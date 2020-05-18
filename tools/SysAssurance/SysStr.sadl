@@ -1,0 +1,28 @@
+//
+//
+// Copyright © 2020 General Electric Company
+//
+// Author: Abha Moitra
+// Date: 2020-05-05
+// Last update: 2020-05-05
+//
+//
+ 
+ uri "http://sadl.org/SysStructure/SysStr" alias SS.
+ 
+// This model defines a simple system structure ontology. 
+// Date is being handled as a string, will be modified later. 
+// Single creator of a Component at the moment.
+
+Component is a class
+	described by compName with a single value of type string
+	described by compDesc with a single value of type string	
+	described by parent with a single value of type Component
+	described by initialCreationDate with a single value of type string
+	described by updateDate with values of type string
+	described by dateOfLastUpdate with a single value of type string
+	described by versionNumber with a single value of type string
+	described by creator with a single value of type Creator.
+
+Creator is a class
+	described by id with a single value of type string. 

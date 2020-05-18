@@ -1,0 +1,32 @@
+//
+//
+// Copyright © 2020 General Electric Company
+//
+// Author: Abha Moitra
+// Date: 2020-05-06
+// Last update: 2020-05-06
+//
+//
+ 
+ uri "http://sadl.org/SysStructure/Req" alias Req.
+ 
+ import "http://sadl.org/SysStructure/SysStr".
+ 
+// This model defines requirements.
+// Note that a varaible declared in component A1 may be visible in component A2.
+// Exercise data ingestion where multiple settingComponents.
+
+Requirement is a class
+	described by reqName with a single value of type string,
+	described by reqText with a single value of type string,
+	described by settingComponent with values of type SS:Component, // the controlled variable may be set in multiple subsystems
+//	described by monitoredVariable with values of type QualifiedVariable,
+	described by controlledVariable with values of type QualifiedVariable. 
+
+QualifiedVariable is a class,
+	described by varName with a single value of type string,
+	described by declaredIn with a single value of type Component,
+	described by varType with a single value of type string, // later expand this out
+	described by varRange with a single value of type InterfaceDefinition. 
+
+InterfaceDefinition is a class. //later expand this out to define ranges etc.

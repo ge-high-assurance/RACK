@@ -4,13 +4,17 @@
 //
 // Author: Abha Moitra
 // Date: 2020-05-06
-// Last update: 2020-05-06
+// Last update: 2020-05-15
 //
 //
  
  uri "http://sadl.org/SysStructure/TestCase" alias TC.
  
  import "http://sadl.org/SysStructure/Req".
+ 
+// Notes for data mapping:
+//		concatenating "<req name> - <test case name>" as the test case name and is assumed to be unique for the moment.
+//		datePerformed, testStrategy, testResult are optional
 
 Analysis is a class.
 Artifact is a class. // move it to a higher level; give it a name, location where stored etc. 
@@ -25,7 +29,7 @@ TestCase is a class,
 	described by testName with a single value of type string
 	described by testReq with a single value of type Requirement
 	described by testStrategy with a single value of type TestStrategy	 
-	described by datePerformed with a single value of type string
+	described by datePerformed with a single value of type date
 	described by testResult with a single value of type float.	
 
 TestStrategy is a class,  must be one of 

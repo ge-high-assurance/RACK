@@ -1,366 +1,50 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:SysInst="http://sadl.org/RACK/SysInstantiation#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://sadl.org/RACK/SysInstantiation">
   <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="Software"/>
     <owl:imports rdf:resource="ExtSys"/>
-    <owl:imports rdf:resource="/builtinfunctions"/>
+    <owl:imports rdf:resource="Analysis"/>
     <owl:imports rdf:resource="/sadlimplicitmodel"/>
     <owl:imports rdf:resource="/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'SysInstantiation.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:Class rdf:ID="SimulationAnalysis">
-    <rdfs:subClassOf>
-      <owl:Class rdf:ID="Analysis"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="TestCoverage">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="coverageAmount"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="coverageStrategy"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="coverageRequirement"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-  </owl:Class>
   <owl:Class rdf:ID="SystemInstantiation">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="makefile"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="hwMapping"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="config"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:ID="compiler"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="source"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:subClassOf rdf:resource="SysAssurance#Thing"/>
-  </owl:Class>
-  <owl:Class rdf:ID="TestCase">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:ID="datePerformed"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:ID="performedBy"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="testReq"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:ID="testName"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="DecisionCoverageAnalysis">
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#Analysis"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="RequirementsAnalysis">
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#Analysis"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="DataCouplingAnalysis">
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#Analysis"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="StackAnalysis">
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#Analysis"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="TestCoverageAmount">
-    <owl:equivalentClass>
-      <owl:Class>
-        <owl:oneOf rdf:parseType="Collection">
-          <SysInst:TestCoverageAmount rdf:ID="X">
-            <rdfs:label xml:lang="en">fully covered</rdfs:label>
-          </SysInst:TestCoverageAmount>
-          <SysInst:TestCoverageAmount rdf:ID="P">
-            <rdfs:label xml:lang="en">limited coverage</rdfs:label>
-          </SysInst:TestCoverageAmount>
-          <SysInst:TestCoverageAmount rdf:ID="na">
-            <rdfs:label xml:lang="en">not applicable</rdfs:label>
-          </SysInst:TestCoverageAmount>
-          <SysInst:TestCoverageAmount rdf:ID="J">
-            <rdfs:label xml:lang="en">justified no coverage</rdfs:label>
-          </SysInst:TestCoverageAmount>
-        </owl:oneOf>
-      </owl:Class>
-    </owl:equivalentClass>
-  </owl:Class>
-  <owl:Class rdf:about="#Analysis">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="analysReport"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:ID="summaryResult"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="SysAssurance#Thing"/>
-  </owl:Class>
-  <owl:Class rdf:ID="TimingAnalysis">
-    <rdfs:subClassOf rdf:resource="#Analysis"/>
-  </owl:Class>
-  <owl:Class rdf:ID="EmulationAnalysis">
-    <rdfs:subClassOf rdf:resource="#Analysis"/>
-  </owl:Class>
-  <owl:Class rdf:ID="RequirementsTraceabilityAnalysis">
-    <rdfs:subClassOf rdf:resource="#Analysis"/>
-  </owl:Class>
-  <owl:Class rdf:ID="RobustnessAnalysis">
-    <rdfs:subClassOf rdf:resource="#Analysis"/>
-  </owl:Class>
-  <owl:Class rdf:ID="WorstCaseAnalysis">
-    <rdfs:subClassOf rdf:resource="#Analysis"/>
-  </owl:Class>
-  <owl:Class rdf:ID="TestStrategy">
-    <owl:equivalentClass>
-      <owl:Class>
-        <owl:oneOf rdf:parseType="Collection">
-          <SysInst:TestStrategy rdf:ID="Fun">
-            <rdfs:label xml:lang="en">Functional Data Completeness Analysis</rdfs:label>
-          </SysInst:TestStrategy>
-          <SysInst:TestStrategy rdf:ID="LCA">
-            <rdfs:label xml:lang="en">Logic Coverage Analysis</rdfs:label>
-          </SysInst:TestStrategy>
-          <SysInst:TestStrategy rdf:ID="ECP">
-            <rdfs:label xml:lang="en">Equivalence Class Partitioning Analysis</rdfs:label>
-          </SysInst:TestStrategy>
-          <SysInst:TestStrategy rdf:ID="BVA">
-            <rdfs:label xml:lang="en">Boundary Value Analysis</rdfs:label>
-          </SysInst:TestStrategy>
-          <SysInst:TestStrategy rdf:ID="Rob">
-            <rdfs:label xml:lang="en">Robustness Test Analysis</rdfs:label>
-          </SysInst:TestStrategy>
-          <SysInst:TestStrategy rdf:ID="DEC">
-            <rdfs:label xml:lang="en">Decomposition and Equation Coverage</rdfs:label>
-          </SysInst:TestStrategy>
-          <SysInst:TestStrategy rdf:ID="MTC">
-            <rdfs:label xml:lang="en">Manual Test Cases</rdfs:label>
-          </SysInst:TestStrategy>
-          <SysInst:TestStrategy rdf:ID="Ctx">
-            <rdfs:label xml:lang="en">Context Analysis</rdfs:label>
-          </SysInst:TestStrategy>
-        </owl:oneOf>
-      </owl:Class>
-    </owl:equivalentClass>
-  </owl:Class>
-  <owl:Class rdf:ID="WorstCaseExecutionTime">
-    <rdfs:subClassOf rdf:resource="#Analysis"/>
-  </owl:Class>
-  <owl:Class rdf:ID="StaticCodeAnalysis">
-    <rdfs:subClassOf rdf:resource="#Analysis"/>
-  </owl:Class>
-  <owl:Class rdf:ID="TestCaseAnalysis">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="testFile"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="testStrategy"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="#Analysis"/>
   </owl:Class>
   <owl:Class rdf:ID="AssuranceFrag">
     <rdfs:subClassOf rdf:resource="SysAssurance#Artifact"/>
   </owl:Class>
-  <owl:Class rdf:ID="StructuralCoverageAnalysis">
-    <rdfs:subClassOf rdf:resource="#Analysis"/>
-  </owl:Class>
-  <owl:Class rdf:ID="IntegrationTestingAnalysis">
-    <rdfs:subClassOf rdf:resource="#Analysis"/>
-  </owl:Class>
+  <owl:ObjectProperty rdf:ID="hwMapping">
+    <rdfs:domain rdf:resource="#SystemInstantiation"/>
+    <rdfs:range rdf:resource="SysAssurance#Artifact"/>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="assuranceFrag">
     <rdfs:domain rdf:resource="#SystemInstantiation"/>
     <rdfs:range rdf:resource="#AssuranceFrag"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#coverageAmount">
-    <rdfs:domain rdf:resource="#TestCoverage"/>
-    <rdfs:range rdf:resource="#TestCoverageAmount"/>
+  <owl:ObjectProperty rdf:ID="config">
+    <rdfs:domain rdf:resource="#SystemInstantiation"/>
+    <rdfs:range rdf:resource="SysAssurance#Artifact"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#source">
+  <owl:ObjectProperty rdf:ID="source">
     <rdfs:domain rdf:resource="#SystemInstantiation"/>
     <rdfs:range rdf:resource="SysAssurance#System"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#makefile">
+  <owl:ObjectProperty rdf:ID="makefile">
     <rdfs:domain rdf:resource="#SystemInstantiation"/>
     <rdfs:range rdf:resource="SysAssurance#Artifact"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="testFileCoverage">
-    <rdfs:domain rdf:resource="#TestCaseAnalysis"/>
-    <rdfs:range rdf:resource="#TestCoverage"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#hwMapping">
-    <rdfs:domain rdf:resource="#SystemInstantiation"/>
-    <rdfs:range rdf:resource="SysAssurance#Artifact"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#coverageStrategy">
-    <rdfs:domain rdf:resource="#TestCoverage"/>
-    <rdfs:range rdf:resource="#TestStrategy"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#testReq">
-    <rdfs:domain rdf:resource="#TestCase"/>
-    <rdfs:range rdf:resource="ExtSys#Requirements"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#analysReport">
-    <rdfs:domain rdf:resource="#Analysis"/>
-    <rdfs:range rdf:resource="SysAssurance#Artifact"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#testFile">
-    <rdfs:domain rdf:resource="#TestCaseAnalysis"/>
-    <rdfs:range rdf:resource="SysAssurance#Artifact"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#coverageRequirement">
-    <rdfs:domain rdf:resource="#TestCoverage"/>
-    <rdfs:range rdf:resource="ExtSys#Requirements"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#testStrategy">
-    <rdfs:domain rdf:resource="#TestCaseAnalysis"/>
-    <rdfs:range rdf:resource="#TestStrategy"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#config">
-    <rdfs:domain rdf:resource="#SystemInstantiation"/>
-    <rdfs:range rdf:resource="SysAssurance#Artifact"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="stds">
-    <rdfs:domain rdf:resource="#Analysis"/>
-    <rdfs:range rdf:resource="SysAssurance#Standard"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="testCases">
-    <rdfs:domain rdf:resource="#TestCaseAnalysis"/>
-    <rdfs:range rdf:resource="#TestCase"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="analysis">
     <rdfs:domain rdf:resource="#SystemInstantiation"/>
-    <rdfs:range rdf:resource="#Analysis"/>
+    <rdfs:range rdf:resource="Analysis#Analysis"/>
   </owl:ObjectProperty>
-  <owl:DatatypeProperty rdf:about="#datePerformed">
-    <rdfs:domain rdf:resource="#TestCase"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="#testName">
-    <rdfs:domain rdf:resource="#TestCase"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="#performedBy">
-    <rdfs:domain rdf:resource="#TestCase"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="#compiler">
+  <owl:ObjectProperty rdf:ID="compiler">
     <rdfs:domain rdf:resource="#SystemInstantiation"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="#summaryResult">
-    <rdfs:domain rdf:resource="#Analysis"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-  </owl:DatatypeProperty>
+    <rdfs:range rdf:resource="Software#Compiler"/>
+  </owl:ObjectProperty>
 </rdf:RDF>

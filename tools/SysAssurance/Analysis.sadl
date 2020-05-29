@@ -1,0 +1,36 @@
+//
+//
+// Copyright © 2020 General Electric Company
+//
+// Author: Abha Moitra, Galois Team
+// Date: 2020-04-09
+// Last update: 2020-05-21
+//
+//
+
+uri "http://sadl.org/RACK/Analysis" alias Analysis.
+
+import "http://sadl.org/RACK/Document".
+import "http://sadl.org/RACK/SysAssurance".
+import "http://sadl.org/RACK/Thing".
+
+Analysis is a type of Thing
+    described by analysisStandard with values of type Standard
+    described by analysisSummaryResult with a single value of type float
+    described by analysisReport with a single value of type Artifact.
+
+{ DataCouplingAnalysis,
+  DecisionCoverageAnalysis,
+  EmulationAnalysis,
+  IntegrationTestingAnalysis,
+  RequirementsAnalysis,
+  RequirementsTraceabilityAnalysis,
+  RobustnessAnalysis,
+  SimulationAnalysis,
+  StackAnalysis,
+  StaticCodeAnalysis,
+  StructuralCoverageAnalysis,
+  TimingAnalysis,
+  WorstCaseAnalysis,
+  WorstCaseExecutionTime
+} are types of Analysis.

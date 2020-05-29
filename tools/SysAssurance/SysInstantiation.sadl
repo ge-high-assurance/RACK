@@ -1,6 +1,6 @@
- //
 //
-// Copyright © 2020 General Electric Company
+//
+// Copyright Â© 2020 General Electric Company
 //
 // Author: Abha Moitra
 // Date: 2020-04-09
@@ -12,65 +12,22 @@ uri "http://sadl.org/RACK/SysInstantiation" alias SysInst.
 
 // This model builds out the Extended System by introducing system instantiation.
 
+import "http://sadl.org/RACK/Analysis".
 import "http://sadl.org/RACK/ExtSys".
+import "http://sadl.org/RACK/Software".
+import "http://sadl.org/RACK/Thing".
 
 // At this point, AssuranceFrag is simply an artifact; based on discussions with TA1s
-// we may want to give it some structure, for example we may have type for it 
-// which could be GSN, SACM, CAE etc and then their structure. 
+// we may want to give it some structure, for example we may have type for it
+// which could be GSN, SACM, CAE etc and then their structure.
 SystemInstantiation is a type of Thing
-	described by source with a single value of type System
-	// a compiler may need to be associated with individual software component
-	described by compiler with a single value of type string //later introduce a class of compilers
-	described by config with a single value of type Artifact
-	described by hwMapping with a single value of type Artifact
-	described by makefile with a single value of type Artifact
-	described by analysis with values of type Analysis
-	described by assuranceFrag with values of type AssuranceFrag.
+    described by source with a single value of type System
+    // a compiler may need to be associated with individual software component
+    described by compiler with a single value of type Compiler
+    described by config with a single value of type Artifact
+    described by hwMapping with a single value of type Artifact
+    described by makefile with a single value of type Artifact
+    described by analysis with values of type Analysis
+    described by assuranceFrag with values of type AssuranceFrag.
 
 AssuranceFrag is a type of Artifact.
-Analysis is a type of Thing
-	described by stds with values of type Standard
-	described by summaryResult with a single value of type float
-	described by analysReport with a single value of type Artifact.
-
-{DataCouplingAnalysis, DecisionCoverageAnalysis, EmulationAnalysis, IntegrationTestingAnalysis, RequirementsAnalysis, 
-	RequirementsTraceabilityAnalysis, RobustnessAnalysis, SimulationAnalysis, StackAnalysis, StaticCodeAnalysis, 
-	StructuralCoverageAnalysis, TestCaseAnalysis, TimingAnalysis, WorstCaseAnalysis, WorstCaseExecutionTime
-} are types of Analysis.
-
-// expanding out TestCaseAnalysis; other analysis will need to be expanded out
-TestCaseAnalysis is a type of Analysis 
-	described by testStrategy with a single value of type TestStrategy
-	described by testFile with a single value of type Artifact // file with tests that are to be run
-	described by testCases with values of type TestCase  // test cases in the test file
-	described by testFileCoverage with values of type TestCoverage.
-
-TestStrategy is a class,  must be one of 
-	{Fun (alias "Functional Data Completeness Analysis"), 
-	LCA (alias "Logic Coverage Analysis"), 
-	ECP (alias "Equivalence Class Partitioning Analysis"), 
-	BVA (alias "Boundary Value Analysis"), 
-	Rob (alias "Robustness Test Analysis"), 
-	DEC (alias "Decomposition and Equation Coverage"), 
-	MTC (alias "Manual Test Cases"), 
-	Ctx (alias "Context Analysis")}.	
-
-TestCase is a class,
-	described by testName with a single value of type string
-	described by testReq with a single value of type extSys:Requirements
-	// performedBy could be moved to at the level of test file artifact?
-	// test case should ideally not be  performed by author of component
-	described by performedBy with a single value of type string, 
-	described by datePerformed with a single value of type string.	
-
-TestCoverage is a class,
-	described by coverageRequirement with a single value of type Requirements,
-	described by coverageStrategy with a single value of type TestStrategy,
-	described by coverageAmount with a single value of type TestCoverageAmount.
-
-TestCoverageAmount is a class must be one of {
-	X (alias "fully covered"), 
-	P (alias "limited coverage"), 
-	na (alias "not applicable"), 
-	J (alias "justified no coverage")
-}.

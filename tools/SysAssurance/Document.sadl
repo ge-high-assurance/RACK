@@ -1,0 +1,29 @@
+//
+//
+// Copyright © 2020 General Electric Company
+//
+// Author: Abha Moitra, Galois Team
+// Date: 2020-04-09
+// Last update: 2020-05-21
+//
+//
+
+uri "http://sadl.org/RACK/Document" alias Document.
+
+import "http://sadl.org/RACK/Thing".
+
+// Documents are written in natural language. They are different from other
+// Artifacts in that their content (i.e. words) is more important than their
+// specific instantiation (e.g. as a webpage vs. a PDF).
+Document is a type of Artifact
+    described by documentName with a single value of type string
+    described by documentVersionString with a single value of type string
+    described by documentCreationDate with a single value of type date
+    described by documentURL with a single value of type string.
+
+KnownDocument is a type of Document,
+	must be one of {DO-178C, MIL-HDBK-516, CNSSI-1253, NIST-SP-800-53, MIL-STD-882E,
+		 			ARP-4761, ARP-4754A, JointSystemsSoftwareSafetyHandbook, STANG-4671}.
+
+// A standard is a document that another Thing may or may not conform to.
+Standard is a type of Document.

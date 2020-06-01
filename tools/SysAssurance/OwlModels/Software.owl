@@ -1,0 +1,521 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:Software="http://sadl.org/RACK/Software#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://sadl.org/RACK/Software">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="SysAssurance"/>
+    <owl:imports rdf:resource="Req"/>
+    <owl:imports rdf:resource="Document"/>
+    <owl:imports rdf:resource="/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'Software.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="LicenseCategory"/>
+  <owl:Class rdf:ID="ProgrammingLanguage"/>
+  <owl:Class rdf:ID="Compiler">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Executable"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="OperatingSystemVersion">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty rdf:resource="#versionOfOperatingSystem"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Package">
+    <rdfs:subClassOf rdf:resource="Thing#Artifact"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SourceIdent"/>
+  <owl:Class rdf:ID="DistributedSoftware">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="File"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="ExecutableFileFormat"/>
+  <owl:Class rdf:ID="BareMetalExecutable">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Executable"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="OperatingSystem"/>
+  <owl:Class rdf:ID="AssemblyLanguage">
+    <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+  </owl:Class>
+  <owl:Class rdf:ID="FSEntry"/>
+  <owl:Class rdf:ID="License"/>
+  <owl:Class rdf:ID="Deployment"/>
+  <owl:Class rdf:ID="DistributedPackage">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Archive"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="StaticLibrary">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ObjectFile"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="SourceTag">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Resource">
+              <rdf:rest rdf:parseType="Resource">
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >sha512</rdf:first>
+              </rdf:rest>
+              <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+              >sha256</rdf:first>
+            </owl:oneOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="tagType"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="GPGSignature"/>
+  <owl:Class rdf:ID="CompiledSoftware">
+    <rdfs:subClassOf rdf:resource="#DistributedSoftware"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SharedLibrary">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ObjectFile"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="StandardizedProgrammingLanguage">
+    <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ISA"/>
+  <owl:Class rdf:about="#Archive">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#File"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#ObjectFile">
+    <rdfs:subClassOf rdf:resource="#CompiledSoftware"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SourceChanges"/>
+  <owl:Class rdf:ID="Interpreter">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Executable"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="SourceType"/>
+  <owl:Class rdf:about="#Executable">
+    <rdfs:subClassOf rdf:resource="#ObjectFile"/>
+  </owl:Class>
+  <owl:Class rdf:ID="OperatingSystemKernel">
+    <rdfs:subClassOf rdf:resource="#BareMetalExecutable"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ImplementationDefinedLanguage">
+    <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Directory">
+    <rdfs:subClassOf rdf:resource="#FSEntry"/>
+  </owl:Class>
+  <owl:Class rdf:ID="PackageRepository">
+    <rdfs:subClassOf rdf:resource="#Deployment"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Bytecode">
+    <rdfs:subClassOf rdf:resource="#DistributedSoftware"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Linker">
+    <rdfs:subClassOf rdf:resource="#Executable"/>
+  </owl:Class>
+  <owl:Class rdf:ID="VulnerabilityReport">
+    <rdfs:subClassOf rdf:resource="Thing#Artifact"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DynamicallyLinkedExecutable">
+    <rdfs:subClassOf rdf:resource="#Executable"/>
+  </owl:Class>
+  <owl:Class rdf:ID="PackageVersion">
+    <rdfs:subClassOf rdf:resource="Thing#Artifact"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SourceInfo"/>
+  <owl:Class rdf:ID="ABI">
+    <rdfs:subClassOf rdf:resource="Document#Standard"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SourceFile">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#File"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DeploymentTarget"/>
+  <owl:Class rdf:ID="IntermediateLanguage">
+    <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+  </owl:Class>
+  <owl:Class rdf:ID="GPGIdentity"/>
+  <owl:Class rdf:ID="Path"/>
+  <owl:Class rdf:about="#File">
+    <rdfs:subClassOf rdf:resource="#FSEntry"/>
+  </owl:Class>
+  <owl:Class rdf:ID="StaticallyLinkedExecutable">
+    <rdfs:subClassOf rdf:resource="#Executable"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="runtimeDependencies">
+    <rdfs:domain rdf:resource="#PackageVersion"/>
+    <rdfs:range rdf:resource="#PackageVersion"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sourceChangesHistory">
+    <rdfs:domain rdf:resource="#SourceChanges"/>
+    <rdfs:range rdf:resource="#SourceIdent"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="standardPLDocument">
+    <rdfs:domain rdf:resource="#StandardizedProgrammingLanguage"/>
+    <rdfs:range rdf:resource="Document#Document"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sourceIdentity">
+    <rdfs:domain rdf:resource="#SourceInfo"/>
+    <rdfs:range rdf:resource="#SourceIdent"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="builtFrom">
+    <rdfs:domain rdf:resource="#DistributedPackage"/>
+    <rdfs:range rdf:resource="#PackageVersion"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fsEntryParentDir">
+    <rdfs:domain rdf:resource="#FSEntry"/>
+    <rdfs:range rdf:resource="#Directory"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="deploymentPackages">
+    <rdfs:domain rdf:resource="#Deployment"/>
+    <rdfs:range rdf:resource="#PackageVersion"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="distRuntimeDependencies">
+    <rdfs:domain rdf:resource="#DistributedSoftware"/>
+    <rdfs:range rdf:resource="#DistributedSoftware"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testDependencies">
+    <rdfs:domain rdf:resource="#PackageVersion"/>
+    <rdfs:range rdf:resource="#PackageVersion"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="packageRepository">
+    <rdfs:domain rdf:resource="#PackageVersion"/>
+    <rdfs:range rdf:resource="#PackageRepository"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="abiExecutableFormat">
+    <rdfs:domain rdf:resource="#ABI"/>
+    <rdfs:range rdf:resource="#ExecutableFileFormat"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sourceChangesFinalCommit">
+    <rdfs:domain rdf:resource="#SourceChanges"/>
+    <rdfs:range rdf:resource="#SourceIdent"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="kernelOfOS">
+    <rdfs:domain rdf:resource="#OperatingSystemKernel"/>
+    <rdfs:range rdf:resource="#OperatingSystem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="identTag">
+    <rdfs:domain rdf:resource="#SourceIdent"/>
+    <rdfs:range rdf:resource="#SourceTag"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="license">
+    <rdfs:domain rdf:resource="#PackageVersion"/>
+    <rdfs:range rdf:resource="#License"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="implPLImplementation">
+    <rdfs:domain rdf:resource="#ImplementationDefinedLanguage"/>
+    <rdfs:range rdf:resource="#PackageVersion"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="objectFileTargetingABI">
+    <rdfs:domain rdf:resource="#ObjectFile"/>
+    <rdfs:range rdf:resource="#ABI"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sourceType">
+    <rdfs:domain rdf:resource="#SourceInfo"/>
+    <rdfs:range rdf:resource="#SourceType"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sigSigner">
+    <rdfs:domain rdf:resource="#GPGSignature"/>
+    <rdfs:range rdf:resource="#GPGIdentity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="interpreterLanguage">
+    <rdfs:domain rdf:resource="#Interpreter"/>
+    <rdfs:range rdf:resource="#ProgrammingLanguage"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="relatedSource">
+    <rdfs:range rdf:resource="#SourceInfo"/>
+    <rdfs:domain rdf:resource="#SourceInfo"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="directoryContents">
+    <rdfs:domain rdf:resource="#Directory"/>
+    <rdfs:range rdf:resource="#FSEntry"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="kernelImplementsABI">
+    <rdfs:domain rdf:resource="#OperatingSystemKernel"/>
+    <rdfs:range rdf:resource="#ABI"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="exeFormat">
+    <rdfs:domain rdf:resource="#Executable"/>
+    <rdfs:range rdf:resource="#ExecutableFileFormat"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="compiledSoftwareCompiledBy">
+    <rdfs:domain rdf:resource="#CompiledSoftware"/>
+    <rdfs:range rdf:resource="#Compiler"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="osVersionOS">
+    <rdfs:domain rdf:resource="#OperatingSystemVersion"/>
+    <rdfs:range rdf:resource="#OperatingSystem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="gpgIdentityEntity">
+    <rdfs:domain rdf:resource="#GPGIdentity"/>
+    <rdfs:range rdf:resource="Thing#Entity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="compilerTargetOSes">
+    <rdfs:domain rdf:resource="#Compiler"/>
+    <rdfs:range rdf:resource="#OperatingSystem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="compilerTargetISAs">
+    <rdfs:domain rdf:resource="#Compiler"/>
+    <rdfs:range rdf:resource="#ISA"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="archiveContains">
+    <rdfs:domain rdf:resource="#Archive"/>
+    <rdfs:range rdf:resource="#File"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="distTargetingOS">
+    <rdfs:domain rdf:resource="#DistributedSoftware"/>
+    <rdfs:range rdf:resource="#OperatingSystem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="distSourcePackage">
+    <rdfs:domain rdf:resource="#DistributedSoftware"/>
+    <rdfs:range rdf:resource="#PackageVersion"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="osVendor">
+    <rdfs:domain rdf:resource="#OperatingSystem"/>
+    <rdfs:range rdf:resource="Thing#Entity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="packageVersionTarget">
+    <rdfs:domain rdf:resource="#PackageVersion"/>
+    <rdfs:range rdf:resource="#OperatingSystemVersion"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fsEntryPath">
+    <rdfs:domain rdf:resource="#FSEntry"/>
+    <rdfs:range rdf:resource="#Path"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sourceChangesOriginChanges">
+    <rdfs:domain rdf:resource="#SourceChanges"/>
+    <rdfs:range rdf:resource="#SourceChanges"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="packageContents">
+    <rdfs:domain rdf:resource="#PackageVersion"/>
+    <rdfs:range rdf:resource="#File"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="deploymentTargetDeployed">
+    <rdfs:domain rdf:resource="#DeploymentTarget"/>
+    <rdfs:range rdf:resource="#Deployment"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="osDefaultPackageManager">
+    <rdfs:domain rdf:resource="#OperatingSystemVersion"/>
+    <rdfs:range rdf:resource="#PackageVersion"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sourceTag">
+    <rdfs:domain rdf:resource="#SourceInfo"/>
+    <rdfs:range rdf:resource="#SourceTag"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="exeLinkedBy">
+    <rdfs:domain rdf:resource="#Executable"/>
+    <rdfs:range rdf:resource="#Linker"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="packageSource">
+    <rdfs:domain rdf:resource="#PackageVersion"/>
+    <rdfs:range rdf:resource="#SourceInfo"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="category">
+    <rdfs:domain rdf:resource="#License"/>
+    <rdfs:range rdf:resource="#LicenseCategory"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="osDefaultPackageRepository">
+    <rdfs:domain rdf:resource="#OperatingSystemVersion"/>
+    <rdfs:range rdf:resource="#PackageRepository"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="compilerTargetABIs">
+    <rdfs:domain rdf:resource="#Compiler"/>
+    <rdfs:range rdf:resource="#ABI"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="compilerTargetLanguage">
+    <rdfs:domain rdf:resource="#Compiler"/>
+    <rdfs:range rdf:resource="#ProgrammingLanguage"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="packageDefaultSource">
+    <rdfs:domain rdf:resource="#Package"/>
+    <rdfs:range rdf:resource="#SourceInfo"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="srcFileLanguage">
+    <rdfs:domain rdf:resource="#SourceFile"/>
+    <rdfs:range rdf:resource="#ProgrammingLanguage"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="packageOwner">
+    <rdfs:domain rdf:resource="#Package"/>
+    <rdfs:range rdf:resource="Thing#Entity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sourceChanges">
+    <rdfs:domain rdf:resource="#SourceInfo"/>
+    <rdfs:range rdf:resource="#SourceChanges"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="tagSignature">
+    <rdfs:domain rdf:resource="#SourceTag"/>
+    <rdfs:range rdf:resource="#GPGSignature"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="issuer">
+    <rdfs:domain rdf:resource="#PackageVersion"/>
+    <rdfs:range rdf:resource="Thing#Entity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="buildDependencies">
+    <rdfs:domain rdf:resource="#PackageVersion"/>
+    <rdfs:range rdf:resource="#PackageVersion"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="srcFileGeneratedBy">
+    <rdfs:domain rdf:resource="#SourceFile"/>
+    <rdfs:range rdf:resource="#Executable"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="compilerSourceLanguage">
+    <rdfs:domain rdf:resource="#Compiler"/>
+    <rdfs:range rdf:resource="#ProgrammingLanguage"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="assemblyISA">
+    <rdfs:domain rdf:resource="#AssemblyLanguage"/>
+    <rdfs:range rdf:resource="#ISA"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="containsDistPackage">
+    <rdfs:domain rdf:resource="#PackageRepository"/>
+    <rdfs:range rdf:resource="#DistributedPackage"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="compiledSoftwareTargeting">
+    <rdfs:domain rdf:resource="#CompiledSoftware"/>
+    <rdfs:range rdf:resource="#ABI"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="osName">
+    <rdfs:domain rdf:resource="#OperatingSystem"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="versionString">
+    <rdfs:domain rdf:resource="#PackageVersion"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#tagType">
+    <rdfs:domain rdf:resource="#SourceTag"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="url">
+    <rdfs:domain rdf:resource="#License"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="tagValue">
+    <rdfs:domain rdf:resource="#SourceTag"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="fileSha256Sum">
+    <rdfs:domain rdf:resource="#File"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="creationDate">
+    <rdfs:domain rdf:resource="#PackageVersion"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="description">
+    <rdfs:domain rdf:resource="#License"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="osVersionCreationDate">
+    <rdfs:domain rdf:resource="#OperatingSystemVersion"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="pathRepresentation">
+    <rdfs:domain rdf:resource="#Path"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="name">
+    <rdfs:domain rdf:resource="#License"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="identIdent">
+    <rdfs:domain rdf:resource="#SourceIdent"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="encumbering">
+    <rdfs:domain rdf:resource="#License"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="identCreationDate">
+    <rdfs:domain rdf:resource="#SourceIdent"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="sourceURL">
+    <rdfs:domain rdf:resource="#SourceInfo"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="exeName">
+    <rdfs:domain rdf:resource="#Executable"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="deploymentTargetName">
+    <rdfs:domain rdf:resource="#DeploymentTarget"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="sourceLocation">
+    <rdfs:domain rdf:resource="#SourceInfo"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="sigFingerprint">
+    <rdfs:domain rdf:resource="#GPGSignature"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="deploymentName">
+    <rdfs:domain rdf:resource="#Deployment"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="gpgIdentityPublicKey">
+    <rdfs:domain rdf:resource="#GPGIdentity"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="osVersionVersion">
+    <rdfs:domain rdf:resource="#OperatingSystemVersion"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="exeLinkage">
+    <rdfs:domain rdf:resource="#Executable"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="packageName">
+    <rdfs:domain rdf:resource="#Package"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="gpgIdentityExpirationDate">
+    <rdfs:domain rdf:resource="#GPGIdentity"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+  <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <Software:LicenseCategory rdf:ID="OpenSource"/>
+      <Software:LicenseCategory rdf:ID="Proprietary"/>
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+  <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <Software:ISA rdf:ID="X86"/>
+      <Software:ISA rdf:ID="X86_64"/>
+      <Software:ISA rdf:ID="ARM64"/>
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+  <Software:SourceType rdf:ID="RpmSourceType"/>
+  <Software:SourceType rdf:ID="GitSourceType"/>
+  <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <Software:StandardizedProgrammingLanguage rdf:ID="CLanguage"/>
+      <Software:ImplementationDefinedLanguage rdf:ID="PythonLanguage"/>
+      <Software:ProgrammingLanguage rdf:ID="JavaLanguage"/>
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+  <Software:SourceType rdf:ID="BinarySourceType"/>
+  <Software:SourceType rdf:ID="TarfileSourceType"/>
+</rdf:RDF>

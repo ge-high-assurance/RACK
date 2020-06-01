@@ -1,0 +1,54 @@
+//
+//
+// Copyright © 2020 General Electric Company
+//
+// Author: Abha Moitra, Galois Team
+// Date: 2020-05-21
+// Last update: 2020-05-21
+//
+//
+
+uri "http://sadl.org/RACK/Thing" alias Thing.
+
+// This file contains the upper-most classes in the ontology, most other classes
+// are subclasses of these.
+
+Thing is a class
+    described by thingName with a single value of type string
+    described by thingDescription with a single value of type string
+    described by thingCreator with values of type string  // can be viewed as "author" as well
+    described by thingInitialCreationDate with a single value of type string
+    described by thingUpdateDate with values of type string.
+
+// do we want to have Thing be broken into AbstractThing and PhysicalThing?
+
+Artifact is a type of Thing
+    described by artifactAuthor with values of type Entity
+    described by artifactDerivedFrom with values of type Artifact
+    described by artifactLocation with a single value of type string.
+
+// Organizational units
+
+Organization is a class,
+    described by orgUrl with a single value of type string,
+    described by orgLocation with values of type string,
+    described by orgCountry with values of type Country,
+    described by orgEmail with a single value of type string,
+    described by orgTitle with a single value of type string.
+
+// Humans
+
+Person is a class,
+    described by personName with a single value of type string,
+    described by personEmail with values of type string,
+    described by persionUsername with values of type string,
+    described by personEmployer with values of type Organization,
+    described by personNationality with values of type Country.
+
+Entity is a class.
+Entity is the same as {Organization or Person}.
+
+// Countries
+
+Country is a class
+    described by countryName with a single value of type string.

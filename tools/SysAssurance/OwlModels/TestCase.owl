@@ -1,0 +1,238 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:TC="http://sadl.org/RACK/TestCase#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://sadl.org/RACK/TestCase">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="Req"/>
+    <owl:imports rdf:resource="SysAssurance"/>
+    <owl:imports rdf:resource="Software"/>
+    <owl:imports rdf:resource="ExtSys"/>
+    <owl:imports rdf:resource="Analysis"/>
+    <owl:imports rdf:resource="/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'TestCase.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="TestCaseAnalysis">
+    <rdfs:subClassOf rdf:resource="Analysis#Analysis"/>
+  </owl:Class>
+  <owl:Class rdf:ID="TestCoverageAmount">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:oneOf rdf:parseType="Collection">
+          <TC:TestCoverageAmount rdf:ID="X">
+            <rdfs:label xml:lang="en">fully covered</rdfs:label>
+          </TC:TestCoverageAmount>
+          <TC:TestCoverageAmount rdf:ID="P">
+            <rdfs:label xml:lang="en">limited coverage</rdfs:label>
+          </TC:TestCoverageAmount>
+          <TC:TestCoverageAmount rdf:ID="na">
+            <rdfs:label xml:lang="en">not applicable</rdfs:label>
+          </TC:TestCoverageAmount>
+          <TC:TestCoverageAmount rdf:ID="J">
+            <rdfs:label xml:lang="en">justified no coverage</rdfs:label>
+          </TC:TestCoverageAmount>
+        </owl:oneOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="TestCoverage">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="TestMetric"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="TestStrategy">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:oneOf rdf:parseType="Collection">
+          <TC:TestStrategy rdf:ID="Fun">
+            <rdfs:label xml:lang="en">Functional Data Completeness Analysis</rdfs:label>
+          </TC:TestStrategy>
+          <TC:TestStrategy rdf:ID="LCA">
+            <rdfs:label xml:lang="en">Logic Coverage Analysis</rdfs:label>
+          </TC:TestStrategy>
+          <TC:TestStrategy rdf:ID="ECP">
+            <rdfs:label xml:lang="en">Equivalence Class Partitioning Analysis</rdfs:label>
+          </TC:TestStrategy>
+          <TC:TestStrategy rdf:ID="BVA">
+            <rdfs:label xml:lang="en">Boundary Value Analysis</rdfs:label>
+          </TC:TestStrategy>
+          <TC:TestStrategy rdf:ID="Rob">
+            <rdfs:label xml:lang="en">Robustness Test Analysis</rdfs:label>
+          </TC:TestStrategy>
+          <TC:TestStrategy rdf:ID="DEC">
+            <rdfs:label xml:lang="en">Decomposition and Equation Coverage</rdfs:label>
+          </TC:TestStrategy>
+          <TC:TestStrategy rdf:ID="MTC">
+            <rdfs:label xml:lang="en">Manual Test Cases</rdfs:label>
+          </TC:TestStrategy>
+          <TC:TestStrategy rdf:ID="Ctx">
+            <rdfs:label xml:lang="en">Context Analysis</rdfs:label>
+          </TC:TestStrategy>
+        </owl:oneOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="TestReport">
+    <rdfs:subClassOf rdf:resource="Thing#Artifact"/>
+  </owl:Class>
+  <owl:Class rdf:ID="TestCase"/>
+  <owl:Class rdf:ID="TestInput"/>
+  <owl:Class rdf:ID="EACF">
+    <rdfs:subClassOf rdf:resource="Thing#Artifact"/>
+  </owl:Class>
+  <owl:Class rdf:ID="TestParameter"/>
+  <owl:ObjectProperty rdf:ID="systemUndertest">
+    <rdfs:domain rdf:resource="#EACF"/>
+    <rdfs:range rdf:resource="Software#PackageVersion"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testReq">
+    <rdfs:domain rdf:resource="#TestCase"/>
+    <rdfs:range rdf:resource="Req#Requirement"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="moduleUnderTest">
+    <rdfs:domain rdf:resource="#EACF"/>
+    <rdfs:range rdf:resource="Software#SourceInfo"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testStrategy">
+    <rdfs:domain rdf:resource="#TestCase"/>
+    <rdfs:range rdf:resource="#TestStrategy"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testFile">
+    <rdfs:domain rdf:resource="#TestCaseAnalysis"/>
+    <rdfs:range rdf:resource="Software#File"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="targetFile">
+    <rdfs:domain rdf:resource="#TestCoverage"/>
+    <rdfs:range rdf:resource="Software#SourceFile"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testCaseGeneratedBy">
+    <rdfs:domain rdf:resource="#TestReport"/>
+    <rdfs:range rdf:resource="#TestCase"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="measurements">
+    <rdfs:domain rdf:resource="#TestReport"/>
+    <rdfs:range rdf:resource="#TestMetric"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="coverageStrategy">
+    <rdfs:domain rdf:resource="#TestCoverage"/>
+    <rdfs:range rdf:resource="#TestStrategy"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testRequirement">
+    <rdfs:domain rdf:resource="#TestCase"/>
+    <rdfs:range rdf:resource="Req#Requirement"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testCaseReports">
+    <rdfs:domain rdf:resource="#EACF"/>
+    <rdfs:range rdf:resource="#TestReport"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="requirements">
+    <rdfs:domain rdf:resource="#EACF"/>
+    <rdfs:range rdf:resource="Req#Requirement"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testAuthor">
+    <rdfs:domain rdf:resource="#TestCase"/>
+    <rdfs:range rdf:resource="Thing#Entity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testEnvironment">
+    <rdfs:domain rdf:resource="#TestReport"/>
+    <rdfs:range rdf:resource="Software#Deployment"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testParameters">
+    <rdfs:domain rdf:resource="#TestCase"/>
+    <rdfs:range rdf:resource="#TestParameter"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="coverageRequirement">
+    <rdfs:domain rdf:resource="#TestCoverage"/>
+    <rdfs:range rdf:resource="ExtSys#Requirements"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="coverageAmount">
+    <rdfs:domain rdf:resource="#TestCoverage"/>
+    <rdfs:range rdf:resource="#TestCoverageAmount"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testInputs">
+    <rdfs:domain rdf:resource="#TestCase"/>
+    <rdfs:range rdf:resource="#TestInput"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testCases">
+    <rdfs:domain rdf:resource="#TestCaseAnalysis"/>
+    <rdfs:range rdf:resource="#TestCase"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="souceCode">
+    <rdfs:domain rdf:resource="#EACF"/>
+    <rdfs:range rdf:resource="Software#SourceInfo"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testTarget">
+    <rdfs:domain rdf:resource="#TestReport"/>
+    <rdfs:range rdf:resource="Software#PackageVersion"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="tester">
+    <rdfs:domain rdf:resource="#TestReport"/>
+    <rdfs:range rdf:resource="Thing#Entity"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="datePerformed">
+    <rdfs:domain rdf:resource="#TestCase"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="Software#name">
+    <rdfs:domain rdf:resource="#TestReport"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="parameterValue">
+    <rdfs:domain rdf:resource="#TestParameter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="testName">
+    <rdfs:domain rdf:resource="#TestCase"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="parameterName">
+    <rdfs:domain rdf:resource="#TestParameter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="traceabilityArtifacts">
+    <rdfs:domain rdf:resource="#EACF"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="assumptions">
+    <rdfs:domain rdf:resource="#EACF"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="percentage">
+    <rdfs:domain rdf:resource="#TestCoverage"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="sesConfig">
+    <rdfs:domain rdf:resource="#EACF"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="simulationRationale">
+    <rdfs:domain rdf:resource="#EACF"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="testResult">
+    <rdfs:domain rdf:resource="#TestCase"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="purpose">
+    <rdfs:domain rdf:resource="#EACF"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="inputValue">
+    <rdfs:domain rdf:resource="#TestInput"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="inputName">
+    <rdfs:domain rdf:resource="#TestInput"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="testFileCoverage">
+    <rdfs:domain rdf:resource="#TestCaseAnalysis"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="coverageCriteria">
+    <rdfs:domain rdf:resource="#EACF"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+</rdf:RDF>

@@ -1,78 +1,32 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:j.0="http://jena.hpl.hp.com/schemas/2003/03/ont-manager#">
-  <j.0:OntologySpec>
-    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >sadllistmodel</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace/RACK/OwlModels/SadlListModel.owl"/>
-    <j.0:publicURI rdf:resource="http://sadl.org/sadllistmodel"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace/RACK/OwlModels/ExtSys.sadl.metrics.owl"/>
-    <j.0:publicURI rdf:resource="http://sadl.org/RACK/ExtSys.metrics"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >extSys</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace/RACK/OwlModels/ExtSys.owl"/>
-    <j.0:publicURI rdf:resource="http://sadl.org/RACK/ExtSys"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >sadlimplicitmodel</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace/RACK/OwlModels/SadlImplicitModel.owl"/>
-    <j.0:publicURI rdf:resource="http://sadl.org/sadlimplicitmodel"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace/RACK/OwlModels/SysInstantiation.sadl.metrics.owl"/>
-    <j.0:publicURI rdf:resource="http://sadl.org/RACK/SysInstantiation.metrics"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >sadlbasemodel</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace/RACK/OwlModels/SadlBaseModel.owl"/>
-    <j.0:publicURI rdf:resource="http://sadl.org/sadlbasemodel"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >SysInst</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace/RACK/OwlModels/SysInstantiation.owl"/>
-    <j.0:publicURI rdf:resource="http://sadl.org/RACK/SysInstantiation"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >SA</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace/RACK/OwlModels/SysAssurance.owl"/>
-    <j.0:publicURI rdf:resource="http://sadl.org/RACK/SysAssurance"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace/RACK/OwlModels/SysAssurance.sadl.metrics.owl"/>
-    <j.0:publicURI rdf:resource="http://sadl.org/RACK/SysAssurance.metrics"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >builtinfunctions</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace/RACK/OwlModels/SadlBuiltinFunctions.owl"/>
-    <j.0:publicURI rdf:resource="http://sadl.org/builtinfunctions"/>
-  </j.0:OntologySpec>
+    xmlns="http://jena.hpl.hp.com/schemas/2003/03/ont-manager#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <DocumentManagerPolicy>
+    <processImports rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</processImports>
+    <cacheModels rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</cacheModels>
+  </DocumentManagerPolicy>
+  <OntologySpec>
+    <prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >owl</prefix>
+    <publicURI rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <language rdf:resource="http://www.w3.org/2002/07/owl"/>
+  </OntologySpec>
+  <OntologySpec>
+    <prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >dc</prefix>
+    <language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <publicURI rdf:resource="http://purl.org/dc/elements/1.1/"/>
+    <altURL rdf:resource="http://protege.stanford.edu/plugins/owl/dc/protege-dc.owl"/>
+  </OntologySpec>
+  <OntologySpec>
+    <prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Concepts</prefix>
+    <createdBy>SADL</createdBy>
+    <language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <altURL rdf:resource="file:/Users/emertens/eclipse-workspace/ARCOS/OwlModels/Concepts.owl"/>
+    <publicURI rdf:resource="http://sadl.org/ARCOS/Concepts"/>
+  </OntologySpec>
 </rdf:RDF>

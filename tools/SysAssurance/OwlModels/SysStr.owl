@@ -1,0 +1,51 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:SS="http://sadl.org/RACK/SysStr#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://sadl.org/RACK/SysStr">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'SysStr.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="Creator"/>
+  <owl:Class rdf:ID="Component"/>
+  <owl:ObjectProperty rdf:ID="parent">
+    <rdfs:domain rdf:resource="#Component"/>
+    <rdfs:range rdf:resource="#Component"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="creator">
+    <rdfs:domain rdf:resource="#Component"/>
+    <rdfs:range rdf:resource="#Creator"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="updateDate">
+    <rdfs:domain rdf:resource="#Component"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="initialCreationDate">
+    <rdfs:domain rdf:resource="#Component"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="compName">
+    <rdfs:domain rdf:resource="#Component"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="dateOfLastUpdate">
+    <rdfs:domain rdf:resource="#Component"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="versionNumber">
+    <rdfs:domain rdf:resource="#Component"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="compDesc">
+    <rdfs:domain rdf:resource="#Component"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="id">
+    <rdfs:domain rdf:resource="#Creator"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+</rdf:RDF>

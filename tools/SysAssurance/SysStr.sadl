@@ -8,13 +8,13 @@
 //
 //
  
- uri "http://sadl.org/SysStructure/SysStr" alias SS.
+ uri "http://sadl.org/RACK/SysStr" alias SS.
  
 // This model defines a simple system structure ontology.  
 // Single creator of a Component at the moment.
 
 // Notes for data mapping:
-//		parent is optional
+//    	parent is optional
 
 // Assumptions in data mapping for the moment:
 //		compName is assumed to be unique for the moment

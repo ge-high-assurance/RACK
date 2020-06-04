@@ -1,0 +1,160 @@
+uri "http://arcos.rack/Sample_2".
+
+//============================================================
+//		BASE ONTOLOGY
+//============================================================
+
+PROCESS (note "The operation/actions taken by an entity to produce a artifact from other artifacts.") is a class.
+ executive describes PROCESS with values of type ENTITY.
+ produces describes PROCESS with values of type ARTIFACT.
+ uses describes PROCESS with values of type ARTIFACT.
+
+ENTITY (note "The thing that is responsible for the execution of a process, could be a Person, Organization, or a Tools")is a class.
+ memberOf describes ENTITY with values of type ENTITY.
+
+ARTIFACT (note "Any tangible asset (includes information) that is an input to, or result from a process")is a class.
+ componentOf describes ARTIFACT with values of type ARTIFACT.
+
+//============================================================
+//		STRUCTRAL DEFINITION
+//============================================================
+
+OBJECT_FILE is a type of ARTIFACT.
+	source describes OBJECT_FILE with values of type ARTIFACT.
+
+AR_FILE is a type of ARTIFACT.
+	source describes AR_FILE with values of type ARTIFACT.
+
+CODE_FILE is a type of ARTIFACT.
+    source describes CODE_FILE with values of type ARTIFACT.
+
+FILE is a type of ARTIFACT.
+
+ARCHIVE is a type of ARTIFACT.
+    content describes ARCHIVE with values of type ARTIFACT.
+
+EXECUTABLE is a type of ARTIFACT.
+    source describes EXECUTABLE with values of type ARTIFACT.
+
+REQUIREMENT is a type of ARTIFACT.
+	source describes REQUIREMENT with values of type ARTIFACT.
+	mitigates describes REQUIREMENT with values of type ARTIFACT.
+
+TOOL is a type of ENTITY.
+	confidenceLevel describes TOOL with values of type string.
+	origin describes TOOL with values of type string.
+	^version describes TOOL with values of type string.
+	license describes TOOL with values of type string.
+
+CODEGEN is a type of PROCESS.
+COMPILATION is a type of PROCESS.
+ARING is a type of PROCESS. // Need a better name - use of "ar" tool
+ARCHIVAL is a type of PROCESS.
+
+//============================================================
+//		INSTANCE DEFINITION
+//============================================================
+
+GCC is a TOOL.
+Ar is a TOOL.
+Python is a TOOL.
+RPMCreate is a TOOL.
+Tar is a TOOL.
+
+Sample2CFile is a CODE_FILE.
+
+Sample2Exe is a EXECUTABLE,
+    has source Sample2CFile.
+
+Sample2Compiliation is a COMPILATION,
+    has executive GCC,
+    has uses Sample2CFile,
+    has uses LibHelper,
+    has produces Sample2Exe.
+
+HelpCFile is a CODE_FILE.
+HelpHFile is a CODE_FILE.
+
+HelpObjectFile is a OBJECT_FILE,
+    has source HelpCFile.
+
+HelpObjectFileCompilation is a COMPILATION,
+    has executive GCC,
+    has uses HelpCFile,
+    has uses HelpHFile,
+    has produces HelpObjectFile.
+
+AssistTxtFile is a FILE.
+
+MkAssistPy is a CODE_FILE.
+
+AssistCFileGen is a CODEGEN,
+    has executive Python,
+    has uses AssistTxt,
+    has uses MkAssistPy.
+
+AssistCFile is a CODE_FILE.
+
+AssistObjectFileCompilation is a COMPILATION,
+    has executive GCC,
+    has uses AssistCFile,
+    has produces AssistObjectFile.
+
+AssistObjectFile is a OBJECT_FILE,
+    has source AssistCFile.
+
+Archival is an ARING,
+    has executive Ar,
+    has uses HelpObjectFile,
+    has uses AssistObjectFile,
+    has produces LibHelper.
+
+// Does source belong here? Or just attached to "Archival"? In general,
+// should we attach "inputs" to artifacts, or the processes that produce them?
+LibHelper is a AR_FILE,
+    has source HelpObjectFile,
+    has source AssistObjectFile.
+
+Sample2RPMInfo is a FILE.
+Sample2RPM is a FILE.
+Sample2TBZ is a FILE.
+LicenseTxtFile is a FILE.
+
+Sample2DistTBZ is a ARCHIVE,
+    has content Sample2Exe,
+    has content LibHelper,
+    has content HelpCFile,
+    has content HelpHFile,
+    has content AssistTxtFile,
+    has content MkAssistPy,
+    has content LicenseTxtFile.
+
+Sample2DistTBZArchival is a ARCHIVAL,
+    has executive Tar,
+    has source Sample2Exe,
+    has source LibHelper,
+    has source HelpCFile,
+    has source HelpHFile,
+    has source AssistTxtFile,
+    has source MkAssistPy,
+    has source LicenseTxtFile,
+    has produces Sample2DistTBZ.
+
+Sample2DistRPM is a ARCHIVE,
+    has content Sample2Exe,
+    has content LibHelper.
+
+Sample2DistRPMArchival is a ARCHIVAL,
+    has executive RPMCreate,
+    has source Sample2Exe,
+    has source LibHelper,
+    has source Sample2RPMInfo,
+    has produces Sample2DistRPM.
+
+//============================================================
+//		META DATA
+//============================================================
+
+TA1-Input is a PROCESS
+	has executive SystemDeveloper
+	has produces SystemLevelRequirements.

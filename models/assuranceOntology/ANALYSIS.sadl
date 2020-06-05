@@ -1,0 +1,12 @@
+uri "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/PROV-S".
+
+ANALYSIS_REPORT is a type of ENTITY.
+	uniqueIdentifer describes ANALYSIS_REPORT with values of type string.
+	
+	producedBy describes ANALYSIS_REPORT with values of type ANALYSIS.
+	producedBy is a type of wasGeneratedBy.
+
+ANALYSIS is a type of ACTIVITY.
+	performedBy (note "Entity that is responsible for producing an analysis, could be a person or a tool. ") describes ANALYSIS with values of type AGENT.
+	performedBy is a type of wasAssociatedWith.

@@ -1,0 +1,9 @@
+uri "http://arcos.rack/ASSURANCE".
+import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/TESTING".
+import "http://arcos.rack/HAZARD".
+
+
+CONTRACT is a type of ENTITY.
+	

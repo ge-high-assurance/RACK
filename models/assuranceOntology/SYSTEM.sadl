@@ -1,0 +1,26 @@
+uri "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/PROV-S".
+
+SYSTEM is a type of ENTITY.
+	uniqueIdentifier describes SYSTEM with values of type string.
+	partOf (note "used to define a relationship to a higher level system") describes SYSTEM with values of type ENTITY.
+	partOf is a type of wasDerivedBy.
+	
+	producedBy describes SYSTEM with values of type SYSTEM_DEVELOPEMENT.
+	producedBy is a type of wasGeneratedBy.	
+	
+INTERFACE is a type of ENTITY.
+	uniqueIdentifier describes INTERFACE with values of type string.
+	
+	source describes INTERFACE with values of type ENTITY.
+	source is a type of wasDerivedBy.
+	
+	destination describes INTERFACE with values of type ENTITY.
+	destination is a type of wasDerivedBy.
+	
+	identifiedBy describes INTERFACE with values of type SYSTEM_DEVELOPEMENT.
+	identifiedBy is a type of wasGeneratedBy.	
+	
+	
+SYSTEM_DEVELOPEMENT is a type of ACTIVITY.
+	developedBy (note "Organization that is responsible for producing a system") describes SYSTEM_DEVELOPEMENT with values of type AGENT.

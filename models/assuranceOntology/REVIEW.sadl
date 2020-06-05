@@ -1,0 +1,4 @@
+uri "http://arcos.rack/REVIEW".
+import "http://arcos.rack/PROV-S".
+
+REVIEW is a type of ENTITY.

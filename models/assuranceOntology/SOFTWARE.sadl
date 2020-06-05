@@ -1,0 +1,5 @@
+uri "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/PROV-S".
+
+CODE_FILE is a type of ENTITY.
+	

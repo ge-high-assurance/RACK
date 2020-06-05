@@ -1,0 +1,6 @@
+uri "http://arcos.rack/HAZARD".
+import "http://arcos.rack/PROV-S".
+
+HAZARD is a type of ENTITY.
+	source describes HAZARD with values of type ENTITY.
+	

@@ -5,26 +5,34 @@ REQUIREMENT is a type of ENTITY.
 	uniqueIdentifer describes REQUIREMENT with values of type string.
 	
 	satisfies (note "trace to a parent requirement (or any object) that the requirement is derived from") describes REQUIREMENT with values of type ENTITY.
-	satisfies is a type of wasDerivedBy.
+	satisfies is a type of wasDerivedFrom.
 	
 	mitigates (note "trace to a hazard that is being mitigated by this requirement.")describes REQUIREMENT with values of type ENTITY.
-	mitigates is a type of wasDerivedBy.
+	mitigates is a type of wasDerivedFrom.
 	
-	writtenBy describes REQUIREMENT with values of type REQUIREMENT_DEVELOPMENT.
-	writtenBy is a type of wasGeneratedBy.
-
+	createdBy describes REQUIREMENT with values of type ACTIVITY.
+	createdBy is a type of wasGeneratedBy.
+	
 DATA_DICTIONARY_TERM is a type of ENTITY.
 	uniqueIdentifer describes DATA_DICTIONARY_TERM with values of type string.
 	
-	producedBy describes DATA_DICTIONARY_TERM with values of type ENTITY.
-	producedBy is a type of wasDerivedBy.
+	providedBy describes DATA_DICTIONARY_TERM with values of type ENTITY.
+	providedBy is a type of wasDerivedFrom.
 	
 	consumedBy describes DATA_DICTIONARY_TERM with values of type ENTITY.
-	consumedBy is a type of wasDerivedBy.
+	consumedBy is a type of wasDerivedFrom.
 	
-	createBy describes DATA_DICTIONARY_TERM with values of type REQUIREMENT_DEVELOPMENT.
-	createBy is a type of wasGeneratedBy.
+	createdBy describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
+	createdBy is a type of wasGeneratedBy.
 	
 REQUIREMENT_DEVELOPMENT is a type of ACTIVITY.
 	author (note "Entity that is responsible for producing a requirement") describes REQUIREMENT_DEVELOPMENT with values of type AGENT.
 	author is a type of wasAssociatedWith.
+	
+	referenced (note "source materials (requirement and design docs) used") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
+	referenced is a type of used.
+	
+	governedBy (note "processes documents used") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
+	governedBy is a type of used.
+	
+	

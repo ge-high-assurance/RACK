@@ -1,4 +1,27 @@
 uri "http://arcos.rack/REVIEW".
 import "http://arcos.rack/PROV-S".
 
-REVIEW is a type of ENTITY.
+REVIEW_LOG is a type of ENTITY.
+	uniqueIdentifer describes REVIEW_LOG with values of type string.
+	
+	reviews  describes REVIEW_LOG with values of type ENTITY.
+	reviews is a type of wasDerivedFrom.
+	
+	reviewState  describes REVIEW_LOG with values of type REVIEW_STATE.
+	REVIEW_STATE is a class, must be one of {Passed, ReviseWithoutReview, ReviseWithReview}.
+	
+	createBy describes REVIEW_LOG with values of type REVIEW.
+	createBy is a type of wasGeneratedBy.
+	
+REVIEW is a type of ACTIVITY.
+	author describes REVIEW with values of type AGENT.
+	author is a type of wasAssociatedWith.
+
+	reviewer describes REVIEW with values of type AGENT.
+	reviewer is a type of wasAssociatedWith.	
+	
+	reviewed describes REVIEW with values of type ENTITY.
+	reviewed is a type of used.
+	
+	governedBy (note "processes documents used") describes REVIEW with values of type ENTITY.
+	governedBy is a type of used.

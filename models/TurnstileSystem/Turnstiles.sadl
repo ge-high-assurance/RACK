@@ -1,0 +1,49 @@
+uri "http://ExampleData/TurnStiles".
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/REQUIREMENTS".
+Turnstiles is a SYSTEM,
+	has uniqueIdentifier "TurnStileSystem".
+	
+Ingate is a SYSTEM,
+	has uniqueIdentifier "In Gate",
+	has partOf Turnstiles.
+	
+Outgate is a SYSTEM,
+	has uniqueIdentifier "Out Gate",
+	has partOf Turnstiles.
+	
+	
+Computer is a SYSTEM,
+	has uniqueIdentifier "Computer",
+	has partOf Turnstiles.
+	
+Display is a SYSTEM,
+	has uniqueIdentifier "Display",
+	has partOf Turnstiles.
+
+inflow is a INTERFACE,
+	has uniqueIdentifier "inflow",
+	has source Ingate,
+	has destination Computer.
+	
+outflow is a INTERFACE,
+	has uniqueIdentifier "outflow",
+	has source Outgate,
+	has destination Computer.
+	
+census is a INTERFACE,
+	has uniqueIdentifier "census",
+	has source Computer,
+	has destination Display,
+	has destination Ingate.	
+
+// Turn Style system shall track the number of people that travel through the in gate.
+Sys-1 is a REQUIREMENT,
+	has uniqueIdentifier "Sys-1".
+// Turn Style system shall track the number of people that travel through the out gate.	
+Sys-2 is a REQUIREMENT,
+	has uniqueIdentifier "Sys-2".
+// Turn Style system shall track the number of people are currently in the park.
+Sys-3 is a REQUIREMENT,
+	has uniqueIdentifier "Sys-3".
+

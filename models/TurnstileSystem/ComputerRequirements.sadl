@@ -1,0 +1,42 @@
+uri "http://ExampleData/ComputerRequirements".
+import "http://arcos.rack/REQUIREMENTS" as Rs.
+import "http://ExampleData/TurnStiles".
+import "http://ExampleData/HazardAssesment".
+
+// The Computer shall increment the counter when a inflow event is received and the counter is less than max int.
+HLR-1 is a REQUIREMENT,
+	has uniqueIdentifier "HLR-1",
+	has satisfies Sys-1,
+	has mitigates H-1.2.	
+	
+// The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0.
+HLR-2 is a REQUIREMENT,
+	has uniqueIdentifier "HLR-2",
+	has satisfies Sys-2,
+	has mitigates H-1.1.	
+	
+// The Computer shall publish the counter at a 1 htz rate.
+HLR-3 is a REQUIREMENT,
+	has uniqueIdentifier "HLR-3",
+	has satisfies Sys-3.	
+	
+inflowEvent is a DATA_DICTIONARY_TERM,
+	has uniqueIdentifier "inflowEvent",
+	has providedBy inflow,
+	has consumedBy HLR-1.
+	
+outflowEvent is a DATA_DICTIONARY_TERM,
+	has uniqueIdentifier "outflowEvent",
+	has providedBy outflow,
+	has consumedBy HLR-2.
+	
+counter is a DATA_DICTIONARY_TERM,
+	has uniqueIdentifier "counter",
+	has providedBy HLR-1,
+	has providedBy HLR-2,
+	has consumedBy HLR-3.
+	
+display is a DATA_DICTIONARY_TERM,
+	has uniqueIdentifier "counter",
+	has providedBy HLR-3,
+	has consumedBy census.

@@ -1,0 +1,21 @@
+uri "http://ExampleData/HazardAssesment".
+import "http://arcos.rack/HAZARD" as H.
+import "http://ExampleData/TurnStiles".
+
+definition describes HAZARD with values of type string. 
+
+H-1 is a HAZARD,
+	has definition "System Crash",
+	has H:source Turnstiles.
+
+H-1.1 is a HAZARD,
+	has definition "Integer Under Flow",
+	has H:source H-1.
+	
+H-1.2 is a HAZARD,
+	has definition "Integer Over Flow",
+	has H:source H-1.
+	
+H-2 is a HAZARD,
+	has definition "Park Exceeds Capacity",
+	has H:source Turnstiles.

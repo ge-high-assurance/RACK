@@ -46,12 +46,15 @@ ABI is a type of Standard
 SoftwareObject is a class
   described by is_swobj_type with a single value of type SWObjectType
   // What "runs/executes/evaluates" this object,
-  described by swobj_evaluated_by with zero or one values of type SoftwareObject
+  described by swobj_evaluated_by with values of type SoftwareObject
   // What creates this object (a tool).
-  described by swobj_builder with zero or one values of type SoftwareObject
-  described by swobj_input_is with values of SoftwareObject.
+  described by swobj_builder with values of type SoftwareObject
+  described by swobj_input_is with values of type SoftwareObject.
 
-SWObjectType is a class
+swobj_evaluated_by of SoftwareObject has at most 1 value.
+swobj_builder of SoftwareObject has at most 1 value.
+
+SWObjectType is a class.
 TarArchive is a type of SWObjectType.
 ZipArchive is a type of SWObjectType.
 RPMPackage is a type of SWObjectType.
@@ -59,7 +62,13 @@ BinaryExecutable is a type of SWObjectType.
 ObjectFile is a type of SWObjectType.
 ObjectLibrary is a type of SWObjectType.
 TextFile is a type of SWObjectType.
+BareMetalExecutable is a type of SWObjectType.
+Compiler is a type of SWObjectType.
+File is a type of SWObjectType.
 
+// Old distinctions still used in TestCase
+SourceInfo is a class.
+SourceFile is a class.
 
 // The SoftwareInstance is a specific instance of a SoftwareObject.
 // It identifies exactly which version of dependencies were associated
@@ -70,22 +79,22 @@ SoftwareInstance is a class
   // What software environment this instance targets.
   // This must match to the OS/Hardware for this to be a valid/useable instance.
   // If not specified, assumed to be inherited from the input instances
-  described by target_swInstance_env_is a single value of type SoftwareEnvironment
+  described by target_swInstance_env_is with a single value of type SoftwareEnvironment
   // What software environment this instance needs to exist.
   // Defaults to the target_swInstance_env_is if not specified.
-  described by needs_swInstance_env_is a single value of type SoftwareEnvironment
+  described by needs_swInstance_env_is with a single value of type SoftwareEnvironment
 
-  described by from_swLocation_of is a single value of type LocationInfo
-  described by instance_input with values of SoftwareInstance.
+  described by from_swLocation_of with a single value of type LocationInfo
+  described by instance_input with values of type SoftwareInstance.
 
 SoftwareEnvironment is a class
   described by env_ISA with a single value of type ISA
   described by env_ABI with a single value of type ABI
   described by env_exefmt with a single value of type ExecutableFileFormat.
 
-SoftwareInstanceLocation is a class
-LocationInfo is a SoftwareInstanceLocation
-PackageVersion is a SoftwareInstanceLocation
+SoftwareInstanceLocation is a class.
+LocationInfo is a SoftwareInstanceLocation.
+PackageVersion is a SoftwareInstanceLocation.
 
 
 // ----------------------------------------------------------------------
@@ -157,7 +166,7 @@ PackageVersion is a type of Artifact
     // The package itself
     described by packageLocation with values of type LocationInfo
     // The location for obtaining the package. e.g. rpm.net
-    described by packageRepository with values of type PackageRepository
+    described by packageRepository with values of type PackageRepository.
 
 // A PackageRepository is a place to get packages from, for example, the Ubuntu
 // repositories, or Docker Hub.
@@ -222,6 +231,10 @@ LocationInfo is a class
 // where they are hosted, etc.
 
 relatedLocation describes LocationInfo with a single value of type LocationInfo.
+
+LocationTag is a class.
+LocationIdentifier is a class.
+SourceIdent is a class.
 
 LocationType is a class.
 GitLocationType is a LocationType.

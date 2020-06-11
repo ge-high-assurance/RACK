@@ -1,6 +1,6 @@
 uri "http://ExampleData/Sample2".
 import "http://arcos.rack/SOFTWARE".
-import "http://ExampleData/LowLevelRequirements".
+
 // based off Makefile
 sample2dist_tbz2 is a PACKAGE_FILE,
 	has wasGeneratedBy tbz2Packaging.

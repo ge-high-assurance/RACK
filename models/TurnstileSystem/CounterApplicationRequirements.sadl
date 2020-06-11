@@ -1,5 +1,5 @@
-uri "http://TurnstileSystem/ComputerRequirements".
-import "http://arcos.rack/REQUIREMENTS" as Rs.
+uri "http://TurnstileSystem/CounterApplicationRequirements".
+import "http://arcos.rack/REQUIREMENTS".
 import "http://TurnstileSystem/TurnStiles".
 import "http://TurnstileSystem/HazardAssesment".
 

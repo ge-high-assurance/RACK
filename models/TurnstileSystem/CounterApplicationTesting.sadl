@@ -1,0 +1,23 @@
+uri "http://TurnstileSystem/CounterApplicationTesting".
+import "http://arcos.rack/TESTING".
+import "http://TurnstileSystem/CounterApplicationRequirements".
+
+TC-1-1 is a TEST
+	has uniqueIdentifier "TC-1-1",
+	has verifies HLR-1.
+
+	
+TC-1-2 is a TEST
+	has uniqueIdentifier "TC-1-2",
+	has verifies HLR-1.
+
+	
+TC-1-3 is a TEST
+	has uniqueIdentifier "TC-1-3",
+	has verifies HLR-1.
+
+TC-1-4 is a TEST
+	has uniqueIdentifier "TC-1-4",
+	has verifies HLR-1.
+	
+	

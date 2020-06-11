@@ -1,7 +1,7 @@
-uri "http://ExampleData/InGateRequirement".
+uri "http://TurnstileSystem/InGateRequirement".
 import "http://arcos.rack/REQUIREMENTS" as Rs.
-import "http://ExampleData/TurnStiles".
-import "http://ExampleData/HazardAssesment".
+import "http://TurnstileSystem/TurnStiles".
+import "http://TurnstileSystem/HazardAssesment".
 
 // The Gate shall permit only one person at a time.
 IN-GATE-1 is a REQUIREMENT,

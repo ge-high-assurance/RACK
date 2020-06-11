@@ -1,6 +1,6 @@
-uri "http://ExampleData/HazardAssesment".
+uri "http://TurnstileSystem/HazardAssesment".
 import "http://arcos.rack/HAZARD" as H.
-import "http://ExampleData/TurnStiles".
+import "http://TurnstileSystem/TurnStiles".
 
 definition describes HAZARD with values of type string. 
 

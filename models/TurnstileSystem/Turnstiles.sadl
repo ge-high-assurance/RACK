@@ -1,4 +1,4 @@
-uri "http://ExampleData/TurnStiles".
+uri "http://TurnstileSystem/TurnStiles".
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/REQUIREMENTS".
 Turnstiles is a SYSTEM,

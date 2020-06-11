@@ -1,7 +1,7 @@
-uri "http://ExampleData/ComputerRequirements".
+uri "http://TurnstileSystem/ComputerRequirements".
 import "http://arcos.rack/REQUIREMENTS" as Rs.
-import "http://ExampleData/TurnStiles".
-import "http://ExampleData/HazardAssesment".
+import "http://TurnstileSystem/TurnStiles".
+import "http://TurnstileSystem/HazardAssesment".
 
 // The Computer shall increment the counter when a inflow event is received and the counter is less than max int.
 HLR-1 is a REQUIREMENT,

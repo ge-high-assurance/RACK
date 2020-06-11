@@ -35,7 +35,7 @@ REQUIREMENT_DEVELOPMENT is a type of ACTIVITY.
 	author (note "Entity that is responsible for producing a requirement") describes REQUIREMENT_DEVELOPMENT with values of type AGENT.
 	author is a type of wasAssociatedWith.
 	
-	referenced (note "source materials (requirement and design docs) used") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
+	referenced (note "source materials (requirement and design docs) used during development") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
 	referenced is a type of used.
 	
 	governedBy (note "processes documents used") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.

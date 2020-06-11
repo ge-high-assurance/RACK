@@ -2,10 +2,7 @@ uri "http://TurnstileSystem/CounterApplication".
 import "http://arcos.rack/SYSTEM".
 import "http://TurnstileSystem/TurnStiles".
 
-CounterApplication is a SYSTEM,
-	has uniqueIdentifier "CounterApplication",
-	has partOf Computer.
-	
+
 InputThread is a SYSTEM,
 	has uniqueIdentifier "InputThread",
 	has partOf CounterApplication.

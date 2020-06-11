@@ -3,18 +3,21 @@ import "http://arcos.rack/REQUIREMENTS" as Rs.
 import "http://TurnstileSystem/TurnStiles".
 import "http://TurnstileSystem/HazardAssesment".
 
-// The Gate shall permit only one person at a time.
 IN-GATE-1 is a REQUIREMENT,
 	has uniqueIdentifier "IN-GATE-1",
-	has satisfies Sys-1.	
+	has text "The Gate shall permit only one person at a time.",
+	has satisfies Sys-1,
+	has governs Ingate.	
 	
-// The Gate shall be disabled when the maximum census is reached.
 IN-GATE-2 is a REQUIREMENT,
 	has uniqueIdentifier "IN-GATE-2",
+	has text "The Gate shall be disabled when the maximum census is reached.",
 	has satisfies Sys-1,
-	has mitigates H-2.	
+	has mitigates H-2,
+	has governs Ingate.	
 	
-// The Gate shall report when a person is admitted.
 IN-GATE-3 is a REQUIREMENT,
 	has uniqueIdentifier "IN-GATE-3",
-	has satisfies Sys-1.	
+	has text "The Gate shall report when a person is admitted.",
+	has satisfies Sys-1,
+	has governs Ingate.	

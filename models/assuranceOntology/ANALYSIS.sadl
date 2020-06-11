@@ -4,6 +4,9 @@ import "http://arcos.rack/PROV-S".
 ANALYSIS_REPORT is a type of ENTITY.
 	uniqueIdentifer describes ANALYSIS_REPORT with values of type string.
 	
+	result describes ANALYSIS_REPORT with values of type ANALYSIS_RESULT.
+	ANALYSIS_RESULT is a class, must be one of {Passed, Failed, Indeterminate}.
+	
 	analyzes describes ANALYSIS_REPORT with values of type ENTITY.
 	analyzes is a type of wasDerivedFrom.
 	

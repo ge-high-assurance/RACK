@@ -1,4 +1,4 @@
-uri "http://TurnstileSystem/CounterApplicationLLRs".
+uri "http://TurnstileSystem/CounterApplicationLLR".
 import "http://arcos.rack/REQUIREMENTS".
 import "http://TurnstileSystem/CounterApplication".
 import "http://TurnstileSystem/CounterApplicationRequirements".

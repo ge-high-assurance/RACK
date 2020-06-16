@@ -13,8 +13,8 @@ TEST is a type of ENTITY.
 TEST_RESULT is a type of ENTITY.
 	uniqueIdentifer describes TEST_RESULT with values of type string.
 
-	result describes TEST_RESULT with values of type TEST_RESULT.
-	TEST_RESULT is a class, must be one of {Passed, Failed, Indeterminate}.
+	result (note "") describes TEST_RESULT with values of type TEST_STATUS.
+	TEST_STATUS is a class, must be one of {Passed, Failed, Indeterminate}.
 	
 	confirms (note "trace to the parent test") describes TEST_RESULT with values of type ENTITY.
 	confirms is a type of wasDerivedFrom.
@@ -27,6 +27,6 @@ TEST_DEVELOPMENT is a type of ACTIVITY.
 	developedBy is a type of wasAssociatedWith.
 
 TEST_EXECUTION is a type of ACTIVITY.
-	executedBy describes TEST_EXECUTION with values of type AGENT.
-	executedBy is a type of wasAssociatedWith.
+	executedOn describes TEST_EXECUTION with values of type AGENT.
+	executedOn is a type of wasAssociatedWith.
 	

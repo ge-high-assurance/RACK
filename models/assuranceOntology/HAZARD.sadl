@@ -1,0 +1,12 @@
+uri "http://arcos.rack/HAZARD".
+import "http://arcos.rack/PROV-S".
+
+HAZARD is a type of ENTITY.
+	uniqueIdentifer describes HAZARD with values of type string.
+	
+	source describes HAZARD with values of type ENTITY.
+	source is a type of wasDerivedFrom.
+	
+HAZARD_IDENTIFICATION is a type of ACTIVITY.
+	author describes HAZARD_IDENTIFICATION with values of type AGENT.
+	author is a type of wasAssociatedWith.

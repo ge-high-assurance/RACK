@@ -1,0 +1,104 @@
+uniqueIdentifier,governs,text
+SYS-REQ-3,BCSU,"BSCU shall set
+	mode of BSCU to Normal
+when (fail of Hyd_1 has been Not_Asserted for the past Hydraulic_Hysterisis and
+	BSCU_mode_command of PILOT_CONTROLS is Normal)."
+SYS-REQ-4,BCSU,"BSCU shall set
+	mode of BSCU to Alternate
+when (BSCU_mode_command of PILOT_CONTROLS is Alternate and
+	fail of Hyd_2 has been Not_Asserted for the past Hydraulic_Hysterisis) or
+	(BSCU_mode_command of PILOT_CONTROLS is Normal and
+	fail of Hyd_1 was Asserted in the past Hydraulic_Hysterisis and
+	fail of Hyd_2 has been Not_Asserted for the past Hydraulic_Hysterisis)."
+SYS-REQ-5,BCSU,"BSCU shall set
+	mode of BSCU to Emergency
+when (fail of Hyd_1 has been Not_Asserted for the past Hydraulic_Hysterisis and
+	fail of Hyd_2 was Asserted in the past Hydraulic_Hysterisis and
+	BSCU_mode_command of PILOT_CONTROLS is Alternate) or
+	(fail of Hyd_1 was Asserted in the past Hydraulic_Hysterisis and
+	fail of Hyd_2 was Asserted in the past Hydraulic_Hysterisis) or
+	(BSCU_mode_command of PILOT_CONTROLS is Emergency)."
+SYS-REQ-6,BCSU,"BSCU shall set
+	fail of HYD_STATUS to Asserted
+when pressure of HYD_STATUS < threshold of HYD_STATUS."
+SYS-REQ-7,BCSU,"BSCU shall set
+	fail of HYD_STATUS to Not_Asserted
+when pressure of HYD_STATUS >= threshold of HYD_STATUS."
+SYS-REQ-39,BCSU,"BSCU shall set
+	fail of HYD_STATUS to Not_Asserted
+when pressure of HYD_STATUS <= 2 * threshold of HYD_STATUS."
+SYS-REQ-34,BCSU,"BSCU shall set
+	fail of HYD_STATUS to Not_Asserted
+when pressure of HYD_STATUS = threshold of HYD_STATUS."
+SYS-REQ-14,BCSU,"BSCU shall set
+	anti_skid_cmd of COMMAND to None 
+when mode of BSCU is not Normal."
+SYS-REQ-15,BCSU,"BSCU shall set
+	anti_skid_shutoff of COMMAND to None
+when mode of BSCU is not Alternate."
+SYS-REQ-13,BCSU,"BSCU shall set
+	anti_skid_cmd of COMMAND to _value_int of Normal_computation
+when mode of BSCU is Normal
+where Normal_computation is (a DATA
+	with description ""compute anti-skid shutoff""
+	with input (validity of MONITOR)
+	with input (pedal_pos_value of PEDAL_POS))."
+SYS-REQ-16,BCSU,"BSCU shall set
+	anti_skid_shutoff of COMMAND to _value_int of Alternate_computation
+when mode of BSCU is Alternate
+where Alternate_computation is (a DATA
+	with description ""compute anti-skid shutoff""
+	with input (validity of MONITOR)
+	with input (pedal_pos_value of PEDAL_POS))."
+SYS-REQ-12,BCSU,"BSCU shall set
+	selector_valve_shutoff of BSCU to Commanded
+only when (validity of Monitor_1 is Invalid and
+	validity of Monitor_2 is Invalid) or
+	(power_value of Power_1 < Low_Power and
+	power_value of Power_2 < Low_Power) or
+	mode of BSCU is not Normal."
+SYS-REQ-18,BCSU,"BSCU shall set
+	emergency_accumulator of BSCU to None
+when mode of BSCU is not Emergency."
+SYS-REQ-17,BCSU,"BSCU shall set
+	emergency_accumulator of BSCU to _value_int of Emergency_computation
+when mode of BSCU is Emergency
+where Emergency_computation is (a DATA
+	with description ""compute braking by accumulator""
+	with input (pedal_pos_value of PEDAL_POS))."
+SYS-REQ-22,BCSU,"BSCU shall set
+	wheel_speed_ind of WHEEL_DATA to wheel_speed of WHEEL_DATA."
+SYS-REQ-24,BCSU,"BSCU shall set
+	brake_temp_ind of WHEEL_DATA to brake_temp of WHEEL_DATA."
+SYS-REQ-23,BCSU,"BSCU shall set
+	tire_pressure_ind of WHEEL_DATA to tire_pressure of WHEEL_DATA."
+SYS-REQ-20,BCSU,"BSCU shall set
+	parking_brake_lever of BSCU_STATUS to Parking_brake_computation
+where Parking_brake_computation is (a COMMAND_STATUS
+	with description ""compute parking brake""
+	with input (wheel_speed of WHEEL_DATA)
+	with input (brake_temp of WHEEL_DATA)
+	with input (tire_pressure of WHEEL_DATA)
+	with input (air_ground of PROXIMITY_DATA)
+	with input (speed_brake_lever of PROXIMITY_DATA)
+	with input (landing_gear_lever of BSCU)
+	with input (pedal_pos_value of PEDAL_POS))."
+SYS-REQ-21,BCSU,"BSCU shall set
+	fault_data of BSCU_STATUS to Fault_computation
+where Fault_computation is (a DATA
+	with description ""compute fault data""
+	with input (wheel_speed of WHEEL_DATA)
+	with input (brake_temp of WHEEL_DATA)
+	with input (tire_pressure of WHEEL_DATA)
+	with input (validity of MONITOR)
+	with input (air_ground of PROXIMITY_DATA)
+	with input (speed_brake_lever of PROXIMITY_DATA)
+	with input (landing_gear_lever of BSCU)
+	with input (pedal_pos_value of PEDAL_POS)
+	with input (parking_brake_lever of PILOT_CONTROLS)
+	with input (autobrake_selector of PILOT_CONTROLS)
+	with input (tra of ENGINE_CONTROLS)
+	with input (fuel_cutoff of ENGINE_CONTROLS)
+	with input (ground_speed of EARTH_REFERENCE_DATA)
+	with input (pitch of EARTH_REFERENCE_DATA)
+	with input (long_accel of EARTH_REFERENCE_DATA))."

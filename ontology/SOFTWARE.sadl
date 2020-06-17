@@ -1,4 +1,4 @@
-uri "http://arcos.rack/SOFTWARE".
+uri "http://arcos.rack/SOFTWARE" alias sw.
 import "http://arcos.rack/PROV-S".
 
 PACKAGE_FILE is a type of ENTITY.
@@ -7,8 +7,8 @@ CODE_FILE is a type of ENTITY.
 	satisfies describes CODE_FILE with values of type ENTITY.
 	satisfies is a type of wasDerivedFrom.
 	
-	language describes CODE_FILE with values of type LANGUAGE.
-	language is a type of wasDerivedFrom.
+	sw:language describes CODE_FILE with values of type LANGUAGE.
+	sw:language is a type of wasDerivedFrom.
 
 	createBy describes CODE_FILE with values of type ACTIVITY.
 	createBy is a type of wasGeneratedBy.

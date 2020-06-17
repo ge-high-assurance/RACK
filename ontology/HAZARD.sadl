@@ -2,7 +2,7 @@ uri "http://arcos.rack/HAZARD".
 import "http://arcos.rack/PROV-S".
 
 HAZARD is a type of ENTITY.
-	uniqueIdentifer describes HAZARD with values of type string.
+	uniqueIdentifier describes HAZARD with values of type string.
 	
 	source describes HAZARD with values of type ENTITY.
 	source is a type of wasDerivedFrom.

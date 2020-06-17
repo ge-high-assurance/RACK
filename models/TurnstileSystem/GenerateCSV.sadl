@@ -1,0 +1,86 @@
+uri "http://TurnstileSystem/GenerateCSV".
+import "http://TurnstileSystem/CounterApplicationLLR".
+import "http://TurnstileSystem/CounterApplicationTesting".
+
+// Note that in the query below, ?SYSTEM is not identical to ?uniqueIdentifier; so I need to list both
+// Similarly for other queries.
+
+// list all SYSTEM
+Write: data 
+{
+  Ask: "select distinct ?SYSTEM ?uniqueIdentifier ?partOf ?producedBy ?provides ?requires where 
+       {?SYSTEM <rdf:type> <SYSTEM>
+        . ?SYSTEM <uniqueIdentifier> ?uniqueIdentifier
+        . OPTIONAL{?SYSTEM <partOf> ?partOf}
+        . OPTIONAL{?SYSTEM <producedBy> ?producedBy}
+        . OPTIONAL{?SYSTEM <provides> ?provides}
+        . OPTIONAL{?SYSTEM <requires> ?requires}
+       } order by ?uniqueIdentifier".
+} to "/Output/SYSTEM.csv".
+
+// list all INTERFACE
+Write: data 
+{
+  Ask: "select distinct ?INTERFACE ?uniqueIdentifier ?source ?destination ?identifiedBy where 
+       {  ?INTERFACE <rdf:type> <INTERFACE>
+        . ?INTERFACE <uniqueIdentifier> ?uniqueIdentifier
+        . OPTIONAL{?INTERFACE <source> ?source}
+        . OPTIONAL{?INTERFACE <destination> ?destination}
+        . OPTIONAL{?INTERFACE <identifiedBy> ?identifiedBy}
+       } order by ?uniqueIdentifier".
+} to "/Output/INTERFACE.csv".
+
+// list all HAZARD
+Write: data 
+{
+  Ask: "select distinct ?HAZARD ?definition ?source where 
+       {  ?HAZARD <rdf:type> <HAZARD>
+        . ?HAZARD <definition> ?definition
+        . OPTIONAL{?HAZARD <H:source> ?source}
+       } order by ?uniqueIdentifier".
+} to "/Output/HAZARD.csv".
+
+// list all REQUIREMENT
+Write: data 
+{
+  Ask: "select distinct ?REQUIREMENT ?uniqueIdentifier ?governs ?satisfies ?mitigates ?createdBy ?text where 
+       {  ?REQUIREMENT <rdf:type> <REQUIREMENT>
+        . ?REQUIREMENT <uniqueIdentifier> ?uniqueIdentifier
+        . OPTIONAL{?REQUIREMENT <governs> ?governs}
+        . OPTIONAL{?REQUIREMENT <satisfies> ?satisfies}
+        . OPTIONAL{?REQUIREMENT <mitigates> ?mitigates}
+        . OPTIONAL{?REQUIREMENT <createdBy> ?createdBy}
+        . OPTIONAL{?REQUIREMENT <text> ?text}
+       } order by ?uniqueIdentifier".
+} to "/Output/REQUIREMENT.csv".
+
+// list all DATA_DICTIONARY_TERM
+// Note that a single DATA_DICTIONARY_TERM can have multiple providedBy and multiple consumedBy; and so we get multiple rows;
+// so we may want to output in a different way.
+Write: data 
+{
+  Ask: "select distinct ?DATA_DICTIONARY_TERM ?uniqueIdentifier ?providedBy ?consumedBy ?createdBy ?text where 
+       {  ?DATA_DICTIONARY_TERM <rdf:type> <DATA_DICTIONARY_TERM>
+        . ?DATA_DICTIONARY_TERM <uniqueIdentifier> ?uniqueIdentifier
+        . OPTIONAL{?DATA_DICTIONARY_TERM <providedBy> ?providedBy}
+        . OPTIONAL{?DATA_DICTIONARY_TERM <consumedBy> ?consumedBy}
+        . OPTIONAL{?DATA_DICTIONARY_TERM <mitigates> ?createdBy}
+        . OPTIONAL{?DATA_DICTIONARY_TERM <text> ?text}
+      } order by ?uniqueIdentifier".
+} to "/Output/DATA_DICTIONARY_TERM.csv".
+
+
+// list all TEST
+Write: data 
+{
+  Ask: "select distinct ?TEST ?uniqueIdentifier ?verifies ?producedBy where 
+       {  ?TEST <rdf:type> <TEST>
+        . ?TEST <uniqueIdentifier> ?uniqueIdentifier
+        . OPTIONAL{?TEST <verifies> ?verifies}
+        . OPTIONAL{?TEST <producedBy> ?producedBy}
+       } order by ?uniqueIdentifier".
+} to "/Output/TEST.csv".
+
+
+
+       

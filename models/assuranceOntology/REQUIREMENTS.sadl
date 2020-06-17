@@ -1,0 +1,44 @@
+uri "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/PROV-S".
+
+REQUIREMENT is a type of ENTITY.
+	uniqueIdentifier describes REQUIREMENT with values of type string.
+	text describes REQUIREMENT with values of type string.
+	
+	governs (note "traces to enitiy which is the subject of the requirement") describes REQUIREMENT with values of type ENTITY.
+	governs is a type of wasDerivedFrom.
+	
+	satisfies (note "trace to a parent requirement (or any object) that the requirement is derived from") describes REQUIREMENT with values of type ENTITY.
+	satisfies is a type of wasDerivedFrom.
+	
+	mitigates (note "trace to a hazard that is being mitigated by this requirement.")describes REQUIREMENT with values of type ENTITY.
+	mitigates is a type of wasDerivedFrom.
+	
+	createdBy describes REQUIREMENT with values of type ACTIVITY.
+	createdBy is a type of wasGeneratedBy.
+	
+	
+DATA_DICTIONARY_TERM is a type of ENTITY.
+	uniqueIdentifier describes DATA_DICTIONARY_TERM with values of type string.
+	text describes DATA_DICTIONARY_TERM with values of type string.
+	
+	providedBy describes DATA_DICTIONARY_TERM with values of type ENTITY.
+	providedBy is a type of wasDerivedFrom.
+	
+	consumedBy describes DATA_DICTIONARY_TERM with values of type ENTITY.
+	consumedBy is a type of wasDerivedFrom.
+	
+	createdBy describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
+	createdBy is a type of wasGeneratedBy.
+	
+REQUIREMENT_DEVELOPMENT is a type of ACTIVITY.
+	author (note "Entity that is responsible for producing a requirement") describes REQUIREMENT_DEVELOPMENT with values of type AGENT.
+	author is a type of wasAssociatedWith.
+	
+	referenced (note "source materials (requirement and design docs) used during development") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
+	referenced is a type of used.
+	
+	governedBy (note "processes documents used") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
+	governedBy is a type of used.
+	
+	

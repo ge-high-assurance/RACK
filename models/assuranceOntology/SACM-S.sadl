@@ -1,0 +1,31 @@
+uri "http://arcos.rack/SACM-S"
+(note "This ontology is based on a sub-set of the SACM meta-model. This subset is the important elements for constructing the structure of a assurance argument, but does not include all information from the meta-model.").
+import "http://arcos.rack/PROV-S".
+
+//not sure if Argument package is really needed for fragments, seems like this would really be something done by TA3
+ARGUMENT_PACKAGE is a type of ENTITY.
+	argumentationElement describes ARGUMENT_PACKAGE with values of type ENTITY. 
+	argumentationElement is a type of wasDerivedFrom.
+	
+CLAIM is a type of ENTITY.
+
+ASSERTED_CONTEXT is a type of ENTITY.
+	source describes ASSERTED_CONTEXT  with values of type ENTITY.
+	source is a type of wasDerivedFrom.
+	
+	target  describes ASSERTED_CONTEXT  with values of type ENTITY.
+	target is a type of wasDerivedFrom.
+
+ASSERTED_INFERENCE is a type of ENTITY.
+	source describes ASSERTED_INFERENCE  with values of type ENTITY.
+	source is a type of wasDerivedFrom.
+	
+	target  describes ASSERTED_INFERENCE  with values of type ENTITY.
+	target is a type of wasDerivedFrom.
+
+	reasoning describes ASSERTED_INFERENCE  with values of type ENTITY.
+	reasoning is a type of wasDerivedFrom.
+
+
+ARTIFACT_REFERENCE is a type of ENTITY.
+ARGUMENT_REASONING is a type of ENTITY.	

@@ -39,16 +39,16 @@ census is a INTERFACE,
 
 Sys-1 is a REQUIREMENT,
 	has uniqueIdentifier "Sys-1",
-	has text "Turn Style system shall track the number of people that travel through the in gate.",
+	has text "Turnstile system shall track the number of people that travel through the in gate.",
 	has governs Turnstiles.
 
 Sys-2 is a REQUIREMENT,
 	has uniqueIdentifier "Sys-2",
-	has text "Turn Style system shall track the number of people that travel through the out gate.	",
+	has text "Turnstile system shall track the number of people that travel through the out gate.	",
 	has governs Turnstiles.
  
 Sys-3 is a REQUIREMENT,
 	has uniqueIdentifier "Sys-3",
-	has text "Turn Style system shall track the number of people are currently in the park.",
+	has text "Turnstile system shall track the number of people are currently in the park.",
 	has governs Turnstiles.
 

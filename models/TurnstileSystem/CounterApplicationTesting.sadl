@@ -21,3 +21,22 @@ TC-1-4 is a TEST
 	has verifies HLR-1.
 	
 	
+TR-1-1 is a TEST_RESULT
+	has uniqueIdentifier "TR-1-1",
+	has confirms TC-1-1.
+
+	
+TR-1-2 is a TEST_RESULT
+	has uniqueIdentifier "TR-1-2",
+	has confirms TC-1-2.
+
+	
+TR-1-3 is a TEST_RESULT
+	has uniqueIdentifier "TR-1-3",
+	has confirms TC-1-3.
+
+TR-1-4 is a TEST_RESULT
+	has uniqueIdentifier "TR-1-4",
+	has confirms TC-1-4.
+	
+	

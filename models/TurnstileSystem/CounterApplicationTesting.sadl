@@ -21,31 +21,60 @@ TC-1-4 is a TEST
 	has verifies HLR-1.
 	
 	
-TR-1-1 is a TEST_RESULT
-	has uniqueIdentifier "TR-1-1",
+TR-1-1-1 is a TEST_RESULT
+	has uniqueIdentifier "TR-1-1-1",
 	has confirms TC-1-1,
 	has result Passed,
 	has executedBy TestRun1.
 
 	
-TR-1-2 is a TEST_RESULT
-	has uniqueIdentifier "TR-1-2",
+TR-1-2-1 is a TEST_RESULT
+	has uniqueIdentifier "TR-1-2-1",
 	has confirms TC-1-2,
 	has result Passed,
 	has executedBy TestRun1.
 
 	
-TR-1-3 is a TEST_RESULT
-	has uniqueIdentifier "TR-1-3",
+TR-1-3-1 is a TEST_RESULT
+	has uniqueIdentifier "TR-1-3-1",
 	has confirms TC-1-3,
 	has result Passed,
 	has executedBy TestRun1.
 
-TR-1-4 is a TEST_RESULT
-	has uniqueIdentifier "TR-1-4",
+TR-1-4-1 is a TEST_RESULT
+	has uniqueIdentifier "TR-1-4-1",
 	has confirms TC-1-4,
 	has result Failed,
 	has executedBy TestRun1.
 	
 
 TestRun1 is a TEST_EXECUTION.	
+
+TR-1-1-2 is a TEST_RESULT
+	has uniqueIdentifier "TR-1-1-2",
+	has confirms TC-1-1,
+	has result Passed,
+	has executedBy TestRun1.
+
+	
+TR-1-2-2 is a TEST_RESULT
+	has uniqueIdentifier "TR-1-2-2",
+	has confirms TC-1-2,
+	has result Passed,
+	has executedBy TestRun1.
+
+	
+TR-1-3-2 is a TEST_RESULT
+	has uniqueIdentifier "TR-1-3-2",
+	has confirms TC-1-3,
+	has result Passed,
+	has executedBy TestRun1.
+
+TR-1-4-2 is a TEST_RESULT
+	has uniqueIdentifier "TR-1-4-2",
+	has confirms TC-1-4,
+	has result Failed,
+	has executedBy TestRun1.
+	
+
+TestRun2 is a TEST_EXECUTION.	

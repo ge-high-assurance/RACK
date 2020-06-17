@@ -2,7 +2,7 @@ uri "http://arcos.rack/REQUIREMENTS".
 import "http://arcos.rack/PROV-S".
 
 REQUIREMENT is a type of ENTITY.
-	uniqueIdentifer describes REQUIREMENT with values of type string.
+	uniqueIdentifier describes REQUIREMENT with values of type string.
 	text describes REQUIREMENT with values of type string.
 	
 	governs (note "traces to enitiy which is the subject of the requirement") describes REQUIREMENT with values of type ENTITY.
@@ -19,7 +19,7 @@ REQUIREMENT is a type of ENTITY.
 	
 	
 DATA_DICTIONARY_TERM is a type of ENTITY.
-	uniqueIdentifer describes DATA_DICTIONARY_TERM with values of type string.
+	uniqueIdentifier describes DATA_DICTIONARY_TERM with values of type string.
 	text describes DATA_DICTIONARY_TERM with values of type string.
 	
 	providedBy describes DATA_DICTIONARY_TERM with values of type ENTITY.

@@ -19,7 +19,7 @@ TEST_RESULT is a type of ENTITY.
 	confirms (note "trace to the parent test") describes TEST_RESULT with values of type ENTITY.
 	confirms is a type of wasDerivedFrom.
 	
-	executedBy (note "activity that created the test result") describes TEST_RESULT with values of type AGENT.
+	executedBy (note "activity that created the test result") describes TEST_RESULT with values of type ACTIVITY.
 	executedBy is a type of wasGeneratedBy.
 	
 TEST_DEVELOPMENT is a type of ACTIVITY.

@@ -1,0 +1,48 @@
+<rdf:RDF
+    xmlns:Rs="http://arcos.rack/REQUIREMENTS"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:j.0="http://arcos.rack/properties#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns="http://TurnstileSystem/InGateRequirement#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:j.1="http://arcos.rack/REQUIREMENTS#"
+  xml:base="http://TurnstileSystem/InGateRequirement">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="HazardAssesment"/>
+    <owl:imports rdf:resource="TurnStiles"/>
+    <owl:imports rdf:resource="http://arcos.rack/REQUIREMENTS"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'InGateRequirements.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <j.1:REQUIREMENT rdf:ID="IN-GATE-3">
+    <j.1:governs rdf:resource="TurnStiles#Ingate"/>
+    <j.1:satisfies rdf:resource="TurnStiles#Sys-1"/>
+    <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The Gate shall report when a person is admitted.</j.1:text>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IN-GATE-3</j.0:uniqueIdentifier>
+  </j.1:REQUIREMENT>
+  <j.1:REQUIREMENT rdf:ID="IN-GATE-2">
+    <j.1:governs rdf:resource="TurnStiles#Ingate"/>
+    <j.1:mitigates rdf:resource="HazardAssesment#H-2"/>
+    <j.1:satisfies rdf:resource="TurnStiles#Sys-1"/>
+    <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The Gate shall be disabled when the maximum census is reached.</j.1:text>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IN-GATE-2</j.0:uniqueIdentifier>
+  </j.1:REQUIREMENT>
+  <j.1:REQUIREMENT rdf:ID="IN-GATE-1">
+    <j.1:governs rdf:resource="TurnStiles#Ingate"/>
+    <j.1:satisfies rdf:resource="TurnStiles#Sys-1"/>
+    <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The Gate shall permit only one person at a time.</j.1:text>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IN-GATE-1</j.0:uniqueIdentifier>
+  </j.1:REQUIREMENT>
+</rdf:RDF>

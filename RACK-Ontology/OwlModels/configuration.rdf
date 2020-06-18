@@ -1,0 +1,28 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://com.ge.research.sadl.configuration#">
+  <Category rdf:about="http://com.ge.research.sadl.configuration#ReasonerSpec">
+    <reasonerClassName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >com.ge.research.sadl.jena.reasoner.JenaReasonerPlugin</reasonerClassName>
+  </Category>
+  <Category rdf:about="http://com.ge.research.sadl.configuration#Jena">
+    <pOWLTranslation rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</pOWLTranslation>
+    <pUseLuceneIndexer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</pUseLuceneIndexer>
+    <pTimeOut rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >-1</pTimeOut>
+    <pTrace rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</pTrace>
+    <pRuleMode rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >hybrid</pRuleMode>
+    <pDerivationLogging rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >None</pDerivationLogging>
+    <pModelSpec rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OWL_MEM_TRANS</pModelSpec>
+    <pTransitiveClosureCaching rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</pTransitiveClosureCaching>
+    <translatorClassName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >com.ge.research.sadl.jena.translator.JenaTranslatorPlugin</translatorClassName>
+  </Category>
+</rdf:RDF>

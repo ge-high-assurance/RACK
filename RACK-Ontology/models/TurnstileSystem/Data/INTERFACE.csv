@@ -1,0 +1,6 @@
+"INTERFACE","uniqueIdentifier","source","destination","identifiedBy"
+"census","census","CounterApplication","Display",null
+"census","census","CounterApplication","Ingate",null
+"inflow","inflow","Ingate","CounterApplication",null
+"outflow","outflow","Outgate","CounterApplication",null
+

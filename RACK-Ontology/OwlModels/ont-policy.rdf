@@ -1,0 +1,344 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://jena.hpl.hp.com/schemas/2003/03/ont-manager#">
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/PROV-S.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/PROV-S.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/Sample2.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/Sample2.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/PROV-S.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/PROV-S"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/ANALYSIS.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/ANALYSIS"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >sadllistmodel</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/SadlListModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadllistmodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/SACM-S.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/SACM-S.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/BCSU_Data_Dictionary.owl"/>
+    <j.0:publicURI rdf:resource="http://WBS/BCSU_Data_Dictionary"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/CounterApplicationTesting.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/CounterApplicationTesting.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/CounterApplicationTesting.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/CounterApplicationTesting"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/BCSU_Requirements.owl"/>
+    <j.0:publicURI rdf:resource="http://WBS/BCSU_Requirements"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >builtinfunctions</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/SadlBuiltinFunctions.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/builtinfunctions"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/TESTING.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/TESTING"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/GenerateCSV.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/GenerateCSV.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/HazardAssesment.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/HazardAssesment.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/BCSU_System.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://WBS/System_Architecture.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/Sample2.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/Sample2"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/TESTING.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/TESTING.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/Turnstiles.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/TurnStiles.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/InGateRequirements.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/InGateRequirement.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/SYSTEM.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/SYSTEM.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/CounterApplication.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/CounterApplication"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/CounterApplication.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/CounterApplication.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/CounterApplicationLLR.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/CounterApplicationLLR"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/BCSU_Requirements.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://WBS/BCSU_Requirements.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/REQUIREMENTS.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/REQUIREMENTS"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/properties.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/properties.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/SOFTWARE.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/SOFTWARE.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/properties.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/properties"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/HazardAssesment.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/HazardAssesment"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >sadlbasemodel</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/SadlBaseModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlbasemodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/InGateRequirements.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/InGateRequirement"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/REQUIREMENTS.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/REQUIREMENTS.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/HAZARD.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/HAZARD"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/CounterApplicationRequirements.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/CounterApplicationRequirements"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/SYSTEM.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/SYSTEM"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >sadlimplicitmodel</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/SadlImplicitModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/REVIEW.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/REVIEW"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/CounterApplicationRequirements.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/CounterApplicationRequirements.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/ANALYSIS.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/ANALYSIS.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/HAZARD.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/HAZARD.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/REVIEW.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/REVIEW.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/SACM-S.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/SACM-S"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >sw</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/SOFTWARE.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/SOFTWARE"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/CounterApplicationLLR.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/CounterApplicationLLR.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/Turnstiles.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/TurnStiles"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/GenerateCSV.owl"/>
+    <j.0:publicURI rdf:resource="http://TurnstileSystem/GenerateCSV"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/BCSU_Data_Dictionary.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://WBS/BCSU_Data_Dictionary.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/C:/Sadl3Workspace2/RACK-Ontology-6-17/OwlModels/BCSU_System.owl"/>
+    <j.0:publicURI rdf:resource="http://WBS/System_Architecture"/>
+  </j.0:OntologySpec>
+</rdf:RDF>

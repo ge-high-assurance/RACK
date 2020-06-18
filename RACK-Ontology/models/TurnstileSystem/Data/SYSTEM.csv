@@ -1,0 +1,10 @@
+"SYSTEM","uniqueIdentifier","partOf","producedBy","provides","requires"
+"CounterApplication","Counter Application","Turnstiles",null,null,null
+"Display","Display","Turnstiles",null,null,null
+"ExecutiveThread","ExecutiveThread","CounterApplication",null,null,null
+"Ingate","In Gate","Turnstiles",null,null,null
+"InputThread","InputThread","CounterApplication",null,null,null
+"Outgate","Out Gate","Turnstiles",null,null,null
+"OutputThread","OutputThread","CounterApplication",null,null,null
+"Turnstiles","TurnStileSystem",null,null,null,null
+

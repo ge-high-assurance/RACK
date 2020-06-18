@@ -1,0 +1,91 @@
+<rdf:RDF
+    xmlns="http://TurnstileSystem/TurnStiles#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:j.0="http://arcos.rack/properties#"
+    xmlns:j.1="http://arcos.rack/SYSTEM#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:j.2="http://arcos.rack/REQUIREMENTS#"
+  xml:base="http://TurnstileSystem/TurnStiles">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://arcos.rack/REQUIREMENTS"/>
+    <owl:imports rdf:resource="http://arcos.rack/SYSTEM"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'Turnstiles.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <j.2:REQUIREMENT rdf:ID="Sys-3">
+    <j.2:governs>
+      <j.1:SYSTEM rdf:ID="Turnstiles">
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >TurnStileSystem</j.0:uniqueIdentifier>
+      </j.1:SYSTEM>
+    </j.2:governs>
+    <j.2:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Turnstile system shall track the number of people are currently in the park.</j.2:text>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Sys-3</j.0:uniqueIdentifier>
+  </j.2:REQUIREMENT>
+  <j.1:INTERFACE rdf:ID="outflow">
+    <j.1:destination>
+      <j.1:SYSTEM rdf:ID="CounterApplication">
+        <j.1:partOf rdf:resource="#Turnstiles"/>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Counter Application</j.0:uniqueIdentifier>
+      </j.1:SYSTEM>
+    </j.1:destination>
+    <j.1:source>
+      <j.1:SYSTEM rdf:ID="Outgate">
+        <j.1:partOf rdf:resource="#Turnstiles"/>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Out Gate</j.0:uniqueIdentifier>
+      </j.1:SYSTEM>
+    </j.1:source>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >outflow</j.0:uniqueIdentifier>
+  </j.1:INTERFACE>
+  <j.2:REQUIREMENT rdf:ID="Sys-2">
+    <j.2:governs rdf:resource="#Turnstiles"/>
+    <j.2:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Turnstile system shall track the number of people that travel through the out gate.	</j.2:text>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Sys-2</j.0:uniqueIdentifier>
+  </j.2:REQUIREMENT>
+  <j.2:REQUIREMENT rdf:ID="Sys-1">
+    <j.2:governs rdf:resource="#Turnstiles"/>
+    <j.2:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Turnstile system shall track the number of people that travel through the in gate.</j.2:text>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Sys-1</j.0:uniqueIdentifier>
+  </j.2:REQUIREMENT>
+  <j.1:INTERFACE rdf:ID="census">
+    <j.1:destination>
+      <j.1:SYSTEM rdf:ID="Ingate">
+        <j.1:partOf rdf:resource="#Turnstiles"/>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >In Gate</j.0:uniqueIdentifier>
+      </j.1:SYSTEM>
+    </j.1:destination>
+    <j.1:destination>
+      <j.1:SYSTEM rdf:ID="Display">
+        <j.1:partOf rdf:resource="#Turnstiles"/>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Display</j.0:uniqueIdentifier>
+      </j.1:SYSTEM>
+    </j.1:destination>
+    <j.1:source rdf:resource="#CounterApplication"/>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >census</j.0:uniqueIdentifier>
+  </j.1:INTERFACE>
+  <j.1:INTERFACE rdf:ID="inflow">
+    <j.1:destination rdf:resource="#CounterApplication"/>
+    <j.1:source rdf:resource="#Ingate"/>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >inflow</j.0:uniqueIdentifier>
+  </j.1:INTERFACE>
+</rdf:RDF>

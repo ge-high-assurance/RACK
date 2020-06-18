@@ -16,7 +16,7 @@ Write: data
         . OPTIONAL{?SYSTEM <provides> ?provides}
         . OPTIONAL{?SYSTEM <requires> ?requires}
        } order by ?uniqueIdentifier".
-} to "/Output/SYSTEM.csv".
+} to "models/TurnstileSystem/Data/SYSTEM.csv".
 
 // list all INTERFACE
 Write: data 
@@ -28,7 +28,7 @@ Write: data
         . OPTIONAL{?INTERFACE <destination> ?destination}
         . OPTIONAL{?INTERFACE <identifiedBy> ?identifiedBy}
        } order by ?uniqueIdentifier".
-} to "/Output/INTERFACE.csv".
+} to "models/TurnstileSystem/Data/INTERFACE.csv".
 
 // list all HAZARD
 Write: data 
@@ -38,7 +38,7 @@ Write: data
         . ?HAZARD <definition> ?definition
         . OPTIONAL{?HAZARD <H:source> ?source}
        } order by ?uniqueIdentifier".
-} to "/Output/HAZARD.csv".
+} to "models/TurnstileSystem/Data/HAZARD.csv".
 
 // list all REQUIREMENT
 Write: data 
@@ -52,7 +52,7 @@ Write: data
         . OPTIONAL{?REQUIREMENT <createdBy> ?createdBy}
         . OPTIONAL{?REQUIREMENT <text> ?text}
        } order by ?uniqueIdentifier".
-} to "/Output/REQUIREMENT.csv".
+} to "models/TurnstileSystem/Data/REQUIREMENT.csv".
 
 // list all DATA_DICTIONARY_TERM
 // Note that a single DATA_DICTIONARY_TERM can have multiple providedBy and multiple consumedBy; and so we get multiple rows;
@@ -67,7 +67,7 @@ Write: data
         . OPTIONAL{?DATA_DICTIONARY_TERM <mitigates> ?createdBy}
         . OPTIONAL{?DATA_DICTIONARY_TERM <text> ?text}
       } order by ?uniqueIdentifier".
-} to "/Output/DATA_DICTIONARY_TERM.csv".
+} to "models/TurnstileSystem/Data/DATA_DICTIONARY_TERM.csv".
 
 
 // list all TEST
@@ -79,7 +79,7 @@ Write: data
         . OPTIONAL{?TEST <verifies> ?verifies}
         . OPTIONAL{?TEST <producedBy> ?producedBy}
        } order by ?uniqueIdentifier".
-} to "/Output/TEST.csv".
+} to "models/TurnstileSystem/Data/TEST.csv".
 
 
 

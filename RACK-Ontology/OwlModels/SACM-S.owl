@@ -1,0 +1,71 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns="http://arcos.rack/SACM-S#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://arcos.rack/SACM-S">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="PROV-S"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology is based on a sub-set of the SACM meta-model. This subset is the important elements for constructing the structure of a assurance argument, but does not include all information from the meta-model.</rdfs:comment>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'SACM-S.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="ASSERTED_CONTEXT">
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ASSERTED_INFERENCE">
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ARTIFACT_REFERENCE">
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ARGUMENT_PACKAGE">
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ARGUMENT_REASONING">
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="CLAIM">
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="reasoning">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#ASSERTED_INFERENCE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="target">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#ASSERTED_CONTEXT"/>
+          <owl:Class rdf:about="#ASSERTED_INFERENCE"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="source">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#ASSERTED_CONTEXT"/>
+          <owl:Class rdf:about="#ASSERTED_INFERENCE"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="argumentationElement">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#ARGUMENT_PACKAGE"/>
+  </owl:ObjectProperty>
+</rdf:RDF>

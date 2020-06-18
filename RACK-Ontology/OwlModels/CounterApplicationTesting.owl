@@ -1,0 +1,104 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:j.0="http://arcos.rack/properties#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns="http://TurnstileSystem/CounterApplicationTesting#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:j.1="http://arcos.rack/TESTING#"
+  xml:base="http://TurnstileSystem/CounterApplicationTesting">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="CounterApplicationRequirements"/>
+    <owl:imports rdf:resource="http://arcos.rack/TESTING"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplicationTesting.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <j.1:TEST_RESULT rdf:ID="TR-1-2-1">
+    <j.1:executedBy>
+      <j.1:TEST_EXECUTION rdf:ID="TestRun1"/>
+    </j.1:executedBy>
+    <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
+    <j.1:confirms>
+      <j.1:TEST rdf:ID="TC-1-2">
+        <j.1:verifies rdf:resource="CounterApplicationRequirements#HLR-1"/>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >TC-1-2</j.0:uniqueIdentifier>
+      </j.1:TEST>
+    </j.1:confirms>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TR-1-2-1</j.0:uniqueIdentifier>
+  </j.1:TEST_RESULT>
+  <j.1:TEST_RESULT rdf:ID="TR-1-1-2">
+    <j.1:executedBy rdf:resource="#TestRun1"/>
+    <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
+    <j.1:confirms>
+      <j.1:TEST rdf:ID="TC-1-1">
+        <j.1:verifies rdf:resource="CounterApplicationRequirements#HLR-1"/>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >TC-1-1</j.0:uniqueIdentifier>
+      </j.1:TEST>
+    </j.1:confirms>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TR-1-1-2</j.0:uniqueIdentifier>
+  </j.1:TEST_RESULT>
+  <j.1:TEST_RESULT rdf:ID="TR-1-1-1">
+    <j.1:executedBy rdf:resource="#TestRun1"/>
+    <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
+    <j.1:confirms rdf:resource="#TC-1-1"/>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TR-1-1-1</j.0:uniqueIdentifier>
+  </j.1:TEST_RESULT>
+  <j.1:TEST_EXECUTION rdf:ID="TestRun2"/>
+  <j.1:TEST_RESULT rdf:ID="TR-1-3-1">
+    <j.1:executedBy rdf:resource="#TestRun1"/>
+    <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
+    <j.1:confirms>
+      <j.1:TEST rdf:ID="TC-1-3">
+        <j.1:verifies rdf:resource="CounterApplicationRequirements#HLR-1"/>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >TC-1-3</j.0:uniqueIdentifier>
+      </j.1:TEST>
+    </j.1:confirms>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TR-1-3-1</j.0:uniqueIdentifier>
+  </j.1:TEST_RESULT>
+  <j.1:TEST_RESULT rdf:ID="TR-1-3-2">
+    <j.1:executedBy rdf:resource="#TestRun1"/>
+    <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
+    <j.1:confirms rdf:resource="#TC-1-3"/>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TR-1-3-2</j.0:uniqueIdentifier>
+  </j.1:TEST_RESULT>
+  <j.1:TEST_RESULT rdf:ID="TR-1-4-1">
+    <j.1:executedBy rdf:resource="#TestRun1"/>
+    <j.1:result rdf:resource="http://arcos.rack/TESTING#Failed"/>
+    <j.1:confirms>
+      <j.1:TEST rdf:ID="TC-1-4">
+        <j.1:verifies rdf:resource="CounterApplicationRequirements#HLR-1"/>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >TC-1-4</j.0:uniqueIdentifier>
+      </j.1:TEST>
+    </j.1:confirms>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TR-1-4-1</j.0:uniqueIdentifier>
+  </j.1:TEST_RESULT>
+  <j.1:TEST_RESULT rdf:ID="TR-1-2-2">
+    <j.1:executedBy rdf:resource="#TestRun1"/>
+    <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
+    <j.1:confirms rdf:resource="#TC-1-2"/>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TR-1-2-2</j.0:uniqueIdentifier>
+  </j.1:TEST_RESULT>
+  <j.1:TEST_RESULT rdf:ID="TR-1-4-2">
+    <j.1:executedBy rdf:resource="#TestRun1"/>
+    <j.1:result rdf:resource="http://arcos.rack/TESTING#Failed"/>
+    <j.1:confirms rdf:resource="#TC-1-4"/>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TR-1-4-2</j.0:uniqueIdentifier>
+  </j.1:TEST_RESULT>
+</rdf:RDF>

@@ -1,0 +1,91 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns="http://arcos.rack/TESTING#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://arcos.rack/TESTING">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="PROV-S"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'TESTING.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="TEST_DEVELOPMENT">
+    <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="TEST">
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="TEST_STATUS">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:oneOf rdf:parseType="Collection">
+          <TEST_STATUS rdf:ID="Passed"/>
+          <TEST_STATUS rdf:ID="Failed"/>
+          <TEST_STATUS rdf:ID="Indeterminate"/>
+        </owl:oneOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="TEST_RESULT">
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="TEST_EXECUTION">
+    <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="developedBy">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
+    <rdfs:comment xml:lang="en">Entity that is responsible for producing a test, could be a person or a tool. </rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#AGENT"/>
+    <rdfs:domain rdf:resource="#TEST_DEVELOPMENT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="verifies">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:comment xml:lang="en">trace to a parent requirement (or any object) that the requirement is derived from</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#TEST"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="executedOn">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
+    <rdfs:range rdf:resource="PROV-S#AGENT"/>
+    <rdfs:domain rdf:resource="#TEST_EXECUTION"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="producedBy">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
+    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
+    <rdfs:domain rdf:resource="#TEST"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="confirms">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:comment xml:lang="en">trace to the parent test</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#TEST_RESULT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="executedBy">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
+    <rdfs:comment xml:lang="en">activity that created the test result</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
+    <rdfs:domain rdf:resource="#TEST_RESULT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="result">
+    <rdfs:comment xml:lang="en"></rdfs:comment>
+    <rdfs:range rdf:resource="#TEST_STATUS"/>
+    <rdfs:domain rdf:resource="#TEST_RESULT"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="uniqueIdentifer">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#TEST"/>
+          <owl:Class rdf:about="#TEST_RESULT"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+</rdf:RDF>

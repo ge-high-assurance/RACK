@@ -1,0 +1,46 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://arcos.rack/HAZARD#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns="http://TurnstileSystem/HazardAssesment#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:H="http://arcos.rack/HAZARD"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://TurnstileSystem/HazardAssesment">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="TurnStiles"/>
+    <owl:imports rdf:resource="http://arcos.rack/HAZARD"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'HazardAssesment.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <owl:DatatypeProperty rdf:ID="definition">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://arcos.rack/HAZARD#HAZARD"/>
+  </owl:DatatypeProperty>
+  <j.0:HAZARD rdf:ID="H-1.1">
+    <j.0:source>
+      <j.0:HAZARD rdf:ID="H-1">
+        <j.0:source rdf:resource="TurnStiles#Turnstiles"/>
+        <definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >System Crash</definition>
+      </j.0:HAZARD>
+    </j.0:source>
+    <definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Integer Under Flow</definition>
+  </j.0:HAZARD>
+  <j.0:HAZARD rdf:ID="H-2">
+    <j.0:source rdf:resource="TurnStiles#Turnstiles"/>
+    <definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Park Exceeds Capacity</definition>
+  </j.0:HAZARD>
+  <j.0:HAZARD rdf:ID="H-1.2">
+    <j.0:source rdf:resource="#H-1"/>
+    <definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Integer Over Flow</definition>
+  </j.0:HAZARD>
+</rdf:RDF>

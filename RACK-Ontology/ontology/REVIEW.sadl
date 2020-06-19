@@ -2,8 +2,6 @@ uri "http://arcos.rack/REVIEW".
 import "http://arcos.rack/PROV-S".
 
 REVIEW_LOG is a type of ENTITY.
-	uniqueIdentifer describes REVIEW_LOG with values of type string.
-	
 	reviews (note "Entity that the review was performed on") describes REVIEW_LOG with values of type ENTITY.
 	reviews is a type of wasDerivedFrom.
 	

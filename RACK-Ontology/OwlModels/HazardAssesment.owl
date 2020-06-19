@@ -2,8 +2,9 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://arcos.rack/HAZARD#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns="http://TurnstileSystem/HazardAssesment#"
+    xmlns:j.1="http://arcos.rack/properties#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns="http://TurnstileSystem/TurnStiles"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
     xmlns:H="http://arcos.rack/HAZARD"
@@ -18,29 +19,33 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'HazardAssesment.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:DatatypeProperty rdf:ID="definition">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://arcos.rack/HAZARD#HAZARD"/>
-  </owl:DatatypeProperty>
   <j.0:HAZARD rdf:ID="H-1.1">
     <j.0:source>
       <j.0:HAZARD rdf:ID="H-1">
         <j.0:source rdf:resource="TurnStiles#Turnstiles"/>
-        <definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >System Crash</definition>
+        <j.0:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >System Crash</j.0:definition>
+        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >H-1</j.1:uniqueIdentifier>
       </j.0:HAZARD>
     </j.0:source>
-    <definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Integer Under Flow</definition>
+    <j.0:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Integer Under Flow</j.0:definition>
+    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >H-1.1</j.1:uniqueIdentifier>
   </j.0:HAZARD>
   <j.0:HAZARD rdf:ID="H-2">
     <j.0:source rdf:resource="TurnStiles#Turnstiles"/>
-    <definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Park Exceeds Capacity</definition>
+    <j.0:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Park Exceeds Capacity</j.0:definition>
+    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >H-2</j.1:uniqueIdentifier>
   </j.0:HAZARD>
   <j.0:HAZARD rdf:ID="H-1.2">
     <j.0:source rdf:resource="#H-1"/>
-    <definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Integer Over Flow</definition>
+    <j.0:definition rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Integer Over Flow</j.0:definition>
+    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >H-1.2</j.1:uniqueIdentifier>
   </j.0:HAZARD>
 </rdf:RDF>

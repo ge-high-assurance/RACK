@@ -2,7 +2,7 @@ uri "http://TurnstileSystem/HazardAssesment".
 import "http://arcos.rack/HAZARD" as H.
 import "http://TurnstileSystem/TurnStiles".
 
-definition describes HAZARD with values of type string. 
+//definition describes HAZARD with values of type string. 
 
 H-1 is a HAZARD,
 	has uniqueIdentifier "H-1",

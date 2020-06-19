@@ -1,0 +1,166 @@
+{
+  "sparqlConn": {
+    "data": [
+      {
+        "type": "fuseki",
+        "url": "http://localhost:3030/RACK",
+        "graph": "http://rack001/data"
+      }
+    ],
+    "domain": "",
+    "name": "RACK local fuseki",
+    "model": [
+      {
+        "type": "fuseki",
+        "url": "http://localhost:3030/RACK",
+        "graph": "http://rack001/model"
+      }
+    ],
+    "enableOwlImports": true
+  },
+  "sNodeGroup": {
+    "offset": 0,
+    "sNodeList": [
+      {
+        "isReturned": false,
+        "propList": [
+          {
+            "KeyName": "uniqueIdentifier",
+            "optMinus": 0,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?verifiesRequirementId",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "fullURIName": "",
+            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+          }
+        ],
+        "NodeName": "REQUIREMENT",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?REQUIREMENT",
+        "valueConstraint": "",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [],
+        "fullURIName": "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
+      },
+      {
+        "isReturned": false,
+        "propList": [
+          {
+            "KeyName": "uniqueIdentifer",
+            "optMinus": 0,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?testUniqueId",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "fullURIName": "",
+            "UriRelationship": "http://arcos.rack/TESTING#uniqueIdentifer"
+          }
+        ],
+        "NodeName": "TEST",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?TEST",
+        "valueConstraint": "",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [
+          {
+            "KeyName": "verifies",
+            "SnodeSparqlIDs": [
+              "?REQUIREMENT"
+            ],
+            "ValueType": "ENTITY",
+            "Connected": true,
+            "DeletionMarkers": [
+              false
+            ],
+            "OptionalMinus": [
+              0
+            ],
+            "Qualifiers": [
+              ""
+            ],
+            "UriConnectBy": "http://arcos.rack/TESTING#verifies",
+            "ConnectBy": "verifies",
+            "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
+          }
+        ],
+        "fullURIName": "http://arcos.rack/TESTING#TEST"
+      }
+    ],
+    "limit": 0,
+    "orderBy": [],
+    "version": 10
+  },
+  "importSpec": {
+    "nodes": [
+      {
+        "mapping": [],
+        "URILookupMode": "createIfMissing",
+        "sparqlID": "?TEST",
+        "type": "http://arcos.rack/TESTING#TEST",
+        "props": [
+          {
+            "mapping": [
+              {
+                "colId": "col_1"
+              }
+            ],
+            "URILookup": [
+              "?TEST"
+            ],
+            "URIRelation": "http://arcos.rack/TESTING#uniqueIdentifer"
+          }
+        ]
+      },
+      {
+        "mapping": [],
+        "URILookupMode": "noCreate",
+        "sparqlID": "?REQUIREMENT",
+        "type": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
+        "props": [
+          {
+            "mapping": [
+              {
+                "colId": "col_2"
+              }
+            ],
+            "URILookup": [
+              "?REQUIREMENT"
+            ],
+            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "columns": [
+      {
+        "colName": "producedBy",
+        "colId": "col_0"
+      },
+      {
+        "colName": "uniqueIdentifier",
+        "colId": "col_1"
+      },
+      {
+        "colName": "verifies",
+        "colId": "col_2"
+      }
+    ],
+    "baseURI": "http://data/test",
+    "dataValidator": [],
+    "transforms": [],
+    "version": "1"
+  },
+  "version": 2
+}

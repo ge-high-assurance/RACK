@@ -30,10 +30,11 @@ Write: data
 // list all HAZARD
 Write: data 
 {
-  Ask: "select distinct ?uniqueIdentifier ?definition ?sourceId where 
+  Ask: "select distinct ?uniqueIdentifier ?definition ?systemSourceId ?hazardSourceId where 
        {  ?HAZARD <rdf:type> <HAZARD> . ?HAZARD <uniqueIdentifier> ?uniqueIdentifier
         . ?HAZARD <definition> ?definition
-        . OPTIONAL{?HAZARD <H:source> ?source . ?source <uniqueIdentifier> ?sourceId}
+        . OPTIONAL{?HAZARD <H:source> ?system . ?system <rdf:type> <SYSTEM> . ?system <uniqueIdentifier> ?systemSourceId}
+        . OPTIONAL{?HAZARD <H:source> ?hazard . ?hazard <rdf:type> <HAZARD> . ?hazard <uniqueIdentifier> ?hazardSourceId}
        } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/HAZARD.csv".
 
@@ -52,15 +53,16 @@ Write: data
 } to "models/TurnstileSystem/Data/REQUIREMENT.csv".
 
 // list all DATA_DICTIONARY_TERM
-// Note that a single DATA_DICTIONARY_TERM can have multiple providedBy and multiple consumedBy; and so we get multiple rows;
-// so we may want to output in a different way.
+// Note that a single DATA_DICTIONARY_TERM can have multiple providedBy and multiple consumedBy; and so we get multiple rows
 Write: data 
 {
-  Ask: "select distinct ?uniqueIdentifier ?providedById ?consumedById ?createdById ?text where 
+  Ask: "select distinct ?uniqueIdentifier ?requirementProvidedById ?requirementConsumedById ?interfaceProvidedById ?interfaceConsumedById ?createdById ?text where 
        {  ?DATA_DICTIONARY_TERM <rdf:type> <DATA_DICTIONARY_TERM>
         . ?DATA_DICTIONARY_TERM <uniqueIdentifier> ?uniqueIdentifier
-        . OPTIONAL{?DATA_DICTIONARY_TERM <providedBy> ?providedBy . ?providedBy <uniqueIdentifier> ?providedById}
-        . OPTIONAL{?DATA_DICTIONARY_TERM <consumedBy> ?consumedBy . ?consumedBy <uniqueIdentifier> ?consumedById}
+        . OPTIONAL{?DATA_DICTIONARY_TERM <providedBy> ?req  . ?req <rdf:type> <REQUIREMENT>  . ?req <uniqueIdentifier>  ?requirementProvidedById}
+        . OPTIONAL{?DATA_DICTIONARY_TERM <consumedBy> ?req2 . ?req2 <rdf:type> <REQUIREMENT> . ?req2 <uniqueIdentifier> ?requirementConsumedById}
+        . OPTIONAL{?DATA_DICTIONARY_TERM <providedBy> ?int  . ?int <rdf:type> <INTERFACE>  . ?int <uniqueIdentifier>  ?interfaceProvidedById}
+        . OPTIONAL{?DATA_DICTIONARY_TERM <consumedBy> ?int2 . ?int2 <rdf:type> <INTERFACE> . ?int2 <uniqueIdentifier> ?interfaceConsumedById}
         . OPTIONAL{?DATA_DICTIONARY_TERM <mitigates> ?createdBy . ?createdBy <uniqueIdentifier> ?createdById}
         . OPTIONAL{?DATA_DICTIONARY_TERM <text> ?text}
       } order by ?uniqueIdentifier".
@@ -77,6 +79,15 @@ Write: data
        } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/TEST.csv".
 
-
-
+// list test results; TEST_EXECUTION does not have unique identifier
+Write: data 
+{
+   Ask: "select ?uniqueIdentifier ?tcId ?result ?testExe where
+         {  ?tr <rdf:type> <TEST_RESULT> 
+          . ?tr <uniqueIdentifier> ?uniqueIdentifier
+          . ?tr <confirms> ?tc . ?tc <uniqueIdentifier> ?tcId
+          . ?tr <result> ?result
+          . ?tr <executedBy> ?testExe 
+         } order by ?testExe ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/TEST_RESULTS.csv".
        

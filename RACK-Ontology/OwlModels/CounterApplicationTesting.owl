@@ -5,7 +5,7 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
-    xmlns="http://TurnstileSystem/CounterApplicationTesting#"
+    xmlns="http://TurnstileSystem/CounterApplicationRequirements"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:j.1="http://arcos.rack/TESTING#"
@@ -34,7 +34,9 @@
     >TR-1-2-1</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
   <j.1:TEST_RESULT rdf:ID="TR-1-1-2">
-    <j.1:executedBy rdf:resource="#TestRun1"/>
+    <j.1:executedBy>
+      <j.1:TEST_EXECUTION rdf:ID="TestRun2"/>
+    </j.1:executedBy>
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.1:confirms>
       <j.1:TEST rdf:ID="TC-1-1">
@@ -53,7 +55,6 @@
     <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >TR-1-1-1</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
-  <j.1:TEST_EXECUTION rdf:ID="TestRun2"/>
   <j.1:TEST_RESULT rdf:ID="TR-1-3-1">
     <j.1:executedBy rdf:resource="#TestRun1"/>
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
@@ -68,7 +69,7 @@
     >TR-1-3-1</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
   <j.1:TEST_RESULT rdf:ID="TR-1-3-2">
-    <j.1:executedBy rdf:resource="#TestRun1"/>
+    <j.1:executedBy rdf:resource="#TestRun2"/>
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.1:confirms rdf:resource="#TC-1-3"/>
     <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -88,14 +89,14 @@
     >TR-1-4-1</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
   <j.1:TEST_RESULT rdf:ID="TR-1-2-2">
-    <j.1:executedBy rdf:resource="#TestRun1"/>
+    <j.1:executedBy rdf:resource="#TestRun2"/>
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.1:confirms rdf:resource="#TC-1-2"/>
     <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >TR-1-2-2</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
   <j.1:TEST_RESULT rdf:ID="TR-1-4-2">
-    <j.1:executedBy rdf:resource="#TestRun1"/>
+    <j.1:executedBy rdf:resource="#TestRun2"/>
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Failed"/>
     <j.1:confirms rdf:resource="#TC-1-4"/>
     <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"

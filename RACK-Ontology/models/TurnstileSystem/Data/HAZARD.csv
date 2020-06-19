@@ -1,6 +1,6 @@
-"uniqueIdentifier","definition","sourceId"
-"H-1","System Crash","TurnStileSystem"
-"H-1.1","Integer Under Flow","H-1"
-"H-1.2","Integer Over Flow","H-1"
-"H-2","Park Exceeds Capacity","TurnStileSystem"
+"uniqueIdentifier","definition","systemSourceId","hazardSourceId"
+"H-1","System Crash","TurnStileSystem",null
+"H-1.1","Integer Under Flow",null,"H-1"
+"H-1.2","Integer Over Flow",null,"H-1"
+"H-2","Park Exceeds Capacity","TurnStileSystem",null
 

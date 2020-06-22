@@ -1,4 +1,4 @@
-uri "http://arcos.rack/ANALYSIS".
+uri "http://arcos.rack/ANALYSIS" alias ^A.
 import "http://arcos.rack/PROV-S".
 
 ANALYSIS_REPORT is a type of ENTITY.

@@ -1,4 +1,4 @@
-uri "http://TurnstileSystem/CounterApplicationLLR".
+uri "http://TurnstileSystem/CounterApplicationLLR" alias cntrappllr.
 import "http://arcos.rack/REQUIREMENTS".
 import "http://TurnstileSystem/CounterApplication".
 import "http://TurnstileSystem/CounterApplicationRequirements".

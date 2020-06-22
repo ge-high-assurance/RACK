@@ -1,4 +1,4 @@
-uri "http://arcos.rack/REVIEW".
+uri "http://arcos.rack/REVIEW" alias Rv.
 import "http://arcos.rack/PROV-S".
 
 REVIEW_LOG is a type of ENTITY.

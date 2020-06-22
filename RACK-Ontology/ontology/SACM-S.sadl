@@ -1,4 +1,4 @@
-uri "http://arcos.rack/SACM-S"
+uri "http://arcos.rack/SACM-S" alias sacms
 (note "This ontology is based on a sub-set of the SACM meta-model. This subset is the important elements for constructing the structure of a assurance argument, but does not include all information from the meta-model.").
 import "http://arcos.rack/PROV-S".
 

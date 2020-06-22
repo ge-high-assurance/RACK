@@ -1,4 +1,4 @@
-uri "http://arcos.rack/HAZARD".
+uri "http://arcos.rack/HAZARD" alias H.
 import "http://arcos.rack/PROV-S".
 
 HAZARD is a type of ENTITY.

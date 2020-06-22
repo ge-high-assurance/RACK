@@ -1,4 +1,4 @@
-uri "http://TurnstileSystem/TurnStiles".
+uri "http://TurnstileSystem/TurnStiles" alias trnstl.
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/REQUIREMENTS".
 Turnstiles is a SYSTEM,

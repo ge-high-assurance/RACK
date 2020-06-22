@@ -1,4 +1,4 @@
-uri "http://TurnstileSystem/CounterApplicationTesting".
+uri "http://TurnstileSystem/CounterApplicationTesting" alias cntrapptst.
 import "http://arcos.rack/TESTING".
 import "http://TurnstileSystem/CounterApplicationRequirements".
 

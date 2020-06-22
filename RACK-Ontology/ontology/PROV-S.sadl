@@ -1,4 +1,4 @@
-uri "http://arcos.rack/PROV-S" (note "a basic Implementation of PROV Data Model standard in SADL
+uri "http://arcos.rack/PROV-S"  alias provs (note "a basic Implementation of PROV Data Model standard in SADL
 based on table https://www.w3.org/TR/prov-dm/#relations-at-a-glance").
 import "http://arcos.rack/properties".
 

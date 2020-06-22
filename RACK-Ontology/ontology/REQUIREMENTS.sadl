@@ -1,4 +1,4 @@
-uri "http://arcos.rack/REQUIREMENTS".
+uri "http://arcos.rack/REQUIREMENTS" alias Rq.
 import "http://arcos.rack/PROV-S".
 
 REQUIREMENT is a type of ENTITY.

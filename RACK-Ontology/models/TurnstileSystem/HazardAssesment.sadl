@@ -1,5 +1,5 @@
-uri "http://TurnstileSystem/HazardAssesment".
-import "http://arcos.rack/HAZARD" as H.
+uri "http://TurnstileSystem/HazardAssesment" alias ha.
+import "http://arcos.rack/HAZARD".
 import "http://TurnstileSystem/TurnStiles".
 
 //definition describes HAZARD with values of type string. 

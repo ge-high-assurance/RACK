@@ -1,4 +1,4 @@
-uri "http://TurnstileSystem/Sample2".
+uri "http://TurnstileSystem/Sample2" alias smpl2.
 import "http://arcos.rack/SOFTWARE".
 
 // based off Makefile

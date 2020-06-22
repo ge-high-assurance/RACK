@@ -1,5 +1,5 @@
-uri "http://TurnstileSystem/InGateRequirement".
-import "http://arcos.rack/REQUIREMENTS" as Rs.
+uri "http://TurnstileSystem/InGateRequirement" alias ingaterq.
+import "http://arcos.rack/REQUIREMENTS".
 import "http://TurnstileSystem/TurnStiles".
 import "http://TurnstileSystem/HazardAssesment".
 

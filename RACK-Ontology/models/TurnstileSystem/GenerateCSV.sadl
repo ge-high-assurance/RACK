@@ -1,4 +1,4 @@
-uri "http://TurnstileSystem/GenerateCSV".
+uri "http://TurnstileSystem/GenerateCSV" alias gencsv.
 import "http://TurnstileSystem/CounterApplicationLLR".
 import "http://TurnstileSystem/CounterApplicationTesting".
 

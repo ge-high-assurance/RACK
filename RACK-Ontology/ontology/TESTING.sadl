@@ -1,4 +1,4 @@
-uri "http://arcos.rack/TESTING".
+uri "http://arcos.rack/TESTING" alias tst.
 import "http://arcos.rack/PROV-S".
 
 TEST is a type of ENTITY.

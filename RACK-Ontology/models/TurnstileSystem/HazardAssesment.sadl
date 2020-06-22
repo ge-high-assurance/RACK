@@ -1,6 +1,6 @@
 uri "http://TurnstileSystem/HazardAssesment" alias ha.
 import "http://arcos.rack/HAZARD".
-import "http://TurnstileSystem/TurnStiles".
+import "http://TurnstileSystem/Turnstiles".
 
 //definition describes HAZARD with values of type string. 
 

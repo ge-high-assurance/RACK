@@ -1,6 +1,6 @@
 uri "http://TurnstileSystem/InGateRequirement" alias ingaterq.
 import "http://arcos.rack/REQUIREMENTS".
-import "http://TurnstileSystem/TurnStiles".
+import "http://TurnstileSystem/Turnstiles".
 import "http://TurnstileSystem/HazardAssesment".
 
 IN-GATE-1 is a REQUIREMENT,

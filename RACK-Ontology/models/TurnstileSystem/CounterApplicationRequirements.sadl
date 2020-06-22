@@ -1,6 +1,6 @@
 uri "http://TurnstileSystem/CounterApplicationRequirements" alias cntrapprq.
 import "http://arcos.rack/REQUIREMENTS".
-import "http://TurnstileSystem/TurnStiles".
+import "http://TurnstileSystem/Turnstiles".
 import "http://TurnstileSystem/HazardAssesment".
 
 HLR-1 is a REQUIREMENT,

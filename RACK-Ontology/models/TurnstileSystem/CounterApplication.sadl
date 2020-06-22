@@ -1,6 +1,6 @@
 uri "http://TurnstileSystem/CounterApplication" alias trnstlsys.
 import "http://arcos.rack/SYSTEM".
-import "http://TurnstileSystem/TurnStiles".
+import "http://TurnstileSystem/Turnstiles".
 
 
 InputThread is a SYSTEM,

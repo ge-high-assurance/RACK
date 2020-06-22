@@ -1,12 +1,14 @@
 uri "http://TurnstileSystem/CounterApplication" alias trnstlsys.
 import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/SOFTWARE".
 import "http://TurnstileSystem/Turnstiles".
 
+// The structure of this software is based on the content of the src/ directory.
 
 InputThread is a SYSTEM,
 	has uniqueIdentifier "InputThread",
 	has partOf CounterApplication.
-	
+
 OutputThread is a SYSTEM,
 	has uniqueIdentifier "OutputThread",
 	has partOf CounterApplication.
@@ -14,3 +16,114 @@ OutputThread is a SYSTEM,
 ExecutiveThread is a SYSTEM,
 	has uniqueIdentifier "ExecutiveThread",
 	has partOf CounterApplication.
+
+// tools and other background
+
+c is a LANGUAGE.
+cc is a COMPILER.
+tar is a PACKAGER.
+make is a AGENT. // TODO: build system?
+
+// input.o
+
+input_c is a CODE_FILE
+    has sw:language c.
+input_h is a CODE_FILE
+    has sw:language c.
+
+input_o_Compiling is a COMPILE,
+    has performedBy cc,
+    has performedBy make,
+    has used input_c,
+    has used input_h.
+
+input_o is a OBJECT_FILE
+    has createBy input_o_Compiling.
+
+// output.o
+
+output_c is a CODE_FILE
+    has sw:language c.
+output_h is a CODE_FILE
+    has sw:language c.
+
+output_o_Compiling is a COMPILE,
+    has performedBy cc,
+    has performedBy make,
+    has used output_c,
+    has used output_h.
+
+output_o is a OBJECT_FILE
+    has createBy output_o_Compiling.
+
+// hw.o, libhw.so
+
+hw_c is a CODE_FILE
+    has sw:language c.
+hw_h is a CODE_FILE
+    has sw:language c.
+
+hw_o_Compiling is a COMPILE,
+    has performedBy cc,
+    has performedBy make,
+    has used hw_c,
+    has used hw_h.
+
+hw_o is a OBJECT_FILE
+    has createBy hw_o_Compiling.
+
+libhw_so_Compiling is a COMPILE,
+    has performedBy cc,
+    has performedBy make,
+    has used hw_o.
+
+libhw_so is a LIBRARY
+    has createBy libhw_so_Compiling.
+
+// counter.exe
+
+counter_c is a CODE_FILE
+    has sw:language c.
+counter_h is a CODE_FILE
+    has sw:language c.
+
+counter_exe_Compiling is a COMPILE,
+    has performedBy cc,
+    has performedBy make,
+    has used input_o,
+    has used output_o,
+    has used libhw_so,
+    has used counter_c,
+    has used counter_h.
+
+counter_exe is an EXECUTABLE
+    has wasGeneratedBy counter_exe_Compiling.
+
+// conf.json
+
+conf_json is a CONFIG_FILE.
+
+// dist.tar.gz
+
+dist_tar is a PACKAGE_FILE,
+	has wasGeneratedBy tarPackaging.
+
+tarPackaging is a PACKAGE,
+    has performedBy tar,
+    has performedBy cc,
+    has used conf_json,
+    has used libhw_so,
+    has used counter_exe.
+
+// test.o
+
+test_c is a CODE_FILE
+    has sw:language c.
+test_h is a CODE_FILE
+    has sw:language c.
+
+test_exe_Compiling is a COMPILE,
+    has performedBy cc,
+    has performedBy make,
+    has used test_c,
+    has used test_h.

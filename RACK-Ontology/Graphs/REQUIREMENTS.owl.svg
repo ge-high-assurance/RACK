@@ -91,7 +91,7 @@
 <text text-anchor="middle" x="784.246" y="-57.8" font-family="Times New Roman,serif" font-size="14.00">satisfies</text>
 </g>
 <!-- n6&#45;&gt;n5 -->
-<g id="edge23" class="edge"><title>n6&#45;&gt;n5</title>
+<g id="edge22" class="edge"><title>n6&#45;&gt;n5</title>
 <path fill="none" stroke="#00cd00" d="M780.778,-36.1383C790.241,-40.8349 799.372,-46.7076 806.746,-54 813.24,-60.4228 817.962,-69.0899 821.325,-77.4035"/>
 <polygon fill="#00cd00" stroke="#00cd00" points="818.033,-78.5907 824.675,-86.845 824.63,-76.2502 818.033,-78.5907"/>
 <text text-anchor="middle" x="840.246" y="-57.8" font-family="Times New Roman,serif" font-size="14.00">governs</text>
@@ -253,29 +253,23 @@
 </g>
 <!-- n20&#45;&gt;n9 -->
 <g id="edge17" class="edge"><title>n20&#45;&gt;n9</title>
-<path fill="none" stroke="#00cd00" d="M931.493,-347.859C923.448,-343.03 915.68,-337.107 909.746,-330 904.292,-323.468 900.558,-315.1 898.014,-307.087"/>
-<polygon fill="#00cd00" stroke="#00cd00" points="901.357,-306.043 895.388,-297.29 894.596,-307.855 901.357,-306.043"/>
-<text text-anchor="middle" x="938.246" y="-318.8" font-family="Times New Roman,serif" font-size="14.00">createdBy</text>
+<path fill="none" stroke="#00cd00" d="M947.165,-347.843C940.156,-342.547 932.822,-336.408 926.746,-330 919.85,-322.727 913.369,-313.925 907.953,-305.746"/>
+<polygon fill="#00cd00" stroke="#00cd00" points="910.846,-303.774 902.524,-297.217 904.941,-307.533 910.846,-303.774"/>
+<text text-anchor="middle" x="955.246" y="-318.8" font-family="Times New Roman,serif" font-size="14.00">createdBy</text>
 </g>
 <!-- n21 -->
 <g id="node21" class="node"><title>n21</title>
 <g id="a_node21"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/XMLSchema.svg" xlink:title="xsd:string">
-<polygon fill="#00008b" stroke="black" points="1046.25,-297 975.246,-297 975.246,-261 1046.25,-261 1046.25,-297"/>
-<text text-anchor="middle" x="1010.75" y="-275.3" font-family="Times New Roman,serif" font-size="14.00" fill="white">xsd:string</text>
+<polygon fill="#00008b" stroke="black" points="1041.25,-297 970.246,-297 970.246,-261 1041.25,-261 1041.25,-297"/>
+<text text-anchor="middle" x="1005.75" y="-275.3" font-family="Times New Roman,serif" font-size="14.00" fill="white">xsd:string</text>
 </a>
 </g>
 </g>
 <!-- n20&#45;&gt;n21 -->
 <g id="edge18" class="edge"><title>n20&#45;&gt;n21</title>
-<path fill="none" stroke="#00cd00" d="M969.873,-347.622C968.999,-337.663 969.249,-325.163 973.746,-315 975.35,-311.374 977.528,-307.944 980.029,-304.753"/>
-<polygon fill="#00cd00" stroke="#00cd00" points="982.633,-307.092 986.768,-297.338 977.452,-302.384 982.633,-307.092"/>
-<text text-anchor="middle" x="984.246" y="-318.8" font-family="Times New Roman,serif" font-size="14.00">text</text>
-</g>
-<!-- n20&#45;&gt;n21 -->
-<g id="edge22" class="edge"><title>n20&#45;&gt;n21</title>
-<path fill="none" stroke="#00cd00" d="M984.835,-347.683C988.336,-342.191 991.961,-335.987 994.746,-330 998.167,-322.645 1001.14,-314.361 1003.57,-306.683"/>
-<polygon fill="#00cd00" stroke="#00cd00" points="1006.93,-307.65 1006.44,-297.067 1000.23,-305.651 1006.93,-307.65"/>
-<text text-anchor="middle" x="1044.25" y="-318.8" font-family="Times New Roman,serif" font-size="14.00">uniqueIdentifier</text>
+<path fill="none" stroke="#00cd00" d="M979.424,-347.799C983.986,-336.047 990.124,-320.238 995.325,-306.842"/>
+<polygon fill="#00cd00" stroke="#00cd00" points="998.721,-307.764 999.078,-297.175 992.196,-305.231 998.721,-307.764"/>
+<text text-anchor="middle" x="1002.25" y="-318.8" font-family="Times New Roman,serif" font-size="14.00">text</text>
 </g>
 </g>
 </svg>

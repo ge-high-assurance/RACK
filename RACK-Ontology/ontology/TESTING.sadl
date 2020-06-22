@@ -2,8 +2,6 @@ uri "http://arcos.rack/TESTING" alias tst.
 import "http://arcos.rack/PROV-S".
 
 TEST is a type of ENTITY.
-	uniqueIdentifer describes TEST with values of type string.
-	
 	verifies (note "trace to a parent requirement (or any object) that the requirement is derived from") describes TEST with values of type ENTITY.
 	verifies is a type of wasDerivedFrom.
 	
@@ -11,8 +9,6 @@ TEST is a type of ENTITY.
 	producedBy is a type of wasGeneratedBy.
 
 TEST_RESULT is a type of ENTITY.
-	uniqueIdentifer describes TEST_RESULT with values of type string.
-
 	result (note "") describes TEST_RESULT with values of type TEST_STATUS.
 	TEST_STATUS is a class, must be one of {Passed, Failed, Indeterminate}.
 	

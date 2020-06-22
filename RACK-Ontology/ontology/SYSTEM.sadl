@@ -2,7 +2,6 @@ uri "http://arcos.rack/SYSTEM" alias sys.
 import "http://arcos.rack/PROV-S".
 
 SYSTEM is a type of ENTITY.
-	uniqueIdentifier describes SYSTEM with values of type string.
 	partOf (note "used to define a relationship to a higher level system") describes SYSTEM with values of type ENTITY.
 	partOf is a type of wasDerivedFrom.
 	
@@ -15,9 +14,7 @@ SYSTEM is a type of ENTITY.
 	requires describes SYSTEM with values of type ENTITY.
 	requires is a type of wasDerivedFrom.
 	
-INTERFACE is a type of ENTITY.
-	uniqueIdentifier describes INTERFACE with values of type string.
-	
+INTERFACE is a type of ENTITY.	
 	source describes INTERFACE with values of type ENTITY.
 	source is the inverse of provides.
 	source is a type of wasDerivedFrom.

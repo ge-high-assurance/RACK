@@ -31,6 +31,33 @@
             "Constraints": "",
             "ValueType": "string",
             "instanceValues": [],
+            "isRuntimeConstrained": true,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?hazard",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "fullURIName": "",
+            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+          }
+        ],
+        "NodeName": "HAZARD",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?HAZARD",
+        "valueConstraint": "",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [],
+        "fullURIName": "http://arcos.rack/HAZARD#HAZARD"
+      },
+      {
+        "isReturned": false,
+        "propList": [
+          {
+            "KeyName": "uniqueIdentifier",
+            "optMinus": 0,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
             "isRuntimeConstrained": false,
             "isMarkedForDeletion": false,
             "SparqlID": "?req",
@@ -45,7 +72,61 @@
         "SparqlID": "?REQUIREMENT",
         "valueConstraint": "",
         "deletionMode": "NO_DELETE",
-        "nodeList": [],
+        "nodeList": [
+          {
+            "KeyName": "mitigates",
+            "SnodeSparqlIDs": [
+              "?HAZARD"
+            ],
+            "ValueType": "ENTITY",
+            "Connected": true,
+            "DeletionMarkers": [
+              false
+            ],
+            "OptionalMinus": [
+              0
+            ],
+            "Qualifiers": [
+              ""
+            ],
+            "UriConnectBy": "http://arcos.rack/REQUIREMENTS#mitigates",
+            "ConnectBy": "mitigates",
+            "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
+          }
+        ],
+        "fullURIName": "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
+      },
+      {
+        "isReturned": false,
+        "propList": [],
+        "NodeName": "REQUIREMENT",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?REQUIREMENT_W_TC",
+        "valueConstraint": "",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [
+          {
+            "KeyName": "satisfies",
+            "SnodeSparqlIDs": [
+              "?REQUIREMENT"
+            ],
+            "ValueType": "ENTITY",
+            "Connected": true,
+            "DeletionMarkers": [
+              false
+            ],
+            "OptionalMinus": [
+              "0"
+            ],
+            "Qualifiers": [
+              "*"
+            ],
+            "UriConnectBy": "http://arcos.rack/REQUIREMENTS#satisfies",
+            "ConnectBy": "satisfies",
+            "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
+          }
+        ],
         "fullURIName": "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
       },
       {
@@ -76,7 +157,7 @@
           {
             "KeyName": "verifies",
             "SnodeSparqlIDs": [
-              "?REQUIREMENT"
+              "?REQUIREMENT_W_TC"
             ],
             "ValueType": "ENTITY",
             "Connected": true,
@@ -84,7 +165,7 @@
               false
             ],
             "OptionalMinus": [
-              "-2"
+              0
             ],
             "Qualifiers": [
               ""
@@ -111,8 +192,20 @@
       },
       {
         "mapping": [],
+        "sparqlID": "?REQUIREMENT_W_TC",
+        "type": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
+        "props": []
+      },
+      {
+        "mapping": [],
         "sparqlID": "?REQUIREMENT",
         "type": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
+        "props": []
+      },
+      {
+        "mapping": [],
+        "sparqlID": "?HAZARD",
+        "type": "http://arcos.rack/HAZARD#HAZARD",
         "props": []
       }
     ],

@@ -33,26 +33,26 @@
             "instanceValues": [],
             "isRuntimeConstrained": false,
             "isMarkedForDeletion": false,
-            "SparqlID": "?req",
+            "SparqlID": "?source",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
             "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
           }
         ],
-        "NodeName": "REQUIREMENT",
+        "NodeName": "SYSTEM",
         "subClassNames": [],
         "isRuntimeConstrained": false,
-        "SparqlID": "?REQUIREMENT",
+        "SparqlID": "?SYSTEM_SRC",
         "valueConstraint": "",
         "deletionMode": "NO_DELETE",
         "nodeList": [],
-        "fullURIName": "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
+        "fullURIName": "http://arcos.rack/SYSTEM#SYSTEM"
       },
       {
         "isReturned": false,
         "propList": [
           {
-            "KeyName": "uniqueIdentifer",
+            "KeyName": "uniqueIdentifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -60,23 +60,50 @@
             "instanceValues": [],
             "isRuntimeConstrained": false,
             "isMarkedForDeletion": false,
-            "SparqlID": "?testcase",
+            "SparqlID": "?destination",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/TESTING#uniqueIdentifer"
+            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
           }
         ],
-        "NodeName": "TEST",
+        "NodeName": "SYSTEM",
         "subClassNames": [],
         "isRuntimeConstrained": false,
-        "SparqlID": "?TEST",
+        "SparqlID": "?SYSTEM_DEST",
+        "valueConstraint": "",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [],
+        "fullURIName": "http://arcos.rack/SYSTEM#SYSTEM"
+      },
+      {
+        "isReturned": false,
+        "propList": [
+          {
+            "KeyName": "uniqueIdentifier",
+            "optMinus": 0,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": true,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?interface",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "fullURIName": "",
+            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+          }
+        ],
+        "NodeName": "INTERFACE",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?INTERFACE",
         "valueConstraint": "",
         "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "verifies",
+            "KeyName": "destination",
             "SnodeSparqlIDs": [
-              "?REQUIREMENT"
+              "?SYSTEM_DEST"
             ],
             "ValueType": "ENTITY",
             "Connected": true,
@@ -84,35 +111,65 @@
               false
             ],
             "OptionalMinus": [
-              "-2"
+              "1"
             ],
             "Qualifiers": [
               ""
             ],
-            "UriConnectBy": "http://arcos.rack/TESTING#verifies",
-            "ConnectBy": "verifies",
+            "UriConnectBy": "http://arcos.rack/SYSTEM#destination",
+            "ConnectBy": "destination",
+            "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
+          },
+          {
+            "KeyName": "source",
+            "SnodeSparqlIDs": [
+              "?SYSTEM_SRC"
+            ],
+            "ValueType": "ENTITY",
+            "Connected": true,
+            "DeletionMarkers": [
+              false
+            ],
+            "OptionalMinus": [
+              "1"
+            ],
+            "Qualifiers": [
+              ""
+            ],
+            "UriConnectBy": "http://arcos.rack/SYSTEM#source",
+            "ConnectBy": "source",
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           }
         ],
-        "fullURIName": "http://arcos.rack/TESTING#TEST"
+        "fullURIName": "http://arcos.rack/SYSTEM#INTERFACE"
       }
     ],
     "limit": 0,
-    "orderBy": [],
+    "orderBy": [
+      {
+        "sparqlID": "?interface"
+      }
+    ],
     "version": 11
   },
   "importSpec": {
     "nodes": [
       {
         "mapping": [],
-        "sparqlID": "?TEST",
-        "type": "http://arcos.rack/TESTING#TEST",
+        "sparqlID": "?INTERFACE",
+        "type": "http://arcos.rack/SYSTEM#INTERFACE",
         "props": []
       },
       {
         "mapping": [],
-        "sparqlID": "?REQUIREMENT",
-        "type": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
+        "sparqlID": "?SYSTEM_DEST",
+        "type": "http://arcos.rack/SYSTEM#SYSTEM",
+        "props": []
+      },
+      {
+        "mapping": [],
+        "sparqlID": "?SYSTEM_SRC",
+        "type": "http://arcos.rack/SYSTEM#SYSTEM",
         "props": []
       }
     ],

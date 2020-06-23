@@ -49,7 +49,7 @@
         "isReturned": false,
         "propList": [
           {
-            "KeyName": "uniqueIdentifer",
+            "KeyName": "uniqueIdentifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -60,7 +60,7 @@
             "SparqlID": "?tcId",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/TESTING#uniqueIdentifer"
+            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
           }
         ],
         "NodeName": "TEST",
@@ -76,7 +76,7 @@
         "isReturned": false,
         "propList": [
           {
-            "KeyName": "uniqueIdentifer",
+            "KeyName": "uniqueIdentifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -84,10 +84,10 @@
             "instanceValues": [],
             "isRuntimeConstrained": false,
             "isMarkedForDeletion": false,
-            "SparqlID": "?uniqueIdentifer",
+            "SparqlID": "?uniqueIdentifier",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/TESTING#uniqueIdentifer"
+            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
           }
         ],
         "NodeName": "TEST_RESULT",
@@ -178,7 +178,7 @@
                 "colId": "col_3"
               }
             ],
-            "URIRelation": "http://arcos.rack/TESTING#uniqueIdentifer"
+            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
           }
         ]
       },
@@ -197,7 +197,7 @@
             "URILookup": [
               "?TEST"
             ],
-            "URIRelation": "http://arcos.rack/TESTING#uniqueIdentifer"
+            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
           }
         ]
       },

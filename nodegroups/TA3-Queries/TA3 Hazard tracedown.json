@@ -133,7 +133,7 @@
         "isReturned": false,
         "propList": [
           {
-            "KeyName": "uniqueIdentifer",
+            "KeyName": "uniqueIdentifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -144,7 +144,7 @@
             "SparqlID": "?testcase",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/TESTING#uniqueIdentifer"
+            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
           }
         ],
         "NodeName": "TEST",

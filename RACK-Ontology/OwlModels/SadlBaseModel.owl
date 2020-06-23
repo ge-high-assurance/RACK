@@ -7,4 +7,18 @@
   <owl:Ontology rdf:about="">
     <rdfs:comment xml:lang="en">Base model for SADL. These concepts can be used without importing.</rdfs:comment>
   </owl:Ontology>
+  <owl:Class rdf:ID="ExternalEquation"/>
+  <owl:Class rdf:ID="Equation"/>
+  <owl:DatatypeProperty rdf:ID="location">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#ExternalEquation"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="externalURI">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+    <rdfs:domain rdf:resource="#ExternalEquation"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="expression">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Equation"/>
+  </owl:DatatypeProperty>
 </rdf:RDF>

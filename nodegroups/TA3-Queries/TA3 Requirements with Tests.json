@@ -33,68 +33,20 @@
             "instanceValues": [],
             "isRuntimeConstrained": false,
             "isMarkedForDeletion": false,
-            "SparqlID": "?system",
+            "SparqlID": "?req",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
             "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
           }
         ],
-        "NodeName": "SYSTEM",
+        "NodeName": "REQUIREMENT",
         "subClassNames": [],
         "isRuntimeConstrained": false,
-        "SparqlID": "?SYSTEM",
+        "SparqlID": "?REQUIREMENT",
         "valueConstraint": "",
         "deletionMode": "NO_DELETE",
         "nodeList": [],
-        "fullURIName": "http://arcos.rack/SYSTEM#SYSTEM"
-      },
-      {
-        "isReturned": false,
-        "propList": [
-          {
-            "KeyName": "definition",
-            "optMinus": 0,
-            "isReturned": true,
-            "Constraints": "",
-            "ValueType": "string",
-            "instanceValues": [],
-            "isRuntimeConstrained": false,
-            "isMarkedForDeletion": false,
-            "SparqlID": "?source",
-            "relationship": "http://www.w3.org/2001/XMLSchema#string",
-            "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/HAZARD#definition"
-          }
-        ],
-        "NodeName": "HAZARD",
-        "subClassNames": [],
-        "isRuntimeConstrained": false,
-        "SparqlID": "?HAZARD_SRC",
-        "valueConstraint": "",
-        "deletionMode": "NO_DELETE",
-        "nodeList": [
-          {
-            "KeyName": "source",
-            "SnodeSparqlIDs": [
-              "?SYSTEM"
-            ],
-            "ValueType": "ENTITY",
-            "Connected": true,
-            "DeletionMarkers": [
-              false
-            ],
-            "OptionalMinus": [
-              "1"
-            ],
-            "Qualifiers": [
-              ""
-            ],
-            "UriConnectBy": "http://arcos.rack/HAZARD#source",
-            "ConnectBy": "source",
-            "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
-          }
-        ],
-        "fullURIName": "http://arcos.rack/HAZARD#HAZARD"
+        "fullURIName": "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
       },
       {
         "isReturned": false,
@@ -106,25 +58,25 @@
             "Constraints": "",
             "ValueType": "string",
             "instanceValues": [],
-            "isRuntimeConstrained": true,
+            "isRuntimeConstrained": false,
             "isMarkedForDeletion": false,
-            "SparqlID": "?hazard",
+            "SparqlID": "?testcase",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
             "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
           }
         ],
-        "NodeName": "HAZARD",
+        "NodeName": "TEST",
         "subClassNames": [],
         "isRuntimeConstrained": false,
-        "SparqlID": "?HAZARD",
+        "SparqlID": "?TEST",
         "valueConstraint": "",
         "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "source",
+            "KeyName": "verifies",
             "SnodeSparqlIDs": [
-              "?HAZARD_SRC"
+              "?REQUIREMENT"
             ],
             "ValueType": "ENTITY",
             "Connected": true,
@@ -132,17 +84,17 @@
               false
             ],
             "OptionalMinus": [
-              "1"
+              0
             ],
             "Qualifiers": [
-              "*"
+              ""
             ],
-            "UriConnectBy": "http://arcos.rack/HAZARD#source",
-            "ConnectBy": "source",
+            "UriConnectBy": "http://arcos.rack/TESTING#verifies",
+            "ConnectBy": "verifies",
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           }
         ],
-        "fullURIName": "http://arcos.rack/HAZARD#HAZARD"
+        "fullURIName": "http://arcos.rack/TESTING#TEST"
       }
     ],
     "limit": 0,
@@ -153,20 +105,14 @@
     "nodes": [
       {
         "mapping": [],
-        "sparqlID": "?HAZARD",
-        "type": "http://arcos.rack/HAZARD#HAZARD",
+        "sparqlID": "?TEST",
+        "type": "http://arcos.rack/TESTING#TEST",
         "props": []
       },
       {
         "mapping": [],
-        "sparqlID": "?HAZARD_SRC",
-        "type": "http://arcos.rack/HAZARD#HAZARD",
-        "props": []
-      },
-      {
-        "mapping": [],
-        "sparqlID": "?SYSTEM",
-        "type": "http://arcos.rack/SYSTEM#SYSTEM",
+        "sparqlID": "?REQUIREMENT",
+        "type": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
         "props": []
       }
     ],

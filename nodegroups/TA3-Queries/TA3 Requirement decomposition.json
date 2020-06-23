@@ -33,7 +33,7 @@
             "instanceValues": [],
             "isRuntimeConstrained": true,
             "isMarkedForDeletion": false,
-            "SparqlID": "?source",
+            "SparqlID": "?req",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
             "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
@@ -42,7 +42,7 @@
         "NodeName": "REQUIREMENT",
         "subClassNames": [],
         "isRuntimeConstrained": false,
-        "SparqlID": "?REQUIREMENT_0",
+        "SparqlID": "?REQUIREMENT",
         "valueConstraint": "",
         "deletionMode": "NO_DELETE",
         "nodeList": [],
@@ -60,7 +60,7 @@
             "instanceValues": [],
             "isRuntimeConstrained": true,
             "isMarkedForDeletion": false,
-            "SparqlID": "?req",
+            "SparqlID": "?decomposition",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
             "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
@@ -69,14 +69,14 @@
         "NodeName": "REQUIREMENT",
         "subClassNames": [],
         "isRuntimeConstrained": false,
-        "SparqlID": "?REQUIREMENT",
+        "SparqlID": "?REQ_DECOMPOSED",
         "valueConstraint": "",
         "deletionMode": "NO_DELETE",
         "nodeList": [
           {
             "KeyName": "satisfies",
             "SnodeSparqlIDs": [
-              "?REQUIREMENT_0"
+              "?REQUIREMENT"
             ],
             "ValueType": "ENTITY",
             "Connected": true,
@@ -105,13 +105,13 @@
     "nodes": [
       {
         "mapping": [],
-        "sparqlID": "?REQUIREMENT",
+        "sparqlID": "?REQ_DECOMPOSED",
         "type": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
         "props": []
       },
       {
         "mapping": [],
-        "sparqlID": "?REQUIREMENT_0",
+        "sparqlID": "?REQUIREMENT",
         "type": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
         "props": []
       }

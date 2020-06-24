@@ -23,31 +23,31 @@
 </g>
 <!-- n2 -->
 <g id="node2" class="node"><title>n2</title>
-<g id="a_node2"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/Turnstiles.owl.svg" xlink:title="trnstl:CounterApplication">
-<ellipse fill="blue" stroke="black" cx="331.745" cy="-18" rx="102.082" ry="18"/>
-<text text-anchor="middle" x="331.745" y="-14.3" font-family="Times New Roman,serif" font-size="14.00" fill="white">trnstl:CounterApplication</text>
+<g id="a_node2"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/Turnstiles.owl.svg" xlink:title="null:CounterApplication">
+<ellipse fill="blue" stroke="black" cx="329.745" cy="-18" rx="96.6831" ry="18"/>
+<text text-anchor="middle" x="329.745" y="-14.3" font-family="Times New Roman,serif" font-size="14.00" fill="white">null:CounterApplication</text>
 </a>
 </g>
 </g>
 <!-- n1&#45;&gt;n2 -->
 <g id="edge2" class="edge"><title>n1&#45;&gt;n2</title>
-<path fill="none" stroke="#00cd00" d="M112.32,-94.6603C142.179,-88.5778 180.515,-79.7747 213.745,-69 239.301,-60.7133 267.001,-49.1199 289.137,-39.1828"/>
-<polygon fill="#00cd00" stroke="#00cd00" points="290.603,-42.3613 298.261,-35.0399 287.708,-35.9876 290.603,-42.3613"/>
+<path fill="none" stroke="#00cd00" d="M112.692,-94.6655C142.509,-88.6113 180.677,-79.8351 213.745,-69 238.796,-60.7913 265.899,-49.2668 287.602,-39.3505"/>
+<polygon fill="#00cd00" stroke="#00cd00" points="289.251,-42.4442 296.858,-35.0699 286.313,-36.0907 289.251,-42.4442"/>
 <text text-anchor="middle" x="272.245" y="-57.8" font-family="Times New Roman,serif" font-size="14.00">partOf</text>
 </g>
 <!-- n3 -->
 <g id="node3" class="node"><title>n3</title>
 <g id="a_node3"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/SYSTEM.owl.svg" xlink:title="sys:SYSTEM">
-<polygon fill="#00008b" stroke="black" points="211.745,-36 117.745,-36 117.745,-0 211.745,-0 211.745,-36"/>
-<text text-anchor="middle" x="164.745" y="-14.3" font-family="Times New Roman,serif" font-size="14.00" fill="white">sys:SYSTEM</text>
+<polygon fill="#00008b" stroke="black" points="214.745,-36 120.745,-36 120.745,-0 214.745,-0 214.745,-36"/>
+<text text-anchor="middle" x="167.745" y="-14.3" font-family="Times New Roman,serif" font-size="14.00" fill="white">sys:SYSTEM</text>
 </a>
 </g>
 </g>
 <!-- n1&#45;&gt;n3 -->
 <g id="edge3" class="edge"><title>n1&#45;&gt;n3</title>
-<path fill="none" stroke="black" d="M81.604,-87.6111C96.9766,-74.925 118.49,-57.1709 135.782,-42.9014"/>
-<polygon fill="black" stroke="black" points="138.4,-45.2783 143.885,-36.2138 133.945,-39.8793 138.4,-45.2783"/>
-<text text-anchor="middle" x="129.245" y="-57.8" font-family="Times New Roman,serif" font-size="14.00">is a</text>
+<path fill="none" stroke="black" d="M82.1824,-87.6111C98.1466,-74.8096 120.546,-56.8477 138.422,-42.5132"/>
+<polygon fill="black" stroke="black" points="140.666,-45.2003 146.278,-36.2138 136.287,-39.7392 140.666,-45.2003"/>
+<text text-anchor="middle" x="131.245" y="-57.8" font-family="Times New Roman,serif" font-size="14.00">is a</text>
 </g>
 <!-- n4 -->
 <g id="node4" class="node"><title>n4</title>
@@ -56,14 +56,14 @@
 </g>
 <!-- n4&#45;&gt;n2 -->
 <g id="edge5" class="edge"><title>n4&#45;&gt;n2</title>
-<path fill="none" stroke="#00cd00" d="M532.559,-87.6686C518.078,-76.6962 497.68,-62.7034 477.745,-54 457.443,-45.1368 434.531,-38.3011 412.979,-33.1235"/>
-<polygon fill="#00cd00" stroke="#00cd00" points="413.718,-29.7021 403.186,-30.86 412.141,-36.5223 413.718,-29.7021"/>
+<path fill="none" stroke="#00cd00" d="M532.567,-87.6494C518.09,-76.6683 497.693,-62.6729 477.745,-54 456.547,-44.7839 432.539,-37.7781 410.122,-32.5485"/>
+<polygon fill="#00cd00" stroke="#00cd00" points="410.813,-29.1166 400.289,-30.3422 409.281,-35.9467 410.813,-29.1166"/>
 <text text-anchor="middle" x="522.245" y="-57.8" font-family="Times New Roman,serif" font-size="14.00">partOf</text>
 </g>
 <!-- n4&#45;&gt;n3 -->
 <g id="edge6" class="edge"><title>n4&#45;&gt;n3</title>
-<path fill="none" stroke="black" d="M508.495,-90.7677C469.814,-79.6122 411.977,-63.9228 360.745,-54 302.162,-42.6536 283.857,-48.5107 221.86,-36.012"/>
-<polygon fill="black" stroke="black" points="222.461,-32.562 211.956,-33.9373 221.026,-39.4133 222.461,-32.562"/>
+<path fill="none" stroke="black" d="M508.25,-90.8235C469.358,-79.7033 411.214,-64.0344 359.745,-54 302.939,-42.9253 285.13,-48.2786 224.987,-36.0444"/>
+<polygon fill="black" stroke="black" points="225.466,-32.5684 214.959,-33.9247 224.019,-39.4171 225.466,-32.5684"/>
 <text text-anchor="middle" x="433.245" y="-57.8" font-family="Times New Roman,serif" font-size="14.00">is a</text>
 </g>
 <!-- n4&#45;&gt;n4 -->
@@ -79,14 +79,14 @@
 </g>
 <!-- n5&#45;&gt;n2 -->
 <g id="edge8" class="edge"><title>n5&#45;&gt;n2</title>
-<path fill="none" stroke="#00cd00" d="M308.613,-86.799C312.622,-75.0474 318.016,-59.2383 322.587,-45.8421"/>
-<polygon fill="#00cd00" stroke="#00cd00" points="325.968,-46.7699 325.885,-36.1754 319.343,-44.5096 325.968,-46.7699"/>
-<text text-anchor="middle" x="338.245" y="-57.8" font-family="Times New Roman,serif" font-size="14.00">partOf</text>
+<path fill="none" stroke="#00cd00" d="M308.208,-86.799C311.941,-75.0474 316.963,-59.2383 321.218,-45.8421"/>
+<polygon fill="#00cd00" stroke="#00cd00" points="324.597,-46.7658 324.289,-36.1754 317.926,-44.6466 324.597,-46.7658"/>
+<text text-anchor="middle" x="337.245" y="-57.8" font-family="Times New Roman,serif" font-size="14.00">partOf</text>
 </g>
 <!-- n5&#45;&gt;n3 -->
 <g id="edge9" class="edge"><title>n5&#45;&gt;n3</title>
-<path fill="none" stroke="black" d="M262.593,-92.4742C234.242,-84.0853 200.336,-73.4474 194.745,-69 186.832,-62.7066 180.527,-53.7134 175.779,-45.0849"/>
-<polygon fill="black" stroke="black" points="178.843,-43.3861 171.237,-36.0103 172.583,-46.5193 178.843,-43.3861"/>
+<path fill="none" stroke="black" d="M262.242,-92.4585C233.92,-84.1209 200.215,-73.5571 194.745,-69 187.365,-62.8527 181.693,-54.1494 177.497,-45.7233"/>
+<polygon fill="black" stroke="black" points="180.644,-44.1868 173.375,-36.4788 174.251,-47.0374 180.644,-44.1868"/>
 <text text-anchor="middle" x="204.245" y="-57.8" font-family="Times New Roman,serif" font-size="14.00">is a</text>
 </g>
 <!-- n5&#45;&gt;n5 -->

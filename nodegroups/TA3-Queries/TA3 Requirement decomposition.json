@@ -31,7 +31,7 @@
             "Constraints": "",
             "ValueType": "string",
             "instanceValues": [],
-            "isRuntimeConstrained": false,
+            "isRuntimeConstrained": true,
             "isMarkedForDeletion": false,
             "SparqlID": "?req",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
@@ -58,23 +58,23 @@
             "Constraints": "",
             "ValueType": "string",
             "instanceValues": [],
-            "isRuntimeConstrained": false,
+            "isRuntimeConstrained": true,
             "isMarkedForDeletion": false,
-            "SparqlID": "?testcase",
+            "SparqlID": "?decomposition",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
             "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
           }
         ],
-        "NodeName": "TEST",
+        "NodeName": "REQUIREMENT",
         "subClassNames": [],
         "isRuntimeConstrained": false,
-        "SparqlID": "?TEST",
+        "SparqlID": "?REQ_DECOMPOSED",
         "valueConstraint": "",
         "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "verifies",
+            "KeyName": "satisfies",
             "SnodeSparqlIDs": [
               "?REQUIREMENT"
             ],
@@ -84,17 +84,17 @@
               false
             ],
             "OptionalMinus": [
-              "-2"
+              "0"
             ],
             "Qualifiers": [
-              ""
+              "+"
             ],
-            "UriConnectBy": "http://arcos.rack/TESTING#verifies",
-            "ConnectBy": "verifies",
+            "UriConnectBy": "http://arcos.rack/REQUIREMENTS#satisfies",
+            "ConnectBy": "satisfies",
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           }
         ],
-        "fullURIName": "http://arcos.rack/TESTING#TEST"
+        "fullURIName": "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
       }
     ],
     "limit": 0,
@@ -105,8 +105,8 @@
     "nodes": [
       {
         "mapping": [],
-        "sparqlID": "?TEST",
-        "type": "http://arcos.rack/TESTING#TEST",
+        "sparqlID": "?REQ_DECOMPOSED",
+        "type": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
         "props": []
       },
       {

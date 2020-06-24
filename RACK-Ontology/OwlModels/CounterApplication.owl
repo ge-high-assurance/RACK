@@ -1,6 +1,7 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:sys="http://arcos.rack/SYSTEM"
     xmlns:j.0="http://arcos.rack/properties#"
     xmlns:j.1="http://arcos.rack/SYSTEM#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
@@ -11,7 +12,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://TurnstileSystem/CounterApplication">
   <owl:Ontology rdf:about="">
-    <owl:imports rdf:resource="TurnStiles"/>
+    <owl:imports rdf:resource="Turnstiles"/>
     <owl:imports rdf:resource="http://arcos.rack/SYSTEM"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
@@ -19,17 +20,17 @@
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplication.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
   <j.1:SYSTEM rdf:ID="OutputThread">
-    <j.1:partOf rdf:resource="TurnStiles#CounterApplication"/>
+    <j.1:partOf rdf:resource="Turnstiles#CounterApplication"/>
     <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >OutputThread</j.0:uniqueIdentifier>
   </j.1:SYSTEM>
   <j.1:SYSTEM rdf:ID="ExecutiveThread">
-    <j.1:partOf rdf:resource="TurnStiles#CounterApplication"/>
+    <j.1:partOf rdf:resource="Turnstiles#CounterApplication"/>
     <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >ExecutiveThread</j.0:uniqueIdentifier>
   </j.1:SYSTEM>
   <j.1:SYSTEM rdf:ID="InputThread">
-    <j.1:partOf rdf:resource="TurnStiles#CounterApplication"/>
+    <j.1:partOf rdf:resource="Turnstiles#CounterApplication"/>
     <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >InputThread</j.0:uniqueIdentifier>
   </j.1:SYSTEM>

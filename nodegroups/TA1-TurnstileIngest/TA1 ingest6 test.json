@@ -33,7 +33,7 @@
             "instanceValues": [],
             "isRuntimeConstrained": false,
             "isMarkedForDeletion": false,
-            "SparqlID": "?req",
+            "SparqlID": "?verifiesRequirementId",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
             "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
@@ -60,7 +60,7 @@
             "instanceValues": [],
             "isRuntimeConstrained": false,
             "isMarkedForDeletion": false,
-            "SparqlID": "?testcase",
+            "SparqlID": "?testUniqueId",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
             "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
@@ -84,7 +84,7 @@
               false
             ],
             "OptionalMinus": [
-              "-2"
+              0
             ],
             "Qualifiers": [
               ""
@@ -99,26 +99,65 @@
     ],
     "limit": 0,
     "orderBy": [],
-    "version": 11
+    "version": 10
   },
   "importSpec": {
     "nodes": [
       {
         "mapping": [],
+        "URILookupMode": "createIfMissing",
         "sparqlID": "?TEST",
         "type": "http://arcos.rack/TESTING#TEST",
-        "props": []
+        "props": [
+          {
+            "mapping": [
+              {
+                "colId": "col_1"
+              }
+            ],
+            "URILookup": [
+              "?TEST"
+            ],
+            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+          }
+        ]
       },
       {
         "mapping": [],
+        "URILookupMode": "noCreate",
         "sparqlID": "?REQUIREMENT",
         "type": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
-        "props": []
+        "props": [
+          {
+            "mapping": [
+              {
+                "colId": "col_2"
+              }
+            ],
+            "URILookup": [
+              "?REQUIREMENT"
+            ],
+            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+          }
+        ]
       }
     ],
     "texts": [],
-    "columns": [],
-    "baseURI": "",
+    "columns": [
+      {
+        "colName": "producedBy",
+        "colId": "col_0"
+      },
+      {
+        "colName": "uniqueIdentifier",
+        "colId": "col_1"
+      },
+      {
+        "colName": "verifies",
+        "colId": "col_2"
+      }
+    ],
+    "baseURI": "http://data/test",
     "dataValidator": [],
     "transforms": [],
     "version": "1"

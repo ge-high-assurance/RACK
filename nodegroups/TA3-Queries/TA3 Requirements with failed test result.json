@@ -1,0 +1,276 @@
+{
+  "sparqlConn": {
+    "data": [
+      {
+        "type": "fuseki",
+        "url": "http://localhost:3030/RACK",
+        "graph": "http://rack001/data"
+      }
+    ],
+    "domain": "",
+    "name": "RACK local fuseki",
+    "model": [
+      {
+        "type": "fuseki",
+        "url": "http://localhost:3030/RACK",
+        "graph": "http://rack001/model"
+      }
+    ],
+    "enableOwlImports": true
+  },
+  "sNodeGroup": {
+    "offset": 0,
+    "sNodeList": [
+      {
+        "isReturned": false,
+        "propList": [
+          {
+            "KeyName": "uniqueIdentifier",
+            "optMinus": 0,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?req",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "fullURIName": "",
+            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+          }
+        ],
+        "NodeName": "REQUIREMENT",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?REQUIREMENT",
+        "valueConstraint": "",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [],
+        "fullURIName": "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
+      },
+      {
+        "isReturned": false,
+        "propList": [],
+        "NodeName": "TEST_STATUS",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?TEST_STATUS",
+        "valueConstraint": "FILTER ( ?TEST_STATUS IN (\u003chttp://arcos.rack/TESTING#Failed\u003e ) ) ",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [],
+        "fullURIName": "http://arcos.rack/TESTING#TEST_STATUS"
+      },
+      {
+        "isReturned": false,
+        "propList": [
+          {
+            "KeyName": "uniqueIdentifier",
+            "optMinus": 0,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?test_execution",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "fullURIName": "",
+            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+          }
+        ],
+        "NodeName": "TEST_EXECUTION",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?TEST_EXECUTION",
+        "valueConstraint": "",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [],
+        "fullURIName": "http://arcos.rack/TESTING#TEST_EXECUTION"
+      },
+      {
+        "isReturned": false,
+        "propList": [
+          {
+            "KeyName": "uniqueIdentifier",
+            "optMinus": 0,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?test",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "fullURIName": "",
+            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+          }
+        ],
+        "NodeName": "TEST",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?TEST",
+        "valueConstraint": "",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [
+          {
+            "KeyName": "verifies",
+            "SnodeSparqlIDs": [
+              "?REQUIREMENT"
+            ],
+            "ValueType": "ENTITY",
+            "Connected": true,
+            "DeletionMarkers": [
+              false
+            ],
+            "OptionalMinus": [
+              0
+            ],
+            "Qualifiers": [
+              ""
+            ],
+            "UriConnectBy": "http://arcos.rack/TESTING#verifies",
+            "ConnectBy": "verifies",
+            "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
+          }
+        ],
+        "fullURIName": "http://arcos.rack/TESTING#TEST"
+      },
+      {
+        "isReturned": false,
+        "propList": [
+          {
+            "KeyName": "uniqueIdentifier",
+            "optMinus": 0,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?test_result",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "fullURIName": "",
+            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+          }
+        ],
+        "NodeName": "TEST_RESULT",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?TEST_RESULT",
+        "valueConstraint": "",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [
+          {
+            "KeyName": "confirms",
+            "SnodeSparqlIDs": [
+              "?TEST"
+            ],
+            "ValueType": "ENTITY",
+            "Connected": true,
+            "DeletionMarkers": [
+              false
+            ],
+            "OptionalMinus": [
+              "0"
+            ],
+            "Qualifiers": [
+              ""
+            ],
+            "UriConnectBy": "http://arcos.rack/TESTING#confirms",
+            "ConnectBy": "confirms",
+            "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
+          },
+          {
+            "KeyName": "executedBy",
+            "SnodeSparqlIDs": [
+              "?TEST_EXECUTION"
+            ],
+            "ValueType": "ACTIVITY",
+            "Connected": true,
+            "DeletionMarkers": [
+              false
+            ],
+            "OptionalMinus": [
+              "0"
+            ],
+            "Qualifiers": [
+              ""
+            ],
+            "UriConnectBy": "http://arcos.rack/TESTING#executedBy",
+            "ConnectBy": "executedBy",
+            "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
+          },
+          {
+            "KeyName": "result",
+            "SnodeSparqlIDs": [
+              "?TEST_STATUS"
+            ],
+            "ValueType": "TEST_STATUS",
+            "Connected": true,
+            "DeletionMarkers": [
+              false
+            ],
+            "OptionalMinus": [
+              0
+            ],
+            "Qualifiers": [
+              ""
+            ],
+            "UriConnectBy": "http://arcos.rack/TESTING#result",
+            "ConnectBy": "result",
+            "UriValueType": "http://arcos.rack/TESTING#TEST_STATUS"
+          }
+        ],
+        "fullURIName": "http://arcos.rack/TESTING#TEST_RESULT"
+      }
+    ],
+    "limit": 0,
+    "orderBy": [
+      {
+        "sparqlID": "?req"
+      }
+    ],
+    "version": 11
+  },
+  "importSpec": {
+    "nodes": [
+      {
+        "mapping": [],
+        "sparqlID": "?TEST_RESULT",
+        "type": "http://arcos.rack/TESTING#TEST_RESULT",
+        "props": []
+      },
+      {
+        "mapping": [],
+        "sparqlID": "?TEST",
+        "type": "http://arcos.rack/TESTING#TEST",
+        "props": []
+      },
+      {
+        "mapping": [],
+        "sparqlID": "?TEST_EXECUTION",
+        "type": "http://arcos.rack/TESTING#TEST_EXECUTION",
+        "props": []
+      },
+      {
+        "mapping": [],
+        "sparqlID": "?TEST_STATUS",
+        "type": "http://arcos.rack/TESTING#TEST_STATUS",
+        "props": []
+      },
+      {
+        "mapping": [],
+        "sparqlID": "?REQUIREMENT",
+        "type": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
+        "props": []
+      }
+    ],
+    "texts": [],
+    "columns": [],
+    "baseURI": "",
+    "dataValidator": [],
+    "transforms": [],
+    "version": "1"
+  },
+  "version": 2
+}

@@ -1,14 +1,17 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
     xmlns:j.0="http://arcos.rack/properties#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:cntrapprq="http://TurnstileSystem/CounterApplicationRequirements"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:trnstlsys="http://TurnstileSystem/CounterApplication"
+    xmlns:j.1="http://arcos.rack/REQUIREMENTS#"
+    xmlns:Rq="http://arcos.rack/REQUIREMENTS"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:cntrappllr="http://TurnstileSystem/CounterApplicationLLR#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:j.1="http://arcos.rack/REQUIREMENTS#"
   xml:base="http://TurnstileSystem/CounterApplicationLLR">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="CounterApplicationRequirements"/>

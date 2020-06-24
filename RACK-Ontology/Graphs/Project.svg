@@ -12,7 +12,7 @@
 <text text-anchor="middle" x="112" y="-694.8" font-family="Times New Roman,serif" font-size="14.00">Project RACK&#45;Ontology import map</text>
 <!-- n1 -->
 <g id="node1" class="node"><title>n1</title>
-<g id="a_node1"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/properties.owl.svg" xlink:title="http://arcos.rack/properties">
+<g id="a_node1"><a xlink:href="./properties.owl.svg" xlink:title="http://arcos.rack/properties">
 <polygon fill="none" stroke="black" points="737.5,-687 683.5,-687 683.5,-651 737.5,-651 737.5,-687"/>
 <text text-anchor="middle" x="710.5" y="-665.3" font-family="Times New Roman,serif" font-size="14.00">P</text>
 </a>
@@ -20,7 +20,7 @@
 </g>
 <!-- n2 -->
 <g id="node2" class="node"><title>n2</title>
-<g id="a_node2"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/PROV-S.owl.svg" xlink:title="http://arcos.rack/PROV&#45;S">
+<g id="a_node2"><a xlink:href="./PROV-S.owl.svg" xlink:title="http://arcos.rack/PROV&#45;S">
 <polygon fill="none" stroke="black" points="737.5,-600 683.5,-600 683.5,-564 737.5,-564 737.5,-600"/>
 <text text-anchor="middle" x="710.5" y="-578.3" font-family="Times New Roman,serif" font-size="14.00">provs</text>
 </a>
@@ -34,7 +34,7 @@
 </g>
 <!-- n3 -->
 <g id="node3" class="node"><title>n3</title>
-<g id="a_node3"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/SYSTEM.owl.svg" xlink:title="http://arcos.rack/SYSTEM">
+<g id="a_node3"><a xlink:href="./SYSTEM.owl.svg" xlink:title="http://arcos.rack/SYSTEM">
 <polygon fill="none" stroke="black" points="86.5,-513 32.5,-513 32.5,-477 86.5,-477 86.5,-513"/>
 <text text-anchor="middle" x="59.5" y="-491.3" font-family="Times New Roman,serif" font-size="14.00">sys</text>
 </a>
@@ -48,7 +48,7 @@
 </g>
 <!-- n6 -->
 <g id="node6" class="node"><title>n6</title>
-<g id="a_node6"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/SACM-S.owl.svg" xlink:title="http://arcos.rack/SACM&#45;S">
+<g id="a_node6"><a xlink:href="./SACM-S.owl.svg" xlink:title="http://arcos.rack/SACM&#45;S">
 <polygon fill="none" stroke="black" points="809.5,-513 755.5,-513 755.5,-477 809.5,-477 809.5,-513"/>
 <text text-anchor="middle" x="782.5" y="-491.3" font-family="Times New Roman,serif" font-size="14.00">sacms</text>
 </a>
@@ -62,7 +62,7 @@
 </g>
 <!-- n7 -->
 <g id="node7" class="node"><title>n7</title>
-<g id="a_node7"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/ANALYSIS.owl.svg" xlink:title="http://arcos.rack/ANALYSIS">
+<g id="a_node7"><a xlink:href="./ANALYSIS.owl.svg" xlink:title="http://arcos.rack/ANALYSIS">
 <polygon fill="none" stroke="black" points="881.5,-513 827.5,-513 827.5,-477 881.5,-477 881.5,-513"/>
 <text text-anchor="middle" x="854.5" y="-491.3" font-family="Times New Roman,serif" font-size="14.00">A</text>
 </a>
@@ -76,7 +76,7 @@
 </g>
 <!-- n10 -->
 <g id="node10" class="node"><title>n10</title>
-<g id="a_node10"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/HAZARD.owl.svg" xlink:title="http://arcos.rack/HAZARD">
+<g id="a_node10"><a xlink:href="./HAZARD.owl.svg" xlink:title="http://arcos.rack/HAZARD">
 <polygon fill="none" stroke="black" points="645.5,-459 591.5,-459 591.5,-423 645.5,-423 645.5,-459"/>
 <text text-anchor="middle" x="618.5" y="-437.3" font-family="Times New Roman,serif" font-size="14.00">H</text>
 </a>
@@ -90,7 +90,7 @@
 </g>
 <!-- n11 -->
 <g id="node11" class="node"><title>n11</title>
-<g id="a_node11"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/REVIEW.owl.svg" xlink:title="http://arcos.rack/REVIEW">
+<g id="a_node11"><a xlink:href="./REVIEW.owl.svg" xlink:title="http://arcos.rack/REVIEW">
 <polygon fill="none" stroke="black" points="963.5,-513 909.5,-513 909.5,-477 963.5,-477 963.5,-513"/>
 <text text-anchor="middle" x="936.5" y="-491.3" font-family="Times New Roman,serif" font-size="14.00">Rv</text>
 </a>
@@ -104,7 +104,7 @@
 </g>
 <!-- n12 -->
 <g id="node12" class="node"><title>n12</title>
-<g id="a_node12"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/SOFTWARE.owl.svg" xlink:title="http://arcos.rack/SOFTWARE">
+<g id="a_node12"><a xlink:href="./SOFTWARE.owl.svg" xlink:title="http://arcos.rack/SOFTWARE">
 <polygon fill="none" stroke="black" points="1055.5,-513 1001.5,-513 1001.5,-477 1055.5,-477 1055.5,-513"/>
 <text text-anchor="middle" x="1028.5" y="-491.3" font-family="Times New Roman,serif" font-size="14.00">sw</text>
 </a>
@@ -118,7 +118,7 @@
 </g>
 <!-- n13 -->
 <g id="node13" class="node"><title>n13</title>
-<g id="a_node13"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/REQUIREMENTS.owl.svg" xlink:title="http://arcos.rack/REQUIREMENTS">
+<g id="a_node13"><a xlink:href="./REQUIREMENTS.owl.svg" xlink:title="http://arcos.rack/REQUIREMENTS">
 <polygon fill="none" stroke="black" points="422.5,-513 368.5,-513 368.5,-477 422.5,-477 422.5,-513"/>
 <text text-anchor="middle" x="395.5" y="-491.3" font-family="Times New Roman,serif" font-size="14.00">Rq</text>
 </a>
@@ -132,7 +132,7 @@
 </g>
 <!-- n15 -->
 <g id="node15" class="node"><title>n15</title>
-<g id="a_node15"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/TESTING.owl.svg" xlink:title="http://arcos.rack/TESTING">
+<g id="a_node15"><a xlink:href="./TESTING.owl.svg" xlink:title="http://arcos.rack/TESTING">
 <polygon fill="none" stroke="black" points="704.5,-351 650.5,-351 650.5,-315 704.5,-315 704.5,-351"/>
 <text text-anchor="middle" x="677.5" y="-329.3" font-family="Times New Roman,serif" font-size="14.00">tst</text>
 </a>
@@ -146,7 +146,7 @@
 </g>
 <!-- n4 -->
 <g id="node4" class="node"><title>n4</title>
-<g id="a_node4"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/CounterApplication.owl.svg" xlink:title="http://TurnstileSystem/CounterApplication">
+<g id="a_node4"><a xlink:href="./CounterApplication.owl.svg" xlink:title="http://TurnstileSystem/CounterApplication">
 <polygon fill="none" stroke="black" points="63,-297 0,-297 0,-261 63,-261 63,-297"/>
 <text text-anchor="middle" x="31.5" y="-275.3" font-family="Times New Roman,serif" font-size="14.00">trnstlsys</text>
 </a>
@@ -160,7 +160,7 @@
 </g>
 <!-- n5 -->
 <g id="node5" class="node"><title>n5</title>
-<g id="a_node5"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/Turnstiles.owl.svg" xlink:title="http://TurnstileSystem/TurnStiles">
+<g id="a_node5"><a xlink:href="./Turnstiles.owl.svg" xlink:title="http://TurnstileSystem/TurnStiles">
 <polygon fill="none" stroke="black" points="284.5,-405 230.5,-405 230.5,-369 284.5,-369 284.5,-405"/>
 <text text-anchor="middle" x="257.5" y="-383.3" font-family="Times New Roman,serif" font-size="14.00">trnstl</text>
 </a>
@@ -174,7 +174,7 @@
 </g>
 <!-- n21 -->
 <g id="node21" class="node"><title>n21</title>
-<g id="a_node21"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/CounterApplicationLLR.owl.svg" xlink:title="http://TurnstileSystem/CounterApplicationLLR">
+<g id="a_node21"><a xlink:href="./CounterApplicationLLR.owl.svg" xlink:title="http://TurnstileSystem/CounterApplicationLLR">
 <polygon fill="none" stroke="black" points="192.5,-123 122.5,-123 122.5,-87 192.5,-87 192.5,-123"/>
 <text text-anchor="middle" x="157.5" y="-101.3" font-family="Times New Roman,serif" font-size="14.00">cntrappllr</text>
 </a>
@@ -194,7 +194,7 @@
 </g>
 <!-- n9 -->
 <g id="node9" class="node"><title>n9</title>
-<g id="a_node9"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/HazardAssesment.owl.svg" xlink:title="http://TurnstileSystem/HazardAssesment">
+<g id="a_node9"><a xlink:href="./HazardAssesment.owl.svg" xlink:title="http://TurnstileSystem/HazardAssesment">
 <polygon fill="none" stroke="black" points="517.5,-297 463.5,-297 463.5,-261 517.5,-261 517.5,-297"/>
 <text text-anchor="middle" x="490.5" y="-275.3" font-family="Times New Roman,serif" font-size="14.00">ha</text>
 </a>
@@ -208,7 +208,7 @@
 </g>
 <!-- n14 -->
 <g id="node14" class="node"><title>n14</title>
-<g id="a_node14"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/CounterApplicationRequirements.owl.svg" xlink:title="http://TurnstileSystem/CounterApplicationRequirements">
+<g id="a_node14"><a xlink:href="./CounterApplicationRequirements.owl.svg" xlink:title="http://TurnstileSystem/CounterApplicationRequirements">
 <polygon fill="none" stroke="black" points="489,-210 418,-210 418,-174 489,-174 489,-210"/>
 <text text-anchor="middle" x="453.5" y="-188.3" font-family="Times New Roman,serif" font-size="14.00">cntrapprq</text>
 </a>
@@ -222,7 +222,7 @@
 </g>
 <!-- n17 -->
 <g id="node17" class="node"><title>n17</title>
-<g id="a_node17"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/InGateRequirements.owl.svg" xlink:title="http://TurnstileSystem/InGateRequirement">
+<g id="a_node17"><a xlink:href="./InGateRequirements.owl.svg" xlink:title="http://TurnstileSystem/InGateRequirement">
 <polygon fill="none" stroke="black" points="361,-210 300,-210 300,-174 361,-174 361,-210"/>
 <text text-anchor="middle" x="330.5" y="-188.3" font-family="Times New Roman,serif" font-size="14.00">ingaterq</text>
 </a>
@@ -236,7 +236,7 @@
 </g>
 <!-- n8 -->
 <g id="node8" class="node"><title>n8</title>
-<g id="a_node8"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/SadlListModel.owl.svg" xlink:title="http://sadl.org/sadllistmodel">
+<g id="a_node8"><a xlink:href="./SadlListModel.owl.svg" xlink:title="http://sadl.org/sadllistmodel">
 <polygon fill="none" stroke="black" points="845,-687 756,-687 756,-651 845,-651 845,-687"/>
 <text text-anchor="middle" x="800.5" y="-665.3" font-family="Times New Roman,serif" font-size="14.00">sadllistmodel</text>
 </a>
@@ -262,7 +262,7 @@
 </g>
 <!-- n16 -->
 <g id="node16" class="node"><title>n16</title>
-<g id="a_node16"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/Sample2.owl.svg" xlink:title="http://TurnstileSystem/Sample2">
+<g id="a_node16"><a xlink:href="./Sample2.owl.svg" xlink:title="http://TurnstileSystem/Sample2">
 <polygon fill="none" stroke="black" points="1055.5,-405 1001.5,-405 1001.5,-369 1055.5,-369 1055.5,-405"/>
 <text text-anchor="middle" x="1028.5" y="-383.3" font-family="Times New Roman,serif" font-size="14.00">smpl2</text>
 </a>
@@ -300,7 +300,7 @@
 </g>
 <!-- n19 -->
 <g id="node19" class="node"><title>n19</title>
-<g id="a_node19"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/CounterApplicationTesting.owl.svg" xlink:title="http://TurnstileSystem/CounterApplicationTesting">
+<g id="a_node19"><a xlink:href="./CounterApplicationTesting.owl.svg" xlink:title="http://TurnstileSystem/CounterApplicationTesting">
 <polygon fill="none" stroke="black" points="490,-123 417,-123 417,-87 490,-87 490,-123"/>
 <text text-anchor="middle" x="453.5" y="-101.3" font-family="Times New Roman,serif" font-size="14.00">cntrapptst</text>
 </a>
@@ -326,7 +326,7 @@
 </g>
 <!-- n18 -->
 <g id="node18" class="node"><title>n18</title>
-<g id="a_node18"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/SadlImplicitModel.owl.svg" xlink:title="http://sadl.org/sadlimplicitmodel">
+<g id="a_node18"><a xlink:href="./SadlImplicitModel.owl.svg" xlink:title="http://sadl.org/sadlimplicitmodel">
 <polygon fill="none" stroke="black" points="977.5,-687 863.5,-687 863.5,-651 977.5,-651 977.5,-687"/>
 <text text-anchor="middle" x="920.5" y="-665.3" font-family="Times New Roman,serif" font-size="14.00">sadlimplicitmodel</text>
 </a>
@@ -334,7 +334,7 @@
 </g>
 <!-- n20 -->
 <g id="node20" class="node"><title>n20</title>
-<g id="a_node20"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/GenerateCSV.owl.svg" xlink:title="http://TurnstileSystem/GenerateCSV">
+<g id="a_node20"><a xlink:href="./GenerateCSV.owl.svg" xlink:title="http://TurnstileSystem/GenerateCSV">
 <polygon fill="none" stroke="black" points="376.5,-36 320.5,-36 320.5,-0 376.5,-0 376.5,-36"/>
 <text text-anchor="middle" x="348.5" y="-14.3" font-family="Times New Roman,serif" font-size="14.00">gencsv</text>
 </a>
@@ -354,7 +354,7 @@
 </g>
 <!-- n22 -->
 <g id="node22" class="node"><title>n22</title>
-<g id="a_node22"><a xlink:href="file:///C:/sadl/git/RACK/RACK-Ontology/Graphs/SadlBuiltinFunctions.owl.svg" xlink:title="http://sadl.org/builtinfunctions">
+<g id="a_node22"><a xlink:href="./SadlBuiltinFunctions.owl.svg" xlink:title="http://sadl.org/builtinfunctions">
 <polygon fill="none" stroke="black" points="1097.5,-687 995.5,-687 995.5,-651 1097.5,-651 1097.5,-687"/>
 <text text-anchor="middle" x="1046.5" y="-665.3" font-family="Times New Roman,serif" font-size="14.00">builtinfunctions</text>
 </a>

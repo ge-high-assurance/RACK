@@ -5,7 +5,7 @@
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns="http://arcos.rack/SACM-S#"
+    xmlns:sacms="http://arcos.rack/SACM-S#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.rack/SACM-S">
   <owl:Ontology rdf:about="">

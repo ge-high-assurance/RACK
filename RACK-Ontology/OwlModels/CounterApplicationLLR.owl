@@ -3,7 +3,7 @@
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
     xmlns:j.0="http://arcos.rack/properties#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns="http://TurnstileSystem/CounterApplicationLLR#"
+    xmlns:cntrappllr="http://TurnstileSystem/CounterApplicationLLR#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"

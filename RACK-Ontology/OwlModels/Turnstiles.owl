@@ -1,6 +1,6 @@
 <rdf:RDF
-    xmlns="http://TurnstileSystem/TurnStiles#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:trnstl="http://TurnstileSystem/TurnStiles#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
     xmlns:j.0="http://arcos.rack/properties#"
     xmlns:j.1="http://arcos.rack/SYSTEM#"

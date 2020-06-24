@@ -5,7 +5,7 @@
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns="http://arcos.rack/TESTING#"
+    xmlns:tst="http://arcos.rack/TESTING#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.rack/TESTING">
   <owl:Ontology rdf:about="">
@@ -25,9 +25,9 @@
     <owl:equivalentClass>
       <owl:Class>
         <owl:oneOf rdf:parseType="Collection">
-          <TEST_STATUS rdf:ID="Passed"/>
-          <TEST_STATUS rdf:ID="Failed"/>
-          <TEST_STATUS rdf:ID="Indeterminate"/>
+          <tst:TEST_STATUS rdf:ID="Passed"/>
+          <tst:TEST_STATUS rdf:ID="Failed"/>
+          <tst:TEST_STATUS rdf:ID="Indeterminate"/>
         </owl:oneOf>
       </owl:Class>
     </owl:equivalentClass>
@@ -77,15 +77,4 @@
     <rdfs:range rdf:resource="#TEST_STATUS"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
   </owl:ObjectProperty>
-  <owl:DatatypeProperty rdf:ID="uniqueIdentifer">
-    <rdfs:domain>
-      <owl:Class>
-        <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#TEST"/>
-          <owl:Class rdf:about="#TEST_RESULT"/>
-        </owl:unionOf>
-      </owl:Class>
-    </rdfs:domain>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </owl:DatatypeProperty>
 </rdf:RDF>

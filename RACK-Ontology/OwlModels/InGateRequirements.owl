@@ -1,11 +1,10 @@
 <rdf:RDF
-    xmlns:Rs="http://arcos.rack/REQUIREMENTS"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
     xmlns:j.0="http://arcos.rack/properties#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns="http://TurnstileSystem/InGateRequirement#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:ingaterq="http://TurnstileSystem/InGateRequirement#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"

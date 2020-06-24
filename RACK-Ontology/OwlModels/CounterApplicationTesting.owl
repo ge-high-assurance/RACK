@@ -5,7 +5,7 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
-    xmlns="http://TurnstileSystem/CounterApplicationRequirements"
+    xmlns:cntrapptst="http://TurnstileSystem/CounterApplicationTesting#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:j.1="http://arcos.rack/TESTING#"

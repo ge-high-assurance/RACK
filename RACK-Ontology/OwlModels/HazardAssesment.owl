@@ -3,11 +3,10 @@
     xmlns:j.0="http://arcos.rack/HAZARD#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
     xmlns:j.1="http://arcos.rack/properties#"
+    xmlns:ha="http://TurnstileSystem/HazardAssesment#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns="http://TurnstileSystem/TurnStiles"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
-    xmlns:H="http://arcos.rack/HAZARD"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://TurnstileSystem/HazardAssesment">

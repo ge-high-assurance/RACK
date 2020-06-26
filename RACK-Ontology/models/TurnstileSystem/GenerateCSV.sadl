@@ -210,7 +210,7 @@ Write: data
 Write: data
 {
   Ask: "select distinct ?uniqueIdentifier ?wasGeneratedById where
-        {  ?PACKAGE_FILE <rdf:type> <EXECUTABLE>
+        {  ?PACKAGE_FILE <rdf:type> <PACKAGE_FILE>
          . ?PACKAGE_FILE <uniqueIdentifier> ?uniqueIdentifier
          . OPTIONAL{  ?PACKAGE_FILE <wasGeneratedBy> ?wasGeneratedBy
                     . ?wasGeneratedBy <rdf:type> <ACTIVITY>
@@ -223,13 +223,13 @@ Write: data
 Write: data
 {
   Ask: "select distinct ?uniqueIdentifier ?performedById ?usedId where
-        {  ?COMPILE <rdf:type> <COMPILE>
-         . ?COMPILE <uniqueIdentifier> ?uniqueIdentifier
-         . OPTIONAL{  ?COMPILE <performedBy> ?performedBy
+        {  ?PACKAGE <rdf:type> <PACKAGE>
+         . ?PACKAGE <uniqueIdentifier> ?uniqueIdentifier
+         . OPTIONAL{  ?PACKAGE <performedBy> ?performedBy
          . ?performedBy <rdf:type> <AGENT>
          . ?performedBy <uniqueIdentifier> ?performedById
         }
-        . OPTIONAL{  ?COMPILE <used> ?used
+        . OPTIONAL{  ?PACKAGE <used> ?used
                    . ?used <rdf:type> <ENTITY>
                    . ?used <uniqueIdentifier> ?usedId
                   }

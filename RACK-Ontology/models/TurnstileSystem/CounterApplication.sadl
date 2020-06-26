@@ -118,7 +118,7 @@ counter_exe_Compiling is a COMPILE
     has used counter_h.
 
 counter_exe is an EXECUTABLE
-    has uniqueIdentifier "counter_exe".
+    has uniqueIdentifier "counter_exe",
     has wasGeneratedBy counter_exe_Compiling.
 
 // conf.json

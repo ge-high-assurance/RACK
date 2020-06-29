@@ -1,5 +1,6 @@
 # TL;DR
-[Learn how to install and use RACK](https://github.com/ge-high-assurance/RACK/wiki/RACK-in-a-Box-User-Guide,-V0.0-(29-June-2020).
+
+[Learn how to install and use RACK](https://github.com/ge-high-assurance/RACK/wiki/RACK-in-a-Box-User-Guide-V0.0).
 
 # Introducing RACK
 
@@ -14,5 +15,5 @@ As shown above, RACK takes in evidence in the form of technical documents, test 
 To make RACK easy for all ARCOS performers to use, we deploy RACK as a software appliance that any user can download, install, and run in a local environment. This deployment model, which we call RACK-in-a-Box, makes it easy for both TA1 and TA3 performers to test software against the RACK APIs at will, without worrying about interfering accidentally with other users. In addition, our model allows for users to concurrently collaborate at will across TAs. For example, a TA1 user can send a set of sample data to a TA3 user, so that the TA3 user can ingest that data in a private RACK instance and develop query techniques independently. RACK's deployment approach achieves this flexibility while retaining ease of deployment in a centralized cloud instance, such as we might use during an ARCOS system evaluation experiment. 
 
 # Getting Started with RACK
-RACK is available either as a virtual machine image or a Docker container, and is supported on Linux, Windows, and MacOS systems. To learn more and get detailed instructions on how to get started, see [our online User Guide](https://github.com/ge-high-assurance/RACK/wiki/RACK-in-a-Box-User-Guide,-V0.0-(29-June-2020).
+RACK is available either as a virtual machine image or a Docker container, and is supported on Linux, Windows, and MacOS systems. To learn more and get detailed instructions on how to get started, see [our online User Guide](https://github.com/ge-high-assurance/RACK/wiki/RACK-in-a-Box-User-Guide-V0.0).
 

@@ -187,12 +187,12 @@ Write: data
 // list all EXECUTABLE
 Write: data
 {
-  Ask: "select distinct ?uniqueIdentifier ?wasGeneratedById where
+  Ask: "select distinct ?uniqueIdentifier ?createById where
         {  ?EXECUTABLE <rdf:type> <EXECUTABLE>
          . ?EXECUTABLE <uniqueIdentifier> ?uniqueIdentifier
-         . OPTIONAL{  ?EXECUTABLE <wasGeneratedBy> ?wasGeneratedBy
-                    . ?wasGeneratedBy <rdf:type> <ACTIVITY>
-                    . ?wasGeneratedBy <uniqueIdentifier> ?wasGeneratedById
+         . OPTIONAL{  ?EXECUTABLE <createBy> ?createBy
+                    . ?createBy <rdf:type> <ACTIVITY>
+                    . ?createBy <uniqueIdentifier> ?createById
                    }
         } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/EXECUTABLE.csv".

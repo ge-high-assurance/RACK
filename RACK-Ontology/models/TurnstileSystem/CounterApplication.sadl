@@ -64,6 +64,7 @@ output_o_Compiling is a COMPILE
     has used output_c,
     has used output_h.
 
+
 output_o is a OBJECT_FILE
     has uniqueIdentifier "output_o",
     has createBy output_o_Compiling.
@@ -119,7 +120,7 @@ counter_exe_Compiling is a COMPILE
 
 counter_exe is an EXECUTABLE
     has uniqueIdentifier "counter_exe",
-    has wasGeneratedBy counter_exe_Compiling.
+    has createBy counter_exe_Compiling.
 
 // conf.json
 

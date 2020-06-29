@@ -6,7 +6,7 @@
 
 RACK (Rapid Assurance Curation Kit) is a research-grade database that uses a structured semantic data model tuned to the domain of the DARPA ARCOS (Automated Rapid Certificaiton Of Software) program. 
 
-<img src="https://github.com/ge-high-assurance/RACK/wiki/images/RACK_cartoon.jpg" alt="RACK Overview Diagram" width="300" align="center">
+<img src="https://github.com/ge-high-assurance/RACK/wiki/images/RACK_cartoon.jpg" alt="RACK Overview Diagram" width="300" align="middle">
 
 As shown above, RACK takes in evidence in the form of technical documents, test cases and test results, analysis reports, and other results that aid in documenting certification of complex systems. RACK also takes as input the _provenance_ of that data, as well as its relationship to the _structure_ of the relevant system. Specifically, RACK provides a data ingestion interface primarily for use by ARCOS TA1 performers, whose primary focus in ARCOS is to provide evidence from which assurance arguments can be crafted. RACK also provides a query interface for use by TA3 performers, whose primary focus in ARCOS is the construction of compelling assurance arguments. RACK queries allow users to find evidence related to diverse parts of the target system, understand where that evidence came from, and what the evidence infers about that system. While RACK aims to fully support the needs of the ARCOS program, we emphasize that RACK is not intended to be production-ready software.
 

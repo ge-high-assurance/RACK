@@ -80,7 +80,7 @@ Write: data
        } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/TEST.csv".
 
-// list all LANGAUGE
+// list all LANGUAGE
 Write: data
 {
   Ask: "select distinct ?uniqueIdentifier where

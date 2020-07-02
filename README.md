@@ -1,6 +1,4 @@
-# TL;DR
-
-[Learn how to install and use RACK](https://github.com/ge-high-assurance/RACK/wiki/RACK-in-a-Box-User-Guide-V0.0).
+In a hurry? Skip this introduction and just [Learn how to install and use RACK](https://github.com/ge-high-assurance/RACK/wiki/RACK-in-a-Box-User-Guide-V0.0).
 
 # Introducing RACK
 

@@ -1,31 +1,36 @@
 uri "http://arcos.rack/SYSTEM" alias sys.
 import "http://arcos.rack/PROV-S".
 
-SYSTEM is a type of ENTITY.
+SYSTEM
+	(note "SYSTEMs classify some logical parts of your application")
+	is a type of ENTITY.
 	partOf (note "used to define a relationship to a higher level system") describes SYSTEM with values of type ENTITY.
 	partOf is a type of wasDerivedFrom.
-	
-	producedBy describes SYSTEM with values of type SYSTEM_DEVELOPEMENT.
-	producedBy is a type of wasGeneratedBy.	
-	
-	provides describes SYSTEM with values of type ENTITY.
+
+	producedBy (note "trace to ACTIVITYs participating in developing this SYSTEM") describes SYSTEM with values of type SYSTEM_DEVELOPEMENT.
+	producedBy is a type of wasGeneratedBy.
+
+	provides (note "list of entities that this SYSTEM provides to others") describes SYSTEM with values of type ENTITY.
 	provides is a type of wasDerivedFrom.
-	
-	requires describes SYSTEM with values of type ENTITY.
+
+	requires (note "list of entities that this SYSTEM requires from others") describes SYSTEM with values of type ENTITY.
 	requires is a type of wasDerivedFrom.
-	
-INTERFACE is a type of ENTITY.	
-	source describes INTERFACE with values of type ENTITY.
+
+INTERFACE
+	(note "INTERFACEs describe directed connections between an ENTITY (e.g. SYSTEM) providing what another ENTITY (e.g. SYSTEM) requires")
+	is a type of ENTITY.
+
+	source (note "identifies the ENTITY that provides what the INTERFACE offers") describes INTERFACE with values of type ENTITY.
 	source is the inverse of provides.
 	source is a type of wasDerivedFrom.
-	
-	destination describes INTERFACE with values of type ENTITY.
+
+	destination (note "identifies the ENTITY that requires what the INTERFACE offers") describes INTERFACE with values of type ENTITY.
 	destination is the inverse of requires.
 	destination is a type of wasDerivedFrom.
-	
-	identifiedBy describes INTERFACE with values of type SYSTEM_DEVELOPEMENT.
-	identifiedBy is a type of wasGeneratedBy.	
-	
-	
+
+	identifiedBy (note "TODO") describes INTERFACE with values of type SYSTEM_DEVELOPEMENT.
+	identifiedBy is a type of wasGeneratedBy.
+
+
 SYSTEM_DEVELOPEMENT is a type of ACTIVITY.
 	developedBy (note "Organization that is responsible for producing a system") describes SYSTEM_DEVELOPEMENT with values of type AGENT.

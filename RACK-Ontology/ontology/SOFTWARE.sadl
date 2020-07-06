@@ -2,7 +2,7 @@ uri "http://arcos.rack/SOFTWARE" alias sw.
 import "http://arcos.rack/PROV-S".
 
 PACKAGE_FILE
-	(note "TODO")
+	(note "a package file, e.g. Reg Hat's .rpm, Debian's .deb, etc.")
 	is a type of ENTITY.
 
 CODE_FILE
@@ -92,7 +92,7 @@ COMPILE
 	performedBy is a type of wasAssociatedWith.
 
 PACKAGE
-	(note "ACTIVITY of running a PACKAGER to produce TODO")
+	(note "ACTIVITY of running a PACKAGER to produce a PACKAGE_FILE")
 	is a type of ACTIVITY.
 	performedBy describes PACKAGE with values of type AGENT.
 	performedBy is a type of wasAssociatedWith.

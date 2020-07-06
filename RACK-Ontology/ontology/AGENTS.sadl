@@ -1,0 +1,28 @@
+uri "http://arcos.rack/AGENTS" alias AGENTS.
+
+import "http://arcos.rack/PROV-S".
+
+ORGANIZATION
+  (note "An organization is a social or legal institution such as a company, society, etc.")
+  is a type of AGENT.
+
+name (note "Full name of an organization")
+  describes ORGANIZATION with values of type string.
+
+PERSON (note "Person agents are people")
+  is a type of AGENT.
+
+name (note "Full name of a person")
+  describes PERSON with values of type string.
+
+emailAddress (note "Email address of person")
+  describes PERSON with values of type string.
+
+employedBy (note "Relates people to the company they were acting on behalf of.")
+  describes PERSON with values of type AGENT.
+employedBy is a type of actedOnBehalfOf.
+
+
+SOFTWAREAGENT
+  (note "A software agent is running software.")
+  is a type of AGENT.

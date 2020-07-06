@@ -1,71 +1,98 @@
 uri "http://arcos.rack/SOFTWARE" alias sw.
 import "http://arcos.rack/PROV-S".
 
-PACKAGE_FILE is a type of ENTITY.
+PACKAGE_FILE
+	(note "TODO")
+	is a type of ENTITY.
 
-CODE_FILE is a type of ENTITY.
+CODE_FILE
+	(note "file that contains code that may be compiled and/or executed")
+	is a type of ENTITY.
 	satisfies describes CODE_FILE with values of type ENTITY.
 	satisfies is a type of wasDerivedFrom.
-	
+
 	sw:language describes CODE_FILE with values of type LANGUAGE.
 	sw:language is a type of wasDerivedFrom.
 
 	createBy describes CODE_FILE with values of type ACTIVITY.
 	createBy is a type of wasGeneratedBy.
 
-LANGUAGE is a type of ENTITY.
+LANGUAGE
+	(note "TODO")
+	is a type of ENTITY.
 	uniqueIdentifier describes LANGUAGE with values of type string.
-	
+
 	^version describes LANGUAGE with values of type string.
-	
-	
-	
-	
-CONFIG_FILE is a type of ENTITY.
+
+
+
+
+CONFIG_FILE
+	(note "anything that can be considered configuration")
+	is a type of ENTITY.
 	createBy describes CONFIG_FILE with values of type ACTIVITY.
 	createBy is a type of wasGeneratedBy.
-OBJECT_FILE is a type of ENTITY.
+OBJECT_FILE
+	(note "compiled object code, not ready for execution")
+	is a type of ENTITY.
 	createBy describes OBJECT_FILE with values of type ACTIVITY.
 	createBy is a type of wasGeneratedBy.
-LIBRARY is a type of ENTITY.
+LIBRARY
+	(note "TODO")
+	is a type of ENTITY.
 	createBy describes LIBRARY with values of type ACTIVITY.
 	createBy is a type of wasGeneratedBy.
-EXECUTABLE is a type of ENTITY.
+EXECUTABLE
+	(note "compiled executable, ready for execution")
+	is a type of ENTITY.
 	createBy describes EXECUTABLE with values of type ACTIVITY.
 	createBy is a type of wasGeneratedBy.
 
-CODE_GENERATOR is a type of AGENT.
+CODE_GENERATOR
+	(note "a tool that generates CODE_FILEs as part of a CODE_GEN ACTIVITY")
+	is a type of AGENT.
 
-COMPILER is a type of AGENT.
+COMPILER
+	(note "a tool that compiles CODE_FILEs into ENTITYs such as OBJECT_FILE or EXECUTABLE")
+	is a type of AGENT.
 
-PACKAGER is a type of AGENT.
+PACKAGER
+	(note "a tool that packages some software together as part of a PACKAGE ACTIVITY")
+	is a type of AGENT.
 
-CODE_DEVELOPMENT is a type of ACTIVITY.
-	author  describes CODE_DEVELOPMENT with values of type AGENT.
+CODE_DEVELOPMENT
+	(note "an ACTIVITY that produces CODE_FILEs")
+	is a type of ACTIVITY.
+	author describes CODE_DEVELOPMENT with values of type AGENT.
 	author is a type of wasAssociatedWith.
-	
+
 	referenced describes CODE_DEVELOPMENT with values of type ENTITY.
 	referenced is a type of used.
-	
+
 	governedBy describes CODE_DEVELOPMENT with values of type ENTITY.
 	governedBy is a type of used.
-	
-	
-BUILD is a type of ACTIVITY.
+
+
+BUILD
+	(note "TODO")
+	is a type of ACTIVITY.
 	step describes BUILD with values of type ACTIVITY.
 	step is a type of wasInformedBy.
 
-CODE_GEN is a type of ACTIVITY.
+CODE_GEN
+	(note "ACTIVITY of running a CODE_GENERATOR to create CODE_FILEs")
+	is a type of ACTIVITY.
 	performedBy describes CODE_GEN with values of type AGENT.
 	performedBy is a type of wasAssociatedWith.
 
-COMPILE is a type of ACTIVITY.
+COMPILE
+	(note "ACTIVITY of running a a COMPILER to produce EXECUTABLEs or OBJECT_FILEs")
+	is a type of ACTIVITY.
 	performedBy describes COMPILE with values of type AGENT.
 	performedBy is a type of wasAssociatedWith.
-	
-PACKAGE is a type of ACTIVITY.
+
+PACKAGE
+	(note "ACTIVITY of running a PACKAGER to produce TODO")
+	is a type of ACTIVITY.
 	performedBy describes PACKAGE with values of type AGENT.
 	performedBy is a type of wasAssociatedWith.
-
-
-	

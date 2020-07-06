@@ -32,5 +32,7 @@ INTERFACE
 	identifiedBy is a type of wasGeneratedBy.
 
 
-SYSTEM_DEVELOPEMENT is a type of ACTIVITY.
+SYSTEM_DEVELOPEMENT
+	(note "ACTIVITY relating to the creation of onr or more some SYSTEMs")
+	is a type of ACTIVITY.
 	developedBy (note "Organization that is responsible for producing a system") describes SYSTEM_DEVELOPEMENT with values of type AGENT.

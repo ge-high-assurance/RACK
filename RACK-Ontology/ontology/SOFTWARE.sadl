@@ -14,7 +14,6 @@ CODE_FILE is a type of ENTITY.
 	createBy is a type of wasGeneratedBy.
 
 LANGUAGE is a type of ENTITY.
-	uniqueIdentifier describes LANGUAGE with values of type string.
 	
 	^version describes LANGUAGE with values of type string.
 	

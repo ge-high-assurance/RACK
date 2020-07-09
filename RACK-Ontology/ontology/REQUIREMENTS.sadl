@@ -2,7 +2,7 @@ uri "http://arcos.rack/REQUIREMENTS" alias Rq.
 import "http://arcos.rack/PROV-S".
 
 REQUIREMENT
-	(node "captures a property of a process or artifact that is to be assessed")
+	(note "captures (both high- and low-level) properties of a process or artifact that are to be assessed")
 	is a type of ENTITY.
 	text describes REQUIREMENT with values of type string.
 
@@ -20,17 +20,17 @@ REQUIREMENT
 
 
 DATA_DICTIONARY_TERM
-	(note "TODO")
+	(note "defines some conceptual data that may be collected somewhere and used somewhere else")
 	is a type of ENTITY.
 	text describes DATA_DICTIONARY_TERM with values of type string.
 
-	providedBy describes DATA_DICTIONARY_TERM with values of type ENTITY.
+	providedBy (note "TODO") describes DATA_DICTIONARY_TERM with values of type ENTITY.
 	providedBy is a type of wasDerivedFrom.
 
-	consumedBy describes DATA_DICTIONARY_TERM with values of type ENTITY.
+	consumedBy (note "ENTITYs that may consume this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
 	consumedBy is a type of wasDerivedFrom.
 
-	createdBy describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
+	createdBy (note "TODO") describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
 	createdBy is a type of wasGeneratedBy.
 
 

@@ -73,7 +73,7 @@ CODE_DEVELOPMENT
 
 
 BUILD
-	(note "TODO")
+	(note "describes a set of ACTIVITYs (e.g. CODE_GEN, COMPILE, ...) that together form some logical building unit")
 	is a type of ACTIVITY.
 	step describes BUILD with values of type ACTIVITY.
 	step is a type of wasInformedBy.

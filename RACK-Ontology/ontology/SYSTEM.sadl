@@ -2,7 +2,7 @@ uri "http://arcos.rack/SYSTEM" alias sys.
 import "http://arcos.rack/PROV-S".
 
 SYSTEM
-	(note "SYSTEMs classify some logical parts of your application")
+	(note "SYSTEMs classify logical parts of the whole system being developed")
 	is a type of ENTITY.
 	partOf (note "used to define a relationship to a higher level system") describes SYSTEM with values of type ENTITY.
 	partOf is a type of wasDerivedFrom.

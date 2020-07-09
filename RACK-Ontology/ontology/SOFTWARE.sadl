@@ -21,7 +21,6 @@ LANGUAGE
 	(note "TODO")
 	is a type of ENTITY.
 	uniqueIdentifier describes LANGUAGE with values of type string.
-
 	^version describes LANGUAGE with values of type string.
 
 

@@ -1,0 +1,26 @@
+uri "http://arcos.rack/GeneratePropInfoCSV" alias genpropinfo.
+import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/HAZARD".
+import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/REVIEW".
+import "http://arcos.rack/SACM-S".
+import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/TESTING".
+
+
+// Need to import all sadl files in ontology folder (except Prov-S.sadl as that is imported by other sadl files).
+
+// The following query writes out relevant info for properties defined.
+Write: data 
+{
+  Ask: "select distinct (?prop as ?property) ?subPropertyOf ?propertyDomain ?propertyRange ?propertyNote where 
+  {?prop <rdfs:domain> ?propertyDomain 
+  . FILTER(!regex(str(?propertyDomain), 'DataDescriptor')) # in SADL ImplicitModels
+  . FILTER(!regex(str(?propertyDomain), 'FunctionPattern')) # in SADL ImplicitModels
+  . ?prop <rdfs:comment> ?propertyNote
+  . ?prop <rdfs:range> ?propertyRange 
+  . OPTIONAL {?prop <rdfs:subPropertyOf> ?subPropertyOf . FILTER (?prop != ?subPropertyOf)}
+  . LET(?localname := strafter(str(?prop), '#'))
+  } order by ?localname".
+} to "ontology/Data/PropInfo.csv".

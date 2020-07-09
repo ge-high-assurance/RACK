@@ -1,2 +1,3 @@
 uri "http://arcos.rack/properties" alias P.
-uniqueIdentifier (note "uniqueIdentifier is any data item that is used to associate items on when loading into the data store, and must be unique across the entire data set.") is a property.
+//uniqueIdentifier (note "uniqueIdentifier is any data item that is used to associate items on when loading into the data store, and must be unique across the entire data set.") 
+//  is a property with values of type string.

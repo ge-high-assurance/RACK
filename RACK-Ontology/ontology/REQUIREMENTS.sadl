@@ -30,7 +30,7 @@ DATA_DICTIONARY_TERM
 	consumedBy (note "ENTITYs that may consume this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
 	consumedBy is a type of wasDerivedFrom.
 
-	createdBy (note "TODO") describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
+	createdBy (note "trace to an ACTIVITY (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term") describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
 	createdBy is a type of wasGeneratedBy.
 
 

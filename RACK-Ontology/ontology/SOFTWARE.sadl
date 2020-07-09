@@ -18,7 +18,7 @@ CODE_FILE
 	createBy is a type of wasGeneratedBy.
 
 LANGUAGE
-	(note "TODO")
+	(note "describes a programming language, possibly identifying some version of its specification")
 	is a type of ENTITY.
 	uniqueIdentifier describes LANGUAGE with values of type string.
 	^version describes LANGUAGE with values of type string.

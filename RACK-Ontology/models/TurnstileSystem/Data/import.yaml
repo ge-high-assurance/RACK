@@ -5,7 +5,7 @@
 #
 # Example:
 # $ ./load_data.py ../models/TurnstileSystem/Data/import.yaml http://localhost
-data-model: "http://rack001/data"
+data-graph: "http://rack001/data"
 ingestion-steps:
 - ["TA1 ingest1 system",        "SYSTEM.csv"]
 - ["TA1 ingest2 interface",     "INTERFACE.csv"]

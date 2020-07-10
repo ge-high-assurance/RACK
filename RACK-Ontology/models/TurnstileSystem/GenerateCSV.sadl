@@ -1,11 +1,12 @@
 uri "http://TurnstileSystem/GenerateCSV" alias gencsv.
+import "http://TurnstileSystem/CounterApplication".
 import "http://TurnstileSystem/CounterApplicationLLR".
 import "http://TurnstileSystem/CounterApplicationTesting".
 
 // list all SYSTEM
-Write: data 
+Write: data
 {
-  Ask: "select distinct ?systemId ?partOfId ?producedById ?providesId ?requiresId where 
+  Ask: "select distinct ?systemId ?partOfId ?producedById ?providesId ?requiresId where
        {?SYSTEM <rdf:type> <SYSTEM>
         . ?SYSTEM <uniqueIdentifier> ?systemId
         . OPTIONAL{?SYSTEM <partOf> ?partOf . ?partOf <uniqueIdentifier> ?partOfId}
@@ -15,10 +16,10 @@ Write: data
        } order by ?systemId".
 } to "models/TurnstileSystem/Data/SYSTEM.csv".
 
-// list all INTERFACE; note we do not have uniqueIdentifier related to "identifiedBy" 
-Write: data 
+// list all INTERFACE; note we do not have uniqueIdentifier related to "identifiedBy"
+Write: data
 {
-  Ask: "select distinct ?uniqueIdentifier ?sourceId ?destinationId ?identifiedBy where 
+  Ask: "select distinct ?uniqueIdentifier ?sourceId ?destinationId ?identifiedBy where
        {  ?INTERFACE <rdf:type> <INTERFACE>
         . ?INTERFACE <uniqueIdentifier> ?uniqueIdentifier
         . OPTIONAL{?INTERFACE <source> ?source . ?source <uniqueIdentifier> ?sourceId}
@@ -28,9 +29,9 @@ Write: data
 } to "models/TurnstileSystem/Data/INTERFACE.csv".
 
 // list all HAZARD
-Write: data 
+Write: data
 {
-  Ask: "select distinct ?uniqueIdentifier ?definition ?systemSourceId ?hazardSourceId where 
+  Ask: "select distinct ?uniqueIdentifier ?definition ?systemSourceId ?hazardSourceId where
        {  ?HAZARD <rdf:type> <HAZARD> . ?HAZARD <uniqueIdentifier> ?uniqueIdentifier
         . ?HAZARD <definition> ?definition
         . OPTIONAL{?HAZARD <H:source> ?system . ?system <rdf:type> <SYSTEM> . ?system <uniqueIdentifier> ?systemSourceId}
@@ -39,9 +40,9 @@ Write: data
 } to "models/TurnstileSystem/Data/HAZARD.csv".
 
 // list all REQUIREMENT
-Write: data 
+Write: data
 {
-  Ask: "select distinct ?uniqueIdentifier ?governsId ?satisfiesId ?mitigatesId ?createdById ?text where 
+  Ask: "select distinct ?uniqueIdentifier ?governsId ?satisfiesId ?mitigatesId ?createdById ?text where
        {  ?REQUIREMENT <rdf:type> <REQUIREMENT>
         . ?REQUIREMENT <uniqueIdentifier> ?uniqueIdentifier
         . OPTIONAL{?REQUIREMENT <governs> ?governs . ?governs <uniqueIdentifier> ?governsId}
@@ -54,9 +55,9 @@ Write: data
 
 // list all DATA_DICTIONARY_TERM
 // Note that a single DATA_DICTIONARY_TERM can have multiple providedBy and multiple consumedBy; and so we get multiple rows
-Write: data 
+Write: data
 {
-  Ask: "select distinct ?uniqueIdentifier ?requirementProvidedById ?requirementConsumedById ?interfaceProvidedById ?interfaceConsumedById ?createdById ?text where 
+  Ask: "select distinct ?uniqueIdentifier ?requirementProvidedById ?requirementConsumedById ?interfaceProvidedById ?interfaceConsumedById ?createdById ?text where
        {  ?DATA_DICTIONARY_TERM <rdf:type> <DATA_DICTIONARY_TERM>
         . ?DATA_DICTIONARY_TERM <uniqueIdentifier> ?uniqueIdentifier
         . OPTIONAL{?DATA_DICTIONARY_TERM <providedBy> ?req  . ?req <rdf:type> <REQUIREMENT>  . ?req <uniqueIdentifier>  ?requirementProvidedById}
@@ -69,9 +70,9 @@ Write: data
 } to "models/TurnstileSystem/Data/DATA_DICTIONARY_TERM.csv".
 
 // list all TEST
-Write: data 
+Write: data
 {
-  Ask: "select distinct ?uniqueIdentifier ?verifies ?producedBy where 
+  Ask: "select distinct ?uniqueIdentifier ?verifies ?producedBy where
        {  ?TEST <rdf:type> <TEST>
         . ?TEST <uniqueIdentifier> ?uniqueIdentifier
         . OPTIONAL{?TEST <verifies> ?verifies . ?verifies <uniqueIdentifier> ?verifiesId}
@@ -79,15 +80,158 @@ Write: data
        } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/TEST.csv".
 
+// list all LANGUAGE
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier where
+        {  ?LANGUAGE <rdf:type> <LANGUAGE>
+         . ?LANGUAGE <uniqueIdentifier> ?uniqueIdentifier
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/LANGUAGE.csv".
+
 // list test results; TEST_EXECUTION does not have unique identifier
-Write: data 
+Write: data
 {
    Ask: "select ?uniqueIdentifier ?tcId ?result ?testExe where
-         {  ?tr <rdf:type> <TEST_RESULT> 
+         {  ?tr <rdf:type> <TEST_RESULT>
           . ?tr <uniqueIdentifier> ?uniqueIdentifier
           . ?tr <confirms> ?tc . ?tc <uniqueIdentifier> ?tcId
           . ?tr <result> ?result
-          . ?tr <executedBy> ?testExe 
+          . ?tr <executedBy> ?testExe
          } order by ?testExe ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/TEST_RESULTS.csv".
-       
+
+// list all COMPILER
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier where
+        {  ?COMPILER <rdf:type> <COMPILER>
+         . ?COMPILER <uniqueIdentifier> ?uniqueIdentifier
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/COMPILER.csv".
+
+// list all PACKAGER
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier where
+        {  ?PACKAGER <rdf:type> <PACKAGER>
+         . ?PACKAGER <uniqueIdentifier> ?uniqueIdentifier
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/PACKAGER.csv".
+
+// list all AGENT
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier where
+        {  ?AGENT <rdf:type> <AGENT>
+         . ?AGENT <uniqueIdentifier> ?uniqueIdentifier
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/AGENT.csv".
+
+// list all CODE_FILE
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier ?languageId where
+        {  ?CODE_FILE <rdf:type> <CODE_FILE>
+          . ?CODE_FILE <uniqueIdentifier> ?uniqueIdentifier
+          . OPTIONAL{  ?CODE_FILE <sw:language> ?language
+                    . ?language <rdf:type> <LANGUAGE>
+                    . ?language <uniqueIdentifier> ?languageId
+                    }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/CODE_FILE.csv".
+
+// list all COMPILE
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier ?performedById ?usedId where
+        {  ?COMPILE <rdf:type> <COMPILE>
+         . ?COMPILE <uniqueIdentifier> ?uniqueIdentifier
+         . OPTIONAL{  ?COMPILE <performedBy> ?performedBy
+                    . ?performedBy <rdf:type> <AGENT>
+                    . ?performedBy <uniqueIdentifier> ?performedById
+                   }
+         . OPTIONAL{  ?COMPILE <used> ?used
+                    . ?used <rdf:type> <ENTITY>
+                    . ?used <uniqueIdentifier> ?usedId
+                   }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/COMPILE.csv".
+
+// list all OBJECT_FILE
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier ?createById where
+        {  ?OBJECT_FILE <rdf:type> <OBJECT_FILE>
+         . ?OBJECT_FILE <uniqueIdentifier> ?uniqueIdentifier
+         . OPTIONAL{  ?OBJECT_FILE <createBy> ?createBy
+                    . ?createBy <rdf:type> <ACTIVITY>
+                    . ?createBy <uniqueIdentifier> ?createById
+                   }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/OBJECT_FILE.csv".
+
+// list all LIBRARY
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier ?createById where
+        {  ?LIBRARY <rdf:type> <LIBRARY>
+         . ?LIBRARY <uniqueIdentifier> ?uniqueIdentifier
+         . OPTIONAL{  ?LIBRARY <createBy> ?createBy
+                    . ?createBy <rdf:type> <ACTIVITY>
+                    . ?createBy <uniqueIdentifier> ?createById
+                   }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/LIBRARY.csv".
+
+// list all EXECUTABLE
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier ?createById where
+        {  ?EXECUTABLE <rdf:type> <EXECUTABLE>
+         . ?EXECUTABLE <uniqueIdentifier> ?uniqueIdentifier
+         . OPTIONAL{  ?EXECUTABLE <createBy> ?createBy
+                    . ?createBy <rdf:type> <ACTIVITY>
+                    . ?createBy <uniqueIdentifier> ?createById
+                   }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/EXECUTABLE.csv".
+
+// list all CONFIG_FILE
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier where
+        {  ?CONFIG_FILE <rdf:type> <CONFIG_FILE>
+         . ?CONFIG_FILE <uniqueIdentifier> ?uniqueIdentifier
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/CONFIG_FILE.csv".
+
+// list all PACKAGE_FILE
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier ?wasGeneratedById where
+        {  ?PACKAGE_FILE <rdf:type> <PACKAGE_FILE>
+         . ?PACKAGE_FILE <uniqueIdentifier> ?uniqueIdentifier
+         . OPTIONAL{  ?PACKAGE_FILE <wasGeneratedBy> ?wasGeneratedBy
+                    . ?wasGeneratedBy <rdf:type> <ACTIVITY>
+                    . ?wasGeneratedBy <uniqueIdentifier> ?wasGeneratedById
+                   }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/PACKAGE_FILE.csv".
+
+// list all PACKAGE
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier ?performedById ?usedId where
+        {  ?PACKAGE <rdf:type> <PACKAGE>
+         . ?PACKAGE <uniqueIdentifier> ?uniqueIdentifier
+         . OPTIONAL{  ?PACKAGE <performedBy> ?performedBy
+         . ?performedBy <rdf:type> <AGENT>
+         . ?performedBy <uniqueIdentifier> ?performedById
+        }
+        . OPTIONAL{  ?PACKAGE <used> ?used
+                   . ?used <rdf:type> <ENTITY>
+                   . ?used <uniqueIdentifier> ?usedId
+                  }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/PACKAGE.csv".

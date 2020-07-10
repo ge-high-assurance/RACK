@@ -19,7 +19,7 @@
     <pDerivationLogging rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >None</pDerivationLogging>
     <pModelSpec rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >OWL_MEM_TRANS</pModelSpec>
+    >OWL_MEM_RDFS</pModelSpec>
     <pTransitiveClosureCaching rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
     >false</pTransitiveClosureCaching>
     <translatorClassName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"

@@ -1,7 +1,14 @@
 uri "http://TurnstileSystem/GenerateCSV" alias gencsv.
 import "http://TurnstileSystem/CounterApplication".
 import "http://TurnstileSystem/CounterApplicationLLR".
+import "http://TurnstileSystem/CounterApplicationRequirements".
 import "http://TurnstileSystem/CounterApplicationTesting".
+import "http://TurnstileSystem/CounterApplicationUnitTesting".
+import "http://TurnstileSystem/HazardAssesment". //rename HazardAssesment.sadl file to correct spelling
+import "http://TurnstileSystem/InGateRequirement". //rename as we use InGateRequirements.sadl and in it we have InGateRequirement
+import "http://TurnstileSystem/Turnstiles".
+
+// directly importing all files, even if some are being imported by other files
 
 // list all SYSTEM
 Write: data

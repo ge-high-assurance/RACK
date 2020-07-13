@@ -37,6 +37,13 @@ input_h is a CODE_FILE
     has uniqueIdentifier "input_h",
     has sw:language c.
 
+input_function is a COMPONENT
+    has uniqueIdentifier "input_function"
+    has componentType SOURCE_FUNCTION
+    has name "input"
+    has valueType "void()"
+    has definedIn input_c.
+
 input_o_Compiling is a COMPILE
     has uniqueIdentifier "input_o_Compiling",
     has performedBy cc,
@@ -56,6 +63,13 @@ output_c is a CODE_FILE
 output_h is a CODE_FILE
     has uniqueIdentifier "output_h",
     has sw:language c.
+
+output_function is a COMPONENT
+    has uniqueIdentifier "output_function"
+    has componentType SOURCE_FUNCTION
+    has name "output"
+    has valueType "void()"
+    has definedIn output_c.
 
 output_o_Compiling is a COMPILE
     has uniqueIdentifier "output_o_Compiling",
@@ -107,6 +121,13 @@ counter_c is a CODE_FILE
 counter_h is a CODE_FILE
     has uniqueIdentifier "counter_h",
     has sw:language c.
+
+main_function is a COMPONENT
+    has uniqueIdentifier "main_function"
+    has componentType SOURCE_FUNCTION
+    has name "main"
+    has valueType "int(int argc, char* argv[])"
+    has definedIn counter_c.
 
 counter_exe_Compiling is a COMPILE
     has uniqueIdentifier "counter_exe_Compiling",

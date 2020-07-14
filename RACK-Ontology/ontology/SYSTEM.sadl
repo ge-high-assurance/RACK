@@ -38,6 +38,6 @@ INTERFACE (note "INTERFACEs describe directed connections between an ENTITY (e.g
 
 
 SYSTEM_DEVELOPMENT is a type of ACTIVITY.
-SYSTEM_DEVELOPEMENT (note "ACTIVITY relating to the creation of one or more some SYSTEMs").
+SYSTEM_DEVELOPMENT (note "ACTIVITY relating to the creation of one or more some SYSTEMs").
 	developedBy describes SYSTEM_DEVELOPEMENT with values of type AGENT.
 	developedBy (note "Organization that is responsible for producing a system").

@@ -17,9 +17,11 @@
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'HAZARD.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
   <owl:Class rdf:ID="HAZARD">
+    <rdfs:comment xml:lang="en">HAZARD as identified by some HAZARD_IDENTIFICATION ACTIVITY, to be assessed for certification</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="HAZARD_IDENTIFICATION">
+    <rdfs:comment xml:lang="en">ACTIVITY that identifies potential sources of HAZARD whose risk must be evaluated</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="author">

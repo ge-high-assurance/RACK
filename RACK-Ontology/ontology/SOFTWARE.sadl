@@ -1,13 +1,11 @@
 uri "http://arcos.rack/SOFTWARE" alias sw.
 import "http://arcos.rack/PROV-S".
 
-PACKAGE_FILE
-	(note "a package file, e.g. Reg Hat's .rpm, Debian's .deb, etc.")
-	is a type of ENTITY.
-
-CODE_FILE
-	(note "file that contains code that may be compiled and/or executed")
-	is a type of ENTITY.
+PACKAGE_FILE is a type of ENTITY.
+PACKAGE_FILE (note "a package file, e.g. Reg Hat's .rpm, Debian's .deb, etc.").
+	
+CODE_FILE is a type of ENTITY.
+CODE_FILE (note "file that contains code that may be compiled and/or executed").
 	satisfies describes CODE_FILE with values of type ENTITY.
 	satisfies is a type of wasDerivedFrom.
 
@@ -17,9 +15,8 @@ CODE_FILE
 	createBy describes CODE_FILE with values of type ACTIVITY.
 	createBy is a type of wasGeneratedBy.
 
-LANGUAGE
-	(note "describes a programming language, possibly identifying some version of its specification")
-	is a type of ENTITY.
+LANGUAGE is a type of ENTITY.
+LANGUAGE (note "describes a programming language, possibly identifying some version of its specification").
 	uniqueIdentifier describes LANGUAGE with values of type string.
 	^version describes LANGUAGE with values of type string.
 
@@ -37,7 +34,7 @@ OBJECT_FILE
 	createBy describes OBJECT_FILE with values of type ACTIVITY.
 	createBy is a type of wasGeneratedBy.
 LIBRARY
-	(note "TODO")
+	(note "shared library")
 	is a type of ENTITY.
 	createBy describes LIBRARY with values of type ACTIVITY.
 	createBy is a type of wasGeneratedBy.

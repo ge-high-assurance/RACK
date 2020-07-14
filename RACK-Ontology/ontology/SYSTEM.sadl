@@ -1,38 +1,43 @@
 uri "http://arcos.rack/SYSTEM" alias sys.
 import "http://arcos.rack/PROV-S".
 
-SYSTEM
-	(note "SYSTEMs classify logical parts of the whole system being developed")
-	is a type of ENTITY.
-	partOf (note "used to define a relationship to a higher level system") describes SYSTEM with values of type ENTITY.
+SYSTEM is a type of ENTITY.
+SYSTEM (note "SYSTEMs classify logical parts of the whole system being developed").
+	partOf describes SYSTEM with values of type ENTITY.
+	partOf (note "used to define a relationship to a higher level system").
 	partOf is a type of wasDerivedFrom.
 
-	producedBy (note "trace to ACTIVITYs participating in developing this SYSTEM") describes SYSTEM with values of type SYSTEM_DEVELOPEMENT.
+	producedBy describes SYSTEM with values of type SYSTEM_DEVELOPEMENT.
+	producedBy (note "trace to ACTIVITYs participating in developing this SYSTEM").
 	producedBy is a type of wasGeneratedBy.
 
-	provides (note "list of entities that this SYSTEM provides to others") describes SYSTEM with values of type ENTITY.
+	provides describes SYSTEM with values of type ENTITY.
+	provides (note "list of entities that this SYSTEM provides to others").
 	provides is a type of wasDerivedFrom.
 
-	requires (note "list of entities that this SYSTEM requires from others") describes SYSTEM with values of type ENTITY.
+	requires describes SYSTEM with values of type ENTITY.
+	requires (note "list of entities that this SYSTEM requires from others").
 	requires is a type of wasDerivedFrom.
 
-INTERFACE
-	(note "INTERFACEs describe directed connections between an ENTITY (e.g. SYSTEM) providing what another ENTITY (e.g. SYSTEM) requires")
-	is a type of ENTITY.
+INTERFACE is a type of ENTITY.
+INTERFACE (note "INTERFACEs describe directed connections between an ENTITY (e.g. SYSTEM) providing what another ENTITY (e.g. SYSTEM) requires").
 
-	source (note "identifies the ENTITY that provides what the INTERFACE offers") describes INTERFACE with values of type ENTITY.
+	source describes INTERFACE with values of type ENTITY.
+	source (note "ENTITY (e.g. SYSTEM) that provides what the INTERFACE offers").
 	source is the inverse of provides.
 	source is a type of wasDerivedFrom.
 
-	destination (note "identifies the ENTITY that requires what the INTERFACE offers") describes INTERFACE with values of type ENTITY.
+	destination describes INTERFACE with values of type ENTITY.
+	destination (note "ENTITY (e.g. SYSTEM) that requires what the INTERFACE offers").
 	destination is the inverse of requires.
 	destination is a type of wasDerivedFrom.
 
-	identifiedBy (note "TODO") describes INTERFACE with values of type SYSTEM_DEVELOPEMENT.
+	identifiedBy describes INTERFACE with values of type SYSTEM_DEVELOPEMENT.
+	identifiedBy (note "ACTIVITY out of which this INTERFACE was identified").
 	identifiedBy is a type of wasGeneratedBy.
 
 
-SYSTEM_DEVELOPEMENT
-	(note "ACTIVITY relating to the creation of one or more some SYSTEMs")
-	is a type of ACTIVITY.
-	developedBy (note "Organization that is responsible for producing a system") describes SYSTEM_DEVELOPEMENT with values of type AGENT.
+SYSTEM_DEVELOPMENT is a type of ACTIVITY.
+SYSTEM_DEVELOPEMENT (note "ACTIVITY relating to the creation of one or more some SYSTEMs").
+	developedBy describes SYSTEM_DEVELOPEMENT with values of type AGENT.
+	developedBy (note "Organization that is responsible for producing a system").

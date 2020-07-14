@@ -1,0 +1,30 @@
+# This file is intended to be used using the load_data.py script found
+# in RACK-Ontology/scripts/
+#
+# Script documentation is available in RACK-Ontology/scripts/README.md
+#
+# Example:
+# $ ./load_data.py ../models/TurnstileSystem/Data/import.yaml http://localhost
+data-graph: "http://rack001/data"
+ingestion-steps:
+- ["TA1 ingest1 system",        "SYSTEM.csv"]
+- ["TA1 ingest2 interface",     "INTERFACE.csv"]
+- ["TA1 ingest1 system",        "SYSTEM.csv"]
+- ["TA1 ingest2 interface",     "INTERFACE.csv"]
+- ["TA1 ingest3 hazard",        "HAZARD.csv"]
+- ["TA1 ingest4 requirement",   "REQUIREMENT.csv"]
+- ["TA1 ingest5 data dict",     "DATA_DICTIONARY_TERM.csv"]
+- ["TA1 ingest6 test",          "TEST.csv"]
+- ["TA1 ingest7 test results",  "TEST_RESULTS.csv"]
+# - ["TA1 ingest8 language",      "LANGUAGE.csv"]
+# - ["TA1 ingest9 compiler",      "COMPILER.csv"]
+# - ["TA1 ingest10 packager",     "PACKAGER.csv"]
+# - ["TA1 ingest11 agent",        "AGENT.csv"]
+# - ["TA1 ingest12 code file",    "CODE_FILE.csv"]
+# - ["TA1 ingest13 compile",      "COMPILE.csv"]
+# - ["TA1 ingest14 object file",  "OBJECT_FILE.csv"]
+# - ["TA1 ingest15 library",      "LIBRARY.csv"]
+# - ["TA1 ingest16 executable",   "EXECUTABLE.csv"]
+# - ["TA1 ingest17 config file",  "CONFIG_FILE.csv"]
+# - ["TA1 ingest18 package file", "PACKAGE_FILE.csv"]
+# - ["TA1 ingest19 package",      "PACKAGE.csv"]

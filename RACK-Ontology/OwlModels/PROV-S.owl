@@ -54,6 +54,7 @@
         </owl:unionOf>
       </owl:Class>
     </rdfs:domain>
+    <rdfs:comment xml:lang="en">uniqueIdentifier is any data item that is used to associate items on when loading into the data store, and must be unique across the entire data set.</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </owl:ObjectProperty>

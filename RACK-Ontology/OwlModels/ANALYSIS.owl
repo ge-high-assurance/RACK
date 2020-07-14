@@ -31,7 +31,7 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="ANALYSIS_REPORT">
-    <rdfs:comment xml:lang="en">TODO</rdfs:comment>
+    <rdfs:comment xml:lang="en">output of an ANALYSIS</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="producedBy">

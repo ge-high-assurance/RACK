@@ -17,7 +17,6 @@ CODE_FILE (note "file that contains code that may be compiled and/or executed").
 
 LANGUAGE is a type of ENTITY.
 LANGUAGE (note "describes a programming language, possibly identifying some version of its specification").
-	uniqueIdentifier describes LANGUAGE with values of type string.
 	^version describes LANGUAGE with values of type string.
 
 

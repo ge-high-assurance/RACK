@@ -14,18 +14,14 @@ REVIEW_LOG (note "outcome of a REVIEW ACTIVITY").
 
 REVIEW is a type of ACTIVITY.
 REVIEW (note "code review ACTIVITY").
-	author describes REVIEW with values of type AGENT.
-	author (note "Agent that is putting items up for review").
+	author (note "Agent that is putting items up for review") describes REVIEW with values of type AGENT.
 	author is a type of wasAssociatedWith.
 
-	reviewer describes REVIEW with values of type AGENT.
-	reviewer (note "Agent(s) that are performing the review").
+	reviewer (note "Agent(s) that are performing the review") describes REVIEW with values of type AGENT.
 	reviewer is a type of wasAssociatedWith.
 
-	reviewd describes REVIEW with values of type ENTITY.
-	reviewed (note "Entity(s) that are being reviewed").
+	reviewed (note "Entity(s) that are being reviewed") describes REVIEW with values of type ENTITY.
 	reviewed is a type of used.
 
-	governedBy describes REVIEW with values of type ENTITY.
-	governedBy (note "processes documents used for performing the review").
+	governedBy (note "processes documents used for performing the review") describes REVIEW with values of type ENTITY.
 	governedBy is a type of used.

@@ -3,32 +3,26 @@ import "http://arcos.rack/PROV-S".
 
 TEST is a type of ENTITY.
 TEST (note "description of a single test").
-	verifies describes TEST with values of type ENTITY.
-	verifies (note "trace to a parent requirement (or any object) that the requirement is derived from").
+	verifies (note "trace to a parent requirement (or any object) that the requirement is derived from") describes TEST with values of type ENTITY.
 	verifies is a type of wasDerivedFrom.
 
-	producedBy describes TEST with values of type ACTIVITY.
-	producedBy (note "trace to a TEST_DEVELOPMENT activity").
+	producedBy (note "trace to a TEST_DEVELOPMENT activity") describes TEST with values of type ACTIVITY.
 	producedBy is a type of wasGeneratedBy.
 
 TEST_RESULT is a type of ENTITY.
 TEST_RESULT (note "result corresponding to one execution of one TEST").
-	result describes TEST_RESULT with values of type TEST_STATUS.
-	result (note "the pass/failure/unknown status resulting from a TEST_EXECUTION").
+	result (note "the pass/failure/unknown status resulting from a TEST_EXECUTION") describes TEST_RESULT with values of type TEST_STATUS.
 	TEST_STATUS is a class, must be one of {Passed, Failed, Indeterminate}.
 
-	confirms describes TEST_RESULT with values of type ENTITY.
-	confirms (note "trace to the parent test").
+	confirms (note "trace to the parent test") describes TEST_RESULT with values of type ENTITY.
 	confirms is a type of wasDerivedFrom.
 
-	executedBy describes TEST_RESULT with values of type ACTIVITY.
-	executedBy (note "activity that created the test result").
+	executedBy (note "activity that created the test result") describes TEST_RESULT with values of type ACTIVITY.
 	executedBy is a type of wasGeneratedBy.
 
 TEST_DEVELOPMENT is a type of ACTIVITY.
 TEST_DEVELOPMENT (note "ACTIVITY of creating a TEST to participate in the evaluation of a requirement").
-	developedBy describes TEST_DEVELOPMENT with values of type AGENT.
-	developedBy (note "Entity that is responsible for producing a test, could be a person or a tool. ").
+	developedBy (note "Entity that is responsible for producing a test, could be a person or a tool. ") describes TEST_DEVELOPMENT with values of type AGENT.
 	developedBy is a type of wasAssociatedWith.
 
 TEST_EXECUTION is a type of ACTIVITY.

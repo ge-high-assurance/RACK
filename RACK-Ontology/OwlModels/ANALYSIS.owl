@@ -41,15 +41,18 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="performedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
+    <rdfs:comment xml:lang="en">Entity that is responsible for producing an analysis, could be a person or a tool. </rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
     <rdfs:domain rdf:resource="#ANALYSIS"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="analyzes">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:comment xml:lang="en">ENTITY(s) under analysis</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#ANALYSIS_REPORT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="result">
+    <rdfs:comment xml:lang="en">one of Passed, Failed, or Indeterminate</rdfs:comment>
     <rdfs:range rdf:resource="#ANALYSIS_RESULT"/>
     <rdfs:domain rdf:resource="#ANALYSIS_REPORT"/>
   </owl:ObjectProperty>

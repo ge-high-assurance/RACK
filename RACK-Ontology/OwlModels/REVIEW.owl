@@ -36,14 +36,19 @@
   </owl:Class>
   <owl:ObjectProperty rdf:ID="reviewer">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
+    <rdfs:comment xml:lang="en">Agent(s) that are performing the review</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
     <rdfs:domain rdf:resource="#REVIEW"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="reviewed">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">Entity(s) that are being reviewed</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#REVIEW"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="governedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">processes documents used for performing the review</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#REVIEW"/>
   </owl:ObjectProperty>
@@ -65,11 +70,8 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="author">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
+    <rdfs:comment xml:lang="en">Agent that is putting items up for review</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
-    <rdfs:domain rdf:resource="#REVIEW"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="reviewd">
-    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#REVIEW"/>
   </owl:ObjectProperty>
 </rdf:RDF>

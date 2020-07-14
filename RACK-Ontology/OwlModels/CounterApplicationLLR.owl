@@ -1,17 +1,14 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:cntrapprq="http://TurnstileSystem/CounterApplicationRequirements"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:trnstlsys="http://TurnstileSystem/CounterApplication"
-    xmlns:j.0="http://arcos.rack/REQUIREMENTS#"
-    xmlns:Rq="http://arcos.rack/REQUIREMENTS"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:j.1="http://arcos.rack/PROV-S#"
+    xmlns:j.0="http://arcos.rack/PROV-S#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:cntrappllr="http://TurnstileSystem/CounterApplicationLLR#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:j.1="http://arcos.rack/REQUIREMENTS#"
   xml:base="http://TurnstileSystem/CounterApplicationLLR">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="CounterApplicationRequirements"/>
@@ -22,155 +19,155 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplicationLLR.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.0:DATA_DICTIONARY_TERM rdf:ID="DCC-6">
-    <j.0:providedBy>
-      <j.0:REQUIREMENT rdf:ID="IN-LLR-6">
-        <j.0:governs rdf:resource="CounterApplication#InputThread"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Input Thread shall print 'Limit Exceeded'' to the console when a valid UDP message is received and the park_count range is exceed.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >IN-LLR-6</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:providedBy>
-    <j.0:providedBy>
-      <j.0:REQUIREMENT rdf:ID="IN-LLR-5">
-        <j.0:governs rdf:resource="CounterApplication#InputThread"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Input Thread shall print 'Invalid Message' to the console when a invalid UDP message is received.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >IN-LLR-5</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:providedBy>
-    <j.0:providedBy>
-      <j.0:REQUIREMENT rdf:ID="EXE-LLR-3">
-        <j.0:governs rdf:resource="CounterApplication#ExecutiveThread"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Executive shall print a single '.' character to the console every second when running.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >EXE-LLR-3</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:providedBy>
-    <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >console</j.0:text>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >DCC-6</j.1:uniqueIdentifier>
-  </j.0:DATA_DICTIONARY_TERM>
-  <j.0:DATA_DICTIONARY_TERM rdf:ID="DCC-5">
-    <j.0:providedBy>
-      <j.0:REQUIREMENT rdf:ID="OUT-LLR-2">
-        <j.0:governs rdf:resource="CounterApplication#OutputThread"/>
-        <j.0:satisfies rdf:resource="CounterApplicationRequirements#HLR-3"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Output Thread shall broadcast a UDP message on port 62001 with the park_count every second.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >OUT-LLR-2</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:providedBy>
-    <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >outgoing UDP message</j.0:text>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >DCC-5</j.1:uniqueIdentifier>
-  </j.0:DATA_DICTIONARY_TERM>
-  <j.0:DATA_DICTIONARY_TERM rdf:ID="DCC-4">
-    <j.0:providedBy>
-      <j.0:REQUIREMENT rdf:ID="IN-LLR-3">
-        <j.0:governs rdf:resource="CounterApplication#InputThread"/>
-        <j.0:satisfies rdf:resource="CounterApplicationRequirements#HLR-2"/>
-        <j.0:satisfies rdf:resource="CounterApplicationRequirements#HLR-1"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Input Thread shall add the delta value received by the UDP to the park_count and send the updated park_count to the Output Thread when a valid UDP message is received and the park_count range is not exceed.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >IN-LLR-3</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:providedBy>
-    <j.0:providedBy>
-      <j.0:REQUIREMENT rdf:ID="OUT-LLR-1">
-        <j.0:governs rdf:resource="CounterApplication#OutputThread"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Output Thread shall initialize the park_count to 0 on powerup.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >OUT-LLR-1</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:providedBy>
-    <j.0:consumedBy rdf:resource="#OUT-LLR-2"/>
-    <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >output_park_count</j.0:text>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >DCC-4</j.1:uniqueIdentifier>
-  </j.0:DATA_DICTIONARY_TERM>
-  <j.0:DATA_DICTIONARY_TERM rdf:ID="DCC-3">
-    <j.0:providedBy>
-      <j.0:REQUIREMENT rdf:ID="IN-LLR-1">
-        <j.0:governs rdf:resource="CounterApplication#InputThread"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Input Thread shall initialize the park_count to 0 on powerup.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >IN-LLR-1</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:providedBy>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >DCC-3</j.1:uniqueIdentifier>
-    <j.0:consumedBy rdf:resource="#IN-LLR-3"/>
-    <j.0:consumedBy rdf:resource="#IN-LLR-5"/>
-    <j.0:consumedBy>
-      <j.0:REQUIREMENT rdf:ID="IN-LLR-2">
-        <j.0:governs rdf:resource="CounterApplication#InputThread"/>
-        <j.0:satisfies rdf:resource="CounterApplicationRequirements#HLR-2"/>
-        <j.0:satisfies rdf:resource="CounterApplicationRequirements#HLR-1"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Input Thread shall check for a incoming UDP message on port 62000.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >IN-LLR-2</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:consumedBy>
-    <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >input_park_count</j.0:text>
-    <j.0:consumedBy>
-      <j.0:REQUIREMENT rdf:ID="IN-LLR-4">
-        <j.0:governs rdf:resource="CounterApplication#InputThread"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Input Thread shall limit park_count to between 0 and 1500.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >IN-LLR-4</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:consumedBy>
-    <j.0:consumedBy rdf:resource="#IN-LLR-6"/>
-    <j.0:providedBy rdf:resource="#IN-LLR-4"/>
-  </j.0:DATA_DICTIONARY_TERM>
-  <j.0:DATA_DICTIONARY_TERM rdf:ID="DCC-2">
-    <j.0:consumedBy rdf:resource="#IN-LLR-6"/>
-    <j.0:consumedBy rdf:resource="#IN-LLR-5"/>
-    <j.0:consumedBy rdf:resource="#IN-LLR-3"/>
-    <j.0:consumedBy rdf:resource="#IN-LLR-2"/>
-    <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >incoming UDP message</j.0:text>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >DCC-2</j.1:uniqueIdentifier>
-  </j.0:DATA_DICTIONARY_TERM>
-  <j.0:DATA_DICTIONARY_TERM rdf:ID="DCC-1">
-    <j.0:consumedBy rdf:resource="#OUT-LLR-1"/>
-    <j.0:consumedBy rdf:resource="#IN-LLR-1"/>
-    <j.0:consumedBy>
-      <j.0:REQUIREMENT rdf:ID="EXE-LLR-2">
-        <j.0:governs rdf:resource="CounterApplication#ExecutiveThread"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Executive shall spawn Output Thread on powerup.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >EXE-LLR-2</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:consumedBy>
-    <j.0:consumedBy>
-      <j.0:REQUIREMENT rdf:ID="EXE-LLR-1">
-        <j.0:governs rdf:resource="CounterApplication#ExecutiveThread"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >Executive shall spawn Input Thread on powerup.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >EXE-LLR-1</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:consumedBy>
-    <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >PowerUp</j.0:text>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >DCC-1</j.1:uniqueIdentifier>
-  </j.0:DATA_DICTIONARY_TERM>
+  <j.1:DATA_DICTIONARY_TERM rdf:ID="DCC-6">
+    <j.1:providedBy>
+      <j.1:REQUIREMENT rdf:ID="IN-LLR-6">
+        <j.1:governs rdf:resource="CounterApplication#InputThread"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Input Thread shall print 'Limit Exceeded'' to the console when a valid UDP message is received and the park_count range is exceed.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >IN-LLR-6</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:providedBy>
+    <j.1:providedBy>
+      <j.1:REQUIREMENT rdf:ID="IN-LLR-5">
+        <j.1:governs rdf:resource="CounterApplication#InputThread"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Input Thread shall print 'Invalid Message' to the console when a invalid UDP message is received.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >IN-LLR-5</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:providedBy>
+    <j.1:providedBy>
+      <j.1:REQUIREMENT rdf:ID="EXE-LLR-3">
+        <j.1:governs rdf:resource="CounterApplication#ExecutiveThread"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Executive shall print a single '.' character to the console every second when running.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >EXE-LLR-3</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:providedBy>
+    <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >console</j.1:text>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DCC-6</j.0:uniqueIdentifier>
+  </j.1:DATA_DICTIONARY_TERM>
+  <j.1:DATA_DICTIONARY_TERM rdf:ID="DCC-5">
+    <j.1:providedBy>
+      <j.1:REQUIREMENT rdf:ID="OUT-LLR-2">
+        <j.1:governs rdf:resource="CounterApplication#OutputThread"/>
+        <j.1:satisfies rdf:resource="CounterApplicationRequirements#HLR-3"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Output Thread shall broadcast a UDP message on port 62001 with the park_count every second.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >OUT-LLR-2</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:providedBy>
+    <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >outgoing UDP message</j.1:text>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DCC-5</j.0:uniqueIdentifier>
+  </j.1:DATA_DICTIONARY_TERM>
+  <j.1:DATA_DICTIONARY_TERM rdf:ID="DCC-4">
+    <j.1:providedBy>
+      <j.1:REQUIREMENT rdf:ID="IN-LLR-3">
+        <j.1:governs rdf:resource="CounterApplication#InputThread"/>
+        <j.1:satisfies rdf:resource="CounterApplicationRequirements#HLR-2"/>
+        <j.1:satisfies rdf:resource="CounterApplicationRequirements#HLR-1"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Input Thread shall add the delta value received by the UDP to the park_count and send the updated park_count to the Output Thread when a valid UDP message is received and the park_count range is not exceed.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >IN-LLR-3</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:providedBy>
+    <j.1:providedBy>
+      <j.1:REQUIREMENT rdf:ID="OUT-LLR-1">
+        <j.1:governs rdf:resource="CounterApplication#OutputThread"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Output Thread shall initialize the park_count to 0 on powerup.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >OUT-LLR-1</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:providedBy>
+    <j.1:consumedBy rdf:resource="#OUT-LLR-2"/>
+    <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >output_park_count</j.1:text>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DCC-4</j.0:uniqueIdentifier>
+  </j.1:DATA_DICTIONARY_TERM>
+  <j.1:DATA_DICTIONARY_TERM rdf:ID="DCC-3">
+    <j.1:providedBy>
+      <j.1:REQUIREMENT rdf:ID="IN-LLR-1">
+        <j.1:governs rdf:resource="CounterApplication#InputThread"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Input Thread shall initialize the park_count to 0 on powerup.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >IN-LLR-1</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:providedBy>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DCC-3</j.0:uniqueIdentifier>
+    <j.1:consumedBy rdf:resource="#IN-LLR-3"/>
+    <j.1:consumedBy rdf:resource="#IN-LLR-5"/>
+    <j.1:consumedBy>
+      <j.1:REQUIREMENT rdf:ID="IN-LLR-2">
+        <j.1:governs rdf:resource="CounterApplication#InputThread"/>
+        <j.1:satisfies rdf:resource="CounterApplicationRequirements#HLR-2"/>
+        <j.1:satisfies rdf:resource="CounterApplicationRequirements#HLR-1"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Input Thread shall check for a incoming UDP message on port 62000.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >IN-LLR-2</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:consumedBy>
+    <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >input_park_count</j.1:text>
+    <j.1:consumedBy>
+      <j.1:REQUIREMENT rdf:ID="IN-LLR-4">
+        <j.1:governs rdf:resource="CounterApplication#InputThread"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Input Thread shall limit park_count to between 0 and 1500.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >IN-LLR-4</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:consumedBy>
+    <j.1:consumedBy rdf:resource="#IN-LLR-6"/>
+    <j.1:providedBy rdf:resource="#IN-LLR-4"/>
+  </j.1:DATA_DICTIONARY_TERM>
+  <j.1:DATA_DICTIONARY_TERM rdf:ID="DCC-2">
+    <j.1:consumedBy rdf:resource="#IN-LLR-6"/>
+    <j.1:consumedBy rdf:resource="#IN-LLR-5"/>
+    <j.1:consumedBy rdf:resource="#IN-LLR-3"/>
+    <j.1:consumedBy rdf:resource="#IN-LLR-2"/>
+    <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >incoming UDP message</j.1:text>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DCC-2</j.0:uniqueIdentifier>
+  </j.1:DATA_DICTIONARY_TERM>
+  <j.1:DATA_DICTIONARY_TERM rdf:ID="DCC-1">
+    <j.1:consumedBy rdf:resource="#OUT-LLR-1"/>
+    <j.1:consumedBy rdf:resource="#IN-LLR-1"/>
+    <j.1:consumedBy>
+      <j.1:REQUIREMENT rdf:ID="EXE-LLR-2">
+        <j.1:governs rdf:resource="CounterApplication#ExecutiveThread"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Executive shall spawn Output Thread on powerup.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >EXE-LLR-2</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:consumedBy>
+    <j.1:consumedBy>
+      <j.1:REQUIREMENT rdf:ID="EXE-LLR-1">
+        <j.1:governs rdf:resource="CounterApplication#ExecutiveThread"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Executive shall spawn Input Thread on powerup.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >EXE-LLR-1</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:consumedBy>
+    <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >PowerUp</j.1:text>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DCC-1</j.0:uniqueIdentifier>
+  </j.1:DATA_DICTIONARY_TERM>
 </rdf:RDF>

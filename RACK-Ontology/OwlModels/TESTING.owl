@@ -44,11 +44,13 @@
   </owl:Class>
   <owl:ObjectProperty rdf:ID="developedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
+    <rdfs:comment xml:lang="en">Entity that is responsible for producing a test, could be a person or a tool. </rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
     <rdfs:domain rdf:resource="#TEST_DEVELOPMENT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="verifies">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:comment xml:lang="en">trace to a parent requirement (or any object) that the requirement is derived from</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#TEST"/>
   </owl:ObjectProperty>
@@ -59,20 +61,24 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="producedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
+    <rdfs:comment xml:lang="en">trace to a TEST_DEVELOPMENT activity</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#TEST"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="confirms">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:comment xml:lang="en">trace to the parent test</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="executedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
+    <rdfs:comment xml:lang="en">activity that created the test result</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="result">
+    <rdfs:comment xml:lang="en">the pass/failure/unknown status resulting from a TEST_EXECUTION</rdfs:comment>
     <rdfs:range rdf:resource="#TEST_STATUS"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
   </owl:ObjectProperty>

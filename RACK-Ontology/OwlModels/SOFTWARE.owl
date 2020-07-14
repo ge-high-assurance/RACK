@@ -56,12 +56,12 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="PACKAGER">
-    <rdfs:comment xml:lang="en">a tool that packages some software together as part of a PACKAGE ACTIVITY</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#AGENT"/>
+    <rdfs:comment xml:lang="en">a tool that packages some software together as part of a PACKAGE ACTIVITY</rdfs:comment>
   </owl:Class>
   <owl:Class rdf:ID="COMPILER">
-    <rdfs:comment xml:lang="en">a tool that compiles CODE_FILEs into ENTITYs such as OBJECT_FILE or EXECUTABLE</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#AGENT"/>
+    <rdfs:comment xml:lang="en">a tool that compiles CODE_FILEs into ENTITYs such as OBJECT_FILE or EXECUTABLE</rdfs:comment>
   </owl:Class>
   <owl:Class rdf:ID="PACKAGE">
     <rdfs:comment xml:lang="en">ACTIVITY of running a PACKAGER to produce a PACKAGE_FILE</rdfs:comment>
@@ -72,8 +72,8 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="CODE_DEVELOPMENT">
-    <rdfs:comment xml:lang="en">an ACTIVITY that produces CODE_FILEs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
+    <rdfs:comment xml:lang="en">an ACTIVITY that produces CODE_FILEs</rdfs:comment>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="governedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>

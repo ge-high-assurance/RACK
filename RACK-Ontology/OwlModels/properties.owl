@@ -14,7 +14,4 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'properties.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <rdf:Property rdf:ID="uniqueIdentifier">
-    <rdfs:comment xml:lang="en">uniqueIdentifier is any data item that is used to associate items on when loading into the data store, and must be unique across the entire data set.</rdfs:comment>
-  </rdf:Property>
 </rdf:RDF>

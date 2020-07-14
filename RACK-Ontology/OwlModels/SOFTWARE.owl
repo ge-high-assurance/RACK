@@ -21,7 +21,7 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="LIBRARY">
-    <rdfs:comment xml:lang="en">shared library</rdfs:comment>
+    <rdfs:comment xml:lang="en">TODO</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="PACKAGE_FILE">

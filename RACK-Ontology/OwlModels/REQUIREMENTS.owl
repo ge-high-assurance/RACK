@@ -21,7 +21,7 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="REQUIREMENT_DEVELOPMENT">
-    <rdfs:comment xml:lang="en">ACTIVITY that produces REQUIREMENTs</rdfs:comment>
+    <rdfs:comment xml:lang="en">an ACTIVITY that produces REQUIREMENTs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="DATA_DICTIONARY_TERM">
@@ -30,19 +30,19 @@
   </owl:Class>
   <owl:ObjectProperty rdf:ID="mitigates">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">ENTITY(s) (e.g. HAZARD) that is being mitigated by this REQUIREMENT</rdfs:comment>
+    <rdfs:comment xml:lang="en">trace to an ENTITY (e.g. HAZARD) that is being mitigated by this REQUIREMENT</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#REQUIREMENT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="consumedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT) that consumes this information</rdfs:comment>
+    <rdfs:comment xml:lang="en">ENTITYs that may consume this information</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#DATA_DICTIONARY_TERM"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="author">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
-    <rdfs:comment xml:lang="en">AGENT(s) responsible for producing a REQUIREMENT</rdfs:comment>
+    <rdfs:comment xml:lang="en">AGENT responsible for producing a REQUIREMENT</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
     <rdfs:domain rdf:resource="#REQUIREMENT_DEVELOPMENT"/>
   </owl:ObjectProperty>
@@ -53,7 +53,7 @@
     <rdfs:domain rdf:resource="#REQUIREMENT_DEVELOPMENT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="createdBy">
-    <rdfs:comment xml:lang="en">ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term</rdfs:comment>
+    <rdfs:comment xml:lang="en">trace to an ACTIVITY (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term</rdfs:comment>
     <rdfs:domain>
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
@@ -62,7 +62,7 @@
         </owl:unionOf>
       </owl:Class>
     </rdfs:domain>
-    <rdfs:comment xml:lang="en">ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT</rdfs:comment>
+    <rdfs:comment xml:lang="en">trace to an ACTIVITY (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
   </owl:ObjectProperty>
@@ -74,19 +74,19 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="providedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT) that provides this information</rdfs:comment>
+    <rdfs:comment xml:lang="en">TODO</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#DATA_DICTIONARY_TERM"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="satisfies">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">Parent ENTITY(s) (e.g. REQUIREMENT) that this REQUIREMENT is derived from</rdfs:comment>
+    <rdfs:comment xml:lang="en">trace to a parent ENTITY (e.g. REQUIREMENT) that this REQUIREMENT is derived from</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#REQUIREMENT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="governs">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">ENTITY(s) that are the subject of the requirement</rdfs:comment>
+    <rdfs:comment xml:lang="en">trace to ENTITYs that are the subject of the requirement</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#REQUIREMENT"/>
   </owl:ObjectProperty>

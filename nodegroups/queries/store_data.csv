@@ -1,0 +1,11 @@
+Context,ID,comments,creationDate,creator,jsonFile
+unused,query Requirements without Tests,Find requirements without a verifying test case,2020-06-29,200001934,Requirements without Tests.json
+unused,query Testcase without requirement,Find any test case that doesn't verify a requirement,2020-06-29,200001934,Testcase without requirement.json
+unused,query System Structure,Find system component associated with the hazards,2020-06-29,200001934,System Structure.json
+unused,query Requirements with failed test result,Find requirements with test failures,2020-06-29,200001934,Requirements with failed test result.json
+unused,query Requirement decomposition,Recursively show all requirements satisfied by an original,2020-06-29,200001934,Requirement decomposition.json
+unused,query Interface structure,Find system source and destination for interface,2020-06-29,200001934,Interface structure.json
+unused,query Requirements with Tests,Find requirements verified by testcase,2020-06-29,200001934,Requirements with Tests.json
+unused,query Trace Hazards to Tests,Trace hazard down to test case,2020-06-29,200001934,Trace Hazards to Tests.json
+unused,query Trace Requirements to Tests,Recursively show all requirements which satisfy and verify a testcase,2020-06-29,200001934,Trace Requirements to Tests.json
+unused,query Hazard structure,Find system component associated with the hazards,2020-06-29,200001934,Hazard structure.json

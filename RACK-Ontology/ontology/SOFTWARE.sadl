@@ -45,14 +45,14 @@ EXECUTABLE (note "compiled executable, ready for execution").
 CODE_GENERATOR is a type of AGENT.
 CODE_GENERATOR (note "a tool that generates CODE_FILEs as part of a CODE_GEN ACTIVITY").
 
-COMPILER (note "a tool that compiles CODE_FILEs into ENTITYs such as OBJECT_FILE or EXECUTABLE").
 COMPILER is a type of AGENT.
+COMPILER (note "a tool that compiles CODE_FILEs into ENTITYs such as OBJECT_FILE or EXECUTABLE").
 
-PACKAGER (note "a tool that packages some software together as part of a PACKAGE ACTIVITY").
 PACKAGER is a type of AGENT.
+PACKAGER (note "a tool that packages some software together as part of a PACKAGE ACTIVITY").
 
-CODE_DEVELOPMENT (note "an ACTIVITY that produces CODE_FILEs").
 CODE_DEVELOPMENT is a type of ACTIVITY.
+CODE_DEVELOPMENT (note "an ACTIVITY that produces CODE_FILEs").
 	author describes CODE_DEVELOPMENT with values of type AGENT.
 	author is a type of wasAssociatedWith.
 

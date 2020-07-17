@@ -135,7 +135,7 @@ counter_exe_Compiling is a COMPILE
     has performedBy make,
     has used input_o,
     has used output_o,
-    has used libhw_so,
+//    has used libhw_so,
     has used counter_c,
     has used counter_h.
 

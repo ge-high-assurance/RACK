@@ -30,7 +30,7 @@
 						"KeyName": "uniqueIdentifier",
 						"ValueType": "string",
 						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/properties#uniqueIdentifier",
+						"UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
 						"Constraints": "",
 						"fullURIName": "",
 						"SparqlID": "?usedId",
@@ -81,7 +81,7 @@
 						"KeyName": "uniqueIdentifier",
 						"ValueType": "string",
 						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/properties#uniqueIdentifier",
+						"UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
 						"Constraints": "",
 						"fullURIName": "",
 						"SparqlID": "?performedById",
@@ -113,7 +113,7 @@
 						"KeyName": "uniqueIdentifier",
 						"ValueType": "string",
 						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/properties#uniqueIdentifier",
+						"UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
 						"Constraints": "",
 						"fullURIName": "",
 						"SparqlID": "?uniqueIdentifier",
@@ -219,7 +219,7 @@
 				"mapping": [],
 				"props": [
 					{
-						"URIRelation": "http://arcos.rack/properties#uniqueIdentifier",
+						"URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
 						"URILookup": [
 							"?PACKAGE"
 						],
@@ -238,7 +238,7 @@
 				"mapping": [],
 				"props": [
 					{
-						"URIRelation": "http://arcos.rack/properties#uniqueIdentifier",
+						"URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
 						"URILookup": [
 							"?AGENT"
 						],
@@ -260,7 +260,7 @@
 				"mapping": [],
 				"props": [
 					{
-						"URIRelation": "http://arcos.rack/properties#uniqueIdentifier",
+						"URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
 						"URILookup": [
 							"?ENTITY"
 						],

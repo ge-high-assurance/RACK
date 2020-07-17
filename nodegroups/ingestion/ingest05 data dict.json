@@ -36,7 +36,7 @@
             "SparqlID": "?interfaceProvidedById",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "INTERFACE",
@@ -63,7 +63,7 @@
             "SparqlID": "?requirementProvidedById",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "REQUIREMENT",
@@ -90,7 +90,7 @@
             "SparqlID": "?interfaceConsumedById",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "INTERFACE",
@@ -117,7 +117,7 @@
             "SparqlID": "?requirementConsumedById",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "REQUIREMENT",
@@ -158,7 +158,7 @@
             "SparqlID": "?uniqueIdentifier",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "DATA_DICTIONARY_TERM",
@@ -249,7 +249,7 @@
             "URILookup": [
               "?DATA_DICTIONARY_TERM"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       },
@@ -271,7 +271,7 @@
             "URILookup": [
               "?REQUIREMENT_CONSUME"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       },
@@ -293,7 +293,7 @@
             "URILookup": [
               "?INTERFACE_CONSUME"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       },
@@ -315,7 +315,7 @@
             "URILookup": [
               "?REQUIREMENT_PROVIDE"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       },
@@ -337,7 +337,7 @@
             "URILookup": [
               "?INTERFACE_PROVIDE"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       }

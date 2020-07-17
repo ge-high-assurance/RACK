@@ -36,7 +36,7 @@
             "SparqlID": "?source",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "SYSTEM",
@@ -63,7 +63,7 @@
             "SparqlID": "?destination",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "SYSTEM",
@@ -90,7 +90,7 @@
             "SparqlID": "?interface",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "INTERFACE",

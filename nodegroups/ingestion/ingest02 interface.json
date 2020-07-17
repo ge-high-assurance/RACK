@@ -36,7 +36,7 @@
             "SparqlID": "?sourceId",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "SYSTEM",
@@ -63,7 +63,7 @@
             "SparqlID": "?destId",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "SYSTEM",
@@ -90,7 +90,7 @@
             "SparqlID": "?uniqueIdentifier",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "INTERFACE",
@@ -165,7 +165,7 @@
             "URILookup": [
               "?INTERFACE"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       },
@@ -184,7 +184,7 @@
             "URILookup": [
               "?SYSTEM_DEST"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       },
@@ -203,7 +203,7 @@
             "URILookup": [
               "?SYSTEM_SRC"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       }

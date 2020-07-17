@@ -48,7 +48,7 @@
             "SparqlID": "",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "TEST_EXECUTION",
@@ -75,7 +75,7 @@
             "SparqlID": "?tcId",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "TEST",
@@ -102,7 +102,7 @@
             "SparqlID": "?uniqueIdentifier",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "TEST_RESULT",
@@ -193,7 +193,7 @@
                 "colId": "col_3"
               }
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       },
@@ -212,7 +212,7 @@
             "URILookup": [
               "?TEST"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       },
@@ -227,7 +227,7 @@
                 "colId": "col_2"
               }
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       },

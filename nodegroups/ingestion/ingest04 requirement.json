@@ -36,7 +36,7 @@
             "SparqlID": "?satisfiesId",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "REQUIREMENT",
@@ -63,7 +63,7 @@
             "SparqlID": "?mitigatesId",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "HAZARD",
@@ -90,7 +90,7 @@
             "SparqlID": "?governsId",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "SYSTEM",
@@ -131,7 +131,7 @@
             "SparqlID": "?uniqueIdentifier",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
-            "UriRelationship": "http://arcos.rack/properties#uniqueIdentifier"
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
         "NodeName": "REQUIREMENT",
@@ -234,7 +234,7 @@
             "URILookup": [
               "?REQUIREMENT"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       },
@@ -253,7 +253,7 @@
             "URILookup": [
               "?SYSTEM"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       },
@@ -275,7 +275,7 @@
             "URILookup": [
               "?HAZARD"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       },
@@ -297,7 +297,7 @@
             "URILookup": [
               "?REQUIREMENT_SAT"
             ],
-            "URIRelation": "http://arcos.rack/properties#uniqueIdentifier"
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ]
       }

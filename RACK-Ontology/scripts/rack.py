@@ -48,7 +48,7 @@ def clear_data(conn):
     result = semtk3.clear_graph(conn, 'data', 0)
     print(result)
 
-def ingest(conn, nodegroup, csv_name):
+def ingest_csv(conn, nodegroup, csv_name):
     """Ingest a CSV file using the named nodegroup."""
     print(f'Loading [{nodegroup}]')
 
@@ -59,7 +59,7 @@ def ingest(conn, nodegroup, csv_name):
 
     print(f' Records: {result["recordsProcessed"]}\tFailures: {result["failuresEncountered"]}')
 
-def driver(config_path, base_url, data_graph, triple_store):
+def ingest_csv_driver(config_path, base_url, data_graph, triple_store):
 
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
@@ -75,7 +75,7 @@ def driver(config_path, base_url, data_graph, triple_store):
 
     clear_data(conn)
     for step in steps:
-        ingest(conn, step[0], os.path.join(base_path, step[1]))
+        ingest_csv(conn, step[0], os.path.join(base_path, step[1]))
 
 def main():
     """Main function"""
@@ -89,7 +89,7 @@ def main():
     logging.basicConfig(level=logging.INFO)
 
     try:
-        driver(args.config, args.URL, args.data_graph, args.triple_store)
+        ingest_csv_driver(args.config, args.URL, args.data_graph, args.triple_store)
     except requests.ConnectionError as exc:
         logging.error('Connection failure\n%s', exc)
         sys.exit(1)

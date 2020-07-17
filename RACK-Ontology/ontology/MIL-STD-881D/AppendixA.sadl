@@ -1,0 +1,393 @@
+uri "http://arcos.rack/MIL-STD-881D/AppendixA" alias AppA.
+import "http://arcos.rack/MIL-STD-881D/MIL-STD-881D".
+
+// SADL constructs 		
+AircraftSystem is a SYSTEM,
+		     wbs "1".
+AircraftSystemIntegrationAssemblyTestandCheckout is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.1".
+AirVehicle is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.2".
+AirVehicleIntegrationAssemblyTestandCheckout is a SYSTEM,
+	     partOf AirVehicle,
+	     wbs "1.2.1".
+Airframe is a SYSTEM,
+	     partOf AirVehicle,
+	     wbs "1.2.2".
+AirframeIntegrationAssemblyTestandCheckout is a SYSTEM,
+	     partOf Airframe,
+	     wbs "1.2.2.1".
+Fuselage is a SYSTEM,
+	     partOf Airframe,
+	     wbs "1.2.2.2".
+Wing is a SYSTEM,
+	     partOf Airframe,
+	     wbs "1.2.2.3".
+Empennage is a SYSTEM,
+	     partOf Airframe,
+	     wbs "1.2.2.4".
+Nacelle is a SYSTEM,
+	     partOf Airframe,
+	     wbs "1.2.2.5".
+OtherAirframeComponents1TonSpecify is a SYSTEM,
+	     partOf Airframe,
+	     wbs "1.2.2.6".
+Propulsion is a SYSTEM,
+	     partOf AirVehicle,
+	     wbs "1.2.3".
+VehicleSubsystems is a SYSTEM,
+	     partOf AirVehicle,
+	     wbs "1.2.4".
+VehicleSubsystemIntegrationAssemblyTestandCheckout is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.1".
+FlightControlSubsystem is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.2".
+AuxiliaryPowerSubsystem is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.3".
+HydraulicSubsystem is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.4".
+ElectricalSubsystem is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.5".
+CrewStationSubsystem is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.6".
+EnvironmentalControlSubsystem is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.7".
+FuelSubsystem is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.8".
+LandingGear is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.9".
+RotorGroup is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.10".
+DriveGroup is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.11".
+VehicleSubsystemSoftwareRelease1TonSpecify is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.12".
+OtherSubsystems1TonSpecify is a SYSTEM,
+	     partOf VehicleSubsystems,
+	     wbs "1.2.4.13".
+Avionics is a SYSTEM,
+	     partOf AirVehicle,
+	     wbs "1.2.5".
+AvionicsIntegrationAssemblyTestandCheckout is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.1".
+CommunicationIdentification is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.2".
+NavigationGuidance is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.3".
+MissionComputerProcessing is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.4".
+FireControl is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.5".
+DataDisplayandControls is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.6".
+Survivability is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.7".
+Reconnaissance is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.8".
+ElectronicWarfare is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.9".
+AutomaticFlightControl is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.10".
+HealthMonitoringSystem is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.11".
+StoresManagement is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.12".
+AvionicsSoftwareRelease1TonSpecify is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.13".
+OtherAvionicsSubsystems1TonSpecify is a SYSTEM,
+	     partOf Avionics,
+	     wbs "1.2.5.14".
+ArmamentWeaponsDelivery is a SYSTEM,
+	     partOf AirVehicle,
+	     wbs "1.2.6".
+AuxiliaryEquipment is a SYSTEM,
+	     partOf AirVehicle,
+	     wbs "1.2.7".
+FurnishingsandEquipment is a SYSTEM,
+	     partOf AirVehicle,
+	     wbs "1.2.8".
+AirVehicleSoftwareRelease1TonSpecify is a SYSTEM,
+	     partOf AirVehicle,
+	     wbs "1.2.9".
+OtherAirVehicle1TonSpecify is a SYSTEM,
+	     partOf AirVehicle,
+	     wbs "1.2.10".
+PayloadMissionSystem is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.3".
+PayloadIntegrationAssemblyTestandCheckout is a SYSTEM,
+	     partOf PayloadMissionSystem,
+	     wbs "1.3.1".
+SurvivabilityPayload1TonSpecify is a SYSTEM,
+	     partOf PayloadMissionSystem,
+	     wbs "1.3.2".
+ReconnaissancePayload1TonSpecify is a SYSTEM,
+	     partOf PayloadMissionSystem,
+	     wbs "1.3.3".
+ElectronicWarfarePayload1TonSpecify is a SYSTEM,
+	     partOf PayloadMissionSystem,
+	     wbs "1.3.4".
+ArmamentWeaponsDeliveryPayload1TonSpecify is a SYSTEM,
+	     partOf PayloadMissionSystem,
+	     wbs "1.3.5".
+PayloadSoftwareRelease1TonSpecify is a SYSTEM,
+	     partOf PayloadMissionSystem,
+	     wbs "1.3.6".
+OtherPayload1TonSpecify is a SYSTEM,
+	     partOf PayloadMissionSystem,
+	     wbs "1.3.7".
+GroundHostSegment is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.4".
+GroundSegmentIntegrationAssemblyTestandCheckout is a SYSTEM,
+	     partOf GroundHostSegment,
+	     wbs "1.4.1".
+GroundControlSystems is a SYSTEM,
+	     partOf GroundHostSegment,
+	     wbs "1.4.2".
+CommandandControlSubsystem is a SYSTEM,
+	     partOf GroundHostSegment,
+	     wbs "1.4.3".
+LaunchEquipment is a SYSTEM,
+	     partOf GroundHostSegment,
+	     wbs "1.4.4".
+RecoveryEquipment is a SYSTEM,
+	     partOf GroundHostSegment,
+	     wbs "1.4.5".
+TransportVehicles is a SYSTEM,
+	     partOf GroundHostSegment,
+	     wbs "1.4.6".
+GroundSegmentSoftwareRelease1TonSpecify is a SYSTEM,
+	     partOf GroundHostSegment,
+	     wbs "1.4.7".
+OtherGroundHostSegment1TonSpecify is a SYSTEM,
+	     partOf GroundHostSegment,
+	     wbs "1.4.8".
+AircraftSystemSoftwareRelease1TonSpecify is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.5".
+SystemsEngineering is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.6".
+SoftwareSystemsEngineering is a SYSTEM,
+	     partOf SystemsEngineering,
+	     wbs "1.6.1".
+IntegratedLogisticsSupportILSSystemsEngineering is a SYSTEM,
+	     partOf SystemsEngineering,
+	     wbs "1.6.2".
+CybersecuritySystemsEngineering is a SYSTEM,
+	     partOf SystemsEngineering,
+	     wbs "1.6.3".
+CoreSystemsEngineering is a SYSTEM,
+	     partOf SystemsEngineering,
+	     wbs "1.6.4".
+OtherSystemsEngineering1TonSpecify is a SYSTEM,
+	     partOf SystemsEngineering,
+	     wbs "1.6.5".
+ProgramManagement is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.7".
+SoftwareProgramManagement is a SYSTEM,
+	     partOf ProgramManagement,
+	     wbs "1.7.1".
+IntegratedLogisticsSupportILSProgramManagement is a SYSTEM,
+	     partOf ProgramManagement,
+	     wbs "1.7.2".
+CybersecurityManagement is a SYSTEM,
+	     partOf ProgramManagement,
+	     wbs "1.7.3".
+CoreProgramManagement is a SYSTEM,
+	     partOf ProgramManagement,
+	     wbs "1.7.4".
+OtherProgramManagement1TonSpecify is a SYSTEM,
+	     partOf ProgramManagement,
+	     wbs "1.7.5".
+SystemTestandEvaluation is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.8".
+DevelopmentTestandEvaluation is a SYSTEM,
+	     partOf SystemTestandEvaluation,
+	     wbs "1.8.1".
+OperationalTestandEvaluation is a SYSTEM,
+	     partOf SystemTestandEvaluation,
+	     wbs "1.8.2".
+CybersecurityTestandEvaluation is a SYSTEM,
+	     partOf SystemTestandEvaluation,
+	     wbs "1.8.3".
+Mock-upsSystemIntegrationLabsSILs is a SYSTEM,
+	     partOf SystemTestandEvaluation,
+	     wbs "1.8.4".
+TestandEvaluationSupport is a SYSTEM,
+	     partOf SystemTestandEvaluation,
+	     wbs "1.8.5".
+TestFacilities is a SYSTEM,
+	     partOf SystemTestandEvaluation,
+	     wbs "1.8.6".
+Training is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.9".
+Equipment is a SYSTEM,
+	     partOf Training,
+	     wbs "1.9.1".
+OperatorInstructionalEquipment is a SYSTEM,
+	     partOf Equipment,
+	     wbs "1.9.1.1".
+MaintainerInstructionalEquipment is a SYSTEM,
+	     partOf Equipment,
+	     wbs "1.9.1.2".
+Services is a SYSTEM,
+	     partOf Training,
+	     wbs "1.9.2".
+OperatorInstructionalServices is a SYSTEM,
+	     partOf Services,
+	     wbs "1.9.2.1".
+MaintainerInstructionalServices is a SYSTEM,
+	     partOf Services,
+	     wbs "1.9.2.2".
+Facilities is a SYSTEM,
+	     partOf Training,
+	     wbs "1.9.3".
+TrainingSoftware1TonSpecify is a SYSTEM,
+	     partOf Training,
+	     wbs "1.9.4".
+Data is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.10".
+DataDeliverables1TonSpecify is a SYSTEM,
+	     partOf Data,
+	     wbs "1.10.1".
+DataRepository is a SYSTEM,
+	     partOf Data,
+	     wbs "1.10.2".
+DataRights1TonSpecify is a SYSTEM,
+	     partOf Data,
+	     wbs "1.10.3".
+PeculiarSupportEquipment is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.11".
+TestandMeasurementEquipment is a SYSTEM,
+	     partOf PeculiarSupportEquipment,
+	     wbs "1.11.1".
+TestandMeasurementEquipmentAirframeHullVehicle is a SYSTEM,
+	     partOf TestandMeasurementEquipment,
+	     wbs "1.11.1.1".
+TestandMeasurementEquipmentPropulsion is a SYSTEM,
+	     partOf TestandMeasurementEquipment,
+	     wbs "1.11.1.2".
+TestandMeasurementEquipmentElectronicsAvionics is a SYSTEM,
+	     partOf TestandMeasurementEquipment,
+	     wbs "1.11.1.3".
+TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify is a SYSTEM,
+	     partOf TestandMeasurementEquipment,
+	     wbs "1.11.1.4".
+SupportandHandlingEquipment is a SYSTEM,
+	     partOf PeculiarSupportEquipment,
+	     wbs "1.11.2".
+SupportandHandlingEquipmentAirframeHullVehicle is a SYSTEM,
+	     partOf SupportandHandlingEquipment,
+	     wbs "1.11.2.1".
+SupportandHandlingEquipmentPropulsion is a SYSTEM,
+	     partOf SupportandHandlingEquipment,
+	     wbs "1.11.2.2".
+SupportandHandlingEquipmentElectronicsAvionics is a SYSTEM,
+	     partOf SupportandHandlingEquipment,
+	     wbs "1.11.2.3".
+SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify is a SYSTEM,
+	     partOf SupportandHandlingEquipment,
+	     wbs "1.11.2.4".
+CommonSupportEquipment is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.12".
+TestandMeasurementEquipment is a SYSTEM,
+	     partOf CommonSupportEquipment,
+	     wbs "1.12.1".
+TestandMeasurementEquipmentAirframeHullVehicle is a SYSTEM,
+	     partOf TestandMeasurementEquipment,
+	     wbs "1.12.1.1".
+TestandMeasurementEquipmentPropulsion is a SYSTEM,
+	     partOf TestandMeasurementEquipment,
+	     wbs "1.12.1.2".
+TestandMeasurementEquipmentElectronicsAvionics is a SYSTEM,
+	     partOf TestandMeasurementEquipment,
+	     wbs "1.12.1.3".
+TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify is a SYSTEM,
+	     partOf TestandMeasurementEquipment,
+	     wbs "1.12.1.4".
+SupportandHandlingEquipment is a SYSTEM,
+	     partOf CommonSupportEquipment,
+	     wbs "1.12.2".
+SupportandHandlingEquipmentAirframeHullVehicle is a SYSTEM,
+	     partOf SupportandHandlingEquipment,
+	     wbs "1.12.2.1".
+SupportandHandlingEquipmentPropulsion is a SYSTEM,
+	     partOf SupportandHandlingEquipment,
+	     wbs "1.12.2.2".
+SupportandHandlingEquipmentElectronicsAvionics is a SYSTEM,
+	     partOf SupportandHandlingEquipment,
+	     wbs "1.12.2.3".
+SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify is a SYSTEM,
+	     partOf SupportandHandlingEquipment,
+	     wbs "1.12.2.4".
+OperationalSiteActivationbySite1TonSpecify is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.13".
+SystemAssemblyInstallationandCheckoutonSite is a SYSTEM,
+	     partOf OperationalSiteActivationbySite1TonSpecify,
+	     wbs "1.13.1".
+ContractorTechnicalSupport is a SYSTEM,
+	     partOf OperationalSiteActivationbySite1TonSpecify,
+	     wbs "1.13.2".
+SiteConstruction is a SYSTEM,
+	     partOf OperationalSiteActivationbySite1TonSpecify,
+	     wbs "1.13.3".
+SiteShipVehicleConversion is a SYSTEM,
+	     partOf OperationalSiteActivationbySite1TonSpecify,
+	     wbs "1.13.4".
+InterimContractorSupportICS is a SYSTEM,
+	     partOf OperationalSiteActivationbySite1TonSpecify,
+	     wbs "1.13.5".
+ContractorLogisticsSupportCLS is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.14".
+IndustrialFacilities is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.15".
+ConstructionConversionExpansion is a SYSTEM,
+	     partOf IndustrialFacilities,
+	     wbs "1.15.1".
+EquipmentAcquisitionorModernization is a SYSTEM,
+	     partOf IndustrialFacilities,
+	     wbs "1.15.2".
+MaintenanceIndustrialFacilities is a SYSTEM,
+	     partOf IndustrialFacilities,
+	     wbs "1.15.3".
+InitialSparesandRepairParts is a SYSTEM,
+	     partOf AircraftSystem,
+	     wbs "1.16".

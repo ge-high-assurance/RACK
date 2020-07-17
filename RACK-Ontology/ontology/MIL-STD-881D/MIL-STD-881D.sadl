@@ -1,0 +1,7 @@
+uri "http://arcos.rack/MIL-STD-881D/MIL-STD-881D" alias m881D.
+import "http://arcos.rack/SYSTEM".
+
+
+wbs (note "This is the WBS string from MIL-STD-881D") 
+    describes SYSTEM with a single value of type string.
+

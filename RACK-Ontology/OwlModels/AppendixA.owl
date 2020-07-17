@@ -1,0 +1,662 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:m881D="http://arcos.rack/MIL-STD-881D/MIL-STD-881D"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:AppA="http://arcos.rack/MIL-STD-881D/AppendixA#"
+    xmlns:j.0="http://arcos.rack/MIL-STD-881D/MIL-STD-881D#"
+    xmlns:j.1="http://arcos.rack/SYSTEM#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://arcos.rack/MIL-STD-881D/AppendixA">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="MIL-STD-881D"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'AppendixA.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <j.1:SYSTEM rdf:ID="OperatorInstructionalServices">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.2.1</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="Services">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.9.2</j.0:wbs>
+        <j.1:partOf>
+          <j.1:SYSTEM rdf:ID="Training">
+            <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >1.9</j.0:wbs>
+            <j.1:partOf>
+              <j.1:SYSTEM rdf:ID="AircraftSystem">
+                <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >1</j.0:wbs>
+              </j.1:SYSTEM>
+            </j.1:partOf>
+          </j.1:SYSTEM>
+        </j.1:partOf>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OperatorInstructionalEquipment">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.1.1</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="Equipment">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.9.1</j.0:wbs>
+        <j.1:partOf rdf:resource="#Training"/>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SoftwareProgramManagement">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.7.1</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="ProgramManagement">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.7</j.0:wbs>
+        <j.1:partOf rdf:resource="#AircraftSystem"/>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="ContractorTechnicalSupport">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.13.2</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="OperationalSiteActivationbySite1TonSpecify">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.13</j.0:wbs>
+        <j.1:partOf rdf:resource="#AircraftSystem"/>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CybersecurityManagement">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.7.3</j.0:wbs>
+    <j.1:partOf rdf:resource="#ProgramManagement"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="ReconnaissancePayload1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.3.3</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="PayloadMissionSystem">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.3</j.0:wbs>
+        <j.1:partOf rdf:resource="#AircraftSystem"/>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.12.1.4</j.0:wbs>
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.11.1.4</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="TestandMeasurementEquipment">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.12.1</j.0:wbs>
+        <j.1:partOf>
+          <j.1:SYSTEM rdf:ID="CommonSupportEquipment">
+            <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >1.12</j.0:wbs>
+            <j.1:partOf rdf:resource="#AircraftSystem"/>
+          </j.1:SYSTEM>
+        </j.1:partOf>
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.11.1</j.0:wbs>
+        <j.1:partOf>
+          <j.1:SYSTEM rdf:ID="PeculiarSupportEquipment">
+            <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >1.11</j.0:wbs>
+            <j.1:partOf rdf:resource="#AircraftSystem"/>
+          </j.1:SYSTEM>
+        </j.1:partOf>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="FuelSubsystem">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.8</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="VehicleSubsystems">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.2.4</j.0:wbs>
+        <j.1:partOf>
+          <j.1:SYSTEM rdf:ID="AirVehicle">
+            <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >1.2</j.0:wbs>
+            <j.1:partOf rdf:resource="#AircraftSystem"/>
+          </j.1:SYSTEM>
+        </j.1:partOf>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="AirVehicleIntegrationAssemblyTestandCheckout">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.1</j.0:wbs>
+    <j.1:partOf rdf:resource="#AirVehicle"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="DataRights1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.10.3</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="Data">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.10</j.0:wbs>
+        <j.1:partOf rdf:resource="#AircraftSystem"/>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="GroundSegmentSoftwareRelease1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.7</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="GroundHostSegment">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.4</j.0:wbs>
+        <j.1:partOf rdf:resource="#AircraftSystem"/>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="VehicleSubsystemIntegrationAssemblyTestandCheckout">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.1</j.0:wbs>
+    <j.1:partOf rdf:resource="#VehicleSubsystems"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="LaunchEquipment">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.4</j.0:wbs>
+    <j.1:partOf rdf:resource="#GroundHostSegment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="DataDisplayandControls">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.6</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="Avionics">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.2.5</j.0:wbs>
+        <j.1:partOf rdf:resource="#AirVehicle"/>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="ContractorLogisticsSupportCLS">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.14</j.0:wbs>
+    <j.1:partOf rdf:resource="#AircraftSystem"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="AvionicsIntegrationAssemblyTestandCheckout">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.1</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="Propulsion">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.3</j.0:wbs>
+    <j.1:partOf rdf:resource="#AirVehicle"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="DriveGroup">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.11</j.0:wbs>
+    <j.1:partOf rdf:resource="#VehicleSubsystems"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="GroundSegmentIntegrationAssemblyTestandCheckout">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.1</j.0:wbs>
+    <j.1:partOf rdf:resource="#GroundHostSegment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="Facilities">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.3</j.0:wbs>
+    <j.1:partOf rdf:resource="#Training"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="FireControl">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.5</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="Empennage">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.2.4</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="Airframe">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.2.2</j.0:wbs>
+        <j.1:partOf rdf:resource="#AirVehicle"/>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandEvaluationSupport">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.5</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="SystemTestandEvaluation">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.8</j.0:wbs>
+        <j.1:partOf rdf:resource="#AircraftSystem"/>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OtherGroundHostSegment1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.8</j.0:wbs>
+    <j.1:partOf rdf:resource="#GroundHostSegment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="AircraftSystemSoftwareRelease1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.5</j.0:wbs>
+    <j.1:partOf rdf:resource="#AircraftSystem"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OtherAirframeComponents1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.2.6</j.0:wbs>
+    <j.1:partOf rdf:resource="#Airframe"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CybersecurityTestandEvaluation">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.3</j.0:wbs>
+    <j.1:partOf rdf:resource="#SystemTestandEvaluation"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SoftwareSystemsEngineering">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.6.1</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="SystemsEngineering">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.6</j.0:wbs>
+        <j.1:partOf rdf:resource="#AircraftSystem"/>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="InitialSparesandRepairParts">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.16</j.0:wbs>
+    <j.1:partOf rdf:resource="#AircraftSystem"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OtherAirVehicle1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.10</j.0:wbs>
+    <j.1:partOf rdf:resource="#AirVehicle"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="MaintenanceIndustrialFacilities">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.15.3</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="IndustrialFacilities">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.15</j.0:wbs>
+        <j.1:partOf rdf:resource="#AircraftSystem"/>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="MissionComputerProcessing">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.4</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="EquipmentAcquisitionorModernization">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.15.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#IndustrialFacilities"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="ElectricalSubsystem">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.5</j.0:wbs>
+    <j.1:partOf rdf:resource="#VehicleSubsystems"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="IntegratedLogisticsSupportILSSystemsEngineering">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.6.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#SystemsEngineering"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TrainingSoftware1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.4</j.0:wbs>
+    <j.1:partOf rdf:resource="#Training"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OtherProgramManagement1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.7.5</j.0:wbs>
+    <j.1:partOf rdf:resource="#ProgramManagement"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="ElectronicWarfarePayload1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.3.4</j.0:wbs>
+    <j.1:partOf rdf:resource="#PayloadMissionSystem"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="IntegratedLogisticsSupportILSProgramManagement">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.7.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#ProgramManagement"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OtherSubsystems1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.13</j.0:wbs>
+    <j.1:partOf rdf:resource="#VehicleSubsystems"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="VehicleSubsystemSoftwareRelease1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.12</j.0:wbs>
+    <j.1:partOf rdf:resource="#VehicleSubsystems"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="HealthMonitoringSystem">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.11</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="ArmamentWeaponsDeliveryPayload1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.3.5</j.0:wbs>
+    <j.1:partOf rdf:resource="#PayloadMissionSystem"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="Mock-upsSystemIntegrationLabsSILs">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.4</j.0:wbs>
+    <j.1:partOf rdf:resource="#SystemTestandEvaluation"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CoreProgramManagement">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.7.4</j.0:wbs>
+    <j.1:partOf rdf:resource="#ProgramManagement"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SurvivabilityPayload1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.3.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#PayloadMissionSystem"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SupportandHandlingEquipmentAirframeHullVehicle">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.12.2.1</j.0:wbs>
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.11.2.1</j.0:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="SupportandHandlingEquipment">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.12.2</j.0:wbs>
+        <j.1:partOf rdf:resource="#CommonSupportEquipment"/>
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.11.2</j.0:wbs>
+        <j.1:partOf rdf:resource="#PeculiarSupportEquipment"/>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="PayloadSoftwareRelease1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.3.6</j.0:wbs>
+    <j.1:partOf rdf:resource="#PayloadMissionSystem"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OtherAvionicsSubsystems1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.14</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CommunicationIdentification">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentAirframeHullVehicle">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.12.1.1</j.0:wbs>
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.11.1.1</j.0:wbs>
+    <j.1:partOf rdf:resource="#TestandMeasurementEquipment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="AuxiliaryPowerSubsystem">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.3</j.0:wbs>
+    <j.1:partOf rdf:resource="#VehicleSubsystems"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="AutomaticFlightControl">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.10</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SupportandHandlingEquipmentPropulsion">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.12.2.2</j.0:wbs>
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.11.2.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#SupportandHandlingEquipment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="FlightControlSubsystem">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#VehicleSubsystems"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CoreSystemsEngineering">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.6.4</j.0:wbs>
+    <j.1:partOf rdf:resource="#SystemsEngineering"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="PayloadIntegrationAssemblyTestandCheckout">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.3.1</j.0:wbs>
+    <j.1:partOf rdf:resource="#PayloadMissionSystem"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="Wing">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.2.3</j.0:wbs>
+    <j.1:partOf rdf:resource="#Airframe"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="Fuselage">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.2.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#Airframe"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="RotorGroup">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.10</j.0:wbs>
+    <j.1:partOf rdf:resource="#VehicleSubsystems"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SiteConstruction">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.13.3</j.0:wbs>
+    <j.1:partOf rdf:resource="#OperationalSiteActivationbySite1TonSpecify"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="AirVehicleSoftwareRelease1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.9</j.0:wbs>
+    <j.1:partOf rdf:resource="#AirVehicle"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="HydraulicSubsystem">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.4</j.0:wbs>
+    <j.1:partOf rdf:resource="#VehicleSubsystems"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentPropulsion">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.12.1.2</j.0:wbs>
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.11.1.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#TestandMeasurementEquipment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentElectronicsAvionics">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.12.1.3</j.0:wbs>
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.11.1.3</j.0:wbs>
+    <j.1:partOf rdf:resource="#TestandMeasurementEquipment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OperationalTestandEvaluation">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#SystemTestandEvaluation"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="InterimContractorSupportICS">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.13.5</j.0:wbs>
+    <j.1:partOf rdf:resource="#OperationalSiteActivationbySite1TonSpecify"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="StoresManagement">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.12</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="EnvironmentalControlSubsystem">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.7</j.0:wbs>
+    <j.1:partOf rdf:resource="#VehicleSubsystems"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="AirframeIntegrationAssemblyTestandCheckout">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.2.1</j.0:wbs>
+    <j.1:partOf rdf:resource="#Airframe"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="LandingGear">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.9</j.0:wbs>
+    <j.1:partOf rdf:resource="#VehicleSubsystems"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestFacilities">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.6</j.0:wbs>
+    <j.1:partOf rdf:resource="#SystemTestandEvaluation"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="AvionicsSoftwareRelease1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.13</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="Survivability">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.7</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TransportVehicles">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.6</j.0:wbs>
+    <j.1:partOf rdf:resource="#GroundHostSegment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="NavigationGuidance">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.3</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="RecoveryEquipment">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.5</j.0:wbs>
+    <j.1:partOf rdf:resource="#GroundHostSegment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="Nacelle">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.2.5</j.0:wbs>
+    <j.1:partOf rdf:resource="#Airframe"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="ElectronicWarfare">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.9</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CommandandControlSubsystem">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.3</j.0:wbs>
+    <j.1:partOf rdf:resource="#GroundHostSegment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="ConstructionConversionExpansion">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.15.1</j.0:wbs>
+    <j.1:partOf rdf:resource="#IndustrialFacilities"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OtherSystemsEngineering1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.6.5</j.0:wbs>
+    <j.1:partOf rdf:resource="#SystemsEngineering"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="AircraftSystemIntegrationAssemblyTestandCheckout">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.1</j.0:wbs>
+    <j.1:partOf rdf:resource="#AircraftSystem"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="MaintainerInstructionalServices">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.2.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#Services"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SupportandHandlingEquipmentElectronicsAvionics">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.12.2.3</j.0:wbs>
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.11.2.3</j.0:wbs>
+    <j.1:partOf rdf:resource="#SupportandHandlingEquipment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="GroundControlSystems">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#GroundHostSegment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SystemAssemblyInstallationandCheckoutonSite">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.13.1</j.0:wbs>
+    <j.1:partOf rdf:resource="#OperationalSiteActivationbySite1TonSpecify"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.12.2.4</j.0:wbs>
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.11.2.4</j.0:wbs>
+    <j.1:partOf rdf:resource="#SupportandHandlingEquipment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CrewStationSubsystem">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.4.6</j.0:wbs>
+    <j.1:partOf rdf:resource="#VehicleSubsystems"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="FurnishingsandEquipment">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.8</j.0:wbs>
+    <j.1:partOf rdf:resource="#AirVehicle"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="DevelopmentTestandEvaluation">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.1</j.0:wbs>
+    <j.1:partOf rdf:resource="#SystemTestandEvaluation"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CybersecuritySystemsEngineering">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.6.3</j.0:wbs>
+    <j.1:partOf rdf:resource="#SystemsEngineering"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="MaintainerInstructionalEquipment">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.1.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#Equipment"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="ArmamentWeaponsDelivery">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.6</j.0:wbs>
+    <j.1:partOf rdf:resource="#AirVehicle"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OtherPayload1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.3.7</j.0:wbs>
+    <j.1:partOf rdf:resource="#PayloadMissionSystem"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="DataRepository">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.10.2</j.0:wbs>
+    <j.1:partOf rdf:resource="#Data"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="AuxiliaryEquipment">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.7</j.0:wbs>
+    <j.1:partOf rdf:resource="#AirVehicle"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="DataDeliverables1TonSpecify">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.10.1</j.0:wbs>
+    <j.1:partOf rdf:resource="#Data"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SiteShipVehicleConversion">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.13.4</j.0:wbs>
+    <j.1:partOf rdf:resource="#OperationalSiteActivationbySite1TonSpecify"/>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="Reconnaissance">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2.5.8</j.0:wbs>
+    <j.1:partOf rdf:resource="#Avionics"/>
+  </j.1:SYSTEM>
+</rdf:RDF>

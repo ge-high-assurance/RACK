@@ -33,7 +33,7 @@
             "instanceValues": [],
             "isRuntimeConstrained": false,
             "isMarkedForDeletion": false,
-            "SparqlID": "?createById",
+            "SparqlID": "?wasGeneratedById",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "fullURIName": "",
             "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
@@ -79,15 +79,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
-        "NodeName": "LIBRARY",
+        "NodeName": "PACKAGE_FILE",
         "subClassNames": [],
         "isRuntimeConstrained": false,
-        "SparqlID": "?LIBRARY",
+        "SparqlID": "?PACKAGE_FILE",
         "valueConstraint": "",
         "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "createBy",
+            "KeyName": "wasGeneratedBy",
             "SnodeSparqlIDs": [
               "?ACTIVITY"
             ],
@@ -102,12 +102,12 @@
             "Qualifiers": [
               ""
             ],
-            "UriConnectBy": "http://arcos.rack/SOFTWARE#createBy",
-            "ConnectBy": "createBy",
+            "UriConnectBy": "http://arcos.rack/PROV-S#wasGeneratedBy",
+            "ConnectBy": "wasGeneratedBy",
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           }
         ],
-        "fullURIName": "http://arcos.rack/SOFTWARE#LIBRARY"
+        "fullURIName": "http://arcos.rack/SOFTWARE#PACKAGE_FILE"
       }
     ],
     "limit": 0,
@@ -119,17 +119,17 @@
       {
         "mapping": [],
         "URILookupMode": "createIfMissing",
-        "sparqlID": "?LIBRARY",
-        "type": "http://arcos.rack/SOFTWARE#LIBRARY",
+        "sparqlID": "?PACKAGE_FILE",
+        "type": "http://arcos.rack/SOFTWARE#PACKAGE_FILE",
         "props": [
           {
             "mapping": [
               {
-                "colId": "col_1"
+                "colId": "col_0"
               }
             ],
             "URILookup": [
-              "?LIBRARY"
+              "?PACKAGE_FILE"
             ],
             "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
@@ -137,14 +137,14 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?ACTIVITY",
         "type": "http://arcos.rack/PROV-S#ACTIVITY",
         "props": [
           {
             "mapping": [
               {
-                "colId": "col_0",
+                "colId": "col_2",
                 "transformList": [
                   "trans_0"
                 ]
@@ -161,7 +161,7 @@
     "texts": [],
     "columns": [
       {
-        "colName": "createById",
+        "colName": "uniqueIdentifier",
         "colId": "col_0"
       },
       {
@@ -169,7 +169,7 @@
         "colId": "col_1"
       },
       {
-        "colName": "uniqueIdentifier",
+        "colName": "wasGeneratedById",
         "colId": "col_2"
       }
     ],

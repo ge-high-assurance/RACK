@@ -1,104 +1,103 @@
 {
-	"version": 2,
-	"sparqlConn": {
-		"name": "MyDB",
-		"domain": "",
-		"enableOwlImports": true,
-		"model": [
-			{
-				"type": "fuseki",
-				"url": "http://eic-60-182.galois.com:8080/fuseki/SemTK",
-				"graph": "http://arcos.rack/ontology"
-			}
-		],
-		"data": [
-			{
-				"type": "fuseki",
-				"url": "http://eic-60-182.galois.com:8080/fuseki/SemTK",
-				"graph": "http://arcos.rack/data"
-			}
-		]
-	},
-	"sNodeGroup": {
-		"version": 11,
-		"limit": 0,
-		"offset": 0,
-		"sNodeList": [
-			{
-				"propList": [
-					{
-						"KeyName": "uniqueIdentifier",
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
-						"Constraints": "",
-						"fullURIName": "",
-						"SparqlID": "?uniqueIdentifier",
-						"isReturned": true,
-						"optMinus": 0,
-						"isRuntimeConstrained": false,
-						"instanceValues": [],
-						"isMarkedForDeletion": false
-					}
-				],
-				"nodeList": [],
-				"NodeName": "PACKAGER",
-				"fullURIName": "http://arcos.rack/SOFTWARE#PACKAGER",
-				"subClassNames": [],
-				"SparqlID": "?PACKAGER",
-				"isReturned": false,
-				"isRuntimeConstrained": false,
-				"valueConstraint": "",
-				"instanceValue": null,
-				"deletionMode": "NO_DELETE"
-			}
-		],
-		"orderBy": []
-	},
-	"importSpec": {
-		"version": "1",
-		"baseURI": "http://data/packager",
-		"columns": [
-			{
-				"colId": "col_0",
-				"colName": "uniqueIdentifier"
-			},
-			{
-				"colId": "col_1",
-				"colName": "uniqueIdentifier"
-			}
-		],
-		"dataValidator": [],
-		"texts": [],
-		"transforms": [
-			{
-				"transId": "trans_0",
-				"name": "rm_null",
-				"transType": "replaceAll",
-				"arg1": "null",
-				"arg2": ""
-			}
-		],
-		"nodes": [
-			{
-				"sparqlID": "?PACKAGER",
-				"type": "http://arcos.rack/SOFTWARE#PACKAGER",
-				"URILookupMode": "createIfMissing",
-				"mapping": [],
-				"props": [
-					{
-						"URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
-						"URILookup": [
-							"?PACKAGER"
-						],
-						"mapping": [
-							{
-								"colId": "col_0"
-							}
-						]
-					}
-				]
-			}
-		]
-	}
+  "sparqlConn": {
+    "data": [
+      {
+        "type": "fuseki",
+        "url": "http://localhost:3030/RACK",
+        "graph": "http://arcos.rack/data"
+      }
+    ],
+    "domain": "",
+    "name": "RACK local fuseki",
+    "model": [
+      {
+        "type": "fuseki",
+        "url": "http://localhost:3030/RACK",
+        "graph": "http://arcos.rack/ontology"
+      }
+    ],
+    "enableOwlImports": true
+  },
+  "sNodeGroup": {
+    "offset": 0,
+    "sNodeList": [
+      {
+        "isReturned": false,
+        "propList": [
+          {
+            "KeyName": "uniqueIdentifier",
+            "optMinus": 0,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?uniqueIdentifier",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "fullURIName": "",
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
+          }
+        ],
+        "NodeName": "PACKAGER",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?PACKAGER",
+        "valueConstraint": "",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [],
+        "fullURIName": "http://arcos.rack/SOFTWARE#PACKAGER"
+      }
+    ],
+    "limit": 0,
+    "orderBy": [],
+    "version": 11
+  },
+  "importSpec": {
+    "nodes": [
+      {
+        "mapping": [],
+        "URILookupMode": "createIfMissing",
+        "sparqlID": "?PACKAGER",
+        "type": "http://arcos.rack/SOFTWARE#PACKAGER",
+        "props": [
+          {
+            "mapping": [
+              {
+                "colId": "col_0"
+              }
+            ],
+            "URILookup": [
+              "?PACKAGER"
+            ],
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "columns": [
+      {
+        "colName": "uniqueIdentifier",
+        "colId": "col_0"
+      },
+      {
+        "colName": "uniqueIdentifier",
+        "colId": "col_1"
+      }
+    ],
+    "baseURI": "http://data/software",
+    "dataValidator": [],
+    "transforms": [
+      {
+        "arg2": "",
+        "transType": "replaceAll",
+        "transId": "trans_0",
+        "arg1": "null",
+        "name": "rm_null"
+      }
+    ],
+    "version": "1"
+  },
+  "version": 2
 }

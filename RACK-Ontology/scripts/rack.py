@@ -8,6 +8,7 @@ import json
 import logging
 import os
 import sys
+from pathlib import Path
 
 from jsonschema import ValidationError, validate
 import requests
@@ -19,13 +20,24 @@ __email__ = "emertens@galois.com"
 
 MODEL_GRAPH = "http://rack001/model"
 
-CONFIG_SCHEMA = {
+INGEST_CSV_CONFIG_SCHEMA = {
     'type' : 'object',
     'additionalProperties': False,
     'properties': {
         'ingestion-steps': {
             'type': 'array',
             'contains': {'type': 'array', 'items': [{'type': 'string'}, {'type': 'string'}]}},
+        'data-graph': {'type': 'string'}
+    }
+}
+
+INGEST_OWL_CONFIG_SCHEMA = {
+    'type' : 'object',
+    'additionalProperties': False,
+    'properties': {
+        'files': {
+            'type': 'array',
+            'contains': {'type': 'string'}},
         'data-graph': {'type': 'string'}
     }
 }
@@ -42,10 +54,10 @@ def sparql_connection(base_url, data_graph, triple_store):
         "data":  [{"type": "fuseki", "url": triple_store, "graph": data_graph}],
         })
 
-def clear_data(conn):
-    """Clear all the existing data in DATA_GRAPH"""
+def clear_graph(conn, which_graph='data'):
+    """Clear all the existing data in the data or model graph"""
     print('Clearing graph')
-    result = semtk3.clear_graph(conn, 'data', 0)
+    result = semtk3.clear_graph(conn, which_graph, 0)
     print(result)
 
 def ingest_csv(conn, nodegroup, csv_name):
@@ -59,11 +71,19 @@ def ingest_csv(conn, nodegroup, csv_name):
 
     print(f' Records: {result["recordsProcessed"]}\tFailures: {result["failuresEncountered"]}')
 
+def ingest_owl(conn, owl_file):
+    print(f'Ingesting [{owl_file}]')
+    result = semtk3.upload_owl(owl_file, conn, "rack", "rack")
+    if result["status"] != "success":
+        logger.error("Error while ingesting OWL files")
+        sys.exit(1)
+
+
 def ingest_csv_driver(config_path, base_url, data_graph, triple_store):
 
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
-        validate(config, CONFIG_SCHEMA)
+        validate(config, INGEST_CSV_CONFIG_SCHEMA)
 
     steps = config['ingestion-steps']
     data_graph = data_graph or config['data-graph']
@@ -73,13 +93,32 @@ def ingest_csv_driver(config_path, base_url, data_graph, triple_store):
 
     semtk3.set_host(base_url)
 
-    clear_data(conn)
+    clear_graph(conn)
     for step in steps:
         ingest_csv(conn, step[0], os.path.join(base_path, step[1]))
 
+def ingest_owl_driver(config_path, base_url, data_graph, triple_store):
+    with open(config_path, 'r') as config_file:
+        config = yaml.safe_load(config_file)
+        validate(config, INGEST_OWL_CONFIG_SCHEMA)
+
+    files = config['files']
+    data_graph = data_graph or config['data-graph']
+    base_path = Path(config_path).parent
+
+    conn = sparql_connection(base_url, data_graph, triple_store)
+
+    semtk3.set_host(base_url)
+
+    clear_graph(conn, which_graph='model')
+    for f in files:
+        ingest_owl(conn, base_path / f)
 
 def dispatch_data_import(args):
     ingest_csv_driver(args.config, args.URL, args.data_graph, args.triple_store)
+
+def dispatch_plumbing_model(args):
+    ingest_owl_driver(args.config, args.URL, args.data_graph, args.triple_store)
 
 def main():
     """Main function"""
@@ -93,11 +132,19 @@ def main():
     plumbing_subparsers = plumbing_parser.add_subparsers(dest='command', required=True)
     plumbing_model_parser = plumbing_subparsers.add_parser('model', help='Modify the data model')
 
+    # TODO(lb): Should we have config, URL, --data-graph, and --triple-store all be top-level arguments?
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     data_import_parser.add_argument('URL', type=str, help='Base SemTK instance URL')
     data_import_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
     data_import_parser.add_argument('--triple-store', type=str, help='Override Fuseki URL')
     data_import_parser.set_defaults(func=dispatch_data_import)
+
+    plumbing_model_parser.add_argument('config', type=str, help='Configuration YAML file')
+    plumbing_model_parser.add_argument('URL', type=str, help='Base SemTK instance URL')
+    plumbing_model_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
+    plumbing_model_parser.add_argument('--triple-store', type=str, help='Override Fuseki URL')
+    plumbing_model_parser.set_defaults(func=dispatch_plumbing_model)
+
 
     args = parser.parse_args()
 
@@ -108,10 +155,11 @@ def main():
             logging.error(f'Subcommand required (use --help to see options)')
             sys.exit(1)
         try:
-            args.func(args)
+            func = args.func
         except AttributeError:
             logging.error(f'Unknown subcommand: "{args.command}"')
             sys.exit(1)
+        func(args)
     except requests.ConnectionError as exc:
         logging.error('Connection failure\n%s', exc)
         sys.exit(1)

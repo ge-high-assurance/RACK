@@ -1,0 +1,103 @@
+{
+  "sparqlConn": {
+    "data": [
+      {
+        "type": "fuseki",
+        "url": "http://localhost:3030/RACK",
+        "graph": "http://arcos.rack/data"
+      }
+    ],
+    "domain": "",
+    "name": "RACK local fuseki",
+    "model": [
+      {
+        "type": "fuseki",
+        "url": "http://localhost:3030/RACK",
+        "graph": "http://arcos.rack/ontology"
+      }
+    ],
+    "enableOwlImports": true
+  },
+  "sNodeGroup": {
+    "offset": 0,
+    "sNodeList": [
+      {
+        "isReturned": false,
+        "propList": [
+          {
+            "KeyName": "uniqueIdentifier",
+            "optMinus": 0,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?uniqueIdentifier",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "fullURIName": "",
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
+          }
+        ],
+        "NodeName": "PACKAGER",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?PACKAGER",
+        "valueConstraint": "",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [],
+        "fullURIName": "http://arcos.rack/SOFTWARE#PACKAGER"
+      }
+    ],
+    "limit": 0,
+    "orderBy": [],
+    "version": 11
+  },
+  "importSpec": {
+    "nodes": [
+      {
+        "mapping": [],
+        "URILookupMode": "createIfMissing",
+        "sparqlID": "?PACKAGER",
+        "type": "http://arcos.rack/SOFTWARE#PACKAGER",
+        "props": [
+          {
+            "mapping": [
+              {
+                "colId": "col_0"
+              }
+            ],
+            "URILookup": [
+              "?PACKAGER"
+            ],
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "columns": [
+      {
+        "colName": "uniqueIdentifier",
+        "colId": "col_0"
+      },
+      {
+        "colName": "uniqueIdentifier",
+        "colId": "col_1"
+      }
+    ],
+    "baseURI": "http://data/software",
+    "dataValidator": [],
+    "transforms": [
+      {
+        "arg2": "",
+        "transType": "replaceAll",
+        "transId": "trans_0",
+        "arg1": "null",
+        "name": "rm_null"
+      }
+    ],
+    "version": "1"
+  },
+  "version": 2
+}

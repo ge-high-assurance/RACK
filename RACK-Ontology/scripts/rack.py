@@ -77,19 +77,41 @@ def ingest_csv_driver(config_path, base_url, data_graph, triple_store):
     for step in steps:
         ingest_csv(conn, step[0], os.path.join(base_path, step[1]))
 
+
+def dispatch_data_import(args):
+    ingest_csv_driver(args.config, args.URL, args.data_graph, args.triple_store)
+
 def main():
     """Main function"""
-    parser = argparse.ArgumentParser(description="Load CSV data into RACK in a Box")
-    parser.add_argument('config', type=str, help='Configuration YAML file')
-    parser.add_argument('URL', type=str, help='Base SemTK instance URL')
-    parser.add_argument('--data-graph', type=str, help='Override data graph URL')
-    parser.add_argument('--triple-store', type=str, help='Override Fuseki URL')
+    parser = argparse.ArgumentParser(description='Load CSV data into RACK in a Box')
+    subparsers = parser.add_subparsers(dest='command')
+
+    data_parser = subparsers.add_parser('data', help='Import or export CSV data')
+    data_subparsers = data_parser.add_subparsers(dest='command', required=True)
+    data_import_parser = data_subparsers.add_parser('import', help='Import CSV data')
+    plumbing_parser = subparsers.add_parser('plumbing', help='Tools for RACK developers')
+    plumbing_subparsers = plumbing_parser.add_subparsers(dest='command', required=True)
+    plumbing_model_parser = plumbing_subparsers.add_parser('model', help='Modify the data model')
+
+    data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
+    data_import_parser.add_argument('URL', type=str, help='Base SemTK instance URL')
+    data_import_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
+    data_import_parser.add_argument('--triple-store', type=str, help='Override Fuseki URL')
+    data_import_parser.set_defaults(func=dispatch_data_import)
+
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO)
 
     try:
-        ingest_csv_driver(args.config, args.URL, args.data_graph, args.triple_store)
+        if args.command is None:
+            logging.error(f'Subcommand required (use --help to see options)')
+            sys.exit(1)
+        try:
+            args.func(args)
+        except AttributeError:
+            logging.error(f'Unknown subcommand: "{args.command}"')
+            sys.exit(1)
     except requests.ConnectionError as exc:
         logging.error('Connection failure\n%s', exc)
         sys.exit(1)

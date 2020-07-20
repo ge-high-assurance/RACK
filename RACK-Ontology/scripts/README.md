@@ -68,11 +68,13 @@ ingestion-steps:
 
 ## Example invocation
 
+These examples uses the virtual environment as defined in the *Installing Dependencies*
+section above.
+
+### Import
+
 This example populates the *Turnstile* example into a RACK in the Box instance
 running on `localhost`
-
-This example uses the virtual environment as defined in the *Installing Dependencies*
-section above.
 
 ```
 $ source venv/bin/activate
@@ -98,6 +100,29 @@ Loading [TA1 ingest6 test]
 Records: 4	Failures: 0
 Loading [TA1 ingest7 test results]
 Records: 8	Failures: 0
+```
+
+### Export
+
+This example exports instances of the `SYSTEM` class from the *Turnstile*
+example from a Rack in the Box instance running on `localhost`:
+
+```
+$ source venv/bin/activate
+(venv) $ ./rack.py data export "ingest01 system" http://rack001/data
+
+INFO:semtk3:Percent complete:  100%
+
+uniqueIdentifier     uniqueIdentifier_parent
+-------------------  -------------------------
+TurnStileSystem
+Counter Application  TurnStileSystem
+Display              TurnStileSystem
+ExecutiveThread      Counter Application
+In Gate              TurnStileSystem
+InputThread          Counter Application
+Out Gate             TurnStileSystem
+OutputThread         Counter Application
 ```
 
 ## Hacking

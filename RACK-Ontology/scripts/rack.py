@@ -13,6 +13,7 @@ from typing import Any, Dict, Optional, NewType
 from types import SimpleNamespace
 
 from jsonschema import ValidationError, validate
+from tabulate import tabulate
 import requests
 import semtk3
 import yaml
@@ -56,6 +57,7 @@ INGEST_OWL_CONFIG_SCHEMA: Dict[str, Any] = {
 def sparql_connection(base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> Connection:
     """Generate a SPARQL connection value."""
 
+    semtk3.set_host(base_url)
     # Default to RACK in a Box triple-store location
     triple_store = triple_store or Url(base_url + ":3030/RACK")
     conn: Dict[str, Any] = {
@@ -72,6 +74,11 @@ def clear_graph(conn: Connection, which_graph: Graph=Graph.DATA) -> None:
     print('Clearing graph')
     result = semtk3.clear_graph(conn, which_graph.value, 0)
     print(result)
+
+def run_query(conn: Connection, nodegroup: str) -> None:
+    semtk_table = semtk3.select_by_id(nodegroup)
+    print()
+    print(tabulate(semtk_table.get_rows(), headers=semtk_table.get_column_names()))
 
 def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     """Ingest a CSV file using the named nodegroup."""
@@ -101,8 +108,6 @@ def ingest_csv_driver(config_path: Path, base_url: Url, data_graph: Optional[Url
 
     conn = sparql_connection(base_url, data_graph, triple_store)
 
-    semtk3.set_host(base_url)
-
     clear_graph(conn)
     for step in steps:
         ingest_csv(conn, step[0], base_path / step[1])
@@ -117,11 +122,13 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
 
     conn = sparql_connection(base_url, None, triple_store)
 
-    semtk3.set_host(base_url)
-
     clear_graph(conn, which_graph=Graph.MODEL)
     for f in files:
         ingest_owl(conn, base_path / f)
+
+def dispatch_data_export(args: SimpleNamespace) -> None:
+    conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
+    run_query(conn, args.nodegroup)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     ingest_csv_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store)
@@ -140,6 +147,7 @@ def main() -> None:
     data_parser = subparsers.add_parser('data', help='Import or export CSV data')
     data_subparsers = data_parser.add_subparsers(dest='command', required=True)
     data_import_parser = data_subparsers.add_parser('import', help='Import CSV data')
+    data_export_parser = data_subparsers.add_parser('export', help='Export query results')
     plumbing_parser = subparsers.add_parser('plumbing', help='Tools for RACK developers')
     plumbing_subparsers = plumbing_parser.add_subparsers(dest='command', required=True)
     plumbing_model_parser = plumbing_subparsers.add_parser('model', help='Modify the data model')
@@ -147,6 +155,10 @@ def main() -> None:
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     data_import_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
     data_import_parser.set_defaults(func=dispatch_data_import)
+
+    data_export_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
+    data_export_parser.add_argument('data_graph', type=str, help='Data graph URL')
+    data_export_parser.set_defaults(func=dispatch_data_export)
 
     plumbing_model_parser.add_argument('config', type=str, help='Configuration YAML file')
     plumbing_model_parser.set_defaults(func=dispatch_plumbing_model)

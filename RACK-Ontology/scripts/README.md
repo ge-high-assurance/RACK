@@ -99,3 +99,26 @@ Records: 4	Failures: 0
 Loading [TA1 ingest7 test results]
 Records: 8	Failures: 0
 ```
+
+## Hacking
+
+The following documentation is only useful for developers of this script.
+
+### Mypy
+
+This script has [Mypy](http://mypy-lang.org)-compliant type annotations which
+are used to statically type-check the code. Usage is simple:
+```bash
+$ source venv/bin/activate
+$ pip install mypy
+$ mypy .
+```
+
+### Tests
+
+You can run the tests with `pytest`:
+```bash
+$ source venv/bin/activate
+$ pip install pytest
+$ pytest
+```

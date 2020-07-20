@@ -24,6 +24,7 @@ Connection = NewType('Connection', str)
 Url = NewType('Url', str)
 
 class Graph(Enum):
+    """Enumeration of SemTK graph types"""
     DATA = "data"
     MODEL = "model"
 
@@ -67,7 +68,7 @@ def sparql_connection(base_url: Url, data_graph: Optional[Url], triple_store: Op
         conn["data"].append({"type": "fuseki", "url": triple_store, "graph": data_graph})
     return Connection(json.dumps(conn))
 
-def clear_graph(conn: Connection, which_graph: Graph=Graph.DATA) -> None:
+def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
     """Clear all the existing data in the data or model graph"""
     print('Clearing graph')
     result = semtk3.clear_graph(conn, which_graph.value, 0)
@@ -85,12 +86,13 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     print(f' Records: {result["recordsProcessed"]}\tFailures: {result["failuresEncountered"]}')
 
 def ingest_owl(conn: Connection, owl_file: Path) -> None:
+    """Upload an OWL file into the model graph."""
     print(f'Ingesting [{owl_file}]', end="")
     semtk3.upload_owl(owl_file, conn, "rack", "rack")
     print('\tOK')
 
 def ingest_csv_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> None:
-
+    """Use an import.yaml file to ingest multiple CSV files into the data graph."""
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
         validate(config, INGEST_CSV_CONFIG_SCHEMA)
@@ -108,6 +110,7 @@ def ingest_csv_driver(config_path: Path, base_url: Url, data_graph: Optional[Url
         ingest_csv(conn, step[0], base_path / step[1])
 
 def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url]) -> None:
+    """Use an import.yaml file to ingest multiple OWL files into the model graph."""
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
         validate(config, INGEST_OWL_CONFIG_SCHEMA)
@@ -120,13 +123,15 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
     semtk3.set_host(base_url)
 
     clear_graph(conn, which_graph=Graph.MODEL)
-    for f in files:
-        ingest_owl(conn, base_path / f)
+    for file in files:
+        ingest_owl(conn, base_path / file)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
+    """Implementation of the data import subcommand"""
     ingest_csv_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store)
 
 def dispatch_plumbing_model(args: SimpleNamespace) -> None:
+    """Implementation of the plumbing model subcommand"""
     ingest_owl_driver(Path(args.config), args.base_url, args.triple_store)
 
 def main() -> None:

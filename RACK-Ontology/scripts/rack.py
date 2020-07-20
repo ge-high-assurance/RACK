@@ -6,9 +6,11 @@ This simple process can be adapted to import other data into RACK for experiment
 import argparse
 import json
 import logging
-import os
 import sys
+from enum import Enum
 from pathlib import Path
+from typing import Any, Dict, Optional, NewType
+from types import SimpleNamespace
 
 from jsonschema import ValidationError, validate
 import requests
@@ -18,11 +20,18 @@ import yaml
 __author__ = "Eric Mertens"
 __email__ = "emertens@galois.com"
 
-DEFAULT_BASE_URL = "http://localhost"
+Connection = NewType('Connection', str)
+Url = NewType('Url', str)
 
-MODEL_GRAPH = "http://rack001/model"
+class Graph(Enum):
+    DATA = "data"
+    MODEL = "model"
 
-INGEST_CSV_CONFIG_SCHEMA = {
+DEFAULT_BASE_URL: Url = Url("http://localhost")
+
+MODEL_GRAPH: Url = Url("http://rack001/model")
+
+INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
     'type' : 'object',
     'additionalProperties': False,
     'properties': {
@@ -33,7 +42,7 @@ INGEST_CSV_CONFIG_SCHEMA = {
     }
 }
 
-INGEST_OWL_CONFIG_SCHEMA = {
+INGEST_OWL_CONFIG_SCHEMA: Dict[str, Any] = {
     'type' : 'object',
     'additionalProperties': False,
     'properties': {
@@ -44,27 +53,27 @@ INGEST_OWL_CONFIG_SCHEMA = {
     }
 }
 
-def sparql_connection(base_url, data_graph, triple_store):
+def sparql_connection(base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> Connection:
     """Generate a SPARQL connection value."""
 
     # Default to RACK in a Box triple-store location
-    triple_store = triple_store or (base_url + ":3030/RACK")
-    conn = {
+    triple_store = triple_store or Url(base_url + ":3030/RACK")
+    conn: Dict[str, Any] = {
         "name": "%NODEGROUP%",
         "model": [{"type": "fuseki", "url": triple_store, "graph": MODEL_GRAPH}],
         "data": []
         }
     if data_graph is not None:
         conn["data"].append({"type": "fuseki", "url": triple_store, "graph": data_graph})
-    return json.dumps(conn)
+    return Connection(json.dumps(conn))
 
-def clear_graph(conn, which_graph='data'):
+def clear_graph(conn: Connection, which_graph: Graph=Graph.DATA) -> None:
     """Clear all the existing data in the data or model graph"""
     print('Clearing graph')
-    result = semtk3.clear_graph(conn, which_graph, 0)
+    result = semtk3.clear_graph(conn, which_graph.value, 0)
     print(result)
 
-def ingest_csv(conn, nodegroup, csv_name):
+def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     """Ingest a CSV file using the named nodegroup."""
     print(f'Loading [{nodegroup}]')
 
@@ -75,12 +84,12 @@ def ingest_csv(conn, nodegroup, csv_name):
 
     print(f' Records: {result["recordsProcessed"]}\tFailures: {result["failuresEncountered"]}')
 
-def ingest_owl(conn, owl_file):
+def ingest_owl(conn: Connection, owl_file: Path) -> None:
     print(f'Ingesting [{owl_file}]', end="")
     semtk3.upload_owl(owl_file, conn, "rack", "rack")
     print('\tOK')
 
-def ingest_csv_driver(config_path, base_url, data_graph, triple_store):
+def ingest_csv_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> None:
 
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
@@ -88,7 +97,7 @@ def ingest_csv_driver(config_path, base_url, data_graph, triple_store):
 
     steps = config['ingestion-steps']
     data_graph = data_graph or config['data-graph']
-    base_path = os.path.dirname(config_path)
+    base_path = config_path.parent
 
     conn = sparql_connection(base_url, data_graph, triple_store)
 
@@ -96,31 +105,31 @@ def ingest_csv_driver(config_path, base_url, data_graph, triple_store):
 
     clear_graph(conn)
     for step in steps:
-        ingest_csv(conn, step[0], os.path.join(base_path, step[1]))
+        ingest_csv(conn, step[0], base_path / step[1])
 
-def ingest_owl_driver(config_path, base_url, triple_store):
+def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url]) -> None:
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
         validate(config, INGEST_OWL_CONFIG_SCHEMA)
 
     files = config['files']
-    base_path = Path(config_path).parent
+    base_path = config_path.parent
 
     conn = sparql_connection(base_url, None, triple_store)
 
     semtk3.set_host(base_url)
 
-    clear_graph(conn, which_graph='model')
+    clear_graph(conn, which_graph=Graph.MODEL)
     for f in files:
         ingest_owl(conn, base_path / f)
 
-def dispatch_data_import(args):
-    ingest_csv_driver(args.config, args.base_url, args.data_graph, args.triple_store)
+def dispatch_data_import(args: SimpleNamespace) -> None:
+    ingest_csv_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store)
 
-def dispatch_plumbing_model(args):
-    ingest_owl_driver(args.config, args.base_url, args.triple_store)
+def dispatch_plumbing_model(args: SimpleNamespace) -> None:
+    ingest_owl_driver(Path(args.config), args.base_url, args.triple_store)
 
-def main():
+def main() -> None:
     """Main function"""
     parser = argparse.ArgumentParser(description='RACK in a Box toolkit')
     parser.add_argument('--base-url', type=str, default=DEFAULT_BASE_URL, help='Base SemTK instance URL')

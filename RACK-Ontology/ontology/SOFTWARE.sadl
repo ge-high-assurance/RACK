@@ -6,41 +6,41 @@ PACKAGE_FILE (note "a package file, e.g. Reg Hat's .rpm, Debian's .deb, etc.").
 
 CODE_FILE is a type of ENTITY.
 CODE_FILE (note "file that contains code that may be compiled and/or executed").
-	satisfies describes CODE_FILE with values of type ENTITY.
-	satisfies is a type of wasDerivedFrom.
+    satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes CODE_FILE with values of type ENTITY.
+    satisfies is a type of wasDerivedFrom.
 
-	sw:language describes CODE_FILE with values of type LANGUAGE.
-	sw:language is a type of wasDerivedFrom.
+    sw:language (note "programming language(s) of this file") describes CODE_FILE with values of type LANGUAGE.
+    sw:language is a type of wasDerivedFrom.
 
-	createBy describes CODE_FILE with values of type ACTIVITY.
-	createBy is a type of wasGeneratedBy.
+    createBy (note "ACTIVITY(s) that created this file") describes CODE_FILE with values of type ACTIVITY.
+    createBy is a type of wasGeneratedBy.
 
 LANGUAGE is a type of ENTITY.
 LANGUAGE (note "describes a programming language, possibly identifying some version of its specification").
-	^version describes LANGUAGE with values of type string.
+    ^version (note "version of the language, where applicable") describes LANGUAGE with values of type string.
 
 
 
 
 CONFIG_FILE is a type of ENTITY.
 CONFIG_FILE (note "anything that can be considered configuration").
-	createBy describes CONFIG_FILE with values of type ACTIVITY.
-	createBy is a type of wasGeneratedBy.
+    createBy (note "ACTIVITY(s) that created this file") describes CONFIG_FILE with values of type ACTIVITY.
+    createBy is a type of wasGeneratedBy.
 
 OBJECT_FILE is a type of ENTITY.
 OBJECT_FILE (note "compiled object code, not ready for execution").
-	createBy describes OBJECT_FILE with values of type ACTIVITY.
-	createBy is a type of wasGeneratedBy.
+    createBy (note "ACTIVITY(s) that created this file") describes OBJECT_FILE with values of type ACTIVITY.
+    createBy is a type of wasGeneratedBy.
 
 LIBRARY is a type of ENTITY.
 LIBRARY (note "shared library").
-	createBy describes LIBRARY with values of type ACTIVITY.
-	createBy is a type of wasGeneratedBy.
+    createBy (note "ACTIVITY(s) that created this file") describes LIBRARY with values of type ACTIVITY.
+    createBy is a type of wasGeneratedBy.
 
 EXECUTABLE is a type of ENTITY.
 EXECUTABLE (note "compiled executable, ready for execution").
-	createBy describes EXECUTABLE with values of type ACTIVITY.
-	createBy is a type of wasGeneratedBy.
+    createBy (note "ACTIVITY(s) that created this file") describes EXECUTABLE with values of type ACTIVITY.
+    createBy is a type of wasGeneratedBy.
 
 CODE_GENERATOR is a type of AGENT.
 CODE_GENERATOR (note "a tool that generates CODE_FILEs as part of a CODE_GEN ACTIVITY").
@@ -53,35 +53,35 @@ PACKAGER (note "a tool that packages some software together as part of a PACKAGE
 
 CODE_DEVELOPMENT is a type of ACTIVITY.
 CODE_DEVELOPMENT (note "an ACTIVITY that produces CODE_FILEs").
-	author describes CODE_DEVELOPMENT with values of type AGENT.
-	author is a type of wasAssociatedWith.
+    author (note "AGENT(s) who participated in this ACTIVITY") describes CODE_DEVELOPMENT with values of type AGENT.
+    author is a type of wasAssociatedWith.
 
-	referenced describes CODE_DEVELOPMENT with values of type ENTITY.
-	referenced is a type of used.
+    referenced (note "ENTITY(s) (e.g. REQUIREMENT) that were referenced during this ACTIVITY") describes CODE_DEVELOPMENT with values of type ENTITY.
+    referenced is a type of used.
 
-	governedBy describes CODE_DEVELOPMENT with values of type ENTITY.
-	governedBy is a type of used.
+    governedBy (note "ENTITY(s) (e.g. REQUIREMENT) that gave rise to this ACTIVITY") describes CODE_DEVELOPMENT with values of type ENTITY.
+    governedBy is a type of used.
 
 
 BUILD is a type of ACTIVITY.
 BUILD (note "describes a set of ACTIVITYs (e.g. CODE_GEN, COMPILE, ...) that together form some logical building unit").
-	step describes BUILD with values of type ACTIVITY.
-	step is a type of wasInformedBy.
+    step (note "a BUILD may be comprised of any number of sub-ACTIVITY(s)") describes BUILD with values of type ACTIVITY.
+    step is a type of wasInformedBy.
 
 CODE_GEN is a type of ACTIVITY.
 CODE_GEN (note "ACTIVITY of running a CODE_GENERATOR to create CODE_FILEs").
-	performedBy describes CODE_GEN with values of type AGENT.
-	performedBy is a type of wasAssociatedWith.
+    performedBy (note "AGENT(s) (e.g. CODE_GENERATOR) generating the code") describes CODE_GEN with values of type AGENT.
+    performedBy is a type of wasAssociatedWith.
 
 COMPILE is a type of ACTIVITY.
 COMPILE (note "ACTIVITY of running a a COMPILER to produce EXECUTABLEs or OBJECT_FILEs").
-	performedBy describes COMPILE with values of type AGENT.
-	performedBy is a type of wasAssociatedWith.
+    performedBy (note "AGENT(s) (e.g. COMPILER) performing the compilation") describes COMPILE with values of type AGENT.
+    performedBy is a type of wasAssociatedWith.
 
 PACKAGE is a type of ACTIVITY.
 PACKAGE (note "ACTIVITY of running a PACKAGER to produce a PACKAGE_FILE").
-	performedBy describes PACKAGE with values of type AGENT.
-	performedBy is a type of wasAssociatedWith.
+    performedBy (note "AGENT(s) (e.g. PACKAGER) performing the packaging") describes PACKAGE with values of type AGENT.
+    performedBy is a type of wasAssociatedWith.
 
 COMPONENT_TYPE
     (note "An open/extensible set of types of software components")

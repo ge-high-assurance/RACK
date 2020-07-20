@@ -44,7 +44,7 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="producedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:range rdf:resource="#SYSTEM_DEVELOPEMENT"/>
+    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="requires">
@@ -59,7 +59,7 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="identifiedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:range rdf:resource="#SYSTEM_DEVELOPEMENT"/>
+    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#INTERFACE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="destination">

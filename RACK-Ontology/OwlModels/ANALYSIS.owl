@@ -42,7 +42,7 @@
   </owl:Class>
   <owl:ObjectProperty rdf:ID="producedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:range rdf:resource="#ANALYSIS"/>
+    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#ANALYSIS_REPORT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="performedBy">
@@ -75,7 +75,13 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#ANALYSIS_ANNOTATION"/>
   </owl:DatatypeProperty>
-  <A:ANALYSIS_ANNOTATION_TYPE rdf:ID="POSTCONDITION"/>
-  <A:ANALYSIS_ANNOTATION_TYPE rdf:ID="INVARIANT"/>
-  <A:ANALYSIS_ANNOTATION_TYPE rdf:ID="PRECONDITION"/>
+  <A:ANALYSIS_ANNOTATION_TYPE rdf:ID="POSTCONDITION">
+    <rdfs:comment xml:lang="en">A constraint that should hold after of successful operation of this unit of code.</rdfs:comment>
+  </A:ANALYSIS_ANNOTATION_TYPE>
+  <A:ANALYSIS_ANNOTATION_TYPE rdf:ID="INVARIANT">
+    <rdfs:comment xml:lang="en">A constraint on this unit of code or data that is true at any point in the program's execution.</rdfs:comment>
+  </A:ANALYSIS_ANNOTATION_TYPE>
+  <A:ANALYSIS_ANNOTATION_TYPE rdf:ID="PRECONDITION">
+    <rdfs:comment xml:lang="en">A constraint that should hold in advance of successful operation of this unit of code.</rdfs:comment>
+  </A:ANALYSIS_ANNOTATION_TYPE>
 </rdf:RDF>

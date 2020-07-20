@@ -4,11 +4,11 @@ import "http://arcos.rack/PROV-S".
 ANALYSIS_REPORT is a type of ENTITY.
 	result describes ANALYSIS_REPORT with values of type ANALYSIS_RESULT.
 	ANALYSIS_RESULT is a class, must be one of {Passed, Failed, Indeterminate}.
-	
+
 	analyzes describes ANALYSIS_REPORT with values of type ENTITY.
 	analyzes is a type of wasDerivedFrom.
-	
-	producedBy describes ANALYSIS_REPORT with values of type ANALYSIS.
+
+	producedBy describes ANALYSIS_REPORT with values of type ACTIVITY.
 	producedBy is a type of wasGeneratedBy.
 
 ANALYSIS is a type of ACTIVITY.

@@ -9,8 +9,6 @@ data-graph: "http://rack001/data"
 ingestion-steps:
 - ["ingest01 system",       "SYSTEM.csv"]
 - ["ingest02 interface",    "INTERFACE.csv"]
-- ["ingest01 system",       "SYSTEM.csv"]
-- ["ingest02 interface",    "INTERFACE.csv"]
 - ["ingest03 hazard",       "HAZARD.csv"]
 - ["ingest04 requirement",  "REQUIREMENT.csv"]
 - ["ingest05 data dict",    "DATA_DICTIONARY_TERM.csv"]

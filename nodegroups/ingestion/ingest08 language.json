@@ -1,0 +1,128 @@
+{
+  "sparqlConn": {
+    "data": [
+      {
+        "type": "fuseki",
+        "url": "http://localhost:3030/RACK",
+        "graph": "http://arcos.rack/data"
+      }
+    ],
+    "domain": "",
+    "name": "RACK local fuseki",
+    "model": [
+      {
+        "type": "fuseki",
+        "url": "http://localhost:3030/RACK",
+        "graph": "http://arcos.rack/ontology"
+      }
+    ],
+    "enableOwlImports": true
+  },
+  "sNodeGroup": {
+    "offset": 0,
+    "sNodeList": [
+      {
+        "isReturned": false,
+        "propList": [
+          {
+            "KeyName": "uniqueIdentifier",
+            "optMinus": 0,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?uniqueIdentifier",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "fullURIName": "",
+            "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
+          },
+          {
+            "KeyName": "version",
+            "optMinus": 1,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?version",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "fullURIName": "",
+            "UriRelationship": "http://arcos.rack/SOFTWARE#version"
+          }
+        ],
+        "NodeName": "LANGUAGE",
+        "subClassNames": [],
+        "isRuntimeConstrained": false,
+        "SparqlID": "?LANGUAGE",
+        "valueConstraint": "",
+        "deletionMode": "NO_DELETE",
+        "nodeList": [],
+        "fullURIName": "http://arcos.rack/SOFTWARE#LANGUAGE"
+      }
+    ],
+    "limit": 0,
+    "orderBy": [],
+    "version": 11
+  },
+  "importSpec": {
+    "nodes": [
+      {
+        "mapping": [],
+        "URILookupMode": "errorIfExists",
+        "sparqlID": "?LANGUAGE",
+        "type": "http://arcos.rack/SOFTWARE#LANGUAGE",
+        "props": [
+          {
+            "mapping": [
+              {
+                "colId": "col_0"
+              }
+            ],
+            "URILookup": [
+              "?LANGUAGE"
+            ],
+            "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
+          },
+          {
+            "mapping": [
+              {
+                "colId": "col_1",
+                "transformList": [
+                  "trans_0"
+                ]
+              }
+            ],
+            "URIRelation": "http://arcos.rack/SOFTWARE#version"
+          }
+        ]
+      }
+    ],
+    "texts": [],
+    "columns": [
+      {
+        "colName": "uniqueIdentifier",
+        "colId": "col_0"
+      },
+      {
+        "colName": "version",
+        "colId": "col_1"
+      }
+    ],
+    "baseURI": "http://data/software",
+    "dataValidator": [],
+    "transforms": [
+      {
+        "arg2": "",
+        "transType": "replaceAll",
+        "transId": "trans_0",
+        "arg1": "null",
+        "name": "rm_null"
+      }
+    ],
+    "version": "1"
+  },
+  "version": 2
+}

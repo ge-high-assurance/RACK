@@ -1,7 +1,6 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:provs="http://arcos.rack/PROV-S"
     xmlns:sys="http://arcos.rack/SYSTEM#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
@@ -16,17 +15,21 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'SYSTEM.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:Class rdf:ID="SYSTEM_DEVELOPEMENT">
+  <owl:Class rdf:ID="SYSTEM_DEVELOPMENT">
+    <rdfs:comment xml:lang="en">ACTIVITY relating to the creation of one or more some SYSTEMs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="SYSTEM">
+    <rdfs:comment xml:lang="en">SYSTEMs classify logical parts of the whole system being developed</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="INTERFACE">
+    <rdfs:comment xml:lang="en">INTERFACEs describe directed connections between an ENTITY (e.g. SYSTEM) providing what another ENTITY (e.g. SYSTEM) requires</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="provides">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:comment xml:lang="en">list of entities that this SYSTEM provides to others</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
   </owl:ObjectProperty>
@@ -39,32 +42,37 @@
   <owl:ObjectProperty rdf:ID="source">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
     <owl:inverseOf rdf:resource="#provides"/>
+    <rdfs:comment xml:lang="en">ENTITY (e.g. SYSTEM) that provides what the INTERFACE offers</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#INTERFACE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="producedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:range rdf:resource="#SYSTEM_DEVELOPEMENT"/>
+    <rdfs:comment xml:lang="en">trace to ACTIVITYs participating in developing this SYSTEM</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="requires">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:comment xml:lang="en">list of entities that this SYSTEM requires from others</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="developedBy">
     <rdfs:comment xml:lang="en">Organization that is responsible for producing a system</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
-    <rdfs:domain rdf:resource="#SYSTEM_DEVELOPEMENT"/>
+    <rdfs:domain rdf:resource="#SYSTEM_DEVELOPMENT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="identifiedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:range rdf:resource="#SYSTEM_DEVELOPEMENT"/>
+    <rdfs:comment xml:lang="en">ACTIVITY out of which this INTERFACE was identified</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#INTERFACE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="destination">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
     <owl:inverseOf rdf:resource="#requires"/>
+    <rdfs:comment xml:lang="en">ENTITY (e.g. SYSTEM) that requires what the INTERFACE offers</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#INTERFACE"/>
   </owl:ObjectProperty>

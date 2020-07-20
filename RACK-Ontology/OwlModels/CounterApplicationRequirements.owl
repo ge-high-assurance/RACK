@@ -1,17 +1,14 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:j.0="http://arcos.rack/REQUIREMENTS#"
-    xmlns:Rq="http://arcos.rack/REQUIREMENTS"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:j.1="http://arcos.rack/PROV-S#"
+    xmlns:j.0="http://arcos.rack/PROV-S#"
     xmlns:cntrapprq="http://TurnstileSystem/CounterApplicationRequirements#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
-    xmlns:trnstl="http://TurnstileSystem/Turnstiles"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:ha="http://TurnstileSystem/HazardAssesment"
+    xmlns:j.1="http://arcos.rack/REQUIREMENTS#"
   xml:base="http://TurnstileSystem/CounterApplicationRequirements">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="HazardAssesment"/>
@@ -22,58 +19,58 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplicationRequirements.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.0:DATA_DICTIONARY_TERM rdf:ID="inflowEvent">
-    <j.0:consumedBy>
-      <j.0:REQUIREMENT rdf:ID="HLR-1">
-        <j.0:governs rdf:resource="Turnstiles#CounterApplication"/>
-        <j.0:mitigates rdf:resource="HazardAssesment#H-1.2"/>
-        <j.0:satisfies rdf:resource="Turnstiles#Sys-1"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >The Computer shall increment the counter when a inflow event is received and the counter is less than max int.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >HLR-1</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:consumedBy>
-    <j.0:providedBy rdf:resource="Turnstiles#inflow"/>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >inflowEvent</j.1:uniqueIdentifier>
-  </j.0:DATA_DICTIONARY_TERM>
-  <j.0:DATA_DICTIONARY_TERM rdf:ID="display">
-    <j.0:consumedBy rdf:resource="Turnstiles#census"/>
-    <j.0:providedBy>
-      <j.0:REQUIREMENT rdf:ID="HLR-3">
-        <j.0:governs rdf:resource="Turnstiles#CounterApplication"/>
-        <j.0:satisfies rdf:resource="Turnstiles#Sys-3"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >The Computer shall publish the counter at a 1 htz rate.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >HLR-3</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:providedBy>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >counter</j.1:uniqueIdentifier>
-  </j.0:DATA_DICTIONARY_TERM>
-  <j.0:DATA_DICTIONARY_TERM rdf:ID="outflowEvent">
-    <j.0:consumedBy>
-      <j.0:REQUIREMENT rdf:ID="HLR-2">
-        <j.0:governs rdf:resource="Turnstiles#CounterApplication"/>
-        <j.0:mitigates rdf:resource="HazardAssesment#H-1.1"/>
-        <j.0:satisfies rdf:resource="Turnstiles#Sys-2"/>
-        <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0.</j.0:text>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >HLR-2</j.1:uniqueIdentifier>
-      </j.0:REQUIREMENT>
-    </j.0:consumedBy>
-    <j.0:providedBy rdf:resource="Turnstiles#outflow"/>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >outflowEvent</j.1:uniqueIdentifier>
-  </j.0:DATA_DICTIONARY_TERM>
-  <j.0:DATA_DICTIONARY_TERM rdf:ID="counter">
-    <j.0:consumedBy rdf:resource="#HLR-3"/>
-    <j.0:providedBy rdf:resource="#HLR-2"/>
-    <j.0:providedBy rdf:resource="#HLR-1"/>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >counter</j.1:uniqueIdentifier>
-  </j.0:DATA_DICTIONARY_TERM>
+  <j.1:DATA_DICTIONARY_TERM rdf:ID="inflowEvent">
+    <j.1:consumedBy>
+      <j.1:REQUIREMENT rdf:ID="HLR-1">
+        <j.1:governs rdf:resource="Turnstiles#CounterApplication"/>
+        <j.1:mitigates rdf:resource="HazardAssesment#H-1.2"/>
+        <j.1:satisfies rdf:resource="Turnstiles#Sys-1"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >The Computer shall increment the counter when a inflow event is received and the counter is less than max int.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >HLR-1</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:consumedBy>
+    <j.1:providedBy rdf:resource="Turnstiles#inflow"/>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >inflowEvent</j.0:uniqueIdentifier>
+  </j.1:DATA_DICTIONARY_TERM>
+  <j.1:DATA_DICTIONARY_TERM rdf:ID="display">
+    <j.1:consumedBy rdf:resource="Turnstiles#census"/>
+    <j.1:providedBy>
+      <j.1:REQUIREMENT rdf:ID="HLR-3">
+        <j.1:governs rdf:resource="Turnstiles#CounterApplication"/>
+        <j.1:satisfies rdf:resource="Turnstiles#Sys-3"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >The Computer shall publish the counter at a 1 htz rate.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >HLR-3</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:providedBy>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >counter</j.0:uniqueIdentifier>
+  </j.1:DATA_DICTIONARY_TERM>
+  <j.1:DATA_DICTIONARY_TERM rdf:ID="outflowEvent">
+    <j.1:consumedBy>
+      <j.1:REQUIREMENT rdf:ID="HLR-2">
+        <j.1:governs rdf:resource="Turnstiles#CounterApplication"/>
+        <j.1:mitigates rdf:resource="HazardAssesment#H-1.1"/>
+        <j.1:satisfies rdf:resource="Turnstiles#Sys-2"/>
+        <j.1:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0.</j.1:text>
+        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >HLR-2</j.0:uniqueIdentifier>
+      </j.1:REQUIREMENT>
+    </j.1:consumedBy>
+    <j.1:providedBy rdf:resource="Turnstiles#outflow"/>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >outflowEvent</j.0:uniqueIdentifier>
+  </j.1:DATA_DICTIONARY_TERM>
+  <j.1:DATA_DICTIONARY_TERM rdf:ID="counter">
+    <j.1:consumedBy rdf:resource="#HLR-3"/>
+    <j.1:providedBy rdf:resource="#HLR-2"/>
+    <j.1:providedBy rdf:resource="#HLR-1"/>
+    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >counter</j.0:uniqueIdentifier>
+  </j.1:DATA_DICTIONARY_TERM>
 </rdf:RDF>

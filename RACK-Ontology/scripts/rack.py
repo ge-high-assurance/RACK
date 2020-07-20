@@ -74,8 +74,9 @@ def ingest_csv(conn, nodegroup, csv_name):
     print(f' Records: {result["recordsProcessed"]}\tFailures: {result["failuresEncountered"]}')
 
 def ingest_owl(conn, owl_file):
-    print(f'Ingesting [{owl_file}]')
+    print(f'Ingesting [{owl_file}]', end="")
     semtk3.upload_owl(owl_file, conn, "rack", "rack")
+    print('\tOK')
 
 def ingest_csv_driver(config_path, base_url, data_graph, triple_store):
 
@@ -140,7 +141,6 @@ def main():
     data_import_parser.set_defaults(func=dispatch_data_import)
 
     plumbing_model_parser.add_argument('config', type=str, help='Configuration YAML file')
-    plumbing_model_parser.add_argument('URL', type=str, help='Base SemTK instance URL')
     plumbing_model_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
     plumbing_model_parser.set_defaults(func=dispatch_plumbing_model)
 

@@ -17,7 +17,7 @@ import yaml
 __author__ = "Eric Mertens"
 __email__ = "emertens@galois.com"
 
-MODEL_GRAPH = "http://arcos.rack/ontology"
+MODEL_GRAPH = "http://rack001/model"
 
 CONFIG_SCHEMA = {
     'type' : 'object',

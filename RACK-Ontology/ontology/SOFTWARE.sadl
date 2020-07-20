@@ -82,3 +82,65 @@ PACKAGE is a type of ACTIVITY.
 PACKAGE (note "ACTIVITY of running a PACKAGER to produce a PACKAGE_FILE").
 	performedBy describes PACKAGE with values of type AGENT.
 	performedBy is a type of wasAssociatedWith.
+
+COMPONENT_TYPE
+    (note "An open/extensible set of types of software components")
+    is a class.
+    uniqueIdentifier describes COMPONENT_TYPE with a single value of type string.
+
+// A few common instances:
+SOURCE_FUNCTION
+    (note "A function or procedure declared or defined in source code.")
+    is a COMPONENT_TYPE
+    has uniqueIdentifier "SOURCE_FUNCTION".
+BINARY_FUNCTION
+    (note "A function in a binary, as defined by the appropriate ABI.")
+    is a COMPONENT_TYPE
+    has uniqueIdentifier "BINARY_FUNCTION".
+SOURCE_GLOBAL_VARIABLE
+    (note "A global variable declared or defined in source code.")
+    is a COMPONENT_TYPE
+    has uniqueIdentifier "SOURCE_GLOBAL_VARIABLE".
+BINARY_GLOBAL_VARIABLE
+    (note "A global variable (generally in the .data or .bss sections).")
+    is a COMPONENT_TYPE
+    has uniqueIdentifier "BINARY_GLOBAL_VARIABLE".
+BINARY_BASIC_BLOCK
+    (note "A basic block at the binary level.")
+    is a COMPONENT_TYPE
+    has uniqueIdentifier "BINARY_BASIC_BLOCK".
+CLASS
+    (note "A class in an object-oriented language.")
+    is a COMPONENT_TYPE
+    has uniqueIdentifier "CLASS".
+CLASS_METHOD
+    (note "A method attached to a class in an object-oriented language.")
+    is a COMPONENT_TYPE
+    has uniqueIdentifier "CLASS_METHOD".
+CLASS_MEMBER_VARIABLE
+    (note "A variable attached to the instances of a class in an object-oriented language.")
+    is a COMPONENT_TYPE
+    has uniqueIdentifier "CLASS_MEMBER_VARIABLE".
+CLASS_CONSTRUCTOR
+    (note "A constructor in an object-oriented language.")
+    is a COMPONENT_TYPE
+    has uniqueIdentifier "CLASS_CONSTRUCTOR".
+MODULE
+    (note "A collection of related code, usually grouped in a lexical scope.")
+    is a COMPONENT_TYPE
+    has uniqueIdentifier "MODULE".
+NAMESPACE
+    (note "A collection of related code, usually grouped in a lexical scope.")
+    is a COMPONENT_TYPE
+    has uniqueIdentifier "NAMESPACE".
+
+COMPONENT is a type of ENTITY.
+    name describes COMPONENT with values of type string.
+    componentType describes COMPONENT with a single value of type COMPONENT_TYPE.
+    valueType (note "The type of this value, if applicable (e.g. for functions or variables).") describes COMPONENT with values of type string.
+    instantiates (note "What logical component (system) does this physical component (code) instantiate or implement?") describes COMPONENT with values of type ENTITY.
+    definedIn (note "Defining entity of this code structure. This could be a CODE_FILE, LIBRARY, etc.") describes COMPONENT with values of type ENTITY.
+    mentions (note "A component referenced by this one, e.g., a callee or variable being used.") describes COMPONENT with values of type ENTITY.
+    subcomponentOf (note "A structural sub-component, e.g., a function might be a subcomponent of module.") describes COMPONENT with values of type ENTITY.
+    requirements (note "Low-level requirements that apply to this component.") describes COMPONENT with values of type ENTITY.
+    annotations (note "Analysis annotations that apply to this component.") describes COMPONENT with values of type ENTITY.

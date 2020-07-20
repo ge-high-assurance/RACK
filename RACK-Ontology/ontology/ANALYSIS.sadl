@@ -9,7 +9,7 @@ ANALYSIS_REPORT (note "output of an ANALYSIS").
 	analyzes (note "ENTITY(s) under analysis") describes ANALYSIS_REPORT with values of type ENTITY.
 	analyzes is a type of wasDerivedFrom.
 
-	producedBy describes ANALYSIS_REPORT with values of type ANALYSIS.
+	producedBy describes ANALYSIS_REPORT with values of type ACTIVITY.
 	producedBy (note "ACTIVITY(s) (e.g. ANALYSIS) producing this report").
 	producedBy is a type of wasGeneratedBy.
 
@@ -17,3 +17,25 @@ ANALYSIS is a type of ACTIVITY.
 ANALYSIS (note "ACTIVITY of running some analysis, supposedly creating some ANALYSIS_REPORT").
 	performedBy (note "Entity that is responsible for producing an analysis, could be a person or a tool. ") describes ANALYSIS with values of type AGENT.
 	performedBy is a type of wasAssociatedWith.
+
+ANALYSIS_ANNOTATION_TYPE
+    (note "An open/extensible set of types of analysis annotations")
+    is a class.
+
+// A few common instances:
+PRECONDITION
+    (note "A constraint that should hold in advance of successful operation of this unit of code.")
+    is a ANALYSIS_ANNOTATION_TYPE.
+POSTCONDITION
+    (note "A constraint that should hold after of successful operation of this unit of code.")
+    is a ANALYSIS_ANNOTATION_TYPE.
+INVARIANT
+    (note "A constraint on this unit of code or data that is true at any point in the program's execution.")
+    is a ANALYSIS_ANNOTATION_TYPE.
+
+ANALYSIS_ANNOTATION
+    (note "A result of the analysis that is linked to some specific part of the system.")
+    is a type of ENTITY.
+    fromReport (note "Which analysis report this annotation comes from.") describes ANALYSIS_ANNOTATION with values of type ENTITY.
+    description (note "The content of the annotation.") describes ANALYSIS_ANNOTATION with values of type string.
+    annotationType (note "The type of the annotation.") describes ANALYSIS_ANNOTATION with values of type ANALYSIS_ANNOTATION_TYPE.

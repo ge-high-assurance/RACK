@@ -1,17 +1,14 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:trnstlsys="http://TurnstileSystem/CounterApplication#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:sw="http://arcos.rack/SOFTWARE"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:sys="http://arcos.rack/SYSTEM"
     xmlns:j.0="http://arcos.rack/SOFTWARE#"
     xmlns:j.1="http://arcos.rack/PROV-S#"
     xmlns:j.2="http://arcos.rack/SYSTEM#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:trnstlsys="http://TurnstileSystem/CounterApplication#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
-    xmlns:trnstl="http://TurnstileSystem/Turnstiles"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://TurnstileSystem/CounterApplication">
   <owl:Ontology rdf:about="">
@@ -33,6 +30,43 @@
     <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >InputThread</j.1:uniqueIdentifier>
   </j.2:SYSTEM>
+  <j.0:COMPONENT rdf:ID="main_function">
+    <j.0:definedIn>
+      <j.0:CODE_FILE rdf:ID="counter_c">
+        <j.0:language>
+          <j.0:LANGUAGE rdf:ID="c">
+            <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >c</j.1:uniqueIdentifier>
+          </j.0:LANGUAGE>
+        </j.0:language>
+        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >counter_c</j.1:uniqueIdentifier>
+      </j.0:CODE_FILE>
+    </j.0:definedIn>
+    <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >int(int argc, char* argv[])</j.0:valueType>
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >main</j.0:name>
+    <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
+    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >main_function</j.1:uniqueIdentifier>
+  </j.0:COMPONENT>
+  <j.0:COMPONENT rdf:ID="output_function">
+    <j.0:definedIn>
+      <j.0:CODE_FILE rdf:ID="output_c">
+        <j.0:language rdf:resource="#c"/>
+        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >output_c</j.1:uniqueIdentifier>
+      </j.0:CODE_FILE>
+    </j.0:definedIn>
+    <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >void()</j.0:valueType>
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >output</j.0:name>
+    <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
+    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >output_function</j.1:uniqueIdentifier>
+  </j.0:COMPONENT>
   <j.0:PACKAGE_FILE rdf:ID="dist_tar">
     <j.1:wasGeneratedBy>
       <j.0:PACKAGE rdf:ID="tarPackaging">
@@ -42,81 +76,12 @@
               <j.0:COMPILE rdf:ID="counter_exe_Compiling">
                 <j.1:used>
                   <j.0:CODE_FILE rdf:ID="counter_h">
-                    <j.0:language>
-                      <j.0:LANGUAGE rdf:ID="c">
-                        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                        >c</j.1:uniqueIdentifier>
-                      </j.0:LANGUAGE>
-                    </j.0:language>
+                    <j.0:language rdf:resource="#c"/>
                     <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                     >counter_h</j.1:uniqueIdentifier>
                   </j.0:CODE_FILE>
                 </j.1:used>
-                <j.1:used>
-                  <j.0:CODE_FILE rdf:ID="counter_c">
-                    <j.0:language rdf:resource="#c"/>
-                    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >counter_c</j.1:uniqueIdentifier>
-                  </j.0:CODE_FILE>
-                </j.1:used>
-                <j.1:used>
-                  <j.0:LIBRARY rdf:ID="libhw_so">
-                    <j.0:createBy>
-                      <j.0:COMPILE rdf:ID="libhw_so_Compiling">
-                        <j.1:used>
-                          <j.0:OBJECT_FILE rdf:ID="hw_o">
-                            <j.0:createBy>
-                              <j.0:COMPILE rdf:ID="hw_o_Compiling">
-                                <j.1:used>
-                                  <j.0:CODE_FILE rdf:ID="hw_h">
-                                    <j.0:language rdf:resource="#c"/>
-                                    <j.1:uniqueIdentifier rdf:datatype=
-                                    "http://www.w3.org/2001/XMLSchema#string"
-                                    >hw_h</j.1:uniqueIdentifier>
-                                  </j.0:CODE_FILE>
-                                </j.1:used>
-                                <j.1:used>
-                                  <j.0:CODE_FILE rdf:ID="hw_c">
-                                    <j.0:language rdf:resource="#c"/>
-                                    <j.1:uniqueIdentifier rdf:datatype=
-                                    "http://www.w3.org/2001/XMLSchema#string"
-                                    >hw_c</j.1:uniqueIdentifier>
-                                  </j.0:CODE_FILE>
-                                </j.1:used>
-                                <j.0:performedBy>
-                                  <j.1:AGENT rdf:ID="make">
-                                    <j.1:uniqueIdentifier rdf:datatype=
-                                    "http://www.w3.org/2001/XMLSchema#string"
-                                    >make</j.1:uniqueIdentifier>
-                                  </j.1:AGENT>
-                                </j.0:performedBy>
-                                <j.0:performedBy>
-                                  <j.0:COMPILER rdf:ID="cc">
-                                    <j.1:uniqueIdentifier rdf:datatype=
-                                    "http://www.w3.org/2001/XMLSchema#string"
-                                    >cc</j.1:uniqueIdentifier>
-                                  </j.0:COMPILER>
-                                </j.0:performedBy>
-                                <j.1:uniqueIdentifier rdf:datatype=
-                                "http://www.w3.org/2001/XMLSchema#string"
-                                >hw_o_Compiling</j.1:uniqueIdentifier>
-                              </j.0:COMPILE>
-                            </j.0:createBy>
-                            <j.1:uniqueIdentifier rdf:datatype=
-                            "http://www.w3.org/2001/XMLSchema#string"
-                            >hw_o</j.1:uniqueIdentifier>
-                          </j.0:OBJECT_FILE>
-                        </j.1:used>
-                        <j.0:performedBy rdf:resource="#make"/>
-                        <j.0:performedBy rdf:resource="#cc"/>
-                        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                        >libhw_so_Compiling</j.1:uniqueIdentifier>
-                      </j.0:COMPILE>
-                    </j.0:createBy>
-                    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >libhw_so</j.1:uniqueIdentifier>
-                  </j.0:LIBRARY>
-                </j.1:used>
+                <j.1:used rdf:resource="#counter_c"/>
                 <j.1:used>
                   <j.0:OBJECT_FILE rdf:ID="output_o">
                     <j.0:createBy>
@@ -129,16 +94,21 @@
                             >output_h</j.1:uniqueIdentifier>
                           </j.0:CODE_FILE>
                         </j.1:used>
-                        <j.1:used>
-                          <j.0:CODE_FILE rdf:ID="output_c">
-                            <j.0:language rdf:resource="#c"/>
+                        <j.1:used rdf:resource="#output_c"/>
+                        <j.0:performedBy>
+                          <j.1:AGENT rdf:ID="make">
                             <j.1:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
-                            >output_c</j.1:uniqueIdentifier>
-                          </j.0:CODE_FILE>
-                        </j.1:used>
-                        <j.0:performedBy rdf:resource="#make"/>
-                        <j.0:performedBy rdf:resource="#cc"/>
+                            >make</j.1:uniqueIdentifier>
+                          </j.1:AGENT>
+                        </j.0:performedBy>
+                        <j.0:performedBy>
+                          <j.0:COMPILER rdf:ID="cc">
+                            <j.1:uniqueIdentifier rdf:datatype=
+                            "http://www.w3.org/2001/XMLSchema#string"
+                            >cc</j.1:uniqueIdentifier>
+                          </j.0:COMPILER>
+                        </j.0:performedBy>
                         <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                         >output_o_Compiling</j.1:uniqueIdentifier>
                       </j.0:COMPILE>
@@ -187,7 +157,50 @@
             >counter_exe</j.1:uniqueIdentifier>
           </j.0:EXECUTABLE>
         </j.1:used>
-        <j.1:used rdf:resource="#libhw_so"/>
+        <j.1:used>
+          <j.0:LIBRARY rdf:ID="libhw_so">
+            <j.0:createBy>
+              <j.0:COMPILE rdf:ID="libhw_so_Compiling">
+                <j.1:used>
+                  <j.0:OBJECT_FILE rdf:ID="hw_o">
+                    <j.0:createBy>
+                      <j.0:COMPILE rdf:ID="hw_o_Compiling">
+                        <j.1:used>
+                          <j.0:CODE_FILE rdf:ID="hw_h">
+                            <j.0:language rdf:resource="#c"/>
+                            <j.1:uniqueIdentifier rdf:datatype=
+                            "http://www.w3.org/2001/XMLSchema#string"
+                            >hw_h</j.1:uniqueIdentifier>
+                          </j.0:CODE_FILE>
+                        </j.1:used>
+                        <j.1:used>
+                          <j.0:CODE_FILE rdf:ID="hw_c">
+                            <j.0:language rdf:resource="#c"/>
+                            <j.1:uniqueIdentifier rdf:datatype=
+                            "http://www.w3.org/2001/XMLSchema#string"
+                            >hw_c</j.1:uniqueIdentifier>
+                          </j.0:CODE_FILE>
+                        </j.1:used>
+                        <j.0:performedBy rdf:resource="#make"/>
+                        <j.0:performedBy rdf:resource="#cc"/>
+                        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >hw_o_Compiling</j.1:uniqueIdentifier>
+                      </j.0:COMPILE>
+                    </j.0:createBy>
+                    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >hw_o</j.1:uniqueIdentifier>
+                  </j.0:OBJECT_FILE>
+                </j.1:used>
+                <j.0:performedBy rdf:resource="#make"/>
+                <j.0:performedBy rdf:resource="#cc"/>
+                <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >libhw_so_Compiling</j.1:uniqueIdentifier>
+              </j.0:COMPILE>
+            </j.0:createBy>
+            <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >libhw_so</j.1:uniqueIdentifier>
+          </j.0:LIBRARY>
+        </j.1:used>
         <j.1:used>
           <j.0:CONFIG_FILE rdf:ID="conf_json">
             <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -233,4 +246,14 @@
     <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >test_exe_Compiling</j.1:uniqueIdentifier>
   </j.0:COMPILE>
+  <j.0:COMPONENT rdf:ID="input_function">
+    <j.0:definedIn rdf:resource="#input_c"/>
+    <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >void()</j.0:valueType>
+    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >input</j.0:name>
+    <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
+    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >input_function</j.1:uniqueIdentifier>
+  </j.0:COMPONENT>
 </rdf:RDF>

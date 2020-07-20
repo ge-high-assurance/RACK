@@ -6,7 +6,7 @@ SYSTEM (note "SYSTEMs classify logical parts of the whole system being developed
 	partOf (note "used to define a relationship to a higher level system") describes SYSTEM with values of type ENTITY.
 	partOf is a type of wasDerivedFrom.
 
-	producedBy (note "trace to ACTIVITYs participating in developing this SYSTEM") describes SYSTEM with values of type SYSTEM_DEVELOPMENT.
+	producedBy (note "trace to ACTIVITYs participating in developing this SYSTEM") describes SYSTEM with values of type ACTIVITY.
 	producedBy is a type of wasGeneratedBy.
 
 	provides (note "list of entities that this SYSTEM provides to others") describes SYSTEM with values of type ENTITY.
@@ -26,7 +26,7 @@ INTERFACE (note "INTERFACEs describe directed connections between an ENTITY (e.g
 	destination is the inverse of requires.
 	destination is a type of wasDerivedFrom.
 
-	identifiedBy (note "ACTIVITY out of which this INTERFACE was identified") describes INTERFACE with values of type SYSTEM_DEVELOPMENT.
+	identifiedBy (note "ACTIVITY out of which this INTERFACE was identified") describes INTERFACE with values of type ACTIVITY.
 	identifiedBy is a type of wasGeneratedBy.
 
 

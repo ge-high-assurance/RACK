@@ -52,10 +52,10 @@ Write: data
   Ask: "select distinct ?uniqueIdentifier ?governsId ?satisfiesId ?mitigatesId ?createdById ?text where
        {  ?REQUIREMENT <rdf:type> <REQUIREMENT>
         . ?REQUIREMENT <uniqueIdentifier> ?uniqueIdentifier
-        . OPTIONAL{?REQUIREMENT <governs> ?governs . ?governs <uniqueIdentifier> ?governsId}
-        . OPTIONAL{?REQUIREMENT <satisfies> ?satisfies . ?satisfies <uniqueIdentifier> ?satisfiesId}
-        . OPTIONAL{?REQUIREMENT <mitigates> ?mitigates . ?mitigates <uniqueIdentifier> ?mitigatesId}
-        . OPTIONAL{?REQUIREMENT <createdBy> ?createdBy . ?createdBy <uniqueIdentifier> ?createdById}
+        . OPTIONAL{?REQUIREMENT <Rq:governs> ?governs . ?governs <uniqueIdentifier> ?governsId}
+        . OPTIONAL{?REQUIREMENT <Rq:satisfies> ?satisfies . ?satisfies <uniqueIdentifier> ?satisfiesId}
+        . OPTIONAL{?REQUIREMENT <Rq:mitigates> ?mitigates . ?mitigates <uniqueIdentifier> ?mitigatesId}
+        . OPTIONAL{?REQUIREMENT <Rq:createdBy> ?createdBy . ?createdBy <uniqueIdentifier> ?createdById}
         . OPTIONAL{?REQUIREMENT <text> ?text}
        } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/REQUIREMENT.csv".

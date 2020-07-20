@@ -49,12 +49,14 @@ def sparql_connection(base_url, data_graph, triple_store):
 
     # Default to RACK in a Box triple-store location
     triple_store = triple_store or (base_url + ":3030/RACK")
-
-    return json.dumps({
+    conn = {
         "name": "%NODEGROUP%",
         "model": [{"type": "fuseki", "url": triple_store, "graph": MODEL_GRAPH}],
-        "data":  [{"type": "fuseki", "url": triple_store, "graph": data_graph}],
-        })
+        "data": []
+        }
+    if data_graph is not None:
+        conn["data"].append({"type": "fuseki", "url": triple_store, "graph": data_graph})
+    return json.dumps(conn)
 
 def clear_graph(conn, which_graph='data'):
     """Clear all the existing data in the data or model graph"""
@@ -96,16 +98,15 @@ def ingest_csv_driver(config_path, base_url, data_graph, triple_store):
     for step in steps:
         ingest_csv(conn, step[0], os.path.join(base_path, step[1]))
 
-def ingest_owl_driver(config_path, base_url, data_graph, triple_store):
+def ingest_owl_driver(config_path, base_url, triple_store):
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
         validate(config, INGEST_OWL_CONFIG_SCHEMA)
 
     files = config['files']
-    data_graph = data_graph or config['data-graph']
     base_path = Path(config_path).parent
 
-    conn = sparql_connection(base_url, data_graph, triple_store)
+    conn = sparql_connection(base_url, None, triple_store)
 
     semtk3.set_host(base_url)
 
@@ -114,11 +115,10 @@ def ingest_owl_driver(config_path, base_url, data_graph, triple_store):
         ingest_owl(conn, base_path / f)
 
 def dispatch_data_import(args):
-    print(args)
     ingest_csv_driver(args.config, args.base_url, args.data_graph, args.triple_store)
 
 def dispatch_plumbing_model(args):
-    ingest_owl_driver(args.config, args.base_url, args.data_graph, args.triple_store)
+    ingest_owl_driver(args.config, args.base_url, args.triple_store)
 
 def main():
     """Main function"""
@@ -135,13 +135,11 @@ def main():
     plumbing_subparsers = plumbing_parser.add_subparsers(dest='command', required=True)
     plumbing_model_parser = plumbing_subparsers.add_parser('model', help='Modify the data model')
 
-    # TODO(lb): Should we have config, URL, --data-graph, and --triple-store all be top-level arguments?
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     data_import_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
     data_import_parser.set_defaults(func=dispatch_data_import)
 
     plumbing_model_parser.add_argument('config', type=str, help='Configuration YAML file')
-    plumbing_model_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
     plumbing_model_parser.set_defaults(func=dispatch_plumbing_model)
 
 

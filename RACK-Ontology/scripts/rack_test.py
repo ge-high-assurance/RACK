@@ -20,4 +20,4 @@ def test_load_csv():
 
 def test_load_owl():
     # Just test that it doesn't raise an exception
-    ingest_owl_driver("../OwlModels/import.yaml", "http://localhost", None, None)
+    ingest_owl_driver("../OwlModels/import.yaml", "http://localhost", None)

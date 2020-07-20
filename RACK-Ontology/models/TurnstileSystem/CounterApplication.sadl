@@ -127,6 +127,8 @@ main_function is a COMPONENT
     has componentType SOURCE_FUNCTION
     has name "main"
     has valueType "int(int argc, char* argv[])"
+    has controlFlowsToUnconditionally input_function
+    has controlFlowsToUnconditionally output_function
     has definedIn counter_c.
 
 counter_exe_Compiling is a COMPILE

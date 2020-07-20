@@ -144,3 +144,5 @@ COMPONENT is a type of ENTITY.
     subcomponentOf (note "A structural sub-component, e.g., a function might be a subcomponent of module.") describes COMPONENT with values of type ENTITY.
     requirements (note "Low-level requirements that apply to this component.") describes COMPONENT with values of type ENTITY.
     annotations (note "Analysis annotations that apply to this component.") describes COMPONENT with values of type ENTITY.
+    controlFlowsToUnconditionally (note "Control flows from this component to the target unconditionally.") describes COMPONENT with values of type COMPONENT.
+    controlFlowsToConditionally (note "Control flows from this component to the target conditionally.") describes COMPONENT with values of type COMPONENT.

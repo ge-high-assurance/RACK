@@ -1,12 +1,20 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:sw="http://arcos.rack/SOFTWARE"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:Rq="http://arcos.rack/REQUIREMENTS"
+    xmlns:sys="http://arcos.rack/SYSTEM"
     xmlns:genpropinfo="http://arcos.rack/GeneratePropInfoCSV#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:A="http://arcos.rack/ANALYSIS"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:tst="http://arcos.rack/TESTING"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:H="http://arcos.rack/HAZARD"
+    xmlns:Rv="http://arcos.rack/REVIEW"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:sacms="http://arcos.rack/SACM-S"
   xml:base="http://arcos.rack/GeneratePropInfoCSV">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="ANALYSIS"/>

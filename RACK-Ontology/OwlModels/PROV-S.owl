@@ -73,4 +73,24 @@
     <rdfs:range rdf:resource="#ENTITY"/>
     <rdfs:domain rdf:resource="#ACTIVITY"/>
   </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="endedAtTime">
+    <rdfs:comment xml:lang="en">The time an activity was ended</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:domain rdf:resource="#ACTIVITY"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="generatedAtTime">
+    <rdfs:comment xml:lang="en">The time this entity was created and available for use</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:domain rdf:resource="#ENTITY"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="startedAtTime">
+    <rdfs:comment xml:lang="en">The time an activity was started</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:domain rdf:resource="#ACTIVITY"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="invalidatedAtTime">
+    <rdfs:comment xml:lang="en">The time at which this entity was no longer usable</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:domain rdf:resource="#ENTITY"/>
+  </owl:DatatypeProperty>
 </rdf:RDF>

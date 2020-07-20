@@ -11,7 +11,10 @@
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
     xmlns:trnstl="http://TurnstileSystem/Turnstiles"
     xmlns:ingaterq="http://TurnstileSystem/InGateRequirement"
+<<<<<<< HEAD
+=======
     xmlns:cntrapputst="http://TurnstileSystem/CounterApplicationUnitTesting"
+>>>>>>> master
     xmlns:cntrappllr="http://TurnstileSystem/CounterApplicationLLR"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:ha="http://TurnstileSystem/HazardAssesment"

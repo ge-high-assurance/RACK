@@ -1,7 +1,6 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:sys="http://arcos.rack/SYSTEM"
     xmlns:m881D="http://arcos.rack/MIL-STD-881D/MIL-STD-881D#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"

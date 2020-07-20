@@ -1,7 +1,6 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:provs="http://arcos.rack/PROV-S"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
@@ -17,9 +16,11 @@
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'TESTING.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
   <owl:Class rdf:ID="TEST_DEVELOPMENT">
+    <rdfs:comment xml:lang="en">ACTIVITY of creating a TEST to participate in the evaluation of a requirement</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST">
+    <rdfs:comment xml:lang="en">description of a single test</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST_STATUS">
@@ -34,9 +35,11 @@
     </owl:equivalentClass>
   </owl:Class>
   <owl:Class rdf:ID="TEST_RESULT">
+    <rdfs:comment xml:lang="en">result corresponding to one execution of one TEST</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST_EXECUTION">
+    <rdfs:comment xml:lang="en">ACTIVITY of performing a TEST and record its corresponding TEST_RESULT</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="developedBy">
@@ -58,6 +61,7 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="producedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
+    <rdfs:comment xml:lang="en">trace to a TEST_DEVELOPMENT activity</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#TEST"/>
   </owl:ObjectProperty>
@@ -74,7 +78,7 @@
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="result">
-    <rdfs:comment xml:lang="en"></rdfs:comment>
+    <rdfs:comment xml:lang="en">the pass/failure/unknown status resulting from a TEST_EXECUTION</rdfs:comment>
     <rdfs:range rdf:resource="#TEST_STATUS"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
   </owl:ObjectProperty>

@@ -127,7 +127,7 @@
 				"transId": "trans_0",
 				"name": "rm_null",
 				"transType": "replaceAll",
-				"arg1": "null",
+				"arg1": "^null$",
 				"arg2": ""
 			}
 		],

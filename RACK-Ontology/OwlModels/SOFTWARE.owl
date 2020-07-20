@@ -3,6 +3,7 @@
     xmlns:sw="http://arcos.rack/SOFTWARE#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
     xmlns:j.0="http://arcos.rack/PROV-S#"
+    xmlns:provs="http://arcos.rack/PROV-S"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"

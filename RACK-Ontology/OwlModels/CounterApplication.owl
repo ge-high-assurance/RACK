@@ -1,14 +1,17 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:trnstlsys="http://TurnstileSystem/CounterApplication#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:sw="http://arcos.rack/SOFTWARE"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:sys="http://arcos.rack/SYSTEM"
     xmlns:j.0="http://arcos.rack/SOFTWARE#"
     xmlns:j.1="http://arcos.rack/PROV-S#"
     xmlns:j.2="http://arcos.rack/SYSTEM#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:trnstlsys="http://TurnstileSystem/CounterApplication#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:trnstl="http://TurnstileSystem/Turnstiles"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://TurnstileSystem/CounterApplication">
   <owl:Ontology rdf:about="">

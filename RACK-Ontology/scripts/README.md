@@ -80,10 +80,10 @@ section above.
 
 ```
 $ source venv/bin/activate
-(venv) $ ./load_data.py ../models/TurnstileSystem/Data/import.yaml http://localhost
+(venv) $ ./rack.py data import ../models/TurnstileSystem/Data/import.yaml http://localhost
 INFO:semtk3:Percent complete:  80%
 INFO:semtk3:Percent complete:  100%
-Clear graph:  Success Update succeeded 
+Clear graph:  Success Update succeeded
 Loading [TA1 ingest1 system]
 Records: 8	Failures: 0
 Loading [TA1 ingest2 interface]

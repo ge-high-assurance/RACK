@@ -25,27 +25,23 @@ $ pip install -r requirements.txt
 ## Usage
 
 ```
-usage: load_data.py [-h] [--data-graph DATA_GRAPH]
-                    [--triple-store TRIPLE_STORE]
-                    config URL
+usage: rack.py [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE] {data,plumbing} ...
 
-Load CSV data into RACK in a Box
+RACK in a Box toolkit
 
 positional arguments:
-  config                Configuration YAML file
-  URL                   Base SemTK instance URL
+  {data,plumbing}
+    data                Import or export CSV data
+    plumbing            Tools for RACK developers
 
 optional arguments:
   -h, --help            show this help message and exit
-  --data-graph DATA_GRAPH
-                        Override data graph URL
+  --base-url BASE_URL   Base SemTK instance URL
   --triple-store TRIPLE_STORE
                         Override Fuseki URL
 ```
 
-The *config* argument is a file path pointing to a data import configuration file.
-
-The *URL* argument is expected to point to the base of a RACK in a Box instance.
+The *base-url* overrides a localhost installation of RACK in a Box.
 
 The *triple-store* URL argument overrides the default RACK in a Box triple-store URL.
 
@@ -80,7 +76,7 @@ section above.
 
 ```
 $ source venv/bin/activate
-(venv) $ ./rack.py data import ../models/TurnstileSystem/Data/import.yaml http://localhost
+(venv) $ ./rack.py data import ../models/TurnstileSystem/Data/import.yaml
 INFO:semtk3:Percent complete:  80%
 INFO:semtk3:Percent complete:  100%
 Clear graph:  Success Update succeeded

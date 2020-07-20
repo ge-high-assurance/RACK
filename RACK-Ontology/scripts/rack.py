@@ -18,6 +18,8 @@ import yaml
 __author__ = "Eric Mertens"
 __email__ = "emertens@galois.com"
 
+DEFAULT_BASE_URL = "http://localhost"
+
 MODEL_GRAPH = "http://rack001/model"
 
 INGEST_CSV_CONFIG_SCHEMA = {
@@ -73,11 +75,7 @@ def ingest_csv(conn, nodegroup, csv_name):
 
 def ingest_owl(conn, owl_file):
     print(f'Ingesting [{owl_file}]')
-    result = semtk3.upload_owl(owl_file, conn, "rack", "rack")
-    if result["status"] != "success":
-        logger.error("Error while ingesting OWL files")
-        sys.exit(1)
-
+    semtk3.upload_owl(owl_file, conn, "rack", "rack")
 
 def ingest_csv_driver(config_path, base_url, data_graph, triple_store):
 
@@ -115,14 +113,18 @@ def ingest_owl_driver(config_path, base_url, data_graph, triple_store):
         ingest_owl(conn, base_path / f)
 
 def dispatch_data_import(args):
-    ingest_csv_driver(args.config, args.URL, args.data_graph, args.triple_store)
+    print(args)
+    ingest_csv_driver(args.config, args.base_url, args.data_graph, args.triple_store)
 
 def dispatch_plumbing_model(args):
-    ingest_owl_driver(args.config, args.URL, args.data_graph, args.triple_store)
+    ingest_owl_driver(args.config, args.base_url, args.data_graph, args.triple_store)
 
 def main():
     """Main function"""
-    parser = argparse.ArgumentParser(description='Load CSV data into RACK in a Box')
+    parser = argparse.ArgumentParser(description='RACK in a Box toolkit')
+    parser.add_argument('--base-url', type=str, default=DEFAULT_BASE_URL, help='Base SemTK instance URL')
+    parser.add_argument('--triple-store', type=str, help='Override Fuseki URL')
+
     subparsers = parser.add_subparsers(dest='command')
 
     data_parser = subparsers.add_parser('data', help='Import or export CSV data')
@@ -134,15 +136,12 @@ def main():
 
     # TODO(lb): Should we have config, URL, --data-graph, and --triple-store all be top-level arguments?
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
-    data_import_parser.add_argument('URL', type=str, help='Base SemTK instance URL')
     data_import_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
-    data_import_parser.add_argument('--triple-store', type=str, help='Override Fuseki URL')
     data_import_parser.set_defaults(func=dispatch_data_import)
 
     plumbing_model_parser.add_argument('config', type=str, help='Configuration YAML file')
     plumbing_model_parser.add_argument('URL', type=str, help='Base SemTK instance URL')
     plumbing_model_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
-    plumbing_model_parser.add_argument('--triple-store', type=str, help='Override Fuseki URL')
     plumbing_model_parser.set_defaults(func=dispatch_plumbing_model)
 
 
@@ -152,12 +151,12 @@ def main():
 
     try:
         if args.command is None:
-            logging.error(f'Subcommand required (use --help to see options)')
+            logging.error('Subcommand required (use --help to see options)')
             sys.exit(1)
         try:
             func = args.func
         except AttributeError:
-            logging.error(f'Unknown subcommand: "{args.command}"')
+            logging.error('Unknown subcommand: %s', args.command)
             sys.exit(1)
         func(args)
     except requests.ConnectionError as exc:

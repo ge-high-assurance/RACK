@@ -76,6 +76,7 @@ def clear_graph(conn: Connection, which_graph: Graph=Graph.DATA) -> None:
     print(result)
 
 def run_query(conn: Connection, nodegroup: str) -> None:
+    semtk3.SEMTK3_CONN_OVERRIDE = conn
     semtk_table = semtk3.select_by_id(nodegroup)
     print()
     print(tabulate(semtk_table.get_rows(), headers=semtk_table.get_column_names()))

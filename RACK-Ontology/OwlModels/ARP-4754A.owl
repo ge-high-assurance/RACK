@@ -1,0 +1,322 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:j.0="http://arcos.rack/PROV-S#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:j.1="http://arcos.rack/PROCESS#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:ARP-4754A="http://common/ARP-4754A#"
+    xmlns:j.2="http://arcos.rack/DOCUMENT#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://common/ARP-4754A">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://arcos.rack/DOCUMENT"/>
+    <owl:imports rdf:resource="http://arcos.rack/PROCESS"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'ARP-4754A.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <j.2:SPECIFICATION rdf:ID="ARP-4754A">
+    <j.2:content>
+      <j.2:SECTION rdf:ID="ARP-4754A-AppendixA">
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4775-4.6">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Validation compliance substantiation is provided.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4775-4.6</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4778-5.3">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Product implementation complies with aircraft, and system requirements.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4778-5.3</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4779-5.4">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Safety requirements are verified.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4779-5.4</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4764-3.2">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The preliminary aircraft safety assessment is performed.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4764-3.2</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4774-4.5">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            ></j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4774-4.5</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4780-5.5">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Verification compliance substantiation is included.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4780-5.5</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4758-2.3">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >System requirements including assumptions and system interfaces are defined.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4758-2.3</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4763-3.1">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The aircraft/system functional hazard assessment is performed.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4763-3.1</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4754-1.1">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >System development and integral process activities are defined</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4754-1.1</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4783-6.2">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Configuration baseline and derivatives are established.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4783-6.2</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4757-2.2">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Aircraft functions are allocated to systems</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4757-2.2</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4785-6.4">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Archive and retrieval are established.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4785-6.4</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4759-2.4">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >System derived requirements (including derived safety-related requirements) are defined and rationale explained</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4759-2.4</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4788-8.1">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Compliance substantiation is provided.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4788-8.1</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4761-2.6">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >System requirements are allocated to items.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4761-2.6</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4765-3.3">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The preliminary system safety assessment is performed.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4765-3.3</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4760-2.5">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >System architecture is defined.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4760-2.5</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4768-3.6">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The system safety assessment is performed.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4768-3.6</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4755-1.2">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Transition criteria and inter-relationship among processes are defined</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4755-1.2</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4784-6.3">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Problem reporting , change control, change review, and configuration status accounting are established.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4784-6.3</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4770-4.1">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Aircraft, system, items requirements are complete and correct.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4770-4.1</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4769-3.7">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Independence requirements in functions, systems and items are captured.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4769-3.7</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4771-4.2">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Assumptions are justified and validated.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4771-4.2</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4767-3.5">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The aircraft safety assessment is performed.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4767-3.5</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4772-4.3">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Derived requirements are justified and validated.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4772-4.3</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4782-6.1">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Configuration items are identified</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4782-6.1</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4777-5.2">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Verification demonstrates intended function and confidence of no unintended function impacts to safety.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4777-5.2</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4787-7.2">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Development activities and processes are conducted in accordance with those plans.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4787-7.2</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4786-7.1">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Assurance is obtained that necessary plans are developed and maintained for all aspects of system certification.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4786-7.1</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4766-3.4">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The common cause analyses are performed.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4766-3.4</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4773-4.4">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Requirements are traceable.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4773-4.4</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4776-5.1">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Test or demonstration procedures are correct.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4776-5.1</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4762-2.7">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Appropriate item, system and aircraft integrations are performed.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4762-2.7</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >PROCESS OBJECTIVES DATA</j.2:title>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4781-5.6">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Assessment of deficiencies and their related impact on safety is identified.</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4781-5.6</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+        <j.2:content>
+          <j.1:OBJECTIVE rdf:ID="ARP-4756-2.1">
+            <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Aircraft-level functions, functional requirements, functional interfaces and assumptions are defined</j.1:description>
+            <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ARP-4756-2.1</j.0:uniqueIdentifier>
+          </j.1:OBJECTIVE>
+        </j.2:content>
+      </j.2:SECTION>
+    </j.2:content>
+    <j.2:approvalAuthority>
+      <j.0:AGENT rdf:ID="SAE"/>
+    </j.2:approvalAuthority>
+    <j.2:issuingOrganization>
+      <j.0:AGENT rdf:ID="WG-63"/>
+    </j.2:issuingOrganization>
+    <j.2:issuingOrganization>
+      <j.0:AGENT rdf:ID="S-18"/>
+    </j.2:issuingOrganization>
+    <j.2:status rdf:resource="http://arcos.rack/DOCUMENT#Released"/>
+    <j.2:dateOfIssue rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2010-12-01</j.2:dateOfIssue>
+  </j.2:SPECIFICATION>
+</rdf:RDF>

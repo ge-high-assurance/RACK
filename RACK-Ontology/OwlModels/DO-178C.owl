@@ -1,0 +1,667 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:j.0="http://arcos.rack/PROV-S#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:DO-178C="http://common/DO-178C#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:j.1="http://arcos.rack/PROCESS#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:j.2="http://arcos.rack/DOCUMENT#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://common/DO-178C">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://arcos.rack/DOCUMENT"/>
+    <owl:imports rdf:resource="http://arcos.rack/PROCESS"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'DO-178C.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <j.2:SPECIFICATION rdf:ID="DO-178C">
+    <j.2:content>
+      <j.2:SECTION rdf:ID="DO-178C-AnnexA">
+        <j.2:content>
+          <j.2:SECTION rdf:ID="A-6">
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-6-5">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Executable Object Code is compatible with target computer. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-6-5</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-6-4">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Executable Object Code is robust with low-level requirements. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-6-4</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-6-3">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Executable Object Code complies with low-level requirements. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-6-3</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-6-2">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Executable Object Code is robust with high-level requirements. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-6-2</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-6-1">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Executable Object Code complies with high-level requirements. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-6-1</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Verification of Outputs of Integration Process</j.2:title>
+          </j.2:SECTION>
+        </j.2:content>
+        <j.2:content>
+          <j.2:SECTION rdf:ID="A-10">
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-10-3">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Compliance substantiation is provided. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-10-3</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-10-2">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >The means of compliance is proposed and agreement with the Plan for Software Aspects of Certification is obtained. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-10-2</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-10-1">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Communication and understanding between the applicant and the certification authority is established. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-10-1</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Certification Liaison Process</j.2:title>
+          </j.2:SECTION>
+        </j.2:content>
+        <j.2:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >PROCESS OBJECTIVES AND OUTPUTS BY SOFTWARE LEVEL</j.2:title>
+        <j.2:content>
+          <j.2:SECTION rdf:ID="A-7">
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-7-6">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Test coverage of software structure (decision coverage) is achieved. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-7-6</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-7-2">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Test results are correct and discrepancies explained. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-7-2</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Verification of Verification Process Results</j.2:title>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-7-5">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Test coverage of software structure (modified condition/decision coverage) is achieved. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-7-5</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-7-8">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Test coverage of software structure (data coupling and control coupling) is achieved. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-7-8</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-7-1">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Test procedures are correct. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-7-1</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-7-4">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Test coverage of low-level requirements is achieved. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-7-4</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-7-7">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Test coverage of software structure (statement coverage) is achieved. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-7-7</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-7-3">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Test coverage of high-level requirements is achieved. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-7-3</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-7-9">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Verification of additional code, that cannot be traced to Source Code, is achieved. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-7-9</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+          </j.2:SECTION>
+        </j.2:content>
+        <j.2:content>
+          <j.2:SECTION rdf:ID="A-1">
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-1-7">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Development and revision of software plans are coordinated. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-1-7</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-1-6">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Software plans comply with this document. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-1-6</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-1-5">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Software development standards are defined. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-1-5</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-1-4">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Additional considerations are addressed. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-1-4</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-1-3">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Software life cycle environment is selected and defined. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-1-3</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-1-2">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >The software life cycle(s), including the inter-relationships between the processes, their sequencing, feedback mechanisms, and transition criteria, is defined. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-1-2</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-1-1">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >The activities of the software life cycle processes are defined. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-1-1</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Software Planning Process</j.2:title>
+          </j.2:SECTION>
+        </j.2:content>
+        <j.2:content>
+          <j.2:SECTION rdf:ID="A-3">
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-3-7">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Algorithms are accurate. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-3-7</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-3-6">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >High-level requirements are traceable to system requirements. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-3-6</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-3-5">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >High-level requirements conform to standards. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-3-5</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-3-4">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >High-level requirements are verifiable. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-3-4</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-3-3">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >High-level requirements are compatible with target computer. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-3-3</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-3-2">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >High-level requirements are accurate and consistent. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-3-2</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-3-1">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >High-level requirements comply with system requirements. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-3-1</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Verification of Outputs of Software Requirements Process</j.2:title>
+          </j.2:SECTION>
+        </j.2:content>
+        <j.2:content>
+          <j.2:SECTION rdf:ID="A-9">
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-9-5">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Assurance is obtained that software conformity review is conducted. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-9-5</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-9-4">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Assurance is obtained that transition criteria for the software life cycle processes are satisfied. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-9-4</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-9-3">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Assurance is obtained that software life cycle processes comply with approved software standards. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-9-3</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-9-2">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Assurance is obtained that software life cycle processes comply with approved software plans. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-9-2</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-9-1">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Assurance is obtained that software plans and standards are developed and reviewed for compliance with this document and for consistency. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-9-1</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Software Quality Assurance Process</j.2:title>
+          </j.2:SECTION>
+        </j.2:content>
+        <j.2:content>
+          <j.2:SECTION rdf:ID="A-8">
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-8-6">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Software life cycle environment control is established. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-8-6</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-8-5">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Software load control is established. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-8-5</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-8-4">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Archive, retrieval, and release are established. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-8-4</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-8-3">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Problem reporting, change control, change review, and configuration status accounting are established. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-8-3</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-8-2">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Baselines and traceability are established. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-8-2</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-8-1">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Configuration items are identified. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-8-1</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Software Configuration Management Process</j.2:title>
+          </j.2:SECTION>
+        </j.2:content>
+        <j.2:content>
+          <j.2:SECTION rdf:ID="A-5">
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-5-3">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Source Code is verifiable. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-5-3</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-5-8">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Parameter Data Item File is correct and complete </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-5-8</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-5-5">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Source Code is traceable to low-level requirements. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-5-5</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Verification of Outputs of Software Coding &amp; Integration Processes</j.2:title>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-5-2">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Source Code complies with software architecture. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-5-2</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-5-4">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Source Code conforms to standards. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-5-4</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-5-6">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Source Code is accurate and consistent. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-5-6</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-5-1">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Source Code complies with low-level requirements. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-5-1</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-5-7">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Output of software integration process is complete and correct. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-5-7</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-5-9">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Verification of Parameter Data Item File is achieved. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-5-9</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+          </j.2:SECTION>
+        </j.2:content>
+        <j.2:content>
+          <j.2:SECTION rdf:ID="A-2">
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-2-7">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Executable Object Code and Parameter Data Item Files, if any, are produced and loaded in the target computer. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-2-7</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-2-6">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Source Code is developed. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-2-6</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-2-5">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Derived lowlevel requirements are defined and provided to the system processes, including the system safety assessment process. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-2-5</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-2-4">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Low-level requirements are developed. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-2-4</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-2-3">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Software architecture is developed. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-2-3</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-2-2">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Derived highlevel requirements are defined and provided to the system processes, including the system safety assessment process. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-2-2</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-2-1">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >High-level requirements are developed. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-2-1</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Software Development Process</j.2:title>
+          </j.2:SECTION>
+        </j.2:content>
+        <j.2:content>
+          <j.2:SECTION rdf:ID="A-4">
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-1">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Low-level requirements comply with high-level requirements. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-1</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-3">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Low-level requirements are compatible with target computer. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-3</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-11">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Software architecture is verifiable. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-11</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-8">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Software architecture is compatible with highlevel requirements. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-8</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Verification of Outputs of Software Design Process</j.2:title>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-5">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Low-level requirements conform to standards. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-5</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-7">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Algorithms are accurate. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-7</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-10">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Software architecture is compatible with target computer. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-10</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-2">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Low-level requirements are accurate and consistent. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-2</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-4">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Low-level requirements are verifiable. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-4</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-12">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Software architecture conforms to standards. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-12</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-9">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Software architecture is consistent. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-9</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-6">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Low-level requirements are traceable to highlevel requirements. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-6</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+            <j.2:content>
+              <j.1:OBJECTIVE rdf:ID="A-4-13">
+                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >Software partitioning integrity is confirmed. </j.1:description>
+                <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >A-4-13</j.0:uniqueIdentifier>
+              </j.1:OBJECTIVE>
+            </j.2:content>
+          </j.2:SECTION>
+        </j.2:content>
+      </j.2:SECTION>
+    </j.2:content>
+    <j.2:approvalAuthority>
+      <j.0:AGENT rdf:ID="RTCA"/>
+    </j.2:approvalAuthority>
+    <j.2:issuingOrganization>
+      <j.0:AGENT rdf:ID="SC-205"/>
+    </j.2:issuingOrganization>
+    <j.2:status rdf:resource="http://arcos.rack/DOCUMENT#Released"/>
+    <j.2:dateOfIssue rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2011-12-13</j.2:dateOfIssue>
+  </j.2:SPECIFICATION>
+</rdf:RDF>

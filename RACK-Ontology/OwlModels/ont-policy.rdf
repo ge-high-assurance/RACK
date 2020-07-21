@@ -135,7 +135,7 @@
   </j.0:OntologySpec>
   <j.0:OntologySpec>
     <j.0:publicURI rdf:resource="http://CPP/CPP.metrics"/>
-    <j.0:altURL rdf:resource="file:/home/val/galois/projects/arcos/RACK/RACK-Ontology/OwlModels/CPP.sadl.metrics.owl"/>
+    <j.0:altURL rdf:resource="file:/C:/ARCOS/Master/RACK/RACK-Ontology/OwlModels/CPP.sadl.metrics.owl"/>
     <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
     <j.0:createdBy>SRL_Metrics</j.0:createdBy>
   </j.0:OntologySpec>
@@ -461,7 +461,7 @@
   </j.0:OntologySpec>
   <j.0:OntologySpec>
     <j.0:publicURI rdf:resource="http://CPP/CPP"/>
-    <j.0:altURL rdf:resource="file:/home/val/galois/projects/arcos/RACK/RACK-Ontology/OwlModels/CPP.owl"/>
+    <j.0:altURL rdf:resource="file:/C:/ARCOS/Master/RACK/RACK-Ontology/OwlModels/CPP.owl"/>
     <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
     <j.0:createdBy>SADL</j.0:createdBy>
     <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"

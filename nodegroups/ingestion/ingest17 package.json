@@ -120,10 +120,10 @@
             "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
         ],
-        "NodeName": "COMPILE",
+        "NodeName": "PACKAGE",
         "subClassNames": [],
         "isRuntimeConstrained": false,
-        "SparqlID": "?COMPILE",
+        "SparqlID": "?PACKAGE",
         "valueConstraint": "",
         "deletionMode": "NO_DELETE",
         "nodeList": [
@@ -168,7 +168,7 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           }
         ],
-        "fullURIName": "http://arcos.rack/SOFTWARE#COMPILE"
+        "fullURIName": "http://arcos.rack/SOFTWARE#PACKAGE"
       }
     ],
     "limit": 0,
@@ -180,8 +180,8 @@
       {
         "mapping": [],
         "URILookupMode": "createIfMissing",
-        "sparqlID": "?COMPILE",
-        "type": "http://arcos.rack/SOFTWARE#COMPILE",
+        "sparqlID": "?PACKAGE",
+        "type": "http://arcos.rack/SOFTWARE#PACKAGE",
         "props": [
           {
             "mapping": [
@@ -190,7 +190,7 @@
               }
             ],
             "URILookup": [
-              "?COMPILE"
+              "?PACKAGE"
             ],
             "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier"
           }
@@ -267,7 +267,7 @@
         "arg2": "",
         "transType": "replaceAll",
         "transId": "trans_0",
-        "arg1": "null",
+        "arg1": "^null$",
         "name": "rm_null"
       }
     ],

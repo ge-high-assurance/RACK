@@ -1,14 +1,17 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:trnstlsys="http://TurnstileSystem/CounterApplication#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:sw="http://arcos.rack/SOFTWARE"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:sys="http://arcos.rack/SYSTEM"
     xmlns:j.0="http://arcos.rack/SOFTWARE#"
     xmlns:j.1="http://arcos.rack/PROV-S#"
     xmlns:j.2="http://arcos.rack/SYSTEM#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:trnstlsys="http://TurnstileSystem/CounterApplication#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:trnstl="http://TurnstileSystem/Turnstiles"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://TurnstileSystem/CounterApplication">
   <owl:Ontology rdf:about="">
@@ -43,6 +46,42 @@
         >counter_c</j.1:uniqueIdentifier>
       </j.0:CODE_FILE>
     </j.0:definedIn>
+    <j.0:controlFlowsToUnconditionally>
+      <j.0:COMPONENT rdf:ID="output_function">
+        <j.0:definedIn>
+          <j.0:CODE_FILE rdf:ID="output_c">
+            <j.0:language rdf:resource="#c"/>
+            <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >output_c</j.1:uniqueIdentifier>
+          </j.0:CODE_FILE>
+        </j.0:definedIn>
+        <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >void()</j.0:valueType>
+        <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >output</j.0:name>
+        <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
+        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >output_function</j.1:uniqueIdentifier>
+      </j.0:COMPONENT>
+    </j.0:controlFlowsToUnconditionally>
+    <j.0:controlFlowsToUnconditionally>
+      <j.0:COMPONENT rdf:ID="input_function">
+        <j.0:definedIn>
+          <j.0:CODE_FILE rdf:ID="input_c">
+            <j.0:language rdf:resource="#c"/>
+            <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >input_c</j.1:uniqueIdentifier>
+          </j.0:CODE_FILE>
+        </j.0:definedIn>
+        <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >void()</j.0:valueType>
+        <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >input</j.0:name>
+        <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
+        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >input_function</j.1:uniqueIdentifier>
+      </j.0:COMPONENT>
+    </j.0:controlFlowsToUnconditionally>
     <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >int(int argc, char* argv[])</j.0:valueType>
     <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -50,22 +89,6 @@
     <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
     <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >main_function</j.1:uniqueIdentifier>
-  </j.0:COMPONENT>
-  <j.0:COMPONENT rdf:ID="output_function">
-    <j.0:definedIn>
-      <j.0:CODE_FILE rdf:ID="output_c">
-        <j.0:language rdf:resource="#c"/>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >output_c</j.1:uniqueIdentifier>
-      </j.0:CODE_FILE>
-    </j.0:definedIn>
-    <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >void()</j.0:valueType>
-    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >output</j.0:name>
-    <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >output_function</j.1:uniqueIdentifier>
   </j.0:COMPONENT>
   <j.0:PACKAGE_FILE rdf:ID="dist_tar">
     <j.1:wasGeneratedBy>
@@ -129,14 +152,7 @@
                             >input_h</j.1:uniqueIdentifier>
                           </j.0:CODE_FILE>
                         </j.1:used>
-                        <j.1:used>
-                          <j.0:CODE_FILE rdf:ID="input_c">
-                            <j.0:language rdf:resource="#c"/>
-                            <j.1:uniqueIdentifier rdf:datatype=
-                            "http://www.w3.org/2001/XMLSchema#string"
-                            >input_c</j.1:uniqueIdentifier>
-                          </j.0:CODE_FILE>
-                        </j.1:used>
+                        <j.1:used rdf:resource="#input_c"/>
                         <j.0:performedBy rdf:resource="#make"/>
                         <j.0:performedBy rdf:resource="#cc"/>
                         <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -246,14 +262,4 @@
     <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >test_exe_Compiling</j.1:uniqueIdentifier>
   </j.0:COMPILE>
-  <j.0:COMPONENT rdf:ID="input_function">
-    <j.0:definedIn rdf:resource="#input_c"/>
-    <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >void()</j.0:valueType>
-    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >input</j.0:name>
-    <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >input_function</j.1:uniqueIdentifier>
-  </j.0:COMPONENT>
 </rdf:RDF>

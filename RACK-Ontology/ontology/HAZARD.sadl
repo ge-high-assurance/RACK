@@ -1,14 +1,18 @@
 uri "http://arcos.rack/HAZARD" alias H.
 import "http://arcos.rack/PROV-S".
 
-HAZARD is a type of ENTITY.
-HAZARD (note "HAZARD as identified by some HAZARD_IDENTIFICATION ACTIVITY, to be assessed for certification").
-	definition (note "some description of the HAZARD") describes HAZARD with values of type string.
+HAZARD
+	(note "HAZARD as identified by some HAZARD_IDENTIFICATION ACTIVITY, to be assessed for certification")
+	is a type of ENTITY.
+
+	definition (note "Description of the HAZARD") describes HAZARD with values of type string.
 
 	source (note "ENTITY(s) that participate in causing this HAZARD") describes HAZARD with values of type ENTITY.
 	source is a type of wasDerivedFrom.
 
-HAZARD_IDENTIFICATION is a type of ACTIVITY.
-HAZARD_IDENTIFICATION (note "ACTIVITY that identifies potential sources of HAZARD whose risk must be evaluated").
+HAZARD_IDENTIFICATION
+	(note "ACTIVITY that identifies potential sources of HAZARD whose risk must be evaluated")
+	is a type of ACTIVITY.
+
 	author (note "AGENT(s) who work on this ACTIVITY") describes HAZARD_IDENTIFICATION with values of type AGENT.
 	author is a type of wasAssociatedWith.

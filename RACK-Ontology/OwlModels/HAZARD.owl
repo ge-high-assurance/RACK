@@ -2,6 +2,7 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:H="http://arcos.rack/HAZARD#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:provs="http://arcos.rack/PROV-S"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
@@ -36,7 +37,7 @@
     <rdfs:domain rdf:resource="#HAZARD"/>
   </owl:ObjectProperty>
   <owl:DatatypeProperty rdf:ID="definition">
-    <rdfs:comment xml:lang="en">some description of the HAZARD</rdfs:comment>
+    <rdfs:comment xml:lang="en">Description of the HAZARD</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#HAZARD"/>
   </owl:DatatypeProperty>

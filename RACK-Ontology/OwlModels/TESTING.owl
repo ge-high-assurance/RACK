@@ -1,6 +1,7 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:provs="http://arcos.rack/PROV-S"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
@@ -20,7 +21,7 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST">
-    <rdfs:comment xml:lang="en">description of a single test</rdfs:comment>
+    <rdfs:comment xml:lang="en">Description of a single test</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST_STATUS">
@@ -35,7 +36,7 @@
     </owl:equivalentClass>
   </owl:Class>
   <owl:Class rdf:ID="TEST_RESULT">
-    <rdfs:comment xml:lang="en">result corresponding to one execution of one TEST</rdfs:comment>
+    <rdfs:comment xml:lang="en">Result corresponding to one execution of one TEST</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST_EXECUTION">
@@ -50,7 +51,7 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="verifies">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">trace to a parent requirement (or any object) that the requirement is derived from</rdfs:comment>
+    <rdfs:comment xml:lang="en">Parent ENTITY(s) (e.g. REQUIREMENT) that this requirement is derived from</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#TEST"/>
   </owl:ObjectProperty>
@@ -61,24 +62,24 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="producedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:comment xml:lang="en">trace to a TEST_DEVELOPMENT activity</rdfs:comment>
+    <rdfs:comment xml:lang="en">TEST_DEVELOPMENT activity(s) this test belongs to</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#TEST"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="confirms">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">trace to the parent test</rdfs:comment>
+    <rdfs:comment xml:lang="en">Parent test(s) of this test result</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="executedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:comment xml:lang="en">activity that created the test result</rdfs:comment>
+    <rdfs:comment xml:lang="en">ACTIVITY(s) that created this test result</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="result">
-    <rdfs:comment xml:lang="en">the pass/failure/unknown status resulting from a TEST_EXECUTION</rdfs:comment>
+    <rdfs:comment xml:lang="en">Pass/Failed/Indeterminate status resulting from a TEST_EXECUTION</rdfs:comment>
     <rdfs:range rdf:resource="#TEST_STATUS"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
   </owl:ObjectProperty>

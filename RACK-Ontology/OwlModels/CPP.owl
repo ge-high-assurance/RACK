@@ -1,13 +1,16 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:j.0="http://arcos.rack/SOFTWARE#"
-    xmlns:j.1="http://arcos.rack/ANALYSIS#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:sw="http://arcos.rack/SOFTWARE"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:cpp="http://CPP/CPP#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:sys="http://arcos.rack/SYSTEM"
+    xmlns:j.0="http://arcos.rack/SOFTWARE#"
+    xmlns:j.1="http://arcos.rack/ANALYSIS#"
+    xmlns:A="http://arcos.rack/ANALYSIS"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://CPP/CPP">
   <owl:Ontology rdf:about="">

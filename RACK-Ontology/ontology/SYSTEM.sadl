@@ -1,22 +1,25 @@
 uri "http://arcos.rack/SYSTEM" alias sys.
 import "http://arcos.rack/PROV-S".
 
-SYSTEM is a type of ENTITY.
-SYSTEM (note "SYSTEMs classify logical parts of the whole system being developed").
-	partOf (note "used to define a relationship to a higher level system") describes SYSTEM with values of type ENTITY.
+SYSTEM
+	(note "SYSTEMs classify logical parts of the whole system being developed")
+	is a type of ENTITY.
+
+	partOf (note "Used to define a relationship to a higher level system") describes SYSTEM with values of type ENTITY.
 	partOf is a type of wasDerivedFrom.
 
-	producedBy (note "trace to ACTIVITYs participating in developing this SYSTEM") describes SYSTEM with values of type ACTIVITY.
+	producedBy (note "ACTIVITY(s) participating in developing this SYSTEM") describes SYSTEM with values of type ACTIVITY.
 	producedBy is a type of wasGeneratedBy.
 
-	provides (note "list of entities that this SYSTEM provides to others") describes SYSTEM with values of type ENTITY.
+	provides (note "List of entities that this SYSTEM provides to others") describes SYSTEM with values of type ENTITY.
 	provides is a type of wasDerivedFrom.
 
-	requires (note "list of entities that this SYSTEM requires from others") describes SYSTEM with values of type ENTITY.
+	requires (note "List of entities that this SYSTEM requires from others") describes SYSTEM with values of type ENTITY.
 	requires is a type of wasDerivedFrom.
 
-INTERFACE is a type of ENTITY.
-INTERFACE (note "INTERFACEs describe directed connections between an ENTITY (e.g. SYSTEM) providing what another ENTITY (e.g. SYSTEM) requires").
+INTERFACE
+	(note "INTERFACEs describe directed connections between an ENTITY (e.g. SYSTEM) providing what another ENTITY (e.g. SYSTEM) requires")
+	is a type of ENTITY.
 
 	source (note "ENTITY (e.g. SYSTEM) that provides what the INTERFACE offers") describes INTERFACE with values of type ENTITY.
 	source is the inverse of provides.
@@ -30,6 +33,8 @@ INTERFACE (note "INTERFACEs describe directed connections between an ENTITY (e.g
 	identifiedBy is a type of wasGeneratedBy.
 
 
-SYSTEM_DEVELOPMENT is a type of ACTIVITY.
-SYSTEM_DEVELOPMENT (note "ACTIVITY relating to the creation of one or more some SYSTEMs").
+SYSTEM_DEVELOPMENT
+	(note "ACTIVITY relating to the creation of one or more some SYSTEMs")
+	is a type of ACTIVITY.
+
 	developedBy (note "Organization that is responsible for producing a system") describes SYSTEM_DEVELOPMENT with values of type AGENT.

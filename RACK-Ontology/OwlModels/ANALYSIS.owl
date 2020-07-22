@@ -2,6 +2,7 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
     xmlns:A="http://arcos.rack/ANALYSIS#"
+    xmlns:provs="http://arcos.rack/PROV-S"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
@@ -38,7 +39,7 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="ANALYSIS_REPORT">
-    <rdfs:comment xml:lang="en">output of an ANALYSIS</rdfs:comment>
+    <rdfs:comment xml:lang="en">Output of an ANALYSIS</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="producedBy">
@@ -69,7 +70,7 @@
     <rdfs:domain rdf:resource="#ANALYSIS_ANNOTATION"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="result">
-    <rdfs:comment xml:lang="en">one of Passed, Failed, or Indeterminate</rdfs:comment>
+    <rdfs:comment xml:lang="en">Passed/Failed/Indeterminate status of this report</rdfs:comment>
     <rdfs:range rdf:resource="#ANALYSIS_RESULT"/>
     <rdfs:domain rdf:resource="#ANALYSIS_REPORT"/>
   </owl:ObjectProperty>

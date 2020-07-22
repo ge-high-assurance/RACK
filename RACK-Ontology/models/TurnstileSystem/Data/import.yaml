@@ -1,14 +1,9 @@
-# This file is intended to be used using the load_data.py script found
+# This file is intended to be used using the rack.py script found
 # in RACK-Ontology/scripts/
 #
 # Script documentation is available in RACK-Ontology/scripts/README.md
-#
-# Example:
-# $ ./load_data.py ../models/TurnstileSystem/Data/import.yaml http://localhost
 data-graph: "http://rack001/data"
 ingestion-steps:
-- ["ingest01 system",       "SYSTEM.csv"]
-- ["ingest02 interface",    "INTERFACE.csv"]
 - ["ingest01 system",       "SYSTEM.csv"]
 - ["ingest02 interface",    "INTERFACE.csv"]
 - ["ingest03 hazard",       "HAZARD.csv"]
@@ -21,10 +16,10 @@ ingestion-steps:
 - ["ingest10 packager",     "PACKAGER.csv"]
 - ["ingest11 agent",        "AGENT.csv"]
 - ["ingest12 code file",    "CODE_FILE.csv"]
-- ["ingest13 compile",      "COMPILE.csv"]
-- ["ingest14 object file",  "OBJECT_FILE.csv"]
-- ["ingest15 library",      "LIBRARY.csv"]
-- ["ingest16 executable",   "EXECUTABLE.csv"]
-- ["ingest17 config file",  "CONFIG_FILE.csv"]
-- ["ingest18 package",      "PACKAGE.csv"]
-- ["ingest19 package file", "PACKAGE_FILE.csv"]
+- ["ingest13 object file",  "OBJECT_FILE.csv"]
+- ["ingest14 library",      "LIBRARY.csv"]
+- ["ingest15 executable",   "EXECUTABLE.csv"]
+- ["ingest16 config file",  "CONFIG_FILE.csv"]
+- ["ingest17 package",      "PACKAGE.csv"]
+- ["ingest18 package file", "PACKAGE_FILE.csv"]
+- ["ingest19 compile",      "COMPILE.csv"]

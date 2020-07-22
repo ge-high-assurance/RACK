@@ -25,27 +25,23 @@ $ pip install -r requirements.txt
 ## Usage
 
 ```
-usage: load_data.py [-h] [--data-graph DATA_GRAPH]
-                    [--triple-store TRIPLE_STORE]
-                    config URL
+usage: rack.py [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE] {data,plumbing} ...
 
-Load CSV data into RACK in a Box
+RACK in a Box toolkit
 
 positional arguments:
-  config                Configuration YAML file
-  URL                   Base SemTK instance URL
+  {data,plumbing}
+    data                Import or export CSV data
+    plumbing            Tools for RACK developers
 
 optional arguments:
   -h, --help            show this help message and exit
-  --data-graph DATA_GRAPH
-                        Override data graph URL
+  --base-url BASE_URL   Base SemTK instance URL
   --triple-store TRIPLE_STORE
                         Override Fuseki URL
 ```
 
-The *config* argument is a file path pointing to a data import configuration file.
-
-The *URL* argument is expected to point to the base of a RACK in a Box instance.
+The *base-url* overrides a localhost installation of RACK in a Box.
 
 The *triple-store* URL argument overrides the default RACK in a Box triple-store URL.
 
@@ -72,18 +68,20 @@ ingestion-steps:
 
 ## Example invocation
 
+These examples uses the virtual environment as defined in the *Installing Dependencies*
+section above.
+
+### Import
+
 This example populates the *Turnstile* example into a RACK in the Box instance
 running on `localhost`
 
-This example uses the virtual environment as defined in the *Installing Dependencies*
-section above.
-
 ```
 $ source venv/bin/activate
-(venv) $ ./load_data.py ../models/TurnstileSystem/Data/import.yaml http://localhost
+(venv) $ ./rack.py data import ../models/TurnstileSystem/Data/import.yaml
 INFO:semtk3:Percent complete:  80%
 INFO:semtk3:Percent complete:  100%
-Clear graph:  Success Update succeeded 
+Clear graph:  Success Update succeeded
 Loading [TA1 ingest1 system]
 Records: 8	Failures: 0
 Loading [TA1 ingest2 interface]
@@ -102,4 +100,50 @@ Loading [TA1 ingest6 test]
 Records: 4	Failures: 0
 Loading [TA1 ingest7 test results]
 Records: 8	Failures: 0
+```
+
+### Export
+
+This example exports instances of the `SYSTEM` class from the *Turnstile*
+example from a Rack in the Box instance running on `localhost`:
+
+```
+$ source venv/bin/activate
+(venv) $ ./rack.py data export "ingest01 system" http://rack001/data
+
+INFO:semtk3:Percent complete:  100%
+
+uniqueIdentifier     uniqueIdentifier_parent
+-------------------  -------------------------
+TurnStileSystem
+Counter Application  TurnStileSystem
+Display              TurnStileSystem
+ExecutiveThread      Counter Application
+In Gate              TurnStileSystem
+InputThread          Counter Application
+Out Gate             TurnStileSystem
+OutputThread         Counter Application
+```
+
+## Hacking
+
+The following documentation is only useful for developers of this script.
+
+### Mypy
+
+This script has [Mypy](http://mypy-lang.org)-compliant type annotations which
+are used to statically type-check the code. Usage is simple:
+```bash
+$ source venv/bin/activate
+$ pip install mypy
+$ mypy .
+```
+
+### Tests
+
+You can run the tests with `pytest`:
+```bash
+$ source venv/bin/activate
+$ pip install pytest
+$ pytest
 ```

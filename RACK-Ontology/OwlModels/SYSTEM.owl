@@ -1,6 +1,7 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:provs="http://arcos.rack/PROV-S"
     xmlns:sys="http://arcos.rack/SYSTEM#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
@@ -29,13 +30,13 @@
   </owl:Class>
   <owl:ObjectProperty rdf:ID="provides">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">list of entities that this SYSTEM provides to others</rdfs:comment>
+    <rdfs:comment xml:lang="en">List of entities that this SYSTEM provides to others</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="partOf">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">used to define a relationship to a higher level system</rdfs:comment>
+    <rdfs:comment xml:lang="en">Used to define a relationship to a higher level system</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
   </owl:ObjectProperty>
@@ -48,13 +49,13 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="producedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:comment xml:lang="en">trace to ACTIVITYs participating in developing this SYSTEM</rdfs:comment>
+    <rdfs:comment xml:lang="en">ACTIVITY(s) participating in developing this SYSTEM</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="requires">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">list of entities that this SYSTEM requires from others</rdfs:comment>
+    <rdfs:comment xml:lang="en">List of entities that this SYSTEM requires from others</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
   </owl:ObjectProperty>

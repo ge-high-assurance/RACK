@@ -93,7 +93,7 @@
         "arg2": "",
         "transType": "replaceAll",
         "transId": "trans_0",
-        "arg1": "null",
+        "arg1": "^null$",
         "name": "rm_null"
       }
     ],

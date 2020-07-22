@@ -1,12 +1,20 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:cntrapptst="http://TurnstileSystem/CounterApplicationTesting"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:cntrapprq="http://TurnstileSystem/CounterApplicationRequirements"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:trnstlsys="http://TurnstileSystem/CounterApplication"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:gencsv="http://TurnstileSystem/GenerateCSV#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:trnstl="http://TurnstileSystem/Turnstiles"
+    xmlns:ingaterq="http://TurnstileSystem/InGateRequirement"
+    xmlns:cntrapputst="http://TurnstileSystem/CounterApplicationUnitTesting"
+    xmlns:cntrappllr="http://TurnstileSystem/CounterApplicationLLR"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:ha="http://TurnstileSystem/HazardAssesment"
   xml:base="http://TurnstileSystem/GenerateCSV">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="InGateRequirement"/>

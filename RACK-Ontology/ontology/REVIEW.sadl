@@ -1,19 +1,23 @@
 uri "http://arcos.rack/REVIEW" alias Rv.
 import "http://arcos.rack/PROV-S".
 
-REVIEW_LOG is a type of ENTITY.
-REVIEW_LOG (note "outcome of a REVIEW ACTIVITY").
+REVIEW_LOG
+	(note "Outcome of a REVIEW ACTIVITY")
+	is a type of ENTITY.
+
 	reviews (note "ENTITY(s) that the review was performed on") describes REVIEW_LOG with values of type ENTITY.
 	reviews is a type of wasDerivedFrom.
 
-	reviewResult (note "review status descriptor") describes REVIEW_LOG with values of type REVIEW_STATE.
+	reviewResult (note "Review status descriptor") describes REVIEW_LOG with values of type REVIEW_STATE.
 	REVIEW_STATE is a class, must be one of {Passed, ReviseWithoutReview, ReviseWithReview}.
 
 	createBy (note "ACTIVITY(s) (e.g. REVIEW) that created this log") describes REVIEW_LOG with values of type ACTIVITY.
 	createBy is a type of wasGeneratedBy.
 
-REVIEW is a type of ACTIVITY.
-REVIEW (note "code review ACTIVITY").
+REVIEW
+	(note "Code review ACTIVITY")
+	is a type of ACTIVITY.
+
 	author (note "AGENT(s) putting items up for review") describes REVIEW with values of type AGENT.
 	author is a type of wasAssociatedWith.
 

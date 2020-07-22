@@ -1,9 +1,11 @@
 uri "http://arcos.rack/ANALYSIS" alias ^A.
 import "http://arcos.rack/PROV-S".
 
-ANALYSIS_REPORT is a type of ENTITY.
-ANALYSIS_REPORT (note "output of an ANALYSIS").
-    result (note "one of Passed, Failed, or Indeterminate") describes ANALYSIS_REPORT with values of type ANALYSIS_RESULT.
+ANALYSIS_REPORT
+	(note "Output of an ANALYSIS")
+	is a type of ENTITY.
+
+    result (note "Passed/Failed/Indeterminate status of this report") describes ANALYSIS_REPORT with values of type ANALYSIS_RESULT.
     ANALYSIS_RESULT is a class, must be one of {Passed, Failed, Indeterminate}.
 
     analyzes (note "ENTITY(s) under analysis") describes ANALYSIS_REPORT with values of type ENTITY.
@@ -13,8 +15,10 @@ ANALYSIS_REPORT (note "output of an ANALYSIS").
     producedBy (note "ACTIVITY(s) (e.g. ANALYSIS) producing this report").
     producedBy is a type of wasGeneratedBy.
 
-ANALYSIS is a type of ACTIVITY.
-ANALYSIS (note "ACTIVITY of running some analysis, supposedly creating some ANALYSIS_REPORT").
+ANALYSIS
+	(note "ACTIVITY of running some analysis, supposedly creating some ANALYSIS_REPORT")
+	is a type of ACTIVITY.
+
     performedBy (note "Entity that is responsible for producing an analysis, could be a person or a tool. ") describes ANALYSIS with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
 

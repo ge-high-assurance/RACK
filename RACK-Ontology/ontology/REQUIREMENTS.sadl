@@ -1,9 +1,11 @@
 uri "http://arcos.rack/REQUIREMENTS" alias Rq.
 import "http://arcos.rack/PROV-S".
 
-REQUIREMENT is a type of ENTITY.
-REQUIREMENT (note "captures (both high- and low-level) properties of a process or artifact that are to be assessed").
-	text (note "description of the REQUIREMENT") describes REQUIREMENT with values of type string.
+REQUIREMENT
+	(note "Captures (both high- and low-level) properties of a process or artifact that are to be assessed")
+	is a type of ENTITY.
+
+	text (note "Description of the REQUIREMENT") describes REQUIREMENT with values of type string.
 
 	governs (note "ENTITY(s) that are the subject of the requirement") describes REQUIREMENT with values of type ENTITY.
 	governs is a type of wasDerivedFrom.
@@ -18,9 +20,11 @@ REQUIREMENT (note "captures (both high- and low-level) properties of a process o
 	createdBy is a type of wasGeneratedBy.
 
 
-DATA_DICTIONARY_TERM is a type of ENTITY.
-DATA_DICTIONARY_TERM (note "defines some conceptual data that may be collected somewhere and used somewhere else").
-	text (note "description of the term") describes DATA_DICTIONARY_TERM with values of type string.
+DATA_DICTIONARY_TERM
+	(note "Defines some conceptual data that may be collected somewhere and used somewhere else")
+	is a type of ENTITY.
+
+	text (note "Description of the term") describes DATA_DICTIONARY_TERM with values of type string.
 
 	providedBy (note "ENTITY(s) (e.g. REQUIREMENT) that provides this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
 	providedBy is a type of wasDerivedFrom.
@@ -32,12 +36,14 @@ DATA_DICTIONARY_TERM (note "defines some conceptual data that may be collected s
 	createdBy is a type of wasGeneratedBy.
 
 
-REQUIREMENT_DEVELOPMENT is a type of ACTIVITY.
-REQUIREMENT_DEVELOPMENT (note "ACTIVITY that produces REQUIREMENTs").
+REQUIREMENT_DEVELOPMENT
+	(note "ACTIVITY that produces REQUIREMENTs")
+	is a type of ACTIVITY.
+
 	author (note "AGENT(s) responsible for producing a REQUIREMENT") describes REQUIREMENT_DEVELOPMENT with values of type AGENT.
 	author is a type of wasAssociatedWith.
 
-	referenced (note "source materials (requirement and design docs) used during development") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
+	referenced (note "Source materials (requirement and design docs) used during development") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
 	referenced is a type of used.
 
 	governedBy (note "ENTITY(s) (e.g. REQUIREMENTS, any sort of document) used during this ACTIVITY") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.

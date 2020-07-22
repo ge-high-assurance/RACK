@@ -28,11 +28,11 @@
     </owl:equivalentClass>
   </owl:Class>
   <owl:Class rdf:ID="REVIEW">
-    <rdfs:comment xml:lang="en">code review ACTIVITY</rdfs:comment>
+    <rdfs:comment xml:lang="en">Code review ACTIVITY</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="REVIEW_LOG">
-    <rdfs:comment xml:lang="en">outcome of a REVIEW ACTIVITY</rdfs:comment>
+    <rdfs:comment xml:lang="en">Outcome of a REVIEW ACTIVITY</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="reviewer">
@@ -60,7 +60,7 @@
     <rdfs:domain rdf:resource="#REVIEW_LOG"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="reviewResult">
-    <rdfs:comment xml:lang="en">review status descriptor</rdfs:comment>
+    <rdfs:comment xml:lang="en">Review status descriptor</rdfs:comment>
     <rdfs:range rdf:resource="#REVIEW_STATE"/>
     <rdfs:domain rdf:resource="#REVIEW_LOG"/>
   </owl:ObjectProperty>

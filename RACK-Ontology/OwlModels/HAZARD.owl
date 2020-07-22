@@ -37,7 +37,7 @@
     <rdfs:domain rdf:resource="#HAZARD"/>
   </owl:ObjectProperty>
   <owl:DatatypeProperty rdf:ID="definition">
-    <rdfs:comment xml:lang="en">some description of the HAZARD</rdfs:comment>
+    <rdfs:comment xml:lang="en">Description of the HAZARD</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#HAZARD"/>
   </owl:DatatypeProperty>

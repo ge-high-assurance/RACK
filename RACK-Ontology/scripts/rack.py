@@ -201,6 +201,10 @@ def main() -> None:
 
     logging.basicConfig(level=logging.INFO)
 
+    if args.base_url.endswith('/'):
+        logging.warning('Trimming the final \'/\' from your base_url')
+        args.base_url = args.base_url[:-1]
+
     try:
         if args.command is None:
             logging.error('Subcommand required (use --help to see options)')

@@ -130,6 +130,18 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
     for file in files:
         ingest_owl(conn, base_path / file)
 
+def store_nodegroups_driver(directory: Path, base_url: Url) -> None:
+    print("Storing nodegroups: ", end="", flush=True)
+    sparql_connection(base_url, None, None)
+    semtk3.store_nodegroups(directory)
+    print("OK")
+
+def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url) -> None:
+    print("Retrieving nodegroups: ", end="", flush=True)
+    sparql_connection(base_url, None, None)
+    semtk3.retrieve_from_store(regexp, directory)
+    print("OK")
+
 def dispatch_data_export(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
     run_query(conn, args.nodegroup)
@@ -141,6 +153,12 @@ def dispatch_data_import(args: SimpleNamespace) -> None:
 def dispatch_plumbing_model(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
     ingest_owl_driver(Path(args.config), args.base_url, args.triple_store)
+
+def dispatch_plumbing_storenodegroups(args: SimpleNamespace) -> None:
+    store_nodegroups_driver(args.directory, args.base_url)
+
+def dispatch_plumbing_retrievenodegroups(args: SimpleNamespace) -> None:
+    retrieve_nodegroups_driver(args.regexp, args.directory, args.base_url)
 
 def main() -> None:
     """Main function"""
@@ -154,9 +172,12 @@ def main() -> None:
     data_subparsers = data_parser.add_subparsers(dest='command', required=True)
     data_import_parser = data_subparsers.add_parser('import', help='Import CSV data')
     data_export_parser = data_subparsers.add_parser('export', help='Export query results')
+
     plumbing_parser = subparsers.add_parser('plumbing', help='Tools for RACK developers')
     plumbing_subparsers = plumbing_parser.add_subparsers(dest='command', required=True)
     plumbing_model_parser = plumbing_subparsers.add_parser('model', help='Modify the data model')
+    plumbing_storenodegroups_parser = plumbing_subparsers.add_parser('store-nodegroups', help='Store nodegroups into RACK')
+    plumbing_retrievenodegroups_parser = plumbing_subparsers.add_parser('retrieve-nodegroups', help='Retrieve nodegroups from RACK')
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     data_import_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
@@ -169,10 +190,20 @@ def main() -> None:
     plumbing_model_parser.add_argument('config', type=str, help='Configuration YAML file')
     plumbing_model_parser.set_defaults(func=dispatch_plumbing_model)
 
+    plumbing_storenodegroups_parser.add_argument('directory', type=str, help='Nodegroup directory')
+    plumbing_storenodegroups_parser.set_defaults(func=dispatch_plumbing_storenodegroups)
+
+    plumbing_retrievenodegroups_parser.add_argument('regexp', type=str, help='Nodegroup selection regular expression')
+    plumbing_retrievenodegroups_parser.add_argument('directory', type=str, help='Nodegroup directory')
+    plumbing_retrievenodegroups_parser.set_defaults(func=dispatch_plumbing_retrievenodegroups)
 
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO)
+
+    if args.base_url.endswith('/'):
+        logging.warning('Trimming the final \'/\' from your base_url')
+        args.base_url = args.base_url[:-1]
 
     try:
         if args.command is None:

@@ -46,18 +46,24 @@ INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
     'properties': {
         'ingestion-steps': {
             'type': 'array',
-            'contains': {
-                'anyOf': [{
-                    'type': 'object',
-                    'additionalProperties': False,
-                    'properties': {
-                        'nodegroup': {'type': 'string'},
-                        'csv': {'type': 'string'}
-                }}, {
-                    'type': 'object',
-                    'addtionalProperties': False,
-                    'properties': {'owl': {'type': 'string'}}
-                }]
+            'items': {
+                'oneOf': [
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        'required': ['nodegroup', 'csv'],
+                        'properties': {
+                            'nodegroup': {'type': 'string'},
+                            'csv': {'type': 'string'}
+                        }
+                    },
+                    {
+                        'type': 'object',
+                        'addtionalProperties': False,
+                        'required': ['owl'],
+                        'properties': {'owl': {'type': 'string'}}
+                    }
+                ]
             }
         },
         'data-graph': {'type': 'string'}

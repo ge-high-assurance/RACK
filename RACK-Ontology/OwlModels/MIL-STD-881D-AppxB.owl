@@ -1,0 +1,645 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:m881D="http://arcos.rack/MIL-STD-881D/MIL-STD-881D"
+    xmlns:MIL-STD-881D-AppxB="http://arcos.rack/MIL-STD-881D/MIL-STD-881D-AppxB#"
+    xmlns:j.0="http://arcos.rack/MIL-STD-881D/MIL-STD-881D#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:j.1="http://arcos.rack/DOCUMENT#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:j.2="http://arcos.rack/PROV-S#"
+    xmlns:j.3="http://arcos.rack/SYSTEM#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://arcos.rack/MIL-STD-881D/MIL-STD-881D-AppxB">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="MIL-STD-881D"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'MIL-STD-881D-AppxB.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <owl:ObjectProperty rdf:ID="B.2">
+    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >APPLICABLE DOCUMENTS</j.1:title>
+    <rdfs:range rdf:resource="/DOCUMENT#SECTION"/>
+    <rdfs:domain>
+      <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D">
+        <rdfs:subClassOf>
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >1</owl:cardinality>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:ID="B.4"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >1</owl:cardinality>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:ID="B.3"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >1</owl:cardinality>
+            <owl:onProperty rdf:resource="#B.2"/>
+          </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >1</owl:cardinality>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:ID="B.1"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </rdfs:subClassOf>
+      </rdf:Description>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#B.1">
+    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SCOPE</j.1:title>
+    <rdfs:range rdf:resource="/DOCUMENT#SECTION"/>
+    <rdfs:domain rdf:resource="MIL-STD-881D#MIL-STD-881D"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#B.4">
+    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DEFINITIONS</j.1:title>
+    <rdfs:range rdf:resource="/DOCUMENT#SECTION"/>
+    <rdfs:domain rdf:resource="MIL-STD-881D#MIL-STD-881D"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#B.3">
+    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >WORK BREAKDOWN STRUCTURE LEVELS</j.1:title>
+    <rdfs:range rdf:resource="/DOCUMENT#SECTION"/>
+    <rdfs:domain rdf:resource="MIL-STD-881D#MIL-STD-881D"/>
+  </owl:ObjectProperty>
+  <j.3:SYSTEM rdf:ID="ContractorTechnicalSupport-1.10.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.10.2</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="OperationalSiteActivationbySite1TonSpecify-1.10">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.10</j.0:wbs>
+        <j.3:partOf>
+          <j.3:SYSTEM rdf:ID="ElectronicSystemGenericSystem-1">
+            <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >1</j.0:wbs>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ElectronicSystemGenericSystem-1</j.2:uniqueIdentifier>
+          </j.3:SYSTEM>
+        </j.3:partOf>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >OperationalSiteActivationbySite1TonSpecify-1.10</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ContractorTechnicalSupport-1.10.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="TestandMeasurementEquipmentElectronicsAvionics-1.9.1.3">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.1.3</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="TestandMeasurementEquipment-1.9.1">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.9.1</j.0:wbs>
+        <j.3:partOf>
+          <j.3:SYSTEM rdf:ID="CommonSupportEquipment-1.9">
+            <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >1.9</j.0:wbs>
+            <j.3:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >CommonSupportEquipment-1.9</j.2:uniqueIdentifier>
+          </j.3:SYSTEM>
+        </j.3:partOf>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >TestandMeasurementEquipment-1.9.1</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TestandMeasurementEquipmentElectronicsAvionics-1.9.1.3</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SupportandHandlingEquipmentElectronicsAvionics-1.9.2.3">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.2.3</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="SupportandHandlingEquipment-1.9.2">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.9.2</j.0:wbs>
+        <j.3:partOf rdf:resource="#CommonSupportEquipment-1.9"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >SupportandHandlingEquipment-1.9.2</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SupportandHandlingEquipmentElectronicsAvionics-1.9.2.3</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify-1.9.1.4">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.1.4</j.0:wbs>
+    <j.3:partOf rdf:resource="#TestandMeasurementEquipment-1.9.1"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify-1.9.1.4</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="TestandMeasurementEquipmentOtherMajorSubsystems1Ton-1.8.1.4">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.1.4</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="TestandMeasurementEquipment-1.8.1">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.8.1</j.0:wbs>
+        <j.3:partOf>
+          <j.3:SYSTEM rdf:ID="PeculiarSupportEquipment-1.8">
+            <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >1.8</j.0:wbs>
+            <j.3:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >PeculiarSupportEquipment-1.8</j.2:uniqueIdentifier>
+          </j.3:SYSTEM>
+        </j.3:partOf>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >TestandMeasurementEquipment-1.8.1</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TestandMeasurementEquipmentOtherMajorSubsystems1Ton-1.8.1.4</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="OperationalTestandEvaluation-1.5.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.5.2</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="SystemTestandEvaluation-1.5">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.5</j.0:wbs>
+        <j.3:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >SystemTestandEvaluation-1.5</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OperationalTestandEvaluation-1.5.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="ConstructionConversionExpansion-1.12.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.12.1</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="IndustrialFacilities-1.12">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.12</j.0:wbs>
+        <j.3:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >IndustrialFacilities-1.12</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ConstructionConversionExpansion-1.12.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="PMPSoftwareIntegrationAssemblyTestandCheckout-1.1.3.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.1.3.2</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="PMPSoftwareRelease1TonSpecify-1.1.3">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.1.3</j.0:wbs>
+        <j.3:partOf>
+          <j.3:SYSTEM rdf:ID="PrimeMissionProductPMP1TonSpecify-1.1">
+            <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >1.1</j.0:wbs>
+            <j.3:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >PrimeMissionProductPMP1TonSpecify-1.1</j.2:uniqueIdentifier>
+          </j.3:SYSTEM>
+        </j.3:partOf>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >PMPSoftwareRelease1TonSpecify-1.1.3</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >PMPSoftwareIntegrationAssemblyTestandCheckout-1.1.3.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="MaintainerInstructionalServices-1.6.2.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.6.2.2</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="Services-1.6.2">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.6.2</j.0:wbs>
+        <j.3:partOf>
+          <j.3:SYSTEM rdf:ID="Training-1.6">
+            <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >1.6</j.0:wbs>
+            <j.3:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Training-1.6</j.2:uniqueIdentifier>
+          </j.3:SYSTEM>
+        </j.3:partOf>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Services-1.6.2</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >MaintainerInstructionalServices-1.6.2.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SupportandHandlingEquipmentPropulsion-1.9.2.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.2.2</j.0:wbs>
+    <j.3:partOf rdf:resource="#SupportandHandlingEquipment-1.9.2"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SupportandHandlingEquipmentPropulsion-1.9.2.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="Facilities-1.6.3">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.6.3</j.0:wbs>
+    <j.3:partOf rdf:resource="#Training-1.6"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Facilities-1.6.3</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="TestandEvaluationSupport-1.5.5">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.5.5</j.0:wbs>
+    <j.3:partOf rdf:resource="#SystemTestandEvaluation-1.5"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TestandEvaluationSupport-1.5.5</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="IntegratedLogisticsSupportILSProgramManagement-1.4.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.2</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="ProgramManagement-1.4">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.4</j.0:wbs>
+        <j.3:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >ProgramManagement-1.4</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IntegratedLogisticsSupportILSProgramManagement-1.4.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SubsystemHardware1TonSpecify-1.1.2.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.1.2.2</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="PMPSubsystem1TonSpecify-1.1.2">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.1.2</j.0:wbs>
+        <j.3:partOf rdf:resource="#PrimeMissionProductPMP1TonSpecify-1.1"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >PMPSubsystem1TonSpecify-1.1.2</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SubsystemHardware1TonSpecify-1.1.2.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="CybersecurityManagement-1.4.3">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.3</j.0:wbs>
+    <j.3:partOf rdf:resource="#ProgramManagement-1.4"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >CybersecurityManagement-1.4.3</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SubsystemIntegrationAssemblyTestandCheckout-1.1.2.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.1.2.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#PMPSubsystem1TonSpecify-1.1.2"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SubsystemIntegrationAssemblyTestandCheckout-1.1.2.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="TestandMeasurementEquipmentElectronicsAvionics-1.8.1.3">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.1.3</j.0:wbs>
+    <j.3:partOf rdf:resource="#TestandMeasurementEquipment-1.8.1"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TestandMeasurementEquipmentElectronicsAvionics-1.8.1.3</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SupportandHandlingEquipmentPropulsion-1.8.2.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.2.2</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="SupportandHandliSngEqifuipment-1.8.2">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.8.2</j.0:wbs>
+        <j.3:partOf rdf:resource="#PeculiarSupportEquipment-1.8"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >SupportandHandliSngEqifuipment-1.8.2</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SupportandHandlingEquipmentPropulsion-1.8.2.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="InitialSparesandRepairParts-1.13">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.13</j.0:wbs>
+    <j.3:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >InitialSparesandRepairParts-1.13</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SiteConstruction-1.10.3">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.10.3</j.0:wbs>
+    <j.3:partOf rdf:resource="#OperationalSiteActivationbySite1TonSpecify-1.10"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SiteConstruction-1.10.3</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SoftwareSystemsEngineering-1.3.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.3.1</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="SystemsEngineering-1.3">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.3</j.0:wbs>
+        <j.3:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >SystemsEngineering-1.3</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SoftwareSystemsEngineering-1.3.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SoftwareProgramManagement-1.4.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#ProgramManagement-1.4"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SoftwareProgramManagement-1.4.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="MaintainerInstructionalEquipment-1.6.1.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.6.1.2</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="Equipment-1.6.1">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.6.1</j.0:wbs>
+        <j.3:partOf rdf:resource="#Training-1.6"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Equipment-1.6.1</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >MaintainerInstructionalEquipment-1.6.1.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SupportandHandlingEquipmentAirframeHullVehicle-1.9.2.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.2.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#SupportandHandlingEquipment-1.9.2"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SupportandHandlingEquipmentAirframeHullVehicle-1.9.2.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="CybersecurityTestandEvaluation-1.5.3">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.5.3</j.0:wbs>
+    <j.3:partOf rdf:resource="#SystemTestandEvaluation-1.5"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >CybersecurityTestandEvaluation-1.5.3</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="PMPIntegrationAssemblyTestandCheckout-1.1.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.1.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#PrimeMissionProductPMP1TonSpecify-1.1"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >PMPIntegrationAssemblyTestandCheckout-1.1.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="TrainingSoftware1TonSpecify-1.6.4">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.6.4</j.0:wbs>
+    <j.3:partOf rdf:resource="#Training-1.6"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TrainingSoftware1TonSpecify-1.6.4</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="OperatorInstructionalServices-1.6.2.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.6.2.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#Services-1.6.2"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OperatorInstructionalServices-1.6.2.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="IntegratedLogisticsSupportILSSystemsEngineering-1.3.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.3.2</j.0:wbs>
+    <j.3:partOf rdf:resource="#SystemsEngineering-1.3"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >IntegratedLogisticsSupportILSSystemsEngineering-1.3.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D-AppxB">
+    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ELECTRONIC OR GENERIC SYSTEMS</j.1:title>
+  </rdf:Description>
+  <j.3:SYSTEM rdf:ID="TestandMeasurementEquipmentAirframeHullVehicle-1.8.1.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.1.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#TestandMeasurementEquipment-1.8.1"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TestandMeasurementEquipmentAirframeHullVehicle-1.8.1.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="ComputerSoftwareConfigurationItemCSCI1TonSpecify-1.1.3.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.1.3.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#PMPSoftwareRelease1TonSpecify-1.1.3"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ComputerSoftwareConfigurationItemCSCI1TonSpecify-1.1.3.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="DevelopmentTestandEvaluation-1.5.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.5.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#SystemTestandEvaluation-1.5"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DevelopmentTestandEvaluation-1.5.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SiteShipVehicleConversion-1.10.4">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.10.4</j.0:wbs>
+    <j.3:partOf rdf:resource="#OperationalSiteActivationbySite1TonSpecify-1.10"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SiteShipVehicleConversion-1.10.4</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="MaintenanceIndustrialFacilities-1.12.3">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.12.3</j.0:wbs>
+    <j.3:partOf rdf:resource="#IndustrialFacilities-1.12"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >MaintenanceIndustrialFacilities-1.12.3</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SupportandHandlingEquipmentAirframeHullVehicle-1.8.2.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.2.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#SupportandHandliSngEqifuipment-1.8.2"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SupportandHandlingEquipmentAirframeHullVehicle-1.8.2.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.9.2.4">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.2.4</j.0:wbs>
+    <j.3:partOf rdf:resource="#SupportandHandlingEquipment-1.9.2"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.9.2.4</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="TestandMeasurementEquipmentPropulsion-1.8.1.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.1.2</j.0:wbs>
+    <j.3:partOf rdf:resource="#TestandMeasurementEquipment-1.8.1"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TestandMeasurementEquipmentPropulsion-1.8.1.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="TestandMeasurementEquipmentAirframeHullVehicle-1.9.1.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.1.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#TestandMeasurementEquipment-1.9.1"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TestandMeasurementEquipmentAirframeHullVehicle-1.9.1.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SystemAssemblyInstallationandCheckoutonSite-1.10.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.10.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#OperationalSiteActivationbySite1TonSpecify-1.10"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SystemAssemblyInstallationandCheckoutonSite-1.10.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="DataRepository-1.7.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.7.2</j.0:wbs>
+    <j.3:partOf>
+      <j.3:SYSTEM rdf:ID="Data-1.7">
+        <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1.7</j.0:wbs>
+        <j.3:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Data-1.7</j.2:uniqueIdentifier>
+      </j.3:SYSTEM>
+    </j.3:partOf>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DataRepository-1.7.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="ContractorLogisticsSupportCLS-1.11">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.11</j.0:wbs>
+    <j.3:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ContractorLogisticsSupportCLS-1.11</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="TestandMeasurementEquipmentPropulsion-1.9.1.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.9.1.2</j.0:wbs>
+    <j.3:partOf rdf:resource="#TestandMeasurementEquipment-1.9.1"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TestandMeasurementEquipmentPropulsion-1.9.1.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="OperatorInstructionalEquipment-1.6.1.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.6.1.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#Equipment-1.6.1"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OperatorInstructionalEquipment-1.6.1.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="OtherProgramManagement1TonSpecify-1.4.5">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.5</j.0:wbs>
+    <j.3:partOf rdf:resource="#ProgramManagement-1.4"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OtherProgramManagement1TonSpecify-1.4.5</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="EquipmentAcquisitionorModernization-1.12.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.12.2</j.0:wbs>
+    <j.3:partOf rdf:resource="#IndustrialFacilities-1.12"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >EquipmentAcquisitionorModernization-1.12.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="CoreProgramManagement-1.4.4">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.4.4</j.0:wbs>
+    <j.3:partOf rdf:resource="#ProgramManagement-1.4"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >CoreProgramManagement-1.4.4</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="CoreSystemsEngineering-1.3.4">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.3.4</j.0:wbs>
+    <j.3:partOf rdf:resource="#SystemsEngineering-1.3"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >CoreSystemsEngineering-1.3.4</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.8.2.4">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.2.4</j.0:wbs>
+    <j.3:partOf rdf:resource="#SupportandHandliSngEqifuipment-1.8.2"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.8.2.4</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="PlatformIntegrationAssemblyTestandCheckout-1.2">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.2</j.0:wbs>
+    <j.3:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >PlatformIntegrationAssemblyTestandCheckout-1.2</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="TestFacilities-1.5.6">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.5.6</j.0:wbs>
+    <j.3:partOf rdf:resource="#SystemTestandEvaluation-1.5"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >TestFacilities-1.5.6</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="OtherSystemsEngineering1TonSpecify-1.3.5">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.3.5</j.0:wbs>
+    <j.3:partOf rdf:resource="#SystemsEngineering-1.3"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OtherSystemsEngineering1TonSpecify-1.3.5</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="InterimContractorSupportICS-1.10.5">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.10.5</j.0:wbs>
+    <j.3:partOf rdf:resource="#OperationalSiteActivationbySite1TonSpecify-1.10"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >InterimContractorSupportICS-1.10.5</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SupportandHandlingEquipmentElectronicsAvionics-1.8.2.3">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.8.2.3</j.0:wbs>
+    <j.3:partOf rdf:resource="#SupportandHandliSngEqifuipment-1.8.2"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SupportandHandlingEquipmentElectronicsAvionics-1.8.2.3</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="Mock-upsSystemIntegrationLabsSILs-1.5.4">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.5.4</j.0:wbs>
+    <j.3:partOf rdf:resource="#SystemTestandEvaluation-1.5"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mock-upsSystemIntegrationLabsSILs-1.5.4</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="DataRights1TonSpecify-1.7.3">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.7.3</j.0:wbs>
+    <j.3:partOf rdf:resource="#Data-1.7"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DataRights1TonSpecify-1.7.3</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="DataDeliverables1TonSpecify-1.7.1">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.7.1</j.0:wbs>
+    <j.3:partOf rdf:resource="#Data-1.7"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DataDeliverables1TonSpecify-1.7.1</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="SubsystemSoftwareRelease1TonSpecify-1.1.2.3">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.1.2.3</j.0:wbs>
+    <j.3:partOf rdf:resource="#PMPSubsystem1TonSpecify-1.1.2"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SubsystemSoftwareRelease1TonSpecify-1.1.2.3</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="CybersecuritySystemsEngineering-1.3.3">
+    <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.3.3</j.0:wbs>
+    <j.3:partOf rdf:resource="#SystemsEngineering-1.3"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >CybersecuritySystemsEngineering-1.3.3</j.2:uniqueIdentifier>
+  </j.3:SYSTEM>
+</rdf:RDF>

@@ -4,9 +4,11 @@
 This simple process can be adapted to import other data into RACK for experimentation.
 """
 import argparse
+import colorama
 import json
 import logging
 import sys
+from colorama import Fore, Back, Style
 from enum import Enum
 from pathlib import Path
 from typing import Any, Dict, Optional, NewType
@@ -20,6 +22,9 @@ import yaml
 
 __author__ = "Eric Mertens"
 __email__ = "emertens@galois.com"
+
+# NOTE: Do **not** use the root logger via `logging.command(...)`, instead use `logger.command(...)`
+logger = logging.getLogger(__name__)
 
 Connection = NewType('Connection', str)
 Url = NewType('Url', str)
@@ -54,6 +59,25 @@ INGEST_OWL_CONFIG_SCHEMA: Dict[str, Any] = {
         'data-graph': {'type': 'string'}
     }
 }
+
+class CustomFormatter(logging.Formatter):
+    """Add custom styles to our log"""
+
+    # NOTE: 8 is the longest levelname (CRITICAL)
+    format = "[%(asctime)s - %(filename)s:%(lineno)d] %(levelname)8s: %(message)s"
+
+    FORMATS = {
+        logging.DEBUG: Fore.WHITE + format + Style.RESET_ALL,
+        logging.INFO: Fore.GREEN + format + Style.RESET_ALL,
+        logging.WARNING: Fore.YELLOW + format + Style.RESET_ALL,
+        logging.ERROR: Fore.RED + format + Style.RESET_ALL,
+        logging.CRITICAL: Style.BRIGHT + Fore.RED + format + Style.RESET_ALL
+    }
+
+    def format(self, record):
+        which_format = self.FORMATS.get(record.levelno)
+        formatter = logging.Formatter(which_format, "%H:%M:%S")
+        return formatter.format(record)
 
 def sparql_connection(base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> Connection:
     """Generate a SPARQL connection value."""
@@ -162,6 +186,15 @@ def dispatch_plumbing_retrievenodegroups(args: SimpleNamespace) -> None:
 
 def main() -> None:
     """Main function"""
+
+    # Sets up colors for Windows users
+    colorama.init()
+
+    # Register our custom color formatter for our logger
+    ch = logging.StreamHandler()
+    ch.setFormatter(CustomFormatter())
+    logger.addHandler(ch)
+
     parser = argparse.ArgumentParser(description='RACK in a Box toolkit')
     parser.add_argument('--base-url', type=str, default=DEFAULT_BASE_URL, help='Base SemTK instance URL')
     parser.add_argument('--triple-store', type=str, help='Override Fuseki URL')
@@ -207,28 +240,28 @@ def main() -> None:
 
     try:
         if args.command is None:
-            logging.error('Subcommand required (use --help to see options)')
+            logger.error('Subcommand required (use --help to see options)')
             sys.exit(1)
         try:
             func = args.func
         except AttributeError:
-            logging.error('Unknown subcommand: %s', args.command)
+            logger.error('Unknown subcommand: %s', args.command)
             sys.exit(1)
         func(args)
     except requests.ConnectionError as exc:
-        logging.error('Connection failure\n%s', exc)
+        logger.error('Connection failure\n%s', exc)
         sys.exit(1)
     except semtk3.restclient.RestException as exc:
-        logging.error('REST Endpoint Failure\n%s', exc)
+        logger.error(f'REST Endpoint Failure\n{exc}')
         sys.exit(1)
     except FileNotFoundError as exc:
-        logging.error('File not found\n%s', exc)
+        logger.error('File not found\n%s', exc)
         sys.exit(1)
     except yaml.YAMLError as exc:
-        logging.error('Failed to load YAML configuration file: %s\n%s', args.config, exc)
+        logger.error('Failed to load YAML configuration file: %s\n%s', args.config, exc)
         sys.exit(1)
     except ValidationError as exc:
-        logging.error('Bad configuration file: %s\n%s', args.config, exc)
+        logger.error('Bad configuration file: %s\n%s', args.config, exc)
         sys.exit(1)
 
 if __name__ == "__main__":

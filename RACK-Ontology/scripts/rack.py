@@ -253,6 +253,7 @@ def main() -> None:
     # Register our custom color formatter for our logger
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(CustomFormatter())
+    logger.propagate = False
     logger.addHandler(stream_handler)
 
     args = get_argument_parser().parse_args()
@@ -260,7 +261,7 @@ def main() -> None:
     logging.basicConfig(level=logging.INFO)
 
     if args.base_url.endswith('/'):
-        logging.warning('Trimming the final \'/\' from your base_url')
+        logger.warning('Trimming the final \'/\' from your base_url')
         args.base_url = args.base_url[:-1]
 
     try:

@@ -12,12 +12,12 @@ Also, it expects to be run inside the RACK repo.
 """
 from pathlib import Path
 
-from rack import DEFAULT_BASE_URL, ingest_csv_driver, ingest_owl_driver, run_query, sparql_connection, Url
+from rack import DEFAULT_BASE_URL, ingest_data_driver, ingest_owl_driver, run_query, sparql_connection, Url
 
 
 def test_load_csv() -> None:
     # Just test that it doesn't raise an exception
-    ingest_csv_driver(Path("../models/TurnstileSystem/Data/import.yaml"), Url("http://localhost"), None, None)
+    ingest_data_driver(Path("../models/TurnstileSystem/Data/import.yaml"), Url("http://localhost"), None, None)
 
 def test_load_owl() -> None:
     # Just test that it doesn't raise an exception

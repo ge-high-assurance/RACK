@@ -4,22 +4,22 @@
 # Script documentation is available in RACK-Ontology/scripts/README.md
 data-graph: "http://rack001/data"
 ingestion-steps:
-- ["ingest01 system",       "SYSTEM.csv"]
-- ["ingest02 interface",    "INTERFACE.csv"]
-- ["ingest03 hazard",       "HAZARD.csv"]
-- ["ingest04 requirement",  "REQUIREMENT.csv"]
-- ["ingest05 data dict",    "DATA_DICTIONARY_TERM.csv"]
-- ["ingest06 test",         "TEST.csv"]
-- ["ingest07 test results", "TEST_RESULTS.csv"]
-- ["ingest08 language",     "LANGUAGE.csv"]
-- ["ingest09 compiler",     "COMPILER.csv"]
-- ["ingest10 packager",     "PACKAGER.csv"]
-- ["ingest11 agent",        "AGENT.csv"]
-- ["ingest12 code file",    "CODE_FILE.csv"]
-- ["ingest13 object file",  "OBJECT_FILE.csv"]
-- ["ingest14 library",      "LIBRARY.csv"]
-- ["ingest15 executable",   "EXECUTABLE.csv"]
-- ["ingest16 config file",  "CONFIG_FILE.csv"]
-- ["ingest17 package",      "PACKAGE.csv"]
-- ["ingest18 package file", "PACKAGE_FILE.csv"]
-- ["ingest19 compile",      "COMPILE.csv"]
+- {nodegroup: "ingest01 system",       csv: "SYSTEM.csv"              }
+- {nodegroup: "ingest02 interface",    csv: "INTERFACE.csv"           }
+- {nodegroup: "ingest03 hazard",       csv: "HAZARD.csv"              }
+- {nodegroup: "ingest04 requirement",  csv: "REQUIREMENT.csv"         }
+- {nodegroup: "ingest05 data dict",    csv: "DATA_DICTIONARY_TERM.csv"}
+- {nodegroup: "ingest06 test",         csv: "TEST.csv"                }
+- {nodegroup: "ingest07 test results", csv: "TEST_RESULTS.csv"        }
+- {nodegroup: "ingest08 language",     csv: "LANGUAGE.csv"            }
+- {nodegroup: "ingest09 compiler",     csv: "COMPILER.csv"            }
+- {nodegroup: "ingest10 packager",     csv: "PACKAGER.csv"            }
+- {nodegroup: "ingest11 agent",        csv: "AGENT.csv"               }
+- {nodegroup: "ingest12 code file",    csv: "CODE_FILE.csv"           }
+- {nodegroup: "ingest13 object file",  csv: "OBJECT_FILE.csv"         }
+- {nodegroup: "ingest14 library",      csv: "LIBRARY.csv"             }
+- {nodegroup: "ingest15 executable",   csv: "EXECUTABLE.csv"          }
+- {nodegroup: "ingest16 config file",  csv: "CONFIG_FILE.csv"         }
+- {nodegroup: "ingest17 package",      csv: "PACKAGE.csv"             }
+- {nodegroup: "ingest18 package file", csv: "PACKAGE_FILE.csv"        }
+- {nodegroup: "ingest19 compile",      csv: "COMPILE.csv"             }

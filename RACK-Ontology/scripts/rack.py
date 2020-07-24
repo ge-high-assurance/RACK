@@ -3,17 +3,19 @@
 
 This simple process can be adapted to import other data into RACK for experimentation.
 """
+# standard imports
 import argparse
-import colorama
+from enum import Enum
 import json
 import logging
-import sys
-from colorama import Fore, Back, Style
-from enum import Enum
 from pathlib import Path
+import sys
 from typing import Any, Dict, Optional, NewType
 from types import SimpleNamespace
 
+# library imports
+import colorama
+from colorama import Fore, Style
 from jsonschema import ValidationError, validate
 from tabulate import tabulate
 import requests
@@ -39,12 +41,25 @@ DEFAULT_BASE_URL: Url = Url("http://localhost")
 MODEL_GRAPH: Url = Url("http://rack001/model")
 
 INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
-    'type' : 'object',
+    'type': 'object',
     'additionalProperties': False,
     'properties': {
         'ingestion-steps': {
             'type': 'array',
-            'contains': {'type': 'array', 'items': [{'type': 'string'}, {'type': 'string'}]}},
+            'contains': {
+                'anyOf': [{
+                    'type': 'object',
+                    'additionalProperties': False,
+                    'properties': {
+                        'nodegroup': {'type': 'string'},
+                        'csv': {'type': 'string'}
+                }}, {
+                    'type': 'object',
+                    'addtionalProperties': False,
+                    'properties': {'owl': {'type': 'string'}}
+                }]
+            }
+        },
         'data-graph': {'type': 'string'}
     }
 }
@@ -64,17 +79,17 @@ class CustomFormatter(logging.Formatter):
     """Add custom styles to our log"""
 
     # NOTE: 8 is the longest levelname (CRITICAL)
-    format = "[%(asctime)s - %(filename)s:%(lineno)d] %(levelname)8s: %(message)s"
+    format_string = "[%(asctime)s - %(filename)s:%(lineno)d] %(levelname)8s: %(message)s"
 
     FORMATS = {
-        logging.DEBUG: Fore.WHITE + format + Style.RESET_ALL,
-        logging.INFO: Fore.GREEN + format + Style.RESET_ALL,
-        logging.WARNING: Fore.YELLOW + format + Style.RESET_ALL,
-        logging.ERROR: Fore.RED + format + Style.RESET_ALL,
-        logging.CRITICAL: Style.BRIGHT + Fore.RED + format + Style.RESET_ALL
+        logging.DEBUG: Fore.WHITE + format_string + Style.RESET_ALL,
+        logging.INFO: Fore.GREEN + format_string + Style.RESET_ALL,
+        logging.WARNING: Fore.YELLOW + format_string + Style.RESET_ALL,
+        logging.ERROR: Fore.RED + format_string + Style.RESET_ALL,
+        logging.CRITICAL: Style.BRIGHT + Fore.RED + format_string + Style.RESET_ALL
     }
 
-    def format(self, record):
+    def format(self, record: logging.LogRecord) -> str:
         which_format = self.FORMATS.get(record.levelno)
         formatter = logging.Formatter(which_format, "%H:%M:%S")
         return formatter.format(record)
@@ -123,7 +138,7 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
     semtk3.upload_owl(owl_file, conn, "rack", "rack")
     print('\tOK')
 
-def ingest_csv_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> None:
+def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
@@ -137,7 +152,13 @@ def ingest_csv_driver(config_path: Path, base_url: Url, data_graph: Optional[Url
 
     clear_graph(conn)
     for step in steps:
-        ingest_csv(conn, step[0], base_path / step[1])
+        if 'owl' in step:
+            owl_file = step['owl']
+            print(f'Ingesting [{owl_file}]', end="")
+            semtk3.upload_owl(base_path / owl_file, conn, "rack", "rack", semtk3.SEMTK3_CONN_DATA)
+            print('\tOK')
+        elif 'csv' in step:
+            ingest_csv(conn, step['nodegroup'], base_path / step['csv'])
 
 def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url]) -> None:
     """Use an import.yaml file to ingest multiple OWL files into the model graph."""
@@ -172,7 +193,7 @@ def dispatch_data_export(args: SimpleNamespace) -> None:
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
-    ingest_csv_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store)
+    ingest_data_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store)
 
 def dispatch_plumbing_model(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
@@ -184,16 +205,7 @@ def dispatch_plumbing_storenodegroups(args: SimpleNamespace) -> None:
 def dispatch_plumbing_retrievenodegroups(args: SimpleNamespace) -> None:
     retrieve_nodegroups_driver(args.regexp, args.directory, args.base_url)
 
-def main() -> None:
-    """Main function"""
-
-    # Sets up colors for Windows users
-    colorama.init()
-
-    # Register our custom color formatter for our logger
-    ch = logging.StreamHandler()
-    ch.setFormatter(CustomFormatter())
-    logger.addHandler(ch)
+def get_argument_parser() -> argparse.ArgumentParser:
 
     parser = argparse.ArgumentParser(description='RACK in a Box toolkit')
     parser.add_argument('--base-url', type=str, default=DEFAULT_BASE_URL, help='Base SemTK instance URL')
@@ -230,7 +242,20 @@ def main() -> None:
     plumbing_retrievenodegroups_parser.add_argument('directory', type=str, help='Nodegroup directory')
     plumbing_retrievenodegroups_parser.set_defaults(func=dispatch_plumbing_retrievenodegroups)
 
-    args = parser.parse_args()
+    return parser
+
+def main() -> None:
+    """Main function"""
+
+    # Sets up colors for Windows users
+    colorama.init()
+
+    # Register our custom color formatter for our logger
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(CustomFormatter())
+    logger.addHandler(stream_handler)
+
+    args = get_argument_parser().parse_args()
 
     logging.basicConfig(level=logging.INFO)
 
@@ -252,7 +277,7 @@ def main() -> None:
         logger.error('Connection failure\n%s', exc)
         sys.exit(1)
     except semtk3.restclient.RestException as exc:
-        logger.error(f'REST Endpoint Failure\n{exc}')
+        logger.error('REST Endpoint Failure\n%s', exc)
         sys.exit(1)
     except FileNotFoundError as exc:
         logger.error('File not found\n%s', exc)

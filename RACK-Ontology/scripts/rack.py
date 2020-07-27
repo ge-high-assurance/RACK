@@ -81,17 +81,25 @@ INGEST_OWL_CONFIG_SCHEMA: Dict[str, Any] = {
     }
 }
 
+def str_good(s: str) -> str:
+    return (Fore.GREEN + s + Style.RESET_ALL)
+
+def str_bad(s: str) -> str:
+    return (Fore.RED + s + Style.RESET_ALL)
+
+def str_highlight(s: str) -> str:
+    return (Fore.MAGENTA + s + Style.RESET_ALL)
+
 class CustomFormatter(logging.Formatter):
     """Add custom styles to our log"""
 
-    # NOTE: 8 is the longest levelname (CRITICAL)
-    format_string = "[%(asctime)s - %(filename)s:%(lineno)d] %(levelname)8s: %(message)s"
+    format_string = "[%(filename)s:%(lineno)d] %(levelname)s: %(message)s"
 
     FORMATS = {
-        logging.DEBUG: Fore.WHITE + format_string + Style.RESET_ALL,
-        logging.INFO: Fore.GREEN + format_string + Style.RESET_ALL,
+        logging.DEBUG: format_string,
+        logging.INFO: Fore.CYAN + format_string + Style.RESET_ALL,
         logging.WARNING: Fore.YELLOW + format_string + Style.RESET_ALL,
-        logging.ERROR: Fore.RED + format_string + Style.RESET_ALL,
+        logging.ERROR: str_bad(format_string),
         logging.CRITICAL: Style.BRIGHT + Fore.RED + format_string + Style.RESET_ALL
     }
 
@@ -119,7 +127,7 @@ def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
     """Clear all the existing data in the data or model graph"""
     print('Clearing graph')
     result = semtk3.clear_graph(conn, which_graph.value, 0)
-    print(result)
+    print(result.lstrip())
 
 def run_query(conn: Connection, nodegroup: str) -> None:
     semtk3.SEMTK3_CONN_OVERRIDE = conn
@@ -129,20 +137,28 @@ def run_query(conn: Connection, nodegroup: str) -> None:
 
 def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     """Ingest a CSV file using the named nodegroup."""
-    print(f'Loading [{nodegroup}]')
+    print(f'Loading {str_highlight(nodegroup): <40} ', end='')
 
     with open(csv_name, "r") as csv_file:
         csv = csv_file.read()
 
-    result = semtk3.ingest_by_id(nodegroup, csv, conn)
+    try:
+        result = semtk3.ingest_by_id(nodegroup, csv, conn)
+    except Exception as e:
+        print(str_bad('FAIL'))
+        raise e
 
-    print(f' Records: {result["recordsProcessed"]}\tFailures: {result["failuresEncountered"]}')
+    print(f'{str_good("OK")} Records: {result["recordsProcessed"]: <7} Failures: {result["failuresEncountered"]}')
 
 def ingest_owl(conn: Connection, owl_file: Path) -> None:
     """Upload an OWL file into the model graph."""
-    print(f'Ingesting [{owl_file}]', end="")
-    semtk3.upload_owl(owl_file, conn, "rack", "rack")
-    print('\tOK')
+    print(f'Ingesting {str_highlight(str(owl_file)): <40}', end="")
+    try:
+        semtk3.upload_owl(owl_file, conn, "rack", "rack")
+    except Exception as e:
+        print(str_bad(' FAIL'))
+        raise e
+    print(str_good(' OK'))
 
 def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
@@ -160,9 +176,13 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Ur
     for step in steps:
         if 'owl' in step:
             owl_file = step['owl']
-            print(f'Ingesting [{owl_file}]', end="")
-            semtk3.upload_owl(base_path / owl_file, conn, "rack", "rack", semtk3.SEMTK3_CONN_DATA)
-            print('\tOK')
+            print(f'Ingesting {str_highlight(str(owl_file)): <40}', end="")
+            try:
+                semtk3.upload_owl(base_path / owl_file, conn, "rack", "rack", semtk3.SEMTK3_CONN_DATA)
+            except Exception as e:
+                print(str_bad(' FAIL'))
+                raise e
+            print(str_good(' OK'))
         elif 'csv' in step:
             ingest_csv(conn, step['nodegroup'], base_path / step['csv'])
 
@@ -261,6 +281,10 @@ def main() -> None:
     stream_handler.setFormatter(CustomFormatter())
     logger.propagate = False
     logger.addHandler(stream_handler)
+    semtk3_logger = logging.getLogger("semtk3")
+    semtk3_logger.handlers = []
+    semtk3_logger.propagate = False
+    semtk3_logger.addHandler(stream_handler)
 
     args = get_argument_parser().parse_args()
 

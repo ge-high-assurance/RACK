@@ -242,6 +242,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description='RACK in a Box toolkit')
     parser.add_argument('--base-url', type=str, default=DEFAULT_BASE_URL, help='Base SemTK instance URL')
     parser.add_argument('--triple-store', type=str, help='Override Fuseki URL')
+    parser.add_argument('--log-level', type=str, default='WARNING', help='Assign logger severity level')
 
     subparsers = parser.add_subparsers(dest='command')
 
@@ -294,7 +295,11 @@ def main() -> None:
 
     args = get_argument_parser().parse_args()
 
-    logging.basicConfig(level=logging.INFO)
+    try:
+        logging.basicConfig(level=args.log_level)
+    except ValueError:
+        logger.error('Bad log level specified')
+        sys.exit(1)
 
     if args.base_url.endswith('/'):
         logger.warning('Trimming the final \'/\' from your base_url')

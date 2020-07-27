@@ -162,11 +162,11 @@ def run_query(conn: Connection, nodegroup: str) -> None:
 def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     """Ingest a CSV file using the named nodegroup."""
 
-    def suffix(result):
+    def suffix(result: dict) -> str:
         return f' Records: {result["recordsProcessed"]: <7} Failures: {result["failuresEncountered"]}'
 
     @with_status(f'Loading {str_highlight(nodegroup)}', suffix)
-    def go():
+    def go() -> dict:
         with open(csv_name, "r") as csv_file:
             csv = csv_file.read()
         return semtk3.ingest_by_id(nodegroup, csv, conn)
@@ -176,7 +176,7 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
 def ingest_owl(conn: Connection, owl_file: Path) -> None:
     """Upload an OWL file into the model graph."""
     @with_status(f'Ingesting {str_highlight(str(owl_file))}')
-    def go():
+    def go() -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
     go()
 

@@ -10,7 +10,7 @@ import json
 import logging
 from pathlib import Path
 import sys
-from typing import Any, Dict, Optional, NewType
+from typing import Any, Callable, Dict, Optional, NewType, TypeVar
 from types import SimpleNamespace
 
 # library imports
@@ -110,6 +110,28 @@ class CustomFormatter(logging.Formatter):
         formatter = logging.Formatter(which_format, "%H:%M:%S")
         return formatter.format(record)
 
+F = TypeVar('F', bound=Callable[..., Any])
+
+def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _: '') -> Callable[[F], F]:
+    """This decorator writes the prefix, followed by three dots, then runs the
+    decorated function.  Upon success, it appends OK, upon failure, it appends
+    FAIL.  If suffix is set, the result of the computation is passed to suffix,
+    and the resulting string is appended after OK."""
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+        def wrapper(*args, **kwargs):
+            nonlocal prefix
+            prefix += '...'
+            print(f'{prefix: <60}', end='', flush=True)
+            try:
+                result = func(*args, **kwargs)
+            except Exception as e:
+                print(str_bad('FAIL'))
+                raise e
+            print(str_good('OK') + suffix(result))
+            return result
+        return wrapper
+    return decorator
+
 def sparql_connection(base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> Connection:
     """Generate a SPARQL connection value."""
 
@@ -139,28 +161,24 @@ def run_query(conn: Connection, nodegroup: str) -> None:
 
 def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     """Ingest a CSV file using the named nodegroup."""
-    print(f'Loading {str_highlight(nodegroup): <40} ', end='')
 
-    with open(csv_name, "r") as csv_file:
-        csv = csv_file.read()
+    def suffix(result):
+        return f' Records: {result["recordsProcessed"]: <7} Failures: {result["failuresEncountered"]}'
 
-    try:
-        result = semtk3.ingest_by_id(nodegroup, csv, conn)
-    except Exception as e:
-        print(str_bad('FAIL'))
-        raise e
+    @with_status(f'Loading {str_highlight(nodegroup)}', suffix)
+    def go():
+        with open(csv_name, "r") as csv_file:
+            csv = csv_file.read()
+        return semtk3.ingest_by_id(nodegroup, csv, conn)
 
-    print(f'{str_good("OK")} Records: {result["recordsProcessed"]: <7} Failures: {result["failuresEncountered"]}')
+    go()
 
 def ingest_owl(conn: Connection, owl_file: Path) -> None:
     """Upload an OWL file into the model graph."""
-    print(f'Ingesting {str_highlight(str(owl_file)): <40}', end="")
-    try:
-        semtk3.upload_owl(owl_file, conn, "rack", "rack")
-    except Exception as e:
-        print(str_bad(' FAIL'))
-        raise e
-    print(str_good(' OK'))
+    @with_status(f'Ingesting {str_highlight(str(owl_file))}')
+    def go():
+        return semtk3.upload_owl(owl_file, conn, "rack", "rack")
+    go()
 
 def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
@@ -207,17 +225,15 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
     for file in files:
         ingest_owl(conn, base_path / file)
 
+@with_status('Storing nodegroups')
 def store_nodegroups_driver(directory: Path, base_url: Url) -> None:
-    print("Storing nodegroups: ", end="", flush=True)
     sparql_connection(base_url, None, None)
     semtk3.store_nodegroups(directory)
-    print("OK")
 
+@with_status('Retrieving nodegroups')
 def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url) -> None:
-    print("Retrieving nodegroups: ", end="", flush=True)
     sparql_connection(base_url, None, None)
     semtk3.retrieve_from_store(regexp, directory)
-    print("OK")
 
 def dispatch_data_export(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)

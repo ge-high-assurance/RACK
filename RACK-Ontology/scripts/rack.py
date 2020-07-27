@@ -87,6 +87,9 @@ def str_good(s: str) -> str:
 def str_bad(s: str) -> str:
     return (Fore.RED + s + Style.RESET_ALL)
 
+def str_highlight(s: str) -> str:
+    return (Fore.MAGENTA + s + Style.RESET_ALL)
+
 class CustomFormatter(logging.Formatter):
     """Add custom styles to our log"""
 
@@ -134,18 +137,22 @@ def run_query(conn: Connection, nodegroup: str) -> None:
 
 def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     """Ingest a CSV file using the named nodegroup."""
-    print(f'Loading [{nodegroup}]')
+    print(f'Loading {str_highlight(nodegroup): <40} ', end='')
 
     with open(csv_name, "r") as csv_file:
         csv = csv_file.read()
 
-    result = semtk3.ingest_by_id(nodegroup, csv, conn)
+    try:
+        result = semtk3.ingest_by_id(nodegroup, csv, conn)
+    except Exception as e:
+        print(str_bad('FAIL'))
+        raise e
 
-    print(f' Records: {result["recordsProcessed"]}\tFailures: {result["failuresEncountered"]}')
+    print(f'{str_good("OK")} Records: {result["recordsProcessed"]: <7} Failures: {result["failuresEncountered"]}')
 
 def ingest_owl(conn: Connection, owl_file: Path) -> None:
     """Upload an OWL file into the model graph."""
-    print(f'Ingesting {Fore.MAGENTA}{owl_file!s: <40}{Style.RESET_ALL}', end="")
+    print(f'Ingesting {str_highlight(str(owl_file)): <40}', end="")
     try:
         semtk3.upload_owl(owl_file, conn, "rack", "rack")
     except Exception as e:
@@ -169,7 +176,7 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Ur
     for step in steps:
         if 'owl' in step:
             owl_file = step['owl']
-            print(f'Ingesting {Fore.MAGENTA}{owl_file!s: <40}{Style.RESET_ALL}', end="")
+            print(f'Ingesting {str_highlight(str(owl_file)): <40}', end="")
             try:
                 semtk3.upload_owl(base_path / owl_file, conn, "rack", "rack", semtk3.SEMTK3_CONN_DATA)
             except Exception as e:

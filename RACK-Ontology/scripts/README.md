@@ -84,7 +84,7 @@ running on `localhost`
 $ source venv/bin/activate
 (venv) $ ./rack.py data import ../models/TurnstileSystem/Data/import.yaml
 Clearing graph
-Success Update succeeded 
+Success Update succeeded
 Loading ingest01 system                 OK Records: 8       Failures: 0
 Loading ingest02 interface              OK Records: 4       Failures: 0
 Loading ingest03 hazard                 OK Records: 4       Failures: 0
@@ -126,6 +126,7 @@ InputThread          Counter Application
 Out Gate             TurnStileSystem
 OutputThread         Counter Application
 ```
+See `./rack.py data export --help` for options, including different export formats (such as CSV), emitting to a file, and omitting the header row.
 
 ### Updating nodegroups
 

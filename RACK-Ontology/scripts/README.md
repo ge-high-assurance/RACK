@@ -1,3 +1,10 @@
+<!---
+NOTE: This document should be copied verbatim to this wiki page before every
+release:
+
+https://github.com/ge-high-assurance/RACK/wiki/Command-line-script:-rack.py
+-->
+
 # Ingestion Script
 
 This python script uses the Node Execution Group REST API

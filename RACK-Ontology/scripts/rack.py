@@ -261,6 +261,10 @@ def main() -> None:
     stream_handler.setFormatter(CustomFormatter())
     logger.propagate = False
     logger.addHandler(stream_handler)
+    semtk3_logger = logging.getLogger("semtk3")
+    semtk3_logger.handlers = []
+    semtk3_logger.propagate = False
+    semtk3_logger.addHandler(stream_handler)
 
     args = get_argument_parser().parse_args()
 

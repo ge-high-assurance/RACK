@@ -127,6 +127,26 @@ Out Gate             TurnStileSystem
 OutputThread         Counter Application
 ```
 
+### Updating nodegroups
+
+The script can automate loading a directory full of nodegroups
+indexed by a `store_data.csv` file.
+
+```
+(venv) $ ./rack.py plumbing store-nodegroups ../../nodegroups/ingestion
+Storing nodegroups...                                       OK
+```
+
+It can also export nodegroups matching a regular expression
+into a directory alongside its `store_data.csv` file for future
+loads.
+
+```
+(venv) $ mkdir outdir
+(venv) $ ./rack.py $CONFIG plumbing retrieve-nodegroups ^ingest outdir
+Retrieving nodegroups...                                    OK
+```
+
 ## Hacking
 
 The following documentation is only useful for developers of this script.

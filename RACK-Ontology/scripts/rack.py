@@ -81,17 +81,22 @@ INGEST_OWL_CONFIG_SCHEMA: Dict[str, Any] = {
     }
 }
 
+def str_good(s: str) -> str:
+    return (Fore.GREEN + s + Style.RESET_ALL)
+
+def str_bad(s: str) -> str:
+    return (Fore.RED + s + Style.RESET_ALL)
+
 class CustomFormatter(logging.Formatter):
     """Add custom styles to our log"""
 
-    # NOTE: 8 is the longest levelname (CRITICAL)
-    format_string = "[%(asctime)s - %(filename)s:%(lineno)d] %(levelname)8s: %(message)s"
+    format_string = "[%(filename)s:%(lineno)d] %(levelname)s: %(message)s"
 
     FORMATS = {
-        logging.DEBUG: Fore.WHITE + format_string + Style.RESET_ALL,
-        logging.INFO: Fore.GREEN + format_string + Style.RESET_ALL,
+        logging.DEBUG: format_string,
+        logging.INFO: Fore.CYAN + format_string + Style.RESET_ALL,
         logging.WARNING: Fore.YELLOW + format_string + Style.RESET_ALL,
-        logging.ERROR: Fore.RED + format_string + Style.RESET_ALL,
+        logging.ERROR: str_bad(format_string),
         logging.CRITICAL: Style.BRIGHT + Fore.RED + format_string + Style.RESET_ALL
     }
 
@@ -140,9 +145,13 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
 
 def ingest_owl(conn: Connection, owl_file: Path) -> None:
     """Upload an OWL file into the model graph."""
-    print(f'Ingesting [{owl_file}]', end="")
-    semtk3.upload_owl(owl_file, conn, "rack", "rack")
-    print('\tOK')
+    print(f'Ingesting {Fore.MAGENTA}{owl_file!s: <40}{Style.RESET_ALL}', end="")
+    try:
+        semtk3.upload_owl(owl_file, conn, "rack", "rack")
+    except Exception as e:
+        print(str_bad(' FAIL'))
+        raise e
+    print(str_good(' OK'))
 
 def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
@@ -160,9 +169,12 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Ur
     for step in steps:
         if 'owl' in step:
             owl_file = step['owl']
-            print(f'Ingesting [{owl_file}]', end="")
-            semtk3.upload_owl(base_path / owl_file, conn, "rack", "rack", semtk3.SEMTK3_CONN_DATA)
-            print('\tOK')
+            print(f'Ingesting {Fore.MAGENTA}{owl_file!s: <40}{Style.RESET_ALL}', end="")
+            try:
+                semtk3.upload_owl(base_path / owl_file, conn, "rack", "rack", semtk3.SEMTK3_CONN_DATA)
+            except Exception as e:
+                print(str_bad(' FAIL'))
+            print(str_good(' OK'))
         elif 'csv' in step:
             ingest_csv(conn, step['nodegroup'], base_path / step['csv'])
 

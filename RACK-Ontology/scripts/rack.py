@@ -119,7 +119,7 @@ def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
     """Clear all the existing data in the data or model graph"""
     print('Clearing graph')
     result = semtk3.clear_graph(conn, which_graph.value, 0)
-    print(result)
+    print(result.lstrip())
 
 def run_query(conn: Connection, nodegroup: str) -> None:
     semtk3.SEMTK3_CONN_OVERRIDE = conn

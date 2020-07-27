@@ -7,6 +7,7 @@ This simple process can be adapted to import other data into RACK for experiment
 import argparse
 import csv
 from enum import Enum, unique
+from io import StringIO
 import json
 import logging
 from pathlib import Path
@@ -21,6 +22,7 @@ from jsonschema import ValidationError, validate
 from tabulate import tabulate
 import requests
 import semtk3
+from semtk3.semtktable import SemtkTable
 import yaml
 
 __author__ = "Eric Mertens"
@@ -164,25 +166,36 @@ def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
     result = semtk3.clear_graph(conn, which_graph.value, 0)
     print(result.lstrip())
 
-def run_query(conn: Connection, nodegroup: str, format: ExportFormat = ExportFormat.TEXT, headers: bool = True) -> None:
-    semtk3.SEMTK3_CONN_OVERRIDE = conn
-    semtk_table = semtk3.select_by_id(nodegroup)
-    print()
+def format_semtk_table(semtk_table: SemtkTable, format: ExportFormat = ExportFormat.TEXT, headers: bool = True) -> str:
+
     if format == ExportFormat.TEXT:
         if headers is True:
-            text_table = tabulate(semtk_table.get_rows(), headers=semtk_table.get_column_names())
+            return tabulate(semtk_table.get_rows(), headers=semtk_table.get_column_names())
         else:
-            text_table = tabulate(semtk_table.get_rows())
-        print(text_table)
+            return tabulate(semtk_table.get_rows())
+
     elif format == ExportFormat.CSV:
-        writer = csv.writer(sys.stdout)
+        output = StringIO()
+        writer = csv.writer(output)
         if headers is True:
             writer.writerow(semtk_table.get_column_names())
         for row in semtk_table.get_rows():
             writer.writerow(row)
+        return output.getvalue()
+
+    print(str_bad(f"Internal error: incomplete implementation of run_query for '{format}'"))
+    sys.exit(1)
+
+def run_query(conn: Connection, nodegroup: str, format: ExportFormat = ExportFormat.TEXT, headers: bool = True, path: Optional[Path] = None) -> None:
+    semtk3.SEMTK3_CONN_OVERRIDE = conn
+    semtk_table = semtk3.select_by_id(nodegroup)
+    formatted_table = format_semtk_table(semtk_table, format=format, headers=headers)
+    if path is None:
+        print()
+        print(formatted_table)
     else:
-        print(str_bad(f"Internal error: incomplete implementation of run_query for '{format}'"))
-        sys.exit(1)
+        with open(path, mode="w") as f:
+            print(formatted_table, file=f)
 
 def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     """Ingest a CSV file using the named nodegroup."""
@@ -262,7 +275,7 @@ def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url) -> N
 
 def dispatch_data_export(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
-    run_query(conn, args.nodegroup, format=args.format, headers=not args.no_headers)
+    run_query(conn, args.nodegroup, format=args.format, headers=not args.no_headers, path=args.file)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
@@ -306,6 +319,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_export_parser.add_argument('data_graph', type=str, help='Data graph URL')
     data_export_parser.add_argument('--format', type=ExportFormat, help='Export format', choices=list(ExportFormat), default=ExportFormat.TEXT)
     data_export_parser.add_argument('--no-headers', action='store_true', help='Omit header row')
+    data_export_parser.add_argument('--file', type=Path, help='Output to file')
     data_export_parser.set_defaults(func=dispatch_data_export)
 
     plumbing_model_parser.add_argument('config', type=str, help='Configuration YAML file')

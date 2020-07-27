@@ -39,10 +39,12 @@ class Graph(Enum):
 DEFAULT_BASE_URL: Url = Url("http://localhost")
 
 MODEL_GRAPH: Url = Url("http://rack001/model")
+DEFAULT_DATA_GRAPH = Url("http://rack001/data")
 
 INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
     'type': 'object',
     'additionalProperties': False,
+    'required': ['ingestion-steps'],
     'properties': {
         'ingestion-steps': {
             'type': 'array',
@@ -73,22 +75,22 @@ INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
 INGEST_OWL_CONFIG_SCHEMA: Dict[str, Any] = {
     'type' : 'object',
     'additionalProperties': False,
+    'required': ['files'],
     'properties': {
         'files': {
             'type': 'array',
-            'contains': {'type': 'string'}},
-        'data-graph': {'type': 'string'}
+            'contains': {'type': 'string'}}
     }
 }
 
 def str_good(s: str) -> str:
-    return (Fore.GREEN + s + Style.RESET_ALL)
+    return Fore.GREEN + s + Style.RESET_ALL
 
 def str_bad(s: str) -> str:
-    return (Fore.RED + s + Style.RESET_ALL)
+    return Fore.RED + s + Style.RESET_ALL
 
 def str_highlight(s: str) -> str:
-    return (Fore.MAGENTA + s + Style.RESET_ALL)
+    return Fore.MAGENTA + s + Style.RESET_ALL
 
 class CustomFormatter(logging.Formatter):
     """Add custom styles to our log"""
@@ -169,6 +171,10 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Ur
     steps = config['ingestion-steps']
     data_graph = data_graph or config['data-graph']
     base_path = config_path.parent
+
+    if data_graph is None:
+        logger.warning("Defaulting data-graph to %s", DEFAULT_DATA_GRAPH)
+        data_graph = DEFAULT_DATA_GRAPH
 
     conn = sparql_connection(base_url, data_graph, triple_store)
 

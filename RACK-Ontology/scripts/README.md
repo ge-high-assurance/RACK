@@ -25,7 +25,9 @@ $ pip install -r requirements.txt
 ## Usage
 
 ```
-usage: rack.py [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE] {data,plumbing} ...
+usage: rack.py [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE]
+               [--log-level LOG_LEVEL]
+               {data,plumbing} ...
 
 RACK in a Box toolkit
 
@@ -39,6 +41,8 @@ optional arguments:
   --base-url BASE_URL   Base SemTK instance URL
   --triple-store TRIPLE_STORE
                         Override Fuseki URL
+  --log-level LOG_LEVEL
+                        Assign logger severity level
 ```
 
 The *base-url* overrides a localhost installation of RACK in a Box.
@@ -62,8 +66,8 @@ CSV paths are resolved relative to the configuration file.
 ```
 data-model: "http://rack001/data"
 ingestion-steps:
-- ["TA1 ingest1 system",        "SYSTEM.csv"]
-- ["TA1 ingest2 interface",     "INTERFACE.csv"]
+- {nodegroup: "ingest01 system",    csv: "SYSTEM.csv"}
+- {nodegroup: "ingest02 interface", csv: "INTERFACE.csv"}
 ```
 
 ## Example invocation
@@ -79,27 +83,27 @@ running on `localhost`
 ```
 $ source venv/bin/activate
 (venv) $ ./rack.py data import ../models/TurnstileSystem/Data/import.yaml
-INFO:semtk3:Percent complete:  80%
-INFO:semtk3:Percent complete:  100%
-Clear graph:  Success Update succeeded
-Loading [TA1 ingest1 system]
-Records: 8	Failures: 0
-Loading [TA1 ingest2 interface]
-Records: 4	Failures: 0
-Loading [TA1 ingest1 system]
-Records: 8	Failures: 0
-Loading [TA1 ingest2 interface]
-Records: 4	Failures: 0
-Loading [TA1 ingest3 hazard]
-Records: 4	Failures: 0
-Loading [TA1 ingest4 requirement]
-Records: 19	Failures: 0
-Loading [TA1 ingest5 data dict]
-Records: 29	Failures: 0
-Loading [TA1 ingest6 test]
-Records: 4	Failures: 0
-Loading [TA1 ingest7 test results]
-Records: 8	Failures: 0
+Clearing graph
+Success Update succeeded 
+Loading ingest01 system                 OK Records: 8       Failures: 0
+Loading ingest02 interface              OK Records: 4       Failures: 0
+Loading ingest03 hazard                 OK Records: 4       Failures: 0
+Loading ingest04 requirement            OK Records: 22      Failures: 0
+Loading ingest05 data dict              OK Records: 29      Failures: 0
+Loading ingest06 test                   OK Records: 8       Failures: 0
+Loading ingest07 test results           OK Records: 16      Failures: 0
+Loading ingest08 language               OK Records: 1       Failures: 0
+Loading ingest09 compiler               OK Records: 1       Failures: 0
+Loading ingest10 packager               OK Records: 1       Failures: 0
+Loading ingest11 agent                  OK Records: 3       Failures: 0
+Loading ingest12 code file              OK Records: 10      Failures: 0
+Loading ingest13 object file            OK Records: 3       Failures: 0
+Loading ingest14 library                OK Records: 1       Failures: 0
+Loading ingest15 executable             OK Records: 1       Failures: 0
+Loading ingest16 config file            OK Records: 1       Failures: 0
+Loading ingest17 package                OK Records: 6       Failures: 0
+Loading ingest18 package file           OK Records: 1       Failures: 0
+Loading ingest19 compile                OK Records: 27      Failures: 0
 ```
 
 ### Export
@@ -110,8 +114,6 @@ example from a Rack in the Box instance running on `localhost`:
 ```
 $ source venv/bin/activate
 (venv) $ ./rack.py data export "ingest01 system" http://rack001/data
-
-INFO:semtk3:Percent complete:  100%
 
 uniqueIdentifier     uniqueIdentifier_parent
 -------------------  -------------------------

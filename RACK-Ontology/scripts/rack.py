@@ -112,13 +112,13 @@ class CustomFormatter(logging.Formatter):
 
 F = TypeVar('F', bound=Callable[..., Any])
 
-def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _: '') -> Callable[[F], F]:
+def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _: '') -> Callable[[Callable[..., Any]], Callable[..., Any]]:
     """This decorator writes the prefix, followed by three dots, then runs the
     decorated function.  Upon success, it appends OK, upon failure, it appends
     FAIL.  If suffix is set, the result of the computation is passed to suffix,
     and the resulting string is appended after OK."""
     def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: tuple, **kwargs: dict) -> Any:
             nonlocal prefix
             prefix += '...'
             print(f'{prefix: <60}', end='', flush=True)

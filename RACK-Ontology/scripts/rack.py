@@ -181,6 +181,7 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Ur
                 semtk3.upload_owl(base_path / owl_file, conn, "rack", "rack", semtk3.SEMTK3_CONN_DATA)
             except Exception as e:
                 print(str_bad(' FAIL'))
+                raise e
             print(str_good(' OK'))
         elif 'csv' in step:
             ingest_csv(conn, step['nodegroup'], base_path / step['csv'])

@@ -10,7 +10,7 @@ import json
 import logging
 from pathlib import Path
 import sys
-from typing import Any, Callable, Dict, Optional, NewType, TypeVar
+from typing import Any, Callable, Dict, Optional, NewType, TypeVar, cast
 from types import SimpleNamespace
 
 # library imports
@@ -110,14 +110,14 @@ class CustomFormatter(logging.Formatter):
         formatter = logging.Formatter(which_format, "%H:%M:%S")
         return formatter.format(record)
 
-F = TypeVar('F', bound=Callable[..., Any])
+Decoratee = TypeVar('Decoratee', bound=Callable[..., Any])
 
-def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _: '') -> Callable[[F], F]:
+def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Callable[[Decoratee], Decoratee]:
     """This decorator writes the prefix, followed by three dots, then runs the
     decorated function.  Upon success, it appends OK, upon failure, it appends
     FAIL.  If suffix is set, the result of the computation is passed to suffix,
     and the resulting string is appended after OK."""
-    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+    def decorator(func: Decoratee) -> Decoratee:
         def wrapper(*args, **kwargs):
             nonlocal prefix
             prefix += '...'
@@ -129,7 +129,7 @@ def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _: '') -> Cal
                 raise e
             print(str_good('OK') + suffix(result))
             return result
-        return wrapper
+        return cast(Decoratee, wrapper)
     return decorator
 
 def sparql_connection(base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> Connection:

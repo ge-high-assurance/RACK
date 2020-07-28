@@ -12,7 +12,7 @@ import json
 import logging
 from pathlib import Path
 import sys
-from typing import Any, Callable, Dict, Optional, NewType, TypeVar, cast
+from typing import Any, Callable, Dict, List, Optional, NewType, TypeVar, cast
 from types import SimpleNamespace
 
 # library imports
@@ -282,6 +282,59 @@ def list_nodegroups_driver(base_url: Url) -> None:
 
     print(format_semtk_table(list_nodegroups()))
 
+def confirm(on_confirmed: Callable[[], None], yes: bool = False) -> None:
+    if yes:
+        on_confirmed()
+        return
+    print(f'{Fore.CYAN}Confirm [y/N]')
+    if input().lower() == 'y':
+        print(str_good('Confirmed.'))
+        on_confirmed()
+    else:
+        print(str_bad('Aborted.'))
+
+def delete_nodegroup(nodegroup: str) -> None:
+    @with_status(f'Deleting {str_highlight(nodegroup)}')
+    def delete():
+        semtk3.delete_nodegroup_from_store(nodegroup)
+    delete()
+
+def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, yes: bool, base_url: Url) -> None:
+    if not nodegroups:
+        print('No nodegroups specified for deletion: doing nothing.')
+        return
+
+    sparql_connection(base_url, None, None)
+    allIDs = semtk3.get_nodegroup_store_data().get_column('ID')
+    nonexistent = [n for n in nodegroups if n not in allIDs]
+    to_delete = [n for n in nodegroups if n in allIDs]
+
+    if nonexistent:
+        print('The following nodegroups do not exist: {}'.format(' '.join(nonexistent)))
+        if not ignore_nonexistent:
+            print(str_bad('Aborting. Remove the nonexistent IDs or use --ignore-nonexistent.'))
+            sys.exit(1)
+
+    if not yes:
+        print('The following nodegroups would be removed: {}'.format(' '.join(str_highlight(s) for s in to_delete)))
+
+    def on_confirmed():
+        for nodegroup in to_delete:
+            delete_nodegroup(nodegroup)
+    confirm(on_confirmed, yes)
+
+def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
+    sparql_connection(base_url, None, None)
+    allIDs = semtk3.get_nodegroup_store_data().get_column('ID')
+
+    if not yes:
+        print('The following nodegroups would be removed: {}'.format(' '.join(str_highlight(s) for s in allIDs)))
+
+    def on_confirmed():
+        for nodegroup in allIDs:
+            delete_nodegroup(nodegroup)
+    confirm(on_confirmed, yes)
+
 def dispatch_data_export(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
     run_query(conn, args.nodegroup, format=args.format, headers=not args.no_headers, path=args.file)
@@ -303,6 +356,12 @@ def dispatch_plumbing_retrievenodegroups(args: SimpleNamespace) -> None:
 def dispatch_plumbing_listnodegroups(args: SimpleNamespace) -> None:
     list_nodegroups_driver(args.base_url)
 
+def dispatch_plumbing_deletenodegroups(args: SimpleNamespace) -> None:
+    delete_nodegroups_driver(args.nodegroups, args.ignore_nonexistent, args.yes, args.base_url)
+
+def dispatch_plumbing_deleteallnodegroups(args: SimpleNamespace) -> None:
+    delete_all_nodegroups_driver(args.yes, args.base_url)
+
 def get_argument_parser() -> argparse.ArgumentParser:
 
     parser = argparse.ArgumentParser(description='RACK in a Box toolkit')
@@ -323,6 +382,8 @@ def get_argument_parser() -> argparse.ArgumentParser:
     plumbing_storenodegroups_parser = plumbing_subparsers.add_parser('store-nodegroups', help='Store nodegroups into RACK')
     plumbing_retrievenodegroups_parser = plumbing_subparsers.add_parser('retrieve-nodegroups', help='Retrieve nodegroups from RACK')
     plumbing_listnodegroups_parser = plumbing_subparsers.add_parser('list-nodegroups', help='List nodegroups from RACK')
+    plumbing_deletenodegroups_parser = plumbing_subparsers.add_parser('delete-nodegroups', help='Delete some nodegroups from RACK')
+    plumbing_deleteallnodegroups_parser = plumbing_subparsers.add_parser('delete-all-nodegroups', help='Delete all nodegroups from RACK')
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     data_import_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
@@ -346,5 +407,13 @@ def get_argument_parser() -> argparse.ArgumentParser:
     plumbing_retrievenodegroups_parser.set_defaults(func=dispatch_plumbing_retrievenodegroups)
 
     plumbing_listnodegroups_parser.set_defaults(func=dispatch_plumbing_listnodegroups)
+
+    plumbing_deletenodegroups_parser.add_argument('nodegroups', type=str, nargs='+', help='IDs of nodegroups to be removed')
+    plumbing_deletenodegroups_parser.add_argument('--ignore-nonexistent', action='store_true', help='Ignore nonexistent IDs')
+    plumbing_deletenodegroups_parser.add_argument('--yes', action='store_true', help='Automatically confirm deletion')
+    plumbing_deletenodegroups_parser.set_defaults(func=dispatch_plumbing_deletenodegroups)
+
+    plumbing_deleteallnodegroups_parser.add_argument('--yes', action='store_true', help='Automatically confirm deletion')
+    plumbing_deleteallnodegroups_parser.set_defaults(func=dispatch_plumbing_deleteallnodegroups)
 
     return parser

@@ -131,7 +131,7 @@ def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Ca
     FAIL.  If suffix is set, the result of the computation is passed to suffix,
     and the resulting string is appended after OK."""
     def decorator(func: Decoratee) -> Decoratee:
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             nonlocal prefix
             prefix += '...'
             print(f'{prefix: <60}', end='', flush=True)
@@ -273,6 +273,15 @@ def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url) -> N
     sparql_connection(base_url, None, None)
     semtk3.retrieve_from_store(regexp, directory)
 
+def list_nodegroups_driver(base_url: Url) -> None:
+
+    @with_status('Listing nodegroups')
+    def list_nodegroups() -> SemtkTable:
+        sparql_connection(base_url, None, None)
+        return semtk3.get_nodegroup_store_data()
+
+    print(format_semtk_table(list_nodegroups()))
+
 def dispatch_data_export(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
     run_query(conn, args.nodegroup, format=args.format, headers=not args.no_headers, path=args.file)
@@ -290,6 +299,9 @@ def dispatch_plumbing_storenodegroups(args: SimpleNamespace) -> None:
 
 def dispatch_plumbing_retrievenodegroups(args: SimpleNamespace) -> None:
     retrieve_nodegroups_driver(args.regexp, args.directory, args.base_url)
+
+def dispatch_plumbing_listnodegroups(args: SimpleNamespace) -> None:
+    list_nodegroups_driver(args.base_url)
 
 def get_argument_parser() -> argparse.ArgumentParser:
 
@@ -310,6 +322,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     plumbing_model_parser = plumbing_subparsers.add_parser('model', help='Modify the data model')
     plumbing_storenodegroups_parser = plumbing_subparsers.add_parser('store-nodegroups', help='Store nodegroups into RACK')
     plumbing_retrievenodegroups_parser = plumbing_subparsers.add_parser('retrieve-nodegroups', help='Retrieve nodegroups from RACK')
+    plumbing_listnodegroups_parser = plumbing_subparsers.add_parser('list-nodegroups', help='List nodegroups from RACK')
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     data_import_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
@@ -331,5 +344,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     plumbing_retrievenodegroups_parser.add_argument('regexp', type=str, help='Nodegroup selection regular expression')
     plumbing_retrievenodegroups_parser.add_argument('directory', type=str, help='Nodegroup directory')
     plumbing_retrievenodegroups_parser.set_defaults(func=dispatch_plumbing_retrievenodegroups)
+
+    plumbing_listnodegroups_parser.set_defaults(func=dispatch_plumbing_listnodegroups)
 
     return parser

@@ -17,7 +17,7 @@ Write: data
        {?SYSTEM <rdf:type> <SYSTEM>
         . ?SYSTEM <uniqueIdentifier> ?systemId
         . OPTIONAL{?SYSTEM <partOf> ?partOf . ?partOf <uniqueIdentifier> ?partOfId}
-        . OPTIONAL{?SYSTEM <producedBy> ?producedBy . ?producedBy <uniqueIdentifier> ?producedById}
+        . OPTIONAL{?SYSTEM <sys:producedBy> ?producedBy . ?producedBy <uniqueIdentifier> ?producedById}
         . OPTIONAL{?SYSTEM <provides> ?provides . ?provides <uniqueIdentifier> ?providesId}
         . OPTIONAL{?SYSTEM <requires> ?requires . ?requires <uniqueIdentifier> ?requiresId}
        } order by ?systemId".
@@ -29,7 +29,7 @@ Write: data
   Ask: "select distinct ?uniqueIdentifier ?sourceId ?destinationId ?identifiedBy where
        {  ?INTERFACE <rdf:type> <INTERFACE>
         . ?INTERFACE <uniqueIdentifier> ?uniqueIdentifier
-        . OPTIONAL{?INTERFACE <source> ?source . ?source <uniqueIdentifier> ?sourceId}
+        . OPTIONAL{?INTERFACE <sys:source> ?source . ?source <uniqueIdentifier> ?sourceId}
         . OPTIONAL{?INTERFACE <destination> ?destination . ?destination <uniqueIdentifier> ?destinationId}
         . OPTIONAL{?INTERFACE <identifiedBy> ?identifiedBy}
        } order by ?uniqueIdentifier".
@@ -83,7 +83,7 @@ Write: data
        {  ?TEST <rdf:type> <TEST>
         . ?TEST <uniqueIdentifier> ?uniqueIdentifier
         . OPTIONAL{?TEST <verifies> ?verifies . ?verifies <uniqueIdentifier> ?verifiesId}
-        . OPTIONAL{?TEST <producedBy> ?producedBy . ?producedBy <uniqueIdentifier> ?producedById}
+        . OPTIONAL{?TEST <tst:producedBy> ?producedBy . ?producedBy <uniqueIdentifier> ?producedById}
        } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/TEST.csv".
 

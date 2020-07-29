@@ -20,67 +20,6 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'MIL-STD-881D-AppxB.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:ObjectProperty rdf:ID="B.2">
-    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >APPLICABLE DOCUMENTS</j.1:title>
-    <rdfs:range rdf:resource="/DOCUMENT#SECTION"/>
-    <rdfs:domain>
-      <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D">
-        <rdfs:subClassOf>
-          <owl:Restriction>
-            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-            >1</owl:cardinality>
-            <owl:onProperty>
-              <owl:ObjectProperty rdf:ID="B.4"/>
-            </owl:onProperty>
-          </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-          <owl:Restriction>
-            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-            >1</owl:cardinality>
-            <owl:onProperty>
-              <owl:ObjectProperty rdf:ID="B.3"/>
-            </owl:onProperty>
-          </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-          <owl:Restriction>
-            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-            >1</owl:cardinality>
-            <owl:onProperty rdf:resource="#B.2"/>
-          </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-          <owl:Restriction>
-            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-            >1</owl:cardinality>
-            <owl:onProperty>
-              <owl:ObjectProperty rdf:ID="B.1"/>
-            </owl:onProperty>
-          </owl:Restriction>
-        </rdfs:subClassOf>
-      </rdf:Description>
-    </rdfs:domain>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#B.1">
-    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >SCOPE</j.1:title>
-    <rdfs:range rdf:resource="/DOCUMENT#SECTION"/>
-    <rdfs:domain rdf:resource="MIL-STD-881D#MIL-STD-881D"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#B.4">
-    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >DEFINITIONS</j.1:title>
-    <rdfs:range rdf:resource="/DOCUMENT#SECTION"/>
-    <rdfs:domain rdf:resource="MIL-STD-881D#MIL-STD-881D"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#B.3">
-    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >WORK BREAKDOWN STRUCTURE LEVELS</j.1:title>
-    <rdfs:range rdf:resource="/DOCUMENT#SECTION"/>
-    <rdfs:domain rdf:resource="MIL-STD-881D#MIL-STD-881D"/>
-  </owl:ObjectProperty>
   <j.3:SYSTEM rdf:ID="ContractorTechnicalSupport-1.10.2">
     <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >1.10.2</j.0:wbs>
@@ -473,6 +412,32 @@
     <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >SupportandHandlingEquipmentAirframeHullVehicle-1.8.2.1</j.2:uniqueIdentifier>
   </j.3:SYSTEM>
+  <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D">
+    <j.1:content>
+      <j.1:SECTION rdf:ID="B.4">
+        <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >DEFINITIONS</j.1:title>
+      </j.1:SECTION>
+    </j.1:content>
+    <j.1:content>
+      <j.1:SECTION rdf:ID="B.3">
+        <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >WORK BREAKDOWN STRUCTURE LEVELS</j.1:title>
+      </j.1:SECTION>
+    </j.1:content>
+    <j.1:content>
+      <j.1:SECTION rdf:ID="B.2">
+        <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >APPLICABLE DOCUMENTS</j.1:title>
+      </j.1:SECTION>
+    </j.1:content>
+    <j.1:content>
+      <j.1:SECTION rdf:ID="B.1">
+        <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >SCOPE</j.1:title>
+      </j.1:SECTION>
+    </j.1:content>
+  </rdf:Description>
   <j.3:SYSTEM rdf:ID="SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.9.2.4">
     <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >1.9.2.4</j.0:wbs>

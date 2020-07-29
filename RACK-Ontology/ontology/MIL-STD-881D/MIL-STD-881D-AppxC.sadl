@@ -5,10 +5,10 @@ import "http://arcos.rack/MIL-STD-881D/MIL-STD-881D".
 // But showing WBS structure from C.3; including partOf relationship in terms of "SYSTEM".
 
 title of MIL-STD-881D-AppxC is "MISSILE/ORDNANCE SYSTEMS".
-C.1 describes MIL-STD-881D with a single value of type SECTION.
-C.2 describes MIL-STD-881D with a single value of type SECTION.
-C.3 describes MIL-STD-881D with a single value of type SECTION.
-C.4 describes MIL-STD-881D with a single value of type SECTION.
+content of MIL-STD-881D is C.1.
+content of MIL-STD-881D is C.2.
+content of MIL-STD-881D is C.3.
+content of MIL-STD-881D is C.4.
 
 C.1 is a SECTION
 	has title "SCOPE".

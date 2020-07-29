@@ -20,67 +20,6 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'MIL-STD-881D-AppxD.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:ObjectProperty rdf:ID="D.3">
-    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >WORK BREAKDOWN STRUCTURE LEVELS</j.1:title>
-    <rdfs:range rdf:resource="/DOCUMENT#SECTION"/>
-    <rdfs:domain>
-      <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D">
-        <rdfs:subClassOf>
-          <owl:Restriction>
-            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-            >1</owl:cardinality>
-            <owl:onProperty>
-              <owl:ObjectProperty rdf:ID="D.4"/>
-            </owl:onProperty>
-          </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-          <owl:Restriction>
-            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-            >1</owl:cardinality>
-            <owl:onProperty rdf:resource="#D.3"/>
-          </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-          <owl:Restriction>
-            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-            >1</owl:cardinality>
-            <owl:onProperty>
-              <owl:ObjectProperty rdf:ID="D.2"/>
-            </owl:onProperty>
-          </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-          <owl:Restriction>
-            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-            >1</owl:cardinality>
-            <owl:onProperty>
-              <owl:ObjectProperty rdf:ID="D.1"/>
-            </owl:onProperty>
-          </owl:Restriction>
-        </rdfs:subClassOf>
-      </rdf:Description>
-    </rdfs:domain>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#D.4">
-    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >DEFINITIONS</j.1:title>
-    <rdfs:range rdf:resource="/DOCUMENT#SECTION"/>
-    <rdfs:domain rdf:resource="MIL-STD-881D#MIL-STD-881D"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#D.1">
-    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >SCOPE</j.1:title>
-    <rdfs:range rdf:resource="/DOCUMENT#SECTION"/>
-    <rdfs:domain rdf:resource="MIL-STD-881D#MIL-STD-881D"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#D.2">
-    <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >APPLICABLE DOCUMENTS</j.1:title>
-    <rdfs:range rdf:resource="/DOCUMENT#SECTION"/>
-    <rdfs:domain rdf:resource="MIL-STD-881D#MIL-STD-881D"/>
-  </owl:ObjectProperty>
   <j.3:SYSTEM rdf:ID="AttitudeControlSystem-1.2.5.1.4">
     <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >1.2.5.1.4</j.0:wbs>
@@ -595,6 +534,32 @@
     <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Aero-StructuresNon-StageRelated-1.2.2</j.2:uniqueIdentifier>
   </j.3:SYSTEM>
+  <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D">
+    <j.1:content>
+      <j.1:SECTION rdf:ID="D.4">
+        <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >DEFINITIONS</j.1:title>
+      </j.1:SECTION>
+    </j.1:content>
+    <j.1:content>
+      <j.1:SECTION rdf:ID="D.3">
+        <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >WORK BREAKDOWN STRUCTURE LEVELS</j.1:title>
+      </j.1:SECTION>
+    </j.1:content>
+    <j.1:content>
+      <j.1:SECTION rdf:ID="D.2">
+        <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >APPLICABLE DOCUMENTS</j.1:title>
+      </j.1:SECTION>
+    </j.1:content>
+    <j.1:content>
+      <j.1:SECTION rdf:ID="D.1">
+        <j.1:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >SCOPE</j.1:title>
+      </j.1:SECTION>
+    </j.1:content>
+  </rdf:Description>
   <j.3:SYSTEM rdf:ID="PropulsionSystem-1.2.5.1.3">
     <j.0:wbs rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >1.2.5.1.3</j.0:wbs>

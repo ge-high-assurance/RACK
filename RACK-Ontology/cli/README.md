@@ -2,21 +2,23 @@
 NOTE: This document should be copied verbatim to this wiki page before every
 release:
 
+TODO(lb): This page should also be renamed to "RACK CLI".
+
 https://github.com/ge-high-assurance/RACK/wiki/Command-line-script-rack.py
 -->
 
-# Ingestion Script
+# RACK CLI
 
-This python script uses the Node Execution Group REST API
-to populate data into RACK in a Box via CSV files.
+The RACK command-line interface can
 
-More documentation on the REST API is available on the
-[REST API Swagger Demo](https://github.com/ge-high-assurance/RACK/wiki/REST-API-Swagger-Demo)
-and [REST cookbook](https://github.com/ge-semtk/semtk/wiki/REST-cookbook) wiki pages.
+ - [populate data](#Import) into RACK in a Box via CSV files
+ - [extract data](#Export) from RACK in a Box to CSV files
+
+among other functions.
 
 ## Installing dependencies
 
-This script requires the [semtk-python3](https://github.com/ge-semtk/semtk-python3) package
+This program requires the [semtk-python3](https://github.com/ge-semtk/semtk-python3) package
 among other requirements listed in `requirements.txt`.
 
 We recommend installing these dependencies in an isolated virtual environment
@@ -27,14 +29,15 @@ of results.
 $ virtualenv venv
 $ source venv/bin/activate
 $ pip install -r requirements.txt
+$ python3 setup.py install
 ```
 
 ## Usage
 
 ```
-usage: rack.py [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE]
-               [--log-level LOG_LEVEL]
-               {data,plumbing} ...
+usage: rack [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE]
+            [--log-level LOG_LEVEL]
+            {data,plumbing} ...
 
 RACK in a Box toolkit
 
@@ -89,7 +92,7 @@ running on `localhost`
 
 ```
 $ source venv/bin/activate
-(venv) $ ./rack.py data import ../models/TurnstileSystem/Data/import.yaml
+(venv) $ rack data import ../models/TurnstileSystem/Data/import.yaml
 Clearing graph
 Success Update succeeded
 Loading ingest01 system                 OK Records: 8       Failures: 0
@@ -120,7 +123,7 @@ example from a Rack in the Box instance running on `localhost`:
 
 ```
 $ source venv/bin/activate
-(venv) $ ./rack.py data export "ingest01 system" http://rack001/data
+(venv) $ rack data export "ingest01 system" http://rack001/data
 
 uniqueIdentifier     uniqueIdentifier_parent
 -------------------  -------------------------
@@ -133,7 +136,7 @@ InputThread          Counter Application
 Out Gate             TurnStileSystem
 OutputThread         Counter Application
 ```
-See `./rack.py data export --help` for options, including different export formats (such as CSV), emitting to a file, and omitting the header row.
+See `rack data export --help` for options, including different export formats (such as CSV), emitting to a file, and omitting the header row.
 
 ### Updating nodegroups
 
@@ -141,7 +144,7 @@ The script can automate loading a directory full of nodegroups
 indexed by a `store_data.csv` file.
 
 ```
-(venv) $ ./rack.py plumbing store-nodegroups ../../nodegroups/ingestion
+(venv) $ rack plumbing store-nodegroups ../../nodegroups/ingestion
 Storing nodegroups...                                       OK
 ```
 
@@ -151,29 +154,10 @@ loads.
 
 ```
 (venv) $ mkdir outdir
-(venv) $ ./rack.py $CONFIG plumbing retrieve-nodegroups ^ingest outdir
+(venv) $ rack.py $CONFIG plumbing retrieve-nodegroups ^ingest outdir
 Retrieving nodegroups...                                    OK
 ```
 
 ## Hacking
 
-The following documentation is only useful for developers of this script.
-
-### Mypy
-
-This script has [Mypy](http://mypy-lang.org)-compliant type annotations which
-are used to statically type-check the code. Usage is simple:
-```bash
-$ source venv/bin/activate
-$ pip install mypy
-$ mypy .
-```
-
-### Tests
-
-You can run the tests with `pytest`:
-```bash
-$ source venv/bin/activate
-$ pip install pytest
-$ pytest
-```
+See [dev/README.md](dev/README.md).

@@ -1,13 +1,15 @@
 uri "http://TurnstileSystem/CounterApplication" alias trnstlsys.
+import "http://arcos.rack/AGENTS".
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/SOFTWARE".
 import "http://TurnstileSystem/Turnstiles".
 
-Galois is an AGENT
-  uniqueIdentifier "AGENT-Galois".
+Galois is an ORGANIZATION
+  uniqueIdentifier "AGENT-Galois"
+  AGENTS:name "Galois".
   
 Mockup is an ACTIVITY
-    uniqueIdentifier "Turnstile software data mockup"
+    uniqueIdentifier "ACTIVITY-Turnstile software data mockup"
     wasAssociatedWith Galois
     startedAtTime "2020-06-01 12:00:00".
 

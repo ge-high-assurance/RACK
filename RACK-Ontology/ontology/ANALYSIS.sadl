@@ -11,8 +11,7 @@ ANALYSIS_REPORT
     analyzes (note "ENTITY(s) under analysis") describes ANALYSIS_REPORT with values of type ENTITY.
     analyzes is a type of wasDerivedFrom.
 
-    producedBy describes ANALYSIS_REPORT with values of type ACTIVITY.
-    producedBy (note "ACTIVITY(s) (e.g. ANALYSIS) producing this report").
+    producedBy (note "ACTIVITY(s) (e.g. ANALYSIS) producing this report") describes ANALYSIS_REPORT with values of type ACTIVITY.
     producedBy is a type of wasGeneratedBy.
 
 ANALYSIS

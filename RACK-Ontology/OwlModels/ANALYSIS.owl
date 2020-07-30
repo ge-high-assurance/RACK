@@ -44,6 +44,7 @@
   </owl:Class>
   <owl:ObjectProperty rdf:ID="producedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
+    <rdfs:comment xml:lang="en">ACTIVITY(s) (e.g. ANALYSIS) producing this report</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#ANALYSIS_REPORT"/>
   </owl:ObjectProperty>

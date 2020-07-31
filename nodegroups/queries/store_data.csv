@@ -9,3 +9,5 @@ unused,query Requirements with Tests,Find requirements verified by testcase,2020
 unused,query Trace Hazards to Tests,Trace hazard down to test case,2020-06-29,200001934,Trace Hazards to Tests.json
 unused,query Trace Requirements to Tests,Recursively show all requirements which satisfy and verify a testcase,2020-06-29,200001934,Trace Requirements to Tests.json
 unused,query Hazard structure,Find system component associated with the hazards,2020-06-29,200001934,Hazard structure.json
+unused,specifications query sections,"Select specifications, sections, and optionally content objectives",2020-07-31,200001934,specifications query sections.json
+unused,specifications query meta-data,"Select specifications, issue date, issuer, approver",2020-07-31,200001934,specifications query meta-data.json

@@ -23,8 +23,6 @@ LANGUAGE
     ^version (note "Version of the language, where applicable") describes LANGUAGE with values of type string.
 
 
-
-
 CONFIG_FILE 
 	(note "Anything that can be considered configuration") 
 	is a type of ENTITY.
@@ -64,6 +62,7 @@ PACKAGER
 CODE_DEVELOPMENT 
 	(note "An ACTIVITY that produces CODE_FILEs") 
 	is a type of ACTIVITY.
+
     author (note "AGENT(s) who participated in this ACTIVITY") describes CODE_DEVELOPMENT with values of type AGENT.
     author is a type of wasAssociatedWith.
 
@@ -100,8 +99,7 @@ PACKAGE
 
 COMPONENT_TYPE
     (note "An open/extensible set of types of software components")
-    is a class.
-    uniqueIdentifier describes COMPONENT_TYPE with a single value of type string.
+    is a type of DATA.
 
 // A few common instances:
 SOURCE_FUNCTION

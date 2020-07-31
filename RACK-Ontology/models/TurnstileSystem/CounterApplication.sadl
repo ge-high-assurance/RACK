@@ -35,14 +35,11 @@ ExecutiveThread is a SYSTEM
 c is a LANGUAGE
     has uniqueIdentifier "c".
 
-cc is a COMPILER
+cc is a ENTITY
     has uniqueIdentifier "cc"
     dataInsertedBy Mockup.
-tar is a PACKAGER
+tar is a ENTITY
     has uniqueIdentifier "tar"
-    dataInsertedBy Mockup.
-make is a AGENT
-    has uniqueIdentifier "make" // TODO: build system?
     dataInsertedBy Mockup.
 
 // input.o
@@ -67,10 +64,9 @@ input_function is a COMPONENT
 input_o_Compiling is a COMPILE
     has uniqueIdentifier "input_o_Compiling",
     dataInsertedBy Mockup,
-    has performedBy cc,
-    has performedBy make,
-    has used input_c,
-    has used input_h.
+    has used (a USAGE entity cc role "compiler"),
+    has used (a USAGE entity input_c),
+    has used (a USAGE entity input_h).
 
 input_o is a OBJECT_FILE
     has uniqueIdentifier "input_o",
@@ -99,11 +95,9 @@ output_function is a COMPONENT
 output_o_Compiling is a COMPILE
     has uniqueIdentifier "output_o_Compiling",
     dataInsertedBy Mockup,
-    has performedBy cc,
-    has performedBy make,
-    has used output_c,
-    has used output_h.
-    
+    used (a USAGE entity cc role "compiler"),
+    used (a USAGE entity output_c),
+    used (a USAGE entity output_h).
 
 output_o is a OBJECT_FILE
     has uniqueIdentifier "output_o",
@@ -124,10 +118,9 @@ hw_h is a CODE_FILE
 hw_o_Compiling is a COMPILE
     has uniqueIdentifier "hw_o_Compiling",
     dataInsertedBy Mockup,
-    has performedBy cc,
-    has performedBy make,
-    has used hw_c,
-    has used hw_h.
+    used (a USAGE entity cc role "compiler"),
+    used (a USAGE entity hw_c),
+    used (a USAGE entity hw_h).
 
 hw_o is a OBJECT_FILE
     has uniqueIdentifier "hw_o",
@@ -137,9 +130,8 @@ hw_o is a OBJECT_FILE
 libhw_so_Compiling is a COMPILE
     has uniqueIdentifier "libhw_so_Compiling",
     dataInsertedBy Mockup,
-    has performedBy cc,
-    has performedBy make,
-    has used hw_o.
+    used (a USAGE entity cc role "compiler"),
+    used (a USAGE entity hw_o).
 
 libhw_so is a LIBRARY
     has uniqueIdentifier "libhw_so",
@@ -170,13 +162,12 @@ main_function is a COMPONENT
 counter_exe_Compiling is a COMPILE
     has uniqueIdentifier "counter_exe_Compiling",
     dataInsertedBy Mockup
-    has performedBy cc,
-    has performedBy make,
-    has used input_o,
-    has used output_o,
-//    has used libhw_so,
-    has used counter_c,
-    has used counter_h.
+    used (a USAGE entity cc role "compiler"),
+    used (a USAGE entity input_o),
+    used (a USAGE entity output_o),
+    used (a USAGE entity libhw_so),
+    used (a USAGE entity counter_c),
+    used (a USAGE entity counter_h).
 
 counter_exe is an EXECUTABLE
     has uniqueIdentifier "counter_exe",
@@ -199,11 +190,10 @@ dist_tar is a PACKAGE_FILE
 tarPackaging is a PACKAGE
     has uniqueIdentifier "tarPackaging",
     dataInsertedBy Mockup,
-    has performedBy tar,
-    has performedBy cc,
-    has used conf_json,
-    has used libhw_so,
-    has used counter_exe.
+    used (a USAGE entity tar role "packager"),
+    used (a USAGE entity conf_json),
+    used (a USAGE entity libhw_so),
+    used (a USAGE entity counter_exe).
 
 // test.o
 
@@ -219,7 +209,6 @@ test_h is a CODE_FILE
 test_exe_Compiling is a COMPILE
     has uniqueIdentifier "test_exe_Compiling",
     dataInsertedBy Mockup,
-    has performedBy cc,
-    has performedBy make,
-    has used test_c,
-    has used test_h.
+    used (a USAGE entity cc role "compiler"),
+    used (a USAGE entity test_c),
+    used (a USAGE entity test_h).

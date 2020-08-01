@@ -25,16 +25,16 @@ We recommend installing these dependencies in an isolated virtual environment
 like [virtualenv](https://pypi.org/project/virtualenv/) to ensure reproducability
 of results.
 
-```
-$ virtualenv venv
-$ source venv/bin/activate
-$ pip install -r requirements.txt
-$ python3 setup.py install
+```shell
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python3 setup.py install
 ```
 
 ## Usage
 
-```
+```text
 usage: rack [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE]
             [--log-level LOG_LEVEL]
             {data,plumbing} ...
@@ -73,7 +73,7 @@ in the same triple store.
 
 CSV paths are resolved relative to the configuration file.
 
-```
+```text
 data-model: "http://rack001/data"
 ingestion-steps:
 - {nodegroup: "ingest01 system",    csv: "SYSTEM.csv"}
@@ -90,7 +90,7 @@ section above.
 This example populates the *Turnstile* example into a RACK in the Box instance
 running on `localhost`
 
-```
+```shell
 $ source venv/bin/activate
 (venv) $ rack data import ../models/TurnstileSystem/Data/import.yaml
 Clearing graph
@@ -121,7 +121,7 @@ Loading ingest19 compile                OK Records: 27      Failures: 0
 This example exports instances of the `SYSTEM` class from the *Turnstile*
 example from a Rack in the Box instance running on `localhost`:
 
-```
+```shell
 $ source venv/bin/activate
 (venv) $ rack data export "ingest01 system" http://rack001/data
 
@@ -136,6 +136,7 @@ InputThread          Counter Application
 Out Gate             TurnStileSystem
 OutputThread         Counter Application
 ```
+
 See `rack data export --help` for options, including different export formats (such as CSV), emitting to a file, and omitting the header row.
 
 ### Updating nodegroups
@@ -143,7 +144,7 @@ See `rack data export --help` for options, including different export formats (s
 The script can automate loading a directory full of nodegroups
 indexed by a `store_data.csv` file.
 
-```
+```shell
 (venv) $ rack plumbing store-nodegroups ../../nodegroups/ingestion
 Storing nodegroups...                                       OK
 ```
@@ -152,7 +153,7 @@ It can also export nodegroups matching a regular expression
 into a directory alongside its `store_data.csv` file for future
 loads.
 
-```
+```shell
 (venv) $ mkdir outdir
 (venv) $ rack.py $CONFIG plumbing retrieve-nodegroups ^ingest outdir
 Retrieving nodegroups...                                    OK

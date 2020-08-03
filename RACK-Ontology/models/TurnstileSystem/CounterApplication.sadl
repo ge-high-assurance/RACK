@@ -60,7 +60,7 @@ input_function is a COMPONENT
     has uniqueIdentifier "input_function"
     dataInsertedBy Mockup
     has componentType SOURCE_FUNCTION
-    has name "input"
+    has sw:name "input"
     has valueType "void()"
     has definedIn input_c.
 
@@ -92,7 +92,7 @@ output_function is a COMPONENT
     has uniqueIdentifier "output_function"
     dataInsertedBy Mockup
     has componentType SOURCE_FUNCTION
-    has name "output"
+    has sw:name "output"
     has valueType "void()"
     has definedIn output_c.
 
@@ -103,7 +103,7 @@ output_o_Compiling is a COMPILE
     has performedBy make,
     has used output_c,
     has used output_h.
-
+    
 
 output_o is a OBJECT_FILE
     has uniqueIdentifier "output_o",
@@ -161,7 +161,7 @@ main_function is a COMPONENT
     has uniqueIdentifier "main_function"
     has componentType SOURCE_FUNCTION
     dataInsertedBy Mockup
-    has name "main"
+    has sw:name "main"
     has valueType "int(int argc, char* argv[])"
     has controlFlowsToUnconditionally input_function
     has controlFlowsToUnconditionally output_function

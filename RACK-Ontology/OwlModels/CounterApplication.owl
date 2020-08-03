@@ -1,14 +1,16 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://arcos.rack/AGENTS#"
     xmlns:trnstlsys="http://TurnstileSystem/CounterApplication#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:sw="http://arcos.rack/SOFTWARE"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:AGENTS="http://arcos.rack/AGENTS"
     xmlns:sys="http://arcos.rack/SYSTEM"
-    xmlns:j.0="http://arcos.rack/SOFTWARE#"
-    xmlns:j.1="http://arcos.rack/PROV-S#"
-    xmlns:j.2="http://arcos.rack/SYSTEM#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
+    xmlns:j.1="http://arcos.rack/SOFTWARE#"
+    xmlns:j.2="http://arcos.rack/PROV-S#"
+    xmlns:j.3="http://arcos.rack/SYSTEM#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
     xmlns:trnstl="http://TurnstileSystem/Turnstiles"
@@ -18,248 +20,297 @@
     <owl:imports rdf:resource="Turnstiles"/>
     <owl:imports rdf:resource="http://arcos.rack/SOFTWARE"/>
     <owl:imports rdf:resource="http://arcos.rack/SYSTEM"/>
+    <owl:imports rdf:resource="http://arcos.rack/AGENTS"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplication.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.2:SYSTEM rdf:ID="ExecutiveThread">
-    <j.2:partOf rdf:resource="Turnstiles#CounterApplication"/>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >ExecutiveThread</j.1:uniqueIdentifier>
-  </j.2:SYSTEM>
-  <j.2:SYSTEM rdf:ID="InputThread">
-    <j.2:partOf rdf:resource="Turnstiles#CounterApplication"/>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >InputThread</j.1:uniqueIdentifier>
-  </j.2:SYSTEM>
-  <j.0:COMPONENT rdf:ID="main_function">
-    <j.0:definedIn>
-      <j.0:CODE_FILE rdf:ID="counter_c">
-        <j.0:language>
-          <j.0:LANGUAGE rdf:ID="c">
-            <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >c</j.1:uniqueIdentifier>
-          </j.0:LANGUAGE>
-        </j.0:language>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >counter_c</j.1:uniqueIdentifier>
-      </j.0:CODE_FILE>
-    </j.0:definedIn>
-    <j.0:controlFlowsToUnconditionally>
-      <j.0:COMPONENT rdf:ID="output_function">
-        <j.0:definedIn>
-          <j.0:CODE_FILE rdf:ID="output_c">
-            <j.0:language rdf:resource="#c"/>
-            <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >output_c</j.1:uniqueIdentifier>
-          </j.0:CODE_FILE>
-        </j.0:definedIn>
-        <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >void()</j.0:valueType>
-        <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >output</j.0:name>
-        <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >output_function</j.1:uniqueIdentifier>
-      </j.0:COMPONENT>
-    </j.0:controlFlowsToUnconditionally>
-    <j.0:controlFlowsToUnconditionally>
-      <j.0:COMPONENT rdf:ID="input_function">
-        <j.0:definedIn>
-          <j.0:CODE_FILE rdf:ID="input_c">
-            <j.0:language rdf:resource="#c"/>
-            <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >input_c</j.1:uniqueIdentifier>
-          </j.0:CODE_FILE>
-        </j.0:definedIn>
-        <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >void()</j.0:valueType>
-        <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >input</j.0:name>
-        <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >input_function</j.1:uniqueIdentifier>
-      </j.0:COMPONENT>
-    </j.0:controlFlowsToUnconditionally>
-    <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >int(int argc, char* argv[])</j.0:valueType>
-    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >main</j.0:name>
-    <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >main_function</j.1:uniqueIdentifier>
-  </j.0:COMPONENT>
-  <j.0:PACKAGE_FILE rdf:ID="dist_tar">
-    <j.1:wasGeneratedBy>
-      <j.0:PACKAGE rdf:ID="tarPackaging">
-        <j.1:used>
-          <j.0:EXECUTABLE rdf:ID="counter_exe">
-            <j.0:createBy>
-              <j.0:COMPILE rdf:ID="counter_exe_Compiling">
-                <j.1:used>
-                  <j.0:CODE_FILE rdf:ID="counter_h">
-                    <j.0:language rdf:resource="#c"/>
-                    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >counter_h</j.1:uniqueIdentifier>
-                  </j.0:CODE_FILE>
-                </j.1:used>
-                <j.1:used rdf:resource="#counter_c"/>
-                <j.1:used>
-                  <j.0:OBJECT_FILE rdf:ID="output_o">
-                    <j.0:createBy>
-                      <j.0:COMPILE rdf:ID="output_o_Compiling">
-                        <j.1:used>
-                          <j.0:CODE_FILE rdf:ID="output_h">
-                            <j.0:language rdf:resource="#c"/>
-                            <j.1:uniqueIdentifier rdf:datatype=
+  <j.3:SYSTEM rdf:ID="ExecutiveThread">
+    <j.3:partOf rdf:resource="Turnstiles#CounterApplication"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ExecutiveThread</j.2:uniqueIdentifier>
+    <j.2:dataInsertedBy>
+      <j.2:ACTIVITY rdf:ID="Mockup">
+        <j.2:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+        >2020-06-01T12:00:00-07:00</j.2:startedAtTime>
+        <j.2:wasAssociatedWith>
+          <j.0:ORGANIZATION rdf:ID="Galois">
+            <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Galois</j.0:name>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >AGENT-Galois</j.2:uniqueIdentifier>
+          </j.0:ORGANIZATION>
+        </j.2:wasAssociatedWith>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >ACTIVITY-Turnstile software data mockup</j.2:uniqueIdentifier>
+      </j.2:ACTIVITY>
+    </j.2:dataInsertedBy>
+  </j.3:SYSTEM>
+  <j.3:SYSTEM rdf:ID="InputThread">
+    <j.3:partOf rdf:resource="Turnstiles#CounterApplication"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >InputThread</j.2:uniqueIdentifier>
+    <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+  </j.3:SYSTEM>
+  <j.1:COMPONENT rdf:ID="main_function">
+    <j.1:definedIn>
+      <j.1:CODE_FILE rdf:ID="counter_c">
+        <j.1:language>
+          <j.1:LANGUAGE rdf:ID="c">
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >c</j.2:uniqueIdentifier>
+          </j.1:LANGUAGE>
+        </j.1:language>
+        <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >counter_c</j.2:uniqueIdentifier>
+      </j.1:CODE_FILE>
+    </j.1:definedIn>
+    <j.1:controlFlowsToUnconditionally>
+      <j.1:COMPONENT rdf:ID="output_function">
+        <j.1:definedIn>
+          <j.1:CODE_FILE rdf:ID="output_c">
+            <j.1:language rdf:resource="#c"/>
+            <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >output_c</j.2:uniqueIdentifier>
+          </j.1:CODE_FILE>
+        </j.1:definedIn>
+        <j.1:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >void()</j.1:valueType>
+        <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >output</j.1:name>
+        <j.1:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
+        <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >output_function</j.2:uniqueIdentifier>
+      </j.1:COMPONENT>
+    </j.1:controlFlowsToUnconditionally>
+    <j.1:controlFlowsToUnconditionally>
+      <j.1:COMPONENT rdf:ID="input_function">
+        <j.1:definedIn>
+          <j.1:CODE_FILE rdf:ID="input_c">
+            <j.1:language rdf:resource="#c"/>
+            <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >input_c</j.2:uniqueIdentifier>
+          </j.1:CODE_FILE>
+        </j.1:definedIn>
+        <j.1:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >void()</j.1:valueType>
+        <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >input</j.1:name>
+        <j.1:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
+        <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >input_function</j.2:uniqueIdentifier>
+      </j.1:COMPONENT>
+    </j.1:controlFlowsToUnconditionally>
+    <j.1:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >int(int argc, char* argv[])</j.1:valueType>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >main</j.1:name>
+    <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+    <j.1:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >main_function</j.2:uniqueIdentifier>
+  </j.1:COMPONENT>
+  <j.1:PACKAGE_FILE rdf:ID="dist_tar">
+    <j.2:wasGeneratedBy>
+      <j.1:PACKAGE rdf:ID="tarPackaging">
+        <j.2:used>
+          <j.1:EXECUTABLE rdf:ID="counter_exe">
+            <j.1:createBy>
+              <j.1:COMPILE rdf:ID="counter_exe_Compiling">
+                <j.2:used>
+                  <j.1:CODE_FILE rdf:ID="counter_h">
+                    <j.1:language rdf:resource="#c"/>
+                    <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >counter_h</j.2:uniqueIdentifier>
+                  </j.1:CODE_FILE>
+                </j.2:used>
+                <j.2:used rdf:resource="#counter_c"/>
+                <j.2:used>
+                  <j.1:OBJECT_FILE rdf:ID="output_o">
+                    <j.1:createBy>
+                      <j.1:COMPILE rdf:ID="output_o_Compiling">
+                        <j.2:used>
+                          <j.1:CODE_FILE rdf:ID="output_h">
+                            <j.1:language rdf:resource="#c"/>
+                            <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                            <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
-                            >output_h</j.1:uniqueIdentifier>
-                          </j.0:CODE_FILE>
-                        </j.1:used>
-                        <j.1:used rdf:resource="#output_c"/>
-                        <j.0:performedBy>
-                          <j.1:AGENT rdf:ID="make">
-                            <j.1:uniqueIdentifier rdf:datatype=
+                            >output_h</j.2:uniqueIdentifier>
+                          </j.1:CODE_FILE>
+                        </j.2:used>
+                        <j.2:used rdf:resource="#output_c"/>
+                        <j.1:performedBy>
+                          <j.2:AGENT rdf:ID="make">
+                            <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                            <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
-                            >make</j.1:uniqueIdentifier>
-                          </j.1:AGENT>
-                        </j.0:performedBy>
-                        <j.0:performedBy>
-                          <j.0:COMPILER rdf:ID="cc">
-                            <j.1:uniqueIdentifier rdf:datatype=
+                            >make</j.2:uniqueIdentifier>
+                          </j.2:AGENT>
+                        </j.1:performedBy>
+                        <j.1:performedBy>
+                          <j.1:COMPILER rdf:ID="cc">
+                            <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                            <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
-                            >cc</j.1:uniqueIdentifier>
-                          </j.0:COMPILER>
-                        </j.0:performedBy>
-                        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                        >output_o_Compiling</j.1:uniqueIdentifier>
-                      </j.0:COMPILE>
-                    </j.0:createBy>
-                    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >output_o</j.1:uniqueIdentifier>
-                  </j.0:OBJECT_FILE>
-                </j.1:used>
-                <j.1:used>
-                  <j.0:OBJECT_FILE rdf:ID="input_o">
-                    <j.0:createBy>
-                      <j.0:COMPILE rdf:ID="input_o_Compiling">
-                        <j.1:used>
-                          <j.0:CODE_FILE rdf:ID="input_h">
-                            <j.0:language rdf:resource="#c"/>
-                            <j.1:uniqueIdentifier rdf:datatype=
+                            >cc</j.2:uniqueIdentifier>
+                          </j.1:COMPILER>
+                        </j.1:performedBy>
+                        <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >output_o_Compiling</j.2:uniqueIdentifier>
+                      </j.1:COMPILE>
+                    </j.1:createBy>
+                    <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >output_o</j.2:uniqueIdentifier>
+                  </j.1:OBJECT_FILE>
+                </j.2:used>
+                <j.2:used>
+                  <j.1:OBJECT_FILE rdf:ID="input_o">
+                    <j.1:createBy>
+                      <j.1:COMPILE rdf:ID="input_o_Compiling">
+                        <j.2:used>
+                          <j.1:CODE_FILE rdf:ID="input_h">
+                            <j.1:language rdf:resource="#c"/>
+                            <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                            <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
-                            >input_h</j.1:uniqueIdentifier>
-                          </j.0:CODE_FILE>
-                        </j.1:used>
-                        <j.1:used rdf:resource="#input_c"/>
-                        <j.0:performedBy rdf:resource="#make"/>
-                        <j.0:performedBy rdf:resource="#cc"/>
-                        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                        >input_o_Compiling</j.1:uniqueIdentifier>
-                      </j.0:COMPILE>
-                    </j.0:createBy>
-                    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >input_o</j.1:uniqueIdentifier>
-                  </j.0:OBJECT_FILE>
-                </j.1:used>
-                <j.0:performedBy rdf:resource="#make"/>
-                <j.0:performedBy rdf:resource="#cc"/>
-                <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                >counter_exe_Compiling</j.1:uniqueIdentifier>
-              </j.0:COMPILE>
-            </j.0:createBy>
-            <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >counter_exe</j.1:uniqueIdentifier>
-          </j.0:EXECUTABLE>
-        </j.1:used>
-        <j.1:used>
-          <j.0:LIBRARY rdf:ID="libhw_so">
-            <j.0:createBy>
-              <j.0:COMPILE rdf:ID="libhw_so_Compiling">
-                <j.1:used>
-                  <j.0:OBJECT_FILE rdf:ID="hw_o">
-                    <j.0:createBy>
-                      <j.0:COMPILE rdf:ID="hw_o_Compiling">
-                        <j.1:used>
-                          <j.0:CODE_FILE rdf:ID="hw_h">
-                            <j.0:language rdf:resource="#c"/>
-                            <j.1:uniqueIdentifier rdf:datatype=
+                            >input_h</j.2:uniqueIdentifier>
+                          </j.1:CODE_FILE>
+                        </j.2:used>
+                        <j.2:used rdf:resource="#input_c"/>
+                        <j.1:performedBy rdf:resource="#make"/>
+                        <j.1:performedBy rdf:resource="#cc"/>
+                        <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >input_o_Compiling</j.2:uniqueIdentifier>
+                      </j.1:COMPILE>
+                    </j.1:createBy>
+                    <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >input_o</j.2:uniqueIdentifier>
+                  </j.1:OBJECT_FILE>
+                </j.2:used>
+                <j.1:performedBy rdf:resource="#make"/>
+                <j.1:performedBy rdf:resource="#cc"/>
+                <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >counter_exe_Compiling</j.2:uniqueIdentifier>
+              </j.1:COMPILE>
+            </j.1:createBy>
+            <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >counter_exe</j.2:uniqueIdentifier>
+          </j.1:EXECUTABLE>
+        </j.2:used>
+        <j.2:used>
+          <j.1:LIBRARY rdf:ID="libhw_so">
+            <j.1:createBy>
+              <j.1:COMPILE rdf:ID="libhw_so_Compiling">
+                <j.2:used>
+                  <j.1:OBJECT_FILE rdf:ID="hw_o">
+                    <j.1:createBy>
+                      <j.1:COMPILE rdf:ID="hw_o_Compiling">
+                        <j.2:used>
+                          <j.1:CODE_FILE rdf:ID="hw_h">
+                            <j.1:language rdf:resource="#c"/>
+                            <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                            <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
-                            >hw_h</j.1:uniqueIdentifier>
-                          </j.0:CODE_FILE>
-                        </j.1:used>
-                        <j.1:used>
-                          <j.0:CODE_FILE rdf:ID="hw_c">
-                            <j.0:language rdf:resource="#c"/>
-                            <j.1:uniqueIdentifier rdf:datatype=
+                            >hw_h</j.2:uniqueIdentifier>
+                          </j.1:CODE_FILE>
+                        </j.2:used>
+                        <j.2:used>
+                          <j.1:CODE_FILE rdf:ID="hw_c">
+                            <j.1:language rdf:resource="#c"/>
+                            <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                            <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
-                            >hw_c</j.1:uniqueIdentifier>
-                          </j.0:CODE_FILE>
-                        </j.1:used>
-                        <j.0:performedBy rdf:resource="#make"/>
-                        <j.0:performedBy rdf:resource="#cc"/>
-                        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                        >hw_o_Compiling</j.1:uniqueIdentifier>
-                      </j.0:COMPILE>
-                    </j.0:createBy>
-                    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >hw_o</j.1:uniqueIdentifier>
-                  </j.0:OBJECT_FILE>
-                </j.1:used>
-                <j.0:performedBy rdf:resource="#make"/>
-                <j.0:performedBy rdf:resource="#cc"/>
-                <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                >libhw_so_Compiling</j.1:uniqueIdentifier>
-              </j.0:COMPILE>
-            </j.0:createBy>
-            <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >libhw_so</j.1:uniqueIdentifier>
-          </j.0:LIBRARY>
-        </j.1:used>
-        <j.1:used>
-          <j.0:CONFIG_FILE rdf:ID="conf_json">
-            <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >conf_json</j.1:uniqueIdentifier>
-          </j.0:CONFIG_FILE>
-        </j.1:used>
-        <j.0:performedBy rdf:resource="#cc"/>
-        <j.0:performedBy>
-          <j.0:PACKAGER rdf:ID="tar">
-            <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >tar</j.1:uniqueIdentifier>
-          </j.0:PACKAGER>
-        </j.0:performedBy>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >tarPackaging</j.1:uniqueIdentifier>
-      </j.0:PACKAGE>
-    </j.1:wasGeneratedBy>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >dist_tar</j.1:uniqueIdentifier>
-  </j.0:PACKAGE_FILE>
-  <j.2:SYSTEM rdf:ID="OutputThread">
-    <j.2:partOf rdf:resource="Turnstiles#CounterApplication"/>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >OutputThread</j.1:uniqueIdentifier>
-  </j.2:SYSTEM>
-  <j.0:COMPILE rdf:ID="test_exe_Compiling">
-    <j.1:used>
-      <j.0:CODE_FILE rdf:ID="test_h">
-        <j.0:language rdf:resource="#c"/>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >test_h</j.1:uniqueIdentifier>
-      </j.0:CODE_FILE>
-    </j.1:used>
-    <j.1:used>
-      <j.0:CODE_FILE rdf:ID="test_c">
-        <j.0:language rdf:resource="#c"/>
-        <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >test_c</j.1:uniqueIdentifier>
-      </j.0:CODE_FILE>
-    </j.1:used>
-    <j.0:performedBy rdf:resource="#make"/>
-    <j.0:performedBy rdf:resource="#cc"/>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >test_exe_Compiling</j.1:uniqueIdentifier>
-  </j.0:COMPILE>
+                            >hw_c</j.2:uniqueIdentifier>
+                          </j.1:CODE_FILE>
+                        </j.2:used>
+                        <j.1:performedBy rdf:resource="#make"/>
+                        <j.1:performedBy rdf:resource="#cc"/>
+                        <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >hw_o_Compiling</j.2:uniqueIdentifier>
+                      </j.1:COMPILE>
+                    </j.1:createBy>
+                    <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >hw_o</j.2:uniqueIdentifier>
+                  </j.1:OBJECT_FILE>
+                </j.2:used>
+                <j.1:performedBy rdf:resource="#make"/>
+                <j.1:performedBy rdf:resource="#cc"/>
+                <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >libhw_so_Compiling</j.2:uniqueIdentifier>
+              </j.1:COMPILE>
+            </j.1:createBy>
+            <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >libhw_so</j.2:uniqueIdentifier>
+          </j.1:LIBRARY>
+        </j.2:used>
+        <j.2:used>
+          <j.1:CONFIG_FILE rdf:ID="conf_json">
+            <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >conf_json</j.2:uniqueIdentifier>
+          </j.1:CONFIG_FILE>
+        </j.2:used>
+        <j.1:performedBy rdf:resource="#cc"/>
+        <j.1:performedBy>
+          <j.1:PACKAGER rdf:ID="tar">
+            <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >tar</j.2:uniqueIdentifier>
+          </j.1:PACKAGER>
+        </j.1:performedBy>
+        <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >tarPackaging</j.2:uniqueIdentifier>
+      </j.1:PACKAGE>
+    </j.2:wasGeneratedBy>
+    <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >dist_tar</j.2:uniqueIdentifier>
+  </j.1:PACKAGE_FILE>
+  <j.3:SYSTEM rdf:ID="OutputThread">
+    <j.3:partOf rdf:resource="Turnstiles#CounterApplication"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OutputThread</j.2:uniqueIdentifier>
+    <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+  </j.3:SYSTEM>
+  <j.1:COMPILE rdf:ID="test_exe_Compiling">
+    <j.2:used>
+      <j.1:CODE_FILE rdf:ID="test_h">
+        <j.1:language rdf:resource="#c"/>
+        <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >test_h</j.2:uniqueIdentifier>
+      </j.1:CODE_FILE>
+    </j.2:used>
+    <j.2:used>
+      <j.1:CODE_FILE rdf:ID="test_c">
+        <j.1:language rdf:resource="#c"/>
+        <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >test_c</j.2:uniqueIdentifier>
+      </j.1:CODE_FILE>
+    </j.2:used>
+    <j.1:performedBy rdf:resource="#make"/>
+    <j.1:performedBy rdf:resource="#cc"/>
+    <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >test_exe_Compiling</j.2:uniqueIdentifier>
+  </j.1:COMPILE>
 </rdf:RDF>

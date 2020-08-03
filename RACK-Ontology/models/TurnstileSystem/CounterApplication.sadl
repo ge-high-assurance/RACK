@@ -92,10 +92,25 @@ output_function is a COMPONENT
     has valueType "void()"
     has definedIn output_c.
 
+CompileWithOptimizations is a FIELD.
+LinkerPath is a FIELD.
+
+output_o_Compiling_cc is a USAGE with entity cc role "compiler".
+
+output_o_Compiling_cc_optimization is an ATTRIBUTE
+  about output_o_Compiling_cc
+  field CompileWithOptimizations
+  fieldValue "yes".
+  
+output_o_Compiling_cc_linkerpath is an ATTRIBUTE
+  about output_o_Compiling_cc
+  field LinkerPath
+  fieldValue "/path/to/libraries".
+
 output_o_Compiling is a COMPILE
     has uniqueIdentifier "output_o_Compiling",
     dataInsertedBy Mockup,
-    used (a USAGE entity cc role "compiler"),
+    used output_o_Compiling_cc,
     used (a USAGE entity output_c),
     used (a USAGE entity output_h).
 

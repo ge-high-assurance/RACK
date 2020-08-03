@@ -1,19 +1,32 @@
 uri "http://TurnstileSystem/CounterApplication" alias trnstlsys.
+import "http://arcos.rack/AGENTS".
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/SOFTWARE".
 import "http://TurnstileSystem/Turnstiles".
 
+Galois is an ORGANIZATION
+  uniqueIdentifier "AGENT-Galois"
+  AGENTS:name "Galois".
+  
+Mockup is an ACTIVITY
+    uniqueIdentifier "ACTIVITY-Turnstile software data mockup"
+    wasAssociatedWith Galois
+    startedAtTime "2020-06-01 12:00:00".
+
 // The structure of this software is based on the content of the src/ directory.
 
 InputThread is a SYSTEM
+    dataInsertedBy Mockup
     has uniqueIdentifier "InputThread",
 	has partOf CounterApplication.
 
 OutputThread is a SYSTEM
+    dataInsertedBy Mockup
     has uniqueIdentifier "OutputThread",
 	has partOf CounterApplication.
 
 ExecutiveThread is a SYSTEM
+    dataInsertedBy Mockup
     has uniqueIdentifier "ExecutiveThread",
 	has partOf CounterApplication.
 
@@ -21,24 +34,31 @@ ExecutiveThread is a SYSTEM
 
 c is a LANGUAGE
     has uniqueIdentifier "c".
+
 cc is a COMPILER
-    has uniqueIdentifier "cc".
+    has uniqueIdentifier "cc"
+    dataInsertedBy Mockup.
 tar is a PACKAGER
-    has uniqueIdentifier "tar".
+    has uniqueIdentifier "tar"
+    dataInsertedBy Mockup.
 make is a AGENT
-    has uniqueIdentifier "make". // TODO: build system?
+    has uniqueIdentifier "make" // TODO: build system?
+    dataInsertedBy Mockup.
 
 // input.o
 
 input_c is a CODE_FILE
     has uniqueIdentifier "input_c",
+    with dataInsertedBy Mockup,
     has sw:language c.
 input_h is a CODE_FILE
     has uniqueIdentifier "input_h",
+    with dataInsertedBy Mockup,
     has sw:language c.
 
 input_function is a COMPONENT
     has uniqueIdentifier "input_function"
+    dataInsertedBy Mockup
     has componentType SOURCE_FUNCTION
     has name "input"
     has valueType "void()"
@@ -46,6 +66,7 @@ input_function is a COMPONENT
 
 input_o_Compiling is a COMPILE
     has uniqueIdentifier "input_o_Compiling",
+    dataInsertedBy Mockup,
     has performedBy cc,
     has performedBy make,
     has used input_c,
@@ -53,19 +74,23 @@ input_o_Compiling is a COMPILE
 
 input_o is a OBJECT_FILE
     has uniqueIdentifier "input_o",
+    dataInsertedBy Mockup,
     has createBy input_o_Compiling.
 
 // output.o
 
 output_c is a CODE_FILE
     has uniqueIdentifier "output_c",
+    dataInsertedBy Mockup,
     has sw:language c.
 output_h is a CODE_FILE
     has uniqueIdentifier "output_h",
+    dataInsertedBy Mockup,
     has sw:language c.
 
 output_function is a COMPONENT
     has uniqueIdentifier "output_function"
+    dataInsertedBy Mockup
     has componentType SOURCE_FUNCTION
     has name "output"
     has valueType "void()"
@@ -73,6 +98,7 @@ output_function is a COMPONENT
 
 output_o_Compiling is a COMPILE
     has uniqueIdentifier "output_o_Compiling",
+    dataInsertedBy Mockup,
     has performedBy cc,
     has performedBy make,
     has used output_c,
@@ -81,19 +107,23 @@ output_o_Compiling is a COMPILE
 
 output_o is a OBJECT_FILE
     has uniqueIdentifier "output_o",
+    dataInsertedBy Mockup,
     has createBy output_o_Compiling.
 
 // hw.o, libhw.so
 
 hw_c is a CODE_FILE
     has uniqueIdentifier "hw_c",
+    dataInsertedBy Mockup,
     has sw:language c.
 hw_h is a CODE_FILE
     has uniqueIdentifier "hw_h",
+    dataInsertedBy Mockup,
     has sw:language c.
 
 hw_o_Compiling is a COMPILE
     has uniqueIdentifier "hw_o_Compiling",
+    dataInsertedBy Mockup,
     has performedBy cc,
     has performedBy make,
     has used hw_c,
@@ -101,30 +131,36 @@ hw_o_Compiling is a COMPILE
 
 hw_o is a OBJECT_FILE
     has uniqueIdentifier "hw_o",
+    dataInsertedBy Mockup,
     has createBy hw_o_Compiling.
 
 libhw_so_Compiling is a COMPILE
     has uniqueIdentifier "libhw_so_Compiling",
+    dataInsertedBy Mockup,
     has performedBy cc,
     has performedBy make,
     has used hw_o.
 
 libhw_so is a LIBRARY
     has uniqueIdentifier "libhw_so",
+    dataInsertedBy Mockup,
     has createBy libhw_so_Compiling.
 
 // counter.exe
 
 counter_c is a CODE_FILE
     has uniqueIdentifier "counter_c",
+    dataInsertedBy Mockup,
     has sw:language c.
 counter_h is a CODE_FILE
     has uniqueIdentifier "counter_h",
+    dataInsertedBy Mockup,
     has sw:language c.
 
 main_function is a COMPONENT
     has uniqueIdentifier "main_function"
     has componentType SOURCE_FUNCTION
+    dataInsertedBy Mockup
     has name "main"
     has valueType "int(int argc, char* argv[])"
     has controlFlowsToUnconditionally input_function
@@ -133,6 +169,7 @@ main_function is a COMPONENT
 
 counter_exe_Compiling is a COMPILE
     has uniqueIdentifier "counter_exe_Compiling",
+    dataInsertedBy Mockup
     has performedBy cc,
     has performedBy make,
     has used input_o,
@@ -143,21 +180,25 @@ counter_exe_Compiling is a COMPILE
 
 counter_exe is an EXECUTABLE
     has uniqueIdentifier "counter_exe",
+    dataInsertedBy Mockup
     has createBy counter_exe_Compiling.
 
 // conf.json
 
 conf_json is a CONFIG_FILE
-    has uniqueIdentifier "conf_json".
+    has uniqueIdentifier "conf_json"
+    dataInsertedBy Mockup.
 
 // dist.tar.gz
 
 dist_tar is a PACKAGE_FILE
     has uniqueIdentifier "dist_tar",
+    dataInsertedBy Mockup,
 	has wasGeneratedBy tarPackaging.
 
 tarPackaging is a PACKAGE
     has uniqueIdentifier "tarPackaging",
+    dataInsertedBy Mockup,
     has performedBy tar,
     has performedBy cc,
     has used conf_json,
@@ -168,13 +209,16 @@ tarPackaging is a PACKAGE
 
 test_c is a CODE_FILE
     has uniqueIdentifier "test_c",
+    dataInsertedBy Mockup,
     has sw:language c.
 test_h is a CODE_FILE
     has uniqueIdentifier "test_h",
+    dataInsertedBy Mockup,
     has sw:language c.
 
 test_exe_Compiling is a COMPILE
     has uniqueIdentifier "test_exe_Compiling",
+    dataInsertedBy Mockup,
     has performedBy cc,
     has performedBy make,
     has used test_c,

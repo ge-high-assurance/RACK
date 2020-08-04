@@ -185,26 +185,32 @@
                           <j.1:OBJECT_FILE rdf:ID="output_o">
                             <j.1:createBy>
                               <j.1:COMPILE rdf:ID="output_o_Compiling">
-                                <j.2:hasAttribute>
-                                  <j.2:ATTRIBUTE>
-                                    <j.2:fieldValue rdf:datatype=
-                                    "http://www.w3.org/2001/XMLSchema#string"
-                                    >/path/to/libraries</j.2:fieldValue>
-                                    <j.2:field>
-                                      <j.2:FIELD rdf:ID="LinkerPath"/>
-                                    </j.2:field>
-                                  </j.2:ATTRIBUTE>
-                                </j.2:hasAttribute>
-                                <j.2:hasAttribute>
-                                  <j.2:ATTRIBUTE>
-                                    <j.2:fieldValue rdf:datatype=
-                                    "http://www.w3.org/2001/XMLSchema#string"
-                                    >yes</j.2:fieldValue>
-                                    <j.2:field>
-                                      <j.2:FIELD rdf:ID="CompileWithOptimizations"/>
-                                    </j.2:field>
-                                  </j.2:ATTRIBUTE>
-                                </j.2:hasAttribute>
+                                <j.2:used>
+                                  <j.2:USAGE>
+                                    <j.2:hasAttribute>
+                                      <j.2:ATTRIBUTE>
+                                        <j.2:fieldValue rdf:datatype=
+                                        "http://www.w3.org/2001/XMLSchema#string"
+                                        >/path/to/libraries</j.2:fieldValue>
+                                        <j.2:field>
+                                          <j.2:FIELD rdf:ID="LinkerPath"/>
+                                        </j.2:field>
+                                      </j.2:ATTRIBUTE>
+                                    </j.2:hasAttribute>
+                                    <j.2:hasAttribute>
+                                      <j.2:ATTRIBUTE>
+                                        <j.2:fieldValue rdf:datatype=
+                                        "http://www.w3.org/2001/XMLSchema#string"
+                                        >yes</j.2:fieldValue>
+                                        <j.2:field>
+                                          <j.2:FIELD rdf:ID="CompileWithOptimizations"/>
+                                        </j.2:field>
+                                      </j.2:ATTRIBUTE>
+                                    </j.2:hasAttribute>
+                                    <j.2:hadRole rdf:resource="#Compiler"/>
+                                    <j.2:entity rdf:resource="#cc"/>
+                                  </j.2:USAGE>
+                                </j.2:used>
                                 <j.2:used>
                                   <j.2:USAGE>
                                     <j.2:entity>

@@ -105,9 +105,12 @@ output_o_Compiling is a COMPILE
     dataInsertedBy Mockup,
     used output_o_Compiling_cc,
     used (a USAGE entity output_c),
-    used (a USAGE entity output_h)
-    hasAttribute (a ATTRIBUTE field CompileWithOptimizations fieldValue "yes")
-    hasAttribute (a ATTRIBUTE field LinkerPath fieldValue "/path/to/libraries").
+    used (a USAGE entity output_h),
+    used (a USAGE
+           entity cc
+           hadRole Compiler
+           hasAttribute (a ATTRIBUTE field CompileWithOptimizations fieldValue "yes"),
+           hasAttribute (a ATTRIBUTE field LinkerPath fieldValue "/path/to/libraries")).
 
 output_o is a OBJECT_FILE
     has uniqueIdentifier "output_o",

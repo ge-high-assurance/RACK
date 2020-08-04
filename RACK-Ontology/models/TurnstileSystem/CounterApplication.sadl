@@ -13,9 +13,6 @@ Mockup is an ACTIVITY
     wasAssociatedWith Galois
     startedAtTime "2020-06-01 12:00:00".
 
-Compiler (note "The executable tool used to process source files into compiled outputs.")
-    is a ROLE.
-
 // The structure of this software is based on the content of the src/ directory.
 
 InputThread is a SYSTEM
@@ -37,24 +34,30 @@ ExecutiveThread is a SYSTEM
 
 c is a LANGUAGE
     has uniqueIdentifier "c".
-
-cc is a ENTITY
+json is a LANGUAGE
+    has uniqueIdentifier "json".
+    
+cc is a FILE
     has uniqueIdentifier "cc"
+    has format ElfFile
     dataInsertedBy Mockup.
 tar is a ENTITY
     has uniqueIdentifier "tar"
+    has format ElfFile
     dataInsertedBy Mockup.
 
 // input.o
 
-input_c is a CODE_FILE
+input_c is a FILE
     has uniqueIdentifier "input_c",
     with dataInsertedBy Mockup,
-    has sw:language c.
-input_h is a CODE_FILE
+    has sw:language c
+    has format TextFile.
+input_h is a FILE
     has uniqueIdentifier "input_h",
     with dataInsertedBy Mockup,
-    has sw:language c.
+    has sw:language c
+    has format TextFile.
 
 input_function is a COMPONENT
     has uniqueIdentifier "input_function"
@@ -67,25 +70,28 @@ input_function is a COMPONENT
 input_o_Compiling is a COMPILE
     has uniqueIdentifier "input_o_Compiling",
     dataInsertedBy Mockup,
-    has used (a USAGE entity cc hadRole Compiler),
+    has used (a USAGE entity cc hadRole COMPILER),
     has used (a USAGE entity input_c),
     has used (a USAGE entity input_h).
 
-input_o is a OBJECT_FILE
+input_o is a FILE
     has uniqueIdentifier "input_o",
     dataInsertedBy Mockup,
-    has createBy input_o_Compiling.
+    has createBy input_o_Compiling
+    has format ElfFile.
 
 // output.o
 
-output_c is a CODE_FILE
+output_c is a FILE
     has uniqueIdentifier "output_c",
     dataInsertedBy Mockup,
-    has sw:language c.
-output_h is a CODE_FILE
+    has sw:language c
+    has format TextFile.
+output_h is a FILE
     has uniqueIdentifier "output_h",
     dataInsertedBy Mockup,
-    has sw:language c.
+    has sw:language c
+    has format TextFile.
 
 output_function is a COMPONENT
     has uniqueIdentifier "output_function"
@@ -98,69 +104,73 @@ output_function is a COMPONENT
 CompileWithOptimizations is a FIELD.
 LinkerPath is a FIELD.
 
-output_o_Compiling_cc is a USAGE with entity cc hadRole Compiler.
-
 output_o_Compiling is a COMPILE
     has uniqueIdentifier "output_o_Compiling",
     dataInsertedBy Mockup,
-    used output_o_Compiling_cc,
     used (a USAGE entity output_c),
     used (a USAGE entity output_h),
     used (a USAGE
            entity cc
-           hadRole Compiler
+           hadRole COMPILER
            hasAttribute (a ATTRIBUTE field CompileWithOptimizations fieldValue "yes"),
            hasAttribute (a ATTRIBUTE field LinkerPath fieldValue "/path/to/libraries")).
 
-output_o is a OBJECT_FILE
+output_o is a FILE
     has uniqueIdentifier "output_o",
     dataInsertedBy Mockup,
-    has createBy output_o_Compiling.
+    has createBy output_o_Compiling
+    has format ElfFile.
 
 // hw.o, libhw.so
 
-hw_c is a CODE_FILE
+hw_c is a FILE
     has uniqueIdentifier "hw_c",
     dataInsertedBy Mockup,
-    has sw:language c.
-hw_h is a CODE_FILE
+    has sw:language c
+    has format TextFile.
+hw_h is a FILE
     has uniqueIdentifier "hw_h",
     dataInsertedBy Mockup,
-    has sw:language c.
+    has sw:language c
+    has format TextFile.
 
 hw_o_Compiling is a COMPILE
     has uniqueIdentifier "hw_o_Compiling",
     dataInsertedBy Mockup,
-    used (a USAGE entity cc hadRole Compiler),
+    used (a USAGE entity cc hadRole COMPILER),
     used (a USAGE entity hw_c),
     used (a USAGE entity hw_h).
 
-hw_o is a OBJECT_FILE
+hw_o is a FILE
     has uniqueIdentifier "hw_o",
     dataInsertedBy Mockup,
-    has createBy hw_o_Compiling.
+    has createBy hw_o_Compiling
+    has format ElfFile.
 
 libhw_so_Compiling is a COMPILE
     has uniqueIdentifier "libhw_so_Compiling",
     dataInsertedBy Mockup,
-    used (a USAGE entity cc hadRole Compiler),
+    used (a USAGE entity cc hadRole COMPILER),
     used (a USAGE entity hw_o).
 
-libhw_so is a LIBRARY
+libhw_so is a FILE
     has uniqueIdentifier "libhw_so",
     dataInsertedBy Mockup,
-    has createBy libhw_so_Compiling.
+    has createBy libhw_so_Compiling
+    has format ElfFile.
 
 // counter.exe
 
-counter_c is a CODE_FILE
+counter_c is a FILE
     has uniqueIdentifier "counter_c",
     dataInsertedBy Mockup,
-    has sw:language c.
-counter_h is a CODE_FILE
+    has sw:language c,
+    has format TextFile.
+counter_h is a FILE
     has uniqueIdentifier "counter_h",
     dataInsertedBy Mockup,
-    has sw:language c.
+    has sw:language c,
+    has format TextFile.
 
 main_function is a COMPONENT
     has uniqueIdentifier "main_function"
@@ -175,53 +185,59 @@ main_function is a COMPONENT
 counter_exe_Compiling is a COMPILE
     has uniqueIdentifier "counter_exe_Compiling",
     dataInsertedBy Mockup
-    used (a USAGE entity cc hadRole Compiler),
+    used (a USAGE entity cc hadRole COMPILER),
     used (a USAGE entity input_o),
     used (a USAGE entity output_o),
     used (a USAGE entity libhw_so),
     used (a USAGE entity counter_c),
     used (a USAGE entity counter_h).
 
-counter_exe is an EXECUTABLE
+counter_exe is an FILE
     has uniqueIdentifier "counter_exe",
     dataInsertedBy Mockup
-    has createBy counter_exe_Compiling.
+    has createBy counter_exe_Compiling
+    has format ElfFile.
 
 // conf.json
 
-conf_json is a CONFIG_FILE
+conf_json is a FILE
     has uniqueIdentifier "conf_json"
-    dataInsertedBy Mockup.
+    dataInsertedBy Mockup
+    has sw:language json
+    has format TextFile.
 
 // dist.tar.gz
 
-dist_tar is a PACKAGE_FILE
+dist_tar is a FILE
     has uniqueIdentifier "dist_tar",
     dataInsertedBy Mockup,
-	has wasGeneratedBy tarPackaging.
+	has wasGeneratedBy tarPackaging
+	has format TarFile.
 
 tarPackaging is a PACKAGE
     has uniqueIdentifier "tarPackaging",
     dataInsertedBy Mockup,
-    used (a USAGE entity tar hadRole Compiler),
+    used (a USAGE entity tar hadRole PACKAGER),
     used (a USAGE entity conf_json),
     used (a USAGE entity libhw_so),
     used (a USAGE entity counter_exe).
 
 // test.o
 
-test_c is a CODE_FILE
+test_c is a FILE
     has uniqueIdentifier "test_c",
     dataInsertedBy Mockup,
-    has sw:language c.
-test_h is a CODE_FILE
+    has sw:language c
+    has format TextFile.
+test_h is a FILE
     has uniqueIdentifier "test_h",
     dataInsertedBy Mockup,
-    has sw:language c.
+    has sw:language c
+    has format TextFile.
 
 test_exe_Compiling is a COMPILE
     has uniqueIdentifier "test_exe_Compiling",
     dataInsertedBy Mockup,
-    used (a USAGE entity cc hadRole Compiler),
+    used (a USAGE entity cc hadRole COMPILER),
     used (a USAGE entity test_c),
     used (a USAGE entity test_h).

@@ -1,20 +1,19 @@
 uri "http://arcos.rack/SOFTWARE" alias sw.
 import "http://arcos.rack/PROV-S".
 
-PACKAGE_FILE 
-	(note "A package file, e.g. Reg Hat's .rpm, Debian's .deb, etc.") 
+FILE 
+	(note "A file in the system") 
 	is a type of ENTITY.
-
-CODE_FILE 
-	(note "File that contains code that may be compiled and/or executed") 
-	is a type of ENTITY.
-    satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes CODE_FILE with values of type ENTITY.
+	filename (note "A logical file path relative to the container of the file.") describes FILE with values of type string.
+	format (note "The byte-level encoding of a file") describes FILE with values of type FORMAT.
+	
+    satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes FILE with values of type ENTITY.
     satisfies is a type of wasDerivedFrom.
 
-    sw:language (note "Programming language(s) of this file") describes CODE_FILE with values of type LANGUAGE.
+    sw:language (note "Programming language(s) of this file") describes FILE with values of type LANGUAGE.
     sw:language is a type of wasDerivedFrom.
 
-    createBy (note "ACTIVITY(s) that created this file") describes CODE_FILE with values of type ACTIVITY.
+    createBy (note "ACTIVITY(s) that created this file") describes FILE with values of type ACTIVITY.
     createBy is a type of wasGeneratedBy.
 
 LANGUAGE 
@@ -22,42 +21,26 @@ LANGUAGE
 	is a type of ENTITY.
     ^version (note "Version of the language, where applicable") describes LANGUAGE with values of type string.
 
-
-CONFIG_FILE 
-	(note "Anything that can be considered configuration") 
-	is a type of ENTITY.
-    createBy (note "ACTIVITY(s) that created this file") describes CONFIG_FILE with values of type ACTIVITY.
-    createBy is a type of wasGeneratedBy.
-
-OBJECT_FILE 
-	(note "Compiled object code, not ready for execution") 
-	is a type of ENTITY.
-    createBy (note "ACTIVITY(s) that created this file") describes OBJECT_FILE with values of type ACTIVITY.
-    createBy is a type of wasGeneratedBy.
-
-LIBRARY 
-	(note "Shared library")
-	 is a type of ENTITY.
-    createBy (note "ACTIVITY(s) that created this file") describes LIBRARY with values of type ACTIVITY.
-    createBy is a type of wasGeneratedBy.
-
-EXECUTABLE 
-	(note "Compiled executable, ready for execution") 
-	is a type of ENTITY.
-    createBy (note "ACTIVITY(s) that created this file") describes EXECUTABLE with values of type ACTIVITY.
-    createBy is a type of wasGeneratedBy.
+FORMAT (note "The data format of a FILE")
+  is a type of DATA.
+  
+TextFile is a FORMAT.
+ElfFile is a FORMAT.
+ZipFile is a FORMAT.
+RpmFile is a FORMAT.
+TarFile is a FORMAT.
 
 CODE_GENERATOR 
 	(note "A tool that generates CODE_FILEs as part of a CODE_GEN ACTIVITY")
-	is a type of AGENT.
+	is a ROLE.
 
 COMPILER 
 	(note "A tool that compiles CODE_FILEs into ENTITYs such as OBJECT_FILE or EXECUTABLE") 
-	is a type of AGENT.
+	is a ROLE.
 
 PACKAGER 
 	(note "A tool that packages some software together as part of a PACKAGE ACTIVITY")
-	is a type of AGENT.
+	is a ROLE.
 
 CODE_DEVELOPMENT 
 	(note "An ACTIVITY that produces CODE_FILEs") 

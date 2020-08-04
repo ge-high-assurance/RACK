@@ -26,19 +26,22 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplication.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.1:PACKAGE_FILE rdf:ID="dist_tar">
+  <j.1:FILE rdf:ID="dist_tar">
+    <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#TarFile"/>
     <j.2:wasGeneratedBy>
       <j.1:PACKAGE rdf:ID="tarPackaging">
         <j.2:used>
           <j.2:USAGE>
             <j.2:entity>
-              <j.1:EXECUTABLE rdf:ID="counter_exe">
+              <j.1:FILE rdf:ID="counter_exe">
+                <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#ElfFile"/>
                 <j.1:createBy>
                   <j.1:COMPILE rdf:ID="counter_exe_Compiling">
                     <j.2:used>
                       <j.2:USAGE>
                         <j.2:entity>
-                          <j.1:CODE_FILE rdf:ID="counter_h">
+                          <j.1:FILE rdf:ID="counter_h">
+                            <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#TextFile"/>
                             <j.1:language>
                               <j.1:LANGUAGE rdf:ID="c">
                                 <j.2:uniqueIdentifier rdf:datatype=
@@ -68,80 +71,80 @@
                             <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
                             >counter_h</j.2:uniqueIdentifier>
-                          </j.1:CODE_FILE>
+                          </j.1:FILE>
                         </j.2:entity>
                       </j.2:USAGE>
                     </j.2:used>
                     <j.2:used>
                       <j.2:USAGE>
                         <j.2:entity>
-                          <j.1:CODE_FILE rdf:ID="counter_c">
+                          <j.1:FILE rdf:ID="counter_c">
+                            <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#TextFile"/>
                             <j.1:language rdf:resource="#c"/>
                             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
                             <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
                             >counter_c</j.2:uniqueIdentifier>
-                          </j.1:CODE_FILE>
+                          </j.1:FILE>
                         </j.2:entity>
                       </j.2:USAGE>
                     </j.2:used>
                     <j.2:used>
                       <j.2:USAGE>
                         <j.2:entity>
-                          <j.1:LIBRARY rdf:ID="libhw_so">
+                          <j.1:FILE rdf:ID="libhw_so">
+                            <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#ElfFile"/>
                             <j.1:createBy>
                               <j.1:COMPILE rdf:ID="libhw_so_Compiling">
                                 <j.2:used>
                                   <j.2:USAGE>
                                     <j.2:entity>
-                                      <j.1:OBJECT_FILE rdf:ID="hw_o">
+                                      <j.1:FILE rdf:ID="hw_o">
+                                        <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#ElfFile"/>
                                         <j.1:createBy>
                                           <j.1:COMPILE rdf:ID="hw_o_Compiling">
                                             <j.2:used>
                                               <j.2:USAGE>
                                                 <j.2:entity>
-                                                  <j.1:CODE_FILE rdf:ID="hw_h">
+                                                  <j.1:FILE rdf:ID="hw_h">
+                                                    <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#TextFile"/>
                                                     <j.1:language rdf:resource="#c"/>
                                                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
                                                     <j.2:uniqueIdentifier
                                                      rdf:datatype=
                                                     "http://www.w3.org/2001/XMLSchema#string"
                                                     >hw_h</j.2:uniqueIdentifier>
-                                                  </j.1:CODE_FILE>
+                                                  </j.1:FILE>
                                                 </j.2:entity>
                                               </j.2:USAGE>
                                             </j.2:used>
                                             <j.2:used>
                                               <j.2:USAGE>
                                                 <j.2:entity>
-                                                  <j.1:CODE_FILE rdf:ID="hw_c">
+                                                  <j.1:FILE rdf:ID="hw_c">
+                                                    <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#TextFile"/>
                                                     <j.1:language rdf:resource="#c"/>
                                                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
                                                     <j.2:uniqueIdentifier
                                                      rdf:datatype=
                                                     "http://www.w3.org/2001/XMLSchema#string"
                                                     >hw_c</j.2:uniqueIdentifier>
-                                                  </j.1:CODE_FILE>
+                                                  </j.1:FILE>
                                                 </j.2:entity>
                                               </j.2:USAGE>
                                             </j.2:used>
                                             <j.2:used>
                                               <j.2:USAGE>
-                                                <j.2:hadRole>
-                                                  <j.2:ROLE rdf:ID="Compiler">
-                                                    <rdfs:comment
-                                                     xml:lang="en"
-                                                    >The executable tool used to process source files into compiled outputs.</rdfs:comment>
-                                                  </j.2:ROLE>
-                                                </j.2:hadRole>
+                                                <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#COMPILER"/>
                                                 <j.2:entity>
-                                                  <j.2:ENTITY rdf:ID="cc">
+                                                  <j.1:FILE rdf:ID="cc">
                                                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                                                    <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#ElfFile"/>
                                                     <j.2:uniqueIdentifier
                                                      rdf:datatype=
                                                     "http://www.w3.org/2001/XMLSchema#string"
                                                     >cc</j.2:uniqueIdentifier>
-                                                  </j.2:ENTITY>
+                                                  </j.1:FILE>
                                                 </j.2:entity>
                                               </j.2:USAGE>
                                             </j.2:used>
@@ -155,13 +158,13 @@
                                         <j.2:uniqueIdentifier
                                          rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                                         >hw_o</j.2:uniqueIdentifier>
-                                      </j.1:OBJECT_FILE>
+                                      </j.1:FILE>
                                     </j.2:entity>
                                   </j.2:USAGE>
                                 </j.2:used>
                                 <j.2:used>
                                   <j.2:USAGE>
-                                    <j.2:hadRole rdf:resource="#Compiler"/>
+                                    <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#COMPILER"/>
                                     <j.2:entity rdf:resource="#cc"/>
                                   </j.2:USAGE>
                                 </j.2:used>
@@ -175,14 +178,15 @@
                             <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
                             >libhw_so</j.2:uniqueIdentifier>
-                          </j.1:LIBRARY>
+                          </j.1:FILE>
                         </j.2:entity>
                       </j.2:USAGE>
                     </j.2:used>
                     <j.2:used>
                       <j.2:USAGE>
                         <j.2:entity>
-                          <j.1:OBJECT_FILE rdf:ID="output_o">
+                          <j.1:FILE rdf:ID="output_o">
+                            <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#ElfFile"/>
                             <j.1:createBy>
                               <j.1:COMPILE rdf:ID="output_o_Compiling">
                                 <j.2:used>
@@ -207,40 +211,36 @@
                                         </j.2:field>
                                       </j.2:ATTRIBUTE>
                                     </j.2:hasAttribute>
-                                    <j.2:hadRole rdf:resource="#Compiler"/>
+                                    <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#COMPILER"/>
                                     <j.2:entity rdf:resource="#cc"/>
                                   </j.2:USAGE>
                                 </j.2:used>
                                 <j.2:used>
                                   <j.2:USAGE>
                                     <j.2:entity>
-                                      <j.1:CODE_FILE rdf:ID="output_h">
+                                      <j.1:FILE rdf:ID="output_h">
+                                        <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#TextFile"/>
                                         <j.1:language rdf:resource="#c"/>
                                         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
                                         <j.2:uniqueIdentifier
                                          rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                                         >output_h</j.2:uniqueIdentifier>
-                                      </j.1:CODE_FILE>
+                                      </j.1:FILE>
                                     </j.2:entity>
                                   </j.2:USAGE>
                                 </j.2:used>
                                 <j.2:used>
                                   <j.2:USAGE>
                                     <j.2:entity>
-                                      <j.1:CODE_FILE rdf:ID="output_c">
+                                      <j.1:FILE rdf:ID="output_c">
+                                        <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#TextFile"/>
                                         <j.1:language rdf:resource="#c"/>
                                         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
                                         <j.2:uniqueIdentifier
                                          rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                                         >output_c</j.2:uniqueIdentifier>
-                                      </j.1:CODE_FILE>
+                                      </j.1:FILE>
                                     </j.2:entity>
-                                  </j.2:USAGE>
-                                </j.2:used>
-                                <j.2:used>
-                                  <j.2:USAGE rdf:ID="output_o_Compiling_cc">
-                                    <j.2:hadRole rdf:resource="#Compiler"/>
-                                    <j.2:entity rdf:resource="#cc"/>
                                   </j.2:USAGE>
                                 </j.2:used>
                                 <j.2:dataInsertedBy rdf:resource="#Mockup"/>
@@ -253,45 +253,48 @@
                             <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
                             >output_o</j.2:uniqueIdentifier>
-                          </j.1:OBJECT_FILE>
+                          </j.1:FILE>
                         </j.2:entity>
                       </j.2:USAGE>
                     </j.2:used>
                     <j.2:used>
                       <j.2:USAGE>
                         <j.2:entity>
-                          <j.1:OBJECT_FILE rdf:ID="input_o">
+                          <j.1:FILE rdf:ID="input_o">
+                            <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#ElfFile"/>
                             <j.1:createBy>
                               <j.1:COMPILE rdf:ID="input_o_Compiling">
                                 <j.2:used>
                                   <j.2:USAGE>
                                     <j.2:entity>
-                                      <j.1:CODE_FILE rdf:ID="input_h">
+                                      <j.1:FILE rdf:ID="input_h">
+                                        <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#TextFile"/>
                                         <j.1:language rdf:resource="#c"/>
                                         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
                                         <j.2:uniqueIdentifier
                                          rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                                         >input_h</j.2:uniqueIdentifier>
-                                      </j.1:CODE_FILE>
+                                      </j.1:FILE>
                                     </j.2:entity>
                                   </j.2:USAGE>
                                 </j.2:used>
                                 <j.2:used>
                                   <j.2:USAGE>
                                     <j.2:entity>
-                                      <j.1:CODE_FILE rdf:ID="input_c">
+                                      <j.1:FILE rdf:ID="input_c">
+                                        <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#TextFile"/>
                                         <j.1:language rdf:resource="#c"/>
                                         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
                                         <j.2:uniqueIdentifier
                                          rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                                         >input_c</j.2:uniqueIdentifier>
-                                      </j.1:CODE_FILE>
+                                      </j.1:FILE>
                                     </j.2:entity>
                                   </j.2:USAGE>
                                 </j.2:used>
                                 <j.2:used>
                                   <j.2:USAGE>
-                                    <j.2:hadRole rdf:resource="#Compiler"/>
+                                    <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#COMPILER"/>
                                     <j.2:entity rdf:resource="#cc"/>
                                   </j.2:USAGE>
                                 </j.2:used>
@@ -305,13 +308,13 @@
                             <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
                             >input_o</j.2:uniqueIdentifier>
-                          </j.1:OBJECT_FILE>
+                          </j.1:FILE>
                         </j.2:entity>
                       </j.2:USAGE>
                     </j.2:used>
                     <j.2:used>
                       <j.2:USAGE>
-                        <j.2:hadRole rdf:resource="#Compiler"/>
+                        <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#COMPILER"/>
                         <j.2:entity rdf:resource="#cc"/>
                       </j.2:USAGE>
                     </j.2:used>
@@ -323,7 +326,7 @@
                 <j.2:dataInsertedBy rdf:resource="#Mockup"/>
                 <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                 >counter_exe</j.2:uniqueIdentifier>
-              </j.1:EXECUTABLE>
+              </j.1:FILE>
             </j.2:entity>
           </j.2:USAGE>
         </j.2:used>
@@ -335,20 +338,28 @@
         <j.2:used>
           <j.2:USAGE>
             <j.2:entity>
-              <j.1:CONFIG_FILE rdf:ID="conf_json">
+              <j.1:FILE rdf:ID="conf_json">
+                <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#TextFile"/>
+                <j.1:language>
+                  <j.1:LANGUAGE rdf:ID="json">
+                    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >json</j.2:uniqueIdentifier>
+                  </j.1:LANGUAGE>
+                </j.1:language>
                 <j.2:dataInsertedBy rdf:resource="#Mockup"/>
                 <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                 >conf_json</j.2:uniqueIdentifier>
-              </j.1:CONFIG_FILE>
+              </j.1:FILE>
             </j.2:entity>
           </j.2:USAGE>
         </j.2:used>
         <j.2:used>
           <j.2:USAGE>
-            <j.2:hadRole rdf:resource="#Compiler"/>
+            <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#PACKAGER"/>
             <j.2:entity>
               <j.2:ENTITY rdf:ID="tar">
                 <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#ElfFile"/>
                 <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                 >tar</j.2:uniqueIdentifier>
               </j.2:ENTITY>
@@ -363,35 +374,37 @@
     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
     <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >dist_tar</j.2:uniqueIdentifier>
-  </j.1:PACKAGE_FILE>
+  </j.1:FILE>
   <j.1:COMPILE rdf:ID="test_exe_Compiling">
     <j.2:used>
       <j.2:USAGE>
         <j.2:entity>
-          <j.1:CODE_FILE rdf:ID="test_h">
+          <j.1:FILE rdf:ID="test_h">
+            <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#TextFile"/>
             <j.1:language rdf:resource="#c"/>
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
             <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
             >test_h</j.2:uniqueIdentifier>
-          </j.1:CODE_FILE>
+          </j.1:FILE>
         </j.2:entity>
       </j.2:USAGE>
     </j.2:used>
     <j.2:used>
       <j.2:USAGE>
         <j.2:entity>
-          <j.1:CODE_FILE rdf:ID="test_c">
+          <j.1:FILE rdf:ID="test_c">
+            <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#TextFile"/>
             <j.1:language rdf:resource="#c"/>
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
             <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
             >test_c</j.2:uniqueIdentifier>
-          </j.1:CODE_FILE>
+          </j.1:FILE>
         </j.2:entity>
       </j.2:USAGE>
     </j.2:used>
     <j.2:used>
       <j.2:USAGE>
-        <j.2:hadRole rdf:resource="#Compiler"/>
+        <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#COMPILER"/>
         <j.2:entity rdf:resource="#cc"/>
       </j.2:USAGE>
     </j.2:used>

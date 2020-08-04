@@ -66,18 +66,8 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="COMPONENT_TYPE">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <rdf:Description rdf:about="PROV-S#uniqueIdentifier">
-            <rdfs:domain rdf:resource="#COMPONENT_TYPE"/>
-          </rdf:Description>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">An open/extensible set of types of software components</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#DATA"/>
   </owl:Class>
   <owl:Class rdf:ID="EXECUTABLE">
     <rdfs:comment xml:lang="en">Compiled executable, ready for execution</rdfs:comment>

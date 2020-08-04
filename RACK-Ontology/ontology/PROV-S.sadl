@@ -4,6 +4,7 @@ uri "http://arcos.rack/PROV-S" alias provs
 DATA (note "A piece of data stored in RACK") is a class.
 	uniqueIdentifier (note "uniqueIdentifier is any data item that is used to associate items on when loading into the data store, and must be unique across the entire data set.") with a single value of type string.
 	dataInsertedBy (note "The activity that caused this data to be added to RACK") describes DATA with values of type ACTIVITY.
+    hasAttribute (note "") describes DATA with values of type ATTRIBUTE.
 
 ENTITY (note "An entity is a physical, digital, conceptual, or other kind of thing with some fixed aspects; entities may be real or imaginary.")
     is a type of DATA.
@@ -29,16 +30,19 @@ ACTIVITY (note "An activity is something that occurs over a period of time and a
 	endedAtTime (note "The time an activity was ended") describes ACTIVITY with values of type dateTime.
     used (note "Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)") describes ACTIVITY with values of type USAGE.
 
+ROLE (note "An optional role describing how an entity was used in an activity.")
+  is a type of DATA.
+
+USAGE (note "Information about a resource that was used by an activity")
+  is a type of DATA
+  described by entity with values of type ENTITY
+  described by hadRole with values of type ROLE.
+
+  
 FIELD (note "Categories of information that can be associated with data in the ontology") 
     is a type of DATA.
 
 ATTRIBUTE (note "Extensible key-value pair information attached to a data element")
   is a type of DATA
-  described by about with a single value of type DATA
   described by field with a single value of type FIELD
   described by fieldValue with a single value of type string.
-
-USAGE (note "Information about a resource that was used by an activity")
-  is a type of DATA
-  described by entity with values of type ENTITY
-  described by role with values of type string.

@@ -13,6 +13,9 @@ Mockup is an ACTIVITY
     wasAssociatedWith Galois
     startedAtTime "2020-06-01 12:00:00".
 
+Compiler (note "The executable tool used to process source files into compiled outputs.")
+    is a ROLE.
+
 // The structure of this software is based on the content of the src/ directory.
 
 InputThread is a SYSTEM
@@ -64,7 +67,7 @@ input_function is a COMPONENT
 input_o_Compiling is a COMPILE
     has uniqueIdentifier "input_o_Compiling",
     dataInsertedBy Mockup,
-    has used (a USAGE entity cc role "compiler"),
+    has used (a USAGE entity cc hadRole Compiler),
     has used (a USAGE entity input_c),
     has used (a USAGE entity input_h).
 
@@ -95,24 +98,16 @@ output_function is a COMPONENT
 CompileWithOptimizations is a FIELD.
 LinkerPath is a FIELD.
 
-output_o_Compiling_cc is a USAGE with entity cc role "compiler".
-
-output_o_Compiling_cc_optimization is an ATTRIBUTE
-  about output_o_Compiling_cc
-  field CompileWithOptimizations
-  fieldValue "yes".
-  
-output_o_Compiling_cc_linkerpath is an ATTRIBUTE
-  about output_o_Compiling_cc
-  field LinkerPath
-  fieldValue "/path/to/libraries".
+output_o_Compiling_cc is a USAGE with entity cc hadRole Compiler.
 
 output_o_Compiling is a COMPILE
     has uniqueIdentifier "output_o_Compiling",
     dataInsertedBy Mockup,
     used output_o_Compiling_cc,
     used (a USAGE entity output_c),
-    used (a USAGE entity output_h).
+    used (a USAGE entity output_h)
+    hasAttribute (a ATTRIBUTE field CompileWithOptimizations fieldValue "yes")
+    hasAttribute (a ATTRIBUTE field LinkerPath fieldValue "/path/to/libraries").
 
 output_o is a OBJECT_FILE
     has uniqueIdentifier "output_o",
@@ -133,7 +128,7 @@ hw_h is a CODE_FILE
 hw_o_Compiling is a COMPILE
     has uniqueIdentifier "hw_o_Compiling",
     dataInsertedBy Mockup,
-    used (a USAGE entity cc role "compiler"),
+    used (a USAGE entity cc hadRole Compiler),
     used (a USAGE entity hw_c),
     used (a USAGE entity hw_h).
 
@@ -145,7 +140,7 @@ hw_o is a OBJECT_FILE
 libhw_so_Compiling is a COMPILE
     has uniqueIdentifier "libhw_so_Compiling",
     dataInsertedBy Mockup,
-    used (a USAGE entity cc role "compiler"),
+    used (a USAGE entity cc hadRole Compiler),
     used (a USAGE entity hw_o).
 
 libhw_so is a LIBRARY
@@ -177,7 +172,7 @@ main_function is a COMPONENT
 counter_exe_Compiling is a COMPILE
     has uniqueIdentifier "counter_exe_Compiling",
     dataInsertedBy Mockup
-    used (a USAGE entity cc role "compiler"),
+    used (a USAGE entity cc hadRole Compiler),
     used (a USAGE entity input_o),
     used (a USAGE entity output_o),
     used (a USAGE entity libhw_so),
@@ -205,7 +200,7 @@ dist_tar is a PACKAGE_FILE
 tarPackaging is a PACKAGE
     has uniqueIdentifier "tarPackaging",
     dataInsertedBy Mockup,
-    used (a USAGE entity tar role "packager"),
+    used (a USAGE entity tar hadRole Compiler),
     used (a USAGE entity conf_json),
     used (a USAGE entity libhw_so),
     used (a USAGE entity counter_exe).
@@ -224,6 +219,6 @@ test_h is a CODE_FILE
 test_exe_Compiling is a COMPILE
     has uniqueIdentifier "test_exe_Compiling",
     dataInsertedBy Mockup,
-    used (a USAGE entity cc role "compiler"),
+    used (a USAGE entity cc hadRole Compiler),
     used (a USAGE entity test_c),
     used (a USAGE entity test_h).

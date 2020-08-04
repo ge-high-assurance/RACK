@@ -209,7 +209,7 @@
                                   </j.2:USAGE>
                                 </j.2:used>
                                 <j.2:used>
-                                  <j.2:USAGE>
+                                  <j.2:USAGE rdf:ID="output_o_Compiling_cc">
                                     <j.2:role rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                                     >compiler</j.2:role>
                                     <j.2:entity rdf:resource="#cc"/>
@@ -339,6 +339,14 @@
     <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >dist_tar</j.2:uniqueIdentifier>
   </j.1:PACKAGE_FILE>
+  <j.2:ATTRIBUTE rdf:ID="output_o_Compiling_cc_optimization">
+    <j.2:fieldValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >yes</j.2:fieldValue>
+    <j.2:field>
+      <j.2:FIELD rdf:ID="CompileWithOptimizations"/>
+    </j.2:field>
+    <j.2:about rdf:resource="#output_o_Compiling_cc"/>
+  </j.2:ATTRIBUTE>
   <j.1:COMPILE rdf:ID="test_exe_Compiling">
     <j.2:used>
       <j.2:USAGE>
@@ -375,6 +383,14 @@
     <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >test_exe_Compiling</j.2:uniqueIdentifier>
   </j.1:COMPILE>
+  <j.2:ATTRIBUTE rdf:ID="output_o_Compiling_cc_linkerpath">
+    <j.2:fieldValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >/path/to/libraries</j.2:fieldValue>
+    <j.2:field>
+      <j.2:FIELD rdf:ID="LinkerPath"/>
+    </j.2:field>
+    <j.2:about rdf:resource="#output_o_Compiling_cc"/>
+  </j.2:ATTRIBUTE>
   <j.3:SYSTEM rdf:ID="ExecutiveThread">
     <j.3:partOf rdf:resource="Turnstiles#CounterApplication"/>
     <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"

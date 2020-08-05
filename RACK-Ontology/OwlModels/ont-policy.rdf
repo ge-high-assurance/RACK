@@ -231,7 +231,7 @@
   </j.0:OntologySpec>
   <j.0:OntologySpec>
     <j.0:publicURI rdf:resource="http://arcos.rack/GeneratePropInfoCSV.metrics"/>
-    <j.0:altURL rdf:resource="file:/home/val/galois/projects/arcos/RACK/RACK-Ontology/OwlModels/GeneratePropInfoCSV.sadl.metrics.owl"/>
+    <j.0:altURL rdf:resource="file:/Users/emertens/Source/arcos/RACK/RACK-Ontology/OwlModels/GeneratePropInfoCSV.sadl.metrics.owl"/>
     <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
     <j.0:createdBy>SRL_Metrics</j.0:createdBy>
   </j.0:OntologySpec>
@@ -545,7 +545,7 @@
   </j.0:OntologySpec>
   <j.0:OntologySpec>
     <j.0:publicURI rdf:resource="http://arcos.rack/GeneratePropInfoCSV"/>
-    <j.0:altURL rdf:resource="file:/home/val/galois/projects/arcos/RACK/RACK-Ontology/OwlModels/GeneratePropInfoCSV.owl"/>
+    <j.0:altURL rdf:resource="file:/Users/emertens/Source/arcos/RACK/RACK-Ontology/OwlModels/GeneratePropInfoCSV.owl"/>
     <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
     <j.0:createdBy>SADL</j.0:createdBy>
     <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"

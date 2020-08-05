@@ -1,66 +1,37 @@
 uri "http://arcos.rack/SOFTWARE" alias sw.
 import "http://arcos.rack/PROV-S".
 
-PACKAGE_FILE 
-	(note "A package file, e.g. Reg Hat's .rpm, Debian's .deb, etc.") 
+FILE
+    (note "A file in the system")
 	is a type of ENTITY.
+	filename (note "A logical file path relative to the container of the file.") describes FILE with values of type string.
 
-CODE_FILE 
-	(note "File that contains code that may be compiled and/or executed") 
-	is a type of ENTITY.
-    satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes CODE_FILE with values of type ENTITY.
+	fileFormat (note "The byte-level encoding of a file") describes FILE with values of type FORMAT.
+
+    satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes FILE with values of type ENTITY.
     satisfies is a type of wasDerivedFrom.
 
-    sw:language (note "Programming language(s) of this file") describes CODE_FILE with values of type LANGUAGE.
-    sw:language is a type of wasDerivedFrom.
-
-    createBy (note "ACTIVITY(s) that created this file") describes CODE_FILE with values of type ACTIVITY.
+    createBy (note "ACTIVITY(s) that created this file") describes FILE with values of type ACTIVITY.
     createBy is a type of wasGeneratedBy.
 
-LANGUAGE 
-	(note "Describes a programming language, possibly identifying some version of its specification") 
-	is a type of ENTITY.
-    ^version (note "Version of the language, where applicable") describes LANGUAGE with values of type string.
+FORMAT
+    (note "The data format of a FILE")
+    is a type of DATA.
 
-
-CONFIG_FILE 
-	(note "Anything that can be considered configuration") 
-	is a type of ENTITY.
-    createBy (note "ACTIVITY(s) that created this file") describes CONFIG_FILE with values of type ACTIVITY.
-    createBy is a type of wasGeneratedBy.
-
-OBJECT_FILE 
-	(note "Compiled object code, not ready for execution") 
-	is a type of ENTITY.
-    createBy (note "ACTIVITY(s) that created this file") describes OBJECT_FILE with values of type ACTIVITY.
-    createBy is a type of wasGeneratedBy.
-
-LIBRARY 
-	(note "Shared library")
-	 is a type of ENTITY.
-    createBy (note "ACTIVITY(s) that created this file") describes LIBRARY with values of type ACTIVITY.
-    createBy is a type of wasGeneratedBy.
-
-EXECUTABLE 
-	(note "Compiled executable, ready for execution") 
-	is a type of ENTITY.
-    createBy (note "ACTIVITY(s) that created this file") describes EXECUTABLE with values of type ACTIVITY.
-    createBy is a type of wasGeneratedBy.
-
-CODE_GENERATOR 
+CODE_GENERATOR
 	(note "A tool that generates CODE_FILEs as part of a CODE_GEN ACTIVITY")
-	is a type of AGENT.
+	is a ROLE.
 
-COMPILER 
-	(note "A tool that compiles CODE_FILEs into ENTITYs such as OBJECT_FILE or EXECUTABLE") 
-	is a type of AGENT.
+COMPILER
+	(note "A tool that compiles CODE_FILEs into ENTITYs such as OBJECT_FILE or EXECUTABLE")
+	is a ROLE.
 
-PACKAGER 
+PACKAGER
 	(note "A tool that packages some software together as part of a PACKAGE ACTIVITY")
-	is a type of AGENT.
+	is a ROLE.
 
-CODE_DEVELOPMENT 
-	(note "An ACTIVITY that produces CODE_FILEs") 
+CODE_DEVELOPMENT
+	(note "An ACTIVITY that produces CODE_FILEs")
 	is a type of ACTIVITY.
 
     author (note "AGENT(s) who participated in this ACTIVITY") describes CODE_DEVELOPMENT with values of type AGENT.
@@ -74,25 +45,25 @@ CODE_DEVELOPMENT
 
 
 BUILD
-	(note "Describes a set of ACTIVITYs (e.g. CODE_GEN, COMPILE, ...) that together form some logical building unit") 
+	(note "Describes a set of ACTIVITYs (e.g. CODE_GEN, COMPILE, ...) that together form some logical building unit")
 	is a type of ACTIVITY.
     step (note "A BUILD may be comprised of any number of sub-ACTIVITY(s)") describes BUILD with values of type ACTIVITY.
     step is a type of wasInformedBy.
 
-CODE_GEN 
-	(note "ACTIVITY of running a CODE_GENERATOR to create CODE_FILEs") 
+CODE_GEN
+	(note "ACTIVITY of running a CODE_GENERATOR to create CODE_FILEs")
 	is a type of ACTIVITY.
     performedBy (note "AGENT(s) (e.g. CODE_GENERATOR) generating the code") describes CODE_GEN with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
 
-COMPILE 
-	(note "ACTIVITY of running a a COMPILER to produce EXECUTABLEs or OBJECT_FILEs") 
+COMPILE
+	(note "ACTIVITY of running a a COMPILER to produce EXECUTABLEs or OBJECT_FILEs")
 	is a type of ACTIVITY.
     performedBy (note "AGENT(s) (e.g. COMPILER) performing the compilation") describes COMPILE with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
 
-PACKAGE 
-	(note "ACTIVITY of running a PACKAGER to produce a PACKAGE_FILE") 
+PACKAGE
+	(note "ACTIVITY of running a PACKAGER to produce a PACKAGE_FILE")
 	is a type of ACTIVITY.
     performedBy (note "AGENT(s) (e.g. PACKAGER) performing the packaging") describes PACKAGE with values of type AGENT.
     performedBy is a type of wasAssociatedWith.

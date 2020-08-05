@@ -41,7 +41,7 @@ cc is a FILE
     has uniqueIdentifier "cc"
     has format ElfFile
     dataInsertedBy Mockup.
-tar is a ENTITY
+tar is a FILE
     has uniqueIdentifier "tar"
     has format ElfFile
     dataInsertedBy Mockup.

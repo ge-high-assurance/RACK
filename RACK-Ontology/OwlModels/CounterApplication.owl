@@ -357,12 +357,12 @@
           <j.2:USAGE>
             <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#PACKAGER"/>
             <j.2:entity>
-              <j.2:ENTITY rdf:ID="tar">
+              <j.1:FILE rdf:ID="tar">
                 <j.2:dataInsertedBy rdf:resource="#Mockup"/>
                 <j.1:format rdf:resource="http://arcos.rack/SOFTWARE#ElfFile"/>
                 <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                 >tar</j.2:uniqueIdentifier>
-              </j.2:ENTITY>
+              </j.1:FILE>
             </j.2:entity>
           </j.2:USAGE>
         </j.2:used>

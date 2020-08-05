@@ -5,63 +5,82 @@ import "http://arcos.rack/SOFTWARE".
 import "http://TurnstileSystem/Turnstiles".
 
 Galois is an ORGANIZATION
-  uniqueIdentifier "AGENT-Galois"
-  AGENTS:name "Galois".
+    has uniqueIdentifier "AGENT-Galois"
+    has AGENTS:name "Galois".
   
 Mockup is an ACTIVITY
-    uniqueIdentifier "ACTIVITY-Turnstile software data mockup"
-    wasAssociatedWith Galois
-    startedAtTime "2020-06-01 12:00:00".
+    has uniqueIdentifier "ACTIVITY-Turnstile software data mockup"
+    has wasAssociatedWith Galois
+    has startedAtTime "2020-06-01 12:00:00".
 
 // The structure of this software is based on the content of the src/ directory.
 
 InputThread is a SYSTEM
-    dataInsertedBy Mockup
+    has dataInsertedBy Mockup
     has uniqueIdentifier "InputThread",
 	has partOf CounterApplication.
 
 OutputThread is a SYSTEM
-    dataInsertedBy Mockup
+    has dataInsertedBy Mockup
     has uniqueIdentifier "OutputThread",
 	has partOf CounterApplication.
 
 ExecutiveThread is a SYSTEM
-    dataInsertedBy Mockup
+    has dataInsertedBy Mockup
     has uniqueIdentifier "ExecutiveThread",
 	has partOf CounterApplication.
 
 // tools and other background
 
-c is a LANGUAGE
-    has uniqueIdentifier "c".
-json is a LANGUAGE
-    has uniqueIdentifier "json".
+CSourceFile (note "A C language source file")
+    is a FORMAT
+    has dataInsertedBy Mockup.
     
+JsonFile (note "JSON data")
+    is a FORMAT
+    has dataInsertedBy Mockup.
+    
+ElfFile (note "ELF object, shared-object, executable")
+    is a FORMAT
+    has dataInsertedBy Mockup.
+    
+ZipFile (note "Compressed file archive")
+    is a FORMAT
+    has dataInsertedBy Mockup.
+    
+RpmFile (note "RedHat Package Manager archive")
+    is a FORMAT
+    has dataInsertedBy Mockup.
+    
+TarFile (note "File archive")
+    is a FORMAT
+    has dataInsertedBy Mockup.
+
 cc is a FILE
     has uniqueIdentifier "cc"
-    has format ElfFile
-    dataInsertedBy Mockup.
+    has fileFormat ElfFile
+    has dataInsertedBy Mockup.
+
 tar is a FILE
     has uniqueIdentifier "tar"
-    has format ElfFile
-    dataInsertedBy Mockup.
+    has fileFormat ElfFile
+    has dataInsertedBy Mockup.
 
 // input.o
 
 input_c is a FILE
     has uniqueIdentifier "input_c",
-    with dataInsertedBy Mockup,
-    has sw:language c
-    has format TextFile.
+    has dataInsertedBy Mockup,
+    has fileFormat CSourceFile.
+
 input_h is a FILE
     has uniqueIdentifier "input_h",
-    with dataInsertedBy Mockup,
-    has sw:language c
-    has format TextFile.
+    has dataInsertedBy Mockup,
+    has fileFormat CSourceFile.
 
 input_function is a COMPONENT
     has uniqueIdentifier "input_function"
-    dataInsertedBy Mockup
+    has dataInsertedBy Mockup
     has componentType SOURCE_FUNCTION
     has sw:name "input"
     has valueType "void()"
@@ -69,33 +88,31 @@ input_function is a COMPONENT
 
 input_o_Compiling is a COMPILE
     has uniqueIdentifier "input_o_Compiling",
-    dataInsertedBy Mockup,
+    has dataInsertedBy Mockup,
     has used (a USAGE entity cc hadRole COMPILER),
     has used (a USAGE entity input_c),
     has used (a USAGE entity input_h).
 
 input_o is a FILE
     has uniqueIdentifier "input_o",
-    dataInsertedBy Mockup,
+    has dataInsertedBy Mockup,
     has createBy input_o_Compiling
-    has format ElfFile.
+    has fileFormat ElfFile.
 
 // output.o
 
 output_c is a FILE
     has uniqueIdentifier "output_c",
-    dataInsertedBy Mockup,
-    has sw:language c
-    has format TextFile.
+    has dataInsertedBy Mockup,
+    has fileFormat CSourceFile.
 output_h is a FILE
     has uniqueIdentifier "output_h",
-    dataInsertedBy Mockup,
-    has sw:language c
-    has format TextFile.
+    has dataInsertedBy Mockup,
+    has fileFormat CSourceFile.
 
 output_function is a COMPONENT
     has uniqueIdentifier "output_function"
-    dataInsertedBy Mockup
+    has dataInsertedBy Mockup
     has componentType SOURCE_FUNCTION
     has sw:name "output"
     has valueType "void()"
@@ -106,7 +123,7 @@ LinkerPath is a FIELD.
 
 output_o_Compiling is a COMPILE
     has uniqueIdentifier "output_o_Compiling",
-    dataInsertedBy Mockup,
+    has dataInsertedBy Mockup,
     used (a USAGE entity output_c),
     used (a USAGE entity output_h),
     used (a USAGE
@@ -117,65 +134,61 @@ output_o_Compiling is a COMPILE
 
 output_o is a FILE
     has uniqueIdentifier "output_o",
-    dataInsertedBy Mockup,
+    has dataInsertedBy Mockup,
     has createBy output_o_Compiling
-    has format ElfFile.
+    has fileFormat ElfFile.
 
 // hw.o, libhw.so
 
 hw_c is a FILE
     has uniqueIdentifier "hw_c",
-    dataInsertedBy Mockup,
-    has sw:language c
-    has format TextFile.
+    has dataInsertedBy Mockup,
+    has fileFormat CSourceFile.
 hw_h is a FILE
     has uniqueIdentifier "hw_h",
-    dataInsertedBy Mockup,
-    has sw:language c
-    has format TextFile.
+    has dataInsertedBy Mockup,
+    has fileFormat CSourceFile.
 
 hw_o_Compiling is a COMPILE
     has uniqueIdentifier "hw_o_Compiling",
-    dataInsertedBy Mockup,
+    has dataInsertedBy Mockup,
     used (a USAGE entity cc hadRole COMPILER),
     used (a USAGE entity hw_c),
     used (a USAGE entity hw_h).
 
 hw_o is a FILE
     has uniqueIdentifier "hw_o",
-    dataInsertedBy Mockup,
+    has dataInsertedBy Mockup,
     has createBy hw_o_Compiling
-    has format ElfFile.
+    has fileFormat ElfFile.
 
 libhw_so_Compiling is a COMPILE
     has uniqueIdentifier "libhw_so_Compiling",
-    dataInsertedBy Mockup,
+    has dataInsertedBy Mockup,
     used (a USAGE entity cc hadRole COMPILER),
     used (a USAGE entity hw_o).
 
 libhw_so is a FILE
     has uniqueIdentifier "libhw_so",
-    dataInsertedBy Mockup,
+    has dataInsertedBy Mockup,
     has createBy libhw_so_Compiling
-    has format ElfFile.
+    has fileFormat ElfFile.
 
 // counter.exe
 
 counter_c is a FILE
     has uniqueIdentifier "counter_c",
-    dataInsertedBy Mockup,
-    has sw:language c,
-    has format TextFile.
+    has dataInsertedBy Mockup,
+    has fileFormat CSourceFile.
 counter_h is a FILE
     has uniqueIdentifier "counter_h",
-    dataInsertedBy Mockup,
-    has sw:language c,
-    has format TextFile.
+    has dataInsertedBy Mockup,
+    has fileFormat CSourceFile.
 
 main_function is a COMPONENT
     has uniqueIdentifier "main_function"
     has componentType SOURCE_FUNCTION
-    dataInsertedBy Mockup
+    has dataInsertedBy Mockup
     has sw:name "main"
     has valueType "int(int argc, char* argv[])"
     has controlFlowsToUnconditionally input_function
@@ -184,7 +197,7 @@ main_function is a COMPONENT
 
 counter_exe_Compiling is a COMPILE
     has uniqueIdentifier "counter_exe_Compiling",
-    dataInsertedBy Mockup
+    has dataInsertedBy Mockup
     used (a USAGE entity cc hadRole COMPILER),
     used (a USAGE entity input_o),
     used (a USAGE entity output_o),
@@ -194,29 +207,28 @@ counter_exe_Compiling is a COMPILE
 
 counter_exe is an FILE
     has uniqueIdentifier "counter_exe",
-    dataInsertedBy Mockup
+    has dataInsertedBy Mockup
     has createBy counter_exe_Compiling
-    has format ElfFile.
+    has fileFormat ElfFile.
 
 // conf.json
 
 conf_json is a FILE
     has uniqueIdentifier "conf_json"
-    dataInsertedBy Mockup
-    has sw:language json
-    has format TextFile.
+    has dataInsertedBy Mockup
+    has fileFormat JsonFile.
 
 // dist.tar.gz
 
 dist_tar is a FILE
     has uniqueIdentifier "dist_tar",
-    dataInsertedBy Mockup,
+    has dataInsertedBy Mockup,
 	has wasGeneratedBy tarPackaging
-	has format TarFile.
+	has fileFormat TarFile.
 
 tarPackaging is a PACKAGE
     has uniqueIdentifier "tarPackaging",
-    dataInsertedBy Mockup,
+    has dataInsertedBy Mockup,
     used (a USAGE entity tar hadRole PACKAGER),
     used (a USAGE entity conf_json),
     used (a USAGE entity libhw_so),
@@ -226,18 +238,16 @@ tarPackaging is a PACKAGE
 
 test_c is a FILE
     has uniqueIdentifier "test_c",
-    dataInsertedBy Mockup,
-    has sw:language c
-    has format TextFile.
+    has dataInsertedBy Mockup,
+    has fileFormat CSourceFile.
 test_h is a FILE
     has uniqueIdentifier "test_h",
-    dataInsertedBy Mockup,
-    has sw:language c
-    has format TextFile.
+    has dataInsertedBy Mockup,
+    has fileFormat CSourceFile.
 
 test_exe_Compiling is a COMPILE
     has uniqueIdentifier "test_exe_Compiling",
-    dataInsertedBy Mockup,
+    has dataInsertedBy Mockup,
     used (a USAGE entity cc hadRole COMPILER),
     used (a USAGE entity test_c),
     used (a USAGE entity test_h).

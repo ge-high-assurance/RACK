@@ -57,10 +57,6 @@
     <rdfs:comment xml:lang="en">ACTIVITY of running a PACKAGER to produce a PACKAGE_FILE</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
-  <owl:Class rdf:ID="LANGUAGE">
-    <rdfs:comment xml:lang="en">Describes a programming language, possibly identifying some version of its specification</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
-  </owl:Class>
   <owl:Class rdf:ID="CODE_DEVELOPMENT">
     <rdfs:comment xml:lang="en">An ACTIVITY that produces CODE_FILEs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
@@ -75,6 +71,11 @@
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
     <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#FILE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fileFormat">
+    <rdfs:comment xml:lang="en">The byte-level encoding of a file</rdfs:comment>
+    <rdfs:range rdf:resource="#FORMAT"/>
     <rdfs:domain rdf:resource="#FILE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="subcomponentOf">
@@ -103,12 +104,6 @@
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#COMPONENT"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="language">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">Programming language(s) of this file</rdfs:comment>
-    <rdfs:range rdf:resource="#LANGUAGE"/>
-    <rdfs:domain rdf:resource="#FILE"/>
-  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#componentType">
     <rdfs:range rdf:resource="#COMPONENT_TYPE"/>
     <rdfs:domain rdf:resource="#COMPONENT"/>
@@ -133,11 +128,6 @@
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
     <rdfs:comment xml:lang="en">ACTIVITY(s) that created this file</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
-    <rdfs:domain rdf:resource="#FILE"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="format">
-    <rdfs:comment xml:lang="en">The byte-level encoding of a file</rdfs:comment>
-    <rdfs:range rdf:resource="#FORMAT"/>
     <rdfs:domain rdf:resource="#FILE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="mentions">
@@ -186,12 +176,6 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#FILE"/>
   </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:ID="version">
-    <rdfs:comment xml:lang="en">Version of the language, where applicable</rdfs:comment>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#LANGUAGE"/>
-  </owl:DatatypeProperty>
-  <sw:FORMAT rdf:ID="ElfFile"/>
   <sw:COMPONENT_TYPE rdf:ID="MODULE">
     <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >MODULE</j.0:uniqueIdentifier>
@@ -240,15 +224,11 @@
     >SOURCE_GLOBAL_VARIABLE</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A global variable declared or defined in source code.</rdfs:comment>
   </sw:COMPONENT_TYPE>
-  <sw:FORMAT rdf:ID="RpmFile"/>
-  <sw:FORMAT rdf:ID="TextFile"/>
   <sw:COMPONENT_TYPE rdf:ID="NAMESPACE">
     <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >NAMESPACE</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A collection of related code, usually grouped in a lexical scope.</rdfs:comment>
   </sw:COMPONENT_TYPE>
-  <sw:FORMAT rdf:ID="ZipFile"/>
-  <sw:FORMAT rdf:ID="TarFile"/>
   <sw:COMPONENT_TYPE rdf:ID="CLASS_MEMBER_VARIABLE">
     <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >CLASS_MEMBER_VARIABLE</j.0:uniqueIdentifier>

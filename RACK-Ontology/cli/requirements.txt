@@ -9,7 +9,7 @@ pyrsistent==0.16.0
 python-dateutil==2.8.1
 PyYAML==5.3.1
 requests==2.24.0
-semtk-python3 @ git+git://github.com/glguy/semtk-python3@6f2706f540cc646e07362a8c274378b64931f676
+semtk-python3 @ git+git://github.com/ge-semtk/semtk-python3@7e12617473a68ab5257a7028d18dffaf7a420401
 six==1.15.0
 tabulate==0.8.7
 urllib3==1.25.9

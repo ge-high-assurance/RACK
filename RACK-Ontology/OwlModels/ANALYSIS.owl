@@ -34,7 +34,6 @@
   <owl:Class rdf:ID="ANALYSIS_ANNOTATION_TYPE">
     <rdfs:comment xml:lang="en">An open/extensible set of types of analysis annotations</rdfs:comment>
   </owl:Class>
-  <owl:Class rdf:ID="ANALYSIS_TYPE"/>
   <owl:Class rdf:ID="ANALYSIS">
     <rdfs:comment xml:lang="en">ACTIVITY of running some analysis, supposedly creating some ANALYSIS_REPORT</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
@@ -53,10 +52,6 @@
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
     <rdfs:comment xml:lang="en">Entity that is responsible for producing an analysis, could be a person or a tool. </rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
-    <rdfs:domain rdf:resource="#ANALYSIS"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="analysis_type">
-    <rdfs:range rdf:resource="#ANALYSIS_TYPE"/>
     <rdfs:domain rdf:resource="#ANALYSIS"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="analyzes">

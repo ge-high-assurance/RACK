@@ -87,14 +87,14 @@ Write: data
        } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/TEST.csv".
 
-// list all LANGUAGE
+// list all FORMAT
 Write: data
 {
   Ask: "select distinct ?uniqueIdentifier where
-        {  ?LANGUAGE <rdf:type> <LANGUAGE>
-         . ?LANGUAGE <uniqueIdentifier> ?uniqueIdentifier
+        {  ?FORMAT <rdf:type> <FORMAT>
+         . ?FORMAT <uniqueIdentifier> ?uniqueIdentifier
         } order by ?uniqueIdentifier".
-} to "models/TurnstileSystem/Data/LANGUAGE.csv".
+} to "models/TurnstileSystem/Data/FORMAT.csv".
 
 // list test results; TEST_EXECUTION does not have unique identifier
 Write: data
@@ -108,24 +108,6 @@ Write: data
          } order by ?testExe ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/TEST_RESULTS.csv".
 
-// list all COMPILER
-Write: data
-{
-  Ask: "select distinct ?uniqueIdentifier where
-        {  ?COMPILER <rdf:type> <COMPILER>
-         . ?COMPILER <uniqueIdentifier> ?uniqueIdentifier
-        } order by ?uniqueIdentifier".
-} to "models/TurnstileSystem/Data/COMPILER.csv".
-
-// list all PACKAGER
-Write: data
-{
-  Ask: "select distinct ?uniqueIdentifier where
-        {  ?PACKAGER <rdf:type> <PACKAGER>
-         . ?PACKAGER <uniqueIdentifier> ?uniqueIdentifier
-        } order by ?uniqueIdentifier".
-} to "models/TurnstileSystem/Data/PACKAGER.csv".
-
 // list all AGENT
 Write: data
 {
@@ -134,19 +116,6 @@ Write: data
          . ?AGENT <uniqueIdentifier> ?uniqueIdentifier
         } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/AGENT.csv".
-
-// list all CODE_FILE
-Write: data
-{
-  Ask: "select distinct ?uniqueIdentifier ?languageId where
-        {  ?CODE_FILE <rdf:type> <CODE_FILE>
-          . ?CODE_FILE <uniqueIdentifier> ?uniqueIdentifier
-          . OPTIONAL{  ?CODE_FILE <sw:language> ?language
-                    . ?language <rdf:type> <LANGUAGE>
-                    . ?language <uniqueIdentifier> ?languageId
-                    }
-        } order by ?uniqueIdentifier".
-} to "models/TurnstileSystem/Data/CODE_FILE.csv".
 
 // list all COMPILE
 Write: data
@@ -165,67 +134,6 @@ Write: data
         } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/COMPILE.csv".
 
-// list all OBJECT_FILE
-Write: data
-{
-  Ask: "select distinct ?uniqueIdentifier ?createById where
-        {  ?OBJECT_FILE <rdf:type> <OBJECT_FILE>
-         . ?OBJECT_FILE <uniqueIdentifier> ?uniqueIdentifier
-         . OPTIONAL{  ?OBJECT_FILE <createBy> ?createBy
-                    . ?createBy <rdf:type> <ACTIVITY>
-                    . ?createBy <uniqueIdentifier> ?createById
-                   }
-        } order by ?uniqueIdentifier".
-} to "models/TurnstileSystem/Data/OBJECT_FILE.csv".
-
-// list all LIBRARY
-Write: data
-{
-  Ask: "select distinct ?uniqueIdentifier ?createById where
-        {  ?LIBRARY <rdf:type> <LIBRARY>
-         . ?LIBRARY <uniqueIdentifier> ?uniqueIdentifier
-         . OPTIONAL{  ?LIBRARY <createBy> ?createBy
-                    . ?createBy <rdf:type> <ACTIVITY>
-                    . ?createBy <uniqueIdentifier> ?createById
-                   }
-        } order by ?uniqueIdentifier".
-} to "models/TurnstileSystem/Data/LIBRARY.csv".
-
-// list all EXECUTABLE
-Write: data
-{
-  Ask: "select distinct ?uniqueIdentifier ?createById where
-        {  ?EXECUTABLE <rdf:type> <EXECUTABLE>
-         . ?EXECUTABLE <uniqueIdentifier> ?uniqueIdentifier
-         . OPTIONAL{  ?EXECUTABLE <createBy> ?createBy
-                    . ?createBy <rdf:type> <ACTIVITY>
-                    . ?createBy <uniqueIdentifier> ?createById
-                   }
-        } order by ?uniqueIdentifier".
-} to "models/TurnstileSystem/Data/EXECUTABLE.csv".
-
-// list all CONFIG_FILE
-Write: data
-{
-  Ask: "select distinct ?uniqueIdentifier where
-        {  ?CONFIG_FILE <rdf:type> <CONFIG_FILE>
-         . ?CONFIG_FILE <uniqueIdentifier> ?uniqueIdentifier
-        } order by ?uniqueIdentifier".
-} to "models/TurnstileSystem/Data/CONFIG_FILE.csv".
-
-// list all PACKAGE_FILE
-Write: data
-{
-  Ask: "select distinct ?uniqueIdentifier ?wasGeneratedById where
-        {  ?PACKAGE_FILE <rdf:type> <PACKAGE_FILE>
-         . ?PACKAGE_FILE <uniqueIdentifier> ?uniqueIdentifier
-         . OPTIONAL{  ?PACKAGE_FILE <wasGeneratedBy> ?wasGeneratedBy
-                    . ?wasGeneratedBy <rdf:type> <ACTIVITY>
-                    . ?wasGeneratedBy <uniqueIdentifier> ?wasGeneratedById
-                   }
-        } order by ?uniqueIdentifier".
-} to "models/TurnstileSystem/Data/PACKAGE_FILE.csv".
-
 // list all PACKAGE
 Write: data
 {
@@ -242,3 +150,20 @@ Write: data
                   }
         } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/PACKAGE.csv".
+
+// list all FILE
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier ?createById ?formatId where
+        {  ?FILE <rdf:type> <FILE>
+         . ?FILE <uniqueIdentifier> ?uniqueIdentifier
+         . OPTIONAL{  ?OBJECT_FILE <createBy> ?createBy
+                    . ?createBy <rdf:type> <ACTIVITY>
+                    . ?createBy <uniqueIdentifier> ?createById
+                   }
+         . OPTIONAL{  ?FILE <fileFormat> ?format
+                    . ?format <rdf:type> <FORMAT>
+                    . ?format <uniqueIdentifier> ?formatId
+                    }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/FILE.csv".

@@ -34,26 +34,32 @@ ExecutiveThread is a SYSTEM
 
 CSourceFile (note "A C language source file")
     is a FORMAT
+    has uniqueIdentifier "FORMAT-CSourceFile"
     has dataInsertedBy Mockup.
     
 JsonFile (note "JSON data")
     is a FORMAT
+    has uniqueIdentifier "FORMAT-JsonFile"
     has dataInsertedBy Mockup.
     
 ElfFile (note "ELF object, shared-object, executable")
     is a FORMAT
+    has uniqueIdentifier "FORMAT-ElfFile"
     has dataInsertedBy Mockup.
     
 ZipFile (note "Compressed file archive")
     is a FORMAT
+    has uniqueIdentifier "FORMAT-ZipFile"
     has dataInsertedBy Mockup.
     
 RpmFile (note "RedHat Package Manager archive")
     is a FORMAT
+    has uniqueIdentifier "FORMAT-RpmFile"
     has dataInsertedBy Mockup.
     
 TarFile (note "File archive")
     is a FORMAT
+    has uniqueIdentifier "FORMAT-TarFile"
     has dataInsertedBy Mockup.
 
 cc is a FILE
@@ -180,6 +186,7 @@ counter_c is a FILE
     has uniqueIdentifier "counter_c",
     has dataInsertedBy Mockup,
     has fileFormat CSourceFile.
+    
 counter_h is a FILE
     has uniqueIdentifier "counter_h",
     has dataInsertedBy Mockup,

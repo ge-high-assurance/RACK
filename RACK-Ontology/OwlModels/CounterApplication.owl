@@ -43,12 +43,16 @@
         >ACTIVITY-Turnstile software data mockup</j.2:uniqueIdentifier>
       </j.2:ACTIVITY>
     </j.2:dataInsertedBy>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FORMAT-RpmFile</j.2:uniqueIdentifier>
     <rdfs:comment xml:lang="en">RedHat Package Manager archive</rdfs:comment>
   </j.1:FORMAT>
   <j.1:FILE rdf:ID="dist_tar">
     <j.1:fileFormat>
       <j.1:FORMAT rdf:ID="TarFile">
         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >FORMAT-TarFile</j.2:uniqueIdentifier>
         <rdfs:comment xml:lang="en">File archive</rdfs:comment>
       </j.1:FORMAT>
     </j.1:fileFormat>
@@ -61,6 +65,8 @@
                 <j.1:fileFormat>
                   <j.1:FORMAT rdf:ID="ElfFile">
                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >FORMAT-ElfFile</j.2:uniqueIdentifier>
                     <rdfs:comment xml:lang="en">ELF object, shared-object, executable</rdfs:comment>
                   </j.1:FORMAT>
                 </j.1:fileFormat>
@@ -73,6 +79,9 @@
                             <j.1:fileFormat>
                               <j.1:FORMAT rdf:ID="CSourceFile">
                                 <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                                <j.2:uniqueIdentifier rdf:datatype=
+                                "http://www.w3.org/2001/XMLSchema#string"
+                                >FORMAT-CSourceFile</j.2:uniqueIdentifier>
                                 <rdfs:comment xml:lang="en">A C language source file</rdfs:comment>
                               </j.1:FORMAT>
                             </j.1:fileFormat>
@@ -344,6 +353,8 @@
                 <j.1:fileFormat>
                   <j.1:FORMAT rdf:ID="JsonFile">
                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >FORMAT-JsonFile</j.2:uniqueIdentifier>
                     <rdfs:comment xml:lang="en">JSON data</rdfs:comment>
                   </j.1:FORMAT>
                 </j.1:fileFormat>
@@ -462,6 +473,8 @@
   </j.1:COMPONENT>
   <j.1:FORMAT rdf:ID="ZipFile">
     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FORMAT-ZipFile</j.2:uniqueIdentifier>
     <rdfs:comment xml:lang="en">Compressed file archive</rdfs:comment>
   </j.1:FORMAT>
   <j.3:SYSTEM rdf:ID="OutputThread">

@@ -3,12 +3,12 @@ import "http://arcos.rack/ANALYSIS".
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/SOFTWARE".
 
-CPP is a sw:LANGUAGE.
+CSourceFormat is a FORMAT.
 
-LIBCPP is a LIBRARY.
+LIBCPP is a FILE.
 
-EXAMPLE_CPP is a CODE_FILE
-  has sw:language CPP.
+EXAMPLE_CPP is a FILE
+  has fileFormat CSourceFormat.
 
 INTERVAL_ANALYSIS is a ANALYSIS.
 

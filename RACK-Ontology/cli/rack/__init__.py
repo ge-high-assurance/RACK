@@ -313,12 +313,12 @@ def get_argument_parser() -> argparse.ArgumentParser:
     subparsers = parser.add_subparsers(dest='command')
 
     data_parser = subparsers.add_parser('data', help='Import or export CSV data')
-    data_subparsers = data_parser.add_subparsers(dest='command', required=True)
+    data_subparsers = data_parser.add_subparsers(dest='command')
     data_import_parser = data_subparsers.add_parser('import', help='Import CSV data')
     data_export_parser = data_subparsers.add_parser('export', help='Export query results')
 
     plumbing_parser = subparsers.add_parser('plumbing', help='Tools for RACK developers')
-    plumbing_subparsers = plumbing_parser.add_subparsers(dest='command', required=True)
+    plumbing_subparsers = plumbing_parser.add_subparsers(dest='command')
     plumbing_model_parser = plumbing_subparsers.add_parser('model', help='Modify the data model')
     plumbing_storenodegroups_parser = plumbing_subparsers.add_parser('store-nodegroups', help='Store nodegroups into RACK')
     plumbing_retrievenodegroups_parser = plumbing_subparsers.add_parser('retrieve-nodegroups', help='Retrieve nodegroups from RACK')

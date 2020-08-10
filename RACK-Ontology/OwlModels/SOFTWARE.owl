@@ -35,11 +35,11 @@
   </owl:Class>
   <owl:Class rdf:ID="COMPONENT_TYPE">
     <rdfs:comment xml:lang="en">An open/extensible set of types of software components</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#DATA"/>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="FORMAT">
     <rdfs:comment xml:lang="en">The data format of a FILE</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#DATA"/>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="COMPONENT">
     <rdfs:subClassOf>

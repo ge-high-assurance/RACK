@@ -18,19 +18,19 @@
   <owl:Class rdf:ID="ROLE">
     <rdfs:comment xml:lang="en">An optional role describing how an entity was used in an activity.</rdfs:comment>
     <rdfs:subClassOf>
-      <owl:Class rdf:ID="DATA"/>
+      <owl:Class rdf:ID="THING"/>
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="FIELD">
     <rdfs:comment xml:lang="en">Categories of information that can be associated with data in the ontology</rdfs:comment>
     <rdfs:subClassOf>
-      <owl:Class rdf:about="#DATA"/>
+      <owl:Class rdf:about="#THING"/>
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="USAGE">
     <rdfs:comment xml:lang="en">Information about a resource that was used by an activity</rdfs:comment>
     <rdfs:subClassOf>
-      <owl:Class rdf:about="#DATA"/>
+      <owl:Class rdf:about="#THING"/>
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="COLLECTION">
@@ -60,27 +60,27 @@
     </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">Extensible key-value pair information attached to a data element</rdfs:comment>
     <rdfs:subClassOf>
-      <owl:Class rdf:about="#DATA"/>
+      <owl:Class rdf:about="#THING"/>
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="AGENT">
     <rdfs:comment xml:lang="en">An agent is something that bears some form of responsibility for an activity taking place, for the existence of an entity, or for another agent's activity.</rdfs:comment>
     <rdfs:subClassOf>
-      <owl:Class rdf:about="#DATA"/>
+      <owl:Class rdf:about="#THING"/>
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="#ENTITY">
     <rdfs:comment xml:lang="en">An entity is a physical, digital, conceptual, or other kind of thing with some fixed aspects; entities may be real or imaginary.</rdfs:comment>
     <rdfs:subClassOf>
-      <owl:Class rdf:about="#DATA"/>
+      <owl:Class rdf:about="#THING"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:about="#DATA">
+  <owl:Class rdf:about="#THING">
     <rdfs:comment xml:lang="en">A piece of data stored in RACK</rdfs:comment>
   </owl:Class>
   <owl:Class rdf:ID="ACTIVITY">
     <rdfs:comment xml:lang="en">An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="#DATA"/>
+    <rdfs:subClassOf rdf:resource="#THING"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="hadRole">
     <rdfs:domain rdf:resource="#USAGE"/>
@@ -103,7 +103,7 @@
   <owl:ObjectProperty rdf:ID="hasAttribute">
     <rdfs:comment xml:lang="en"></rdfs:comment>
     <rdfs:range rdf:resource="#ATTRIBUTE"/>
-    <rdfs:domain rdf:resource="#DATA"/>
+    <rdfs:domain rdf:resource="#THING"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hadMember">
     <rdfs:comment xml:lang="en">A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.</rdfs:comment>
@@ -122,7 +122,7 @@
   <owl:ObjectProperty rdf:ID="dataInsertedBy">
     <rdfs:comment xml:lang="en">The activity that caused this data to be added to RACK</rdfs:comment>
     <rdfs:range rdf:resource="#ACTIVITY"/>
-    <rdfs:domain rdf:resource="#DATA"/>
+    <rdfs:domain rdf:resource="#THING"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="wasDerivedFrom">
     <rdfs:comment xml:lang="en">A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity.</rdfs:comment>

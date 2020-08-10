@@ -16,7 +16,7 @@ FILE
 
 FORMAT
     (note "The data format of a FILE")
-    is a type of DATA.
+    is a type of THING.
 
 CODE_GENERATOR
 	(note "A tool that generates CODE_FILEs as part of a CODE_GEN ACTIVITY")
@@ -70,7 +70,7 @@ PACKAGE
 
 COMPONENT_TYPE
     (note "An open/extensible set of types of software components")
-    is a type of DATA.
+    is a type of THING.
 
 // A few common instances:
 SOURCE_FUNCTION

@@ -2,7 +2,7 @@ uri "http://arcos.rack/PROV-S" alias provs
 (note "a basic Implementation of PROV Data Model standard in SADL based on table https://www.w3.org/TR/prov-dm/#relations-at-a-glance").
 
 THING (note "A piece of data stored in RACK") is a class.
-	uniqueIdentifier (note "uniqueIdentifier is any data item that is used to associate items on when loading into the data store, and must be unique across the entire data set.") with a single value of type string.
+	uniqueIdentifier (note "uniqueIdentifier is any data item that is used to associate items on when loading into the data store, and must be unique across the entire data set.") describes THING with values of type string.
 	dataInsertedBy (note "The activity that caused this data to be added to RACK") describes THING with values of type ACTIVITY.
     hasAttribute (note "") describes THING with values of type ATTRIBUTE.
 

@@ -295,7 +295,7 @@ def confirm(on_confirmed: Callable[[], None], yes: bool = False) -> None:
 
 def delete_nodegroup(nodegroup: str) -> None:
     @with_status(f'Deleting {str_highlight(nodegroup)}')
-    def delete():
+    def delete() -> None:
         semtk3.delete_nodegroup_from_store(nodegroup)
     delete()
 
@@ -318,7 +318,7 @@ def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, ye
     if not yes:
         print('The following nodegroups would be removed: {}'.format(' '.join(str_highlight(s) for s in to_delete)))
 
-    def on_confirmed():
+    def on_confirmed() -> None:
         for nodegroup in to_delete:
             delete_nodegroup(nodegroup)
     confirm(on_confirmed, yes)
@@ -330,7 +330,7 @@ def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
     if not yes:
         print('The following nodegroups would be removed: {}'.format(' '.join(str_highlight(s) for s in allIDs)))
 
-    def on_confirmed():
+    def on_confirmed() -> None:
         for nodegroup in allIDs:
             delete_nodegroup(nodegroup)
     confirm(on_confirmed, yes)
@@ -343,23 +343,23 @@ def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
     ingest_data_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store)
 
-def dispatch_plumbing_model(args: SimpleNamespace) -> None:
+def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
     ingest_owl_driver(Path(args.config), args.base_url, args.triple_store)
 
-def dispatch_plumbing_storenodegroups(args: SimpleNamespace) -> None:
+def dispatch_nodegroups_import(args: SimpleNamespace) -> None:
     store_nodegroups_driver(args.directory, args.base_url)
 
-def dispatch_plumbing_retrievenodegroups(args: SimpleNamespace) -> None:
+def dispatch_nodegroups_export(args: SimpleNamespace) -> None:
     retrieve_nodegroups_driver(args.regexp, args.directory, args.base_url)
 
-def dispatch_plumbing_listnodegroups(args: SimpleNamespace) -> None:
+def dispatch_nodegroups_list(args: SimpleNamespace) -> None:
     list_nodegroups_driver(args.base_url)
 
-def dispatch_plumbing_deletenodegroups(args: SimpleNamespace) -> None:
+def dispatch_nodegroups_delete(args: SimpleNamespace) -> None:
     delete_nodegroups_driver(args.nodegroups, args.ignore_nonexistent, args.yes, args.base_url)
 
-def dispatch_plumbing_deleteallnodegroups(args: SimpleNamespace) -> None:
+def dispatch_nodegroups_deleteall(args: SimpleNamespace) -> None:
     delete_all_nodegroups_driver(args.yes, args.base_url)
 
 def get_argument_parser() -> argparse.ArgumentParser:
@@ -376,14 +376,17 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_import_parser = data_subparsers.add_parser('import', help='Import CSV data')
     data_export_parser = data_subparsers.add_parser('export', help='Export query results')
 
-    plumbing_parser = subparsers.add_parser('plumbing', help='Tools for RACK developers')
-    plumbing_subparsers = plumbing_parser.add_subparsers(dest='command')
-    plumbing_model_parser = plumbing_subparsers.add_parser('model', help='Modify the data model')
-    plumbing_storenodegroups_parser = plumbing_subparsers.add_parser('store-nodegroups', help='Store nodegroups into RACK')
-    plumbing_retrievenodegroups_parser = plumbing_subparsers.add_parser('retrieve-nodegroups', help='Retrieve nodegroups from RACK')
-    plumbing_listnodegroups_parser = plumbing_subparsers.add_parser('list-nodegroups', help='List nodegroups from RACK')
-    plumbing_deletenodegroups_parser = plumbing_subparsers.add_parser('delete-nodegroups', help='Delete some nodegroups from RACK')
-    plumbing_deleteallnodegroups_parser = plumbing_subparsers.add_parser('delete-all-nodegroups', help='Delete all nodegroups from RACK')
+    model_parser = subparsers.add_parser('model', help='Interact with SemTK model')
+    model_subparsers = model_parser.add_subparsers(dest='command')
+    model_import_parser = model_subparsers.add_parser('import', help='Modify the data model')
+
+    nodegroups_parser = subparsers.add_parser('nodegroups', help='Interact with SemTK nodegroups')
+    nodegroups_subparsers = nodegroups_parser.add_subparsers(dest='command')
+    nodegroups_import_parser = nodegroups_subparsers.add_parser('import', help='Store nodegroups into RACK')
+    nodegroups_export_parser = nodegroups_subparsers.add_parser('export', help='Retrieve nodegroups from RACK')
+    nodegroups_list_parser = nodegroups_subparsers.add_parser('list', help='List nodegroups from RACK')
+    nodegroups_delete_parser = nodegroups_subparsers.add_parser('delete', help='Delete some nodegroups from RACK')
+    nodegroups_deleteall_parser = nodegroups_subparsers.add_parser('delete-all', help='Delete all nodegroups from RACK')
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     data_import_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
@@ -396,24 +399,24 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_export_parser.add_argument('--file', type=Path, help='Output to file')
     data_export_parser.set_defaults(func=dispatch_data_export)
 
-    plumbing_model_parser.add_argument('config', type=str, help='Configuration YAML file')
-    plumbing_model_parser.set_defaults(func=dispatch_plumbing_model)
+    model_import_parser.add_argument('config', type=str, help='Configuration YAML file')
+    model_import_parser.set_defaults(func=dispatch_model_import)
 
-    plumbing_storenodegroups_parser.add_argument('directory', type=str, help='Nodegroup directory')
-    plumbing_storenodegroups_parser.set_defaults(func=dispatch_plumbing_storenodegroups)
+    nodegroups_import_parser.add_argument('directory', type=str, help='Nodegroup directory')
+    nodegroups_import_parser.set_defaults(func=dispatch_nodegroups_import)
 
-    plumbing_retrievenodegroups_parser.add_argument('regexp', type=str, help='Nodegroup selection regular expression')
-    plumbing_retrievenodegroups_parser.add_argument('directory', type=str, help='Nodegroup directory')
-    plumbing_retrievenodegroups_parser.set_defaults(func=dispatch_plumbing_retrievenodegroups)
+    nodegroups_export_parser.add_argument('regexp', type=str, help='Nodegroup selection regular expression')
+    nodegroups_export_parser.add_argument('directory', type=str, help='Nodegroup directory')
+    nodegroups_export_parser.set_defaults(func=dispatch_nodegroups_export)
 
-    plumbing_listnodegroups_parser.set_defaults(func=dispatch_plumbing_listnodegroups)
+    nodegroups_list_parser.set_defaults(func=dispatch_nodegroups_list)
 
-    plumbing_deletenodegroups_parser.add_argument('nodegroups', type=str, nargs='+', help='IDs of nodegroups to be removed')
-    plumbing_deletenodegroups_parser.add_argument('--ignore-nonexistent', action='store_true', help='Ignore nonexistent IDs')
-    plumbing_deletenodegroups_parser.add_argument('--yes', action='store_true', help='Automatically confirm deletion')
-    plumbing_deletenodegroups_parser.set_defaults(func=dispatch_plumbing_deletenodegroups)
+    nodegroups_delete_parser.add_argument('nodegroups', type=str, nargs='+', help='IDs of nodegroups to be removed')
+    nodegroups_delete_parser.add_argument('--ignore-nonexistent', action='store_true', help='Ignore nonexistent IDs')
+    nodegroups_delete_parser.add_argument('--yes', action='store_true', help='Automatically confirm deletion')
+    nodegroups_delete_parser.set_defaults(func=dispatch_nodegroups_delete)
 
-    plumbing_deleteallnodegroups_parser.add_argument('--yes', action='store_true', help='Automatically confirm deletion')
-    plumbing_deleteallnodegroups_parser.set_defaults(func=dispatch_plumbing_deleteallnodegroups)
+    nodegroups_deleteall_parser.add_argument('--yes', action='store_true', help='Automatically confirm deletion')
+    nodegroups_deleteall_parser.set_defaults(func=dispatch_nodegroups_deleteall)
 
     return parser

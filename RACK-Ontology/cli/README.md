@@ -145,7 +145,7 @@ The script can automate loading a directory full of nodegroups
 indexed by a `store_data.csv` file.
 
 ```shell
-(venv) $ rack plumbing store-nodegroups ../../nodegroups/ingestion
+(venv) $ rack nodegroups import ../../nodegroups/ingestion
 Storing nodegroups...                                       OK
 ```
 
@@ -155,7 +155,7 @@ loads.
 
 ```shell
 (venv) $ mkdir outdir
-(venv) $ rack.py $CONFIG plumbing retrieve-nodegroups ^ingest outdir
+(venv) $ rack nodegroups export ^ingest outdir
 Retrieving nodegroups...                                    OK
 ```
 

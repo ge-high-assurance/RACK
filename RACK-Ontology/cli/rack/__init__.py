@@ -218,7 +218,7 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
     go()
 
-def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> None:
+def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
@@ -234,7 +234,9 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Ur
 
     conn = sparql_connection(base_url, data_graph, triple_store)
 
-    clear_graph(conn)
+    if clear:
+        clear_graph(conn)
+
     for step in steps:
         if 'owl' in step:
             owl_file = step['owl']
@@ -341,7 +343,7 @@ def dispatch_data_export(args: SimpleNamespace) -> None:
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
-    ingest_data_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store)
+    ingest_data_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store, args.clear)
 
 def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
@@ -390,6 +392,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     data_import_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
+    data_import_parser.add_argument('--clear', action='store_true', help='Clear data graph before import')
     data_import_parser.set_defaults(func=dispatch_data_import)
 
     data_export_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')

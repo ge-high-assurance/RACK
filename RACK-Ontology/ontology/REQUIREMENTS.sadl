@@ -6,6 +6,15 @@ REQUIREMENT
 	is a type of ENTITY.
 
 	text (note "Description of the REQUIREMENT") describes REQUIREMENT with values of type string.
+	// The "text" string can optionally be subdivided into sub-parts : givenText, ifText, thenText
+	// This corresponds to how rules are defined in SADL and note that in a SADL rule whatever is in
+	// givenText can simply be included in the ifText part.
+	// Note that modulo naming changes this structure also matches the structure
+	// that GrammaTech had which was : Given, When, Then parts.
+	// The structure of requirements in ASSERT subsume this structure of requirements. 
+	givenText (note "optional part that can be used to set certain conditions apart from other conditions in the ifText part") describes REQUIREMENT with values of type string.
+	ifText (note "conditions under which this requirement holds") describes REQUIREMENT with values of type string.
+	thenText (note "specifies what should hold by this requirement if the requirement conditions are met") describes REQUIREMENT with values of type string.
 
 	governs (note "ENTITY(s) that are the subject of the requirement") describes REQUIREMENT with values of type ENTITY.
 	governs is a type of wasDerivedFrom.

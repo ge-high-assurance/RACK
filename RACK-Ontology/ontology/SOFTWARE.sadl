@@ -30,9 +30,6 @@ CODE_DEVELOPMENT
 
     governedBy (note "ENTITY(s) (e.g. REQUIREMENT) that gave rise to this ACTIVITY") describes CODE_DEVELOPMENT with values of type ENTITY.
     governedBy is a type of used.
-    
-    abc describes CODE_DEVELOPMENT with values of type double.
-
 
 BUILD
 	(note "Describes a set of ACTIVITYs (e.g. CODE_GEN, COMPILE, ...) that together form some logical building unit")

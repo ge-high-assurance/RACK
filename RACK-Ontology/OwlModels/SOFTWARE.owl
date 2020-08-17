@@ -191,10 +191,6 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#COMPONENT"/>
   </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:ID="abc">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
-    <rdfs:domain rdf:resource="#CODE_DEVELOPMENT"/>
-  </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="filename">
     <rdfs:comment xml:lang="en">A logical file path relative to the container of the file.</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>

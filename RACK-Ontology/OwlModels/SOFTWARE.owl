@@ -63,6 +63,7 @@
   </owl:Class>
   <owl:ObjectProperty rdf:ID="packageInput">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">Source files used when generating the package output</rdfs:comment>
     <rdfs:range rdf:resource="#FILE"/>
     <rdfs:domain rdf:resource="#PACKAGE"/>
   </owl:ObjectProperty>
@@ -120,6 +121,7 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="compiledBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">The tool that performed the compilation</rdfs:comment>
     <rdfs:range rdf:resource="#FILE"/>
     <rdfs:domain rdf:resource="#COMPILE"/>
   </owl:ObjectProperty>
@@ -147,11 +149,13 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="packagedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">The tool used to generate the package output</rdfs:comment>
     <rdfs:range rdf:resource="#FILE"/>
     <rdfs:domain rdf:resource="#PACKAGE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="compileInput">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">Source files that contributed to the compilation</rdfs:comment>
     <rdfs:range rdf:resource="#FILE"/>
     <rdfs:domain rdf:resource="#COMPILE"/>
   </owl:ObjectProperty>

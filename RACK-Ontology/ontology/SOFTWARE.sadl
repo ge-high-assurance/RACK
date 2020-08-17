@@ -49,10 +49,10 @@ COMPILE
     performedBy (note "AGENT(s) (e.g. COMPILER) performing the compilation") describes COMPILE with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
     
-    compiledBy describes COMPILE with values of type FILE.
+    compiledBy (note "The tool that performed the compilation") describes COMPILE with values of type FILE.
     compiledBy is a type of used.
     
-    compileInput describes COMPILE with values of type FILE.
+    compileInput (note "Source files that contributed to the compilation") describes COMPILE with values of type FILE.
     compileInput is a type of used.
 
 PACKAGE
@@ -61,10 +61,10 @@ PACKAGE
     performedBy (note "AGENT(s) (e.g. PACKAGER) performing the packaging") describes PACKAGE with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
 
-	packagedBy describes PACKAGE with values of type FILE.
+	packagedBy (note "The tool used to generate the package output") describes PACKAGE with values of type FILE.
 	packagedBy is a type of used.
 
-	packageInput describes PACKAGE with values of type FILE.
+	packageInput (note "Source files used when generating the package output") describes PACKAGE with values of type FILE.
 	packageInput is a type of used.
 
 COMPONENT_TYPE

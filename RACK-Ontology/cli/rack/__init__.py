@@ -10,6 +10,7 @@ from enum import Enum, unique
 from io import StringIO
 import json
 import logging
+from os import environ
 from pathlib import Path
 import sys
 from typing import Any, Callable, Dict, List, Optional, NewType, TypeVar, cast
@@ -367,8 +368,8 @@ def dispatch_nodegroups_deleteall(args: SimpleNamespace) -> None:
 def get_argument_parser() -> argparse.ArgumentParser:
 
     parser = argparse.ArgumentParser(description='RACK in a Box toolkit')
-    parser.add_argument('--base-url', type=str, default=DEFAULT_BASE_URL, help='Base SemTK instance URL')
-    parser.add_argument('--triple-store', type=str, help='Override Fuseki URL')
+    parser.add_argument('--base-url', type=str, default=environ.get('BASE_URL') or DEFAULT_BASE_URL, help='Base SemTK instance URL')
+    parser.add_argument('--triple-store', type=str, default=environ.get('TRIPLE_STORE'), help='Override Fuseki URL')
     parser.add_argument('--log-level', type=str, default='WARNING', help='Assign logger severity level')
 
     subparsers = parser.add_subparsers(dest='command')

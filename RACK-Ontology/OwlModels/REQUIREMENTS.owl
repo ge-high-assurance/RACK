@@ -103,4 +103,19 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:comment xml:lang="en">Description of the REQUIREMENT</rdfs:comment>
   </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="thenText">
+    <rdfs:comment xml:lang="en">specifies what should hold by this requirement if the requirement conditions are met</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#REQUIREMENT"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="ifText">
+    <rdfs:comment xml:lang="en">conditions under which this requirement holds</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#REQUIREMENT"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="givenText">
+    <rdfs:comment xml:lang="en">optional part that can be used to set certain conditions apart from other conditions in the ifText part</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#REQUIREMENT"/>
+  </owl:DatatypeProperty>
 </rdf:RDF>

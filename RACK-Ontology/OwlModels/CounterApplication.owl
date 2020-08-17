@@ -60,6 +60,8 @@
       <j.1:PACKAGE rdf:ID="tarPackaging">
         <j.2:used>
           <j.2:USAGE>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >tarPackagingCounterExe</j.2:uniqueIdentifier>
             <j.2:entity>
               <j.1:FILE rdf:ID="counter_exe">
                 <j.1:fileFormat>
@@ -74,6 +76,8 @@
                   <j.1:COMPILE rdf:ID="counter_exe_Compiling">
                     <j.2:used>
                       <j.2:USAGE>
+                        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >counter_exe_CompilingCounterH</j.2:uniqueIdentifier>
                         <j.2:entity>
                           <j.1:FILE rdf:ID="counter_h">
                             <j.1:fileFormat>
@@ -95,6 +99,8 @@
                     </j.2:used>
                     <j.2:used>
                       <j.2:USAGE>
+                        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >counter_exe_CompilingCounterC</j.2:uniqueIdentifier>
                         <j.2:entity>
                           <j.1:FILE rdf:ID="counter_c">
                             <j.1:fileFormat rdf:resource="#CSourceFile"/>
@@ -108,6 +114,8 @@
                     </j.2:used>
                     <j.2:used>
                       <j.2:USAGE>
+                        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >counter_exe_CompilingLibHwSo</j.2:uniqueIdentifier>
                         <j.2:entity>
                           <j.1:FILE rdf:ID="libhw_so">
                             <j.1:fileFormat rdf:resource="#ElfFile"/>
@@ -115,6 +123,9 @@
                               <j.1:COMPILE rdf:ID="libhw_so_Compiling">
                                 <j.2:used>
                                   <j.2:USAGE>
+                                    <j.2:uniqueIdentifier rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >libhw_so_CompilingHwO</j.2:uniqueIdentifier>
                                     <j.2:entity>
                                       <j.1:FILE rdf:ID="hw_o">
                                         <j.1:fileFormat rdf:resource="#ElfFile"/>
@@ -122,6 +133,10 @@
                                           <j.1:COMPILE rdf:ID="hw_o_Compiling">
                                             <j.2:used>
                                               <j.2:USAGE>
+                                                <j.2:uniqueIdentifier
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >hw_o_CompilingHwH</j.2:uniqueIdentifier>
                                                 <j.2:entity>
                                                   <j.1:FILE rdf:ID="hw_h">
                                                     <j.1:fileFormat rdf:resource="#CSourceFile"/>
@@ -136,6 +151,10 @@
                                             </j.2:used>
                                             <j.2:used>
                                               <j.2:USAGE>
+                                                <j.2:uniqueIdentifier
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >hw_o_CompilingHwC</j.2:uniqueIdentifier>
                                                 <j.2:entity>
                                                   <j.1:FILE rdf:ID="hw_c">
                                                     <j.1:fileFormat rdf:resource="#CSourceFile"/>
@@ -150,6 +169,10 @@
                                             </j.2:used>
                                             <j.2:used>
                                               <j.2:USAGE>
+                                                <j.2:uniqueIdentifier
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >hw_o_CompilingCc</j.2:uniqueIdentifier>
                                                 <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#COMPILER"/>
                                                 <j.2:entity>
                                                   <j.1:FILE rdf:ID="cc">
@@ -179,6 +202,9 @@
                                 </j.2:used>
                                 <j.2:used>
                                   <j.2:USAGE>
+                                    <j.2:uniqueIdentifier rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >libhw_so_CompilingCc</j.2:uniqueIdentifier>
                                     <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#COMPILER"/>
                                     <j.2:entity rdf:resource="#cc"/>
                                   </j.2:USAGE>
@@ -199,6 +225,8 @@
                     </j.2:used>
                     <j.2:used>
                       <j.2:USAGE>
+                        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >counter_exe_CompilingOutputO</j.2:uniqueIdentifier>
                         <j.2:entity>
                           <j.1:FILE rdf:ID="output_o">
                             <j.1:fileFormat rdf:resource="#ElfFile"/>
@@ -206,6 +234,9 @@
                               <j.1:COMPILE rdf:ID="output_o_Compiling">
                                 <j.2:used>
                                   <j.2:USAGE>
+                                    <j.2:uniqueIdentifier rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >output_o_CompilingCc</j.2:uniqueIdentifier>
                                     <j.2:hasAttribute>
                                       <j.2:ATTRIBUTE>
                                         <j.2:fieldValue rdf:datatype=
@@ -232,6 +263,9 @@
                                 </j.2:used>
                                 <j.2:used>
                                   <j.2:USAGE>
+                                    <j.2:uniqueIdentifier rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >output_o_CompilingOutputH</j.2:uniqueIdentifier>
                                     <j.2:entity>
                                       <j.1:FILE rdf:ID="output_h">
                                         <j.1:fileFormat rdf:resource="#CSourceFile"/>
@@ -245,6 +279,9 @@
                                 </j.2:used>
                                 <j.2:used>
                                   <j.2:USAGE>
+                                    <j.2:uniqueIdentifier rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >output_o_CompilingOutputC</j.2:uniqueIdentifier>
                                     <j.2:entity>
                                       <j.1:FILE rdf:ID="output_c">
                                         <j.1:fileFormat rdf:resource="#CSourceFile"/>
@@ -272,6 +309,8 @@
                     </j.2:used>
                     <j.2:used>
                       <j.2:USAGE>
+                        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >counter_exe_CompilingInputO</j.2:uniqueIdentifier>
                         <j.2:entity>
                           <j.1:FILE rdf:ID="input_o">
                             <j.1:fileFormat rdf:resource="#ElfFile"/>
@@ -279,6 +318,9 @@
                               <j.1:COMPILE rdf:ID="input_o_Compiling">
                                 <j.2:used>
                                   <j.2:USAGE>
+                                    <j.2:uniqueIdentifier rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >input_o_CompilingInputH</j.2:uniqueIdentifier>
                                     <j.2:entity>
                                       <j.1:FILE rdf:ID="input_h">
                                         <j.1:fileFormat rdf:resource="#CSourceFile"/>
@@ -292,6 +334,9 @@
                                 </j.2:used>
                                 <j.2:used>
                                   <j.2:USAGE>
+                                    <j.2:uniqueIdentifier rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >input_o_CompilingInputC</j.2:uniqueIdentifier>
                                     <j.2:entity>
                                       <j.1:FILE rdf:ID="input_c">
                                         <j.1:fileFormat rdf:resource="#CSourceFile"/>
@@ -305,6 +350,9 @@
                                 </j.2:used>
                                 <j.2:used>
                                   <j.2:USAGE>
+                                    <j.2:uniqueIdentifier rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >input_o_CompilingCc</j.2:uniqueIdentifier>
                                     <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#COMPILER"/>
                                     <j.2:entity rdf:resource="#cc"/>
                                   </j.2:USAGE>
@@ -325,6 +373,8 @@
                     </j.2:used>
                     <j.2:used>
                       <j.2:USAGE>
+                        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >counter_exe_CompilingCc</j.2:uniqueIdentifier>
                         <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#COMPILER"/>
                         <j.2:entity rdf:resource="#cc"/>
                       </j.2:USAGE>
@@ -343,11 +393,15 @@
         </j.2:used>
         <j.2:used>
           <j.2:USAGE>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >tarPackagingLibHwSo</j.2:uniqueIdentifier>
             <j.2:entity rdf:resource="#libhw_so"/>
           </j.2:USAGE>
         </j.2:used>
         <j.2:used>
           <j.2:USAGE>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >tarPackagingConfJson</j.2:uniqueIdentifier>
             <j.2:entity>
               <j.1:FILE rdf:ID="conf_json">
                 <j.1:fileFormat>
@@ -367,6 +421,8 @@
         </j.2:used>
         <j.2:used>
           <j.2:USAGE>
+            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >tarPackagingTar</j.2:uniqueIdentifier>
             <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#PACKAGER"/>
             <j.2:entity>
               <j.1:FILE rdf:ID="tar">
@@ -390,6 +446,8 @@
   <j.1:COMPILE rdf:ID="test_exe_Compiling">
     <j.2:used>
       <j.2:USAGE>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >test_exe_CompilingTestH</j.2:uniqueIdentifier>
         <j.2:entity>
           <j.1:FILE rdf:ID="test_h">
             <j.1:fileFormat rdf:resource="#CSourceFile"/>
@@ -402,6 +460,8 @@
     </j.2:used>
     <j.2:used>
       <j.2:USAGE>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >test_exe_CompilingTestC</j.2:uniqueIdentifier>
         <j.2:entity>
           <j.1:FILE rdf:ID="test_c">
             <j.1:fileFormat rdf:resource="#CSourceFile"/>
@@ -414,6 +474,8 @@
     </j.2:used>
     <j.2:used>
       <j.2:USAGE>
+        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >test_exe_CompilingCc</j.2:uniqueIdentifier>
         <j.2:hadRole rdf:resource="http://arcos.rack/SOFTWARE#COMPILER"/>
         <j.2:entity rdf:resource="#cc"/>
       </j.2:USAGE>

@@ -157,7 +157,7 @@ Write: data
   Ask: "select distinct ?uniqueIdentifier ?createById ?formatId where
         {  ?FILE <rdf:type> <FILE>
          . ?FILE <uniqueIdentifier> ?uniqueIdentifier
-         . OPTIONAL{  ?OBJECT_FILE <createBy> ?createBy
+         . OPTIONAL{  ?FILE <createBy> ?createBy
                     . ?createBy <rdf:type> <ACTIVITY>
                     . ?createBy <uniqueIdentifier> ?createById
                    }

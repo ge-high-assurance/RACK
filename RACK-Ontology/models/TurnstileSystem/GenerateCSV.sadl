@@ -120,16 +120,20 @@ Write: data
 // list all COMPILE
 Write: data
 {
-  Ask: "select distinct ?uniqueIdentifier ?performedById ?usedId where
+  Ask: "select distinct ?uniqueIdentifier ?performedById ?compiledById ?compileInputId where
         {  ?COMPILE <rdf:type> <COMPILE>
          . ?COMPILE <uniqueIdentifier> ?uniqueIdentifier
          . OPTIONAL{  ?COMPILE <performedBy> ?performedBy
                     . ?performedBy <rdf:type> <AGENT>
                     . ?performedBy <uniqueIdentifier> ?performedById
                    }
-         . OPTIONAL{  ?COMPILE <used> ?used
-                    . ?used <rdf:type> <ENTITY>
-                    . ?used <uniqueIdentifier> ?usedId
+         . OPTIONAL{  ?COMPILE <compiledBy> ?compiledBy
+                    . ?compiledBy <rdf:type> <ENTITY>
+                    . ?compiledBy <uniqueIdentifier> ?compiledById
+                   }
+         . OPTIONAL{  ?COMPILE <compileInput> ?compileInput
+                    . ?compileInput <rdf:type> <ENTITY>
+                    . ?compileInput <uniqueIdentifier> ?compileInputId
                    }
         } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/COMPILE.csv".
@@ -137,16 +141,20 @@ Write: data
 // list all PACKAGE
 Write: data
 {
-  Ask: "select distinct ?uniqueIdentifier ?performedById ?usedId where
+  Ask: "select distinct ?uniqueIdentifier ?performedById ?packagedById ?packageInputId where
         {  ?PACKAGE <rdf:type> <PACKAGE>
-         . ?PACKAGE <uniqueIdentifier> ?uniqueIdentifier
-         . OPTIONAL{  ?PACKAGE <performedBy> ?performedBy
-         . ?performedBy <rdf:type> <AGENT>
-         . ?performedBy <uniqueIdentifier> ?performedById
-        }
-        . OPTIONAL{  ?PACKAGE <used> ?used
-                   . ?used <rdf:type> <ENTITY>
-                   . ?used <uniqueIdentifier> ?usedId
+        . ?PACKAGE <uniqueIdentifier> ?uniqueIdentifier
+        . OPTIONAL{ ?PACKAGE <performedBy> ?performedBy
+                  . ?performedBy <rdf:type> <AGENT>
+                  . ?performedBy <uniqueIdentifier> ?performedById
+                  }
+        . OPTIONAL{ ?PACKAGE <packagedBy> ?packagedBy
+                  . ?packagedBy <rdf:type> <ENTITY>
+                  . ?packagedBy <uniqueIdentifier> ?packagedById
+                  }
+        . OPTIONAL{ ?PACKAGE <packageInput> ?packageInput
+                  . ?packageInput <rdf:type> <ENTITY>
+                  . ?packageInput <uniqueIdentifier> ?packageInputId
                   }
         } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/PACKAGE.csv".

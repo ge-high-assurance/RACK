@@ -95,9 +95,9 @@ input_function is a COMPONENT
 input_o_Compiling is a COMPILE
     has uniqueIdentifier "input_o_Compiling",
     has dataInsertedBy Mockup,
-    has used (a USAGE entity cc hadRole COMPILER),
-    has used (a USAGE entity input_c),
-    has used (a USAGE entity input_h).
+    has compiledBy cc,
+    has compileInput input_c,
+    has compileInput input_h.
 
 input_o is a FILE
     has uniqueIdentifier "input_o",
@@ -130,13 +130,11 @@ LinkerPath is a FIELD.
 output_o_Compiling is a COMPILE
     has uniqueIdentifier "output_o_Compiling",
     has dataInsertedBy Mockup,
-    used (a USAGE entity output_c),
-    used (a USAGE entity output_h),
-    used (a USAGE
-           entity cc
-           hadRole COMPILER
-           hasAttribute (a ATTRIBUTE field CompileWithOptimizations fieldValue "yes"),
-           hasAttribute (a ATTRIBUTE field LinkerPath fieldValue "/path/to/libraries")).
+    has compileInput output_c,
+    has compileInput output_h,
+    has compiledBy cc,
+    has hasAttribute (a ATTRIBUTE field CompileWithOptimizations fieldValue "yes"),
+    has hasAttribute (a ATTRIBUTE field LinkerPath fieldValue "/path/to/libraries").
 
 output_o is a FILE
     has uniqueIdentifier "output_o",
@@ -158,9 +156,9 @@ hw_h is a FILE
 hw_o_Compiling is a COMPILE
     has uniqueIdentifier "hw_o_Compiling",
     has dataInsertedBy Mockup,
-    used (a USAGE entity cc hadRole COMPILER),
-    used (a USAGE entity hw_c),
-    used (a USAGE entity hw_h).
+    has compiledBy cc,
+    has compileInput hw_c,
+    has compileInput hw_h.
 
 hw_o is a FILE
     has uniqueIdentifier "hw_o",
@@ -171,8 +169,8 @@ hw_o is a FILE
 libhw_so_Compiling is a COMPILE
     has uniqueIdentifier "libhw_so_Compiling",
     has dataInsertedBy Mockup,
-    used (a USAGE entity cc hadRole COMPILER),
-    used (a USAGE entity hw_o).
+    has compiledBy cc,
+    has compileInput hw_o.
 
 libhw_so is a FILE
     has uniqueIdentifier "libhw_so",
@@ -205,12 +203,12 @@ main_function is a COMPONENT
 counter_exe_Compiling is a COMPILE
     has uniqueIdentifier "counter_exe_Compiling",
     has dataInsertedBy Mockup
-    used (a USAGE entity cc hadRole COMPILER),
-    used (a USAGE entity input_o),
-    used (a USAGE entity output_o),
-    used (a USAGE entity libhw_so),
-    used (a USAGE entity counter_c),
-    used (a USAGE entity counter_h).
+    has compiledBy cc,
+    has compileInput input_o,
+    has compileInput output_o,
+    has compileInput libhw_so,
+    has compileInput counter_c,
+    has compileInput counter_h.
 
 counter_exe is an FILE
     has uniqueIdentifier "counter_exe",
@@ -236,10 +234,10 @@ dist_tar is a FILE
 tarPackaging is a PACKAGE
     has uniqueIdentifier "tarPackaging",
     has dataInsertedBy Mockup,
-    used (a USAGE entity tar hadRole PACKAGER),
-    used (a USAGE entity conf_json),
-    used (a USAGE entity libhw_so),
-    used (a USAGE entity counter_exe).
+    has packagedBy tar,
+    has packageInput conf_json,
+    has packageInput libhw_so,
+    has packageInput counter_exe.
 
 // test.o
 
@@ -255,6 +253,6 @@ test_h is a FILE
 test_exe_Compiling is a COMPILE
     has uniqueIdentifier "test_exe_Compiling",
     has dataInsertedBy Mockup,
-    used (a USAGE entity cc hadRole COMPILER),
-    used (a USAGE entity test_c),
-    used (a USAGE entity test_h).
+    has compiledBy cc,
+    has compileInput test_c,
+    has compileInput test_h.

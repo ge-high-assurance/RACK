@@ -61,6 +61,12 @@
     <rdfs:comment xml:lang="en">An ACTIVITY that produces CODE_FILEs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
+  <owl:ObjectProperty rdf:ID="packageInput">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">Source files used when generating the package output</rdfs:comment>
+    <rdfs:range rdf:resource="#FILE"/>
+    <rdfs:domain rdf:resource="#PACKAGE"/>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="governedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
     <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT) that gave rise to this ACTIVITY</rdfs:comment>
@@ -113,6 +119,12 @@
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#COMPONENT"/>
   </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="compiledBy">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">The tool that performed the compilation</rdfs:comment>
+    <rdfs:range rdf:resource="#FILE"/>
+    <rdfs:domain rdf:resource="#COMPILE"/>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="step">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasInformedBy"/>
     <rdfs:comment xml:lang="en">A BUILD may be comprised of any number of sub-ACTIVITY(s)</rdfs:comment>
@@ -134,6 +146,18 @@
     <rdfs:comment xml:lang="en">A component referenced by this one, e.g., a callee or variable being used.</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#COMPONENT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="packagedBy">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">The tool used to generate the package output</rdfs:comment>
+    <rdfs:range rdf:resource="#FILE"/>
+    <rdfs:domain rdf:resource="#PACKAGE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="compileInput">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">Source files that contributed to the compilation</rdfs:comment>
+    <rdfs:range rdf:resource="#FILE"/>
+    <rdfs:domain rdf:resource="#COMPILE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="performedBy">
     <rdfs:comment xml:lang="en">AGENT(s) (e.g. PACKAGER) performing the packaging</rdfs:comment>
@@ -201,9 +225,6 @@
     >BINARY_BASIC_BLOCK</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A basic block at the binary level.</rdfs:comment>
   </sw:COMPONENT_TYPE>
-  <j.0:ROLE rdf:ID="CODE_GENERATOR">
-    <rdfs:comment xml:lang="en">A tool that generates CODE_FILEs as part of a CODE_GEN ACTIVITY</rdfs:comment>
-  </j.0:ROLE>
   <sw:COMPONENT_TYPE rdf:ID="BINARY_GLOBAL_VARIABLE">
     <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >BINARY_GLOBAL_VARIABLE</j.0:uniqueIdentifier>
@@ -234,10 +255,4 @@
     >CLASS_MEMBER_VARIABLE</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A variable attached to the instances of a class in an object-oriented language.</rdfs:comment>
   </sw:COMPONENT_TYPE>
-  <j.0:ROLE rdf:ID="PACKAGER">
-    <rdfs:comment xml:lang="en">A tool that packages some software together as part of a PACKAGE ACTIVITY</rdfs:comment>
-  </j.0:ROLE>
-  <j.0:ROLE rdf:ID="COMPILER">
-    <rdfs:comment xml:lang="en">A tool that compiles CODE_FILEs into ENTITYs such as OBJECT_FILE or EXECUTABLE</rdfs:comment>
-  </j.0:ROLE>
 </rdf:RDF>

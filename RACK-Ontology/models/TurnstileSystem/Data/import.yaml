@@ -11,15 +11,8 @@ ingestion-steps:
 - {nodegroup: "ingest05 data dict",    csv: "DATA_DICTIONARY_TERM.csv"}
 - {nodegroup: "ingest06 test",         csv: "TEST.csv"                }
 - {nodegroup: "ingest07 test results", csv: "TEST_RESULTS.csv"        }
-- {nodegroup: "ingest08 language",     csv: "LANGUAGE.csv"            }
-- {nodegroup: "ingest09 compiler",     csv: "COMPILER.csv"            }
-- {nodegroup: "ingest10 packager",     csv: "PACKAGER.csv"            }
-- {nodegroup: "ingest11 agent",        csv: "AGENT.csv"               }
-- {nodegroup: "ingest12 code file",    csv: "CODE_FILE.csv"           }
-- {nodegroup: "ingest13 object file",  csv: "OBJECT_FILE.csv"         }
-- {nodegroup: "ingest14 library",      csv: "LIBRARY.csv"             }
-- {nodegroup: "ingest15 executable",   csv: "EXECUTABLE.csv"          }
-- {nodegroup: "ingest16 config file",  csv: "CONFIG_FILE.csv"         }
-- {nodegroup: "ingest17 package",      csv: "PACKAGE.csv"             }
-- {nodegroup: "ingest18 package file", csv: "PACKAGE_FILE.csv"        }
-- {nodegroup: "ingest19 compile",      csv: "COMPILE.csv"             }
+- {nodegroup: "ingest08 agent",        csv: "AGENT.csv"               }
+- {nodegroup: "ingest09 package",      csv: "PACKAGE.csv"             }
+- {nodegroup: "ingest10 compile",      csv: "COMPILE.csv"             }
+- {nodegroup: "ingest11 format",       csv: "FORMAT.csv"              }
+- {nodegroup: "ingest12 file",         csv: "FILE.csv"                }

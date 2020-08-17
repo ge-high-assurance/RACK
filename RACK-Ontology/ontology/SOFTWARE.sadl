@@ -18,18 +18,6 @@ FORMAT
     (note "The data format of a FILE")
     is a type of THING.
 
-CODE_GENERATOR
-	(note "A tool that generates CODE_FILEs as part of a CODE_GEN ACTIVITY")
-	is a ROLE.
-
-COMPILER
-	(note "A tool that compiles CODE_FILEs into ENTITYs such as OBJECT_FILE or EXECUTABLE")
-	is a ROLE.
-
-PACKAGER
-	(note "A tool that packages some software together as part of a PACKAGE ACTIVITY")
-	is a ROLE.
-
 CODE_DEVELOPMENT
 	(note "An ACTIVITY that produces CODE_FILEs")
 	is a type of ACTIVITY.
@@ -42,6 +30,8 @@ CODE_DEVELOPMENT
 
     governedBy (note "ENTITY(s) (e.g. REQUIREMENT) that gave rise to this ACTIVITY") describes CODE_DEVELOPMENT with values of type ENTITY.
     governedBy is a type of used.
+    
+    abc describes CODE_DEVELOPMENT with values of type double.
 
 
 BUILD
@@ -61,12 +51,24 @@ COMPILE
 	is a type of ACTIVITY.
     performedBy (note "AGENT(s) (e.g. COMPILER) performing the compilation") describes COMPILE with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
+    
+    compiledBy describes COMPILE with values of type FILE.
+    compiledBy is a type of used.
+    
+    compileInput describes COMPILE with values of type FILE.
+    compileInput is a type of used.
 
 PACKAGE
 	(note "ACTIVITY of running a PACKAGER to produce a PACKAGE_FILE")
 	is a type of ACTIVITY.
     performedBy (note "AGENT(s) (e.g. PACKAGER) performing the packaging") describes PACKAGE with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
+
+	packagedBy describes PACKAGE with values of type FILE.
+	packagedBy is a type of used.
+
+	packageInput describes PACKAGE with values of type FILE.
+	packageInput is a type of used.
 
 COMPONENT_TYPE
     (note "An open/extensible set of types of software components")

@@ -175,3 +175,49 @@ Write: data
                     }
         } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/FILE.csv".
+
+// list all COMPONENT
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier ?name ?componentTypeId ?valueType ?instantiateId ?definedInId ?mentionId ?subcomponentId ?requirementId ?annotationId ?controlFlowsToConditionallyId ?controlFlowsToUnconditionallyId  where
+        { ?COMPONENT <rdf:type> <COMPONENT>
+        . ?COMPONENT <uniqueIdentifier> ?uniqueIdentifier
+		. ?COMPONENT <componentType> ?componentType
+	    . ?componentType <rdf:type> <COMPONENT_TYPE>
+        . ?componentType <uniqueIdentifier> ?componentTypeId
+		. OPTIONAL{ ?COMPONENT <name> ?name }
+		. OPTIONAL{ ?COMPONENT <valueType> ?valueType }
+        . OPTIONAL{ ?COMPONENT <instantiates> ?instantiates
+                  . ?instantiates <rdf:type> <ENTITY>
+                  . ?instantiates <uniqueIdentifier> ?instantiatesId
+                  }
+        . OPTIONAL{ ?COMPONENT <definedIn> ?definedIn
+                  . ?definedIn <rdf:type> <ENTITY>
+                  . ?definedIn <uniqueIdentifier> ?definedInId
+                  }
+        . OPTIONAL{ ?COMPONENT <mentions> ?mentions
+                  . ?mentions <rdf:type> <ENTITY>
+                  . ?mentions <uniqueIdentifier> ?mentionsId
+                  }
+        . OPTIONAL{ ?COMPONENT <subcomponentOf> ?subcomponentOf
+                  . ?subcomponentOf <rdf:type> <COMPONENT>
+                  . ?subcomponentOf <uniqueIdentifier> ?subcomponentOfId
+                  }
+        . OPTIONAL{ ?COMPONENT <requirements> ?requirements
+                  . ?requirements <rdf:type> <ENTITY>
+                  . ?requirements <uniqueIdentifier> ?requirementsId
+                  }
+        . OPTIONAL{ ?COMPONENT <annotations> ?annotations
+                  . ?annotations <rdf:type> <ENTITY>
+                  . ?annotations <uniqueIdentifier> ?annotationsId
+                  }
+        . OPTIONAL{ ?COMPONENT <controlFlowsToUnconditionally> ?controlFlowsToUnconditionally
+                  . ?controlFlowsToUnconditionally <rdf:type> <COMPONENT>
+                  . ?controlFlowsToUnconditionally <uniqueIdentifier> ?controlFlowsToUnconditionallyId
+                  }
+        . OPTIONAL{ ?COMPONENT <controlFlowsToConditionally> ?controlFlowsToConditionally
+                  . ?controlFlowsToConditionally <rdf:type> <COMPONENT>
+                  . ?controlFlowsToConditionally <uniqueIdentifier> ?controlFlowsToConditionallyId
+                  }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/COMPONENT.csv".

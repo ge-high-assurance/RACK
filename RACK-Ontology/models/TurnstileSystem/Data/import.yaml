@@ -16,3 +16,4 @@ ingestion-steps:
 - {nodegroup: "ingest10 compile",      csv: "COMPILE.csv"             }
 - {nodegroup: "ingest11 format",       csv: "FORMAT.csv"              }
 - {nodegroup: "ingest12 file",         csv: "FILE.csv"                }
+- {nodegroup: "ingest13 component",    csv: "COMPONENT.csv"           }

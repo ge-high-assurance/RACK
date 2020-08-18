@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-if ! command -v rack
+if ! command -v rack > /dev/null
 then
         echo "rack cli tool not found in PATH"
         exit 1

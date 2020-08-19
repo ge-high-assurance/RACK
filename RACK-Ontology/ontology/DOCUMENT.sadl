@@ -63,7 +63,7 @@ REPORT (note "A REPORT describes the results of activities such as investigation
     content describes REPORT with values of type ENTITY.
     content is a type of hadMember.
 
-REQUEST (note "A REQUEST initiates a defined course of action or changed to fulfill a need.")is a type of ENTITY.
+REQUEST (note "A REQUEST initiates a defined course of action or changed to fulfill a need.") is a type of ENTITY.
     dateOfInitiation describes REQUEST with values of type date.
     
     status describes REQUEST with values of type DOC_STATUS.
@@ -74,7 +74,7 @@ REQUEST (note "A REQUEST initiates a defined course of action or changed to fulf
     content describes REQUEST with values of type ENTITY.
     content is a type of hadMember.
 
-SPECIFICATION (note "A SPECIFICATION identifies, in a complete, precise, and verifiable manner, the requirements, design, behavior, or other expected characteristics of a system, service or process.")is a type of ENTITY.
+SPECIFICATION (note "A SPECIFICATION identifies, in a complete, precise, and verifiable manner, the requirements, design, behavior, or other expected characteristics of a system, service or process.") is a type of ENTITY.
     dateOfIssue describes SPECIFICATION with values of type date.
     
     status describes SPECIFICATION with values of type DOC_STATUS.

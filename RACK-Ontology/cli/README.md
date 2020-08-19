@@ -32,6 +32,12 @@ pip install -r requirements.txt
 python3 setup.py install
 ```
 
+## Set up default RACK-in-a-Box
+
+```shell
+setup-rack.sh
+```
+
 ## Usage
 
 ```text

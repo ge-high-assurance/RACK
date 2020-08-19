@@ -32,7 +32,17 @@ pip install -r requirements.txt
 python3 setup.py install
 ```
 
-## Usage
+## Set up default RACK-in-a-Box
+
+This shell script will load the default model and data into RACK-in-a-Box:
+
+```shell
+setup-rack.sh
+```
+
+## The "rack" command
+
+The rack command performs other changes to the RACK-in-a-box triplestore.
 
 ```text
 usage: rack [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE]

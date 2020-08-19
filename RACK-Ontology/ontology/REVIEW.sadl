@@ -5,9 +5,6 @@ REVIEW_LOG
 	(note "Outcome of a REVIEW ACTIVITY")
 	is a type of ENTITY.
 
-	reviews (note "ENTITY(s) that the review was performed on") describes REVIEW_LOG with values of type ENTITY.
-	reviews is a type of wasDerivedFrom.
-
 	reviewResult (note "Review status descriptor") describes REVIEW_LOG with values of type REVIEW_STATE.
 	REVIEW_STATE is a class, must be one of {Passed, ReviseWithoutReview, ReviseWithReview}.
 

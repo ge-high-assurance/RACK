@@ -1,4 +1,4 @@
-uri "http://TurnstileSystem/HazardAssesment" alias ha.
+uri "http://TurnstileSystem/HazardAssessment" alias ha.
 import "http://arcos.rack/HAZARD".
 import "http://TurnstileSystem/Turnstiles".
 

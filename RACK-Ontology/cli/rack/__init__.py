@@ -251,7 +251,7 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Ur
         elif 'csv' in step:
             ingest_csv(conn, step['nodegroup'], base_path / step['csv'])
 
-def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url]) -> None:
+def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple OWL files into the model graph."""
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
@@ -262,7 +262,9 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
 
     conn = sparql_connection(base_url, None, triple_store)
 
-    clear_graph(conn, which_graph=Graph.MODEL)
+    if clear:
+        clear_graph(conn, which_graph=Graph.MODEL)
+
     for file in files:
         ingest_owl(conn, base_path / file)
 
@@ -348,7 +350,7 @@ def dispatch_data_import(args: SimpleNamespace) -> None:
 
 def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
-    ingest_owl_driver(Path(args.config), args.base_url, args.triple_store)
+    ingest_owl_driver(Path(args.config), args.base_url, args.triple_store, args.clear)
 
 def dispatch_nodegroups_import(args: SimpleNamespace) -> None:
     store_nodegroups_driver(args.directory, args.base_url)
@@ -405,6 +407,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     model_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     model_import_parser.set_defaults(func=dispatch_model_import)
+    model_import_parser.add_argument('--clear', action='store_true', help='Clear model graph before import')
 
     nodegroups_import_parser.add_argument('directory', type=str, help='Nodegroup directory')
     nodegroups_import_parser.set_defaults(func=dispatch_nodegroups_import)

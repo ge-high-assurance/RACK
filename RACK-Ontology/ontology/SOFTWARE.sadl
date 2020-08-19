@@ -11,16 +11,20 @@ FILE
     satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes FILE with values of type ENTITY.
     satisfies is a type of wasDerivedFrom.
 
-    createBy (note "ACTIVITY(s) that created this file") describes FILE with values of type ACTIVITY.
+    createBy (note "FILE_CREATION ACTIVITY that created this file") describes FILE with values of type FILE_CREATION.
     createBy is a type of wasGeneratedBy.
 
 FORMAT
     (note "The data format of a FILE")
     is a type of THING.
 
+FILE_CREATION
+   (note "An ACTIVITY that produces a FILE")
+   is a type of ACTIVITY.
+
 CODE_DEVELOPMENT
 	(note "An ACTIVITY that produces CODE_FILEs")
-	is a type of ACTIVITY.
+	is a type of FILE_CREATION.
 
     author (note "AGENT(s) who participated in this ACTIVITY") describes CODE_DEVELOPMENT with values of type AGENT.
     author is a type of wasAssociatedWith.
@@ -33,19 +37,19 @@ CODE_DEVELOPMENT
 
 BUILD
 	(note "Describes a set of ACTIVITYs (e.g. CODE_GEN, COMPILE, ...) that together form some logical building unit")
-	is a type of ACTIVITY.
+	is a type of FILE_CREATION.
     step (note "A BUILD may be comprised of any number of sub-ACTIVITY(s)") describes BUILD with values of type ACTIVITY.
     step is a type of wasInformedBy.
 
 CODE_GEN
 	(note "ACTIVITY of running a CODE_GENERATOR to create CODE_FILEs")
-	is a type of ACTIVITY.
-    performedBy (note "AGENT(s) (e.g. CODE_GENERATOR) generating the code") describes CODE_GEN with values of type AGENT.
+	is a type of FILE_CREATION.
+    performedBy (note "CODE_GENERATOR(s) generating the code") describes CODE_GEN with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
 
 COMPILE
 	(note "ACTIVITY of running a a COMPILER to produce EXECUTABLEs or OBJECT_FILEs")
-	is a type of ACTIVITY.
+	is a type of FILE_CREATION.
     performedBy (note "AGENT(s) (e.g. COMPILER) performing the compilation") describes COMPILE with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
     
@@ -57,7 +61,7 @@ COMPILE
 
 PACKAGE
 	(note "ACTIVITY of running a PACKAGER to produce a PACKAGE_FILE")
-	is a type of ACTIVITY.
+	is a type of FILE_CREATION.
     performedBy (note "AGENT(s) (e.g. PACKAGER) performing the packaging") describes PACKAGE with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
 

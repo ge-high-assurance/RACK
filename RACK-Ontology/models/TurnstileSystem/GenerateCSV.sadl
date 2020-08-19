@@ -162,9 +162,10 @@ Write: data
 // list all FILE
 Write: data
 {
-  Ask: "select distinct ?uniqueIdentifier ?createById ?formatId where
+  Ask: "select distinct ?uniqueIdentifier ?createById ?formatId ?filename where
         {  ?FILE <rdf:type> <FILE>
          . ?FILE <uniqueIdentifier> ?uniqueIdentifier
+		 . OPTIONAL{ ?FILE <filename> ?filename }
          . OPTIONAL{  ?FILE <createBy> ?createBy
                     . ?createBy <rdf:type> <ACTIVITY>
                     . ?createBy <uniqueIdentifier> ?createById

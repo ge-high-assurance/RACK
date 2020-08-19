@@ -71,6 +71,8 @@
           </j.1:FORMAT>
         </j.1:fileFormat>
         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+        <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >counter.c</j.1:filename>
         <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >counter_c</j.2:uniqueIdentifier>
       </j.1:FILE>
@@ -81,6 +83,8 @@
           <j.1:FILE rdf:ID="output_c">
             <j.1:fileFormat rdf:resource="#CSourceFile"/>
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >output.c</j.1:filename>
             <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
             >output_c</j.2:uniqueIdentifier>
           </j.1:FILE>
@@ -101,6 +105,8 @@
           <j.1:FILE rdf:ID="input_c">
             <j.1:fileFormat rdf:resource="#CSourceFile"/>
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >input.c</j.1:filename>
             <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
             >input_c</j.2:uniqueIdentifier>
           </j.1:FILE>
@@ -157,6 +163,8 @@
                   <j.1:FILE rdf:ID="counter_h">
                     <j.1:fileFormat rdf:resource="#CSourceFile"/>
                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                    <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >counter.h</j.1:filename>
                     <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                     >counter_h</j.2:uniqueIdentifier>
                   </j.1:FILE>
@@ -176,6 +184,9 @@
                                   <j.1:FILE rdf:ID="hw_h">
                                     <j.1:fileFormat rdf:resource="#CSourceFile"/>
                                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                                    <j.1:filename rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >hw.h</j.1:filename>
                                     <j.2:uniqueIdentifier rdf:datatype=
                                     "http://www.w3.org/2001/XMLSchema#string"
                                     >hw_h</j.2:uniqueIdentifier>
@@ -185,6 +196,9 @@
                                   <j.1:FILE rdf:ID="hw_c">
                                     <j.1:fileFormat rdf:resource="#CSourceFile"/>
                                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                                    <j.1:filename rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >hw.c</j.1:filename>
                                     <j.2:uniqueIdentifier rdf:datatype=
                                     "http://www.w3.org/2001/XMLSchema#string"
                                     >hw_c</j.2:uniqueIdentifier>
@@ -194,6 +208,9 @@
                                   <j.1:FILE rdf:ID="cc">
                                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
                                     <j.1:fileFormat rdf:resource="#ElfFile"/>
+                                    <j.1:filename rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >cc</j.1:filename>
                                     <j.2:uniqueIdentifier rdf:datatype=
                                     "http://www.w3.org/2001/XMLSchema#string"
                                     >cc</j.2:uniqueIdentifier>
@@ -206,6 +223,8 @@
                               </j.1:COMPILE>
                             </j.1:createBy>
                             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                            >hw.o</j.1:filename>
                             <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
                             >hw_o</j.2:uniqueIdentifier>
@@ -218,6 +237,8 @@
                       </j.1:COMPILE>
                     </j.1:createBy>
                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                    <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >libhw.so</j.1:filename>
                     <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                     >libhw_so</j.2:uniqueIdentifier>
                   </j.1:FILE>
@@ -250,6 +271,8 @@
                           <j.1:FILE rdf:ID="output_h">
                             <j.1:fileFormat rdf:resource="#CSourceFile"/>
                             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                            >output.h</j.1:filename>
                             <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
                             >output_h</j.2:uniqueIdentifier>
@@ -262,6 +285,8 @@
                       </j.1:COMPILE>
                     </j.1:createBy>
                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                    <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >output.o</j.1:filename>
                     <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                     >output_o</j.2:uniqueIdentifier>
                   </j.1:FILE>
@@ -275,6 +300,8 @@
                           <j.1:FILE rdf:ID="input_h">
                             <j.1:fileFormat rdf:resource="#CSourceFile"/>
                             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                            >input.h</j.1:filename>
                             <j.2:uniqueIdentifier rdf:datatype=
                             "http://www.w3.org/2001/XMLSchema#string"
                             >input_h</j.2:uniqueIdentifier>
@@ -288,6 +315,8 @@
                       </j.1:COMPILE>
                     </j.1:createBy>
                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+                    <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >input.o</j.1:filename>
                     <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                     >input_o</j.2:uniqueIdentifier>
                   </j.1:FILE>
@@ -299,6 +328,8 @@
               </j.1:COMPILE>
             </j.1:createBy>
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >counter.exe</j.1:filename>
             <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
             >counter_exe</j.2:uniqueIdentifier>
           </j.1:FILE>
@@ -315,6 +346,8 @@
               </j.1:FORMAT>
             </j.1:fileFormat>
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >conf.json</j.1:filename>
             <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
             >conf_json</j.2:uniqueIdentifier>
           </j.1:FILE>
@@ -323,6 +356,8 @@
           <j.1:FILE rdf:ID="tar">
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
             <j.1:fileFormat rdf:resource="#ElfFile"/>
+            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >tar</j.1:filename>
             <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
             >tar</j.2:uniqueIdentifier>
           </j.1:FILE>
@@ -333,6 +368,8 @@
       </j.1:PACKAGE>
     </j.2:wasGeneratedBy>
     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+    <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >dist.tar</j.1:filename>
     <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >dist_tar</j.2:uniqueIdentifier>
   </j.1:FILE>
@@ -347,6 +384,8 @@
       <j.1:FILE rdf:ID="test_h">
         <j.1:fileFormat rdf:resource="#CSourceFile"/>
         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+        <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >test.h</j.1:filename>
         <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >test_h</j.2:uniqueIdentifier>
       </j.1:FILE>
@@ -355,6 +394,8 @@
       <j.1:FILE rdf:ID="test_c">
         <j.1:fileFormat rdf:resource="#CSourceFile"/>
         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
+        <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >test.c</j.1:filename>
         <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >test_c</j.2:uniqueIdentifier>
       </j.1:FILE>

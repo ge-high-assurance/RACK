@@ -18,11 +18,11 @@
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'SOFTWARE.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
   <owl:Class rdf:ID="CODE_GEN">
-    <rdfs:comment xml:lang="en">ACTIVITY of running a CODE_GENERATOR to create CODE_FILEs</rdfs:comment>
+    <rdfs:comment xml:lang="en">ACTIVITY of running a CODE_GENERATOR to create source code FILEs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="COMPILE">
-    <rdfs:comment xml:lang="en">ACTIVITY of running a a COMPILER to produce EXECUTABLEs or OBJECT_FILEs</rdfs:comment>
+    <rdfs:comment xml:lang="en">ACTIVITY of running a a COMPILER to produce executable and object FILEs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="BUILD">
@@ -54,11 +54,11 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="PACKAGE">
-    <rdfs:comment xml:lang="en">ACTIVITY of running a PACKAGER to produce a PACKAGE_FILE</rdfs:comment>
+    <rdfs:comment xml:lang="en">ACTIVITY of running a PACKAGER to produce a package FILE</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="CODE_DEVELOPMENT">
-    <rdfs:comment xml:lang="en">An ACTIVITY that produces CODE_FILEs</rdfs:comment>
+    <rdfs:comment xml:lang="en">An ACTIVITY that produces source code FILEs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="packageInput">
@@ -106,7 +106,7 @@
     <rdfs:domain rdf:resource="#COMPONENT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="definedIn">
-    <rdfs:comment xml:lang="en">Defining entity of this code structure. This could be a CODE_FILE, LIBRARY, etc.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Defining entity of this code structure. This is typically a FILE.</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#COMPONENT"/>
   </owl:ObjectProperty>

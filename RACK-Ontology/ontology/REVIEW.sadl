@@ -11,7 +11,7 @@ REVIEW_LOG
 	reviewResult (note "Review status descriptor") describes REVIEW_LOG with values of type REVIEW_STATE.
 	REVIEW_STATE is a class, must be one of {Passed, ReviseWithoutReview, ReviseWithReview}.
 
-	createBy (note "ACTIVITY(s) (e.g. REVIEW) that created this log") describes REVIEW_LOG with values of type ACTIVITY.
+	createBy (note "REVIEW(s) ACTIVITY that created this log") describes REVIEW_LOG with values of type REVIEW.
 	createBy is a type of wasGeneratedBy.
 
 REVIEW
@@ -27,5 +27,5 @@ REVIEW
 	reviewed (note "ENTITY(s) being reviewed") describes REVIEW with values of type ENTITY.
 	reviewed is a type of used.
 
-	governedBy (note "ENTITY(s) (e.g. REQUIREMENT) used for performing the review") describes REVIEW with values of type ENTITY.
+	governedBy (note "REQUIREMENT(s) ENTITY used for performing the review") describes REVIEW with values of type REQUIREMENT.
 	governedBy is a type of used.

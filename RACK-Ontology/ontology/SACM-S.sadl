@@ -23,7 +23,7 @@ ASSERTED_INFERENCE is a type of ENTITY.
 	target  describes ASSERTED_INFERENCE  with values of type ENTITY.
 	target is a type of wasDerivedFrom.
 
-	reasoning describes ASSERTED_INFERENCE  with values of type ENTITY.
+	reasoning describes ASSERTED_INFERENCE  with values of type ARGUMENT_REASONING.
 	reasoning is a type of wasDerivedFrom.
 
 

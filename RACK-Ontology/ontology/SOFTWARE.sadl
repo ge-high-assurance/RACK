@@ -8,7 +8,7 @@ FILE
 
 	fileFormat (note "The byte-level encoding of a file") describes FILE with values of type FORMAT.
 
-    satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes FILE with values of type ENTITY.
+    satisfies (note "REQUIREMENT that this code file participates in satisfying") describes FILE with values of type REQUIREMENT.
     satisfies is a type of wasDerivedFrom.
 
     createBy (note "ACTIVITY(s) that created this file") describes FILE with values of type ACTIVITY.
@@ -25,10 +25,10 @@ CODE_DEVELOPMENT
     author (note "AGENT(s) who participated in this ACTIVITY") describes CODE_DEVELOPMENT with values of type AGENT.
     author is a type of wasAssociatedWith.
 
-    referenced (note "ENTITY(s) (e.g. REQUIREMENT) that were referenced during this ACTIVITY") describes CODE_DEVELOPMENT with values of type ENTITY.
+    referenced (note "REQUIREMENT(s) that were referenced during this ACTIVITY") describes CODE_DEVELOPMENT with values of type REQUIREMENT.
     referenced is a type of used.
 
-    governedBy (note "ENTITY(s) (e.g. REQUIREMENT) that gave rise to this ACTIVITY") describes CODE_DEVELOPMENT with values of type ENTITY.
+    governedBy (note "REQUIREMENT(s) that gave rise to this ACTIVITY") describes CODE_DEVELOPMENT with values of type REQUIREMENT.
     governedBy is a type of used.
 
 BUILD
@@ -121,11 +121,11 @@ COMPONENT is a type of ENTITY.
     name describes COMPONENT with values of type string.
     componentType describes COMPONENT with a single value of type COMPONENT_TYPE.
     valueType (note "The type of this value, if applicable (e.g. for functions or variables).") describes COMPONENT with values of type string.
-    instantiates (note "What logical component (system) does this physical component (code) instantiate or implement?") describes COMPONENT with values of type ENTITY.
-    definedIn (note "Defining entity of this code structure. This could be a CODE_FILE, LIBRARY, etc.") describes COMPONENT with values of type ENTITY.
-    mentions (note "A component referenced by this one, e.g., a callee or variable being used.") describes COMPONENT with values of type ENTITY.
-    subcomponentOf (note "A structural sub-component, e.g., a function might be a subcomponent of module.") describes COMPONENT with values of type ENTITY.
-    requirements (note "Low-level requirements that apply to this component.") describes COMPONENT with values of type ENTITY.
-    annotations (note "Analysis annotations that apply to this component.") describes COMPONENT with values of type ENTITY.
+    instantiates (note "What logical component (system) does this physical component (code) instantiate or implement?") describes COMPONENT with values of type SYSTEM.
+    definedIn (note "Defining entity of this code structure. This could be a CODE_FILE, LIBRARY, etc.") describes COMPONENT with values of type SYSTEM.
+    mentions (note "A component referenced by this one, e.g., a callee or variable being used.") describes COMPONENT with values of type COMPONENT.
+    subcomponentOf (note "A structural sub-component, e.g., a function might be a subcomponent of module.") describes COMPONENT with values of type COMPONENT.
+    requirements (note "Low-level requirements that apply to this component.") describes COMPONENT with values of type REQUIREMENTS.
+    annotations (note "Analysis annotations that apply to this component.") describes COMPONENT with values of type ANALYSIS_ANNOTATION.
     controlFlowsToUnconditionally (note "Control flows from this component to the target unconditionally.") describes COMPONENT with values of type COMPONENT.
     controlFlowsToConditionally (note "Control flows from this component to the target conditionally.") describes COMPONENT with values of type COMPONENT.

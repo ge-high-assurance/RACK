@@ -11,7 +11,7 @@ ANALYSIS_REPORT
     analyzes (note "ENTITY(s) under analysis") describes ANALYSIS_REPORT with values of type ENTITY.
     analyzes is a type of wasDerivedFrom.
 
-    producedBy (note "ACTIVITY(s) (e.g. ANALYSIS) producing this report") describes ANALYSIS_REPORT with values of type ACTIVITY.
+    producedBy (note "ANALYSIS/ANALYSES activity producing this report") describes ANALYSIS_REPORT with values of type ANALYSIS.
     producedBy is a type of wasGeneratedBy.
 
 ANALYSIS
@@ -39,6 +39,6 @@ INVARIANT
 ANALYSIS_ANNOTATION
     (note "A result of the analysis that is linked to some specific part of the system.")
     is a type of ENTITY.
-    fromReport (note "Which analysis report this annotation comes from.") describes ANALYSIS_ANNOTATION with values of type ENTITY.
+    fromReport (note "Which analysis report this annotation comes from.") describes ANALYSIS_ANNOTATION with values of type ANALYSIS_REPORT.
     description (note "The content of the annotation.") describes ANALYSIS_ANNOTATION with values of type string.
     annotationType (note "The type of the annotation.") describes ANALYSIS_ANNOTATION with values of type ANALYSIS_ANNOTATION_TYPE.

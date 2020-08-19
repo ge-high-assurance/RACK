@@ -19,13 +19,13 @@ REQUIREMENT
 	governs (note "ENTITY(s) that are the subject of the requirement") describes REQUIREMENT with values of type ENTITY.
 	governs is a type of wasDerivedFrom.
 
-	satisfies (note "Parent ENTITY(s) (e.g. REQUIREMENT) that this REQUIREMENT is derived from") describes REQUIREMENT with values of type ENTITY.
+	satisfies (note "Parent REQUIREMENT(s) ENTITY that this REQUIREMENT is derived from") describes REQUIREMENT with values of type REQUIREMENT.
 	satisfies is a type of wasDerivedFrom.
 
-	mitigates (note "ENTITY(s) (e.g. HAZARD) that is being mitigated by this REQUIREMENT") describes REQUIREMENT with values of type ENTITY.
+	mitigates (note "HAZARD(s) ENTITY that is being mitigated by this REQUIREMENT") describes REQUIREMENT with values of type HAZARD.
 	mitigates is a type of wasDerivedFrom.
 
-	createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT") describes REQUIREMENT with values of type ACTIVITY.
+	createdBy (note "REQUIREMENT_DEVELOPMENT(s) ACTIVITY that created this REQUIREMENT") describes REQUIREMENT with values of type REQUIREMENT_DEVELOPMENT.
 	createdBy is a type of wasGeneratedBy.
 
 
@@ -35,13 +35,13 @@ DATA_DICTIONARY_TERM
 
 	text (note "Description of the term") describes DATA_DICTIONARY_TERM with values of type string.
 
-	providedBy (note "ENTITY(s) (e.g. REQUIREMENT) that provides this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
+	providedBy (note "REQUIREMENT(s) ENTITY that provides this information") describes DATA_DICTIONARY_TERM with values of type REQUIREMENT.
 	providedBy is a type of wasDerivedFrom.
 
-	consumedBy (note "ENTITY(s) (e.g. REQUIREMENT) that consumes this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
+	consumedBy (note "REQUIREMENT(s) ENTITY that consumes this information") describes DATA_DICTIONARY_TERM with values of type REQUIREMENT.
 	consumedBy is a type of wasDerivedFrom.
 
-	createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term") describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
+	createdBy (note "REQUIREMENT_DEVELOPMENT(s) ACTIVITY that created this data dictionary term") describes DATA_DICTIONARY_TERM with values of type REQUIREMENT_DEVELOPMENT.
 	createdBy is a type of wasGeneratedBy.
 
 
@@ -55,5 +55,5 @@ REQUIREMENT_DEVELOPMENT
 	referenced (note "Source materials (requirement and design docs) used during development") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
 	referenced is a type of used.
 
-	governedBy (note "ENTITY(s) (e.g. REQUIREMENTS, any sort of document) used during this ACTIVITY") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
+	governedBy (note "REQUIREMENT(s) ENTITY (any sort of document) used during this ACTIVITY") describes REQUIREMENT_DEVELOPMENT with values of type REQUIREMENT.
 	governedBy is a type of used.

@@ -92,7 +92,7 @@ BINARY_BASIC_BLOCK
     (note "A basic block at the binary level.")
     is a COMPONENT_TYPE
     has uniqueIdentifier "BINARY_BASIC_BLOCK".
-CLASS
+CLASS_DEFINITION
     (note "A class in an object-oriented language.")
     is a COMPONENT_TYPE
     has uniqueIdentifier "CLASS".

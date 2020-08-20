@@ -11,6 +11,9 @@ DIST = dist.tar.gz
 TEST = $(APP)test
 TESTEXE = $(TEST).exe
 
+build: $(EXE)
+dist: $(DIST)
+
 %.o: %.c %.h
 	$(CC) $(CFLAGS) -c $<
 

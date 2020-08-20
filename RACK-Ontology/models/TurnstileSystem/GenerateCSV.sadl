@@ -4,7 +4,7 @@ import "http://TurnstileSystem/CounterApplicationLLR".
 import "http://TurnstileSystem/CounterApplicationRequirements".
 import "http://TurnstileSystem/CounterApplicationTesting".
 import "http://TurnstileSystem/CounterApplicationUnitTesting".
-import "http://TurnstileSystem/HazardAssesment". //rename HazardAssesment.sadl file to correct spelling
+import "http://TurnstileSystem/HazardAssessment".
 import "http://TurnstileSystem/InGateRequirement". //rename as we use InGateRequirements.sadl and in it we have InGateRequirement
 import "http://TurnstileSystem/Turnstiles".
 

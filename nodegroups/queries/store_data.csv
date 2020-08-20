@@ -1,4 +1,7 @@
 ID,comments,creator,jsonFile
+query Compilation Inputs,Find inputs used in compilation of executables,langston,query Compilation Inputs.json
+query Control Flow From Function,Find functions called by specified function,langston,query Control Flow From Function.json
+query Files of a Given Format,Find files of specified format,langston,query Files of a Given Format.json
 query Requirements without Tests,Find requirements without a verifying test case,200001934,query Requirements without Tests.json
 query Testcase without requirement,Find any test case that doesn't verify a requirement,200001934,query Testcase without requirement.json
 query System Structure,Find system component associated with the hazards,200001934,query System Structure.json

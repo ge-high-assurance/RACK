@@ -12,3 +12,4 @@ ingest10 compile,Ingest Compile Data (Step 10),eric,ingest10 compile.json
 ingest11 format,Ingestion for software file formats (Step 11),eric,ingest11 format.json
 ingest12 file,Ingestion for software files (Step 12),eric,ingest12 file.json
 ingest13 component,Ingest software components,eric,ingest13 component.json
+ingest14 confidence,Ingest Confidence Data (Step 14),val,ingest14 confidence.json

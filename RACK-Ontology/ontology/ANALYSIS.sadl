@@ -7,6 +7,8 @@ ANALYSIS_REPORT
 
     result (note "Passed/Failed/Indeterminate status of this report") describes ANALYSIS_REPORT with values of type ANALYSIS_RESULT.
     ANALYSIS_RESULT is a class, must be one of {Passed, Failed, Indeterminate}.
+    
+    metric (note "provides a numerical result value from the analysis that was performed") describes ANALYSIS_REPORT with values of type float.
 
     analyzes (note "ENTITY(s) under analysis") describes ANALYSIS_REPORT with values of type ENTITY.
     analyzes is a type of wasDerivedFrom.

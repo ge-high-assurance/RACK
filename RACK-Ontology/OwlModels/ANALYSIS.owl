@@ -80,6 +80,11 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#ANALYSIS_ANNOTATION"/>
   </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="metric">
+    <rdfs:comment xml:lang="en">provides a numerical result value from the analysis that was performed</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:domain rdf:resource="#ANALYSIS_REPORT"/>
+  </owl:DatatypeProperty>
   <A:ANALYSIS_ANNOTATION_TYPE rdf:ID="POSTCONDITION">
     <rdfs:comment xml:lang="en">A constraint that should hold after of successful operation of this unit of code.</rdfs:comment>
   </A:ANALYSIS_ANNOTATION_TYPE>

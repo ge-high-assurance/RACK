@@ -38,7 +38,7 @@ ENDL is a COMPONENT
   definedIn LIBCPP.
 
 GENERATOR is a COMPONENT
-  has componentType CLASS
+  has componentType CLASS_DEFINITION
   has name "Generator"
   definedIn EXAMPLE_CPP.
 

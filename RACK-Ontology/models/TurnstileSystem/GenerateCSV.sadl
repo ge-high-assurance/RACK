@@ -186,7 +186,7 @@ Write: data
 		. ?COMPONENT <componentType> ?componentType
 	    . ?componentType <rdf:type> <COMPONENT_TYPE>
         . ?componentType <uniqueIdentifier> ?componentTypeId
-		. OPTIONAL{ ?COMPONENT <name> ?name }
+		. OPTIONAL{ ?COMPONENT <SOFTWARE#name> ?name }
 		. OPTIONAL{ ?COMPONENT <valueType> ?valueType }
         . OPTIONAL{ ?COMPONENT <instantiates> ?instantiates
                   . ?instantiates <rdf:type> <ENTITY>

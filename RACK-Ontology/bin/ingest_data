@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+case $# in
+    2) target="upload_model_to_rack" ;;
+    3) target="save_model_to_file(${3@Q},${1@Q})" ;;
+    *) echo Usage: $(basename $0) DATA_NAMESPACE DATA_DIR [OwlFile]
+       echo ""
+       echo "  Reads RACK ontology and creates instances from DATA_DIR data"
+       echo "  under the specified namespace.  The created instances are then"
+       echo "  uploaded to RACK or written to the specified OWL file."
+       echo ""
+       echo "  Example:"
+       echo "    $ $(basename $0) http://TurnstileSystem/CounterApplication \ "
+       echo "           models/TurnstileSystem/src"
+       exit 1
+esac
+
+swipl -g "load_local_model('$(dirname $0)/../OwlModels')" \
+      -g "load_recognizer('$(dirname $0)/../databin/databin.rack')" \
+      -g "load_data(${1@Q},${2@Q})" \
+      -g $target \
+      -t halt \
+      $(dirname $0)/rack_model.pl \
+      $(dirname $0)/../databin/databin.rack

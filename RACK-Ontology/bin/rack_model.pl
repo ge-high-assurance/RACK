@@ -12,6 +12,7 @@ description DSL into instances in the model.
               % Loading and saving RDF/OWL triples
               load_local_model/1,
               save_model_to_file/1,
+              save_model_to_file/2,
 
               load_model_from_url/1,
               upload_model_to_url/1,
@@ -172,10 +173,25 @@ upload_model_to_rack :-
 %! save_model_to_file(+Filename:atom) is semidet.
 %
 % Saves the local RDF/OWL triples to a local Owl file (XML format).
+% Like save_model_to_file/2 but saves *all* RDF triples.
 
 save_model_to_file(Filename) :-
     open(Filename, write, Out),
     rdf_save(stream(Out)),
+    close(Out).
+
+
+%! save_model_to_file(+Filename:string, +Namespace:atom) is semidet.
+%! save_model_to_file(+Filename:atom, +Namespace:atom) is semidet.
+%
+% Saves the local RDF/OWL triples for the specified namespace to a
+% local Owl file (XML format).
+%
+% See save_model_to_file/1 to save *all* RDF triples instead.
+
+save_model_to_file(Filename, NS) :-
+    open(Filename, write, Out),
+    rdf_save(stream(Out), NS),
     close(Out).
 
 
@@ -374,7 +390,8 @@ show_triple(S,P,O) :-
 
 add_triple(S,P,O) :-
     show_triple(S, P, O),
-    rdf_assert(S, P, O).
+    (rack_namespace(NS), rdf_assert(S, P, O, NS)) ;
+    (\+ rack_namespace(_), rdf_assert(S, P, O)).
 
 %! rdf_dataref(-RDFClass, +Data, -Instance) is semidet.
 %! rdf_dataref(+RDFClass, +Data, -Instance) is semidet.

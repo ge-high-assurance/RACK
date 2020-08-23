@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+. $(dirname $0)/rackfuncs.sh
+
+tmpfile=".$$.strace"
+trap 'rm ${tmpfile}*' EXIT ERR
+
+strace -f -e trace=file -e status=successful -o $tmpfile $(find_in_path_remainder $(basename $0)) "${@}"
+
+awk -f <(cat <<EOF
+BEGIN { show=0;
+      }
+/creat/ {
+    split(\$2, p, "(");
+    if (show==0) {
+      # Unique name for output file, based on first tar output file
+      name = p[2]
+      gsub("\"", "", name)
+      gsub(",$", "", name)
+      print name >"${tmpfile}.name"
+      # Initialization command
+    }
+    show=1;
+    print "tar_access(", p[2], "create)."
+  }
+/openat/ { if (show==1) print "tar_access(", \$3, "open)." }
+EOF
+        )  $tmpfile > $tmpfile.out
+
+if [ -r $tmpfile.out -a -r $tmpfile.name ] ; then
+    mv $tmpfile.out .$(cat $tmpfile.name).rack
+    rm $tmpfile.name
+fi

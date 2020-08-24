@@ -27,8 +27,8 @@ description DSL into instances in the model.
               owl_list/2,
               entity/1,
               entity/2,
-              property/2,
-              property_target/3,
+              property/3,
+              property_target/4,
               rack_instance/2,
               rack_entity_instance/1,
               rack_entity_instance/3,
@@ -267,13 +267,20 @@ enumerations(E, ES) :-
     enumerationOf(E, C),
     findall(S, rdf(S, rdf:type, C), ES).
 
-property(E, P) :-
-    entity(E),
-    rdf(P, rdfs:domain, E).
+property(Class, Property, unique) :-
+    % Property is unique to this class and directly associated
+    rdf(Property, rdfs:domain, Class), !.
+property(Class, Property, shared) :-
+    % Property is shared with multiple classes, specified in a list.
+    rdf(Property, rdfs:domain, Intermediary),
+    rdf(Intermediary, owl:unionOf, DomainList),
+    rdf_list(DomainList), !,
+    rdf_list(DomainList, Classes),
+    member(Class, Classes).
 
-property_target(E, P, T) :-
-    property(E, P),
-    rdf(P, rdfs:range, T).
+property_target(Class, Property, PropUsage, Target) :-
+    property(Class, Property, PropUsage),
+    rdf(Property, rdfs:range, Target).
 
 %! rack_instance(+OntologyClassName:atom, -InstanceURL:atom) is nondet
 %

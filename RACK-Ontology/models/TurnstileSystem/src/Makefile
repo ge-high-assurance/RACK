@@ -24,7 +24,7 @@ $(EXE): $(APP).c $(APP).h $(OBJECTS) $(LIBS)
 	$(CC) $(CFLAGS) -L$(PWD) -lhw -o $@ $< $(OBJECTS)
 
 $(DIST): conf.json $(LIBS) $(EXE)
-	$(TAR) cfv $@ $^
+	$(TAR) cf $@ $^
 
 $(TESTEXE): test.c test.h $(EXE)
 	$(CC) $(CFLAGS) -o $@ $<

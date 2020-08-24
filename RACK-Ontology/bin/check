@@ -1,0 +1,41 @@
+#!/usr/bin/env swipl
+
+:- initialization(main, main).
+
+:- use_module(library(optparse)).
+:- consult(check_rack).
+
+main :-
+    working_directory(Cwd, Cwd),
+    atom_concat(Cwd, 'OwlModels/', OwlDir),
+    OptSpec = [ [opt(verbose), type(boolean), default(false),
+                 shortflags([v]), longflags(['verbose']),
+                 help('Enable verbose output')],
+
+                [opt(ontology_dir), meta('DIR_OR_URL'), type(atom),
+                 shortflags([o]), longflags(['ontology', 'model']),
+                 default(OwlDir),
+                 help('Where to load ontology from')]
+              ],
+
+    opt_arguments(OptSpec, Opts, _PosArgs),
+    % write('Opts: '), write(Opts), nl,
+    % write('PosArgs: '), write(PosArgs), nl,
+    set_verbosity(Opts),
+    get_ontology_dir(Opts, ODir),
+    print_message(informational, loading_ontology_dir(ODir)),
+    load_local_model(ODir),
+    check_rack.
+
+get_ontology_dir([], ".").
+get_ontology_dir([ontology_dir(D)|_], D).
+get_ontology_dir([_|Options], D) :- get_ontology_dir(Options, D).
+
+set_verbosity([]).
+set_verbosity([verbose(true)|_]) :- set_prolog_flag(verbose, normal).
+set_verbosity([verbose(false)|_]) :- set_prolog_flag(verbose, silent).
+set_verbosity([_|Opts]) :- set_verbosity(Opts).
+
+
+prolog:message(loading_ontology_dir(D)) -->
+    [ 'loading ontology from ~w'-[D] ].

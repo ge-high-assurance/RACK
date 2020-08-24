@@ -3,9 +3,18 @@
 
 report :-
     rdf_equal(rack:'PROV-S#THING', Thing),
+    rdf(Thing, rdf:type, _), !, % verify the ontology is loaded
     report_rack_ontology(Thing, [], NonThings),
     findall(NT, (member(NT, NonThings),
                  report_rack_ontology(NT, [], _)), _).
+
+report :-
+    rdf_equal(rack:'PROV-S#THING', Thing),
+    \+ rdf(Thing, rdf:type, _),
+    print_message(error, no_ontology_loaded).
+
+prolog:message(no_ontology_loaded) -->
+    [ 'No ontology has been loaded for analysis.'-[] ].
 
 report_rack_ontology(E, Parents, SeenNonThings) :-
     (rdf(E, rdfs:comment, C), ! ; C = "?"),

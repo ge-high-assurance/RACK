@@ -269,12 +269,12 @@ enumerations(E, ES) :-
 
 property(Class, Property, unique) :-
     % Property is unique to this class and directly associated
-    rdf(Property, rdfs:domain, Class), !.
+    rdf(Property, rdfs:domain, Class).
 property(Class, Property, shared) :-
     % Property is shared with multiple classes, specified in a list.
     rdf(Property, rdfs:domain, Intermediary),
     rdf(Intermediary, owl:unionOf, DomainList),
-    rdf_list(DomainList), !,
+    rdf_list(DomainList),
     rdf_list(DomainList, Classes),
     member(Class, Classes).
 

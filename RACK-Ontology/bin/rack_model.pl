@@ -410,9 +410,7 @@ add_triple(S,P,O) :-
 rdf_dataref(RDFClass, Data, Instance) :-
     rdf(RDFClass, rdf:type, owl:'Class'),
     rack_ref(ShortC, RDFClass),
-    write('ShortC '), write(ShortC), nl,
     data_instance(ShortC, Data, Instance, InstanceData),
-    write('ShortC '), write(ShortC), write(' Data Instance '),write(Instance),nl,
     add_triple(Instance, rdf:type, RDFClass),
     add_rdfdata(RDFClass, Instance, InstanceData).
 

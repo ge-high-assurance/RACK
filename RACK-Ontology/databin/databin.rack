@@ -3,7 +3,7 @@
 %% Recognizers for matching tool output data
 
 data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
-    tar_access(File, create),
+    tar_access(_Nonce, File, create),  %% KWQ: file_to_fpath with a Dir
     rack_namespace(NS),
     ns_ref(NS, File, Instance),
     InstanceData = createdFile(File, tar).

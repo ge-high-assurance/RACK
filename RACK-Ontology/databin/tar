@@ -7,7 +7,9 @@ trap 'rm ${tmpfile}*' EXIT ERR
 
 strace -f -e trace=file -e status=successful -o $tmpfile $(find_in_path_remainder $(basename $0)) "${@}"
 
-awk -f <(cat <<EOF
+awk -f <(
+    nonce="n$(date +%s)-$$"
+    cat <<EOF
 BEGIN { show=0;
       }
 /creat/ {
@@ -21,9 +23,9 @@ BEGIN { show=0;
       # Initialization command
     }
     show=1;
-    print "tar_access(", p[2], "create)."
+    print "tar_access('${nonce}', ", p[2], "create)."
   }
-/openat/ { if (show==1) print "tar_access(", \$3, "open)." }
+/openat/ { if (show==1) print "tar_access('${nonce}', ", \$3, "open)." }
 EOF
         )  $tmpfile > $tmpfile.out
 

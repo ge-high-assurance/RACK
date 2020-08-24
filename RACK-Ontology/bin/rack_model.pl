@@ -32,6 +32,7 @@ description DSL into instances in the model.
               rack_instance/2,
               rack_entity_instance/1,
               rack_entity_instance/3,
+              rack_ontology_node/3,
 
               % Importing user data into the model
               load_data/2,
@@ -236,6 +237,20 @@ owl_list(B, PL) :-
     rdf_list(L),
     rdf_list(L,PL).
 
+%! rack_ontology_node(+Node:atom, -Area:atom, -Item:atom)
+%
+% True if the Node is defined by RACK and if so, returns the Area and
+% Item.
+%
+%    :- rack_ontology_node('http://arcos.rack/DOCUMENT#DOC_STATUS', Area, Item).
+%    Area = 'DOCUMENT#'
+%    Item = 'DOC_STATUS'
+%    :- rack_ontology_node(owl:'Class', Area, Item).
+%    false.
+
+rack_ontology_node(Node, Area, Item) :-
+    rdf_split_url(E, Item, Node),
+    rack_ref(Area, E).
 
 entity(E) :-
     is_owl_class(E),

@@ -10,7 +10,7 @@ case $# in
        then target="report"; loads+=(-f $(dirname $0)/analyze_rack.pl)
        else target="save_model_to_file(${3@Q},${1@Q})"
        fi;;
-    *) echo Usage: $(basename $0) DATA_NAMESPACE DATA_DIR [OwlFile|\"analysis\"]
+    *) echo Usage: $(basename $0) DATA_NAMESPACE DATA_DIR '[OwlFile|"analysis"]'
        echo ""
        echo "  Reads RACK ontology and creates instances from DATA_DIR data"
        echo "  under the specified namespace.  The created instances are then"

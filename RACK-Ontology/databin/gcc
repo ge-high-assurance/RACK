@@ -3,7 +3,7 @@
 # TODO: use -M for internal assist of include files
 # TODO: get -L paths and -l libraries
 
-$(dirname $0)/rackfuncs.sh
+. $(dirname $0)/rackfuncs.sh
 
 inf=()
 outf=''

@@ -141,20 +141,22 @@ ingestion-steps:
 - {nodegroup: "ingest02 interface", csv: "INTERFACE.csv"}
 - {owl: "example.owl"}
 ```
+
 ## Overriding default RACK URLs
+
 Connecting to RACK requires knowledge of the SemTK and Fuseki URLs. The RACK cli assumes that these URLs will be at their default locations on `localhost`. These URLs can be overridden using either command-line flags or environment variables.
 
 ### SemTK URL
 
-* Default value: `http://localhost`
-* Override flag: `--base-url`
-* Override environment variable: `BASE_URL`
+- Default value: `http://localhost`
+- Override flag: `--base-url`
+- Override environment variable: `BASE_URL`
 
 ### Fuseki URL
 
-* Default value: *Base URL* + `:3030/RACK`
-* Override flags: `--triple-store`
-* Override environment variable: `TRIPLE_STORE`
+- Default value: *Base URL* + `:3030/RACK`
+- Override flags: `--triple-store`
+- Override environment variable: `TRIPLE_STORE`
 
 ## Example invocations
 
@@ -170,7 +172,7 @@ instance running in a Docker container on `localhost`:
 $ source venv/bin/activate
 (venv) $ rack data import --clear ../models/TurnstileSystem/Data/import.yaml
 Clearing graph
-Success Update succeeded 
+Success Update succeeded
 Loading ingest01 system...                         OK Records: 8       Failures: 0
 Loading ingest02 interface...                      OK Records: 4       Failures: 0
 Loading ingest03 hazard...                         OK Records: 4       Failures: 0

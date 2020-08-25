@@ -27,7 +27,7 @@ other requirements listed in `requirements.txt`.
 
 We recommend installing these dependencies in an isolated virtual
 environment using [virtualenv](https://pypi.org/project/virtualenv/)
-to ensure reproducability of results.
+to ensure reproducibility of results.
 
 ```shell
 virtualenv venv
@@ -112,33 +112,51 @@ optional arguments:
                         Assign logger severity level
 ```
 
-The *BASE_URL* argument overrides the default URL used to find the
-locally running RACK-in-a-Box instance; it allows the rack program to
-contact a remote RACK-in-a-Box instance instead.
+The `rack` command is split into three subcommands: `data`, `model`, and `nodegroups`. Each of these subcommands offers its own help listing. For example try `rack data --help` for more information about the flags available when interacting with the data store.
 
-The *TRIPLE_STORE* URL argument overrides the default URL used to find
-the RACK-in-a-Box's triple-store.
+The `model` subcommand is used to load the ontology itself. This is typically only done at the initial configuration step for RACK.
 
-## Configuration file format
+The `nodegroups` subcommand is used to import and export nodegroups from SemTK. This is useful both for initial configuration and also for persisting your generated nodegroups across RACK instances.
+
+The `data` subcommand is used to import CSV and OWL data files using the RACK ontology as well as exporting CSV files using nodegroups stored in SemTK.
+
+## Data Ingestion Configuration file format
 
 The import configuration files are YAML files that specify the target
-*data-graph* and *ingestion-steps*.
+`data-graph` and `ingestion-steps`. These files will be the argument to a `rack data import` command.
 
-*data-graph* is a graph identifier URL. This URL allows multiple
+`data-graph` is a graph identifier URL. This URL allows multiple
 datasets to be stored in the same triple store.
 
-*ingestion-steps* is a list of pairs of *nodegroup id* and *CSV path*.
+`ingestion-steps` takes an ordered list of CSV and OWL file imports used to populate the graph.
 
-CSV paths are resolved relative to the configuration file.
+CSV files can be ingested by adding list elements containing a `csv` path and a `nodegroup` that lists an existing nodegroup ID in RACK. CSV paths are resolved relative to the configuration file.
+
+OWL files can be ingested by adding list elements containing an `owl` path to the OWL file.
 
 ```text
 data-model: "http://rack001/data"
 ingestion-steps:
 - {nodegroup: "ingest01 system",    csv: "SYSTEM.csv"}
 - {nodegroup: "ingest02 interface", csv: "INTERFACE.csv"}
+- {owl: "example.owl"}
 ```
+## Overriding default RACK URLs
+Connecting to RACK requires knowledge of the SemTK and Fuseki URLs. The RACK cli assumes that these URLs will be at their default locations on `localhost`. These URLs can be overridden using either command-line flags or environment variables.
 
-## Example invocation
+### SemTK URL
+
+* Default value: `http://localhost`
+* Override flag: `--base-url`
+* Override environment variable: `BASE_URL`
+
+### Fuseki URL
+
+* Default value: *Base URL* + `:3030/RACK`
+* Override flags: `--triple-store`
+* Override environment variable: `TRIPLE_STORE`
+
+## Example invocations
 
 These examples uses the virtual environment as defined in the
 *Installing Dependencies* section above.
@@ -150,28 +168,23 @@ instance running in a Docker container on `localhost`:
 
 ```shell
 $ source venv/bin/activate
-(venv) $ rack data import ../models/TurnstileSystem/Data/import.yaml
+(venv) $ rack data import --clear ../models/TurnstileSystem/Data/import.yaml
 Clearing graph
-Success Update succeeded
-Loading ingest01 system                 OK Records: 8       Failures: 0
-Loading ingest02 interface              OK Records: 4       Failures: 0
-Loading ingest03 hazard                 OK Records: 4       Failures: 0
-Loading ingest04 requirement            OK Records: 22      Failures: 0
-Loading ingest05 data dict              OK Records: 29      Failures: 0
-Loading ingest06 test                   OK Records: 8       Failures: 0
-Loading ingest07 test results           OK Records: 16      Failures: 0
-Loading ingest08 language               OK Records: 1       Failures: 0
-Loading ingest09 compiler               OK Records: 1       Failures: 0
-Loading ingest10 packager               OK Records: 1       Failures: 0
-Loading ingest11 agent                  OK Records: 3       Failures: 0
-Loading ingest12 code file              OK Records: 10      Failures: 0
-Loading ingest13 object file            OK Records: 3       Failures: 0
-Loading ingest14 library                OK Records: 1       Failures: 0
-Loading ingest15 executable             OK Records: 1       Failures: 0
-Loading ingest16 config file            OK Records: 1       Failures: 0
-Loading ingest17 package                OK Records: 6       Failures: 0
-Loading ingest18 package file           OK Records: 1       Failures: 0
-Loading ingest19 compile                OK Records: 27      Failures: 0
+Success Update succeeded 
+Loading ingest01 system...                         OK Records: 8       Failures: 0
+Loading ingest02 interface...                      OK Records: 4       Failures: 0
+Loading ingest03 hazard...                         OK Records: 4       Failures: 0
+Loading ingest04 requirement...                    OK Records: 22      Failures: 0
+Loading ingest05 data dict...                      OK Records: 29      Failures: 0
+Loading ingest06 test...                           OK Records: 8       Failures: 0
+Loading ingest07 test results...                   OK Records: 16      Failures: 0
+Loading ingest08 agent...                          OK Records: 1       Failures: 0
+Loading ingest09 package...                        OK Records: 3       Failures: 0
+Loading ingest10 compile...                        OK Records: 14      Failures: 0
+Loading ingest11 format...                         OK Records: 6       Failures: 0
+Loading ingest12 file...                           OK Records: 19      Failures: 0
+Loading ingest13 component...                      OK Records: 4       Failures: 0
+Loading ingest14 confidence...                     OK Records: 2       Failures: 0
 ```
 
 ### Export data
@@ -200,7 +213,7 @@ See `rack data export --help` for options, including different export
 formats (such as CSV), emitting to a file, and omitting the header
 row.
 
-### Update nodegroups
+### Update Nodegroups
 
 The script can automate loading a directory full of nodegroups
 indexed by a `store_data.csv` file.
@@ -216,8 +229,12 @@ loads.
 
 ```shell
 (venv) $ mkdir outdir
-(venv) $ rack nodegroups export ^ingest outdir
+(venv) $ rack nodegroups export ^queries outdir
 Retrieving nodegroups...                                    OK
+(venv) $ ls outdir
+query Compilation Inputs.json                   query Requirements without Tests.json
+query Control Flow From Function.json           query System Structure.json
+...
 ```
 
 ## Hacking

@@ -42,25 +42,33 @@ class_comment(Class, Comment) :- rdf(Class, rdfs:comment, Comment), !.
 class_comment(_, "?").
 
 report_rack_properties(E, P) :-
-    property_target(E, P, PType, T),
-    show_property(E, P, PType, T).
+    property_target(E, P, PType, T, Extra),
+    show_property(E, P, PType, T, Extra).
 
-show_property(_E, P, unique, T) :-
+show_property(_E, P, unique, T, Extra) :-
     rack_ref(ST, T), !,
     prefix_shorten(P, SP),
-    format('   . ~w ~`-t-> ~w~79|~n', [SP, ST]).
-show_property(_E, P, shared, T) :-
+    show_property_extra(Extra, "---", SE),
+    format('   . ~w ~`-t~w-> ~w~79|~n', [SP, SE, ST]).
+show_property(_E, P, shared, T, Extra) :-
     rack_ref(ST, T), !,
     prefix_shorten(P, SP),
-    format('  *. ~w ~`-t-> ~w~79|~n', [SP, ST]).
-show_property(_E, P, shared, T) :-
+    show_property_extra(Extra, "---", SE),
+    format('  *. ~w ~`-t~w-> ~w~79|~n', [SP, SE, ST]).
+show_property(_E, P, shared, T, Extra) :-
     prefix_shorten(P, SP),
     prefix_shorten(T, ST),
-    format('  *. ~w :: ~w~n', [SP, ST]).
-show_property(_E, P, unique, T) :-
+    show_property_extra(Extra, "", SE),
+    format('  *. ~w ~w :: ~w~n', [SP, SE, ST]).
+show_property(_E, P, unique, T, Extra) :-
     prefix_shorten(P, SP),
     prefix_shorten(T, ST),
-    format('   . ~w :: ~w~n', [SP, ST]).
+    show_property_extra(Extra, "", SE),
+    format('   . ~w ~w :: ~w~n', [SP, SE, ST]).
+
+show_property_extra(cardinality(N), _, NS) :-
+    atom_concat('(', N, N1), atom_concat(N1, ')', NS).
+show_property_extra(normal, D, D).
 
 subclass_path(E, Path) :-
     parent_path(E, RPath),

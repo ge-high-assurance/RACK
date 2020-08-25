@@ -28,7 +28,7 @@ description DSL into instances in the model.
               entity/1,
               entity/2,
               property/3,
-              property_target/4,
+              property_target/5,
               rack_instance/2,
               rack_entity_instance/1,
               rack_entity_instance/3,
@@ -282,6 +282,14 @@ enumerations(E, ES) :-
     enumerationOf(E, C),
     findall(S, rdf(S, rdf:type, C), ES).
 
+
+%! property(+Class, -Property, -PropUsage) is multidet.
+%
+%   Used to retrieve a Property and it's uniqueness to that Class.
+%
+%   The PropUsage will be either =unique= or =shared= to indicate if
+%   this Property is shared with another Class.
+
 property(Class, Property, unique) :-
     % Property is unique to this class and directly associated
     rdf(Property, rdfs:domain, Class).
@@ -293,9 +301,38 @@ property(Class, Property, shared) :-
     rdf_list(DomainList, Classes),
     member(Class, Classes).
 
-property_target(Class, Property, PropUsage, Target) :-
+%! property_target(+Class, ?Property, -PropUsage, -Target, -Restrictions) is multidet.
+%
+%   Used to retrieve a Property and Target object for a Class.
+%
+%   The PropUsage will be either =unique= or =shared= to indicate if
+%   this Property is shared with another Class.
+%
+%   The Restrictions will be either =normal= for no restrictions or
+%   =canonical(-Value:Int)= to specify a canonical constraint on the
+%   property instances.
+
+property_target(Class, Property, PropUsage, Target, Restrictions) :-
     property(Class, Property, PropUsage),
-    rdf(Property, rdfs:range, Target).
+    rdf(Property, rdfs:range, Target),
+    property_extra(Class, Property, Target, Restrictions).
+
+property_extra(Class, Property, _Target, cardinality(N)) :-
+    rdf(Class, rdfs:subClassOf, B),
+    rdf_bnode(B),
+    rdf(B, owl:onProperty, Property),
+    rdf(B, rdf:type, owl:'Restriction'),
+    rdf(B, owl:cardinality, I),
+    rdf_literal(I),
+    rdf_numeric(I, N).
+property_extra(Class, _Property, _Target, normal) :-
+    findall(P, (rdf(Class, rdfs:subClassOf, P),
+                rdf(P, rdf:type, owl:'Restriction')),  PS),
+    length(PS, 0).
+
+rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:int).
+rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:integer).
+
 
 %! rack_instance(+OntologyClassName:atom, -InstanceURL:atom) is nondet
 %

@@ -6,6 +6,9 @@ report :-
     rdf(Thing, rdf:type, _), !, % verify the ontology is loaded
     rack_nodes(Nodes),
     report_rack_nodes(Nodes),
+    format('~n~n'),
+    instance_prefixes(Prefixes),
+    report_instance_prefixes(Prefixes),
     true.
 
 report :-
@@ -16,16 +19,23 @@ report :-
 prolog:message(no_ontology_loaded) -->
     [ 'No ontology has been loaded for analysis.'-[] ].
 
+% ----------------------------------------------------------------------
+
 rack_nodes(Nodes) :-
     setof(E, T^Area^Item^(rdf(E, rdf:type, T),
                           rdf_reachable(T, rdfs:subClassOf, owl:'Class'),
                           rack_ontology_node(E, Area, Item)),
           Nodes).
 
-report_rack_nodes([]).
-report_rack_nodes([E|ES]) :-
+report_rack_nodes(Nodes) :-
+    length(Nodes, N),
+    format('~`#t Ontology Nodes (~:d) ~`#t~78|~n', [N]),
+    report_rack_nodes_(Nodes).
+
+report_rack_nodes_([]).
+report_rack_nodes_([E|ES]) :-
     report_rack_node(E),
-    report_rack_nodes(ES).
+    report_rack_nodes_(ES).
 
 report_rack_node(E) :-
     rdf(E, rdf:type, T),
@@ -36,7 +46,7 @@ report_rack_node(E) :-
     format('~n~w~w  :: ~w~n  ~w~n', [PPath, SE, ST, C]),
     findall(P, report_rack_properties(E, P), _PS),
     findall(S, report_rack_subclasses(E, S), _),
-    report_instances(E).
+    report_instance_counts(E).
 
 class_comment(Class, Comment) :- rdf(Class, rdfs:comment, Comment), !.
 class_comment(_, "?").
@@ -87,28 +97,54 @@ parent_path(E, [R|RS]) :-
     parent_path(LR, RS).
 parent_path(E, []) :- rdf_subject(E), \+ rdf(E, rdfs:subClassOf, _).
 
+% ----------------------------------------------------------------------
+
 report_rack_subclasses(E, S) :-
     rdf(S, rdfs:subClassOf, E),
     rdf(S, rdf:type, T),
     prefix_shorten(T, ST),
     format('  ^-- ~w  ~`.t~52| :: ~w~n', [S, ST]).
 
-report_instances(E) :-
+report_instance_counts(E) :-
     findall(I, rdf(I, rdf:type, E), IS),
-    report_instances(E, IS).
+    report_instance_counts(E, IS).
 
-report_instances(E, IS) :-
+report_instance_counts(E, IS) :-
     length(IS, ISLen),
     (ISLen == 0, !, true;
      setof(NS, L^X^(member(X, IS), rdf_split_url(NS, L, X)), NSL),
-     findall(RNS, report_instances(E, IS, NSL, RNS), _RNSL)).
+     findall(RNS, report_instance_counts(E, IS, NSL, RNS), _RNSL)).
 
-report_instances(E, _IS, NSL, CNS) :-
+report_instance_counts(E, _IS, NSL, CNS) :-
     member(CNS, NSL),
     findall(NSX, (rdf(NSX, rdf:type, E), rdf_split_url(CNS, _, NSX)), NSXS),
     length(NSXS, N),
     format('  () of ~d instances in ~w~n', [N, CNS]).
 
+instance_prefixes(Prefixes) :-
+    setof(P, E^T^I^L^(rdf(E, rdf:type, T),
+                      rdf_reachable(T, rdfs:subClassOf, owl:'Class'),
+                      rdf(I, rdf:type, E),
+                      \+ rack_ontology_node(I, _, _),
+                      \+ rdf_bnode(I),
+                      rdf_split_url(P, L, I)), Prefixes).
+
+report_instance_prefixes(Prefixes) :-
+    length(Prefixes, N),
+    format('~`#t Instance Prefixes (~:d) ~`#t~78|~n', [N]),
+    findall(P, (member(P, Prefixes), report_instance_prefix(P)), _).
+
+report_instance_prefix(Prefix) :-
+    findall(I, (rdf(I, rdf:type, E),
+                rdf(E, rdf:type, T),
+                rdf_reachable(T, rdfs:subClassOf, owl:'Class'),
+                \+ rdf_bnode(I),
+                rdf_split_url(Prefix, _L, I)
+               ), IS),
+    length(IS, N),
+    format('  ~:d in ~w~n', [N, Prefix]).
+
+% ----------------------------------------------------------------------
 
 prefix_shorten(URI, ShortOrURI) :-
     rdf_current_prefix(Prefix, Exp), atom_concat(Exp, Local, URI), !,

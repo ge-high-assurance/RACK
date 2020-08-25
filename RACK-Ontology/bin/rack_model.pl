@@ -264,27 +264,27 @@ entity(E, C) :-
 
 % TODO: this is a WIP
 enumerationOf(E, C) :-
-    %% atom_length(E, LE),
-    %% RE is LE - 18,
-    %% sub_atom(E, 0, 18, RE, 'http://arcos.rack/'),
+    % atom_length(E, LE),
+    % RE is LE - 18,
+    % sub_atom(E, 0, 18, RE, 'http://arcos.rack/'),
     rdf(E, rdf:type, C),
     is_owl_class(C).
-    %% sub_atom(C, 0, 18, _, 'http://arcos.rack/').
-%% enumerationOf(E, C) :-
-%%     rack_ref(E, R),
-%%     rdf(R, rdf:type, C),
-%%     rack_ref(_AbbrevC, C).
-%% enumerationOf(E, C) :-
-%%     rack_ref(_AbbrevE, E),
-%%     rdf(E, rdf:type, C).
-%%     rack_ref(_AbbrevC, C).
+    % sub_atom(C, 0, 18, _, 'http://arcos.rack/').
+% enumerationOf(E, C) :-
+%     rack_ref(E, R),
+%     rdf(R, rdf:type, C),
+%     rack_ref(_AbbrevC, C).
+% enumerationOf(E, C) :-
+%     rack_ref(_AbbrevE, E),
+%     rdf(E, rdf:type, C).
+%     rack_ref(_AbbrevC, C).
 
 enumerations(E, ES) :-
     enumerationOf(E, C),
     findall(S, rdf(S, rdf:type, C), ES).
 
 
-%! property(+Class, -Property, -PropUsage) is multidet.
+%! property(+Class, -Property, -PropUsage) is multi.
 %
 %   Used to retrieve a Property and it's uniqueness to that Class.
 %
@@ -302,7 +302,7 @@ property(Class, Property, shared) :-
     rdf_list(DomainList, Classes),
     member(Class, Classes).
 
-%! property_target(+Class, ?Property, -PropUsage, -Target, -Restrictions) is multidet.
+%! property_target(+Class, ?Property, -PropUsage, -Target, -Restrictions) is multi.
 %
 %   Used to retrieve a Property and Target object for a Class.
 %
@@ -375,7 +375,7 @@ rack_entity_instance(Namespace, ClassName, InstanceURL) :-
     ns_ref(Namespace, _, InstanceURL),
     rack_ref(ClassName, E).
 
-%% TODO: rack_activity_instance, rack_agent_instance
+% TODO: rack_activity_instance, rack_agent_instance
 
 %% ----------------------------------------------------------------------
 %% Loading generated data from .rack files

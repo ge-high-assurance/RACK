@@ -1,29 +1,33 @@
 <!---
-NOTE: This document should be copied verbatim to this wiki page before every
-release:
+NOTE: This file should be copied to this wiki page before each release:
 
-TODO(lb): This page should also be renamed to "RACK CLI".
-
-https://github.com/ge-high-assurance/RACK/wiki/Command-line-script-rack.py
+https://github.com/ge-high-assurance/RACK/wiki/RACK-CLI
 -->
 
 # RACK CLI
 
-The RACK command-line interface can
+The RACK command-line interface (the `rack` program) can
 
-- [populate data](#Import) into RACK in a Box via CSV files
-- [extract data](#Export) from RACK in a Box to CSV files
+- [initialize](#Initialize RACK-in-a-Box) RACK-in-a-Box
+- [import data](#Import) into RACK-in-a-Box from CSV files
+- [export data](#Export) from RACK-in-a-Box to CSV files
 
-among other functions.
+To do its work, the rack program uses the Node Execution Group REST
+API which is documented in the [REST API Swagger
+Demo](https://github.com/ge-high-assurance/RACK/wiki/REST-API-Swagger-Demo)
+and [REST
+cookbook](https://github.com/ge-semtk/semtk/wiki/REST-cookbook) wiki
+pages.
 
 ## Installing dependencies
 
-This program requires the [semtk-python3](https://github.com/ge-semtk/semtk-python3) package
-among other requirements listed in `requirements.txt`.
+The rack program requires the
+[semtk-python3](https://github.com/ge-semtk/semtk-python3) package and
+other requirements listed in `requirements.txt`.
 
-We recommend installing these dependencies in an isolated virtual environment
-like [virtualenv](https://pypi.org/project/virtualenv/) to ensure reproducability
-of results.
+We recommend installing these dependencies in an isolated virtual
+environment using [virtualenv](https://pypi.org/project/virtualenv/)
+to ensure reproducability of results.
 
 ```shell
 virtualenv venv
@@ -32,29 +36,72 @@ pip install -r requirements.txt
 python3 setup.py install
 ```
 
-## Set up default RACK-in-a-Box
+## Initialize RACK-in-a-Box
 
-This shell script will load the default model and data into RACK-in-a-Box:
+We have written a shell script called `setup-rack.sh` which will call
+the `rack` program to initialize a RACK-in-a-Box instance with the
+RACK ontology model and some default data.  It is assumed that you are
+still in the isolated Python virtual environment and running a
+RACK-in-a-Box instance in a Docker container on `localhost`.  Here is
+how to run `setup-rack.sh` and what its output may look like:
 
 ```shell
-setup-rack.sh
+(venv) $ ./setup-rack.sh
+Clearing graph
+Success Update succeeded
+Ingesting ../OwlModels/AGENTS.owl...               OK
+Ingesting ../OwlModels/ANALYSIS.owl...             OK
+Ingesting ../OwlModels/DOCUMENT.owl...             OK
+Ingesting ../OwlModels/HAZARD.owl...               OK
+Ingesting ../OwlModels/PROCESS.owl...              OK
+Ingesting ../OwlModels/PROV-S.owl...               OK
+Ingesting ../OwlModels/REQUIREMENTS.owl...         OK
+Ingesting ../OwlModels/REVIEW.owl...               OK
+Ingesting ../OwlModels/SACM-S.owl...               OK
+Ingesting ../OwlModels/SOFTWARE.owl...             OK
+Ingesting ../OwlModels/SYSTEM.owl...               OK
+Ingesting ../OwlModels/TESTING.owl...              OK
+Storing nodegroups...                                       OK
+Storing nodegroups...                                       OK
+Clearing graph
+Success Update succeeded
+Loading ingest01 system...                         OK Records: 8       Failures: 0
+Loading ingest02 interface...                      OK Records: 4       Failures: 0
+Loading ingest03 hazard...                         OK Records: 4       Failures: 0
+Loading ingest04 requirement...                    OK Records: 22      Failures: 0
+Loading ingest05 data dict...                      OK Records: 29      Failures: 0
+Loading ingest06 test...                           OK Records: 8       Failures: 0
+Loading ingest07 test results...                   OK Records: 16      Failures: 0
+Loading ingest08 agent...                          OK Records: 1       Failures: 0
+Loading ingest09 package...                        OK Records: 3       Failures: 0
+Loading ingest10 compile...                        OK Records: 14      Failures: 0
+Loading ingest11 format...                         OK Records: 6       Failures: 0
+Loading ingest12 file...                           OK Records: 19      Failures: 0
+Loading ingest13 component...                      OK Records: 4       Failures: 0
+Ingesting ARP-4754A.owl                   OK
+Ingesting DO-178C.owl                     OK
+Ingesting DO-330.owl                      OK
+Ingesting MIL-STD-881D.owl                OK
+Ingesting MIL-STD-881D-AppxB.owl          OK
+Ingesting MIL-STD-881D-AppxD.owl          OK
+Ingesting MIL-STD-881D-AppxA.owl          OK
+Ingesting MIL-STD-881D-AppxC.owl          OK
 ```
 
-## The "rack" command
+## How to use the rack program
 
-The rack command performs other changes to the RACK-in-a-box triplestore.
+The rack program accepts the following command line arguments:
 
 ```text
-usage: rack [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE]
-            [--log-level LOG_LEVEL]
-            {data,plumbing} ...
+usage: rack [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE] [--log-level LOG_LEVEL] {data,model,nodegroups} ...
 
 RACK in a Box toolkit
 
 positional arguments:
-  {data,plumbing}
+  {data,model,nodegroups}
     data                Import or export CSV data
-    plumbing            Tools for RACK developers
+    model               Interact with SemTK model
+    nodegroups          Interact with SemTK nodegroups
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -65,19 +112,20 @@ optional arguments:
                         Assign logger severity level
 ```
 
-The *base-url* overrides a localhost installation of RACK in a Box.
+The *BASE_URL* argument overrides the default URL used to find the
+locally running RACK-in-a-Box instance; it allows the rack program to
+contact a remote RACK-in-a-Box instance instead.
 
-The *triple-store* URL argument overrides the default RACK in a Box triple-store URL.
-
-The *data-graph* URL argument overrides the data-set identifier specified in the configuration file.
+The *TRIPLE_STORE* URL argument overrides the default URL used to find
+the RACK-in-a-Box's triple-store.
 
 ## Configuration file format
 
-The import configuration files are YAML files that specify the target *data-graph*
-and *ingestion-steps*.
+The import configuration files are YAML files that specify the target
+*data-graph* and *ingestion-steps*.
 
-*data-graph* is a graph identifier URL. This URL allows multiple datasets to be stored
-in the same triple store.
+*data-graph* is a graph identifier URL. This URL allows multiple
+datasets to be stored in the same triple store.
 
 *ingestion-steps* is a list of pairs of *nodegroup id* and *CSV path*.
 
@@ -92,13 +140,13 @@ ingestion-steps:
 
 ## Example invocation
 
-These examples uses the virtual environment as defined in the *Installing Dependencies*
-section above.
+These examples uses the virtual environment as defined in the
+*Installing Dependencies* section above.
 
 ### Import
 
-This example populates the *Turnstile* example into a RACK in the Box instance
-running on `localhost`
+This example populates the *Turnstile* example into a RACK-in-a-Box
+instance running in a Docker container on `localhost`:
 
 ```shell
 $ source venv/bin/activate
@@ -128,8 +176,9 @@ Loading ingest19 compile                OK Records: 27      Failures: 0
 
 ### Export
 
-This example exports instances of the `SYSTEM` class from the *Turnstile*
-example from a Rack in the Box instance running on `localhost`:
+This example exports instances of the `SYSTEM` class from the
+*Turnstile* example from a Rack-in-a-Box instance running in a Docker
+container on `localhost`:
 
 ```shell
 $ source venv/bin/activate
@@ -147,7 +196,9 @@ Out Gate             TurnStileSystem
 OutputThread         Counter Application
 ```
 
-See `rack data export --help` for options, including different export formats (such as CSV), emitting to a file, and omitting the header row.
+See `rack data export --help` for options, including different export
+formats (such as CSV), emitting to a file, and omitting the header
+row.
 
 ### Updating nodegroups
 

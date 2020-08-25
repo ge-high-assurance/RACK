@@ -8,9 +8,9 @@ https://github.com/ge-high-assurance/RACK/wiki/RACK-CLI
 
 The RACK command-line interface (the `rack` program) can
 
-- [initialize](#Initialize RACK-in-a-Box) RACK-in-a-Box
-- [import data](#Import) into RACK-in-a-Box from CSV files
-- [export data](#Export) from RACK-in-a-Box to CSV files
+- [initialize](#initialize-rack-in-a-box) RACK-in-a-Box
+- [import data](#import-data) into RACK-in-a-Box from CSV files
+- [export data](#export-data) from RACK-in-a-Box to CSV files
 
 To do its work, the rack program uses the Node Execution Group REST
 API which is documented in the [REST API Swagger
@@ -19,7 +19,7 @@ and [REST
 cookbook](https://github.com/ge-semtk/semtk/wiki/REST-cookbook) wiki
 pages.
 
-## Installing dependencies
+## Install dependencies
 
 The rack program requires the
 [semtk-python3](https://github.com/ge-semtk/semtk-python3) package and
@@ -143,7 +143,7 @@ ingestion-steps:
 These examples uses the virtual environment as defined in the
 *Installing Dependencies* section above.
 
-### Import
+### Import data
 
 This example populates the *Turnstile* example into a RACK-in-a-Box
 instance running in a Docker container on `localhost`:
@@ -174,7 +174,7 @@ Loading ingest18 package file           OK Records: 1       Failures: 0
 Loading ingest19 compile                OK Records: 27      Failures: 0
 ```
 
-### Export
+### Export data
 
 This example exports instances of the `SYSTEM` class from the
 *Turnstile* example from a Rack-in-a-Box instance running in a Docker
@@ -200,7 +200,7 @@ See `rack data export --help` for options, including different export
 formats (such as CSV), emitting to a file, and omitting the header
 row.
 
-### Updating nodegroups
+### Update nodegroups
 
 The script can automate loading a directory full of nodegroups
 indexed by a `store_data.csv` file.

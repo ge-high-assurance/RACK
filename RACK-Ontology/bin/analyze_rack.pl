@@ -136,7 +136,21 @@ report_instance_counts(E, _IS, NSL, CNS) :-
     member(CNS, NSL),
     findall(NSX, (rdf(NSX, rdf:type, E), rdf_split_url(CNS, _, NSX)), NSXS),
     length(NSXS, N),
-    format('  () of ~d instances in ~w~n', [N, CNS]).
+    format('  () of ~d instances in ~w~n', [N, CNS]),
+    report_rack_instances(E, CNS, N, 20).
+
+report_rack_instances(E, Pfx, Count, Limit) :-
+    findall(I, (rdf(I, rdf:type, E),
+                rack_ontology_node(I, _, _),
+                rdf_split_url(Pfx, _, I)
+               ), RACK_IS),
+    ((Count >= Limit, !,
+     format('    = MANY [use -i ~w to view]~n', [Pfx]));
+     findall(I, report_rack_instance(RACK_IS, I), _IS)).
+
+report_rack_instance(RACK_IS, I) :-
+    member(I, RACK_IS),
+    format('    = ~w~n', [I]).
 
 instance_prefixes(Prefixes) :-
     setof(P, E^T^I^L^(rdf(E, rdf:type, T),

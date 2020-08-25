@@ -33,6 +33,7 @@ description DSL into instances in the model.
               rack_entity_instance/1,
               rack_entity_instance/3,
               rack_ontology_node/3,
+              rdf_literal_val_type/3,
 
               % Importing user data into the model
               load_data/2,
@@ -332,6 +333,9 @@ property_extra(Class, _Property, _Target, normal) :-
 
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:int).
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:integer).
+
+rdf_literal_val_type(Literal, Value, Type) :-
+    rdf_equal(Literal, Value^^Type).
 
 
 %! rack_instance(+OntologyClassName:atom, -InstanceURL:atom) is nondet

@@ -11,8 +11,8 @@ https://github.com/ge-high-assurance/RACK/wiki/Command-line-script-rack.py
 
 The RACK command-line interface can
 
- - [populate data](#Import) into RACK in a Box via CSV files
- - [extract data](#Export) from RACK in a Box to CSV files
+- [populate data](#Import) into RACK in a Box via CSV files
+- [extract data](#Export) from RACK in a Box to CSV files
 
 among other functions.
 

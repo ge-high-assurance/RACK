@@ -31,7 +31,12 @@ main :-
 
                 [opt(data_namespace), meta('NS'), type(atom),
                  shortflags([n]), longflags(['namespace']),
-                 help('Namespace to load data into')]
+                 help('Namespace to load data into')],
+
+                [opt(instance_prefix), meta('PREFIX'), type(atom),
+                 shortflags([i]), longflags(['instance_prefix', 'instance']),
+                 default(none),
+                 help('Prefix of instances to analyze (or "all" to analyze all isntances)')]
               ],
 
     opt_arguments(OptSpec, Opts, _PosArgs),
@@ -44,7 +49,7 @@ main :-
     load_local_model(ODir),
     load_recognizers(Opts),
     load_data_from_dir(Opts),
-    report.
+    (Pfx = none, !, report ; report(Pfx)).
 
 get_ontology_dir(Opts, Path) :- member(ontology_dir(Path), Opts), !.
 get_ontology_dir(_, '.').

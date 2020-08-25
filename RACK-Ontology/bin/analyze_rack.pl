@@ -16,6 +16,23 @@ report :-
     \+ rdf(Thing, rdf:type, _),
     print_message(error, no_ontology_loaded).
 
+report(InstancePfx) :-
+    rdf_equal(rack:'PROV-S#THING', Thing),
+    rdf(Thing, rdf:type, _), !, % verify the ontology is loaded
+    rack_nodes(Nodes),
+    report_rack_nodes(Nodes),
+    format('~n~n'),
+    instance_prefixes(Prefixes),
+    report_instance_prefixes(Prefixes),
+    format('~n~n'),
+    report_instances_in(InstancePfx),
+    true.
+
+report(_) :-
+    rdf_equal(rack:'PROV-S#THING', Thing),
+    \+ rdf(Thing, rdf:type, _),
+    print_message(error, no_ontology_loaded).
+
 prolog:message(no_ontology_loaded) -->
     [ 'No ontology has been loaded for analysis.'-[] ].
 
@@ -143,6 +160,45 @@ report_instance_prefix(Prefix) :-
                ), IS),
     length(IS, N),
     format('  ~:d in ~w~n', [N, Prefix]).
+
+report_instances_in(Pfx) :- write('rii '), write(Pfx), nl,
+    findall(I, (rdf(I, rdf:type, E),
+                rdf(E, rdf:type, T),
+                rdf_reachable(T, rdfs:subClassOf, owl:'Class'),
+                \+ rdf_bnode(I),
+                atom_concat(Pfx, _, I)
+               ), IS),
+    length(IS, N),
+    format('~`#t ~:d Instances in ~w ~`#t~78|~n', [N, Pfx]),
+    findall(I, (member(I, IS), report_instance(I)), _).
+
+report_instance(I) :-
+    rdf(I, rdf:type, T),
+    prefix_shorten(I, SI),
+    prefix_shorten(T, ST),
+    format('~n~w :: ~w~n', [SI, ST]),
+    findall((PR, PV), report_instance_propval(I, PR, PV), _PRVS),
+    true.
+
+report_instance_propval(I, PR, PV) :-
+    rdf(I, PR, PV),
+    report_instance_propval_(I, PR, PV).
+
+report_instance_propval_(_I, PR, _PV) :-
+    rdf_equal(PR, rdf:type), !.  % do nothing else, already reported
+report_instance_propval_(_I, PR, PV) :-
+    rdf_literal(PV), !,
+    prefix_shorten(PR, SPR),
+    rdf_literal_val_type(PV, PVv, PVt),
+    prefix_shorten(PVt, SPVt),
+    format('   . ~w = ~w :: ~w~n', [ SPR, PVv, SPVt ]).
+report_instance_propval_(_I, PR, PV, SPVT) :-
+    \+ rdf_literal(PV),
+    prefix_shorten(PV, SPV),
+    rdf(PV, rdf:type, PVT),
+    prefix_shorten(PVT, SPVT),
+    prefix_shorten(PR, SPR),
+    format('   . ~w ~w :.: ~w~n', [ SPR, SPV, SPVT ]).
 
 % ----------------------------------------------------------------------
 

@@ -46,8 +46,6 @@
     <j.0:content>
       <j.0:SECTION rdf:ID="MIL-STD-881D-AppxH"/>
     </j.0:content>
-    <j.0:dateOfIssue rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
-    >2018-04-09</j.0:dateOfIssue>
     <j.0:content>
       <j.0:SECTION rdf:ID="MIL-STD-881D-AppxC"/>
     </j.0:content>
@@ -63,6 +61,8 @@
     <j.0:content>
       <j.0:SECTION rdf:ID="MIL-STD-881D-AppxD"/>
     </j.0:content>
+    <j.0:dateOfIssue rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2018-04-09</j.0:dateOfIssue>
     <j.0:content>
       <j.0:SECTION rdf:ID="MIL-STD-881D-AppxI"/>
     </j.0:content>

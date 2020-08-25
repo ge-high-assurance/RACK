@@ -27,12 +27,10 @@
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.1:confirms>
       <j.1:TEST rdf:ID="UTC-1-1">
-        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >UTC-1-1</j.0:uniqueIdentifier>
+        <j.0:uniqueIdentifier>UTC-1-1</j.0:uniqueIdentifier>
       </j.1:TEST>
     </j.1:confirms>
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >UTR-1-1-1</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>UTR-1-1-1</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
   <j.1:TEST_RESULT rdf:ID="UTR-1-1-2">
     <j.1:executedBy>
@@ -40,64 +38,54 @@
     </j.1:executedBy>
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.1:confirms rdf:resource="#UTC-1-1"/>
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >UTR-1-1-2</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>UTR-1-1-2</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
   <j.1:TEST_RESULT rdf:ID="UTR-1-2-1">
     <j.1:executedBy rdf:resource="#UnitTestRun1"/>
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.1:confirms>
       <j.1:TEST rdf:ID="UTC-1-2">
-        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >UTC-1-2</j.0:uniqueIdentifier>
+        <j.0:uniqueIdentifier>UTC-1-2</j.0:uniqueIdentifier>
       </j.1:TEST>
     </j.1:confirms>
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >UTR-1-2-1</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>UTR-1-2-1</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
   <j.1:TEST_RESULT rdf:ID="UTR-1-2-2">
     <j.1:executedBy rdf:resource="#UnitTestRun2"/>
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.1:confirms rdf:resource="#UTC-1-2"/>
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >UTR-1-2-2</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>UTR-1-2-2</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
   <j.1:TEST_RESULT rdf:ID="UTR-1-3-1">
     <j.1:executedBy rdf:resource="#UnitTestRun1"/>
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.1:confirms>
       <j.1:TEST rdf:ID="UTC-1-3">
-        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >UTC-1-3</j.0:uniqueIdentifier>
+        <j.0:uniqueIdentifier>UTC-1-3</j.0:uniqueIdentifier>
       </j.1:TEST>
     </j.1:confirms>
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >UTR-1-3-1</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>UTR-1-3-1</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
   <j.1:TEST_RESULT rdf:ID="UTR-1-4-2">
     <j.1:executedBy rdf:resource="#UnitTestRun2"/>
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Failed"/>
     <j.1:confirms>
       <j.1:TEST rdf:ID="UTC-1-4">
-        <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >UTC-1-4</j.0:uniqueIdentifier>
+        <j.0:uniqueIdentifier>UTC-1-4</j.0:uniqueIdentifier>
       </j.1:TEST>
     </j.1:confirms>
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >UTR-1-4-2</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>UTR-1-4-2</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
   <j.1:TEST_RESULT rdf:ID="UTR-1-3-2">
     <j.1:executedBy rdf:resource="#UnitTestRun2"/>
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.1:confirms rdf:resource="#UTC-1-3"/>
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >UTR-1-3-2</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>UTR-1-3-2</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
   <j.1:TEST_RESULT rdf:ID="UTR-1-4-1">
     <j.1:executedBy rdf:resource="#UnitTestRun1"/>
     <j.1:result rdf:resource="http://arcos.rack/TESTING#Failed"/>
     <j.1:confirms rdf:resource="#UTC-1-4"/>
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >UTR-1-4-1</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>UTR-1-4-1</j.0:uniqueIdentifier>
   </j.1:TEST_RESULT>
 </rdf:RDF>

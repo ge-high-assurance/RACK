@@ -3,6 +3,7 @@
     xmlns:sw="http://arcos.rack/SOFTWARE"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:CONFIDENCE="http://arcos.rack/CONFIDENCE"
     xmlns:Rq="http://arcos.rack/REQUIREMENTS"
     xmlns:sys="http://arcos.rack/SYSTEM"
     xmlns:genpropinfo="http://arcos.rack/GeneratePropInfoCSV#"
@@ -27,6 +28,7 @@
     <owl:imports rdf:resource="SACM-S"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="REQUIREMENTS"/>
+    <owl:imports rdf:resource="CONFIDENCE"/>
     <owl:imports rdf:resource="TESTING"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
   </owl:Ontology>

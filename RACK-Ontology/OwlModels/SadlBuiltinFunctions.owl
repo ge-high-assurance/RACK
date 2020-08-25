@@ -32,7 +32,7 @@
     <rdfs:subClassOf rdf:resource="sadllistmodel#List"/>
   </owl:Class>
   <j.1:ExternalEquation rdf:ID="isDType">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#isDType</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#isDType</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -56,7 +56,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean isDType(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#isDType")</j.1:script>
+        <j.1:script>boolean isDType(string X): uri("org.apache.jena.reasoner.rulesys.builtins#isDType")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -117,7 +117,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="addOne">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#addOne</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#addOne</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -141,12 +141,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>decimal addOne(decimal X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#addOne")</j.1:script>
+        <j.1:script>decimal addOne(decimal X): uri("org.apache.jena.reasoner.rulesys.builtins#addOne")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listMapAsObject">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#listMapAsObject</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listMapAsObject</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -190,7 +190,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean listMapAsObject(string X,string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listMapAsObject")</j.1:script>
+        <j.1:script>boolean listMapAsObject(string X,string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#listMapAsObject")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -243,7 +243,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="now">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#now</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#now</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -255,7 +255,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>dateTime now(): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#now")</j.1:script>
+        <j.1:script>dateTime now(): uri("org.apache.jena.reasoner.rulesys.builtins#now")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -278,7 +278,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="le">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#le</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#le</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -312,7 +312,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean le(decimal X,decimal X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#le")</j.1:script>
+        <j.1:script>boolean le(decimal X,decimal X): uri("org.apache.jena.reasoner.rulesys.builtins#le")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -326,7 +326,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="uriConcat">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#uriConcat</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#uriConcat</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -360,7 +360,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>string uriConcat(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#uriConcat")</j.1:script>
+        <j.1:script>string uriConcat(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#uriConcat")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -374,7 +374,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="notBNode">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#notBNode</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#notBNode</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -398,7 +398,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean notBNode(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#notBNode")</j.1:script>
+        <j.1:script>boolean notBNode(string X): uri("org.apache.jena.reasoner.rulesys.builtins#notBNode")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -475,7 +475,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="regex">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#regex</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#regex</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -509,12 +509,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>string regex(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#regex")</j.1:script>
+        <j.1:script>string regex(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#regex")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listLength">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#listLength</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listLength</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -538,7 +538,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>int listLength(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listLength")</j.1:script>
+        <j.1:script>int listLength(string X): uri("org.apache.jena.reasoner.rulesys.builtins#listLength")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -561,7 +561,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="notLiteral">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#notLiteral</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#notLiteral</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -585,12 +585,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean notLiteral(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#notLiteral")</j.1:script>
+        <j.1:script>boolean notLiteral(string X): uri("org.apache.jena.reasoner.rulesys.builtins#notLiteral")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listEqual">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#listEqual</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listEqual</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -624,7 +624,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean listEqual(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listEqual")</j.1:script>
+        <j.1:script>boolean listEqual(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#listEqual")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -650,7 +650,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listContains">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#listContains</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listContains</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -684,7 +684,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean listContains(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listContains")</j.1:script>
+        <j.1:script>boolean listContains(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#listContains")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -696,7 +696,7 @@
         <j.1:script>-- sqrt(): uri("com.ge.research.sadl.jena.reasoner.builtin#sqrt")</j.1:script>
       </j.1:Script>
     </j.1:expression>
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#sqrt</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#sqrt</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -720,7 +720,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>decimal sqrt(decimal X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#sqrt")</j.1:script>
+        <j.1:script>decimal sqrt(decimal X): uri("org.apache.jena.reasoner.rulesys.builtins#sqrt")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -769,7 +769,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="bound">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#bound</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#bound</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -793,7 +793,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean bound(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#bound")</j.1:script>
+        <j.1:script>boolean bound(string X): uri("org.apache.jena.reasoner.rulesys.builtins#bound")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -805,7 +805,7 @@
         <j.1:script>-- pow(): uri("com.ge.research.sadl.jena.reasoner.builtin#pow")</j.1:script>
       </j.1:Script>
     </j.1:expression>
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#pow</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#pow</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -839,12 +839,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>decimal pow(decimal X,decimal X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#pow")</j.1:script>
+        <j.1:script>decimal pow(decimal X,decimal X): uri("org.apache.jena.reasoner.rulesys.builtins#pow")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="ge">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#ge</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#ge</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -878,21 +878,21 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean ge(decimal X,decimal X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#ge")</j.1:script>
+        <j.1:script>boolean ge(decimal X,decimal X): uri("org.apache.jena.reasoner.rulesys.builtins#ge")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="table">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#table</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#table</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>-- table(): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#table")</j.1:script>
+        <j.1:script>-- table(): uri("org.apache.jena.reasoner.rulesys.builtins#table")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="notBType">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#notBType</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#notBType</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -916,7 +916,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean notBType(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#notBType")</j.1:script>
+        <j.1:script>boolean notBType(string X): uri("org.apache.jena.reasoner.rulesys.builtins#notBType")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -950,7 +950,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="isBNode">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#isBNode</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#isBNode</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -974,12 +974,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean isBNode(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#isBNode")</j.1:script>
+        <j.1:script>boolean isBNode(string X): uri("org.apache.jena.reasoner.rulesys.builtins#isBNode")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="notDType">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#notDType</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#notDType</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1003,7 +1003,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean notDType(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#notDType")</j.1:script>
+        <j.1:script>boolean notDType(string X): uri("org.apache.jena.reasoner.rulesys.builtins#notDType")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -1026,7 +1026,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listMapAsSubject">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#listMapAsSubject</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listMapAsSubject</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1070,16 +1070,16 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean listMapAsSubject(string X,string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listMapAsSubject")</j.1:script>
+        <j.1:script>boolean listMapAsSubject(string X,string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#listMapAsSubject")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="tableAll">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#tableAll</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#tableAll</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>-- tableAll(): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#tableAll")</j.1:script>
+        <j.1:script>-- tableAll(): uri("org.apache.jena.reasoner.rulesys.builtins#tableAll")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -1132,7 +1132,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listEntry">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#listEntry</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listEntry</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1166,12 +1166,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>string listEntry(string X,int X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listEntry")</j.1:script>
+        <j.1:script>string listEntry(string X,int X): uri("org.apache.jena.reasoner.rulesys.builtins#listEntry")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="difference">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#difference</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#difference</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1205,7 +1205,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>decimal difference(decimal X,decimal X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#difference")</j.1:script>
+        <j.1:script>decimal difference(decimal X,decimal X): uri("org.apache.jena.reasoner.rulesys.builtins#difference")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -1219,7 +1219,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="isLiteral">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#isLiteral</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#isLiteral</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1243,12 +1243,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean isLiteral(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#isLiteral")</j.1:script>
+        <j.1:script>boolean isLiteral(string X): uri("org.apache.jena.reasoner.rulesys.builtins#isLiteral")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="unbound">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#unbound</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#unbound</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1272,12 +1272,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>string unbound(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#unbound")</j.1:script>
+        <j.1:script>string unbound(string X): uri("org.apache.jena.reasoner.rulesys.builtins#unbound")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listNotEqual">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#listNotEqual</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listNotEqual</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1311,7 +1311,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean listNotEqual(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listNotEqual")</j.1:script>
+        <j.1:script>boolean listNotEqual(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#listNotEqual")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -1325,7 +1325,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="countLiteralValues">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#countLiteralValues</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#countLiteralValues</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1359,12 +1359,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>int countLiteralValues(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#countLiteralValues")</j.1:script>
+        <j.1:script>int countLiteralValues(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#countLiteralValues")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listNotContains">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#listNotContains</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listNotContains</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1398,7 +1398,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>boolean listNotContains(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listNotContains")</j.1:script>
+        <j.1:script>boolean listNotContains(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#listNotContains")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -1408,6 +1408,15 @@
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
         <j.1:script>-- noUnknownValues(): uri("com.ge.research.sadl.jena.reasoner.builtin#noUnknownValues")</j.1:script>
+      </j.1:Script>
+    </j.1:expression>
+  </j.1:ExternalEquation>
+  <j.1:ExternalEquation rdf:ID="thereExists">
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#thereExists</j.1:externalURI>
+    <j.1:expression>
+      <j.1:Script>
+        <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
+        <j.1:script>-- thereExists(): uri("com.ge.research.sadl.jena.reasoner.builtin#thereExists")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
@@ -1421,7 +1430,7 @@
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="strConcat">
-    <j.1:externalURI>com.hp.hpl.jena.reasoner.rulesys.builtins#strConcat</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#strConcat</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1431,22 +1440,12 @@
       <rdf:type rdf:nodeID="A0"/>
     </j.1:returnTypes>
     <j.1:arguments rdf:parseType="Resource">
-      <j.0:rest rdf:parseType="Resource">
-        <j.0:first>
-          <j.1:DataDescriptor>
-            <j.1:dataType>http://www.w3.org/2001/XMLSchema#string</j.1:dataType>
-            <j.1:descriptorVariable>
-              <j.1:GPVariable rdf:ID="strConcat_X"/>
-            </j.1:descriptorVariable>
-            <j.1:localDescriptorName>X</j.1:localDescriptorName>
-          </j.1:DataDescriptor>
-        </j.0:first>
-        <rdf:type rdf:nodeID="A0"/>
-      </j.0:rest>
       <j.0:first>
         <j.1:DataDescriptor>
           <j.1:dataType>http://www.w3.org/2001/XMLSchema#string</j.1:dataType>
-          <j.1:descriptorVariable rdf:resource="#strConcat_X"/>
+          <j.1:descriptorVariable>
+            <j.1:GPVariable rdf:ID="strConcat_X"/>
+          </j.1:descriptorVariable>
           <j.1:localDescriptorName>X</j.1:localDescriptorName>
         </j.1:DataDescriptor>
       </j.0:first>
@@ -1455,7 +1454,7 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script>string strConcat(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#strConcat")</j.1:script>
+        <j.1:script>string strConcat(string X): uri("org.apache.jena.reasoner.rulesys.builtins#strConcat")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>

@@ -222,3 +222,23 @@ Write: data
                   }
         } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/COMPONENT.csv".
+
+// list all CONFIDENCE_ASSESSMENT
+Write: data
+{
+  Ask: "select distinct ?assessmentId ?createById ?assesseeId ?belief ?disbelief ?uncertainty where
+        {  ?CONFIDENCE_ASSESSMENT <rdf:type> <CONFIDENCE_ASSESSMENT>
+         . ?CONFIDENCE_ASSESSMENT <uniqueIdentifier> ?assessmentId
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:createBy> ?createBy
+                    . ?createBy <rdf:type> <ACTIVITY>
+                    . ?createBy <uniqueIdentifier> ?createById
+                   }
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:assesses> ?assessee
+                    . ?assessee <rdf:type> <ENTITY>
+                    . ?assessee <uniqueIdentifier> ?assesseeId
+                   }
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:belief> ?belief }
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:disbelief> ?disbelief }
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:uncertainty> ?uncertainty }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/CONFIDENCE_ASSESSMENT.csv".

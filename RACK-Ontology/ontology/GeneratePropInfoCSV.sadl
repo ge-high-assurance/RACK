@@ -1,5 +1,6 @@
 uri "http://arcos.rack/GeneratePropInfoCSV" alias genpropinfo.
 import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/CONFIDENCE".
 import "http://arcos.rack/HAZARD".
 import "http://arcos.rack/REQUIREMENTS".
 import "http://arcos.rack/REVIEW".

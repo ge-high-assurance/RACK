@@ -1,4 +1,5 @@
 uri "http://TurnstileSystem/CounterApplicationTesting" alias cntrapptst.
+import "http://arcos.rack/CONFIDENCE".
 import "http://arcos.rack/TESTING".
 import "http://TurnstileSystem/CounterApplicationRequirements".
 
@@ -77,4 +78,23 @@ TR-1-4-2 is a TEST_RESULT
 	has executedBy TestRun2.
 	
 
-TestRun2 is a TEST_EXECUTION.	
+TestRun2 is a TEST_EXECUTION.
+
+ASSESSING_CONFIDENCE_CounterApplicationTesting is an ACTIVITY
+    has uniqueIdentifier "ASSESSING_CONFIDENCE_CounterApplicationTesting".
+
+CONFIDENCE_ASSESSMENT_TR-1-1-1 is a BDU_CONFIDENCE_ASSESSMENT,
+    has uniqueIdentifier "CONFIDENCE_ASSESSMENT_TR-1-1-1",
+    has createBy ASSESSING_CONFIDENCE_CounterApplicationTesting,
+    has assesses TR-1-1-1,
+    has belief 1.0,
+    has disbelief 0.0,
+    has uncertainty 0.0.
+
+CONFIDENCE_ASSESSMENT_TR-1-2-1 is a BDU_CONFIDENCE_ASSESSMENT,
+    has uniqueIdentifier "CONFIDENCE_ASSESSMENT_TR-1-2-1",
+    has createBy ASSESSING_CONFIDENCE_CounterApplicationTesting,
+    has assesses TR-1-2-1,
+    has belief 0.99,
+    has disbelief 0.01,
+    has uncertainty 0.0.

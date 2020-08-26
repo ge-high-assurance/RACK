@@ -22,18 +22,16 @@ data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
     build_inputs(Nonce, Inputs),
     build_from(Nonce, Dir),
     member(Input, Inputs),
-    file_to_fpath(Input, Dir, FPath),
     rack_namespace(NS),
-    ns_ref(NS, FPath, Instance),
+    ns_ref(NS, Nonce, I), append_fld(I, Input, Instance),
     InstanceData = sw_file_data(Dir, Input).
 
 data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
     build_outputs(Nonce, Outputs),
     build_from(Nonce, Dir),
     member(Output, Outputs),
-    file_to_fpath(Output, Dir, FPath),
     rack_namespace(NS),
-    ns_ref(NS, FPath, Instance),
+    ns_ref(NS, Nonce, O), append_fld(O, Output, Instance),
     InstanceData = sw_file_data(Dir, Output).
 
 data_get('SOFTWARE#FILE', 'SOFTWARE#filename', createdFile(File, tar), Value) :-

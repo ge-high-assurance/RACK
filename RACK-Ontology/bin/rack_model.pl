@@ -23,6 +23,7 @@ description DSL into instances in the model.
               % Ontology relationship predicates
               rack_ref/2,
               ns_ref/3,
+              append_fld/3,
               is_owl_class/1,
               owl_list/2,
               entity/1,
@@ -225,6 +226,14 @@ rack_ref(Name, URI) :- atom_concat('http://arcos.rack/', Name, URI).
 
 ns_ref(NS, Target, Ref) :- atom_concat(NS, '#', P),
                            atom_concat(P, Target, Ref).
+
+%! append_fld(+Base:atom, +Fld:atom, -Result:atom) is det.
+%
+% Used to construct an RDF node reference from a base and a suffix
+% field name using a regular syntax.
+
+append_fld(Base, Fld, Result) :- atom_concat(Base, '.>', B),
+                                 atom_concat(B, Fld, Result).
 
 
 is_owl_class(E) :-

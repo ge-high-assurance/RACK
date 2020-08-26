@@ -243,11 +243,13 @@ owl_list(B, PL) :-
 % True if the Node is defined by RACK and if so, returns the Area and
 % Item.
 %
-%    :- rack_ontology_node('http://arcos.rack/DOCUMENT#DOC_STATUS', Area, Item).
-%    Area = 'DOCUMENT#'
-%    Item = 'DOC_STATUS'
-%    :- rack_ontology_node(owl:'Class', Area, Item).
-%    false.
+% ==
+% :- rack_ontology_node('http://arcos.rack/DOCUMENT#DOC_STATUS', Area, Item).
+% Area = 'DOCUMENT#'
+% Item = 'DOC_STATUS'
+% :- rack_ontology_node(owl:'Class', Area, Item).
+% false.
+% ==
 
 rack_ontology_node(Node, Area, Item) :-
     rdf_split_url(E, Item, Node),
@@ -342,9 +344,11 @@ rdf_literal_val_type(Literal, Value, Type) :-
 %
 % Used to return instances of the corresponding ontology class (by name).
 %
-%     :- rack_instance('SOFTWARE#FILE', I).
-%     I = 'http://TurnstileSystem/CounterApplication/counter.c' ;
-%     ...
+% ==
+% :- rack_instance('SOFTWARE#FILE', I).
+% I = 'http://TurnstileSystem/CounterApplication/counter.c' ;
+% ...
+% ==
 
 rack_instance(OntologyClassName, InstanceURL) :-
     rack_ref(OntologyClassName, Ref),
@@ -365,8 +369,10 @@ rack_entity_instance(InstanceURL) :-
 % Used to return instances of ontology ENTITY objects existing in the
 % specified namespace.
 %
-%    :- rack_entity_instance('HTTP://TurnstileSystem/CounterApplication', I).
-%    I = 'http://TurnstileSystem/CounterApplication/counter.c'
+% ==
+% :- rack_entity_instance('HTTP://TurnstileSystem/CounterApplication', I).
+% I = 'http://TurnstileSystem/CounterApplication/counter.c'
+% ==
 
 rack_entity_instance(Namespace, ClassName, InstanceURL) :-
     entity(E),
@@ -488,44 +494,54 @@ rdf_target(Value, ValType, TargetRef) :-
 
 
 %% ----------------------------------------------------------------------
-%% Recognizers for Loaded Data
-%%
-%% Data recognizers are invoked by the load_data/2 and rdf_dataref/3
-%% process to recognize the relationship between information in the
-%% input =.rack= data files and specific ontology elements.
-%%
-%% Data recognizers are an evolving active mapping between RACK user
-%% data and the RACK core ontology; new user data should be
-%% accompanied by recognizers for that data.
-%%
-%% The recognizers are only needed for discrete, singular components;
-%% the relationships between the components identified by the
-%% recognizers is automatically identified by using the RACK ontology
-%% model to determine those relationships.
-%%
-%% There are two recognizers: data_instance/4 and data_get/4.
-%%
-%% * data_instance(+OntologyObjectName:atom, +Data, -Instance, -InstanceData)
-%%   The data_instance recognizer is used to associate Data with the
-%%   OntologyObjectName.  The returned Instance is the rdf Subject URL
-%%   to be used to describe this instance, and the InstanceData is
-%%   used to perform associated field (and transitive object)
-%%   recognition via the data_get/4 recognizer.
-%% * data_get(+OntologyObjectName:atom, +OntologyPropertyName:atom, +Data, -Value)
-%%   The data_get recognizer is used to determine the value for a the
-%%   specified property of the specified object, based on the passed
-%%   Data (which is usually the InstanceData returned by the
-%%   data_instance/4 for the object).  The value may be a scalar value
-%%   (like xsd:string) or it may be another data object Instance.
-%%
-%% The OntologyObjectName and OntologyPropertyName passed to both
-%% data_instance/4 and data_get/4 are the short names for the RACK
-%% ontology item.  They are both expanded to a full URI via the
-%% rack_ref/2 rule.
-%%
-%% Some common data recognizers are provided below, but each data
-%% tool/format will usually be accompanied by a set of recognizers for
-%% that data.
+%% ----+ Recognizers for Loaded Data
+
+%! load_recognizer(+FPath:path) is semidet
+%
+% Used to load a set of Data recognizers from a file.  This can be
+% used with multiple files to aggregate recognizers.
+%
+% Data recognizers are invoked by the load_data/2 and rdf_dataref/3
+% process to recognize the relationship between information in the
+% input =.rack= data files and specific ontology elements.
+%
+% Data recognizers are an evolving active mapping between RACK user
+% data and the RACK core ontology; new user data should be
+% accompanied by recognizers for that data.
+%
+% The recognizers are only needed for discrete, singular components;
+% the relationships between the components identified by the
+% recognizers is automatically identified by using the RACK ontology
+% model to determine those relationships.
+%
+% There are two recognizers: data_instance/4 and data_get/4.
+%
+%   * data_instance(+OntologyObjectName:atom, +Data, -Instance, -InstanceData)
+%     The data_instance recognizer is used to associate Data with the
+%     OntologyObjectName.  The returned Instance is the rdf Subject URL
+%     to be used to describe this instance, and the InstanceData is
+%     used to perform associated field (and transitive object)
+%     recognition via the data_get/4 recognizer.
+%
+%   * data_get(+OntologyObjectName:atom, +OntologyPropertyName:atom, +Data, -Value)
+%     The data_get recognizer is used to determine the value for a the
+%     specified property of the specified object, based on the passed
+%     Data (which is usually the InstanceData returned by the
+%     data_instance/4 for the object).  The value may be a scalar value
+%     (like xsd:string) or it may be another data object Instance.
+%
+%
+% The OntologyObjectName and OntologyPropertyName passed to both
+% data_instance/4 and data_get/4 are the short names for the RACK
+% ontology item.  They are both expanded to a full URI via the
+% rack_ref/2 rule.
+
+load_recognizer(FPath) :-
+    consult([FPath]).
+
+% Some common data recognizers are provided below, but each data
+% tool/format will usually be accompanied by a set of recognizers for
+% that data.
 
 :- multifile data_instance/4, data_get/4.
 
@@ -533,5 +549,3 @@ data_get('SOFTWARE#FILE', 'SOFTWARE#filename', sw_file_data(Dir, NameOrPath), Va
     file_to_fpath(NameOrPath, Dir, Path),
     atom_string(Path, Value).
 
-load_recognizer(FPath) :-
-    consult([FPath]).

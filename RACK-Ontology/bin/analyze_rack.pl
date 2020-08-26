@@ -192,6 +192,7 @@ report_instance(I) :-
     prefix_shorten(T, ST),
     format('~n~w :: ~w~n', [SI, ST]),
     findall((PR, PV), report_instance_propval(I, PR, PV), _PRVS),
+    findall(MP, report_instance_missingprop(T, I, MP), _MPS),
     true.
 
 report_instance_propval(I, PR, PV) :-
@@ -213,6 +214,11 @@ report_instance_propval_(_I, PR, PV, SPVT) :-
     prefix_shorten(PVT, SPVT),
     prefix_shorten(PR, SPR),
     format('   . ~w ~w :.: ~w~n', [ SPR, SPV, SPVT ]).
+
+report_instance_missingprop(T, I, MP) :-
+    property_target(T, Property, _Usage, Target, _Restr),
+    \+ rdf(I, Property, Target),
+    format('   . ~w = ?~n', Property).
 
 % ----------------------------------------------------------------------
 

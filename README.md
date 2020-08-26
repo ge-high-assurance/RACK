@@ -1,4 +1,4 @@
-In a hurry? Skip this introduction and just [learn how to install and use RACK](https://github.com/ge-high-assurance/RACK/wiki/RACK-in-a-Box-User-Guide-v0.0).
+In a hurry? Skip this introduction and just [learn how to install and use RACK](https://github.com/ge-high-assurance/RACK/wiki/home).
 
 # Introducing RACK
 

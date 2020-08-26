@@ -16,3 +16,8 @@ find_in_path_excluding() { # $1 = name of executable, $2.. = exclusion paths
                 ) | tr ' ' :) type -p $exe)
 }
 
+top_rel_curdir() {
+    tdir=${TOPDIR:-$(pwd)}
+    here=$(pwd | sed -e "s,^${tdir}/\?\(.*\),\1,")
+    if [ -z $here ] ; then echo . ; else echo $here; fi
+}

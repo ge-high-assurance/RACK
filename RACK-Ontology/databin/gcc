@@ -35,7 +35,7 @@ realtool=$(find_in_path_remainder $tool)
     nonce="n$(date +%s)-$$"
     echo ":- multifile build_with/5, build_from/2, build_inputs/2, build_outputs/2."
     echo "build_with(${nonce@Q}, compile," ${tool@Q}, ${realtool@Q}, [ "${opts[*]@Q}" ] ")."
-    echo "build_from(${nonce@Q}, '"$(pwd)"')."
+    echo "build_from(${nonce@Q}, '"$(top_rel_curdir)"')."
     echo "build_inputs(${nonce@Q}, [ ${inf[*]@Q} ])."
     echo "build_outputs(${nonce@Q}, [ ${outf@Q} ])."
 

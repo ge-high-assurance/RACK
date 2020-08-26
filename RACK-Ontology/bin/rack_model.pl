@@ -330,6 +330,9 @@ property_target(Class, Property, PropUsage, Target, Restrictions) :-
     property(Class, Property, PropUsage),
     rdf(Property, rdfs:range, Target),
     property_extra(Class, Property, Target, Restrictions).
+property_target(Class, Property, PropUsage, Target, Restrictions) :-
+    rdf(Class, rdfs:subClassOf, Parent),
+    property_target(Parent, Property, PropUsage, Target, Restrictions).
 
 property_extra(Class, Property, _Target, cardinality(N)) :-
     rdf(Class, rdfs:subClassOf, B),

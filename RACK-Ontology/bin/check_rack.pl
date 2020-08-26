@@ -6,8 +6,11 @@ check_rack :-
     findall(NPC, check_not_prov_s(NPC), NPCS),
     length(CS, CSLen),
     length(NPCS, NPCSLen),
+    format('~`.t Summary ~`.t~78|~n'),
     warn_if_nonzero("missing a Note/Description", CSLen),
     warn_if_nonzero("not a subclass of PROV-S#THING", NPCSLen),
+    (CSLen == 0, NPCSLen == 0, !,
+     format('No issues found~n') ; format('ISSUES FOUND IN CHECK~n')),
     true.
 
 check_missing_notes(Class) :-

@@ -175,7 +175,7 @@ report_instance_prefix(Prefix) :-
     length(IS, N),
     format('  ~:d in ~w~n', [N, Prefix]).
 
-report_instances_in(Pfx) :- write('rii '), write(Pfx), nl,
+report_instances_in(Pfx) :-
     findall(I, (rdf(I, rdf:type, E),
                 rdf(E, rdf:type, T),
                 rdf_reachable(T, rdfs:subClassOf, owl:'Class'),

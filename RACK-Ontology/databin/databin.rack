@@ -34,5 +34,11 @@ data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
     ns_ref(NS, Nonce, O), append_fld(O, Output, Instance),
     InstanceData = sw_file_data(Dir, Output).
 
+data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
+    build_with(Nonce, _ToolType, ToolName, ToolPath, _ToolArgs),
+    rack_namespace(NS),
+    ns_ref(NS, ToolPath, Instance),
+    InstanceData = sw_file_data('/tmp', ToolPath).
+
 data_get('SOFTWARE#FILE', 'SOFTWARE#filename', createdFile(File, tar), Value) :-
     atom_string(File, Value).

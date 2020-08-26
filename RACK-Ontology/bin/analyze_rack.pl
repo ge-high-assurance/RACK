@@ -217,8 +217,9 @@ report_instance_propval_(_I, PR, PV, SPVT) :-
 
 report_instance_missingprop(T, I, Property) :-
     property_target(T, Property, _Usage, Target, _Restr),
-    \+ rdf(I, Property, Target),
-    format('   . ~w = ?~n', Property).
+    \+ rdf(I, Property, _Val),
+    prefix_shorten(Target, ST),
+    format('  ?. ~w = ? :: ~w~n', [Property, ST]).
 
 % ----------------------------------------------------------------------
 

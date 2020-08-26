@@ -9,7 +9,7 @@ main :-
     working_directory(Cwd, Cwd),
     atom_concat(Cwd, 'OwlModels/', OwlDir),
     atom_concat(Cwd, 'models/TurnstileSystem/src', DataDir),
-    atom_concat(Cwd, 'databin/', RDir),
+    atom_concat(Cwd, 'databin/databin.rack', RFile),
     OptSpec = [ [opt(verbose), type(boolean), default(false),
                  shortflags([v]), longflags(['verbose']),
                  help('Enable verbose output')],
@@ -21,7 +21,7 @@ main :-
 
                 [opt(recognizers), meta('FILE'), type(atom),
                  shortflags([r]), longflags(['recognizer', 'recognizers']),
-                 default(RDir),
+                 default(RFile),
                  help('File containing data recognizers to use')],
 
                 [opt(data_dir), meta('DIR'), type(atom),
@@ -31,6 +31,7 @@ main :-
 
                 [opt(data_namespace), meta('NS'), type(atom),
                  shortflags([n]), longflags(['namespace']),
+                 default('http://testdata'),
                  help('Namespace to load data into')],
 
                 [opt(instance_prefix), meta('PREFIX'), type(atom),

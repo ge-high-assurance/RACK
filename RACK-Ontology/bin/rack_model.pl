@@ -91,6 +91,8 @@ file_to_fpath(File, DirPath, FilePath) :-
 %  load_model_from_url/1 or load_model_from_rack/0.
 
 load_local_model(Dir) :-
+    (atom(Dir), ! ; string(Dir), ! ;
+     print_message(error, invalid_directory_spec(Dir)), !, fail),
     % rdf_retractall(_,_,_), !,
     directory_files(Dir, AllFiles),
     findall(F, (member(E, AllFiles),
@@ -453,6 +455,8 @@ load_data_file(F) :-
 
 rack_datafile(F) :- file_name_extension(_, ".rack", F).
 
+prolog:message(invalid_directory_spec(_Dir)) -->
+    [ 'invalid directory specification, must be an atom or a string' ].
 prolog:message(loading_rack_datafile(Namespace, FP)) -->
     [ 'loading data into ~w from ~w ... '-[Namespace, FP] ].
 prolog:message(loaded_data_instances(Namespace, Count)) -->

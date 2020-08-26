@@ -12,7 +12,45 @@ by running `swipl` **from this directory**, and entering:
 This command should set up a local pldoc webserver instance listening at
 [http://localhost:4040/pldoc](http://localhost:4040/pldoc).
 
-# Setup
+# Command-line Usage
+
+There are a number of command-line utilities that can be used with the
+Prolog modules in this directory.
+
+ * `analyze` Runs an analysis of the ontology model and any associated
+   instantiated data.  Command-line options can be used to specify the
+   data model to be loaded and which subset of the data model
+   instances to display.
+
+   ```shell
+   $ analyze -h
+   $ analyze -i http://turnstilesystem/CounterApplication
+   ```
+
+ * `check` Runs various tests and checks on the ontology model and any
+   associated instantiated data.  Similar command-line options to the
+   `analyze` command, viewable via the `-h` flag.
+
+   ```shell
+   $ check -h
+   $ check -v
+   ```
+
+* `ingest_data` Loads the ontology model (from disk or RACK/Fuseki),
+   a set of data recognizers, and then the data to be recognized,
+   instantiating that data against the ontology model.  Writes the
+   result to disk or back to the RACK/Fuseki server.  See the `-h`
+   flag for usage details.
+
+   ```shell
+   $ ingest_data -h
+   $ ingest_data http://TurnstileSystem/CounterApplication \
+       models/TurnstileSystem/src
+   ```
+
+# Prolog API Usage
+
+## Setup
 
 In order to load `rack_model.pl`, you will need a Prolog interpreter.  One such
 interpreter is the SWI Prolog implementation.  You can use it to load the module
@@ -22,9 +60,9 @@ in a read-eval print loop (REPL) by doing:
 swipl -s rack_model.pl
 ```
 
-# Manipulating models
+## Manipulating models
 
-## Loading
+### Loading
 
 You may load a model in memory using one of the three following forms:
 
@@ -45,7 +83,7 @@ which can easily be obtained for testing by running:
 fuseki-server --mem RACK/
 ```
 
-## Saving locally
+### Saving locally
 
 There are two forms for saving the model in memory to a local file:
 
@@ -57,7 +95,7 @@ save_model_to_file('path/to/filename.owl', 'SomeNamespace').
 They will both write out to the specified file, the latter allowing the
 specification of a namespace for the triples.
 
-## Uploading to Fuseki
+### Uploading to Fuseki
 
 There are two forms for uploading the model in memory to a Fuseki instance:
 

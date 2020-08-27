@@ -35,3 +35,21 @@ data_instance('SOFTWARE#FILE', load_data, ToolPath,
 
 data_get('SOFTWARE#FILE', 'SOFTWARE#filename', createdFile(File, tar), Value) :-
     atom_string(File, Value).
+
+data_get('SOFTWARE#FILE', 'SOFTWARE#fileFormat',
+         sw_file_data(Nonce, _, F), 'CSourceFile') :-
+    build_inputs(Nonce, FS),
+    member(F, FS),
+    build_with(Nonce, compile, _, _, _).
+
+data_get('SOFTWARE#FILE', 'SOFTWARE#fileFormat',
+         sw_file_data(Nonce, _, F), 'ElfFile') :-
+    build_outputs(Nonce, FS),
+    member(F, FS),
+    build_with(Nonce, compile, _, _, _).
+
+
+data_instance('SOFTWARE#FORMAT', load_data, F, F) :-
+    member(F, [ 'CSourceFile', 'ElfFile' ]).
+data_get('SOFTWARE#FORMAT', 'PROV-S#uniqueIdentifier', Fmt, FmtS) :-
+    atom_string(Fmt, FmtS).

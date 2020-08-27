@@ -552,7 +552,10 @@ add_rdfdata(RDFClass, Class, DataRef, Data) :-
 
 add_rdfproperty(ShortC, ShortP, _RDFClass, Property, DataRef, Data) :-
     data_get(ShortC, ShortP, Data, Value),
-    (atom(Value), !, rack_namespace(NS), ns_ref(NS, Value, TargetRef);
+    (atom(Value), !, rack_namespace(NS), ns_ref(NS, Value, TargetRef),
+     ((rdf(DataRef, Property, TargetRef), ! ;
+       rdf(Property, rdfs:range, TargetType),
+       add_triple(TargetRef, rdf:type, TargetType)));
      TargetRef = Value),
     add_triple(DataRef, Property, TargetRef).
 

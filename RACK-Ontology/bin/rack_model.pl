@@ -539,7 +539,7 @@ rdf_dataref(RDFClass, Data, Instance) :-
     rack_namespace(NS),
     ns_ref(NS, InstanceSuffix, Instance),
     add_triple(Instance, rdf:type, RDFClass),
-    add_rdfdata(RDFClass, Instance, InstanceData).
+    (add_rdfdata(RDFClass, RDFClass, Instance, InstanceData); true).
 
 add_rdfdata(RDFClass, DataRef, Data) :-
     rdf(Property, rdfs:domain, RDFClass),

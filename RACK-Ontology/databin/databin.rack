@@ -19,8 +19,16 @@ data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
     build_inputs(Nonce, Inputs),
     build_from(Nonce, Dir),
     member(Input, Inputs),
-    append_fld(Nonce, Input, Instance),
+    input_or_prev_output(Nonce, Dir, Input, Instance),
     InstanceData = sw_file_data(Nonce, Dir, Input).
+input_or_prev_output(_Nonce, Dir, Input, InstanceRef) :-
+    % This file is an input, but was it an output of a previous operation?
+    output_of(_AnyTool, Dir, Input, BuildNonce), !,
+    append_fld(BuildNonce, Input, InstanceRef).
+input_or_prev_output(Nonce, _, Input, InstanceRef) :-
+    % The above failed so file was not an output of a previous build.
+    % It was probably created by a user, so it's a new, distinct file.
+    append_fld(Nonce, Input, InstanceRef).
 
 data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
     build_outputs(Nonce, Outputs),
@@ -31,7 +39,7 @@ data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
 
 data_instance('SOFTWARE#FILE', load_data, ToolPath,
               sw_file_data(Nonce, '/tmp', ToolPath)) :-
-    build_with(_Nonce, _ToolType, _ToolName, ToolPath, _ToolArgs).
+    build_with(Nonce, _ToolType, _ToolName, ToolPath, _ToolArgs).
 
 data_get('SOFTWARE#FILE', 'SOFTWARE#filename', createdFile(File, tar), Value) :-
     atom_string(File, Value).
@@ -40,7 +48,21 @@ data_get('SOFTWARE#FILE', 'SOFTWARE#fileFormat',
          sw_file_data(Nonce, _, F), 'CSourceFile') :-
     build_inputs(Nonce, FS),
     member(F, FS),
-    build_with(Nonce, compile, _, _, _).
+    build_with(Nonce, compile, _, _, _),
+    % now make sure this wasn't an output of a previous build step
+    % (e.g. a .o object file)
+    build_from(Nonce, Dir),
+    \+ output_of(compile, Dir, F, _).
+
+output_of(Tool, Dir, F, BuildNonce) :-
+    % File F in dir Dir might be the output of a previous build (if
+    % so, report the BuildNonce).  The Tool might be specified as a
+    % restriction, or it might also be an output.
+    build_from(BuildNonce, Dir),
+    build_with(BuildNonce, Tool, _, _, _),
+    build_outputs(BuildNonce, FS),
+    member(F, FS), !.  % red cut
+output_of(_, _, _, _) :- false.  % base case for checkout output_of
 
 data_get('SOFTWARE#FILE', 'SOFTWARE#fileFormat',
          sw_file_data(Nonce, _, F), 'ElfFile') :-

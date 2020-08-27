@@ -504,9 +504,16 @@ prolog:message(loaded_data_instances(Namespace, Count)) -->
 %% ----------------------------------------------------------------------
 %% Conversion of loaded data into RACK ontology RDF triples
 
+
+% display triples in debug mode.  Enable and disable via
+%
+%     :- debug(triples).
+%     :- nodebug(triples).
+
 show_triples :- rdf(S,P,O), show_triple(S,P,O).
 show_triple(S,P,O) :-
-    format('Triple: ~w --~w--> ~w~n', [S, P, O]).
+    debug(triples, 'Triple: ~w --~w--> ~w~n', [S, P, O]).
+
 
 add_triple(S,P,O) :-
     show_triple(S, P, O),

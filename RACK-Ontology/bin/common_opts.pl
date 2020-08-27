@@ -6,33 +6,38 @@ parse_args(ExtraArgs, Opts, PosArgs) :-
     atom_concat(Cwd, 'models/TurnstileSystem/src', DataDir),
     atom_concat(Cwd, 'databin/databin.rack', RFile),
     append([ [opt(verbose), type(boolean), default(false),
-                 shortflags([v]), longflags(['verbose']),
-                 help('Enable verbose output')],
+              shortflags([v]), longflags(['verbose']),
+              help('Enable verbose output')],
 
-                [opt(ontology_dir), meta('DIR_OR_URL'), type(atom),
-                 shortflags([o]), longflags(['ontology', 'model']),
-                 default(OwlDir),
-                 help('Where to load ontology from')],
+             [opt(declare), type(boolean), default(false),
+              shortflags(['D']), longflags(['declare']),
+              help('Declare generated RDF triples to stdout')],
 
-                [opt(recognizers), meta('FILE'), type(atom),
-                 shortflags([r]), longflags(['recognizer', 'recognizers']),
-                 default(RFile),
-                 help('File containing data recognizers to use')],
+             [opt(ontology_dir), meta('DIR_OR_URL'), type(atom),
+              shortflags([o]), longflags(['ontology', 'model']),
+              default(OwlDir),
+              help('Where to load ontology from')],
 
-                [opt(data_dir), meta('DIR'), type(atom),
-                 shortflags([d]), longflags(['data']),
-                 default(DataDir),
-                 help('Where to load data from')],
+             [opt(recognizers), meta('FILE'), type(atom),
+              shortflags([r]), longflags(['recognizer', 'recognizers']),
+              default(RFile),
+              help('File containing data recognizers to use')],
 
-                [opt(data_namespace), meta('NS'), type(atom),
-                 shortflags([n]), longflags(['namespace']),
-                 default('http://testdata'),
-                 help('Namespace to load data into')]
+             [opt(data_dir), meta('DIR'), type(atom),
+              shortflags([d]), longflags(['data']),
+              default(DataDir),
+              help('Where to load data from')],
+
+             [opt(data_namespace), meta('NS'), type(atom),
+              shortflags([n]), longflags(['namespace']),
+              default('http://testdata.org/'),
+              help('Namespace to load data into')]
            ], ExtraArgs, OptSpec),
     opt_arguments(OptSpec, Opts, PosArgs),
     % write('Opts: '), write(Opts), nl,
     % write('PosArgs: '), write(PosArgs), nl,
     set_verbosity(Opts),
+    set_declaration_level(Opts),
     get_ontology_dir(Opts, ODir),
     print_message(informational, loading_ontology_dir(ODir)),
     load_local_model(ODir),
@@ -57,6 +62,11 @@ set_verbosity([]).
 set_verbosity([verbose(true)|_]) :- set_prolog_flag(verbose, normal).
 set_verbosity([verbose(false)|_]) :- set_prolog_flag(verbose, silent).
 set_verbosity([_|Opts]) :- set_verbosity(Opts).
+
+set_declaration_level(Opts) :-
+    member(declare(true), Opts), !,
+    debug(triples).
+set_declaration_level(_).
 
 
 prolog:message(loading_ontology_dir(D)) -->

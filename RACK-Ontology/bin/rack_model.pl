@@ -535,7 +535,9 @@ add_triple(S,P,O) :-
 rdf_dataref(RDFClass, Data, Instance) :-
     rdf(RDFClass, rdf:type, owl:'Class'),
     rack_ref(ShortC, RDFClass),
-    data_instance(ShortC, Data, Instance, InstanceData),
+    data_instance(ShortC, Data, InstanceSuffix, InstanceData),
+    rack_namespace(NS),
+    ns_ref(NS, InstanceSuffix, Instance),
     add_triple(Instance, rdf:type, RDFClass),
     add_rdfdata(RDFClass, Instance, InstanceData).
 

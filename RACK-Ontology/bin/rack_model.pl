@@ -551,10 +551,6 @@ add_rdfproperty(ShortC, ShortP, _RDFClass, Property, DataRef, Data) :-
     rdf_target(Value, ValueType, TargetRef),
     add_triple(DataRef, Property, TargetRef).
 
-rdf_target(Value, ValType, Value) :- rdf_equal(ValType, xsd:string).
-rdf_target(Value, ValType, TargetRef) :-
-    rdf_dataref(ValType, Value, TargetRef).
-
 
 %% ----------------------------------------------------------------------
 %% ----+ Recognizers for Loaded Data

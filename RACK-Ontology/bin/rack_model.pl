@@ -609,7 +609,7 @@ load_recognizer(FPath) :-
 
 :- multifile data_instance/4, data_get/4.
 
-data_get('SOFTWARE#FILE', 'SOFTWARE#filename', sw_file_data(Dir, NameOrPath), Value) :-
+data_get('SOFTWARE#FILE', 'SOFTWARE#filename', sw_file_data(_, Dir, NameOrPath), Value) :-
     file_to_fpath(NameOrPath, Dir, Path),
     atom_string(Path, Value).
 

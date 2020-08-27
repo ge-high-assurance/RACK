@@ -20,17 +20,17 @@ data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
     build_from(Nonce, Dir),
     member(Input, Inputs),
     append_fld(Nonce, Input, Instance),
-    InstanceData = sw_file_data(Dir, Input).
+    InstanceData = sw_file_data(Nonce, Dir, Input).
 
 data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
     build_outputs(Nonce, Outputs),
     build_from(Nonce, Dir),
     member(Output, Outputs),
     append_fld(Nonce, Output, Instance),
-    InstanceData = sw_file_data(Dir, Output).
+    InstanceData = sw_file_data(Nonce, Dir, Output).
 
 data_instance('SOFTWARE#FILE', load_data, ToolPath,
-              sw_file_data('/tmp', ToolPath)) :-
+              sw_file_data(Nonce, '/tmp', ToolPath)) :-
     build_with(_Nonce, _ToolType, _ToolName, ToolPath, _ToolArgs).
 
 data_get('SOFTWARE#FILE', 'SOFTWARE#filename', createdFile(File, tar), Value) :-

@@ -541,8 +541,11 @@ rdf_dataref(RDFClass, Data, Instance) :-
     add_triple(Instance, rdf:type, RDFClass),
     (add_rdfdata(RDFClass, RDFClass, Instance, InstanceData); true).
 
-add_rdfdata(RDFClass, DataRef, Data) :-
-    rdf(Property, rdfs:domain, RDFClass),
+add_rdfdata(RDFClass, Class, DataRef, Data) :-
+    (rdf(Class, rdfs:subClassOf, Parent), !,
+     (add_rdfdata(RDFClass, Parent, DataRef, Data);true) ;
+     true),
+    property(Class, Property, _),
     rack_ref(ShortC, RDFClass),
     rack_ref(ShortP, Property),
     add_rdfproperty(ShortC, ShortP, RDFClass, Property, DataRef, Data).

@@ -369,6 +369,22 @@ property_extra(Class, _Property, _Target, normal) :-
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:int).
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:integer).
 
+%! rdf_literal_val_type(+Literal:atom, -Value:atom, -Type:Atom) is semidet
+%! rdf_literal_val_type(-Literal:atom, +Value:atom, +Type:Atom) is semidet
+%
+% Bi-directional conversion between the internal Prolog/RDF
+% representation of literal values and the actual value and type.
+% There is no validation of the types and values, this is a simple
+% join/split equality comparison.
+%
+% ==
+% :- rdf_literal_val_type(42^^'http://www.w3.org/2001/XMLSchema#int', V, T).
+% V = 42,
+% T = 'http://www.w3.org/2001/XMLSchema#int'
+% :- rdf_literal_val_type(L, 42, 'http://www.w3.org/2001/XMLSchema#int').
+% L = 42^^'http://www.w3.org/2001/XMLSchema#int'
+% ==
+
 rdf_literal_val_type(Literal, Value, Type) :-
     rdf_equal(Literal, Value^^Type).
 

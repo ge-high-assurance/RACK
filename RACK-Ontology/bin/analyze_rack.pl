@@ -202,18 +202,17 @@ report_instance_propval(I, PR, PV) :-
 report_instance_propval_(_I, PR, _PV) :-
     rdf_equal(PR, rdf:type), !.  % do nothing else, already reported
 report_instance_propval_(_I, PR, PV) :-
-    rdf_literal(PV), !,
+    rdf_is_literal(PV), !,   % n.b. do not use rdf_literal: admits all atoms?!
     prefix_shorten(PR, SPR),
     rdf_literal_val_type(PV, PVv, PVt),
     prefix_shorten(PVt, SPVt),
     format('   . ~w = ~w :: ~w~n', [ SPR, PVv, SPVt ]).
-report_instance_propval_(_I, PR, PV, SPVT) :-
-    \+ rdf_literal(PV),
+report_instance_propval_(_I, PR, PV) :-
     prefix_shorten(PV, SPV),
     rdf(PV, rdf:type, PVT),
     prefix_shorten(PVT, SPVT),
     prefix_shorten(PR, SPR),
-    format('   . ~w ~w :.: ~w~n', [ SPR, SPV, SPVT ]).
+    format('   . ~w = ~w  :: ~w~n', [ SPR, SPV, SPVT ]).
 
 report_instance_missingprop(T, I, Property) :-
     property_target(T, Property, _Usage, Target, _Restr),

@@ -37,4 +37,50 @@
     * https://github.com/ge-high-assurance/RACK/wiki/Multiple-Source-Data-Resolution
     * https://github.com/ge-high-assurance/RACK/issues/132
     * "Type" validation?  See
-      https://github.com/ge-high-assurance/RACK/issues/69 where analysis
+      https://github.com/ge-high-assurance/RACK/issues/69 where there was confusion between:
+
+      #+BEGIN_EXAMPLE
+      PRECONDITION is a ANALYSIS_ANNOTATION_TYPE.
+      #+END_EXAMPLE
+
+      and
+
+      #+BEGIN_EXAMPLE
+      PRECONDITION is a type of ANALYSIS_ANNOTATION_TYPE.
+      #+END_EXAMPLE
+
+      Using the analyze tool, the former (preferred) results in:
+
+#+BEGIN_EXAMPLE
+rack:ANALYSIS#ANALYSIS_ANNOTATION_TYPE  :: owl:Class
+  An open/extensible set of types of analysis annotations@en
+  () of 3 instances in http://arcos.rack/ANALYSIS#
+    = http://arcos.rack/ANALYSIS#POSTCONDITION
+    = http://arcos.rack/ANALYSIS#INVARIANT
+    = http://arcos.rack/ANALYSIS#PRECONDITION
+
+#+END_EXAMPLE
+
+       and the latter results in:
+
+#+BEGIN_EXAMPLE
+rack:ANALYSIS#ANALYSIS_ANNOTATION_TYPE  :: owl:Class
+  An open/extensible set of types of analysis annotations@en
+  ^-- http://arcos.rack/ANALYSIS#PRECONDITION  ..... :: owl:Class
+  () of 2 instances in http://arcos.rack/ANALYSIS#
+    = http://arcos.rack/ANALYSIS#POSTCONDITION
+    = http://arcos.rack/ANALYSIS#INVARIANT
+
+rack:ANALYSIS#ANALYSIS_ANNOTATION_TYPE.rack:ANALYSIS#PRECONDITION  :: owl:Class
+  A constraint that should hold in advance of successful operation of this unit of code. @ en
+
+#+END_EXAMPLE
+
+       Is it somehow possible to identify this issue and alert on it
+       during the ~check~ tool?
+
+       * A class with instances *and* a subclass?
+       * A subclass with no properties?
+       * Should ANALYSIS_ANNOTATION_TYPE have a ~owl:Restriction ->
+         owl:allValuesFrom~ restriction (see above)?
+       * Some sort of type analysis related to the above?

@@ -515,10 +515,15 @@ show_triple(S,P,O) :-
     debug(triples, 'Triple: ~w --~w--> ~w~n', [S, P, O]).
 
 
+% Convenience routine to add a new triple with a debug statement (if
+% enabled) and assigning it to a graph corresponding to the defined
+% rack_namespace (if any).
+
 add_triple(S,P,O) :-
     show_triple(S, P, O),
     (rack_namespace(NS), rdf_assert(S, P, O, NS)) ;
     (\+ rack_namespace(_), rdf_assert(S, P, O)).
+
 
 %! rdf_dataref(-RDFClass, +Data, -Instance) is semidet.
 %! rdf_dataref(+RDFClass, +Data, -Instance) is semidet.

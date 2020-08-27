@@ -70,8 +70,20 @@ data_get('SOFTWARE#FILE', 'SOFTWARE#fileFormat',
     member(F, FS),
     build_with(Nonce, compile, _, _, _).
 
+data_get('SOFTWARE#FILE', 'SOFTWARE#createBy', sw_file_data(Nonce, _, F), V) :-
+    build_outputs(Nonce, FS),
+    member(F, FS),
+    build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
+    append_fld(Nonce, ToolType, V).
+
 
 data_instance('SOFTWARE#FORMAT', load_data, F, F) :-
     member(F, [ 'CSourceFile', 'ElfFile' ]).
 data_get('SOFTWARE#FORMAT', 'PROV-S#uniqueIdentifier', Fmt, FmtS) :-
     atom_string(Fmt, FmtS).
+
+data_instance('PROV-S#ACTIVITY', load_data, Instance, InstanceData) :-
+    InstanceData = build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
+    InstanceData,
+    write('PS#A '), write(Nonce), write(' and '), write(ToolType), nl,
+    append_fld(Nonce, ToolType, Instance).

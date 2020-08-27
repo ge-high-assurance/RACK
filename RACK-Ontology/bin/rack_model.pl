@@ -24,6 +24,7 @@ description DSL into instances in the model.
               rack_ref/2,
               ns_ref/3,
               append_fld/3,
+              prefix_shorten/2,
               is_owl_class/1,
               owl_list/2,
               entity/1,
@@ -236,6 +237,24 @@ ns_ref(NS, Target, Ref) :- atom_concat(NS, '#', P),
 
 append_fld(Base, Fld, Result) :- atom_concat(Base, '.>', B),
                                  atom_concat(B, Fld, Result).
+
+%! prefix_shorten(+URI:atom, -ShortOrURI) is det
+%
+% Used to convert a full URI into a shortened version using a prefix
+% if one is known, or return the original URI if there is no prefixed
+% version available.
+%
+% ===
+% :- prefix_shorten('http://www.w3.org/1999/02/22-rdf-syntax-ns#type', S).
+% S = 'rdf:type'.
+% :- prefix-shorten('http://something.org/with/no#prefix', S).
+% S = 'http://something.org/with/no#prefix'.
+% ===
+prefix_shorten(URI, ShortOrURI) :-
+    rdf_current_prefix(Prefix, Exp), atom_concat(Exp, Local, URI), !,
+    atom_concat(Prefix, ':', A),
+    atom_concat(A, Local, ShortOrURI).
+prefix_shorten(URI, URI).
 
 
 is_owl_class(E) :-

@@ -220,11 +220,3 @@ report_instance_missingprop(T, I, Property) :-
     \+ rdf(I, Property, _Val),
     prefix_shorten(Target, ST),
     format('  ?. ~w = ? :: ~w~n', [Property, ST]).
-
-% ----------------------------------------------------------------------
-
-prefix_shorten(URI, ShortOrURI) :-
-    rdf_current_prefix(Prefix, Exp), atom_concat(Exp, Local, URI), !,
-    atom_concat(Prefix, ':', A),
-    atom_concat(A, Local, ShortOrURI).
-prefix_shorten(URI, URI).

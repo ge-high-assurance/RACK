@@ -1,0 +1,40 @@
+name: Build
+on: [push]
+
+jobs:
+  lint:
+    name: Lint shell scripts and the RACK CLI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Lint shell scripts with ShellCheck
+        uses: ludeeus/action-shellcheck@master
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Cache RACK CLI development dependencies
+        uses: actions/cache@v2
+        with:
+          # This path is specific to Ubuntu
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('RACK-Ontology/cli/dev/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
+
+      - name: Install development dependencies
+        run: |
+          pip install \
+            --quiet \
+            --requirement RACK-Ontology/cli/dev/requirements.txt
+
+      - shell: bash
+        name: Lint the RACK CLI
+        run: |
+          cd RACK-Ontology/cli
+          pylint .
+          mypy .

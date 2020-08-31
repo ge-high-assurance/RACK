@@ -14,6 +14,13 @@ This command should set up a local pldoc webserver instance listening at
 
 # Command-line Usage
 
+NOTE: For the following commands to work, you will want to have generated some
+data for them to use.  For instance, to get the "TurnstileSystem" data
+generated, you can run the `Makefile` in
+`RACK-Ontology/models/TurnstileSystem/Data/src` while prepending
+`RACK-Ontology/databin` to your `PATH`.  This will ensure that the script uses
+the instrumented `gcc` that records data.
+
 There are a number of command-line utilities that can be used with the
 Prolog modules in this directory.
 

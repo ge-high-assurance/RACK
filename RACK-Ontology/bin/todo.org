@@ -3,7 +3,7 @@
     Fill out the Turnstile example, guided by missing field values in
     the ~analyze -i 'http://testdata.org/'~ output by writing either
     ~data_instance~ or ~data_get~ rules.
-    * Debugging note: insert insert ~write(X),write(Y),nl,~ lines into
+    * Debugging note: insert ~write(X),write(Y),nl,~ lines into
       existing rules: they will be printed to stdout as the rule
       checking crosses that point.  ~X~ and ~Y~ can be strings,
       numbers, atoms, or variables that you want to see.

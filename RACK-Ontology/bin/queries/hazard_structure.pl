@@ -1,7 +1,4 @@
-:- module(hazard_structure, [
-              hazard_debug/3,
-              hazard_structure/5
-          ]).
+:- module(hazard_structure, [hazard_structure/5]).
 
 :- consult('../paths').
 

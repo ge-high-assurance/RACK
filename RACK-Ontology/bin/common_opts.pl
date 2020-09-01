@@ -1,5 +1,7 @@
 % Common command-line option handling for RACK prolog utilities
 
+:- use_module('rack_model').
+
 parse_args(ExtraArgs, Opts, PosArgs) :-
     working_directory(Cwd, Cwd),
     atom_concat(Cwd, 'OwlModels/', OwlDir),

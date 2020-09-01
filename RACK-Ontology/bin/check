@@ -2,9 +2,11 @@
 
 :- initialization(main, main).
 
+:- ensure_loaded('./paths').
+
 :- use_module(library(optparse)).
-:- consult(check_rack).
 :- consult(common_opts).
+:- consult(rack(check)).
 
 main :-
     parse_args([], _Opts, _PosArgs),

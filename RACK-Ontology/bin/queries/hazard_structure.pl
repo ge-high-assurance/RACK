@@ -1,21 +1,24 @@
 :- module(hazard_structure, [hazard_structure/5]).
 
-:- consult('../paths').
+:- ensure_loaded('../paths').
 
 :- use_module(library(semweb/rdf11)).
-:- use_module('../rack_model').
+:- use_module(ontology(hazard)).
+:- use_module(ontology(requirements)).
+:- use_module(ontology(testing)).
+:- use_module(rack(model)).
 :- use_module(utils(transitive_closure)).
 
 % val: reified because I don't know whether Prolog has anonymous partial application
 requirements_satisfies(A, B) :- rdf(A, rack:'REQUIREMENTS#satisfies', B).
 
 hazard_structure(Hazard, Source, LLR, HLR, TestCase) :-
-    rack_instance('HAZARD#HAZARD', Hazard),
+    hazard(Hazard),
     rack_entity_instance(Source),
-    rack_instance('REQUIREMENTS#REQUIREMENT', LLR),
-    rack_instance('REQUIREMENTS#REQUIREMENT', HLR),
-    rack_instance('TESTING#TEST', TestCase),
-    rdf(TestCase, rack:'TESTING#verifies', HLR),
+    requirement(LLR),
+    requirement(HLR),
+    test(TestCase),
+    verifies(TestCase, HLR),
     transitive_closure(hazard_structure:requirements_satisfies, LLR, HLR),
-    rdf(HLR, rack:'REQUIREMENTS#mitigates', Hazard),
-    rdf(Hazard, rack:'HAZARD#source', Source).
+    mitigates(HLR, Hazard),
+    source(Hazard, Source).

@@ -1,5 +1,7 @@
+:- ensure_loaded('../paths').
+
 :- use_module(library(semweb/rdf11)).
-:- use_module(rack_model).
+:- use_module(rack(model)).
 
 report :-
     rdf_equal(rack:'PROV-S#THING', Thing),

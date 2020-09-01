@@ -1,6 +1,8 @@
 % Common command-line option handling for RACK prolog utilities
 
-:- use_module('rack_model').
+:- ensure_loaded('./paths').
+
+:- use_module(rack(model)).
 
 opts_spec(Spec) :-
     working_directory(Cwd, Cwd),

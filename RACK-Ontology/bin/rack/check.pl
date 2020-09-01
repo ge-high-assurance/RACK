@@ -1,5 +1,7 @@
+:- ensure_loaded('../paths').
+
 :- use_module(library(semweb/rdf11)).
-:- use_module(rack_model).
+:- use_module(rack(model)).
 
 check_rack :-
     findall(C, check_missing_notes(C), CS),

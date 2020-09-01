@@ -318,7 +318,7 @@ enumerations(E, ES) :-
 
 %! property(+Class, -Property, -PropUsage) is multi.
 %
-%   Used to retrieve a Property and it's uniqueness to that Class.
+%   Used to retrieve a Property and its uniqueness to that Class.
 %
 %   The PropUsage will be either =unique= or =shared= to indicate if
 %   this Property is shared with another Class.

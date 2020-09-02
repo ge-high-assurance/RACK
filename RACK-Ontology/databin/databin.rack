@@ -4,6 +4,7 @@
 % wrappers that will be recognized here.
 
 :- discontiguous tar_access/3,
+                 build_with/5,
                  build_inputs/2,
                  build_outputs/2,
                  build_from/2.

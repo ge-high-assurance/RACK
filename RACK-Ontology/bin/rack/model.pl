@@ -369,8 +369,8 @@ property_extra(Class, _Property, _Target, normal) :-
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:int).
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:integer).
 
-%! rdf_literal_val_type(+Literal:atom, -Value:atom, -Type:Atom) is semidet
-%! rdf_literal_val_type(-Literal:atom, +Value:atom, +Type:Atom) is semidet
+%! rdf_literal_val_type(+Literal:atom, -Value:atom, -Type:Atom) is semidet.
+%! rdf_literal_val_type(-Literal:atom, +Value:atom, +Type:Atom) is semidet.
 %
 % Bi-directional conversion between the internal Prolog/RDF
 % representation of literal values and the actual value and type.
@@ -615,4 +615,3 @@ load_recognizer(FPath) :-
 data_get('SOFTWARE#FILE', 'SOFTWARE#filename', sw_file_data(_, Dir, NameOrPath), Value) :-
     file_to_fpath(NameOrPath, Dir, Path),
     atom_string(Path, Value).
-

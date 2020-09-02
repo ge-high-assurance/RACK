@@ -63,12 +63,19 @@ report_rack_node(E) :-
     prefix_shorten(T, ST),
     subclass_path(E, PPath),
     format('~n~w~w  :: ~w~n  ~w~n', [PPath, SE, ST, C]),
-    findall(P, report_rack_properties(E, P), _PS),
-    findall(S, report_rack_subclasses(E, S), _),
+    report_rack_properties(E),
+    report_rack_subclasses(E),
     report_instance_counts(E).
+
 
 class_comment(Class, Comment) :- rdf(Class, rdfs:comment, Comment), !.
 class_comment(_, "?").
+
+report_rack_properties(E) :-
+    findall(P, property_target(E, P, _, _, _), AllP),
+    sort(AllP, SortP),
+    findall(P, (member(P, SortP),
+                report_rack_properties(E, P)), _PS).
 
 report_rack_properties(E, P) :-
     property_target(E, P, PType, T, Extra),
@@ -118,6 +125,12 @@ parent_path(E, []) :- rdf_subject(E), \+ rdf(E, rdfs:subClassOf, _).
 
 % ----------------------------------------------------------------------
 
+report_rack_subclasses(E) :-
+    findall(S, rdf(S, rdfs:subClassOf, E), AllS),
+    sort(AllS, SortS),
+    findall(S, (member(S, SortS),
+                report_rack_subclasses(E, S)), _).
+
 report_rack_subclasses(E, S) :-
     rdf(S, rdfs:subClassOf, E),
     rdf(S, rdf:type, T),
@@ -126,7 +139,8 @@ report_rack_subclasses(E, S) :-
 
 report_instance_counts(E) :-
     findall(I, rdf(I, rdf:type, E), IS),
-    report_instance_counts(E, IS).
+    sort(IS, SIS),
+    report_instance_counts(E, SIS).
 
 report_instance_counts(E, IS) :-
     length(IS, ISLen),
@@ -147,8 +161,9 @@ report_rack_instances(E, Pfx, Count, Limit) :-
                 rdf_split_url(Pfx, _, I)
                ), RACK_IS),
     ((Count >= Limit, !,
-     format('    = MANY [use -i ~w to view]~n', [Pfx]));
-     findall(I, report_rack_instance(RACK_IS, I), _IS)).
+      format('    = MANY [use -i ~w to view]~n', [Pfx]));
+     sort(RACK_IS, S_RACK_IS),
+     findall(I, report_rack_instance(S_RACK_IS, I), _IS)).
 
 report_rack_instance(RACK_IS, I) :-
     member(I, RACK_IS),
@@ -186,7 +201,8 @@ report_instances_in(Pfx) :-
                ), IS),
     length(IS, N),
     format('~`#t ~:d Instances in ~w ~`#t~78|~n', [N, Pfx]),
-    findall(I, (member(I, IS), report_instance(I)), _).
+    sort(IS, SIS),
+    findall(I, (member(I, SIS), report_instance(I)), _).
 
 report_instance(I) :-
     rdf(I, rdf:type, T),

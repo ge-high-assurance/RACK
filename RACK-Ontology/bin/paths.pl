@@ -1,4 +1,7 @@
-:- module(paths, []).
+:- module(paths,
+          [
+              paths_dir/1
+          ]).
 
 this_is_paths. % marker for obtaining the path to this file
 

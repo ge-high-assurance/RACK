@@ -9,9 +9,6 @@
 :- use_module(rack(model)).
 :- use_module(utils(transitive_closure)).
 
-% val: reified because I don't know whether Prolog has anonymous partial application
-requirements_satisfies(A, B) :- rdf(A, rack:'REQUIREMENTS#satisfies', B).
-
 hazard_structure(Hazard, Source, LLR, HLR, TestCase) :-
     hazard(Hazard),
     rack_entity_instance(Source),
@@ -19,6 +16,6 @@ hazard_structure(Hazard, Source, LLR, HLR, TestCase) :-
     requirement(HLR),
     test(TestCase),
     verifies(TestCase, HLR),
-    transitive_closure(hazard_structure:requirements_satisfies, LLR, HLR),
+    transitive_closure(requirements:satisfies, LLR, HLR),
     mitigates(HLR, Hazard),
     source(Hazard, Source).

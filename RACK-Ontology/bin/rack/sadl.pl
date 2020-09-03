@@ -135,6 +135,9 @@ prolog:message(no_is_a_for(Subject, Rel, Object)) -->
     [ 'No is_a(..) definitoin for a ~w with ~w relation to ~w'-[
           Subject, Rel, Object] ].
 
+prolog:message(unrecognized_term(What, Phase)) -->
+    [ 'Unrecognized term during the ~w phase: ~w'-[Phase, What] ].
+
 prolog:message(import_not_found(URL)) -->
     [ 'No SADL import file supplying URI ~w could be found.'-[URL] ].
 
@@ -313,8 +316,8 @@ annot(note(NoteStr)) --> [note, qs(A)], { atom_string(A, NoteStr) }.
 
 
 % ----------------------------------------------------------------------
-% Process parsed SADL IR to collect type information, including
-% performing full imports.
+% TYPING PHASE: Process parsed SADL IR to collect type information,
+% including performing full imports.
 
 :- op(500,xfy,::).
 
@@ -383,7 +386,10 @@ sty(_,F,F, [N::instance|PKs]) --> [ instance(_ID, subj(N,_), _Inst, Props) ],
 sty(_,F,F, [S::clsOrInst,P::property]) --> [ propdef(S,propId(P,_),_) ].
 sty(_,F,F, []) --> [ propinv(_,_) ].
 sty(_,F,F, [I::class]) --> [ valenum(subj(I,_),_) ].
-% sty(_,_,_,_) --> [ What ], { write('tfail on '),write(What),nl }.
+sty(_,_,_,_) --> [ What ],
+                 { print_message(error, unrecognized_term(What, typing)),
+                   fail
+                 }.
 
 proptys(PT, [P::PT|PKinds]) --> [prop(_ID, propId(P,_), _)], proptys(PT, PKinds).
 proptys(_, []) --> [].
@@ -523,7 +529,8 @@ fuip(U,D,H,O) :-
 
 
 % ----------------------------------------------------------------------
-% Process parsed SADL IR to generate RDF triples and assoc. definitions
+% EMITTING PHASE: Process parsed SADL IR to generate RDF triples and
+% assoc. definitions
 
 sadl_rdf(U,Pfxs,Kinds) --> [file(F), set_uri(U, Annots)],
                            { setup_rdf(F,U,none,Annots) },
@@ -553,7 +560,7 @@ sar(U,Kinds,Pfxs) --> sr(U, Kinds, ThisPfxs), sar(U, Kinds, OtherPfxs),
                       }.
 sar(_,_,[]) --> [].  % nothing matched: halts processing, "remainder" shown as error.
 
-sr(_,_,[]) --> [ import(_) ].  % handled in sad pass
+sr(_,_,[]) --> [ import(_) ].  % handled in typing pass
 sr(U,Kinds,Pfxs) --> [ instance(_ID, Subj, Props) ],
                      { inst_props(Kinds, U, Subj, Props, _, _, Pfxs) }.
 sr(U,Kinds,Pfxs) --> [ classdef(_ID, Subj, ParentClass, Props) ],
@@ -590,6 +597,11 @@ sr(U,Kinds,Pfxs) --> [ valenum(subj(I,Annots),VS) ],
                          rdf_assert(ListOneOf, owl:oneOf, VSList, G),
                          rdf_assert(Subject, owl:equivalentClass, ListOneOf, G)
                      }.
+sr(_,_,_) --> [What],
+              { print_message(error, unrecognized_term(What, emitting)),
+                fail
+              }.
+
 % sr(_,_,L,L) :- write('No match for: '),write(L),nl,fail.
 
 class_props(Kinds, U, subj(N, SubjAnnots), Props, Subject, G, Pfxs) :-

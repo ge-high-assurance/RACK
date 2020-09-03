@@ -254,6 +254,8 @@ term(instance(sr5,I,[prop(p2,P,V)])) --> valterm(simple,V), [is],
                                          det(lc,_), [P, of, I].           %[5]
 term(unnamedI(sr6_7,C,PTS)) --> det(_,indef), [C], propterms(_,PTS).    %[6,7]
 
+% The following are listed in the [SADL] document, but it's expected
+% that they are fully handled by the above.
 term(triplerep(sr8,S,P,V)) --> [S], owns, [P], valterm(simple,V).         %[8]
 term(triplerep(sr9,S,P,V)) --> [P, of, S, is], valterm(simple,V).         %[9]
 term(triplerep(sr10,S,P,V)) --> valterm(simple,V), [is, P, of, S].       %[10]
@@ -672,17 +674,11 @@ obj_ref(_Kinds, _URL, _G, float, literal, Float) :-
 obj_ref(Kinds, URL, _G, C, Kind, Reference) :-
     ns_ref(URL, C, Reference),
     member(C::Kind, Kinds), !.
-%%     rdf(Reference, rdf:type, owl:'Class'), !.
-%% obj_ref(URL, _G, C, property, Reference) :-
-%%     ns_ref(URL, C, Reference),
-%%     rdf(Reference, rdf:type, owl:'ObjectProperty'), !.
 obj_ref(_Kinds, URL, G, C, Kind, Reference) :-
     % The ns_ref didn't generate a valid local reference, so this is
     % probably defined in a separate file and was realized by an
     % import statement.
     extern_ref(URL, G, C, Kind, Reference).
-%% obj_ref(_Kinds, URL, G, C, Kind, Ref) :-
-%%     write('Seeking obj_ref('),write(URL),write(', '),write(C),write(')'),nl,fail.
 obj_ref(_Kinds, _URL, _G, V, value, V) :- !.
 
 % Note "External References": In SADL, one can say:

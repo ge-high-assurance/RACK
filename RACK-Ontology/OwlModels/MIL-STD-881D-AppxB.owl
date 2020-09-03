@@ -306,26 +306,26 @@
     <j.2:uniqueIdentifier>SupportandHandlingEquipmentAirframeHullVehicle-1.8.2.1</j.2:uniqueIdentifier>
   </j.3:SYSTEM>
   <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D">
-    <j.1:content>
+    <j.2:content>
       <j.1:SECTION rdf:ID="B.4">
         <j.1:title>DEFINITIONS</j.1:title>
       </j.1:SECTION>
-    </j.1:content>
-    <j.1:content>
+    </j.2:content>
+    <j.2:content>
       <j.1:SECTION rdf:ID="B.3">
         <j.1:title>WORK BREAKDOWN STRUCTURE LEVELS</j.1:title>
       </j.1:SECTION>
-    </j.1:content>
-    <j.1:content>
+    </j.2:content>
+    <j.2:content>
       <j.1:SECTION rdf:ID="B.2">
         <j.1:title>APPLICABLE DOCUMENTS</j.1:title>
       </j.1:SECTION>
-    </j.1:content>
-    <j.1:content>
+    </j.2:content>
+    <j.2:content>
       <j.1:SECTION rdf:ID="B.1">
         <j.1:title>SCOPE</j.1:title>
       </j.1:SECTION>
-    </j.1:content>
+    </j.2:content>
   </rdf:Description>
   <j.3:SYSTEM rdf:ID="SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.9.2.4">
     <j.0:wbs>1.9.2.4</j.0:wbs>

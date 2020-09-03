@@ -135,6 +135,9 @@ prolog:message(no_is_a_for(Subject, Rel, Object)) -->
     [ 'No is_a(..) definitoin for a ~w with ~w relation to ~w'-[
           Subject, Rel, Object] ].
 
+prolog:message(import_not_found(URL)) -->
+    [ 'No SADL import file supplying URI ~w could be found.'-[URL] ].
+
 % ----------------------------------------------------------------------
 % Tokenize a character stream read from a file.
 

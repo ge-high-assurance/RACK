@@ -147,7 +147,8 @@ prolog:message(import_not_found(URL)) -->
 lexical_analysis([T|Ts]) --> blnks, token(T), lstream(Ts).
 
 lstream([T|Ts]) --> blnks, token(T), !, lstream(Ts).
-lstream([]) --> blnks, [].
+lstream(['.']) --> blnks, ['.'].  % Last char in file is the final .
+lstream([]) --> blnks, [].  % Blanks at the end of the file
 lstream([]) --> [].
 
 comment(S) --> ['/', '/'], c2eol(CS), { atom_chars(S, CS) }.
@@ -157,8 +158,12 @@ token('(') --> ['('].
 token(')') --> [')'].
 token('{') --> ['{'].
 token('}') --> ['}'].
-token('.') --> ['.'].
 token(',') --> [','].
+% A period (.) is allowed to be embedded in an un-quoted word as a
+% normal character.  It only has significance if it is the end of a
+% sentence, which seems to imply it must be followed by some
+% whitespace.
+token('.') --> ['.',N], { char_type(N, space) ; char_type(N, white) }.
 token(T)   --> ['^'], w(W), { atom_chars(T,W) }.  % see Note "carat" below.
 token(T)   --> w(W), { atom_chars(T,W) }.
 
@@ -167,6 +172,7 @@ word_char(C) :- \+ char_type(C, space),
 
 w([C|Cs]) --> [C], { word_char(C) }, wc(Cs).
 wc([C|Cs]) --> [C], { word_char(C) }, !, wc(Cs).
+wc(['.',C|Cs]) --> ['.',C], { word_char(C) }, !, wc(Cs).
 wc([]) --> [].
 
 qc([]) --> [].

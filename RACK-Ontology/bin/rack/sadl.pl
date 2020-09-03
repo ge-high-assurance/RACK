@@ -152,7 +152,7 @@ lstream([]) --> [].
 
 comment(S) --> ['/', '/'], c2eol(CS), { atom_chars(S, CS) }.
 
-token(qs(T))   --> ['"'], qc(S), ['"'], { atom_chars(T,S) }.
+token(T)   --> ['"'], qc(S), ['"'], { atom_chars(T,S) }.
 token('(') --> ['('].
 token(')') --> [')'].
 token('{') --> ['{'].
@@ -200,9 +200,9 @@ s([])    --> [].                         % Failure for URI start line.
 s_([T|Ss]) --> term(T), ['.'], s_(Ss).
 s_([])     --> [].                       % Failure for term matching
 
-uri_spec(set_uri(URI, Alias, A)) --> [uri, qs(URI), alias, Alias],
+uri_spec(set_uri(URI, Alias, A)) --> [uri, URI, alias, Alias],
                                      annots(A), ['.'].
-uri_spec(set_uri(URI, A)) --> [uri, qs(URI)], annots(A), ['.'].
+uri_spec(set_uri(URI, A)) --> [uri, URI], annots(A), ['.'].
 
 
 %% The srN or %[N] references below refer to the "Toward a Unified
@@ -224,7 +224,7 @@ uri_spec(set_uri(URI, A)) --> [uri, qs(URI)], annots(A), ['.'].
 %%      these names, but this emitter does.
 
 
-term(import(URL)) --> [import, qs(URL)].
+term(import(URL)) --> [import, URL].
 term(propinv(I,P)) --> subj(subj(I,[])), [is], dl,
                        [inverse, of], obj(P).                         %[new-3]
 term(valenum(I,VS)) --> subj(I), [is], obj(class),
@@ -312,7 +312,7 @@ annots([]) --> [].
 annots_([A|As]) --> annot(A), [','], annots_(As).
 annots_([A]) --> annot(A).
 annots_([]) --> [].
-annot(note(NoteStr)) --> [note, qs(A)], { atom_string(A, NoteStr) }.
+annot(note(NoteStr)) --> [note, A], { atom_string(A, NoteStr) }.
 
 
 % ----------------------------------------------------------------------
@@ -664,7 +664,6 @@ obj_ref(_Kinds, _URL, _G, dateTime, literal, DateTime) :-
 obj_ref(_Kinds, _URL, _G, float, literal, Float) :-
     rdf_equal(xsd:float, Float), !.
 obj_ref(Kinds, URL, _G, C, Kind, Reference) :-
-    C \= qs(_),
     ns_ref(URL, C, Reference),
     member(C::Kind, Kinds), !.
 %%     rdf(Reference, rdf:type, owl:'Class'), !.
@@ -675,11 +674,9 @@ obj_ref(_Kinds, URL, G, C, Kind, Reference) :-
     % The ns_ref didn't generate a valid local reference, so this is
     % probably defined in a separate file and was realized by an
     % import statement.
-    C \= qs(_),
     extern_ref(URL, G, C, Kind, Reference).
 %% obj_ref(_Kinds, URL, G, C, Kind, Ref) :-
 %%     write('Seeking obj_ref('),write(URL),write(', '),write(C),write(')'),nl,fail.
-obj_ref(_Kinds, _URL, _G, qs(S), value, S) :- !.
 obj_ref(_Kinds, _URL, _G, V, value, V) :- !.
 
 % Note "External References": In SADL, one can say:
@@ -760,9 +757,7 @@ def_propval(Kinds, URL, Subject, propId(Prop,_PropAnn),val(_Restr,Tgt),[Pfx]) :-
     % KWQ: transform Tgt into not just literal(str) based on TgtTy
     obj_ref(Kinds, URL, G, Prop, propval, P),
     val_prefix_ref(URL, P, Prop, Pfx, PRef),
-    (Tgt = qs(Str), !, rdf_assert(C,PRef,literal(Str)) ;
-     rdf_assert(C,PRef,literal(Tgt))).
-    % KWQ: lose qs wrapper?  how do we know it's a value here then?
+    rdf_assert(C,PRef,literal(Tgt))).
 
 def_prop(Kinds, URL, Subject, propId(Prop,PropAnn),val(Restr,Tgt), []) :-
     subj_ref(URL, Prop, G, P),

@@ -21,21 +21,12 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'MIL-STD-881D.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:DatatypeProperty rdf:ID="wbs">
+  <owl:FunctionalProperty rdf:ID="wbs">
     <rdfs:comment xml:lang="en">This is the WBS (Work Breakdown Structure) string from MIL-STD-881D</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain>
-      <rdf:Description rdf:about="/SYSTEM#SYSTEM">
-        <rdfs:subClassOf>
-          <owl:Restriction>
-            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-            >1</owl:cardinality>
-            <owl:onProperty rdf:resource="#wbs"/>
-          </owl:Restriction>
-        </rdfs:subClassOf>
-      </rdf:Description>
-    </rdfs:domain>
-  </owl:DatatypeProperty>
+    <rdfs:domain rdf:resource="/SYSTEM#SYSTEM"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
   <j.0:SPECIFICATION rdf:ID="MIL-STD-881D">
     <j.0:content>
       <j.0:SECTION rdf:ID="MIL-STD-881D-AppxJ"/>

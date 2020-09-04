@@ -704,18 +704,35 @@ obj_ref(_Kinds, _URL, _G, V, value, V) :- !.
 % selected if imports have matching names (does Eclipse SADL have a
 % heuristic for this?).
 extern_ref(URL, G, C, class, ExternClass) :-
+    % This version handles the case where C just the name, like 'OBJECT'
     atom_concat(BaseURL, G, URL),  % get BaseURL
     atom_concat('#', C, Fragment), % get target class fragment
     rdf(ERef, rdf:type, owl:'Class'),  % find a defined class
-    atom_concat(BaseURL, ExternClass, ERef), % class without BaseURL
-    atom_concat(_From, Fragment, ExternClass).  % right target?
-extern_ref(URL, G, C, property, ExternProp) :-
+    atom_concat(_From, Fragment, ERef),
+    (atom_concat(BaseURL, ExternClass, ERef),
+     atom_concat(_Here, Fragment, ExternClass);
+     ExternClass=ERef).
+extern_ref(URL, _G, C, class, ExternClass) :-
+    % This version handles the case where C is like 'FILE#OBJECT'
+    rdf(ExternClass, rdf:type, owl:'Class'),
+    atom_concat(BaseURL, C, ExternClass),
+    BaseURL \= URL.
+extern_ref(URL, G, P, property, ExternProp) :-
+    % This version handles the case where C is just the name, like 'PROP_A'
     atom_concat(BaseURL, G, URL),  % get BaseURL
-    atom_concat('#', C, Fragment), % get target class fragment
+    atom_concat('#', P, Fragment), % get target class fragment
     (rdf(ERef, rdf:type, owl:'ObjectProperty');
      rdf(ERef, rdf:type, owl:'DatatypeProperty')),  % find a defined Property
-    atom_concat(BaseURL, ExternProp, ERef), % property without BaseURL
-    atom_concat(_From, Fragment, ExternProp).  % right target?
+    atom_concat(_From, Fragment, ERef),
+    (atom_concat(BaseURL, ExternProp, ERef), % property without BaseURL
+     atom_concat(_Here, Fragment, ExternProp);  % right local URL target?
+    ExternProp=ERef).  % remote URL target
+extern_ref(URL, _G, P, property, ExternProp) :-
+    % This version handles the case where P is like 'FILE#PROP_A'
+    (rdf(ExternProp, rdf:type, owl:'ObjectProperty');
+     rdf(ExternProp, rdf:type, owl:'DatatypeProperty')),
+    atom_concat(BaseURL, P, ExternProp),
+    BaseURL \= URL.
 
 
 subj_ref(BaseURI, SubjName, G, SubjRef) :-

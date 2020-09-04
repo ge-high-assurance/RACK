@@ -41,10 +41,6 @@ fail=0
 
 skip=(
     GeneratePropInfoCSV.sadl
-    MIL-STD-881D-AppxA.sadl
-    MIL-STD-881D-AppxB.sadl
-    MIL-STD-881D-AppxC.sadl
-    MIL-STD-881D-AppxD.sadl
 )
 
 for SFile in $(find ${INPDIR} -name '*.sadl') ; do

@@ -791,7 +791,8 @@ def_propval(Kinds, URL, Subject, propId(Prop,_PropAnn),val(_Restr,Tgt),[Pfx]) :-
 typed_val(_Kinds, _URL, _G, V, Date, date(Y,M,D)^^Date) :-
     rdf_equal(xsd:date, Date), !,
     atom_string(V, S),
-    split_string(S, "/", "", [MS,DS,YS]),
+    ( split_string(S, "/", "", [MS,DS,YS]);     % 12/25/2010
+      split_string(S, "-", "", [YS,MS]), DS=1), % 2010-12
     atom_string(YA,YS), atom_number(YA,Y),
     atom_string(MA,MS), atom_number(MA,M),
     atom_string(DA,DS), atom_number(DA,D).

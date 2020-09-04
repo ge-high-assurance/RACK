@@ -247,12 +247,14 @@ term(propdef(S,P,V)) --> property(P), [describes], obj(S),
                          % annotations on P.
                          [with], valphrs(simple,V).                   %[new-1]
 
-term(instance(sr3,I,PTS)) --> subj(I), propterms(simple,PTS).             %[3]
-term(instance(sr4,I,[prop(p1,P,V)])) --> det(cap,_), [P, of, I, is],
-                                         valterm(simple,V).               %[4]
+term(propval(I,P,V)) -->
+    det(cap,_), property(P), [of], obj(I), [is], valterm(simple,V).       %[4]
+term(propval(I,P,V)) -->
+    property(P), [of], obj(I), [is], valterm(simple,V).               %[new-4]
 term(instance(sr5,I,[prop(p2,P,V)])) --> valterm(simple,V), [is],
                                          det(lc,_), [P, of, I].           %[5]
-term(unnamedI(sr6_7,C,PTS)) --> det(_,indef), [C], propterms(_,PTS).    %[6,7]
+term(instance(sr3,I,PTS)) --> subj(I), propterms(simple,PTS).             %[3]
+% term(unnamedI(sr6_7,C,PTS)) --> det(_,indef), [C], propterms(_,PTS).    %[6,7]
 
 % The following are listed in the [SADL] document, but it's expected
 % that they are fully handled by the above.
@@ -386,12 +388,13 @@ sty(U,IFs,OFs,[]) --> [ import(URL) ],
                           rdf_default_graph(_, OrigG)
                       }.
 sty(_,F,F, [N::clsOrInst|PKs]) --> [ instance(_ID, subj(N,_), Props) ],
-                                   { phrase(proptys(property, PKs), Props) }.
+                                   { phrase(proptys(propval, PKs), Props) }.
 sty(_,F,F, [N::class|PKs]) --> [ classdef(_ID, subj(N,_), _, Props) ],
                                { phrase(proptys(propdef, PKs), Props) }.
 sty(_,F,F, [N::instance|PKs]) --> [ instance(_ID, subj(N,_), _Inst, Props) ],
                                   { phrase(proptys(propval, PKs), Props) }.
 sty(_,F,F, [S::clsOrInst,P::property]) --> [ propdef(S,propId(P,_),_) ].
+sty(_,F,F, [S::instance,P::propval]) --> [ propval(S,propId(P,_),_) ].
 sty(_,F,F, []) --> [ propinv(_,_) ].
 sty(_,F,F, [I::class]) --> [ valenum(subj(I,_),_) ].
 sty(_,_,_,_) --> [ What ],
@@ -586,6 +589,7 @@ sr(U,Kinds,Pfxs) --> [ instance(_ID, Subj, ClassDef, Props) ],
                          % , write('inst1 '),write(Subj),write(' is_a '),write(ClassDef),nl
                      }.
 sr(U,Kinds,Pfxs) --> [ propdef(S,P,V) ], { def_prop(Kinds,U,S,P,V,Pfxs) }.
+sr(U,Kinds,Pfxs) --> [ propval(S,P,V) ], { def_propval(Kinds,U,S,P,V,Pfxs) }.
 sr(U,_,[]) --> [ propinv(I,P) ],
                {
                    rdf_default_graph(G),
@@ -772,15 +776,40 @@ pr(_,_,_,_,[]) --> [].
 
 def_propval(Kinds, URL, Subject, propId(Prop,_PropAnn),val(_Restr,Tgt),[Pfx]) :-
     subj_ref(URL, Subject, G, C),
-    obj_ref(Kinds, URL, G, Tgt, _TgtTy, _T), !,
-    % KWQ: transform Tgt into not just literal(str) based on TgtTy
-    obj_ref(Kinds, URL, G, Prop, propval, P),
+    obj_ref(Kinds, URL, G, Tgt, _TgtTy, _T),
+    obj_ref(Kinds, URL, G, Prop, propval, P), !,
+    % Get the definition of this property, where the range will
+    % determine the type of the property value Tgt to set.
+    obj_ref(Kinds, URL, G, Prop, property, PDef),
+    rdf(PDef, rdfs:range, PDType),
+    % Values require a prefixed reference
     val_prefix_ref(URL, P, Prop, Pfx, PRef),
-    rdf_assert(C,PRef,literal(Tgt))).
+    % Convert the Tgt value to the type specified by the property
+    typed_val(Kinds, URL, G, Tgt, PDType, TyVal),
+    rdf_assert(C, PRef, TyVal).
+
+typed_val(_Kinds, _URL, _G, V, Date, date(Y,M,D)^^Date) :-
+    rdf_equal(xsd:date, Date), !,
+    atom_string(V, S),
+    split_string(S, "/", "", [MS,DS,YS]),
+    atom_string(YA,YS), atom_number(YA,Y),
+    atom_string(MA,MS), atom_number(MA,M),
+    atom_string(DA,DS), atom_number(DA,D).
+typed_val(_Kinds, _URL, _G, V, Int, I^^Int) :-
+    rdf_equal(xsd:int, Int), !, atom_number(V, I).
+typed_val(_Kinds, _URL, _G, V, Integer, I^^Integer) :-
+    rdf_equal(xsd:integer, Integer), !, atom_number(V, I).
+typed_val(_Kinds, _URL, _G, V, Float, F^^Float) :-
+    rdf_equal(xsd:float, Float), !, atom_number(V, F).
+typed_val(Kinds, URL, G, V, Ty, VRef) :-
+    obj_ref(Kinds, URL, G, Ty, class, _PDC), !,
+    ns_ref(URL, V, VRef).
+typed_val(_Kinds, _URL, _G, V, _, literal(V)).
+
 
 def_prop(Kinds, URL, Subject, propId(Prop,PropAnn),val(Restr,Tgt), []) :-
     subj_ref(URL, Prop, G, P),
-    subj_ref(URL, Subject, G, C),
+    obj_ref(Kinds, URL, G, Subject, class, C),
     obj_ref(Kinds, URL, G, Tgt, Kind, T),
     def_prop_type(G, P, Kind, T),
     add_prop_domain(P, C, G),

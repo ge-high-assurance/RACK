@@ -313,8 +313,7 @@ det(lc,indef)  --> [a].
 det(lc,indef)  --> [an].
 
 
-% KWQ: include the curly braces?
-word(P) --> [P], { \+ member(P, ['(', ')', '.', ',']) }. % , '{', '}']) }.
+word(P) --> [P], { \+ member(P, ['(', ')', '.', ',', '{', '}']) }.
 
 
 annots(AS) --> ['('], annots_(AS), [')'].

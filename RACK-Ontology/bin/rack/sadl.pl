@@ -411,23 +411,8 @@ proptys(_, []) --> [].
 % ----------------------------------------------------------------------
 % Import management
 
-% :- op(500,xfy,::).
 
-do_import_of(U,URL,IFU,OFU) :- new_do_import_of(U,URL,IFU,OFU).
-
-old_do_import_of(U, URL, FURLs, FURLs) :-
-    % The SADL import specifies the import by URL, not file,
-    % so assume that if the BaseURL of the import is the
-    % same as the current URL, that the portion after the
-    % URL specifies the SADL file to import (with a .sadl
-    % extension).
-    rdf_default_graph(OrigG),
-    atom_concat(BaseURL, OrigG, U),
-    atom_concat(BaseURL, ImportName, URL),
-    atom_concat(ImportName, '.sadl', ImportFile),
-    import_sadl_from_file(ImportFile, _ImportSADL, URL, _Alias).
-
-new_do_import_of(_U, URL, InFURLs, InFURLs) :-
+do_import_of(_U, URL, InFURLs, InFURLs) :-
     % The SADL import specifies the import by URL, not file, so import
     % all SADL files in the vicinity to find one that declares that it
     % provides the uri being imported.  Can move upward in the
@@ -442,7 +427,7 @@ new_do_import_of(_U, URL, InFURLs, InFURLs) :-
     member(F::URL, InFURLs), !,
     import_sadl_from_file(F, _SADL, URL, _Aliases).
 
-new_do_import_of(U, URL, InFURLs, OutFURLs) :-
+do_import_of(U, URL, InFURLs, OutFURLs) :-
     % Handles the case where the FURL is not already known
     member(F::U, InFURLs),  % get main file
     find_file_for_url(F, URL, InFURLs, OutFURLs),

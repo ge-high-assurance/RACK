@@ -156,6 +156,8 @@ comment(S) --> ['/', '/'], c2eol(CS), { atom_chars(S, CS) }.
 token(T)   --> ['"'], qc(S), ['"'], { atom_chars(T,S) }.
 token('(') --> ['('].
 token(')') --> [')'].
+token('[') --> ['['].
+token(']') --> [']'].
 token('{') --> ['{'].
 token('}') --> ['}'].
 token(',') --> [','].
@@ -168,7 +170,7 @@ token(T)   --> ['^'], w(W), { atom_chars(T,W) }.  % see Note "carat" below.
 token(T)   --> w(W), { atom_chars(T,W) }.
 
 word_char(C) :- \+ char_type(C, space),
-                \+ member(C, ['(', ')', '.', ',', '{', '}', '^']).
+                \+ member(C, ['(', ')', '.', ',', '{', '}', '^', '[', ']']).
 
 w([C|Cs]) --> [C], { word_char(C) }, wc(Cs).
 wc([C|Cs]) --> [C], { word_char(C) }, !, wc(Cs).
@@ -266,6 +268,7 @@ term(triplerep(sr10,S,P,V)) --> valterm(simple,V), [is, P, of, S].       %[10]
 propterms(T,[P|PTs]) --> pterm(T,P), propterms(T,PTs).
 propterms(_,[]) --> [].
 
+pterm(_,valrange(Vlo,Vhi)) --> ['[', Vlo, ',', Vhi, ']'].
 pterm(T,prop(p3,P,V)) --> [','], owns, property(P), [with], valphrs(T,V).
 pterm(T,prop(p4,P,V)) --> owns, property(P), [with], valphrs(T,V).
 pterm(T,prop(p5,P,V)) --> [','], owns, property(P), valterm(T,V).
@@ -402,6 +405,7 @@ sty(_,_,_,_) --> [ What ],
                  }.
 
 proptys(PT, [P::PT|PKinds]) --> [prop(_ID, propId(P,_), _)], proptys(PT, PKinds).
+proptys(PT, PKinds) --> [valrange(_,_)], proptys(PT, PKinds).
 proptys(_, []) --> [].
 
 % ----------------------------------------------------------------------
@@ -575,10 +579,11 @@ sr(U,Kinds,Pfxs) --> [ instance(_ID, Subj, Props) ],
                      { inst_props(Kinds, U, Subj, Props, _, _, Pfxs) }.
 sr(U,Kinds,Pfxs) --> [ classdef(_ID, Subj, ParentClass, Props) ],
                      {
-                         class_props(Kinds, U, Subj, Props, SubjRef, G, P_Pfxs),
+                         Subj = subj(S,_),
+                         subj_ref(U,S,G,SubjRef),
                          is_a(Kinds, U, SubjRef, classdef, ParentClass, G, I_Pfxs),
+                         class_props(Kinds, U, Subj, Props, SubjRef, G, P_Pfxs),
                          append(I_Pfxs, P_Pfxs, Pfxs)
-                         % , write('classdef '),write(Subj),write(' props is_a '),write(ParentClass),nl
                      }.
 sr(U,Kinds,Pfxs) --> [ instance(_ID, Subj, ClassDef, Props) ],
                      {
@@ -761,6 +766,26 @@ pr(Kinds,U,Subj,classdef, Pfxs) -->
     {
         append(NewPfxs, OtherPfxs, JoinPfxs),
         sort(JoinPfxs, Pfxs)
+    }.
+pr(Kinds,U,Subj,classdef, _) -->
+    [valrange(Vlo, Vhi)], !,
+    {
+        subj_ref(U,Subj,G,Subject),
+        rdf(Subject, rdf:type, SubjTy),
+        typed_val(Kinds, U, G, Vlo, SubjTy, VloRef),
+        typed_val(Kinds, U, G, Vhi, SubjTy, VhiRef),
+        rdf_default_graph(G),
+        rdf_retractall(Subject, rdf:type, SubjTy, G),
+        rdf_assert(Subject, rdf:type, rdfs:'Datatype', G),
+        rdf_create_bnode(RestrColl),
+        rdf_assert(Subject, owl:equivalentClass, RestrColl, G),
+        rdf_assert(RestrColl, rdf:type, rdfs:'Datatype', G),
+        rdf_assert(RestrColl, owl:onDatatype, SubjTy, G),
+        rdf_create_bnode(Restr),
+        rdf_assert(Restr, xsd:minInclusive, VloRef, G),
+        rdf_assert(Restr, xsd:maxInclusive, VhiRef, G),
+        rdf_assert_list([Restr], RestrList, G),
+        rdf_assert(RestrColl, owl:withRestrictions, RestrList, G)
     }.
 pr(Kinds,U,Subj,instance, Pfxs) -->
     [prop(_ID, P, val(R,T))], !,

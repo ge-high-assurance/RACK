@@ -39,6 +39,10 @@ check_instance_property_violations(Property) :-
     % Exclude namespaces we aren't interested in
     has_interesting_prefix(I),
     % Find a required property defined on that instance type (or parent type)
+    (check_cardinality(Property, I, T);
+     check_maybe_prop(Property, I, T)).
+
+check_cardinality(Property, I, T) :-
     property_target(T, Property, _PUsage, _Target, cardinality(N)),
     has_interesting_prefix(Property),
     % How many actual values for that property on this instance
@@ -49,6 +53,19 @@ check_instance_property_violations(Property) :-
     prefix_shorten(I, SI),
     prefix_shorten(Property, SP),
     print_message(error, cardinality_violation(SI, SP, N, VSLen)).
+
+check_maybe_prop(Property, I, T) :-
+    property_target(T, Property, _PUsage, _Target, maybe),
+    has_interesting_prefix(Property),
+    % How many actual values for that property on this instance
+    findall(V, rdf(I, Property, V), VS),
+    (length(VS, 0), !, fail; % fail to not report during check
+     length(VS, 1), !, fail; % fail to not report during check
+     length(VS, VSLen),
+     prefix_shorten(I, SI),
+     prefix_shorten(Property, SP),
+     print_message(error, maybe_restriction(SI, SP, VSLen))).
+
 
 has_interesting_prefix(I) :-
     member(Pfx, [ 'http://sadl.org/' ]),
@@ -69,3 +86,6 @@ prolog:message(num_classes(What, Count)) -->
 prolog:message(cardinality_violation(Instance, Property, Specified, Actual)) -->
     [ '~w . ~w has ~d values but cardinality of ~d~n'-[
           Instance, Property, Actual, Specified] ].
+prolog:message(maybe_restriction(Instance, Property, Actual)) -->
+    [ '~w . ~w must have only zero or one instance, but has ~d~n'-[
+          Instance, Property, Actual] ].

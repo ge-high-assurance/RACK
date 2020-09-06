@@ -711,10 +711,10 @@ extern_ref(URL, G, C, class, ExternClass) :-
     atom_concat(BaseURL, G, URL),  % get BaseURL
     atom_concat('#', C, Fragment), % get target class fragment
     rdf(ERef, rdf:type, owl:'Class'),  % find a defined class
-    atom_concat(_From, Fragment, ERef),
-    (atom_concat(BaseURL, ExternClass, ERef),
-     atom_concat(_Here, Fragment, ExternClass);
-     ExternClass=ERef).
+    atom_concat(From, Fragment, ERef),
+    (From = URL, % local reference, don't need URL portion
+     atom_concat(BaseURL, ExternClass, ERef);
+     ExternClass=ERef).  % remote reference: return full spec
 extern_ref(URL, _G, C, class, ExternClass) :-
     % This version handles the case where C is like 'FILE#OBJECT'
     rdf(ExternClass, rdf:type, owl:'Class'),
@@ -726,10 +726,10 @@ extern_ref(URL, G, P, property, ExternProp) :-
     atom_concat('#', P, Fragment), % get target class fragment
     (rdf(ERef, rdf:type, owl:'ObjectProperty');
      rdf(ERef, rdf:type, owl:'DatatypeProperty')),  % find a defined Property
-    atom_concat(_From, Fragment, ERef),
-    (atom_concat(BaseURL, ExternProp, ERef), % property without BaseURL
-     atom_concat(_Here, Fragment, ExternProp);  % right local URL target?
-    ExternProp=ERef).  % remote URL target
+    atom_concat(From, Fragment, ERef),
+    (From = URL, % local reference, don't need URL portion
+     atom_concat(BaseURL, ExternProp, ERef);
+     ExternProp=ERef).  % remote URL target
 extern_ref(URL, _G, P, property, ExternProp) :-
     % This version handles the case where P is like 'FILE#PROP_A'
     (rdf(ExternProp, rdf:type, owl:'ObjectProperty');

@@ -234,6 +234,12 @@ uri_spec(set_uri(URI, A)) --> [uri, URI], annots(A), ['.'].
 %%
 %% ^2 - Eclipse SADL implementation does not allow annotations on
 %%      these names, but this emitter does.
+%%
+%% ^3 - %[new-5] must come before %[3] to disambiguate an object with
+%%      no note annotation.
+%%
+%% ^4 - %[new-1] must come before %[3] to disambiguate when there is
+%%      no note annotation.
 
 
 term(import(URL)) --> [import, URL].
@@ -247,12 +253,9 @@ term(classdef(sr1_2,I,class,PTS)) --> subj(I), [is], obj(class),        %[1,2]
                                   propterms(simple,PTS).
 term(instance(sr1_2,I,C,PTS)) --> subj(I), [is], obj(C),                %[1,2]
                                   propterms(simple,PTS).
-term(propdef(S,P,V)) --> property(P), [describes], obj(S),
-                         % this rule must come before sr3 to
-                         % disambiguate when there is no note
-                         % annotations on P.
-                         [with], valphrs(simple,V).                   %[new-1]
-
+term(propdef(S,P,V)) --> property(P), [describes], obj(S),        %[new-1, ^4]
+                         [with], valphrs(simple,V).
+term(funclim(I)) --> [I, has, a, single, value].                  %[new-5, ^3]
 term(propval(I,P,V)) -->
     det(cap,_), property(P), [of], obj(I), [is], valterm(simple,V).       %[4]
 term(propval(I,P,V)) -->
@@ -355,6 +358,9 @@ resolve(All, [N::clsOrInst|Ks], Rs) :-
 resolve(All, [N::clsOrInst|Ks], Rs) :-
     member(N::instance, All), !,
     resolve(All, Ks, Rs).
+resolve(All, [N::property|Ks], Rs) :-
+    member(N::funcprop, All), !,
+    resolve(All, Ks, Rs).
 resolve(All, [K|Ks], [K|Rs]) :- resolve(All, Ks, Rs).
 
 
@@ -403,6 +409,7 @@ sty(_,F,F, [S::clsOrInst,P::property]) --> [ propdef(S,propId(P,_),_) ].
 sty(_,F,F, [S::instance,P::propval]) --> [ propval(S,propId(P,_),_) ].
 sty(_,F,F, []) --> [ propinv(_,_) ].
 sty(_,F,F, [I::class]) --> [ valenum(subj(I,_),_) ].
+sty(_,F,F, [P::funcprop]) --> [ funclim(P) ].
 sty(_,_,_,_) --> [ What ],
                  { print_message(error, unrecognized_term(What, typing)),
                    fail
@@ -610,6 +617,7 @@ sr(U,Kinds,Pfxs) --> [ valenum(subj(I,Annots),VS) ],
                          append(SPfxs, VPfxs, APfxs),
                          sort(APfxs, Pfxs)
                      }.
+sr(_,_,_) --> [ funclim(_) ].  % handled during typing
 sr(_,_,_) --> [What],
               { print_message(error, unrecognized_term(What, emitting)),
                 fail
@@ -725,6 +733,7 @@ extern_ref(URL, G, P, property, ExternProp) :-
     atom_concat(BaseURL, G, URL),  % get BaseURL
     atom_concat('#', P, Fragment), % get target class fragment
     (rdf(ERef, rdf:type, owl:'ObjectProperty');
+     rdf(ERef, rdf:type, owl:'FunctionalDataProperty');
      rdf(ERef, rdf:type, owl:'DatatypeProperty')),  % find a defined Property
     atom_concat(From, Fragment, ERef),
     (From = URL, % local reference, don't need URL portion
@@ -733,6 +742,7 @@ extern_ref(URL, G, P, property, ExternProp) :-
 extern_ref(URL, _G, P, property, ExternProp) :-
     % This version handles the case where P is like 'FILE#PROP_A'
     (rdf(ExternProp, rdf:type, owl:'ObjectProperty');
+     rdf(ExternProp, rdf:type, owl:'FunctionalDataProperty');
      rdf(ExternProp, rdf:type, owl:'DatatypeProperty')),
     atom_concat(BaseURL, P, ExternProp),
     BaseURL \= URL.
@@ -839,20 +849,23 @@ typed_val(_Kinds, _URL, _G, V, _, literal(V)).
 
 
 def_prop(Kinds, URL, Subject, propId(Prop,PropAnn),val(Restr,Tgt), []) :-
-    subj_ref(URL, Prop, G, P),
+    rdf_default_graph(G),
+    obj_ref(Kinds, URL, G, Prop, PKind, P),
     obj_ref(Kinds, URL, G, Subject, class, C),
-    obj_ref(Kinds, URL, G, Tgt, Kind, T),
-    def_prop_type(G, P, Kind, T),
+    obj_ref(Kinds, URL, G, Tgt, TKind, T),
+    def_prop_type(G, P, PKind, T, TKind),
     add_prop_domain(P, C, G),
     rdf_assert(P, rdfs:range, T, G),
     def_restr(G,C,P,Restr),
     phrase(nt(P), PropAnn).
 
-def_prop_type(G, P, class, _T) :-
+def_prop_type(G, P, funcprop, _T, _) :-
+    rdf_assert(P, rdf:type, owl:'FunctionalDataProperty', G), !.
+def_prop_type(G, P, _, _T, class) :-
     rdf_assert(P, rdf:type, owl:'ObjectProperty', G).
-def_prop_type(G, P, property, _T) :-
+def_prop_type(G, P, _, _T, property) :-
     rdf_assert(P, rdf:type, owl:'ObjectProperty', G).
-def_prop_type(G, P, literal, _T) :-
+def_prop_type(G, P, _, _T, literal) :-
     rdf_assert(P, rdf:type, owl:'DatatypeProperty', G).
 
 add_prop_domain(Prop, Class, G) :-

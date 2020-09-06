@@ -10,11 +10,11 @@
     xmlns:ingaterq="http://TurnstileSystem/InGateRequirement#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
     xmlns:trnstl="http://TurnstileSystem/Turnstiles"
+    xmlns:ha="http://TurnstileSystem/HazardAssessment"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:ha="http://TurnstileSystem/HazardAssesment"
   xml:base="http://TurnstileSystem/InGateRequirement">
   <owl:Ontology rdf:about="">
-    <owl:imports rdf:resource="HazardAssesment"/>
+    <owl:imports rdf:resource="HazardAssessment"/>
     <owl:imports rdf:resource="Turnstiles"/>
     <owl:imports rdf:resource="http://arcos.rack/REQUIREMENTS"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
@@ -25,26 +25,20 @@
   <j.0:REQUIREMENT rdf:ID="IN-GATE-3">
     <j.0:governs rdf:resource="Turnstiles#Ingate"/>
     <j.0:satisfies rdf:resource="Turnstiles#Sys-1"/>
-    <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >The Gate shall report when a person is admitted.</j.0:text>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >IN-GATE-3</j.1:uniqueIdentifier>
+    <j.0:text>The Gate shall report when a person is admitted.</j.0:text>
+    <j.1:uniqueIdentifier>IN-GATE-3</j.1:uniqueIdentifier>
   </j.0:REQUIREMENT>
   <j.0:REQUIREMENT rdf:ID="IN-GATE-2">
     <j.0:governs rdf:resource="Turnstiles#Ingate"/>
-    <j.0:mitigates rdf:resource="HazardAssesment#H-2"/>
+    <j.0:mitigates rdf:resource="HazardAssessment#H-2"/>
     <j.0:satisfies rdf:resource="Turnstiles#Sys-1"/>
-    <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >The Gate shall be disabled when the maximum census is reached.</j.0:text>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >IN-GATE-2</j.1:uniqueIdentifier>
+    <j.0:text>The Gate shall be disabled when the maximum census is reached.</j.0:text>
+    <j.1:uniqueIdentifier>IN-GATE-2</j.1:uniqueIdentifier>
   </j.0:REQUIREMENT>
   <j.0:REQUIREMENT rdf:ID="IN-GATE-1">
     <j.0:governs rdf:resource="Turnstiles#Ingate"/>
     <j.0:satisfies rdf:resource="Turnstiles#Sys-1"/>
-    <j.0:text rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >The Gate shall permit only one person at a time.</j.0:text>
-    <j.1:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >IN-GATE-1</j.1:uniqueIdentifier>
+    <j.0:text>The Gate shall permit only one person at a time.</j.0:text>
+    <j.1:uniqueIdentifier>IN-GATE-1</j.1:uniqueIdentifier>
   </j.0:REQUIREMENT>
 </rdf:RDF>

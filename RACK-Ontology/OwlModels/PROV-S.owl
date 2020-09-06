@@ -82,6 +82,7 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#field">
     <rdfs:domain rdf:resource="#ATTRIBUTE"/>
+    <rdfs:comment xml:lang="en">extensible field</rdfs:comment>
     <rdfs:range rdf:resource="#FIELD"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="wasInformedBy">
@@ -105,7 +106,7 @@
     <rdfs:domain rdf:resource="#ENTITY"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hasAttribute">
-    <rdfs:comment xml:lang="en"></rdfs:comment>
+    <rdfs:comment xml:lang="en">An extensible attribute instance</rdfs:comment>
     <rdfs:range rdf:resource="#ATTRIBUTE"/>
     <rdfs:domain rdf:resource="#THING"/>
   </owl:ObjectProperty>
@@ -131,6 +132,7 @@
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:about="#fieldValue">
     <rdfs:domain rdf:resource="#ATTRIBUTE"/>
+    <rdfs:comment xml:lang="en">extensible field value</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="uniqueIdentifier">

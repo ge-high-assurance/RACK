@@ -28,35 +28,29 @@
   </owl:Ontology>
   <j.3:SYSTEM rdf:ID="ExecutiveThread">
     <j.3:partOf rdf:resource="Turnstiles#CounterApplication"/>
-    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >ExecutiveThread</j.2:uniqueIdentifier>
+    <j.2:uniqueIdentifier>ExecutiveThread</j.2:uniqueIdentifier>
     <j.2:dataInsertedBy>
       <j.2:ACTIVITY rdf:ID="Mockup">
         <j.2:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
         >2020-06-01T12:00:00-07:00</j.2:startedAtTime>
         <j.2:wasAssociatedWith>
           <j.0:ORGANIZATION rdf:ID="Galois">
-            <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >Galois</j.0:name>
-            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >AGENT-Galois</j.2:uniqueIdentifier>
+            <j.0:name>Galois</j.0:name>
+            <j.2:uniqueIdentifier>AGENT-Galois</j.2:uniqueIdentifier>
           </j.0:ORGANIZATION>
         </j.2:wasAssociatedWith>
-        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >ACTIVITY-Turnstile software data mockup</j.2:uniqueIdentifier>
+        <j.2:uniqueIdentifier>ACTIVITY-Turnstile software data mockup</j.2:uniqueIdentifier>
       </j.2:ACTIVITY>
     </j.2:dataInsertedBy>
   </j.3:SYSTEM>
   <j.3:SYSTEM rdf:ID="InputThread">
     <j.3:partOf rdf:resource="Turnstiles#CounterApplication"/>
-    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >InputThread</j.2:uniqueIdentifier>
+    <j.2:uniqueIdentifier>InputThread</j.2:uniqueIdentifier>
     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
   </j.3:SYSTEM>
   <j.1:FORMAT rdf:ID="RpmFile">
     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >FORMAT-RpmFile</j.2:uniqueIdentifier>
+    <j.2:uniqueIdentifier>FORMAT-RpmFile</j.2:uniqueIdentifier>
     <rdfs:comment xml:lang="en">RedHat Package Manager archive</rdfs:comment>
   </j.1:FORMAT>
   <j.1:COMPONENT rdf:ID="main_function">
@@ -65,16 +59,13 @@
         <j.1:fileFormat>
           <j.1:FORMAT rdf:ID="CSourceFile">
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >FORMAT-CSourceFile</j.2:uniqueIdentifier>
+            <j.2:uniqueIdentifier>FORMAT-CSourceFile</j.2:uniqueIdentifier>
             <rdfs:comment xml:lang="en">A C language source file</rdfs:comment>
           </j.1:FORMAT>
         </j.1:fileFormat>
         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >counter.c</j.1:filename>
-        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >counter_c</j.2:uniqueIdentifier>
+        <j.1:filename>counter.c</j.1:filename>
+        <j.2:uniqueIdentifier>counter_c</j.2:uniqueIdentifier>
       </j.1:FILE>
     </j.1:definedIn>
     <j.1:controlFlowsToUnconditionally>
@@ -83,20 +74,15 @@
           <j.1:FILE rdf:ID="output_c">
             <j.1:fileFormat rdf:resource="#CSourceFile"/>
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >output.c</j.1:filename>
-            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >output_c</j.2:uniqueIdentifier>
+            <j.1:filename>output.c</j.1:filename>
+            <j.2:uniqueIdentifier>output_c</j.2:uniqueIdentifier>
           </j.1:FILE>
         </j.1:definedIn>
-        <j.1:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >void()</j.1:valueType>
-        <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >output</j.1:name>
+        <j.1:valueType>void()</j.1:valueType>
+        <j.1:name>output</j.1:name>
         <j.1:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >output_function</j.2:uniqueIdentifier>
+        <j.2:uniqueIdentifier>output_function</j.2:uniqueIdentifier>
       </j.1:COMPONENT>
     </j.1:controlFlowsToUnconditionally>
     <j.1:controlFlowsToUnconditionally>
@@ -105,43 +91,33 @@
           <j.1:FILE rdf:ID="input_c">
             <j.1:fileFormat rdf:resource="#CSourceFile"/>
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >input.c</j.1:filename>
-            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >input_c</j.2:uniqueIdentifier>
+            <j.1:filename>input.c</j.1:filename>
+            <j.2:uniqueIdentifier>input_c</j.2:uniqueIdentifier>
           </j.1:FILE>
         </j.1:definedIn>
-        <j.1:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >void()</j.1:valueType>
-        <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >input</j.1:name>
+        <j.1:valueType>void()</j.1:valueType>
+        <j.1:name>input</j.1:name>
         <j.1:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >input_function</j.2:uniqueIdentifier>
+        <j.2:uniqueIdentifier>input_function</j.2:uniqueIdentifier>
       </j.1:COMPONENT>
     </j.1:controlFlowsToUnconditionally>
-    <j.1:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >int(int argc, char* argv[])</j.1:valueType>
-    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >main</j.1:name>
+    <j.1:valueType>int(int argc, char* argv[])</j.1:valueType>
+    <j.1:name>main</j.1:name>
     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
     <j.1:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >main_function</j.2:uniqueIdentifier>
+    <j.2:uniqueIdentifier>main_function</j.2:uniqueIdentifier>
   </j.1:COMPONENT>
   <j.1:FORMAT rdf:ID="ZipFile">
     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >FORMAT-ZipFile</j.2:uniqueIdentifier>
+    <j.2:uniqueIdentifier>FORMAT-ZipFile</j.2:uniqueIdentifier>
     <rdfs:comment xml:lang="en">Compressed file archive</rdfs:comment>
   </j.1:FORMAT>
   <j.1:FILE rdf:ID="dist_tar">
     <j.1:fileFormat>
       <j.1:FORMAT rdf:ID="TarFile">
         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >FORMAT-TarFile</j.2:uniqueIdentifier>
+        <j.2:uniqueIdentifier>FORMAT-TarFile</j.2:uniqueIdentifier>
         <rdfs:comment xml:lang="en">File archive</rdfs:comment>
       </j.1:FORMAT>
     </j.1:fileFormat>
@@ -152,8 +128,7 @@
             <j.1:fileFormat>
               <j.1:FORMAT rdf:ID="ElfFile">
                 <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                >FORMAT-ElfFile</j.2:uniqueIdentifier>
+                <j.2:uniqueIdentifier>FORMAT-ElfFile</j.2:uniqueIdentifier>
                 <rdfs:comment xml:lang="en">ELF object, shared-object, executable</rdfs:comment>
               </j.1:FORMAT>
             </j.1:fileFormat>
@@ -163,10 +138,8 @@
                   <j.1:FILE rdf:ID="counter_h">
                     <j.1:fileFormat rdf:resource="#CSourceFile"/>
                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                    <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >counter.h</j.1:filename>
-                    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >counter_h</j.2:uniqueIdentifier>
+                    <j.1:filename>counter.h</j.1:filename>
+                    <j.2:uniqueIdentifier>counter_h</j.2:uniqueIdentifier>
                   </j.1:FILE>
                 </j.1:compileInput>
                 <j.1:compileInput rdf:resource="#counter_c"/>
@@ -184,63 +157,43 @@
                                   <j.1:FILE rdf:ID="hw_h">
                                     <j.1:fileFormat rdf:resource="#CSourceFile"/>
                                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                                    <j.1:filename rdf:datatype=
-                                    "http://www.w3.org/2001/XMLSchema#string"
-                                    >hw.h</j.1:filename>
-                                    <j.2:uniqueIdentifier rdf:datatype=
-                                    "http://www.w3.org/2001/XMLSchema#string"
-                                    >hw_h</j.2:uniqueIdentifier>
+                                    <j.1:filename>hw.h</j.1:filename>
+                                    <j.2:uniqueIdentifier>hw_h</j.2:uniqueIdentifier>
                                   </j.1:FILE>
                                 </j.1:compileInput>
                                 <j.1:compileInput>
                                   <j.1:FILE rdf:ID="hw_c">
                                     <j.1:fileFormat rdf:resource="#CSourceFile"/>
                                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                                    <j.1:filename rdf:datatype=
-                                    "http://www.w3.org/2001/XMLSchema#string"
-                                    >hw.c</j.1:filename>
-                                    <j.2:uniqueIdentifier rdf:datatype=
-                                    "http://www.w3.org/2001/XMLSchema#string"
-                                    >hw_c</j.2:uniqueIdentifier>
+                                    <j.1:filename>hw.c</j.1:filename>
+                                    <j.2:uniqueIdentifier>hw_c</j.2:uniqueIdentifier>
                                   </j.1:FILE>
                                 </j.1:compileInput>
                                 <j.1:compiledBy>
                                   <j.1:FILE rdf:ID="cc">
                                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
                                     <j.1:fileFormat rdf:resource="#ElfFile"/>
-                                    <j.1:filename rdf:datatype=
-                                    "http://www.w3.org/2001/XMLSchema#string"
-                                    >cc</j.1:filename>
-                                    <j.2:uniqueIdentifier rdf:datatype=
-                                    "http://www.w3.org/2001/XMLSchema#string"
-                                    >cc</j.2:uniqueIdentifier>
+                                    <j.1:filename>cc</j.1:filename>
+                                    <j.2:uniqueIdentifier>cc</j.2:uniqueIdentifier>
                                   </j.1:FILE>
                                 </j.1:compiledBy>
                                 <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                                <j.2:uniqueIdentifier rdf:datatype=
-                                "http://www.w3.org/2001/XMLSchema#string"
-                                >hw_o_Compiling</j.2:uniqueIdentifier>
+                                <j.2:uniqueIdentifier>hw_o_Compiling</j.2:uniqueIdentifier>
                               </j.1:COMPILE>
                             </j.1:createBy>
                             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                            >hw.o</j.1:filename>
-                            <j.2:uniqueIdentifier rdf:datatype=
-                            "http://www.w3.org/2001/XMLSchema#string"
-                            >hw_o</j.2:uniqueIdentifier>
+                            <j.1:filename>hw.o</j.1:filename>
+                            <j.2:uniqueIdentifier>hw_o</j.2:uniqueIdentifier>
                           </j.1:FILE>
                         </j.1:compileInput>
                         <j.1:compiledBy rdf:resource="#cc"/>
                         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                        >libhw_so_Compiling</j.2:uniqueIdentifier>
+                        <j.2:uniqueIdentifier>libhw_so_Compiling</j.2:uniqueIdentifier>
                       </j.1:COMPILE>
                     </j.1:createBy>
                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                    <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >libhw.so</j.1:filename>
-                    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >libhw_so</j.2:uniqueIdentifier>
+                    <j.1:filename>libhw.so</j.1:filename>
+                    <j.2:uniqueIdentifier>libhw_so</j.2:uniqueIdentifier>
                   </j.1:FILE>
                 </j.1:compileInput>
                 <j.1:compileInput>
@@ -250,8 +203,7 @@
                       <j.1:COMPILE rdf:ID="output_o_Compiling">
                         <j.2:hasAttribute>
                           <j.2:ATTRIBUTE>
-                            <j.2:fieldValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                            >/path/to/libraries</j.2:fieldValue>
+                            <j.2:fieldValue>/path/to/libraries</j.2:fieldValue>
                             <j.2:field>
                               <j.2:FIELD rdf:ID="LinkerPath"/>
                             </j.2:field>
@@ -259,8 +211,7 @@
                         </j.2:hasAttribute>
                         <j.2:hasAttribute>
                           <j.2:ATTRIBUTE>
-                            <j.2:fieldValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                            >yes</j.2:fieldValue>
+                            <j.2:fieldValue>yes</j.2:fieldValue>
                             <j.2:field>
                               <j.2:FIELD rdf:ID="CompileWithOptimizations"/>
                             </j.2:field>
@@ -271,24 +222,18 @@
                           <j.1:FILE rdf:ID="output_h">
                             <j.1:fileFormat rdf:resource="#CSourceFile"/>
                             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                            >output.h</j.1:filename>
-                            <j.2:uniqueIdentifier rdf:datatype=
-                            "http://www.w3.org/2001/XMLSchema#string"
-                            >output_h</j.2:uniqueIdentifier>
+                            <j.1:filename>output.h</j.1:filename>
+                            <j.2:uniqueIdentifier>output_h</j.2:uniqueIdentifier>
                           </j.1:FILE>
                         </j.1:compileInput>
                         <j.1:compileInput rdf:resource="#output_c"/>
                         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                        >output_o_Compiling</j.2:uniqueIdentifier>
+                        <j.2:uniqueIdentifier>output_o_Compiling</j.2:uniqueIdentifier>
                       </j.1:COMPILE>
                     </j.1:createBy>
                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                    <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >output.o</j.1:filename>
-                    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >output_o</j.2:uniqueIdentifier>
+                    <j.1:filename>output.o</j.1:filename>
+                    <j.2:uniqueIdentifier>output_o</j.2:uniqueIdentifier>
                   </j.1:FILE>
                 </j.1:compileInput>
                 <j.1:compileInput>
@@ -300,38 +245,29 @@
                           <j.1:FILE rdf:ID="input_h">
                             <j.1:fileFormat rdf:resource="#CSourceFile"/>
                             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                            >input.h</j.1:filename>
-                            <j.2:uniqueIdentifier rdf:datatype=
-                            "http://www.w3.org/2001/XMLSchema#string"
-                            >input_h</j.2:uniqueIdentifier>
+                            <j.1:filename>input.h</j.1:filename>
+                            <j.2:uniqueIdentifier>input_h</j.2:uniqueIdentifier>
                           </j.1:FILE>
                         </j.1:compileInput>
                         <j.1:compileInput rdf:resource="#input_c"/>
                         <j.1:compiledBy rdf:resource="#cc"/>
                         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                        >input_o_Compiling</j.2:uniqueIdentifier>
+                        <j.2:uniqueIdentifier>input_o_Compiling</j.2:uniqueIdentifier>
                       </j.1:COMPILE>
                     </j.1:createBy>
                     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                    <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >input.o</j.1:filename>
-                    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                    >input_o</j.2:uniqueIdentifier>
+                    <j.1:filename>input.o</j.1:filename>
+                    <j.2:uniqueIdentifier>input_o</j.2:uniqueIdentifier>
                   </j.1:FILE>
                 </j.1:compileInput>
                 <j.1:compiledBy rdf:resource="#cc"/>
                 <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                >counter_exe_Compiling</j.2:uniqueIdentifier>
+                <j.2:uniqueIdentifier>counter_exe_Compiling</j.2:uniqueIdentifier>
               </j.1:COMPILE>
             </j.1:createBy>
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >counter.exe</j.1:filename>
-            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >counter_exe</j.2:uniqueIdentifier>
+            <j.1:filename>counter.exe</j.1:filename>
+            <j.2:uniqueIdentifier>counter_exe</j.2:uniqueIdentifier>
           </j.1:FILE>
         </j.1:packageInput>
         <j.1:packageInput rdf:resource="#libhw_so"/>
@@ -340,43 +276,34 @@
             <j.1:fileFormat>
               <j.1:FORMAT rdf:ID="JsonFile">
                 <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-                <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                >FORMAT-JsonFile</j.2:uniqueIdentifier>
+                <j.2:uniqueIdentifier>FORMAT-JsonFile</j.2:uniqueIdentifier>
                 <rdfs:comment xml:lang="en">JSON data</rdfs:comment>
               </j.1:FORMAT>
             </j.1:fileFormat>
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >conf.json</j.1:filename>
-            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >conf_json</j.2:uniqueIdentifier>
+            <j.1:filename>conf.json</j.1:filename>
+            <j.2:uniqueIdentifier>conf_json</j.2:uniqueIdentifier>
           </j.1:FILE>
         </j.1:packageInput>
         <j.1:packagedBy>
           <j.1:FILE rdf:ID="tar">
             <j.2:dataInsertedBy rdf:resource="#Mockup"/>
             <j.1:fileFormat rdf:resource="#ElfFile"/>
-            <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >tar</j.1:filename>
-            <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >tar</j.2:uniqueIdentifier>
+            <j.1:filename>tar</j.1:filename>
+            <j.2:uniqueIdentifier>tar</j.2:uniqueIdentifier>
           </j.1:FILE>
         </j.1:packagedBy>
         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >tarPackaging</j.2:uniqueIdentifier>
+        <j.2:uniqueIdentifier>tarPackaging</j.2:uniqueIdentifier>
       </j.1:PACKAGE>
     </j.2:wasGeneratedBy>
     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-    <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >dist.tar</j.1:filename>
-    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >dist_tar</j.2:uniqueIdentifier>
+    <j.1:filename>dist.tar</j.1:filename>
+    <j.2:uniqueIdentifier>dist_tar</j.2:uniqueIdentifier>
   </j.1:FILE>
   <j.3:SYSTEM rdf:ID="OutputThread">
     <j.3:partOf rdf:resource="Turnstiles#CounterApplication"/>
-    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >OutputThread</j.2:uniqueIdentifier>
+    <j.2:uniqueIdentifier>OutputThread</j.2:uniqueIdentifier>
     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
   </j.3:SYSTEM>
   <j.1:COMPILE rdf:ID="test_exe_Compiling">
@@ -384,25 +311,20 @@
       <j.1:FILE rdf:ID="test_h">
         <j.1:fileFormat rdf:resource="#CSourceFile"/>
         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >test.h</j.1:filename>
-        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >test_h</j.2:uniqueIdentifier>
+        <j.1:filename>test.h</j.1:filename>
+        <j.2:uniqueIdentifier>test_h</j.2:uniqueIdentifier>
       </j.1:FILE>
     </j.1:compileInput>
     <j.1:compileInput>
       <j.1:FILE rdf:ID="test_c">
         <j.1:fileFormat rdf:resource="#CSourceFile"/>
         <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.1:filename rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >test.c</j.1:filename>
-        <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >test_c</j.2:uniqueIdentifier>
+        <j.1:filename>test.c</j.1:filename>
+        <j.2:uniqueIdentifier>test_c</j.2:uniqueIdentifier>
       </j.1:FILE>
     </j.1:compileInput>
     <j.1:compiledBy rdf:resource="#cc"/>
     <j.2:dataInsertedBy rdf:resource="#Mockup"/>
-    <j.2:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >test_exe_Compiling</j.2:uniqueIdentifier>
+    <j.2:uniqueIdentifier>test_exe_Compiling</j.2:uniqueIdentifier>
   </j.1:COMPILE>
 </rdf:RDF>

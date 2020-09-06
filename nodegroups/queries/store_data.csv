@@ -1,10 +1,7 @@
 ID,comments,creator,jsonFile
-query Compilation Inputs,Find inputs used in compilation of executables,langston,query Compilation Inputs.json
-query Control Flow From Function,Find functions called by specified function,langston,query Control Flow From Function.json
 query Files of a Given Format,Find files of specified format,langston,query Files of a Given Format.json
 query Requirements without Tests,Find requirements without a verifying test case,200001934,query Requirements without Tests.json
 query Testcase without requirement,Find any test case that doesn't verify a requirement,200001934,query Testcase without requirement.json
-query System Structure,Find system component associated with the hazards,200001934,query System Structure.json
 query Requirements with failed test result,Find requirements with test failures,200001934,query Requirements with failed test result.json
 query Requirement decomposition,Recursively show all requirements satisfied by an original,200001934,query Requirement decomposition.json
 query Interface structure,Find system source and destination for interface,200001934,query Interface structure.json
@@ -13,3 +10,6 @@ query Trace Hazards to Tests,Trace hazard down to test case,200001934,query Trac
 query Trace Requirements to Tests,Recursively show all requirements which satisfy and verify a testcase,200001934,query Trace Requirements to Tests.json
 query Hazard structure,Find system component associated with the hazards,200001934,query Hazard structure.json
 query Terms consumedBy Requirement,Find data dictionary terms consumed by requirement(s),200001934,query Terms consumedBy Requirement.json
+query Control Flow From Function,Find functions called by specified function,eric,query Control Flow From Function.json
+query Compilation Inputs,Find inputs used in compilation of executables,langston,query Compilation Inputs.json
+query System Structure,Extract system subcomponent structure contained under a given top-level anchor system,eric,query System Structure.json

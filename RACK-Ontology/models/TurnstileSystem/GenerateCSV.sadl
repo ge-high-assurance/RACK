@@ -123,7 +123,7 @@ Write: data
   Ask: "select distinct ?uniqueIdentifier ?performedById ?compiledById ?compileInputId where
         {  ?COMPILE <rdf:type> <COMPILE>
          . ?COMPILE <uniqueIdentifier> ?uniqueIdentifier
-         . OPTIONAL{  ?COMPILE <performedBy> ?performedBy
+         . OPTIONAL{  ?COMPILE <sw:performedBy> ?performedBy
                     . ?performedBy <rdf:type> <AGENT>
                     . ?performedBy <uniqueIdentifier> ?performedById
                    }
@@ -144,7 +144,7 @@ Write: data
   Ask: "select distinct ?uniqueIdentifier ?performedById ?packagedById ?packageInputId where
         {  ?PACKAGE <rdf:type> <PACKAGE>
         . ?PACKAGE <uniqueIdentifier> ?uniqueIdentifier
-        . OPTIONAL{ ?PACKAGE <performedBy> ?performedBy
+        . OPTIONAL{ ?PACKAGE <sw:performedBy> ?performedBy
                   . ?performedBy <rdf:type> <AGENT>
                   . ?performedBy <uniqueIdentifier> ?performedById
                   }
@@ -166,7 +166,7 @@ Write: data
         {  ?FILE <rdf:type> <FILE>
          . ?FILE <uniqueIdentifier> ?uniqueIdentifier
 		 . OPTIONAL{ ?FILE <filename> ?filename }
-         . OPTIONAL{  ?FILE <createBy> ?createBy
+         . OPTIONAL{  ?FILE <sw:createBy> ?createBy
                     . ?createBy <rdf:type> <ACTIVITY>
                     . ?createBy <uniqueIdentifier> ?createById
                    }
@@ -186,7 +186,7 @@ Write: data
 		. ?COMPONENT <componentType> ?componentType
 	    . ?componentType <rdf:type> <COMPONENT_TYPE>
         . ?componentType <uniqueIdentifier> ?componentTypeId
-		. OPTIONAL{ ?COMPONENT <SOFTWARE#name> ?name }
+		. OPTIONAL{ ?COMPONENT <sw:name> ?name }
 		. OPTIONAL{ ?COMPONENT <valueType> ?valueType }
         . OPTIONAL{ ?COMPONENT <instantiates> ?instantiates
                   . ?instantiates <rdf:type> <ENTITY>
@@ -222,3 +222,23 @@ Write: data
                   }
         } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/COMPONENT.csv".
+
+// list all CONFIDENCE_ASSESSMENT
+Write: data
+{
+  Ask: "select distinct ?assessmentId ?createById ?assesseeId ?belief ?disbelief ?uncertainty where
+        {  ?CONFIDENCE_ASSESSMENT <rdf:type> <CONFIDENCE_ASSESSMENT>
+         . ?CONFIDENCE_ASSESSMENT <uniqueIdentifier> ?assessmentId
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:createBy> ?createBy
+                    . ?createBy <rdf:type> <ACTIVITY>
+                    . ?createBy <uniqueIdentifier> ?createById
+                   }
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:assesses> ?assessee
+                    . ?assessee <rdf:type> <ENTITY>
+                    . ?assessee <uniqueIdentifier> ?assesseeId
+                   }
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:belief> ?belief }
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:disbelief> ?disbelief }
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:uncertainty> ?uncertainty }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/CONFIDENCE_ASSESSMENT.csv".

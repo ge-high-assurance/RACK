@@ -32,8 +32,7 @@
     <rdfs:subClassOf rdf:resource="sadllistmodel#List"/>
   </owl:Class>
   <j.1:ExternalEquation rdf:ID="isDType">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#isDType</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#isDType</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -57,47 +56,39 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean isDType(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#isDType")</j.1:script>
+        <j.1:script>boolean isDType(string X): uri("org.apache.jena.reasoner.rulesys.builtins#isDType")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="countUniqueMatches">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#countUniqueMatches</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#countUniqueMatches</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- countUniqueMatches(): uri("com.ge.research.sadl.jena.reasoner.builtin#countUniqueMatches")</j.1:script>
+        <j.1:script>-- countUniqueMatches(): uri("com.ge.research.sadl.jena.reasoner.builtin#countUniqueMatches")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listConcat">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#listConcat</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#listConcat</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- listConcat(): uri("com.ge.research.sadl.jena.reasoner.builtin#listConcat")</j.1:script>
+        <j.1:script>-- listConcat(): uri("com.ge.research.sadl.jena.reasoner.builtin#listConcat")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="unique">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#unique</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#unique</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- unique(): uri("com.ge.research.sadl.jena.reasoner.builtin#unique")</j.1:script>
+        <j.1:script>-- unique(): uri("com.ge.research.sadl.jena.reasoner.builtin#unique")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="abs">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#abs</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#abs</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -121,14 +112,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >decimal abs(decimal X): uri("com.ge.research.sadl.jena.reasoner.builtin#abs")</j.1:script>
+        <j.1:script>decimal abs(decimal X): uri("com.ge.research.sadl.jena.reasoner.builtin#abs")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="addOne">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#addOne</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#addOne</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -152,14 +141,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >decimal addOne(decimal X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#addOne")</j.1:script>
+        <j.1:script>decimal addOne(decimal X): uri("org.apache.jena.reasoner.rulesys.builtins#addOne")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listMapAsObject">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#listMapAsObject</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listMapAsObject</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -203,14 +190,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean listMapAsObject(string X,string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listMapAsObject")</j.1:script>
+        <j.1:script>boolean listMapAsObject(string X,string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#listMapAsObject")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="min">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#min</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#min</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -244,25 +229,21 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >decimal min(decimal X,decimal X): uri("com.ge.research.sadl.jena.reasoner.builtin#min")</j.1:script>
+        <j.1:script>decimal min(decimal X,decimal X): uri("com.ge.research.sadl.jena.reasoner.builtin#min")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="noSubjectsOtherThan">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#noSubjectsOtherThan</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#noSubjectsOtherThan</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- noSubjectsOtherThan(): uri("com.ge.research.sadl.jena.reasoner.builtin#noSubjectsOtherThan")</j.1:script>
+        <j.1:script>-- noSubjectsOtherThan(): uri("com.ge.research.sadl.jena.reasoner.builtin#noSubjectsOtherThan")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="now">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#now</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#now</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -274,36 +255,30 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >dateTime now(): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#now")</j.1:script>
+        <j.1:script>dateTime now(): uri("org.apache.jena.reasoner.rulesys.builtins#now")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="average">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#average</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#average</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- average(): uri("com.ge.research.sadl.jena.reasoner.builtin#average")</j.1:script>
+        <j.1:script>-- average(): uri("com.ge.research.sadl.jena.reasoner.builtin#average")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="atan">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#atan</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#atan</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- atan(): uri("com.ge.research.sadl.jena.reasoner.builtin#atan")</j.1:script>
+        <j.1:script>-- atan(): uri("com.ge.research.sadl.jena.reasoner.builtin#atan")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="le">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#le</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#le</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -337,25 +312,21 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean le(decimal X,decimal X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#le")</j.1:script>
+        <j.1:script>boolean le(decimal X,decimal X): uri("org.apache.jena.reasoner.rulesys.builtins#le")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="greaterThan">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#greaterThan</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#greaterThan</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- greaterThan(): uri("com.ge.research.sadl.jena.reasoner.builtin#greaterThan")</j.1:script>
+        <j.1:script>-- greaterThan(): uri("com.ge.research.sadl.jena.reasoner.builtin#greaterThan")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="uriConcat">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#uriConcat</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#uriConcat</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -389,25 +360,21 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >string uriConcat(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#uriConcat")</j.1:script>
+        <j.1:script>string uriConcat(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#uriConcat")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="subtractDates">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#subtractDates</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#subtractDates</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- subtractDates(): uri("com.ge.research.sadl.jena.reasoner.builtin#subtractDates")</j.1:script>
+        <j.1:script>-- subtractDates(): uri("com.ge.research.sadl.jena.reasoner.builtin#subtractDates")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="notBNode">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#notBNode</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#notBNode</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -431,102 +398,84 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean notBNode(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#notBNode")</j.1:script>
+        <j.1:script>boolean notBNode(string X): uri("org.apache.jena.reasoner.rulesys.builtins#notBNode")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="mod">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#mod</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#mod</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- mod(): uri("com.ge.research.sadl.jena.reasoner.builtin#mod")</j.1:script>
+        <j.1:script>-- mod(): uri("com.ge.research.sadl.jena.reasoner.builtin#mod")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="ceiling">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#ceiling</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#ceiling</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- ceiling(): uri("com.ge.research.sadl.jena.reasoner.builtin#ceiling")</j.1:script>
+        <j.1:script>-- ceiling(): uri("com.ge.research.sadl.jena.reasoner.builtin#ceiling")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="lessThan">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#lessThan</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#lessThan</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- lessThan(): uri("com.ge.research.sadl.jena.reasoner.builtin#lessThan")</j.1:script>
+        <j.1:script>-- lessThan(): uri("com.ge.research.sadl.jena.reasoner.builtin#lessThan")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="localname">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#localname</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#localname</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- localname(): uri("com.ge.research.sadl.jena.reasoner.builtin#localname")</j.1:script>
+        <j.1:script>-- localname(): uri("com.ge.research.sadl.jena.reasoner.builtin#localname")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="cos">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#cos</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#cos</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- cos(): uri("com.ge.research.sadl.jena.reasoner.builtin#cos")</j.1:script>
+        <j.1:script>-- cos(): uri("com.ge.research.sadl.jena.reasoner.builtin#cos")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="list">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#list</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#list</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- list(): uri("com.ge.research.sadl.jena.reasoner.builtin#list")</j.1:script>
+        <j.1:script>-- list(): uri("com.ge.research.sadl.jena.reasoner.builtin#list")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="oneOf">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#oneOf</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#oneOf</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- oneOf(): uri("com.ge.research.sadl.jena.reasoner.builtin#oneOf")</j.1:script>
+        <j.1:script>-- oneOf(): uri("com.ge.research.sadl.jena.reasoner.builtin#oneOf")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="getClassFromConstraint">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#getClassFromConstraint</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#getClassFromConstraint</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- getClassFromConstraint(): uri("com.ge.research.sadl.jena.reasoner.builtin#getClassFromConstraint")</j.1:script>
+        <j.1:script>-- getClassFromConstraint(): uri("com.ge.research.sadl.jena.reasoner.builtin#getClassFromConstraint")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="regex">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#regex</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#regex</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -560,14 +509,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >string regex(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#regex")</j.1:script>
+        <j.1:script>string regex(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#regex")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listLength">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#listLength</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listLength</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -591,36 +538,30 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >int listLength(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listLength")</j.1:script>
+        <j.1:script>int listLength(string X): uri("org.apache.jena.reasoner.rulesys.builtins#listLength")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="noValuesOtherThan">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#noValuesOtherThan</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#noValuesOtherThan</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- noValuesOtherThan(): uri("com.ge.research.sadl.jena.reasoner.builtin#noValuesOtherThan")</j.1:script>
+        <j.1:script>-- noValuesOtherThan(): uri("com.ge.research.sadl.jena.reasoner.builtin#noValuesOtherThan")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="asin">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#asin</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#asin</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- asin(): uri("com.ge.research.sadl.jena.reasoner.builtin#asin")</j.1:script>
+        <j.1:script>-- asin(): uri("com.ge.research.sadl.jena.reasoner.builtin#asin")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="notLiteral">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#notLiteral</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#notLiteral</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -644,14 +585,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean notLiteral(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#notLiteral")</j.1:script>
+        <j.1:script>boolean notLiteral(string X): uri("org.apache.jena.reasoner.rulesys.builtins#notLiteral")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listEqual">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#listEqual</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listEqual</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -685,14 +624,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean listEqual(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listEqual")</j.1:script>
+        <j.1:script>boolean listEqual(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#listEqual")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="print">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#print</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#print</j.1:externalURI>
     <j.1:arguments rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -708,14 +645,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- print(string X): uri("com.ge.research.sadl.jena.reasoner.builtin#print")</j.1:script>
+        <j.1:script>-- print(string X): uri("com.ge.research.sadl.jena.reasoner.builtin#print")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listContains">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#listContains</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listContains</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -749,23 +684,19 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean listContains(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listContains")</j.1:script>
+        <j.1:script>boolean listContains(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#listContains")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="sqrt">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#sqrt</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#sqrt</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- sqrt(): uri("com.ge.research.sadl.jena.reasoner.builtin#sqrt")</j.1:script>
+        <j.1:script>-- sqrt(): uri("com.ge.research.sadl.jena.reasoner.builtin#sqrt")</j.1:script>
       </j.1:Script>
     </j.1:expression>
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#sqrt</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#sqrt</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -789,36 +720,30 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >decimal sqrt(decimal X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#sqrt")</j.1:script>
+        <j.1:script>decimal sqrt(decimal X): uri("org.apache.jena.reasoner.rulesys.builtins#sqrt")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="product">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#product</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#product</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- product(): uri("com.ge.research.sadl.jena.reasoner.builtin#product")</j.1:script>
+        <j.1:script>-- product(): uri("com.ge.research.sadl.jena.reasoner.builtin#product")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="getInstance">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#getInstance</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#getInstance</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- getInstance(): uri("com.ge.research.sadl.jena.reasoner.builtin#getInstance")</j.1:script>
+        <j.1:script>-- getInstance(): uri("com.ge.research.sadl.jena.reasoner.builtin#getInstance")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="countMatches">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#countMatches</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#countMatches</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -830,25 +755,21 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >int countMatches(): uri("com.ge.research.sadl.jena.reasoner.builtin#countMatches")</j.1:script>
+        <j.1:script>int countMatches(): uri("com.ge.research.sadl.jena.reasoner.builtin#countMatches")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="notOnlyValue">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#notOnlyValue</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#notOnlyValue</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- notOnlyValue(): uri("com.ge.research.sadl.jena.reasoner.builtin#notOnlyValue")</j.1:script>
+        <j.1:script>-- notOnlyValue(): uri("com.ge.research.sadl.jena.reasoner.builtin#notOnlyValue")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="bound">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#bound</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#bound</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -872,23 +793,19 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean bound(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#bound")</j.1:script>
+        <j.1:script>boolean bound(string X): uri("org.apache.jena.reasoner.rulesys.builtins#bound")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="pow">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#pow</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#pow</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- pow(): uri("com.ge.research.sadl.jena.reasoner.builtin#pow")</j.1:script>
+        <j.1:script>-- pow(): uri("com.ge.research.sadl.jena.reasoner.builtin#pow")</j.1:script>
       </j.1:Script>
     </j.1:expression>
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#pow</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#pow</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -922,14 +839,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >decimal pow(decimal X,decimal X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#pow")</j.1:script>
+        <j.1:script>decimal pow(decimal X,decimal X): uri("org.apache.jena.reasoner.rulesys.builtins#pow")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="ge">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#ge</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#ge</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -963,25 +878,21 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean ge(decimal X,decimal X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#ge")</j.1:script>
+        <j.1:script>boolean ge(decimal X,decimal X): uri("org.apache.jena.reasoner.rulesys.builtins#ge")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="table">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#table</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#table</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- table(): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#table")</j.1:script>
+        <j.1:script>-- table(): uri("org.apache.jena.reasoner.rulesys.builtins#table")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="notBType">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#notBType</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#notBType</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1005,14 +916,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean notBType(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#notBType")</j.1:script>
+        <j.1:script>boolean notBType(string X): uri("org.apache.jena.reasoner.rulesys.builtins#notBType")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="acos">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#acos</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#acos</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1036,14 +945,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >decimal acos(decimal X): uri("com.ge.research.sadl.jena.reasoner.builtin#acos")</j.1:script>
+        <j.1:script>decimal acos(decimal X): uri("com.ge.research.sadl.jena.reasoner.builtin#acos")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="isBNode">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#isBNode</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#isBNode</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1067,14 +974,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean isBNode(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#isBNode")</j.1:script>
+        <j.1:script>boolean isBNode(string X): uri("org.apache.jena.reasoner.rulesys.builtins#isBNode")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="notDType">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#notDType</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#notDType</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1098,36 +1003,30 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean notDType(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#notDType")</j.1:script>
+        <j.1:script>boolean notDType(string X): uri("org.apache.jena.reasoner.rulesys.builtins#notDType")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="noValue">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#noValue</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#noValue</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- noValue(): uri("com.ge.research.sadl.jena.reasoner.builtin#noValue")</j.1:script>
+        <j.1:script>-- noValue(): uri("com.ge.research.sadl.jena.reasoner.builtin#noValue")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="sum">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#sum</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#sum</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- sum(): uri("com.ge.research.sadl.jena.reasoner.builtin#sum")</j.1:script>
+        <j.1:script>-- sum(): uri("com.ge.research.sadl.jena.reasoner.builtin#sum")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listMapAsSubject">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#listMapAsSubject</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listMapAsSubject</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1171,36 +1070,30 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean listMapAsSubject(string X,string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listMapAsSubject")</j.1:script>
+        <j.1:script>boolean listMapAsSubject(string X,string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#listMapAsSubject")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="tableAll">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#tableAll</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#tableAll</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- tableAll(): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#tableAll")</j.1:script>
+        <j.1:script>-- tableAll(): uri("org.apache.jena.reasoner.rulesys.builtins#tableAll")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listToString">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#listToString</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#listToString</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- listToString(): uri("com.ge.research.sadl.jena.reasoner.builtin#listToString")</j.1:script>
+        <j.1:script>-- listToString(): uri("com.ge.research.sadl.jena.reasoner.builtin#listToString")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="max">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#max</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#max</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1234,14 +1127,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >decimal max(decimal X,decimal X): uri("com.ge.research.sadl.jena.reasoner.builtin#max")</j.1:script>
+        <j.1:script>decimal max(decimal X,decimal X): uri("com.ge.research.sadl.jena.reasoner.builtin#max")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listEntry">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#listEntry</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listEntry</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1275,14 +1166,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >string listEntry(string X,int X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listEntry")</j.1:script>
+        <j.1:script>string listEntry(string X,int X): uri("org.apache.jena.reasoner.rulesys.builtins#listEntry")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="difference">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#difference</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#difference</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1316,25 +1205,21 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >decimal difference(decimal X,decimal X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#difference")</j.1:script>
+        <j.1:script>decimal difference(decimal X,decimal X): uri("org.apache.jena.reasoner.rulesys.builtins#difference")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listSubtract">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#listSubtract</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#listSubtract</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- listSubtract(): uri("com.ge.research.sadl.jena.reasoner.builtin#listSubtract")</j.1:script>
+        <j.1:script>-- listSubtract(): uri("com.ge.research.sadl.jena.reasoner.builtin#listSubtract")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="isLiteral">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#isLiteral</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#isLiteral</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1358,14 +1243,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean isLiteral(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#isLiteral")</j.1:script>
+        <j.1:script>boolean isLiteral(string X): uri("org.apache.jena.reasoner.rulesys.builtins#isLiteral")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="unbound">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#unbound</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#unbound</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1389,14 +1272,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >string unbound(string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#unbound")</j.1:script>
+        <j.1:script>string unbound(string X): uri("org.apache.jena.reasoner.rulesys.builtins#unbound")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listNotEqual">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#listNotEqual</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listNotEqual</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1430,25 +1311,21 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean listNotEqual(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listNotEqual")</j.1:script>
+        <j.1:script>boolean listNotEqual(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#listNotEqual")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="sin">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#sin</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#sin</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- sin(): uri("com.ge.research.sadl.jena.reasoner.builtin#sin")</j.1:script>
+        <j.1:script>-- sin(): uri("com.ge.research.sadl.jena.reasoner.builtin#sin")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="countLiteralValues">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#countLiteralValues</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#countLiteralValues</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1482,14 +1359,12 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >int countLiteralValues(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#countLiteralValues")</j.1:script>
+        <j.1:script>int countLiteralValues(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#countLiteralValues")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="listNotContains">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#listNotContains</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#listNotContains</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1523,36 +1398,39 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >boolean listNotContains(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#listNotContains")</j.1:script>
+        <j.1:script>boolean listNotContains(string X,string X): uri("org.apache.jena.reasoner.rulesys.builtins#listNotContains")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="noUnknownValues">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#noUnknownValues</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#noUnknownValues</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- noUnknownValues(): uri("com.ge.research.sadl.jena.reasoner.builtin#noUnknownValues")</j.1:script>
+        <j.1:script>-- noUnknownValues(): uri("com.ge.research.sadl.jena.reasoner.builtin#noUnknownValues")</j.1:script>
+      </j.1:Script>
+    </j.1:expression>
+  </j.1:ExternalEquation>
+  <j.1:ExternalEquation rdf:ID="thereExists">
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#thereExists</j.1:externalURI>
+    <j.1:expression>
+      <j.1:Script>
+        <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
+        <j.1:script>-- thereExists(): uri("com.ge.research.sadl.jena.reasoner.builtin#thereExists")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="assign">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#assign</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#assign</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- assign(): uri("com.ge.research.sadl.jena.reasoner.builtin#assign")</j.1:script>
+        <j.1:script>-- assign(): uri("com.ge.research.sadl.jena.reasoner.builtin#assign")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="strConcat">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.hp.hpl.jena.reasoner.rulesys.builtins#strConcat</j.1:externalURI>
+    <j.1:externalURI>org.apache.jena.reasoner.rulesys.builtins#strConcat</j.1:externalURI>
     <j.1:returnTypes rdf:parseType="Resource">
       <j.0:first>
         <j.1:DataDescriptor>
@@ -1562,22 +1440,12 @@
       <rdf:type rdf:nodeID="A0"/>
     </j.1:returnTypes>
     <j.1:arguments rdf:parseType="Resource">
-      <j.0:rest rdf:parseType="Resource">
-        <j.0:first>
-          <j.1:DataDescriptor>
-            <j.1:dataType>http://www.w3.org/2001/XMLSchema#string</j.1:dataType>
-            <j.1:descriptorVariable>
-              <j.1:GPVariable rdf:ID="strConcat_X"/>
-            </j.1:descriptorVariable>
-            <j.1:localDescriptorName>X</j.1:localDescriptorName>
-          </j.1:DataDescriptor>
-        </j.0:first>
-        <rdf:type rdf:nodeID="A0"/>
-      </j.0:rest>
       <j.0:first>
         <j.1:DataDescriptor>
           <j.1:dataType>http://www.w3.org/2001/XMLSchema#string</j.1:dataType>
-          <j.1:descriptorVariable rdf:resource="#strConcat_X"/>
+          <j.1:descriptorVariable>
+            <j.1:GPVariable rdf:ID="strConcat_X"/>
+          </j.1:descriptorVariable>
           <j.1:localDescriptorName>X</j.1:localDescriptorName>
         </j.1:DataDescriptor>
       </j.0:first>
@@ -1586,30 +1454,25 @@
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >string strConcat(string X,string X): uri("com.hp.hpl.jena.reasoner.rulesys.builtins#strConcat")</j.1:script>
+        <j.1:script>string strConcat(string X): uri("org.apache.jena.reasoner.rulesys.builtins#strConcat")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="floor">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#floor</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#floor</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- floor(): uri("com.ge.research.sadl.jena.reasoner.builtin#floor")</j.1:script>
+        <j.1:script>-- floor(): uri("com.ge.research.sadl.jena.reasoner.builtin#floor")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>
   <j.1:ExternalEquation rdf:ID="tan">
-    <j.1:externalURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >com.ge.research.sadl.jena.reasoner.builtin#tan</j.1:externalURI>
+    <j.1:externalURI>com.ge.research.sadl.jena.reasoner.builtin#tan</j.1:externalURI>
     <j.1:expression>
       <j.1:Script>
         <j.1:language rdf:resource="sadlimplicitmodel#Text"/>
-        <j.1:script rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >-- tan(): uri("com.ge.research.sadl.jena.reasoner.builtin#tan")</j.1:script>
+        <j.1:script>-- tan(): uri("com.ge.research.sadl.jena.reasoner.builtin#tan")</j.1:script>
       </j.1:Script>
     </j.1:expression>
   </j.1:ExternalEquation>

@@ -31,18 +31,18 @@
 :- use_module(library(semweb/rdfs)).
 
 sadl_file_to_owl(SADLFile, OwlFile) :-
-    import_sadl_from_file(SADLFile, SADL, URI, Aliases),
+    import_sadl_from_file(SADLFile, [], _, SADL, URI, Aliases),
     length(SADL, SLen),
     print_message(informational, sadl_imported(SADLFile, SLen, URI, Aliases)),
     write_owl(OwlFile, URI, Aliases).
 
-import_sadl_from_file(File, SADL, BaseURI, Aliases) :-
+import_sadl_from_file(File, IFUs, OFUs, SADL, BaseURI, Aliases) :-
     read_file_to_string(File, Contents, []),
-    import_sadl_from_string(File, Contents, SADL, BaseURI, Aliases).
+    import_sadl_from_string(File, IFUs, OFUs, Contents, SADL, BaseURI, Aliases).
 
-import_sadl_from_string(FName, SADLStr, SADL, BaseURI, Aliases) :-
+import_sadl_from_string(FName, IFUs, OFUs, SADLStr, SADL, BaseURI, Aliases) :-
     sadl_statement(SADLStr, SADL),
-    (sadl_to_rdf(FName, SADL, BaseURI, Aliases), !;
+    (sadl_to_rdf(FName, IFUs, OFUs, SADL, BaseURI, Aliases), !;
      print_message(error, sadl_to_rdf_failed), fail).
 
 sadl_statement(Stmt, Parsed) :-
@@ -59,9 +59,9 @@ parse_sadl(Tokens, Parsed) :-
     !, % failed the parse, don't try other (failure) combinations
     print_message(error, no_parse_for_sadl(Remainder)), fail.
 
-sadl_to_rdf(FName, SADL, URI, Aliases) :-
+sadl_to_rdf(FName, InFURLs, OutFURLs, SADL, URI, Aliases) :-
     debug(parsing, 'Typechecking', []),
-    phrase(sadl_types(URI,Kinds), [file(FName)|SADL], []),
+    phrase(sadl_types(URI,InFURLs,OutFURLs,Kinds), [file(FName)|SADL], []),
     debug(parsing, 'Kinds: ~w', [Kinds]),
     debug(parsing, 'Emitting RDF', []),
     % n.b. sadl_rdf has side effects of asserting RDF triples
@@ -341,14 +341,14 @@ annot(note(NoteStr)) --> [note, A], { atom_string(A, NoteStr) }.
 :- op(500,xfy,::).
 
 
-sadl_types(U,Kinds) --> [file(F), set_uri(U, _)],
-                        { set_graph_for_file(F, _G) },
-                        sadlty(U, [F::U], _FileURLs, RKinds),
-                        { resolve(RKinds, RKinds, Kinds) }.
-sadl_types(U,Kinds) --> [file(F), set_uri(U, _, _)],
-                        { set_graph_for_file(F, _G) },
-                        sadlty(U, [F::U], _FileURLs, RKinds),
-                        { resolve(RKinds, RKinds, Kinds) }.
+sadl_types(U,IFUs,OFUs,Kinds) --> [file(F), set_uri(U, _)],
+                                  { set_graph_for_file(F, _G) },
+                                  sadlty(U, [F::U|IFUs], OFUs, RKinds),
+                                  { resolve(RKinds, RKinds, Kinds) }.
+sadl_types(U,IFUs,OFUs,Kinds) --> [file(F), set_uri(U, _, _)],
+                                  { set_graph_for_file(F, _G) },
+                                  sadlty(U, [F::U|IFUs], OFUs, RKinds),
+                                  { resolve(RKinds, RKinds, Kinds) }.
 
 
 resolve(_, [], []).
@@ -386,6 +386,11 @@ sadlty(U,InFURLs,OutFURLs,Kinds) -->
 sadlty(_,F,F,[])   --> [].
 
 
+sty(_,IFs,IFs,[]) --> [ import(URL) ],
+                      {
+                          member(imported::URL, IFs), !,
+                          debug(importing, 'already imported ~w', [URL])
+                      }.
 sty(U,IFs,OFs,[]) --> [ import(URL) ],
                       {
                           debug(importing, 'importing ~w', [URL]),
@@ -423,7 +428,7 @@ proptys(_, []) --> [].
 % Import management
 
 
-do_import_of(_U, URL, InFURLs, InFURLs) :-
+do_import_of(_U, URL, InFURLs, OutFURLs) :-
     % The SADL import specifies the import by URL, not file, so import
     % all SADL files in the vicinity to find one that declares that it
     % provides the uri being imported.  Can move upward in the
@@ -436,15 +441,16 @@ do_import_of(_U, URL, InFURLs, InFURLs) :-
     % These are convenience to help minimize duplicated work in the
     % presence of multiple imports.
     member(F::URL, InFURLs), !,
-    import_sadl_from_file(F, _SADL, URL, _Aliases).
+    import_sadl_from_file(F, [imported::URL|InFURLs], OutFURLs, _, URL, _).
 
-do_import_of(U, URL, InFURLs, OutFURLs) :-
+do_import_of(U, URL, IFURLs, OFURLs) :-
     % Handles the case where the FURL is not already known
-    member(F::U, InFURLs),  % get main file
-    find_file_for_url(F, URL, InFURLs, OutFURLs),
-    (member(InpF::URL, OutFURLs), !,
-     import_sadl_from_file(InpF, _SADL, URL, _Aliases);
-     print_message(error, import_not_found(URL))).
+    member(F::U, IFURLs),  % get main file
+    find_file_for_url(F, URL, IFURLs, UpdFURLs),
+    (member(InpF::URL, UpdFURLs), !,
+     import_sadl_from_file(InpF, [imported::URL|UpdFURLs], OFURLs, _, URL, _);
+     print_message(error, import_not_found(URL)),
+     fail).
 
 find_file_for_url(StartFile, TargetURL, InFURLs, OutFURLs) :-
     file_directory_name(StartFile, FDir),

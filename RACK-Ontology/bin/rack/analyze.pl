@@ -104,6 +104,7 @@ show_property(_E, P, unique, T, Extra) :-
 
 show_property_extra(cardinality(N), _, NS) :-
     atom_concat('(', N, N1), atom_concat(N1, ')', NS).
+show_property_extra(maybe, _, '(0/1)').
 show_property_extra(normal, D, D).
 
 subclass_path(E, Path) :-

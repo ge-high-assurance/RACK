@@ -362,7 +362,7 @@ property_extra(Class, Property, _Target, cardinality(N)) :-
     rdf_literal(I),
     rdf_numeric(I, N).
 property_extra(_Class, Property, _Target, maybe) :-
-    rdf(Property, rdf:type, owl:'FunctionalDataProperty'), !.
+    rdf(Property, rdf:type, owl:'FunctionalProperty'), !.
 property_extra(_Class, _Property, _Target, normal).
 
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:int).

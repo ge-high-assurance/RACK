@@ -40,7 +40,8 @@ check_instance_property_violations(Property) :-
     has_interesting_prefix(I),
     % Find a required property defined on that instance type (or parent type)
     (check_cardinality(Property, I, T);
-     check_maybe_prop(Property, I, T)).
+     check_maybe_prop(Property, I, T);
+     check_invalid_value(Property, I, T)).
 
 check_cardinality(Property, I, T) :-
     property_target(T, Property, _PUsage, _Target, cardinality(N)),
@@ -66,6 +67,55 @@ check_maybe_prop(Property, I, T) :-
      prefix_shorten(Property, SP),
      print_message(error, maybe_restriction(SI, SP, VSLen))).
 
+check_invalid_value(Property, I, T) :-
+    property_target(T, Property, _PUsage, _Target, _Restr),
+    has_interesting_prefix(Property),
+    rdf(I, Property, V),
+    \+ rdf_is_literal(V),  % literals checked elsewhere
+    \+ rdf(V, rdf:type, _),
+    rdf(Property, rdfs:range, PTy),
+    rdf(PTy, owl:equivalentClass, PTyEquiv),
+    rdf(PTyEquiv, owl:oneOf, Enums), !,
+    rdf_list(Enums,L),
+    prefix_shorten(I, SI),
+    prefix_shorten(Property, SP),
+    prefix_shorten(V, SV),
+    maplist(prefix_shorten, L, SL),
+    print_message(error, invalid_value_in_enum(SI, SP, SV, SL)).
+
+check_invalid_value(Property, I, T) :-
+    property_target(T, Property, _PUsage, _Target, _Restr),
+    has_interesting_prefix(Property),
+    rdf(I, Property, V),
+    rdf_is_literal(V),  % literals checked elsewhere
+    rdf(Property, rdfs:range, R),
+    rdf(R, owl:equivalentClass, REquiv),
+    rdf(REquiv, owl:withRestrictions, RL),
+    rdf(REquiv, owl:onDatatype, RT),
+    rdf_list(RL, L),
+    member(E,L),
+    rdf(E, xsd:minInclusive, MinV),
+    rdf(E, xsd:maxInclusive, MaxV),
+    actual_val(MinV, RT, MinVal),
+    actual_val(MaxV, RT, MaxVal),
+    actual_val(V, RT, Val),
+    (rdf_compare(<,Val,MinVal) ; rdf_compare(>,Val,MaxVal)),
+    prefix_shorten(I, SI),
+    prefix_shorten(Property, SP),
+    print_message(error, value_outside_range(SI, SP, RT, Val, MinVal, MaxVal)).
+
+actual_val((V^^VT),VT,(V^^VT)).  % normal
+actual_val(V,VT,Val) :-
+    rdf_equal(V, VS^^(xsd:string)),
+    % SADL doesn't specify the type for the maxInclusive/minInclusive
+    % values, so they are interpreted as strings.  Attempt to convert
+    % them to th1e target type here.
+    \+ rdf_equal(xsd:string, VT),
+    atom_string(VA,VS),
+    % Note: converted based on representation, not VT because there is
+    % no way to direct the conversion.
+    atom_number(VA,VN),
+    Val = VN^^VT.
 
 has_interesting_prefix(I) :-
     member(Pfx, [ 'http://sadl.org/' ]),
@@ -89,3 +139,14 @@ prolog:message(cardinality_violation(Instance, Property, Specified, Actual)) -->
 prolog:message(maybe_restriction(Instance, Property, Actual)) -->
     [ '~w . ~w must have only zero or one instance, but has ~d~n'-[
           Instance, Property, Actual] ].
+prolog:message(invalid_value_in_enum(Instance, Property, Value, Valid)) -->
+    [ '~w . ~w value of ~w is invalid, allowed enumerations: ~w~n'-[
+          Instance, Property, Value, Valid] ].
+prolog:message(value_outside_range(Instance, Property, Ty, V, MinV, MaxV)) -->
+    { (rdf_equal(xsd:T, Ty) ; T = Ty),
+      (rdf_equal(Val^^Ty, V) ; Val = V),
+      (rdf_equal(Min^^Ty, MinV) ; Min = MinV),
+      (rdf_equal(Max^^Ty, MaxV) ; Max = MaxV)
+    },
+    [ '~w . ~w value of ~w is outside ~w range [~w .. ~w]~n'-[
+          Instance, Property, Val, T, Min, Max ] ].

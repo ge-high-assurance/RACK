@@ -759,8 +759,7 @@ extern_ref(URL, G, P, property, ExternProp) :-
     atom_concat(BaseURL, G, URL),  % get BaseURL
     atom_concat('#', P, Fragment), % get target class fragment
     (rdf(ERef, rdf:type, owl:'ObjectProperty');
-     rdf(ERef, rdf:type, owl:'FunctionalObjectProperty');
-     rdf(ERef, rdf:type, owl:'FunctionalDataProperty');
+     rdf(ERef, rdf:type, owl:'FunctionalProperty');
      rdf(ERef, rdf:type, owl:'DatatypeProperty')),  % find a defined Property
     atom_concat(From, Fragment, ERef),
     (From = URL, % local reference, don't need URL portion
@@ -769,8 +768,7 @@ extern_ref(URL, G, P, property, ExternProp) :-
 extern_ref(URL, _G, P, property, ExternProp) :-
     % This version handles the case where P is like 'FILE#PROP_A'
     (rdf(ExternProp, rdf:type, owl:'ObjectProperty');
-     rdf(ExternProp, rdf:type, owl:'FunctionalObjectProperty');
-     rdf(ExternProp, rdf:type, owl:'FunctionalDataProperty');
+     rdf(ExternProp, rdf:type, owl:'FunctionalProperty');
      rdf(ExternProp, rdf:type, owl:'DatatypeProperty')),
     atom_concat(BaseURL, P, ExternProp),
     BaseURL \= URL.
@@ -887,10 +885,8 @@ def_prop(Kinds, URL, Subject, propId(Prop,PropAnn),val(Restr,Tgt), []) :-
     def_restr(G,C,P,Restr),
     phrase(nt(P), PropAnn).
 
-def_prop_type(G, P, funcprop, _T, literal) :-
-    rdf_assert(P, rdf:type, owl:'FunctionalDataProperty', G), !.
 def_prop_type(G, P, funcprop, _T, _) :-
-    rdf_assert(P, rdf:type, owl:'FunctionalObjectProperty', G), !.
+    rdf_assert(P, rdf:type, owl:'FunctionalProperty', G), !.
 def_prop_type(G, P, _, _T, class) :-
     rdf_assert(P, rdf:type, owl:'ObjectProperty', G).
 def_prop_type(G, P, _, _T, property) :-

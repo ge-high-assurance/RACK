@@ -228,10 +228,26 @@ report_instance_propval_(_I, PR, PV) :-
     format('   . ~w = ~w :: ~w~n', [ SPR, PVv, SPVt ]).
 report_instance_propval_(_I, PR, PV) :-
     prefix_shorten(PV, SPV),
-    rdf(PV, rdf:type, PVT),
+    rdf(PV, rdf:type, PVT), !,
     prefix_shorten(PVT, SPVT),
     prefix_shorten(PR, SPR),
     format('   . ~w = ~w  :: ~w~n', [ SPR, SPV, SPVT ]).
+report_instance_propval_(_I, PR, PV) :-
+    prefix_shorten(PV, SPV),
+    % case where rdf(PV, rdf:type, PVT) fails, usually a value not in the enum set
+    \+ rdf(PV, rdf:type, _),
+    rdf(PR, rdfs:range, PTy),
+    rdf(PTy, owl:equivalentClass, PTyEquiv),
+    rdf(PTyEquiv, owl:oneOf, Enums), !,
+    rdf_list(Enums,L),
+    prefix_shorten(PR, SPR),
+    maplist(prefix_shorten, L, SL),
+    format('   . ~w = ', [SPR]),
+    ansi_format([bold,fg(red)], '~w  !! not in: ~w~n', [SPV, SL]).
+report_instance_propval_(_I, PR, PV) :-
+    prefix_shorten(PR, SPR),
+    ansi_format([bold,fg(yellow)], '  -. ~w = ~w~n', [SPR, PV]).
+
 
 report_instance_missingprop(T, I, Property) :-
     property_target(T, Property, _Usage, Target, _Restr),

@@ -141,6 +141,10 @@ prolog:message(unrecognized_term(What, Phase)) -->
 prolog:message(import_not_found(URL)) -->
     [ 'No SADL import file supplying URI ~w could be found.'-[URL] ].
 
+prolog:message(value_not_in_enum(Val, EnumClass, EnumVals)) -->
+    [ 'Set value "~w" is not a defined value for ~w: ~w'-[
+          Val, EnumClass, EnumVals] ].
+
 % ----------------------------------------------------------------------
 % Tokenize a character stream read from a file.
 
@@ -785,7 +789,6 @@ pr(_,_,_,_,[]) --> [].
 
 def_propval(Kinds, URL, Subject, propId(Prop,_PropAnn),val(_Restr,Tgt),[Pfx]) :-
     subj_ref(URL, Subject, G, C),
-    obj_ref(Kinds, URL, G, Tgt, _TgtTy, _T),
     obj_ref(Kinds, URL, G, Prop, propval, P), !,
     % Get the definition of this property, where the range will
     % determine the type of the property value Tgt to set.
@@ -811,6 +814,18 @@ typed_val(_Kinds, _URL, _G, V, Integer, I^^Integer) :-
     rdf_equal(xsd:integer, Integer), !, atom_number(V, I).
 typed_val(_Kinds, _URL, _G, V, Float, F^^Float) :-
     rdf_equal(xsd:float, Float), !, atom_number(V, F).
+typed_val(Kinds, URL, G, V, Ty, VRef) :-
+    % If the Type is a Class, and that Class has an enum of values
+    obj_ref(Kinds, URL, G, Ty, class, PDC),
+    rdf(PDC, owl:equivalentClass, Equiv),
+    rdf(Equiv, owl:oneOf, Enum),
+    rdf_list(Enum, Vals),
+    (member(VRef, Vals),
+     atom_concat(BaseH, V, VRef),
+     atom_concat(_Base, '#', BaseH);
+     print_message(warning, value_not_in_enum(V, PDC, Vals)),
+     fail
+    ), !.
 typed_val(Kinds, URL, G, V, Ty, VRef) :-
     obj_ref(Kinds, URL, G, Ty, class, _PDC), !,
     ns_ref(URL, V, VRef).

@@ -498,12 +498,7 @@ get_furl(TargetURL, Dir, InFURLs, FURLs) -->
         atom_concat(DS, SADLFile, FPath),
         read_file_to_string(FPath, Contents, []),
         sadl_statement(Contents, SADL),
-        (member(set_uri(U,_), SADL) ; member(set_uri(U,_,_), SADL)), !,
-        (
-         %%    U = TargetURL,
-         %% write('s2rdf '),write(FPath),write(' @ '),write(U),nl,
-         %% sadl_to_rdf(FPath, SADL, U, _Aliases);
-         true)
+        (member(set_uri(U,_), SADL) ; member(set_uri(U,_,_), SADL))
     }, !,
     get_furl(TargetURL, Dir, [FPath::U|InFURLs], FURLs).
 get_furl(TargetURL, Dir, InF, OutF) --> [_File],  % not useful, skip it

@@ -593,14 +593,22 @@ sr(U,_,[]) --> [ propinv(I,P) ],
 sr(U,Kinds,Pfxs) --> [ valenum(subj(I,Annots),VS) ],
                      {
                          subj_ref(U, I, G, Subject),
-                         is_a(Kinds, U, Subject, classdef, class, G, Pfxs),
+                         is_a(Kinds, U, Subject, classdef, class, G, SPfxs),
                          phrase(nt(Subject), Annots),
-                         all_are_type(U, G, Subject, VS, VSRefs),
+                         findall(VPfxl, (member(V,VS),
+                                        ns_ref(U,V,VSRef),
+                                        is_a(Kinds, U, VSRef, valueOf, I, G, VPfxl)
+                                       ),
+                                 VPfxls),
+                         flatten(VPfxls, VPfxs),
                          rdf_create_bnode(ListOneOf),
                          rdf_assert(ListOneOf, rdf:type, owl:'Class', G),
+                         findall(VSRef, (member(V,VS), ns_ref(U,V,VSRef)), VSRefs),
                          rdf_assert_list(VSRefs, VSList, G),
                          rdf_assert(ListOneOf, owl:oneOf, VSList, G),
-                         rdf_assert(Subject, owl:equivalentClass, ListOneOf, G)
+                         rdf_assert(Subject, owl:equivalentClass, ListOneOf, G),
+                         append(SPfxs, VPfxs, APfxs),
+                         sort(APfxs, Pfxs)
                      }.
 sr(_,_,_) --> [What],
               { print_message(error, unrecognized_term(What, emitting)),
@@ -623,12 +631,6 @@ inst_props(Kinds, U, subj(N, SubjAnnots), Props, Subject, G, Pfxs) :-
      (print_message(error, missing_property_handling(Subject, Props)),
       fail)).
 
-all_are_type(_, _, _, [], []).
-all_are_type(URL, G, TType, [T|Ts], [TRef|TRefs]) :-
-    ns_ref(URL, T, TRef),
-    rdf_assert(TRef, rdf:type, TType, G),
-    all_are_type(URL, G, TType, Ts, TRefs).
-
 
 % Define the existence of a thing.  The same statement
 % (e.g. instance(sr1_2, ...)) could be made for a sub-class or a
@@ -647,15 +649,19 @@ is_a(Kinds, URL, Subject, classdef, C, G, []) :-
     obj_ref(Kinds, URL, G, C, literal, Lit),
     rdf_assert(Subject, rdf:type, Lit, G), !.
 is_a(_Kinds, _URL, Subject, instance, C, G, [Pfx]) :-
-    % write('is_a '),write(URL), write(' '), write(Subject),write(' instance of '),write(C),nl,
     atom_concat('v.', G, Pfx),
     atom_concat(Pfx, ':', VGC),
     atom_concat(VGC, C, PfxRef),
     atom_concat(G, '#', PfxOf),
     rdf_register_prefix(Pfx, PfxOf, [force(true)]),
     rdf_assert(Subject, rdf:type, PfxRef, G).
-    %% ns_ref(URL, C, CRef),
-    %% rdf_assert(Subject, rdf:type, CRef, G).
+is_a(_Kinds, _URL, VarVal, valueOf, VarType, G, [Pfx]) :-
+    atom_concat('v.', G, Pfx),
+    atom_concat(Pfx, ':', VGC),
+    atom_concat(VGC, VarType, PfxRef),
+    atom_concat(G, '#', PfxOf),
+    rdf_register_prefix(Pfx, PfxOf, [force(true)]),
+    rdf_assert(VarVal, rdf:type, PfxRef, G).
 is_a(_Kinds, _URL, Subject, What, C, _G) :-
     print_message(error, no_is_a_for(Subject, What, C)), fail.
 

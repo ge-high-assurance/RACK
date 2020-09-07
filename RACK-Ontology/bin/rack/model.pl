@@ -542,7 +542,16 @@ rdf_dataref(RDFClass, Data, Instance) :-
     rack_namespace(NS),
     ns_ref(NS, InstanceSuffix, Instance),
     add_triple(Instance, rdf:type, RDFClass),
-    (add_rdfdata(RDFClass, RDFClass, Instance, InstanceData); true).
+    (is_list(InstanceData),
+     add_each_rdfdata(RDFClass, RDFClass, Instance, InstanceData);
+     \+ is_list(InstanceData),
+     add_rdfdata(RDFClass, RDFClass, Instance, InstanceData);
+     true  % OK if there are no elements for this instance
+    ).
+
+add_each_rdfdata(RDFClass, Class, DataRef, DataList) :-
+    member(Data, DataList),
+    add_rdfdata(RDFClass, Class, DataRef, Data).
 
 add_rdfdata(RDFClass, Class, DataRef, Data) :-
     (rdf(Class, rdfs:subClassOf, Parent), !,

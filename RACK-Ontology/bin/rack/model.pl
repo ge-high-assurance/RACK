@@ -197,7 +197,7 @@ save_model_to_file(Filename) :-
 
 save_model_to_file(Filename, NS) :-
     open(Filename, write, Out),
-    rdf_save(stream(Out), NS),
+    rdf_save(stream(Out), [graph(NS), base_uri(NS)]),
     close(Out).
 
 

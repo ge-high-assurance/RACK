@@ -83,6 +83,16 @@ data_instance('SOFTWARE#FORMAT', load_data, F, F) :-
 data_get('SOFTWARE#FORMAT', 'PROV-S#uniqueIdentifier', Fmt, FmtS) :-
     atom_string(Fmt, FmtS).
 
+data_instance('PROV-S#ACTIVITY', load_data_start, ingest_data, ingesting_data).
+data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime', ingesting_data, V) :-
+    get_time(TS), stamp_date_time(TS, date(Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
+    V = date_time(Y,Mo,D,H,Min,S,UTCOff).
+data_instance('PROV-S#ACTIVITY', load_data_finish, ingest_data, ingested_data).
+data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', ingested_data, V) :-
+    get_time(TS), stamp_date_time(TS, date(Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
+    V = date_time(Y,Mo,D,H,Min,S,UTCOff).
+
+
 data_instance('PROV-S#ACTIVITY', load_data, Instance, InstanceData) :-
     InstanceData = build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
     InstanceData,

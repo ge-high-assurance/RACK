@@ -459,7 +459,11 @@ realize_loaded_data :-
     % n.b. use findall to force all backtracking here, otherwise
     % =erase(SetNS)= in load_data/2 will run after the first success
     % and no more instances will be instantiated.
-    findall(Instance, rdf_dataref(_RDFClass, load_data, Instance), Instances),
+    findall(Instance, rdf_dataref(_RDFClass1, load_data_start, Instance), StInstances),
+    findall(Instance, rdf_dataref(_RDFClass2, load_data, Instance), LdInstances),
+    findall(Instance, rdf_dataref(_RDFClass3, load_data_finish, Instance), FiInstances),
+    append(StInstances, LdInstances, StLdInstances),
+    append(StLdInstances, FiInstances, Instances),
     length(Instances, Count),
     rack_namespace(Namespace),
     print_message(informational, loaded_data_instances(Namespace, Count)).

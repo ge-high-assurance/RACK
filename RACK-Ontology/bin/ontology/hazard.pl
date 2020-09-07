@@ -1,7 +1,11 @@
+% THIS FILE WAS AUTOMATICALLY GENERATED, SEE README
+
 :- module(hazard,
           [
-              hazard/1,
-              source/2
+            hazard/1,
+            hazard_identification/1,
+            definition/2,
+            source/2
           ]).
 
 :- ensure_loaded('../paths').
@@ -9,6 +13,8 @@
 :- use_module(library(semweb/rdf11)).
 :- use_module(rack(model)).
 
-hazard(Hazard) :- rack_instance('HAZARD#HAZARD', Hazard).
+hazard(C) :- rack_instance('HAZARD#HAZARD', C).
+hazard_identification(C) :- rack_instance('HAZARD#HAZARD_IDENTIFICATION', C).
 
-source(Hazard, Source) :- rdf(Hazard, rack:'HAZARD#source', Source).
+definition(A, B) :- rdf(A, rack:'HAZARD#definition', B).
+source(A, B) :- rdf(A, rack:'HAZARD#source', B).

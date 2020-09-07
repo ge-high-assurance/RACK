@@ -566,7 +566,11 @@ fuip(U,D,H,O) :-
 
 % ----------------------------------------------------------------------
 % EMITTING PHASE: Process parsed SADL IR to generate RDF triples and
-% assoc. definitions
+% assoc. definitions.
+%
+% References:
+% https://swi-prolog.org/pldoc/doc_for?object=section(%27packages/semweb.html%27)
+% https://w3.org/TR/2012/REC-owl2-primer-20121211/
 
 sadl_rdf(U,Pfxs,Kinds) --> [file(F), set_uri(U, Annots)],
                            { setup_rdf(F,U,none,Annots) },

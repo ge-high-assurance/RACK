@@ -51,6 +51,9 @@ description DSL into instances in the model.
 :- use_module(library(http/http_open)).
 :- use_module(library(http/http_client)).
 
+rack_model_name(ModelName) :-   % my identity, including version
+    append_fld('v1.0', 'rack/model.pl', ModelName).
+
 %% ----------------------------------------------------------------------
 %% Support functions
 
@@ -623,6 +626,24 @@ load_recognizer(FPath) :-
 % that data.
 
 :- multifile data_instance/4, data_get/4.
+
+data_instance('PROV-S#ACTIVITY', load_data_start, ModelName, [uid(ModelName),
+                                                              model_start(ModelName, StartTime)]) :-
+    rack_model_name(ModelName),
+    % n.b. get_time/1 is impure and unstable, so call it in the
+    % data_instance which is only called once as opposed to the
+    % data_get which might be called multiple times (for parents of
+    % the class as well as the class).
+    get_time(TS), stamp_date_time(TS, date(Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
+    StartTime = date_time(Y,Mo,D,H,Min,S,UTCOff).
+data_instance('PROV-S#ACTIVITY', load_data_finish, ModelName, [model_end(ModelName, EndTime)]) :-
+    rack_model_name(ModelName),
+    get_time(TS), stamp_date_time(TS, date(Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
+    EndTime = date_time(Y,Mo,D,H,Min,S,UTCOff).
+data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime', model_start(ModelName, StartTime), StartTime) :-
+    rack_model_name(ModelName).
+data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', model_end(ModelName, EndTime), EndTime) :-
+    rack_model_name(ModelName).
 
 data_get('SOFTWARE#FILE', 'SOFTWARE#filename', sw_file_data(_, Dir, NameOrPath), Value) :-
     file_to_fpath(NameOrPath, Dir, Path),

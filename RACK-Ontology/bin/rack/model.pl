@@ -235,7 +235,7 @@ ns_ref(NS, Target, Ref) :- atom_concat(NS, '#', P),
 % Used to construct an RDF node reference from a base and a suffix
 % field name using a regular syntax.
 
-append_fld(Base, Fld, Result) :- atom_concat(Base, '.>', B),
+append_fld(Base, Fld, Result) :- atom_concat(Base, '~', B),
                                  atom_concat(B, Fld, Result).
 
 %! prefix_shorten(+URI:atom, -ShortOrURI) is det

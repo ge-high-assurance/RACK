@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 loads=(
-    -f $(dirname $0)/rack_model.pl
+    -f $(dirname $0)/rack/model.pl
 )
 
 case $# in

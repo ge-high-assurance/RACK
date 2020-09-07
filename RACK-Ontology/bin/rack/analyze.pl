@@ -42,7 +42,8 @@ prolog:message(no_ontology_loaded) -->
 
 rack_nodes(Nodes) :-
     setof(E, T^Area^Item^(rdf(E, rdf:type, T),
-                          rdf_reachable(T, rdfs:subClassOf, owl:'Class'),
+                          (rdf_reachable(T, rdfs:subClassOf, owl:'Class');
+                           rdf_reachable(T, rdf:type, rdfs:'Datatype')),
                           rack_ontology_node(E, Area, Item)),
           Nodes).
 
@@ -57,6 +58,14 @@ report_rack_nodes_([E|ES]) :-
     report_rack_nodes_(ES).
 
 report_rack_node(E) :-
+    rdf(E, rdf:type, rdfs:'Datatype'),
+    rdf(E, owl:equivalentClass, Equiv),
+    rdf(Equiv, owl:onDatatype, BaseTy), !,
+    prefix_shorten(E, SE),
+    prefix_shorten(BaseTy, SBT),
+    format('~n~w  :: Datatype of ~w~n', [SE, SBT]),
+    report_datatype_restrictions(Equiv).
+report_rack_node(E) :-
     rdf(E, rdf:type, T),
     class_comment(E, C),
     prefix_shorten(E, SE),
@@ -66,6 +75,21 @@ report_rack_node(E) :-
     report_rack_properties(E),
     report_rack_subclasses(E),
     report_instance_counts(E).
+
+
+report_datatype_restrictions(Equiv) :-
+    rdf(Equiv, owl:withRestrictions, Restrs), !,
+    rdf_list(Restrs, RList),
+    member(R, RList),
+    report_datatype_restriction(R).
+report_datatype_restrictions(_).
+
+report_datatype_restriction(R) :-
+    rdf(R, xsd:minInclusive, MinR),
+    rdf(R, xsd:maxInclusive, MaxR),
+    rdf_equal(Min^^T, MinR),
+    rdf_equal(Max^^T, MaxR),
+    format('    restriction: [~w..~w]~n', [Min, Max]).
 
 
 class_comment(Class, Comment) :- rdf(Class, rdfs:comment, Comment), !.

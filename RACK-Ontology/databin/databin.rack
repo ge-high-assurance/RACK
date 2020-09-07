@@ -7,7 +7,9 @@
                  build_with/5,
                  build_inputs/2,
                  build_outputs/2,
-                 build_from/2.
+                 build_from/2,
+                 build_start/2,
+                 build_finished/3.
 
 %% Recognizers for matching tool output data
 
@@ -93,7 +95,19 @@ data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', ingested_data, V) :-
     V = date_time(Y,Mo,D,H,Min,S,UTCOff).
 
 
-data_instance('PROV-S#ACTIVITY', load_data, Instance, InstanceData) :-
-    InstanceData = build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
-    InstanceData,
+data_instance('PROV-S#ACTIVITY', load_data, Instance, activity_data(BW,BS,BF)) :-
+    BW = build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
+    BS = build_start(Nonce, _StartTime),
+    BF = build_finished(Nonce, _FinishTime, _ExitVal),
+    BW, BS, BF,
     append_fld(Nonce, ToolType, Instance).
+
+data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime',
+         activity_data(_, build_start(_, T), _),
+         T).
+
+data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime',
+         activity_data(_, _, build_finished(_, T, _)),
+         T).
+
+data_get('PROV-S#ACTIVITY', 'PROV-S#dataInsertedBy', activity_data(_, _, _), ingest_data).

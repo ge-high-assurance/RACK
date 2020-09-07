@@ -5,10 +5,9 @@
 :- use_module(rack(model)).
 
 opts_spec(Spec) :-
-    working_directory(Cwd, Cwd),
-    atom_concat(Cwd, 'OwlModels/', OwlDir),
-    atom_concat(Cwd, 'models/TurnstileSystem/src', DataDir),
-    atom_concat(Cwd, 'databin/databin.rack', RFile),
+    OwlDir='OwlModels',
+    DataDir='models/TurnstileSystem/src',
+    RFile='databin/databin.rack',
     Spec =
     [ [opt(verbose), type(boolean), default(false),
        shortflags([v]), longflags(['verbose']),
@@ -21,22 +20,22 @@ opts_spec(Spec) :-
       [opt(ontology_dir), meta('DIR_OR_URL'), type(atom),
        shortflags([o]), longflags(['ontology', 'model']),
        default(OwlDir),
-       help('Where to load ontology from')],
+       help('Where to load ontology .Owl files from')],
 
       [opt(recognizers), meta('FILE'), type(atom),
        shortflags([r]), longflags(['recognizer', 'recognizers']),
        default(RFile),
-       help('File containing data recognizers to use')],
+       help('File containing data recognizers to use for loading data from tool generated output and converting it to ontology elements.')],
 
       [opt(data_dir), meta('DIR'), type(atom),
        shortflags([d]), longflags(['data']),
        default(DataDir),
-       help('Where to load data from')],
+       help('Directory root to load tool-generated data from.  All tool generated files located in this tree will be imported and converted to ontology elements.')],
 
       [opt(data_namespace), meta('NS'), type(atom),
        shortflags([n]), longflags(['namespace']),
-       default('http://testdata.org/'),
-       help('Namespace to load data into')],
+       default('http://testdata.org/test'),
+       help('Namespace to load tool-generated data into when importing from the data directory (see --data).')],
 
       [opt(help), type(boolean), default(false),
        shortflags([h]), longflags(['help']),

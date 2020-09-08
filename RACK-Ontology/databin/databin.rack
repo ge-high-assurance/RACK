@@ -16,10 +16,27 @@ databin_name(MyName) :-
 
 %% Recognizers for matching tool output data
 
+% -- This ingestion activity
+
+data_instance('PROV-S#ACTIVITY', load_data_start, MyName, [uid(MyName),ingesting_data(StartTime)]) :-
+    databin_name(MyName),
+    get_time(TS), stamp_date_time(TS, date(_Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
+    StartTime = date_time(1999,Mo,D,H,Min,S,UTCOff).
+data_instance('PROV-S#ACTIVITY', load_data_finish, MyName, ingested_data(EndTime)) :-
+    databin_name(MyName),
+    get_time(TS), stamp_date_time(TS, date(Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
+    EndTime = date_time(Y,Mo,D,H,Min,S,UTCOff).
+data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime', ingesting_data(StartTime), StartTime).
+data_get('PROV-S#ACTIVITY', 'PROV-S#wasInformedBy', ingesting_data(_), ModelName) :-
+    rack_model_name(ModelName).
+data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', ingested_data(EndTime), EndTime).
+
+%% -- tar ------------------------------
+
 data_instance('SOFTWARE#FILE', load_data, File, createdFile(File, tar)) :-
     tar_access(_Nonce, File, create).
 
-%%
+%% -- files ------------------------------
 
 data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
     build_inputs(Nonce, Inputs),
@@ -84,23 +101,15 @@ data_get('SOFTWARE#FILE', 'SOFTWARE#createBy', sw_file_data(Nonce, _, F), V) :-
     append_fld(Nonce, ToolType, V).
 
 
+%% -- Formats ------------------------------
+
 data_instance('SOFTWARE#FORMAT', load_data, F, [uid(F), fmt(F)]) :-
     member(F, [ 'CSourceFile', 'ElfFile' ]).
 data_get('SOFTWARE#FORMAT', 'PROV-S#uniqueIdentifier', fmt(Fmt), FmtS) :-
     atom_string(Fmt, FmtS).
 
-data_instance('PROV-S#ACTIVITY', load_data_start, MyName, [uid(MyName),ingesting_data(StartTime)]) :-
-    databin_name(MyName),
-    get_time(TS), stamp_date_time(TS, date(_Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
-    StartTime = date_time(1999,Mo,D,H,Min,S,UTCOff).
-data_instance('PROV-S#ACTIVITY', load_data_finish, MyName, ingested_data(EndTime)) :-
-    databin_name(MyName),
-    get_time(TS), stamp_date_time(TS, date(Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
-    EndTime = date_time(Y,Mo,D,H,Min,S,UTCOff).
-data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime', ingesting_data(StartTime), StartTime).
-data_get('PROV-S#ACTIVITY', 'PROV-S#wasInformedBy', ingesting_data(_), ModelName) :-
-    rack_model_name(ModelName).
-data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', ingested_data(EndTime), EndTime).
+%% -- Activities ------------------------------
+
 
 data_instance('PROV-S#ACTIVITY', load_data, Instance, activity_data(BW,BS,BF)) :-
     BW = build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
@@ -109,13 +118,7 @@ data_instance('PROV-S#ACTIVITY', load_data, Instance, activity_data(BW,BS,BF)) :
     BW, BS, BF,
     append_fld(Nonce, ToolType, Instance).
 
-data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime',
-         activity_data(_, build_start(_, T), _),
-         T).
+data_get(_, 'PROV-S#startedAtTime', activity_data(_,build_start(_,T),_), T).
+data_get(_, 'PROV-S#endedAtTime', activity_data(_,_,build_finished(_,T,_)), T).
+data_get(_, 'PROV-S#dataInsertedBy', _, MyName) :- databin_name(MyName).
 
-data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime',
-         activity_data(_, _, build_finished(_, T, _)),
-         T).
-
-data_get(_, 'PROV-S#dataInsertedBy', _, MyName) :-
-    databin_name(MyName).

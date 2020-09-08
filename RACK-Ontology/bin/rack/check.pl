@@ -6,15 +6,18 @@
 check_rack :-
     findall(C, check_missing_notes(C), CS),
     findall(NPC, check_not_prov_s(NPC), NPCS),
+    findall(BI, check_instance_types(BI), BIS),
     findall(MI, check_instance_property_violations(MI), MIS),
     length(CS, CSLen),
     length(NPCS, NPCSLen),
+    length(BIS, BISLen),
     length(MIS, MISLen),
     format('~`.t Summary ~`.t~78|~n'),
     warn_if_nonzero("missing a Note/Description", CSLen),
     warn_if_nonzero("not a subclass of PROV-S#THING", NPCSLen),
+    warn_if_nonzero("with instance issues", BISLen),
     warn_if_nonzero("with instance property issues", MISLen),
-    (CSLen == 0, NPCSLen == 0, MISLen == 0, !,
+    (CSLen == 0, NPCSLen == 0, BISLen == 0, MISLen == 0, !,
      format('No issues found~n') ; format('ISSUES FOUND IN CHECK~n')),
     true.
 
@@ -30,6 +33,21 @@ check_not_prov_s(Class) :-
     rack_ref('PROV-S#THING', Thing),
     \+ rdf_reachable(Class, rdfs:subClassOf, Thing),
     print_message(warning, not_prov_s_thing_class(Class)).
+
+check_instance_types(I) :-
+    % Get an instance
+    rdf(I, rdf:type, T),
+    rdf(T, rdf:type, C),
+    rdf_reachable(C, rdfs:subClassOf, owl:'Class'),
+    % Exclude namespaces we aren't interested in
+    has_interesting_prefix(I),
+    findall(IT, rdf(I, rdf:type, IT), ITs),
+    length(ITs, N),
+    N > 1,
+    ITs = [T|_],
+    prefix_shorten(I, SI),
+    maplist(prefix_shorten, ITs, SITs),
+    print_message(error, multiple_types_for_instance(SI, SITs)).
 
 check_instance_property_violations(Property) :-
     % Get an instance
@@ -150,3 +168,5 @@ prolog:message(value_outside_range(Instance, Property, Ty, V, MinV, MaxV)) -->
     },
     [ '~w . ~w value of ~w is outside ~w range [~w .. ~w]~n'-[
           Instance, Property, Val, T, Min, Max ] ].
+prolog:message(multiple_types_for_instance(Instance, Types)) -->
+    [ 'Instance ~w has multiple types: ~w~n'-[Instance, Types] ].

@@ -59,6 +59,7 @@ check_instance_property_violations(Property) :-
     % Find a required property defined on that instance type (or parent type)
     (check_cardinality(Property, I, T);
      check_maybe_prop(Property, I, T);
+     check_target_type(Property, I, T);
      check_invalid_value(Property, I, T)).
 
 check_cardinality(Property, I, T) :-
@@ -84,6 +85,20 @@ check_maybe_prop(Property, I, T) :-
      prefix_shorten(I, SI),
      prefix_shorten(Property, SP),
      print_message(error, maybe_restriction(SI, SP, VSLen))).
+
+check_target_type(Property, I, T) :-
+    property_target(T, Property, _PUsage, Target, _Restr),
+    has_interesting_prefix(Property),
+    rdf(I, Property, Val),
+    \+ rdf_is_literal(Val),  % TODO check these as well?
+    rdf(Val, rdf:type, ValTy),
+    ValTy \= Target,
+    prefix_shorten(I, SI),
+    prefix_shorten(Property, SP),
+    prefix_shorten(ValTy, SPTy),
+    prefix_shorten(Target, ST),
+    prefix_shorten(Val, SV),
+    print_message(error, property_value_wrong_type(SI, SP, SV, ST, SPTy)).
 
 check_invalid_value(Property, I, T) :-
     property_target(T, Property, _PUsage, _Target, _Restr),
@@ -170,3 +185,6 @@ prolog:message(value_outside_range(Instance, Property, Ty, V, MinV, MaxV)) -->
           Instance, Property, Val, T, Min, Max ] ].
 prolog:message(multiple_types_for_instance(Instance, Types)) -->
     [ 'Instance ~w has multiple types: ~w~n'-[Instance, Types] ].
+prolog:message(property_value_wrong_type(Instance, Property, Val, ValType, DefType)) -->
+    [ 'Instance property ~w . ~w of ~w should be a ~w but is a ~w'-[
+          Instance, Property, Val, DefType, ValType] ].

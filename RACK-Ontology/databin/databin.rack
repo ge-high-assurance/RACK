@@ -110,13 +110,16 @@ data_get('SOFTWARE#FORMAT', 'PROV-S#uniqueIdentifier', fmt(Fmt), FmtS) :-
 
 %% -- Activities ------------------------------
 
+activity_instance(Nonce, ToolType, InstanceName) :-
+    append_fld(Nonce, ToolType, InstanceName).
+
 data_instance('SOFTWARE#COMPILE', load_data, Instance,
               [ uid(Instance), activity_data(BW,BS,BF) ]) :-
     BW = build_with(Nonce, compile, _ToolName, _ToolPath, _ToolArgs),
     BS = build_start(Nonce, _StartTime),
     BF = build_finished(Nonce, _FinishTime, _ExitVal),
     BW, BS, BF,
-    append_fld(Nonce, compile, Instance).
+    activity_instance(Nonce, compile, Instance).
 
 data_get('SOFTWARE#COMPILE', 'SOFTWARE#compiledBy',
          activity_data(build_with(_, compile, _, ToolPath, _),_,_),
@@ -128,7 +131,14 @@ data_instance('SOFTWARE#BUILD', load_data, Instance,
     BS = build_start(Nonce, _StartTime),
     BF = build_finished(Nonce, _FinishTime, _ExitVal),
     BW, BS, BF,
-    append_fld(Nonce, make, Instance).
+    activity_instance(Nonce, make, Instance).
+
+data_get('SOFTWARE#BUILD', 'SOFTWARE#step',
+         activity_data(build_with(BuildNonce, _, _, _, _),_,_), V) :-
+    build_with(BuildNonce, _, _, _, _),
+    build_with(ToolNonce, ToolType, _, _, _),
+    build_step(BuildNonce, ToolNonce),
+    activity_instance(ToolNonce, ToolType, V).
 
 
 data_instance('PROV-S#ACTIVITY', load_data, Instance,
@@ -140,7 +150,7 @@ data_instance('PROV-S#ACTIVITY', load_data, Instance,
     ToolType \= compile,
     ToolType \= make,
     fail,
-    append_fld(Nonce, ToolType, Instance).
+    activity_instance(Nonce, ToolType, Instance).
 
 data_get(_, 'PROV-S#startedAtTime', activity_data(_,build_start(_,T),_), T).
 data_get(_, 'PROV-S#endedAtTime', activity_data(_,_,build_finished(_,T,_)), T).

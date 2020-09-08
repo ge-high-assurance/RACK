@@ -26,7 +26,7 @@ data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
     build_from(Nonce, Dir),
     member(Input, Inputs),
     input_or_prev_output(Nonce, Dir, Input, Instance),
-    InstanceData = sw_file_data(Nonce, Dir, Input).
+    InstanceData = [uid(Instance), sw_file_data(Nonce, Dir, Input)].
 input_or_prev_output(_Nonce, Dir, Input, InstanceRef) :-
     % This file is an input, but was it an output of a previous operation?
     output_of(_AnyTool, Dir, Input, BuildNonce), !,
@@ -41,11 +41,12 @@ data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
     build_from(Nonce, Dir),
     member(Output, Outputs),
     append_fld(Nonce, Output, Instance),
-    InstanceData = sw_file_data(Nonce, Dir, Output).
+    InstanceData = [uid(Instance), sw_file_data(Nonce, Dir, Output)].
 
 data_instance('SOFTWARE#FILE', load_data, ToolPath,
-              sw_file_data(Nonce, '/tmp', ToolPath)) :-
-    build_with(Nonce, _ToolType, _ToolName, ToolPath, _ToolArgs).
+              [uid(UID), sw_file_data(Nonce, '/tmp', ToolPath)]) :-
+    build_with(Nonce, _ToolType, _ToolName, ToolPath, _ToolArgs),
+    UID = ToolPath.
 
 data_get('SOFTWARE#FILE', 'SOFTWARE#filename', createdFile(File, tar), Value) :-
     atom_string(File, Value).
@@ -83,9 +84,9 @@ data_get('SOFTWARE#FILE', 'SOFTWARE#createBy', sw_file_data(Nonce, _, F), V) :-
     append_fld(Nonce, ToolType, V).
 
 
-data_instance('SOFTWARE#FORMAT', load_data, F, F) :-
+data_instance('SOFTWARE#FORMAT', load_data, F, [uid(F), fmt(F)]) :-
     member(F, [ 'CSourceFile', 'ElfFile' ]).
-data_get('SOFTWARE#FORMAT', 'PROV-S#uniqueIdentifier', Fmt, FmtS) :-
+data_get('SOFTWARE#FORMAT', 'PROV-S#uniqueIdentifier', fmt(Fmt), FmtS) :-
     atom_string(Fmt, FmtS).
 
 data_instance('PROV-S#ACTIVITY', load_data_start, MyName, [uid(MyName),ingesting_data(StartTime)]) :-

@@ -653,6 +653,8 @@ data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime', model_start(ModelName, Start
 data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', model_end(ModelName, EndTime), EndTime) :-
     rack_model_name(ModelName).
 
+data_get(_, 'PROV-S#uniqueIdentifier', uid(UID), UIDStr) :- atom_string(UID, UIDStr).
+
 data_get('SOFTWARE#FILE', 'SOFTWARE#filename', sw_file_data(_, Dir, NameOrPath), Value) :-
     file_to_fpath(NameOrPath, Dir, Path),
     atom_string(Path, Value).

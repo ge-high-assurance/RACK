@@ -612,6 +612,14 @@ add_rdfproperty(ShortC, ShortP, _RDFClass, Property, DataRef, Data) :-
 %     data_instance/4 for the object).  The value may be a scalar value
 %     (like xsd:string) or it may be another data object Instance.
 %
+% Notes:
+%
+%  1. Re-defining instances and properties should be idempotent.
+%
+%  2. A data_get might be called multiple times with the same
+%     PropertyName because it is called when the parent class is
+%     traversed as well as when the current class it traversed.
+%
 %
 % The OntologyObjectName and OntologyPropertyName passed to both
 % data_instance/4 and data_get/4 are the short names for the RACK

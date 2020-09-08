@@ -1,5 +1,8 @@
 :- multifile data_instance/4, data_get/4.
 
+databin_name(MyName) :-
+    append_fld('v0.8', ingest_databin, MyName).
+
 % These are the various facts that might be emitted by the databin
 % wrappers that will be recognized here.
 
@@ -85,15 +88,18 @@ data_instance('SOFTWARE#FORMAT', load_data, F, F) :-
 data_get('SOFTWARE#FORMAT', 'PROV-S#uniqueIdentifier', Fmt, FmtS) :-
     atom_string(Fmt, FmtS).
 
-data_instance('PROV-S#ACTIVITY', load_data_start, ingest_data, ingesting_data).
-data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime', ingesting_data, V) :-
+data_instance('PROV-S#ACTIVITY', load_data_start, MyName, [uid(MyName),ingesting_data(StartTime)]) :-
+    databin_name(MyName),
+    get_time(TS), stamp_date_time(TS, date(_Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
+    StartTime = date_time(1999,Mo,D,H,Min,S,UTCOff).
+data_instance('PROV-S#ACTIVITY', load_data_finish, MyName, ingested_data(EndTime)) :-
+    databin_name(MyName),
     get_time(TS), stamp_date_time(TS, date(Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
-    V = date_time(Y,Mo,D,H,Min,S,UTCOff).
-data_instance('PROV-S#ACTIVITY', load_data_finish, ingest_data, ingested_data).
-data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', ingested_data, V) :-
-    get_time(TS), stamp_date_time(TS, date(Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
-    V = date_time(Y,Mo,D,H,Min,S,UTCOff).
-
+    EndTime = date_time(Y,Mo,D,H,Min,S,UTCOff).
+data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime', ingesting_data(StartTime), StartTime).
+data_get('PROV-S#ACTIVITY', 'PROV-S#wasInformedBy', ingesting_data(_), ModelName) :-
+    rack_model_name(ModelName).
+data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', ingested_data(EndTime), EndTime).
 
 data_instance('PROV-S#ACTIVITY', load_data, Instance, activity_data(BW,BS,BF)) :-
     BW = build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
@@ -110,4 +116,5 @@ data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime',
          activity_data(_, _, build_finished(_, T, _)),
          T).
 
-data_get('PROV-S#ACTIVITY', 'PROV-S#dataInsertedBy', activity_data(_, _, _), ingest_data).
+data_get(_, 'PROV-S#dataInsertedBy', _, MyName) :-
+    databin_name(MyName).

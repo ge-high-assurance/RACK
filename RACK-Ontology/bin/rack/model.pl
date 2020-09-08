@@ -576,12 +576,13 @@ add_rdfproperty(ShortC, ShortP, _RDFClass, Property, DataRef, Data) :-
         % simply creating this property causes it to *exist* because
         % of it's relationship to the value; it might be
         % under-specified, but this is a valid state.
-        atom(Value), !,
+        atom(Value),
         rack_namespace(NS),
         ns_ref(NS, Value, TargetRef) ;
 
         % It wasn't an atom, so it's probably a literal value (number,
         % string, etc.) and can be used directly.
+        \+ atom(Value),
         TargetRef = Value
     ),
     add_triple(DataRef, Property, TargetRef).

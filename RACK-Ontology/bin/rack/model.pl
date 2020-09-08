@@ -567,11 +567,23 @@ add_rdfdata(RDFClass, Class, DataRef, Data) :-
 
 add_rdfproperty(ShortC, ShortP, _RDFClass, Property, DataRef, Data) :-
     data_get(ShortC, ShortP, Data, Value),
-    (atom(Value), !, rack_namespace(NS), ns_ref(NS, Value, TargetRef),
-     ((rdf(DataRef, Property, TargetRef), ! ;
-       rdf(Property, rdfs:range, TargetType),
-       add_triple(TargetRef, rdf:type, TargetType)));
-     TargetRef = Value),
+    (
+        % If this is an atom, treat it as a shorthand reference to an
+        % object in the current namespace.
+        %
+        % Note that the reference might not have been explicitly
+        % defined.  From an RDF-triple perspective, this is fine:
+        % simply creating this property causes it to *exist* because
+        % of it's relationship to the value; it might be
+        % under-specified, but this is a valid state.
+        atom(Value), !,
+        rack_namespace(NS),
+        ns_ref(NS, Value, TargetRef) ;
+
+        % It wasn't an atom, so it's probably a literal value (number,
+        % string, etc.) and can be used directly.
+        TargetRef = Value
+    ),
     add_triple(DataRef, Property, TargetRef).
 
 

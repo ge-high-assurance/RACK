@@ -200,7 +200,10 @@ write_ontology_file(Namespace, Things, Properties) :-
     forall(member(Thing, Things), write_class(Handle, Namespace, Thing)),
     nl(Handle),
     forall(member(Property, Properties), write_property(Handle, Namespace, Property)),
-    close(Handle).
+    close(Handle),
+    % let the user know which files are being written
+    atomic_list_concat(['Wrote', FilePath], ' ', DisplayedInformation),
+    writeln(DisplayedInformation).
 
 %! write_ontology() is det.
 %

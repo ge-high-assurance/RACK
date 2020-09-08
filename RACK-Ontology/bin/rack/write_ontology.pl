@@ -7,6 +7,7 @@
 
 :- use_module(library(semweb/rdf11)).
 :- use_module(rack(model)).
+:- use_module(utils(zip_by_key)).
 
 %! rack_qualified(+Namespace, +Name, -Qualified) is det.
 %
@@ -49,53 +50,6 @@ rack_property_decomposed(Namespace, Name) :-
 rack_properties(Properties) :-
     setof(Namespace-Name, rack_property_decomposed(Namespace, Name), Pairs),
     group_pairs_by_key(Pairs, Properties).
-
-% NOTE (val) I feel like there is a smarter way of doing this
-%! zip_by_key_aux(+KeyValues1, +KeyValues2, ?Key, -Values1, -Values2) is det.
-%
-%    Enumerates all keys from the union of the keys of the first two arguments.
-%    For each key, outputs the values for that key in each of the key-value
-%    lists.  If a key appears only in one of the key-value lists, its value for
-%    the other list is considered to be [].
-%
-%      zip_by_key_aux(['Key1'-A1], ['Key1'-A2], 'Key1', A1, A2) :- true.
-%      zip_by_key_aux(['Key1'-A1], [],          'Key1', A1, []) :- true.
-%      zip_by_key_aux([],          ['Key1'-A2], 'Key1', [], A2) :- true.
-zip_by_key_aux(KeyValues1, KeyValues2, NS, Values1, []) :-
-    member(NS-Values1, KeyValues1), \+ member(NS-_, KeyValues2).
-zip_by_key_aux(KeyValues1, KeyValues2, NS, [], Values2) :-
-    \+ member(NS-_, KeyValues1), member(NS-Values2, KeyValues2).
-zip_by_key_aux(KeyValues1, KeyValues2, NS, Values1, Values2) :-
-    member(NS-Values1, KeyValues1), member(NS-Values2, KeyValues2).
-
-%! zip_by_key(+KeyValuesIn1, +KeyValuesIn2, -KeyValuesOut) is det.
-%
-%    Takes two keyed collections of lists:
-%
-%      KeyValuesIn1 = ['Key1'-['V1-a', 'V1-b', 'V1-c'], 'Key2'-['V2-a']]
-%      KeyValuesIn2 = ['Key1'-['V1-d', 'V1-e'], 'Key3'-['V3-a', 'V3-b']]
-%
-%    and returns keyed triples, where the second component comes from
-%    KeyValuesIn1, and the third component comes from KeyValuesIn2, and any
-%    missing component is replaced by [] i.e.
-%
-%      KeyValuesOut = [ 'Key1'-['V1-a', 'V1-b', 'V1-c']-['V1-d', 'V1-e']
-%                    , 'Key2-['V2-a']-[]
-%                    , 'Key3'-[]-['V3-a']
-%                    ]
-%
-%    This lets us take a keyed list of classes, and a keyed list of properties,
-%    where the keys overlap, and obtained a keyed list of triples
-%    (Key-Classes-Properties), so that we can generate the ontology file for
-%    that Key in one go.
-%
-%    (NOTE: if needs ever be, the default value could become a parameter)
-zip_by_key(KeyValuesIn1, KeyValuesIn2, KeyValuesOut) :-
-    setof(
-     NS-Values1-Values2,
-     zip_by_key_aux(KeyValuesIn1, KeyValuesIn2, NS, Values1, Values2),
-     KeyValuesOut
-    ).
 
 %! ontology_directory(-Dir) is det.
 %
@@ -212,7 +166,7 @@ write_ontology_file(Namespace, Things, Properties) :-
 write_ontology() :-
     rack_classes(ClassesGroups),
     rack_properties(PropertiesGroups),
-    zip_by_key(ClassesGroups, PropertiesGroups, Groups),
+    zip_by_key(ClassesGroups, [], PropertiesGroups, [], Groups),
     forall(
      member(Namespace-Classes-Properties, Groups),
      write_ontology_file(Namespace, Classes, Properties)

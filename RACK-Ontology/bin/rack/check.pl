@@ -93,6 +93,7 @@ check_target_type(Property, I, T) :-
     \+ rdf_is_literal(Val),  % TODO check these as well?
     rdf(Val, rdf:type, ValTy),
     ValTy \= Target,
+    \+ rdf_reachable(ValTy, rdfs:subClassOf, Target),
     prefix_shorten(I, SI),
     prefix_shorten(Property, SP),
     prefix_shorten(ValTy, SPTy),

@@ -14,9 +14,9 @@ Probability (note "probability value between 0 and 1") is a type of float [0,1].
 
 BDU_CONFIDENCE_ASSESSMENT (note "A belief-disbelief-uncertainty confidence assessment, c.f. Subjective Logic. belief, disbelief, and uncertainty should sum to 1") is a type of CONFIDENCE_ASSESSMENT.
 
-    belief (note "belief that an assessment is true") describes CONFIDENCE_ASSESSMENT with a single value of type Probability.
-    disbelief (note "belief that an assessment is false") describes CONFIDENCE_ASSESSMENT with a single value of type Probability.
-    uncertainty (note "uncommitted belief") describes CONFIDENCE_ASSESSMENT with a single value of type Probability.
+    belief (note "belief that an assessment is true") describes CONFIDENCE_ASSESSMENT with a single value of type float.
+    disbelief (note "belief that an assessment is false") describes CONFIDENCE_ASSESSMENT with a single value of type float.
+    uncertainty (note "uncommitted belief") describes CONFIDENCE_ASSESSMENT with a single value of type float.
 
 ASSESSING_CONFIDENCE (note "ACTIVITY that establishes a CONFIDENCE_ASSESSMENT") is a type of ACTIVITY.
 

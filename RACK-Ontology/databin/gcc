@@ -41,20 +41,7 @@ nonce="n$(date +%s)-$$"
     echo "build_start(${nonce@Q}, $(date +'date_time(%+4Y,%m,%d,%H,%M,%S,%z)'))."
 ) > .${outf}.rack
 
-add_make_step() {
-    export IFS="@"
-    set ${1}
-    make_rackfile=$1
-    make_nonce=$2
-    echo "build_step(${make_nonce@Q}, ${nonce@Q})." >> ${make_rackfile}
-}
-
-(
-    export IFS=":"
-    for to_make in ${MAKE_DATABIN:-""} ; do
-        add_make_step $to_make
-    done
-)
+update_make_steps
 
 when_done() {
     rval=$?

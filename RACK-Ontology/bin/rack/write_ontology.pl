@@ -9,6 +9,9 @@
 :- use_module(rack(model)).
 :- use_module(utils(zip_by_key)).
 
+prolog:message(wrote_ontology(FilePath)) -->
+    [ 'Wrote ~w'-[FilePath] ].
+
 %! rack_qualified(+Namespace, +Name, -Qualified) is det.
 %
 %    Computes the RACK-qualified name given a namespace and a name.
@@ -156,8 +159,7 @@ write_ontology_file(Namespace, Things, Properties) :-
     forall(member(Property, Properties), write_property(Handle, Namespace, Property)),
     close(Handle),
     % let the user know which files are being written
-    atomic_list_concat(['Wrote', FilePath], ' ', DisplayedInformation),
-    writeln(DisplayedInformation).
+    print_message(informational, wrote_ontology(FilePath)).
 
 %! write_ontology() is det.
 %

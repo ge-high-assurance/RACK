@@ -7,16 +7,26 @@
 
 inf=()
 outf=''
+inclf=''
 opts=()
 
 outnxt=0
+inclnxt=0
+ignnxt=0
 
 for ARG ; do
     case ${ARG} in
         -o) outnxt=1 ;;
+        -MF) inclnxt=1 ;;
+        -MT) ignnxt=1 ;;
         *) if (( $outnxt )) ; then
                outf="${ARG}"
                outnxt=0
+           elif (( $inclnxt )) ; then
+               inclf="${ARG}"
+               inclnxt=0
+           elif (( $ignnxt )) ; then
+               ignnxt=0
            elif [ -r ${ARG} ] ; then
                inf+=("${ARG}")
            else
@@ -27,6 +37,8 @@ for ARG ; do
 done
 
 outf="${outf:-$(basename $inf .c).o}"
+inclf="${inclf:-$(basename $inf .c).d}"
+rackf="$(dirname ${outf})/.$(basename ${outf}).rack"
 tool=$(basename $0)
 realtool=$(find_in_path_remainder $tool)
 nonce="n$(date +%s)-$$"
@@ -39,13 +51,13 @@ nonce="n$(date +%s)-$$"
     echo "build_inputs(${nonce@Q}, [ ${inf[*]@Q} ])."
     echo "build_outputs(${nonce@Q}, [ ${outf@Q} ])."
     echo "build_start(${nonce@Q}, $(date +'date_time(%+4Y,%m,%d,%H,%M,%S,%z)'))."
-) > .${outf}.rack
+) > ${rackf}
 
 update_make_steps
 
 when_done() {
     rval=$?
-    echo "build_finished(${nonce@Q}, $(date +'date_time(%+4Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> .${outf}.rack
+    echo "build_finished(${nonce@Q}, $(date +'date_time(%+4Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> ${rackf}
 }
 trap when_done EXIT
 

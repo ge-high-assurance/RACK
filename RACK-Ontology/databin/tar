@@ -3,14 +3,27 @@
 . $(dirname $0)/rackfuncs.sh
 
 tmpfile=".$$.strace"
-trap 'rm ${tmpfile}*' EXIT ERR
+nonce="n$(date +%s)-$$"
+realtool=$(find_in_path_remainder $(basename $0))
 
-strace -f -e trace=file -e status=successful -o $tmpfile $(find_in_path_remainder $(basename $0)) "${@}"
+update_make_steps
+
+on_finish() {
+    rm -f ${tmpfile}*
+}
+trap on_finish EXIT ERR
+
+echo "tar_start(${nonce@Q}, $(date +'date_time(%+4Y,%m,%d,%H,%M,%S,%z)'), ${realtool@Q})." > ${tmpfile}.out
+
+strace -f -e trace=file -e status=successful -o $tmpfile $realtool "${@}"
+
+rval=$?
+echo "tar_finished(${nonce@Q}, $(date +'date_time(%+4Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> ${tmpfile}.out
 
 awk -f <(
-    nonce="n$(date +%s)-$$"
     cat <<EOF
 BEGIN { show=0;
+        print "build_from(${nonce@Q}, '$(top_rel_curdir)').";
       }
 /creat/ {
     split(\$2, p, "(");
@@ -27,7 +40,7 @@ BEGIN { show=0;
   }
 /openat/ { if (show==1) print "tar_access('${nonce}', ", \$3, "open)." }
 EOF
-        )  $tmpfile > $tmpfile.out
+        )  $tmpfile >> $tmpfile.out
 
 if [ -r $tmpfile.out -a -r $tmpfile.name ] ; then
     mv $tmpfile.out .$(cat $tmpfile.name).rack

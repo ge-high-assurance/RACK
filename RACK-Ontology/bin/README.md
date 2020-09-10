@@ -17,7 +17,7 @@ This command should set up a local pldoc webserver instance listening at
 NOTE: For the following commands to work, you will want to have generated some
 data for them to use.  For instance, to get the "TurnstileSystem" data
 generated, you can run the `Makefile` in
-`RACK-Ontology/models/TurnstileSystem/Data/src` while prepending
+`RACK-Ontology/models/TurnstileSystem/src` while prepending
 `RACK-Ontology/databin` to your `PATH`.  This will ensure that the script uses
 the instrumented `gcc` that records data.
 

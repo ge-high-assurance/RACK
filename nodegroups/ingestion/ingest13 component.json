@@ -203,7 +203,7 @@
                     }
                 ],
                 "sparqlID": "?DEFINE_IN",
-                "type": "http://arcos.rack/PROV-S#ENTITY"
+                "type": "http://arcos.rack/SOFTWARE#FILE"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -511,7 +511,7 @@
                 "NodeName": "ENTITY",
                 "SparqlID": "?DEFINE_IN",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/PROV-S#ENTITY",
+                "fullURIName": "http://arcos.rack/SOFTWARE#FILE",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,

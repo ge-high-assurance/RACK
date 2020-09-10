@@ -78,7 +78,7 @@
                 "props": [
                     {
                         "URILookup": [
-                            "?ENTITY"
+                            "?TEST_RESULT"
                         ],
                         "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
                         "mapping": [
@@ -88,8 +88,8 @@
                         ]
                     }
                 ],
-                "sparqlID": "?ENTITY",
-                "type": "http://arcos.rack/PROV-S#ENTITY"
+                "sparqlID": "?TEST_RESULT",
+                "type": "http://arcos.rack/TESTING#TEST_RESULT"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -150,9 +150,9 @@
             },
             {
                 "NodeName": "ENTITY",
-                "SparqlID": "?ENTITY",
+                "SparqlID": "?TEST_RESULT",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/PROV-S#ENTITY",
+                "fullURIName": "http://arcos.rack/TESTING#TEST_RESULT",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -227,7 +227,7 @@
                             ""
                         ],
                         "SnodeSparqlIDs": [
-                            "?ENTITY"
+                            "?TEST_RESULT"
                         ],
                         "UriConnectBy": "http://arcos.rack/CONFIDENCE#assesses",
                         "UriValueType": "http://arcos.rack/PROV-S#ENTITY",

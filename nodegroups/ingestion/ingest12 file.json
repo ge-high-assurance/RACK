@@ -75,7 +75,7 @@
                     }
                 ],
                 "sparqlID": "?CREATEBY",
-                "type": "http://arcos.rack/PROV-S#ACTIVITY"
+                "type": "http://arcos.rack/SOFTWARE#COMPILE"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -227,7 +227,7 @@
                 "NodeName": "ACTIVITY",
                 "SparqlID": "?CREATEBY",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/PROV-S#ACTIVITY",
+                "fullURIName": "http://arcos.rack/SOFTWARE#COMPILE",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,

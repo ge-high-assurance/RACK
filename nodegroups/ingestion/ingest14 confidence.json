@@ -1,1 +1,343 @@
-{"sparqlConn":{"data":[{"type":"fuseki","url":"http://localhost:8080/fuseki/SemTK","graph":"http://rack001/data"}],"domain":"","name":"MyDB","model":[{"type":"fuseki","url":"http://localhost:8080/fuseki/SemTK","graph":"http://rack001/model"}],"enableOwlImports":true},"sNodeGroup":{"offset":0,"sNodeList":[{"isReturned":false,"propList":[{"KeyName":"uniqueIdentifier","optMinus":0,"isReturned":true,"Constraints":"","ValueType":"string","instanceValues":[],"isRuntimeConstrained":false,"isMarkedForDeletion":false,"SparqlID":"?uniqueIdentifier_0","relationship":"http://www.w3.org/2001/XMLSchema#string","fullURIName":"","UriRelationship":"http://arcos.rack/PROV-S#uniqueIdentifier"}],"NodeName":"ASSESSING_CONFIDENCE","subClassNames":[],"isRuntimeConstrained":false,"SparqlID":"?ASSESSING_CONFIDENCE","valueConstraint":"","deletionMode":"NO_DELETE","nodeList":[],"instanceValue":null,"fullURIName":"http://arcos.rack/CONFIDENCE#ASSESSING_CONFIDENCE"},{"isReturned":false,"propList":[{"KeyName":"uniqueIdentifier","optMinus":0,"isReturned":true,"Constraints":"","ValueType":"string","instanceValues":[],"isRuntimeConstrained":false,"isMarkedForDeletion":false,"SparqlID":"?uniqueIdentifier","relationship":"http://www.w3.org/2001/XMLSchema#string","fullURIName":"","UriRelationship":"http://arcos.rack/PROV-S#uniqueIdentifier"}],"NodeName":"ENTITY","subClassNames":["http://arcos.rack/SACM-S#ASSERTED_CONTEXT","http://arcos.rack/SACM-S#ARGUMENT_REASONING","http://arcos.rack/DOCUMENT#DESCRIPTION","http://arcos.rack/SYSTEM#SYSTEM","http://arcos.rack/DOCUMENT#SECTION","http://arcos.rack/PROCESS#OBJECTIVE","http://arcos.rack/SACM-S#CLAIM","http://arcos.rack/SYSTEM#INTERFACE","http://arcos.rack/ANALYSIS#ANALYSIS_ANNOTATION","http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM","http://arcos.rack/HAZARD#HAZARD","http://arcos.rack/PROV-S#COLLECTION","http://arcos.rack/ANALYSIS#ANALYSIS_REPORT","http://arcos.rack/DOCUMENT#SPECIFICATION","http://arcos.rack/DOCUMENT#REPORT","http://arcos.rack/DOCUMENT#REQUEST","http://arcos.rack/SACM-S#ARGUMENT_PACKAGE","http://arcos.rack/SOFTWARE#FILE","http://arcos.rack/TESTING#TEST","http://arcos.rack/TESTING#TEST_RESULT","http://arcos.rack/DOCUMENT#PLAN","http://arcos.rack/REVIEW#REVIEW_LOG","http://arcos.rack/SACM-S#ASSERTED_INFERENCE","http://arcos.rack/SOFTWARE#COMPONENT","http://arcos.rack/SACM-S#ARTIFACT_REFERENCE","http://arcos.rack/DOCUMENT#PROCEDURE","http://arcos.rack/REQUIREMENTS#REQUIREMENT"],"isRuntimeConstrained":false,"SparqlID":"?ENTITY","valueConstraint":"","deletionMode":"NO_DELETE","nodeList":[],"instanceValue":null,"fullURIName":"http://arcos.rack/PROV-S#ENTITY"},{"isReturned":false,"propList":[{"KeyName":"belief","optMinus":0,"isReturned":true,"Constraints":"","ValueType":"float","instanceValues":[],"isRuntimeConstrained":false,"isMarkedForDeletion":false,"SparqlID":"?belief","relationship":"http://www.w3.org/2001/XMLSchema#float","fullURIName":"","UriRelationship":"http://arcos.rack/CONFIDENCE#belief"},{"KeyName":"disbelief","optMinus":0,"isReturned":true,"Constraints":"","ValueType":"float","instanceValues":[],"isRuntimeConstrained":false,"isMarkedForDeletion":false,"SparqlID":"?disbelief","relationship":"http://www.w3.org/2001/XMLSchema#float","fullURIName":"","UriRelationship":"http://arcos.rack/CONFIDENCE#disbelief"},{"KeyName":"uncertainty","optMinus":0,"isReturned":true,"Constraints":"","ValueType":"float","instanceValues":[],"isRuntimeConstrained":false,"isMarkedForDeletion":false,"SparqlID":"?uncertainty","relationship":"http://www.w3.org/2001/XMLSchema#float","fullURIName":"","UriRelationship":"http://arcos.rack/CONFIDENCE#uncertainty"},{"KeyName":"uniqueIdentifier","optMinus":0,"isReturned":false,"Constraints":"","ValueType":"string","instanceValues":[],"isRuntimeConstrained":false,"isMarkedForDeletion":false,"SparqlID":"","relationship":"http://www.w3.org/2001/XMLSchema#string","fullURIName":"","UriRelationship":"http://arcos.rack/PROV-S#uniqueIdentifier"}],"NodeName":"CONFIDENCE_ASSESSMENT","subClassNames":["http://arcos.rack/CONFIDENCE#BDU_CONFIDENCE_ASSESSMENT"],"isRuntimeConstrained":false,"SparqlID":"?CONFIDENCE_ASSESSMENT","valueConstraint":"","deletionMode":"NO_DELETE","nodeList":[{"KeyName":"assesses","SnodeSparqlIDs":["?ENTITY"],"ValueType":"ENTITY","Connected":true,"DeletionMarkers":[false],"OptionalMinus":[0],"Qualifiers":[""],"UriConnectBy":"http://arcos.rack/CONFIDENCE#assesses","ConnectBy":"assesses","UriValueType":"http://arcos.rack/PROV-S#ENTITY"},{"KeyName":"createBy","SnodeSparqlIDs":["?ASSESSING_CONFIDENCE"],"ValueType":"ACTIVITY","Connected":true,"DeletionMarkers":[false],"OptionalMinus":[0],"Qualifiers":[""],"UriConnectBy":"http://arcos.rack/CONFIDENCE#createBy","ConnectBy":"createBy","UriValueType":"http://arcos.rack/PROV-S#ACTIVITY"}],"instanceValue":null,"fullURIName":"http://arcos.rack/CONFIDENCE#CONFIDENCE_ASSESSMENT"}],"limit":0,"orderBy":[],"version":11},"importSpec":{"nodes":[{"mapping":[],"URILookupMode":"createIfMissing","sparqlID":"?CONFIDENCE_ASSESSMENT","type":"http://arcos.rack/CONFIDENCE#CONFIDENCE_ASSESSMENT","props":[{"mapping":[{"colId":"col_2"}],"URIRelation":"http://arcos.rack/CONFIDENCE#belief"},{"mapping":[{"colId":"col_4"}],"URIRelation":"http://arcos.rack/CONFIDENCE#disbelief"},{"mapping":[{"colId":"col_5"}],"URIRelation":"http://arcos.rack/CONFIDENCE#uncertainty"},{"mapping":[{"colId":"col_1"}],"URILookup":["?CONFIDENCE_ASSESSMENT"],"URIRelation":"http://arcos.rack/PROV-S#uniqueIdentifier"}]},{"mapping":[],"URILookupMode":"createIfMissing","sparqlID":"?ENTITY","type":"http://arcos.rack/PROV-S#ENTITY","props":[{"mapping":[{"colId":"col_0"}],"URILookup":["?ENTITY"],"URIRelation":"http://arcos.rack/PROV-S#uniqueIdentifier"}]},{"mapping":[],"URILookupMode":"createIfMissing","sparqlID":"?ASSESSING_CONFIDENCE","type":"http://arcos.rack/CONFIDENCE#ASSESSING_CONFIDENCE","props":[{"mapping":[{"colId":"col_3"}],"URILookup":["?ASSESSING_CONFIDENCE"],"URIRelation":"http://arcos.rack/PROV-S#uniqueIdentifier"}]}],"texts":[],"columns":[{"colName":"assesseeId","colId":"col_0"},{"colName":"assessmentId","colId":"col_1"},{"colName":"belief","colId":"col_2"},{"colName":"createById","colId":"col_3"},{"colName":"disbelief","colId":"col_4"},{"colName":"uncertainty","colId":"col_5"}],"baseURI":"","dataValidator":[],"transforms":[],"version":"1"},"version":2}
+{
+    "importSpec": {
+        "baseURI": "",
+        "columns": [
+            {
+                "colId": "col_0",
+                "colName": "assesseeId"
+            },
+            {
+                "colId": "col_1",
+                "colName": "assessmentId"
+            },
+            {
+                "colId": "col_2",
+                "colName": "belief"
+            },
+            {
+                "colId": "col_3",
+                "colName": "createById"
+            },
+            {
+                "colId": "col_4",
+                "colName": "disbelief"
+            },
+            {
+                "colId": "col_5",
+                "colName": "uncertainty"
+            }
+        ],
+        "dataValidator": [],
+        "nodes": [
+            {
+                "URILookupMode": "createIfMissing",
+                "mapping": [],
+                "props": [
+                    {
+                        "URIRelation": "http://arcos.rack/CONFIDENCE#belief",
+                        "mapping": [
+                            {
+                                "colId": "col_2"
+                            }
+                        ]
+                    },
+                    {
+                        "URIRelation": "http://arcos.rack/CONFIDENCE#disbelief",
+                        "mapping": [
+                            {
+                                "colId": "col_4"
+                            }
+                        ]
+                    },
+                    {
+                        "URIRelation": "http://arcos.rack/CONFIDENCE#uncertainty",
+                        "mapping": [
+                            {
+                                "colId": "col_5"
+                            }
+                        ]
+                    },
+                    {
+                        "URILookup": [
+                            "?CONFIDENCE_ASSESSMENT"
+                        ],
+                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "mapping": [
+                            {
+                                "colId": "col_1"
+                            }
+                        ]
+                    }
+                ],
+                "sparqlID": "?CONFIDENCE_ASSESSMENT",
+                "type": "http://arcos.rack/CONFIDENCE#CONFIDENCE_ASSESSMENT"
+            },
+            {
+                "URILookupMode": "createIfMissing",
+                "mapping": [],
+                "props": [
+                    {
+                        "URILookup": [
+                            "?ENTITY"
+                        ],
+                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "mapping": [
+                            {
+                                "colId": "col_0"
+                            }
+                        ]
+                    }
+                ],
+                "sparqlID": "?ENTITY",
+                "type": "http://arcos.rack/PROV-S#ENTITY"
+            },
+            {
+                "URILookupMode": "createIfMissing",
+                "mapping": [],
+                "props": [
+                    {
+                        "URILookup": [
+                            "?ASSESSING_CONFIDENCE"
+                        ],
+                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "mapping": [
+                            {
+                                "colId": "col_3"
+                            }
+                        ]
+                    }
+                ],
+                "sparqlID": "?ASSESSING_CONFIDENCE",
+                "type": "http://arcos.rack/CONFIDENCE#ASSESSING_CONFIDENCE"
+            }
+        ],
+        "texts": [],
+        "transforms": [],
+        "version": "1"
+    },
+    "sNodeGroup": {
+        "limit": 0,
+        "offset": 0,
+        "orderBy": [],
+        "sNodeList": [
+            {
+                "NodeName": "ASSESSING_CONFIDENCE",
+                "SparqlID": "?ASSESSING_CONFIDENCE",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/CONFIDENCE#ASSESSING_CONFIDENCE",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "uniqueIdentifier",
+                        "SparqlID": "?uniqueIdentifier_0",
+                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [],
+                "valueConstraint": ""
+            },
+            {
+                "NodeName": "ENTITY",
+                "SparqlID": "?ENTITY",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/PROV-S#ENTITY",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "uniqueIdentifier",
+                        "SparqlID": "?uniqueIdentifier",
+                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [
+                    "http://arcos.rack/SACM-S#ASSERTED_CONTEXT",
+                    "http://arcos.rack/SACM-S#ARGUMENT_REASONING",
+                    "http://arcos.rack/DOCUMENT#DESCRIPTION",
+                    "http://arcos.rack/SYSTEM#SYSTEM",
+                    "http://arcos.rack/DOCUMENT#SECTION",
+                    "http://arcos.rack/PROCESS#OBJECTIVE",
+                    "http://arcos.rack/SACM-S#CLAIM",
+                    "http://arcos.rack/SYSTEM#INTERFACE",
+                    "http://arcos.rack/ANALYSIS#ANALYSIS_ANNOTATION",
+                    "http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM",
+                    "http://arcos.rack/HAZARD#HAZARD",
+                    "http://arcos.rack/PROV-S#COLLECTION",
+                    "http://arcos.rack/ANALYSIS#ANALYSIS_REPORT",
+                    "http://arcos.rack/DOCUMENT#SPECIFICATION",
+                    "http://arcos.rack/DOCUMENT#REPORT",
+                    "http://arcos.rack/DOCUMENT#REQUEST",
+                    "http://arcos.rack/SACM-S#ARGUMENT_PACKAGE",
+                    "http://arcos.rack/SOFTWARE#FILE",
+                    "http://arcos.rack/TESTING#TEST",
+                    "http://arcos.rack/TESTING#TEST_RESULT",
+                    "http://arcos.rack/DOCUMENT#PLAN",
+                    "http://arcos.rack/REVIEW#REVIEW_LOG",
+                    "http://arcos.rack/SACM-S#ASSERTED_INFERENCE",
+                    "http://arcos.rack/SOFTWARE#COMPONENT",
+                    "http://arcos.rack/SACM-S#ARTIFACT_REFERENCE",
+                    "http://arcos.rack/DOCUMENT#PROCEDURE",
+                    "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
+                ],
+                "valueConstraint": ""
+            },
+            {
+                "NodeName": "CONFIDENCE_ASSESSMENT",
+                "SparqlID": "?CONFIDENCE_ASSESSMENT",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/CONFIDENCE#CONFIDENCE_ASSESSMENT",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [
+                    {
+                        "ConnectBy": "assesses",
+                        "Connected": true,
+                        "DeletionMarkers": [
+                            false
+                        ],
+                        "KeyName": "assesses",
+                        "OptionalMinus": [
+                            0
+                        ],
+                        "Qualifiers": [
+                            ""
+                        ],
+                        "SnodeSparqlIDs": [
+                            "?ENTITY"
+                        ],
+                        "UriConnectBy": "http://arcos.rack/CONFIDENCE#assesses",
+                        "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+                        "ValueType": "ENTITY"
+                    },
+                    {
+                        "ConnectBy": "createBy",
+                        "Connected": true,
+                        "DeletionMarkers": [
+                            false
+                        ],
+                        "KeyName": "createBy",
+                        "OptionalMinus": [
+                            0
+                        ],
+                        "Qualifiers": [
+                            ""
+                        ],
+                        "SnodeSparqlIDs": [
+                            "?ASSESSING_CONFIDENCE"
+                        ],
+                        "UriConnectBy": "http://arcos.rack/CONFIDENCE#createBy",
+                        "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
+                        "ValueType": "ACTIVITY"
+                    }
+                ],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "belief",
+                        "SparqlID": "?belief",
+                        "UriRelationship": "http://arcos.rack/CONFIDENCE#belief",
+                        "ValueType": "float",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#float"
+                    },
+                    {
+                        "Constraints": "",
+                        "KeyName": "disbelief",
+                        "SparqlID": "?disbelief",
+                        "UriRelationship": "http://arcos.rack/CONFIDENCE#disbelief",
+                        "ValueType": "float",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#float"
+                    },
+                    {
+                        "Constraints": "",
+                        "KeyName": "uncertainty",
+                        "SparqlID": "?uncertainty",
+                        "UriRelationship": "http://arcos.rack/CONFIDENCE#uncertainty",
+                        "ValueType": "float",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#float"
+                    },
+                    {
+                        "Constraints": "",
+                        "KeyName": "uniqueIdentifier",
+                        "SparqlID": "",
+                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": false,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [
+                    "http://arcos.rack/CONFIDENCE#BDU_CONFIDENCE_ASSESSMENT"
+                ],
+                "valueConstraint": ""
+            }
+        ],
+        "version": 11
+    },
+    "sparqlConn": {
+        "data": [
+            {
+                "graph": "http://rack001/data",
+                "type": "fuseki",
+                "url": "http://localhost:8080/fuseki/SemTK"
+            }
+        ],
+        "domain": "",
+        "enableOwlImports": true,
+        "model": [
+            {
+                "graph": "http://rack001/model",
+                "type": "fuseki",
+                "url": "http://localhost:8080/fuseki/SemTK"
+            }
+        ],
+        "name": "MyDB"
+    },
+    "version": 2
+}

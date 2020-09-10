@@ -13,3 +13,4 @@ query Terms consumedBy Requirement,Find data dictionary terms consumed by requir
 query Control Flow From Function,Find functions called by specified function,eric,query Control Flow From Function.json
 query Compilation Inputs,Find inputs used in compilation of executables,langston,query Compilation Inputs.json
 query System Structure,Extract system subcomponent structure contained under a given top-level anchor system,eric,query System Structure.json
+query test empty thing,Check for non-SYSTEM typed things with uniqueId and no other properties,200001934,query test empty thing.json

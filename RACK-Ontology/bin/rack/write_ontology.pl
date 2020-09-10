@@ -161,11 +161,11 @@ write_ontology_file(Namespace, Things, Properties) :-
     % let the user know which files are being written
     print_message(informational, wrote_ontology(FilePath)).
 
-%! write_ontology() is det.
+%! write_ontology is det.
 %
 %    Writes the ontology files for all things and properties in the in-memory
 %    model, outputting Prolog files in the ontology folder.
-write_ontology() :-
+write_ontology :-
     rack_classes(ClassesGroups),
     rack_properties(PropertiesGroups),
     zip_by_key(ClassesGroups, [], PropertiesGroups, [], Groups),

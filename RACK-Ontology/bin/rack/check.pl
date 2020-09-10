@@ -45,9 +45,7 @@ check_instance_types(I) :-
     length(ITs, N),
     N > 1,
     ITs = [T|_],
-    prefix_shorten(I, SI),
-    maplist(prefix_shorten, ITs, SITs),
-    print_message(error, multiple_types_for_instance(SI, SITs)).
+    print_message(error, multiple_types_for_instance(I, ITs)).
 
 check_instance_property_violations(Property) :-
     % Get an instance
@@ -68,38 +66,28 @@ check_cardinality(Property, I, T) :-
     % How many actual values for that property on this instance
     findall(V, rdf(I, Property, V), VS),
     length(VS, VSLen),
-    % Error if no match
     VSLen \= N,
-    prefix_shorten(I, SI),
-    prefix_shorten(Property, SP),
-    print_message(error, cardinality_violation(SI, SP, N, VSLen)).
+    print_message(error, cardinality_violation(I, Property, N, VSLen)).
 
 check_maybe_prop(Property, I, T) :-
     property_target(T, Property, _PUsage, _Target, maybe),
     has_interesting_prefix(Property),
     % How many actual values for that property on this instance
     findall(V, rdf(I, Property, V), VS),
-    (length(VS, 0), !, fail; % fail to not report during check
-     length(VS, 1), !, fail; % fail to not report during check
+    (length(VS, 0), !, fail; % fail: do not report during check
+     length(VS, 1), !, fail; % fail: do not report during check
      length(VS, VSLen),
-     prefix_shorten(I, SI),
-     prefix_shorten(Property, SP),
-     print_message(error, maybe_restriction(SI, SP, VSLen))).
+     print_message(error, maybe_restriction(I, Property, VSLen))).
 
 check_target_type(Property, I, T) :-
     property_target(T, Property, _PUsage, Target, _Restr),
     has_interesting_prefix(Property),
     rdf(I, Property, Val),
     \+ rdf_is_literal(Val),  % TODO check these as well?
-    rdf(Val, rdf:type, ValTy),
-    ValTy \= Target,
-    \+ rdf_reachable(ValTy, rdfs:subClassOf, Target),
-    prefix_shorten(I, SI),
-    prefix_shorten(Property, SP),
-    prefix_shorten(ValTy, SPTy),
-    prefix_shorten(Target, ST),
-    prefix_shorten(Val, SV),
-    print_message(error, property_value_wrong_type(SI, SP, SV, ST, SPTy)).
+    rdf(Val, rdf:type, DefTy),
+    DefTy \= Target,
+    \+ rdf_reachable(DefTy, rdfs:subClassOf, Target),
+    print_message(error, property_value_wrong_type(I, Property, DefTy, Val, Target)).
 
 check_invalid_value(Property, I, T) :-
     property_target(T, Property, _PUsage, _Target, _Restr),
@@ -111,17 +99,13 @@ check_invalid_value(Property, I, T) :-
     rdf(PTy, owl:equivalentClass, PTyEquiv),
     rdf(PTyEquiv, owl:oneOf, Enums), !,
     rdf_list(Enums,L),
-    prefix_shorten(I, SI),
-    prefix_shorten(Property, SP),
-    prefix_shorten(V, SV),
-    maplist(prefix_shorten, L, SL),
-    print_message(error, invalid_value_in_enum(SI, SP, SV, SL)).
+    print_message(error, invalid_value_in_enum(I, Property, V, L)).
 
 check_invalid_value(Property, I, T) :-
     property_target(T, Property, _PUsage, _Target, _Restr),
     has_interesting_prefix(Property),
     rdf(I, Property, V),
-    rdf_is_literal(V),  % literals checked elsewhere
+    rdf_is_literal(V),  % non-literals handled elsewhere
     rdf(Property, rdfs:range, R),
     rdf(R, owl:equivalentClass, REquiv),
     rdf(REquiv, owl:withRestrictions, RL),
@@ -134,16 +118,14 @@ check_invalid_value(Property, I, T) :-
     actual_val(MaxV, RT, MaxVal),
     actual_val(V, RT, Val),
     (rdf_compare(<,Val,MinVal) ; rdf_compare(>,Val,MaxVal)),
-    prefix_shorten(I, SI),
-    prefix_shorten(Property, SP),
-    print_message(error, value_outside_range(SI, SP, RT, Val, MinVal, MaxVal)).
+    print_message(error, value_outside_range(I, Property, RT, Val, MinVal, MaxVal)).
 
 actual_val((V^^VT),VT,(V^^VT)).  % normal
 actual_val(V,VT,Val) :-
     rdf_equal(V, VS^^(xsd:string)),
     % SADL doesn't specify the type for the maxInclusive/minInclusive
     % values, so they are interpreted as strings.  Attempt to convert
-    % them to th1e target type here.
+    % them to the target type here.
     \+ rdf_equal(xsd:string, VT),
     atom_string(VA,VS),
     % Note: converted based on representation, not VT because there is
@@ -168,24 +150,46 @@ prolog:message(not_prov_s_thing_class(Class)) -->
 prolog:message(num_classes(What, Count)) -->
     [ 'There are ~:d RACK definitions ~w.'-[Count, What] ].
 prolog:message(cardinality_violation(Instance, Property, Specified, Actual)) -->
+    { prefix_shorten(Instance, SI),
+      prefix_shorten(Property, SP)
+    },
     [ '~w . ~w has ~d values but cardinality of ~d~n'-[
-          Instance, Property, Actual, Specified] ].
+          SI, SP, Actual, Specified] ].
 prolog:message(maybe_restriction(Instance, Property, Actual)) -->
+    { prefix_shorten(Instance, SI),
+      prefix_shorten(Property, SP)
+    },
     [ '~w . ~w must have only zero or one instance, but has ~d~n'-[
-          Instance, Property, Actual] ].
+          SI, SP, Actual] ].
 prolog:message(invalid_value_in_enum(Instance, Property, Value, Valid)) -->
+    { prefix_shorten(Instance, SI),
+      prefix_shorten(Property, SP),
+      prefix_shorten(Value, SV),
+      maplist(prefix_shorten, Valid, SL)
+    },
     [ '~w . ~w value of ~w is invalid, allowed enumerations: ~w~n'-[
-          Instance, Property, Value, Valid] ].
+          SI, SP, SV, SL] ].
 prolog:message(value_outside_range(Instance, Property, Ty, V, MinV, MaxV)) -->
-    { (rdf_equal(xsd:T, Ty) ; T = Ty),
+    { prefix_shorten(Instance, SI),
+      prefix_shorten(Property, SP),
+      (rdf_equal(xsd:T, Ty) ; T = Ty),
       (rdf_equal(Val^^Ty, V) ; Val = V),
       (rdf_equal(Min^^Ty, MinV) ; Min = MinV),
       (rdf_equal(Max^^Ty, MaxV) ; Max = MaxV)
     },
     [ '~w . ~w value of ~w is outside ~w range [~w .. ~w]~n'-[
-          Instance, Property, Val, T, Min, Max ] ].
+          SI, SP, Val, T, Min, Max ] ].
 prolog:message(multiple_types_for_instance(Instance, Types)) -->
-    [ 'Instance ~w has multiple types: ~w~n'-[Instance, Types] ].
-prolog:message(property_value_wrong_type(Instance, Property, Val, ValType, DefType)) -->
+    { prefix_shorten(Instance, SI),
+      maplist(prefix_shorten(Types, STys))
+    },
+    [ 'Instance ~w has multiple types: ~w~n'-[SI, STys] ].
+prolog:message(property_value_wrong_type(Instance, Property, DefType, Val, ValType)) -->
+    { prefix_shorten(Instance, SI),
+      prefix_shorten(Property, SP),
+      prefix_shorten(DefType, SDTy),
+      prefix_shorten(ValType, SVTy),
+      prefix_shorten(Val, SV)
+    },
     [ 'Instance property ~w . ~w of ~w should be a ~w but is a ~w'-[
-          Instance, Property, Val, DefType, ValType] ].
+          SI, SP, SV, SDTy, SVTy] ].

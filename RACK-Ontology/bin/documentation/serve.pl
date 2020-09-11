@@ -3,6 +3,8 @@
 :- doc_server(4040).
 :- portray_text(true).
 
+:- load_files(checks(bdu)).
+
 :- load_files(ontology(hazard)).
 :- load_files(ontology(requirements)).
 :- load_files(ontology(testing)).

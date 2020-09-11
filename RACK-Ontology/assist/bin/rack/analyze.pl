@@ -20,7 +20,8 @@ report(_) :-
 report(InstancePfx, Opts) :-
     report(Opts),
     format('~n~n'),
-    report_instances_in(InstancePfx).
+    report_instances_in(InstancePfx),
+    report_instances_in_summary(InstancePfx).
 
 prolog:message(no_ontology_loaded) -->
     [ 'No ontology has been loaded for analysis.'-[] ].
@@ -270,3 +271,19 @@ report_instance_missingprop(T, I, Property) :-
     \+ rdf(I, Property, _Val),
     prefix_shorten(Target, ST),
     format('  ?. ~w = ? :: ~w~n', [Property, ST]).
+
+report_instances_in_summary(Pfx) :-
+    format('~n~n~`#t ~w Instances Summary ~`#t~78|~n', [Pfx]),
+    findall(E, instances_in_summary(Pfx, E), _).
+
+instances_in_summary(Pfx, T) :-
+    findall(Leaf, ontology_leaf_class(Leaf), Leaves),
+    sort(Leaves, SL),
+    member(T, SL),
+    findall(I, (rdf(I, rdf:type, T),
+                \+ rdf_bnode(I),
+                atom_concat(Pfx, _, I)
+               ), IS),
+    length(IS, ISLen),
+    ISLen > 0,
+    format('  ~:d~6|~t ~w instances~n', [ISLen, T]).

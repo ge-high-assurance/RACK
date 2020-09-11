@@ -6,7 +6,7 @@ You can read the code's documentation, as well as a rendering of this very file,
 by running `swipl` **from this directory**, and entering:
 
 ```prolog
-[serve_documentation].
+[documentation/serve].
 ```
 
 This command should set up a local pldoc webserver instance listening at

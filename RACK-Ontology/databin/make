@@ -15,12 +15,12 @@ export MAKE_DATABIN="${outf}@${nonce}:${MAKE_DATABIN}"
     echo ":- multifile build_with/5, build_from/2, build_inputs/2, build_outputs/2, build_start/2, build_finished/3, build_step/2."
     echo "build_with(${nonce@Q}, make," ${tool@Q}, ${realtool@Q}, [ "${opts[*]@Q}" ] ")."
     echo "build_from(${nonce@Q}, '"$(top_rel_curdir)"')."
-    echo "build_start(${nonce@Q}, $(date +'date_time(%+4Y,%m,%d,%H,%M,%S,%z)'))."
+    echo "build_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'))."
 ) > ${outf}
 
 when_done() {
     rval=$?
-    echo "build_finished(${nonce@Q}, $(date +'date_time(%+4Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> ${outf}
+    echo "build_finished(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> ${outf}
 }
 trap when_done EXIT
 

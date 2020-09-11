@@ -13,12 +13,12 @@ on_finish() {
 }
 trap on_finish EXIT ERR
 
-echo "tar_start(${nonce@Q}, $(date +'date_time(%+4Y,%m,%d,%H,%M,%S,%z)'), ${realtool@Q})." > ${tmpfile}.out
+echo "tar_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), ${realtool@Q})." > ${tmpfile}.out
 
 strace -f -e trace=file -e status=successful -o $tmpfile $realtool "${@}"
 
 rval=$?
-echo "tar_finished(${nonce@Q}, $(date +'date_time(%+4Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> ${tmpfile}.out
+echo "tar_finished(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> ${tmpfile}.out
 
 awk -f <(
     cat <<EOF

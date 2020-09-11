@@ -50,14 +50,14 @@ nonce="n$(date +%s)-$$"
     echo "build_from(${nonce@Q}, '"$(top_rel_curdir)"')."
     echo "build_inputs(${nonce@Q}, [ ${inf[*]@Q} ])."
     echo "build_outputs(${nonce@Q}, [ ${outf@Q} ])."
-    echo "build_start(${nonce@Q}, $(date +'date_time(%+4Y,%m,%d,%H,%M,%S,%z)'))."
+    echo "build_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'))."
 ) > ${rackf}
 
 update_make_steps
 
 when_done() {
     rval=$?
-    echo "build_finished(${nonce@Q}, $(date +'date_time(%+4Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> ${rackf}
+    echo "build_finished(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> ${rackf}
 }
 trap when_done EXIT
 

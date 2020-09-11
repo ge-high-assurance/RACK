@@ -29,7 +29,7 @@ esac
 # add -q to suppress informational messages
 # add -g "debug(triples)" to see definitions as they occur
 
-swipl -g "load_local_model('$(dirname $0)/../OwlModels')" \
+swipl -g "load_local_model('$(dirname $0)/../../OwlModels')" \
       -g "load_recognizer('$(dirname $0)/../databin/databin.rack')" \
       -g "load_data(${1@Q},${2@Q})" \
       -g $target \

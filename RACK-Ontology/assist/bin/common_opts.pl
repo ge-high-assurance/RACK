@@ -7,7 +7,10 @@
 opts_spec(Spec) :-
     OwlDir='OwlModels',
     DataDir='models/TurnstileSystem/src',
-    RFile='databin/databin.rack',
+    paths_dir(Dir),
+    file_directory_name(Dir, AssistDir),
+    atom_concat(AssistDir, '/databin', DataBinDir),
+    atom_concat(DataBinDir, '/databin.rack', DBRack),
     Spec =
     [ [opt(verbose), type(boolean), default(false),
        shortflags([v]), longflags(['verbose']),
@@ -24,7 +27,7 @@ opts_spec(Spec) :-
 
       [opt(recognizers), meta('FILE'), type(atom),
        shortflags([r]), longflags(['recognizer', 'recognizers']),
-       default(RFile),
+       default(DBRack),
        help('File containing data recognizers to use for loading data from tool generated output and converting it to ontology elements.')],
 
       [opt(data_dir), meta('DIR'), type(atom),

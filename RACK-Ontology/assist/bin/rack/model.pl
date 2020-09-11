@@ -288,10 +288,22 @@ rack_ontology_node(Node, Area, Item) :-
     rdf_split_url(E, Item, Node),
     rack_ref(Area, E).
 
+%! entity(?E:atom) is semidet
+%
+% True if the E is an instance of the RACK ontology PROV-S#ENTITY element.
+%
+% Can be called with E as a variable to iterate over all ENTITY elements.
+
 entity(E) :-
     is_owl_class(E),
     rdf(E, rdfs:subClassOf, rack:'PROV-S#ENTITY'),
     \+ rdf_bnode(E).
+
+%! entity(?Entity:atom, -Comment:atom)
+%
+% Returns the Comment (i.e. note) associated with the Entity, or
+% iterate over all Entities and return the Entity along with its
+% Comment.
 
 entity(E, C) :-
     entity(E),
@@ -421,7 +433,8 @@ rack_entity_instance(InstanceURL) :-
 % specified namespace.
 %
 % ==
-% :- rack_entity_instance('HTTP://TurnstileSystem/CounterApplication', I).
+% :- rack_ref('SOFTWARE#FILE', File),
+%    rack_entity_instance('HTTP://TurnstileSystem/CounterApplication', File, I).
 % I = 'http://TurnstileSystem/CounterApplication/counter.c'
 % ==
 

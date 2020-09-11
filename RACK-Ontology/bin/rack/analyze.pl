@@ -182,12 +182,17 @@ report_rack_instance(RACK_IS, I) :-
     format('    = ~w~n', [I]).
 
 instance_prefixes(Prefixes) :-
-    setof(P, E^T^I^L^(rdf(E, rdf:type, T),
-                      rdf_reachable(T, rdfs:subClassOf, owl:'Class'),
-                      rdf(I, rdf:type, E),
-                      \+ rack_ontology_node(I, _, _),
-                      \+ rdf_bnode(I),
-                      rdf_split_url(P, L, I)), Prefixes).
+    setof(P, E^T^I^L^PL^PB^
+             (rdf(E, rdf:type, T),
+              rdf_reachable(T, rdfs:subClassOf, owl:'Class'),
+              rdf(I, rdf:type, E),
+              \+ rack_ontology_node(I, _, _),
+              \+ rdf_bnode(I),
+              rdf_split_url(PL, L, I),
+              atomic_list_concat([PB|_],'#',PL),
+              atom_concat(PB,'#',P)
+             ),
+          Prefixes).
 
 report_instance_prefixes(Prefixes) :-
     length(Prefixes, N),
@@ -199,7 +204,7 @@ report_instance_prefix(Prefix) :-
                 rdf(E, rdf:type, T),
                 rdf_reachable(T, rdfs:subClassOf, owl:'Class'),
                 \+ rdf_bnode(I),
-                rdf_split_url(Prefix, _L, I)
+                atom_concat(Prefix, _, I)
                ), IS),
     length(IS, N),
     format('  ~:d in ~w~n', [N, Prefix]).

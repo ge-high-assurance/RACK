@@ -29,6 +29,7 @@ description DSL into instances in the model.
               owl_list/2,
               entity/1,
               entity/2,
+              ontology_leaf_class/1,
               property/3,
               property_target/5,
               rack_instance/2,
@@ -308,6 +309,33 @@ entity(E) :-
 entity(E, C) :-
     entity(E),
     rdf(E, rdfs:comment, C).
+
+
+%! ontology_leaf_class(+Class:atom)
+%
+% True if the Class is a leaf node in the RACK ontology.  The Class
+% may be a variable to iterate over all ontology-defined classes.
+
+ontology_leaf_class(C) :-
+    is_owl_class(PCRef),
+    rdf(PCRef, rdf:type, owl:'Class'),
+    atom_concat('http://arcos.rack/PROV-S#', N, PCRef),
+    rdf_reachable(C, rdfs:subClassOf, PCRef),
+    % Most PROV-S classes are PROV-S#THING subclasses, avoid double
+    % referencing an item in this way
+    ( N \= 'THING';
+      (N = 'THING',
+       \+ atom_concat('http://arcos.rack/PROV-S#', _, C),
+       % only use THING itself if there is no other PROV-S class in
+       % the chain to the target T.
+      findall(OtherPCRef,
+              (rdf(OtherPCRef, rdf:type, owl:'Class'),
+               rdf(OtherPCRef, rdfs:subClassOf, PCRef),
+               % OtherPCRef \= 'http://arcos.rack/PROV-S#THING',
+               rdf_reachable(C, rdfs:subClassOf, OtherPCRef)),
+              OtherRefs),
+      length(OtherRefs, 0))).
+
 
 % TODO: this is a WIP
 enumerationOf(E, C) :-

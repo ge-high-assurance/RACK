@@ -3,37 +3,24 @@
 :- use_module(library(semweb/rdf11)).
 :- use_module(rack(model)).
 
-report :-
+report(Opts) :-
     rdf_equal(rack:'PROV-S#THING', Thing),
     rdf(Thing, rdf:type, _), !, % verify the ontology is loaded
     rack_nodes(Nodes),
-    report_rack_nodes(Nodes),
+    (member(hide_ontology(true), Opts), !; report_rack_nodes(Nodes)),
     format('~n~n'),
     instance_prefixes(Prefixes),
-    report_instance_prefixes(Prefixes),
-    true.
-
-report :-
-    rdf_equal(rack:'PROV-S#THING', Thing),
-    \+ rdf(Thing, rdf:type, _),
-    print_message(error, no_ontology_loaded).
-
-report(InstancePfx) :-
-    rdf_equal(rack:'PROV-S#THING', Thing),
-    rdf(Thing, rdf:type, _), !, % verify the ontology is loaded
-    rack_nodes(Nodes),
-    report_rack_nodes(Nodes),
-    format('~n~n'),
-    instance_prefixes(Prefixes),
-    report_instance_prefixes(Prefixes),
-    format('~n~n'),
-    report_instances_in(InstancePfx),
-    true.
+    report_instance_prefixes(Prefixes).
 
 report(_) :-
     rdf_equal(rack:'PROV-S#THING', Thing),
     \+ rdf(Thing, rdf:type, _),
     print_message(error, no_ontology_loaded).
+
+report(InstancePfx, Opts) :-
+    report(Opts),
+    format('~n~n'),
+    report_instances_in(InstancePfx).
 
 prolog:message(no_ontology_loaded) -->
     [ 'No ontology has been loaded for analysis.'-[] ].

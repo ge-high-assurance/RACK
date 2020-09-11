@@ -18,15 +18,15 @@
   </owl:Ontology>
   <owl:Class rdf:ID="REQUEST">
     <rdfs:comment xml:lang="en">A REQUEST initiates a defined course of action or changed to fulfill a need.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
   <owl:Class rdf:ID="SECTION">
     <rdfs:comment xml:lang="en">A SECTION is generic grouping of ENTITYs with a document</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
   <owl:Class rdf:ID="DESCRIPTION">
     <rdfs:comment xml:lang="en">A DESCRIPTION represents a planned or actual concept, function, design or object.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
   <owl:Class rdf:ID="DOC_STATUS">
     <owl:equivalentClass>
@@ -41,19 +41,19 @@
   </owl:Class>
   <owl:Class rdf:ID="REPORT">
     <rdfs:comment xml:lang="en">A REPORT describes the results of activities such as investigations, observations, assessments, or test.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
   <owl:Class rdf:ID="SPECIFICATION">
     <rdfs:comment xml:lang="en">A SPECIFICATION identifies, in a complete, precise, and verifiable manner, the requirements, design, behavior, or other expected characteristics of a system, service or process.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
   <owl:Class rdf:ID="PLAN">
     <rdfs:comment xml:lang="en">A PLAN presents a systematic course of action for achieving a declared purpose, including when, how, and by whom specified activities are to be performed. </rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
   <owl:Class rdf:ID="PROCEDURE">
     <rdfs:comment xml:lang="en">A PROCEDURE presents an ordered series of steps to perform a process, activity, or task</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="approvalAuthority">
     <rdfs:domain>
@@ -73,24 +73,6 @@
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
     <rdfs:domain rdf:resource="#REQUEST"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="content">
-    <rdfs:domain>
-      <owl:Class>
-        <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#DESCRIPTION"/>
-          <owl:Class rdf:about="#PLAN"/>
-          <owl:Class rdf:about="#PROCEDURE"/>
-          <owl:Class rdf:about="#REPORT"/>
-          <owl:Class rdf:about="#REQUEST"/>
-          <owl:Class rdf:about="#SPECIFICATION"/>
-          <owl:Class rdf:about="#SECTION"/>
-        </owl:unionOf>
-      </owl:Class>
-    </rdfs:domain>
-    <rdfs:comment xml:lang="en">Constituent ENTITYs that are contained in a document.</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
-    <rdfs:subPropertyOf rdf:resource="PROV-S#hadMember"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="references">
     <rdfs:domain>

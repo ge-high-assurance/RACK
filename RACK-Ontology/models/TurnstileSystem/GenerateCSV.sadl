@@ -167,7 +167,7 @@ Write: data
          . ?FILE <uniqueIdentifier> ?uniqueIdentifier
 		 . OPTIONAL{ ?FILE <filename> ?filename }
          . OPTIONAL{  ?FILE <sw:createBy> ?createBy
-                    . ?createBy <rdf:type> <ACTIVITY>
+                    . ?createBy <rdf:type> <COMPILE>
                     . ?createBy <uniqueIdentifier> ?createById
                    }
          . OPTIONAL{  ?FILE <fileFormat> ?format
@@ -193,7 +193,7 @@ Write: data
                   . ?instantiates <uniqueIdentifier> ?instantiatesId
                   }
         . OPTIONAL{ ?COMPONENT <definedIn> ?definedIn
-                  . ?definedIn <rdf:type> <ENTITY>
+                  . ?definedIn <rdf:type> <FILE>
                   . ?definedIn <uniqueIdentifier> ?definedInId
                   }
         . OPTIONAL{ ?COMPONENT <mentions> ?mentions
@@ -234,7 +234,7 @@ Write: data
                     . ?createBy <uniqueIdentifier> ?createById
                    }
          . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:assesses> ?assessee
-                    . ?assessee <rdf:type> <ENTITY>
+                    . ?assessee <rdf:type> <TEST_RESULT>
                     . ?assessee <uniqueIdentifier> ?assesseeId
                    }
          . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:belief> ?belief }

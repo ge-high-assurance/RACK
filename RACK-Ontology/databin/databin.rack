@@ -7,6 +7,8 @@ databin_name(MyName) :-
 % wrappers that will be recognized here.
 
 :- discontiguous tar_access/3,
+                 tar_start/3,
+                 tar_finished/3,
                  build_with/5,
                  build_inputs/2,
                  build_outputs/2,

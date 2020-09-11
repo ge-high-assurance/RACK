@@ -13,7 +13,8 @@ on_finish() {
 }
 trap on_finish EXIT ERR
 
-echo "tar_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), ${realtool@Q})." > ${tmpfile}.out
+echo ":- multifile tar_start/3, tar_finished/3, build_from/2, tar_access/3." > ${tmpfile}.out
+echo "tar_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), ${realtool@Q})." >> ${tmpfile}.out
 
 strace -f -e trace=file -e status=successful -o $tmpfile $realtool "${@}"
 

@@ -66,6 +66,12 @@ update_make_steps
 
 when_done() {
     rval=$?
+    if [ ! -z $inclf -a -r $inclf ] ; then
+        read -a fl < <(cat $inclf)
+        unset fl[0]  # remove output file
+        IFS=","
+        echo "build_inputs(${nonce@Q}, [ ${fl[*]@Q} ])." >> ${rackf}
+    fi
     echo "build_finished(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> ${rackf}
 }
 trap when_done EXIT

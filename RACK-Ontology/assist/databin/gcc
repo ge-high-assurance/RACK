@@ -13,6 +13,7 @@ opts=()
 outnxt=0
 inclnxt=0
 ignnxt=0
+declare -a extra
 
 for ARG ; do
     case ${ARG} in
@@ -48,7 +49,10 @@ if [ -z "${inf}" ] ; then
 fi
 
 outf="${outf:-$(basename $inf .c).o}"
-inclf="${outf:-$(basename $inf .c).d}"
+if [ -z "${inclf}" ] ; then
+    inclf="$(dirname ${inf})/.$(basename ${inf} .c).d"
+    extra+=("-MMD" "-MF" "$inclf")
+fi
 rackf="$(dirname ${outf})/.$(basename ${outf}).rack"
 nonce="n$(date +%s)-$$"
 
@@ -76,4 +80,4 @@ when_done() {
 }
 trap when_done EXIT
 
-$realtool ${*}
+$realtool ${*} ${extra[*]}

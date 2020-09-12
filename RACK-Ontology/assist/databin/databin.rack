@@ -192,7 +192,6 @@ data_instance('PROV-S#ACTIVITY', load_data, Instance,
     BW, BS, BF,
     ToolType \= compile,
     ToolType \= make,
-    fail,
     activity_instance(Nonce, ToolType, Instance).
 
 data_get(_, 'PROV-S#startedAtTime', activity_data(_,build_start(_,T),_), T).

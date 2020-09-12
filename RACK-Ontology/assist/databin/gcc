@@ -36,11 +36,20 @@ for ARG ; do
     esac
 done
 
-outf="${outf:-$(basename $inf .c).o}"
-inclf="${inclf:-$(basename $inf .c).d}"
-rackf="$(dirname ${outf})/.$(basename ${outf}).rack"
 tool=$(basename $0)
 realtool=$(find_in_path_remainder $tool)
+
+if [ -z "${inf}" ] ; then
+    # Sometimes things like "gcc --version" is run by configure or
+    # other tools to do other things than actually compile, so just
+    # execute these without recording rack information.
+    $realtool ${*}
+    exit $?
+fi
+
+outf="${outf:-$(basename $inf .c).o}"
+inclf="${outf:-$(basename $inf .c).d}"
+rackf="$(dirname ${outf})/.$(basename ${outf}).rack"
 nonce="n$(date +%s)-$$"
 
 (

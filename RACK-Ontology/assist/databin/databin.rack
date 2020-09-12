@@ -147,7 +147,7 @@ data_get('SOFTWARE#FILE', 'SOFTWARE#createBy', sw_file_data(Nonce, _, F), V) :-
 %% -- Formats ------------------------------
 
 data_instance('SOFTWARE#FORMAT', load_data, F, [uid(F), fmt(F)]) :-
-    member(F, [ 'CSourceFile', 'ElfFile', 'TarFile' ]).
+    member(F, [ 'CSourceFile', 'ElfFile', 'TarFile', 'ArchiveFile' ]).
 data_get('SOFTWARE#FORMAT', 'PROV-S#uniqueIdentifier', fmt(Fmt), FmtS) :-
     atom_string(Fmt, FmtS).
 

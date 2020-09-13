@@ -1,8 +1,16 @@
+
 * Areas for improvement/investigation
 ** Write more recognizers
     Fill out the Turnstile example, guided by missing field values in
     the ~analyze -i 'http://testdata.org/'~ output by writing either
     ~data_instance~ or ~data_get~ rules.
+
+    * Capture user (AGENT) who runs build
+    * Use `nm` command to capture list of functions in object files
+    * Try a sample ADA codebase (e.g. https://github.com/psyomn/ash)
+
+*** Helpful information
+
     * Debugging note: insert ~write(X),write(Y),nl,~ lines into
       existing rules: they will be printed to stdout as the rule
       checking crosses that point.  ~X~ and ~Y~ can be strings,
@@ -18,20 +26,10 @@
       information from output files?
     * Also see the ~-frecord-gcc-switches~ flag Langston found.  Maybe
       the wrapper just adds that switch, then we post-extract.
-** Try a larger project
-    * Example: ffmpeg
 ** Investigate http://github.com/trailofbits/blight as wrapper alternative
 ** Write more checks
     * Unconnected node clusters in a namespace?  Probably something
       missing/wrong.
-    * Closed enumerations?  For example, we have a TESTING#TEST_STATUS
-      that enumerates possible TESTING#result values.  Can we check
-      loaded data to ensure that all instance values match the
-      enumerated set?  This might require SADL to emit
-      ~owl:Restriction -> owl:allValuesFrom~ "universal
-      quantification", which I'm not sure it currently does (see
-      https://w3.org/TR/2012/REC-owl2-primer-20121211/ section 5.2
-      "Property Restrictions").
     * others?
 ** Possibility for use on or in relation to existing issues
     * https://github.com/ge-high-assurance/RACK/wiki/Multiple-Source-Data-Resolution

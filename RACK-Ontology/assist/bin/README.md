@@ -14,15 +14,15 @@ This command should set up a local pldoc webserver instance listening at
 
 # Command-line Usage
 
-NOTE: For the following commands to work, you will want to have generated some
-data for them to use.  For instance, to get the "TurnstileSystem" data
-generated, you can run the `Makefile` in
-`RACK-Ontology/models/TurnstileSystem/src` while prepending
-`RACK-Ontology/databin` to your `PATH`.  This will ensure that the script uses
-the instrumented `gcc` that records data.
+NOTE: For the following commands to work, you will want to have
+generated some data for them to use.  For instance, to get the
+"TurnstileSystem" data generated, you can run `make` on the `Makefile`
+in `RACK-Ontology/models/TurnstileSystem/src` while prepending
+`RACK-Ontology/databin` to your `PATH`.  This will ensure that the
+script uses the instrumented `gcc` that records data.
 
 There are a number of command-line utilities that can be used with the
-Prolog modules in this directory.
+Prolog modules in this directory:
 
  * `analyze` Runs an analysis of the ontology model and any associated
    instantiated data.  Command-line options can be used to specify the
@@ -54,6 +54,20 @@ Prolog modules in this directory.
    $ ingest_data http://TurnstileSystem/CounterApplication \
        models/TurnstileSystem/src
    ```
+
+   The above would ingest all build/test datafiles generated during
+   the build process in the `models/TurnstileSystem/src` directory.
+   The results would be loaded into the RACK database being served at
+   `http://localhost:3030` as instance data in the
+   `http://TurnstileSystem/CounterApplication` namespace.
+
+The typical usage is to:
+
+ 1. perform a build with the `databin` directory
+    in the `PATH` so that the wrappers in that directory can capture the
+    build information into datafiles in that directory, then
+ 2. `ingest_data` to load that data as instances in the RACK database, then
+ 3. `analyze` or `check` that data.
 
 # Prolog API Usage
 
@@ -114,3 +128,40 @@ upload_model_to_rack().
 As for loading, the `upload_model_to_url/1` expects to find a Fuseki instance at
 that location, while `upload_model_to_rack/0` expects the instance to live at
 `localhost:3030/RACK`.
+
+# Design Notes
+
+## Node identifiers
+
+  `PROV-S#ACTIVITY` operations are typically annotated by a date + PID
+  (process ID) nonce value; repeated runs of the same activity will
+  have a different nonce.
+
+  `SOFTWARE#FILE` instances are typically annotated by a SHA1 hash of the file
+  itself, for stable references that change only when the file itself
+  changes (independent of filename).
+
+  Build tools that invoke other build tools should have a way to
+  correlate these invocations.  For the databin `make` wrapper, the
+  wrapper sets the `MAKE_DATABIN` which other databin wrappers can use
+  to associate themselves with.  The `MAKE_DATABIN` wrapper is a
+  colon-separated list to handle recursive `make` invocations.  Other
+  build tools can use a similar technique.
+
+## Performance
+
+The following data is collected for processing a moderately large code
+base (turnstile + ffmpeg) and a very large codebase.
+
+ | Codebase         | Tool    | Runtime | Notes                                              |
+ |------------------|---------|---------|----------------------------------------------------|
+ | moderately large | ingest  | 9m30s   | Saved 38.880 triples about 6,649 subjects          |
+ |                  | -       |         |                                                    |
+ |                  | analyze | 12.2s   | 1,878 http://arcos.rack/SOFTWARE#COMPILE instances |
+ |                  |         |         | 4.756 http://arcos.rack/SOFTWARE#FILE instances    |
+ |                  |         |         | 9     http://arcos.rack/PROV-S#ACTIVITY instances  |
+ |------------------|---------|---------|----------------------------------------------------|
+ | huge             | ingest  | 14m7s   | Saved 455,231 triples about 89,945 subjects        |
+ |                  | -       |         |                                                    |
+ |                  | analyze | 15m36s  | 1,880 http://arcos.rack/SOFTWARE#COMPILE instances |
+ |                  |         |         | 88,049 http://arcos.rack/SOFTWARE#FILE instances   |

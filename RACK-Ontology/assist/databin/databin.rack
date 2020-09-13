@@ -14,7 +14,8 @@ databin_name(MyName) :-
                  build_outputs/2,
                  build_from/2,
                  build_start/2,
-                 build_finished/3.
+                 build_finished/3,
+                 file_sha1/3.
 
 %% Recognizers for matching tool output data
 
@@ -39,13 +40,13 @@ data_instance('SOFTWARE#FILE', load_data, Instance,
               [ uid(Instance), sw_file_data(Nonce, Dir, File) ]) :-
     tar_access(Nonce, File, create),
     build_from(Nonce, Dir),
-    append_fld(Nonce, File, Instance).
+    file_instance(Nonce, Dir, File, Instance).
 
 data_instance('SOFTWARE#FILE', load_data, Instance,
               [ uid(Instance), sw_file_data(Nonce, Dir, File) ]) :-
     tar_access(Nonce, File, open),
     build_from(Nonce, Dir),
-    append_fld(Nonce, File, Instance).
+    file_instance(Nonce, Dir, File, Instance).
 
 data_get('SOFTWARE#FILE', 'SOFTWARE#fileFormat',
          sw_file_data(Nonce, _, File), 'TarFile') :-
@@ -61,7 +62,8 @@ data_get('SOFTWARE#PACKAGE', 'SOFTWARE#packagedBy', package_tar(N), ToolPath) :-
 
 data_get('SOFTWARE#PACKAGE', 'SOFTWARE#packageInput', package_tar(Nonce), V) :-
     tar_access(Nonce, File, open),
-    append_fld(Nonce, File, V).
+    build_from(Nonce, Dir),
+    file_instance(Nonce, Dir, File, V).
 
 data_get(_, 'PROV-S#startedAtTime', package_tar(N), T) :- tar_start(N, T, _).
 data_get(_, 'PROV-S#endedAtTime', package_tar(N), T) :- tar_finished(N, T, _).
@@ -84,26 +86,25 @@ data_get('SOFTWARE#BUILD', 'SOFTWARE#step',
 
 %% -- files ------------------------------
 
+file_instance(Nonce, _, Input, InstanceRef) :-
+    % The above failed so file was not an output of a previous build.
+    % It was probably created by a user, so it's a new, distinct file.
+    (file_sha1(Input, SHA1, Nonce), !, append_fld(SHA1, Input, InstanceRef);
+     atom_string(IA, Input), file_sha1(IA, SHA1, Nonce), !, append_fld(SHA1, IA, InstanceRef);
+     append_fld(Nonce, Input, InstanceRef)).
+
 data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
     build_inputs(Nonce, Inputs),
     build_from(Nonce, Dir),
     member(Input, Inputs),
-    input_or_prev_output(Nonce, Dir, Input, Instance),
+    file_instance(Nonce, Dir, Input, Instance),
     InstanceData = [uid(Instance), sw_file_data(Nonce, Dir, Input)].
-input_or_prev_output(_Nonce, Dir, Input, InstanceRef) :-
-    % This file is an input, but was it an output of a previous operation?
-    output_of(_AnyTool, Dir, Input, BuildNonce), !,
-    append_fld(BuildNonce, Input, InstanceRef).
-input_or_prev_output(Nonce, _, Input, InstanceRef) :-
-    % The above failed so file was not an output of a previous build.
-    % It was probably created by a user, so it's a new, distinct file.
-    append_fld(Nonce, Input, InstanceRef).
 
 data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
     build_outputs(Nonce, Outputs),
     build_from(Nonce, Dir),
     member(Output, Outputs),
-    append_fld(Nonce, Output, Instance),
+    file_instance(Nonce, Dir, Output, Instance),
     InstanceData = [uid(Instance), sw_file_data(Nonce, Dir, Output)].
 
 data_instance('SOFTWARE#FILE', load_data, ToolPath,

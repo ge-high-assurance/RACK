@@ -13,7 +13,8 @@ on_finish() {
 }
 trap on_finish EXIT ERR
 
-echo ":- multifile tar_start/3, tar_finished/3, build_from/2, tar_access/3." > ${tmpfile}.out
+echo ":- multifile tar_start/3, tar_finished/3, tar_access/3,
+                   build_from/2, file_sha1/3." > ${tmpfile}.out
 echo "tar_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), ${realtool@Q})." >> ${tmpfile}.out
 
 strace -f -e trace=file -e status=successful -o $tmpfile $realtool "${@}"
@@ -38,8 +39,19 @@ BEGIN { show=0;
     }
     show=1;
     print "tar_access('${nonce}', ", p[2], "create)."
+    "sha1sum " name | getline shafilesum
+    split(shafilesum, sha)
+    print "file_sha1('" sha[2] "', '" sha[1] "', '${nonce}')."
   }
-/openat/ { if (show==1) print "tar_access('${nonce}', ", \$3, "open)." }
+/openat/ { if (show==1) {
+             print "tar_access('${nonce}', ", \$3, "open)."
+             name = \$3
+             gsub(",$", "", name)
+             "sha1sum " name | getline shafilesum
+             split(shafilesum, sha)
+             print "file_sha1('" sha[2] "', '" sha[1] "', '${nonce}')."
+           }
+         }
 EOF
         )  $tmpfile >> $tmpfile.out
 

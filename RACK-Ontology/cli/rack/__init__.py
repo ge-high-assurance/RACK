@@ -12,6 +12,7 @@ import json
 import logging
 from os import environ
 from pathlib import Path
+import re
 import sys
 from typing import Any, Callable, Dict, List, Optional, NewType, TypeVar, cast
 from types import SimpleNamespace
@@ -304,24 +305,30 @@ def delete_nodegroup(nodegroup: str) -> None:
         semtk3.delete_nodegroup_from_store(nodegroup)
     delete()
 
-def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, yes: bool, base_url: Url) -> None:
+def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, yes: bool, use_regexp: bool, base_url: Url) -> None:
     if not nodegroups:
         print('No nodegroups specified for deletion: doing nothing.')
         return
 
     sparql_connection(base_url, None, None)
     allIDs = semtk3.get_nodegroup_store_data().get_column('ID')
-    nonexistent = [n for n in nodegroups if n not in allIDs]
-    to_delete = [n for n in nodegroups if n in allIDs]
+
+    if use_regexp:
+        regexps = [re.compile(regex_str) for regex_str in nodegroups]
+        nonexistent = [r.pattern for r in regexps if not any(r.search(i) for i in allIDs)]
+        to_delete = [i for i in allIDs if any(r.search(i) for r in regexps)]
+    else:
+        nonexistent = [n for n in nodegroups if n not in allIDs]
+        to_delete = [n for n in nodegroups if n in allIDs]
 
     if nonexistent:
-        print('The following nodegroups do not exist: {}'.format(' '.join(nonexistent)))
+        print('The following nodegroups do not exist: {}'.format(', '.join(str_highlight(s) for s in nonexistent)))
         if not ignore_nonexistent:
             print(str_bad('Aborting. Remove the nonexistent IDs or use --ignore-nonexistent.'))
             sys.exit(1)
 
     if not yes:
-        print('The following nodegroups would be removed: {}'.format(' '.join(str_highlight(s) for s in to_delete)))
+        print('The following nodegroups would be removed: {}'.format(', '.join(str_highlight(s) for s in to_delete)))
 
     def on_confirmed() -> None:
         for nodegroup in to_delete:
@@ -362,7 +369,7 @@ def dispatch_nodegroups_list(args: SimpleNamespace) -> None:
     list_nodegroups_driver(args.base_url)
 
 def dispatch_nodegroups_delete(args: SimpleNamespace) -> None:
-    delete_nodegroups_driver(args.nodegroups, args.ignore_nonexistent, args.yes, args.base_url)
+    delete_nodegroups_driver(args.nodegroups, args.ignore_nonexistent, args.yes, args.regexp, args.base_url)
 
 def dispatch_nodegroups_deleteall(args: SimpleNamespace) -> None:
     delete_all_nodegroups_driver(args.yes, args.base_url)
@@ -421,6 +428,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     nodegroups_delete_parser.add_argument('nodegroups', type=str, nargs='+', help='IDs of nodegroups to be removed')
     nodegroups_delete_parser.add_argument('--ignore-nonexistent', action='store_true', help='Ignore nonexistent IDs')
     nodegroups_delete_parser.add_argument('--yes', action='store_true', help='Automatically confirm deletion')
+    nodegroups_delete_parser.add_argument('--regexp', action='store_true', help='Match nodegroup ID with regular expression')
     nodegroups_delete_parser.set_defaults(func=dispatch_nodegroups_delete)
 
     nodegroups_deleteall_parser.add_argument('--yes', action='store_true', help='Automatically confirm deletion')

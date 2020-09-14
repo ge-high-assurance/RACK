@@ -12,3 +12,4 @@ user:file_search_path(ontology, P) :- paths_dir(D), directory_file_path(D, 'onto
 user:file_search_path(queries, P) :- paths_dir(D), directory_file_path(D, 'queries', P).
 user:file_search_path(rack, P) :- paths_dir(D), directory_file_path(D, 'rack', P).
 user:file_search_path(utils, P) :- paths_dir(D), directory_file_path(D, 'utils', P).
+user:file_search_path(visualization, P) :- paths_dir(D), directory_file_path(D, 'visualization', P).

@@ -18,3 +18,7 @@
 
 :- load_files(utils(transitive_closure)).
 :- load_files(utils(zip_by_key)).
+
+:- load_files(visualization(my_dot_arc)).
+:- load_files(visualization(my_dot_node)).
+:- load_files(visualization(view_neighbors)).

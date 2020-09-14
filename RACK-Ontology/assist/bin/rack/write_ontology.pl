@@ -23,7 +23,7 @@ rack_qualified(Namespace, Name, Qualified) :-
 %! rack_class(-Qualified) is nondet.
 %
 %    Enumerates RACK classes from the current in-memory model.  Output is a
-%    qualified name, stripped of the 'http://arcox.rack' URI prefix.
+%    qualified name, stripped of the 'http://arcos.rack' URI prefix.
 %
 %      rack_class('SOFTWARE#FILE') :- true.   % assuming it is in the model
 rack_class(Qualified) :-

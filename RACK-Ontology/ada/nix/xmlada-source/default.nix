@@ -1,9 +1,13 @@
 { nixpkgs, sources }:
 nixpkgs.stdenv.mkDerivation {
 
-  buildPhase = "echo SKIPPED";
+  buildPhase = ''
+    # do nothing
+  '';
 
-  configurePhase = "echo SKIPPED";
+  configurePhase = ''
+    # do nothing
+  '';
 
   installPhase = ''
     mkdir -p $out

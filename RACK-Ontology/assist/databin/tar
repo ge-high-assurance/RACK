@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+. $(dirname $0)/rackfuncs.sh
+
+tmpfile=".$$.strace"
+nonce="n$(date +%s)-$$"
+realtool=$(find_in_path_remainder $(basename $0))
+
+update_make_steps
+
+on_finish() {
+    rm -f ${tmpfile}*
+}
+trap on_finish EXIT ERR
+
+echo ":- multifile tar_start/3, tar_finished/3, tar_access/3,
+                   build_from/2, file_sha1/3." > ${tmpfile}.out
+echo "tar_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), ${realtool@Q})." >> ${tmpfile}.out
+
+strace -f -e trace=file -e status=successful -o $tmpfile $realtool "${@}"
+
+rval=$?
+echo "tar_finished(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> ${tmpfile}.out
+
+awk -f <(
+    cat <<EOF
+BEGIN { show=0;
+        print "build_from(${nonce@Q}, '$(top_rel_curdir)').";
+      }
+/creat/ {
+    split(\$2, p, "(");
+    if (show==0) {
+      # Unique name for output file, based on first tar output file
+      name = p[2]
+      gsub("\"", "", name)
+      gsub(",$", "", name)
+      print name >"${tmpfile}.name"
+      # Initialization command
+    }
+    show=1;
+    print "tar_access('${nonce}', ", p[2], "create)."
+    "sha1sum " name | getline shafilesum
+    split(shafilesum, sha)
+    print "file_sha1('" sha[2] "', '" sha[1] "', '${nonce}')."
+  }
+/openat/ { if (show==1) {
+             print "tar_access('${nonce}', ", \$3, "open)."
+             name = \$3
+             gsub(",$", "", name)
+             "sha1sum " name | getline shafilesum
+             split(shafilesum, sha)
+             print "file_sha1('" sha[2] "', '" sha[1] "', '${nonce}')."
+           }
+         }
+EOF
+        )  $tmpfile >> $tmpfile.out
+
+if [ -r $tmpfile.out -a -r $tmpfile.name ] ; then
+    mv $tmpfile.out .$(cat $tmpfile.name).rack
+    rm $tmpfile.name
+fi

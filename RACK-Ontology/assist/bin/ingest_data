@@ -5,6 +5,7 @@ loads=(
     -f $(dirname "$0")/rack/model.pl
 )
 
+# shellcheck disable=SC2046
 case $# in
     2) target="upload_model_to_rack" ;;
     3) if [ "$3" == "analysis" ]

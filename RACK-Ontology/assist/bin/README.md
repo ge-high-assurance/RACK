@@ -155,10 +155,10 @@ base (turnstile + ffmpeg) and a very large codebase.
 
  | Codebase         | Tool    | Runtime | Notes                                              |
  |------------------|---------|---------|----------------------------------------------------|
- | moderately large | ingest  | 9m30s   | Saved 38.880 triples about 6,649 subjects          |
+ | moderately large | ingest  | 9m30s   | Saved 38,880 triples about 6,649 subjects          |
  |                  | -       |         |                                                    |
  |                  | analyze | 12.2s   | 1,878 http://arcos.rack/SOFTWARE#COMPILE instances |
- |                  |         |         | 4.756 http://arcos.rack/SOFTWARE#FILE instances    |
+ |                  |         |         | 4,756 http://arcos.rack/SOFTWARE#FILE instances    |
  |                  |         |         | 9     http://arcos.rack/PROV-S#ACTIVITY instances  |
  |------------------|---------|---------|----------------------------------------------------|
  | huge             | ingest  | 14m7s   | Saved 455,231 triples about 89,945 subjects        |

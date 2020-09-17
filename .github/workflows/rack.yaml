@@ -10,6 +10,8 @@ jobs:
 
       - name: Lint shell scripts with ShellCheck
         uses: ludeeus/action-shellcheck@master
+        env:
+          SHELLCHECK_OPTS: -e SC1008
 
       - name: Set up Python
         uses: actions/setup-python@v2

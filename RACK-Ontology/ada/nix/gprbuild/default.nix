@@ -1,5 +1,5 @@
 { gnat, gprbuild-bootstrap, nixpkgs, sources, which, xmlada-bootstrap
-, xmlada-source
+, xmlada-source-configured
 }:
 nixpkgs.stdenv.mkDerivation {
 
@@ -14,7 +14,7 @@ nixpkgs.stdenv.mkDerivation {
   ];
 
   configurePhase = ''
-    export GPR_PROJECT_PATH="${xmlada-source}"
+    export GPR_PROJECT_PATH="${xmlada-source-configured}"
   '';
 
   buildPhase = ''

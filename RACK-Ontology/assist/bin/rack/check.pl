@@ -123,9 +123,12 @@ check_invalid_value(Property, I, T) :-
 actual_val((V^^VT),VT,(V^^VT)).  % normal
 actual_val(V,VT,Val) :-
     rdf_equal(V, VS^^(xsd:string)),
-    % SADL doesn't specify the type for the maxInclusive/minInclusive
-    % values, so they are interpreted as strings.  Attempt to convert
-    % them to the target type here.
+    % OWL1 and older SADL doesn't specify the type for the
+    % maxInclusive/minInclusive values, so they are interpreted as
+    % strings.  Attempt to convert them to the target type here.  In
+    % general, the OWL specification specifies using a "lexical value"
+    % which is then converted at use sites to the "actual value" of
+    % the desired type.
     \+ rdf_equal(xsd:string, VT),
     atom_string(VA,VS),
     % Note: converted based on representation, not VT because there is

@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2236,SC2166,SC2162,SC2184,SC1090
+
 
 # TODO: use -M for internal assist of include files
 # TODO: get -L paths and -l libraries
 
-. $(dirname $0)/rackfuncs.sh
+# shellcheck disable=SC2046
+. $(dirname "$0")/rackfuncs.sh
 
 inf=()
 outf=''
@@ -20,15 +23,15 @@ for ARG ; do
         -o) outnxt=1 ;;
         -MF) inclnxt=1 ;;
         -MT) ignnxt=1 ;;
-        *) if (( $outnxt )) ; then
+        *) if (( outnxt )) ; then
                outf="${ARG}"
                outnxt=0
-           elif (( $inclnxt )) ; then
+           elif (( inclnxt )) ; then
                inclf="${ARG}"
                inclnxt=0
-           elif (( $ignnxt )) ; then
+           elif (( ignnxt )) ; then
                ignnxt=0
-           elif [ -r ${ARG} ] ; then
+           elif [ -r "${ARG}" ] ; then
                inf+=("${ARG}")
            else
                opts+=("${ARG}")
@@ -37,22 +40,26 @@ for ARG ; do
     esac
 done
 
-tool=$(basename $0)
-realtool=$(find_in_path_remainder $tool)
+tool=$(basename "$0")
+realtool=$(find_in_path_remainder "$tool")
 
+# shellcheck disable=SC2128
 if [ -z "${inf}" ] ; then
     # Sometimes things like "gcc --version" is run by configure or
     # other tools to do other things than actually compile, so just
     # execute these without recording rack information.
-    $realtool ${*}
+    "$realtool" "${@}"
     exit $?
 fi
 
-outf="${outf:-$(basename $inf .c).o}"
+# shellcheck disable=SC2128
+outf="${outf:-$(basename "$inf" .c).o}"
 if [ -z "${inclf}" ] ; then
-    inclf="$(dirname ${inf})/.$(basename ${inf} .c).d"
+    # shellcheck disable=SC2128
+    inclf="$(dirname "${inf}")/.$(basename "${inf}" .c).d"
     extra+=("-MMD" "-MF" "$inclf")
 fi
+# shellcheck disable=2086
 rackf="$(dirname ${outf})/.$(basename ${outf}).rack"
 nonce="n$(date +%s)-$$"
 
@@ -60,36 +67,38 @@ nonce="n$(date +%s)-$$"
     export IFS=","
     echo ":- multifile build_with/5, build_from/2, build_inputs/2, build_outputs/2,
                        build_start/2, build_finished/3, file_sha1/3."
+    # shellcheck disable=SC2086
     echo "build_with(${nonce@Q}, compile," ${tool@Q}, ${realtool@Q}, [ "${opts[*]@Q}" ] ")."
+    # shellcheck disable=SC2086,SC2027,SC2046
     echo "build_from(${nonce@Q}, '"$(top_rel_curdir)"')."
     echo "build_inputs(${nonce@Q}, [ ${inf[*]@Q} ])."
     echo "build_outputs(${nonce@Q}, [ ${outf@Q} ])."
     echo "build_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'))."
-) > ${rackf}
+) > "${rackf}"
 
 update_make_steps
 
 when_done() {
     rval=$?
-    if [ ! -z $inclf -a -r $inclf ] ; then
-        read -a fl < <(cat $inclf)
+    if [ ! -z "$inclf" -a -r "$inclf" ] ; then
+        read -a fl < <(cat "$inclf")
         if [ ${#fl[*]} -gt 1 ] ; then
             unset fl[0]  # remove output file
             IFS=","
-            echo "build_inputs(${nonce@Q}, [ ${fl[*]@Q} ])." >> ${rackf}
+            echo "build_inputs(${nonce@Q}, [ ${fl[*]@Q} ])." >> "${rackf}"
             IFS=" "
-            for F in ${fl[*]}; do
-                read sum f < <(sha1sum $F)
-                echo "file_sha1(${f@Q}, ${sum@Q}, ${nonce@Q})." >> ${rackf}
+            for F in "${fl[@]}"; do
+                read sum f < <(sha1sum "$F")
+                echo "file_sha1(${f@Q}, ${sum@Q}, ${nonce@Q})." >> "${rackf}"
             done
         fi
     fi
-    for F in ${outf} ${inf[*]} ; do
-        read sum f < <(sha1sum $F)
-        echo "file_sha1(${f@Q}, ${sum@Q}, ${nonce@Q})." >> ${rackf}
+    for F in ${outf} "${inf[@]}" ; do
+        read sum f < <(sha1sum "$F")
+        echo "file_sha1(${f@Q}, ${sum@Q}, ${nonce@Q})." >> "${rackf}"
     done
-    echo "build_finished(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> ${rackf}
+    echo "build_finished(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> "${rackf}"
 }
 trap when_done EXIT
 
-$realtool ${*} ${extra[*]}
+"$realtool" "${@}" "${extra[@]}"

@@ -2,12 +2,12 @@
 , nixpkgs ? import sources.nixpkgs {}
 }:
 let
-  gprbuild-bootstrap = import ./gprbuild-bootstrap.nix { inherit nixpkgs sources; };
+  gprbuild = import ./gprbuild.nix { inherit nixpkgs sources; };
   xmlada-bootstrap = import ./xmlada-bootstrap.nix { inherit nixpkgs sources; };
 in
 nixpkgs.callPackage ./gnatcore-coll {
   inherit
-    gprbuild-bootstrap
+    gprbuild
     nixpkgs
     sources
     xmlada-bootstrap;

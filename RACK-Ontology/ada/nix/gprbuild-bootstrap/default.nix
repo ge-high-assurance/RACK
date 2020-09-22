@@ -10,7 +10,6 @@ nixpkgs.stdenv.mkDerivation {
   '';
 
   buildPhase = ''
-    mkdir $out
     ./bootstrap.sh --with-xmlada=${xmlada-source} --with-kb=${gprconfig_kb-source} --prefix=$out
   '';
 
@@ -20,4 +19,5 @@ nixpkgs.stdenv.mkDerivation {
 
   name = "gprbuild-bootstrap";
   src = fetchTarball { inherit (sources.gprbuild) url sha256; };
+
 }

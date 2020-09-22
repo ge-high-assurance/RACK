@@ -1,4 +1,4 @@
-{ gprbuild-bootstrap, nixpkgs, sources }:
+{ glibc, gprbuild-bootstrap, nixpkgs, sources }:
 nixpkgs.stdenv.mkDerivation {
 
   buildInputs = [
@@ -6,20 +6,19 @@ nixpkgs.stdenv.mkDerivation {
   ];
 
   configurePhase = ''
+    export LIBRARY_PATH="${glibc}/lib"
     ./configure --prefix=$out
   '';
 
-  # NOTE (val) Getting linker errors when trying to build the dynamic one, so
-  # trying to see if static is enough
   buildPhase = ''
-    make static
+    make
   '';
 
   installPhase = ''
-    mkdir -p $out
-    make install-static
+    make install
   '';
 
-  name = "xmlada";
+  name = "xmlada-bootstrap";
   src = fetchTarball { inherit (sources.xmlada) url sha256; };
+
 }

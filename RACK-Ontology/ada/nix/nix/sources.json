@@ -1,4 +1,16 @@
 {
+    "gnatcoll-core": {
+        "branch": "master",
+        "description": "GNAT Components Collection – Core packages",
+        "homepage": "",
+        "owner": "AdaCore",
+        "repo": "gnatcoll-core",
+        "rev": "ab46d43daf614b5123a0b789eb209eb4e0847918",
+        "sha256": "0nraqirgxxfb53mvkpyipq9qv3jh1ssbdzl8q885xh192h7vw5i4",
+        "type": "tarball",
+        "url": "https://github.com/AdaCore/gnatcoll-core/archive/ab46d43daf614b5123a0b789eb209eb4e0847918.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "gprbuild": {
         "branch": "master",
         "description": "GPRbuild is an advanced build system designed to help automate the construction of multi-language systems.",

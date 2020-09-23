@@ -1,4 +1,4 @@
-* How to build libadalang
+# How to build libadalang
 
 - Enter the provided shell via `nix-shell`.  It will build lots of Ada libraries
   and the gprbuild tool suite.

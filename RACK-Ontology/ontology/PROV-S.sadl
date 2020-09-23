@@ -16,7 +16,7 @@ ENTITY (note "An entity is a physical, digital, conceptual, or other kind of thi
 
 COLLECTION (note "A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.")
     is a type of ENTITY.
-	hadMember (note "A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.") describes COLLECTION with values of type ENTITY.
+	content (note "A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.") describes COLLECTION with values of type ENTITY.
 
 AGENT (note "An agent is something that bears some form of responsibility for an activity taking place, for the existence of an entity, or for another agent's activity.")
     is a type of THING.

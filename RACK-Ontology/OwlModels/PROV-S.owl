@@ -75,11 +75,6 @@
     <rdfs:range rdf:resource="#ACTIVITY"/>
     <rdfs:domain rdf:resource="#ENTITY"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="hadMember">
-    <rdfs:comment xml:lang="en">A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.</rdfs:comment>
-    <rdfs:range rdf:resource="#ENTITY"/>
-    <rdfs:domain rdf:resource="#COLLECTION"/>
-  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#field">
     <rdfs:domain rdf:resource="#ATTRIBUTE"/>
     <rdfs:comment xml:lang="en">extensible field</rdfs:comment>
@@ -114,6 +109,11 @@
     <rdfs:comment xml:lang="en">An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity.</rdfs:comment>
     <rdfs:range rdf:resource="#AGENT"/>
     <rdfs:domain rdf:resource="#ACTIVITY"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="content">
+    <rdfs:comment xml:lang="en">A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.</rdfs:comment>
+    <rdfs:range rdf:resource="#ENTITY"/>
+    <rdfs:domain rdf:resource="#COLLECTION"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="actedOnBehalfOf">
     <rdfs:comment xml:lang="en">Delegation is the assignment of authority and responsibility to an agent (by itself or by another agent) to carry out a specific activity as a delegate or representative, while the agent it acts on behalf of retains some responsibility for the outcome of the delegated work.</rdfs:comment>

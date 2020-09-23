@@ -4,7 +4,7 @@ import "http://arcos.rack/PROV-S".
 
 
 
-DESCRIPTION (note "A DESCRIPTION represents a planned or actual concept, function, design or object.") is a type of ENTITY.
+DESCRIPTION (note "A DESCRIPTION represents a planned or actual concept, function, design or object.") is a type of COLLECTION.
     dateOfIssue (note "Release date for the document.") describes DESCRIPTION with values of type date.
     
     status (note "Identifies the maturity of the document, In_Development, Released, Withdrawn.") describes DESCRIPTION with values of type DOC_STATUS.
@@ -15,13 +15,7 @@ DESCRIPTION (note "A DESCRIPTION represents a planned or actual concept, functio
     references (note "Source Materials used in the development of a document.") describes DESCRIPTION with values of type ENTITY.
     references is a type of wasDerivedFrom.
 
-    content (note "Constituent ENTITYs that are contained in a document.") describes DESCRIPTION with values of type ENTITY.
-    content is a type of hadMember.
-    
-    
-    
-
-PLAN (note "A PLAN presents a systematic course of action for achieving a declared purpose, including when, how, and by whom specified activities are to be performed. ")is a type of ENTITY.
+PLAN (note "A PLAN presents a systematic course of action for achieving a declared purpose, including when, how, and by whom specified activities are to be performed. ")is a type of COLLECTION.
     dateOfIssue describes PLAN with values of type date.
     
     status describes PLAN with values of type DOC_STATUS.
@@ -35,10 +29,7 @@ PLAN (note "A PLAN presents a systematic course of action for achieving a declar
     references describes PLAN with values of type ENTITY.
     references is a type of wasDerivedFrom.
 
-    content describes PLAN with values of type ENTITY.
-    content is a type of hadMember.
-
-PROCEDURE (note "A PROCEDURE presents an ordered series of steps to perform a process, activity, or task") is a type of ENTITY.
+PROCEDURE (note "A PROCEDURE presents an ordered series of steps to perform a process, activity, or task") is a type of COLLECTION.
     dateOfIssue describes PROCEDURE with values of type date.
     
     status describes PROCEDURE with values of type DOC_STATUS.
@@ -49,10 +40,7 @@ PROCEDURE (note "A PROCEDURE presents an ordered series of steps to perform a pr
     approvalAuthority describes PROCEDURE with values of type AGENT.
     approvalAuthority is a type of wasGeneratedBy.
 
-    content describes PROCEDURE with values of type ENTITY.
-    content is a type of hadMember.
-
-REPORT (note "A REPORT describes the results of activities such as investigations, observations, assessments, or test.") is a type of ENTITY.
+REPORT (note "A REPORT describes the results of activities such as investigations, observations, assessments, or test.") is a type of COLLECTION.
     dateOfIssue describes REPORT with values of type date.
     
     status describes REPORT with values of type DOC_STATUS.
@@ -60,10 +48,7 @@ REPORT (note "A REPORT describes the results of activities such as investigation
     issuingOrganization describes REPORT with values of type AGENT.
     issuingOrganization is a type of wasGeneratedBy.
 
-    content describes REPORT with values of type ENTITY.
-    content is a type of hadMember.
-
-REQUEST (note "A REQUEST initiates a defined course of action or changed to fulfill a need.") is a type of ENTITY.
+REQUEST (note "A REQUEST initiates a defined course of action or changed to fulfill a need.") is a type of COLLECTION.
     dateOfInitiation describes REQUEST with values of type date.
     
     status describes REQUEST with values of type DOC_STATUS.
@@ -71,10 +56,7 @@ REQUEST (note "A REQUEST initiates a defined course of action or changed to fulf
     originatorOfRequest describes REQUEST with values of type AGENT.
     originatorOfRequest is a type of wasGeneratedBy.
 
-    content describes REQUEST with values of type ENTITY.
-    content is a type of hadMember.
-
-SPECIFICATION (note "A SPECIFICATION identifies, in a complete, precise, and verifiable manner, the requirements, design, behavior, or other expected characteristics of a system, service or process.") is a type of ENTITY.
+SPECIFICATION (note "A SPECIFICATION identifies, in a complete, precise, and verifiable manner, the requirements, design, behavior, or other expected characteristics of a system, service or process.") is a type of COLLECTION.
     dateOfIssue describes SPECIFICATION with values of type date.
     
     status describes SPECIFICATION with values of type DOC_STATUS.
@@ -88,14 +70,8 @@ SPECIFICATION (note "A SPECIFICATION identifies, in a complete, precise, and ver
     references describes SPECIFICATION with values of type ENTITY.
     references is a type of wasDerivedFrom.
     
-    content describes SPECIFICATION with values of type ENTITY.
-    content is a type of hadMember.
-    
-SECTION (note "A SECTION is generic grouping of ENTITYs with a document") is a type of ENTITY.
+SECTION (note "A SECTION is generic grouping of ENTITYs with a document") is a type of COLLECTION.
 
-	title describes SECTION with values of type string.
-
-    content describes SECTION with values of type ENTITY.
-    content is a type of hadMember.    
+	title describes SECTION with values of type string.  
 
 DOC_STATUS is a class, must be one of {In_Development, Released, Withdrawn}.

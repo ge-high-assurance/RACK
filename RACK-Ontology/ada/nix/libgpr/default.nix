@@ -16,23 +16,22 @@ nixpkgs.stdenv.mkDerivation {
   configurePhase = ''
     export GPR_PROJECT_PATH="${xmlada-bootstrap}/share/gpr"
     export LIBRARY_PATH="${glibc}/lib"
- '';
+    make prefix=$out BUILD=production setup
+    '';
 
   buildPhase = ''
-    make prefix=$out BUILD=production setup
-    make all
+    make libgpr.build
   '';
 
   # NOTE (val) for some reason `make install` does not copy the gprconfig
   # knowledge database in the output, which causes problems when running
   # gprbuild.  So doing it manually here.
   installPhase = ''
-    make install
-    mkdir -p $out/share/gprconfig
-    cp ${gprconfig_kb-source}/db/* $out/share/gprconfig/
+    mkdir -p $out
+    make libgpr.install
   '';
 
-  name = "gprbuild";
+  name = "libgpr";
   src = fetchTarball { inherit (sources.gprbuild) url sha256; };
 
 }

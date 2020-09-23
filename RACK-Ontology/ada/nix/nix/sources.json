@@ -1,4 +1,16 @@
 {
+    "gnatcoll-bindings": {
+        "branch": "master",
+        "description": "GNAT Components Collection – Bindings to C libraries",
+        "homepage": "",
+        "owner": "AdaCore",
+        "repo": "gnatcoll-bindings",
+        "rev": "c8425159d5c4c276dddab4a9c2e239738531b92d",
+        "sha256": "1c31jk7acwg20i0s8ji5cwsv5ndsrlk1vhm6xkpyf8lgd3s26zp2",
+        "type": "tarball",
+        "url": "https://github.com/AdaCore/gnatcoll-bindings/archive/c8425159d5c4c276dddab4a9c2e239738531b92d.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "gnatcoll-core": {
         "branch": "master",
         "description": "GNAT Components Collection – Core packages",
@@ -17,10 +29,10 @@
         "homepage": null,
         "owner": "AdaCore",
         "repo": "gprbuild",
-        "rev": "4c3d0e9c9e080a7d67fce031b19edbb8f582e76a",
-        "sha256": "1mf4v8iq987nzw16q5gw25q5gh3hy4ylirr73am2qrzxp8n46whg",
+        "rev": "7772f33055c3553bea2f454cde0f3bfc0646e85a",
+        "sha256": "1rq05x1wpg0r3vdzcqhb79j8lk06z0mdlw4qqs57hr2l4daf8hdg",
         "type": "tarball",
-        "url": "https://github.com/AdaCore/gprbuild/archive/4c3d0e9c9e080a7d67fce031b19edbb8f582e76a.tar.gz",
+        "url": "https://github.com/AdaCore/gprbuild/archive/7772f33055c3553bea2f454cde0f3bfc0646e85a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "gprconfig_kb": {
@@ -41,10 +53,10 @@
         "homepage": "https://www.adacore.com",
         "owner": "AdaCore",
         "repo": "libadalang",
-        "rev": "95ba688b5bed9037264484f72d4f481c46c2714b",
-        "sha256": "127bzhvdy1n8rl5q1wrkkm6qhvzbn41xzs6bjd8pw57f28ag9v6q",
+        "rev": "eb5b59c4864ce4e3dbddc6e808c6c1aaab3285e8",
+        "sha256": "0z8arpf724r56h9081jvy1hhycjjcnaxahxjcilj285pxh3cyk0b",
         "type": "tarball",
-        "url": "https://github.com/AdaCore/libadalang/archive/95ba688b5bed9037264484f72d4f481c46c2714b.tar.gz",
+        "url": "https://github.com/AdaCore/libadalang/archive/eb5b59c4864ce4e3dbddc6e808c6c1aaab3285e8.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {

@@ -1,8 +1,8 @@
-{ glibc, gprbuild-bootstrap, nixpkgs, sources }:
+{ glibc, gprbuild, nixpkgs, sources }:
 nixpkgs.stdenv.mkDerivation {
 
   buildInputs = [
-    gprbuild-bootstrap
+    gprbuild
   ];
 
   configurePhase = ''
@@ -18,7 +18,7 @@ nixpkgs.stdenv.mkDerivation {
     make install
   '';
 
-  name = "xmlada-bootstrap";
+  name = "xmlada";
   src = fetchTarball { inherit (sources.xmlada) url sha256; };
 
 }

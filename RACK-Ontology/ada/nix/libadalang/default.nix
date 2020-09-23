@@ -7,6 +7,6 @@ nixpkgs.stdenv.mkDerivation {
   ];
 
   name = "libadalang";
-  src = fetchTarball { inherit (sources.gprbuild) url sha256; };
+  src = fetchTarball { inherit (sources.libadalang) url sha256; };
 
 }

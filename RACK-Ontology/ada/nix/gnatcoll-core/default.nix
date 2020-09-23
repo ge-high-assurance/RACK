@@ -1,11 +1,11 @@
-{ glibc, gnat, gprbuild, nixpkgs, sources, which, xmlada-bootstrap
+{ glibc, gnat, gprbuild, libgpr, nixpkgs, sources, which, xmlada-bootstrap
 }:
 nixpkgs.stdenv.mkDerivation {
 
   buildInputs = [
     gprbuild
+    libgpr
     which
-    xmlada-bootstrap
   ];
 
   propagatedBuildInputs = [
@@ -13,7 +13,7 @@ nixpkgs.stdenv.mkDerivation {
   ];
 
   configurePhase = ''
-    export GPR_PROJECT_PATH="${xmlada-bootstrap}/share/gpr"
+    export GPR_PROJECT_PATH="${gprbuild}/share/gpr:${libgpr}/share/gpr:${xmlada-bootstrap}/share/gpr"
     export LIBRARY_PATH="${glibc}/lib"
   '';
 
@@ -23,6 +23,6 @@ nixpkgs.stdenv.mkDerivation {
   '';
 
   name = "gnatcoll-core";
-  src = fetchTarball { inherit (sources.gprbuild) url sha256; };
+  src = fetchTarball { inherit (sources.gnatcoll-core) url sha256; };
 
 }

@@ -10,18 +10,25 @@
 - Enter the `libadalang` directory, and create a Python virtual environment,
   source it, and install the Python requirements, by doing, say:
 
-```
-python -mvenv .env
-source ./.env/bin/activate
-pip install -r REQUIREMENTS.md pip
-```
+  ```
+  python -mvenv .env
+  source ./.env/bin/activate
+  pip install -r REQUIREMENTS.dev
+  ```
+
+- Additionally, pretty-printing Python code seems to require the Python library
+  black, which is not listed in REQUIREMENTS.dev, so install it manually:
+
+  ```
+  pip install black
+  ```
 
 - In the `libadalang` directory, with the virtual environment, you can generate
   the bindings using:
 
-```
-python ada/manage.py generate
-```
+  ```
+  python ada/manage.py generate
+  ```
 
 At the moment, you should get errors about pretty-printing, I'm not sure they
 matter yet and will try to solve them soon.
@@ -29,6 +36,12 @@ matter yet and will try to solve them soon.
 - In the `libadalang` directory, with the virtual environment, you can build the
   library using:
 
-```
-python ada/manage.py --library-types=static,static-pic,relocatable build --build-mode prod
-```
+  ```
+  python ada/manage.py --library-types=static,static-pic,relocatable build --build-mode prod
+  ```
+
+- You can install it via:
+
+  ```
+  python ada/manage.py --library-types=static,static-pic,relocatable install --build-mode prod out
+  ```

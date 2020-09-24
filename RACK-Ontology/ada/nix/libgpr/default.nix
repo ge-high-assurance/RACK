@@ -17,7 +17,7 @@ nixpkgs.stdenv.mkDerivation {
     export GPR_PROJECT_PATH="${xmlada-bootstrap}/share/gpr"
     export LIBRARY_PATH="${glibc}/lib"
     make prefix=$out BUILD=production setup
-    '';
+  '';
 
   buildPhase = ''
     make libgpr.build

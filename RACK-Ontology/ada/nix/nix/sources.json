@@ -1,4 +1,28 @@
 {
+    "ASIS": {
+        "branch": "fsf",
+        "description": "Supports building the Ada Semantic Interface Specification library and tools for FSF GCC variants. Tracks AdaCore CE releases.",
+        "homepage": "",
+        "owner": "simonjwright",
+        "repo": "ASIS",
+        "rev": "75eabc75aa5f7f1559524153f209601574f32b5c",
+        "sha256": "1hpqg568y362wpgmf2lzkr5ynvhdgjbahwnf3n7c14ifbwy2dafv",
+        "type": "tarball",
+        "url": "https://github.com/simonjwright/ASIS/archive/75eabc75aa5f7f1559524153f209601574f32b5c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "gnat_util": {
+        "branch": "master",
+        "description": "Provides access to GNAT compiler internals for AdaCore utilities",
+        "homepage": null,
+        "owner": "simonjwright",
+        "repo": "gnat_util",
+        "rev": "e71e5414ea8e0fd128f4f16b68c46e6918e9e5e6",
+        "sha256": "1c835mvyswywj0k481bdfgznqbv66s60ygx962yswmmi74scldy3",
+        "type": "tarball",
+        "url": "https://github.com/simonjwright/gnat_util/archive/e71e5414ea8e0fd128f4f16b68c46e6918e9e5e6.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "gnatcoll-bindings": {
         "branch": "master",
         "description": "GNAT Components Collection – Bindings to C libraries",
@@ -45,6 +69,18 @@
         "sha256": "1r2a4hxihxikzv1gijf2i432lz9m1b6igwynh27l1shaw27lxz5w",
         "type": "tarball",
         "url": "https://github.com/AdaCore/gprconfig_kb/archive/51a7999e436584a707abb2441972f054b38a1754.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "langkit": {
+        "branch": "master",
+        "description": "Language creation framework.",
+        "homepage": "https://www.adacore.com",
+        "owner": "AdaCore",
+        "repo": "langkit",
+        "rev": "a556e9b89d42ce8379f44d2d97c9f9d4f3acccf4",
+        "sha256": "0n278wxycbgd3nj2fbvxszjg6sxgz7zfd54anvl572qw1a9scfx2",
+        "type": "tarball",
+        "url": "https://github.com/AdaCore/langkit/archive/a556e9b89d42ce8379f44d2d97c9f9d4f3acccf4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "libadalang": {

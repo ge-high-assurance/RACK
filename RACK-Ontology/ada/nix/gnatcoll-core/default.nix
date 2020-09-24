@@ -1,4 +1,4 @@
-{ glibc, gnat, gprbuild, libgpr, nixpkgs, sources, which, xmlada-bootstrap
+{ glibc, gprbuild, libgpr, nixpkgs, sources, which, xmlada-bootstrap
 }:
 nixpkgs.stdenv.mkDerivation {
 
@@ -8,12 +8,8 @@ nixpkgs.stdenv.mkDerivation {
     which
   ];
 
-  propagatedBuildInputs = [
-    gnat
-  ];
-
   configurePhase = ''
-    export GPR_PROJECT_PATH="${gprbuild}/share/gpr:${libgpr}/share/gpr:${xmlada-bootstrap}/share/gpr"
+    export GPR_PROJECT_PATH="${libgpr}/share/gpr:${xmlada-bootstrap}/share/gpr"
     export LIBRARY_PATH="${glibc}/lib"
   '';
 

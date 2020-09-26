@@ -1,8 +1,9 @@
-{ glibc, gprbuild, libgpr, nixpkgs, sources, which, xmlada-bootstrap
+{ glibc, gnat, gprbuild, libgpr, nixpkgs, sources, which, xmlada-bootstrap
 }:
 nixpkgs.stdenv.mkDerivation {
 
   buildInputs = [
+    gnat
     gprbuild
     libgpr
     which

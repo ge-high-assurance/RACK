@@ -1,7 +1,8 @@
-{ glibc, gprbuild-bootstrap, nixpkgs, sources }:
+{ glibc, gnat, gprbuild-bootstrap, nixpkgs, sources }:
 nixpkgs.stdenv.mkDerivation {
 
   buildInputs = [
+    gnat
     gprbuild-bootstrap
   ];
 

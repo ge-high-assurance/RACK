@@ -1,5 +1,6 @@
 { sources ? import ./nix/sources.nix {}
 , nixpkgs ? import sources.nixpkgs {}
+, gnat ? nixpkgs.gnat10
 }:
 let
   gnatcoll-core = import ./gnatcoll-core.nix { inherit nixpkgs sources; };

@@ -1,8 +1,9 @@
-{ glibc, gmp, gnatcoll-core, gprbuild, libgpr, nixpkgs, python, sources, which, xmlada-bootstrap
+{ glibc, gmp, gnat, gnatcoll-core, gprbuild, libgpr, nixpkgs, python, sources, which, xmlada-bootstrap
 }:
 nixpkgs.stdenv.mkDerivation {
 
   buildInputs = [
+    gnat
     gnatcoll-core
     gprbuild
     python

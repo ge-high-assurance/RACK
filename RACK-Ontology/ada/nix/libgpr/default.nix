@@ -1,20 +1,17 @@
-{ glibc, gnat, gprbuild-bootstrap, gprconfig_kb-source, nixpkgs, sources, which, xmlada-bootstrap
+{ glibc, gnat, gprbuild, gprconfig_kb-source, nixpkgs, sources, which, xmlada
 }:
 nixpkgs.stdenv.mkDerivation {
 
   buildInputs = [
-    gprbuild-bootstrap
-    which
-    xmlada-bootstrap
-  ];
-
-  propagatedBuildInputs = [
     gnat
+    gprbuild
+    which
+    xmlada
   ];
 
   # LIBRARY_PATH is needed so that ld can find crti.o and crt1.o
   configurePhase = ''
-    export GPR_PROJECT_PATH="${xmlada-bootstrap}/share/gpr"
+    export GPR_PROJECT_PATH="${xmlada}/share/gpr"
     export LIBRARY_PATH="${glibc}/lib"
     make prefix=$out BUILD=production setup
   '';

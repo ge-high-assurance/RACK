@@ -14,7 +14,8 @@ buildPythonPackage rec {
   # NOTE (val) this is giving me trouble, not sure whether needed
   postPatch = ''
     substituteInPlace setup.py \
-      --replace "        extras_require[platform_string].append(\"ld\")" \
+      --replace \
+      "        extras_require[platform_string].append(\"ld\")" \
       "        pass"
   '';
 

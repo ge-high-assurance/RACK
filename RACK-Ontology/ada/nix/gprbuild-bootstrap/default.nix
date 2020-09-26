@@ -1,7 +1,7 @@
 { gnat, gprconfig_kb-source, nixpkgs, sources, xmlada-source }:
 nixpkgs.stdenv.mkDerivation {
 
-  propagatedBuildInputs = [
+  buildInputs = [
     gnat
   ];
 

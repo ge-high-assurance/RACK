@@ -12,15 +12,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "gnat_util": {
-        "branch": "master",
+        "branch": "10.1.0",
         "description": "Provides access to GNAT compiler internals for AdaCore utilities",
         "homepage": null,
         "owner": "simonjwright",
         "repo": "gnat_util",
-        "rev": "e71e5414ea8e0fd128f4f16b68c46e6918e9e5e6",
-        "sha256": "1c835mvyswywj0k481bdfgznqbv66s60ygx962yswmmi74scldy3",
+        "rev": "7e5af8f4365b49cd39b1e7de5fd3c6eb71b989e2",
+        "sha256": "0pv7vpd8whz1cqhhpzzxkpgxm80wdrrk2fp9q2rxwi65dpyq2g9z",
         "type": "tarball",
-        "url": "https://github.com/simonjwright/gnat_util/archive/e71e5414ea8e0fd128f4f16b68c46e6918e9e5e6.tar.gz",
+        "url": "https://github.com/simonjwright/gnat_util/archive/7e5af8f4365b49cd39b1e7de5fd3c6eb71b989e2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "gnatcoll-bindings": {

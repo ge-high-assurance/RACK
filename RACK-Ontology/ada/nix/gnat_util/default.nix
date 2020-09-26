@@ -1,27 +1,39 @@
-{ glibc, gnatcoll-core, gprbuild, libgpr, nixpkgs, sources, xmlada
+{ gcc-build-output, gcc-source, glibc, gnat, gnatcoll-core, gprbuild, libgpr, nixpkgs, sources, xmlada
 }:
 nixpkgs.stdenv.mkDerivation {
 
   buildInputs = [
+      gnat
       gprbuild
   ];
 
   # LIBRARY_PATH is needed so that ld can find crti.o and crt1.o
   configurePhase = ''
-    export GPR_PROJECT_PATH="${gnatcoll-core}/share/gpr:${libgpr}/share/gpr:${xmlada}/share/gpr"
+    export RELEASE=${gnat.version}
+    echo $RELEASE
+    export GCC_SRC_BASE=${gcc-source}
+    export GCC_BLD_BASE=${gcc-build-output}/build
     export LIBRARY_PATH="${glibc}/lib"
   '';
 
   buildPhase = ''
     make
-    exit 42
   '';
 
+  # NOTE (val) I don't know why this one does not copy its gnat_util.gpr file in
+  # the output, so doing it manually
+  # NOTE (val) This seems to assume that src, .build
   installPhase = ''
     make install prefix=$out
+    mkdir -p $out/share/gpr
+    cp gnat_util.gpr $out/share/gpr/
+    cp -r src/ $out
+    mkdir -p $out/share/gpr/.build-static
+    mkdir -p $out/share/gpr/lib/static
+    mkdir -p $out/share/gpr/src
   '';
 
-  name = "asis-for-gnat";
+  name = "gnat_util";
   src = fetchTarball { inherit (sources.gnat_util) url sha256; };
 
 }

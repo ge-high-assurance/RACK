@@ -1,16 +1,18 @@
 { sources ? import ./nix/sources.nix {}
 , nixpkgs ? import sources.nixpkgs {}
+, gnat ? nixpkgs.gnat10
 }:
 let
-  gprbuild-bootstrap = import ./gprbuild-bootstrap.nix { inherit nixpkgs sources; };
+  gprbuild = import ./gprbuild.nix { inherit gnat nixpkgs sources; };
   gprconfig_kb-source = import ./gprconfig_kb-source.nix { inherit nixpkgs sources; };
-  xmlada-bootstrap = import ./xmlada-bootstrap.nix { inherit nixpkgs sources; };
+  xmlada = import ./xmlada.nix { inherit gnat nixpkgs sources; };
 in
 nixpkgs.callPackage ./libgpr {
   inherit
+    gnat
     gprconfig_kb-source
-    gprbuild-bootstrap
+    gprbuild
     nixpkgs
     sources
-    xmlada-bootstrap;
+    xmlada;
 }

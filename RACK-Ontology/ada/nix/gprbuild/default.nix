@@ -3,13 +3,10 @@
 nixpkgs.stdenv.mkDerivation {
 
   buildInputs = [
+    gnat
     gprbuild-bootstrap
     which
     xmlada-bootstrap
-  ];
-
-  propagatedBuildInputs = [
-    gnat
   ];
 
   # LIBRARY_PATH is needed so that ld can find crti.o and crt1.o

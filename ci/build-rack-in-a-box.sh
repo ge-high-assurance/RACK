@@ -5,7 +5,7 @@ set -euo pipefail
 tar cf /tmp/rack.tar.gz --exclude=.git --exclude=packer .
 mv /tmp/rack.tar.gz packer/files/
 
-pushd packer || exit 1
+cd packer
 
 function assert_exists() {
   if ! [[ -f "files/${1}" ]]; then
@@ -42,5 +42,3 @@ touch files/{documentation.html,index.html,style.css}
 
 packer build rack-box-docker.json
 docker image ls
-
-popd || exit 1

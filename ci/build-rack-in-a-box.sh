@@ -2,8 +2,7 @@
 
 set -euo pipefail
 
-tar cf /tmp/rack.tar.gz --exclude=.git --exclude=packer .
-mv /tmp/rack.tar.gz packer/files/
+tar cf packer/files/rack.tar.gz --exclude=.git --exclude=packer .
 
 cd packer
 

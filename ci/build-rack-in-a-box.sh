@@ -14,7 +14,7 @@ function assert_exists() {
     exit 1
   fi
 }
-assert_exists semtk-opensource-2.2.1-SNAPSHOT-bin.tar.gz
+assert_exists "semtk-opensource-bin.tar.gz"
 
 fuseki_version="3.16.0"
 fuseki_tarball="files/apache-jena-fuseki-${fuseki_version}.tar.gz"

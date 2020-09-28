@@ -16,8 +16,7 @@ function assert_exists() {
 }
 assert_exists "semtk-opensource-bin.tar.gz"
 
-fuseki_version="3.16.0"
-fuseki_tarball="files/apache-jena-fuseki-${fuseki_version}.tar.gz"
+fuseki_tarball="files/apache-jena-fuseki-${FUSEKI_VERSION}.tar.gz"
 
 if ! [[ -f "${fuseki_tarball}" ]]; then
   curl \
@@ -25,7 +24,7 @@ if ! [[ -f "${fuseki_tarball}" ]]; then
     --silent \
     --show-error \
     --output "${fuseki_tarball}" \
-    "https://mirrors.gigenet.com/apache/jena/binaries/apache-jena-fuseki-${fuseki_version}.tar.gz"
+    "https://mirrors.gigenet.com/apache/jena/binaries/apache-jena-fuseki-${FUSEKI_VERSION}.tar.gz"
 fi
 
 systemctl_script="files/systemctl3.py"

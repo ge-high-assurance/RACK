@@ -1,10 +1,11 @@
-{ asis-for-gnat, black, gnat, gnatcoll-bindings-gmp, gnatcoll-bindings-iconv, gnatcoll-core
-, gprbuild, langkit, libgpr, nixpkgs, pythonPackages, sources, xmlada
+{ asis-for-gnat, black, glibc, gmp, gnat, gnatcoll-bindings-gmp, gnatcoll-bindings-iconv
+, gnatcoll-core, gprbuild, langkit, libgpr, nixpkgs, pythonPackages, sources, xmlada
 }:
 nixpkgs.stdenv.mkDerivation {
 
   buildInputs = [
     # asis-for-gnat
+    gmp
     gnat
     gprbuild
   ];
@@ -16,6 +17,7 @@ nixpkgs.stdenv.mkDerivation {
 
   configurePhase = ''
     export GPR_PROJECT_PATH="${gnatcoll-core}/share/gpr:${gnatcoll-bindings-gmp}/share/gpr:${gnatcoll-bindings-iconv}/share/gpr:${libgpr}/share/gpr:${xmlada}/share/gpr"
+    export LIBRARY_PATH="${glibc}/lib"
     python ada/manage.py generate
   '';
 

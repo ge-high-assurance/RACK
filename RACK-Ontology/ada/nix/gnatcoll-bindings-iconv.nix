@@ -10,6 +10,7 @@ let
 in
 nixpkgs.callPackage ./gnatcoll-bindings-iconv {
   inherit
+    gnat
     gnatcoll-core
     gprbuild
     libgpr

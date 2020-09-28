@@ -20,17 +20,8 @@ nixpkgs.stdenv.mkDerivation {
     make
   '';
 
-  # NOTE (val) I don't know why this one does not copy its gnat_util.gpr file in
-  # the output, so doing it manually
-  # NOTE (val) This seems to assume that src, .build
   installPhase = ''
     make install prefix=$out
-    mkdir -p $out/share/gpr
-    cp gnat_util.gpr $out/share/gpr/
-    cp -r src/ $out
-    mkdir -p $out/share/gpr/.build-static
-    mkdir -p $out/share/gpr/lib/static
-    mkdir -p $out/share/gpr/src
   '';
 
   name = "gnat_util";

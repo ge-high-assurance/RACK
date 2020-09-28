@@ -21,7 +21,7 @@ nixpkgs.stdenv.mkDerivation {
   name = "gcc-${gnat.cc.version}-source";
   src = nixpkgs.fetchurl {
     url = "mirror://gcc/releases/gcc-${gnat.cc.version}/gcc-${gnat.cc.version}.tar.xz";
-    sha256 = "1817nc2bqdc251k0lpc51cimna7v68xjrnvqzvc50q3ax4s6i9kr";
+    sha256 = "130xdkhmz1bc2kzx061s3sfwk36xah1fw5w332c0nzwwpdl47pdq";
   };
 
 }

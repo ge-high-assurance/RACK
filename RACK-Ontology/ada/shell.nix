@@ -7,23 +7,13 @@ let
 in
 nixpkgs.mkShell {
   buildInputs = with nixpkgs; [
-    # gnatcoll-bindings-gmp
-    # gnatcoll-bindings-iconv
-    # gnatcoll-core
-    # gprbuild
     libadalang
-    # myPythonPackages.pip
-    # myPythonPackages.setuptools
-    # myPythonPackages.virtualenv
   ];
 
-  # GPR_PROJECT_PATH="${gnatcoll-bindings-gmp}/share/gpr:${gnatcoll-bindings-iconv}/share/gpr:${gnatcoll-core}/share/gpr:${libgpr}/share/gpr:${xmlada}/share/gpr";
+  LD_LIBRARY_PATH="${libadalang}/lib";
 
-  # LIBRARY_PATH="${nixpkgs.glibc}/lib";
-
-  # shellHook = ''
-  # alias pip="PIP_PREFIX='$(pwd)/_build/pip_packages' \pip"
-  # export PYTHONPATH="$(pwd)/_build/pip_packages/lib/python2.7/site-packages:$PYTHONPATH"
-  # unset SOURCE_DATE_EPOCH
-  # '';
+  shellHook = ''
+    export PATH=${libadalang}/bin:$PATH
+    export PYTHONPATH=${libadalang}/python:$PYTHONPATH
+  '';
 }

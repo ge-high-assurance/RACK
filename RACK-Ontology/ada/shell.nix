@@ -10,6 +10,8 @@ nixpkgs.mkShell {
     libadalang
   ];
 
+  AST_HTML="${libadalang}/share/libadalang/ast-types.html";
+
   LD_LIBRARY_PATH="${libadalang}/lib";
 
   shellHook = ''

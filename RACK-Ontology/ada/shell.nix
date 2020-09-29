@@ -13,6 +13,7 @@ nixpkgs.mkShell {
   ];
 
   AST_HTML="${libadalang}/share/libadalang/ast-types.html";
+  LIBADALANG_ADA_FILES="${libadalang}/include/libadalang";
 
   LD_LIBRARY_PATH="${libadalang}/lib";
 

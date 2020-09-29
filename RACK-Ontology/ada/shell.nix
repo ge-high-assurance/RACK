@@ -1,13 +1,15 @@
 { sources ? import ./nix/nix/sources.nix {}
 , nixpkgs ? import sources.nixpkgs {}
+, pythonPackages ? nixpkgs.python37Packages
 }:
 let
   gnat = nixpkgs.gnat10;
-  libadalang = import ./nix/libadalang.nix { inherit gnat nixpkgs; };
+  libadalang = import ./nix/libadalang.nix { inherit gnat nixpkgs pythonPackages; };
 in
 nixpkgs.mkShell {
   buildInputs = with nixpkgs; [
     libadalang
+    pythonPackages.pylint
   ];
 
   AST_HTML="${libadalang}/share/libadalang/ast-types.html";

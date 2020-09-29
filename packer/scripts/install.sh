@@ -2,7 +2,7 @@
 
 # Exit if anything goes wrong
 
-set -exo pipefail
+set -eo pipefail
 cd /tmp/files
 
 # Execute this part of the script only if we're building a Docker image

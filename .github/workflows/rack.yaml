@@ -57,7 +57,7 @@ jobs:
         uses: actions/cache@v2
         id: cache-semtk
         with:
-          path: packer/files/semtk-opensource-${SEMTK_VERSION}-bin.tar.gz
+          path: packer/files/semtk-opensource-bin.tar.gz
           key: ${{ runner.os }}-semtk-${{ env.SEMTK_COMMIT }}
 
       - shell: bash

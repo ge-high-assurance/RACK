@@ -4,6 +4,7 @@ set -euo pipefail
 
 tar cf packer/files/rack.tar.gz --exclude=.git --exclude=packer .
 
+mv ../RACK.wiki/documentation.html packer/files
 cd packer
 
 function assert_exists() {
@@ -15,28 +16,30 @@ function assert_exists() {
 }
 assert_exists "semtk-opensource-bin.tar.gz"
 
-fuseki_tarball="files/apache-jena-fuseki-${FUSEKI_VERSION}.tar.gz"
-
-if ! [[ -f "${fuseki_tarball}" ]]; then
+function get() {
+  if ! [[ -f "${1}" ]]; then
   curl \
     --location \
     --silent \
     --show-error \
-    --output "${fuseki_tarball}" \
-    "https://mirrors.gigenet.com/apache/jena/binaries/apache-jena-fuseki-${FUSEKI_VERSION}.tar.gz"
-fi
+    --output "${1}" \
+    "${2}"
+  fi
+}
 
-systemctl_script="files/systemctl3.py"
-if ! [[ -f "${systemctl_script}" ]]; then
-  curl \
-    --location \
-    --silent \
-    --show-error \
-    --output "${systemctl_script}" \
-    "https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl3.py"
-fi
+get \
+  "files/apache-jena-fuseki-${FUSEKI_VERSION}.tar.gz" \
+  "https://mirrors.gigenet.com/apache/jena/binaries/apache-jena-fuseki-${FUSEKI_VERSION}.tar.gz"
 
-touch files/{documentation.html,index.html,style.css}
+get \
+  "files/systemctl3.py" \
+  "https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl3.py"
+
+get \
+  "files/style.css" \
+  "https://raw.githubusercontent.com/KrauseFx/markdown-to-html-github-style/master/style.css"
+
+touch files/index.html
 
 packer build rack-box-docker.json
 docker image ls

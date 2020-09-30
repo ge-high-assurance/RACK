@@ -52,19 +52,30 @@ jobs:
       FUSEKI_VERSION: "3.16.0"
     steps:
       - uses: actions/checkout@v2
+        with:
+          repository: ${{github.repository}}.wiki
+          path: RACK.wiki
+
+      - uses: actions/checkout@v2
+        with:
+          path: RACK
+
+      - shell: bash
+        name: Build documentation
+        run: bash RACK/ci/build-wiki-docs.sh
 
       - name: Cache SemTK
         uses: actions/cache@v2
         id: cache-semtk
         with:
-          path: packer/files/semtk-opensource-bin.tar.gz
+          path: RACK/packer/files/semtk-opensource-bin.tar.gz
           key: ${{ runner.os }}-semtk-${{ env.SEMTK_COMMIT }}
 
       - shell: bash
         name: Build SemTK
         if: steps.cache-semtk.outputs.cache-hit != 'true'
-        run: bash ci/build-semtk.sh
+        run: bash -c "cd RACK && ci/build-semtk.sh"
 
       - shell: bash
         name: Build RACK-in-a-Box Docker image
-        run: bash ci/build-rack-in-a-box.sh
+        run: bash -c "cd RACK && ci/build-rack-in-a-box.sh"

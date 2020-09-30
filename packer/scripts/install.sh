@@ -175,12 +175,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 python3 setup.py --quiet install
 
-# TODO: Use setup-rack.sh
-rack model import ../OwlModels/import.yaml
-rack nodegroups import ../../nodegroups/ingestion
-rack nodegroups import ../../nodegroups/queries
-rack data import --clear ../models/TurnstileSystem/Data/import.yaml
-rack data import ../OwlModels/requirements.yaml
+./setup-rack.sh
 
 popd || exit 1
 popd || exit 1

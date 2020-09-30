@@ -38,5 +38,26 @@ fi
 
 touch files/{documentation.html,index.html,style.css}
 
+installed() { command -v "$1" >/dev/null 2>&1; }
+
+# Install Packer if it's absent (i.e. when using `act`)
+if ! installed packer; then
+  pushd /tmp || exit 1
+
+  ver="1.6.2"
+  curl \
+    --location \
+    --silent \
+    --show-error \
+    --output "packer_${ver}_linux_amd64.zip" \
+    "https://releases.hashicorp.com/packer/${ver}/packer_${ver}_linux_amd64.zip"
+  sudo apt-get install -y unzip
+  unzip -o "packer_${ver}_linux_amd64.zip"
+  sudo mv packer /usr/local/bin
+
+  popd || exit 1
+fi
+
+
 packer build rack-box-docker.json
 docker image ls

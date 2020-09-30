@@ -7,6 +7,8 @@ These scripts are used in CI.
 The [`act`][act] tool can be used to run (an
 approximation of) the Github Actions workflow locally:
 
+- Download a binary release of Packer for Ubuntu, and place the `packer`
+  executable in the `packer/` directory.
 - Install `act`
 - Generate a Github [personal access token][PAT] (PAT)
 - Create a `.secrets` file containing `GITHUB_TOKEN=<your-github-PAT-here>`

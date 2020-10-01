@@ -4,7 +4,6 @@ set -euo pipefail
 
 tar cf packer/files/rack.tar.gz --exclude=.git --exclude=packer .
 
-mv ../RACK.wiki/documentation.html packer/files
 cd packer
 
 function assert_exists() {

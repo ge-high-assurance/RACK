@@ -38,10 +38,10 @@ fi
 
 touch files/{documentation.html,index.html,style.css}
 
-installed() { command -v "$1" >/dev/null 2>&1; }
+is_bin_on_path() { builtin type -P "${1}" &> /dev/null; }
 
 # Install Packer if it's absent (i.e. when using `act`)
-if ! installed packer; then
+if ! is_bin_on_path packer; then
   sudo mv ./packer /usr/local/bin
 fi
 

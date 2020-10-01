@@ -14,6 +14,10 @@ approximation of) the Github Actions workflow locally:
 - Create a `.secrets` file containing `GITHUB_TOKEN=<your-github-PAT-here>`
 - Run `act --secret-file .secrets -P ubuntu-latest=nektos/act-environments-ubuntu:18.04`
 
+The Docker image `nektos/act-environments-ubuntu:18.04` is quite large
+(approximately 18GB), so (1) you'll need enough free disk space to store it and
+(2) the first execution of `act` takes a while because it downloads this image.
+
 ### Troubleshooting
 
 #### "volume is in use"

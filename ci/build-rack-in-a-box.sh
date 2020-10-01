@@ -2,7 +2,15 @@
 
 set -euo pipefail
 
-tar cf packer/files/rack.tar.gz --exclude=.git --exclude=packer .
+tar cf \
+    packer/files/rack.tar.gz \
+    --exclude=.git \
+    --exclude=.github \
+    --exclude=RACK-Ontology/assist \
+    --exclude=ci \
+    --exclude=packer \
+    --exclude=tools \
+    .
 
 cd packer
 

@@ -26,11 +26,11 @@ If you see a message like this:
 ```
 Error: Error response from daemon: remove act-Build-Lint-shell-scripts-and-the-RACK-CLI: volume is in use
 ```
-You can forcibly stop and remove all Docker containers and their volumes:
+You can forcibly stop and remove the `act` Docker containers and their volumes:
 ```bash
-docker stop $(docker ps -aq)
-docker rm $(docker ps -aq)
-docker volume rm $(docker volume ls --filter dangling=true -q)
+docker stop $(docker ps -a | grep "nektos/act-environments-ubuntu:18.04" | awk '{print $1}')
+docker rm $(docker ps -a | grep "nektos/act-environments-ubuntu:18.04" | awk '{print $1}')
+docker volume rm $(docker volume ls --filter dangling=true | grep -o -E "act-.+$")
 ```
 There may also be a more precise solution to this issue, but the above works.
 

@@ -18,7 +18,7 @@ check_rack :-
     warn_if_nonzero("with instance issues", BISLen),
     warn_if_nonzero("with instance property issues", MISLen),
     (CSLen == 0, NPCSLen == 0, BISLen == 0, MISLen == 0, !,
-     format('No issues found~n') ; format('ISSUES FOUND IN CHECK~n')),
+     format('No issues found~n') ; format('ISSUES FOUND IN CHECK~n'), halt(1)),
     true.
 
 check_missing_notes(Class) :-

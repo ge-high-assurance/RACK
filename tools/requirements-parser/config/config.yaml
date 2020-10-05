@@ -1,0 +1,31 @@
+#  Logging information
+version: 1
+formatters:
+  simple:
+    format: "[%(asctime)s] {%(module)s:%(lineno)d} %(levelname)s: %(message)s"
+  extended:
+    format: "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s"
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: simple
+
+  file_handler:
+    class: logging.FileHandler
+    level: INFO
+    filename: requirements-parser.log
+    formatter: extended
+
+loggers:
+  dev:
+    level: INFO
+    handlers: [console,file_handler]
+  test:
+    level: INFO
+    handlers: [console]
+
+root:
+  level: INFO
+  handlers: [console,file_handler]

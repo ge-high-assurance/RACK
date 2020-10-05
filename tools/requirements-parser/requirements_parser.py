@@ -66,6 +66,25 @@ def get_automates_parse(text: str):
     return sentences
 
 
+def get_system_name(words: list, chunks: list):
+    """
+    This method extracts the system name that governs the requirement.
+    System name are all words in noun phrases preceding the first verb phrase
+    :param words: List of words in a sentence
+    :param chunks: List of chunk tags for each word in the sentence
+    :return: the system name as string or empty if not found
+    """
+
+    system_name = ''
+    for idx in range(0, len(chunks)):
+        chunk_tag = chunks[idx]
+        if chunk_tag != 'B-VP':
+            system_name = system_name + ' ' + words[idx]
+        else:
+            break
+    return system_name.strip()
+
+
 def get_action_verb(words: list, tags: list, chunks: list):
     """
     Given a list of words, their part of speech (POS) tags and chunks,
@@ -73,7 +92,7 @@ def get_action_verb(words: list, tags: list, chunks: list):
     Action verb is defined as the first verb or noun in the first verb phrase in the sentence.
     :param words: List of words in a sentence
     :param tags: List of POS tags for each word in the sentence
-    :param chunks: List of chunks in the sentence
+    :param chunks: List of chunk tags for each word in the sentence
     :return: action_verb as string. Returns None if action_verb is not found
     """
 
@@ -122,6 +141,9 @@ def process_sentence(sentence):
     # Retrieve chunks/phrases in the sentence
     chunks = get_list_from_dictionary('chunks', sentence)
 
+    # Extract system name from the requirement sentence
+    system_name = get_system_name(words, chunks)
+
     # Extract requirement action verb
     action_verb = get_action_verb(words, tags, chunks)
 
@@ -152,7 +174,7 @@ def process_sentence(sentence):
             # print("Output:", str_)
             outputs.append(str_.strip())
 
-    return {"inputs": inputs, "outputs": outputs}
+    return {"system_name": system_name, "inputs": inputs, "outputs": outputs}
 
 
 def parse_requriments(text: str):
@@ -240,4 +262,3 @@ def get_automates_sentence_parse(sent: str):
                                         outputs.append(str_.strip())
 
     return {"inputs": inputs, "outputs": outputs}
-

@@ -8,6 +8,10 @@ if __name__ == '__main__':
     for sent in sents:
         dict_ = parser.parse_requriments(sent)
 
+        if 'system_name' in dict_:
+            system_name = dict_["system_name"]
+            print(system_name)
+
         if 'inputs' in dict_:
             inputs = dict_["inputs"]
             print(inputs)
@@ -15,4 +19,6 @@ if __name__ == '__main__':
         if 'outputs' in dict_:
             outputs = dict_["outputs"]
             print(outputs)
+
+
 

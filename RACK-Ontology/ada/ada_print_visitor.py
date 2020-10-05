@@ -29,18 +29,8 @@ class AdaPrintVisitor(AdaVisitor):
         indent = '  ' * (self.depth - 1)
         print(f'{indent}{str}')
 
-    def visit_AdaNodeList(self, list):
-        self.print(list.__class__.__name__)
-        for node in list:
-            self.generic_visit(node)
-
     def visit_NameList(self, list):
         self.print(f'{list.__class__.__name__} {list.text}')
-
-    def visit_PragmaNodeList(self, list):
-        self.print(list.__class__.__name__)
-        for pragma in list:
-            self.generic_visit(pragma)
 
     def visit_Identifier(self, node):
         self.print(f'Identifier {node.text}')
@@ -50,26 +40,8 @@ class AdaPrintVisitor(AdaVisitor):
         self.print(f'CompilationUnit {name}')
         self.generic_visit(node)
 
-    def visit_DeclarativePart(self, node):
-        # self.print(f'DeclarativePart')
-        self.print_then_super_generic_visit(node)
-
-    def visit_DeclList(self, node):
-        self.print(f'DeclList[...]')
-
     def visit_DottedName(self, node):
         self.print(f'DottedName {node.text}')
-
-    def visit_Params(self, node):
-        # don't recurse more or it will take forever
-        self.print(f'Params[...]')
-
-    def visit_SingleProtectedDecl(self, node):
-        print(node.children)
-        self.print_then_super_generic_visit(node)
-
-    def visit_StmtList(self, node):
-        self.print(f'StmtList[...]')
 
     def visit_TypeDecl(self, node):
         name = '.'.join(node.f_name.f_name.p_as_symbol_array)

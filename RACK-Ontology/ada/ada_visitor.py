@@ -1,3 +1,9 @@
+import libadalang as lal
+from typing import TypeVar
+
+AdaVisitorT = TypeVar('AdaVisitorT', bound='AdaVisitor')
+AdaNodeT = TypeVar('AdaNodeT', bound='lal.AdaNode')
+
 class AdaVisitor():
 
     '''
@@ -18,13 +24,13 @@ class AdaVisitor():
     given file looks like.
     '''
 
-    def generic_visit(self, node):
+    def generic_visit(self: AdaVisitorT, node: AdaNodeT) -> None:
         '''Generically visit some node, recursively visiting its children'''
         children = getattr(node, 'children', [])
         for child in children:
             self.visit(child)
 
-    def visit(self, node):
+    def visit(self: AdaVisitorT, node: AdaNodeT) -> None:
         '''Entry point to visit an arbitrary Ada AST node'''
         method = 'visit_' + node.__class__.__name__
         visitor = getattr(self, method, self.generic_visit)

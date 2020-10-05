@@ -6,7 +6,7 @@ if __name__ == '__main__':
              'Input Thread shall check for a incoming UDP message on port 62000. ']
 
     for sent in sents:
-        dict_ = parser.parse_requriments(sent)
+        dict_ = parser.parse_requirements(sent)
 
         if 'system_name' in dict_:
             system_name = dict_["system_name"]

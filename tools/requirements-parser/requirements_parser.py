@@ -32,6 +32,13 @@ def get_outgoing_edges(edges, words: list, word_index):
 
 
 def get_list_from_dictionary(key, dictionary):
+    """
+    Given a dictionary and a key whose value is a list, check if key exists in the dictionary
+    Return the list if key exist, else return empty value.
+    :param key: The name of the key whose value needs to be extracted
+    :param dictionary: Dictionary from which tke value has to be extracted for the given key
+    :return: value (list) associated with the key; empty list if key is absent
+    """
     list_ = []
     if key in dictionary:
         list_ = dictionary[key]
@@ -39,6 +46,12 @@ def get_list_from_dictionary(key, dictionary):
 
 
 def get_automates_parse(text: str):
+    """
+    Get a NLP parse of the sentence from the AutoMATES Text Reading service.
+    This method makes a REST call to the text reading service and returns the nlp parse
+    :param text: The text/string to be parsed
+    :return: List of sentence objects.
+    """
     results_json = {}
     sentences = []
     payload = {'text': text}
@@ -125,8 +138,12 @@ def get_dependency_graph_edges(sentence):
 
 
 def process_sentence(sentence):
-    # do processing here
-    # return dictionary
+    """
+    Process a requirements sentence and extract system name, inputs, outputs
+    :param sentence: Sentence/text to be processed
+    :return: A dictionary with system name, list of inputs, list of outputs
+    {"system_name" : "str", "inputs": ["str"], "outputs": ["str"]}
+    """
 
     inputs = []
     outputs = []
@@ -177,88 +194,17 @@ def process_sentence(sentence):
     return {"system_name": system_name, "inputs": inputs, "outputs": outputs}
 
 
-def parse_requriments(text: str):
+# TODO: This is designed to deal with only sentence per requirement
+def parse_requirements(text: str):
+    """
+    This method is the main API call to parse requirements.
+    This method obtains the NLP parse of the text
+    Loops through each sentence to extract system name, inputs and outputs.
+    :param text: Sentence to be processed
+    :return: A dictionary with system name, list of inputs, list of outputs
+    """
     dict_ = {}
     sentences = get_automates_parse(text)
     for sentence in sentences:
         dict_ = process_sentence(sentence)
     return dict_
-
-
-def get_automates_sentence_parse(sent: str):
-    """
-
-    :param sent:
-    :return:
-    """
-    logging.info("Parsing Sentence")
-    inputs = []
-    outputs = []
-
-    payload = {'text': sent}
-    headers = {'Content-Type': 'application/json'}
-
-    response = requests.request("POST", config.AutomatesServiceURL, headers=headers, data=json.dumps(payload))
-    response = response.json()
-    if 'documents' in response:
-        doc_obj = response['documents']
-        for key in doc_obj.keys():
-            if 'sentences' in doc_obj[key]:
-                sentences = doc_obj[key]['sentences']
-
-                words = []
-                tags = []
-                chunks = []
-
-                for sentence in sentences:
-                    if 'words' in sentence:
-                        words = sentence['words']
-                        # print(words, "\n")
-                    if 'tags' in sentence:
-                        tags = sentence['tags']
-                        # print(tags)
-                    if 'chunks' in sentence:
-                        chunks = sentence['chunks']
-                        # print(chunks)
-
-                    action_verb = None
-
-                    for i in range(0, len(chunks)):
-                        chunk = chunks[i]
-                        if chunk == 'B-VP' or chunk == 'I-VP':
-                            tag = tags[i]
-                            if tag == 'VB' or tag == 'NN':
-                                # print(words[i])
-                                action_verb = words[i]
-                                break
-
-                    if 'graphs' in sentence:
-                        if 'universal-enhanced' in sentence['graphs']:
-                            # print(sentence['graphs']['universal-enhanced'], "\n")
-                            if 'edges' in sentence['graphs']['universal-enhanced']:
-                                edges = sentence['graphs']['universal-enhanced']['edges']
-                                # get_outgoing_edges(edges, words, words.index(action_verb))
-                                for edge in edges:
-                                    source = edge['source']
-                                    destination = edge['destination']
-                                    relation = edge['relation']
-
-                                    if 'nmod_' in relation and words[source] == action_verb:
-                                        print("match:", words[source], words[destination], relation)
-                                        word_list = get_outgoing_edges(edges, words, destination)
-                                        str_ = ''
-                                        for word_idx in word_list:
-                                            str_ = str_ + ' ' + words[word_idx]
-                                        print("Input:", str_)
-                                        inputs.append(str_.strip())
-
-                                    elif 'dobj' in relation and words[source] == action_verb:
-                                        print("match:", words[source], words[destination], relation)
-                                        word_list = get_outgoing_edges(edges, words, destination)
-                                        str_ = ''
-                                        for word_idx in word_list:
-                                            str_ = str_ + ' ' + words[word_idx]
-                                        print("Output:", str_)
-                                        outputs.append(str_.strip())
-
-    return {"inputs": inputs, "outputs": outputs}

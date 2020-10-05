@@ -19,21 +19,13 @@ class AdaPrintVisitor(AdaVisitor):
             return
         self.depth += 1
         method = 'visit_' + node.__class__.__name__
-        if getattr(self, method, None) == None:
-            self.print_then_super_generic_visit(node)
-        visitor = getattr(self, method, self.generic_visit)
+        visitor = getattr(self, method, self.print_then_super_generic_visit)
         visitor(node)
         self.depth -= 1
 
     def print(self, str):
         indent = '  ' * (self.depth - 1)
         print(f'{indent}{str}')
-
-    def visit_NameList(self, list):
-        self.print(f'{list.__class__.__name__} {list.text}')
-
-    def visit_Identifier(self, node):
-        self.print(f'Identifier {node.text}')
 
     def visit_CompilationUnit(self, node):
         name = '.'.join(node.p_syntactic_fully_qualified_name)
@@ -42,6 +34,12 @@ class AdaPrintVisitor(AdaVisitor):
 
     def visit_DottedName(self, node):
         self.print(f'DottedName {node.text}')
+
+    def visit_Identifier(self, node):
+        self.print(f'Identifier {node.text}')
+
+    def visit_NameList(self, list):
+        self.print(f'{list.__class__.__name__} {list.text}')
 
     def visit_TypeDecl(self, node):
         name = '.'.join(node.f_name.f_name.p_as_symbol_array)

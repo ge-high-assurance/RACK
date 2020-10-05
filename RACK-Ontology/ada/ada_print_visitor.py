@@ -1,4 +1,8 @@
+from colorama import Fore
+
 from ada_visitor import AdaVisitor
+
+colors = [Fore.RED, Fore.GREEN, Fore.BLUE, Fore.YELLOW, Fore.MAGENTA, Fore.CYAN, Fore.WHITE]
 
 class AdaPrintVisitor(AdaVisitor):
 
@@ -24,7 +28,10 @@ class AdaPrintVisitor(AdaVisitor):
         self.depth -= 1
 
     def print(self, str):
-        indent = '  ' * (self.depth - 1)
+        indent = ''
+        # - 1 so that depth 1 shows with 0 indentation, etc.
+        for i in range(self.depth - 1):
+            indent += f'{colors[i % len(colors)]}| {Fore.RESET}'
         print(f'{indent}{str}')
 
     def visit_CompilationUnit(self, node):

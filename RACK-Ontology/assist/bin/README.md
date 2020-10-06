@@ -33,7 +33,7 @@ Prolog modules in this directory:
    $ check -v
    ```
 
-* `ingest_data` Loads the ontology model (from disk or RACK/Fuseki),
+ * `ingest_data` Loads the ontology model (from disk or RACK/Fuseki),
    a set of data recognizers, and then the data to be recognized,
    instantiating that data against the ontology model.  Writes the
    result to disk or back to the RACK/Fuseki server.  See the `-h`
@@ -51,13 +51,13 @@ Prolog modules in this directory:
    `http://localhost:3030` as instance data in the
    `http://TurnstileSystem/CounterApplication` namespace.
 
-The typical usage is to:
+   The typical usage is to:
 
- 1. perform a build with the `databin` directory
-    in the `PATH` so that the wrappers in that directory can capture the
-    build information into datafiles in that directory, then
- 2. `ingest_data` to load that data as instances in the RACK database, then
- 3. `analyze` or `check` that data.
+    1. perform a build with the `databin` directory
+       in the `PATH` so that the wrappers in that directory can capture the
+       build information into datafiles in that directory, then
+    2. `ingest_data` to load that data as instances in the RACK database, then
+    3. `analyze` or `check` that data.
 
 # Prolog API Usage
 

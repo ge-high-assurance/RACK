@@ -2,16 +2,6 @@ This directory contains Prolog modules offering tools for loading OWL models in
 and out of a Fuseki instance, as well as several Prolog relations for querying
 the ontology.
 
-You can read the code's documentation, as well as a rendering of this very file,
-by running `swipl` **from this directory**, and entering:
-
-```prolog
-[documentation/serve].
-```
-
-This command should set up a local pldoc webserver instance listening at
-[http://localhost:4040/pldoc](http://localhost:4040/pldoc).
-
 # Command-line Usage
 
 NOTE: For the following commands to work, you will want to have
@@ -70,6 +60,16 @@ The typical usage is to:
  3. `analyze` or `check` that data.
 
 # Prolog API Usage
+
+You can read the code's documentation, as well as a rendering of this very file,
+by running `swipl` **from this directory**, and entering:
+
+```prolog
+[documentation/serve].
+```
+
+This command should set up a local pldoc webserver instance listening at
+[http://localhost:4040/pldoc](http://localhost:4040/pldoc).
 
 ## Setup
 

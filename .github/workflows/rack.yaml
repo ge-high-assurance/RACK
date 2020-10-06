@@ -1,0 +1,70 @@
+name: Build
+on: [push]
+
+jobs:
+  lint:
+    name: Lint shell scripts and the RACK CLI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Lint shell scripts with ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        env:
+          SHELLCHECK_OPTS: -e SC1008
+        with:
+          ignore: packer
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Cache RACK CLI development dependencies
+        uses: actions/cache@v2
+        with:
+          # This path is specific to Ubuntu
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('RACK-Ontology/cli/dev/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
+
+      - name: Install development dependencies
+        run: |
+          pip install \
+            --quiet \
+            --requirement RACK-Ontology/cli/dev/requirements.txt
+
+      - shell: bash
+        name: Lint the RACK CLI
+        run: |
+          cd RACK-Ontology/cli
+          pylint .
+          mypy .
+
+  build:
+    name: Build and test RACK-in-a-Box Docker
+    runs-on: ubuntu-latest
+    env:
+      SEMTK_COMMIT: "b218cf276c9c7169d9c6211fcd5196f490f465a6"
+      SEMTK_VERSION: "2.2.1-SNAPSHOT"
+      FUSEKI_VERSION: "3.16.0"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache SemTK
+        uses: actions/cache@v2
+        id: cache-semtk
+        with:
+          path: packer/files/semtk-opensource-bin.tar.gz
+          key: ${{ runner.os }}-semtk-${{ env.SEMTK_COMMIT }}
+
+      - shell: bash
+        name: Build SemTK
+        if: steps.cache-semtk.outputs.cache-hit != 'true'
+        run: bash ci/build-semtk.sh
+
+      - shell: bash
+        name: Build RACK-in-a-Box Docker image
+        run: bash ci/build-rack-in-a-box.sh

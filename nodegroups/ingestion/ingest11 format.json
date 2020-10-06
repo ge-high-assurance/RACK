@@ -1,1 +1,92 @@
-{"sparqlConn":{"data":[{"type":"fuseki","url":"http://eic-60-182.galois.com:8080/fuseki/SemTK","graph":"http://rack001/data"}],"domain":"","name":"MyDB","model":[{"type":"fuseki","url":"http://eic-60-182.galois.com:8080/fuseki/SemTK","graph":"http://rack001/model"}],"enableOwlImports":true},"sNodeGroup":{"offset":0,"sNodeList":[{"isReturned":false,"propList":[{"KeyName":"uniqueIdentifier","optMinus":0,"isReturned":true,"Constraints":"","ValueType":"string","instanceValues":[],"isRuntimeConstrained":false,"isMarkedForDeletion":false,"SparqlID":"?uniqueIdentifier","relationship":"http://www.w3.org/2001/XMLSchema#string","fullURIName":"","UriRelationship":"http://arcos.rack/PROV-S#uniqueIdentifier"}],"NodeName":"FORMAT","subClassNames":[],"isRuntimeConstrained":false,"SparqlID":"?FORMAT","valueConstraint":"","deletionMode":"NO_DELETE","nodeList":[],"instanceValue":null,"fullURIName":"http://arcos.rack/SOFTWARE#FORMAT"}],"limit":0,"orderBy":[],"version":11},"importSpec":{"nodes":[{"mapping":[],"URILookupMode":"createIfMissing","sparqlID":"?FORMAT","type":"http://arcos.rack/SOFTWARE#FORMAT","props":[{"mapping":[{"colId":"col_0"}],"URILookup":["?FORMAT"],"URIRelation":"http://arcos.rack/PROV-S#uniqueIdentifier"}]}],"texts":[],"columns":[{"colName":"uniqueIdentifier","colId":"col_0"}],"baseURI":"http://arcos.data/format","dataValidator":[],"transforms":[],"version":"1"},"version":2}
+{
+    "importSpec": {
+        "baseURI": "http://arcos.data/format",
+        "columns": [
+            {
+                "colId": "col_0",
+                "colName": "uniqueIdentifier"
+            }
+        ],
+        "dataValidator": [],
+        "nodes": [
+            {
+                "URILookupMode": "createIfMissing",
+                "mapping": [],
+                "props": [
+                    {
+                        "URILookup": [
+                            "?FORMAT"
+                        ],
+                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "mapping": [
+                            {
+                                "colId": "col_0"
+                            }
+                        ]
+                    }
+                ],
+                "sparqlID": "?FORMAT",
+                "type": "http://arcos.rack/SOFTWARE#FORMAT"
+            }
+        ],
+        "texts": [],
+        "transforms": [],
+        "version": "1"
+    },
+    "sNodeGroup": {
+        "limit": 0,
+        "offset": 0,
+        "orderBy": [],
+        "sNodeList": [
+            {
+                "NodeName": "FORMAT",
+                "SparqlID": "?FORMAT",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/SOFTWARE#FORMAT",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "uniqueIdentifier",
+                        "SparqlID": "?uniqueIdentifier",
+                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [],
+                "valueConstraint": ""
+            }
+        ],
+        "version": 11
+    },
+    "sparqlConn": {
+        "data": [
+            {
+                "graph": "http://rack001/data",
+                "type": "fuseki",
+                "url": "http://eic-60-182.galois.com:8080/fuseki/SemTK"
+            }
+        ],
+        "domain": "",
+        "enableOwlImports": true,
+        "model": [
+            {
+                "graph": "http://rack001/model",
+                "type": "fuseki",
+                "url": "http://eic-60-182.galois.com:8080/fuseki/SemTK"
+            }
+        ],
+        "name": "MyDB"
+    },
+    "version": 2
+}

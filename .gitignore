@@ -2,6 +2,9 @@ RACK-Ontology/scripts/.project
 .pydevproject
 *.py[cod]
 
+# act
+.secrets
+
 # C extensions
 *.so
 

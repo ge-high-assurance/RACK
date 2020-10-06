@@ -3,7 +3,7 @@
 bindir=$(dirname ${0:-pwd})
 
 case $# in
-    1) INPDIR=${bindir}/../ontology;
+    1) INPDIR=${bindir}/../../ontology;
        OUTDIR=${1} ;;
     2) INPDIR=${1};
        OUTDIR=${2} ;;

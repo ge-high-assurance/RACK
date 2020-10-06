@@ -115,20 +115,20 @@
                 "SparqlID": "?TEST_EXECUTION",
                 "deletionMode": "NO_DELETE",
                 "fullURIName": "http://arcos.rack/TESTING#TEST_EXECUTION",
-                "isReturned": true,
+                "isReturned": false,
                 "isRuntimeConstrained": false,
                 "nodeList": [],
                 "propList": [
                     {
                         "Constraints": "",
                         "KeyName": "uniqueIdentifier",
-                        "SparqlID": "",
+                        "SparqlID": "?testExe",
                         "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": false,
+                        "isReturned": true,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
                         "relationship": "http://www.w3.org/2001/XMLSchema#string"
@@ -200,7 +200,7 @@
                         ],
                         "KeyName": "executedBy",
                         "OptionalMinus": [
-                            0
+                            "1"
                         ],
                         "Qualifiers": [
                             ""

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2086,SC2102,SC2044
 
-bindir=$(dirname ${0:-pwd})
+bindir=$(dirname "${0:-pwd}")
 
 usage() {
     echo Usage: $0 [INPUT_DIR] OUTPUT_DIR
@@ -20,10 +21,10 @@ case $# in
     *) usage
 esac
 
-if [ ! -d ${INPDIR} ] ; then
+if [ ! -d "${INPDIR}" ] ; then
     echo "ERROR: input directory ${INPDIR} does not exist"
     exit 1
-elif [ ! -d ${OUTDIR} ] ; then
+elif [ ! -d "${OUTDIR}" ] ; then
     echo "ERROR: output directory ${OUTDIR} does not exist"
     exit 1
 fi
@@ -31,9 +32,9 @@ fi
 convert_file() { # $1 = input .sadl file path, $2 = output dir path or file path
     inp=$1
     outp=${2:-"$(dirname $1)"}
-    if [ -d $outp ] ; then
+    if [ -d "$outp" ] ; then
         outp="${outp}/$(basename ${inp} .sadl).owl"
-    elif [ ! -d $(dirname ${outp}) ] ; then
+    elif [ ! -d "$(dirname ${outp})" ] ; then
         echo "ERROR: Cannot write to output directory or file: ${outp}"
         exit 1
     fi
@@ -54,7 +55,7 @@ for SFile in $(find ${INPDIR} -name '*.sadl') ; do
             continue 2
         fi
     done
-    convert_file ${SFile} ${OUTDIR} && ok=$(($ok+1)) || fail=$(($fail+1))
+    convert_file "${SFile}" "${OUTDIR}" && ok=$((ok+1)) || fail=$((fail+1))
 done
 
 echo Conversion results: $ok converted successfully, $fail failures

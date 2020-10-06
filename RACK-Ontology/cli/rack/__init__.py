@@ -199,6 +199,11 @@ def run_query(conn: Connection, nodegroup: str, format: ExportFormat = ExportFor
         with open(path, mode="w") as f:
             print(formatted_table, file=f)
 
+def run_count_query(conn: Connection, nodegroup: str) -> None:
+    semtk3.SEMTK3_CONN_OVERRIDE = conn
+    semtk_table = semtk3.count_by_id(nodegroup)
+    print(semtk_table.get_rows()[0][0])
+
 def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     """Ingest a CSV file using the named nodegroup."""
 
@@ -351,6 +356,10 @@ def dispatch_data_export(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
     run_query(conn, args.nodegroup, format=args.format, headers=not args.no_headers, path=args.file)
 
+def dispatch_data_count(args: SimpleNamespace) -> None:
+    conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
+    run_count_query(conn, args.nodegroup)
+
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
     ingest_data_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store, args.clear)
@@ -387,6 +396,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_subparsers = data_parser.add_subparsers(dest='command')
     data_import_parser = data_subparsers.add_parser('import', help='Import CSV data')
     data_export_parser = data_subparsers.add_parser('export', help='Export query results')
+    data_count_parser = data_subparsers.add_parser('count', help='Count matched query rows')
 
     model_parser = subparsers.add_parser('model', help='Interact with SemTK model')
     model_subparsers = model_parser.add_subparsers(dest='command')
@@ -411,6 +421,10 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_export_parser.add_argument('--no-headers', action='store_true', help='Omit header row')
     data_export_parser.add_argument('--file', type=Path, help='Output to file')
     data_export_parser.set_defaults(func=dispatch_data_export)
+
+    data_count_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
+    data_count_parser.add_argument('data_graph', type=str, help='Data graph URL')
+    data_count_parser.set_defaults(func=dispatch_data_count)
 
     model_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     model_import_parser.set_defaults(func=dispatch_model_import)

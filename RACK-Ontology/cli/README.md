@@ -215,6 +215,16 @@ See `rack data export --help` for options, including different export
 formats (such as CSV), emitting to a file, and omitting the header
 row.
 
+### Count result rows
+
+The number of results a nodegroup would generate can be obtained
+using the `count` sub-command.
+
+```shell
+(venv) $ rack data count "ingest07 test results" "http://rack001/data"
+16
+```
+
 ### Update Nodegroups
 
 The script can automate loading a directory full of nodegroups

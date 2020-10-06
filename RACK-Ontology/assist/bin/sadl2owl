@@ -2,17 +2,22 @@
 
 bindir=$(dirname ${0:-pwd})
 
+usage() {
+    echo Usage: $0 [INPUT_DIR] OUTPUT_DIR
+    echo ""
+    echo "   Converts SADL files in ontology directory into OWL files"
+    echo "   in the specified target directory"
+    exit 1
+}
+
+if [ "${1}" == "-h" ] ; then usage; fi
+
 case $# in
     1) INPDIR=${bindir}/../../ontology;
        OUTDIR=${1} ;;
     2) INPDIR=${1};
        OUTDIR=${2} ;;
-    *)
-        echo Usage: $0 [INPUT_DIR] OUTPUT_DIR
-        echo ""
-        echo "   Converts SADL files in ontology directory into OWL files"
-        echo "   in the specified target directory"
-        exit 1
+    *) usage
 esac
 
 if [ ! -d ${INPDIR} ] ; then

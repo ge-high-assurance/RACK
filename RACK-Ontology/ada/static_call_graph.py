@@ -35,11 +35,12 @@ class StaticCallGraphVisitor(AdaVisitor):
         params = get_params(spec)
         local_visitor = StaticCallGraphVisitor(name, params, self)
         local_visitor.visit(node.f_stmts)
+
+        defined = 'at the top-level'if self.caller == None else f'in {self.caller}'
+        print(f'{name.text} (defined {defined}) calls:')
         for callee in local_visitor.callees:
-            if callee in params:
-                print(f'{name.text} calls its parameter {callee}')
-            else:
-                print(f'{name.text} calls {callee}')
+            extra = '' if callee not in params else ' (which it receives as parameter)'
+            print(f' - {callee}{extra}')
 
     def visit_CallExpr(self, node):
         self.record_call(node.f_name.text)

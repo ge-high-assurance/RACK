@@ -15,13 +15,18 @@ class StaticCallGraphVisitor(AdaVisitor):
     '''
 
     def __init__(self, caller=None, params=[], parent=None):
+        # set of all callees witnessed for the current function/procedure
         self.callees = set()
+        # which function/procedure we are currently analyzing
         self.caller = caller
+        # formal names of parameters to the function we are analyzing
         self.params = params
+        # within which function/procedure was the current one defined
         self.parent = parent
         pass
 
     def record_call(self, callee):
+        '''Records a witnessed static function/procedure call to callee'''
         self.callees.add(callee)
 
     def visit_SubpBody(self, node):

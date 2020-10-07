@@ -5,9 +5,11 @@ ingest03 hazard,Ingest Hazard Data (Step 3),200001934,ingest03 hazard.json
 ingest04 requirement,Ingest Requirement Data (Step 4),200001934,ingest04 requirement.json
 ingest05 data dict,Ingest Data dictionary Data (Step 5),200001934,ingest05 data dict.json
 ingest06 test,Ingest Test Data (Step 6),200001934,ingest06 test.json
-ingest07 test results,Ingest Test Result Data (Step 7),200001934,ingest07 test results.json
 ingest08 agent,Ingest Agent Data (Step 8),200001934,ingest08 agent.json
 ingest09 package,Ingest Package Data (Step 9),eric,ingest09 package.json
 ingest10 compile,Ingest Compile Data (Step 10),eric,ingest10 compile.json
 ingest11 format,Ingestion for software file formats (Step 11),eric,ingest11 format.json
 ingest12 file,Ingestion for software files (Step 12),eric,ingest12 file.json
+ingest13 component,Ingest software components,eric,ingest13 component.json
+ingest07 test results,Ingest Test Result Data (Step 7),eric,ingest07 test results.json
+ingest14 confidence,Ingest Confidence Data (Step 14),eric,ingest14 confidence.json

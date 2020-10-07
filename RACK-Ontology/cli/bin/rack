@@ -1,5 +1,6 @@
 # -*- python -*-
 import logging
+import re
 import sys
 
 import colorama
@@ -66,4 +67,7 @@ if __name__ == "__main__":
         sys.exit(1)
     except ValidationError as exc:
         logger.error('Bad configuration file: %s\n%s', args.config, exc)
+        sys.exit(1)
+    except re.error as exc:
+        logger.error('Bad regular expression: %s\n%s', exc.pattern, exc.msg)
         sys.exit(1)

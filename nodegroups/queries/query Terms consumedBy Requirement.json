@@ -1,1 +1,186 @@
-{"sparqlConn":{"data":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/data"}],"domain":"","name":"RACK local fuseki","model":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}],"enableOwlImports":true},"sNodeGroup":{"offset":0,"sNodeList":[{"isReturned":false,"propList":[{"KeyName":"text","optMinus":0,"isReturned":true,"Constraints":"","ValueType":"string","instanceValues":[],"isRuntimeConstrained":false,"isMarkedForDeletion":false,"SparqlID":"?req_text","relationship":"http://www.w3.org/2001/XMLSchema#string","fullURIName":"","UriRelationship":"http://arcos.rack/REQUIREMENTS#text"},{"KeyName":"uniqueIdentifier","optMinus":0,"isReturned":true,"Constraints":"","ValueType":"string","instanceValues":[],"isRuntimeConstrained":false,"isMarkedForDeletion":false,"SparqlID":"?req_id","relationship":"http://www.w3.org/2001/XMLSchema#string","fullURIName":"","UriRelationship":"http://arcos.rack/PROV-S#uniqueIdentifier"}],"NodeName":"REQUIREMENT","subClassNames":[],"isRuntimeConstrained":false,"SparqlID":"?REQUIREMENT","valueConstraint":"","deletionMode":"NO_DELETE","nodeList":[],"instanceValue":null,"fullURIName":"http://arcos.rack/REQUIREMENTS#REQUIREMENT"},{"isReturned":false,"propList":[{"KeyName":"text","optMinus":0,"isReturned":true,"Constraints":"","ValueType":"string","instanceValues":[],"isRuntimeConstrained":false,"isMarkedForDeletion":false,"SparqlID":"?term_text","relationship":"http://www.w3.org/2001/XMLSchema#string","fullURIName":"","UriRelationship":"http://arcos.rack/REQUIREMENTS#text"},{"KeyName":"uniqueIdentifier","optMinus":0,"isReturned":true,"Constraints":"","ValueType":"string","instanceValues":[],"isRuntimeConstrained":true,"isMarkedForDeletion":false,"SparqlID":"?term_id","relationship":"http://www.w3.org/2001/XMLSchema#string","fullURIName":"","UriRelationship":"http://arcos.rack/PROV-S#uniqueIdentifier"}],"NodeName":"DATA_DICTIONARY_TERM","subClassNames":[],"isRuntimeConstrained":false,"SparqlID":"?DATA_DICTIONARY_TERM","valueConstraint":"","deletionMode":"NO_DELETE","nodeList":[{"KeyName":"consumedBy","SnodeSparqlIDs":["?REQUIREMENT"],"ValueType":"ENTITY","Connected":true,"DeletionMarkers":[false],"OptionalMinus":[0],"Qualifiers":[""],"UriConnectBy":"http://arcos.rack/REQUIREMENTS#consumedBy","ConnectBy":"consumedBy","UriValueType":"http://arcos.rack/PROV-S#ENTITY"}],"instanceValue":null,"fullURIName":"http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM"}],"limit":0,"orderBy":[],"version":11},"importSpec":{"nodes":[{"mapping":[],"sparqlID":"?DATA_DICTIONARY_TERM","type":"http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM","props":[]},{"mapping":[],"sparqlID":"?REQUIREMENT","type":"http://arcos.rack/REQUIREMENTS#REQUIREMENT","props":[]}],"texts":[],"columns":[{"colName":"partOfId","colId":"col_0"},{"colName":"producedBy","colId":"col_1"},{"colName":"provides","colId":"col_2"},{"colName":"requires","colId":"col_3"},{"colName":"systemId","colId":"col_4"}],"baseURI":"http://data/system","dataValidator":[],"transforms":[{"arg2":"","transType":"replaceAll","transId":"trans_0","arg1":"^null$","name":"rm_null"}],"version":"1"},"version":2}
+{
+    "importSpec": {
+        "baseURI": "http://data/system",
+        "columns": [
+            {
+                "colId": "col_0",
+                "colName": "partOfId"
+            },
+            {
+                "colId": "col_1",
+                "colName": "producedBy"
+            },
+            {
+                "colId": "col_2",
+                "colName": "provides"
+            },
+            {
+                "colId": "col_3",
+                "colName": "requires"
+            },
+            {
+                "colId": "col_4",
+                "colName": "systemId"
+            }
+        ],
+        "dataValidator": [],
+        "nodes": [
+            {
+                "mapping": [],
+                "props": [],
+                "sparqlID": "?DATA_DICTIONARY_TERM",
+                "type": "http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM"
+            },
+            {
+                "mapping": [],
+                "props": [],
+                "sparqlID": "?REQUIREMENT",
+                "type": "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
+            }
+        ],
+        "texts": [],
+        "transforms": [
+            {
+                "arg1": "^null$",
+                "arg2": "",
+                "name": "rm_null",
+                "transId": "trans_0",
+                "transType": "replaceAll"
+            }
+        ],
+        "version": "1"
+    },
+    "sNodeGroup": {
+        "limit": 0,
+        "offset": 0,
+        "orderBy": [],
+        "sNodeList": [
+            {
+                "NodeName": "REQUIREMENT",
+                "SparqlID": "?REQUIREMENT",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "text",
+                        "SparqlID": "?req_text",
+                        "UriRelationship": "http://arcos.rack/REQUIREMENTS#text",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    },
+                    {
+                        "Constraints": "",
+                        "KeyName": "uniqueIdentifier",
+                        "SparqlID": "?req_id",
+                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [],
+                "valueConstraint": ""
+            },
+            {
+                "NodeName": "DATA_DICTIONARY_TERM",
+                "SparqlID": "?DATA_DICTIONARY_TERM",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [
+                    {
+                        "ConnectBy": "consumedBy",
+                        "Connected": true,
+                        "DeletionMarkers": [
+                            false
+                        ],
+                        "KeyName": "consumedBy",
+                        "OptionalMinus": [
+                            0
+                        ],
+                        "Qualifiers": [
+                            ""
+                        ],
+                        "SnodeSparqlIDs": [
+                            "?REQUIREMENT"
+                        ],
+                        "UriConnectBy": "http://arcos.rack/REQUIREMENTS#consumedBy",
+                        "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+                        "ValueType": "ENTITY"
+                    }
+                ],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "text",
+                        "SparqlID": "?term_text",
+                        "UriRelationship": "http://arcos.rack/REQUIREMENTS#text",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    },
+                    {
+                        "Constraints": "",
+                        "KeyName": "uniqueIdentifier",
+                        "SparqlID": "?term_id",
+                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": true,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [],
+                "valueConstraint": ""
+            }
+        ],
+        "version": 11
+    },
+    "sparqlConn": {
+        "data": [
+            {
+                "graph": "http://rack001/data",
+                "type": "fuseki",
+                "url": "http://localhost:3030/RACK"
+            }
+        ],
+        "domain": "",
+        "enableOwlImports": true,
+        "model": [
+            {
+                "graph": "http://rack001/model",
+                "type": "fuseki",
+                "url": "http://localhost:3030/RACK"
+            }
+        ],
+        "name": "RACK local fuseki"
+    },
+    "version": 2
+}

@@ -2,6 +2,9 @@ RACK-Ontology/scripts/.project
 .pydevproject
 *.py[cod]
 
+# act
+.secrets
+
 # C extensions
 *.so
 
@@ -12,7 +15,6 @@ dist
 build
 eggs
 parts
-bin
 var
 sdist
 develop-eggs

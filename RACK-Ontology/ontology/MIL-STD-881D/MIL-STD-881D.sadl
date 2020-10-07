@@ -7,7 +7,9 @@ import "http://arcos.rack/DOCUMENT".
 // as you would only import a subset of them for the system under analysis.
 
 wbs (note "This is the WBS (Work Breakdown Structure) string from MIL-STD-881D") 
-    describes SYSTEM with a single value of type string.
+    describes SYSTEM with values of type string.
+
+wbs has a single value. // defines wbs to be "functional" and thus have *at most* one value
 
 // TBD: Need to identify issuingOrganization and approvalAuthority.
 MIL-STD-881D is a SPECIFICATION,

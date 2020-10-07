@@ -1,3 +1,4 @@
 mypy==0.782
+pylint==2.6.0
 pytest==6.0
 pytest-docker==0.8

@@ -1,0 +1,129 @@
+{
+    "importSpec": {
+        "baseURI": "",
+        "columns": [],
+        "dataValidator": [],
+        "nodes": [
+            {
+                "mapping": [],
+                "props": [],
+                "sparqlID": "?COMPONENT",
+                "type": "http://arcos.rack/SOFTWARE#COMPONENT"
+            },
+            {
+                "mapping": [],
+                "props": [],
+                "sparqlID": "?CONTROL_FLOWS_TO_UNCONDITIONALLY",
+                "type": "http://arcos.rack/SOFTWARE#COMPONENT"
+            }
+        ],
+        "texts": [],
+        "transforms": [],
+        "version": "1"
+    },
+    "sNodeGroup": {
+        "limit": 0,
+        "offset": 0,
+        "orderBy": [],
+        "sNodeList": [
+            {
+                "NodeName": "COMPONENT",
+                "SparqlID": "?CONTROL_FLOWS_TO_UNCONDITIONALLY",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/SOFTWARE#COMPONENT",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "name",
+                        "SparqlID": "?controlFlowsToUnconditionally",
+                        "UriRelationship": "http://arcos.rack/SOFTWARE#name",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [],
+                "valueConstraint": ""
+            },
+            {
+                "NodeName": "COMPONENT",
+                "SparqlID": "?COMPONENT",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/SOFTWARE#COMPONENT",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [
+                    {
+                        "ConnectBy": "controlFlowsToUnconditionally",
+                        "Connected": true,
+                        "DeletionMarkers": [
+                            false
+                        ],
+                        "KeyName": "controlFlowsToUnconditionally",
+                        "OptionalMinus": [
+                            "0"
+                        ],
+                        "Qualifiers": [
+                            ""
+                        ],
+                        "SnodeSparqlIDs": [
+                            "?CONTROL_FLOWS_TO_UNCONDITIONALLY"
+                        ],
+                        "UriConnectBy": "http://arcos.rack/SOFTWARE#controlFlowsToUnconditionally",
+                        "UriValueType": "http://arcos.rack/SOFTWARE#COMPONENT",
+                        "ValueType": "COMPONENT"
+                    }
+                ],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "name",
+                        "SparqlID": "?name",
+                        "UriRelationship": "http://arcos.rack/SOFTWARE#name",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": true,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [],
+                "valueConstraint": ""
+            }
+        ],
+        "version": 11
+    },
+    "sparqlConn": {
+        "data": [
+            {
+                "graph": "http://rack001/data",
+                "type": "fuseki",
+                "url": "http://eic-60-182.galois.com:8080/fuseki/SemTK"
+            }
+        ],
+        "domain": "",
+        "enableOwlImports": true,
+        "model": [
+            {
+                "graph": "http://rack001/model",
+                "type": "fuseki",
+                "url": "http://eic-60-182.galois.com:8080/fuseki/SemTK"
+            }
+        ],
+        "name": "MyDB"
+    },
+    "version": 2
+}

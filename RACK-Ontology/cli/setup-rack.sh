@@ -7,7 +7,9 @@ then
     exit 1
 fi
 
-rack model import ../OwlModels/import.yaml
+rack model import --clear ../OwlModels/import.yaml
+rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest[0-9]+" "^query "
 rack nodegroups import ../../nodegroups/ingestion
 rack nodegroups import ../../nodegroups/queries
 rack data import --clear ../models/TurnstileSystem/Data/import.yaml
+rack data import ../OwlModels/requirements.yaml

@@ -4,15 +4,17 @@
 # Script documentation is available in RACK-Ontology/scripts/README.md
 data-graph: "http://rack001/data"
 ingestion-steps:
-- {nodegroup: "ingest01 system",       csv: "SYSTEM.csv"              }
-- {nodegroup: "ingest02 interface",    csv: "INTERFACE.csv"           }
-- {nodegroup: "ingest03 hazard",       csv: "HAZARD.csv"              }
-- {nodegroup: "ingest04 requirement",  csv: "REQUIREMENT.csv"         }
-- {nodegroup: "ingest05 data dict",    csv: "DATA_DICTIONARY_TERM.csv"}
-- {nodegroup: "ingest06 test",         csv: "TEST.csv"                }
-- {nodegroup: "ingest07 test results", csv: "TEST_RESULTS.csv"        }
-- {nodegroup: "ingest08 agent",        csv: "AGENT.csv"               }
-- {nodegroup: "ingest09 package",      csv: "PACKAGE.csv"             }
-- {nodegroup: "ingest10 compile",      csv: "COMPILE.csv"             }
-- {nodegroup: "ingest11 format",       csv: "FORMAT.csv"              }
-- {nodegroup: "ingest12 file",         csv: "FILE.csv"                }
+- {nodegroup: "ingest01 system",       csv: "SYSTEM.csv"               }
+- {nodegroup: "ingest02 interface",    csv: "INTERFACE.csv"            }
+- {nodegroup: "ingest03 hazard",       csv: "HAZARD.csv"               }
+- {nodegroup: "ingest04 requirement",  csv: "REQUIREMENT.csv"          }
+- {nodegroup: "ingest05 data dict",    csv: "DATA_DICTIONARY_TERM.csv" }
+- {nodegroup: "ingest06 test",         csv: "TEST.csv"                 }
+- {nodegroup: "ingest07 test results", csv: "TEST_RESULTS.csv"         }
+- {nodegroup: "ingest08 agent",        csv: "AGENT.csv"                }
+- {nodegroup: "ingest09 package",      csv: "PACKAGE.csv"              }
+- {nodegroup: "ingest10 compile",      csv: "COMPILE.csv"              }
+- {nodegroup: "ingest11 format",       csv: "FORMAT.csv"               }
+- {nodegroup: "ingest12 file",         csv: "FILE.csv"                 }
+- {nodegroup: "ingest13 component",    csv: "COMPONENT.csv"            }
+- {nodegroup: "ingest14 confidence",   csv: "CONFIDENCE_ASSESSMENT.csv"}

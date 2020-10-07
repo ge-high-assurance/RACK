@@ -1,0 +1,84 @@
+
+* Areas for improvement/investigation
+** Write more recognizers
+    Fill out the Turnstile example, guided by missing field values in
+    the ~analyze -i 'http://testdata.org/'~ output by writing either
+    ~data_instance~ or ~data_get~ rules.
+
+    * Capture user (AGENT) who runs build
+    * Use `nm` command to capture list of functions in object files
+    * Try a sample ADA codebase (e.g. https://github.com/psyomn/ash)
+
+*** Helpful information
+
+    * Debugging note: insert ~write(X),write(Y),nl,~ lines into
+      existing rules: they will be printed to stdout as the rule
+      checking crosses that point.  ~X~ and ~Y~ can be strings,
+      numbers, atoms, or variables that you want to see.
+    * Debugging note 2: write a rule like the following to see all the
+      fields tested and the corresponding data for a specific class
+      (here, SOFTWARE#FILE):
+          data_get('SOFTWARE#FILE', Field, Data, V) :-
+            write('FILE.'),write(Field),write(' from '),write(Data),write('?'),nl,fail.
+** Investigate ELF contents
+    * How much provenance data is recorded in ELF optional sections?  Do
+      we need compiler/linker wrappers or can we post-extract that
+      information from output files?
+    * Also see the ~-frecord-gcc-switches~ flag Langston found.  Maybe
+      the wrapper just adds that switch, then we post-extract.
+** Investigate http://github.com/trailofbits/blight as wrapper alternative
+** Write more checks
+    * Unconnected node clusters in a namespace?  Probably something
+      missing/wrong.
+    * others?
+** Possibility for use on or in relation to existing issues
+    * https://github.com/ge-high-assurance/RACK/wiki/Multiple-Source-Data-Resolution
+    * https://github.com/ge-high-assurance/RACK/issues/132
+    * "Type" validation?  See
+      https://github.com/ge-high-assurance/RACK/issues/69 where there was confusion between:
+
+      #+BEGIN_EXAMPLE
+      PRECONDITION is a ANALYSIS_ANNOTATION_TYPE.
+      #+END_EXAMPLE
+
+      and
+
+      #+BEGIN_EXAMPLE
+      PRECONDITION is a type of ANALYSIS_ANNOTATION_TYPE.
+      #+END_EXAMPLE
+
+      Using the analyze tool, the former (preferred) results in:
+
+#+BEGIN_EXAMPLE
+rack:ANALYSIS#ANALYSIS_ANNOTATION_TYPE  :: owl:Class
+  An open/extensible set of types of analysis annotations@en
+  () of 3 instances in http://arcos.rack/ANALYSIS#
+    = http://arcos.rack/ANALYSIS#POSTCONDITION
+    = http://arcos.rack/ANALYSIS#INVARIANT
+    = http://arcos.rack/ANALYSIS#PRECONDITION
+
+#+END_EXAMPLE
+
+       and the latter results in:
+
+#+BEGIN_EXAMPLE
+rack:ANALYSIS#ANALYSIS_ANNOTATION_TYPE  :: owl:Class
+  An open/extensible set of types of analysis annotations@en
+  ^-- http://arcos.rack/ANALYSIS#PRECONDITION  ..... :: owl:Class
+  () of 2 instances in http://arcos.rack/ANALYSIS#
+    = http://arcos.rack/ANALYSIS#POSTCONDITION
+    = http://arcos.rack/ANALYSIS#INVARIANT
+
+rack:ANALYSIS#ANALYSIS_ANNOTATION_TYPE.rack:ANALYSIS#PRECONDITION  :: owl:Class
+  A constraint that should hold in advance of successful operation of this unit of code. @ en
+
+#+END_EXAMPLE
+
+       Is it somehow possible to identify this issue and alert on it
+       during the ~check~ tool?
+
+       * A class with instances *and* a subclass?
+       * A subclass with no properties?
+       * Should ANALYSIS_ANNOTATION_TYPE have a ~owl:Restriction ->
+         owl:allValuesFrom~ restriction (see above)?
+       * Some sort of type analysis related to the above?

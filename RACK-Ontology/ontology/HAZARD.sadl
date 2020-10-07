@@ -10,6 +10,9 @@ HAZARD
 	source (note "ENTITY(s) that participate in causing this HAZARD") describes HAZARD with values of type ENTITY.
 	source is a type of wasDerivedFrom.
 
+   identified (note "how this HAZARD was identified") describes HAZARD with values of type HAZARD_IDENTIFICATION.
+   identified is a type of wasGeneratedBy.
+
 HAZARD_IDENTIFICATION
 	(note "ACTIVITY that identifies potential sources of HAZARD whose risk must be evaluated")
 	is a type of ACTIVITY.

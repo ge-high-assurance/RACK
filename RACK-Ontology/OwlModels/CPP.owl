@@ -37,8 +37,7 @@
             </j.0:definedIn>
             <j.0:annotations>
               <j.1:ANALYSIS_ANNOTATION rdf:ID="STATE_INVARIANT">
-                <j.1:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                >This variable is non-negative.</j.1:description>
+                <j.1:description>This variable is non-negative.</j.1:description>
                 <j.1:annotationType rdf:resource="http://arcos.rack/ANALYSIS#INVARIANT"/>
                 <j.1:fromReport>
                   <j.1:ANALYSIS_REPORT rdf:ID="INTERVAL_ANALYSIS_REPORT">
@@ -50,21 +49,17 @@
             <j.0:subcomponentOf>
               <j.0:COMPONENT rdf:ID="GENERATOR">
                 <j.0:definedIn rdf:resource="#EXAMPLE_CPP"/>
-                <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-                >Generator</j.0:name>
-                <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#CLASS"/>
+                <j.0:name>Generator</j.0:name>
+                <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#CLASS_DEFINITION"/>
               </j.0:COMPONENT>
             </j.0:subcomponentOf>
-            <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >int</j.0:valueType>
-            <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >state</j.0:name>
+            <j.0:valueType>int</j.0:valueType>
+            <j.0:name>state</j.0:name>
             <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#CLASS_MEMBER_VARIABLE"/>
           </j.0:COMPONENT>
         </j.0:mentions>
         <j.0:definedIn rdf:resource="#EXAMPLE_CPP"/>
-        <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >()</j.0:valueType>
+        <j.0:valueType>()</j.0:valueType>
         <j.0:subcomponentOf rdf:resource="#GENERATOR"/>
         <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#CLASS_CONSTRUCTOR"/>
       </j.0:COMPONENT>
@@ -74,10 +69,8 @@
         <j.0:mentions rdf:resource="#GENERATOR_STATE"/>
         <j.0:definedIn rdf:resource="#EXAMPLE_CPP"/>
         <j.0:subcomponentOf rdf:resource="#GENERATOR"/>
-        <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >int()</j.0:valueType>
-        <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >next</j.0:name>
+        <j.0:valueType>int()</j.0:valueType>
+        <j.0:name>next</j.0:name>
         <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#CLASS_METHOD"/>
       </j.0:COMPONENT>
     </j.0:mentions>
@@ -87,8 +80,7 @@
         <j.0:definedIn>
           <j.0:FILE rdf:ID="LIBCPP"/>
         </j.0:definedIn>
-        <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >operator&lt;&lt;</j.0:name>
+        <j.0:name>operator&lt;&lt;</j.0:name>
         <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
       </j.0:COMPONENT>
     </j.0:mentions>
@@ -96,27 +88,21 @@
     <j.0:mentions>
       <j.0:COMPONENT rdf:ID="ENDL">
         <j.0:definedIn rdf:resource="#LIBCPP"/>
-        <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >template&lt; class CharT, class Traits &gt; std::basic_ostream&lt;CharT, Traits&gt;&amp; ( std::basic_ostream&lt;CharT, Traits&gt;&amp;)</j.0:valueType>
-        <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >std::cout</j.0:name>
+        <j.0:valueType>template&lt; class CharT, class Traits &gt; std::basic_ostream&lt;CharT, Traits&gt;&amp; ( std::basic_ostream&lt;CharT, Traits&gt;&amp;)</j.0:valueType>
+        <j.0:name>std::cout</j.0:name>
         <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_GLOBAL_VARIABLE"/>
       </j.0:COMPONENT>
     </j.0:mentions>
-    <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >main</j.0:name>
+    <j.0:name>main</j.0:name>
     <j.0:definedIn rdf:resource="#EXAMPLE_CPP"/>
     <j.0:mentions>
       <j.0:COMPONENT rdf:ID="COUT">
         <j.0:definedIn rdf:resource="#LIBCPP"/>
-        <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >std::ostream</j.0:valueType>
-        <j.0:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >std::cout</j.0:name>
+        <j.0:valueType>std::ostream</j.0:valueType>
+        <j.0:name>std::cout</j.0:name>
         <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_GLOBAL_VARIABLE"/>
       </j.0:COMPONENT>
     </j.0:mentions>
-    <j.0:valueType rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >int(int,char*[])</j.0:valueType>
+    <j.0:valueType>int(int,char*[])</j.0:valueType>
   </j.0:COMPONENT>
 </rdf:RDF>

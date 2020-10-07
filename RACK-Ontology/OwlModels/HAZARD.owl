@@ -24,6 +24,12 @@
     <rdfs:comment xml:lang="en">ACTIVITY that identifies potential sources of HAZARD whose risk must be evaluated</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
+  <owl:ObjectProperty rdf:ID="identified">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
+    <rdfs:comment xml:lang="en">how this HAZARD was identified</rdfs:comment>
+    <rdfs:range rdf:resource="#HAZARD_IDENTIFICATION"/>
+    <rdfs:domain rdf:resource="#HAZARD"/>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="author">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
     <rdfs:comment xml:lang="en">AGENT(s) who work on this ACTIVITY</rdfs:comment>

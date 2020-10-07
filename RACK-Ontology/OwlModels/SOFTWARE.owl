@@ -18,11 +18,11 @@
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'SOFTWARE.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
   <owl:Class rdf:ID="CODE_GEN">
-    <rdfs:comment xml:lang="en">ACTIVITY of running a CODE_GENERATOR to create CODE_FILEs</rdfs:comment>
+    <rdfs:comment xml:lang="en">ACTIVITY of running a CODE_GENERATOR to create source code FILEs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="COMPILE">
-    <rdfs:comment xml:lang="en">ACTIVITY of running a a COMPILER to produce EXECUTABLEs or OBJECT_FILEs</rdfs:comment>
+    <rdfs:comment xml:lang="en">ACTIVITY of running a a COMPILER to produce executable and object FILEs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="BUILD">
@@ -54,11 +54,11 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="PACKAGE">
-    <rdfs:comment xml:lang="en">ACTIVITY of running a PACKAGER to produce a PACKAGE_FILE</rdfs:comment>
+    <rdfs:comment xml:lang="en">ACTIVITY of running a PACKAGER to produce a package FILE</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="CODE_DEVELOPMENT">
-    <rdfs:comment xml:lang="en">An ACTIVITY that produces CODE_FILEs</rdfs:comment>
+    <rdfs:comment xml:lang="en">An ACTIVITY that produces source code FILEs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="packageInput">
@@ -106,7 +106,7 @@
     <rdfs:domain rdf:resource="#COMPONENT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="definedIn">
-    <rdfs:comment xml:lang="en">Defining entity of this code structure. This could be a CODE_FILE, LIBRARY, etc.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Defining entity of this code structure. This is typically a FILE.</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#COMPONENT"/>
   </owl:ObjectProperty>
@@ -201,58 +201,47 @@
     <rdfs:domain rdf:resource="#FILE"/>
   </owl:DatatypeProperty>
   <sw:COMPONENT_TYPE rdf:ID="MODULE">
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >MODULE</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>MODULE</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A collection of related code, usually grouped in a lexical scope.</rdfs:comment>
   </sw:COMPONENT_TYPE>
-  <sw:COMPONENT_TYPE rdf:ID="CLASS">
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >CLASS</j.0:uniqueIdentifier>
-    <rdfs:comment xml:lang="en">A class in an object-oriented language.</rdfs:comment>
-  </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="CLASS_CONSTRUCTOR">
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >CLASS_CONSTRUCTOR</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>CLASS_CONSTRUCTOR</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A constructor in an object-oriented language.</rdfs:comment>
   </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="SOURCE_FUNCTION">
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >SOURCE_FUNCTION</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>SOURCE_FUNCTION</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A function or procedure declared or defined in source code.</rdfs:comment>
   </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="BINARY_BASIC_BLOCK">
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >BINARY_BASIC_BLOCK</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>BINARY_BASIC_BLOCK</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A basic block at the binary level.</rdfs:comment>
   </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="BINARY_GLOBAL_VARIABLE">
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >BINARY_GLOBAL_VARIABLE</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>BINARY_GLOBAL_VARIABLE</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A global variable (generally in the .data or .bss sections).</rdfs:comment>
   </sw:COMPONENT_TYPE>
+  <sw:COMPONENT_TYPE rdf:ID="CLASS_DEFINITION">
+    <j.0:uniqueIdentifier>CLASS</j.0:uniqueIdentifier>
+    <rdfs:comment xml:lang="en">A class in an object-oriented language.</rdfs:comment>
+  </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="CLASS_METHOD">
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >CLASS_METHOD</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>CLASS_METHOD</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A method attached to a class in an object-oriented language.</rdfs:comment>
   </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="BINARY_FUNCTION">
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >BINARY_FUNCTION</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>BINARY_FUNCTION</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A function in a binary, as defined by the appropriate ABI.</rdfs:comment>
   </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="SOURCE_GLOBAL_VARIABLE">
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >SOURCE_GLOBAL_VARIABLE</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>SOURCE_GLOBAL_VARIABLE</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A global variable declared or defined in source code.</rdfs:comment>
   </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="NAMESPACE">
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >NAMESPACE</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>NAMESPACE</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A collection of related code, usually grouped in a lexical scope.</rdfs:comment>
   </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="CLASS_MEMBER_VARIABLE">
-    <j.0:uniqueIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >CLASS_MEMBER_VARIABLE</j.0:uniqueIdentifier>
+    <j.0:uniqueIdentifier>CLASS_MEMBER_VARIABLE</j.0:uniqueIdentifier>
     <rdfs:comment xml:lang="en">A variable attached to the instances of a class in an object-oriented language.</rdfs:comment>
   </sw:COMPONENT_TYPE>
 </rdf:RDF>

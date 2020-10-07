@@ -12,6 +12,7 @@ import json
 import logging
 from os import environ
 from pathlib import Path
+import re
 import sys
 from typing import Any, Callable, Dict, List, Optional, NewType, TypeVar, cast
 from types import SimpleNamespace
@@ -198,6 +199,11 @@ def run_query(conn: Connection, nodegroup: str, format: ExportFormat = ExportFor
         with open(path, mode="w") as f:
             print(formatted_table, file=f)
 
+def run_count_query(conn: Connection, nodegroup: str) -> None:
+    semtk3.SEMTK3_CONN_OVERRIDE = conn
+    semtk_table = semtk3.count_by_id(nodegroup)
+    print(semtk_table.get_rows()[0][0])
+
 def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     """Ingest a CSV file using the named nodegroup."""
 
@@ -251,7 +257,7 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Ur
         elif 'csv' in step:
             ingest_csv(conn, step['nodegroup'], base_path / step['csv'])
 
-def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url]) -> None:
+def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple OWL files into the model graph."""
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
@@ -262,7 +268,9 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
 
     conn = sparql_connection(base_url, None, triple_store)
 
-    clear_graph(conn, which_graph=Graph.MODEL)
+    if clear:
+        clear_graph(conn, which_graph=Graph.MODEL)
+
     for file in files:
         ingest_owl(conn, base_path / file)
 
@@ -302,24 +310,30 @@ def delete_nodegroup(nodegroup: str) -> None:
         semtk3.delete_nodegroup_from_store(nodegroup)
     delete()
 
-def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, yes: bool, base_url: Url) -> None:
+def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, yes: bool, use_regexp: bool, base_url: Url) -> None:
     if not nodegroups:
         print('No nodegroups specified for deletion: doing nothing.')
         return
 
     sparql_connection(base_url, None, None)
     allIDs = semtk3.get_nodegroup_store_data().get_column('ID')
-    nonexistent = [n for n in nodegroups if n not in allIDs]
-    to_delete = [n for n in nodegroups if n in allIDs]
+
+    if use_regexp:
+        regexps = [re.compile(regex_str) for regex_str in nodegroups]
+        nonexistent = [r.pattern for r in regexps if not any(r.search(i) for i in allIDs)]
+        to_delete = [i for i in allIDs if any(r.search(i) for r in regexps)]
+    else:
+        nonexistent = [n for n in nodegroups if n not in allIDs]
+        to_delete = [n for n in nodegroups if n in allIDs]
 
     if nonexistent:
-        print('The following nodegroups do not exist: {}'.format(' '.join(nonexistent)))
+        print('The following nodegroups do not exist: {}'.format(', '.join(str_highlight(s) for s in nonexistent)))
         if not ignore_nonexistent:
             print(str_bad('Aborting. Remove the nonexistent IDs or use --ignore-nonexistent.'))
             sys.exit(1)
 
     if not yes:
-        print('The following nodegroups would be removed: {}'.format(' '.join(str_highlight(s) for s in to_delete)))
+        print('The following nodegroups would be removed: {}'.format(', '.join(str_highlight(s) for s in to_delete)))
 
     def on_confirmed() -> None:
         for nodegroup in to_delete:
@@ -342,13 +356,17 @@ def dispatch_data_export(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
     run_query(conn, args.nodegroup, format=args.format, headers=not args.no_headers, path=args.file)
 
+def dispatch_data_count(args: SimpleNamespace) -> None:
+    conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
+    run_count_query(conn, args.nodegroup)
+
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
     ingest_data_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store, args.clear)
 
 def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
-    ingest_owl_driver(Path(args.config), args.base_url, args.triple_store)
+    ingest_owl_driver(Path(args.config), args.base_url, args.triple_store, args.clear)
 
 def dispatch_nodegroups_import(args: SimpleNamespace) -> None:
     store_nodegroups_driver(args.directory, args.base_url)
@@ -360,7 +378,7 @@ def dispatch_nodegroups_list(args: SimpleNamespace) -> None:
     list_nodegroups_driver(args.base_url)
 
 def dispatch_nodegroups_delete(args: SimpleNamespace) -> None:
-    delete_nodegroups_driver(args.nodegroups, args.ignore_nonexistent, args.yes, args.base_url)
+    delete_nodegroups_driver(args.nodegroups, args.ignore_nonexistent, args.yes, args.regexp, args.base_url)
 
 def dispatch_nodegroups_deleteall(args: SimpleNamespace) -> None:
     delete_all_nodegroups_driver(args.yes, args.base_url)
@@ -378,6 +396,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_subparsers = data_parser.add_subparsers(dest='command')
     data_import_parser = data_subparsers.add_parser('import', help='Import CSV data')
     data_export_parser = data_subparsers.add_parser('export', help='Export query results')
+    data_count_parser = data_subparsers.add_parser('count', help='Count matched query rows')
 
     model_parser = subparsers.add_parser('model', help='Interact with SemTK model')
     model_subparsers = model_parser.add_subparsers(dest='command')
@@ -403,8 +422,13 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_export_parser.add_argument('--file', type=Path, help='Output to file')
     data_export_parser.set_defaults(func=dispatch_data_export)
 
+    data_count_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
+    data_count_parser.add_argument('data_graph', type=str, help='Data graph URL')
+    data_count_parser.set_defaults(func=dispatch_data_count)
+
     model_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     model_import_parser.set_defaults(func=dispatch_model_import)
+    model_import_parser.add_argument('--clear', action='store_true', help='Clear model graph before import')
 
     nodegroups_import_parser.add_argument('directory', type=str, help='Nodegroup directory')
     nodegroups_import_parser.set_defaults(func=dispatch_nodegroups_import)
@@ -418,6 +442,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     nodegroups_delete_parser.add_argument('nodegroups', type=str, nargs='+', help='IDs of nodegroups to be removed')
     nodegroups_delete_parser.add_argument('--ignore-nonexistent', action='store_true', help='Ignore nonexistent IDs')
     nodegroups_delete_parser.add_argument('--yes', action='store_true', help='Automatically confirm deletion')
+    nodegroups_delete_parser.add_argument('--regexp', action='store_true', help='Match nodegroup ID with regular expression')
     nodegroups_delete_parser.set_defaults(func=dispatch_nodegroups_delete)
 
     nodegroups_deleteall_parser.add_argument('--yes', action='store_true', help='Automatically confirm deletion')

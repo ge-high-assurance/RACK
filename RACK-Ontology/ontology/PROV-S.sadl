@@ -4,7 +4,7 @@ uri "http://arcos.rack/PROV-S" alias provs
 THING (note "A piece of data stored in RACK") is a class.
 	uniqueIdentifier (note "uniqueIdentifier is any data item that is used to associate items on when loading into the data store, and must be unique across the entire data set.") describes THING with values of type string.
 	dataInsertedBy (note "The activity that caused this data to be added to RACK") describes THING with values of type ACTIVITY.
-    hasAttribute (note "") describes THING with values of type ATTRIBUTE.
+    hasAttribute (note "An extensible attribute instance") describes THING with values of type ATTRIBUTE.
 
 ENTITY (note "An entity is a physical, digital, conceptual, or other kind of thing with some fixed aspects; entities may be real or imaginary.")
     is a type of THING.
@@ -16,7 +16,7 @@ ENTITY (note "An entity is a physical, digital, conceptual, or other kind of thi
 
 COLLECTION (note "A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.")
     is a type of ENTITY.
-	hadMember (note "A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.") describes COLLECTION with values of type ENTITY.
+	content (note "A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.") describes COLLECTION with values of type ENTITY.
 
 AGENT (note "An agent is something that bears some form of responsibility for an activity taking place, for the existence of an entity, or for another agent's activity.")
     is a type of THING.
@@ -35,5 +35,5 @@ FIELD (note "Categories of information that can be associated with data in the o
 
 ATTRIBUTE (note "Extensible key-value pair information attached to a data element")
   is a type of THING
-  described by field with a single value of type FIELD
-  described by fieldValue with a single value of type string.
+  described by field (note "extensible field") with a single value of type FIELD
+  described by fieldValue (note "extensible field value") with a single value of type string.

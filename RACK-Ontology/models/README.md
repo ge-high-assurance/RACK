@@ -1,5 +1,3 @@
-# RACK
-DARPA's Automated Rapid Certification of Software (ARCOS) project called Rapid Assurance Curation Kit (RACK) 
+# RACK models
 
-Team Members:
-
+Contains example models built using the RACK Ontology.

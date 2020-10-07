@@ -4,7 +4,7 @@ import "http://TurnstileSystem/CounterApplicationLLR".
 import "http://TurnstileSystem/CounterApplicationRequirements".
 import "http://TurnstileSystem/CounterApplicationTesting".
 import "http://TurnstileSystem/CounterApplicationUnitTesting".
-import "http://TurnstileSystem/HazardAssesment". //rename HazardAssesment.sadl file to correct spelling
+import "http://TurnstileSystem/HazardAssessment".
 import "http://TurnstileSystem/InGateRequirement". //rename as we use InGateRequirements.sadl and in it we have InGateRequirement
 import "http://TurnstileSystem/Turnstiles".
 
@@ -123,7 +123,7 @@ Write: data
   Ask: "select distinct ?uniqueIdentifier ?performedById ?compiledById ?compileInputId where
         {  ?COMPILE <rdf:type> <COMPILE>
          . ?COMPILE <uniqueIdentifier> ?uniqueIdentifier
-         . OPTIONAL{  ?COMPILE <performedBy> ?performedBy
+         . OPTIONAL{  ?COMPILE <sw:performedBy> ?performedBy
                     . ?performedBy <rdf:type> <AGENT>
                     . ?performedBy <uniqueIdentifier> ?performedById
                    }
@@ -144,7 +144,7 @@ Write: data
   Ask: "select distinct ?uniqueIdentifier ?performedById ?packagedById ?packageInputId where
         {  ?PACKAGE <rdf:type> <PACKAGE>
         . ?PACKAGE <uniqueIdentifier> ?uniqueIdentifier
-        . OPTIONAL{ ?PACKAGE <performedBy> ?performedBy
+        . OPTIONAL{ ?PACKAGE <sw:performedBy> ?performedBy
                   . ?performedBy <rdf:type> <AGENT>
                   . ?performedBy <uniqueIdentifier> ?performedById
                   }
@@ -162,11 +162,12 @@ Write: data
 // list all FILE
 Write: data
 {
-  Ask: "select distinct ?uniqueIdentifier ?createById ?formatId where
+  Ask: "select distinct ?uniqueIdentifier ?createById ?formatId ?filename where
         {  ?FILE <rdf:type> <FILE>
          . ?FILE <uniqueIdentifier> ?uniqueIdentifier
-         . OPTIONAL{  ?FILE <createBy> ?createBy
-                    . ?createBy <rdf:type> <ACTIVITY>
+		 . OPTIONAL{ ?FILE <filename> ?filename }
+         . OPTIONAL{  ?FILE <sw:createBy> ?createBy
+                    . ?createBy <rdf:type> <COMPILE>
                     . ?createBy <uniqueIdentifier> ?createById
                    }
          . OPTIONAL{  ?FILE <fileFormat> ?format
@@ -175,3 +176,69 @@ Write: data
                     }
         } order by ?uniqueIdentifier".
 } to "models/TurnstileSystem/Data/FILE.csv".
+
+// list all COMPONENT
+Write: data
+{
+  Ask: "select distinct ?uniqueIdentifier ?name ?componentTypeId ?valueType ?instantiateId ?definedInId ?mentionId ?subcomponentId ?requirementId ?annotationId ?controlFlowsToConditionallyId ?controlFlowsToUnconditionallyId  where
+        { ?COMPONENT <rdf:type> <COMPONENT>
+        . ?COMPONENT <uniqueIdentifier> ?uniqueIdentifier
+		. ?COMPONENT <componentType> ?componentType
+	    . ?componentType <rdf:type> <COMPONENT_TYPE>
+        . ?componentType <uniqueIdentifier> ?componentTypeId
+		. OPTIONAL{ ?COMPONENT <sw:name> ?name }
+		. OPTIONAL{ ?COMPONENT <valueType> ?valueType }
+        . OPTIONAL{ ?COMPONENT <instantiates> ?instantiates
+                  . ?instantiates <rdf:type> <ENTITY>
+                  . ?instantiates <uniqueIdentifier> ?instantiatesId
+                  }
+        . OPTIONAL{ ?COMPONENT <definedIn> ?definedIn
+                  . ?definedIn <rdf:type> <FILE>
+                  . ?definedIn <uniqueIdentifier> ?definedInId
+                  }
+        . OPTIONAL{ ?COMPONENT <mentions> ?mentions
+                  . ?mentions <rdf:type> <ENTITY>
+                  . ?mentions <uniqueIdentifier> ?mentionsId
+                  }
+        . OPTIONAL{ ?COMPONENT <subcomponentOf> ?subcomponentOf
+                  . ?subcomponentOf <rdf:type> <COMPONENT>
+                  . ?subcomponentOf <uniqueIdentifier> ?subcomponentOfId
+                  }
+        . OPTIONAL{ ?COMPONENT <requirements> ?requirements
+                  . ?requirements <rdf:type> <ENTITY>
+                  . ?requirements <uniqueIdentifier> ?requirementsId
+                  }
+        . OPTIONAL{ ?COMPONENT <annotations> ?annotations
+                  . ?annotations <rdf:type> <ENTITY>
+                  . ?annotations <uniqueIdentifier> ?annotationsId
+                  }
+        . OPTIONAL{ ?COMPONENT <controlFlowsToUnconditionally> ?controlFlowsToUnconditionally
+                  . ?controlFlowsToUnconditionally <rdf:type> <COMPONENT>
+                  . ?controlFlowsToUnconditionally <uniqueIdentifier> ?controlFlowsToUnconditionallyId
+                  }
+        . OPTIONAL{ ?COMPONENT <controlFlowsToConditionally> ?controlFlowsToConditionally
+                  . ?controlFlowsToConditionally <rdf:type> <COMPONENT>
+                  . ?controlFlowsToConditionally <uniqueIdentifier> ?controlFlowsToConditionallyId
+                  }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/COMPONENT.csv".
+
+// list all CONFIDENCE_ASSESSMENT
+Write: data
+{
+  Ask: "select distinct ?assessmentId ?createById ?assesseeId ?belief ?disbelief ?uncertainty where
+        {  ?CONFIDENCE_ASSESSMENT <rdf:type> <CONFIDENCE_ASSESSMENT>
+         . ?CONFIDENCE_ASSESSMENT <uniqueIdentifier> ?assessmentId
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:createBy> ?createBy
+                    . ?createBy <rdf:type> <ACTIVITY>
+                    . ?createBy <uniqueIdentifier> ?createById
+                   }
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:assesses> ?assessee
+                    . ?assessee <rdf:type> <TEST_RESULT>
+                    . ?assessee <uniqueIdentifier> ?assesseeId
+                   }
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:belief> ?belief }
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:disbelief> ?disbelief }
+         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:uncertainty> ?uncertainty }
+        } order by ?uniqueIdentifier".
+} to "models/TurnstileSystem/Data/CONFIDENCE_ASSESSMENT.csv".

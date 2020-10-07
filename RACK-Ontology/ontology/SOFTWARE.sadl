@@ -23,7 +23,7 @@ FILE_CREATION
    is a type of ACTIVITY.
 
 CODE_DEVELOPMENT
-	(note "An ACTIVITY that produces CODE_FILEs")
+	(note "An ACTIVITY that produces source code FILEs")
 	is a type of FILE_CREATION.
 
     author (note "AGENT(s) who participated in this ACTIVITY") describes CODE_DEVELOPMENT with values of type AGENT.
@@ -42,13 +42,13 @@ BUILD
     step is a type of wasInformedBy.
 
 CODE_GEN
-	(note "ACTIVITY of running a CODE_GENERATOR to create CODE_FILEs")
+	(note "ACTIVITY of running a CODE_GENERATOR to create source code FILEs")
 	is a type of FILE_CREATION.
-    performedBy (note "CODE_GENERATOR(s) generating the code") describes CODE_GEN with values of type AGENT.
+    performedBy (note "AGENT(s) (e.g. CODE_GENERATOR) generating the code") describes CODE_GEN with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
 
 COMPILE
-	(note "ACTIVITY of running a a COMPILER to produce EXECUTABLEs or OBJECT_FILEs")
+	(note "ACTIVITY of running a a COMPILER to produce executable and object FILEs")
 	is a type of FILE_CREATION.
     performedBy (note "AGENT(s) (e.g. COMPILER) performing the compilation") describes COMPILE with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
@@ -60,8 +60,9 @@ COMPILE
     compileInput is a type of used.
 
 PACKAGE
-	(note "ACTIVITY of running a PACKAGER to produce a PACKAGE_FILE")
+	(note "ACTIVITY of running a PACKAGER to produce a package FILE")
 	is a type of FILE_CREATION.
+
     performedBy (note "AGENT(s) (e.g. PACKAGER) performing the packaging") describes PACKAGE with values of type AGENT.
     performedBy is a type of wasAssociatedWith.
 
@@ -96,7 +97,7 @@ BINARY_BASIC_BLOCK
     (note "A basic block at the binary level.")
     is a COMPONENT_TYPE
     has uniqueIdentifier "BINARY_BASIC_BLOCK".
-CLASS
+CLASS_DEFINITION
     (note "A class in an object-oriented language.")
     is a COMPONENT_TYPE
     has uniqueIdentifier "CLASS".
@@ -126,7 +127,7 @@ COMPONENT is a type of ENTITY.
     componentType describes COMPONENT with a single value of type COMPONENT_TYPE.
     valueType (note "The type of this value, if applicable (e.g. for functions or variables).") describes COMPONENT with values of type string.
     instantiates (note "What logical component (system) does this physical component (code) instantiate or implement?") describes COMPONENT with values of type ENTITY.
-    definedIn (note "Defining entity of this code structure. This could be a CODE_FILE, LIBRARY, etc.") describes COMPONENT with values of type ENTITY.
+    definedIn (note "Defining entity of this code structure. This is typically a FILE.") describes COMPONENT with values of type ENTITY.
     mentions (note "A component referenced by this one, e.g., a callee or variable being used.") describes COMPONENT with values of type ENTITY.
     subcomponentOf (note "A structural sub-component, e.g., a function might be a subcomponent of module.") describes COMPONENT with values of type ENTITY.
     requirements (note "Low-level requirements that apply to this component.") describes COMPONENT with values of type ENTITY.

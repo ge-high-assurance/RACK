@@ -1,6 +1,10 @@
 uri "http://arcos.rack/GeneratePropInfoCSV" alias genpropinfo.
+import "http://arcos.rack/AGENTS".
 import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/CONFIDENCE".
+import "http://arcos.rack/DOCUMENT".
 import "http://arcos.rack/HAZARD".
+import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/REQUIREMENTS".
 import "http://arcos.rack/REVIEW".
 import "http://arcos.rack/SACM-S".
@@ -24,3 +28,14 @@ Write: data
   . LET(?localname := strafter(str(?prop), '#'))
   } order by ?localname".
 } to "ontology/Data/PropInfo.csv".
+
+// The following query writes out properties that are missing notes.
+Write: data
+{
+Ask: "select distinct (?prop as ?property) ?propertyDomain where 
+  {?prop <rdfs:domain> ?propertyDomain 
+  . FILTER(regex(str(?prop), 'arcos'))
+  . OPTIONAL {?prop <rdfs:comment> ?propertyNote} . FILTER (!bound(?propertyNote))
+  . LET(?localname := strafter(str(?prop), '#'))
+  } order by ?localname".
+} to "ontology/Data/PropInfo_missingPropertyNote.csv".

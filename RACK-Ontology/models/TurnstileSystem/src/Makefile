@@ -11,6 +11,9 @@ DIST = dist.tar.gz
 TEST = $(APP)test
 TESTEXE = $(TEST).exe
 
+build: $(EXE)
+dist: $(DIST)
+
 %.o: %.c %.h
 	$(CC) $(CFLAGS) -c $<
 
@@ -21,7 +24,7 @@ $(EXE): $(APP).c $(APP).h $(OBJECTS) $(LIBS)
 	$(CC) $(CFLAGS) -L$(PWD) -lhw -o $@ $< $(OBJECTS)
 
 $(DIST): conf.json $(LIBS) $(EXE)
-	$(TAR) cfv $@ $^
+	$(TAR) cf $@ $^
 
 $(TESTEXE): test.c test.h $(EXE)
 	$(CC) $(CFLAGS) -o $@ $<

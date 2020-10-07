@@ -33,6 +33,7 @@ class StaticCallGraphVisitor(AdaVisitor):
         spec = node.f_subp_spec
         name = spec.f_subp_name
         params = get_params(spec)
+        super().generic_visit(node.f_decls)
         local_visitor = StaticCallGraphVisitor(name, params, self)
         local_visitor.visit(node.f_stmts)
 

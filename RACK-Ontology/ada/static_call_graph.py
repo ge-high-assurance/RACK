@@ -14,16 +14,13 @@ class StaticCallGraphVisitor(AdaVisitor):
     Computes the static call graph within some AST node.
     '''
 
-    def __init__(self, caller=None, params=[], parent=None):
+    def __init__(self, caller=None, params=[]):
         # set of all callees witnessed for the current function/procedure
         self.callees = set()
         # which function/procedure we are currently analyzing
         self.caller = caller
         # formal names of parameters to the function we are analyzing
         self.params = params
-        # within which function/procedure was the current one defined
-        self.parent = parent
-        pass
 
     def record_call(self, callee):
         '''Records a witnessed static function/procedure call to callee'''
@@ -33,11 +30,15 @@ class StaticCallGraphVisitor(AdaVisitor):
         spec = node.f_subp_spec
         name = spec.f_subp_name
         params = get_params(spec)
-        super().generic_visit(node.f_decls)
-        local_visitor = StaticCallGraphVisitor(name, params, self)
+        local_visitor = StaticCallGraphVisitor(caller=name, params=params)
+        local_visitor.visit(node.f_decls)
         local_visitor.visit(node.f_stmts)
 
-        defined = 'at the top-level'if self.caller == None else f'in {self.caller}'
+        caller = self.caller
+        defined = 'at the top-level'if caller == None else f'in {caller.text}'
+        if not list(local_visitor.callees):
+            print(f'{name.text} (defined {defined}) does not make any call.')
+            return
         print(f'{name.text} (defined {defined}) calls:')
         for callee in local_visitor.callees:
             extra = '' if callee not in params else ' (which it receives as parameter)'

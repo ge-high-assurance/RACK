@@ -290,8 +290,8 @@
                             "?CREATEBY"
                         ],
                         "UriConnectBy": "http://arcos.rack/SOFTWARE#createBy",
-                        "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
-                        "ValueType": "ACTIVITY"
+                        "UriValueType": "http://arcos.rack/SOFTWARE#FILE_CREATION",
+                        "ValueType": "FILE_CREATION"
                     },
                     {
                         "ConnectBy": "fileFormat",

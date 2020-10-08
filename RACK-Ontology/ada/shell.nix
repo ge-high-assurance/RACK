@@ -10,9 +10,7 @@ in
 nixpkgs.mkShell {
   buildInputs = with nixpkgs; [
     libadalang
-    pythonPackages.colorama
-    pythonPackages.mypy
-    pythonPackages.pylint
+    pipenv
     stubs
   ];
 

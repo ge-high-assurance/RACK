@@ -3,6 +3,12 @@ from typing import List, Set
 
 from ada_visitor import AdaVisitor
 
+def namespace_str(namespace: List[str]) -> str:
+    if len(namespace) == 1:
+        return namespace[0]
+    path = '.'.join(namespace[1:])
+    return f'{namespace[0]}:{path}'
+
 def get_params(node: lal.SubpSpec) -> List[str]:
     subp_params = node.f_subp_params
     params = subp_params.f_params if subp_params != None else []
@@ -14,11 +20,11 @@ class StaticCallGraphVisitor(AdaVisitor):
     Computes the static call graph within some AST node.
     '''
 
-    def __init__(self, caller: lal.AdaNode, params: List[str] = []) -> None:
+    def __init__(self, namespace: List[str], params: List[str] = []) -> None:
         # set of all callees witnessed for the current function/procedure
         self.callees: Set[str] = set()
-        # which function/procedure we are currently analyzing
-        self.caller: lal.AdaNode = caller
+        # current enclosing namespace
+        self.namespace = namespace
         # formal names of parameters to the function we are analyzing
         self.params: List[str] = params
 
@@ -26,17 +32,27 @@ class StaticCallGraphVisitor(AdaVisitor):
         '''Records a witnessed static function/procedure call to callee'''
         self.callees.add(callee)
 
+    def visit_PackageBody(self, node: lal.PackageBody) -> None:
+        # here we register the namespace and keep visiting with the same visitor
+        name = node.f_package_name
+        self.namespace += [name.text]
+        super().generic_visit(node.f_decls)
+        super().generic_visit(node.f_stmts)
+        pass
+
     def visit_SubpBody(self, node: lal.SubpBody) -> None:
         spec = node.f_subp_spec
         name = spec.f_subp_name
         params = get_params(spec)
-        local_visitor = StaticCallGraphVisitor(caller=name, params=params)
+        local_visitor = StaticCallGraphVisitor(
+            namespace=self.namespace + [name.text],
+            params=params
+        )
         # assumption: the spec does not contain calls
         local_visitor.visit(node.f_decls)
         local_visitor.visit(node.f_stmts)
 
-        caller = self.caller
-        defined = 'at the top-level'if caller == None else f'in {caller.text}'
+        defined = f'in {namespace_str(self.namespace)}'
         if not list(local_visitor.callees):
             print(f'{name.text} (defined {defined}) does not make any call.')
             return

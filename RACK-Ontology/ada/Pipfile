@@ -1,0 +1,18 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+mypy = "==0.782"
+MonkeyType = "==20.5.0"
+pylint = "==2.6.0"
+
+[packages]
+colorama = "==0.4.3"
+rdflib = "==5.0.0"
+pylint = "*"
+mypyls = {extras = ["default-mypy"], file = "https://github.com/matangover/mypyls/archive/master.zip"}
+
+[requires]
+python_version = "3.8"

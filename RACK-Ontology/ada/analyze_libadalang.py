@@ -9,13 +9,15 @@ from static_call_graph import StaticCallGraphVisitor
 context = lal.AnalysisContext()
 
 libadalang_ada_files = os.environ['LIBADALANG_ADA_FILES']
-file = 'libadalang-helpers.adb'
-unit = context.get_from_file(f'{libadalang_ada_files}/{file}')
+ada_file = 'libadalang-parsers.adb'
+unit = context.get_from_file(f'{libadalang_ada_files}/{ada_file}')
 
 if unit.root:
     debug = True
     if debug:
         adaVisitor = AdaPrintVisitor(max_depth = 20)
         adaVisitor.visit(unit.root)
-    staticCallGraphVisitor = StaticCallGraphVisitor(caller=file)
+    staticCallGraphVisitor = StaticCallGraphVisitor(
+        namespace=[ada_file]
+    )
     staticCallGraphVisitor.visit(unit.root)

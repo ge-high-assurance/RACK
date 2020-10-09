@@ -2,16 +2,6 @@ This directory contains Prolog modules offering tools for loading OWL models in
 and out of a Fuseki instance, as well as several Prolog relations for querying
 the ontology.
 
-You can read the code's documentation, as well as a rendering of this very file,
-by running `swipl` **from this directory**, and entering:
-
-```prolog
-[documentation/serve].
-```
-
-This command should set up a local pldoc webserver instance listening at
-[http://localhost:4040/pldoc](http://localhost:4040/pldoc).
-
 # Command-line Usage
 
 NOTE: For the following commands to work, you will want to have
@@ -43,7 +33,7 @@ Prolog modules in this directory:
    $ check -v
    ```
 
-* `ingest_data` Loads the ontology model (from disk or RACK/Fuseki),
+ * `ingest_data` Loads the ontology model (from disk or RACK/Fuseki),
    a set of data recognizers, and then the data to be recognized,
    instantiating that data against the ontology model.  Writes the
    result to disk or back to the RACK/Fuseki server.  See the `-h`
@@ -61,15 +51,49 @@ Prolog modules in this directory:
    `http://localhost:3030` as instance data in the
    `http://TurnstileSystem/CounterApplication` namespace.
 
-The typical usage is to:
+   The typical usage is to:
 
- 1. perform a build with the `databin` directory
-    in the `PATH` so that the wrappers in that directory can capture the
-    build information into datafiles in that directory, then
- 2. `ingest_data` to load that data as instances in the RACK database, then
- 3. `analyze` or `check` that data.
+    1. perform a build with the `databin` directory
+       in the `PATH` so that the wrappers in that directory can capture the
+       build information into datafiles in that directory, then
+    2. `ingest_data` to load that data as instances in the RACK database, then
+    3. `analyze` or `check` that data.
+
+ * `sadl2owl` Performs a conversion of the `.sadl` files in an input
+   directory (defaulting to `RACK-Ontology/ontology`) into `.owl`
+   files in the specified output directory.  Command-line options are
+   visible when invoking with no arguments or with the `-h` flag.
+
+   ```shell
+   $ sadl2owl RACK-OntologyOwlModels
+   ```
+
+   Note that this tool is a subset of the Eclipse SADL functionality.
+   Primary development should still utilize Eclipse SADL.  This tool
+   is intended for batch automation like CI processing and has the
+   following limitations:
+
+      - provides conversion for only a subset of SADL (the subset
+        utilized by the current ontology specification, which should
+        be extended as needed)
+
+      - requires well-formed SADL as input (i.e. it does not provide
+        helpful diagnostic or error messages).
+
+      - Does not support the SADL active operators (e.g. `Ask`,
+        `Rule`, or `Test`).
 
 # Prolog API Usage
+
+You can read the code's documentation, as well as a rendering of this very file,
+by running `swipl` **from this directory**, and entering:
+
+```prolog
+[documentation/serve].
+```
+
+This command should set up a local pldoc webserver instance listening at
+[http://localhost:4040/pldoc](http://localhost:4040/pldoc).
 
 ## Setup
 

@@ -61,7 +61,7 @@
                         "URILookup": [
                             "?CONFIDENCE_ASSESSMENT"
                         ],
-                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
                         "mapping": [
                             {
                                 "colId": "col_1"
@@ -80,7 +80,7 @@
                         "URILookup": [
                             "?TEST_RESULT"
                         ],
-                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
                         "mapping": [
                             {
                                 "colId": "col_0"
@@ -99,7 +99,7 @@
                         "URILookup": [
                             "?ASSESSING_CONFIDENCE"
                         ],
-                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
                         "mapping": [
                             {
                                 "colId": "col_3"
@@ -132,9 +132,9 @@
                 "propList": [
                     {
                         "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
-                        "SparqlID": "?uniqueIdentifier_0",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "KeyName": "identifier",
+                        "SparqlID": "?identifier_0",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -160,9 +160,9 @@
                 "propList": [
                     {
                         "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
-                        "SparqlID": "?uniqueIdentifier",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "KeyName": "identifier",
+                        "SparqlID": "?identifier",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -299,9 +299,9 @@
                     },
                     {
                         "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
+                        "KeyName": "identifier",
                         "SparqlID": "",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],

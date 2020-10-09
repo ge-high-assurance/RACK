@@ -27,10 +27,10 @@
 			{
 				"propList": [
 					{
-						"KeyName": "uniqueIdentifier",
+						"KeyName": "identifier",
 						"ValueType": "string",
 						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"fullURIName": "",
 						"SparqlID": "?format",

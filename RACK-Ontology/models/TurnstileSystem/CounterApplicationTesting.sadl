@@ -4,46 +4,46 @@ import "http://arcos.rack/TESTING".
 import "http://TurnstileSystem/CounterApplicationRequirements".
 
 TC-1-1 is a TEST
-	has uniqueIdentifier "TC-1-1",
+	has identifier "TC-1-1",
 	has verifies HLR-1.
 
 	
 TC-1-2 is a TEST
-	has uniqueIdentifier "TC-1-2",
+	has identifier "TC-1-2",
 	has verifies HLR-1.
 
 	
 TC-1-3 is a TEST
-	has uniqueIdentifier "TC-1-3",
+	has identifier "TC-1-3",
 	has verifies HLR-1.
 
 TC-1-4 is a TEST
-	has uniqueIdentifier "TC-1-4",
+	has identifier "TC-1-4",
 	has verifies HLR-1.
 	
 	
 TR-1-1-1 is a TEST_RESULT
-	has uniqueIdentifier "TR-1-1-1",
+	has identifier "TR-1-1-1",
 	has confirms TC-1-1,
 	has result Passed,
 	has executedBy TestRun1.
 
 	
 TR-1-2-1 is a TEST_RESULT
-	has uniqueIdentifier "TR-1-2-1",
+	has identifier "TR-1-2-1",
 	has confirms TC-1-2,
 	has result Passed,
 	has executedBy TestRun1.
 
 	
 TR-1-3-1 is a TEST_RESULT
-	has uniqueIdentifier "TR-1-3-1",
+	has identifier "TR-1-3-1",
 	has confirms TC-1-3,
 	has result Passed,
 	has executedBy TestRun1.
 
 TR-1-4-1 is a TEST_RESULT
-	has uniqueIdentifier "TR-1-4-1",
+	has identifier "TR-1-4-1",
 	has confirms TC-1-4,
 	has result Failed,
 	has executedBy TestRun1.
@@ -52,27 +52,27 @@ TR-1-4-1 is a TEST_RESULT
 TestRun1 is a TEST_EXECUTION.	
 
 TR-1-1-2 is a TEST_RESULT
-	has uniqueIdentifier "TR-1-1-2",
+	has identifier "TR-1-1-2",
 	has confirms TC-1-1,
 	has result Passed,
 	has executedBy TestRun2.
 
 	
 TR-1-2-2 is a TEST_RESULT
-	has uniqueIdentifier "TR-1-2-2",
+	has identifier "TR-1-2-2",
 	has confirms TC-1-2,
 	has result Passed,
 	has executedBy TestRun2.
 
 	
 TR-1-3-2 is a TEST_RESULT
-	has uniqueIdentifier "TR-1-3-2",
+	has identifier "TR-1-3-2",
 	has confirms TC-1-3,
 	has result Passed,
 	has executedBy TestRun2.
 
 TR-1-4-2 is a TEST_RESULT
-	has uniqueIdentifier "TR-1-4-2",
+	has identifier "TR-1-4-2",
 	has confirms TC-1-4,
 	has result Failed,
 	has executedBy TestRun2.
@@ -81,10 +81,10 @@ TR-1-4-2 is a TEST_RESULT
 TestRun2 is a TEST_EXECUTION.
 
 ASSESSING_CONFIDENCE_CounterApplicationTesting is an ACTIVITY
-    has uniqueIdentifier "ASSESSING_CONFIDENCE_CounterApplicationTesting".
+    has identifier "ASSESSING_CONFIDENCE_CounterApplicationTesting".
 
 CONFIDENCE_ASSESSMENT_TR-1-1-1 is a BDU_CONFIDENCE_ASSESSMENT,
-    has uniqueIdentifier "CONFIDENCE_ASSESSMENT_TR-1-1-1",
+    has identifier "CONFIDENCE_ASSESSMENT_TR-1-1-1",
     has createBy ASSESSING_CONFIDENCE_CounterApplicationTesting,
     has assesses TR-1-1-1,
     has belief 1.0,
@@ -92,7 +92,7 @@ CONFIDENCE_ASSESSMENT_TR-1-1-1 is a BDU_CONFIDENCE_ASSESSMENT,
     has uncertainty 0.0.
 
 CONFIDENCE_ASSESSMENT_TR-1-2-1 is a BDU_CONFIDENCE_ASSESSMENT,
-    has uniqueIdentifier "CONFIDENCE_ASSESSMENT_TR-1-2-1",
+    has identifier "CONFIDENCE_ASSESSMENT_TR-1-2-1",
     has createBy ASSESSING_CONFIDENCE_CounterApplicationTesting,
     has assesses TR-1-2-1,
     has belief 0.99,

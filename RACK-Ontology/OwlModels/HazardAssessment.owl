@@ -1,15 +1,14 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:j.0="http://arcos.rack/HAZARD#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:j.1="http://arcos.rack/PROV-S#"
+    xmlns:H="http://arcos.rack/HAZARD#"
+    xmlns:j.0="http://arcos.rack/PROV-S#"
     xmlns:ha="http://TurnstileSystem/HazardAssessment#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
-    xmlns:trnstl="http://TurnstileSystem/Turnstiles"
-    xmlns:H="http://arcos.rack/HAZARD"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:trnstl="http://TurnstileSystem/Turnstiles#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://TurnstileSystem/HazardAssessment">
   <owl:Ontology rdf:about="">
@@ -20,25 +19,25 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'HazardAssessment.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.0:HAZARD rdf:ID="H-1.1">
-    <j.0:source>
-      <j.0:HAZARD rdf:ID="H-1">
-        <j.0:source rdf:resource="Turnstiles#Turnstiles"/>
-        <j.0:definition>System Crash</j.0:definition>
-        <j.1:uniqueIdentifier>H-1</j.1:uniqueIdentifier>
-      </j.0:HAZARD>
-    </j.0:source>
-    <j.0:definition>Integer Under Flow</j.0:definition>
-    <j.1:uniqueIdentifier>H-1.1</j.1:uniqueIdentifier>
-  </j.0:HAZARD>
-  <j.0:HAZARD rdf:ID="H-1.2">
-    <j.0:source rdf:resource="#H-1"/>
-    <j.0:definition>Integer Over Flow</j.0:definition>
-    <j.1:uniqueIdentifier>H-1.2</j.1:uniqueIdentifier>
-  </j.0:HAZARD>
-  <j.0:HAZARD rdf:ID="H-2">
-    <j.0:source rdf:resource="Turnstiles#Turnstiles"/>
-    <j.0:definition>Park Exceeds Capacity</j.0:definition>
-    <j.1:uniqueIdentifier>H-2</j.1:uniqueIdentifier>
-  </j.0:HAZARD>
+  <H:HAZARD rdf:ID="H-1.1">
+    <H:source>
+      <H:HAZARD rdf:ID="H-1">
+        <H:source rdf:resource="Turnstiles#Turnstiles"/>
+        <H:definition>System Crash</H:definition>
+        <j.0:identifier>H-1</j.0:identifier>
+      </H:HAZARD>
+    </H:source>
+    <H:definition>Integer Under Flow</H:definition>
+    <j.0:identifier>H-1.1</j.0:identifier>
+  </H:HAZARD>
+  <H:HAZARD rdf:ID="H-1.2">
+    <H:source rdf:resource="#H-1"/>
+    <H:definition>Integer Over Flow</H:definition>
+    <j.0:identifier>H-1.2</j.0:identifier>
+  </H:HAZARD>
+  <H:HAZARD rdf:ID="H-2">
+    <H:source rdf:resource="Turnstiles#Turnstiles"/>
+    <H:definition>Park Exceeds Capacity</H:definition>
+    <j.0:identifier>H-2</j.0:identifier>
+  </H:HAZARD>
 </rdf:RDF>

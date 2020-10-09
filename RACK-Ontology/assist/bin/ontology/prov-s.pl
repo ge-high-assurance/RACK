@@ -14,7 +14,7 @@
             fieldValue/2,
             hasAttribute/2,
             startedAtTime/2,
-            uniqueIdentifier/2,
+            identifier/2,
             wasAssociatedWith/2,
             wasGeneratedBy/2
           ]).
@@ -37,6 +37,6 @@ field(A, B) :- rdf(A, rack:'PROV-S#field', B).
 fieldValue(A, B) :- rdf(A, rack:'PROV-S#fieldValue', B).
 hasAttribute(A, B) :- rdf(A, rack:'PROV-S#hasAttribute', B).
 startedAtTime(A, B) :- rdf(A, rack:'PROV-S#startedAtTime', B).
-uniqueIdentifier(A, B) :- rdf(A, rack:'PROV-S#uniqueIdentifier', B).
+identifier(A, B) :- rdf(A, rack:'PROV-S#identifier', B).
 wasAssociatedWith(A, B) :- rdf(A, rack:'PROV-S#wasAssociatedWith', B).
 wasGeneratedBy(A, B) :- rdf(A, rack:'PROV-S#wasGeneratedBy', B).

@@ -4,20 +4,20 @@ import "http://TurnstileSystem/Turnstiles".
 import "http://TurnstileSystem/HazardAssessment".
 
 IN-GATE-1 is a REQUIREMENT,
-	has uniqueIdentifier "IN-GATE-1",
+	has identifier "IN-GATE-1",
 	has text "The Gate shall permit only one person at a time.",
 	has satisfies Sys-1,
 	has governs Ingate.	
 	
 IN-GATE-2 is a REQUIREMENT,
-	has uniqueIdentifier "IN-GATE-2",
+	has identifier "IN-GATE-2",
 	has text "The Gate shall be disabled when the maximum census is reached.",
 	has satisfies Sys-1,
 	has mitigates H-2,
 	has governs Ingate.	
 	
 IN-GATE-3 is a REQUIREMENT,
-	has uniqueIdentifier "IN-GATE-3",
+	has identifier "IN-GATE-3",
 	has text "The Gate shall report when a person is admitted.",
 	has satisfies Sys-1,
 	has governs Ingate.	

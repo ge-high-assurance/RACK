@@ -1,40 +1,33 @@
-package Outer is
-    function OuterFun (Input : Boolean) return Boolean;
-    procedure OuterProc (Input : in Boolean);
-    package Nested is
-        procedure NestedProc ();
-        function NestedFun return Boolean;
-    end Nested;
-end Outer;
+with Regression_Library; use Regression_Library;
 
-package body Outer is
+package body Regression is
 
-    function OuterFun (Input : Boolean) return Boolean is
-    begin
-        return False;
-    end OuterFun;
+    package body Outer is
 
-    procedure OuterProc (Input : in Boolean)
-    begin
-        return;
-    end OuterProc;
-
-    package body Nested is
-
-        procedure NestedProc (Input : in Boolean) is
+        function OuterFun (Input : Boolean) return Boolean is
         begin
-            OuterProc(Input);
-        end NestedProc;
+            return False;
+        end OuterFun;
 
-        function Nested_Fun (Input : in Boolean) return Boolean is
+        procedure OuterProc (Input : in Boolean) is
         begin
-            return OuterFun(Input);
-        end Nested_Fun;
+            return;
+        end OuterProc;
 
-    end Nested;
+        package body Nested is
 
-end Outer;
+            procedure NestedProc (Input : in Boolean) is
+            begin
+                OuterProc(Input);
+            end NestedProc;
 
-package Outer.Child is
+            function NestedFun (Input : in Boolean) return Boolean is
+            begin
+                return (LibraryFun(Input) or OuterFun(Input));
+            end NestedFun;
 
-end Outer.Child;
+        end Nested;
+
+    end Outer;
+
+end Regression;

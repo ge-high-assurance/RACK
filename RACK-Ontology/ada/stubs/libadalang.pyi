@@ -1,7 +1,10 @@
 # NOTE: Currently, I'm only putting the minimal amount of definitions here so
 # that mypy is happy. This is **not** exhaustive.
 
-from typing import Iterable
+# needed for postponing type annotations, to allow a method returning its class
+# should be unnecessary in Python 3.10+
+from __future__ import annotations
+from typing import Iterable, List
 
 class AdaNode:
     @property
@@ -12,8 +15,9 @@ class BasicDecl(AdaNode):
     def p_canonical_fully_qualified_name(self) -> str: ...
 
 class Name(AdaNode):
-    @property
     def p_referenced_decl(self) -> BasicDecl: ...
+    @property
+    def p_resolve_names(self) -> bool: ...
 
 class CallExpr(AdaNode):
     @property
@@ -65,7 +69,23 @@ class SubpBody(AdaNode):
 
 class AnalysisUnit:
     @property
+    def diagnostics(self) -> str: ...
+    @property
+    def filename(self) -> str: ...
+    @property
     def root(self) -> AdaNode: ...
 
+class AnalysisUnitKind:
+    def unit_body(self) -> AnalysisUnitKind: ...
+    def unit_specification(self) -> AnalysisUnitKind: ...
+
 class AnalysisContext:
+    def __init__(self, unit_provider: UnitProvider) -> None: ...
     def get_from_file(self, file: str) -> AnalysisUnit: ...
+    def get_from_provider(self, name: str, kind: AnalysisUnitKind) -> AnalysisUnit: ...
+
+class UnitProvider:
+    @classmethod
+    def auto(klass, input_files: List[str]) -> UnitProvider: ...
+    @classmethod
+    def for_project(klass, project: str) -> UnitProvider: ...

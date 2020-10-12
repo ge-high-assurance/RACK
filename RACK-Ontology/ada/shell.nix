@@ -4,14 +4,19 @@
 }:
 let
   gnat = nixpkgs.gnat10;
+  gprbuild = import ./nix/gprbuild.nix { inherit gnat nixpkgs; };
   libadalang = import ./nix/libadalang.nix { inherit gnat nixpkgs pythonPackages; };
   stubs = import ./stubs { inherit nixpkgs; };
+  xmlada = import ./nix/xmlada.nix { inherit gnat nixpkgs; };
 in
 nixpkgs.mkShell {
   buildInputs = with nixpkgs; [
+    gnat
+    gprbuild
     libadalang
     pipenv
     stubs
+    xmlada
   ];
 
   # for quick access to this offline documentation, if needed
@@ -20,11 +25,12 @@ nixpkgs.mkShell {
   LD_LIBRARY_PATH="${libadalang}/lib";
   # quick access to some Ada files, for testing purposes
   LIBADALANG_ADA_FILES="${libadalang}/include/libadalang";
+  LIBRARY_PATH="${xmlada}/lib";
   # variable used by mypy to find type signature stubs for libraries missing them
   MYPYPATH="${stubs}";
 
   shellHook = ''
-    export PATH=${libadalang}/bin:$PATH
+    export PATH=${nixpkgs.glibc}/lib:${libadalang}/bin:$PATH
     export PYTHONPATH=${libadalang}/python:$PYTHONPATH
   '';
 }

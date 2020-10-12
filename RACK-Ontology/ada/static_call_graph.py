@@ -62,4 +62,9 @@ class StaticCallGraphVisitor(AdaVisitor):
             print(f' - {callee}{extra}')
 
     def visit_CallExpr(self, node: lal.CallExpr):
-        self.record_call(node.f_name.text)
+        defined = (
+            f'(defined at {node.f_name.p_referenced_decl()})'
+            if node.f_name.p_resolve_names
+            else '(could not locate definition)'
+        )
+        self.record_call(f'{node.f_name.text} {defined}')

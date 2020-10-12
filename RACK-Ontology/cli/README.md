@@ -199,7 +199,7 @@ container on `localhost`:
 $ source venv/bin/activate
 (venv) $ rack data export "ingest01 system" http://rack001/data
 
-uniqueIdentifier     uniqueIdentifier_parent
+identifier     identifier_parent
 -------------------  -------------------------
 TurnStileSystem
 Counter Application  TurnStileSystem

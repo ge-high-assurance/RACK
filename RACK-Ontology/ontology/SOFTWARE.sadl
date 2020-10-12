@@ -80,47 +80,47 @@ COMPONENT_TYPE
 SOURCE_FUNCTION
     (note "A function or procedure declared or defined in source code.")
     is a COMPONENT_TYPE
-    has uniqueIdentifier "SOURCE_FUNCTION".
+    has identifier "SOURCE_FUNCTION".
 BINARY_FUNCTION
     (note "A function in a binary, as defined by the appropriate ABI.")
     is a COMPONENT_TYPE
-    has uniqueIdentifier "BINARY_FUNCTION".
+    has identifier "BINARY_FUNCTION".
 SOURCE_GLOBAL_VARIABLE
     (note "A global variable declared or defined in source code.")
     is a COMPONENT_TYPE
-    has uniqueIdentifier "SOURCE_GLOBAL_VARIABLE".
+    has identifier "SOURCE_GLOBAL_VARIABLE".
 BINARY_GLOBAL_VARIABLE
     (note "A global variable (generally in the .data or .bss sections).")
     is a COMPONENT_TYPE
-    has uniqueIdentifier "BINARY_GLOBAL_VARIABLE".
+    has identifier "BINARY_GLOBAL_VARIABLE".
 BINARY_BASIC_BLOCK
     (note "A basic block at the binary level.")
     is a COMPONENT_TYPE
-    has uniqueIdentifier "BINARY_BASIC_BLOCK".
+    has identifier "BINARY_BASIC_BLOCK".
 CLASS_DEFINITION
     (note "A class in an object-oriented language.")
     is a COMPONENT_TYPE
-    has uniqueIdentifier "CLASS".
+    has identifier "CLASS".
 CLASS_METHOD
     (note "A method attached to a class in an object-oriented language.")
     is a COMPONENT_TYPE
-    has uniqueIdentifier "CLASS_METHOD".
+    has identifier "CLASS_METHOD".
 CLASS_MEMBER_VARIABLE
     (note "A variable attached to the instances of a class in an object-oriented language.")
     is a COMPONENT_TYPE
-    has uniqueIdentifier "CLASS_MEMBER_VARIABLE".
+    has identifier "CLASS_MEMBER_VARIABLE".
 CLASS_CONSTRUCTOR
     (note "A constructor in an object-oriented language.")
     is a COMPONENT_TYPE
-    has uniqueIdentifier "CLASS_CONSTRUCTOR".
+    has identifier "CLASS_CONSTRUCTOR".
 MODULE
     (note "A collection of related code, usually grouped in a lexical scope.")
     is a COMPONENT_TYPE
-    has uniqueIdentifier "MODULE".
+    has identifier "MODULE".
 NAMESPACE
     (note "A collection of related code, usually grouped in a lexical scope.")
     is a COMPONENT_TYPE
-    has uniqueIdentifier "NAMESPACE".
+    has identifier "NAMESPACE".
 
 COMPONENT is a type of ENTITY.
     name describes COMPONENT with values of type string.

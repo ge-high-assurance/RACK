@@ -1,17 +1,16 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:j.0="http://arcos.rack/REQUIREMENTS#"
-    xmlns:Rq="http://arcos.rack/REQUIREMENTS"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:j.1="http://arcos.rack/PROV-S#"
+    xmlns:j.0="http://arcos.rack/PROV-S#"
+    xmlns:ha="http://TurnstileSystem/HazardAssessment#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:ingaterq="http://TurnstileSystem/InGateRequirement#"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
-    xmlns:trnstl="http://TurnstileSystem/Turnstiles"
-    xmlns:ha="http://TurnstileSystem/HazardAssessment"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:trnstl="http://TurnstileSystem/Turnstiles#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:Rq="http://arcos.rack/REQUIREMENTS#"
   xml:base="http://TurnstileSystem/InGateRequirement">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="HazardAssessment"/>
@@ -22,23 +21,23 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'InGateRequirements.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.0:REQUIREMENT rdf:ID="IN-GATE-3">
-    <j.0:governs rdf:resource="Turnstiles#Ingate"/>
-    <j.0:satisfies rdf:resource="Turnstiles#Sys-1"/>
-    <j.0:text>The Gate shall report when a person is admitted.</j.0:text>
-    <j.1:uniqueIdentifier>IN-GATE-3</j.1:uniqueIdentifier>
-  </j.0:REQUIREMENT>
-  <j.0:REQUIREMENT rdf:ID="IN-GATE-2">
-    <j.0:governs rdf:resource="Turnstiles#Ingate"/>
-    <j.0:mitigates rdf:resource="HazardAssessment#H-2"/>
-    <j.0:satisfies rdf:resource="Turnstiles#Sys-1"/>
-    <j.0:text>The Gate shall be disabled when the maximum census is reached.</j.0:text>
-    <j.1:uniqueIdentifier>IN-GATE-2</j.1:uniqueIdentifier>
-  </j.0:REQUIREMENT>
-  <j.0:REQUIREMENT rdf:ID="IN-GATE-1">
-    <j.0:governs rdf:resource="Turnstiles#Ingate"/>
-    <j.0:satisfies rdf:resource="Turnstiles#Sys-1"/>
-    <j.0:text>The Gate shall permit only one person at a time.</j.0:text>
-    <j.1:uniqueIdentifier>IN-GATE-1</j.1:uniqueIdentifier>
-  </j.0:REQUIREMENT>
+  <Rq:REQUIREMENT rdf:ID="IN-GATE-3">
+    <Rq:governs rdf:resource="Turnstiles#Ingate"/>
+    <Rq:satisfies rdf:resource="Turnstiles#Sys-1"/>
+    <Rq:text>The Gate shall report when a person is admitted.</Rq:text>
+    <j.0:identifier>IN-GATE-3</j.0:identifier>
+  </Rq:REQUIREMENT>
+  <Rq:REQUIREMENT rdf:ID="IN-GATE-2">
+    <Rq:governs rdf:resource="Turnstiles#Ingate"/>
+    <Rq:mitigates rdf:resource="HazardAssessment#H-2"/>
+    <Rq:satisfies rdf:resource="Turnstiles#Sys-1"/>
+    <Rq:text>The Gate shall be disabled when the maximum census is reached.</Rq:text>
+    <j.0:identifier>IN-GATE-2</j.0:identifier>
+  </Rq:REQUIREMENT>
+  <Rq:REQUIREMENT rdf:ID="IN-GATE-1">
+    <Rq:governs rdf:resource="Turnstiles#Ingate"/>
+    <Rq:satisfies rdf:resource="Turnstiles#Sys-1"/>
+    <Rq:text>The Gate shall permit only one person at a time.</Rq:text>
+    <j.0:identifier>IN-GATE-1</j.0:identifier>
+  </Rq:REQUIREMENT>
 </rdf:RDF>

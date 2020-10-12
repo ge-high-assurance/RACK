@@ -1,4 +1,4 @@
-"uniqueIdentifier","governsId","satisfiesId","mitigatesId","createdById","text"
+"identifier","governsId","satisfiesId","mitigatesId","createdById","text"
 "EXE-LLR-1","ExecutiveThread",null,null,null,"Executive shall spawn Input Thread on powerup."
 "EXE-LLR-2","ExecutiveThread",null,null,null,"Executive shall spawn Output Thread on powerup."
 "EXE-LLR-3","ExecutiveThread",null,null,null,"Executive shall print a single '.' character to the console every second when running."

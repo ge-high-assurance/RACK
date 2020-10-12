@@ -5,70 +5,70 @@ import "http://TurnstileSystem/CounterApplicationRequirements".
 
 
 EXE-LLR-1 is a REQUIREMENT,
-	has uniqueIdentifier "EXE-LLR-1",
+	has identifier "EXE-LLR-1",
 	has text "Executive shall spawn Input Thread on powerup.",
 	has governs ExecutiveThread.
 
 
 EXE-LLR-2 is a REQUIREMENT,
-	has uniqueIdentifier "EXE-LLR-2",
+	has identifier "EXE-LLR-2",
 	has text "Executive shall spawn Output Thread on powerup.",
 	has governs ExecutiveThread.
 
 
 EXE-LLR-3 is a REQUIREMENT,
-	has uniqueIdentifier "EXE-LLR-3",
+	has identifier "EXE-LLR-3",
 	has text "Executive shall print a single '.' character to the console every second when running.",
 	has governs ExecutiveThread.
 
 
 IN-LLR-1 is a REQUIREMENT,
-	has uniqueIdentifier "IN-LLR-1",
+	has identifier "IN-LLR-1",
 	has text "Input Thread shall initialize the park_count to 0 on powerup.",
 	has governs InputThread.
 
 IN-LLR-2 is a REQUIREMENT,
-	has uniqueIdentifier "IN-LLR-2",
+	has identifier "IN-LLR-2",
 	has text "Input Thread shall check for a incoming UDP message on port 62000.",
 	has satisfies HLR-1,
 	has satisfies HLR-2,
 	has governs InputThread.
 
 IN-LLR-3 is a REQUIREMENT,
-	has uniqueIdentifier "IN-LLR-3",
+	has identifier "IN-LLR-3",
 	has text "Input Thread shall add the delta value received by the UDP to the park_count and send the updated park_count to the Output Thread when a valid UDP message is received and the park_count range is not exceed.",
 	has satisfies HLR-1,
 	has satisfies HLR-2,
 	has governs InputThread.
 
 IN-LLR-4 is a REQUIREMENT,
-	has uniqueIdentifier "IN-LLR-4",
+	has identifier "IN-LLR-4",
 	has text "Input Thread shall limit park_count to between 0 and 1500.",
 	has governs InputThread.
 
 IN-LLR-5 is a REQUIREMENT,
-	has uniqueIdentifier "IN-LLR-5",
+	has identifier "IN-LLR-5",
 	has text "Input Thread shall print 'Invalid Message' to the console when a invalid UDP message is received.",
 	has governs InputThread.
 
 IN-LLR-6 is a REQUIREMENT,
-	has uniqueIdentifier "IN-LLR-6",
+	has identifier "IN-LLR-6",
 	has text "Input Thread shall print 'Limit Exceeded'' to the console when a valid UDP message is received and the park_count range is exceed.",
 	has governs InputThread.
 
 OUT-LLR-1 is a REQUIREMENT,
-	has uniqueIdentifier "OUT-LLR-1",
+	has identifier "OUT-LLR-1",
 	has text "Output Thread shall initialize the park_count to 0 on powerup.",
 	has governs OutputThread.
 
 OUT-LLR-2 is a REQUIREMENT,
-	has uniqueIdentifier "OUT-LLR-2",
+	has identifier "OUT-LLR-2",
 	has text "Output Thread shall broadcast a UDP message on port 62001 with the park_count every second.",
 	has satisfies HLR-3,
 	has governs OutputThread.
 	
 DCC-1 is a DATA_DICTIONARY_TERM,
-	has uniqueIdentifier "DCC-1",
+	has identifier "DCC-1",
 	has text "PowerUp",
 	has consumedBy EXE-LLR-1,
 	has consumedBy EXE-LLR-2,
@@ -76,7 +76,7 @@ DCC-1 is a DATA_DICTIONARY_TERM,
 	has consumedBy OUT-LLR-1.
 
 DCC-2 is a DATA_DICTIONARY_TERM,
-	has uniqueIdentifier "DCC-2",
+	has identifier "DCC-2",
 	has text "incoming UDP message",
 	has consumedBy IN-LLR-2,
 	has consumedBy IN-LLR-3,
@@ -84,7 +84,7 @@ DCC-2 is a DATA_DICTIONARY_TERM,
 	has consumedBy IN-LLR-6.
 	
 DCC-3 is a DATA_DICTIONARY_TERM,
-	has uniqueIdentifier "DCC-3",
+	has identifier "DCC-3",
 	has text "input_park_count",
 	has consumedBy IN-LLR-2,
 	has consumedBy IN-LLR-3,
@@ -95,19 +95,19 @@ DCC-3 is a DATA_DICTIONARY_TERM,
 	has providedBy IN-LLR-4.
 	
 DCC-4 is a DATA_DICTIONARY_TERM,
-	has uniqueIdentifier "DCC-4",
+	has identifier "DCC-4",
 	has text "output_park_count",
 	has consumedBy OUT-LLR-2,
 	has providedBy OUT-LLR-1,
 	has providedBy IN-LLR-3.
 
 DCC-5 is a DATA_DICTIONARY_TERM,
-	has uniqueIdentifier "DCC-5",
+	has identifier "DCC-5",
 	has text "outgoing UDP message",
 	has providedBy OUT-LLR-2.
 	
 DCC-6 is a DATA_DICTIONARY_TERM,
-	has uniqueIdentifier "DCC-6",
+	has identifier "DCC-6",
 	has text "console",
 	has providedBy EXE-LLR-3,
 	has providedBy IN-LLR-5,

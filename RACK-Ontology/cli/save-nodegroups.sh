@@ -1,4 +1,6 @@
 #!/bin/sh
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
+#
 # This script helps export changes to the nodegroups for
 # storage in the repository
 set -eu

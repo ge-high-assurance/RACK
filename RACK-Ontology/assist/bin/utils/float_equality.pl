@@ -1,3 +1,4 @@
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 :- module(float_equality, [float_equality/2]).
 
 %! float_equality(+A, +B) is det.

@@ -5,6 +5,7 @@ service, including working with modes loaded from (and saved to) local
 files or network triple stores, and the ability to convert a data
 description DSL into instances in the model.
 
+Copyright (c) 2020, General Electric Company and Galois, Inc.
 */
 
 :- module(rack,

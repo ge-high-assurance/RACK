@@ -26,6 +26,8 @@
 % operation is that the user uses the GE-developed SADL Eclipse plugin
 % to develop valid SADL files and that this tool is used for
 % subsequent automation, such as CI tasks.
+%
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 
 :- use_module(library(semweb/rdf11)).
 :- use_module(library(semweb/rdfs)).

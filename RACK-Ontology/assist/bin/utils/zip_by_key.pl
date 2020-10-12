@@ -1,3 +1,4 @@
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 :- module(zip_by_key,
           [
            zip_by_key/5

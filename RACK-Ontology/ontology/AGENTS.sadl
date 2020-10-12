@@ -1,3 +1,4 @@
+// Copyright (c) 2020, General Electric Company and Galois, Inc.
 uri "http://arcos.rack/AGENTS" alias AGENTS.
 
 import "http://arcos.rack/PROV-S".

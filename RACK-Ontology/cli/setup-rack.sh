@@ -1,4 +1,5 @@
 #!/bin/sh
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
 set -eu
 
 if ! command -v rack > /dev/null

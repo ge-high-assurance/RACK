@@ -1,3 +1,4 @@
+// Copyright (c) 2020, General Electric Company and Galois, Inc.
 uri "http://common/ARP-4754A" alias ARP-4754A.
 import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/DOCUMENT".

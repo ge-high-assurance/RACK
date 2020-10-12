@@ -1,3 +1,4 @@
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 :- multifile data_instance/4, data_get/4.
 
 databin_name(MyName) :-

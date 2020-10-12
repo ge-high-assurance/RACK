@@ -1,4 +1,6 @@
 % Common command-line option handling for RACK prolog utilities
+%
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 
 :- ensure_loaded('./paths').
 

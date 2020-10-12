@@ -1,3 +1,4 @@
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 :- ensure_loaded('../paths').
 
 :- use_module(library(semweb/rdf11)).

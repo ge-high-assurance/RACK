@@ -1,3 +1,4 @@
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
 """Tests for RACK script features
 
 Run with pytest.

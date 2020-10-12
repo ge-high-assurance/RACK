@@ -1,3 +1,4 @@
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 :- module(write_ontology,
           [
            write_ontology/0

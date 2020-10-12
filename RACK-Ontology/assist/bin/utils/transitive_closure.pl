@@ -1,3 +1,4 @@
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 :- module(transitive_closure, [transitive_closure/3]).
 
 %! transitive_closure(+R, ?A, ?B) is nondet.

@@ -1,4 +1,6 @@
 # -*- python -*-
+#
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
 import logging
 import re
 import sys

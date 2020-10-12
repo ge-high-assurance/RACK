@@ -1,3 +1,4 @@
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
 """Pytest fixtures and configuration"""
 
 import pytest

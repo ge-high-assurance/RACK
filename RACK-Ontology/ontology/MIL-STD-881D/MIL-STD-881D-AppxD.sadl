@@ -1,3 +1,4 @@
+// Copyright (c) 2020, General Electric Company and Galois, Inc.
 uri "http://arcos.rack/MIL-STD-881D/MIL-STD-881D-AppxD" alias MIL-STD-881D-AppxD.
 import "http://arcos.rack/MIL-STD-881D/MIL-STD-881D".
 
@@ -618,4 +619,3 @@ InitialSparesRepairParts-1.14 is a SYSTEM,
 	has identifier "InitialSparesRepairParts-1.14",
 	has partOf StrategicMissileSystems-1,
 	has wbs "1.14".
-	

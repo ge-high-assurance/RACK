@@ -1,7 +1,7 @@
 #!/bin/bash
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
 
 # Exit if anything goes wrong
-
 set -eo pipefail
 cd /tmp/files
 

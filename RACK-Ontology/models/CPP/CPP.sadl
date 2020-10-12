@@ -1,3 +1,4 @@
+// Copyright (c) 2020, General Electric Company and Galois, Inc.
 uri "http://CPP/CPP" alias cpp.
 import "http://arcos.rack/ANALYSIS".
 import "http://arcos.rack/SYSTEM".

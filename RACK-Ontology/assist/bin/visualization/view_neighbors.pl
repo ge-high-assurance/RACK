@@ -1,3 +1,4 @@
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 :- module(view_neighbors, [view_neighbors/1]).
 
 :- ensure_loaded('../paths').

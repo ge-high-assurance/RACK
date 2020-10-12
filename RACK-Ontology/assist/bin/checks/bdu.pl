@@ -7,6 +7,8 @@
 %
 % TODO (val) We will probably want to allow duplicate assessments as long as
 % they are created as part of a different activity.
+%
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 
 :- module(
     bdu,

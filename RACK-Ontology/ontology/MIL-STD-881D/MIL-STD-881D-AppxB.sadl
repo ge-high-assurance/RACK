@@ -1,3 +1,4 @@
+// Copyright (c) 2020, General Electric Company and Galois, Inc.
 uri "http://arcos.rack/MIL-STD-881D/MIL-STD-881D-AppxB" alias MIL-STD-881D-AppxB.
 import "http://arcos.rack/MIL-STD-881D/MIL-STD-881D".
 
@@ -330,4 +331,3 @@ InitialSparesandRepairParts-1.13 is a SYSTEM,
 	has identifier "InitialSparesandRepairParts-1.13",
 	has partOf ElectronicSystemGenericSystem-1,
 	has wbs "1.13".
-		

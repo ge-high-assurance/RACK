@@ -1,3 +1,4 @@
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 :- module(hazard_structure, [hazard_structure/5]).
 
 :- ensure_loaded('../paths').

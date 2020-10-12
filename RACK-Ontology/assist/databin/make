@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC2046
+#
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
 
-# shellcheck disable=SC2046
 . $(dirname "$0")/rackfuncs.sh
 
 outf=$(pwd)/.make.rack

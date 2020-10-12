@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
 """Loads CSV data into RACK in a Box
 
 This simple process can be adapted to import other data into RACK for experimentation.

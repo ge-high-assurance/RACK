@@ -1,3 +1,4 @@
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 :- module(my_dot_node, [my_dot_node/2]).
 
 :- ensure_loaded('../paths').

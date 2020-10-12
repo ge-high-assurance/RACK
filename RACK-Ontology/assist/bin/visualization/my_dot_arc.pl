@@ -1,3 +1,4 @@
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
 :- module(my_dot_arc, [my_dot_arc/4]).
 
 :- ensure_loaded('../paths').

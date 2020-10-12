@@ -1,3 +1,4 @@
+// Copyright (c) 2020, General Electric Company and Galois, Inc.
 uri "http://arcos.rack/DOCUMENT" alias D.
 import "http://arcos.rack/PROV-S".
 // These document types and properties are derived based off of ISO/IEC/IEEE 15289

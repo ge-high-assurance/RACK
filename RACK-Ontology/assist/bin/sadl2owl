@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2086,SC2102,SC2044
+#
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
 
 bindir=$(dirname "${0:-pwd}")
 

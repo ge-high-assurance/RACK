@@ -1,3 +1,4 @@
+// Copyright (c) 2020, General Electric Company and Galois, Inc.
 uri "http://arcos.rack/MIL-STD-881D/MIL-STD-881D-AppxC" alias MIL-STD-881D-AppxC.
 import "http://arcos.rack/MIL-STD-881D/MIL-STD-881D".
 
@@ -617,4 +618,4 @@ MaintenanceIndustrialFacilities-1.16.3 is a SYSTEM,
 InitialSparesandRepairParts-1.17 is a SYSTEM,
 	has identifier "InitialSparesandRepairParts-1.17",
 	has partOf MissileOrdnanceSystem-1,
-	has wbs "1.17".	
+	has wbs "1.17".

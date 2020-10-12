@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2236,SC2166,SC2162,SC2184,SC1090
+#
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
 
 
 # TODO: use -M for internal assist of include files

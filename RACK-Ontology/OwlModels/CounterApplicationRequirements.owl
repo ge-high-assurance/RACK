@@ -44,7 +44,7 @@
         <j.0:identifier>HLR-3</j.0:identifier>
       </Rq:REQUIREMENT>
     </Rq:providedBy>
-    <j.0:identifier>counter</j.0:identifier>
+    <j.0:identifier>display</j.0:identifier>
   </Rq:DATA_DICTIONARY_TERM>
   <Rq:DATA_DICTIONARY_TERM rdf:ID="outflowEvent">
     <Rq:consumedBy>

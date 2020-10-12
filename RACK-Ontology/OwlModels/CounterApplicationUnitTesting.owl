@@ -21,7 +21,9 @@
   </owl:Ontology>
   <tst:TEST_RESULT rdf:ID="UTR-1-1-1">
     <tst:executedBy>
-      <tst:TEST_EXECUTION rdf:ID="UnitTestRun1"/>
+      <tst:TEST_EXECUTION rdf:ID="UnitTestRun1">
+        <j.0:identifier>UnitTestRun1</j.0:identifier>
+      </tst:TEST_EXECUTION>
     </tst:executedBy>
     <tst:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <tst:confirms>
@@ -33,7 +35,9 @@
   </tst:TEST_RESULT>
   <tst:TEST_RESULT rdf:ID="UTR-1-1-2">
     <tst:executedBy>
-      <tst:TEST_EXECUTION rdf:ID="UnitTestRun2"/>
+      <tst:TEST_EXECUTION rdf:ID="UnitTestRun2">
+        <j.0:identifier>UnitTestRun2</j.0:identifier>
+      </tst:TEST_EXECUTION>
     </tst:executedBy>
     <tst:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <tst:confirms rdf:resource="#UTC-1-1"/>

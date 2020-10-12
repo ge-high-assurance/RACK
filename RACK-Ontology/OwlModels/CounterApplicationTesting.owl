@@ -31,7 +31,9 @@
     <CONFIDENCE:assesses>
       <tst:TEST_RESULT rdf:ID="TR-1-1-1">
         <tst:executedBy>
-          <tst:TEST_EXECUTION rdf:ID="TestRun1"/>
+          <tst:TEST_EXECUTION rdf:ID="TestRun1">
+            <j.0:identifier>TestRun1</j.0:identifier>
+          </tst:TEST_EXECUTION>
         </tst:executedBy>
         <tst:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
         <tst:confirms>
@@ -52,7 +54,9 @@
   </CONFIDENCE:BDU_CONFIDENCE_ASSESSMENT>
   <tst:TEST_RESULT rdf:ID="TR-1-1-2">
     <tst:executedBy>
-      <tst:TEST_EXECUTION rdf:ID="TestRun2"/>
+      <tst:TEST_EXECUTION rdf:ID="TestRun2">
+        <j.0:identifier>TestRun2</j.0:identifier>
+      </tst:TEST_EXECUTION>
     </tst:executedBy>
     <tst:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <tst:confirms rdf:resource="#TC-1-1"/>

@@ -10,117 +10,52 @@ import "http://TurnstileSystem/Turnstiles".
 
 // directly importing all files, even if some are being imported by other files
 
-// list all SYSTEM
-Write: data
-{
-  Ask: "select distinct ?systemId ?partOfId ?producedById ?providesId ?requiresId where
-       {?SYSTEM <rdf:type> <SYSTEM>
-        . ?SYSTEM <identifier> ?systemId
-        . OPTIONAL{?SYSTEM <partOf> ?partOf . ?partOf <identifier> ?partOfId}
-        . OPTIONAL{?SYSTEM <sys:producedBy> ?producedBy . ?producedBy <identifier> ?producedById}
-        . OPTIONAL{?SYSTEM <provides> ?provides . ?provides <identifier> ?providesId}
-        . OPTIONAL{?SYSTEM <requires> ?requires . ?requires <identifier> ?requiresId}
-       } order by ?systemId".
-} to "models/TurnstileSystem/Data/SYSTEM.csv".
+// Redid as follows
+//		reordered so the files are written in alphabetical order
+//		some file names renamed to match the ontology class (e.g. TEST_RESULT.csv instead of TEST_RESULTS.csv)
+//		some file names altered so that they are specific to class (so have ORGANIZATION.csv instead of AGENT.csv)
+//		some new files are being generated (e.g. TEST_EXECUTION.csv)
+//		additional columns added - in some cases the values were not null (e.g. dataInsertedBy), in most they were null
+//		column names were altered to match ontology (e.g. replaced tcId by confirmsId)
+// Not yet done
+//		Not generating csv files where there is no data (e.g. BUILD.csv)
+//		Not showing hasAttribute column as that is a bnode - need to make sure how it will be handled in SemTK
+//		If there is a class with say 2 properties that each can appear multiple times (e.g. as in COMPILE)
+//			then are we handling it properly in SemTK? Note that in COMPILE one of the 2 properties is hasAttribute
+//			which we are currently ignoring.
+// Note: if the range of a property can be 2 different classes then currently we have multiple columns,
+//			one for each type of class. This does not seem to be a good approach.
+// Note: we use 'identifier' to look up objects in SemTK, should we be using URIs instead?
 
-// list all INTERFACE; note we do not have identifier related to "identifiedBy"
+// list all BDU_CONFIDENCE_ASSESSMENT
 Write: data
 {
-  Ask: "select distinct ?identifier ?sourceId ?destinationId ?identifiedBy where
-       {  ?INTERFACE <rdf:type> <INTERFACE>
-        . ?INTERFACE <identifier> ?identifier
-        . OPTIONAL{?INTERFACE <sys:source> ?source . ?source <identifier> ?sourceId}
-        . OPTIONAL{?INTERFACE <destination> ?destination . ?destination <identifier> ?destinationId}
-        . OPTIONAL{?INTERFACE <identifiedBy> ?identifiedBy}
-       } order by ?identifier".
-} to "models/TurnstileSystem/Data/INTERFACE.csv".
-
-// list all HAZARD
-Write: data
-{
-  Ask: "select distinct ?identifier ?definition ?systemSourceId ?hazardSourceId where
-       {  ?HAZARD <rdf:type> <HAZARD> . ?HAZARD <identifier> ?identifier
-        . ?HAZARD <definition> ?definition
-        . OPTIONAL{?HAZARD <H:source> ?system . ?system <rdf:type> <SYSTEM> . ?system <identifier> ?systemSourceId}
-        . OPTIONAL{?HAZARD <H:source> ?hazard . ?hazard <rdf:type> <HAZARD> . ?hazard <identifier> ?hazardSourceId}
-       } order by ?identifier".
-} to "models/TurnstileSystem/Data/HAZARD.csv".
-
-// list all REQUIREMENT
-Write: data
-{
-  Ask: "select distinct ?identifier ?governsId ?satisfiesId ?mitigatesId ?createdById ?text where
-       {  ?REQUIREMENT <rdf:type> <REQUIREMENT>
-        . ?REQUIREMENT <identifier> ?identifier
-        . OPTIONAL{?REQUIREMENT <Rq:governs> ?governs . ?governs <identifier> ?governsId}
-        . OPTIONAL{?REQUIREMENT <Rq:satisfies> ?satisfies . ?satisfies <identifier> ?satisfiesId}
-        . OPTIONAL{?REQUIREMENT <Rq:mitigates> ?mitigates . ?mitigates <identifier> ?mitigatesId}
-        . OPTIONAL{?REQUIREMENT <Rq:createdBy> ?createdBy . ?createdBy <identifier> ?createdById}
-        . OPTIONAL{?REQUIREMENT <text> ?text}
-       } order by ?identifier".
-} to "models/TurnstileSystem/Data/REQUIREMENT.csv".
-
-// list all DATA_DICTIONARY_TERM
-// Note that a single DATA_DICTIONARY_TERM can have multiple providedBy and multiple consumedBy; and so we get multiple rows
-Write: data
-{
-  Ask: "select distinct ?identifier ?requirementProvidedById ?requirementConsumedById ?interfaceProvidedById ?interfaceConsumedById ?createdById ?text where
-       {  ?DATA_DICTIONARY_TERM <rdf:type> <DATA_DICTIONARY_TERM>
-        . ?DATA_DICTIONARY_TERM <identifier> ?identifier
-        . OPTIONAL{?DATA_DICTIONARY_TERM <providedBy> ?req  . ?req <rdf:type> <REQUIREMENT>  . ?req <identifier>  ?requirementProvidedById}
-        . OPTIONAL{?DATA_DICTIONARY_TERM <consumedBy> ?req2 . ?req2 <rdf:type> <REQUIREMENT> . ?req2 <identifier> ?requirementConsumedById}
-        . OPTIONAL{?DATA_DICTIONARY_TERM <providedBy> ?int  . ?int <rdf:type> <INTERFACE>  . ?int <identifier>  ?interfaceProvidedById}
-        . OPTIONAL{?DATA_DICTIONARY_TERM <consumedBy> ?int2 . ?int2 <rdf:type> <INTERFACE> . ?int2 <identifier> ?interfaceConsumedById}
-        . OPTIONAL{?DATA_DICTIONARY_TERM <mitigates> ?createdBy . ?createdBy <identifier> ?createdById}
-        . OPTIONAL{?DATA_DICTIONARY_TERM <text> ?text}
-      } order by ?identifier".
-} to "models/TurnstileSystem/Data/DATA_DICTIONARY_TERM.csv".
-
-// list all TEST
-Write: data
-{
-  Ask: "select distinct ?identifier ?verifies ?producedBy where
-       {  ?TEST <rdf:type> <TEST>
-        . ?TEST <identifier> ?identifier
-        . OPTIONAL{?TEST <verifies> ?verifies . ?verifies <identifier> ?verifiesId}
-        . OPTIONAL{?TEST <tst:producedBy> ?producedBy . ?producedBy <identifier> ?producedById}
-       } order by ?identifier".
-} to "models/TurnstileSystem/Data/TEST.csv".
-
-// list all FORMAT
-Write: data
-{
-  Ask: "select distinct ?identifier where
-        {  ?FORMAT <rdf:type> <FORMAT>
-         . ?FORMAT <identifier> ?identifier
+  Ask: "select distinct ?assessmentId ?createById ?assesseeId ?belief ?disbelief ?uncertainty ?dataInsertedById where
+        {  ?BDU_CONFIDENCE_ASSESSMENT <rdf:type> <BDU_CONFIDENCE_ASSESSMENT>
+         . ?BDU_CONFIDENCE_ASSESSMENT <identifier> ?assessmentId
+         . OPTIONAL{  ?BDU_CONFIDENCE_ASSESSMENT <CONFIDENCE:createBy> ?createBy
+                    . ?createBy <rdf:type> <ACTIVITY>
+                    . ?createBy <identifier> ?createById
+                   }
+         . OPTIONAL{  ?BDU_CONFIDENCE_ASSESSMENT <CONFIDENCE:assesses> ?assessee
+                    . ?assessee <rdf:type> <TEST_RESULT>
+                    . ?assessee <identifier> ?assesseeId
+                   }
+         . OPTIONAL{  ?BDU_CONFIDENCE_ASSESSMENT <CONFIDENCE:belief> ?belief }
+         . OPTIONAL{  ?BDU_CONFIDENCE_ASSESSMENT <CONFIDENCE:disbelief> ?disbelief }
+         . OPTIONAL{  ?BDU_CONFIDENCE_ASSESSMENT <CONFIDENCE:uncertainty> ?uncertainty }
+         . OPTIONAL{  ?BDU_CONFIDENCE_ASSESSMENT <CONFIDENCE:dataInsertedBy> ?dataInsertedBy
+                    . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                    . ?dataInsertedBy <identifier> ?dataInsertedById
+                   }
         } order by ?identifier".
-} to "models/TurnstileSystem/Data/FORMAT.csv".
-
-// list test results; TEST_EXECUTION does not have identifier
-Write: data
-{
-   Ask: "select ?identifier ?tcId ?result ?testExe where
-         {  ?tr <rdf:type> <TEST_RESULT>
-          . ?tr <identifier> ?identifier
-          . ?tr <confirms> ?tc . ?tc <identifier> ?tcId
-          . ?tr <result> ?result
-          . ?tr <executedBy> ?testExe
-         } order by ?testExe ?identifier".
-} to "models/TurnstileSystem/Data/TEST_RESULTS.csv".
-
-// list all AGENT
-Write: data
-{
-  Ask: "select distinct ?identifier where
-        {  ?AGENT <rdf:type> <AGENT>
-         . ?AGENT <identifier> ?identifier
-        } order by ?identifier".
-} to "models/TurnstileSystem/Data/AGENT.csv".
+} to "models/TurnstileSystem/Data/BDU_CONFIDENCE_ASSESSMENT.csv".
 
 // list all COMPILE
 Write: data
 {
-  Ask: "select distinct ?identifier ?performedById ?compiledById ?compileInputId where
+  Ask: "select distinct ?identifier ?performedById ?compiledById ?compileInputId ?dataInsertedById 
+        ?startedAtTime ?endedAtTime ?wasInformedById where
         {  ?COMPILE <rdf:type> <COMPILE>
          . ?COMPILE <identifier> ?identifier
          . OPTIONAL{  ?COMPILE <sw:performedBy> ?performedBy
@@ -135,52 +70,25 @@ Write: data
                     . ?compileInput <rdf:type> <ENTITY>
                     . ?compileInput <identifier> ?compileInputId
                    }
+        . OPTIONAL{ ?COMPILE <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        . OPTIONAL{ ?COMPILE <startedAtTime> ?startedAtTime}
+        . OPTIONAL{ ?COMPILE <endedAtTime> ?endedAtTime}
+        . OPTIONAL{ ?COMPILE <wasInformedBy> ?wasInformedBy
+                  . ?wasInformedBy <rdf:type> <ACTIVITY>
+                  . ?wasInformedBy <identifier> ?wasInformedById
+                  }
         } order by ?identifier".
 } to "models/TurnstileSystem/Data/COMPILE.csv".
-
-// list all PACKAGE
-Write: data
-{
-  Ask: "select distinct ?identifier ?performedById ?packagedById ?packageInputId where
-        {  ?PACKAGE <rdf:type> <PACKAGE>
-        . ?PACKAGE <identifier> ?identifier
-        . OPTIONAL{ ?PACKAGE <sw:performedBy> ?performedBy
-                  . ?performedBy <rdf:type> <AGENT>
-                  . ?performedBy <identifier> ?performedById
-                  }
-        . OPTIONAL{ ?PACKAGE <packagedBy> ?packagedBy
-                  . ?packagedBy <rdf:type> <ENTITY>
-                  . ?packagedBy <identifier> ?packagedById
-                  }
-        . OPTIONAL{ ?PACKAGE <packageInput> ?packageInput
-                  . ?packageInput <rdf:type> <ENTITY>
-                  . ?packageInput <identifier> ?packageInputId
-                  }
-        } order by ?identifier".
-} to "models/TurnstileSystem/Data/PACKAGE.csv".
-
-// list all FILE
-Write: data
-{
-  Ask: "select distinct ?identifier ?createById ?formatId ?filename where
-        {  ?FILE <rdf:type> <FILE>
-         . ?FILE <identifier> ?identifier
-		 . OPTIONAL{ ?FILE <filename> ?filename }
-         . OPTIONAL{  ?FILE <sw:createBy> ?createBy
-                    . ?createBy <rdf:type> <COMPILE>
-                    . ?createBy <identifier> ?createById
-                   }
-         . OPTIONAL{  ?FILE <fileFormat> ?format
-                    . ?format <rdf:type> <FORMAT>
-                    . ?format <identifier> ?formatId
-                    }
-        } order by ?identifier".
-} to "models/TurnstileSystem/Data/FILE.csv".
 
 // list all COMPONENT
 Write: data
 {
-  Ask: "select distinct ?identifier ?name ?componentTypeId ?valueType ?instantiateId ?definedInId ?mentionId ?subcomponentId ?requirementId ?annotationId ?controlFlowsToConditionallyId ?controlFlowsToUnconditionallyId  where
+  Ask: "select distinct ?identifier ?componentTypeId ?name ?valueType ?instantiateId ?definedInId ?mentionId 
+        ?subcomponentId ?requirementId ?annotationId ?controlFlowsToConditionallyId ?controlFlowsToUnconditionallyId  
+        ?dataInsertedById ?generatedAtTime ?invalidatedAtTime ?wasAttributedToId ?wasDerivedFromId ?wasGeneratedById  where
         { ?COMPONENT <rdf:type> <COMPONENT>
         . ?COMPONENT <identifier> ?identifier
 		. ?COMPONENT <componentType> ?componentType
@@ -212,33 +120,330 @@ Write: data
                   . ?annotations <rdf:type> <ENTITY>
                   . ?annotations <identifier> ?annotationsId
                   }
+        . OPTIONAL{ ?COMPONENT <controlFlowsToUnconditionally> ?controlFlowsToConditionally
+                  . ?controlFlowsToConditionally <rdf:type> <COMPONENT>
+                  . ?controlFlowsToConditionally <identifier> ?controlFlowsToConditionallyId
+                  }
         . OPTIONAL{ ?COMPONENT <controlFlowsToUnconditionally> ?controlFlowsToUnconditionally
                   . ?controlFlowsToUnconditionally <rdf:type> <COMPONENT>
                   . ?controlFlowsToUnconditionally <identifier> ?controlFlowsToUnconditionallyId
                   }
-        . OPTIONAL{ ?COMPONENT <controlFlowsToConditionally> ?controlFlowsToConditionally
-                  . ?controlFlowsToConditionally <rdf:type> <COMPONENT>
-                  . ?controlFlowsToConditionally <identifier> ?controlFlowsToConditionallyId
+        . OPTIONAL{ ?COMPONENT <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        . OPTIONAL{ ?COMPONENT <generatedAtTime> ?generatedAtTime}
+        . OPTIONAL{ ?COMPONENT <invalidatedAtTime> ?invalidatedAtTime}
+        . OPTIONAL{ ?COMPONENT <wasAttributedTo> ?wasAttributedTo
+                  . ?wasAttributedTo <rdf:type> <AGENT>
+                  . ?wasAttributedTo <identifier> ?wasAttributedToId
+                  }
+        . OPTIONAL{ ?COMPONENT <wasDerivedFrom> ?wasDerivedFrom
+                  . ?wasDerivedFrom <rdf:type> <ENTITY>
+                  . ?wasDerivedFrom <identifier> ?wasDerivedFromId
+                  }
+        . OPTIONAL{ ?COMPONENT <wasGeneratedBy> ?wasGeneratedBy
+                  . ?wasGeneratedBy <rdf:type> <ACTIVITY>
+                  . ?wasGeneratedBy <identifier> ?wasGeneratedById
                   }
         } order by ?identifier".
 } to "models/TurnstileSystem/Data/COMPONENT.csv".
-
-// list all CONFIDENCE_ASSESSMENT
+// list all DATA_DICTIONARY_TERM
+// Note that a single DATA_DICTIONARY_TERM can have multiple providedBy and multiple consumedBy; and so we get multiple rows
 Write: data
 {
-  Ask: "select distinct ?assessmentId ?createById ?assesseeId ?belief ?disbelief ?uncertainty where
-        {  ?CONFIDENCE_ASSESSMENT <rdf:type> <CONFIDENCE_ASSESSMENT>
-         . ?CONFIDENCE_ASSESSMENT <identifier> ?assessmentId
-         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:createBy> ?createBy
-                    . ?createBy <rdf:type> <ACTIVITY>
+  Ask: "select distinct ?identifier ?requirementProvidedById ?requirementConsumedById ?interfaceProvidedById ?interfaceConsumedById ?createdById ?text 
+       ?dataInsertedById ?generatedAtTime ?invalidatedAtTime ?wasAttributedToId where
+       {  ?DATA_DICTIONARY_TERM <rdf:type> <DATA_DICTIONARY_TERM>
+        . ?DATA_DICTIONARY_TERM <identifier> ?identifier
+        . OPTIONAL{?DATA_DICTIONARY_TERM <providedBy> ?req  . ?req <rdf:type> <REQUIREMENT>  . ?req <identifier>  ?requirementProvidedById}
+        . OPTIONAL{?DATA_DICTIONARY_TERM <consumedBy> ?req2 . ?req2 <rdf:type> <REQUIREMENT> . ?req2 <identifier> ?requirementConsumedById}
+        . OPTIONAL{?DATA_DICTIONARY_TERM <providedBy> ?int  . ?int <rdf:type> <INTERFACE>  . ?int <identifier>  ?interfaceProvidedById}
+        . OPTIONAL{?DATA_DICTIONARY_TERM <consumedBy> ?int2 . ?int2 <rdf:type> <INTERFACE> . ?int2 <identifier> ?interfaceConsumedById}
+        . OPTIONAL{?DATA_DICTIONARY_TERM <mitigates> ?createdBy . ?createdBy <identifier> ?createdById}
+        . OPTIONAL{?DATA_DICTIONARY_TERM <text> ?text}
+        . OPTIONAL{ ?DATA_DICTIONARY_TERM <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        . OPTIONAL{ ?DATA_DICTIONARY_TERM <generatedAtTime> ?generatedAtTime}
+        . OPTIONAL{ ?DATA_DICTIONARY_TERM <invalidatedAtTime> ?invalidatedAtTime}
+        . OPTIONAL{ ?DATA_DICTIONARY_TERM <wasAttributedTo> ?wasAttributedTo
+                  . ?wasAttributedTo <rdf:type> <AGENT>
+                  . ?wasAttributedTo <identifier> ?wasAttributedToId
+                  }
+      } order by ?identifier".
+} to "models/TurnstileSystem/Data/DATA_DICTIONARY_TERM.csv".
+
+// list all FILE
+Write: data
+{
+  Ask: "select distinct ?identifier ?filename ?createById ?formatId ?dataInsertedById ?generatedAtTime ?invalidatedAtTime 
+       ?wasAttributedToId ?satisfiesId where
+        {  ?FILE <rdf:type> <FILE>
+         . ?FILE <identifier> ?identifier
+		 . OPTIONAL{ ?FILE <filename> ?filename }
+         . OPTIONAL{  ?FILE <sw:createBy> ?createBy
+                    . ?createBy <rdf:type> <COMPILE>
                     . ?createBy <identifier> ?createById
                    }
-         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:assesses> ?assessee
-                    . ?assessee <rdf:type> <TEST_RESULT>
-                    . ?assessee <identifier> ?assesseeId
-                   }
-         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:belief> ?belief }
-         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:disbelief> ?disbelief }
-         . OPTIONAL{  ?CONFIDENCE_ASSESSMENT <CONFIDENCE:uncertainty> ?uncertainty }
+         . OPTIONAL{  ?FILE <fileFormat> ?format
+                    . ?format <rdf:type> <FORMAT>
+                    . ?format <identifier> ?formatId
+                    }
+        . OPTIONAL{ ?FILE <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        . OPTIONAL{ ?FILE <generatedAtTime> ?generatedAtTime}
+        . OPTIONAL{ ?FILE <invalidatedAtTime> ?invalidatedAtTime}
+        . OPTIONAL{ ?FILE <wasAttributedTo> ?wasAttributedTo
+                  . ?wasAttributedTo <rdf:type> <AGENT>
+                  . ?wasAttributedTo <identifier> ?wasAttributedToId
+                  }
+        . OPTIONAL{ ?FILE <sw:satisfies> ?satisfies
+                  . ?satisfies <rdf:type> <ENTITY>
+                  . ?satisfies <identifier> ?satisfiesId
+                  }
         } order by ?identifier".
-} to "models/TurnstileSystem/Data/CONFIDENCE_ASSESSMENT.csv".
+} to "models/TurnstileSystem/Data/FILE.csv".
+
+// list all FORMAT
+Write: data
+{
+  Ask: "select distinct ?identifier ?dataInsertedById where
+        {  ?FORMAT <rdf:type> <FORMAT>
+         . ?FORMAT <identifier> ?identifier
+        . OPTIONAL{ ?FORMAT <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        } order by ?identifier".
+} to "models/TurnstileSystem/Data/FORMAT.csv".
+
+// list all HAZARD
+Write: data
+{
+  Ask: "select distinct ?identifier ?definition ?systemSourceId ?hazardSourceId ?dataInsertedBy ?generatedAtTime 
+       ?invalidatedAtTime ?wasAttributedToId ?identifiedId where
+       {  ?HAZARD <rdf:type> <HAZARD> . ?HAZARD <identifier> ?identifier
+        . ?HAZARD <definition> ?definition
+        . OPTIONAL{?HAZARD <H:source> ?system . ?system <rdf:type> <SYSTEM> . ?system <identifier> ?systemSourceId}
+        . OPTIONAL{?HAZARD <H:source> ?hazard . ?hazard <rdf:type> <HAZARD> . ?hazard <identifier> ?hazardSourceId}
+        . OPTIONAL{ ?HAZARD <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        . OPTIONAL{ ?HAZARD <generatedAtTime> ?generatedAtTime}
+        . OPTIONAL{ ?HAZARD <invalidatedAtTime> ?invalidatedAtTime}
+        . OPTIONAL{ ?HAZARD <wasAttributedTo> ?wasAttributedTo
+                  . ?wasAttributedTo <rdf:type> <AGENT>
+                  . ?wasAttributedTo <identifier> ?wasAttributedToId
+                  }
+        . OPTIONAL{ ?HAZARD <identified> ?identified
+                  . ?identified <rdf:type> <HAZARD_IDENTIFICATION>
+                  . ?identified <identifier> ?identifiedId
+                  }
+       } order by ?identifier".
+} to "models/TurnstileSystem/Data/HAZARD.csv".
+
+// list all INTERFACE
+Write: data
+{
+  Ask: "select distinct ?identifier ?sourceId ?destinationId ?identifiedById ?dataInsertedById ?generatedAtTime 
+       ?invalidatedAtTime ?wasAttributedToId where
+       {  ?INTERFACE <rdf:type> <INTERFACE>
+        . ?INTERFACE <identifier> ?identifier
+        . OPTIONAL{?INTERFACE <sys:source> ?source . ?source <identifier> ?sourceId}
+        . OPTIONAL{?INTERFACE <destination> ?destination . ?destination <identifier> ?destinationId}
+        . OPTIONAL{?INTERFACE <identifiedBy> ?identifiedBy
+                   . ?identifiedBy <rdf:type> <ACTIVITY>
+                   . ?identifiedBy <identifier> ?identifiedById
+                  }
+        . OPTIONAL{ ?INTERFACE <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        . OPTIONAL{ ?INTERFACE <generatedAtTime> ?generatedAtTime}
+        . OPTIONAL{ ?INTERFACE <invalidatedAtTime> ?invalidatedAtTime}
+        . OPTIONAL{ ?INTERFACE <wasAttributedTo> ?wasAttributedTo
+                  . ?wasAttributedTo <rdf:type> <AGENT>
+                  . ?wasAttributedTo <identifier> ?wasAttributedToId
+                  }
+       } order by ?identifier".
+} to "models/TurnstileSystem/Data/INTERFACE.csv".
+
+// list all ORGANIZATION (earlier this info was written out in AGENT.csv)
+Write: data
+{
+  Ask: "select distinct ?identifier ?name ?dataInsertedById ?actedOnBehalfOfId where
+        {  ?ORGANIZATION <rdf:type> <ORGANIZATION>
+         . ?ORGANIZATION <identifier> ?identifier
+         . OPTIONAL {?ORGANIZATION <AGENTS:name> ?name}
+         . OPTIONAL{  ?ORGANIZATION <dataInsertedBy> ?dataInsertedBy
+                    . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                    . ?dataInsertedBy <identifier> ?dataInsertedById
+                   }
+         . OPTIONAL{  ?ORGANIZATION <actedOnBehalfOf> ?actedOnBehalfOf
+                    . ?actedOnBehalfOf <rdf:type> <AGENT>
+                    . ?actedOnBehalfOf <identifier> ?actedOnBehalfOfId
+                   }
+        } order by ?identifier".
+} to "models/TurnstileSystem/Data/ORGANIZATION.csv".
+
+// list all PACKAGE
+Write: data
+{
+  Ask: "select distinct ?identifier ?performedById ?packagedById ?packageInputId ?dataInsertedById ?startedAtTime ?endedAtTime where
+        {  ?PACKAGE <rdf:type> <PACKAGE>
+        . ?PACKAGE <identifier> ?identifier
+        . OPTIONAL{ ?PACKAGE <sw:performedBy> ?performedBy
+                  . ?performedBy <rdf:type> <AGENT>
+                  . ?performedBy <identifier> ?performedById
+                  }
+        . OPTIONAL{ ?PACKAGE <packagedBy> ?packagedBy
+                  . ?packagedBy <rdf:type> <ENTITY>
+                  . ?packagedBy <identifier> ?packagedById
+                  }
+        . OPTIONAL{ ?PACKAGE <packageInput> ?packageInput
+                  . ?packageInput <rdf:type> <ENTITY>
+                  . ?packageInput <identifier> ?packageInputId
+                  }
+        . OPTIONAL{ ?PACKAGE <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        . OPTIONAL{ ?PACKAGE <startedAtTime> ?startedAtTime}
+        . OPTIONAL{ ?PACKAGE <endedAtTime> ?endedAtTime}
+        } order by ?identifier".
+} to "models/TurnstileSystem/Data/PACKAGE.csv".
+
+// list all REQUIREMENT
+Write: data
+{
+  Ask: "select distinct ?identifier ?governsId ?satisfiesId ?mitigatesId ?createdById ?text ?dataInsertedBy ?generatedAtTime 
+       ?invalidatedAtTime ?wasAttributedToId ?givenText ?ifText ?thenText where
+       {  ?REQUIREMENT <rdf:type> <REQUIREMENT>
+        . ?REQUIREMENT <identifier> ?identifier
+        . OPTIONAL{?REQUIREMENT <Rq:governs> ?governs . ?governs <identifier> ?governsId}
+        . OPTIONAL{?REQUIREMENT <Rq:satisfies> ?satisfies . ?satisfies <identifier> ?satisfiesId}
+        . OPTIONAL{?REQUIREMENT <Rq:mitigates> ?mitigates . ?mitigates <identifier> ?mitigatesId}
+        . OPTIONAL{?REQUIREMENT <Rq:createdBy> ?createdBy . ?createdBy <identifier> ?createdById}
+        . OPTIONAL{?REQUIREMENT <text> ?text}
+        . OPTIONAL{ ?REQUIREMENT <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        . OPTIONAL{ ?REQUIREMENT <generatedAtTime> ?generatedAtTime}
+        . OPTIONAL{ ?REQUIREMENT <invalidatedAtTime> ?invalidatedAtTime}
+        . OPTIONAL{ ?REQUIREMENT <wasAttributedTo> ?wasAttributedTo
+                  . ?wasAttributedTo <rdf:type> <AGENT>
+                  . ?wasAttributedTo <identifier> ?wasAttributedToId
+                  }
+        . OPTIONAL{ ?REQUIREMENT <givenText> ?givenText}
+        . OPTIONAL{ ?REQUIREMENT <ifText>    ?ifText}
+        . OPTIONAL{ ?REQUIREMENT <thenText>  ?thenText}
+       } order by ?identifier".
+} to "models/TurnstileSystem/Data/REQUIREMENT.csv".
+
+// list all SYSTEM
+Write: data
+{
+  Ask: "select distinct ?identifier ?partOfId ?producedById ?providesId ?requiresId ?dataInsertedById ?generatedAtTime 
+        ?wasAttributedToId ?requiresId where
+       {?SYSTEM <rdf:type> <SYSTEM>
+        . ?SYSTEM <identifier> ?identifier
+        . OPTIONAL{?SYSTEM <partOf> ?partOf . ?partOf <identifier> ?partOfId}
+        . OPTIONAL{?SYSTEM <sys:producedBy> ?producedBy . ?producedBy <identifier> ?producedById}
+        . OPTIONAL{?SYSTEM <provides> ?provides . ?provides <identifier> ?providesId}
+        . OPTIONAL{?SYSTEM <requires> ?requires . ?requires <identifier> ?requiresId}
+        . OPTIONAL{ ?SYSTEM <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        . OPTIONAL{ ?SYSTEM <generatedAtTime> ?generatedAtTime}
+        . OPTIONAL{ ?SYSTEM <wasAttributedTo> ?wasAttributedTo
+                  . ?wasAttributedTo <rdf:type> <AGENT>
+                  . ?wasAttributedTo <identifier> ?wasAttributedToId
+                  }
+        . OPTIONAL{ ?SYSTEM <requires> ?requires
+                  . ?requires <rdf:type> <ENTITY>
+                  . ?requires <identifier> ?requiresId
+                  }
+       } order by ?identifier".
+} to "models/TurnstileSystem/Data/SYSTEM.csv".
+
+// list all TEST
+Write: data
+{
+  Ask: "select distinct ?identifier ?verifiesId ?producedById ?dataInsertedById ?generatedAtTime ?invalidatedAtTime ?wasAttributedToId where
+       {  ?TEST <rdf:type> <TEST>
+        . ?TEST <identifier> ?identifier
+        . OPTIONAL{?TEST <verifies> ?verifies . ?verifies <identifier> ?verifiesId}
+        . OPTIONAL{?TEST <tst:producedBy> ?producedBy . ?producedBy <identifier> ?producedById}
+        . OPTIONAL{ ?TEST <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        . OPTIONAL{ ?TEST <generatedAtTime> ?generatedAtTime}
+        . OPTIONAL{ ?TEST <invalidatedAtTime> ?invalidatedAtTime}
+        . OPTIONAL{ ?TEST <wasAttributedTo> ?wasAttributedTo
+                  . ?wasAttributedTo <rdf:type> <AGENT>
+                  . ?wasAttributedTo <identifier> ?wasAttributedToId
+                  }
+       } order by ?identifier".
+} to "models/TurnstileSystem/Data/TEST.csv".
+
+// list TEST_EXECUTION
+// note that identifier was added in 2 sadl files
+Write: data
+{
+Ask: "select distinct ?identifier ?dataInsertedById ?startedAtTime ?endedAtTime ?wasInformedById ?executedOnId ?usedId where
+      {?TEST_EXECUTION <rdf:type> <TEST_EXECUTION>
+        . ?TEST_EXECUTION <identifier> ?identifier
+        . OPTIONAL{ ?TEST_EXECUTION <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        . OPTIONAL{ ?TEST_EXECUTION <startedAtTime> ?startedAtTime}
+        . OPTIONAL{ ?TEST_EXECUTION <endedAtTime> ?endedAtTime}
+        . OPTIONAL{ ?TEST_EXECUTION <wasInformedBy> ?wasInformedBy
+                  . ?wasInformedBy <rdf:type> <ACTIVITY>
+                  . ?wasInformedBy <identifier> ?wasInformedById
+                  }
+        . OPTIONAL{ ?TEST_EXECUTION <executedOn> ?executedOn
+                  . ?executedOn <rdf:type> <AGENT>
+                  . ?executedOn <identifier> ?executedOnId
+                  }
+        . OPTIONAL{ ?TEST_EXECUTION <used> ?used
+                  . ?used <rdf:type> <ENTITY>
+                  . ?used <identifier> ?usedId
+                  }
+      } order by ?identifier".
+} to "models/TurnstileSystem/Data/TEST_EXECUTION.csv".
+// list TEST_RESULT
+Write: data
+{
+   Ask: "select ?identifier ?confirmsId ?result ?executedById ?dataInsertedById ?generatedAtTime ?invalidatedAtTime ?wasAttributedToId where
+         {  ?TEST_RESULT <rdf:type> <TEST_RESULT>
+          . ?TEST_RESULT <identifier> ?identifier
+          . OPTIONAL{?TEST_RESULT <confirms> ?confirms . ?confirms <identifier> ?confirmsId}
+          . OPTIONAL{?TEST_RESULT <result> ?result}
+          . OPTIONAL{ ?TEST_RESULT <executedBy> ?executedBy
+                    . ?executedBy <rdf:type> <TEST_EXECUTION>
+                    . ?executedBy <identifier> ?executedById
+                    }
+        . OPTIONAL{ ?TEST_RESULT <dataInsertedBy> ?dataInsertedBy
+                  . ?dataInsertedBy <rdf:type> <ACTIVITY>
+                  . ?dataInsertedBy <identifier> ?dataInsertedById
+                  }
+        . OPTIONAL{ ?TEST_RESULT <generatedAtTime> ?generatedAtTime}
+        . OPTIONAL{ ?TEST_RESULT <invalidatedAtTime> ?invalidatedAtTime}
+        . OPTIONAL{ ?TEST_RESULT <wasAttributedTo> ?wasAttributedTo
+                  . ?wasAttributedTo <rdf:type> <AGENT>
+                  . ?wasAttributedTo <identifier> ?wasAttributedToId
+                  }
+         } order by ?identifier".
+} to "models/TurnstileSystem/Data/TEST_RESULT.csv".
+
+

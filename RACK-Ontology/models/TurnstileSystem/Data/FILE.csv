@@ -1,21 +1,21 @@
-"identifier","createById","formatId","filename"
-"cc",null,"FORMAT-ElfFile","cc"
-"conf_json",null,"FORMAT-JsonFile","conf.json"
-"counter_c",null,"FORMAT-CSourceFile","counter.c"
-"counter_exe","counter_exe_Compiling","FORMAT-ElfFile","counter.exe"
-"counter_h",null,"FORMAT-CSourceFile","counter.h"
-"dist_tar",null,"FORMAT-TarFile","dist.tar"
-"hw_c",null,"FORMAT-CSourceFile","hw.c"
-"hw_h",null,"FORMAT-CSourceFile","hw.h"
-"hw_o","hw_o_Compiling","FORMAT-ElfFile","hw.o"
-"input_c",null,"FORMAT-CSourceFile","input.c"
-"input_h",null,"FORMAT-CSourceFile","input.h"
-"input_o","input_o_Compiling","FORMAT-ElfFile","input.o"
-"libhw_so","libhw_so_Compiling","FORMAT-ElfFile","libhw.so"
-"output_c",null,"FORMAT-CSourceFile","output.c"
-"output_h",null,"FORMAT-CSourceFile","output.h"
-"output_o","output_o_Compiling","FORMAT-ElfFile","output.o"
-"tar",null,"FORMAT-ElfFile","tar"
-"test_c",null,"FORMAT-CSourceFile","test.c"
-"test_h",null,"FORMAT-CSourceFile","test.h"
+"identifier","filename","createById","formatId","dataInsertedById","generatedAtTime","invalidatedAtTime","wasAttributedToId","satisfiesId"
+"cc","cc",null,"FORMAT-ElfFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"conf_json","conf.json",null,"FORMAT-JsonFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"counter_c","counter.c",null,"FORMAT-CSourceFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"counter_exe","counter.exe","counter_exe_Compiling","FORMAT-ElfFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"counter_h","counter.h",null,"FORMAT-CSourceFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"dist_tar","dist.tar",null,"FORMAT-TarFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"hw_c","hw.c",null,"FORMAT-CSourceFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"hw_h","hw.h",null,"FORMAT-CSourceFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"hw_o","hw.o","hw_o_Compiling","FORMAT-ElfFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"input_c","input.c",null,"FORMAT-CSourceFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"input_h","input.h",null,"FORMAT-CSourceFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"input_o","input.o","input_o_Compiling","FORMAT-ElfFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"libhw_so","libhw.so","libhw_so_Compiling","FORMAT-ElfFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"output_c","output.c",null,"FORMAT-CSourceFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"output_h","output.h",null,"FORMAT-CSourceFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"output_o","output.o","output_o_Compiling","FORMAT-ElfFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"tar","tar",null,"FORMAT-ElfFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"test_c","test.c",null,"FORMAT-CSourceFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
+"test_h","test.h",null,"FORMAT-CSourceFile","ACTIVITY-Turnstile software data mockup",null,null,null,null
 

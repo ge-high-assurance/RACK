@@ -1,16 +1,15 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
-    xmlns:AGENTS="http://arcos.rack/AGENTS#"
-    xmlns:trnstlsys="http://TurnstileSystem/CounterApplication#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:sw="http://arcos.rack/SOFTWARE#"
     xmlns:j.0="http://arcos.rack/PROV-S#"
+    xmlns:AGENTS="http://arcos.rack/AGENTS#"
     xmlns:sys="http://arcos.rack/SYSTEM#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:trnstlsys="http://TurnstileSystem/CounterApplication#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:trnstl="http://TurnstileSystem/Turnstiles#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://TurnstileSystem/CounterApplication">
   <owl:Ontology rdf:about="">
@@ -18,7 +17,6 @@
     <owl:imports rdf:resource="http://arcos.rack/SOFTWARE"/>
     <owl:imports rdf:resource="http://arcos.rack/SYSTEM"/>
     <owl:imports rdf:resource="http://arcos.rack/AGENTS"/>
-    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplication.sadl' and should not be directly edited.</rdfs:comment>

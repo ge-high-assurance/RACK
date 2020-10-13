@@ -40,6 +40,6 @@ counter is a DATA_DICTIONARY_TERM,
 	has consumedBy HLR-3.
 	
 display is a DATA_DICTIONARY_TERM,
-	has identifier "counter",
+	has identifier "display",
 	has providedBy HLR-3,
 	has consumedBy census.

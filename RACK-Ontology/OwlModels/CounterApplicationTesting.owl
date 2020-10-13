@@ -3,7 +3,6 @@
     xmlns:j.0="http://arcos.rack/PROV-S#"
     xmlns:cntrapprq="http://TurnstileSystem/CounterApplicationRequirements#"
     xmlns:CONFIDENCE="http://arcos.rack/CONFIDENCE#"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:cntrapptst="http://TurnstileSystem/CounterApplicationTesting#"
@@ -16,7 +15,6 @@
     <owl:imports rdf:resource="CounterApplicationRequirements"/>
     <owl:imports rdf:resource="http://arcos.rack/TESTING"/>
     <owl:imports rdf:resource="http://arcos.rack/CONFIDENCE"/>
-    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplicationTesting.sadl' and should not be directly edited.</rdfs:comment>
@@ -31,7 +29,9 @@
     <CONFIDENCE:assesses>
       <tst:TEST_RESULT rdf:ID="TR-1-1-1">
         <tst:executedBy>
-          <tst:TEST_EXECUTION rdf:ID="TestRun1"/>
+          <tst:TEST_EXECUTION rdf:ID="TestRun1">
+            <j.0:identifier>TestRun1</j.0:identifier>
+          </tst:TEST_EXECUTION>
         </tst:executedBy>
         <tst:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
         <tst:confirms>
@@ -52,7 +52,9 @@
   </CONFIDENCE:BDU_CONFIDENCE_ASSESSMENT>
   <tst:TEST_RESULT rdf:ID="TR-1-1-2">
     <tst:executedBy>
-      <tst:TEST_EXECUTION rdf:ID="TestRun2"/>
+      <tst:TEST_EXECUTION rdf:ID="TestRun2">
+        <j.0:identifier>TestRun2</j.0:identifier>
+      </tst:TEST_EXECUTION>
     </tst:executedBy>
     <tst:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <tst:confirms rdf:resource="#TC-1-1"/>

@@ -3,7 +3,6 @@
     xmlns:sw="http://arcos.rack/SOFTWARE#"
     xmlns:A="http://arcos.rack/ANALYSIS#"
     xmlns:sys="http://arcos.rack/SYSTEM#"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -15,7 +14,6 @@
     <owl:imports rdf:resource="http://arcos.rack/SOFTWARE"/>
     <owl:imports rdf:resource="http://arcos.rack/SYSTEM"/>
     <owl:imports rdf:resource="http://arcos.rack/ANALYSIS"/>
-    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CPP.sadl' and should not be directly edited.</rdfs:comment>

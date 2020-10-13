@@ -17,6 +17,22 @@
             {
                 "colId": "col_3",
                 "colName": "identifier"
+            },
+            {
+                "colId": "col_4",
+                "colName": "dataInsertedById"
+            },
+            {
+                "colId": "col_5",
+                "colName": "startedAtTime"
+            },
+            {
+                "colId": "col_6",
+                "colName": "endedAtTime"
+            },
+            {
+                "colId": "col_7",
+                "colName": "wasInformedById"
             }
         ],
         "dataValidator": [],
@@ -26,6 +42,17 @@
                 "mapping": [],
                 "props": [
                     {
+                        "URIRelation": "http://arcos.rack/PROV-S#endedAtTime",
+                        "mapping": [
+                            {
+                                "colId": "col_6",
+                                "transformList": [
+                                    "trans_0"
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "URILookup": [
                             "?COMPILE"
                         ],
@@ -33,6 +60,17 @@
                         "mapping": [
                             {
                                 "colId": "col_3"
+                            }
+                        ]
+                    },
+                    {
+                        "URIRelation": "http://arcos.rack/PROV-S#startedAtTime",
+                        "mapping": [
+                            {
+                                "colId": "col_5",
+                                "transformList": [
+                                    "trans_0"
+                                ]
                             }
                         ]
                     }
@@ -90,6 +128,28 @@
                 "props": [
                     {
                         "URILookup": [
+                            "?DATA_INSERTED_BY"
+                        ],
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
+                        "mapping": [
+                            {
+                                "colId": "col_4",
+                                "transformList": [
+                                    "trans_0"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "sparqlID": "?DATA_INSERTED_BY",
+                "type": "http://arcos.rack/PROV-S#ACTIVITY"
+            },
+            {
+                "URILookupMode": "createIfMissing",
+                "mapping": [],
+                "props": [
+                    {
+                        "URILookup": [
                             "?AGENT"
                         ],
                         "URIRelation": "http://arcos.rack/PROV-S#identifier",
@@ -105,6 +165,28 @@
                 ],
                 "sparqlID": "?AGENT",
                 "type": "http://arcos.rack/PROV-S#AGENT"
+            },
+            {
+                "URILookupMode": "createIfMissing",
+                "mapping": [],
+                "props": [
+                    {
+                        "URILookup": [
+                            "?WAS_INFORMED_BY"
+                        ],
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
+                        "mapping": [
+                            {
+                                "colId": "col_7",
+                                "transformList": [
+                                    "trans_0"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "sparqlID": "?WAS_INFORMED_BY",
+                "type": "http://arcos.rack/PROV-S#ACTIVITY"
             }
         ],
         "texts": [],
@@ -124,6 +206,49 @@
         "offset": 0,
         "orderBy": [],
         "sNodeList": [
+            {
+                "NodeName": "ACTIVITY",
+                "SparqlID": "?WAS_INFORMED_BY",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/PROV-S#ACTIVITY",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "identifier",
+                        "SparqlID": "?wasInformedById",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [
+                    "http://arcos.rack/SYSTEM#SYSTEM_DEVELOPMENT",
+                    "http://arcos.rack/TESTING#TEST_DEVELOPMENT",
+                    "http://arcos.rack/ANALYSIS#ANALYSIS",
+                    "http://arcos.rack/TESTING#TEST_EXECUTION",
+                    "http://arcos.rack/SOFTWARE#FILE_CREATION",
+                    "http://arcos.rack/SOFTWARE#CODE_GEN",
+                    "http://arcos.rack/SOFTWARE#COMPILE",
+                    "http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT",
+                    "http://arcos.rack/SOFTWARE#PACKAGE",
+                    "http://arcos.rack/SOFTWARE#BUILD",
+                    "http://arcos.rack/CONFIDENCE#ASSESSING_CONFIDENCE",
+                    "http://arcos.rack/REVIEW#REVIEW",
+                    "http://arcos.rack/HAZARD#HAZARD_IDENTIFICATION",
+                    "http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"
+                ],
+                "valueConstraint": ""
+            },
             {
                 "NodeName": "AGENT",
                 "SparqlID": "?AGENT",
@@ -153,6 +278,49 @@
                     "http://arcos.rack/AGENTS#ORGANIZATION",
                     "http://arcos.rack/AGENTS#PERSON",
                     "http://arcos.rack/AGENTS#SOFTWAREAGENT"
+                ],
+                "valueConstraint": ""
+            },
+            {
+                "NodeName": "ACTIVITY",
+                "SparqlID": "?DATA_INSERTED_BY",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/PROV-S#ACTIVITY",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "identifier",
+                        "SparqlID": "?dataInsertedById",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [
+                    "http://arcos.rack/SYSTEM#SYSTEM_DEVELOPMENT",
+                    "http://arcos.rack/TESTING#TEST_DEVELOPMENT",
+                    "http://arcos.rack/ANALYSIS#ANALYSIS",
+                    "http://arcos.rack/TESTING#TEST_EXECUTION",
+                    "http://arcos.rack/SOFTWARE#FILE_CREATION",
+                    "http://arcos.rack/SOFTWARE#CODE_GEN",
+                    "http://arcos.rack/SOFTWARE#COMPILE",
+                    "http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT",
+                    "http://arcos.rack/SOFTWARE#PACKAGE",
+                    "http://arcos.rack/SOFTWARE#BUILD",
+                    "http://arcos.rack/CONFIDENCE#ASSESSING_CONFIDENCE",
+                    "http://arcos.rack/REVIEW#REVIEW",
+                    "http://arcos.rack/HAZARD#HAZARD_IDENTIFICATION",
+                    "http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"
                 ],
                 "valueConstraint": ""
             },
@@ -262,6 +430,26 @@
                         "ValueType": "FILE"
                     },
                     {
+                        "ConnectBy": "dataInsertedBy",
+                        "Connected": true,
+                        "DeletionMarkers": [
+                            false
+                        ],
+                        "KeyName": "dataInsertedBy",
+                        "OptionalMinus": [
+                            "1"
+                        ],
+                        "Qualifiers": [
+                            ""
+                        ],
+                        "SnodeSparqlIDs": [
+                            "?DATA_INSERTED_BY"
+                        ],
+                        "UriConnectBy": "http://arcos.rack/PROV-S#dataInsertedBy",
+                        "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
+                        "ValueType": "ACTIVITY"
+                    },
+                    {
                         "ConnectBy": "performedBy",
                         "Connected": true,
                         "DeletionMarkers": [
@@ -280,9 +468,43 @@
                         "UriConnectBy": "http://arcos.rack/SOFTWARE#performedBy",
                         "UriValueType": "http://arcos.rack/PROV-S#AGENT",
                         "ValueType": "AGENT"
+                    },
+                    {
+                        "ConnectBy": "wasInformedBy",
+                        "Connected": true,
+                        "DeletionMarkers": [
+                            false
+                        ],
+                        "KeyName": "wasInformedBy",
+                        "OptionalMinus": [
+                            "1"
+                        ],
+                        "Qualifiers": [
+                            ""
+                        ],
+                        "SnodeSparqlIDs": [
+                            "?WAS_INFORMED_BY"
+                        ],
+                        "UriConnectBy": "http://arcos.rack/PROV-S#wasInformedBy",
+                        "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
+                        "ValueType": "ACTIVITY"
                     }
                 ],
                 "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "endedAtTime",
+                        "SparqlID": "?endedAtTime",
+                        "UriRelationship": "http://arcos.rack/PROV-S#endedAtTime",
+                        "ValueType": "dateTime",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 1,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#dateTime"
+                    },
                     {
                         "Constraints": "",
                         "KeyName": "identifier",
@@ -296,6 +518,20 @@
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
                         "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    },
+                    {
+                        "Constraints": "",
+                        "KeyName": "startedAtTime",
+                        "SparqlID": "?startedAtTime",
+                        "UriRelationship": "http://arcos.rack/PROV-S#startedAtTime",
+                        "ValueType": "dateTime",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 1,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#dateTime"
                     }
                 ],
                 "subClassNames": [],

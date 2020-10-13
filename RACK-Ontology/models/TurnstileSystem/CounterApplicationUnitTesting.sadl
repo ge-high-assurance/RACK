@@ -38,7 +38,8 @@ UTR-1-4-1 is a TEST_RESULT
 	has result Failed,
 	has executedBy UnitTestRun1.
 
-UnitTestRun1 is a TEST_EXECUTION.
+UnitTestRun1 is a TEST_EXECUTION
+    has identifier "UnitTestRun1".
 
 UTR-1-1-2 is a TEST_RESULT
 	has identifier "UTR-1-1-2",
@@ -64,4 +65,5 @@ UTR-1-4-2 is a TEST_RESULT
 	has result Failed,
 	has executedBy UnitTestRun2.
 
-UnitTestRun2 is a TEST_EXECUTION.
+UnitTestRun2 is a TEST_EXECUTION    
+    has identifier "UnitTestRun2".

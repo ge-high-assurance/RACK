@@ -49,7 +49,8 @@ TR-1-4-1 is a TEST_RESULT
 	has executedBy TestRun1.
 	
 
-TestRun1 is a TEST_EXECUTION.	
+TestRun1 is a TEST_EXECUTION
+    has identifier "TestRun1".	
 
 TR-1-1-2 is a TEST_RESULT
 	has identifier "TR-1-1-2",
@@ -78,7 +79,8 @@ TR-1-4-2 is a TEST_RESULT
 	has executedBy TestRun2.
 	
 
-TestRun2 is a TEST_EXECUTION.
+TestRun2 is a TEST_EXECUTION
+    has identifier "TestRun2".
 
 ASSESSING_CONFIDENCE_CounterApplicationTesting is an ACTIVITY
     has identifier "ASSESSING_CONFIDENCE_CounterApplicationTesting".

@@ -1,0 +1,73 @@
+uri "http://Turnstile/SoftwareVerificationPlan".
+import "http://Turnstile/SoftwareDevelopmentPlan".
+
+import "http://arcos.rack/DOCUMENT".
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/REVIEW".
+import "http://arcos.rack/TESTING".
+
+_SoftwareVerificationPlan is a SECTION,
+    has content Software_Review_Process,
+    has content Sotware_Test_Execution_Process,
+    has content Sotware_Test_Generation_Process,
+    has content ReviewArtifacts,
+    has content SoftwareComponentTestResults,
+    has content SoftwareComponentTests,
+    has content SoftwareUnitTestResults,
+    has content SoftwareUnitTests.
+
+  Software_Review_Process is a REVIEW
+    has wasInformedBy Sotware_Test_Generation_Process
+    has used HighLevelRequirements
+    has used DataDictionary
+    has used LowLevelRequirements
+    has used DataAndControlCouples
+    has used SoftwareModules
+    has used SoftwareRequirementReviewChecklist
+    has used SoftwareDesignReviewChecklist
+    has used SoftwareCodeReviewChecklist
+    has wasInformedBy Problem_Reporting_Process.
+
+  Sotware_Test_Execution_Process is a TEST_EXECUTION
+    has used ExecutableObject
+    has used SoftwareComponentTests
+    has used SoftwareUnitTests
+    has wasInformedBy Problem_Reporting_Process.
+
+  Sotware_Test_Generation_Process is a TEST_DEVELOPMENT
+    has wasInformedBy Sotware_Test_Execution_Process
+    has used HighLevelRequirements
+    has used LowLevelRequirements
+    has used C_Headers
+    has used C_Code
+    has used SoftwareTestGuidance.
+
+  ReviewArtifacts is a REVIEW_LOG
+    has wasGeneratedBy Software_Review_Process
+    has wasGeneratedBy System_Development_Process
+    has used SystemVerificationReport
+    has wasGeneratedBy Software_Review_Process.
+
+  SoftwareComponentTestResults is a TEST_RESULT
+    has wasGeneratedBy Sotware_Test_Execution_Process
+    has wasGeneratedBy System_Development_Process
+    has used SystemVerificationReport
+    has used Source_Control_Management_Process
+    has wasGeneratedBy Sotware_Test_Execution_Process.
+
+  SoftwareComponentTests is a TEST
+    has wasGeneratedBy System_Development_Process
+    has used SystemVerificationReport
+    has wasGeneratedBy Sotware_Test_Generation_Process.
+
+  SoftwareUnitTestResults is a TEST_RESULT
+    has wasGeneratedBy Sotware_Test_Execution_Process
+    has wasGeneratedBy System_Development_Process
+    has used SystemVerificationReport
+    has used Source_Control_Management_Process.
+
+  SoftwareUnitTests is a TEST
+    has wasGeneratedBy System_Development_Process
+    has used SystemVerificationReport
+    has wasGeneratedBy Sotware_Test_Generation_Process.

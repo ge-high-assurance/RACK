@@ -8,6 +8,8 @@ import "http://TurnstileSystem/HazardAssessment".
 import "http://TurnstileSystem/InGateRequirement". //rename as we use InGateRequirements.sadl and in it we have InGateRequirement
 import "http://TurnstileSystem/Turnstiles".
 
+import "http://www.w3.org/2000/01/rdf-schema". // so as to use OWL_MEM reasoner after adding in transitive rules directly
+
 // directly importing all files, even if some are being imported by other files
 
 // Redid as follows
@@ -26,6 +28,16 @@ import "http://TurnstileSystem/Turnstiles".
 // Note: if the range of a property can be 2 different classes then currently we have multiple columns,
 //			one for each type of class. This does not seem to be a good approach.
 // Note: we use 'identifier' to look up objects in SemTK, should we be using URIs instead?
+
+ Rule Transitive1 
+ if cls1 rdfs:subClassOf cls2
+ and cls2 rdfs:subClassOf cls3
+ then cls1 rdfs:subClassOf cls3.
+ 
+ Rule Transitive2  
+if inst is a cls and 
+   cls is a type of cls2
+then inst is a cls2.
 
 // list all BDU_CONFIDENCE_ASSESSMENT
 Write: data

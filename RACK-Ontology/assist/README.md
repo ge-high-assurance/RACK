@@ -4,7 +4,13 @@ RACK ASSIST
 (Automated Software Structure Ingestion and System Testing)
 
 This toolset provides for the ability to do various automated tasks,
-guided by the core RACK ontology.
+guided by the core RACK ontology.  These tools are designed to be run
+directly from the command-line or as part of the build process of the
+software being certified.
+
+These tools additionally provide an alternate data ingestion method to
+the CSV file + RACK cli tooling.  Either is appropriate to use, based
+on the needs at the time.
 
 
 * `databin`

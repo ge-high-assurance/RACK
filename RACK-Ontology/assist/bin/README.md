@@ -33,6 +33,10 @@ Prolog modules in this directory:
    $ check -v
    ```
 
+   The various checks performed by this tool are designed to be
+   extensible.  Adding new checks for ontology invariants is
+   encouraged by both RACK developers and users.
+
  * `ingest_data` Loads the ontology model (from disk or RACK/Fuseki),
    a set of data recognizers, and then the data to be recognized,
    instantiating that data against the ontology model.  Writes the
@@ -58,6 +62,15 @@ Prolog modules in this directory:
        build information into datafiles in that directory, then
     2. `ingest_data` to load that data as instances in the RACK database, then
     3. `analyze` or `check` that data.
+
+  The `ingest_data` tool is designed to be extensible.  A RACK user
+  can emit `.rack` files (or an equivalent) during their analysis of
+  the data.  By creating corresponding data recognizers for the data
+  in those `.rack` files, the `ingest_data` tool will be able to
+  upload the recognized data into the RACK database for those
+  processes as well as the ones defined in the RACK distribution.  For
+  more information, see the documentation on "Recognizers for Loaded
+  Data" in the [RACK model management Prolog file: rack/model.pl](rack/model.pl).
 
  * `sadl2owl` Performs a conversion of the `.sadl` files in an input
    directory (defaulting to `RACK-Ontology/ontology`) into `.owl`

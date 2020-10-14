@@ -1,6 +1,7 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:provs="http://arcos.rack/PROV-S#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -10,6 +11,7 @@
   xml:base="http://arcos.rack/DOCUMENT">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="PROV-S"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'DOCUMENT.sadl' and should not be directly edited.</rdfs:comment>
@@ -26,10 +28,6 @@
     <rdfs:comment xml:lang="en">A DESCRIPTION represents a planned or actual concept, function, design or object.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
-  <owl:Class rdf:ID="REPORT">
-    <rdfs:comment xml:lang="en">A REPORT describes the results of activities such as investigations, observations, assessments, or test.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
-  </owl:Class>
   <owl:Class rdf:ID="DOC_STATUS">
     <owl:equivalentClass>
       <owl:Class>
@@ -40,6 +38,10 @@
         </owl:oneOf>
       </owl:Class>
     </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="REPORT">
+    <rdfs:comment xml:lang="en">A REPORT describes the results of activities such as investigations, observations, assessments, or test.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
   <owl:Class rdf:ID="SPECIFICATION">
     <rdfs:comment xml:lang="en">A SPECIFICATION identifies, in a complete, precise, and verifiable manner, the requirements, design, behavior, or other expected characteristics of a system, service or process.</rdfs:comment>
@@ -54,12 +56,18 @@
     <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="approvalAuthority">
-    <rdfs:domain rdf:resource="#SPECIFICATION"/>
-    <rdfs:domain rdf:resource="#PROCEDURE"/>
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#PLAN"/>
+          <owl:Class rdf:about="#PROCEDURE"/>
+          <owl:Class rdf:about="#SPECIFICATION"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
     <rdfs:comment xml:lang="en">AGENT responsible for approving a document.</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
-    <rdfs:domain rdf:resource="#PLAN"/>
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="originatorOfRequest">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
@@ -67,45 +75,69 @@
     <rdfs:domain rdf:resource="#REQUEST"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="references">
-    <rdfs:domain rdf:resource="#SPECIFICATION"/>
-    <rdfs:domain rdf:resource="#PLAN"/>
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DESCRIPTION"/>
+          <owl:Class rdf:about="#PLAN"/>
+          <owl:Class rdf:about="#SPECIFICATION"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
     <rdfs:comment xml:lang="en">Source Materials used in the development of a document.</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
-    <rdfs:domain rdf:resource="#DESCRIPTION"/>
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="issuingOrganization">
-    <rdfs:domain rdf:resource="#SPECIFICATION"/>
-    <rdfs:domain rdf:resource="#REPORT"/>
-    <rdfs:domain rdf:resource="#PROCEDURE"/>
-    <rdfs:domain rdf:resource="#PLAN"/>
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DESCRIPTION"/>
+          <owl:Class rdf:about="#PLAN"/>
+          <owl:Class rdf:about="#PROCEDURE"/>
+          <owl:Class rdf:about="#REPORT"/>
+          <owl:Class rdf:about="#SPECIFICATION"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
     <rdfs:comment xml:lang="en">AGENT responsible for producing a document.</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
-    <rdfs:domain rdf:resource="#DESCRIPTION"/>
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="status">
-    <rdfs:domain rdf:resource="#SPECIFICATION"/>
-    <rdfs:domain rdf:resource="#REQUEST"/>
-    <rdfs:domain rdf:resource="#REPORT"/>
-    <rdfs:domain rdf:resource="#PROCEDURE"/>
-    <rdfs:domain rdf:resource="#PLAN"/>
-    <rdfs:comment xml:lang="en">Identifies the maturity of the document, In_Development, Released, Withdrawn.</rdfs:comment>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DESCRIPTION"/>
+          <owl:Class rdf:about="#PLAN"/>
+          <owl:Class rdf:about="#PROCEDURE"/>
+          <owl:Class rdf:about="#REPORT"/>
+          <owl:Class rdf:about="#REQUEST"/>
+          <owl:Class rdf:about="#SPECIFICATION"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
     <rdfs:range rdf:resource="#DOC_STATUS"/>
-    <rdfs:domain rdf:resource="#DESCRIPTION"/>
+    <rdfs:comment xml:lang="en">Identifies the maturity of the document, In_Development, Released, Withdrawn.</rdfs:comment>
   </owl:ObjectProperty>
   <owl:DatatypeProperty rdf:ID="dateOfInitiation">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
     <rdfs:domain rdf:resource="#REQUEST"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="dateOfIssue">
-    <rdfs:domain rdf:resource="#SPECIFICATION"/>
-    <rdfs:domain rdf:resource="#REPORT"/>
-    <rdfs:domain rdf:resource="#PROCEDURE"/>
-    <rdfs:domain rdf:resource="#PLAN"/>
-    <rdfs:comment xml:lang="en">Release date for the document.</rdfs:comment>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DESCRIPTION"/>
+          <owl:Class rdf:about="#PLAN"/>
+          <owl:Class rdf:about="#PROCEDURE"/>
+          <owl:Class rdf:about="#REPORT"/>
+          <owl:Class rdf:about="#SPECIFICATION"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
-    <rdfs:domain rdf:resource="#DESCRIPTION"/>
+    <rdfs:comment xml:lang="en">Release date for the document.</rdfs:comment>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="title">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>

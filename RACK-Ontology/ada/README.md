@@ -20,5 +20,5 @@ To run the analysis on the regression test (NOTE: this is likely to change
 shortly, so this may not be up to date):
 
 ```shell
-pipenv run ./analyze-libadalang.py --project ./regression.gpr ./regression.adb
+pipenv run ./run_analysis.py --project ./regression.gpr ./regression.adb
 ```

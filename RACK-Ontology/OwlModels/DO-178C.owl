@@ -1,6 +1,7 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://arcos.rack/PROV-S#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:DO-178C="http://common/DO-178C#"
     xmlns:Pr="http://arcos.rack/PROCESS#"
@@ -13,6 +14,7 @@
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="http://arcos.rack/DOCUMENT"/>
     <owl:imports rdf:resource="http://arcos.rack/PROCESS"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'DO-178C.sadl' and should not be directly edited.</rdfs:comment>

@@ -1,5 +1,6 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:trnstlsys="http://TurnstileSystem/CounterApplication#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -27,6 +28,7 @@
     <owl:imports rdf:resource="CounterApplicationLLR"/>
     <owl:imports rdf:resource="CounterApplication"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'GenerateCSV.sadl' and should not be directly edited.</rdfs:comment>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
   </owl:Ontology>
   <sadlimplicitmodel:Rule rdf:ID="Transitive1"/>

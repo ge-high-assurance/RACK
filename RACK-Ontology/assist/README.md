@@ -16,7 +16,7 @@ on the needs at the time.
 * `databin`
 
    This directory contains Linux wrappers for various tools that can
-   be used to emit auxiliary data into ~.rack~ files during the build
+   be used to emit auxiliary data into `.rack` files during the build
    process. This data can then be used to establish instance data in
    the RACK database for that built software tree.
 

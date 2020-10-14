@@ -1,3 +1,14 @@
+% Copyright (c) 2020, Galois, Inc.
+%
+% All Rights Reserved
+%
+% This material is based upon work supported by the Defense Advanced Research
+% Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+%
+% Any opinions, findings and conclusions or recommendations expressed in this
+% material are those of the author(s) and do not necessarily reflect the views
+% of the Defense Advanced Research Projects Agency (DARPA).
+
 % This module contains several checks relating to BDUs
 % (Belief-Disbelief-Uncertainty metrics).  In particular, we may want to check:
 %
@@ -7,8 +18,6 @@
 %
 % TODO (val) We will probably want to allow duplicate assessments as long as
 % they are created as part of a different activity.
-%
-% Copyright (c) 2020, General Electric Company and Galois, Inc.
 
 :- module(
     bdu,

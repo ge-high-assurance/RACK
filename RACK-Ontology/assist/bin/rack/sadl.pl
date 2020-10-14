@@ -1,3 +1,14 @@
+% Copyright (c) 2020, Galois, Inc.
+%
+% All Rights Reserved
+%
+% This material is based upon work supported by the Defense Advanced Research
+% Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+%
+% Any opinions, findings and conclusions or recommendations expressed in this
+% material are those of the author(s) and do not necessarily reflect the views
+% of the Defense Advanced Research Projects Agency (DARPA).
+
 % Converts the subset of SADL used for the ARCOS RACK project into
 % Owl.  The top-level function is sadl_file_to_owl/2, which reads the
 % SADL file and writes an OWL file.
@@ -26,8 +37,6 @@
 % operation is that the user uses the GE-developed SADL Eclipse plugin
 % to develop valid SADL files and that this tool is used for
 % subsequent automation, such as CI tasks.
-%
-% Copyright (c) 2020, General Electric Company and Galois, Inc.
 
 :- use_module(library(semweb/rdf11)).
 :- use_module(library(semweb/rdfs)).

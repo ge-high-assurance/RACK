@@ -1,0 +1,31 @@
+uri "http://Turnstile/PropertyDefinitionInference".
+import "http://www.w3.org/2000/01/rdf-schema".
+
+// Include the Project Specific Definition Files
+import "http://Turnstile/DevelopmentPlan".
+
+ ClassProp is a class, 
+	described by className with a single value of type class 
+	described by propName with values of type class.
+	
+Rule GenClassPropStrEntity:
+if xclass has rdfs:subClassOf ENTITY
+and noValue(xclass,rdfs:subClassOf,COLLECTION)
+then there exists a ClassProp with className xclass.
+
+
+Rule GenClassPropStrActivity:
+if xclass has rdfs:subClassOf ACTIVITY
+then there exists a ClassProp with className xclass.
+ 
+Rule GenClassPropStrAgent:
+if xclass has rdfs:subClassOf AGENT
+then there exists a ClassProp with className xclass.
+	
+Rule PopulateClassProp:
+	if  cp is a ClassProp 
+		and cn is className of cp 
+		and cn has rdfs:subClassOf cnsc 
+		and p has rdfs:domain cnsc 
+	then cp has propName p.
+	

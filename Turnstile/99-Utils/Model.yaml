@@ -4,15 +4,14 @@
 # Script documentation is available in RACK-Ontology/scripts/README.md
 data-graph: "http://rack001/data"
 ingestion-steps:
+- { owl: "../OwlModels/DevelopmentPlan.owl"}
+- { owl: "../OwlModels/TurnstilesSystemDesign.owl"}
+- { owl: "../OwlModels/HazardAssessment.owl"}
 - { owl: "../OwlModels/CounterApplicationDesignDescription.owl"}
-- { owl: "../OwlModels/CounterApplicationPlanForAspecsOfCertification.owl"}
 - { owl: "../OwlModels/CounterApplicationRequirementSpec.owl"}
-- { owl: "../OwlModels/CounterApplicationSoftwareDevelopmentPlan.owl"}
-- { owl: "../OwlModels/CounterApplicationSoftwareVerificationPlan.owl"}
 - { owl: "../OwlModels/CounterApplicationTesting.owl"}
 - { owl: "../OwlModels/CounterApplicationUnitTesting.owl"}
-- { owl: "../OwlModels/HazardAssessment.owl"}
-- { owl: "../OwlModels/TurnstilesSystemDesign.owl"}
-- { owl: "../OwlModels/TurnstileSystemDevelopmentPlan.owl"}
+
+
 # Ontology based on Deductions
 - { owl: "../Temp/Deductions.sadl.Deductions.owl.txt"}

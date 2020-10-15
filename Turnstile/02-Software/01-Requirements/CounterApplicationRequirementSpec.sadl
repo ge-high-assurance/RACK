@@ -1,0 +1,61 @@
+uri "http://Turnstile/CounterApplicationRequirementSpec" alias cntrapprq.
+import "http://Turnstile/DevelopmentPlan".
+import "http://Turnstile/TurnstileSystemDesign".
+import "http://Turnstile/HazardAssessment".
+
+JohnDoe is a Engineer
+	has identifier "John Doe".
+
+HlrDev1 is a SoftwareRequirementsDefinition
+	has identifier "HLR Dev 1"
+	has Rq:author JohnDoe.
+	
+
+HLR-1 is a HighLevelRequirement,
+	has identifier "HLR-1",
+	has text "The Computer shall increment the counter when a inflow event is received and the counter is less than max int.",
+	has Rq:satisfies Sys-1,
+	has mitigates H-1.2,
+	has governs CounterApplication,
+	has createdBy HlrDev1.	
+	
+HLR-2 is a HighLevelRequirement,
+	has identifier "HLR-2",
+	has text "The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0.",
+	has Rq:satisfies Sys-2,
+	has mitigates H-1.1,
+	has governs CounterApplication,
+	has createdBy HlrDev1.	
+	
+HLR-3 is a HighLevelRequirement,
+	has identifier "HLR-3",
+	has text "The Computer shall publish the counter at a 1 htz rate.",
+	has Rq:satisfies Sys-3,
+	has governs CounterApplication,
+	has createdBy HlrDev1.	
+
+inflowEvent is a DataDictionary,
+	has identifier "inflowEvent",
+	has providedBy inflow,
+	has consumedBy HLR-1,
+	has createdBy HlrDev1.
+	
+outflowEvent is a DataDictionary,
+	has identifier "outflowEvent",
+	has providedBy outflow,
+	has consumedBy HLR-2,
+	has createdBy HlrDev1.
+	
+counter is a DataDictionary,
+	has identifier "counter",
+	has providedBy HLR-1,
+	has providedBy HLR-2,
+	has consumedBy HLR-3,
+	has createdBy HlrDev1.
+	
+display is a DataDictionary,
+	has identifier "counter",
+	has providedBy HLR-3,
+	has consumedBy census,
+	has createdBy HlrDev1.
+	

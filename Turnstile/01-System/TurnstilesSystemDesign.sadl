@@ -1,0 +1,54 @@
+uri "http://Turnstile/TurnstileSystemDesign" alias TSysDP.
+import "http://Turnstile/DevelopmentPlan".
+
+Turnstiles is a SYSTEM,
+	has identifier "TurnStileSystem".
+	
+Ingate is a SystemComponent,
+	has identifier "In Gate",
+	has partOf Turnstiles.
+	
+Outgate is a SystemComponent,
+	has identifier "Out Gate",
+	has partOf Turnstiles.
+	
+	
+CounterApplication is a SystemComponent,
+	has identifier "Counter Application",
+	has partOf Turnstiles.
+	
+Display is a SystemComponent,
+	has identifier "Display",
+	has partOf Turnstiles.
+
+inflow is a SystemInterfaceDefinition,
+	has identifier "inflow",
+	has sys:source Ingate,
+	has destination CounterApplication.
+	
+outflow is a SystemInterfaceDefinition,
+	has identifier "outflow",
+	has sys:source Outgate,
+	has destination CounterApplication.
+	
+census is a SystemInterfaceDefinition,
+	has identifier "census",
+	has sys:source CounterApplication,
+	has destination Display,
+	has destination Ingate.	
+
+Sys-1 is a SystemRequirement,
+	has identifier "Sys-1",
+	has text "Turnstile system shall track the number of people that travel through the in gate.",
+	has governs Turnstiles.
+
+Sys-2 is a SystemRequirement,
+	has identifier "Sys-2",
+	has text "Turnstile system shall track the number of people that travel through the out gate.	",
+	has governs Turnstiles.
+ 
+Sys-3 is a SystemRequirement,
+	has identifier "Sys-3",
+	has text "Turnstile system shall track the number of people are currently in the park.",
+	has governs Turnstiles.
+

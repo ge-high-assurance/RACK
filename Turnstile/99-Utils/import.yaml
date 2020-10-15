@@ -3,13 +3,4 @@
 #
 # Script documentation is available in RACK-Ontology/scripts/README.md
 files:
-- ../OwlModels/CounterApplicationDesignDescription.owl
-- ../OwlModels/CounterApplicationPlanForAspecsOfCertification.owl
-- ../OwlModels/CounterApplicationRequirementSpec.owl
-- ../OwlModels/CounterApplicationSoftwareDevelopmentPlan.owl
-- ../OwlModels/CounterApplicationSoftwareVerificationPlan.owl
-- ../OwlModels/CounterApplicationTesting.owl
-- ../OwlModels/CounterApplicationUnitTesting.owl
-- ../OwlModels/HazardAssessment.owl
-- ../OwlModels/TurnstilesSystemDesign.owl
-- ../OwlModels/TurnstileSystemDevelopmentPlan.owl
+- ../OwlModels/DevelopmentPlan.owl

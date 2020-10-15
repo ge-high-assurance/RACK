@@ -1,0 +1,671 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://arcos.rack/SOFTWARE#"
+    xmlns:j.1="http://arcos.rack/PROV-S#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:j.2="http://arcos.rack/SYSTEM#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns="http://Turnstile/DevelopmentPlan#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:j.3="http://arcos.rack/DOCUMENT#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://Turnstile/DevelopmentPlan">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://arcos.rack/REVIEW"/>
+    <owl:imports rdf:resource="http://arcos.rack/TESTING"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'DevelopmentPlan.sadl' and should not be directly edited.</rdfs:comment>
+    <owl:imports rdf:resource="http://arcos.rack/HAZARD"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://arcos.rack/SYSTEM"/>
+    <owl:imports rdf:resource="http://arcos.rack/REQUIREMENTS"/>
+    <owl:imports rdf:resource="http://arcos.rack/DOCUMENT"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <owl:imports rdf:resource="http://arcos.rack/SOFTWARE"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="SystemInterfaceDefinition">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="DefineSystemInterfaces"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SYSTEM#INTERFACE"/>
+  </owl:Class>
+  <owl:Class rdf:ID="RequirementConfigurationManagement">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareIntegration">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#COMPILE"/>
+  </owl:Class>
+  <owl:Class rdf:ID="LowLevelRequirement">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="HighLevelRequirement"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/REQUIREMENTS#satisfies"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="SoftwareDesign"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ChangeRequest">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Change_Authorization"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/DOCUMENT#REQUEST"/>
+  </owl:Class>
+  <owl:Class rdf:about="#DefineSystemInterfaces">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareUnitTestExecution">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareRequirementsReview">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REVIEW#REVIEW"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareComponentTestExecution">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ExecutableObject">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareIntegration"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#FILE"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Engineer">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#AGENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareUnitTest">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#LowLevelRequirement"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/TESTING#verifies"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="DevelopUnitTests"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DevelopComponentTests">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_DEVELOPMENT"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Change_Authorization">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DevelopSystemArchitecture">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SystemComponent">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DevelopSystemArchitecture"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SYSTEM#SYSTEM"/>
+  </owl:Class>
+  <owl:Class rdf:about="#HighLevelRequirement">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="SystemRequirement"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/REQUIREMENTS#satisfies"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="SoftwareRequirementsDefinition"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SoftwareDesign">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareCodeReviewArtifacts">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="SoftwareCodeReview"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REVIEW#REVIEW_LOG"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DataDictionary">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#SoftwareRequirementsDefinition"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareDesignReviewArtifacts">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#LowLevelRequirement"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/REVIEW#reviews"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="SoftwareDesignReview"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REVIEW#REVIEW_LOG"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DataAndControlCouple">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareDesign"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareComponentTestResult">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="SoftwareComponentTest"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/TESTING#confirms"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareComponentTestExecution"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareComponentTestExecution"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_RESULT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareAccomplishmentSummary">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="GenerateSoftwareReleaseDocumentation"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/DOCUMENT#REPORT"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SoftwareCodeReview">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REVIEW#REVIEW"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SoftwareDesignReview">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REVIEW#REVIEW"/>
+  </owl:Class>
+  <owl:Class rdf:ID="C_Header">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#LowLevelRequirement"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/SOFTWARE#satisfies"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="SoftwareCoding"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#FILE"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Problem_Reporting">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:about="#DevelopUnitTests">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_DEVELOPMENT"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SoftwareRequirementsDefinition">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SoftwareCoding">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SoftwareComponentTest">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#HighLevelRequirement"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/TESTING#verifies"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DevelopComponentTests"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SystemRequirement">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="SystemRequirementsDefinition"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="C_Code">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareCoding"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#FILE"/>
+  </owl:Class>
+  <owl:Class rdf:about="#GenerateSoftwareReleaseDocumentation">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareModule">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareDesign"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SYSTEM#SYSTEM"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ReviewConfigurationManagement">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ProblemReport">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#Problem_Reporting"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/DOCUMENT#REPORT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SourceConfigurationManagement">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareUnitTestResult">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareUnitTest"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/TESTING#confirms"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareUnitTestExecution"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_RESULT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareRequirementReviewArtifacts">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#HighLevelRequirement"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/REVIEW#reviews"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareRequirementsReview"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REVIEW#REVIEW_LOG"/>
+  </owl:Class>
+  <owl:Class rdf:ID="RpmFile">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareIntegration"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#FILE"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SystemRequirementsDefinition">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"/>
+  </owl:Class>
+  <j.2:INTERFACE rdf:ID="Outflow"/>
+  <sadlimplicitmodel:Rule rdf:ID="C_Header_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="DataDictionary_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="DataAndControlCouple_content"/>
+  <j.2:INTERFACE rdf:ID="Inflow"/>
+  <sadlimplicitmodel:Rule rdf:ID="SoftwareUnitTestResult_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="HighLevelRequirement_content"/>
+  <j.2:INTERFACE rdf:ID="Census"/>
+  <sadlimplicitmodel:Rule rdf:ID="C_Code_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="SoftwareComponentTest_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="LowLevelRequirement_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="SoftwareComponentTestResult_content"/>
+  <j.3:PLAN rdf:ID="_DevelopmentPlan">
+    <j.1:content>
+      <j.3:PLAN rdf:ID="_07-SoftwareStandards">
+        <j.1:content>
+          <j.3:PLAN rdf:ID="SoftwareTestGuidance">
+            <j.1:used>
+              <j.3:SPECIFICATION rdf:ID="VerificationStandard">
+                <j.1:wasGeneratedBy>
+                  <j.1:ACTIVITY rdf:ID="SoftwarePlanningProcess"/>
+                </j.1:wasGeneratedBy>
+              </j.3:SPECIFICATION>
+            </j.1:used>
+          </j.3:PLAN>
+        </j.1:content>
+        <j.1:content>
+          <j.3:PLAN rdf:ID="SoftwareRequirementReviewChecklist">
+            <j.1:used rdf:resource="#VerificationStandard"/>
+          </j.3:PLAN>
+        </j.1:content>
+        <j.1:content>
+          <j.3:PLAN rdf:ID="SoftwareDesignReviewChecklist">
+            <j.1:used rdf:resource="#VerificationStandard"/>
+          </j.3:PLAN>
+        </j.1:content>
+        <j.1:content>
+          <j.3:PLAN rdf:ID="SoftwareCodeReviewChecklist">
+            <j.1:used rdf:resource="#VerificationStandard"/>
+          </j.3:PLAN>
+        </j.1:content>
+      </j.3:PLAN>
+    </j.1:content>
+    <j.1:content>
+      <j.3:PLAN rdf:ID="_06-SoftwareQualityAssurance"/>
+    </j.1:content>
+    <j.1:content>
+      <j.3:PLAN rdf:ID="_05-SoftwareConfigurationManagment">
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_02-SoftwareConfigurationManagementEnvironment"/>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_01-ChangeManagement"/>
+        </j.1:content>
+      </j.3:PLAN>
+    </j.1:content>
+    <j.1:content>
+      <j.3:PLAN rdf:ID="_04-SoftwareVerification">
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_03-SoftwareTestExecutionProcess"/>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_02-SoftwareTestGenerationProcess"/>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_01-SoftwareReviewProcess"/>
+        </j.1:content>
+      </j.3:PLAN>
+    </j.1:content>
+    <j.1:content>
+      <j.3:PLAN rdf:ID="_03-SoftwareDevelopment">
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_03-SoftwareDevelopmentEnvironment">
+            <j.1:content>
+              <j.0:FILE rdf:ID="GCC"/>
+            </j.1:content>
+          </j.3:SECTION>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_02-SoftwareDevelopmentLifeCycle"/>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_01-Standards"/>
+        </j.1:content>
+      </j.3:PLAN>
+    </j.1:content>
+    <j.1:content>
+      <j.3:PLAN rdf:ID="_02-SystemDevelopement">
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_03-HazardAssesment"/>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_02-SystemDesign"/>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_01-SystemRequirements"/>
+        </j.1:content>
+      </j.3:PLAN>
+    </j.1:content>
+    <j.1:content>
+      <j.3:PLAN rdf:ID="_01-PlanForSoftwareAspectsOfCertification">
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_08-SupplierOversite"/>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_07-AdditionalConsiderations"/>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_06-Schedule"/>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_05-SoftwareLifeCycleData">
+            <j.1:content>
+              <j.3:REPORT rdf:ID="SystemVerificationReport">
+                <j.1:wasGeneratedBy>
+                  <j.1:ACTIVITY rdf:ID="System_Development_Process">
+                    <j.1:wasInformedBy>
+                      <j.1:ACTIVITY rdf:ID="SoftwareConfigurationManagementProcess">
+                        <j.1:wasInformedBy>
+                          <j.1:ACTIVITY rdf:ID="SoftwareVerficationProcess">
+                            <j.1:used>
+                              <j.3:SPECIFICATION rdf:ID="CounterApplicationRequirementSpec">
+                                <j.1:wasGeneratedBy>
+                                  <j.1:ACTIVITY rdf:ID="SoftwareDevelopmentProcess">
+                                    <j.1:used rdf:resource="#SystemVerificationReport"/>
+                                    <j.1:used>
+                                      <j.3:SPECIFICATION rdf:ID="SystemSpec">
+                                        <j.1:wasGeneratedBy rdf:resource="#System_Development_Process"/>
+                                      </j.3:SPECIFICATION>
+                                    </j.1:used>
+                                    <j.1:used>
+                                      <j.3:SPECIFICATION rdf:ID="SoftwareStandard">
+                                        <j.1:wasGeneratedBy rdf:resource="#SoftwarePlanningProcess"/>
+                                      </j.3:SPECIFICATION>
+                                    </j.1:used>
+                                    <j.1:used>
+                                      <j.3:SPECIFICATION rdf:ID="RequirementStandard">
+                                        <j.1:wasGeneratedBy rdf:resource="#SoftwarePlanningProcess"/>
+                                      </j.3:SPECIFICATION>
+                                    </j.1:used>
+                                    <j.1:wasInformedBy rdf:resource="#SoftwarePlanningProcess"/>
+                                    <j.1:wasInformedBy rdf:resource="#System_Development_Process"/>
+                                  </j.1:ACTIVITY>
+                                </j.1:wasGeneratedBy>
+                              </j.3:SPECIFICATION>
+                            </j.1:used>
+                            <j.1:used>
+                              <j.3:DESCRIPTION rdf:ID="CounterApplicationSoftwareDesign">
+                                <j.1:wasGeneratedBy rdf:resource="#SoftwareDevelopmentProcess"/>
+                              </j.3:DESCRIPTION>
+                            </j.1:used>
+                            <j.1:used>
+                              <j.3:SPECIFICATION rdf:ID="CounterApplicationSourceCode">
+                                <j.1:wasGeneratedBy rdf:resource="#SoftwareDevelopmentProcess"/>
+                              </j.3:SPECIFICATION>
+                            </j.1:used>
+                            <j.1:used>
+                              <j.1:COLLECTION rdf:ID="CounterApplicationSoftware">
+                                <j.1:wasGeneratedBy rdf:resource="#SoftwareDevelopmentProcess"/>
+                              </j.1:COLLECTION>
+                            </j.1:used>
+                            <j.1:used rdf:resource="#VerificationStandard"/>
+                            <j.1:wasInformedBy rdf:resource="#SoftwareDevelopmentProcess"/>
+                          </j.1:ACTIVITY>
+                        </j.1:wasInformedBy>
+                        <j.1:wasInformedBy rdf:resource="#SoftwareDevelopmentProcess"/>
+                      </j.1:ACTIVITY>
+                    </j.1:wasInformedBy>
+                  </j.1:ACTIVITY>
+                </j.1:wasGeneratedBy>
+              </j.3:REPORT>
+            </j.1:content>
+            <j.1:content rdf:resource="#CounterApplicationSoftware"/>
+            <j.1:content rdf:resource="#SystemSpec"/>
+            <j.1:content rdf:resource="#CounterApplicationSourceCode"/>
+            <j.1:content rdf:resource="#VerificationStandard"/>
+            <j.1:content rdf:resource="#CounterApplicationRequirementSpec"/>
+            <j.1:content>
+              <j.3:REPORT rdf:ID="SoftwareConfigurationIndex">
+                <j.1:wasGeneratedBy rdf:resource="#SoftwareConfigurationManagementProcess"/>
+              </j.3:REPORT>
+            </j.1:content>
+            <j.1:content>
+              <j.3:REPORT rdf:ID="CounterVerificationResults">
+                <j.1:wasGeneratedBy rdf:resource="#SoftwareVerficationProcess"/>
+              </j.3:REPORT>
+            </j.1:content>
+            <j.1:content>
+              <j.3:DESCRIPTION rdf:ID="SoftwareVersionDescription">
+                <j.1:wasGeneratedBy rdf:resource="#SoftwareConfigurationManagementProcess"/>
+              </j.3:DESCRIPTION>
+            </j.1:content>
+            <j.1:content rdf:resource="#CounterApplicationSoftwareDesign"/>
+            <j.1:content rdf:resource="#RequirementStandard"/>
+            <j.1:content rdf:resource="#SoftwareStandard"/>
+            <j.1:content>
+              <j.3:REPORT rdf:ID="SoftwareEnvironmentConfigurationIndex">
+                <j.1:wasGeneratedBy rdf:resource="#SoftwareConfigurationManagementProcess"/>
+              </j.3:REPORT>
+            </j.1:content>
+          </j.3:SECTION>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_04-SoftwareLifeCycle"/>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_03-CertificationConsiderations"/>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_02-SoftwareOverview">
+            <j.1:content>
+              <j.0:COMPONENT rdf:ID="OutputThread">
+                <j.2:partOf>
+                  <j.2:SOFTWARE_COMPONENT rdf:ID="CounterApplication">
+                    <j.2:partOf>
+                      <j.2:SYSTEM rdf:ID="Turnstile"/>
+                    </j.2:partOf>
+                  </j.2:SOFTWARE_COMPONENT>
+                </j.2:partOf>
+              </j.0:COMPONENT>
+            </j.1:content>
+            <j.1:content>
+              <j.0:COMPONENT rdf:ID="InputThread">
+                <j.2:partOf rdf:resource="#CounterApplication"/>
+              </j.0:COMPONENT>
+            </j.1:content>
+            <j.1:content>
+              <j.0:COMPONENT rdf:ID="ExecutiveThread">
+                <j.2:partOf rdf:resource="#CounterApplication"/>
+              </j.0:COMPONENT>
+            </j.1:content>
+            <j.1:content rdf:resource="#CounterApplication"/>
+          </j.3:SECTION>
+        </j.1:content>
+        <j.1:content>
+          <j.3:SECTION rdf:ID="_01-SystemOverview">
+            <j.1:content rdf:resource="#Turnstile"/>
+            <j.1:content>
+              <j.2:HARDWARE_COMPONENT rdf:ID="OutGate">
+                <j.2:partOf rdf:resource="#Turnstile"/>
+              </j.2:HARDWARE_COMPONENT>
+            </j.1:content>
+            <j.1:content>
+              <j.2:HARDWARE_COMPONENT rdf:ID="InGate">
+                <j.2:partOf rdf:resource="#Turnstile"/>
+              </j.2:HARDWARE_COMPONENT>
+            </j.1:content>
+            <j.1:content>
+              <j.2:HARDWARE_COMPONENT rdf:ID="Display">
+                <j.2:partOf rdf:resource="#Turnstile"/>
+              </j.2:HARDWARE_COMPONENT>
+            </j.1:content>
+            <j.1:content rdf:resource="#CounterApplication"/>
+          </j.3:SECTION>
+        </j.1:content>
+      </j.3:PLAN>
+    </j.1:content>
+  </j.3:PLAN>
+  <rdf:Description rdf:about="http://arcos.rack/PROV-S#wasInformedBy">
+    <rdfs:range rdf:resource="#DevelopComponentTests"/>
+    <rdfs:range rdf:resource="#SoftwareCoding"/>
+    <rdfs:range rdf:resource="#SoftwareDesign"/>
+    <rdfs:range rdf:resource="#ReviewConfigurationManagement"/>
+    <rdfs:range rdf:resource="#RequirementConfigurationManagement"/>
+    <rdfs:range rdf:resource="#SoftwareRequirementsReview"/>
+    <rdfs:range rdf:resource="#Problem_Reporting"/>
+    <rdfs:range rdf:resource="#SoftwareIntegration"/>
+    <rdfs:range rdf:resource="#DefineSystemInterfaces"/>
+    <rdfs:range rdf:resource="#SoftwareDesignReview"/>
+    <rdfs:range rdf:resource="#SoftwareCodeReview"/>
+    <rdfs:range rdf:resource="#SoftwareRequirementsDefinition"/>
+    <rdfs:range rdf:resource="#SourceConfigurationManagement"/>
+    <rdfs:range rdf:resource="#DevelopSystemArchitecture"/>
+    <rdfs:range rdf:resource="#SoftwareUnitTestExecution"/>
+    <rdfs:range rdf:resource="#Change_Authorization"/>
+    <rdfs:range rdf:resource="#DevelopUnitTests"/>
+    <rdfs:range rdf:resource="#SystemRequirementsDefinition"/>
+    <rdfs:range rdf:resource="#SoftwareComponentTestExecution"/>
+  </rdf:Description>
+  <sadlimplicitmodel:Rule rdf:ID="ExecutableObject_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="SoftwareRequirementReviewArtifacts_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="SoftwareDesignReviewArtifacts_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="SoftwareModule_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="SoftwareCodeReviewArtifacts_content"/>
+  <j.1:ACTIVITY rdf:ID="SoftwareQualityAssuranceProcess">
+    <j.1:wasInformedBy rdf:resource="#SoftwareVerficationProcess"/>
+    <j.1:wasInformedBy rdf:resource="#SoftwareDevelopmentProcess"/>
+    <j.1:wasInformedBy rdf:resource="#SoftwarePlanningProcess"/>
+  </j.1:ACTIVITY>
+  <sadlimplicitmodel:Rule rdf:ID="SoftwareUnitTest_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="RpmFile_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="SystemComponent_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="SystemInterfaceDefinition_content"/>
+  <sadlimplicitmodel:Rule rdf:ID="SystemRequirement_content"/>
+</rdf:RDF>

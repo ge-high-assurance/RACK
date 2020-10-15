@@ -1,0 +1,470 @@
+uri "http://Turnstile/DevelopmentPlan".
+import "http://arcos.rack/DOCUMENT".
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/REVIEW".
+import "http://arcos.rack/TESTING".
+import "http://arcos.rack/HAZARD".
+
+_DevelopmentPlan is a PLAN,
+    has content _01-PlanForSoftwareAspectsOfCertification,
+    has content _02-SystemDevelopement,
+    has content _03-SoftwareDevelopment,
+    has content _04-SoftwareVerification,
+    has content _05-SoftwareConfigurationManagment,
+    has content _06-SoftwareQualityAssurance,
+    has content _07-SoftwareStandards.
+
+
+  _01-PlanForSoftwareAspectsOfCertification is a PLAN,
+      has content _01-SystemOverview,
+      has content _02-SoftwareOverview,
+      has content _03-CertificationConsiderations,
+      has content _04-SoftwareLifeCycle,
+      has content _05-SoftwareLifeCycleData,
+      has content _06-Schedule,
+      has content _07-AdditionalConsiderations,
+      has content _08-SupplierOversite.
+
+
+    _01-SystemOverview is a SECTION,
+        has content CounterApplication,
+        has content Display,
+        has content InGate,
+        has content OutGate,
+        has content Turnstile.
+
+      CounterApplication is a SOFTWARE_COMPONENT
+        has partOf Turnstile.
+
+      Display is a HARDWARE_COMPONENT
+        has partOf Turnstile.
+
+      InGate is a HARDWARE_COMPONENT
+        has partOf Turnstile.
+
+      OutGate is a HARDWARE_COMPONENT
+        has partOf Turnstile.
+
+      Turnstile is a SYSTEM.
+
+      Census is a INTERFACE.
+
+      Inflow is a INTERFACE.
+
+      Outflow is a INTERFACE.
+
+
+    _02-SoftwareOverview is a SECTION,
+        has content CounterApplication,
+        has content ExecutiveThread,
+        has content InputThread,
+        has content OutputThread.
+
+      CounterApplication is a SOFTWARE_COMPONENT.
+
+      ExecutiveThread is a COMPONENT
+        has partOf CounterApplication.
+
+      InputThread is a COMPONENT
+        has partOf CounterApplication.
+
+      OutputThread is a COMPONENT
+        has partOf CounterApplication.
+
+
+    _03-CertificationConsiderations is a SECTION.
+
+
+    _04-SoftwareLifeCycle is a SECTION.
+
+      SoftwareConfigurationManagementProcess is a ACTIVITY
+        has wasInformedBy SoftwareDevelopmentProcess
+        has wasInformedBy SoftwareVerficationProcess.
+
+      SoftwareDevelopmentProcess is a ACTIVITY
+        has wasInformedBy System_Development_Process
+        has wasInformedBy SoftwarePlanningProcess
+        has used RequirementStandard
+        has used SoftwareStandard
+        has used SystemSpec
+        has used SystemVerificationReport.
+
+      SoftwarePlanningProcess is a ACTIVITY.
+
+      SoftwareQualityAssuranceProcess is a ACTIVITY
+        has wasInformedBy SoftwarePlanningProcess
+        has wasInformedBy SoftwareDevelopmentProcess
+        has wasInformedBy SoftwareVerficationProcess.
+
+      SoftwareVerficationProcess is a ACTIVITY
+        has wasInformedBy SoftwareDevelopmentProcess
+        has used VerificationStandard
+        has used CounterApplicationSoftware
+        has used CounterApplicationSourceCode
+        has used CounterApplicationSoftwareDesign
+        has used CounterApplicationRequirementSpec.
+
+      System_Development_Process is a ACTIVITY
+        has wasInformedBy SoftwareConfigurationManagementProcess.
+
+
+    _05-SoftwareLifeCycleData is a SECTION,
+        has content CounterApplicationRequirementSpec,
+        has content CounterApplicationSoftware,
+        has content CounterApplicationSoftwareDesign,
+        has content CounterApplicationSourceCode,
+        has content CounterVerificationResults,
+        has content RequirementStandard,
+        has content SoftwareConfigurationIndex,
+        has content SoftwareEnvironmentConfigurationIndex,
+        has content SoftwareStandard,
+        has content SoftwareVersionDescription,
+        has content SystemSpec,
+        has content SystemVerificationReport,
+        has content VerificationStandard.
+
+      CounterApplicationRequirementSpec is a SPECIFICATION
+        has wasGeneratedBy SoftwareDevelopmentProcess.
+
+      CounterApplicationSoftware is a COLLECTION
+        has wasGeneratedBy SoftwareDevelopmentProcess.
+
+      CounterApplicationSoftwareDesign is a DESCRIPTION
+        has wasGeneratedBy SoftwareDevelopmentProcess.
+
+      CounterApplicationSourceCode is a SPECIFICATION
+        has wasGeneratedBy SoftwareDevelopmentProcess.
+
+      CounterVerificationResults is a REPORT
+        has wasGeneratedBy SoftwareVerficationProcess.
+
+      RequirementStandard is a SPECIFICATION
+        has wasGeneratedBy SoftwarePlanningProcess.
+
+      SoftwareConfigurationIndex is a REPORT
+        has wasGeneratedBy SoftwareConfigurationManagementProcess.
+
+      SoftwareEnvironmentConfigurationIndex is a REPORT
+        has wasGeneratedBy SoftwareConfigurationManagementProcess.
+
+      SoftwareStandard is a SPECIFICATION
+        has wasGeneratedBy SoftwarePlanningProcess.
+
+      SoftwareVersionDescription is a DESCRIPTION
+        has wasGeneratedBy SoftwareConfigurationManagementProcess.
+
+      SystemSpec is a SPECIFICATION
+        has wasGeneratedBy System_Development_Process.
+
+      SystemVerificationReport is a REPORT
+        has wasGeneratedBy System_Development_Process.
+
+      VerificationStandard is a SPECIFICATION
+        has wasGeneratedBy SoftwarePlanningProcess.
+
+
+    _06-Schedule is a SECTION.
+
+
+    _07-AdditionalConsiderations is a SECTION.
+
+
+    _08-SupplierOversite is a SECTION.
+
+
+  _02-SystemDevelopement is a PLAN,
+      has content _01-SystemRequirements,
+      has content _02-SystemDesign,
+      has content _03-HazardAssesment.
+
+
+    _01-SystemRequirements is a SECTION.
+
+      SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
+        wasInformedBy of SystemRequirementsDefinition has values of type DevelopSystemArchitecture.
+
+      SystemRequirement is a type of REQUIREMENT.
+        wasGeneratedBy of SystemRequirement only has values of type SystemRequirementsDefinition.
+      Rule SystemRequirement_content:
+        given x is a  SystemRequirement 
+        then SystemSpec has content x.
+
+
+    _02-SystemDesign is a SECTION.
+
+      DefineSystemInterfaces is a type of ACTIVITY.
+        wasInformedBy of DefineSystemInterfaces has values of type SystemRequirementsDefinition.
+
+      DevelopSystemArchitecture is a type of ACTIVITY.
+
+      SystemComponent is a type of SYSTEM.
+        wasGeneratedBy of SystemComponent only has values of type DevelopSystemArchitecture.
+      Rule SystemComponent_content:
+        given x is a  SystemComponent 
+        then SystemSpec has content x.
+
+      SystemInterfaceDefinition is a type of INTERFACE.
+        wasGeneratedBy of SystemInterfaceDefinition only has values of type DefineSystemInterfaces.
+      Rule SystemInterfaceDefinition_content:
+        given x is a  SystemInterfaceDefinition 
+        then SystemSpec has content x.
+
+
+    _03-HazardAssesment is a SECTION.
+
+
+  _03-SoftwareDevelopment is a PLAN,
+      has content _01-Standards,
+      has content _02-SoftwareDevelopmentLifeCycle,
+      has content _03-SoftwareDevelopmentEnvironment.
+
+
+    _01-Standards is a SECTION.
+
+
+    _02-SoftwareDevelopmentLifeCycle is a SECTION.
+
+      SoftwareCoding is a type of CODE_DEVELOPMENT.
+        wasInformedBy of SoftwareCoding has values of type Change_Authorization.
+        wasInformedBy of SoftwareCoding has values of type SoftwareDesign.
+
+      SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
+        wasInformedBy of SoftwareDesign has values of type SoftwareRequirementsDefinition.
+        wasInformedBy of SoftwareDesign has values of type Change_Authorization.
+
+      SoftwareIntegration is a type of COMPILE.
+        wasInformedBy of SoftwareIntegration has values of type SoftwareCoding.
+
+      SoftwareRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
+        wasInformedBy of SoftwareRequirementsDefinition has values of type Change_Authorization.
+        wasInformedBy of SoftwareRequirementsDefinition has values of type DefineSystemInterfaces.
+
+      C_Code is a type of FILE.
+        wasGeneratedBy of C_Code only has values of type SoftwareCoding.
+      Rule C_Code_content:
+        given x is a  C_Code 
+        then CounterApplicationSourceCode has content x.
+
+      C_Header is a type of FILE.
+        wasGeneratedBy of C_Header only has values of type SoftwareCoding.
+      Rule C_Header_content:
+        given x is a  C_Header 
+        then CounterApplicationSourceCode has content x.
+        sw:satisfies of C_Header only has values of type LowLevelRequirement.
+
+      DataAndControlCouple is a type of DATA_DICTIONARY_TERM.
+        wasGeneratedBy of DataAndControlCouple only has values of type SoftwareDesign.
+      Rule DataAndControlCouple_content:
+        given x is a  DataAndControlCouple 
+        then CounterApplicationSoftwareDesign has content x.
+
+      DataDictionary is a type of DATA_DICTIONARY_TERM.
+        wasGeneratedBy of DataDictionary only has values of type SoftwareRequirementsDefinition.
+      Rule DataDictionary_content:
+        given x is a  DataDictionary 
+        then CounterApplicationRequirementSpec has content x.
+
+      ExecutableObject is a type of FILE.
+        wasGeneratedBy of ExecutableObject only has values of type SoftwareIntegration.
+      Rule ExecutableObject_content:
+        given x is a  ExecutableObject 
+        then CounterApplicationSoftware has content x.
+
+      HighLevelRequirement is a type of REQUIREMENT.
+        wasGeneratedBy of HighLevelRequirement only has values of type SoftwareRequirementsDefinition.
+      Rule HighLevelRequirement_content:
+        given x is a  HighLevelRequirement 
+        then CounterApplicationRequirementSpec has content x.
+        Rq:satisfies of HighLevelRequirement only has values of type SystemRequirement.
+
+      LowLevelRequirement is a type of REQUIREMENT.
+        wasGeneratedBy of LowLevelRequirement only has values of type SoftwareDesign.
+      Rule LowLevelRequirement_content:
+        given x is a  LowLevelRequirement 
+        then CounterApplicationSoftwareDesign has content x.
+        Rq:satisfies of LowLevelRequirement only has values of type HighLevelRequirement.
+
+      RpmFile is a type of FILE.
+        wasGeneratedBy of RpmFile only has values of type SoftwareIntegration.
+      Rule RpmFile_content:
+        given x is a  RpmFile 
+        then CounterApplicationSoftware has content x.
+
+      SoftwareModule is a type of SYSTEM.
+        wasGeneratedBy of SoftwareModule only has values of type SoftwareDesign.
+      Rule SoftwareModule_content:
+        given x is a  SoftwareModule 
+        then CounterApplicationSoftwareDesign has content x.
+
+
+    _03-SoftwareDevelopmentEnvironment is a SECTION,
+        has content GCC.
+
+      Engineer is a type of AGENT.
+
+      GCC is a FILE.
+
+
+  _04-SoftwareVerification is a PLAN,
+      has content _01-SoftwareReviewProcess,
+      has content _02-SoftwareTestGenerationProcess,
+      has content _03-SoftwareTestExecutionProcess.
+
+    SoftwareCodeReviewArtifacts is a type of REVIEW_LOG.
+      wasGeneratedBy of SoftwareCodeReviewArtifacts only has values of type SoftwareCodeReview.
+    Rule SoftwareCodeReviewArtifacts_content:
+      given x is a  SoftwareCodeReviewArtifacts 
+      then SystemVerificationReport has content x.
+
+    SoftwareComponentTest is a type of TEST.
+    Rule SoftwareComponentTest_content:
+      given x is a  SoftwareComponentTest 
+      then SystemVerificationReport has content x.
+      wasGeneratedBy of SoftwareComponentTest only has values of type DevelopComponentTests.
+      verifies of SoftwareComponentTest only has values of type HighLevelRequirement.
+
+    SoftwareComponentTestResult is a type of TEST_RESULT.
+      wasGeneratedBy of SoftwareComponentTestResult only has values of type SoftwareComponentTestExecution.
+      wasGeneratedBy of SoftwareComponentTestResult only has values of type SoftwareComponentTestExecution.
+    Rule SoftwareComponentTestResult_content:
+      given x is a  SoftwareComponentTestResult 
+      then SystemVerificationReport has content x.
+      confirms of SoftwareComponentTestResult only has values of type SoftwareComponentTest.
+
+    SoftwareDesignReviewArtifacts is a type of REVIEW_LOG.
+      wasGeneratedBy of SoftwareDesignReviewArtifacts only has values of type SoftwareDesignReview.
+    Rule SoftwareDesignReviewArtifacts_content:
+      given x is a  SoftwareDesignReviewArtifacts 
+      then SystemVerificationReport has content x.
+      reviews of SoftwareDesignReviewArtifacts only has values of type LowLevelRequirement.
+
+    SoftwareRequirementReviewArtifacts is a type of REVIEW_LOG.
+    Rule SoftwareRequirementReviewArtifacts_content:
+      given x is a  SoftwareRequirementReviewArtifacts 
+      then SystemVerificationReport has content x.
+      wasGeneratedBy of SoftwareRequirementReviewArtifacts only has values of type SoftwareRequirementsReview.
+      reviews of SoftwareRequirementReviewArtifacts only has values of type HighLevelRequirement.
+
+    SoftwareUnitTest is a type of TEST.
+    Rule SoftwareUnitTest_content:
+      given x is a  SoftwareUnitTest 
+      then SystemVerificationReport has content x.
+      wasGeneratedBy of SoftwareUnitTest only has values of type DevelopUnitTests.
+      verifies of SoftwareUnitTest only has values of type LowLevelRequirement.
+
+    SoftwareUnitTestResult is a type of TEST_RESULT.
+      wasGeneratedBy of SoftwareUnitTestResult only has values of type SoftwareUnitTestExecution.
+    Rule SoftwareUnitTestResult_content:
+      given x is a  SoftwareUnitTestResult 
+      then SystemVerificationReport has content x.
+      confirms of SoftwareUnitTestResult only has values of type SoftwareUnitTest.
+
+
+    _01-SoftwareReviewProcess is a SECTION.
+
+      SoftwareCodeReview is a type of REVIEW.
+        wasInformedBy of SoftwareCodeReview has values of type SoftwareDesignReview.
+        wasInformedBy of SoftwareCodeReview has values of type SoftwareCoding.
+
+      SoftwareDesignReview is a type of REVIEW.
+        wasInformedBy of SoftwareDesignReview has values of type SoftwareRequirementsReview.
+        wasInformedBy of SoftwareDesignReview has values of type SoftwareDesign.
+
+      SoftwareRequirementsReview is a type of REVIEW.
+        wasInformedBy of SoftwareRequirementsReview has values of type SoftwareRequirementsDefinition.
+
+
+    _02-SoftwareTestGenerationProcess is a SECTION.
+
+      DevelopComponentTests is a type of TEST_DEVELOPMENT.
+        wasInformedBy of DevelopComponentTests has values of type DevelopUnitTests.
+        wasInformedBy of DevelopComponentTests has values of type SoftwareRequirementsReview.
+
+      DevelopUnitTests is a type of TEST_DEVELOPMENT.
+        wasInformedBy of DevelopUnitTests has values of type SoftwareDesignReview.
+
+
+    _03-SoftwareTestExecutionProcess is a SECTION.
+
+      SoftwareComponentTestExecution is a type of TEST_EXECUTION.
+        wasInformedBy of SoftwareComponentTestExecution has values of type SoftwareIntegration.
+        wasInformedBy of SoftwareComponentTestExecution has values of type DevelopComponentTests.
+
+      SoftwareUnitTestExecution is a type of TEST_EXECUTION.
+        wasInformedBy of SoftwareUnitTestExecution has values of type DevelopUnitTests.
+        wasInformedBy of SoftwareUnitTestExecution has values of type SoftwareCoding.
+
+
+  _05-SoftwareConfigurationManagment is a PLAN,
+      has content _01-ChangeManagement,
+      has content _02-SoftwareConfigurationManagementEnvironment.
+
+    ChangeRequest is a type of REQUEST.
+      wasGeneratedBy of ChangeRequest only has values of type Change_Authorization.
+
+    ProblemReport is a type of REPORT.
+      wasGeneratedBy of ProblemReport only has values of type Problem_Reporting.
+
+
+    _01-ChangeManagement is a SECTION.
+
+      Change_Authorization is a type of ACTIVITY.
+        wasInformedBy of Change_Authorization has values of type Problem_Reporting.
+
+      Problem_Reporting is a type of ACTIVITY.
+        wasInformedBy of Problem_Reporting has values of type SoftwareComponentTestExecution.
+        wasInformedBy of Problem_Reporting has values of type SoftwareRequirementsReview.
+        wasInformedBy of Problem_Reporting has values of type SoftwareDesignReview.
+        wasInformedBy of Problem_Reporting has values of type SoftwareCodeReview.
+        wasInformedBy of Problem_Reporting has values of type SoftwareUnitTestExecution.
+
+
+    _02-SoftwareConfigurationManagementEnvironment is a SECTION.
+
+      GenerateSoftwareReleaseDocumentation is a type of ACTIVITY.
+        wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type SourceConfigurationManagement.
+        wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type RequirementConfigurationManagement.
+        wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type ReviewConfigurationManagement.
+
+      RequirementConfigurationManagement is a type of ACTIVITY.
+        wasInformedBy of RequirementConfigurationManagement has values of type SoftwareRequirementsDefinition.
+        wasInformedBy of RequirementConfigurationManagement has values of type SoftwareDesign.
+
+      ReviewConfigurationManagement is a type of ACTIVITY.
+        wasInformedBy of ReviewConfigurationManagement has values of type SoftwareRequirementsReview.
+        wasInformedBy of ReviewConfigurationManagement has values of type SoftwareDesignReview.
+        wasInformedBy of ReviewConfigurationManagement has values of type SoftwareCodeReview.
+
+      SourceConfigurationManagement is a type of ACTIVITY.
+        wasInformedBy of SourceConfigurationManagement has values of type DevelopComponentTests.
+        wasInformedBy of SourceConfigurationManagement has values of type DevelopUnitTests.
+        wasInformedBy of SourceConfigurationManagement has values of type SoftwareUnitTestExecution.
+        wasInformedBy of SourceConfigurationManagement has values of type SoftwareComponentTestExecution.
+        wasInformedBy of SourceConfigurationManagement has values of type SoftwareCoding.
+
+      SoftwareAccomplishmentSummary is a type of REPORT.
+        wasGeneratedBy of SoftwareAccomplishmentSummary only has values of type GenerateSoftwareReleaseDocumentation.
+
+
+  _06-SoftwareQualityAssurance is a PLAN.
+
+
+  _07-SoftwareStandards is a PLAN,
+      has content SoftwareCodeReviewChecklist,
+      has content SoftwareDesignReviewChecklist,
+      has content SoftwareRequirementReviewChecklist,
+      has content SoftwareTestGuidance.
+
+    SoftwareCodeReviewChecklist is a PLAN
+      has used VerificationStandard.
+
+    SoftwareDesignReviewChecklist is a PLAN
+      has used VerificationStandard.
+
+    SoftwareRequirementReviewChecklist is a PLAN
+      has used VerificationStandard.
+
+    SoftwareTestGuidance is a PLAN
+      has used VerificationStandard.

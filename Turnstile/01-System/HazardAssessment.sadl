@@ -1,13 +1,12 @@
-uri "http://TurnstileSystem/HazardAssessment" alias ha.
-import "http://arcos.rack/HAZARD".
-import "http://TurnstileSystem/Turnstiles".
+uri "http://Turnstile/HazardAssessment" alias ha.
+import "http://Turnstile/DevelopmentPlan".
 
 //definition describes HAZARD with values of type string. 
 
 H-1 is a HAZARD,
 	has identifier "H-1",
 	has definition "System Crash",
-	has H:source Turnstiles.
+	has H:source Turnstile.
 
 H-1.1 is a HAZARD,
 	has identifier "H-1.1",
@@ -22,4 +21,4 @@ H-1.2 is a HAZARD,
 H-2 is a HAZARD,
 	has identifier "H-2",
 	has definition "Park Exceeds Capacity",
-	has H:source Turnstiles.
+	has H:source Turnstile.

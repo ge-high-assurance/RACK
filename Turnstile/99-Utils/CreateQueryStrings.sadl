@@ -1,0 +1,35 @@
+uri "http://Turnstile/CreateQueryStrings".
+import "http://Turnstile/PropertyDefinitionInference".
+
+// Other than issues with quotes, the following query can be used to run the queries to generate the csv files.
+// Note the order in which the properties are generated is arbitrary.
+// Instructions for taking care of quotes is as follows
+// 			copy and paste output from running CheckCardinality.sadl into RunQueryString.sadl and edit it as follows
+// 				replace yyy by a "
+// 				and delete zzz"
+// 				and delete "zzz  
+// Keeping these instructions in this file so that we can do global replace in RunQueryString.sadl
+
+Write: data {Ask GenQueryString1: "select ?QueryStr where 		# depending on how we automates, we may not need to output ?ClassType
+{
+  {select distinct ?ClassName ?ClassProp ?Class (group_concat(distinct ?temp2; separator='} . OPTIONAL{') as ?PropList) where
+    {  ?ClassProp <rdf:type> <ClassProp> 
+     . ?ClassProp <className> ?Class 												# e.g. ?Class is http://arcos.rack/SYSTEM#SYSTEM for which we want all properties 
+     . Let (?ClassVarInt := replace(str(?Class),'http.*#','?')) 					# making a variable (e.g. ?SYSTEM)
+     . ?ClassProp <http://Turnstile/PropertyDefinitionInference#propName> ?PropName 		# ?PropName is the property
+     . LET (?VarNameInt := replace(str(?PropName),'http.*#','> ?')) 				# replace initial part of property with a ? to make it a variable in query (e.g. > ?producedBy)
+     . LET (?temp1 := concat(str(?PropName),str(?VarNameInt)))						# e.g. http://arcos.rack/SYSTEM#producedBy> ?producedBy
+     . LET (?temp2 := concat(concat(?ClassVarInt,' <'),?temp1))						# e.g. ?SYSTEM <http://arcos.rack/SYSTEM#producedBy> ?producedBy
+    } group by ?ClassName ?ClassProp ?Class
+  }
+  . LET (?ClassType := replace(str(?Class),'http.*#',''))							# strip out; only using it to then generate eventual csv file name
+  . LET (?ClassVar := replace(str(?Class),'http.*#','?')) 							# making a variable (e.g. ?SYSTEM)
+  . LET (?str0 := 'zzzWrite: data {Ask: yyyselect * where {')  						# first part of query string
+  . LET (?str1 := concat(str(?ClassVar), ' <rdf:type> <')) 							# putting together the first clause of the form ?SYSTEM <rdf:type> <SYSTEM>
+  . LET (?str2 := concat(?str1,replace(str(?Class),'http.*#','')))
+  . LET (?str4 := concat(?str2,'> . OPTIONAL{'))
+  . LET (?str5 := concat(?str0,?str4))												# the first clause is in along with first OPTIONAL fragment
+  . LET (?str6 := concat(?str5, ?PropList))											# all the properties in the query string
+  . LET (?str7 := concat(?str6,'}}yyy.} to yyyData/'))				
+  . LET (?QueryStr := concat(?str7, concat(str(?ClassType),'.csvyyy.zzz')))			# end the query string
+} order by ?QueryStr".} to "99-Utils/QueryStrings.txt".

@@ -1,4 +1,5 @@
 #!/bin/sh
+cd "$(dirname "$0")"
 set -eu
 
 if ! command -v rack > /dev/null
@@ -7,9 +8,10 @@ then
     exit 1
 fi
 
-rack --base-url http://10.33.49.125 model import --clear ../OwlModels/import.yaml
-rack --base-url http://10.33.49.125 model import  ../../Turnstile/99-Utils/import.yaml
 
-rack --base-url http://10.33.49.125 data import --clear ../OwlModels/DO-178C.yaml
-rack --base-url http://10.33.49.125 data import ../../Turnstile/99-Utils/Model.yaml
+rack --base-url http://10.33.49.197 model import --clear ../../../RACK/RACK-Ontology/OwlModels/import.yaml
+rack --base-url http://10.33.49.197 model import  ./import.yaml
+
+rack --base-url http://10.33.49.197 data import --clear ../../../RACK/RACK-Ontology/OwlModels/DO-178C.yaml
+rack --base-url http://10.33.49.197 data import ./Model.yaml
 

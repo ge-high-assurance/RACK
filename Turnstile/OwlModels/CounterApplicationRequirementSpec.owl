@@ -1,0 +1,85 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:j.0="http://Turnstile/DevelopmentPlan#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:j.1="http://arcos.rack/REQUIREMENTS#"
+    xmlns:j.2="http://arcos.rack/PROV-S#"
+    xmlns:ha="http://Turnstile/HazardAssessment#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:TSysDP="http://Turnstile/TurnstileSystemDesign#"
+    xmlns:cntrapprq="http://Turnstile/CounterApplicationRequirementSpec#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://Turnstile/CounterApplicationRequirementSpec">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="HazardAssessment"/>
+    <owl:imports rdf:resource="TurnstileSystemDesign"/>
+    <owl:imports rdf:resource="DevelopmentPlan"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplicationRequirementSpec.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <j.0:DataDictionary rdf:ID="display">
+    <j.1:createdBy>
+      <j.0:SoftwareRequirementsDefinition rdf:ID="HlrDev1">
+        <j.1:author>
+          <j.0:Engineer rdf:ID="JohnDoe">
+            <j.2:identifier>John Doe</j.2:identifier>
+          </j.0:Engineer>
+        </j.1:author>
+        <j.2:identifier>HLR Dev 1</j.2:identifier>
+      </j.0:SoftwareRequirementsDefinition>
+    </j.1:createdBy>
+    <j.1:consumedBy rdf:resource="TurnstileSystemDesign#census"/>
+    <j.1:providedBy>
+      <j.0:HighLevelRequirement rdf:ID="HLR-3">
+        <j.1:createdBy rdf:resource="#HlrDev1"/>
+        <j.1:governs rdf:resource="DevelopmentPlan#CounterApplication"/>
+        <j.1:satisfies rdf:resource="TurnstileSystemDesign#Sys-3"/>
+        <j.1:text>The Computer shall publish the counter at a 1 htz rate.</j.1:text>
+        <j.2:identifier>HLR-3</j.2:identifier>
+      </j.0:HighLevelRequirement>
+    </j.1:providedBy>
+    <j.2:identifier>counter</j.2:identifier>
+  </j.0:DataDictionary>
+  <j.0:DataDictionary rdf:ID="counter">
+    <j.1:createdBy rdf:resource="#HlrDev1"/>
+    <j.1:consumedBy rdf:resource="#HLR-3"/>
+    <j.1:providedBy>
+      <j.0:HighLevelRequirement rdf:ID="HLR-2">
+        <j.1:createdBy rdf:resource="#HlrDev1"/>
+        <j.1:governs rdf:resource="DevelopmentPlan#CounterApplication"/>
+        <j.1:mitigates rdf:resource="HazardAssessment#H-1.1"/>
+        <j.1:satisfies rdf:resource="TurnstileSystemDesign#Sys-2"/>
+        <j.1:text>The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0.</j.1:text>
+        <j.2:identifier>HLR-2</j.2:identifier>
+      </j.0:HighLevelRequirement>
+    </j.1:providedBy>
+    <j.1:providedBy>
+      <j.0:HighLevelRequirement rdf:ID="HLR-1">
+        <j.1:createdBy rdf:resource="#HlrDev1"/>
+        <j.1:governs rdf:resource="DevelopmentPlan#CounterApplication"/>
+        <j.1:mitigates rdf:resource="HazardAssessment#H-1.2"/>
+        <j.1:satisfies rdf:resource="TurnstileSystemDesign#Sys-1"/>
+        <j.1:text>The Computer shall increment the counter when a inflow event is received and the counter is less than max int.</j.1:text>
+        <j.2:identifier>HLR-1</j.2:identifier>
+      </j.0:HighLevelRequirement>
+    </j.1:providedBy>
+    <j.2:identifier>counter</j.2:identifier>
+  </j.0:DataDictionary>
+  <j.0:DataDictionary rdf:ID="inflowEvent">
+    <j.1:createdBy rdf:resource="#HlrDev1"/>
+    <j.1:consumedBy rdf:resource="#HLR-1"/>
+    <j.1:providedBy rdf:resource="TurnstileSystemDesign#inflow"/>
+    <j.2:identifier>inflowEvent</j.2:identifier>
+  </j.0:DataDictionary>
+  <j.0:DataDictionary rdf:ID="outflowEvent">
+    <j.1:createdBy rdf:resource="#HlrDev1"/>
+    <j.1:consumedBy rdf:resource="#HLR-2"/>
+    <j.1:providedBy rdf:resource="TurnstileSystemDesign#outflow"/>
+    <j.2:identifier>outflowEvent</j.2:identifier>
+  </j.0:DataDictionary>
+</rdf:RDF>

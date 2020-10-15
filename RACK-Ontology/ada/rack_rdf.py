@@ -1,4 +1,7 @@
+#!/usr/bin/env python
+
 """Demonstration driver"""
+
 import sys
 from rdflib import Graph, Namespace
 from ontology import Component, ComponentType, File, FileFormat

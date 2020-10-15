@@ -8,29 +8,27 @@ NS = Namespace("http://arcos.rack/SOFTWARE#")
 RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 
 class Thing:
-    def __init__(self, uri):
-        self.node = URIRef(uri)
-        self.rdf_type = None
+    def __init__(self, uri: str, rdf_type: URIRef) -> None:
+        self.node: URIRef = URIRef(uri)
+        self.rdf_type: URIRef = rdf_type
 
-    def add_to_graph(self, graph):
+    def add_to_graph(self, graph: Graph) -> None:
         graph.bind("sw", NS)
         graph.add((self.node, RDF.type, self.rdf_type))
 
 class FileFormat(Thing):
-    def __init__(self, uri):
-        super().__init__(uri)
-        self.rdf_type = NS.FORMAT
+    def __init__(self, uri: str) -> None:
+        super().__init__(uri, NS.FORMAT)
 
 class File(Thing):
     """File entity"""
 
-    def __init__(self, uri, filename, file_format):
-        super().__init__(uri)
-        self.rdf_type = NS.FILE
-        self.filename = filename
-        self.file_format = file_format
+    def __init__(self, uri: str, filename: str, file_format: FileFormat) -> None:
+        super().__init__(uri, NS.FILE)
+        self.filename: str = filename
+        self.file_format: FileFormat = file_format
 
-    def add_to_graph(self, graph):
+    def add_to_graph(self, graph: Graph) -> None:
         super().add_to_graph(graph)
         graph.add((self.node, NS.filename, Literal(self.filename)))
         graph.add((self.node, NS.fileFormat, Literal(self.file_format.node)))
@@ -43,22 +41,21 @@ class ComponentType(Enum):
 class Component(Thing):
     """Software components"""
 
-    def __init__(self, uri, name, ty: ComponentType):
-        super().__init__(uri)
-        self.rdf_type = NS.COMPONENT
+    def __init__(self, uri: str, name: str, ty: ComponentType) -> None:
+        super().__init__(uri, NS.COMPONENT)
         self.name = name
         self.component_type = ty
         self.defined_in: Optional[File] = None
         self.mentions: List[Component] = []
         self.parents: List[Component] = []
 
-    def add_mention(self, component):
+    def add_mention(self, component: Component) -> None:
         self.mentions.append(component)
 
-    def add_parent(self, parent):
+    def add_parent(self, parent: Component) -> None:
         self.parents.append(parent)
 
-    def add_to_graph(self, graph: Graph):
+    def add_to_graph(self, graph: Graph) -> None:
         """Serialize the component into an RDF graph"""
         super().add_to_graph(graph)
 

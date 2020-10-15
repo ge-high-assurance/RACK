@@ -1,6 +1,6 @@
 OWL_Format=RDF/XML-ABBREV
 ambiguousNameCheckOn=true
-baseUri=http\://sadl.org
+baseUri=http\://arcos.rack
 cardinalityCheck=false
 com.ge.research.sadl.SADL.useProjectSettings=true
 contentAssist__filterImplicitModel=false

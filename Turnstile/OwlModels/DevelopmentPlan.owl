@@ -21,6 +21,7 @@
     <owl:imports rdf:resource="http://arcos.rack/SYSTEM"/>
     <owl:imports rdf:resource="http://arcos.rack/REQUIREMENTS"/>
     <owl:imports rdf:resource="http://arcos.rack/DOCUMENT"/>
+    <owl:imports rdf:resource="http://arcos.rack/AGENTS"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <owl:imports rdf:resource="http://arcos.rack/SOFTWARE"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
@@ -586,23 +587,23 @@
           <j.3:SECTION rdf:ID="_02-SoftwareOverview">
             <j.1:content>
               <j.0:COMPONENT rdf:ID="OutputThread">
-                <j.2:partOf>
-                  <j.2:SOFTWARE_COMPONENT rdf:ID="CounterApplication">
+                <j.0:subcomponentOf>
+                  <j.2:SYSTEM rdf:ID="CounterApplication">
                     <j.2:partOf>
                       <j.2:SYSTEM rdf:ID="Turnstile"/>
                     </j.2:partOf>
-                  </j.2:SOFTWARE_COMPONENT>
-                </j.2:partOf>
+                  </j.2:SYSTEM>
+                </j.0:subcomponentOf>
               </j.0:COMPONENT>
             </j.1:content>
             <j.1:content>
               <j.0:COMPONENT rdf:ID="InputThread">
-                <j.2:partOf rdf:resource="#CounterApplication"/>
+                <j.0:subcomponentOf rdf:resource="#CounterApplication"/>
               </j.0:COMPONENT>
             </j.1:content>
             <j.1:content>
               <j.0:COMPONENT rdf:ID="ExecutiveThread">
-                <j.2:partOf rdf:resource="#CounterApplication"/>
+                <j.0:subcomponentOf rdf:resource="#CounterApplication"/>
               </j.0:COMPONENT>
             </j.1:content>
             <j.1:content rdf:resource="#CounterApplication"/>
@@ -612,19 +613,19 @@
           <j.3:SECTION rdf:ID="_01-SystemOverview">
             <j.1:content rdf:resource="#Turnstile"/>
             <j.1:content>
-              <j.2:HARDWARE_COMPONENT rdf:ID="OutGate">
+              <j.2:SYSTEM rdf:ID="OutGate">
                 <j.2:partOf rdf:resource="#Turnstile"/>
-              </j.2:HARDWARE_COMPONENT>
+              </j.2:SYSTEM>
             </j.1:content>
             <j.1:content>
-              <j.2:HARDWARE_COMPONENT rdf:ID="InGate">
+              <j.2:SYSTEM rdf:ID="InGate">
                 <j.2:partOf rdf:resource="#Turnstile"/>
-              </j.2:HARDWARE_COMPONENT>
+              </j.2:SYSTEM>
             </j.1:content>
             <j.1:content>
-              <j.2:HARDWARE_COMPONENT rdf:ID="Display">
+              <j.2:SYSTEM rdf:ID="Display">
                 <j.2:partOf rdf:resource="#Turnstile"/>
-              </j.2:HARDWARE_COMPONENT>
+              </j.2:SYSTEM>
             </j.1:content>
             <j.1:content rdf:resource="#CounterApplication"/>
           </j.3:SECTION>

@@ -6,6 +6,7 @@ import "http://arcos.rack/REQUIREMENTS".
 import "http://arcos.rack/REVIEW".
 import "http://arcos.rack/TESTING".
 import "http://arcos.rack/HAZARD".
+import "http://arcos.rack/AGENTS".
 
 _DevelopmentPlan is a PLAN,
     has content _01-PlanForSoftwareAspectsOfCertification,
@@ -35,16 +36,16 @@ _DevelopmentPlan is a PLAN,
         has content OutGate,
         has content Turnstile.
 
-      CounterApplication is a SOFTWARE_COMPONENT
+      CounterApplication is a SYSTEM
         has partOf Turnstile.
 
-      Display is a HARDWARE_COMPONENT
+      Display is a SYSTEM
         has partOf Turnstile.
 
-      InGate is a HARDWARE_COMPONENT
+      InGate is a SYSTEM
         has partOf Turnstile.
 
-      OutGate is a HARDWARE_COMPONENT
+      OutGate is a SYSTEM
         has partOf Turnstile.
 
       Turnstile is a SYSTEM.
@@ -62,16 +63,16 @@ _DevelopmentPlan is a PLAN,
         has content InputThread,
         has content OutputThread.
 
-      CounterApplication is a SOFTWARE_COMPONENT.
+      CounterApplication is a SYSTEM.
 
       ExecutiveThread is a COMPONENT
-        has partOf CounterApplication.
+        has subcomponentOf CounterApplication.
 
       InputThread is a COMPONENT
-        has partOf CounterApplication.
+        has subcomponentOf CounterApplication.
 
       OutputThread is a COMPONENT
-        has partOf CounterApplication.
+        has subcomponentOf CounterApplication.
 
 
     _03-CertificationConsiderations is a SECTION.

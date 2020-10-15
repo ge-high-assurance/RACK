@@ -11,7 +11,7 @@ ingestion-steps:
 - { owl: "../OwlModels/CounterApplicationRequirementSpec.owl"}
 - { owl: "../OwlModels/CounterApplicationTesting.owl"}
 - { owl: "../OwlModels/CounterApplicationUnitTesting.owl"}
-
+- { owl: "../OwlModels/CounterApplication.owl"}
 
 # Ontology based on Deductions
 - { owl: "../Temp/Deductions.sadl.Deductions.owl.txt"}

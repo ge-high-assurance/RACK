@@ -1,8 +1,6 @@
 uri "http://TurnstileSystem/CounterApplication" alias trnstlsys.
-import "http://arcos.rack/AGENTS".
-import "http://arcos.rack/SYSTEM".
-import "http://arcos.rack/SOFTWARE".
-import "http://TurnstileSystem/Turnstiles".
+import "http://Turnstile/DevelopmentPlan".
+import "http://Turnstile/CounterApplicationDesignDescription".
 
 Galois is an ORGANIZATION
     has identifier "AGENT-Galois"
@@ -15,20 +13,20 @@ Mockup is an ACTIVITY
 
 // The structure of this software is based on the content of the src/ directory.
 
-InputThread is a SYSTEM
+InputThread is a COMPONENT
     has dataInsertedBy Mockup
     has identifier "InputThread",
-	has partOf CounterApplication.
+	has subcomponentOf CounterApplication.
 
-OutputThread is a SYSTEM
+OutputThread is a COMPONENT
     has dataInsertedBy Mockup
     has identifier "OutputThread",
-	has partOf CounterApplication.
+	has subcomponentOf CounterApplication.
 
-ExecutiveThread is a SYSTEM
+ExecutiveThread is a COMPONENT
     has dataInsertedBy Mockup
     has identifier "ExecutiveThread",
-	has partOf CounterApplication.
+	has subcomponentOf CounterApplication.
 
 // tools and other background
 
@@ -52,21 +50,12 @@ ZipFile (note "Compressed file archive")
     has identifier "FORMAT-ZipFile"
     has dataInsertedBy Mockup.
     
-RpmFile (note "RedHat Package Manager archive")
-    is a FORMAT
-    has identifier "FORMAT-RpmFile"
-    has dataInsertedBy Mockup.
-    
+   
 TarFile (note "File archive")
     is a FORMAT
     has identifier "FORMAT-TarFile"
     has dataInsertedBy Mockup.
 
-cc is a FILE
-    has identifier "cc"
-    has filename "cc"
-    has fileFormat ElfFile
-    has dataInsertedBy Mockup.
 
 tar is a FILE
     has identifier "tar"
@@ -76,13 +65,13 @@ tar is a FILE
 
 // input.o
 
-input_c is a FILE
+input_c is a C_Code
     has identifier "input_c",
     has filename "input.c",
     has dataInsertedBy Mockup,
     has fileFormat CSourceFile.
 
-input_h is a FILE
+input_h is a C_Header
     has identifier "input_h",
     has filename "input.h",
     has dataInsertedBy Mockup,
@@ -96,10 +85,10 @@ input_function is a COMPONENT
     has valueType "void()"
     has definedIn input_c.
 
-input_o_Compiling is a COMPILE
+input_o_Compiling is a SoftwareIntegration
     has identifier "input_o_Compiling",
     has dataInsertedBy Mockup,
-    has compiledBy cc,
+    has compiledBy GCC,
     has compileInput input_c,
     has compileInput input_h.
 
@@ -107,21 +96,26 @@ input_o is a FILE
     has identifier "input_o",
     has filename "input.o",
     has dataInsertedBy Mockup,
-    has createBy input_o_Compiling
+    has sw:createBy input_o_Compiling
     has fileFormat ElfFile.
 
 // output.o
 
-output_c is a FILE
+output_c is a C_Code
     has identifier "output_c",
     has filename "output.c",
     has dataInsertedBy Mockup,
     has fileFormat CSourceFile.
-output_h is a FILE
+output_h is a C_Header
     has identifier "output_h",
     has filename "output.h",
     has dataInsertedBy Mockup,
-    has fileFormat CSourceFile.
+    has fileFormat CSourceFile
+    has filename "hw.h",
+    has dataInsertedBy Mockup,
+    has fileFormat CSourceFile,
+    has sw:satisfies OUT-LLR-1,
+    has sw:satisfies OUT-LLR-2.
 
 output_function is a COMPONENT
     has identifier "output_function"
@@ -134,12 +128,12 @@ output_function is a COMPONENT
 CompileWithOptimizations is a FIELD.
 LinkerPath is a FIELD.
 
-output_o_Compiling is a COMPILE
+output_o_Compiling is a SoftwareIntegration
     has identifier "output_o_Compiling",
     has dataInsertedBy Mockup,
     has compileInput output_c,
     has compileInput output_h,
-    has compiledBy cc,
+    has compiledBy GCC,
     has hasAttribute (a ATTRIBUTE field CompileWithOptimizations fieldValue "yes"),
     has hasAttribute (a ATTRIBUTE field LinkerPath fieldValue "/path/to/libraries").
 
@@ -147,26 +141,32 @@ output_o is a FILE
     has identifier "output_o",
     has filename "output.o"
     has dataInsertedBy Mockup,
-    has createBy output_o_Compiling
+    has sw:createBy output_o_Compiling
     has fileFormat ElfFile.
 
 // hw.o, libhw.so
 
-hw_c is a FILE
+hw_c is a C_Code
     has identifier "hw_c",
     has filename "hw.c",
     has dataInsertedBy Mockup,
     has fileFormat CSourceFile.
-hw_h is a FILE
+hw_h is a C_Header
     has identifier "hw_h",
     has filename "hw.h",
     has dataInsertedBy Mockup,
-    has fileFormat CSourceFile.
+    has fileFormat CSourceFile,
+    has sw:satisfies IN-LLR-1,
+    has sw:satisfies IN-LLR-2,
+    has sw:satisfies IN-LLR-3,
+    has sw:satisfies IN-LLR-4,
+    has sw:satisfies IN-LLR-5,
+    has sw:satisfies IN-LLR-6.
 
 hw_o_Compiling is a COMPILE
     has identifier "hw_o_Compiling",
     has dataInsertedBy Mockup,
-    has compiledBy cc,
+    has compiledBy GCC,
     has compileInput hw_c,
     has compileInput hw_h.
 
@@ -174,35 +174,38 @@ hw_o is a FILE
     has identifier "hw_o",
     has filename "hw.o",
     has dataInsertedBy Mockup,
-    has createBy hw_o_Compiling
+    has sw:createBy hw_o_Compiling
     has fileFormat ElfFile.
 
-libhw_so_Compiling is a COMPILE
+libhw_so_Compiling is a SoftwareIntegration
     has identifier "libhw_so_Compiling",
     has dataInsertedBy Mockup,
-    has compiledBy cc,
+    has compiledBy GCC,
     has compileInput hw_o.
 
 libhw_so is a FILE
     has identifier "libhw_so",
     has filename "libhw.so",
     has dataInsertedBy Mockup,
-    has createBy libhw_so_Compiling
+    has sw:createBy libhw_so_Compiling
     has fileFormat ElfFile.
 
 // counter.exe
 
-counter_c is a FILE
+counter_c is a C_Code
     has identifier "counter_c",
     has filename "counter.c",
     has dataInsertedBy Mockup,
     has fileFormat CSourceFile.
     
-counter_h is a FILE
+counter_h is a C_Header
     has identifier "counter_h",
     has filename "counter.h",
     has dataInsertedBy Mockup,
-    has fileFormat CSourceFile.
+    has fileFormat CSourceFile,
+    has sw:satisfies EXE-LLR-1,
+    has sw:satisfies EXE-LLR-2,
+    has sw:satisfies EXE-LLR-3.
 
 main_function is a COMPONENT
     has identifier "main_function"
@@ -214,10 +217,10 @@ main_function is a COMPONENT
     has controlFlowsToUnconditionally output_function
     has definedIn counter_c.
 
-counter_exe_Compiling is a COMPILE
+counter_exe_Compiling is a SoftwareIntegration
     has identifier "counter_exe_Compiling",
     has dataInsertedBy Mockup
-    has compiledBy cc,
+    has compiledBy GCC,
     has compileInput input_o,
     has compileInput output_o,
     has compileInput libhw_so,
@@ -228,7 +231,7 @@ counter_exe is an FILE
     has identifier "counter_exe",
     has filename "counter.exe",
     has dataInsertedBy Mockup
-    has createBy counter_exe_Compiling
+    has sw:createBy counter_exe_Compiling
     has fileFormat ElfFile.
 
 // conf.json
@@ -258,20 +261,20 @@ tarPackaging is a PACKAGE
 
 // test.o
 
-test_c is a FILE
+test_c is a C_Code
     has identifier "test_c",
     has filename "test.c",
     has dataInsertedBy Mockup,
     has fileFormat CSourceFile.
-test_h is a FILE
+test_h is a C_Header
     has identifier "test_h",
     has filename "test.h",
     has dataInsertedBy Mockup,
     has fileFormat CSourceFile.
 
-test_exe_Compiling is a COMPILE
+test_exe_Compiling is a SoftwareIntegration
     has identifier "test_exe_Compiling",
     has dataInsertedBy Mockup,
-    has compiledBy cc,
+    has compiledBy GCC,
     has compileInput test_c,
     has compileInput test_h.

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
 
 set -euo pipefail
 

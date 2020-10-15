@@ -1,10 +1,20 @@
+% Copyright (c) 2020, Galois, Inc.
+%
+% All Rights Reserved
+%
+% This material is based upon work supported by the Defense Advanced Research
+% Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+%
+% Any opinions, findings and conclusions or recommendations expressed in this
+% material are those of the author(s) and do not necessarily reflect the views
+% of the Defense Advanced Research Projects Agency (DARPA).
+
 /** <module> RACK utility
 
 This module provides facilities for working with the ARCOS RACK
 service, including working with modes loaded from (and saved to) local
 files or network triple stores, and the ability to convert a data
 description DSL into instances in the model.
-
 */
 
 :- module(rack,

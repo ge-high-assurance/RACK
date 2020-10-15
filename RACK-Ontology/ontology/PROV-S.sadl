@@ -1,3 +1,15 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
 uri "http://arcos.rack/PROV-S" alias provs 
 (note "a basic Implementation of PROV Data Model standard in SADL based on table https://www.w3.org/TR/prov-dm/#relations-at-a-glance").
 

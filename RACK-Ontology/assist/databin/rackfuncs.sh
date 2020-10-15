@@ -1,6 +1,8 @@
 #!/usr/bin/env head
 # This file provides support scripts for the RACK assist databin
 # functionality and is not meant to be run directly.
+#
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
 
 find_in_path_remainder() { # $1 = name of executable
     # shellcheck disable=SC2046

@@ -127,3 +127,12 @@ should be tagged:
 Note that creating a GitHub release tags the RACK repo automatically,
 but we should manually tag the RACK wiki since its pages go into the
 RACK box too.
+
+---
+Copyright (c) 2020, General Electric Company, Galois, Inc.
+
+All Rights Reserved
+
+This material is based upon work supported by the Defense Advanced Research Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+
+Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the Defense Advanced Research Projects Agency (DARPA).

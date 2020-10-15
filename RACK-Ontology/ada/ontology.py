@@ -1,8 +1,10 @@
 """RACK Software ontology binding"""
 
+from __future__ import annotations
+
 from enum import Enum
-from typing import List, Optional
 from rdflib import Graph, Literal, Namespace, URIRef
+from typing import List, Optional
 
 NS = Namespace("http://arcos.rack/SOFTWARE#")
 RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")

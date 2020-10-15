@@ -1,7 +1,8 @@
 """RACK Software ontology binding"""
 
 from enum import Enum
-from rdflib import Namespace, Graph, URIRef, Literal
+from typing import List, Optional
+from rdflib import Graph, Literal, Namespace, URIRef
 
 NS = Namespace("http://arcos.rack/SOFTWARE#")
 RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
@@ -10,7 +11,7 @@ class Thing:
     def __init__(self, uri):
         self.node = URIRef(uri)
         self.rdf_type = None
-    
+
     def add_to_graph(self, graph):
         graph.bind("sw", NS)
         graph.add((self.node, RDF.type, self.rdf_type))
@@ -47,9 +48,9 @@ class Component(Thing):
         self.rdf_type = NS.COMPONENT
         self.name = name
         self.component_type = ty
-        self.defined_in = None
-        self.mentions = []
-        self.parents = []
+        self.defined_in: Optional[File] = None
+        self.mentions: List[Component] = []
+        self.parents: List[Component] = []
 
     def add_mention(self, component):
         self.mentions.append(component)

@@ -6,8 +6,13 @@ import "http://arcos.rack/REQUIREMENTS".
 import "http://arcos.rack/REVIEW".
 import "http://arcos.rack/TESTING".
 import "http://arcos.rack/HAZARD".
+import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/AGENTS".
+import "http://common/DO-178C".
 
+
+    //Model Location: DevelopmentPlan
 _DevelopmentPlan is a PLAN,
     has content _01-PlanForSoftwareAspectsOfCertification,
     has content _02-SystemDevelopement,
@@ -18,6 +23,8 @@ _DevelopmentPlan is a PLAN,
     has content _07-SoftwareStandards.
 
 
+
+      //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification
   _01-PlanForSoftwareAspectsOfCertification is a PLAN,
       has content _01-SystemOverview,
       has content _02-SoftwareOverview,
@@ -29,6 +36,8 @@ _DevelopmentPlan is a PLAN,
       has content _08-SupplierOversite.
 
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview
     _01-SystemOverview is a SECTION,
         has content CounterApplication,
         has content Display,
@@ -36,54 +45,88 @@ _DevelopmentPlan is a PLAN,
         has content OutGate,
         has content Turnstile.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.CounterApplication
       CounterApplication is a SYSTEM
         has partOf Turnstile.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Display
       Display is a SYSTEM
         has partOf Turnstile.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.InGate
       InGate is a SYSTEM
         has partOf Turnstile.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.OutGate
       OutGate is a SYSTEM
         has partOf Turnstile.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Turnstile
       Turnstile is a SYSTEM.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Census
       Census is a INTERFACE.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Inflow
       Inflow is a INTERFACE.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Outflow
       Outflow is a INTERFACE.
 
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview
     _02-SoftwareOverview is a SECTION,
         has content CounterApplication,
         has content ExecutiveThread,
         has content InputThread,
         has content OutputThread.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.CounterApplication
       CounterApplication is a SYSTEM.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.ExecutiveThread
       ExecutiveThread is a COMPONENT
-        has subcomponentOf CounterApplication.
+        has partOf CounterApplication.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.InputThread
       InputThread is a COMPONENT
-        has subcomponentOf CounterApplication.
+        has partOf CounterApplication.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.OutputThread
       OutputThread is a COMPONENT
-        has subcomponentOf CounterApplication.
+        has partOf CounterApplication.
 
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.03-CertificationConsiderations
     _03-CertificationConsiderations is a SECTION.
 
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle
     _04-SoftwareLifeCycle is a SECTION.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle.SoftwareConfigurationManagementProcess
       SoftwareConfigurationManagementProcess is a ACTIVITY
         has wasInformedBy SoftwareDevelopmentProcess
         has wasInformedBy SoftwareVerficationProcess.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle.SoftwareDevelopmentProcess
       SoftwareDevelopmentProcess is a ACTIVITY
         has wasInformedBy System_Development_Process
         has wasInformedBy SoftwarePlanningProcess
@@ -92,13 +135,19 @@ _DevelopmentPlan is a PLAN,
         has used SystemSpec
         has used SystemVerificationReport.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle.SoftwarePlanningProcess
       SoftwarePlanningProcess is a ACTIVITY.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle.SoftwareQualityAssuranceProcess
       SoftwareQualityAssuranceProcess is a ACTIVITY
         has wasInformedBy SoftwarePlanningProcess
         has wasInformedBy SoftwareDevelopmentProcess
         has wasInformedBy SoftwareVerficationProcess.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle.SoftwareVerficationProcess
       SoftwareVerficationProcess is a ACTIVITY
         has wasInformedBy SoftwareDevelopmentProcess
         has used VerificationStandard
@@ -107,10 +156,14 @@ _DevelopmentPlan is a PLAN,
         has used CounterApplicationSoftwareDesign
         has used CounterApplicationRequirementSpec.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle.System Development Process
       System_Development_Process is a ACTIVITY
         has wasInformedBy SoftwareConfigurationManagementProcess.
 
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData
     _05-SoftwareLifeCycleData is a SECTION,
         has content CounterApplicationRequirementSpec,
         has content CounterApplicationSoftware,
@@ -126,66 +179,106 @@ _DevelopmentPlan is a PLAN,
         has content SystemVerificationReport,
         has content VerificationStandard.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterApplicationRequirementSpec
       CounterApplicationRequirementSpec is a SPECIFICATION
         has wasGeneratedBy SoftwareDevelopmentProcess.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterApplicationSoftware
       CounterApplicationSoftware is a COLLECTION
         has wasGeneratedBy SoftwareDevelopmentProcess.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterApplicationSoftwareDesign
       CounterApplicationSoftwareDesign is a DESCRIPTION
         has wasGeneratedBy SoftwareDevelopmentProcess.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterApplicationSourceCode
       CounterApplicationSourceCode is a SPECIFICATION
         has wasGeneratedBy SoftwareDevelopmentProcess.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterVerificationResults
       CounterVerificationResults is a REPORT
         has wasGeneratedBy SoftwareVerficationProcess.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.RequirementStandard
       RequirementStandard is a SPECIFICATION
         has wasGeneratedBy SoftwarePlanningProcess.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SoftwareConfigurationIndex
       SoftwareConfigurationIndex is a REPORT
         has wasGeneratedBy SoftwareConfigurationManagementProcess.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SoftwareEnvironmentConfigurationIndex
       SoftwareEnvironmentConfigurationIndex is a REPORT
         has wasGeneratedBy SoftwareConfigurationManagementProcess.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SoftwareStandard
       SoftwareStandard is a SPECIFICATION
         has wasGeneratedBy SoftwarePlanningProcess.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SoftwareVersionDescription
       SoftwareVersionDescription is a DESCRIPTION
         has wasGeneratedBy SoftwareConfigurationManagementProcess.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SystemSpec
       SystemSpec is a SPECIFICATION
         has wasGeneratedBy System_Development_Process.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SystemVerificationReport
       SystemVerificationReport is a REPORT
         has wasGeneratedBy System_Development_Process.
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.VerificationStandard
       VerificationStandard is a SPECIFICATION
         has wasGeneratedBy SoftwarePlanningProcess.
 
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.06-Schedule
     _06-Schedule is a SECTION.
 
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.07-AdditionalConsiderations
     _07-AdditionalConsiderations is a SECTION.
 
 
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.08-SupplierOversite
     _08-SupplierOversite is a SECTION.
 
 
+
+      //Model Location: DevelopmentPlan.02-SystemDevelopement
   _02-SystemDevelopement is a PLAN,
       has content _01-SystemRequirements,
       has content _02-SystemDesign,
       has content _03-HazardAssesment.
 
 
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.01-SystemRequirements
     _01-SystemRequirements is a SECTION.
 
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.01-SystemRequirements.SystemRequirementsDefinition
       SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
         wasInformedBy of SystemRequirementsDefinition has values of type DevelopSystemArchitecture.
 
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.01-SystemRequirements.SystemRequirement
       SystemRequirement is a type of REQUIREMENT.
         wasGeneratedBy of SystemRequirement only has values of type SystemRequirementsDefinition.
       Rule SystemRequirement_content:
@@ -193,19 +286,29 @@ _DevelopmentPlan is a PLAN,
         then SystemSpec has content x.
 
 
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.02-SystemDesign
     _02-SystemDesign is a SECTION.
 
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.02-SystemDesign.DefineSystemInterfaces
       DefineSystemInterfaces is a type of ACTIVITY.
         wasInformedBy of DefineSystemInterfaces has values of type SystemRequirementsDefinition.
 
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.02-SystemDesign.DevelopSystemArchitecture
       DevelopSystemArchitecture is a type of ACTIVITY.
 
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.02-SystemDesign.SystemComponent
       SystemComponent is a type of SYSTEM.
         wasGeneratedBy of SystemComponent only has values of type DevelopSystemArchitecture.
       Rule SystemComponent_content:
         given x is a  SystemComponent 
         then SystemSpec has content x.
 
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.02-SystemDesign.SystemInterfaceDefinition
       SystemInterfaceDefinition is a type of INTERFACE.
         wasGeneratedBy of SystemInterfaceDefinition only has values of type DefineSystemInterfaces.
       Rule SystemInterfaceDefinition_content:
@@ -213,86 +316,138 @@ _DevelopmentPlan is a PLAN,
         then SystemSpec has content x.
 
 
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.03-HazardAssesment
     _03-HazardAssesment is a SECTION.
 
 
+
+      //Model Location: DevelopmentPlan.03-SoftwareDevelopment
   _03-SoftwareDevelopment is a PLAN,
       has content _01-Standards,
       has content _02-SoftwareDevelopmentLifeCycle,
       has content _03-SoftwareDevelopmentEnvironment.
 
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.01-Standards
     _01-Standards is a SECTION.
 
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle
     _02-SoftwareDevelopmentLifeCycle is a SECTION.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareCoding
       SoftwareCoding is a type of CODE_DEVELOPMENT.
         wasInformedBy of SoftwareCoding has values of type Change_Authorization.
         wasInformedBy of SoftwareCoding has values of type SoftwareDesign.
+      Rule SoftwareCoding_A-2-6:
+        given x is a  SoftwareCoding 
+        then A-2-6 has satisfiedBy x.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareDesign
       SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
         wasInformedBy of SoftwareDesign has values of type SoftwareRequirementsDefinition.
         wasInformedBy of SoftwareDesign has values of type Change_Authorization.
+      Rule SoftwareDesign_A-2-5:
+        given x is a  SoftwareDesign 
+        then A-2-5 has satisfiedBy x.
+      Rule SoftwareDesign_A-2-4:
+        given x is a  SoftwareDesign 
+        then A-2-4 has satisfiedBy x.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareIntegration
       SoftwareIntegration is a type of COMPILE.
         wasInformedBy of SoftwareIntegration has values of type SoftwareCoding.
+      Rule SoftwareIntegration_A-2-7:
+        given x is a  SoftwareIntegration 
+        then A-2-7 has satisfiedBy x.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareRequirementsDefinition
       SoftwareRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
         wasInformedBy of SoftwareRequirementsDefinition has values of type Change_Authorization.
         wasInformedBy of SoftwareRequirementsDefinition has values of type DefineSystemInterfaces.
+      Rule SoftwareRequirementsDefinition_A-2-2:
+        given x is a  SoftwareRequirementsDefinition 
+        then A-2-2 has satisfiedBy x.
+      Rule SoftwareRequirementsDefinition_A-2-1:
+        given x is a  SoftwareRequirementsDefinition 
+        then A-2-1 has satisfiedBy x.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.C_Code
       C_Code is a type of FILE.
         wasGeneratedBy of C_Code only has values of type SoftwareCoding.
       Rule C_Code_content:
         given x is a  C_Code 
         then CounterApplicationSourceCode has content x.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.C_Header
       C_Header is a type of FILE.
         wasGeneratedBy of C_Header only has values of type SoftwareCoding.
       Rule C_Header_content:
         given x is a  C_Header 
         then CounterApplicationSourceCode has content x.
-        sw:satisfies of C_Header only has values of type LowLevelRequirement.
+        satisfies of C_Header only has values of type LowLevelRequirement.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.DataAndControlCouple
       DataAndControlCouple is a type of DATA_DICTIONARY_TERM.
         wasGeneratedBy of DataAndControlCouple only has values of type SoftwareDesign.
       Rule DataAndControlCouple_content:
         given x is a  DataAndControlCouple 
         then CounterApplicationSoftwareDesign has content x.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.DataDictionary
       DataDictionary is a type of DATA_DICTIONARY_TERM.
         wasGeneratedBy of DataDictionary only has values of type SoftwareRequirementsDefinition.
       Rule DataDictionary_content:
         given x is a  DataDictionary 
         then CounterApplicationRequirementSpec has content x.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.ExecutableObject
       ExecutableObject is a type of FILE.
         wasGeneratedBy of ExecutableObject only has values of type SoftwareIntegration.
       Rule ExecutableObject_content:
         given x is a  ExecutableObject 
         then CounterApplicationSoftware has content x.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.HighLevelRequirement
       HighLevelRequirement is a type of REQUIREMENT.
         wasGeneratedBy of HighLevelRequirement only has values of type SoftwareRequirementsDefinition.
       Rule HighLevelRequirement_content:
         given x is a  HighLevelRequirement 
         then CounterApplicationRequirementSpec has content x.
-        Rq:satisfies of HighLevelRequirement only has values of type SystemRequirement.
+        satisfies of HighLevelRequirement only has values of type SystemRequirement.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.LowLevelRequirement
       LowLevelRequirement is a type of REQUIREMENT.
         wasGeneratedBy of LowLevelRequirement only has values of type SoftwareDesign.
       Rule LowLevelRequirement_content:
         given x is a  LowLevelRequirement 
         then CounterApplicationSoftwareDesign has content x.
-        Rq:satisfies of LowLevelRequirement only has values of type HighLevelRequirement.
+        satisfies of LowLevelRequirement only has values of type HighLevelRequirement.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.RpmFile
       RpmFile is a type of FILE.
         wasGeneratedBy of RpmFile only has values of type SoftwareIntegration.
       Rule RpmFile_content:
         given x is a  RpmFile 
         then CounterApplicationSoftware has content x.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareModule
       SoftwareModule is a type of SYSTEM.
         wasGeneratedBy of SoftwareModule only has values of type SoftwareDesign.
       Rule SoftwareModule_content:
@@ -300,25 +455,54 @@ _DevelopmentPlan is a PLAN,
         then CounterApplicationSoftwareDesign has content x.
 
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment
     _03-SoftwareDevelopmentEnvironment is a SECTION,
         has content GCC.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.Engineer
       Engineer is a type of AGENT.
 
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.GCC
       GCC is a FILE.
 
 
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification
   _04-SoftwareVerification is a PLAN,
       has content _01-SoftwareReviewProcess,
       has content _02-SoftwareTestGenerationProcess,
+      has content _04-SoftwareAnalysis,
       has content _03-SoftwareTestExecutionProcess.
 
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.ControlCoupleCoverageReport
+    ControlCoupleCoverageReport is a type of ANALYSIS_REPORT.
+      wasGeneratedBy of ControlCoupleCoverageReport only has values of type ControlCouplingAnalysis.
+    Rule ControlCoupleCoverageReport_content:
+      given x is a  ControlCoupleCoverageReport 
+      then SystemVerificationReport has content x.
+
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.DataCoupleCoverageReport
+    DataCoupleCoverageReport is a type of ANALYSIS_REPORT.
+      wasGeneratedBy of DataCoupleCoverageReport only has values of type DataCouplingAnalysis.
+    Rule DataCoupleCoverageReport_content:
+      given x is a  DataCoupleCoverageReport 
+      then SystemVerificationReport has content x.
+
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareCodeReviewArtifacts
     SoftwareCodeReviewArtifacts is a type of REVIEW_LOG.
       wasGeneratedBy of SoftwareCodeReviewArtifacts only has values of type SoftwareCodeReview.
     Rule SoftwareCodeReviewArtifacts_content:
       given x is a  SoftwareCodeReviewArtifacts 
       then SystemVerificationReport has content x.
 
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareComponentTest
     SoftwareComponentTest is a type of TEST.
     Rule SoftwareComponentTest_content:
       given x is a  SoftwareComponentTest 
@@ -326,14 +510,17 @@ _DevelopmentPlan is a PLAN,
       wasGeneratedBy of SoftwareComponentTest only has values of type DevelopComponentTests.
       verifies of SoftwareComponentTest only has values of type HighLevelRequirement.
 
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareComponentTestResult
     SoftwareComponentTestResult is a type of TEST_RESULT.
-      wasGeneratedBy of SoftwareComponentTestResult only has values of type SoftwareComponentTestExecution.
       wasGeneratedBy of SoftwareComponentTestResult only has values of type SoftwareComponentTestExecution.
     Rule SoftwareComponentTestResult_content:
       given x is a  SoftwareComponentTestResult 
       then SystemVerificationReport has content x.
       confirms of SoftwareComponentTestResult only has values of type SoftwareComponentTest.
 
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareDesignReviewArtifacts
     SoftwareDesignReviewArtifacts is a type of REVIEW_LOG.
       wasGeneratedBy of SoftwareDesignReviewArtifacts only has values of type SoftwareDesignReview.
     Rule SoftwareDesignReviewArtifacts_content:
@@ -341,6 +528,8 @@ _DevelopmentPlan is a PLAN,
       then SystemVerificationReport has content x.
       reviews of SoftwareDesignReviewArtifacts only has values of type LowLevelRequirement.
 
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareRequirementReviewArtifacts
     SoftwareRequirementReviewArtifacts is a type of REVIEW_LOG.
     Rule SoftwareRequirementReviewArtifacts_content:
       given x is a  SoftwareRequirementReviewArtifacts 
@@ -348,6 +537,8 @@ _DevelopmentPlan is a PLAN,
       wasGeneratedBy of SoftwareRequirementReviewArtifacts only has values of type SoftwareRequirementsReview.
       reviews of SoftwareRequirementReviewArtifacts only has values of type HighLevelRequirement.
 
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareUnitTest
     SoftwareUnitTest is a type of TEST.
     Rule SoftwareUnitTest_content:
       given x is a  SoftwareUnitTest 
@@ -355,6 +546,8 @@ _DevelopmentPlan is a PLAN,
       wasGeneratedBy of SoftwareUnitTest only has values of type DevelopUnitTests.
       verifies of SoftwareUnitTest only has values of type LowLevelRequirement.
 
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareUnitTestResult
     SoftwareUnitTestResult is a type of TEST_RESULT.
       wasGeneratedBy of SoftwareUnitTestResult only has values of type SoftwareUnitTestExecution.
     Rule SoftwareUnitTestResult_content:
@@ -363,81 +556,291 @@ _DevelopmentPlan is a PLAN,
       confirms of SoftwareUnitTestResult only has values of type SoftwareUnitTest.
 
 
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.StructuralCoverageReport
+    StructuralCoverageReport is a type of ANALYSIS_REPORT.
+      wasGeneratedBy of StructuralCoverageReport only has values of type StructualCoverageAnalysis.
+    Rule StructuralCoverageReport_content:
+      given x is a  StructuralCoverageReport 
+      then SystemVerificationReport has content x.
+
+
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess
     _01-SoftwareReviewProcess is a SECTION.
 
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess.SoftwareCodeReview
       SoftwareCodeReview is a type of REVIEW.
         wasInformedBy of SoftwareCodeReview has values of type SoftwareDesignReview.
         wasInformedBy of SoftwareCodeReview has values of type SoftwareCoding.
+      Rule SoftwareCodeReview_A-5-1:
+        given x is a  SoftwareCodeReview 
+        then A-5-1 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-2:
+        given x is a  SoftwareCodeReview 
+        then A-5-2 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-3:
+        given x is a  SoftwareCodeReview 
+        then A-5-3 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-4:
+        given x is a  SoftwareCodeReview 
+        then A-5-4 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-5:
+        given x is a  SoftwareCodeReview 
+        then A-5-5 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-6:
+        given x is a  SoftwareCodeReview 
+        then A-5-6 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-7:
+        given x is a  SoftwareCodeReview 
+        then A-5-7 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-8:
+        given x is a  SoftwareCodeReview 
+        then A-5-8 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-9:
+        given x is a  SoftwareCodeReview 
+        then A-5-9 has satisfiedBy x.
 
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess.SoftwareDesignReview
       SoftwareDesignReview is a type of REVIEW.
         wasInformedBy of SoftwareDesignReview has values of type SoftwareRequirementsReview.
         wasInformedBy of SoftwareDesignReview has values of type SoftwareDesign.
+      Rule SoftwareDesignReview_A-4-1:
+        given x is a  SoftwareDesignReview 
+        then A-4-1 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-2:
+        given x is a  SoftwareDesignReview 
+        then A-4-2 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-3:
+        given x is a  SoftwareDesignReview 
+        then A-4-3 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-6:
+        given x is a  SoftwareDesignReview 
+        then A-4-6 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-7:
+        given x is a  SoftwareDesignReview 
+        then A-4-7 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-5:
+        given x is a  SoftwareDesignReview 
+        then A-4-5 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-4:
+        given x is a  SoftwareDesignReview 
+        then A-4-4 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-8:
+        given x is a  SoftwareDesignReview 
+        then A-4-8 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-9:
+        given x is a  SoftwareDesignReview 
+        then A-4-9 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-10:
+        given x is a  SoftwareDesignReview 
+        then A-4-10 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-11:
+        given x is a  SoftwareDesignReview 
+        then A-4-11 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-12:
+        given x is a  SoftwareDesignReview 
+        then A-4-12 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-13:
+        given x is a  SoftwareDesignReview 
+        then A-4-13 has satisfiedBy x.
 
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess.SoftwareRequirementsReview
       SoftwareRequirementsReview is a type of REVIEW.
         wasInformedBy of SoftwareRequirementsReview has values of type SoftwareRequirementsDefinition.
+      Rule SoftwareRequirementsReview_A-3-1:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-1 has satisfiedBy x.
+      Rule SoftwareRequirementsReview_A-3-2:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-2 has satisfiedBy x.
+      Rule SoftwareRequirementsReview_A-3-3:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-3 has satisfiedBy x.
+      Rule SoftwareRequirementsReview_A-3-4:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-4 has satisfiedBy x.
+      Rule SoftwareRequirementsReview_A-3-5:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-5 has satisfiedBy x.
+      Rule SoftwareRequirementsReview_A-3-6:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-6 has satisfiedBy x.
+      Rule SoftwareRequirementsReview_A-3-7:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-7 has satisfiedBy x.
 
 
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.02-SoftwareTestGenerationProcess
     _02-SoftwareTestGenerationProcess is a SECTION.
 
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.02-SoftwareTestGenerationProcess.DevelopComponentTests
       DevelopComponentTests is a type of TEST_DEVELOPMENT.
         wasInformedBy of DevelopComponentTests has values of type DevelopUnitTests.
         wasInformedBy of DevelopComponentTests has values of type SoftwareRequirementsReview.
+      Rule DevelopComponentTests_A-7-1:
+        given x is a  DevelopComponentTests 
+        then A-7-1 has satisfiedBy x.
 
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.02-SoftwareTestGenerationProcess.DevelopUnitTests
       DevelopUnitTests is a type of TEST_DEVELOPMENT.
         wasInformedBy of DevelopUnitTests has values of type SoftwareDesignReview.
+      Rule DevelopUnitTests_A-7-1:
+        given x is a  DevelopUnitTests 
+        then A-7-1 has satisfiedBy x.
 
 
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis
+    _04-SoftwareAnalysis is a SECTION.
+
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis.ControlCouplingAnalysis
+      ControlCouplingAnalysis is a type of ANALYSIS.
+        wasInformedBy of ControlCouplingAnalysis has values of type SoftwareComponentTestExecution.
+      Rule ControlCouplingAnalysis_A-7-8:
+        given x is a  ControlCouplingAnalysis 
+        then A-7-8 has satisfiedBy x.
+
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis.DataCouplingAnalysis
+      DataCouplingAnalysis is a type of ANALYSIS.
+        wasInformedBy of DataCouplingAnalysis has values of type SoftwareComponentTestExecution.
+      Rule DataCouplingAnalysis_A-7-8:
+        given x is a  DataCouplingAnalysis 
+        then A-7-8 has satisfiedBy x.
+
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis.StructualCoverageAnalysis
+      StructualCoverageAnalysis is a type of ANALYSIS.
+        CoveredNodes describes StructualCoverageAnalysis with values of type int.
+        UncoveredNodes describes StructualCoverageAnalysis with values of type int.
+        wasInformedBy of StructualCoverageAnalysis has values of type SoftwareComponentTestExecution.
+      Rule StructualCoverageAnalysis_A-7-7:
+        given x is a  StructualCoverageAnalysis 
+        then A-7-7 has satisfiedBy x.
+      Rule StructualCoverageAnalysis_A-7-6:
+        given x is a  StructualCoverageAnalysis 
+        then A-7-6 has satisfiedBy x.
+      Rule StructualCoverageAnalysis_A-7-5:
+        given x is a  StructualCoverageAnalysis 
+        then A-7-5 has satisfiedBy x.
+
+
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.03-SoftwareTestExecutionProcess
     _03-SoftwareTestExecutionProcess is a SECTION.
 
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.03-SoftwareTestExecutionProcess.SoftwareComponentTestExecution
       SoftwareComponentTestExecution is a type of TEST_EXECUTION.
         wasInformedBy of SoftwareComponentTestExecution has values of type SoftwareIntegration.
         wasInformedBy of SoftwareComponentTestExecution has values of type DevelopComponentTests.
+      Rule SoftwareComponentTestExecution_A-6-1:
+        given x is a  SoftwareComponentTestExecution 
+        then A-6-1 has satisfiedBy x.
+      Rule SoftwareComponentTestExecution_A-6-2:
+        given x is a  SoftwareComponentTestExecution 
+        then A-6-2 has satisfiedBy x.
+      Rule SoftwareComponentTestExecution_A-6-5:
+        given x is a  SoftwareComponentTestExecution 
+        then A-6-5 has satisfiedBy x.
+      Rule SoftwareComponentTestExecution_A-7-2:
+        given x is a  SoftwareComponentTestExecution 
+        then A-7-2 has satisfiedBy x.
+      Rule SoftwareComponentTestExecution_A-7-3:
+        given x is a  SoftwareComponentTestExecution 
+        then A-7-3 has satisfiedBy x.
 
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.03-SoftwareTestExecutionProcess.SoftwareUnitTestExecution
       SoftwareUnitTestExecution is a type of TEST_EXECUTION.
         wasInformedBy of SoftwareUnitTestExecution has values of type DevelopUnitTests.
         wasInformedBy of SoftwareUnitTestExecution has values of type SoftwareCoding.
+      Rule SoftwareUnitTestExecution_A-6-3:
+        given x is a  SoftwareUnitTestExecution 
+        then A-6-3 has satisfiedBy x.
+      Rule SoftwareUnitTestExecution_A-6-4:
+        given x is a  SoftwareUnitTestExecution 
+        then A-6-4 has satisfiedBy x.
+      Rule SoftwareUnitTestExecution_A-7-2:
+        given x is a  SoftwareUnitTestExecution 
+        then A-7-2 has satisfiedBy x.
+      Rule SoftwareUnitTestExecution_A-7-4:
+        given x is a  SoftwareUnitTestExecution 
+        then A-7-4 has satisfiedBy x.
 
 
+
+      //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment
   _05-SoftwareConfigurationManagment is a PLAN,
       has content _01-ChangeManagement,
       has content _02-SoftwareConfigurationManagementEnvironment.
 
+
+      //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.ChangeRequest
     ChangeRequest is a type of REQUEST.
       wasGeneratedBy of ChangeRequest only has values of type Change_Authorization.
 
+
+      //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.ProblemReport
     ProblemReport is a type of REPORT.
       wasGeneratedBy of ProblemReport only has values of type Problem_Reporting.
 
 
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.01-ChangeManagement
     _01-ChangeManagement is a SECTION.
 
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.01-ChangeManagement.Change Authorization
       Change_Authorization is a type of ACTIVITY.
         wasInformedBy of Change_Authorization has values of type Problem_Reporting.
 
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.01-ChangeManagement.Problem Reporting
       Problem_Reporting is a type of ACTIVITY.
         wasInformedBy of Problem_Reporting has values of type SoftwareComponentTestExecution.
         wasInformedBy of Problem_Reporting has values of type SoftwareRequirementsReview.
         wasInformedBy of Problem_Reporting has values of type SoftwareDesignReview.
         wasInformedBy of Problem_Reporting has values of type SoftwareCodeReview.
         wasInformedBy of Problem_Reporting has values of type SoftwareUnitTestExecution.
+      Rule Problem_Reporting_A-7-2:
+        given x is a  Problem_Reporting 
+        then A-7-2 has satisfiedBy x.
 
 
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment
     _02-SoftwareConfigurationManagementEnvironment is a SECTION.
 
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.GenerateSoftwareReleaseDocumentation
       GenerateSoftwareReleaseDocumentation is a type of ACTIVITY.
         wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type SourceConfigurationManagement.
         wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type RequirementConfigurationManagement.
         wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type ReviewConfigurationManagement.
 
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.RequirementConfigurationManagement
       RequirementConfigurationManagement is a type of ACTIVITY.
         wasInformedBy of RequirementConfigurationManagement has values of type SoftwareRequirementsDefinition.
         wasInformedBy of RequirementConfigurationManagement has values of type SoftwareDesign.
 
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.ReviewConfigurationManagement
       ReviewConfigurationManagement is a type of ACTIVITY.
         wasInformedBy of ReviewConfigurationManagement has values of type SoftwareRequirementsReview.
         wasInformedBy of ReviewConfigurationManagement has values of type SoftwareDesignReview.
         wasInformedBy of ReviewConfigurationManagement has values of type SoftwareCodeReview.
 
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.SourceConfigurationManagement
       SourceConfigurationManagement is a type of ACTIVITY.
         wasInformedBy of SourceConfigurationManagement has values of type DevelopComponentTests.
         wasInformedBy of SourceConfigurationManagement has values of type DevelopUnitTests.
@@ -445,27 +848,41 @@ _DevelopmentPlan is a PLAN,
         wasInformedBy of SourceConfigurationManagement has values of type SoftwareComponentTestExecution.
         wasInformedBy of SourceConfigurationManagement has values of type SoftwareCoding.
 
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.SoftwareAccomplishmentSummary
       SoftwareAccomplishmentSummary is a type of REPORT.
         wasGeneratedBy of SoftwareAccomplishmentSummary only has values of type GenerateSoftwareReleaseDocumentation.
 
 
+
+      //Model Location: DevelopmentPlan.06-SoftwareQualityAssurance
   _06-SoftwareQualityAssurance is a PLAN.
 
 
+
+      //Model Location: DevelopmentPlan.07-SoftwareStandards
   _07-SoftwareStandards is a PLAN,
       has content SoftwareCodeReviewChecklist,
       has content SoftwareDesignReviewChecklist,
       has content SoftwareRequirementReviewChecklist,
       has content SoftwareTestGuidance.
 
+
+      //Model Location: DevelopmentPlan.07-SoftwareStandards.SoftwareCodeReviewChecklist
     SoftwareCodeReviewChecklist is a PLAN
       has used VerificationStandard.
 
+
+      //Model Location: DevelopmentPlan.07-SoftwareStandards.SoftwareDesignReviewChecklist
     SoftwareDesignReviewChecklist is a PLAN
       has used VerificationStandard.
 
+
+      //Model Location: DevelopmentPlan.07-SoftwareStandards.SoftwareRequirementReviewChecklist
     SoftwareRequirementReviewChecklist is a PLAN
       has used VerificationStandard.
 
+
+      //Model Location: DevelopmentPlan.07-SoftwareStandards.SoftwareTestGuidance
     SoftwareTestGuidance is a PLAN
       has used VerificationStandard.

@@ -9,9 +9,9 @@ then
 fi
 
 
-rack --base-url http://10.33.49.197 model import --clear ../../../RACK/RACK-Ontology/OwlModels/import.yaml
-rack --base-url http://10.33.49.197 model import  ./import.yaml
+rack --base-url http://10.33.49.238 model import --clear ../../../RACK/RACK-Ontology/OwlModels/import.yaml
+rack --base-url http://10.33.49.238 model import  ./import.yaml
 
-rack --base-url http://10.33.49.197 data import --clear ../../../RACK/RACK-Ontology/OwlModels/DO-178C.yaml
-rack --base-url http://10.33.49.197 data import ./Model.yaml
+rack --base-url http://10.33.49.238 data import --clear ../../../RACK/RACK-Ontology/OwlModels/DO-178C.yaml
+rack --base-url http://10.33.49.238 data import ./Model.yaml
 

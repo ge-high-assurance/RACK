@@ -4,8 +4,9 @@ import "http://Turnstile/HazardAssessment".
 import "http://Turnstile/CounterApplicationRequirementSpec".
 import "http://Turnstile/CounterApplicationDesignDescription".
 import "http://Turnstile/CounterApplicationSoftwareUnitTesting".
-import "http://Turnstile/TurnstileSystemDesign".
-
-
+import "http://Turnstile/TurnstileDesign".
+import "http://Turnstile/CounterApplicationTesting".
+import "http://Turnstile/CounterApplication".
+import "http://Turnstile/CounterApplicationReviews".
 
 Print: Deductions .

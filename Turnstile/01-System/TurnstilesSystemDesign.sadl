@@ -1,8 +1,8 @@
-uri "http://Turnstile/TurnstileSystemDesign" alias TSysDP.
+uri "http://Turnstile/TurnstileDesign" alias TSysDP.
 import "http://Turnstile/DevelopmentPlan".
 
 Turnstiles is a SYSTEM,
-	has identifier "TurnStileSystem".
+	has identifier "Turnstile".
 	
 Ingate is a SystemComponent,
 	has identifier "In Gate",

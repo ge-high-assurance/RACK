@@ -1,0 +1,45 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:cntrappllr="http://Turnstile/CounterApplicationDesignDescription#"
+    xmlns="http://Turnstile/CounterApplicationReviews#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:j.0="http://Turnstile/DevelopmentPlan#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:j.1="http://arcos.rack/REVIEW#"
+    xmlns:cntrapprq="http://Turnstile/CounterApplicationRequirementSpec#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://Turnstile/CounterApplicationReviews">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="CounterApplicationDesignDescription"/>
+    <owl:imports rdf:resource="CounterApplicationRequirementSpec"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplicationReviews.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <j.0:SoftwareDesignReview rdf:ID="LlrReview3">
+    <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#EXE-LLR-3"/>
+    <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#EXE-LLR-2"/>
+    <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#EXE-LLR-1"/>
+  </j.0:SoftwareDesignReview>
+  <j.0:SoftwareDesignReview rdf:ID="LlrReview2">
+    <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#OUT-LLR-2"/>
+    <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#OUT-LLR-1"/>
+  </j.0:SoftwareDesignReview>
+  <j.0:SoftwareRequirementsReview rdf:ID="HlrReview">
+    <j.1:reviewed rdf:resource="CounterApplicationRequirementSpec#HLR-3"/>
+    <j.1:reviewed rdf:resource="CounterApplicationRequirementSpec#HLR-2"/>
+    <j.1:reviewed rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
+  </j.0:SoftwareRequirementsReview>
+  <j.0:SoftwareDesignReview rdf:ID="LlrReview1">
+    <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-6"/>
+    <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-5"/>
+    <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-4"/>
+    <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-3"/>
+    <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-2"/>
+    <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-1"/>
+  </j.0:SoftwareDesignReview>
+</rdf:RDF>

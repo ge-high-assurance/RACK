@@ -1,4 +1,4 @@
-uri "http://TurnstileSystem/CounterApplication" alias trnstlsys.
+uri "http://Turnstile/CounterApplication" alias trnstlsys.
 import "http://Turnstile/DevelopmentPlan".
 import "http://Turnstile/CounterApplicationDesignDescription".
 

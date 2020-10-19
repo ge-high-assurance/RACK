@@ -1,0 +1,29 @@
+ uri "http://Turnstile/CounterApplicationReviews".
+ import "http://Turnstile/CounterApplicationRequirementSpec".
+ import "http://Turnstile/CounterApplicationDesignDescription".
+ 
+ HlrReview is a SoftwareRequirementsReview
+ 	has reviewed HLR-1
+ 	has reviewed HLR-2
+ 	has reviewed HLR-3.
+ 	
+ LlrReview1 is a SoftwareDesignReview
+ 	has reviewed IN-LLR-1
+ 	has reviewed IN-LLR-2
+ 	has reviewed IN-LLR-3
+ 	has reviewed IN-LLR-4
+ 	has reviewed IN-LLR-5
+ 	has reviewed IN-LLR-6.
+ 	
+LlrReview2 is a SoftwareDesignReview
+ 	has reviewed OUT-LLR-1
+ 	has reviewed OUT-LLR-2.
+ 	
+LlrReview3 is a SoftwareDesignReview
+ 	has reviewed EXE-LLR-1
+ 	has reviewed EXE-LLR-2
+ 	has reviewed EXE-LLR-3. 	
+ 	
+ 	
+ 	
+ 	

@@ -1,0 +1,8 @@
+# This file is intended to be used using the rack.py script found
+# in RACK-Ontology/scripts/
+#
+# Script documentation is available in RACK-Ontology/scripts/README.md
+data-graph: "http://rack001/data"
+ingestion-steps:
+- { owl: "DO-178C.owl"}
+

@@ -25,27 +25,27 @@ TC-1-4 is a SoftwareComponentTest
 TR-1-1-1 is a SoftwareComponentTestResult
 	has identifier "TR-1-1-1",
 	has confirms TC-1-1,
-	has result tst:Passed,
+	has tst:result tst:Passed,
 	has executedBy TestRun1.
 
 	
 TR-1-2-1 is a SoftwareComponentTestResult
 	has identifier "TR-1-2-1",
 	has confirms TC-1-2,
-	has result tst:Passed,
+	has tst:result tst:Passed,
 	has executedBy TestRun1.
 
 	
 TR-1-3-1 is a SoftwareComponentTestResult
 	has identifier "TR-1-3-1",
 	has confirms TC-1-3,
-	has result tst:Passed,
+	has tst:result tst:Passed,
 	has executedBy TestRun1.
 
 TR-1-4-1 is a SoftwareComponentTestResult
 	has identifier "TR-1-4-1",
 	has confirms TC-1-4,
-	has result Failed,
+	has tst:result tst:Failed,
 	has executedBy TestRun1.
 	
 
@@ -54,27 +54,27 @@ TestRun1 is a SoftwareComponentTestExecution.
 TR-1-1-2 is a SoftwareComponentTestResult
 	has identifier "TR-1-1-2",
 	has confirms TC-1-1,
-	has result tst:Passed,
+	has tst:result tst:Passed,
 	has executedBy TestRun2.
 
 	
 TR-1-2-2 is a SoftwareComponentTestResult
 	has identifier "TR-1-2-2",
 	has confirms TC-1-2,
-	has result tst:Passed,
+	has tst:result tst:Passed,
 	has executedBy TestRun2.
 
 	
 TR-1-3-2 is a SoftwareComponentTestResult
 	has identifier "TR-1-3-2",
 	has confirms TC-1-3,
-	has result tst:Passed,
+	has tst:result tst:Passed,
 	has executedBy TestRun2.
 
 TR-1-4-2 is a SoftwareComponentTestResult
 	has identifier "TR-1-4-2",
 	has confirms TC-1-4,
-	has result Failed,
+	has tst:result tst:Failed,
 	has executedBy TestRun2.
 	
 

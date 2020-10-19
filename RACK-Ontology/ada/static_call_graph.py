@@ -1,13 +1,13 @@
 import libadalang as lal
-from typing import List, Set
+from typing import Dict, List, Set
 
 from ada_visitor import AdaVisitor
 
 def namespace_str(namespace: List[str]) -> str:
     if len(namespace) == 1:
         return namespace[0]
-    path = '.'.join(namespace[1:])
-    return f'{namespace[0]}:{path}'
+    path = ".".join(namespace[1:])
+    return f"{namespace[0]}:{path}"
 
 def get_params(node: lal.SubpSpec) -> List[str]:
     subp_params = node.f_subp_params
@@ -16,9 +16,9 @@ def get_params(node: lal.SubpSpec) -> List[str]:
 
 class StaticCallGraphVisitor(AdaVisitor):
 
-    '''
+    """
     Computes the static call graph within some AST node.
-    '''
+    """
 
     def __init__(self, namespace: List[str], params: List[str] = []) -> None:
         # set of all callees witnessed for the current function/procedure

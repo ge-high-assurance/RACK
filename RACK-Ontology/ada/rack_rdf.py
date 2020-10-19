@@ -15,12 +15,12 @@ g.bind("format", FORMAT)
 
 txt_format = FileFormat(FORMAT.TEXT_FILE)
 
-my_file = File(DATA['src.txt'], "src.txt", txt_format)
+my_file = File(DATA["src.txt"], "src.txt", txt_format)
 
-c1 = Component(DATA['fun1'], "fun1", ComponentType.SOURCE_FUNCTION)
+c1 = Component(DATA["fun1"], "fun1", ComponentType.SOURCE_FUNCTION)
 c1.defined_in = my_file
 
-c2 = Component(DATA['fun2'], "fun2", ComponentType.SOURCE_FUNCTION)
+c2 = Component(DATA["fun2"], "fun2", ComponentType.SOURCE_FUNCTION)
 c2.defined_in = my_file
 c2.add_mention(c1)
 

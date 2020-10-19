@@ -12,7 +12,9 @@ package Regression is
 
             procedure NestedProc (Input : in Boolean);
 
-            function NestedFun (Input : in Boolean) return Boolean;
+            type FunctionType is access function(Input : Integer) return Boolean;
+
+            function NestedFun (Input : in Boolean; InputFun : FunctionType) return Boolean;
 
         end Nested;
 

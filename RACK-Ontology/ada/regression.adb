@@ -21,9 +21,9 @@ package body Regression is
                 OuterProc(Input);
             end NestedProc;
 
-            function NestedFun (Input : in Boolean) return Boolean is
+            function NestedFun (Input : in Boolean; InputFun : FunctionType) return Boolean is
             begin
-                return (LibraryFun(Input) or OuterFun(Input));
+                return (LibraryFun(Input) or OuterFun(Input)) or InputFun(0);
             end NestedFun;
 
         end Nested;

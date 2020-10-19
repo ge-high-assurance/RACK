@@ -17,7 +17,9 @@ def get_params(node: lal.SubpSpec) -> List[str]:
 class StaticCallGraphVisitor(AdaVisitor):
 
     """
-    Computes the static call graph within some AST node.
+    Computes the static call graph within some AST node. Once visit() has
+    completed, you can read the call graph in the call_graph instance
+    variable.
     """
 
     def __init__(self, body_being_defined: str, namespace: List[str], params: List[str] = []) -> None:
@@ -32,11 +34,14 @@ class StaticCallGraphVisitor(AdaVisitor):
         self.body_being_defined: str = body_being_defined
         """
         Name of the body (function/procedure) currently being defined, that will
-        be deemed the caller of whatever call expression we encounter
+        be deemed the caller of whatever call expression we encounter.
         """
 
-        # call graph being computed
         self.call_graph: Dict[str, Set[str]] = dict()
+        """
+        The call graph being computed.
+        """
+
         # current enclosing namespace (can be arbitrarily initialized, say with
         # a file name) then, traversed namespaces are added onto
         self.namespace = namespace

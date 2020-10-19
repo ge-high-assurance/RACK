@@ -6,7 +6,7 @@ Galois is an ORGANIZATION
     has identifier "AGENT-Galois"
     has AGENTS:name "Galois".
   
-Mockup is an ACTIVITY
+Mockup is an SoftwareCoding
     has identifier "ACTIVITY-Turnstile software data mockup"
     has wasAssociatedWith Galois
     has startedAtTime "2020-06-01 12:00:00".

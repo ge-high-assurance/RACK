@@ -35,7 +35,7 @@ for file in args.files:
             adaVisitor = AdaPrintVisitor(max_depth = 20)
             adaVisitor.visit(unit.root)
         staticCallGraphVisitor = StaticCallGraphVisitor(
-            body_being_defined = unit.filename,
+            callable_being_defined = unit.filename,
             namespace = [unit.filename]
         )
         staticCallGraphVisitor.visit(unit.root)

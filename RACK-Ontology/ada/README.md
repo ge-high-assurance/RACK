@@ -22,3 +22,10 @@ shortly, so this may not be up to date):
 ```shell
 pipenv run ./run_analysis.py --project ./regression.gpr ./regression.adb
 ```
+
+# Regression testing
+
+The files `regression.{adb,ads}` try to set up some limited regression
+testing. If you need to modify them, you can check that your changes are
+sensible by running `gprbuild` in the current directory. This assumes that
+you have gprbuild installed, which is the case if you use the nix shell.

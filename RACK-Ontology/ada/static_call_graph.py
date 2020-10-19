@@ -20,17 +20,34 @@ class StaticCallGraphVisitor(AdaVisitor):
     Computes the static call graph within some AST node.
     """
 
-    def __init__(self, namespace: List[str], params: List[str] = []) -> None:
-        # set of all callees witnessed for the current function/procedure
-        self.callees: Set[str] = set()
-        # current enclosing namespace
+    def __init__(self, body_being_defined: str, namespace: List[str], params: List[str] = []) -> None:
+        """
+        Initialize the visitor.  Because it is not very practical to locally
+        update the parameters when doing recursive calls, we suggest instead to
+        instantiate a new local visitor, run it, and then gather from its final
+        state whatever data you need.  Avoids code duplication, at the price of
+        creating a bunch of short-lived instances.
+        """
+
+        self.body_being_defined: str = body_being_defined
+        """
+        Name of the body (function/procedure) currently being defined, that will
+        be deemed the caller of whatever call expression we encounter
+        """
+
+        # call graph being computed
+        self.call_graph: Dict[str, Set[str]] = dict()
+        # current enclosing namespace (can be arbitrarily initialized, say with
+        # a file name) then, traversed namespaces are added onto
         self.namespace = namespace
         # formal names of parameters to the function we are analyzing
         self.params: List[str] = params
 
     def record_call(self, callee: str) -> None:
-        '''Records a witnessed static function/procedure call to callee'''
-        self.callees.add(callee)
+        """Records a witnessed static function/procedure call to callee"""
+        if self.body_being_defined not in self.call_graph:
+            self.call_graph[self.body_being_defined] = set()
+        self.call_graph[self.body_being_defined].add(callee)
 
     def visit_PackageBody(self, node: lal.PackageBody) -> None:
         # here we register the namespace and keep visiting with the same visitor
@@ -45,26 +62,25 @@ class StaticCallGraphVisitor(AdaVisitor):
         name = spec.f_subp_name
         params = get_params(spec)
         local_visitor = StaticCallGraphVisitor(
-            namespace=self.namespace + [name.text],
-            params=params
+            body_being_defined = name.text,
+            namespace = self.namespace + [name.text],
+            params = params
         )
         # assumption: the spec does not contain calls
         local_visitor.visit(node.f_decls)
         local_visitor.visit(node.f_stmts)
 
-        defined = f'in {namespace_str(self.namespace)}'
-        if not list(local_visitor.callees):
-            print(f'{name.text} (defined {defined}) does not make any call.')
-            return
-        print(f'{name.text} (defined {defined}) calls:')
-        for callee in local_visitor.callees:
-            extra = '' if callee not in params else ' (which it receives as parameter)'
-            print(f' - {callee}{extra}')
+        # hoist all the local callee information to the current graph
+        for key in local_visitor.call_graph:
+            if not key in self.call_graph:
+                self.call_graph[key] = set()
+            self.call_graph[key] = self.call_graph[key].union(local_visitor.call_graph[key])
+
 
     def visit_CallExpr(self, node: lal.CallExpr):
         defined = (
-            f'(defined at {node.f_name.p_referenced_decl()})'
+            f"(defined at {node.f_name.p_referenced_decl()})"
             if node.f_name.p_resolve_names
-            else '(could not locate definition)'
+            else "(could not locate definition)"
         )
-        self.record_call(f'{node.f_name.text} {defined}')
+        self.record_call(f"{node.f_name.text} {defined}")

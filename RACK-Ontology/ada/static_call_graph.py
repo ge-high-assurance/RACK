@@ -9,11 +9,6 @@ def namespace_str(namespace: List[str]) -> str:
     path = ".".join(namespace[1:])
     return f"{namespace[0]}:{path}"
 
-def get_params(node: lal.SubpSpec) -> List[str]:
-    subp_params = node.f_subp_params
-    params = subp_params.f_params if subp_params != None else []
-    return [param.f_ids.text for param in params]
-
 class StaticCallGraphVisitor(AdaVisitor):
 
     """
@@ -22,7 +17,7 @@ class StaticCallGraphVisitor(AdaVisitor):
     variable.
     """
 
-    def __init__(self, body_being_defined: str, namespace: List[str], params: List[str] = []) -> None:
+    def __init__(self, body_being_defined: str, namespace: List[str]) -> None:
         """
         Initialize the visitor.  Because it is not very practical to locally
         update the parameters when doing recursive calls, we suggest instead to
@@ -68,11 +63,9 @@ class StaticCallGraphVisitor(AdaVisitor):
     def visit_SubpBody(self, node: lal.SubpBody) -> None:
         spec = node.f_subp_spec
         name = spec.f_subp_name
-        params = get_params(spec)
         local_visitor = StaticCallGraphVisitor(
             body_being_defined = name.text,
-            namespace = self.namespace + [name.text],
-            params = params
+            namespace = self.namespace + [name.text]
         )
         # assumption: the spec does not contain calls
         local_visitor.visit(node.f_decls)

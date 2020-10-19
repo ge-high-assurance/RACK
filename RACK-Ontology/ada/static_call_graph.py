@@ -45,8 +45,11 @@ class StaticCallGraphVisitor(AdaVisitor):
         # current enclosing namespace (can be arbitrarily initialized, say with
         # a file name) then, traversed namespaces are added onto
         self.namespace = namespace
-        # formal names of parameters to the function we are analyzing
-        self.params: List[str] = params
+        """
+        The current enclosing namespace, as a sequence enclosing namespaces
+        (currently, the top-level will actually be the name of the enclosing
+        file).
+        """
 
     def record_call(self, callee: str) -> None:
         """Records a witnessed static function/procedure call to callee"""
@@ -80,7 +83,6 @@ class StaticCallGraphVisitor(AdaVisitor):
             if not key in self.call_graph:
                 self.call_graph[key] = set()
             self.call_graph[key] = self.call_graph[key].union(local_visitor.call_graph[key])
-
 
     def visit_CallExpr(self, node: lal.CallExpr):
         defined = (

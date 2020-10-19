@@ -11,7 +11,6 @@ import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/AGENTS".
 import "http://common/DO-178C".
 
-
     //Model Location: DevelopmentPlan
 _DevelopmentPlan is a PLAN,
     has content _01-PlanForSoftwareAspectsOfCertification,
@@ -458,15 +457,20 @@ _DevelopmentPlan is a PLAN,
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment
     _03-SoftwareDevelopmentEnvironment is a SECTION,
-        has content GCC.
+        has content GCC,
+        has content General_Electric.
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.Engineer
-      Engineer is a type of AGENT.
+      Engineer is a type of PERSON.
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.GCC
       GCC is a FILE.
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.General Electric
+      General_Electric is a ORGANIZATION.
 
 
 

@@ -1,16 +1,17 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:j.0="http://arcos.rack/PROV-S#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
-    xmlns:j.1="http://Turnstile/DevelopmentPlan#"
+    xmlns:j.0="http://Turnstile/DevelopmentPlan#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:cntrapptst="http://Turnstile/CounterApplicationTesting#"
-    xmlns:cntrapprq="http://Turnstile/CounterApplicationRequirementSpec#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:j.1="http://arcos.rack/PROV-S#"
+    xmlns:j.2="http://arcos.rack/SYSTEM#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:cntrapprq="http://Turnstile/CounterApplicationRequirementSpec#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:j.2="http://arcos.rack/TESTING#"
+    xmlns:j.3="http://arcos.rack/TESTING#"
   xml:base="http://Turnstile/CounterApplicationTesting">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="CounterApplicationRequirementSpec"/>
@@ -20,76 +21,92 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplicationTesting.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.1:SoftwareComponentTestResult rdf:ID="TR-1-1-1">
-    <j.2:executedBy>
-      <j.1:SoftwareComponentTestExecution rdf:ID="TestRun1"/>
-    </j.2:executedBy>
-    <j.2:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
-    <j.2:confirms>
-      <j.1:SoftwareComponentTest rdf:ID="TC-1-1">
-        <j.2:verifies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
-        <j.0:identifier>TC-1-1</j.0:identifier>
-      </j.1:SoftwareComponentTest>
-    </j.2:confirms>
-    <j.0:identifier>TR-1-1-1</j.0:identifier>
-  </j.1:SoftwareComponentTestResult>
-  <j.1:SoftwareComponentTestResult rdf:ID="TR-1-2-1">
-    <j.2:executedBy rdf:resource="#TestRun1"/>
-    <j.2:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
-    <j.2:confirms>
-      <j.1:SoftwareComponentTest rdf:ID="TC-1-2">
-        <j.2:verifies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
-        <j.0:identifier>TC-1-2</j.0:identifier>
-      </j.1:SoftwareComponentTest>
-    </j.2:confirms>
-    <j.0:identifier>TR-1-2-1</j.0:identifier>
-  </j.1:SoftwareComponentTestResult>
-  <j.1:SoftwareComponentTestResult rdf:ID="TR-1-3-1">
-    <j.2:executedBy rdf:resource="#TestRun1"/>
-    <j.2:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
-    <j.2:confirms>
-      <j.1:SoftwareComponentTest rdf:ID="TC-1-3">
-        <j.2:verifies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
-        <j.0:identifier>TC-1-3</j.0:identifier>
-      </j.1:SoftwareComponentTest>
-    </j.2:confirms>
-    <j.0:identifier>TR-1-3-1</j.0:identifier>
-  </j.1:SoftwareComponentTestResult>
-  <j.1:SoftwareComponentTestResult rdf:ID="TR-1-1-2">
-    <j.2:executedBy>
-      <j.1:SoftwareComponentTestExecution rdf:ID="TestRun2"/>
-    </j.2:executedBy>
-    <j.2:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
-    <j.2:confirms rdf:resource="#TC-1-1"/>
-    <j.0:identifier>TR-1-1-2</j.0:identifier>
-  </j.1:SoftwareComponentTestResult>
-  <j.1:SoftwareComponentTestResult rdf:ID="TR-1-2-2">
-    <j.2:executedBy rdf:resource="#TestRun2"/>
-    <j.2:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
-    <j.2:confirms rdf:resource="#TC-1-2"/>
-    <j.0:identifier>TR-1-2-2</j.0:identifier>
-  </j.1:SoftwareComponentTestResult>
-  <j.1:SoftwareComponentTestResult rdf:ID="TR-1-4-2">
-    <j.2:executedBy rdf:resource="#TestRun2"/>
-    <j.2:result rdf:resource="http://arcos.rack/TESTING#Failed"/>
-    <j.2:confirms>
-      <j.1:SoftwareComponentTest rdf:ID="TC-1-4">
-        <j.2:verifies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
-        <j.0:identifier>TC-1-4</j.0:identifier>
-      </j.1:SoftwareComponentTest>
-    </j.2:confirms>
-    <j.0:identifier>TR-1-4-2</j.0:identifier>
-  </j.1:SoftwareComponentTestResult>
-  <j.1:SoftwareComponentTestResult rdf:ID="TR-1-4-1">
-    <j.2:executedBy rdf:resource="#TestRun1"/>
-    <j.2:result rdf:resource="http://arcos.rack/TESTING#Failed"/>
-    <j.2:confirms rdf:resource="#TC-1-4"/>
-    <j.0:identifier>TR-1-4-1</j.0:identifier>
-  </j.1:SoftwareComponentTestResult>
-  <j.1:SoftwareComponentTestResult rdf:ID="TR-1-3-2">
-    <j.2:executedBy rdf:resource="#TestRun2"/>
-    <j.2:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
-    <j.2:confirms rdf:resource="#TC-1-3"/>
-    <j.0:identifier>TR-1-3-2</j.0:identifier>
-  </j.1:SoftwareComponentTestResult>
+  <j.0:SoftwareComponentTestResult rdf:ID="TR-1-1-1">
+    <j.3:executedBy>
+      <j.0:SoftwareComponentTestExecution rdf:ID="TestRun1">
+        <j.3:executedOn>
+          <j.1:AGENT rdf:ID="TargetHardware"/>
+        </j.3:executedOn>
+      </j.0:SoftwareComponentTestExecution>
+    </j.3:executedBy>
+    <j.3:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
+    <j.3:confirms>
+      <j.0:SoftwareComponentTest rdf:ID="TC-1-1">
+        <j.3:producedBy>
+          <j.0:DevelopComponentTests rdf:ID="CompTestDevelopment">
+            <j.3:developedBy>
+              <j.1:AGENT rdf:ID="ASSERT"/>
+            </j.3:developedBy>
+          </j.0:DevelopComponentTests>
+        </j.3:producedBy>
+        <j.3:verifies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
+        <j.1:identifier>TC-1-1</j.1:identifier>
+      </j.0:SoftwareComponentTest>
+    </j.3:confirms>
+    <j.1:identifier>TR-1-1-1</j.1:identifier>
+  </j.0:SoftwareComponentTestResult>
+  <j.0:SoftwareComponentTestResult rdf:ID="TR-1-2-1">
+    <j.3:executedBy rdf:resource="#TestRun1"/>
+    <j.3:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
+    <j.3:confirms>
+      <j.0:SoftwareComponentTest rdf:ID="TC-1-2">
+        <j.3:producedBy rdf:resource="#CompTestDevelopment"/>
+        <j.3:verifies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
+        <j.1:identifier>TC-1-2</j.1:identifier>
+      </j.0:SoftwareComponentTest>
+    </j.3:confirms>
+    <j.1:identifier>TR-1-2-1</j.1:identifier>
+  </j.0:SoftwareComponentTestResult>
+  <j.0:SoftwareComponentTestResult rdf:ID="TR-1-1-2">
+    <j.3:executedBy>
+      <j.0:SoftwareComponentTestExecution rdf:ID="TestRun2">
+        <j.3:executedOn rdf:resource="#TargetHardware"/>
+      </j.0:SoftwareComponentTestExecution>
+    </j.3:executedBy>
+    <j.3:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
+    <j.3:confirms rdf:resource="#TC-1-1"/>
+    <j.1:identifier>TR-1-1-2</j.1:identifier>
+  </j.0:SoftwareComponentTestResult>
+  <j.0:SoftwareComponentTestResult rdf:ID="TR-1-2-2">
+    <j.3:executedBy rdf:resource="#TestRun2"/>
+    <j.3:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
+    <j.3:confirms rdf:resource="#TC-1-2"/>
+    <j.1:identifier>TR-1-2-2</j.1:identifier>
+  </j.0:SoftwareComponentTestResult>
+  <j.0:SoftwareComponentTestResult rdf:ID="TR-1-3-1">
+    <j.3:executedBy rdf:resource="#TestRun1"/>
+    <j.3:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
+    <j.3:confirms>
+      <j.0:SoftwareComponentTest rdf:ID="TC-1-3">
+        <j.3:producedBy rdf:resource="#CompTestDevelopment"/>
+        <j.3:verifies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
+        <j.1:identifier>TC-1-3</j.1:identifier>
+      </j.0:SoftwareComponentTest>
+    </j.3:confirms>
+    <j.1:identifier>TR-1-3-1</j.1:identifier>
+  </j.0:SoftwareComponentTestResult>
+  <j.0:SoftwareComponentTestResult rdf:ID="TR-1-4-2">
+    <j.3:executedBy rdf:resource="#TestRun2"/>
+    <j.3:result rdf:resource="http://arcos.rack/TESTING#Failed"/>
+    <j.3:confirms>
+      <j.0:SoftwareComponentTest rdf:ID="TC-1-4">
+        <j.2:producedBy rdf:resource="#CompTestDevelopment"/>
+        <j.3:verifies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
+        <j.1:identifier>TC-1-4</j.1:identifier>
+      </j.0:SoftwareComponentTest>
+    </j.3:confirms>
+    <j.1:identifier>TR-1-4-2</j.1:identifier>
+  </j.0:SoftwareComponentTestResult>
+  <j.0:SoftwareComponentTestResult rdf:ID="TR-1-4-1">
+    <j.3:executedBy rdf:resource="#TestRun1"/>
+    <j.3:result rdf:resource="http://arcos.rack/TESTING#Failed"/>
+    <j.3:confirms rdf:resource="#TC-1-4"/>
+    <j.1:identifier>TR-1-4-1</j.1:identifier>
+  </j.0:SoftwareComponentTestResult>
+  <j.0:SoftwareComponentTestResult rdf:ID="TR-1-3-2">
+    <j.3:executedBy rdf:resource="#TestRun2"/>
+    <j.3:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
+    <j.3:confirms rdf:resource="#TC-1-3"/>
+    <j.1:identifier>TR-1-3-2</j.1:identifier>
+  </j.0:SoftwareComponentTestResult>
 </rdf:RDF>

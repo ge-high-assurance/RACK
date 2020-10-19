@@ -30,11 +30,21 @@
   <owl:ObjectProperty rdf:about="#className">
     <rdfs:domain rdf:resource="#ClassProp"/>
   </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="superPropName">
+    <rdfs:domain rdf:resource="#ClassProp"/>
+    <rdfs:comment xml:lang="en"> all the properties that have more specific subproperties</rdfs:comment>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="propName">
     <rdfs:domain rdf:resource="#ClassProp"/>
+    <rdfs:comment xml:lang="en"> all the properties with className in the domain</rdfs:comment>
   </owl:ObjectProperty>
-  <sadlimplicitmodel:Rule rdf:ID="GenClassPropStrAgent"/>
-  <sadlimplicitmodel:Rule rdf:ID="PopulateClassProp"/>
-  <sadlimplicitmodel:Rule rdf:ID="GenClassPropStrEntity"/>
-  <sadlimplicitmodel:Rule rdf:ID="GenClassPropStrActivity"/>
+  <sadlimplicitmodel:Rule rdf:ID="Transitive1"/>
+  <sadlimplicitmodel:Rule rdf:ID="Transitive2"/>
+  <sadlimplicitmodel:Rule rdf:ID="GenClassPropStrThing"/>
+  <sadlimplicitmodel:Rule rdf:ID="TransitiveClassProp"/>
+  <sadlimplicitmodel:Rule rdf:ID="PopulateClassProp0"/>
+  <ClassProp rdf:ID="THINGTemp">
+    <className rdf:resource="http://arcos.rack/PROV-S#THING"/>
+  </ClassProp>
+  <sadlimplicitmodel:Rule rdf:ID="TagSuperProperties"/>
 </rdf:RDF>

@@ -9,27 +9,64 @@ import "http://Turnstile/PropertyDefinitionInference".
 // 				and delete zzz"
 // 				and delete "zzz  
 // Keeping these instructions in this file so that we can do global replace in RunQueryString.sadl
+// &#10; for newline in tooltips
 
-Write: data {Ask GenQueryString1: "select ?QueryStr where 		# depending on how we automates, we may not need to output ?ClassType
-{
-  {select distinct ?ClassName ?ClassProp ?Class (group_concat(distinct ?temp2; separator='} . OPTIONAL{') as ?PropList) where
-    {  ?ClassProp <rdf:type> <ClassProp> 
-     . ?ClassProp <className> ?Class 												# e.g. ?Class is http://arcos.rack/SYSTEM#SYSTEM for which we want all properties 
-     . Let (?ClassVarInt := replace(str(?Class),'http.*#','?')) 					# making a variable (e.g. ?SYSTEM)
-     . ?ClassProp <http://Turnstile/PropertyDefinitionInference#propName> ?PropName 		# ?PropName is the property
-     . LET (?VarNameInt := replace(str(?PropName),'http.*#','> ?')) 				# replace initial part of property with a ? to make it a variable in query (e.g. > ?producedBy)
-     . LET (?temp1 := concat(str(?PropName),str(?VarNameInt)))						# e.g. http://arcos.rack/SYSTEM#producedBy> ?producedBy
-     . LET (?temp2 := concat(concat(?ClassVarInt,' <'),?temp1))						# e.g. ?SYSTEM <http://arcos.rack/SYSTEM#producedBy> ?producedBy
-    } group by ?ClassName ?ClassProp ?Class
-  }
-  . LET (?ClassType := replace(str(?Class),'http.*#',''))							# strip out; only using it to then generate eventual csv file name
-  . LET (?ClassVar := replace(str(?Class),'http.*#','?')) 							# making a variable (e.g. ?SYSTEM)
-  . LET (?str0 := 'zzzWrite: data {Ask: yyyselect * where {')  						# first part of query string
-  . LET (?str1 := concat(str(?ClassVar), ' <rdf:type> <')) 							# putting together the first clause of the form ?SYSTEM <rdf:type> <SYSTEM>
+Write: data {Ask GenQueryString: " select  ?QueryStr  where { {
+select ?Class (group_concat(distinct ?PropList; separator='} . OPTIONAL{') as ?FinalPropList) 
+              (group_concat(distinct ?HeaderList; separator=' ') as ?FinalHeaderList) where  
+{ ?ClassProp <rdf:type> <ClassProp> . ?ClassProp <className> ?Class
+  {select * where
+  { 
+     { select distinct ?ClassProp ?Class (group_concat(distinct ?xtemp2; separator='} . OPTIONAL{') as ?PropList) 
+       (group_concat(distinct ?ytemp1; separator=' ') as ?HeaderList)where
+       { Let (?xClassVarInt := replace(str(?Class),'http.*#','?')) 							# making a variable (e.g. ?SYSTEM)
+         . ?ClassProp <http://Turnstile/PropertyDefinitionInference#propName> ?xPropName 
+         . FILTER(!regex(str(?xPropName), 'http://arcos.rack/PROV-S#hasAttribute')) 		# drop hasAttribute because that is a bnode and we need to sort out how to handle it
+         . FILTER NOT EXISTS {?ClassProp <http://Turnstile/PropertyDefinitionInference#superPropName> ?xPropName}	# discard if this property should be dropped
+         . LET (?xVarNameInt := replace(str(?xPropName),'http.*#','> ?')) 					# replace initial part of property with a ? to make it a variable in query (e.g. > ?producedBy)
+         . LET (?xtemp1 := concat(str(?xPropName),str(?xVarNameInt)))						# e.g. http://arcos.rack/SYSTEM#producedBy> ?producedBy
+         . LET (?xtemp2 := concat(concat(?xClassVarInt,' <'),?xtemp1))						# e.g. ?SYSTEM <http://arcos.rack/SYSTEM#producedBy> ?producedBy	 
+         . ?xPropName <rdfs:range> ?xPropRange												# move this and next earlier
+         . FILTER(!regex(str(?xPropRange), 'http://arcos.rack/PROV-S#'))
+         . LET (?ytemp1 := replace(str(?xPropName),'http.*#','?'))
+       } group by ?ClassProp ?Class
+     }
+  union 
+     {select distinct ?ClassProp ?Class (group_concat(distinct ?temp3; separator='} . OPTIONAL{') as ?PropList) 
+      (group_concat(distinct ?ztemp2; separator=' ') as ?HeaderList) where
+        { Let (?ClassVarInt := replace(str(?Class),'http.*#','?')) 							# making a variable (e.g. ?SYSTEM)
+          . ?ClassProp <http://Turnstile/PropertyDefinitionInference#propName> ?PropName
+          . FILTER(!regex(str(?PropName), 'http://arcos.rack/PROV-S#hasAttribute')) 		# drop hasAttribute because that is a bnode and we need to sort out how to handle it
+          . FILTER NOT EXISTS {?ClassProp <http://Turnstile/PropertyDefinitionInference#superPropName> ?PropName}	# discard if this property should be dropped
+          . LET (?VarNameInt := replace(str(?PropName),'http.*#','> ?')) 					# replace initial part of property with a ? to make it a variable in query (e.g. > ?producedBy)
+          . LET (?temp1 := concat(str(?PropName),str(?VarNameInt)))							# e.g. http://arcos.rack/SYSTEM#producedBy> ?producedBy
+          . LET (?temp2 := concat(concat(?ClassVarInt,' <'),?temp1))						# e.g. ?SYSTEM <http://arcos.rack/SYSTEM#producedBy> ?producedBy 	 
+          . ?PropName <rdfs:range> ?PropRange
+          . FILTER(regex(str(?PropRange), 'http://arcos.rack/PROV-S#'))
+          . LET(?q1 := replace(str(?PropName),'http.*#','?')) 								# later alter as ?VarIntName and ?q1 only differ by a prefix
+          . LET(?getId1 := concat(' . ',?q1)) 
+          . LET(?getId2 := concat(?getId1, ' <identifier> '))
+          . LET(?getId3 := concat(?getId2,?q1))
+          . LET(?getId4 := concat(?getId3,'Id'))
+          . LET(?temp3 := concat(?temp2, ?getId4))
+          . LET (?ztemp1 := replace(str(?PropName),'http.*#','?'))
+          . LET (?ztemp2 := concat(?ztemp1,'Id'))		
+        } group by ?ClassProp ?Class
+     }
+} }
+} group by ?Class}
+# now combine column headers, properties to generate the query string
+  . LET (?ClassType := replace(str(?Class),'http.*#',''))									# strip out; only using it to then generate eventual csv file name
+  . LET (?ClassVar := replace(str(?Class),'http.*#','?')) 									# making a variable (e.g. ?SYSTEM)
+  . LET (?ttt1 := 'zzzWrite: data {Ask: yyyselect ')  										# first part of query string
+  . LET (?ttt2 := concat(?ttt1,?FinalHeaderList))
+  . LET (?str0 := concat(?ttt2,' where {'))
+  . LET (?str1 := concat(str(?ClassVar), ' <rdf:type> <')) 									# putting together the first clause of the form ?SYSTEM <rdf:type> <SYSTEM>
   . LET (?str2 := concat(?str1,replace(str(?Class),'http.*#','')))
   . LET (?str4 := concat(?str2,'> . OPTIONAL{'))
-  . LET (?str5 := concat(?str0,?str4))												# the first clause is in along with first OPTIONAL fragment
-  . LET (?str6 := concat(?str5, ?PropList))											# all the properties in the query string
-  . LET (?str7 := concat(?str6,'}}yyy.} to yyyData/'))				
-  . LET (?QueryStr := concat(?str7, concat(str(?ClassType),'.csvyyy.zzz')))			# end the query string
-} order by ?QueryStr".} to "99-Utils/QueryStrings.txt".
+  . LET (?str5 := concat(?str0,?str4))														# the first clause is in along with first OPTIONAL fragment
+  . LET (?str6 := concat(concat(?str5, ?FinalPropList),'} '))								# all the properties in the query string
+  . LET (?str7 := concat(concat(?str6,'} order by '),str(?ClassVar)))
+  . LET (?str8 := concat(?str7,' yyy.} to yyy99-Utils/Data/'))				
+  . LET (?QueryStr := concat(?str8, concat(str(?ClassType),'.csvyyy.zzz')))					# end the query string
+} ".} to "99-Utils/QueryStrings.txt".

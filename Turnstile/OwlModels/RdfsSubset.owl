@@ -16,4 +16,6 @@
   <rdf:Property rdf:ID="domain"/>
   <rdf:Property rdf:ID="subPropertyOf"/>
   <rdf:Property rdf:ID="subClassOf"/>
+  <rdf:Property rdf:ID="range"/>
+  <rdf:Property rdf:ID="subTypeOf"/>
 </rdf:RDF>

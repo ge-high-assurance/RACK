@@ -26,7 +26,9 @@
     <j.1:createdBy>
       <j.0:SoftwareDesign rdf:ID="LlrDev1">
         <j.1:author>
-          <j.0:Engineer rdf:ID="JaneDoe"/>
+          <j.0:Engineer rdf:ID="JaneDoe">
+            <j.3:identifier>Jane Doe</j.3:identifier>
+          </j.0:Engineer>
         </j.1:author>
       </j.0:SoftwareDesign>
     </j.1:createdBy>

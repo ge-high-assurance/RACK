@@ -9,7 +9,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://Turnstile/RunQueries">
   <owl:Ontology rdf:about="">
-    <owl:imports rdf:resource="DevelopmentPlan"/>
+    <owl:imports rdf:resource="All"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>

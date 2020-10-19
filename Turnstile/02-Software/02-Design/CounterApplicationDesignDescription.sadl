@@ -2,7 +2,8 @@ uri "http://Turnstile/CounterApplicationDesignDescription" alias cntrappllr.
 import "http://Turnstile/DevelopmentPlan".
 import "http://Turnstile/CounterApplicationRequirementSpec".
 
-JaneDoe is a Engineer.
+JaneDoe is a Engineer
+	has identifier "Jane Doe".
 
 LlrDev1 is a SoftwareDesign
 	has Rq:author JaneDoe.

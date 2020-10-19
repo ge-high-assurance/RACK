@@ -1,0 +1,15 @@
+"invalidatedAtTime","identifier","givenText","generatedAtTime","ifText","thenText","governsId","satisfiesId","dataInsertedById","mitigatesId","wasGeneratedById","wasAttributedToId"
+null,"EXE-LLR-1",null,null,null,null,"ExecutiveThread",null,null,null,null,null
+null,"EXE-LLR-2",null,null,null,null,"ExecutiveThread",null,null,null,null,null
+null,"EXE-LLR-3",null,null,null,null,"ExecutiveThread",null,null,null,null,null
+null,"IN-LLR-1",null,null,null,null,"InputThread",null,null,null,null,null
+null,"IN-LLR-2",null,null,null,null,"InputThread","HLR-1",null,null,null,null
+null,"IN-LLR-2",null,null,null,null,"InputThread","HLR-2",null,null,null,null
+null,"IN-LLR-3",null,null,null,null,"InputThread","HLR-1",null,null,null,null
+null,"IN-LLR-3",null,null,null,null,"InputThread","HLR-2",null,null,null,null
+null,"IN-LLR-4",null,null,null,null,"InputThread",null,null,null,null,null
+null,"IN-LLR-5",null,null,null,null,"InputThread",null,null,null,null,null
+null,"IN-LLR-6",null,null,null,null,"InputThread",null,null,null,null,null
+null,"OUT-LLR-1",null,null,null,null,"OutputThread",null,null,null,null,null
+null,"OUT-LLR-2",null,null,null,null,"OutputThread","HLR-3",null,null,null,null
+

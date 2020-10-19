@@ -29,6 +29,7 @@
     <reasonerClassName>com.ge.research.sadl.jena.reasoner.JenaReasonerPlugin</reasonerClassName>
   </Category>
   <Category rdf:about="http://com.ge.research.sadl.configuration#Jena">
+    <pModelSpec>OWL_MEM</pModelSpec>
     <pOWLTranslation rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
     >false</pOWLTranslation>
     <pUseLuceneIndexer rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
@@ -36,11 +37,10 @@
     <pTimeOut>-1</pTimeOut>
     <pTrace rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
     >false</pTrace>
+    <pTransitiveClosureCaching rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</pTransitiveClosureCaching>
     <pRuleMode>hybrid</pRuleMode>
     <pDerivationLogging>None</pDerivationLogging>
-    <pModelSpec>OWL_MEM_RDFS</pModelSpec>
-    <pTransitiveClosureCaching rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
-    >false</pTransitiveClosureCaching>
     <translatorClassName>com.ge.research.sadl.jena.translator.JenaTranslatorPlugin</translatorClassName>
   </Category>
   <Category rdf:about="http://com.ge.research.sadl.configuration#Builtin"/>

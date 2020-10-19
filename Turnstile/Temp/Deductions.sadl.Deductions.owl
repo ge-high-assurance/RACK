@@ -5,7 +5,7 @@
     xmlns:j.1="http://arcos.rack/PROCESS#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-  xml:base="http://Turnstile/Deductions">
+  xml:base="http://Turnstile/DeductionsInferred">
   <rdf:Description rdf:about="http://common/DO-178C#A-2-1">
     <j.1:satisfiedBy rdf:resource="CounterApplicationRequirementSpec#HlrDev1"/>
   </rdf:Description>
@@ -54,6 +54,9 @@
     <j.1:satisfiedBy rdf:resource="CounterApplicationReviews#LlrReview2"/>
     <j.1:satisfiedBy rdf:resource="CounterApplicationReviews#LlrReview1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://common/DO-178C#A-3-4">
+    <j.1:satisfiedBy rdf:resource="CounterApplicationReviews#HlrReview"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://common/DO-178C#A-6-3">
     <j.1:satisfiedBy rdf:resource="CounterApplicationSoftwareUnitTesting#SoftwareUnitTestRun2"/>
     <j.1:satisfiedBy rdf:resource="CounterApplicationSoftwareUnitTesting#SoftwareUnitTestRun1"/>
@@ -67,9 +70,6 @@
   <rdf:Description rdf:about="http://common/DO-178C#A-2-5">
     <j.1:satisfiedBy rdf:resource="CounterApplicationDesignDescription#SwDesign"/>
     <j.1:satisfiedBy rdf:resource="CounterApplicationDesignDescription#LlrDev1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://common/DO-178C#A-3-4">
-    <j.1:satisfiedBy rdf:resource="CounterApplicationReviews#HlrReview"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://common/DO-178C#A-4-9">
     <j.1:satisfiedBy rdf:resource="CounterApplicationReviews#LlrReview3"/>
@@ -95,29 +95,43 @@
   </rdf:Description>
   <rdf:Description rdf:about="DevelopmentPlan#SystemVerificationReport">
     <j.0:content rdf:resource="CounterApplicationTesting#TR-1-1-2"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#LlrReview1Log-6"/>
     <j.0:content rdf:resource="CounterApplicationTesting#TC-1-2"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#LlrReview3Log-3"/>
     <j.0:content rdf:resource="CounterApplicationTesting#TR-1-4-1"/>
     <j.0:content rdf:resource="CounterApplicationTesting#TC-1-3"/>
     <j.0:content rdf:resource="CounterApplicationTesting#TR-1-4-2"/>
     <j.0:content rdf:resource="CounterApplicationTesting#TC-1-4"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#HlrReviewLog-1"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#HlrReviewLog-2"/>
     <j.0:content rdf:resource="CounterApplicationSoftwareUnitTesting#UTC-1-1"/>
     <j.0:content rdf:resource="CounterApplicationSoftwareUnitTesting#UTR-1-3-1"/>
     <j.0:content rdf:resource="CounterApplicationSoftwareUnitTesting#UTR-1-4-1"/>
     <j.0:content rdf:resource="CounterApplicationSoftwareUnitTesting#UTR-1-2-1"/>
     <j.0:content rdf:resource="CounterApplicationTesting#TR-1-3-2"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#LlrReview2Log-1"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#HlrReviewLog-3"/>
     <j.0:content rdf:resource="CounterApplicationSoftwareUnitTesting#UTR-1-4-2"/>
     <j.0:content rdf:resource="CounterApplicationSoftwareUnitTesting#UTR-1-3-2"/>
     <j.0:content rdf:resource="CounterApplicationSoftwareUnitTesting#UTR-1-2-2"/>
     <j.0:content rdf:resource="CounterApplicationSoftwareUnitTesting#UTC-1-2"/>
     <j.0:content rdf:resource="CounterApplicationSoftwareUnitTesting#UTR-1-1-2"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#LlrReview2Log-2"/>
     <j.0:content rdf:resource="CounterApplicationSoftwareUnitTesting#UTC-1-3"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#LlrReview1Log-2"/>
     <j.0:content rdf:resource="CounterApplicationSoftwareUnitTesting#UTC-1-4"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#LlrReview1Log-3"/>
     <j.0:content rdf:resource="CounterApplicationTesting#TR-1-3-1"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#LlrReview1Log-4"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#LlrReview3Log-1"/>
     <j.0:content rdf:resource="CounterApplicationSoftwareUnitTesting#UTR-1-1-1"/>
     <j.0:content rdf:resource="CounterApplicationTesting#TR-1-2-1"/>
     <j.0:content rdf:resource="CounterApplicationTesting#TR-1-1-1"/>
-    <j.0:content rdf:resource="CounterApplicationTesting#TC-1-1"/>
     <j.0:content rdf:resource="CounterApplicationTesting#TR-1-2-2"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#LlrReview1Log-5"/>
+    <j.0:content rdf:resource="CounterApplicationTesting#TC-1-1"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#LlrReview3Log-2"/>
+    <j.0:content rdf:resource="CounterApplicationReviews#LlrReview1Log-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="DevelopmentPlan#CounterApplicationRequirementSpec">
     <j.0:content rdf:resource="CounterApplicationRequirementSpec#HLR-3"/>
@@ -156,6 +170,10 @@
   <rdf:Description rdf:about="http://common/DO-178C#A-3-7">
     <j.1:satisfiedBy rdf:resource="CounterApplicationReviews#HlrReview"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://common/DO-178C#A-7-3">
+    <j.1:satisfiedBy rdf:resource="CounterApplicationTesting#TestRun2"/>
+    <j.1:satisfiedBy rdf:resource="CounterApplicationTesting#TestRun1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://common/DO-178C#A-2-2">
     <j.1:satisfiedBy rdf:resource="CounterApplicationRequirementSpec#HlrDev1"/>
   </rdf:Description>
@@ -166,18 +184,10 @@
     <j.1:satisfiedBy rdf:resource="CounterApplicationSoftwareUnitTesting#SoftwareUnitTestRun2"/>
     <j.1:satisfiedBy rdf:resource="CounterApplicationSoftwareUnitTesting#SoftwareUnitTestRun1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://common/DO-178C#A-7-3">
-    <j.1:satisfiedBy rdf:resource="CounterApplicationTesting#TestRun2"/>
-    <j.1:satisfiedBy rdf:resource="CounterApplicationTesting#TestRun1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://common/DO-178C#A-4-6">
     <j.1:satisfiedBy rdf:resource="CounterApplicationReviews#LlrReview3"/>
     <j.1:satisfiedBy rdf:resource="CounterApplicationReviews#LlrReview2"/>
     <j.1:satisfiedBy rdf:resource="CounterApplicationReviews#LlrReview1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://common/DO-178C#A-6-2">
-    <j.1:satisfiedBy rdf:resource="CounterApplicationTesting#TestRun2"/>
-    <j.1:satisfiedBy rdf:resource="CounterApplicationTesting#TestRun1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://common/DO-178C#A-2-4">
     <j.1:satisfiedBy rdf:resource="CounterApplicationDesignDescription#SwDesign"/>
@@ -185,6 +195,14 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://common/DO-178C#A-3-3">
     <j.1:satisfiedBy rdf:resource="CounterApplicationReviews#HlrReview"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://common/DO-178C#A-6-2">
+    <j.1:satisfiedBy rdf:resource="CounterApplicationTesting#TestRun2"/>
+    <j.1:satisfiedBy rdf:resource="CounterApplicationTesting#TestRun1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://common/DO-178C#A-7-1">
+    <j.1:satisfiedBy rdf:resource="CounterApplicationSoftwareUnitTesting#UnitTestDevelopment"/>
+    <j.1:satisfiedBy rdf:resource="CounterApplicationTesting#CompTestDevelopment"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://common/DO-178C#A-4-4">
     <j.1:satisfiedBy rdf:resource="CounterApplicationReviews#LlrReview3"/>

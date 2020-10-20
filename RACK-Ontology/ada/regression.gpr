@@ -1,0 +1,7 @@
+project Regression is
+
+    for Source_Dirs use (
+        "."
+    );
+
+end Regression;

@@ -25,7 +25,7 @@ provider = (
 
 context = lal.AnalysisContext(unit_provider=provider)
 
-debug = True
+debug = False
 
 for file in args.files:
     print(f"Analyzing {file}")
@@ -35,7 +35,7 @@ for file in args.files:
             adaVisitor = AdaPrintVisitor(max_depth = 20)
             adaVisitor.visit(unit.root)
         staticCallGraphVisitor = StaticCallGraphVisitor(
-            callable_being_defined = unit.filename,
+            callable_being_defined = None,
             namespace = [unit.filename]
         )
         staticCallGraphVisitor.visit(unit.root)

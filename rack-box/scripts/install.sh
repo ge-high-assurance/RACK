@@ -53,9 +53,10 @@ systemctl start fuseki
 # Initialize SemTK environment variables
 
 cd /home/${USER}/semtk-opensource
-chmod 755 *.sh
+chmod 755 ./*.sh
 export SERVER_ADDRESS=localhost
 export SERVICE_HOST=localhost
+# shellcheck disable=SC1091
 source .env
 
 # Set up each SemTK system service
@@ -116,5 +117,6 @@ done
 # Setup the RACK dataset using the RACK CLI
 
 cd /home/${USER}/RACK/RACK-Ontology/cli
+# shellcheck disable=SC1091
 source venv/bin/activate
 ./setup-rack.sh

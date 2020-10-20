@@ -17,8 +17,8 @@ export DEBCONF_NONINTERACTIVE_SEEN=true
 if [ "${PACKER_BUILDER_TYPE}" == "hyperv-iso" ]; then
     mkdir /usr/libexec/hypervkvpd
     cd /usr/libexec/hypervkvpd
-    ln -s /usr/sbin/hv_get_dhcp_info
-    ln -s /usr/sbin/hv_get_dns_info
+    ln -s /usr/sbin/hv_get_dhcp_info .
+    ln -s /usr/sbin/hv_get_dns_info .
 else
     apt-get remove -y linux-cloud-tools-virtual
     apt-get autoremove -y # remaining linux-cloud-tools packages

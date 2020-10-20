@@ -217,6 +217,7 @@ jobs:
         b=${{ matrix.builder }}
         v=${{ github.event.release.tag_name }}
         cd RACK/rack-box
+        ls -al files rack-box*
         packer build -var headless=true -var version=$v rack-box-$b.json
 
     - name: Split RACK-in-a-Box image

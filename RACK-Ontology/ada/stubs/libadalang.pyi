@@ -12,6 +12,8 @@ class AdaNode:
 
 class BasicDecl(AdaNode):
     @property
+    def p_defining_name(self) -> DefiningName: ...
+    @property
     def p_canonical_fully_qualified_name(self) -> str: ...
 
 class Name(AdaNode):
@@ -25,9 +27,11 @@ class CallExpr(AdaNode):
 
 class DeclarativePart(AdaNode): ...
 
-class DefiningName(AdaNode):
+class DefiningName(Name):
     @property
     def f_name(self) -> Name: ...
+    @property
+    def p_basic_decl(self) -> BasicDecl: ...
 
 class DefiningNameList(AdaNode, Iterable[DefiningName]):
     def __iter__(self): ...

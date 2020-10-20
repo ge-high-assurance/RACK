@@ -1,6 +1,6 @@
-"generatedAtTime","invalidatedAtTime","identifier","sourceId","destinationId","wasAttributedToId","dataInsertedById","identifiedById"
-null,null,"census","Counter Application","Display",null,null,null
-null,null,"census","Counter Application","In Gate",null,null,null
-null,null,"inflow","In Gate","Counter Application",null,null,null
-null,null,"outflow","Out Gate","Counter Application",null,null,null
+"generatedAtTime","identifier","invalidatedAtTime","identifiedById","destinationId","wasAttributedToId","sourceId","dataInsertedById"
+null,"census",null,null,"Display",null,"Counter Application",null
+null,"census",null,null,"In Gate",null,"Counter Application",null
+null,"inflow",null,null,"Counter Application",null,"In Gate",null
+null,"outflow",null,null,"Counter Application",null,"Out Gate",null
 

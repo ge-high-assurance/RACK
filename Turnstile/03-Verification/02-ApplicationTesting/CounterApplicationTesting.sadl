@@ -2,10 +2,12 @@ uri "http://Turnstile/CounterApplicationTesting" alias cntrapptst.
 import "http://Turnstile/DevelopmentPlan".
 import "http://Turnstile/CounterApplicationRequirementSpec".
 
-ASSERT is a AGENT.
+
 
 CompTestDevelopment is a DevelopComponentTests
-	has tst:developedBy ASSERT.
+	has identifier "CompTestDevelopment"
+	has tst:developedBy ASSERT
+	has used VerificationStandard.
 
 TC-1-1 is a SoftwareComponentTest
 	has identifier "TC-1-1",

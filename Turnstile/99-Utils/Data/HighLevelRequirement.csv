@@ -1,5 +1,5 @@
-"generatedAtTime","invalidatedAtTime","identifier","ifText","thenText","givenText","satisfiesId","wasAttributedToId","dataInsertedById","governsId","mitigatesId","wasGeneratedById"
-null,null,"HLR-1",null,null,null,"Sys-1",null,null,"Counter Application","H-1.2",null
-null,null,"HLR-2",null,null,null,"Sys-2",null,null,"Counter Application","H-1.1",null
-null,null,"HLR-3",null,null,null,"Sys-3",null,null,"Counter Application",null,null
+"givenText","generatedAtTime","thenText","invalidatedAtTime","ifText","identifier","dataInsertedById","wasGeneratedById","governsId","satisfiesId","wasAttributedToId","mitigatesId"
+null,null,null,null,null,"HLR-1",null,null,"Counter Application","Sys-1",null,"H-1.2"
+null,null,null,null,null,"HLR-2",null,null,"Counter Application","Sys-2",null,"H-1.1"
+null,null,null,null,null,"HLR-3",null,null,"Counter Application","Sys-3",null,null
 

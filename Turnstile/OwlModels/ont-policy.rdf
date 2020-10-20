@@ -2,25 +2,12 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://jena.hpl.hp.com/schemas/2003/03/ont-manager#">
   <j.0:OntologySpec>
-    <j.0:publicURI rdf:resource="http://sadl.org/sadlbasemodel"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/SadlBaseModel.owl"/>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/02-Software/01-Requirements/CounterApplicationRequirementSpec.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/CounterApplicationRequirementSpec.owl"/>
     <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
     <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:prefix>sadlbasemodel</j.0:prefix>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:createdBy>ExternalEmfResource</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/Temp/Deductions.sadl.Deductions.owl"/>
-    <j.0:publicURI rdf:resource="http://Turnstile/DeductionsInferred"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/02-Software/02-Design/CounterApplicationDesignDescription.sadl</j.0:sadlSourceURL>
-    <j.0:prefix>cntrappllr</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/CounterApplicationDesignDescription.owl"/>
-    <j.0:publicURI rdf:resource="http://Turnstile/CounterApplicationDesignDescription"/>
+    <j.0:prefix>cntrapprq</j.0:prefix>
+    <j.0:publicURI rdf:resource="http://Turnstile/CounterApplicationRequirementSpec"/>
   </j.0:OntologySpec>
   <j.0:OntologySpec>
     <j.0:sadlSourceURL>platform:/resource/Turnstile/01-System/TurnstilesSystemDesign.sadl</j.0:sadlSourceURL>
@@ -31,26 +18,130 @@
     <j.0:publicURI rdf:resource="http://Turnstile/TurnstileDesign"/>
   </j.0:OntologySpec>
   <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/02-Software/01-Requirements/CounterApplicationRequirementSpec.sadl</j.0:sadlSourceURL>
-    <j.0:prefix>cntrapprq</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:publicURI rdf:resource="http://Turnstile/CounterApplication"/>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/CounterApplication.owl"/>
     <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/CounterApplicationRequirementSpec.owl"/>
-    <j.0:publicURI rdf:resource="http://Turnstile/CounterApplicationRequirementSpec"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>trnstlsys</j.0:prefix>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/02-Software/03-Implementation/CounterApplication.sadl</j.0:sadlSourceURL>
   </j.0:OntologySpec>
   <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/00-Planning/DevelopmentPlan.sadl</j.0:sadlSourceURL>
+    <j.0:prefix>sadllistmodel</j.0:prefix>
     <j.0:createdBy>SADL</j.0:createdBy>
     <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/DevelopmentPlan.owl"/>
-    <j.0:publicURI rdf:resource="http://Turnstile/DevelopmentPlan"/>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/SadlListModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadllistmodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix>sadlbasemodel</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/SadlBaseModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlbasemodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/99-Utils/Deductions.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/Deductions.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:publicURI rdf:resource="http://Turnstile/Deductions"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:publicURI rdf:resource="http://Turnstile/DeductionsInferred"/>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/Temp/Deductions.sadl.Deductions.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>ExternalEmfResource</j.0:createdBy>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/03-Verification/02-ApplicationTesting/CounterApplicationTesting.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/CounterApplicationTesting.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>cntrapptst</j.0:prefix>
+    <j.0:publicURI rdf:resource="http://Turnstile/CounterApplicationTesting"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/03-Verification/03-UnitTesting/CounterApplicationUnitTesting.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/CounterApplicationUnitTesting.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>cntrapputst</j.0:prefix>
+    <j.0:publicURI rdf:resource="http://Turnstile/CounterApplicationSoftwareUnitTesting"/>
   </j.0:OntologySpec>
   <j.0:OntologySpec>
     <j.0:sadlSourceURL>platform:/resource/Turnstile/99-Utils/CreateQueryStrings.sadl</j.0:sadlSourceURL>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
     <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/CreateQueryStrings.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
     <j.0:publicURI rdf:resource="http://Turnstile/CreateQueryStrings"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/SadlImplicitModel.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>sadlimplicitmodel</j.0:prefix>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/ImplicitModel/SadlImplicitModel.sadl</j.0:sadlSourceURL>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/99-Utils/PropertyDefinitionInference.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/PropertyDefinitionInference.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:publicURI rdf:resource="http://Turnstile/PropertyDefinitionInference"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/99-Utils/TestQueries.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/TestQueries.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:publicURI rdf:resource="http://Turnstile/TestQueries"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/99-Utils/RdfsSubset.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/RdfsSubset.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>rdfs</j.0:prefix>
+    <j.0:publicURI rdf:resource="http://www.w3.org/2000/01/rdf-schema"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/00-Planning/DevelopmentPlan.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/DevelopmentPlan.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:publicURI rdf:resource="http://Turnstile/DevelopmentPlan"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/ImplicitModel/SadlBuiltinFunctions.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/SadlBuiltinFunctions.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>builtinfunctions</j.0:prefix>
+    <j.0:publicURI rdf:resource="http://sadl.org/builtinfunctions"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/01-System/HazardAssessment.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/HazardAssessment.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>ha</j.0:prefix>
+    <j.0:publicURI rdf:resource="http://Turnstile/HazardAssessment"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/02-Software/02-Design/CounterApplicationDesignDescription.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/CounterApplicationDesignDescription.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>cntrappllr</j.0:prefix>
+    <j.0:publicURI rdf:resource="http://Turnstile/CounterApplicationDesignDescription"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/Turnstile/99-Utils/All.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/All.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:publicURI rdf:resource="http://Turnstile/All"/>
   </j.0:OntologySpec>
   <j.0:OntologySpec>
     <j.0:sadlSourceURL>platform:/resource/Turnstile/99-Utils/RunQueryString.sadl</j.0:sadlSourceURL>
@@ -60,101 +151,10 @@
     <j.0:publicURI rdf:resource="http://Turnstile/RunQueries"/>
   </j.0:OntologySpec>
   <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/ImplicitModel/SadlImplicitModel.sadl</j.0:sadlSourceURL>
-    <j.0:prefix>sadlimplicitmodel</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/SadlImplicitModel.owl"/>
-    <j.0:publicURI rdf:resource="http://sadl.org/sadlimplicitmodel"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/99-Utils/Deductions.sadl</j.0:sadlSourceURL>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/Deductions.owl"/>
-    <j.0:publicURI rdf:resource="http://Turnstile/Deductions"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/99-Utils/RdfsSubset.sadl</j.0:sadlSourceURL>
-    <j.0:prefix>rdfs</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/RdfsSubset.owl"/>
-    <j.0:publicURI rdf:resource="http://www.w3.org/2000/01/rdf-schema"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/02-Software/03-Implementation/CounterApplication.sadl</j.0:sadlSourceURL>
-    <j.0:prefix>trnstlsys</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/CounterApplication.owl"/>
-    <j.0:publicURI rdf:resource="http://Turnstile/CounterApplication"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/ImplicitModel/SadlBuiltinFunctions.sadl</j.0:sadlSourceURL>
-    <j.0:prefix>builtinfunctions</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/SadlBuiltinFunctions.owl"/>
-    <j.0:publicURI rdf:resource="http://sadl.org/builtinfunctions"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/03-Verification/03-UnitTesting/CounterApplicationUnitTesting.sadl</j.0:sadlSourceURL>
-    <j.0:prefix>cntrapputst</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/CounterApplicationUnitTesting.owl"/>
-    <j.0:publicURI rdf:resource="http://Turnstile/CounterApplicationSoftwareUnitTesting"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:publicURI rdf:resource="http://sadl.org/sadllistmodel"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/SadlListModel.owl"/>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:prefix>sadllistmodel</j.0:prefix>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/99-Utils/All.sadl</j.0:sadlSourceURL>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/All.owl"/>
-    <j.0:publicURI rdf:resource="http://Turnstile/All"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/99-Utils/TestQueries.sadl</j.0:sadlSourceURL>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/TestQueries.owl"/>
-    <j.0:publicURI rdf:resource="http://Turnstile/TestQueries"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
     <j.0:sadlSourceURL>platform:/resource/Turnstile/03-Verification/01-Reviews/CounterApplicationReviews.sadl</j.0:sadlSourceURL>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
     <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/CounterApplicationReviews.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
     <j.0:publicURI rdf:resource="http://Turnstile/CounterApplicationReviews"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/99-Utils/PropertyDefinitionInference.sadl</j.0:sadlSourceURL>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/PropertyDefinitionInference.owl"/>
-    <j.0:publicURI rdf:resource="http://Turnstile/PropertyDefinitionInference"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/01-System/HazardAssessment.sadl</j.0:sadlSourceURL>
-    <j.0:prefix>ha</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/HazardAssessment.owl"/>
-    <j.0:publicURI rdf:resource="http://Turnstile/HazardAssessment"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Turnstile/03-Verification/02-ApplicationTesting/CounterApplicationTesting.sadl</j.0:sadlSourceURL>
-    <j.0:prefix>cntrapptst</j.0:prefix>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:altURL rdf:resource="file:/home/ubuntu/RACK/Turnstile/OwlModels/CounterApplicationTesting.owl"/>
-    <j.0:publicURI rdf:resource="http://Turnstile/CounterApplicationTesting"/>
   </j.0:OntologySpec>
 </rdf:RDF>

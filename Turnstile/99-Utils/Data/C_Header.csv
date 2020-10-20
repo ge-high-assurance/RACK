@@ -1,17 +1,15 @@
-"filename","identifier","generatedAtTime","invalidatedAtTime","fileFormat","createBy","wasAttributedToId","satisfiesId","dataInsertedById"
-"counter.h","counter_h",null,null,"CSourceFile",null,null,"EXE-LLR-1","ACTIVITY-Turnstile software data mockup"
-"counter.h","counter_h",null,null,"CSourceFile",null,null,"EXE-LLR-2","ACTIVITY-Turnstile software data mockup"
-"counter.h","counter_h",null,null,"CSourceFile",null,null,"EXE-LLR-3","ACTIVITY-Turnstile software data mockup"
-"hw.h","hw_h",null,null,"CSourceFile",null,null,"IN-LLR-1","ACTIVITY-Turnstile software data mockup"
-"hw.h","hw_h",null,null,"CSourceFile",null,null,"IN-LLR-2","ACTIVITY-Turnstile software data mockup"
-"hw.h","hw_h",null,null,"CSourceFile",null,null,"IN-LLR-3","ACTIVITY-Turnstile software data mockup"
-"hw.h","hw_h",null,null,"CSourceFile",null,null,"IN-LLR-4","ACTIVITY-Turnstile software data mockup"
-"hw.h","hw_h",null,null,"CSourceFile",null,null,"IN-LLR-5","ACTIVITY-Turnstile software data mockup"
-"hw.h","hw_h",null,null,"CSourceFile",null,null,"IN-LLR-6","ACTIVITY-Turnstile software data mockup"
-"input.h","input_h",null,null,"CSourceFile",null,null,null,"ACTIVITY-Turnstile software data mockup"
-"hw.h","output_h",null,null,"CSourceFile",null,null,"OUT-LLR-1","ACTIVITY-Turnstile software data mockup"
-"hw.h","output_h",null,null,"CSourceFile",null,null,"OUT-LLR-2","ACTIVITY-Turnstile software data mockup"
-"output.h","output_h",null,null,"CSourceFile",null,null,"OUT-LLR-1","ACTIVITY-Turnstile software data mockup"
-"output.h","output_h",null,null,"CSourceFile",null,null,"OUT-LLR-2","ACTIVITY-Turnstile software data mockup"
-"test.h","test_h",null,null,"CSourceFile",null,null,null,"ACTIVITY-Turnstile software data mockup"
+"filename","fileFormat","generatedAtTime","invalidatedAtTime","identifier","createBy","satisfiesId","wasAttributedToId","dataInsertedById"
+"counter.h","CSourceFile",null,null,"counter_h","CodeSW-1","EXE-LLR-1",null,null
+"counter.h","CSourceFile",null,null,"counter_h","CodeSW-1","EXE-LLR-2",null,null
+"counter.h","CSourceFile",null,null,"counter_h","CodeSW-1","EXE-LLR-3",null,null
+"hw.h","CSourceFile",null,null,"hw_h","CodeSW-1","IN-LLR-1",null,null
+"hw.h","CSourceFile",null,null,"hw_h","CodeSW-1","IN-LLR-2",null,null
+"hw.h","CSourceFile",null,null,"hw_h","CodeSW-1","IN-LLR-3",null,null
+"hw.h","CSourceFile",null,null,"hw_h","CodeSW-1","IN-LLR-4",null,null
+"hw.h","CSourceFile",null,null,"hw_h","CodeSW-1","IN-LLR-5",null,null
+"hw.h","CSourceFile",null,null,"hw_h","CodeSW-1","IN-LLR-6",null,null
+"input.h","CSourceFile",null,null,"input_h","CodeSW-1",null,null,null
+"output.h","CSourceFile",null,null,"output_h","CodeSW-1","OUT-LLR-1",null,null
+"output.h","CSourceFile",null,null,"output_h","CodeSW-1","OUT-LLR-2",null,null
+"test.h","CSourceFile",null,null,"test_h","CodeSW-1",null,null,null
 

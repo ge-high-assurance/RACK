@@ -1,16 +1,15 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:cntrappllr="http://Turnstile/CounterApplicationDesignDescription#"
+    xmlns:j.0="http://arcos.rack/SOFTWARE#"
+    xmlns:j.1="http://arcos.rack/PROV-S#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
-    xmlns:j.0="http://arcos.rack/AGENTS#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:trnstlsys="http://Turnstile/CounterApplication#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
-    xmlns:j.1="http://Turnstile/DevelopmentPlan#"
+    xmlns:j.2="http://Turnstile/DevelopmentPlan#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
-    xmlns:cntrappllr="http://Turnstile/CounterApplicationDesignDescription#"
-    xmlns:j.2="http://arcos.rack/SOFTWARE#"
-    xmlns:j.3="http://arcos.rack/PROV-S#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://Turnstile/CounterApplication">
   <owl:Ontology rdf:about="">
@@ -21,305 +20,205 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplication.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.2:COMPONENT rdf:about="DevelopmentPlan#OutputThread">
-    <j.2:subcomponentOf rdf:resource="DevelopmentPlan#CounterApplication"/>
-    <j.3:identifier>OutputThread</j.3:identifier>
-    <j.3:dataInsertedBy>
-      <j.3:ACTIVITY rdf:ID="Mockup">
-        <j.3:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-        >2020-06-01T12:00:00-04:00</j.3:startedAtTime>
-        <j.3:wasAssociatedWith>
-          <j.0:ORGANIZATION rdf:ID="Galois">
-            <j.0:name>Galois</j.0:name>
-            <j.3:identifier>AGENT-Galois</j.3:identifier>
-          </j.0:ORGANIZATION>
-        </j.3:wasAssociatedWith>
-        <j.3:identifier>ACTIVITY-Turnstile software data mockup</j.3:identifier>
-      </j.3:ACTIVITY>
-    </j.3:dataInsertedBy>
-  </j.2:COMPONENT>
-  <j.2:FORMAT rdf:ID="ZipFile">
-    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-    <j.3:identifier>FORMAT-ZipFile</j.3:identifier>
-    <rdfs:comment xml:lang="en">Compressed file archive</rdfs:comment>
-  </j.2:FORMAT>
-  <j.2:FILE rdf:ID="dist_tar">
-    <j.2:fileFormat>
-      <j.2:FORMAT rdf:ID="TarFile">
-        <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.3:identifier>FORMAT-TarFile</j.3:identifier>
-        <rdfs:comment xml:lang="en">File archive</rdfs:comment>
-      </j.2:FORMAT>
-    </j.2:fileFormat>
-    <j.3:wasGeneratedBy>
-      <j.2:PACKAGE rdf:ID="tarPackaging">
-        <j.2:packageInput>
-          <j.2:FILE rdf:ID="counter_exe">
-            <j.2:fileFormat>
-              <j.2:FORMAT rdf:ID="ElfFile">
-                <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                <j.3:identifier>FORMAT-ElfFile</j.3:identifier>
-                <rdfs:comment xml:lang="en">ELF object, shared-object, executable</rdfs:comment>
-              </j.2:FORMAT>
-            </j.2:fileFormat>
-            <j.2:createBy>
-              <j.1:SoftwareIntegration rdf:ID="counter_exe_Compiling">
-                <j.2:compileInput>
-                  <j.1:C_Header rdf:ID="counter_h">
-                    <j.2:satisfies rdf:resource="CounterApplicationDesignDescription#EXE-LLR-3"/>
-                    <j.2:satisfies rdf:resource="CounterApplicationDesignDescription#EXE-LLR-2"/>
-                    <j.2:satisfies rdf:resource="CounterApplicationDesignDescription#EXE-LLR-1"/>
-                    <j.2:fileFormat>
-                      <j.2:FORMAT rdf:ID="CSourceFile">
-                        <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                        <j.3:identifier>FORMAT-CSourceFile</j.3:identifier>
-                        <rdfs:comment xml:lang="en">A C language source file</rdfs:comment>
-                      </j.2:FORMAT>
-                    </j.2:fileFormat>
-                    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                    <j.2:filename>counter.h</j.2:filename>
-                    <j.3:identifier>counter_h</j.3:identifier>
-                  </j.1:C_Header>
-                </j.2:compileInput>
-                <j.2:compileInput>
-                  <j.1:C_Code rdf:ID="counter_c">
-                    <j.2:fileFormat rdf:resource="#CSourceFile"/>
-                    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                    <j.2:filename>counter.c</j.2:filename>
-                    <j.3:identifier>counter_c</j.3:identifier>
-                  </j.1:C_Code>
-                </j.2:compileInput>
-                <j.2:compileInput>
-                  <j.2:FILE rdf:ID="libhw_so">
-                    <j.2:fileFormat rdf:resource="#ElfFile"/>
-                    <j.2:createBy>
-                      <j.1:SoftwareIntegration rdf:ID="libhw_so_Compiling">
-                        <j.2:compileInput>
-                          <j.2:FILE rdf:ID="hw_o">
-                            <j.2:fileFormat rdf:resource="#ElfFile"/>
-                            <j.2:createBy>
-                              <j.2:COMPILE rdf:ID="hw_o_Compiling">
-                                <j.2:compileInput>
-                                  <j.1:C_Header rdf:ID="hw_h">
-                                    <j.2:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-5"/>
-                                    <j.2:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-6"/>
-                                    <j.2:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-3"/>
-                                    <j.2:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-1"/>
-                                    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                                    <j.2:filename>hw.h</j.2:filename>
-                                    <j.2:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-4"/>
-                                    <j.3:identifier>hw_h</j.3:identifier>
-                                    <j.2:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-2"/>
-                                    <j.2:fileFormat rdf:resource="#CSourceFile"/>
-                                  </j.1:C_Header>
-                                </j.2:compileInput>
-                                <j.2:compileInput>
-                                  <j.1:C_Code rdf:ID="hw_c">
-                                    <j.2:fileFormat rdf:resource="#CSourceFile"/>
-                                    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                                    <j.2:filename>hw.c</j.2:filename>
-                                    <j.3:identifier>hw_c</j.3:identifier>
-                                  </j.1:C_Code>
-                                </j.2:compileInput>
-                                <j.2:compiledBy rdf:resource="DevelopmentPlan#GCC"/>
-                                <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                                <j.3:identifier>hw_o_Compiling</j.3:identifier>
-                              </j.2:COMPILE>
-                            </j.2:createBy>
-                            <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                            <j.2:filename>hw.o</j.2:filename>
-                            <j.3:identifier>hw_o</j.3:identifier>
-                          </j.2:FILE>
-                        </j.2:compileInput>
-                        <j.2:compiledBy rdf:resource="DevelopmentPlan#GCC"/>
-                        <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                        <j.3:identifier>libhw_so_Compiling</j.3:identifier>
-                      </j.1:SoftwareIntegration>
-                    </j.2:createBy>
-                    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                    <j.2:filename>libhw.so</j.2:filename>
-                    <j.3:identifier>libhw_so</j.3:identifier>
-                  </j.2:FILE>
-                </j.2:compileInput>
-                <j.2:compileInput>
-                  <j.2:FILE rdf:ID="output_o">
-                    <j.2:fileFormat rdf:resource="#ElfFile"/>
-                    <j.2:createBy>
-                      <j.1:SoftwareIntegration rdf:ID="output_o_Compiling">
-                        <j.3:hasAttribute>
-                          <j.3:ATTRIBUTE>
-                            <j.3:fieldValue>/path/to/libraries</j.3:fieldValue>
-                            <j.3:field>
-                              <j.3:FIELD rdf:ID="LinkerPath"/>
-                            </j.3:field>
-                          </j.3:ATTRIBUTE>
-                        </j.3:hasAttribute>
-                        <j.3:hasAttribute>
-                          <j.3:ATTRIBUTE>
-                            <j.3:fieldValue>yes</j.3:fieldValue>
-                            <j.3:field>
-                              <j.3:FIELD rdf:ID="CompileWithOptimizations"/>
-                            </j.3:field>
-                          </j.3:ATTRIBUTE>
-                        </j.3:hasAttribute>
-                        <j.2:compiledBy rdf:resource="DevelopmentPlan#GCC"/>
-                        <j.2:compileInput>
-                          <j.1:C_Header rdf:ID="output_h">
-                            <j.2:satisfies rdf:resource="CounterApplicationDesignDescription#OUT-LLR-2"/>
-                            <j.2:satisfies rdf:resource="CounterApplicationDesignDescription#OUT-LLR-1"/>
-                            <j.2:filename>hw.h</j.2:filename>
-                            <j.2:fileFormat rdf:resource="#CSourceFile"/>
-                            <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                            <j.2:filename>output.h</j.2:filename>
-                            <j.3:identifier>output_h</j.3:identifier>
-                          </j.1:C_Header>
-                        </j.2:compileInput>
-                        <j.2:compileInput>
-                          <j.1:C_Code rdf:ID="output_c">
-                            <j.2:fileFormat rdf:resource="#CSourceFile"/>
-                            <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                            <j.2:filename>output.c</j.2:filename>
-                            <j.3:identifier>output_c</j.3:identifier>
-                          </j.1:C_Code>
-                        </j.2:compileInput>
-                        <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                        <j.3:identifier>output_o_Compiling</j.3:identifier>
-                      </j.1:SoftwareIntegration>
-                    </j.2:createBy>
-                    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                    <j.2:filename>output.o</j.2:filename>
-                    <j.3:identifier>output_o</j.3:identifier>
-                  </j.2:FILE>
-                </j.2:compileInput>
-                <j.2:compileInput>
-                  <j.2:FILE rdf:ID="input_o">
-                    <j.2:fileFormat rdf:resource="#ElfFile"/>
-                    <j.2:createBy>
-                      <j.1:SoftwareIntegration rdf:ID="input_o_Compiling">
-                        <j.2:compileInput>
-                          <j.1:C_Header rdf:ID="input_h">
-                            <j.2:fileFormat rdf:resource="#CSourceFile"/>
-                            <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                            <j.2:filename>input.h</j.2:filename>
-                            <j.3:identifier>input_h</j.3:identifier>
-                          </j.1:C_Header>
-                        </j.2:compileInput>
-                        <j.2:compileInput>
-                          <j.1:C_Code rdf:ID="input_c">
-                            <j.2:fileFormat rdf:resource="#CSourceFile"/>
-                            <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                            <j.2:filename>input.c</j.2:filename>
-                            <j.3:identifier>input_c</j.3:identifier>
-                          </j.1:C_Code>
-                        </j.2:compileInput>
-                        <j.2:compiledBy rdf:resource="DevelopmentPlan#GCC"/>
-                        <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                        <j.3:identifier>input_o_Compiling</j.3:identifier>
-                      </j.1:SoftwareIntegration>
-                    </j.2:createBy>
-                    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                    <j.2:filename>input.o</j.2:filename>
-                    <j.3:identifier>input_o</j.3:identifier>
-                  </j.2:FILE>
-                </j.2:compileInput>
-                <j.2:compiledBy rdf:resource="DevelopmentPlan#GCC"/>
-                <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                <j.3:identifier>counter_exe_Compiling</j.3:identifier>
-              </j.1:SoftwareIntegration>
-            </j.2:createBy>
-            <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-            <j.2:filename>counter.exe</j.2:filename>
-            <j.3:identifier>counter_exe</j.3:identifier>
-          </j.2:FILE>
-        </j.2:packageInput>
-        <j.2:packageInput rdf:resource="#libhw_so"/>
-        <j.2:packageInput>
-          <j.2:FILE rdf:ID="conf_json">
-            <j.2:fileFormat>
-              <j.2:FORMAT rdf:ID="JsonFile">
-                <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-                <j.3:identifier>FORMAT-JsonFile</j.3:identifier>
-                <rdfs:comment xml:lang="en">JSON data</rdfs:comment>
-              </j.2:FORMAT>
-            </j.2:fileFormat>
-            <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-            <j.2:filename>conf.json</j.2:filename>
-            <j.3:identifier>conf_json</j.3:identifier>
-          </j.2:FILE>
-        </j.2:packageInput>
-        <j.2:packagedBy>
-          <j.2:FILE rdf:ID="tar">
-            <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-            <j.2:fileFormat rdf:resource="#ElfFile"/>
-            <j.2:filename>tar</j.2:filename>
-            <j.3:identifier>tar</j.3:identifier>
-          </j.2:FILE>
-        </j.2:packagedBy>
-        <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.3:identifier>tarPackaging</j.3:identifier>
-      </j.2:PACKAGE>
-    </j.3:wasGeneratedBy>
-    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-    <j.2:filename>dist.tar</j.2:filename>
-    <j.3:identifier>dist_tar</j.3:identifier>
-  </j.2:FILE>
-  <j.2:COMPONENT rdf:about="DevelopmentPlan#ExecutiveThread">
-    <j.2:subcomponentOf rdf:resource="DevelopmentPlan#CounterApplication"/>
-    <j.3:identifier>ExecutiveThread</j.3:identifier>
-    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-  </j.2:COMPONENT>
-  <j.2:COMPONENT rdf:ID="main_function">
-    <j.2:definedIn rdf:resource="#counter_c"/>
-    <j.2:controlFlowsToUnconditionally>
-      <j.2:COMPONENT rdf:ID="output_function">
-        <j.2:definedIn rdf:resource="#output_c"/>
-        <j.2:valueType>void()</j.2:valueType>
-        <j.2:name>output</j.2:name>
-        <j.2:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-        <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.3:identifier>output_function</j.3:identifier>
-      </j.2:COMPONENT>
-    </j.2:controlFlowsToUnconditionally>
-    <j.2:controlFlowsToUnconditionally>
-      <j.2:COMPONENT rdf:ID="input_function">
-        <j.2:definedIn rdf:resource="#input_c"/>
-        <j.2:valueType>void()</j.2:valueType>
-        <j.2:name>input</j.2:name>
-        <j.2:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-        <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.3:identifier>input_function</j.3:identifier>
-      </j.2:COMPONENT>
-    </j.2:controlFlowsToUnconditionally>
-    <j.2:valueType>int(int argc, char* argv[])</j.2:valueType>
-    <j.2:name>main</j.2:name>
-    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-    <j.2:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-    <j.3:identifier>main_function</j.3:identifier>
-  </j.2:COMPONENT>
-  <j.2:COMPONENT rdf:about="DevelopmentPlan#InputThread">
-    <j.2:subcomponentOf rdf:resource="DevelopmentPlan#CounterApplication"/>
-    <j.3:identifier>InputThread</j.3:identifier>
-    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-  </j.2:COMPONENT>
-  <j.1:SoftwareIntegration rdf:ID="test_exe_Compiling">
-    <j.2:compileInput>
-      <j.1:C_Header rdf:ID="test_h">
-        <j.2:fileFormat rdf:resource="#CSourceFile"/>
-        <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.2:filename>test.h</j.2:filename>
-        <j.3:identifier>test_h</j.3:identifier>
-      </j.1:C_Header>
-    </j.2:compileInput>
-    <j.2:compileInput>
-      <j.1:C_Code rdf:ID="test_c">
-        <j.2:fileFormat rdf:resource="#CSourceFile"/>
-        <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.2:filename>test.c</j.2:filename>
-        <j.3:identifier>test_c</j.3:identifier>
-      </j.1:C_Code>
-    </j.2:compileInput>
-    <j.2:compiledBy rdf:resource="DevelopmentPlan#GCC"/>
-    <j.3:dataInsertedBy rdf:resource="#Mockup"/>
-    <j.3:identifier>test_exe_Compiling</j.3:identifier>
-  </j.1:SoftwareIntegration>
+  <j.0:FILE rdf:ID="dist_tar">
+    <j.0:fileFormat rdf:resource="DevelopmentPlan#TarFile"/>
+    <j.1:wasGeneratedBy>
+      <j.0:PACKAGE rdf:ID="tarPackaging">
+        <j.0:packageInput>
+          <j.0:FILE rdf:ID="counter_exe">
+            <j.0:fileFormat rdf:resource="DevelopmentPlan#ElfFile"/>
+            <j.0:createBy>
+              <j.2:SoftwareIntegration rdf:ID="counter_exe_Compiling">
+                <j.0:compileInput>
+                  <j.2:C_Header rdf:ID="counter_h">
+                    <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#EXE-LLR-3"/>
+                    <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#EXE-LLR-2"/>
+                    <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#EXE-LLR-1"/>
+                    <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                    <j.0:createBy>
+                      <j.2:SoftwareCoding rdf:ID="CodeSW-1">
+                        <j.0:author rdf:resource="CounterApplicationDesignDescription#JaneDoe"/>
+                        <j.1:identifier>CodeSW-1</j.1:identifier>
+                      </j.2:SoftwareCoding>
+                    </j.0:createBy>
+                    <j.0:filename>counter.h</j.0:filename>
+                    <j.1:identifier>counter_h</j.1:identifier>
+                  </j.2:C_Header>
+                </j.0:compileInput>
+                <j.0:compileInput>
+                  <j.2:C_Code rdf:ID="counter_c">
+                    <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                    <j.0:createBy rdf:resource="#CodeSW-1"/>
+                    <j.0:filename>counter.c</j.0:filename>
+                    <j.1:identifier>counter_c</j.1:identifier>
+                  </j.2:C_Code>
+                </j.0:compileInput>
+                <j.0:compileInput>
+                  <j.0:FILE rdf:ID="libhw_so">
+                    <j.0:fileFormat rdf:resource="DevelopmentPlan#ElfFile"/>
+                    <j.0:createBy>
+                      <j.2:SoftwareIntegration rdf:ID="libhw_so_Compiling">
+                        <j.0:compileInput>
+                          <j.0:FILE rdf:ID="hw_o">
+                            <j.0:fileFormat rdf:resource="DevelopmentPlan#ElfFile"/>
+                            <j.0:createBy>
+                              <j.0:COMPILE rdf:ID="hw_o_Compiling">
+                                <j.0:compileInput>
+                                  <j.2:C_Header rdf:ID="hw_h">
+                                    <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-5"/>
+                                    <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-6"/>
+                                    <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-3"/>
+                                    <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-1"/>
+                                    <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                                    <j.0:createBy rdf:resource="#CodeSW-1"/>
+                                    <j.0:filename>hw.h</j.0:filename>
+                                    <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-4"/>
+                                    <j.1:identifier>hw_h</j.1:identifier>
+                                    <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-2"/>
+                                  </j.2:C_Header>
+                                </j.0:compileInput>
+                                <j.0:compileInput>
+                                  <j.2:C_Code rdf:ID="hw_c">
+                                    <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                                    <j.0:createBy rdf:resource="#CodeSW-1"/>
+                                    <j.0:filename>hw.c</j.0:filename>
+                                    <j.1:identifier>hw_c</j.1:identifier>
+                                  </j.2:C_Code>
+                                </j.0:compileInput>
+                                <j.0:performedBy rdf:resource="DevelopmentPlan#GCC"/>
+                                <j.1:identifier>hw_o_Compiling</j.1:identifier>
+                              </j.0:COMPILE>
+                            </j.0:createBy>
+                            <j.0:filename>hw.o</j.0:filename>
+                            <j.1:identifier>hw_o</j.1:identifier>
+                          </j.0:FILE>
+                        </j.0:compileInput>
+                        <j.0:compiledBy rdf:resource="DevelopmentPlan#GCC"/>
+                        <j.1:identifier>libhw_so_Compiling</j.1:identifier>
+                      </j.2:SoftwareIntegration>
+                    </j.0:createBy>
+                    <j.0:filename>libhw.so</j.0:filename>
+                    <j.1:identifier>libhw_so</j.1:identifier>
+                  </j.0:FILE>
+                </j.0:compileInput>
+                <j.0:compileInput>
+                  <j.0:FILE rdf:ID="output_o">
+                    <j.0:fileFormat rdf:resource="DevelopmentPlan#ElfFile"/>
+                    <j.0:createBy>
+                      <j.2:SoftwareIntegration rdf:ID="output_o_Compiling">
+                        <j.1:hasAttribute>
+                          <j.1:ATTRIBUTE>
+                            <j.1:fieldValue>/path/to/libraries</j.1:fieldValue>
+                            <j.1:field>
+                              <j.1:FIELD rdf:ID="LinkerPath"/>
+                            </j.1:field>
+                          </j.1:ATTRIBUTE>
+                        </j.1:hasAttribute>
+                        <j.1:hasAttribute>
+                          <j.1:ATTRIBUTE>
+                            <j.1:fieldValue>yes</j.1:fieldValue>
+                            <j.1:field>
+                              <j.1:FIELD rdf:ID="CompileWithOptimizations"/>
+                            </j.1:field>
+                          </j.1:ATTRIBUTE>
+                        </j.1:hasAttribute>
+                        <j.0:performedBy rdf:resource="DevelopmentPlan#GCC"/>
+                        <j.0:compileInput>
+                          <j.2:C_Header rdf:ID="output_h">
+                            <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#OUT-LLR-2"/>
+                            <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#OUT-LLR-1"/>
+                            <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                            <j.0:createBy rdf:resource="#CodeSW-1"/>
+                            <j.0:filename>output.h</j.0:filename>
+                            <j.1:identifier>output_h</j.1:identifier>
+                          </j.2:C_Header>
+                        </j.0:compileInput>
+                        <j.0:compileInput>
+                          <j.2:C_Code rdf:ID="output_c">
+                            <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                            <j.0:createBy rdf:resource="#CodeSW-1"/>
+                            <j.0:filename>output.c</j.0:filename>
+                            <j.1:identifier>output_c</j.1:identifier>
+                          </j.2:C_Code>
+                        </j.0:compileInput>
+                        <j.1:identifier>output_o_Compiling</j.1:identifier>
+                      </j.2:SoftwareIntegration>
+                    </j.0:createBy>
+                    <j.0:filename>output.o</j.0:filename>
+                    <j.1:identifier>output_o</j.1:identifier>
+                  </j.0:FILE>
+                </j.0:compileInput>
+                <j.0:compileInput>
+                  <j.0:FILE rdf:ID="input_o">
+                    <j.0:fileFormat rdf:resource="DevelopmentPlan#ElfFile"/>
+                    <j.0:createBy>
+                      <j.2:SoftwareIntegration rdf:ID="input_o_Compiling">
+                        <j.0:compileInput>
+                          <j.2:C_Header rdf:ID="input_h">
+                            <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                            <j.0:createBy rdf:resource="#CodeSW-1"/>
+                            <j.0:filename>input.h</j.0:filename>
+                            <j.1:identifier>input_h</j.1:identifier>
+                          </j.2:C_Header>
+                        </j.0:compileInput>
+                        <j.0:compileInput>
+                          <j.2:C_Code rdf:ID="input_c">
+                            <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                            <j.0:createBy rdf:resource="#CodeSW-1"/>
+                            <j.0:filename>input.c</j.0:filename>
+                            <j.1:identifier>input_c</j.1:identifier>
+                          </j.2:C_Code>
+                        </j.0:compileInput>
+                        <j.0:performedBy rdf:resource="DevelopmentPlan#GCC"/>
+                        <j.1:identifier>input_o_Compiling</j.1:identifier>
+                      </j.2:SoftwareIntegration>
+                    </j.0:createBy>
+                    <j.0:filename>input.o</j.0:filename>
+                    <j.1:identifier>input_o</j.1:identifier>
+                  </j.0:FILE>
+                </j.0:compileInput>
+                <j.0:compiledBy rdf:resource="DevelopmentPlan#GCC"/>
+                <j.1:identifier>counter_exe_Compiling</j.1:identifier>
+              </j.2:SoftwareIntegration>
+            </j.0:createBy>
+            <j.0:filename>counter.exe</j.0:filename>
+            <j.1:identifier>counter_exe</j.1:identifier>
+          </j.0:FILE>
+        </j.0:packageInput>
+        <j.0:packageInput rdf:resource="#libhw_so"/>
+        <j.0:packageInput>
+          <j.0:FILE rdf:ID="conf_json">
+            <j.0:fileFormat rdf:resource="DevelopmentPlan#JsonFile"/>
+            <j.0:createBy rdf:resource="#CodeSW-1"/>
+            <j.0:filename>conf.json</j.0:filename>
+            <j.1:identifier>conf_json</j.1:identifier>
+          </j.0:FILE>
+        </j.0:packageInput>
+        <j.0:performedBy rdf:resource="DevelopmentPlan#TAR"/>
+        <j.1:identifier>tarPackaging</j.1:identifier>
+      </j.0:PACKAGE>
+    </j.1:wasGeneratedBy>
+    <j.0:filename>dist.tar</j.0:filename>
+    <j.1:identifier>dist_tar</j.1:identifier>
+  </j.0:FILE>
+  <j.2:SoftwareIntegration rdf:ID="test_exe_Compiling">
+    <j.0:compileInput>
+      <j.2:C_Header rdf:ID="test_h">
+        <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+        <j.0:createBy rdf:resource="#CodeSW-1"/>
+        <j.0:filename>test.h</j.0:filename>
+        <j.1:identifier>test_h</j.1:identifier>
+      </j.2:C_Header>
+    </j.0:compileInput>
+    <j.0:compileInput>
+      <j.2:C_Code rdf:ID="test_c">
+        <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+        <j.0:createBy rdf:resource="#CodeSW-1"/>
+        <j.0:filename>test.c</j.0:filename>
+        <j.1:identifier>test_c</j.1:identifier>
+      </j.2:C_Code>
+    </j.0:compileInput>
+    <j.0:performedBy rdf:resource="DevelopmentPlan#GCC"/>
+    <j.1:identifier>test_exe_Compiling</j.1:identifier>
+  </j.2:SoftwareIntegration>
 </rdf:RDF>

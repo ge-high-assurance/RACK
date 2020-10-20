@@ -1,7 +1,7 @@
-"generatedAtTime","invalidatedAtTime","identifier","consumedById","dataInsertedById","providedById","wasAttributedToId","wasGeneratedById"
-null,null,"counter","HLR-3",null,"HLR-1",null,null
-null,null,"counter","HLR-3",null,"HLR-2",null,null
-null,null,"counter","census",null,"HLR-3",null,null
-null,null,"inflowEvent","HLR-1",null,"inflow",null,null
-null,null,"outflowEvent","HLR-2",null,"outflow",null,null
+"generatedAtTime","invalidatedAtTime","identifier","wasAttributedToId","consumedById","dataInsertedById","wasGeneratedById","providedById"
+null,null,"counter",null,"HLR-3",null,null,"HLR-1"
+null,null,"counter",null,"HLR-3",null,null,"HLR-2"
+null,null,"counter",null,"census",null,null,"HLR-3"
+null,null,"inflowEvent",null,"HLR-1",null,null,"inflow"
+null,null,"outflowEvent",null,"HLR-2",null,null,"outflow"
 

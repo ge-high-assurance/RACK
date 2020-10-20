@@ -513,10 +513,28 @@
         <j.3:content>
           <j.1:SECTION rdf:ID="_03-SoftwareDevelopmentEnvironment">
             <j.3:content>
+              <j.2:FORMAT rdf:ID="ZipFile"/>
+            </j.3:content>
+            <j.3:content>
+              <j.2:FORMAT rdf:ID="TarFile"/>
+            </j.3:content>
+            <j.3:content>
+              <j.0:TOOL rdf:ID="TAR"/>
+            </j.3:content>
+            <j.3:content>
+              <j.2:FORMAT rdf:ID="JsonFile"/>
+            </j.3:content>
+            <j.3:content>
               <j.0:ORGANIZATION rdf:ID="General_Electric"/>
             </j.3:content>
             <j.3:content>
-              <j.2:FILE rdf:ID="GCC"/>
+              <j.0:TOOL rdf:ID="GCC"/>
+            </j.3:content>
+            <j.3:content>
+              <j.2:FORMAT rdf:ID="ElfFile"/>
+            </j.3:content>
+            <j.3:content>
+              <j.2:FORMAT rdf:ID="CSourceFile"/>
             </j.3:content>
           </j.1:SECTION>
         </j.3:content>

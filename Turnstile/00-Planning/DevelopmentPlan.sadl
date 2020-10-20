@@ -11,6 +11,7 @@ import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/AGENTS".
 import "http://common/DO-178C".
 
+
     //Model Location: DevelopmentPlan
 _DevelopmentPlan is a PLAN,
     has content _01-PlanForSoftwareAspectsOfCertification,
@@ -457,20 +458,50 @@ _DevelopmentPlan is a PLAN,
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment
     _03-SoftwareDevelopmentEnvironment is a SECTION,
+        has content CSourceFile,
+        has content ElfFile,
         has content GCC,
-        has content General_Electric.
+        has content General_Electric,
+        has content JsonFile,
+        has content TAR,
+        has content TarFile,
+        has content ZipFile.
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.Engineer
       Engineer is a type of PERSON.
 
 
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.CSourceFile
+      CSourceFile is a FORMAT.
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.ElfFile
+      ElfFile is a FORMAT.
+
+
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.GCC
-      GCC is a FILE.
+      GCC is a TOOL.
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.General Electric
       General_Electric is a ORGANIZATION.
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.JsonFile
+      JsonFile is a FORMAT.
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.TAR
+      TAR is a TOOL.
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.TarFile
+      TarFile is a FORMAT.
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.ZipFile
+      ZipFile is a FORMAT.
 
 
 
@@ -481,7 +512,7 @@ _DevelopmentPlan is a PLAN,
       has content _04-SoftwareAnalysis,
       has content _03-SoftwareTestExecutionProcess.
 
-
+ASSERT is a AGENT.
       //Model Location: DevelopmentPlan.04-SoftwareVerification.ControlCoupleCoverageReport
     ControlCoupleCoverageReport is a type of ANALYSIS_REPORT.
       wasGeneratedBy of ControlCoupleCoverageReport only has values of type ControlCouplingAnalysis.

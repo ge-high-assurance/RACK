@@ -111,7 +111,7 @@
             {
                 "graph": "http://rack001/data",
                 "type": "fuseki",
-                "url": "http://eic-60-182.galois.com:8080/fuseki/SemTK"
+                "url": "http://eic-60-182.galois.com:3030/RACK"
             }
         ],
         "domain": "",
@@ -120,7 +120,7 @@
             {
                 "graph": "http://rack001/model",
                 "type": "fuseki",
-                "url": "http://eic-60-182.galois.com:8080/fuseki/SemTK"
+                "url": "http://eic-60-182.galois.com:3030/RACK"
             }
         ],
         "name": "MyDB"

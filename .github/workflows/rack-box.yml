@@ -49,7 +49,7 @@ jobs:
         path: |
           RACK/rack-box/files/documentation.html
           RACK/rack-box/files/index.html
-        key: rack-doc-${{ hashFiles('RACK.wiki/*') }}
+        key: rack-doc-${{ hashFiles('RACK.wiki/*.md') }}
 
     - name: Cache SemTK distribution
       uses: actions/cache@v2

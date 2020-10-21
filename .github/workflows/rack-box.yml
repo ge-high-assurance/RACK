@@ -40,7 +40,7 @@ jobs:
       id: cache-rack-cli
       with:
         path: RACK/rack-box/files/rack.tar.gz
-        key: rack-cli-${{ hashFiles(RACK/RACK-Ontology/**) }}
+        key: rack-cli-${{ hashFiles('RACK/RACK-Ontology/**') }}
 
     - name: Cache RACK documentation
       uses: actions/cache@v2
@@ -49,7 +49,7 @@ jobs:
         path: |
           RACK/rack-box/files/documentation.html
           RACK/rack-box/files/index.html
-        key: rack-doc-${{ hashFiles(RACK.wiki/*) }}
+        key: rack-doc-${{ hashFiles('RACK.wiki/*') }}
 
     - name: Cache SemTK distribution
       uses: actions/cache@v2

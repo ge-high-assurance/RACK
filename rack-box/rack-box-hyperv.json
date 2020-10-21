@@ -1,0 +1,73 @@
+{
+  "variables": {
+    "cpus": "4",
+    "headless": "false",
+    "http_proxy": "{{env `http_proxy`}}",
+    "https_proxy": "{{env `https_proxy`}}",
+    "memory": "4096",
+    "no_proxy": "{{env `no_proxy`}}",
+    "version": "v3.0",
+    "vm_name": "rack-box-{{user `version`}}"
+  },
+
+  "builders": [
+    {
+      "type": "hyperv-iso",
+      "iso_checksum": "sha256:443511f6bf12402c12503733059269a2e10dec602916c0a75263e5d990f6bb93",
+      "iso_url": "http://releases.ubuntu.com/20.04/ubuntu-20.04.1-live-server-amd64.iso",
+
+      "disk_block_size": 1,
+      "memory": "{{user `memory`}}",
+      "vm_name": "{{user `vm_name`}}",
+      "cpus": "{{user `cpus`}}",
+      "enable_dynamic_memory": true,
+
+      "http_directory": "http",
+
+      "headless": "{{user `headless`}}",
+      "shutdown_command": "sudo shutdown -P now",
+
+      "communicator": "ssh",
+      "ssh_username": "ubuntu",
+      "ssh_password": "ubuntu",
+      "ssh_handshake_attempts": "15",
+      "ssh_timeout": "15m",
+
+      "boot_wait": "2s",
+      "boot_command": [
+        "<f6><esc><wait>",
+        "<f6><esc><wait>",
+        "<f6><esc><wait>",
+        "<f6><esc><wait>",
+        "<f6><esc><wait>",
+        "<f6><esc><wait>",
+        "<f6><esc><wait>",
+        "<f6><esc><wait>",
+        "<f6><esc><wait>",
+        "autoinstall ds=nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/",
+        "<enter><wait>"
+      ]
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "./files",
+      "destination": "/tmp"
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/install.sh",
+        "scripts/clean.sh"
+      ],
+      "environment_vars": [
+        "http_proxy={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "no_proxy={{user `no_proxy`}}"
+      ],
+      "execute_command": "{{.Vars}} sudo -E bash '{{.Path}}'"
+    }
+  ]
+}

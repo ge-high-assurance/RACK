@@ -111,7 +111,6 @@ jobs:
 
     - name: Build RACK-in-a-Box image
       run: |
-        pwd && ls -alR
         cd RACK/rack-box
         packer build -var version=dev rack-box-docker.json
 

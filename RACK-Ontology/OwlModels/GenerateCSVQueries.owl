@@ -1,0 +1,126 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:trnstlsys="http://TurnstileSystem/CounterApplication#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:genq="http://TurnstileSystem/GenerateCSVQueries#"
+    xmlns:cntrapprq="http://TurnstileSystem/CounterApplicationRequirements#"
+    xmlns:ha="http://TurnstileSystem/HazardAssessment#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:cntrappllr="http://TurnstileSystem/CounterApplicationLLR#"
+    xmlns:ingaterq="http://TurnstileSystem/InGateRequirement#"
+    xmlns:cntrapptst="http://TurnstileSystem/CounterApplicationTesting#"
+    xmlns:trnstl="http://TurnstileSystem/Turnstiles#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:cntrapputst="http://TurnstileSystem/CounterApplicationUnitTesting#"
+  xml:base="http://TurnstileSystem/GenerateCSVQueries">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="Turnstiles"/>
+    <owl:imports rdf:resource="http://www.w3.org/2000/01/rdf-schema"/>
+    <owl:imports rdf:resource="CounterApplicationUnitTesting"/>
+    <owl:imports rdf:resource="CounterApplicationLLR"/>
+    <owl:imports rdf:resource="HazardAssessment"/>
+    <owl:imports rdf:resource="InGateRequirement"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <owl:imports rdf:resource="CounterApplication"/>
+    <owl:imports rdf:resource="CounterApplicationRequirements"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'GenerateCSVQueries.sadl' and should not be directly edited.</rdfs:comment>
+    <owl:imports rdf:resource="CounterApplicationTesting"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="ClassProp">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="className"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="#className">
+    <rdfs:domain rdf:resource="#ClassProp"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="superPropName">
+    <rdfs:domain rdf:resource="#ClassProp"/>
+    <rdfs:comment xml:lang="en"> all the properties that have more specific subproperties</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="propName">
+    <rdfs:domain rdf:resource="#ClassProp"/>
+    <rdfs:comment xml:lang="en"> all the properties with className in the domain</rdfs:comment>
+  </owl:ObjectProperty>
+  <sadlimplicitmodel:NamedQuery rdf:ID="GenQueryString">
+    <rdfs:isDefinedBy> select  ?QueryStr  where { {&#xD;
+select ?Class (group_concat(distinct ?PropList; separator='} . OPTIONAL{') as ?FinalPropList) &#xD;
+              (group_concat(distinct ?HeaderList; separator=' ') as ?FinalHeaderList) where  &#xD;
+{ ?ClassProp &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://TurnstileSystem/GenerateCSVQueries#ClassProp&gt; . ?ClassProp &lt;http://TurnstileSystem/GenerateCSVQueries#className&gt; ?Class&#xD;
+  {select * where&#xD;
+  { &#xD;
+     { select distinct ?ClassProp ?Class (group_concat(distinct ?xtemp2; separator='} . OPTIONAL{') as ?PropList) &#xD;
+       (group_concat(distinct ?ytemp1; separator=' ') as ?HeaderList)where&#xD;
+       { Let (?xClassVarInt := replace(str(?Class),'http.*#','?')) 							# making a variable (e.g. ?SYSTEM)&#xD;
+         . ?ClassProp &lt;http://TurnstileSystem/GenerateCSVQueries#propName&gt; ?xPropName &#xD;
+         . FILTER(!regex(str(?xPropName), 'http://arcos.rack/PROV-S#hasAttribute')) 		# drop hasAttribute because that is a bnode and we need to sort out how to handle it&#xD;
+         . FILTER NOT EXISTS {?ClassProp &lt;http://TurnstileSystem/GenerateCSVQueries#superPropName&gt; ?xPropName}	# discard if this property should be dropped&#xD;
+         . LET (?xVarNameInt := replace(str(?xPropName),'http.*#','&gt; ?')) 					# replace initial part of property with a ? to make it a variable in query (e.g. &gt; ?producedBy)&#xD;
+         . LET (?xtemp1 := concat(str(?xPropName),str(?xVarNameInt)))						# e.g. http://arcos.rack/SYSTEM#producedBy&gt; ?producedBy&#xD;
+         . LET (?xtemp2 := concat(concat(?xClassVarInt,' &lt;'),?xtemp1))						# e.g. ?SYSTEM &lt;http://arcos.rack/SYSTEM#producedBy&gt; ?producedBy	 &#xD;
+         . ?xPropName &lt;http://www.w3.org/2000/01/rdf-schema#range&gt; ?xPropRange												# move this and next earlier&#xD;
+         . FILTER(!regex(str(?xPropRange), 'http://arcos.rack/'))&#xD;
+         . LET (?ytemp1 := replace(str(?xPropName),'http.*#','?'))&#xD;
+       } group by ?ClassProp ?Class&#xD;
+     }&#xD;
+  union &#xD;
+     {select distinct ?ClassProp ?Class (group_concat(distinct ?temp3; separator='} . OPTIONAL{') as ?PropList) &#xD;
+      (group_concat(distinct ?ztemp2; separator=' ') as ?HeaderList) where&#xD;
+        { Let (?ClassVarInt := replace(str(?Class),'http.*#','?')) 							# making a variable (e.g. ?SYSTEM)&#xD;
+          . ?ClassProp &lt;http://TurnstileSystem/GenerateCSVQueries#propName&gt; ?PropName&#xD;
+          . FILTER(!regex(str(?PropName), 'http://arcos.rack/PROV-S#hasAttribute')) 		# drop hasAttribute because that is a bnode and we need to sort out how to handle it&#xD;
+          . FILTER NOT EXISTS {?ClassProp &lt;http://TurnstileSystem/GenerateCSVQueries#superPropName&gt; ?PropName}	# discard if this property should be dropped&#xD;
+          . LET (?VarNameInt := replace(str(?PropName),'http.*#','&gt; ?')) 					# replace initial part of property with a ? to make it a variable in query (e.g. &gt; ?producedBy)&#xD;
+          . LET (?temp1 := concat(str(?PropName),str(?VarNameInt)))							# e.g. http://arcos.rack/SYSTEM#producedBy&gt; ?producedBy&#xD;
+          . LET (?temp2 := concat(concat(?ClassVarInt,' &lt;'),?temp1))						# e.g. ?SYSTEM &lt;http://arcos.rack/SYSTEM#producedBy&gt; ?producedBy 	 &#xD;
+          . ?PropName &lt;http://www.w3.org/2000/01/rdf-schema#range&gt; ?PropRange&#xD;
+          . FILTER(regex(str(?PropRange), 'http://arcos.rack/'))&#xD;
+          . LET(?q1 := replace(str(?PropName),'http.*#','?')) 								# later alter as ?VarIntName and ?q1 only differ by a prefix&#xD;
+          . LET(?getId1 := concat(' . ',?q1)) &#xD;
+          . LET(?getId2 := concat(?getId1, ' &lt;http://arcos.rack/PROV-S#identifier&gt; '))&#xD;
+          . LET(?getId3 := concat(?getId2,?q1))&#xD;
+          . LET(?getId4 := concat(?getId3,'Id'))&#xD;
+          . LET(?temp3 := concat(?temp2, ?getId4))&#xD;
+          . LET (?ztemp1 := replace(str(?PropName),'http.*#','?'))&#xD;
+          . LET (?ztemp2 := concat(?ztemp1,'Id'))		&#xD;
+        } group by ?ClassProp ?Class&#xD;
+     }&#xD;
+} }&#xD;
+} group by ?Class}&#xD;
+# now combine column headers, properties to generate the query string&#xD;
+  . LET (?ClassType := replace(str(?Class),'http.*#',''))									# strip out; only using it to then generate eventual csv file name&#xD;
+  . LET (?ClassVar := replace(str(?Class),'http.*#','?')) 									# making a variable (e.g. ?SYSTEM)&#xD;
+  . LET (?ttt1 := 'zzzWrite: data {Ask: yyyselect ')  										# first part of query string&#xD;
+  . LET (?ttt2 := concat(?ttt1,?FinalHeaderList))&#xD;
+  . LET (?str0 := concat(?ttt2,' where {'))&#xD;
+  . LET (?str1 := concat(str(?ClassVar), ' &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;')) 									# putting together the first clause of the form ?SYSTEM &lt;rdf:type&gt; &lt;http://arcos.rack/SYSTEM#SYSTEM&gt;&#xD;
+  . LET (?str2 := concat(?str1,replace(str(?Class),'http.*#','')))&#xD;
+  . LET (?str4 := concat(?str2,'&gt; . OPTIONAL{'))&#xD;
+  . LET (?str5 := concat(?str0,?str4))														# the first clause is in along with first OPTIONAL fragment&#xD;
+  . LET (?str6 := concat(concat(?str5, ?FinalPropList),'} '))								# all the properties in the query string&#xD;
+  . LET (?str7 := concat(concat(?str6,'} order by '),str(?ClassVar)))&#xD;
+  . LET (?str8 := concat(?str7,' yyy.} to yyymodels/TurnstileSystem/Data/'))				&#xD;
+  . LET (?QueryStr := concat(?str8, concat(str(?ClassType),'.csvyyy.zzz')))					# end the query string&#xD;
+} </rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:Rule rdf:ID="TransitiveClassProp"/>
+  <sadlimplicitmodel:Rule rdf:ID="TagSuperProperties"/>
+  <sadlimplicitmodel:Rule rdf:ID="PopulateClassProp0"/>
+  <genq:ClassProp rdf:ID="THINGTemp">
+    <genq:className rdf:resource="http://arcos.rack/PROV-S#THING"/>
+  </genq:ClassProp>
+  <sadlimplicitmodel:Rule rdf:ID="GenClassPropStrThing"/>
+  <sadlimplicitmodel:Rule rdf:ID="Transitive2"/>
+  <sadlimplicitmodel:Rule rdf:ID="Transitive1"/>
+</rdf:RDF>

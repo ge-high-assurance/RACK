@@ -24,8 +24,9 @@ if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
     export DEBIAN_FRONTEND=noninteractive
     export DEBCONF_NONINTERACTIVE_SEEN=true
 
+    add-apt-repository ppa:swi-prolog/stable
     apt-get update -y
-    apt-get install -y curl default-jre gettext-base nginx-light python3 unzip
+    apt-get install -y curl default-jre gettext-base nginx-light python3 unzip swi-prolog
 
     # Install docker-systemctl-replaement
 

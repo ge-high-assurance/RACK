@@ -82,6 +82,18 @@ mv /tmp/files/{documentation.html,index.html,style.css} ${WEBAPPS}
 chown -R ${USER}.${USER} /home/${USER}
 chown -R ${USER}.${USER} ${WEBAPPS}
 
+# Wait for Fuseki to become ready
+
+echo "Waiting for Fuseki at http://localhost:3030..."
+MAX_SECS=400
+while ! curl http://localhost:3030/$/ping &>/dev/null; do
+    if [[ $SECONDS -gt $MAX_SECS ]]; then
+        echo "Error: Took longer than $MAX_SECS seconds to start Fuseki"
+        exit 1
+    fi
+    sleep 10
+done
+
 # Create the RACK dataset
 
 curl -Ss -d 'dbName=RACK' -d 'dbType=tdb' 'http://localhost:3030/$/datasets'

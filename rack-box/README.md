@@ -1,5 +1,9 @@
 # RACK-box
 
+These instructions are for manually building VM and Docker images containing a
+RACK distribution. These are normally built by the RACK CI system, and are
+published to [the corresponding Github Releases page](https://github.com/ge-high-assurance/RACK/tags).
+
 Install [Packer](https://www.packer.io/) if you don't have it.  Next,
 use it to build Docker and Virtual RACK boxes for ARCOS technical
 performers from an Ubuntu 20.04 Docker image or ISO file.
@@ -27,7 +31,8 @@ the `files` subdirectory before building:
   `apache-jena-fuseki-3.16.0.tar.gz` from
   <https://jena.apache.org/download/> and rename it)
 
-- `files/RACK.nq`: latest RACK database (see build instructions below)
+- `files/rack.tar.gz`: A binary distribution of the RACK CLI, see
+  [Build the RACK CLI](#Build-the-RACK-CLI).
 
 - `files/documentation.html`: RACK documentation (clone RACK.wiki, run
   `gwtc -t RACK-in-a-Box RACK.wiki/` using [Github Wikito
@@ -41,8 +46,7 @@ the `files` subdirectory before building:
   copy `index.html`)
 
 - `files/semtk.tar.gz`: latest SemTK distribution (download
-  `distribution-2.2.1-SNAPSHOT.tar.gz` from
-  <https://oss.sonatype.org/#nexus-search;quick~semtk> and rename it)
+  `distribution-2.2.2-SNAPSHOT.tar.gz` from <https://oss.sonatype.org/service/local/artifact/maven/content?r=snapshots&g=com.ge.research.semtk&a=distribution&v=2.2.2-SNAPSHOT&c=bin&e=tar.gz> and rename it)
 
 - `files/style.css`: stylesheet for index.html (visit
   [markdown-to-html-github-style](https://github.com/KrauseFx/markdown-to-html-github-style)
@@ -56,7 +60,7 @@ the `files` subdirectory before building:
 The CI release workflow automates downloading these files into the
 GitHub runner's RACK-box/files directory.
 
-## Build the latest RACK database
+## Build the RACK CLI
 
 The RACK team has written a RACK [command-line
 interface](https://github.com/ge-high-assurance/RACK/tree/master/RACK-Ontology/cli)
@@ -66,6 +70,10 @@ repository on your computer and run the following commands to set up
 an isolated Python virtual environment with all the dependencies
 needed to run the RACK CLI:
 
+<!--
+Note for documentation authors: These instructions should be kept in sync with
+the RACK CLI README.
+-->
 ```shell
 sudo apt update
 sudo apt install python3-pip python3-virtualenv
@@ -74,129 +82,10 @@ cd RACK/RACK-Ontology/cli
 virtualenv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
-python3 setup.py install
-```
-
-Start a RACK-in-a-Box instance running in a Docker container on your
-computer, re-enter the isolated virtual environment if you aren't
-still in it, and run setup-rack.sh to build the latest RACK database
-on the RACK box:
-
-```shell
-$ docker run -detach -p 22:22 -p 80:80 -p 12050-12092:12050-12092 interran/rack-box:v3.0
-1dd2747edeb9197b7f439172b7ef60f42aad7c1581d31996be788277545daa90
-$ cd RACK/RACK-Ontology/cli
-$ source venv/bin/activate
-(venv) $ ./setup-rack.sh
-Clearing graph
-Success Update succeeded
-Ingesting ../OwlModels/AGENTS.owl...               OK
-Ingesting ../OwlModels/ANALYSIS.owl...             OK
-Ingesting ../OwlModels/CONFIDENCE.owl...           OK
-Ingesting ../OwlModels/DOCUMENT.owl...             OK
-Ingesting ../OwlModels/HAZARD.owl...               OK
-Ingesting ../OwlModels/PROCESS.owl...              OK
-Ingesting ../OwlModels/PROV-S.owl...               OK
-Ingesting ../OwlModels/REQUIREMENTS.owl...         OK
-Ingesting ../OwlModels/REVIEW.owl...               OK
-Ingesting ../OwlModels/SACM-S.owl...               OK
-Ingesting ../OwlModels/SOFTWARE.owl...             OK
-Ingesting ../OwlModels/SYSTEM.owl...               OK
-Ingesting ../OwlModels/TESTING.owl...              OK
-Deleting ingest08 language...                      OK
-Deleting ingest09 compiler...                      OK
-Deleting ingest10 packager...                      OK
-Deleting ingest11 agent...                         OK
-Deleting ingest12 code file...                     OK
-Deleting ingest13 object file...                   OK
-Deleting ingest14 library...                       OK
-Deleting ingest15 executable...                    OK
-Deleting ingest16 config file...                   OK
-Deleting ingest17 package...                       OK
-Deleting ingest18 package file...                  OK
-Deleting ingest19 compile...                       OK
-Deleting ingest01 system...                        OK
-Deleting ingest02 interface...                     OK
-Deleting ingest03 hazard...                        OK
-Deleting ingest04 requirement...                   OK
-Deleting ingest05 data dict...                     OK
-Deleting ingest06 test...                          OK
-Deleting ingest07 test results...                  OK
-Deleting ingest08 agent...                         OK
-Deleting ingest09 package...                       OK
-Deleting ingest10 compile...                       OK
-Deleting ingest11 format...                        OK
-Deleting ingest12 file...                          OK
-Deleting ingest13 component...                     OK
-Deleting ingest14 confidence...                    OK
-Deleting query Compilation Inputs...               OK
-Deleting query Control Flow From Function...       OK
-Deleting query Files of a Given Format...          OK
-Deleting query Requirements without Tests...       OK
-Deleting query Testcase without requirement...     OK
-Deleting query System Structure...                 OK
-Deleting query Requirements with failed test result...OK
-Deleting query Requirement decomposition...        OK
-Deleting query Interface structure...              OK
-Deleting query Requirements with Tests...          OK
-Deleting query Trace Hazards to Tests...           OK
-Deleting query Trace Requirements to Tests...      OK
-Deleting query Hazard structure...                 OK
-Deleting query Terms consumedBy Requirement...     OK
-Storing nodegroups...                                       OK
-Storing nodegroups...                                       OK
-Clearing graph
-Success Update succeeded
-Loading ingest01 system...                         OK Records: 8       Failures: 0
-Loading ingest02 interface...                      OK Records: 4       Failures: 0
-Loading ingest03 hazard...                         OK Records: 4       Failures: 0
-Loading ingest04 requirement...                    OK Records: 22      Failures: 0
-Loading ingest05 data dict...                      OK Records: 29      Failures: 0
-Loading ingest06 test...                           OK Records: 8       Failures: 0
-Loading ingest07 test results...                   OK Records: 16      Failures: 0
-Loading ingest08 agent...                          OK Records: 1       Failures: 0
-Loading ingest09 package...                        OK Records: 3       Failures: 0
-Loading ingest10 compile...                        OK Records: 14      Failures: 0
-Loading ingest11 format...                         OK Records: 6       Failures: 0
-Loading ingest12 file...                           OK Records: 19      Failures: 0
-Loading ingest13 component...                      OK Records: 4       Failures: 0
-Loading ingest14 confidence...                     OK Records: 2       Failures: 0
-Ingesting ARP-4754A.owl                   OK
-Ingesting DO-178C.owl                     OK
-Ingesting DO-330.owl                      OK
-Ingesting MIL-STD-881D.owl                OK
-Ingesting MIL-STD-881D-AppxB.owl          OK
-Ingesting MIL-STD-881D-AppxD.owl          OK
-Ingesting MIL-STD-881D-AppxA.owl          OK
-Ingesting MIL-STD-881D-AppxC.owl          OK
-```
-
-Next, use the Docker Dashboard to open a CLI terminal with a shell
-inside the Docker container and run the following commands to back up
-the Fuseki triplestore to a new RACK.nq file:
-
-```shell
-# curl -Ss -d '' 'http://localhost:3030/$/backup/RACK'
-{
-  "taskId" : "1" ,
-  "requestId" : 505
-}
-# cd /etc/fuseki/backups
-# gunzip RACK*
-# mv RACK* RACK.nq
-# ls -al
-total 1288
-drwxr-xr-x 1 fuseki fuseki    4096 Aug 25 15:58 .
-drwxr-xr-x 1 fuseki fuseki    4096 Aug 21 19:56 ..
--rw-r--r-- 1 fuseki fuseki 1305526 Aug 25 15:57 RACK.nq
-```
-
-Once you have created the new RACK.nq file, copy it into the files
-subdirectory in this directory so you can build some new RACK boxes:
-
-```shell
-cd files
-docker cp <CONTAINER_NAME>:/etc/fuseki/backups/RACK.nq .
+python3 setup.py --quiet install
+find venv/bin -type f | xargs perl -p -i -e 's|${{ github.workspace }}|/home/ubuntu|g'
+cd ${{ github.workspace }}
+tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=RACK-Ontology/assist --exclude=ci --exclude=packer --exclude=rack-box --exclude=tools RACK
 ```
 
 ## Build the RACK boxes
@@ -235,6 +124,15 @@ zip rack-box-hyperv-v3.0.zip -s 1500m -r rack-box-hyperv-v3.0
 zip rack-box-virtualbox-v3.0.zip -s 1500m -r rack-box-virtualbox-v3.0
 <upload split zip files to GitHub Release page>
 ```
+
+## Release process
+
+When preparing a release, we will need to perform the following steps:
+
+1. Update version numbers in some files (see the next section).
+2. Tag the RACK wiki with the release tag name since the CI workflow will use the tag name when checking out the wiki files.
+3. Create a release in the GitHub Release page via the `Draft a new release` button, enter the release title, tag name, and description, and click `Publish`.
+4. The CI release workflow will build and attach/push the rack-box images automatically.
 
 ## Update documentation pages
 

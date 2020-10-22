@@ -24,3 +24,12 @@ docker run --detach -p 80:80 -p 12050-12092:12050-12092 interran/rack-box:v3.0
 Type "localhost" in your web browser's address bar, hit Enter, and you
 should see your RACK box's welcome page appear in your browser.  The
 welcome page will tell you some things you can do with your RACK box.
+
+---
+Copyright (c) 2020, General Electric Company, Galois, Inc.
+
+All Rights Reserved
+
+This material is based upon work supported by the Defense Advanced Research Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+
+Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the Defense Advanced Research Projects Agency (DARPA).

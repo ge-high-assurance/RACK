@@ -40,7 +40,7 @@ if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
 
 fi
 
-# Unpack the Fuseski distribution
+# Unpack the Fuseki distribution
 
 tar xfzC apache-jena-fuseki-3.16.0.tar.gz /opt
 mv /opt/apache-jena-fuseki-3.16.0 /opt/fuseki

@@ -31,7 +31,7 @@ if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
 
 fi
 
-# Unpack Fuseski, RACK, and SemTK distributions
+# Unpack Fuseki, RACK, and SemTK distributions
 
 tar xfzC fuseki.tar.gz /opt
 rm fuseki.tar.gz

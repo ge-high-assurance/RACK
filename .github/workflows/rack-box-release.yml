@@ -1,0 +1,273 @@
+# Builds rack-box images when a release is published:
+#  - Caches files needed to build rack-box images
+#  - Builds rack-box images for Docker and VirtualBox
+#  - Pushes rack-box Docker image to Docker Hub
+#  - Uploads rack-box VirtualBox image to GitHub release page
+
+name: RACK-in-a-Box release build
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  setup:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Check out RACK source
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK
+        ref: ${{ github.event.release.tag_name }}
+        token: ${{ secrets.RACK_CI_PAT }}
+        path: RACK
+
+    - name: Check out RACK wiki
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK.wiki
+        ref: ${{ github.event.release.tag_name }}
+        token: ${{ secrets.RACK_CI_PAT }}
+        path: RACK.wiki
+
+    - name: Cache Fuseki distribution
+      uses: actions/cache@v2
+      id: cache-fuseki
+      with:
+        path: RACK/rack-box/files/fuseki.tar.gz
+        key: fuseki-3.16.0
+
+    - name: Cache RACK CLI
+      uses: actions/cache@v2
+      id: cache-rack-cli
+      with:
+        path: RACK/rack-box/files/rack.tar.gz
+        key: rack-cli-${{ hashFiles('RACK/RACK-Ontology/**') }}
+
+    - name: Cache RACK documentation
+      uses: actions/cache@v2
+      id: cache-rack-doc
+      with:
+        path: |
+          RACK/rack-box/files/documentation.html
+          RACK/rack-box/files/index.html
+        key: rack-doc-${{ hashFiles('RACK.wiki/*.md') }}
+
+    - name: Cache SemTK distribution
+      uses: actions/cache@v2
+      id: cache-semtk
+      with:
+        path: RACK/rack-box/files/semtk.tar.gz
+        key: semtk-2.2.2-SNAPSHOT-v3
+
+    - name: Cache style spreadsheet
+      uses: actions/cache@v2
+      id: cache-style
+      with:
+        path: RACK/rack-box/files/style.css
+        key: style-db9e23f
+
+    - name: Cache systemctl script
+      uses: actions/cache@v2
+      id: cache-systemctl
+      with:
+        path: RACK/rack-box/files/systemctl3.py
+        key: systemctl-1.5.4260
+
+    - name: Download Fuseki distribution
+      if: steps.cache-fuseki.outputs.cache-hit != 'true'
+      run: curl -LSs https://apache.claz.org/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
+
+    - name: Package RACK CLI
+      if: steps.cache-rack-cli.outputs.cache-hit != 'true'
+      run: |
+        sudo apt-get install -y python3-virtualenv
+        cd RACK/RACK-Ontology/cli
+        virtualenv venv
+        source venv/bin/activate
+        pip3 install -r requirements.txt
+        python3 setup.py --quiet install
+        find venv/bin -type f | xargs perl -p -i -e 's|${{ github.workspace }}|/home/ubuntu|g'
+        cd ${{ github.workspace }}
+        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=RACK-Ontology/assist --exclude=ci --exclude=packer --exclude=rack-box --exclude=tools RACK
+
+    - name: Generate RACK documentation
+      if: steps.cache-rack-doc.outputs.cache-hit != 'true'
+      run: |
+        sudo npm install -g github-wikito-converter markdown-to-html
+        gwtc -t RACK-in-a-Box RACK.wiki
+        markdown -t RACK-in-a-box -s style.css RACK.wiki/Welcome.md > index.html
+        mv documentation.html index.html RACK/rack-box/files
+
+    - name: Download SemTK distribution
+      if: steps.cache-semtk.outputs.cache-hit != 'true'
+      run: curl -LSs 'https://oss.sonatype.org/service/local/artifact/maven/content?r=snapshots&g=com.ge.research.semtk&a=distribution&v=2.2.2-SNAPSHOT&c=bin&e=tar.gz' -o RACK/rack-box/files/semtk.tar.gz
+
+    - name: Download style spreadsheet
+      if: steps.cache-style.outputs.cache-hit != 'true'
+      run: curl -LSs https://github.com/KrauseFx/markdown-to-html-github-style/raw/master/style.css -o RACK/rack-box/files/style.css
+
+    - name: Download systemctl script
+      if: steps.cache-systemctl.outputs.cache-hit != 'true'
+      run: curl -LSs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4260/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
+
+  build:
+    name: build ${{ matrix.builder }} ${{ matrix.os }}
+    needs: setup
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
+
+# Unfortunately, ubuntu-latest can't run virtualbox (VT-x is not
+# available: VERR_VMK_NO_VMX) and windows-latest can't run Hyper-V
+# https://github.com/actions/virtual-environments/issues/183#issuecomment-706244929
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - builder: docker
+          os: ubuntu-20.04
+          shell: bash
+        - builder: virtualbox
+          os: macos-latest
+          shell: bash
+#        - builder: hyperv
+#          os: windows-latest
+#          shell: msys2 {0}
+
+    steps:
+    - name: Check out RACK source
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK
+        ref: ${{ github.event.release.tag_name }}
+        token: ${{ secrets.RACK_CI_PAT }}
+        path: RACK
+
+    - name: Cache Fuseki distribution
+      uses: actions/cache@v2
+      id: cache-fuseki
+      with:
+        path: RACK/rack-box/files/fuseki.tar.gz
+        key: fuseki-3.16.0
+
+    - name: Cache RACK CLI
+      uses: actions/cache@v2
+      id: cache-rack-cli
+      with:
+        path: RACK/rack-box/files/rack.tar.gz
+        key: rack-cli-${{ hashFiles('RACK/RACK-Ontology/**') }}
+
+    - name: Cache RACK documentation
+      uses: actions/cache@v2
+      id: cache-rack-doc
+      with:
+        path: |
+          RACK/rack-box/files/documentation.html
+          RACK/rack-box/files/index.html
+        key: rack-doc-${{ hashFiles('RACK.wiki/*.md') }}
+
+    - name: Cache SemTK distribution
+      uses: actions/cache@v2
+      id: cache-semtk
+      with:
+        path: RACK/rack-box/files/semtk.tar.gz
+        key: semtk-2.2.2-SNAPSHOT-v3
+
+    - name: Cache style spreadsheet
+      uses: actions/cache@v2
+      id: cache-style
+      with:
+        path: RACK/rack-box/files/style.css
+        key: style-db9e23f
+
+    - name: Cache systemctl script
+      uses: actions/cache@v2
+      id: cache-systemctl
+      with:
+        path: RACK/rack-box/files/systemctl3.py
+        key: systemctl-1.5.4260
+
+    - name: Cache Ubuntu ISO
+      if: matrix.builder != 'docker'
+      uses: actions/cache@v2
+      id: cache-ubuntu
+      with:
+        path: RACK/rack-box/packer_cache/e30b34e4d3c536763868a42bb9d5b8f14af297b8.iso
+        key: ubuntu-20.04.1
+
+# Doesn't work on windows-latest (nested virtualization is unsupported)
+    - name: Enable Hyper-V
+      if: matrix.builder == 'hyperv' && matrix.os == 'windows-latest'
+      shell: powershell
+      run: |
+        Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+        Add-WindowsFeature RSAT-Hyper-V-Tools -IncludeAllSubFeature
+
+# Doesn't work on ubuntu-20.04 (nested virtualization is unsupported)
+    - name: Install VirtualBox
+      if: matrix.builder == 'virtualbox' && matrix.os == 'ubuntu-20.04'
+      run: sudo apt-get install -y virtualbox
+
+    - name: Build RACK-in-a-Box image
+      run: |
+        b=${{ matrix.builder }}
+        v=${{ github.event.release.tag_name }}
+        cd RACK/rack-box
+        packer build -var headless=true -var version=$v rack-box-$b.json
+
+    - name: Split RACK-in-a-Box image
+      if: matrix.builder != 'docker'
+      run: |
+        b=${{ matrix.builder }}
+        v=${{ github.event.release.tag_name }}
+        cd RACK/rack-box
+        mv output-$b-iso rack-box-$b-$v
+        zip rack-box-$b-$v.zip -s 1500m -r rack-box-$b-$v
+
+    - name: Login to Docker Hub
+      if: matrix.builder == 'docker'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Push RACK-in-a-Box image to Docker Hub
+      if: matrix.builder == 'docker'
+      run: docker push interran/rack-box:${{ github.event.release.tag_name }}
+
+    - name: Upload RACK-in-a-Box split image to GitHub release (#1)
+      if: matrix.builder != 'docker'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: RACK/rack-box/rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.z01
+        asset_name: rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.z01
+        asset_content_type: application/zip
+
+    - name: Upload RACK-in-a-Box split image to GitHub release (#2)
+      if: matrix.builder != 'docker'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: RACK/rack-box/rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zip
+        asset_name: rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zip
+        asset_content_type: application/zip
+
+    - name: Upload README.md to GitHub release assets
+      if: matrix.builder != 'docker'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: RACK/rack-box/README-GitHub-Release.md
+        asset_name: README.md
+        asset_content_type: text/markdown; charset=UTF-8

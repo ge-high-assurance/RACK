@@ -1,5 +1,5 @@
-# Builds a RACK box upon each push to master:
-#  - Caches files needed to build RACK box
+# Builds a Docker image upon each push to master:
+#  - Caches files needed to build rack-box images
 #  - Builds rack-box:dev Docker image
 #  - Pushes rack-box:dev image to Docker Hub
 

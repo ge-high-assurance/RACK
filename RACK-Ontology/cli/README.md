@@ -32,7 +32,7 @@ to ensure reproducibility of results.
 ```shell
 virtualenv venv
 source venv/bin/activate
-pip install -r requirements.txt
+pip install --force -r requirements.txt
 python3 setup.py install
 ```
 

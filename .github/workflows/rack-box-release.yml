@@ -239,7 +239,7 @@ jobs:
       if: matrix.builder == 'docker'
       run: docker push interran/rack-box:${{ github.event.release.tag_name }}
 
-    - name: Upload RACK-in-a-Box split image to GitHub release (#1)
+    - name: Upload RACK-in-a-Box split image (1/3) to GitHub release assets
       if: matrix.builder != 'docker'
       uses: actions/upload-release-asset@v1
       env:
@@ -250,7 +250,18 @@ jobs:
         asset_name: rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.z01
         asset_content_type: application/zip
 
-    - name: Upload RACK-in-a-Box split image to GitHub release (#2)
+    - name: Upload RACK-in-a-Box split image (2/3) to GitHub release assets
+      if: matrix.builder != 'docker'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: RACK/rack-box/rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.z02
+        asset_name: rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.z02
+        asset_content_type: application/zip
+
+    - name: Upload RACK-in-a-Box split image (3/3) to GitHub release assets
       if: matrix.builder != 'docker'
       uses: actions/upload-release-asset@v1
       env:

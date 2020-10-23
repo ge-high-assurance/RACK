@@ -20,14 +20,16 @@ if [ "${PACKER_BUILDER_TYPE}" == "hyperv-iso" ]; then
     ln -s /usr/sbin/hv_get_dhcp_info .
     ln -s /usr/sbin/hv_get_dns_info .
 else
-    apt-get remove -y linux-cloud-tools-virtual
-    apt-get autoremove -y # remaining linux-cloud-tools packages
+    apt-get remove -yqq linux-cloud-tools-virtual
+    apt-get autoremove -yqq # remaining linux-cloud-tools packages
 fi
 
-# Upgrade all packages
+# Upgrade all packages, also install swi-prolog
 
-apt-get update
-apt-get upgrade -y
+add-apt-repository ppa:swi-prolog/stable
+apt-get update -yqq
+apt-get install -yqq swi-prolog
+apt-get upgrade -yqq
 
 # Clean apt cache and temporary files
 

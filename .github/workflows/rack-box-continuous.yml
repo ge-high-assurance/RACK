@@ -109,7 +109,7 @@ jobs:
       if: steps.cache-systemctl.outputs.cache-hit != 'true'
       run: curl -LSs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4260/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
 
-    - name: Build RACK-in-a-Box image
+    - name: Build rack-box image
       run: |
         cd RACK/rack-box
         packer build -var version=dev rack-box-docker.json
@@ -120,5 +120,5 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Push RACK-in-a-Box image to Docker Hub
+    - name: Push rack-box image to Docker Hub
       run: docker push interran/rack-box:dev

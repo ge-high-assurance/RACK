@@ -12,10 +12,10 @@ Here are very brief instructions how to run the Docker RACK box.  You will find 
 Here are very brief instructions how to run the Virtual RACK box.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Virtual-RACK-Box) in the RACK Wiki.
 
 1. Download the split VirtualBox zip files.
-2. Recombine the split VirtualBox zip files into an unsplit zip file.
-3. Unpack the unsplit zip file (creating a rack-box-virtualbox folder).
+2. Concatenate the split VirtualBox zip files together.
+3. Unzip the newly concatenated zip file.
 4. Start VirtualBox.
-5. Import the VirtualBox VM from the rack-box-virtualbox folder.
+5. Import the VirtualBox VM from the rack-box-virtualbox-v3.0 folder.
 6. Open the VM's Settings.
 7. Click on Network.
 8. Change the first network adapter from NAT to Bridged.

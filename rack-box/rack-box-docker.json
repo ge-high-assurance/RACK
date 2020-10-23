@@ -5,7 +5,7 @@
     "no_proxy": "{{env `no_proxy`}}",
     "repository": "interran/rack-box",
     "tags": "{{user `version`}}",
-    "version": "v3.0"
+    "version": "dev"
   },
 
   "builders": [

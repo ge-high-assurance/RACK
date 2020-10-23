@@ -6,7 +6,7 @@
     "https_proxy": "{{env `https_proxy`}}",
     "memory": "4096",
     "no_proxy": "{{env `no_proxy`}}",
-    "version": "v3.0",
+    "version": "dev",
     "vm_name": "rack-box-{{user `version`}}"
   },
 

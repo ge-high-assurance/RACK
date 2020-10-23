@@ -90,7 +90,7 @@ jobs:
         python3 setup.py --quiet install
         find venv/bin -type f | xargs perl -p -i -e 's|${{ github.workspace }}|/home/ubuntu|g'
         cd ${{ github.workspace }}
-        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=ci --exclude=packer --exclude=rack-box --exclude=tools RACK
+        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=rack-box --exclude=tools RACK
 
     - name: Generate RACK documentation
       if: steps.cache-rack-doc.outputs.cache-hit != 'true'

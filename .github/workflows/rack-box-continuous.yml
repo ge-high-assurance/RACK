@@ -40,7 +40,7 @@ jobs:
       id: cache-rack-cli
       with:
         path: RACK/rack-box/files/rack.tar.gz
-        key: rack-cli-${{ hashFiles('RACK/RACK-Ontology/**', 'RACK/nodegroups/**) }}
+        key: rack-cli-${{ hashFiles('RACK/RACK-Ontology/**', 'RACK/nodegroups/**') }}
 
     - name: Cache RACK documentation
       uses: actions/cache@v2

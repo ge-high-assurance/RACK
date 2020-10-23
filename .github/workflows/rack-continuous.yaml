@@ -1,12 +1,7 @@
 # Lints the RACK source
 
 name: RACK continous lint
-
-on:
-  pull_request:
-    branches: [ master ]
-  push:
-    branches: [ master ]
+on: [push]
 
 jobs:
   lint:

@@ -238,7 +238,7 @@ jobs:
         cd RACK/rack-box
         mv output-$b-iso rack-box-$b-$v
         zip -r rack-box-$b-$v.zip rack-box-$b-$v
-        split -b 1500MB -d rack-box-$b-$v.zip rack-box-$b-$v.zip
+        split -b 1500m rack-box-$b-$v.zip rack-box-$b-$v.zip
         ls -l rack-box-$b-$v.zip??
 
     - name: Upload rack-box split image (1/3) to GitHub release assets
@@ -248,7 +248,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: RACK/rack-box/rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zip00
+        asset_path: RACK/rack-box/rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zipaa
         asset_name: rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zip00
         asset_content_type: application/zip
 
@@ -259,7 +259,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: RACK/rack-box/rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zip01
+        asset_path: RACK/rack-box/rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zipab
         asset_name: rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zip01
         asset_content_type: application/zip
 
@@ -270,7 +270,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: RACK/rack-box/rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zip02
+        asset_path: RACK/rack-box/rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zipac
         asset_name: rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zip02
         asset_content_type: application/zip
 

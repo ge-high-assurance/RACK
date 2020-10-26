@@ -85,7 +85,7 @@ jobs:
         python3 setup.py --quiet install
         find venv/bin -type f | xargs perl -p -i -e 's|${{ github.workspace }}|/home/ubuntu|g'
         cd ${{ github.workspace }}
-        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=rack-box --exclude=tools RACK
+        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=rack-box --exclude=tests --exclude=tools RACK
 
     - name: Generate RACK documentation
       if: steps.cache-rack-doc.outputs.cache-hit != 'true'
@@ -111,6 +111,23 @@ jobs:
       run: |
         cd RACK/rack-box
         packer build -var version=dev rack-box-docker.json
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install RACK CLI
+      run: |
+        cd RACK/RACK-Ontology/cli
+        python3 -m pip install -r requirements.txt
+        python3 setup.py --quiet install
+
+    - name: Test rack-box image
+      run: |
+        cd RACK
+        python3 -m pip install -r tests/requirements.txt
+        pytest tests
 
     - name: Login to Docker Hub
       if: github.base_ref == 'master'

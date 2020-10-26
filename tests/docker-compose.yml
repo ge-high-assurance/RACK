@@ -1,0 +1,9 @@
+---
+version: '2'
+services:
+  rack:
+    image: "interran/rack-box:dev"
+    ports:
+      - "80:8000"
+      - "3030:3030"
+      - "12050-12092:12050-12092"

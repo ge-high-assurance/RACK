@@ -47,6 +47,13 @@ jobs:
           mypy .
 
       - shell: bash
+        name: Lint the RACK-box test suite
+        run: |
+          cd tests
+          pylint .
+          mypy .
+
+      - shell: bash
         name: Lint the ontology
         continue-on-error: true
         run: |

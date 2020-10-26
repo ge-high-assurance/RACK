@@ -5,9 +5,7 @@
 
 name: RACK-in-a-Box continous build
 
-on:
-  push:
-    branches: [ master ]
+on: [push]
 
 jobs:
   build:
@@ -119,6 +117,8 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+      if: github.base_ref == 'master'
 
     - name: Push rack-box image to Docker Hub
       run: docker push interran/rack-box:dev
+      if: github.base_ref == 'master'

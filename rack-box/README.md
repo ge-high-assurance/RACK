@@ -87,7 +87,17 @@ pip3 install -r requirements.txt
 python3 setup.py --quiet install
 find venv/bin -type f | xargs perl -p -i -e "s|$HOME|/home/ubuntu|g"
 cd $HOME
-tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=rack-box --exclude=tools RACK
+tar cfz RACK/rack-box/files/rack.tar.gz \
+  --exclude=.git \
+  --exclude=.github \
+  --exclude=.gitignore \
+  --exclude=.project \
+  --exclude=LICENSE \
+  --exclude=README.md \
+  --exclude=docs \
+  --exclude=rack-box \
+  --exclude=tools \
+  RACK
 ```
 
 The reason for the find | xargs commands is to allow the isolated

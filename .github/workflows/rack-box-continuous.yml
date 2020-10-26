@@ -70,6 +70,13 @@ jobs:
         path: RACK/rack-box/files/systemctl3.py
         key: systemctl-1.5.4260
 
+    - name: Cache RACK-in-a-Box Docker image
+      uses: actions/cache@v2
+      id: cache-rack-box-docker
+      with:
+        path: rack-box.tar
+        key: rack-box-tar-${{ hashFiles('RACK-Ontology/**', 'nodegroups/**', 'rack-box/**') }}
+
     - name: Download Fuseki distribution
       if: steps.cache-fuseki.outputs.cache-hit != 'true'
       run: curl -LSs https://apache.claz.org/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
@@ -85,7 +92,19 @@ jobs:
         python3 setup.py --quiet install
         find venv/bin -type f | xargs perl -p -i -e 's|${{ github.workspace }}|/home/ubuntu|g'
         cd ${{ github.workspace }}
-        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=rack-box --exclude=tools RACK
+        # NOTE: This must be consistent with the files hashed in cache key for
+        # this tarball.
+        tar cfz RACK/rack-box/files/rack.tar.gz \
+          --exclude=.git \
+          --exclude=.github \
+          --exclude=.gitignore \
+          --exclude=.project \
+          --exclude=LICENSE \
+          --exclude=README.md \
+          --exclude=docs \
+          --exclude=rack-box \
+          --exclude=tools \
+          RACK
 
     - name: Generate RACK documentation
       if: steps.cache-rack-doc.outputs.cache-hit != 'true'
@@ -107,10 +126,17 @@ jobs:
       if: steps.cache-systemctl.outputs.cache-hit != 'true'
       run: curl -LSs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4260/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
 
+    - name: Import rack-box image
+      if: steps.cache-rack-box-tar.outputs.cache-hit == 'true'
+      run: |
+        docker load --input rack-box.tar
+
     - name: Build rack-box image
+      if: steps.cache-rack-box-tar.outputs.cache-hit != 'true'
       run: |
         cd RACK/rack-box
         packer build -var version=dev rack-box-docker.json
+        docker save interran/rack-box:dev --output rack-box.tar
 
     - name: Login to Docker Hub
       uses: docker/login-action@v1

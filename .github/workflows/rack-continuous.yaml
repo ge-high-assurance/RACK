@@ -11,7 +11,8 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Lint shell scripts with ShellCheck
-        uses: ludeeus/action-shellcheck@master
+        # This action is composite on master which `act` can't yet handle.
+        uses: ludeeus/action-shellcheck@fcee962fee3f87888d7992ab0560232aef368e89
         env:
           SHELLCHECK_OPTS: -e SC1008
         with:

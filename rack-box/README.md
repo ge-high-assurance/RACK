@@ -37,7 +37,7 @@ subdirectory before building your rack-box images:
 - `files/rack.tar.gz`: A copy of the RACK ontology and data (clone
   this repo and run `tar cfz RACK/rack-box/files/rack.tar.gz
   --exclude=.git --exclude=.github --exclude=assist --exclude=cli
-  --exclude=rack-box --exclude=tools RACK`)
+  --exclude=rack-box --exclude=tools --exclude=tests RACK`)
 
 - `files/documentation.html`: RACK documentation (clone RACK.wiki, run
   `gwtc -t RACK-in-a-Box RACK.wiki/` using [Github Wikito
@@ -91,7 +91,7 @@ pip3 wheel --wheel-dir=wheels -r requirements.txt
 pip3 wheel --wheel-dir=wheels .
 python3 -m pip install ./wheels/*.whl
 cd $HOME
-tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/RACK-Ontology/cli/{setup-rack.sh,wheels}
+tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
 ```
 
 ## Build the rack-box images

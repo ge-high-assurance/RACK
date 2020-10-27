@@ -11,24 +11,18 @@ import "http://TurnstileSystem/Turnstiles".
 
 import "http://www.w3.org/2000/01/rdf-schema". // we just import a few properties that we need
 
-// Running this file will generate output that can then used to run queries 
-// that will generate the csv files for data ingestion, see instructions below.
+// Running this file will generate output that can then used to run queries (RunCSVQueries.sadl) 
+// that in turn will generate the csv files for data ingestion, see instructions below.
 // Note this is for TurnstileSystem but can be modified to work with any model.
-
-// For HAZARD.csv generated:
-//		In our data, the source can be another Hazard or a System; in existing CSV there are 2 columns to reflect this;
-//		as SemTK needs the type info.
-//		Currently, I have just one column for source which contains both Hazard and System.
+// HOWEVER, in what is checked in to GIT the CSV files have not been updated. 
+// We will update the CSV files after we plan for updating the associated nodegroups!
+// There are also other changes that are needed to this file - see notes below.
 
 // define a structure where the properties will be stored for a class
 ClassProp is a class, 
 	described by className with a single value of type class 
-	described by propName (note " all the properties with className in the domain") with values of type class
-	described by superPropName (note " all the properties that have more specific subproperties") with values of type class.
-
-// temporarily for testing I want to only consider SYSTEM
-//SYSTEMTemp is a ClassProp with className SYSTEM.
-//ENTITYTemp is a ClassProp with className ENTITY.
+	described by propName (note "all the properties with className in the domain") with values of type class
+	described by superPropName (note "all the properties that have more specific subproperties") with values of type class.
 
 // following 2 rules allow us to just use OWL_MEM reasoner
  Rule Transitive1 
@@ -43,6 +37,7 @@ then inst is a cls2.
 
 THINGTemp is a ClassProp with className THING.
 // I am dropping all subclasses of ATTRIBUTE, COLLECTION, FIELD (but it will generate THING.csv, ATTRIBUTE.csv, COLLECTION.csv, FIELD.csv)
+// but they get added because of the transitive rule.
 Rule GenClassPropStrThing:
 if xclass has rdfs:subClassOf THING
 and noValue(xclass,rdfs:subClassOf,ATTRIBUTE)
@@ -73,15 +68,12 @@ Rule TagSuperProperties: // identifies ancestor properties that are made more sp
        and cp2 has propName p2  								// and p2 is a property of ancestor
      then cp1 has superPropName p2.  
 
-//Ask: "select ?cn where {?x <rdf:type> <ClassProp> . ?x <className> ?cn } order by ?cn".
-//Ask: "select ?x ?z ?z2 ?d ?r where { ?x <className> ?z . ?x <propName> ?z2. ?z2 <rdfs:domain> ?d . ?z2 <rdfs:range> ?r} order by ?x ?z ?z2".    
-//Ask: "select ?z ?z2 ?d ?r where { ?x <className> ?z . ?x <superPropName> ?z2. ?z2 <rdfs:domain> ?d . ?z2 <rdfs:range> ?r} order by ?z ?z2".
-
 // use the following two
 //Ask: "select ?cn ?p where {?x <rdf:type> <ClassProp> . ?x <className> ?cn . ?x <propName> ?p} order by ?cn ?p".
 //Ask: "select ?cn ?p where {?x <rdf:type> <ClassProp> . ?x <className> ?cn . ?x <superPropName> ?p} order by ?cn ?p".
 
 // Other than issues with quotes, the following query can be used to run the queries to generate the csv files.
+// In the "Turnstile" branch, there is a python script that does the quote substitution.
 // Note the order in which the properties are generated is arbitrary.
 // Instructions for taking care of quotes is as follows
 // 			copy and paste output from running CheckCardinality.sadl into RunQueryString.sadl and edit it as follows
@@ -90,14 +82,11 @@ Rule TagSuperProperties: // identifies ancestor properties that are made more sp
 // 				and delete "zzz  
 // Keeping these instructions in this file so that we can do global replace in RunQueryString.sadl
 
-// REDOING on 10/19
 // Note a number of CSV files generated are empty (as expected)
-// Could clean the query up some more.
-// Can I add in 'newlines' in the query string - just nice to have.
 // Other notes:
 //		Order of columns need not match what we were manually generating; 'identifier' may not be the first column
-//		Ignoring hasAttribute until we figure out what we want to do with bnodes
-//		In Hazard, the sourceID is 1 column; SemTK wants it as 2 columns (see earlier comments for more details)
+//		Ignoring hasAttribute until we figure out what we want to do with bnodes.
+//		In Hazard, the sourceID is 1 column; SemTK wants it as 2 columns.
 //		Check ATTRIBUTE.csv
 //		Check COMPILE.csv : a COMPILE (like output_o_Compiling) can have multiple compileInput and multiple hasAttribute.
 //			So, after we sort out hasAttribute, there would be 4 rows of data for output_o_Compiling
@@ -162,8 +151,4 @@ select ?Class (group_concat(distinct ?PropList; separator='} . OPTIONAL{') as ?F
   . LET (?QueryStr := concat(?str8, concat(str(?ClassType),'.csvyyy.zzz')))					# end the query string
 } ".
 
-//Testing
-// properties for a specified class 
-//Ask: "select ?pn  where {?cp <rdf:type> <ClassProp> . ?cp <className> <SYSTEM> . ?cp <propName> ?pn } order by ?pn".
-//Ask: "select ?spn where {?cp <rdf:type> <ClassProp> . ?cp <className> <SYSTEM> . OPTIONAL{?cp <superPropName> ?spn} } order by ?spn".
 

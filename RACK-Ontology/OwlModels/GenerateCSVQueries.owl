@@ -47,11 +47,11 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="superPropName">
     <rdfs:domain rdf:resource="#ClassProp"/>
-    <rdfs:comment xml:lang="en"> all the properties that have more specific subproperties</rdfs:comment>
+    <rdfs:comment xml:lang="en">all the properties that have more specific subproperties</rdfs:comment>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="propName">
     <rdfs:domain rdf:resource="#ClassProp"/>
-    <rdfs:comment xml:lang="en"> all the properties with className in the domain</rdfs:comment>
+    <rdfs:comment xml:lang="en">all the properties with className in the domain</rdfs:comment>
   </owl:ObjectProperty>
   <sadlimplicitmodel:NamedQuery rdf:ID="GenQueryString">
     <rdfs:isDefinedBy> select  ?QueryStr  where { {&#xD;

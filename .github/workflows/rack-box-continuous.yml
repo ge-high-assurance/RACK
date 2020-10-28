@@ -37,8 +37,26 @@ jobs:
       uses: actions/cache@v2
       id: cache-rack-cli
       with:
+        path: RACK/rack-box/files/rack-cli.tar.gz
+        key: rack-cli-${{ hashFiles('RACK/cli/**') }}
+
+    - name: Cache RACK CLI dependencies
+      if: steps.cache-rack-cli.outputs.cache-hit != 'true'
+      uses: actions/cache@v2
+      with:
+        # This path is specific to Ubuntu
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('RACK/cli/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          ${{ runner.os }}-
+
+    - name: Cache RACK ontology and data
+      uses: actions/cache@v2
+      id: cache-rack-ontology
+      with:
         path: RACK/rack-box/files/rack.tar.gz
-        key: rack-cli-${{ hashFiles('RACK/RACK-Ontology/**', 'RACK/nodegroups/**') }}
+        key: rack-ontology-${{ hashFiles('RACK/RACK-Ontology/**', 'RACK/nodegroups/**') }}
 
     - name: Cache RACK documentation
       uses: actions/cache@v2
@@ -77,15 +95,16 @@ jobs:
     - name: Package RACK CLI
       if: steps.cache-rack-cli.outputs.cache-hit != 'true'
       run: |
-        sudo apt-get install -y python3-virtualenv
         cd RACK/cli
-        virtualenv venv
-        source venv/bin/activate
-        pip3 install -r requirements.txt
-        python3 setup.py --quiet install
-        find venv/bin -type f | xargs perl -p -i -e 's|${{ github.workspace }}|/home/ubuntu|g'
+        pip3 wheel --wheel-dir=wheels -r requirements.txt
+        pip3 wheel --wheel-dir=wheels .
         cd ${{ github.workspace }}
-        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=rack-box --exclude=tools RACK
+        tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
+
+    - name: Package RACK ontology and data
+      if: steps.cache-rack-ontology.outputs.cache-hit != 'true'
+      run: |
+        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tools RACK
 
     - name: Generate RACK documentation
       if: steps.cache-rack-doc.outputs.cache-hit != 'true'

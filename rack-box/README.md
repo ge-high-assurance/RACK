@@ -73,26 +73,19 @@ the RACK CLI, clone the RACK git repository in your home directory
 
 <!--
 Note for documentation authors: These instructions should be kept in sync with
-the RACK CLI README.
+the Github Actions workflows.
 -->
 ```shell
 sudo apt update
-sudo apt install python3-pip python3-virtualenv
+sudo apt install python3-pip
 cd $HOME
 git clone git@github.com:ge-high-assurance/RACK.git
 cd RACK/cli
-virtualenv venv
-source venv/bin/activate
-pip3 install -r requirements.txt
-python3 setup.py --quiet install
-find venv/bin -type f | xargs perl -p -i -e "s|$HOME|/home/ubuntu|g"
+pip3 wheel --wheel-dir=wheels -r requirements.txt
+pip3 wheel --wheel-dir=wheels .
 cd $HOME
-tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=rack-box --exclude=tools RACK
+tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/RACK-Ontology/cli/{setup-rack.sh,wheels}
 ```
-
-The reason for the find | xargs commands is to allow the isolated
-Python virtual environment used by the RACK CLI to be copied safely
-from your home directory to the rack-box's home directory.
 
 ## Build the rack-box images
 

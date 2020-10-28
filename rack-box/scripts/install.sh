@@ -16,7 +16,7 @@ if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
     export DEBCONF_NONINTERACTIVE_SEEN=true
 
     apt-get update -yqq
-    apt-get install -yqq curl default-jre gettext-base nano nginx-light python3 software-properties-common unzip
+    apt-get install -yqq curl default-jre gettext-base nano nginx-light python3 python3-pip software-properties-common unzip
 
     # Install docker-systemctl-replaement
 
@@ -37,6 +37,8 @@ rm fuseki.tar.gz
 mv /opt/apache-jena-fuseki-3.16.0 /opt/fuseki
 tar xfzC rack.tar.gz /home/${USER}
 rm rack.tar.gz
+tar xfzC rack-cli.tar.gz /home/${USER}
+rm rack-cli.tar.gz
 tar xfzC semtk.tar.gz /home/${USER}
 rm semtk.tar.gz
 mv ENV_OVERRIDE /home/${USER}/semtk-opensource
@@ -128,7 +130,6 @@ done
 
 # Setup the RACK dataset using the RACK CLI
 
-cd /home/${USER}/RACK/cli
-# shellcheck disable=SC1091
-source venv/bin/activate
+cd /home/${USER}/RACK/cli/
+python3 -m pip install ./wheels/*.whl
 ./setup-rack.sh

@@ -32,12 +32,20 @@
     <owl:equivalentClass>
       <owl:Class>
         <owl:oneOf rdf:parseType="Collection">
-          <D:DOC_STATUS rdf:ID="In_Development"/>
-          <D:DOC_STATUS rdf:ID="Released"/>
-          <D:DOC_STATUS rdf:ID="Withdrawn"/>
+          <D:DOC_STATUS rdf:ID="In_Development">
+            <provs:identifier>In Development</provs:identifier>
+          </D:DOC_STATUS>
+          <D:DOC_STATUS rdf:ID="Released">
+            <provs:identifier>Released</provs:identifier>
+          </D:DOC_STATUS>
+          <D:DOC_STATUS rdf:ID="Withdrawn">
+            <provs:identifier>Withdrawn</provs:identifier>
+          </D:DOC_STATUS>
         </owl:oneOf>
       </owl:Class>
     </owl:equivalentClass>
+    <rdfs:comment xml:lang="en">Life-cycle status of a document</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="REPORT">
     <rdfs:comment xml:lang="en">A REPORT describes the results of activities such as investigations, observations, assessments, or test.</rdfs:comment>

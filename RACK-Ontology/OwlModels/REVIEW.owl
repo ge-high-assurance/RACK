@@ -20,12 +20,20 @@
     <owl:equivalentClass>
       <owl:Class>
         <owl:oneOf rdf:parseType="Collection">
-          <Rv:REVIEW_STATE rdf:ID="Passed"/>
-          <Rv:REVIEW_STATE rdf:ID="ReviseWithoutReview"/>
-          <Rv:REVIEW_STATE rdf:ID="ReviseWithReview"/>
+          <Rv:REVIEW_STATE rdf:ID="Passed">
+            <provs:identifier>Passed</provs:identifier>
+          </Rv:REVIEW_STATE>
+          <Rv:REVIEW_STATE rdf:ID="ReviseWithoutReview">
+            <provs:identifier>Review Without Review</provs:identifier>
+          </Rv:REVIEW_STATE>
+          <Rv:REVIEW_STATE rdf:ID="ReviseWithReview">
+            <provs:identifier>Revise With Review</provs:identifier>
+          </Rv:REVIEW_STATE>
         </owl:oneOf>
       </owl:Class>
     </owl:equivalentClass>
+    <rdfs:comment xml:lang="en">Life-cycle status of a review log</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="REVIEW">
     <rdfs:comment xml:lang="en">Code review ACTIVITY</rdfs:comment>

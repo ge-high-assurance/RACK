@@ -1,0 +1,154 @@
+uri "http://TurnstileSystem/GenerateCSVQueries" alias genq.
+
+import "http://TurnstileSystem/CounterApplication".
+import "http://TurnstileSystem/CounterApplicationLLR".
+import "http://TurnstileSystem/CounterApplicationRequirements".
+import "http://TurnstileSystem/CounterApplicationTesting".
+import "http://TurnstileSystem/CounterApplicationUnitTesting".
+import "http://TurnstileSystem/HazardAssessment". 
+import "http://TurnstileSystem/InGateRequirement". //rename as we use InGateRequirements.sadl and in it we have InGateRequirement
+import "http://TurnstileSystem/Turnstiles".
+
+import "http://www.w3.org/2000/01/rdf-schema". // we just import a few properties that we need
+
+// Running this file will generate output that can then used to run queries (RunCSVQueries.sadl) 
+// that in turn will generate the csv files for data ingestion, see instructions below.
+// Note this is for TurnstileSystem but can be modified to work with any model.
+// HOWEVER, in what is checked in to GIT the CSV files have not been updated. 
+// We will update the CSV files after we plan for updating the associated nodegroups!
+// There are also other changes that are needed to this file - see notes below.
+
+// define a structure where the properties will be stored for a class
+ClassProp is a class, 
+	described by className with a single value of type class 
+	described by propName (note "all the properties with className in the domain") with values of type class
+	described by superPropName (note "all the properties that have more specific subproperties") with values of type class.
+
+// following 2 rules allow us to just use OWL_MEM reasoner
+ Rule Transitive1 
+ if cls1 rdfs:subClassOf cls2
+ and cls2 rdfs:subClassOf cls3
+ then cls1 rdfs:subClassOf cls3.
+ 
+ Rule Transitive2  
+if inst is a cls and 
+   cls is a type of cls2
+then inst is a cls2.
+
+THINGTemp is a ClassProp with className THING.
+// I am dropping all subclasses of ATTRIBUTE, COLLECTION, FIELD (but it will generate THING.csv, ATTRIBUTE.csv, COLLECTION.csv, FIELD.csv)
+// but they get added because of the transitive rule.
+Rule GenClassPropStrThing:
+if xclass has rdfs:subClassOf THING
+and noValue(xclass,rdfs:subClassOf,ATTRIBUTE)
+and noValue(xclass,rdfs:subClassOf,COLLECTION)
+and noValue(xclass,rdfs:subClassOf,FIELD)
+then there exists a ClassProp with className xclass.
+
+Rule PopulateClassProp0: // gets all direct properties
+	if  cp is a ClassProp and cn is className of cp 
+		and p has rdfs:domain cn 
+		and p has rdfs:range r  
+	then cp has propName p.
+
+Rule TransitiveClassProp:  // gets all properties from ancestors
+    if cp1 is a ClassProp and cp2 is a ClassProp and cp1 != cp2 // get 2 different ClassProp
+       and cn1 is className of cp1 and cn2 is className of cp2  // get their className
+       and cn1 has rdfs:subClassOf cn2 							// cn1 is a descendant of cn2
+       and p2 is a propName of cp2
+    then cp1 has propName p2.   
+
+Rule TagSuperProperties: // identifies ancestor properties that are made more specific by other properties
+    if cp1 is a ClassProp and cp2 is a ClassProp and cp1 != cp2 // get 2 different ClassProp       
+       and cn1 is className of cp1 and cn2 is className of cp2  // get their className     
+       and cn1 has rdfs:subClassOf cn2 							// cn1 is a descendant of cn2
+       and p1 is a propName of cp1 
+       and p1 has rdfs:subPropertyOf p2 						// so "p1 is a type of p2"
+       and p1 != p2
+       and cp2 has propName p2  								// and p2 is a property of ancestor
+     then cp1 has superPropName p2.  
+
+// use the following two
+//Ask: "select ?cn ?p where {?x <rdf:type> <ClassProp> . ?x <className> ?cn . ?x <propName> ?p} order by ?cn ?p".
+//Ask: "select ?cn ?p where {?x <rdf:type> <ClassProp> . ?x <className> ?cn . ?x <superPropName> ?p} order by ?cn ?p".
+
+// Other than issues with quotes, the following query can be used to run the queries to generate the csv files.
+// In the "Turnstile" branch, there is a python script that does the quote substitution.
+// Note the order in which the properties are generated is arbitrary.
+// Instructions for taking care of quotes is as follows
+// 			copy and paste output from running CheckCardinality.sadl into RunQueryString.sadl and edit it as follows
+// 				replace yyy by a "
+// 				and delete zzz"
+// 				and delete "zzz  
+// Keeping these instructions in this file so that we can do global replace in RunQueryString.sadl
+
+// Note a number of CSV files generated are empty (as expected)
+// Other notes:
+//		Order of columns need not match what we were manually generating; 'identifier' may not be the first column
+//		Ignoring hasAttribute until we figure out what we want to do with bnodes.
+//		In Hazard, the sourceID is 1 column; SemTK wants it as 2 columns.
+//		Check ATTRIBUTE.csv
+//		Check COMPILE.csv : a COMPILE (like output_o_Compiling) can have multiple compileInput and multiple hasAttribute.
+//			So, after we sort out hasAttribute, there would be 4 rows of data for output_o_Compiling
+//			is that ok wrt SemTK?
+Ask GenQueryString: " select  ?QueryStr  where { {
+select ?Class (group_concat(distinct ?PropList; separator='} . OPTIONAL{') as ?FinalPropList) 
+              (group_concat(distinct ?HeaderList; separator=' ') as ?FinalHeaderList) where  
+{ ?ClassProp <rdf:type> <ClassProp> . ?ClassProp <className> ?Class
+  {select * where
+  { 
+     { select distinct ?ClassProp ?Class (group_concat(distinct ?xtemp2; separator='} . OPTIONAL{') as ?PropList) 
+       (group_concat(distinct ?ytemp1; separator=' ') as ?HeaderList)where
+       { Let (?xClassVarInt := replace(str(?Class),'http.*#','?')) 							# making a variable (e.g. ?SYSTEM)
+         . ?ClassProp <http://TurnstileSystem/GenerateCSVQueries#propName> ?xPropName 
+         . FILTER(!regex(str(?xPropName), 'http://arcos.rack/PROV-S#hasAttribute')) 		# drop hasAttribute because that is a bnode and we need to sort out how to handle it
+         . FILTER NOT EXISTS {?ClassProp <http://TurnstileSystem/GenerateCSVQueries#superPropName> ?xPropName}	# discard if this property should be dropped
+         . LET (?xVarNameInt := replace(str(?xPropName),'http.*#','> ?')) 					# replace initial part of property with a ? to make it a variable in query (e.g. > ?producedBy)
+         . LET (?xtemp1 := concat(str(?xPropName),str(?xVarNameInt)))						# e.g. http://arcos.rack/SYSTEM#producedBy> ?producedBy
+         . LET (?xtemp2 := concat(concat(?xClassVarInt,' <'),?xtemp1))						# e.g. ?SYSTEM <http://arcos.rack/SYSTEM#producedBy> ?producedBy	 
+         . ?xPropName <rdfs:range> ?xPropRange												# move this and next earlier
+         . FILTER(!regex(str(?xPropRange), 'http://arcos.rack/'))
+         . LET (?ytemp1 := replace(str(?xPropName),'http.*#','?'))
+       } group by ?ClassProp ?Class
+     }
+  union 
+     {select distinct ?ClassProp ?Class (group_concat(distinct ?temp3; separator='} . OPTIONAL{') as ?PropList) 
+      (group_concat(distinct ?ztemp2; separator=' ') as ?HeaderList) where
+        { Let (?ClassVarInt := replace(str(?Class),'http.*#','?')) 							# making a variable (e.g. ?SYSTEM)
+          . ?ClassProp <http://TurnstileSystem/GenerateCSVQueries#propName> ?PropName
+          . FILTER(!regex(str(?PropName), 'http://arcos.rack/PROV-S#hasAttribute')) 		# drop hasAttribute because that is a bnode and we need to sort out how to handle it
+          . FILTER NOT EXISTS {?ClassProp <http://TurnstileSystem/GenerateCSVQueries#superPropName> ?PropName}	# discard if this property should be dropped
+          . LET (?VarNameInt := replace(str(?PropName),'http.*#','> ?')) 					# replace initial part of property with a ? to make it a variable in query (e.g. > ?producedBy)
+          . LET (?temp1 := concat(str(?PropName),str(?VarNameInt)))							# e.g. http://arcos.rack/SYSTEM#producedBy> ?producedBy
+          . LET (?temp2 := concat(concat(?ClassVarInt,' <'),?temp1))						# e.g. ?SYSTEM <http://arcos.rack/SYSTEM#producedBy> ?producedBy 	 
+          . ?PropName <rdfs:range> ?PropRange
+          . FILTER(regex(str(?PropRange), 'http://arcos.rack/'))
+          . LET(?q1 := replace(str(?PropName),'http.*#','?')) 								# later alter as ?VarIntName and ?q1 only differ by a prefix
+          . LET(?getId1 := concat(' . ',?q1)) 
+          . LET(?getId2 := concat(?getId1, ' <identifier> '))
+          . LET(?getId3 := concat(?getId2,?q1))
+          . LET(?getId4 := concat(?getId3,'Id'))
+          . LET(?temp3 := concat(?temp2, ?getId4))
+          . LET (?ztemp1 := replace(str(?PropName),'http.*#','?'))
+          . LET (?ztemp2 := concat(?ztemp1,'Id'))		
+        } group by ?ClassProp ?Class
+     }
+} }
+} group by ?Class}
+# now combine column headers, properties to generate the query string
+  . LET (?ClassType := replace(str(?Class),'http.*#',''))									# strip out; only using it to then generate eventual csv file name
+  . LET (?ClassVar := replace(str(?Class),'http.*#','?')) 									# making a variable (e.g. ?SYSTEM)
+  . LET (?ttt1 := 'zzzWrite: data {Ask: yyyselect ')  										# first part of query string
+  . LET (?ttt2 := concat(?ttt1,?FinalHeaderList))
+  . LET (?str0 := concat(?ttt2,' where {'))
+  . LET (?str1 := concat(str(?ClassVar), ' <rdf:type> <')) 									# putting together the first clause of the form ?SYSTEM <rdf:type> <SYSTEM>
+  . LET (?str2 := concat(?str1,replace(str(?Class),'http.*#','')))
+  . LET (?str4 := concat(?str2,'> . OPTIONAL{'))
+  . LET (?str5 := concat(?str0,?str4))														# the first clause is in along with first OPTIONAL fragment
+  . LET (?str6 := concat(concat(?str5, ?FinalPropList),'} '))								# all the properties in the query string
+  . LET (?str7 := concat(concat(?str6,'} order by '),str(?ClassVar)))
+  . LET (?str8 := concat(?str7,' yyy.} to yyymodels/TurnstileSystem/Data/'))				
+  . LET (?QueryStr := concat(?str8, concat(str(?ClassType),'.csvyyy.zzz')))					# end the query string
+} ".
+
+

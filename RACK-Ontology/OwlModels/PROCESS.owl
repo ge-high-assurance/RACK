@@ -20,9 +20,4 @@
     <rdfs:comment xml:lang="en">An OBJECTIVE identifies tasks from a process for which evidence must be provided to show that the task has been completed. </rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
-  <owl:DatatypeProperty rdf:ID="description">
-    <rdfs:comment xml:lang="en">Textual description of the OBJECTIVE</rdfs:comment>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#OBJECTIVE"/>
-  </owl:DatatypeProperty>
 </rdf:RDF>

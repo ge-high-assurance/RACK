@@ -31,7 +31,7 @@
     <j.0:dataInsertedBy>
       <j.0:ACTIVITY rdf:ID="Mockup">
         <j.0:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-        >2020-06-01T12:00:00-04:00</j.0:startedAtTime>
+        >2020-06-01T12:00:00-07:00</j.0:startedAtTime>
         <j.0:wasAssociatedWith>
           <AGENTS:ORGANIZATION rdf:ID="Galois">
             <AGENTS:name>Galois</AGENTS:name>

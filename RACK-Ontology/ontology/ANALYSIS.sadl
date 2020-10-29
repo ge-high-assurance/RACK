@@ -54,5 +54,4 @@ ANALYSIS_ANNOTATION
     (note "A result of the analysis that is linked to some specific part of the system.")
     is a type of ENTITY.
     fromReport (note "Which analysis report this annotation comes from.") describes ANALYSIS_ANNOTATION with values of type ENTITY.
-    description (note "The content of the annotation.") describes ANALYSIS_ANNOTATION with values of type string.
     annotationType (note "The type of the annotation.") describes ANALYSIS_ANNOTATION with values of type ANALYSIS_ANNOTATION_TYPE.

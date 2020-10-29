@@ -2,6 +2,7 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:provs="http://arcos.rack/PROV-S#"
     xmlns:A="http://arcos.rack/ANALYSIS#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -10,6 +11,7 @@
   xml:base="http://arcos.rack/ANALYSIS">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="PROV-S"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'ANALYSIS.sadl' and should not be directly edited.</rdfs:comment>
@@ -73,11 +75,6 @@
     <rdfs:range rdf:resource="#ANALYSIS_RESULT"/>
     <rdfs:domain rdf:resource="#ANALYSIS_REPORT"/>
   </owl:ObjectProperty>
-  <owl:DatatypeProperty rdf:ID="description">
-    <rdfs:comment xml:lang="en">The content of the annotation.</rdfs:comment>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#ANALYSIS_ANNOTATION"/>
-  </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="metric">
     <rdfs:comment xml:lang="en">provides a numerical result value from the analysis that was performed</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>

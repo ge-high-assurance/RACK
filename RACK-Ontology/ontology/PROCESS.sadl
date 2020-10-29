@@ -15,4 +15,3 @@ import "http://arcos.rack/PROV-S".
 
 
 OBJECTIVE (note "An OBJECTIVE identifies tasks from a process for which evidence must be provided to show that the task has been completed. ") is a type of ENTITY.
-	description (note "Textual description of the OBJECTIVE") describes OBJECTIVE with values of type string.

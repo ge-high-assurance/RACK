@@ -1,0 +1,60 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://jena.hpl.hp.com/schemas/2003/03/ont-manager#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <OntologySpec>
+    <prefix>sadllistmodel</prefix>
+    <createdBy>SADL</createdBy>
+    <language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <altURL rdf:resource="file:/Users/emertens/Source/arcos/RACK/GrammaTech-Ontology/OwlModels/SadlListModel.owl"/>
+    <publicURI rdf:resource="http://sadl.org/sadllistmodel"/>
+  </OntologySpec>
+  <OntologySpec>
+    <prefix>dc</prefix>
+    <language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <publicURI rdf:resource="http://purl.org/dc/elements/1.1/"/>
+    <altURL rdf:resource="http://protege.stanford.edu/plugins/owl/dc/protege-dc.owl"/>
+  </OntologySpec>
+  <OntologySpec>
+    <sadlSourceURL>platform:/resource/GrammaTech-Ontology/ImplicitModel/SadlImplicitModel.sadl</sadlSourceURL>
+    <prefix>sadlimplicitmodel</prefix>
+    <createdBy>SADL</createdBy>
+    <language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <altURL rdf:resource="file:/Users/emertens/Source/arcos/RACK/GrammaTech-Ontology/OwlModels/SadlImplicitModel.owl"/>
+    <publicURI rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+  </OntologySpec>
+  <OntologySpec>
+    <sadlSourceURL>platform:/resource/GrammaTech-Ontology/ontology/GrammaTech.sadl</sadlSourceURL>
+    <prefix>Acert</prefix>
+    <createdBy>SADL</createdBy>
+    <language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <altURL rdf:resource="file:/Users/emertens/Source/arcos/RACK/GrammaTech-Ontology/OwlModels/GrammaTech.owl"/>
+    <publicURI rdf:resource="http://arcos.acert/Overlay"/>
+  </OntologySpec>
+  <OntologySpec>
+    <prefix>sadlbasemodel</prefix>
+    <createdBy>SADL</createdBy>
+    <language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <altURL rdf:resource="file:/Users/emertens/Source/arcos/RACK/GrammaTech-Ontology/OwlModels/SadlBaseModel.owl"/>
+    <publicURI rdf:resource="http://sadl.org/sadlbasemodel"/>
+  </OntologySpec>
+  <OntologySpec>
+    <sadlSourceURL>platform:/resource/GrammaTech-Ontology/ImplicitModel/SadlBuiltinFunctions.sadl</sadlSourceURL>
+    <prefix>builtinfunctions</prefix>
+    <createdBy>SADL</createdBy>
+    <language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <altURL rdf:resource="file:/Users/emertens/Source/arcos/RACK/GrammaTech-Ontology/OwlModels/SadlBuiltinFunctions.owl"/>
+    <publicURI rdf:resource="http://sadl.org/builtinfunctions"/>
+  </OntologySpec>
+  <OntologySpec>
+    <prefix>owl</prefix>
+    <publicURI rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <language rdf:resource="http://www.w3.org/2002/07/owl"/>
+  </OntologySpec>
+  <DocumentManagerPolicy>
+    <processImports rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</processImports>
+    <cacheModels rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</cacheModels>
+  </DocumentManagerPolicy>
+</rdf:RDF>

@@ -65,7 +65,7 @@ the GitHub runner's RACK/rack-box/files directory.
 ## Build the RACK CLI
 
 The RACK team has written a RACK [command-line
-interface](https://github.com/ge-high-assurance/RACK/tree/master/RACK-Ontology/cli)
+interface](https://github.com/ge-high-assurance/RACK/tree/master/cli)
 and a setup-rack.sh script which will build the latest RACK database
 using that command-line interface.  To build a binary distribution of
 the RACK CLI, clone the RACK git repository in your home directory
@@ -80,7 +80,7 @@ sudo apt update
 sudo apt install python3-pip python3-virtualenv
 cd $HOME
 git clone git@github.com:ge-high-assurance/RACK.git
-cd RACK/RACK-Ontology/cli
+cd RACK/cli
 virtualenv venv
 source venv/bin/activate
 pip3 install -r requirements.txt

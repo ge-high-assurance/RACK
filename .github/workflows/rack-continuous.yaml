@@ -28,7 +28,7 @@ jobs:
         with:
           # This path is specific to Ubuntu
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('RACK-Ontology/cli/dev/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('cli/dev/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
             ${{ runner.os }}-
@@ -37,12 +37,12 @@ jobs:
         run: |
           pip install \
             --quiet \
-            --requirement RACK-Ontology/cli/dev/requirements.txt
+            --requirement cli/dev/requirements.txt
 
       - shell: bash
         name: Lint the RACK CLI
         run: |
-          cd RACK-Ontology/cli
+          cd cli
           pylint .
           mypy .
 
@@ -55,4 +55,4 @@ jobs:
           sudo apt-get install -qq --yes swi-prolog
 
           cd RACK-Ontology
-          ./assist/bin/check
+          ../assist/bin/check

@@ -83,7 +83,7 @@ jobs:
       if: steps.cache-rack-cli.outputs.cache-hit != 'true'
       run: |
         sudo apt-get install -y python3-virtualenv
-        cd RACK/RACK-Ontology/cli
+        cd RACK/cli
         virtualenv venv
         source venv/bin/activate
         pip3 install -r requirements.txt

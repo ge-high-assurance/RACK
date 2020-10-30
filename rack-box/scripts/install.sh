@@ -128,7 +128,7 @@ done
 
 # Setup the RACK dataset using the RACK CLI
 
-cd /home/${USER}/RACK/RACK-Ontology/cli
+cd /home/${USER}/RACK/cli
 # shellcheck disable=SC1091
 source venv/bin/activate
 ./setup-rack.sh

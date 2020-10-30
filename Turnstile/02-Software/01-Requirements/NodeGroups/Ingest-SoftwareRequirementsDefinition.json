@@ -1,0 +1,384 @@
+{
+	"version": 2,
+	"sparqlConn": {
+		"name": "RACK local fuseki",
+		"domain": "",
+		"enableOwlImports": true,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/data"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 11,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_SystemInterfaceDefinition",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"NodeName": "SystemInterfaceDefinition",
+				"fullURIName": "http://Turnstile/DevelopmentPlan#SystemInterfaceDefinition",
+				"subClassNames": [],
+				"SparqlID": "?SystemInterfaceDefinition",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_SystemRequirement",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"NodeName": "SystemRequirement",
+				"fullURIName": "http://Turnstile/DevelopmentPlan#SystemRequirement",
+				"subClassNames": [],
+				"SparqlID": "?SystemRequirement",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_RequirementStandard",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"NodeName": "SPECIFICATION",
+				"fullURIName": "http://arcos.rack/DOCUMENT#SPECIFICATION",
+				"subClassNames": [],
+				"SparqlID": "?RequirementStandard",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_Engineer",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"NodeName": "Engineer",
+				"fullURIName": "http://Turnstile/DevelopmentPlan#Engineer",
+				"subClassNames": [],
+				"SparqlID": "?Engineer",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_SoftwareRequirementsDefinition",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [
+					{
+						"SnodeSparqlIDs": [
+							"?Engineer"
+						],
+						"OptionalMinus": [
+							"1"
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"KeyName": "author",
+						"ValueType": "AGENT",
+						"UriValueType": "http://arcos.rack/PROV-S#AGENT",
+						"ConnectBy": "author",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/REQUIREMENTS#author"
+					},
+					{
+						"SnodeSparqlIDs": [
+							"?RequirementStandard"
+						],
+						"OptionalMinus": [
+							"1"
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"KeyName": "governedBy",
+						"ValueType": "ENTITY",
+						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"ConnectBy": "governedBy",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/REQUIREMENTS#governedBy"
+					},
+					{
+						"SnodeSparqlIDs": [
+							"?SystemRequirement",
+							"?SystemInterfaceDefinition"
+						],
+						"OptionalMinus": [
+							"1",
+							"1"
+						],
+						"Qualifiers": [
+							"",
+							""
+						],
+						"DeletionMarkers": [
+							false,
+							false
+						],
+						"KeyName": "used",
+						"ValueType": "ENTITY",
+						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"ConnectBy": "used",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/PROV-S#used"
+					}
+				],
+				"NodeName": "SoftwareRequirementsDefinition",
+				"fullURIName": "http://Turnstile/DevelopmentPlan#SoftwareRequirementsDefinition",
+				"subClassNames": [],
+				"SparqlID": "?SoftwareRequirementsDefinition",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			}
+		],
+		"orderBy": []
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [
+			{
+				"colId": "col_0",
+				"colName": "identifier_SystemInterfaceDefinition"
+			},
+			{
+				"colId": "col_1",
+				"colName": "identifier_SystemRequirement"
+			},
+			{
+				"colId": "col_2",
+				"colName": "identifier_RequirementStandard"
+			},
+			{
+				"colId": "col_3",
+				"colName": "identifier_Engineer"
+			},
+			{
+				"colId": "col_4",
+				"colName": "identifier_SoftwareRequirementsDefinition"
+			}
+		],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [
+			{
+				"transId": "trans_0",
+				"name": "RemoveNulls",
+				"transType": "replaceAll",
+				"arg1": "null",
+				"arg2": ""
+			}
+		],
+		"nodes": [
+			{
+				"sparqlID": "?SystemInterfaceDefinition",
+				"type": "http://Turnstile/DevelopmentPlan#SystemInterfaceDefinition",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?SystemInterfaceDefinition"
+						],
+						"mapping": [
+							{
+								"colId": "col_0",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?SystemRequirement",
+				"type": "http://Turnstile/DevelopmentPlan#SystemRequirement",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?SystemRequirement"
+						],
+						"mapping": [
+							{
+								"colId": "col_1",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?RequirementStandard",
+				"type": "http://arcos.rack/DOCUMENT#SPECIFICATION",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?RequirementStandard"
+						],
+						"mapping": [
+							{
+								"colId": "col_2",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?Engineer",
+				"type": "http://Turnstile/DevelopmentPlan#Engineer",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?Engineer"
+						],
+						"mapping": [
+							{
+								"colId": "col_3",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?SoftwareRequirementsDefinition",
+				"type": "http://Turnstile/DevelopmentPlan#SoftwareRequirementsDefinition",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?SoftwareRequirementsDefinition"
+						],
+						"mapping": [
+							{
+								"colId": "col_4",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

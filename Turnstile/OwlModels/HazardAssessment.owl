@@ -20,7 +20,7 @@
   <j.0:HAZARD rdf:ID="H-1.2">
     <j.0:source>
       <j.0:HAZARD rdf:ID="H-1">
-        <j.0:source rdf:resource="DevelopmentPlan#Turnstile"/>
+        <j.0:source rdf:resource="#Turnstile"/>
         <j.0:definition>System Crash</j.0:definition>
         <j.1:identifier>H-1</j.1:identifier>
       </j.0:HAZARD>
@@ -34,7 +34,7 @@
     <j.1:identifier>H-1.1</j.1:identifier>
   </j.0:HAZARD>
   <j.0:HAZARD rdf:ID="H-2">
-    <j.0:source rdf:resource="DevelopmentPlan#Turnstile"/>
+    <j.0:source rdf:resource="#Turnstile"/>
     <j.0:definition>Park Exceeds Capacity</j.0:definition>
     <j.1:identifier>H-2</j.1:identifier>
   </j.0:HAZARD>

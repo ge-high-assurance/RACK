@@ -1,0 +1,1 @@
+output.o: output.c

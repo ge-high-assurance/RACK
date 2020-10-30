@@ -21,12 +21,12 @@
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplication.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
   <j.0:FILE rdf:ID="dist_tar">
-    <j.0:fileFormat rdf:resource="DevelopmentPlan#TarFile"/>
+    <j.0:fileFormat rdf:resource="#TarFile"/>
     <j.1:wasGeneratedBy>
       <j.0:PACKAGE rdf:ID="tarPackaging">
         <j.0:packageInput>
           <j.0:FILE rdf:ID="counter_exe">
-            <j.0:fileFormat rdf:resource="DevelopmentPlan#ElfFile"/>
+            <j.0:fileFormat rdf:resource="#ElfFile"/>
             <j.0:createBy>
               <j.2:SoftwareIntegration rdf:ID="counter_exe_Compiling">
                 <j.0:compileInput>
@@ -34,7 +34,7 @@
                     <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#EXE-LLR-3"/>
                     <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#EXE-LLR-2"/>
                     <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#EXE-LLR-1"/>
-                    <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                    <j.0:fileFormat rdf:resource="#CSourceFile"/>
                     <j.0:createBy>
                       <j.2:SoftwareCoding rdf:ID="CodeSW-1">
                         <j.0:author rdf:resource="CounterApplicationDesignDescription#JaneDoe"/>
@@ -47,7 +47,7 @@
                 </j.0:compileInput>
                 <j.0:compileInput>
                   <j.2:C_Code rdf:ID="counter_c">
-                    <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                    <j.0:fileFormat rdf:resource="#CSourceFile"/>
                     <j.0:createBy rdf:resource="#CodeSW-1"/>
                     <j.0:filename>counter.c</j.0:filename>
                     <j.1:identifier>counter_c</j.1:identifier>
@@ -55,12 +55,12 @@
                 </j.0:compileInput>
                 <j.0:compileInput>
                   <j.0:FILE rdf:ID="libhw_so">
-                    <j.0:fileFormat rdf:resource="DevelopmentPlan#ElfFile"/>
+                    <j.0:fileFormat rdf:resource="#ElfFile"/>
                     <j.0:createBy>
                       <j.2:SoftwareIntegration rdf:ID="libhw_so_Compiling">
                         <j.0:compileInput>
                           <j.0:FILE rdf:ID="hw_o">
-                            <j.0:fileFormat rdf:resource="DevelopmentPlan#ElfFile"/>
+                            <j.0:fileFormat rdf:resource="#ElfFile"/>
                             <j.0:createBy>
                               <j.0:COMPILE rdf:ID="hw_o_Compiling">
                                 <j.0:compileInput>
@@ -69,23 +69,23 @@
                                     <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-6"/>
                                     <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-3"/>
                                     <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-1"/>
-                                    <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
                                     <j.0:createBy rdf:resource="#CodeSW-1"/>
                                     <j.0:filename>hw.h</j.0:filename>
                                     <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-4"/>
                                     <j.1:identifier>hw_h</j.1:identifier>
                                     <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#IN-LLR-2"/>
+                                    <j.0:fileFormat rdf:resource="#CSourceFile"/>
                                   </j.2:C_Header>
                                 </j.0:compileInput>
                                 <j.0:compileInput>
                                   <j.2:C_Code rdf:ID="hw_c">
-                                    <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                                    <j.0:fileFormat rdf:resource="#CSourceFile"/>
                                     <j.0:createBy rdf:resource="#CodeSW-1"/>
                                     <j.0:filename>hw.c</j.0:filename>
                                     <j.1:identifier>hw_c</j.1:identifier>
                                   </j.2:C_Code>
                                 </j.0:compileInput>
-                                <j.0:performedBy rdf:resource="DevelopmentPlan#GCC"/>
+                                <j.0:performedBy rdf:resource="#GCC"/>
                                 <j.1:identifier>hw_o_Compiling</j.1:identifier>
                               </j.0:COMPILE>
                             </j.0:createBy>
@@ -93,7 +93,7 @@
                             <j.1:identifier>hw_o</j.1:identifier>
                           </j.0:FILE>
                         </j.0:compileInput>
-                        <j.0:compiledBy rdf:resource="DevelopmentPlan#GCC"/>
+                        <j.0:compiledBy rdf:resource="#GCC"/>
                         <j.1:identifier>libhw_so_Compiling</j.1:identifier>
                       </j.2:SoftwareIntegration>
                     </j.0:createBy>
@@ -103,7 +103,7 @@
                 </j.0:compileInput>
                 <j.0:compileInput>
                   <j.0:FILE rdf:ID="output_o">
-                    <j.0:fileFormat rdf:resource="DevelopmentPlan#ElfFile"/>
+                    <j.0:fileFormat rdf:resource="#ElfFile"/>
                     <j.0:createBy>
                       <j.2:SoftwareIntegration rdf:ID="output_o_Compiling">
                         <j.1:hasAttribute>
@@ -122,12 +122,12 @@
                             </j.1:field>
                           </j.1:ATTRIBUTE>
                         </j.1:hasAttribute>
-                        <j.0:performedBy rdf:resource="DevelopmentPlan#GCC"/>
+                        <j.0:performedBy rdf:resource="#GCC"/>
                         <j.0:compileInput>
                           <j.2:C_Header rdf:ID="output_h">
                             <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#OUT-LLR-2"/>
                             <j.0:satisfies rdf:resource="CounterApplicationDesignDescription#OUT-LLR-1"/>
-                            <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                            <j.0:fileFormat rdf:resource="#CSourceFile"/>
                             <j.0:createBy rdf:resource="#CodeSW-1"/>
                             <j.0:filename>output.h</j.0:filename>
                             <j.1:identifier>output_h</j.1:identifier>
@@ -135,7 +135,7 @@
                         </j.0:compileInput>
                         <j.0:compileInput>
                           <j.2:C_Code rdf:ID="output_c">
-                            <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                            <j.0:fileFormat rdf:resource="#CSourceFile"/>
                             <j.0:createBy rdf:resource="#CodeSW-1"/>
                             <j.0:filename>output.c</j.0:filename>
                             <j.1:identifier>output_c</j.1:identifier>
@@ -150,12 +150,12 @@
                 </j.0:compileInput>
                 <j.0:compileInput>
                   <j.0:FILE rdf:ID="input_o">
-                    <j.0:fileFormat rdf:resource="DevelopmentPlan#ElfFile"/>
+                    <j.0:fileFormat rdf:resource="#ElfFile"/>
                     <j.0:createBy>
                       <j.2:SoftwareIntegration rdf:ID="input_o_Compiling">
                         <j.0:compileInput>
                           <j.2:C_Header rdf:ID="input_h">
-                            <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                            <j.0:fileFormat rdf:resource="#CSourceFile"/>
                             <j.0:createBy rdf:resource="#CodeSW-1"/>
                             <j.0:filename>input.h</j.0:filename>
                             <j.1:identifier>input_h</j.1:identifier>
@@ -163,13 +163,13 @@
                         </j.0:compileInput>
                         <j.0:compileInput>
                           <j.2:C_Code rdf:ID="input_c">
-                            <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+                            <j.0:fileFormat rdf:resource="#CSourceFile"/>
                             <j.0:createBy rdf:resource="#CodeSW-1"/>
                             <j.0:filename>input.c</j.0:filename>
                             <j.1:identifier>input_c</j.1:identifier>
                           </j.2:C_Code>
                         </j.0:compileInput>
-                        <j.0:performedBy rdf:resource="DevelopmentPlan#GCC"/>
+                        <j.0:performedBy rdf:resource="#GCC"/>
                         <j.1:identifier>input_o_Compiling</j.1:identifier>
                       </j.2:SoftwareIntegration>
                     </j.0:createBy>
@@ -177,7 +177,7 @@
                     <j.1:identifier>input_o</j.1:identifier>
                   </j.0:FILE>
                 </j.0:compileInput>
-                <j.0:compiledBy rdf:resource="DevelopmentPlan#GCC"/>
+                <j.0:compiledBy rdf:resource="#GCC"/>
                 <j.1:identifier>counter_exe_Compiling</j.1:identifier>
               </j.2:SoftwareIntegration>
             </j.0:createBy>
@@ -188,13 +188,13 @@
         <j.0:packageInput rdf:resource="#libhw_so"/>
         <j.0:packageInput>
           <j.0:FILE rdf:ID="conf_json">
-            <j.0:fileFormat rdf:resource="DevelopmentPlan#JsonFile"/>
+            <j.0:fileFormat rdf:resource="#JsonFile"/>
             <j.0:createBy rdf:resource="#CodeSW-1"/>
             <j.0:filename>conf.json</j.0:filename>
             <j.1:identifier>conf_json</j.1:identifier>
           </j.0:FILE>
         </j.0:packageInput>
-        <j.0:performedBy rdf:resource="DevelopmentPlan#TAR"/>
+        <j.0:performedBy rdf:resource="#TAR"/>
         <j.1:identifier>tarPackaging</j.1:identifier>
       </j.0:PACKAGE>
     </j.1:wasGeneratedBy>
@@ -204,7 +204,7 @@
   <j.2:SoftwareIntegration rdf:ID="test_exe_Compiling">
     <j.0:compileInput>
       <j.2:C_Header rdf:ID="test_h">
-        <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+        <j.0:fileFormat rdf:resource="#CSourceFile"/>
         <j.0:createBy rdf:resource="#CodeSW-1"/>
         <j.0:filename>test.h</j.0:filename>
         <j.1:identifier>test_h</j.1:identifier>
@@ -212,13 +212,13 @@
     </j.0:compileInput>
     <j.0:compileInput>
       <j.2:C_Code rdf:ID="test_c">
-        <j.0:fileFormat rdf:resource="DevelopmentPlan#CSourceFile"/>
+        <j.0:fileFormat rdf:resource="#CSourceFile"/>
         <j.0:createBy rdf:resource="#CodeSW-1"/>
         <j.0:filename>test.c</j.0:filename>
         <j.1:identifier>test_c</j.1:identifier>
       </j.2:C_Code>
     </j.0:compileInput>
-    <j.0:performedBy rdf:resource="DevelopmentPlan#GCC"/>
+    <j.0:performedBy rdf:resource="#GCC"/>
     <j.1:identifier>test_exe_Compiling</j.1:identifier>
   </j.2:SoftwareIntegration>
 </rdf:RDF>

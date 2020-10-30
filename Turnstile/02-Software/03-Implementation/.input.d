@@ -1,0 +1,1 @@
+input.o: input.c

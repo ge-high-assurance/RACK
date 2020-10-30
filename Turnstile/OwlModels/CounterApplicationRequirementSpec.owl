@@ -22,7 +22,7 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplicationRequirementSpec.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.0:DataDictionary rdf:ID="display">
+  <j.0:DataDictionary rdf:ID="counter">
     <j.1:createdBy>
       <j.0:SoftwareRequirementsDefinition rdf:ID="HlrDev1">
         <j.1:author>
@@ -33,25 +33,19 @@
         <j.2:identifier>HLR Dev 1</j.2:identifier>
       </j.0:SoftwareRequirementsDefinition>
     </j.1:createdBy>
-    <j.1:consumedBy rdf:resource="TurnstileDesign#census"/>
-    <j.1:providedBy>
+    <j.1:consumedBy>
       <j.0:HighLevelRequirement rdf:ID="HLR-3">
         <j.1:createdBy rdf:resource="#HlrDev1"/>
-        <j.1:governs rdf:resource="DevelopmentPlan#CounterApplication"/>
+        <j.1:governs rdf:resource="TurnstileDesign#CounterApplication"/>
         <j.1:satisfies rdf:resource="TurnstileDesign#Sys-3"/>
         <j.1:text>The Computer shall publish the counter at a 1 htz rate.</j.1:text>
         <j.2:identifier>HLR-3</j.2:identifier>
       </j.0:HighLevelRequirement>
-    </j.1:providedBy>
-    <j.2:identifier>counter</j.2:identifier>
-  </j.0:DataDictionary>
-  <j.0:DataDictionary rdf:ID="counter">
-    <j.1:createdBy rdf:resource="#HlrDev1"/>
-    <j.1:consumedBy rdf:resource="#HLR-3"/>
+    </j.1:consumedBy>
     <j.1:providedBy>
       <j.0:HighLevelRequirement rdf:ID="HLR-2">
         <j.1:createdBy rdf:resource="#HlrDev1"/>
-        <j.1:governs rdf:resource="DevelopmentPlan#CounterApplication"/>
+        <j.1:governs rdf:resource="TurnstileDesign#CounterApplication"/>
         <j.1:mitigates rdf:resource="HazardAssessment#H-1.1"/>
         <j.1:satisfies rdf:resource="TurnstileDesign#Sys-2"/>
         <j.1:text>The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0.</j.1:text>
@@ -61,7 +55,7 @@
     <j.1:providedBy>
       <j.0:HighLevelRequirement rdf:ID="HLR-1">
         <j.1:createdBy rdf:resource="#HlrDev1"/>
-        <j.1:governs rdf:resource="DevelopmentPlan#CounterApplication"/>
+        <j.1:governs rdf:resource="TurnstileDesign#CounterApplication"/>
         <j.1:mitigates rdf:resource="HazardAssessment#H-1.2"/>
         <j.1:satisfies rdf:resource="TurnstileDesign#Sys-1"/>
         <j.1:text>The Computer shall increment the counter when a inflow event is received and the counter is less than max int.</j.1:text>
@@ -70,16 +64,201 @@
     </j.1:providedBy>
     <j.2:identifier>counter</j.2:identifier>
   </j.0:DataDictionary>
-  <j.0:DataDictionary rdf:ID="inflowEvent">
-    <j.1:createdBy rdf:resource="#HlrDev1"/>
-    <j.1:consumedBy rdf:resource="#HLR-1"/>
-    <j.1:providedBy rdf:resource="TurnstileDesign#inflow"/>
-    <j.2:identifier>inflowEvent</j.2:identifier>
-  </j.0:DataDictionary>
+  <sadlimplicitmodel:NamedQuery rdf:ID="DataDictionaryCsv">
+    <rdfs:isDefinedBy>
+
+prefix REQUIREMENTS:&lt;http://arcos.rack/REQUIREMENTS#&gt;
+prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
+prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
+prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
+select distinct ?identifier_DataDictionary ?text_DataDictionary ?identifier_consumedBy_ConsumingHighLevelRequirement ?identifier_consumedBy_ConsumingSystemInterfaceDefinition ?identifier_createdBy_SoftwareRequirementsDefinition ?identifier_providedBy_ProvidingHighLevelRequirement ?identifier_providedBy_ProducingSystemInterfaceDefinition
+
+ where {
+	?DataDictionary a DevelopmentPlan:DataDictionary .
+	?DataDictionary PROV_S:identifier ?identifier_DataDictionary .
+	optional{
+		?DataDictionary REQUIREMENTS:text ?text_DataDictionary .
+	} 
+	optional {
+
+		?DataDictionary REQUIREMENTS:consumedBy ?ConsumingHighLevelRequirement .
+			?ConsumingHighLevelRequirement a DevelopmentPlan:HighLevelRequirement .
+			?ConsumingHighLevelRequirement PROV_S:identifier ?identifier_consumedBy_ConsumingHighLevelRequirement .
+	}
+	optional {
+
+		?DataDictionary REQUIREMENTS:consumedBy ?ConsumingSystemInterfaceDefinition .
+			?ConsumingSystemInterfaceDefinition a DevelopmentPlan:SystemInterfaceDefinition .
+			?ConsumingSystemInterfaceDefinition PROV_S:identifier ?identifier_consumedBy_ConsumingSystemInterfaceDefinition .
+	}
+	optional {
+
+		?DataDictionary REQUIREMENTS:createdBy ?SoftwareRequirementsDefinition .
+			?SoftwareRequirementsDefinition a DevelopmentPlan:SoftwareRequirementsDefinition .
+			?SoftwareRequirementsDefinition PROV_S:identifier ?identifier_createdBy_SoftwareRequirementsDefinition .
+	}
+	optional {
+
+		?DataDictionary REQUIREMENTS:providedBy ?ProvidingHighLevelRequirement .
+			?ProvidingHighLevelRequirement a DevelopmentPlan:HighLevelRequirement .
+			?ProvidingHighLevelRequirement PROV_S:identifier ?identifier_providedBy_ProvidingHighLevelRequirement .
+	}
+	optional {
+
+		?DataDictionary REQUIREMENTS:providedBy ?ProducingSystemInterfaceDefinition .
+			?ProducingSystemInterfaceDefinition a DevelopmentPlan:SystemInterfaceDefinition .
+			?ProducingSystemInterfaceDefinition PROV_S:identifier ?identifier_providedBy_ProducingSystemInterfaceDefinition .
+	}
+}
+
+
+
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="EngineerCsv">
+    <rdfs:isDefinedBy>
+
+prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
+prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
+prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
+prefix AGENTS:&lt;http://arcos.rack/AGENTS#&gt;
+select distinct ?emailAddress_Engineer ?identifier_Engineer ?name_Engineer ?identifier_Organization
+ where {
+	?Engineer a DevelopmentPlan:Engineer .
+	optional{
+		?Engineer AGENTS:emailAddress ?emailAddress_Engineer .
+	} 
+	?Engineer PROV_S:identifier ?identifier_Engineer .
+	optional{
+		?Engineer AGENTS:name ?name_Engineer .
+	} 
+	optional {
+
+		?Engineer AGENTS:employedBy ?ORGANIZATION .
+			?ORGANIZATION a AGENTS:ORGANIZATION .
+			?ORGANIZATION PROV_S:identifier ?identifier_Organization .
+	}
+}
+
+
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="HighLevelRequirementsCsv">
+    <rdfs:isDefinedBy>
+
+prefix REQUIREMENTS:&lt;http://arcos.rack/REQUIREMENTS#&gt;
+prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
+prefix SYSTEM:&lt;http://arcos.rack/SYSTEM#&gt;
+prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
+prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix HAZARD:&lt;http://arcos.rack/HAZARD#&gt;
+prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
+select distinct ?identifier_HighLevelRequirement ?text_HighLevelRequirement ?identifier_createdBy_HighLevelRequirement ?identifier_governs_HighLevelRequirement ?identifier_mitigates_HighLevelRequirement ?identifier_satisfies_HighLevelRequirement
+ where {
+	?HighLevelRequirement a DevelopmentPlan:HighLevelRequirement .
+	?HighLevelRequirement PROV_S:identifier ?identifier_HighLevelRequirement .
+	?HighLevelRequirement REQUIREMENTS:text ?text_HighLevelRequirement .
+	optional {
+
+		?HighLevelRequirement REQUIREMENTS:createdBy ?SoftwareRequirementsDefinition .
+			?SoftwareRequirementsDefinition a DevelopmentPlan:SoftwareRequirementsDefinition .
+			?SoftwareRequirementsDefinition PROV_S:identifier ?identifier_createdBy_HighLevelRequirement .
+	}
+	optional {
+
+		?HighLevelRequirement REQUIREMENTS:governs ?SYSTEM .
+			?SYSTEM a ?SYSTEM_type .
+			?SYSTEM_type  rdfs:subClassOf* SYSTEM:SYSTEM.
+			?SYSTEM PROV_S:identifier ?identifier_governs_HighLevelRequirement .
+	}
+	optional {
+
+		?HighLevelRequirement REQUIREMENTS:mitigates ?HAZARD .
+			?HAZARD a HAZARD:HAZARD .
+			?HAZARD PROV_S:identifier ?identifier_mitigates_HighLevelRequirement .
+	}
+	optional {
+
+		?HighLevelRequirement REQUIREMENTS:satisfies ?SystemRequirement .
+			?SystemRequirement a DevelopmentPlan:SystemRequirement .
+			?SystemRequirement PROV_S:identifier ?identifier_satisfies_HighLevelRequirement .
+	}
+}
+
+
+
+
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
   <j.0:DataDictionary rdf:ID="outflowEvent">
     <j.1:createdBy rdf:resource="#HlrDev1"/>
     <j.1:consumedBy rdf:resource="#HLR-2"/>
     <j.1:providedBy rdf:resource="TurnstileDesign#outflow"/>
     <j.2:identifier>outflowEvent</j.2:identifier>
+  </j.0:DataDictionary>
+  <j.0:DataDictionary rdf:ID="display">
+    <j.1:createdBy rdf:resource="#HlrDev1"/>
+    <j.1:consumedBy rdf:resource="TurnstileDesign#census"/>
+    <j.1:providedBy rdf:resource="#HLR-3"/>
+    <j.2:identifier>counter</j.2:identifier>
+  </j.0:DataDictionary>
+  <sadlimplicitmodel:NamedQuery rdf:ID="SoftwareRequirementsDefinitionCsv">
+    <rdfs:isDefinedBy>
+
+prefix REQUIREMENTS:&lt;http://arcos.rack/REQUIREMENTS#&gt;
+prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
+prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
+prefix DOCUMENT:&lt;http://arcos.rack/DOCUMENT#&gt;
+prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
+select distinct ?identifier_SoftwareRequirementsDefinition ?identifier_author_SoftwareRequirementDefinition ?identifier_governedBy_SoftwareRequirementsDefinition ?identifier_used_SystemRequirement ?identifier_used_SystemInterfaceDefintion
+
+ where {
+	?SoftwareRequirementsDefinition a DevelopmentPlan:SoftwareRequirementsDefinition .
+	?SoftwareRequirementsDefinition PROV_S:identifier ?identifier_SoftwareRequirementsDefinition .
+	optional {
+
+		?SoftwareRequirementsDefinition REQUIREMENTS:author ?Engineer .
+			?Engineer a DevelopmentPlan:Engineer .
+			?Engineer PROV_S:identifier ?identifier_author_SoftwareRequirementDefinition .
+	}
+	optional {
+
+		?SoftwareRequirementsDefinition REQUIREMENTS:governedBy ?RequirementStandard .
+			?RequirementStandard a DOCUMENT:SPECIFICATION .
+			?RequirementStandard PROV_S:identifier ?identifier_governedBy_SoftwareRequirementsDefinition .
+	}
+	optional {
+
+		?SoftwareRequirementsDefinition PROV_S:used ?SystemRequirement .
+			?SystemRequirement a DevelopmentPlan:SystemRequirement .
+			?SystemRequirement PROV_S:identifier ?identifier_used_SystemRequirement .
+	}
+	optional {
+		?SoftwareRequirementsDefinition PROV_S:used ?SystemInterfaceDefinition .
+			?SystemInterfaceDefinition a DevelopmentPlan:SystemInterfaceDefinition .
+			?SystemInterfaceDefinition PROV_S:identifier ?identifier_used_SystemInterfaceDefintion .
+	}
+}
+
+
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <j.0:DataDictionary rdf:ID="inflowEvent">
+    <j.1:createdBy rdf:resource="#HlrDev1"/>
+    <j.1:consumedBy rdf:resource="#HLR-1"/>
+    <j.1:providedBy rdf:resource="TurnstileDesign#inflow"/>
+    <j.1:text>Signal indicating that a person has passed through the ingate</j.1:text>
+    <j.2:identifier>inflowEvent</j.2:identifier>
   </j.0:DataDictionary>
 </rdf:RDF>

@@ -1,0 +1,5 @@
+"identifier_HighLevelRequirement","text_HighLevelRequirement","identifier_createdBy_HighLevelRequirement","identifier_governs_HighLevelRequirement","identifier_mitigates_HighLevelRequirement","identifier_satisfies_HighLevelRequirement"
+"HLR-1","The Computer shall increment the counter when a inflow event is received and the counter is less than max int.","HLR Dev 1","Counter Application","H-1.2","Sys-1"
+"HLR-2","The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0.","HLR Dev 1","Counter Application","H-1.1","Sys-2"
+"HLR-3","The Computer shall publish the counter at a 1 htz rate.","HLR Dev 1","Counter Application",null,"Sys-3"
+

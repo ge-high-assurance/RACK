@@ -1,0 +1,12 @@
+:- multifile build_with/5, build_from/2, build_inputs/2, build_outputs/2,
+                       build_start/2, build_finished/3, file_sha1/3.
+build_with('n1603137211-8706', compile, 'gcc', '/usr/bin/gcc', [ '-g','-O1','-Wall','-Werror','-c' ] ).
+build_from('n1603137211-8706', '.').
+build_inputs('n1603137211-8706', [ 'output.c' ]).
+build_outputs('n1603137211-8706', [ 'output.o' ]).
+build_start('n1603137211-8706', date_time(2020,10,19,15,53,31,-0400)).
+build_inputs('n1603137211-8706', [ 'output.c' ]).
+file_sha1('output.c', 'bbbaab99c75f2cc482a6bec2a5d4c08f5e272441', 'n1603137211-8706').
+file_sha1('output.o', 'a5a54fe0925815681d627572b8db0cf6e3966caa', 'n1603137211-8706').
+file_sha1('output.c', 'bbbaab99c75f2cc482a6bec2a5d4c08f5e272441', 'n1603137211-8706').
+build_finished('n1603137211-8706', date_time(2020,10,19,15,53,31,-0400), 0).

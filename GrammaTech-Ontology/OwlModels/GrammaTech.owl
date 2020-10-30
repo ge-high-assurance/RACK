@@ -18,9 +18,6 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'GrammaTech.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:Class rdf:ID="AcertTestExecution">
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>
-  </owl:Class>
   <owl:Class rdf:ID="AcertTest">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST"/>
   </owl:Class>
@@ -43,7 +40,7 @@
   </owl:Class>
   <owl:ObjectProperty rdf:ID="snapshotFile">
     <rdfs:range rdf:resource="http://arcos.rack/FILE#FILE"/>
-    <rdfs:domain rdf:resource="#AcertTestExecution"/>
+    <rdfs:domain rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="failureReason">
     <rdfs:comment xml:lang="en">reason for failure, e.g.: timeout, crash, bad output</rdfs:comment>
@@ -52,11 +49,11 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="outputFile">
     <rdfs:range rdf:resource="http://arcos.rack/FILE#FILE"/>
-    <rdfs:domain rdf:resource="#AcertTestExecution"/>
+    <rdfs:domain rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="coverageFile">
     <rdfs:range rdf:resource="http://arcos.rack/FILE#FILE"/>
-    <rdfs:domain rdf:resource="#AcertTestExecution"/>
+    <rdfs:domain rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="testBDDScenarioFile">
     <rdfs:comment xml:lang="en">Behavior-driven development scenario defining this test</rdfs:comment>
@@ -76,7 +73,7 @@
   <owl:DatatypeProperty rdf:ID="memory">
     <rdfs:comment xml:lang="en">maximum bytes of resident memory used by test execution</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
-    <rdfs:domain rdf:resource="#AcertTestExecution"/>
+    <rdfs:domain rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="whenTextConfidence">
     <rdfs:comment xml:lang="en">confidence that this was the when-portion of the text</rdfs:comment>
@@ -86,7 +83,7 @@
   <owl:DatatypeProperty rdf:ID="cpuTime">
     <rdfs:comment xml:lang="en">seconds of CPU time used when executing the test execution</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
-    <rdfs:domain rdf:resource="#AcertTestExecution"/>
+    <rdfs:domain rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="givenTextConfidence">
     <rdfs:comment xml:lang="en">confidence that this was the given-portion of the text</rdfs:comment>

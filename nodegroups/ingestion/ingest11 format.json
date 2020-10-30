@@ -30,7 +30,7 @@
                     }
                 ],
                 "sparqlID": "?FORMAT",
-                "type": "http://arcos.rack/SOFTWARE#FORMAT"
+                "type": "http://arcos.rack/FILE#FORMAT"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -102,7 +102,7 @@
                     "http://arcos.rack/TESTING#TEST_DEVELOPMENT",
                     "http://arcos.rack/ANALYSIS#ANALYSIS",
                     "http://arcos.rack/TESTING#TEST_EXECUTION",
-                    "http://arcos.rack/SOFTWARE#FILE_CREATION",
+                    "http://arcos.rack/FILE#FILE_CREATION",
                     "http://arcos.rack/SOFTWARE#CODE_GEN",
                     "http://arcos.rack/SOFTWARE#COMPILE",
                     "http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT",
@@ -119,7 +119,7 @@
                 "NodeName": "FORMAT",
                 "SparqlID": "?FORMAT",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#FORMAT",
+                "fullURIName": "http://arcos.rack/FILE#FORMAT",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,

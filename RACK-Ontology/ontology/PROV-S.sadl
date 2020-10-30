@@ -15,6 +15,8 @@ uri "http://arcos.rack/PROV-S" alias provs
 
 THING (note "A piece of data stored in RACK") is a class.
 	identifier (note "identifier is any data item that is used to associate items on when loading into the data store.") describes THING with values of type string.
+    title (note "A short, human-readable identifying label.") describes THING with values of type string.
+    description (note "A free-form, multi-line, human-readable explanation of this data element.") describes THING with values of type string.
 	dataInsertedBy (note "The activity that caused this data to be added to RACK") describes THING with values of type ACTIVITY.
     hasAttribute (note "An extensible attribute instance") describes THING with values of type ATTRIBUTE.
 

@@ -46,7 +46,7 @@
                 "mapping": [],
                 "props": [
                     {
-                        "URIRelation": "http://arcos.rack/SOFTWARE#filename",
+                        "URIRelation": "http://arcos.rack/FILE#filename",
                         "mapping": [
                             {
                                 "colId": "col_1",
@@ -91,7 +91,7 @@
                     }
                 ],
                 "sparqlID": "?FILE",
-                "type": "http://arcos.rack/SOFTWARE#FILE"
+                "type": "http://arcos.rack/FILE#FILE"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -157,7 +157,7 @@
                     }
                 ],
                 "sparqlID": "?FORMAT",
-                "type": "http://arcos.rack/SOFTWARE#FORMAT"
+                "type": "http://arcos.rack/FILE#FORMAT"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -296,7 +296,7 @@
                     "http://arcos.rack/DOCUMENT#REPORT",
                     "http://arcos.rack/DOCUMENT#REQUEST",
                     "http://arcos.rack/SACM-S#ARGUMENT_PACKAGE",
-                    "http://arcos.rack/SOFTWARE#FILE",
+                    "http://arcos.rack/FILE#FILE",
                     "http://arcos.rack/TESTING#TEST",
                     "http://arcos.rack/TESTING#TEST_RESULT",
                     "http://arcos.rack/DOCUMENT#PLAN",
@@ -313,7 +313,7 @@
                 "NodeName": "FORMAT",
                 "SparqlID": "?FORMAT",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#FORMAT",
+                "fullURIName": "http://arcos.rack/FILE#FORMAT",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -367,7 +367,7 @@
                     "http://arcos.rack/TESTING#TEST_DEVELOPMENT",
                     "http://arcos.rack/ANALYSIS#ANALYSIS",
                     "http://arcos.rack/TESTING#TEST_EXECUTION",
-                    "http://arcos.rack/SOFTWARE#FILE_CREATION",
+                    "http://arcos.rack/FILE#FILE_CREATION",
                     "http://arcos.rack/SOFTWARE#CODE_GEN",
                     "http://arcos.rack/SOFTWARE#COMPILE",
                     "http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT",
@@ -425,7 +425,7 @@
                 "NodeName": "FILE",
                 "SparqlID": "?FILE",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#FILE",
+                "fullURIName": "http://arcos.rack/FILE#FILE",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -446,8 +446,8 @@
                         "SnodeSparqlIDs": [
                             "?CREATEBY"
                         ],
-                        "UriConnectBy": "http://arcos.rack/SOFTWARE#createBy",
-                        "UriValueType": "http://arcos.rack/SOFTWARE#FILE_CREATION",
+                        "UriConnectBy": "http://arcos.rack/FILE#createBy",
+                        "UriValueType": "http://arcos.rack/FILE#FILE_CREATION",
                         "ValueType": "FILE_CREATION"
                     },
                     {
@@ -486,8 +486,8 @@
                         "SnodeSparqlIDs": [
                             "?FORMAT"
                         ],
-                        "UriConnectBy": "http://arcos.rack/SOFTWARE#fileFormat",
-                        "UriValueType": "http://arcos.rack/SOFTWARE#FORMAT",
+                        "UriConnectBy": "http://arcos.rack/FILE#fileFormat",
+                        "UriValueType": "http://arcos.rack/FILE#FORMAT",
                         "ValueType": "FORMAT"
                     },
                     {
@@ -506,7 +506,7 @@
                         "SnodeSparqlIDs": [
                             "?ENTITY"
                         ],
-                        "UriConnectBy": "http://arcos.rack/SOFTWARE#satisfies",
+                        "UriConnectBy": "http://arcos.rack/FILE#satisfies",
                         "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
                         "ValueType": "ENTITY"
                     },
@@ -536,7 +536,7 @@
                         "Constraints": "",
                         "KeyName": "filename",
                         "SparqlID": "?filename",
-                        "UriRelationship": "http://arcos.rack/SOFTWARE#filename",
+                        "UriRelationship": "http://arcos.rack/FILE#filename",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],

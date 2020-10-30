@@ -3,6 +3,7 @@
     xmlns:MIL-STD-881D-AppxA="http://arcos.rack/MIL-STD-881D/MIL-STD-881D-AppxA#"
     xmlns:j.0="http://arcos.rack/PROV-S#"
     xmlns:m881D="http://arcos.rack/MIL-STD-881D/MIL-STD-881D#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:j.1="http://arcos.rack/SYSTEM#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
@@ -13,6 +14,7 @@
   xml:base="http://arcos.rack/MIL-STD-881D/MIL-STD-881D-AppxA">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="MIL-STD-881D"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'MIL-STD-881D-AppxA.sadl' and should not be directly edited.</rdfs:comment>
@@ -153,7 +155,7 @@
     <j.0:identifier>ElectronicWarfare-1.2.5.9</j.0:identifier>
   </j.1:SYSTEM>
   <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D-AppxA">
-    <j.2:title>AIRCRAFT SYSTEMS</j.2:title>
+    <j.0:title>AIRCRAFT SYSTEMS</j.0:title>
   </rdf:Description>
   <j.1:SYSTEM rdf:ID="SoftwareSystemsEngineering-1.6.1">
     <m881D:wbs>1.6.1</m881D:wbs>
@@ -338,22 +340,22 @@
   <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D">
     <j.0:content>
       <j.2:SECTION rdf:ID="A.4">
-        <j.2:title>DEFINITIONS</j.2:title>
+        <j.0:title>DEFINITIONS</j.0:title>
       </j.2:SECTION>
     </j.0:content>
     <j.0:content>
       <j.2:SECTION rdf:ID="A.3">
-        <j.2:title>WORK BREAKDOWN STRUCTURE LEVELS</j.2:title>
+        <j.0:title>WORK BREAKDOWN STRUCTURE LEVELS</j.0:title>
       </j.2:SECTION>
     </j.0:content>
     <j.0:content>
       <j.2:SECTION rdf:ID="A.2">
-        <j.2:title>APPLICABLE DOCUMENTS</j.2:title>
+        <j.0:title>APPLICABLE DOCUMENTS</j.0:title>
       </j.2:SECTION>
     </j.0:content>
     <j.0:content>
       <j.2:SECTION rdf:ID="A.1">
-        <j.2:title>SCOPE</j.2:title>
+        <j.0:title>SCOPE</j.0:title>
       </j.2:SECTION>
     </j.0:content>
   </rdf:Description>

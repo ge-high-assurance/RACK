@@ -98,7 +98,7 @@
                     }
                 ],
                 "sparqlID": "?COMPILE_INPUT",
-                "type": "http://arcos.rack/SOFTWARE#FILE"
+                "type": "http://arcos.rack/FILE#FILE"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -120,7 +120,7 @@
                     }
                 ],
                 "sparqlID": "?COMPILED_BY",
-                "type": "http://arcos.rack/SOFTWARE#FILE"
+                "type": "http://arcos.rack/FILE#FILE"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -236,7 +236,7 @@
                     "http://arcos.rack/TESTING#TEST_DEVELOPMENT",
                     "http://arcos.rack/ANALYSIS#ANALYSIS",
                     "http://arcos.rack/TESTING#TEST_EXECUTION",
-                    "http://arcos.rack/SOFTWARE#FILE_CREATION",
+                    "http://arcos.rack/FILE#FILE_CREATION",
                     "http://arcos.rack/SOFTWARE#CODE_GEN",
                     "http://arcos.rack/SOFTWARE#COMPILE",
                     "http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT",
@@ -311,7 +311,7 @@
                     "http://arcos.rack/TESTING#TEST_DEVELOPMENT",
                     "http://arcos.rack/ANALYSIS#ANALYSIS",
                     "http://arcos.rack/TESTING#TEST_EXECUTION",
-                    "http://arcos.rack/SOFTWARE#FILE_CREATION",
+                    "http://arcos.rack/FILE#FILE_CREATION",
                     "http://arcos.rack/SOFTWARE#CODE_GEN",
                     "http://arcos.rack/SOFTWARE#COMPILE",
                     "http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT",
@@ -328,7 +328,7 @@
                 "NodeName": "FILE",
                 "SparqlID": "?COMPILED_BY",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#FILE",
+                "fullURIName": "http://arcos.rack/FILE#FILE",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -356,7 +356,7 @@
                 "NodeName": "FILE",
                 "SparqlID": "?COMPILE_INPUT",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#FILE",
+                "fullURIName": "http://arcos.rack/FILE#FILE",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -406,7 +406,7 @@
                             "?COMPILE_INPUT"
                         ],
                         "UriConnectBy": "http://arcos.rack/SOFTWARE#compileInput",
-                        "UriValueType": "http://arcos.rack/SOFTWARE#FILE",
+                        "UriValueType": "http://arcos.rack/FILE#FILE",
                         "ValueType": "FILE"
                     },
                     {
@@ -426,7 +426,7 @@
                             "?COMPILED_BY"
                         ],
                         "UriConnectBy": "http://arcos.rack/SOFTWARE#compiledBy",
-                        "UriValueType": "http://arcos.rack/SOFTWARE#FILE",
+                        "UriValueType": "http://arcos.rack/FILE#FILE",
                         "ValueType": "FILE"
                     },
                     {

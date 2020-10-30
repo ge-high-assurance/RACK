@@ -2,6 +2,7 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://arcos.rack/PROV-S#"
     xmlns:ha="http://TurnstileSystem/HazardAssessment#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:ingaterq="http://TurnstileSystem/InGateRequirement#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
@@ -15,6 +16,7 @@
     <owl:imports rdf:resource="HazardAssessment"/>
     <owl:imports rdf:resource="Turnstiles"/>
     <owl:imports rdf:resource="http://arcos.rack/REQUIREMENTS"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'InGateRequirements.sadl' and should not be directly edited.</rdfs:comment>

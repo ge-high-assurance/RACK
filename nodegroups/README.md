@@ -25,7 +25,7 @@ java -cp /path/to/standaloneExecutables-jar-with-dependencies.jar com.ge.researc
 ```
 
 NOTE: Check out the RACK [command-line
-interface](../RACK-Ontology/cli/) which may be easier to use.
+interface](../cli/) which may be easier to use.
 
 ---
 Copyright (c) 2020, General Electric Company, Galois, Inc.

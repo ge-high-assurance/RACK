@@ -1,22 +1,25 @@
-# Lints the RACK source
+# Lints the RACK source upon every push (while ignoring tag-only pushes)
 
 name: RACK continous lint
-on: [push]
+
+on:
+  push:
+    branches: [ '*' ]
+    tags-ignore: [ '*' ]
 
 jobs:
   lint:
-    name: Lint shell scripts and the RACK CLI
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out RACK source
+        uses: actions/checkout@v2
 
       - name: Lint shell scripts with ShellCheck
         # This action is composite on master which `act` can't yet handle.
         uses: ludeeus/action-shellcheck@fcee962fee3f87888d7992ab0560232aef368e89
         env:
           SHELLCHECK_OPTS: -e SC1008
-        with:
-          ignore: packer
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -39,15 +42,13 @@ jobs:
             --quiet \
             --requirement cli/dev/requirements.txt
 
-      - shell: bash
-        name: Lint the RACK CLI
+      - name: Lint the RACK CLI
         run: |
           cd cli
           pylint .
           mypy .
 
-      - shell: bash
-        name: Lint the ontology
+      - name: Lint the ontology
         continue-on-error: true
         run: |
           sudo apt-add-repository ppa:swi-prolog/stable

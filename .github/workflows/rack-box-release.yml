@@ -139,9 +139,9 @@ jobs:
       run:
         shell: ${{ matrix.shell }}
 
-# Unfortunately, ubuntu-latest can't run virtualbox (VT-x is not
-# available: VERR_VMK_NO_VMX) and windows-latest can't run Hyper-V
-# https://github.com/actions/virtual-environments/issues/183#issuecomment-706244929
+    # Unfortunately, ubuntu-latest can't run virtualbox (VT-x is not
+    # available: VERR_VMK_NO_VMX) and windows-latest can't run Hyper-V
+    # https://github.com/actions/virtual-environments/issues/183#issuecomment-706244929
 
     strategy:
       fail-fast: false
@@ -218,7 +218,7 @@ jobs:
         path: RACK/rack-box/packer_cache/e30b34e4d3c536763868a42bb9d5b8f14af297b8.iso
         key: ubuntu-20.04.1
 
-# Doesn't work on windows-latest (nested virtualization is unsupported)
+    # Doesn't work on windows-latest (nested virtualization is unsupported)
     - name: Enable Hyper-V
       if: matrix.builder == 'hyperv' && matrix.os == 'windows-latest'
       shell: powershell
@@ -226,7 +226,7 @@ jobs:
         Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
         Add-WindowsFeature RSAT-Hyper-V-Tools -IncludeAllSubFeature
 
-# Doesn't work on ubuntu-20.04 (nested virtualization is unsupported)
+    # Doesn't work on ubuntu-20.04 (nested virtualization is unsupported)
     - name: Install VirtualBox
       if: matrix.builder == 'virtualbox' && matrix.os == 'ubuntu-20.04'
       run: sudo apt-get install -y virtualbox

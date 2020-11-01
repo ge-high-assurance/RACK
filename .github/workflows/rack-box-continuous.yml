@@ -1,11 +1,14 @@
-# Builds a Docker image upon each push to master:
+# Builds a Docker image upon every push (while ignoring tag-only pushes):
 #  - Caches files needed to build rack-box images
 #  - Builds rack-box:dev Docker image
 #  - Pushes rack-box:dev image to Docker Hub
 
 name: RACK-in-a-Box continous build
 
-on: [push]
+on:
+  push:
+    branches: [ '*' ]
+    tags-ignore: [ '*' ]
 
 jobs:
   build:

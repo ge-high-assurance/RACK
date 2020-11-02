@@ -9,15 +9,15 @@
  * material are those of the author(s) and do not necessarily reflect the views
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
- uri "http://Turnstile/Deductions".
-import "http://Turnstile/DevelopmentPlan".
-import "http://Turnstile/HazardAssessment".
-import "http://Turnstile/CounterApplicationRequirementSpec".
-import "http://Turnstile/CounterApplicationDesignDescription".
-import "http://Turnstile/CounterApplicationSoftwareUnitTesting".
+ uri "http://Turnstile/All".
 import "http://Turnstile/TurnstileDesign".
+import "http://Turnstile/HazardAssessment".
+import "http://Turnstile/DevelopmentPlanData".
+import "http://Turnstile/DevelopmentPlan".
 import "http://Turnstile/CounterApplicationTesting".
+import "http://Turnstile/CounterApplicationSoftwareUnitTesting".
 import "http://Turnstile/CounterApplication".
+import "http://Turnstile/CounterApplicationDesignDescription".
 import "http://Turnstile/CounterApplicationReviews".
-
-Print: Deductions .
+import "http://Turnstile/CounterApplicationRequirementSpec".
+import "http://Turnstile/Deductions".

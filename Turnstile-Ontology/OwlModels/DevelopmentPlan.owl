@@ -65,7 +65,7 @@
         <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#FILE"/>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/FILE#FILE"/>
   </owl:Class>
   <owl:Class rdf:ID="SoftwareUnitTest">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST"/>
@@ -175,7 +175,7 @@
         <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#FILE"/>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/FILE#FILE"/>
   </owl:Class>
   <owl:Class rdf:about="#SoftwareCoding">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT"/>
@@ -234,7 +234,7 @@
         <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#FILE"/>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/FILE#FILE"/>
   </owl:Class>
   <owl:Class rdf:ID="SystemInterfaceDefinition">
     <rdfs:subClassOf>
@@ -293,11 +293,11 @@
   <owl:Class rdf:ID="DevelopUnitTests">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_DEVELOPMENT"/>
   </owl:Class>
-  <owl:Class rdf:ID="SoftwareComponentTest">
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST"/>
-  </owl:Class>
   <owl:Class rdf:about="#SoftwareRequirementsDefinition">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareComponentTest">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST"/>
   </owl:Class>
   <owl:Class rdf:ID="C_Code">
     <rdfs:subClassOf>
@@ -306,7 +306,7 @@
         <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#FILE"/>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/FILE#FILE"/>
   </owl:Class>
   <owl:Class rdf:ID="SoftwareModule">
     <rdfs:subClassOf>
@@ -332,9 +332,17 @@
   <owl:Class rdf:about="#SystemRequirementsDefinition">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"/>
   </owl:Class>
+  <owl:DatatypeProperty rdf:ID="compileWithOptimizations">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:domain rdf:resource="#SoftwareIntegration"/>
+  </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="CoveredNodes">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     <rdfs:domain rdf:resource="#StructualCoverageAnalysis"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="linkerPath">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#SoftwareIntegration"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="UncoveredNodes">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>

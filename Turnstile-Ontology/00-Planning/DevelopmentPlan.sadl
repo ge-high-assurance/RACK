@@ -1,4 +1,15 @@
-uri "http://Turnstile/DevelopmentPlan".
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+ uri "http://Turnstile/DevelopmentPlan".
 import "http://arcos.rack/DOCUMENT".
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/SOFTWARE".
@@ -49,7 +60,9 @@ import "http://common/DO-178C".
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareIntegration
       SoftwareIntegration is a type of COMPILE.
-        wasInformedBy of SoftwareIntegration has values of type SoftwareCoding.        
+        wasInformedBy of SoftwareIntegration has values of type SoftwareCoding.
+        compileWithOptimizations describes  SoftwareIntegration with values of type boolean.     
+        linkerPath describes  SoftwareIntegration with values of type string.       
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareRequirementsDefinition
       SoftwareRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.

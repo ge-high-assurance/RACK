@@ -1,0 +1,35 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:trnstlsys="http://Turnstile/CounterApplication#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:cntrapptst="http://Turnstile/CounterApplicationTesting#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:cntrappllr="http://Turnstile/CounterApplicationDesignDescription#"
+    xmlns:cntrapputst="http://Turnstile/CounterApplicationSoftwareUnitTesting#"
+    xmlns:ha="http://Turnstile/HazardAssessment#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:TSysDP="http://Turnstile/TurnstileDesign#"
+    xmlns:cntrapprq="http://Turnstile/CounterApplicationRequirementSpec#"
+    xmlns="http://Turnstile/All#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://Turnstile/All">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="CounterApplication"/>
+    <owl:imports rdf:resource="TurnstileDesign"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="HazardAssessment"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="CounterApplicationRequirementSpec"/>
+    <owl:imports rdf:resource="Deductions"/>
+    <owl:imports rdf:resource="CounterApplicationDesignDescription"/>
+    <owl:imports rdf:resource="DevelopmentPlanData"/>
+    <owl:imports rdf:resource="CounterApplicationReviews"/>
+    <owl:imports rdf:resource="CounterApplicationSoftwareUnitTesting"/>
+    <owl:imports rdf:resource="DevelopmentPlan"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'All.sadl' and should not be directly edited.</rdfs:comment>
+    <owl:imports rdf:resource="CounterApplicationTesting"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+  </owl:Ontology>
+</rdf:RDF>

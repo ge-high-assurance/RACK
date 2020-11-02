@@ -15,4 +15,4 @@ rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest[0-9]+" "^que
 rack nodegroups import ../Turnstile-Ontology/99-Utils/NodeGroups
 
 rack data import --clear ../RACK-Ontology/OwlModels/DO-178C.yaml
-rack import ../Turnstile-Ontology/99-Utils/Data/Model.yaml
+rack data import ../Turnstile-Ontology/99-Utils/Data/Model.yaml

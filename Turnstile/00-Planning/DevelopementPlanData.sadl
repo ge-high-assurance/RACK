@@ -196,11 +196,13 @@ _DevelopmentPlan is a PLAN,
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.RequirementStandard
       RequirementStandard is a SPECIFICATION
+      	has identifier "RQ-STD"
         has wasGeneratedBy SoftwarePlanningProcess.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SoftwareConfigurationIndex
       SoftwareConfigurationIndex is a REPORT
+      	has identifier "SCI"
         has wasGeneratedBy SoftwareConfigurationManagementProcess.
 
 

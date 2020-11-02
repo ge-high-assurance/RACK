@@ -23,6 +23,6 @@ employedBy (note "Relates people to the company they were acting on behalf of.")
 employedBy is a type of actedOnBehalfOf.
 
 
-SOFTWAREAGENT
-  (note "A software agent is running software.")
+TOOL
+  (note "is a software agent that performs an activity.")
   is a type of AGENT.

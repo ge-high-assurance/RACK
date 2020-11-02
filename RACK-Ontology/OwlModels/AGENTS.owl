@@ -16,8 +16,8 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'AGENTS.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:Class rdf:ID="SOFTWAREAGENT">
-    <rdfs:comment xml:lang="en">A software agent is running software.</rdfs:comment>
+  <owl:Class rdf:ID="TOOL">
+    <rdfs:comment xml:lang="en">is a software agent that performs an activity.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#AGENT"/>
   </owl:Class>
   <owl:Class rdf:ID="ORGANIZATION">

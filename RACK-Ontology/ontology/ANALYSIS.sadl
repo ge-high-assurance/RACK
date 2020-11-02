@@ -18,7 +18,6 @@ ANALYSIS_REPORT
 	is a type of ENTITY.
 
     result (note "Passed/Failed/Indeterminate status of this report") describes ANALYSIS_REPORT with values of type ANALYSIS_RESULT.
-    ANALYSIS_RESULT is a class, must be one of {Passed, Failed, Indeterminate}.
     
     metric (note "provides a numerical result value from the analysis that was performed") describes ANALYSIS_REPORT with values of type float.
 
@@ -27,6 +26,13 @@ ANALYSIS_REPORT
 
     producedBy (note "ACTIVITY(s) (e.g. ANALYSIS) producing this report") describes ANALYSIS_REPORT with values of type ACTIVITY.
     producedBy is a type of wasGeneratedBy.
+
+ANALYSIS_RESULT (note "Outcome of an analysis report")
+    is a type of THING,
+    must be one of {Passed, Failed, Indeterminate}.
+Passed        is an ANALYSIS_RESULT with identifier "Passed".
+Failed        is an ANALYSIS_RESULT with identifier "Failed".
+Indeterminate is an ANALYSIS_RESULT with identifier "Indeterminate".
 
 ANALYSIS
 	(note "ACTIVITY of running some analysis, supposedly creating some ANALYSIS_REPORT")
@@ -37,18 +43,21 @@ ANALYSIS
 
 ANALYSIS_ANNOTATION_TYPE
     (note "An open/extensible set of types of analysis annotations")
-    is a class.
+    is a type of THING.
 
 // A few common instances:
 PRECONDITION
     (note "A constraint that should hold in advance of successful operation of this unit of code.")
-    is a ANALYSIS_ANNOTATION_TYPE.
+    is an ANALYSIS_ANNOTATION_TYPE,
+    with identifier "Precondition".
 POSTCONDITION
     (note "A constraint that should hold after of successful operation of this unit of code.")
-    is a ANALYSIS_ANNOTATION_TYPE.
+    is an ANALYSIS_ANNOTATION_TYPE,
+    with identifier "Postcondition".
 INVARIANT
     (note "A constraint on this unit of code or data that is true at any point in the program's execution.")
-    is a ANALYSIS_ANNOTATION_TYPE.
+    is an ANALYSIS_ANNOTATION_TYPE,
+    with identifier "Invariant".
 
 ANALYSIS_ANNOTATION
     (note "A result of the analysis that is linked to some specific part of the system.")

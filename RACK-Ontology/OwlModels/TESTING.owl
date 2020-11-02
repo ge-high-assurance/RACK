@@ -28,12 +28,20 @@
     <owl:equivalentClass>
       <owl:Class>
         <owl:oneOf rdf:parseType="Collection">
-          <tst:TEST_STATUS rdf:ID="Passed"/>
-          <tst:TEST_STATUS rdf:ID="Failed"/>
-          <tst:TEST_STATUS rdf:ID="Indeterminate"/>
+          <tst:TEST_STATUS rdf:ID="Passed">
+            <provs:identifier>Passed</provs:identifier>
+          </tst:TEST_STATUS>
+          <tst:TEST_STATUS rdf:ID="Failed">
+            <provs:identifier>Failed</provs:identifier>
+          </tst:TEST_STATUS>
+          <tst:TEST_STATUS rdf:ID="Indeterminate">
+            <provs:identifier>Indeterminate</provs:identifier>
+          </tst:TEST_STATUS>
         </owl:oneOf>
       </owl:Class>
     </owl:equivalentClass>
+    <rdfs:comment xml:lang="en">The high-level outcome of a TEST_RESULT</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST_RESULT">
     <rdfs:comment xml:lang="en">Result corresponding to one execution of one TEST</rdfs:comment>

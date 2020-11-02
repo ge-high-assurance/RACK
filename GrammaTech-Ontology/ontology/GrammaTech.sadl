@@ -16,18 +16,10 @@ AcertRequirement is a type of REQUIREMENT.
     givenTextConfidence (note "confidence that this was the given-portion of the text")
         describes AcertRequirement with values of type double.
 
-AcertTest is a type of TEST.
-    testBDDScenarioFile (note "Behavior-driven development scenario defining this test") describes AcertTest with values of type FILE.
-
 AcertTestResult is a type of TEST_RESULT.
     failureReason (note "reason for failure, e.g.: timeout, crash, bad output")
         describes AcertTestResult with values of type FailureReason.
     FailureReason is a class, must be one of {Timeout, Crash, BadOutput}.
-
-    /* XXX: Can we provide structured data here? */
-    outputFile   describes TEST_EXECUTION with values of type FILE.
-    coverageFile describes TEST_EXECUTION with values of type FILE.
-    snapshotFile describes TEST_EXECUTION with values of type FILE.
 
     /* Metrics */
     cpuTime (note "seconds of CPU time used when executing the test execution")

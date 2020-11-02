@@ -21,40 +21,6 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplicationDesignDescription.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <sadlimplicitmodel:NamedQuery rdf:ID="ThreadsCsv">
-    <rdfs:isDefinedBy>
-
-prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
-prefix SYSTEM:&lt;http://arcos.rack/SYSTEM#&gt;
-prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
-prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
-prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
-select distinct ?identifier_SYSTEM ?identifier_SYSTEM_0 ?identifier_SoftwareDesign
- where {
-	?SYSTEM a ?SYSTEM_type .
-	?SYSTEM_type  rdfs:subClassOf* SYSTEM:SYSTEM.
-	?SYSTEM PROV_S:identifier ?identifier_SYSTEM .
-	optional {
-
-		?SYSTEM SYSTEM:partOf ?SYSTEM_0 .
-			?SYSTEM_0 a ?SYSTEM_0_type .
-			?SYSTEM_0_type  rdfs:subClassOf* SYSTEM:SYSTEM.
-			?SYSTEM_0 PROV_S:identifier ?identifier_SYSTEM_0 .
-	}
-	optional {
-
-		?SYSTEM SYSTEM:producedBy ?SoftwareDesign .
-			?SoftwareDesign a DevelopmentPlan:SoftwareDesign .
-			?SoftwareDesign PROV_S:identifier ?identifier_SoftwareDesign .
-	}
-}
-
-
-	
-</rdfs:isDefinedBy>
-  </sadlimplicitmodel:NamedQuery>
   <j.0:DataAndControlCouple rdf:ID="DCC-6">
     <j.1:createdBy>
       <j.0:SoftwareDesign rdf:ID="LlrDev1">
@@ -110,6 +76,26 @@ select distinct ?identifier_SYSTEM ?identifier_SYSTEM_0 ?identifier_SoftwareDesi
     <j.1:text>console</j.1:text>
     <j.2:identifier>DCC-6</j.2:identifier>
   </j.0:DataAndControlCouple>
+  <j.0:DataAndControlCouple rdf:ID="DCC-5">
+    <j.1:createdBy rdf:resource="#LlrDev1"/>
+    <j.1:providedBy>
+      <j.0:LowLevelRequirement rdf:ID="OUT-LLR-2">
+        <j.1:createdBy rdf:resource="#LlrDev1"/>
+        <j.1:governs>
+          <j.3:SYSTEM rdf:ID="OutputThread">
+            <j.3:producedBy rdf:resource="#SwDesign"/>
+            <j.3:partOf rdf:resource="TurnstileDesign#CounterApplication"/>
+            <j.2:identifier>OutputThread</j.2:identifier>
+          </j.3:SYSTEM>
+        </j.1:governs>
+        <j.1:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-3"/>
+        <j.1:text>Output Thread shall broadcast a UDP message on port 62001 with the park_count every second.</j.1:text>
+        <j.2:identifier>OUT-LLR-2</j.2:identifier>
+      </j.0:LowLevelRequirement>
+    </j.1:providedBy>
+    <j.1:text>outgoing UDP message</j.1:text>
+    <j.2:identifier>DCC-5</j.2:identifier>
+  </j.0:DataAndControlCouple>
   <j.0:DataAndControlCouple rdf:ID="DCC-4">
     <j.1:createdBy rdf:resource="#LlrDev1"/>
     <j.1:providedBy>
@@ -125,101 +111,14 @@ select distinct ?identifier_SYSTEM ?identifier_SYSTEM_0 ?identifier_SoftwareDesi
     <j.1:providedBy>
       <j.0:LowLevelRequirement rdf:ID="OUT-LLR-1">
         <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs>
-          <j.3:SYSTEM rdf:ID="OutputThread">
-            <j.3:producedBy rdf:resource="#SwDesign"/>
-            <j.3:partOf rdf:resource="TurnstileDesign#CounterApplication"/>
-            <j.2:identifier>OutputThread</j.2:identifier>
-          </j.3:SYSTEM>
-        </j.1:governs>
+        <j.1:governs rdf:resource="#OutputThread"/>
         <j.1:text>Output Thread shall initialize the park_count to 0 on powerup.</j.1:text>
         <j.2:identifier>OUT-LLR-1</j.2:identifier>
       </j.0:LowLevelRequirement>
     </j.1:providedBy>
-    <j.1:consumedBy>
-      <j.0:LowLevelRequirement rdf:ID="OUT-LLR-2">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs rdf:resource="#OutputThread"/>
-        <j.1:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-3"/>
-        <j.1:text>Output Thread shall broadcast a UDP message on port 62001 with the park_count every second.</j.1:text>
-        <j.2:identifier>OUT-LLR-2</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:consumedBy>
+    <j.1:consumedBy rdf:resource="#OUT-LLR-2"/>
     <j.1:text>output_park_count</j.1:text>
     <j.2:identifier>DCC-4</j.2:identifier>
-  </j.0:DataAndControlCouple>
-  <j.0:DataAndControlCouple rdf:ID="DCC-2">
-    <j.1:createdBy rdf:resource="#LlrDev1"/>
-    <j.1:consumedBy rdf:resource="#IN-LLR-6"/>
-    <j.1:consumedBy rdf:resource="#IN-LLR-5"/>
-    <j.1:consumedBy rdf:resource="#IN-LLR-3"/>
-    <j.1:consumedBy>
-      <j.0:LowLevelRequirement rdf:ID="IN-LLR-2">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs rdf:resource="#InputThread"/>
-        <j.1:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-2"/>
-        <j.1:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
-        <j.1:text>Input Thread shall check for a incoming UDP message on port 62000.</j.1:text>
-        <j.2:identifier>IN-LLR-2</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:consumedBy>
-    <j.1:text>incoming UDP message</j.1:text>
-    <j.2:identifier>DCC-2</j.2:identifier>
-  </j.0:DataAndControlCouple>
-  <sadlimplicitmodel:NamedQuery rdf:ID="LowLevelRequirementsCsv">
-    <rdfs:isDefinedBy>
-
-prefix REQUIREMENTS:&lt;http://arcos.rack/REQUIREMENTS#&gt;
-prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
-prefix SYSTEM:&lt;http://arcos.rack/SYSTEM#&gt;
-prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
-prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-prefix HAZARD:&lt;http://arcos.rack/HAZARD#&gt;
-prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
-prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
-select distinct ?identifier_LowLevelRequirement ?text_LowLevelRequirement ?identifier_SoftwareDesign ?identifier_SYSTEM ?identifier_HAZARD ?identifier_HighLevelRequirement
- where {
-	?LowLevelRequirement a DevelopmentPlan:LowLevelRequirement .
-	?LowLevelRequirement PROV_S:identifier ?identifier_LowLevelRequirement .
-	optional{
-		?LowLevelRequirement REQUIREMENTS:text ?text_LowLevelRequirement .
-	} 
-	optional {
-
-		?LowLevelRequirement REQUIREMENTS:createdBy ?SoftwareDesign .
-			?SoftwareDesign a DevelopmentPlan:SoftwareDesign .
-			?SoftwareDesign PROV_S:identifier ?identifier_SoftwareDesign .
-	}
-	optional {
-
-		?LowLevelRequirement REQUIREMENTS:governs ?SYSTEM .
-			?SYSTEM a ?SYSTEM_type .
-			?SYSTEM_type  rdfs:subClassOf* SYSTEM:SYSTEM.
-			?SYSTEM PROV_S:identifier ?identifier_SYSTEM .
-	}
-	optional {
-
-		?LowLevelRequirement REQUIREMENTS:mitigates ?HAZARD .
-			?HAZARD a HAZARD:HAZARD .
-			?HAZARD PROV_S:identifier ?identifier_HAZARD .
-	}
-	optional {
-
-		?LowLevelRequirement REQUIREMENTS:satisfies ?HighLevelRequirement .
-			?HighLevelRequirement a DevelopmentPlan:HighLevelRequirement .
-			?HighLevelRequirement PROV_S:identifier ?identifier_HighLevelRequirement .
-	}
-}
-
-
-</rdfs:isDefinedBy>
-  </sadlimplicitmodel:NamedQuery>
-  <j.0:DataAndControlCouple rdf:ID="DCC-5">
-    <j.1:createdBy rdf:resource="#LlrDev1"/>
-    <j.1:providedBy rdf:resource="#OUT-LLR-2"/>
-    <j.1:text>outgoing UDP message</j.1:text>
-    <j.2:identifier>DCC-5</j.2:identifier>
   </j.0:DataAndControlCouple>
   <j.0:DataAndControlCouple rdf:ID="DCC-3">
     <j.1:providedBy>
@@ -239,13 +138,31 @@ select distinct ?identifier_LowLevelRequirement ?text_LowLevelRequirement ?ident
       </j.0:LowLevelRequirement>
     </j.1:providedBy>
     <j.1:consumedBy rdf:resource="#IN-LLR-4"/>
-    <j.1:consumedBy rdf:resource="#IN-LLR-2"/>
+    <j.1:consumedBy>
+      <j.0:LowLevelRequirement rdf:ID="IN-LLR-2">
+        <j.1:createdBy rdf:resource="#LlrDev1"/>
+        <j.1:governs rdf:resource="#InputThread"/>
+        <j.1:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-2"/>
+        <j.1:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
+        <j.1:text>Input Thread shall check for a incoming UDP message on port 62000.</j.1:text>
+        <j.2:identifier>IN-LLR-2</j.2:identifier>
+      </j.0:LowLevelRequirement>
+    </j.1:consumedBy>
     <j.1:createdBy rdf:resource="#LlrDev1"/>
     <j.2:identifier>DCC-3</j.2:identifier>
     <j.1:consumedBy rdf:resource="#IN-LLR-5"/>
     <j.1:consumedBy rdf:resource="#IN-LLR-3"/>
     <j.1:consumedBy rdf:resource="#IN-LLR-6"/>
     <j.1:text>input_park_count</j.1:text>
+  </j.0:DataAndControlCouple>
+  <j.0:DataAndControlCouple rdf:ID="DCC-2">
+    <j.1:createdBy rdf:resource="#LlrDev1"/>
+    <j.1:consumedBy rdf:resource="#IN-LLR-6"/>
+    <j.1:consumedBy rdf:resource="#IN-LLR-5"/>
+    <j.1:consumedBy rdf:resource="#IN-LLR-3"/>
+    <j.1:consumedBy rdf:resource="#IN-LLR-2"/>
+    <j.1:text>incoming UDP message</j.1:text>
+    <j.2:identifier>DCC-2</j.2:identifier>
   </j.0:DataAndControlCouple>
   <j.0:DataAndControlCouple rdf:ID="DCC-1">
     <j.1:createdBy rdf:resource="#LlrDev1"/>
@@ -270,85 +187,4 @@ select distinct ?identifier_LowLevelRequirement ?text_LowLevelRequirement ?ident
     <j.1:text>PowerUp</j.1:text>
     <j.2:identifier>DCC-1</j.2:identifier>
   </j.0:DataAndControlCouple>
-  <sadlimplicitmodel:NamedQuery rdf:ID="DataAndControlCoupleCsv">
-    <rdfs:isDefinedBy>
-
-prefix REQUIREMENTS:&lt;http://arcos.rack/REQUIREMENTS#&gt;
-prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
-prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
-prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
-prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
-select distinct ?identifier_DataAndControlCouple ?text_DataAndControlCouple ?ConsumingLowLevelRequirement ?identifier_ConsumingLowLevelRequirement ?identifier_SoftwareDesign ?ProducingLowLevelRequirement ?identifier_ProducingLowLevelRequirement
-
- where {
-	?DataAndControlCouple a DevelopmentPlan:DataAndControlCouple .
-	?DataAndControlCouple PROV_S:identifier ?identifier_DataAndControlCouple .
-	optional{
-		?DataAndControlCouple REQUIREMENTS:text ?text_DataAndControlCouple .
-	} 
-	optional {
-
-		?DataAndControlCouple REQUIREMENTS:consumedBy ?ConsumingLowLevelRequirement .
-			?ConsumingLowLevelRequirement a DevelopmentPlan:LowLevelRequirement .
-			?ConsumingLowLevelRequirement PROV_S:identifier ?identifier_ConsumingLowLevelRequirement .
-	}
-	optional {
-
-		?DataAndControlCouple REQUIREMENTS:createdBy ?SoftwareDesign .
-			?SoftwareDesign a DevelopmentPlan:SoftwareDesign .
-			?SoftwareDesign PROV_S:identifier ?identifier_SoftwareDesign .
-	}
-	optional {
-
-		?DataAndControlCouple REQUIREMENTS:providedBy ?ProducingLowLevelRequirement .
-			?ProducingLowLevelRequirement a DevelopmentPlan:LowLevelRequirement .
-			?ProducingLowLevelRequirement PROV_S:identifier ?identifier_ProducingLowLevelRequirement .
-	}
-}
-
-
-
-</rdfs:isDefinedBy>
-  </sadlimplicitmodel:NamedQuery>
-  <sadlimplicitmodel:NamedQuery rdf:ID="SoftwareDesignCsv">
-    <rdfs:isDefinedBy>
-
-prefix REQUIREMENTS:&lt;http://arcos.rack/REQUIREMENTS#&gt;
-prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
-prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
-prefix DOCUMENT:&lt;http://arcos.rack/DOCUMENT#&gt;
-prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
-prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
-select distinct ?identifier_SoftwareDesign ?identifier_Engineer ?identifier_DesignStandard ?identifier_HighLevelRequirement
- where {
-	?SoftwareDesign a DevelopmentPlan:SoftwareDesign .
-	?SoftwareDesign PROV_S:identifier ?identifier_SoftwareDesign .
-	optional {
-
-		?SoftwareDesign REQUIREMENTS:author ?Engineer .
-			?Engineer a DevelopmentPlan:Engineer .
-			?Engineer PROV_S:identifier ?identifier_Engineer .
-	}
-	optional {
-
-		?SoftwareDesign REQUIREMENTS:governedBy ?DesignStandard .
-			?DesignStandard a DOCUMENT:SPECIFICATION .
-			?DesignStandard PROV_S:identifier ?identifier_DesignStandard .
-	}
-	optional {
-
-		?SoftwareDesign PROV_S:used ?HighLevelRequirement .
-			?HighLevelRequirement a DevelopmentPlan:HighLevelRequirement .
-			?HighLevelRequirement PROV_S:identifier ?identifier_HighLevelRequirement .
-	}
-}
-
-
-
-</rdfs:isDefinedBy>
-  </sadlimplicitmodel:NamedQuery>
 </rdf:RDF>

@@ -9,8 +9,10 @@ then
 fi
 
 rack model import --clear ../RACK-Ontology/OwlModels/import.yaml
-rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest[0-9]+" "^query "
-rack nodegroups import ../nodegroups/ingestion
-rack nodegroups import ../nodegroups/queries
-#rack data import --clear ../RACK-Ontology/models/TurnstileSystem/Data/import.yaml
-#rack data import ../RACK-Ontology/OwlModels/requirements.yaml
+rack model import ../Turnstile-Ontology/99-Utils/import.yaml
+
+rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest[0-9]+" "^query " "^Ingest-"
+rack nodegroups import ../Turnstile-Ontology/99-Utils/NodeGroups
+
+rack data import --clear ../RACK-Ontology/OwlModels/DO-178C.yaml
+rack import ../Turnstile-Ontology/99-Utils/Data/Model.yaml

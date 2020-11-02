@@ -1,0 +1,395 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns="http://Turnstile/RunQueries#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://Turnstile/RunQueries">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="All"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'RunDataQueries.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <sadlimplicitmodel:NamedQuery rdf:ID="HighLevelRequirementsCsv">
+    <rdfs:isDefinedBy>
+
+prefix REQUIREMENTS:&lt;http://arcos.rack/REQUIREMENTS#&gt;
+prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
+prefix SYSTEM:&lt;http://arcos.rack/SYSTEM#&gt;
+prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
+prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix HAZARD:&lt;http://arcos.rack/HAZARD#&gt;
+prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
+select distinct ?identifier_HighLevelRequirement ?text_HighLevelRequirement ?identifier_createdBy_HighLevelRequirement ?identifier_governs_HighLevelRequirement ?identifier_mitigates_HighLevelRequirement ?identifier_satisfies_HighLevelRequirement
+ where {
+	?HighLevelRequirement a DevelopmentPlan:HighLevelRequirement .
+	?HighLevelRequirement PROV_S:identifier ?identifier_HighLevelRequirement .
+	?HighLevelRequirement REQUIREMENTS:text ?text_HighLevelRequirement .
+	optional {
+
+		?HighLevelRequirement REQUIREMENTS:createdBy ?SoftwareRequirementsDefinition .
+			?SoftwareRequirementsDefinition a DevelopmentPlan:SoftwareRequirementsDefinition .
+			?SoftwareRequirementsDefinition PROV_S:identifier ?identifier_createdBy_HighLevelRequirement .
+	}
+	optional {
+
+		?HighLevelRequirement REQUIREMENTS:governs ?SYSTEM .
+			?SYSTEM a ?SYSTEM_type .
+			?SYSTEM_type  rdfs:subClassOf* SYSTEM:SYSTEM.
+			?SYSTEM PROV_S:identifier ?identifier_governs_HighLevelRequirement .
+	}
+	optional {
+
+		?HighLevelRequirement REQUIREMENTS:mitigates ?HAZARD .
+			?HAZARD a HAZARD:HAZARD .
+			?HAZARD PROV_S:identifier ?identifier_mitigates_HighLevelRequirement .
+	}
+	optional {
+
+		?HighLevelRequirement REQUIREMENTS:satisfies ?SystemRequirement .
+			?SystemRequirement a DevelopmentPlan:SystemRequirement .
+			?SystemRequirement PROV_S:identifier ?identifier_satisfies_HighLevelRequirement .
+	}
+}
+
+
+
+
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="SoftwareRequirementsDefinitionCsv">
+    <rdfs:isDefinedBy>
+
+prefix REQUIREMENTS:&lt;http://arcos.rack/REQUIREMENTS#&gt;
+prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
+prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
+prefix DOCUMENT:&lt;http://arcos.rack/DOCUMENT#&gt;
+prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
+select distinct ?identifier_SoftwareRequirementsDefinition ?identifier_author_SoftwareRequirementDefinition ?identifier_governedBy_SoftwareRequirementsDefinition ?identifier_used_SystemRequirement ?identifier_used_SystemInterfaceDefintion
+
+ where {
+	?SoftwareRequirementsDefinition a DevelopmentPlan:SoftwareRequirementsDefinition .
+	?SoftwareRequirementsDefinition PROV_S:identifier ?identifier_SoftwareRequirementsDefinition .
+	optional {
+
+		?SoftwareRequirementsDefinition REQUIREMENTS:author ?Engineer .
+			?Engineer a DevelopmentPlan:Engineer .
+			?Engineer PROV_S:identifier ?identifier_author_SoftwareRequirementDefinition .
+	}
+	optional {
+
+		?SoftwareRequirementsDefinition REQUIREMENTS:governedBy ?RequirementStandard .
+			?RequirementStandard a DOCUMENT:SPECIFICATION .
+			?RequirementStandard PROV_S:identifier ?identifier_governedBy_SoftwareRequirementsDefinition .
+	}
+	optional {
+
+		?SoftwareRequirementsDefinition PROV_S:used ?SystemRequirement .
+			?SystemRequirement a DevelopmentPlan:SystemRequirement .
+			?SystemRequirement PROV_S:identifier ?identifier_used_SystemRequirement .
+	}
+	optional {
+		?SoftwareRequirementsDefinition PROV_S:used ?SystemInterfaceDefinition .
+			?SystemInterfaceDefinition a DevelopmentPlan:SystemInterfaceDefinition .
+			?SystemInterfaceDefinition PROV_S:identifier ?identifier_used_SystemInterfaceDefintion .
+	}
+}
+
+
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="DataAndControlCoupleCsv">
+    <rdfs:isDefinedBy>
+
+prefix REQUIREMENTS:&lt;http://arcos.rack/REQUIREMENTS#&gt;
+prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
+prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
+prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
+select distinct ?identifier_DataAndControlCouple ?text_DataAndControlCouple ?ConsumingLowLevelRequirement ?identifier_ConsumingLowLevelRequirement ?identifier_SoftwareDesign ?ProducingLowLevelRequirement ?identifier_ProducingLowLevelRequirement
+
+ where {
+	?DataAndControlCouple a DevelopmentPlan:DataAndControlCouple .
+	?DataAndControlCouple PROV_S:identifier ?identifier_DataAndControlCouple .
+	optional{?DataAndControlCouple REQUIREMENTS:text ?text_DataAndControlCouple .} 
+	optional {
+
+		?DataAndControlCouple REQUIREMENTS:consumedBy ?ConsumingLowLevelRequirement .
+			?ConsumingLowLevelRequirement a DevelopmentPlan:LowLevelRequirement .
+			?ConsumingLowLevelRequirement PROV_S:identifier ?identifier_ConsumingLowLevelRequirement .
+	}
+	optional {
+
+		?DataAndControlCouple REQUIREMENTS:createdBy ?SoftwareDesign .
+			?SoftwareDesign a DevelopmentPlan:SoftwareDesign .
+			?SoftwareDesign PROV_S:identifier ?identifier_SoftwareDesign .
+	}
+	optional {
+
+		?DataAndControlCouple REQUIREMENTS:providedBy ?ProducingLowLevelRequirement .
+			?ProducingLowLevelRequirement a DevelopmentPlan:LowLevelRequirement .
+			?ProducingLowLevelRequirement PROV_S:identifier ?identifier_ProducingLowLevelRequirement .
+	}
+}
+
+
+
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="TEST">
+    <rdfs:isDefinedBy>
+
+select distinct ?identifier_SoftwareRequirementsDefinition ?identifier_Engineer ?identifier_RequirementStandard ?identifier_SystemRequirement ?identifier_SystemInterfaceDefinition
+where {
+    ?SoftwareRequirementsDefinition a http://Turnstile/DevelopmentPlan#SoftwareRequirementsDefinition . 
+    ?SoftwareRequirementsDefinition http://arcos.rack/PROV-S#identifier ?identifier_SoftwareRequirementsDefinition . 
+    optional{
+
+    ?SoftwareRequirementsDefinition http://arcos.rack/REQUIREMENTS#author ?Engineer .
+        ?Engineer a http://Turnstile/DevelopmentPlan#Engineer . 
+        ?Engineer http://arcos.rack/PROV-S#identifier ?identifier_Engineer . 
+    }
+    optional{
+
+    ?SoftwareRequirementsDefinition http://arcos.rack/REQUIREMENTS#governedBy ?RequirementStandard .
+        ?RequirementStandard a http://arcos.rack/DOCUMENT#SPECIFICATION . 
+        ?RequirementStandard http://arcos.rack/PROV-S#identifier ?identifier_RequirementStandard . 
+    }
+    optional{
+
+    ?SoftwareRequirementsDefinition http://arcos.rack/PROV-S#used ?SystemRequirement .
+        ?SystemRequirement a http://Turnstile/DevelopmentPlan#SystemRequirement . 
+        ?SystemRequirement http://arcos.rack/PROV-S#identifier ?identifier_SystemRequirement . 
+    }
+    optional{
+
+    ?SoftwareRequirementsDefinition http://arcos.rack/PROV-S#used ?SystemInterfaceDefinition .
+        ?SystemInterfaceDefinition a http://Turnstile/DevelopmentPlan#SystemInterfaceDefinition . 
+        ?SystemInterfaceDefinition http://arcos.rack/PROV-S#identifier ?identifier_SystemInterfaceDefinition . 
+    }
+
+}
+
+
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="ThreadsCsv">
+    <rdfs:isDefinedBy>
+
+prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
+prefix SYSTEM:&lt;http://arcos.rack/SYSTEM#&gt;
+prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
+prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
+select distinct ?identifier_SYSTEM ?identifier_SYSTEM_0 ?identifier_SoftwareDesign
+ where {
+	?SYSTEM a ?SYSTEM_type .
+	?SYSTEM_type  rdfs:subClassOf* SYSTEM:SYSTEM.
+	?SYSTEM PROV_S:identifier ?identifier_SYSTEM .
+	optional {
+
+		?SYSTEM SYSTEM:partOf ?SYSTEM_0 .
+			?SYSTEM_0 a ?SYSTEM_0_type .
+			?SYSTEM_0_type  rdfs:subClassOf* SYSTEM:SYSTEM.
+			?SYSTEM_0 PROV_S:identifier ?identifier_SYSTEM_0 .
+	}
+	optional {
+
+		?SYSTEM SYSTEM:producedBy ?SoftwareDesign .
+			?SoftwareDesign a DevelopmentPlan:SoftwareDesign .
+			?SoftwareDesign PROV_S:identifier ?identifier_SoftwareDesign .
+	}
+}
+
+
+	
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="EngineerCsv">
+    <rdfs:isDefinedBy>
+
+prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
+prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
+prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
+prefix AGENTS:&lt;http://arcos.rack/AGENTS#&gt;
+select distinct ?emailAddress_Engineer ?identifier_Engineer ?name_Engineer ?identifier_Organization
+ where {
+	?Engineer a DevelopmentPlan:Engineer .
+	optional{
+		?Engineer AGENTS:emailAddress ?emailAddress_Engineer .
+	} 
+	?Engineer PROV_S:identifier ?identifier_Engineer .
+	optional{
+		?Engineer AGENTS:name ?name_Engineer .
+	} 
+	optional {
+
+		?Engineer AGENTS:employedBy ?ORGANIZATION .
+			?ORGANIZATION a AGENTS:ORGANIZATION .
+			?ORGANIZATION PROV_S:identifier ?identifier_Organization .
+	}
+}
+
+
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="SoftwareDesignCsv">
+    <rdfs:isDefinedBy>
+
+prefix REQUIREMENTS:&lt;http://arcos.rack/REQUIREMENTS#&gt;
+prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
+prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
+prefix DOCUMENT:&lt;http://arcos.rack/DOCUMENT#&gt;
+prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
+select distinct ?identifier_SoftwareDesign ?identifier_Engineer ?identifier_DesignStandard ?identifier_HighLevelRequirement
+ where {
+	?SoftwareDesign a DevelopmentPlan:SoftwareDesign .
+	?SoftwareDesign PROV_S:identifier ?identifier_SoftwareDesign .
+	optional {
+
+		?SoftwareDesign REQUIREMENTS:author ?Engineer .
+			?Engineer a DevelopmentPlan:Engineer .
+			?Engineer PROV_S:identifier ?identifier_Engineer .
+	}
+	optional {
+
+		?SoftwareDesign REQUIREMENTS:governedBy ?DesignStandard .
+			?DesignStandard a DOCUMENT:SPECIFICATION .
+			?DesignStandard PROV_S:identifier ?identifier_DesignStandard .
+	}
+	optional {
+
+		?SoftwareDesign PROV_S:used ?HighLevelRequirement .
+			?HighLevelRequirement a DevelopmentPlan:HighLevelRequirement .
+			?HighLevelRequirement PROV_S:identifier ?identifier_HighLevelRequirement .
+	}
+}
+
+
+
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="DataDictionaryCsv">
+    <rdfs:isDefinedBy>
+
+prefix REQUIREMENTS:&lt;http://arcos.rack/REQUIREMENTS#&gt;
+prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
+prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
+prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
+select distinct ?identifier_DataDictionary ?text_DataDictionary ?identifier_consumedBy_ConsumingHighLevelRequirement ?identifier_consumedBy_ConsumingSystemInterfaceDefinition ?identifier_createdBy_SoftwareRequirementsDefinition ?identifier_providedBy_ProvidingHighLevelRequirement ?identifier_providedBy_ProducingSystemInterfaceDefinition
+
+ where {
+	?DataDictionary a DevelopmentPlan:DataDictionary .
+	?DataDictionary PROV_S:identifier ?identifier_DataDictionary .
+	optional{
+		?DataDictionary REQUIREMENTS:text ?text_DataDictionary .
+	} 
+	optional {
+
+		?DataDictionary REQUIREMENTS:consumedBy ?ConsumingHighLevelRequirement .
+			?ConsumingHighLevelRequirement a DevelopmentPlan:HighLevelRequirement .
+			?ConsumingHighLevelRequirement PROV_S:identifier ?identifier_consumedBy_ConsumingHighLevelRequirement .
+	}
+	optional {
+
+		?DataDictionary REQUIREMENTS:consumedBy ?ConsumingSystemInterfaceDefinition .
+			?ConsumingSystemInterfaceDefinition a DevelopmentPlan:SystemInterfaceDefinition .
+			?ConsumingSystemInterfaceDefinition PROV_S:identifier ?identifier_consumedBy_ConsumingSystemInterfaceDefinition .
+	}
+	optional {
+
+		?DataDictionary REQUIREMENTS:createdBy ?SoftwareRequirementsDefinition .
+			?SoftwareRequirementsDefinition a DevelopmentPlan:SoftwareRequirementsDefinition .
+			?SoftwareRequirementsDefinition PROV_S:identifier ?identifier_createdBy_SoftwareRequirementsDefinition .
+	}
+	optional {
+
+		?DataDictionary REQUIREMENTS:providedBy ?ProvidingHighLevelRequirement .
+			?ProvidingHighLevelRequirement a DevelopmentPlan:HighLevelRequirement .
+			?ProvidingHighLevelRequirement PROV_S:identifier ?identifier_providedBy_ProvidingHighLevelRequirement .
+	}
+	optional {
+
+		?DataDictionary REQUIREMENTS:providedBy ?ProducingSystemInterfaceDefinition .
+			?ProducingSystemInterfaceDefinition a DevelopmentPlan:SystemInterfaceDefinition .
+			?ProducingSystemInterfaceDefinition PROV_S:identifier ?identifier_providedBy_ProducingSystemInterfaceDefinition .
+	}
+}
+
+
+
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="LowLevelRequirementsCsv">
+    <rdfs:isDefinedBy>
+
+prefix REQUIREMENTS:&lt;http://arcos.rack/REQUIREMENTS#&gt;
+prefix rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix DevelopmentPlan:&lt;http://Turnstile/DevelopmentPlan#&gt;
+prefix SYSTEM:&lt;http://arcos.rack/SYSTEM#&gt;
+prefix PROV_S:&lt;http://arcos.rack/PROV-S#&gt;
+prefix rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix HAZARD:&lt;http://arcos.rack/HAZARD#&gt;
+prefix XMLSchema:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix generated:&lt;http://semtk.research.ge.com/generated#&gt;
+select distinct ?identifier_LowLevelRequirement ?text_LowLevelRequirement ?identifier_SoftwareDesign ?identifier_SYSTEM ?identifier_HAZARD ?identifier_HighLevelRequirement
+ where {
+	?LowLevelRequirement a DevelopmentPlan:LowLevelRequirement .
+	?LowLevelRequirement PROV_S:identifier ?identifier_LowLevelRequirement .
+	optional{
+		?LowLevelRequirement REQUIREMENTS:text ?text_LowLevelRequirement .
+	} 
+	optional {
+
+		?LowLevelRequirement REQUIREMENTS:createdBy ?SoftwareDesign .
+			?SoftwareDesign a DevelopmentPlan:SoftwareDesign .
+			?SoftwareDesign PROV_S:identifier ?identifier_SoftwareDesign .
+	}
+	optional {
+
+		?LowLevelRequirement REQUIREMENTS:governs ?SYSTEM .
+			?SYSTEM a ?SYSTEM_type .
+			?SYSTEM_type  rdfs:subClassOf* SYSTEM:SYSTEM.
+			?SYSTEM PROV_S:identifier ?identifier_SYSTEM .
+	}
+	optional {
+
+		?LowLevelRequirement REQUIREMENTS:mitigates ?HAZARD .
+			?HAZARD a HAZARD:HAZARD .
+			?HAZARD PROV_S:identifier ?identifier_HAZARD .
+	}
+	optional {
+
+		?LowLevelRequirement REQUIREMENTS:satisfies ?HighLevelRequirement .
+			?HighLevelRequirement a DevelopmentPlan:HighLevelRequirement .
+			?HighLevelRequirement PROV_S:identifier ?identifier_HighLevelRequirement .
+	}
+}
+
+
+</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+</rdf:RDF>

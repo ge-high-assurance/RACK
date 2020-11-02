@@ -1,26 +1,26 @@
-"invalidatedAtTime","identifier","generatedAtTime","wasAttributedToId","wasGeneratedById","consumedById","dataInsertedById","providedById"
-null,"DCC-1",null,null,null,"EXE-LLR-1",null,null
-null,"DCC-1",null,null,null,"EXE-LLR-2",null,null
-null,"DCC-1",null,null,null,"IN-LLR-1",null,null
-null,"DCC-1",null,null,null,"OUT-LLR-1",null,null
-null,"DCC-2",null,null,null,"IN-LLR-2",null,null
-null,"DCC-2",null,null,null,"IN-LLR-3",null,null
-null,"DCC-2",null,null,null,"IN-LLR-5",null,null
-null,"DCC-2",null,null,null,"IN-LLR-6",null,null
-null,"DCC-3",null,null,null,"IN-LLR-2",null,"IN-LLR-1"
-null,"DCC-3",null,null,null,"IN-LLR-2",null,"IN-LLR-4"
-null,"DCC-3",null,null,null,"IN-LLR-3",null,"IN-LLR-1"
-null,"DCC-3",null,null,null,"IN-LLR-3",null,"IN-LLR-4"
-null,"DCC-3",null,null,null,"IN-LLR-4",null,"IN-LLR-1"
-null,"DCC-3",null,null,null,"IN-LLR-4",null,"IN-LLR-4"
-null,"DCC-3",null,null,null,"IN-LLR-5",null,"IN-LLR-1"
-null,"DCC-3",null,null,null,"IN-LLR-5",null,"IN-LLR-4"
-null,"DCC-3",null,null,null,"IN-LLR-6",null,"IN-LLR-1"
-null,"DCC-3",null,null,null,"IN-LLR-6",null,"IN-LLR-4"
-null,"DCC-4",null,null,null,"OUT-LLR-2",null,"IN-LLR-3"
-null,"DCC-4",null,null,null,"OUT-LLR-2",null,"OUT-LLR-1"
-null,"DCC-5",null,null,null,null,null,"OUT-LLR-2"
-null,"DCC-6",null,null,null,null,null,"EXE-LLR-3"
-null,"DCC-6",null,null,null,null,null,"IN-LLR-5"
-null,"DCC-6",null,null,null,null,null,"IN-LLR-6"
+"ProducingLowLevelRequirement","identifier_ProducingLowLevelRequirement","identifier_SoftwareDesign","ConsumingLowLevelRequirement","identifier_ConsumingLowLevelRequirement","identifier_DataAndControlCouple","text_DataAndControlCouple"
+"IN-LLR-6","IN-LLR-6","LlrDev1",null,null,"DCC-6","console"
+"IN-LLR-5","IN-LLR-5","LlrDev1",null,null,"DCC-6","console"
+"EXE-LLR-3","EXE-LLR-3","LlrDev1",null,null,"DCC-6","console"
+"OUT-LLR-2","OUT-LLR-2","LlrDev1",null,null,"DCC-5","outgoing UDP message"
+"IN-LLR-3","IN-LLR-3","LlrDev1","OUT-LLR-2","OUT-LLR-2","DCC-4","output_park_count"
+"OUT-LLR-1","OUT-LLR-1","LlrDev1","OUT-LLR-2","OUT-LLR-2","DCC-4","output_park_count"
+"IN-LLR-1","IN-LLR-1","LlrDev1","IN-LLR-4","IN-LLR-4","DCC-3","input_park_count"
+"IN-LLR-4","IN-LLR-4","LlrDev1","IN-LLR-4","IN-LLR-4","DCC-3","input_park_count"
+"IN-LLR-1","IN-LLR-1","LlrDev1","IN-LLR-2","IN-LLR-2","DCC-3","input_park_count"
+"IN-LLR-4","IN-LLR-4","LlrDev1","IN-LLR-2","IN-LLR-2","DCC-3","input_park_count"
+"IN-LLR-1","IN-LLR-1","LlrDev1","IN-LLR-5","IN-LLR-5","DCC-3","input_park_count"
+"IN-LLR-4","IN-LLR-4","LlrDev1","IN-LLR-5","IN-LLR-5","DCC-3","input_park_count"
+"IN-LLR-1","IN-LLR-1","LlrDev1","IN-LLR-3","IN-LLR-3","DCC-3","input_park_count"
+"IN-LLR-4","IN-LLR-4","LlrDev1","IN-LLR-3","IN-LLR-3","DCC-3","input_park_count"
+"IN-LLR-1","IN-LLR-1","LlrDev1","IN-LLR-6","IN-LLR-6","DCC-3","input_park_count"
+"IN-LLR-4","IN-LLR-4","LlrDev1","IN-LLR-6","IN-LLR-6","DCC-3","input_park_count"
+null,null,"LlrDev1","IN-LLR-6","IN-LLR-6","DCC-2","incoming UDP message"
+null,null,"LlrDev1","IN-LLR-5","IN-LLR-5","DCC-2","incoming UDP message"
+null,null,"LlrDev1","IN-LLR-3","IN-LLR-3","DCC-2","incoming UDP message"
+null,null,"LlrDev1","IN-LLR-2","IN-LLR-2","DCC-2","incoming UDP message"
+null,null,"LlrDev1","OUT-LLR-1","OUT-LLR-1","DCC-1","PowerUp"
+null,null,"LlrDev1","IN-LLR-1","IN-LLR-1","DCC-1","PowerUp"
+null,null,"LlrDev1","EXE-LLR-2","EXE-LLR-2","DCC-1","PowerUp"
+null,null,"LlrDev1","EXE-LLR-1","EXE-LLR-1","DCC-1","PowerUp"
 

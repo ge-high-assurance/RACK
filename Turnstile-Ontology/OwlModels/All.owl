@@ -22,7 +22,6 @@
     <owl:imports rdf:resource="HazardAssessment"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="CounterApplicationRequirementSpec"/>
-    <owl:imports rdf:resource="Deductions"/>
     <owl:imports rdf:resource="CounterApplicationDesignDescription"/>
     <owl:imports rdf:resource="DevelopmentPlanData"/>
     <owl:imports rdf:resource="CounterApplicationReviews"/>

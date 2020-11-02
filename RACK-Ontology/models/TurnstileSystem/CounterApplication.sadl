@@ -144,17 +144,19 @@ output_function is a COMPONENT
     has valueType "void()"
     has definedIn output_c.
 
-CompileWithOptimizations is a FIELD.
-LinkerPath is a FIELD.
+// These will likely move into a Turnstile-specific  
+// CompileWithOptimizations is a FIELD.
+// LinkerPath is a FIELD.
 
 output_o_Compiling is a COMPILE
     has identifier "output_o_Compiling",
     has dataInsertedBy Mockup,
     has compileInput output_c,
     has compileInput output_h,
-    has compiledBy cc,
-    has hasAttribute (a ATTRIBUTE field CompileWithOptimizations fieldValue "yes"),
-    has hasAttribute (a ATTRIBUTE field LinkerPath fieldValue "/path/to/libraries").
+    has compiledBy cc.
+
+//  has hasAttribute (a ATTRIBUTE field CompileWithOptimizations fieldValue "yes"),
+//  has hasAttribute (a ATTRIBUTE field LinkerPath fieldValue "/path/to/libraries").
 
 output_o is a FILE
     has identifier "output_o",

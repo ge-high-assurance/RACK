@@ -18,9 +18,6 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'GrammaTech.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:Class rdf:ID="AcertTest">
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST"/>
-  </owl:Class>
   <owl:Class rdf:ID="FailureReason">
     <owl:equivalentClass>
       <owl:Class>
@@ -38,27 +35,10 @@
   <owl:Class rdf:ID="AcertTestResult">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_RESULT"/>
   </owl:Class>
-  <owl:ObjectProperty rdf:ID="snapshotFile">
-    <rdfs:range rdf:resource="http://arcos.rack/FILE#FILE"/>
-    <rdfs:domain rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>
-  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="failureReason">
     <rdfs:comment xml:lang="en">reason for failure, e.g.: timeout, crash, bad output</rdfs:comment>
     <rdfs:range rdf:resource="#FailureReason"/>
     <rdfs:domain rdf:resource="#AcertTestResult"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="outputFile">
-    <rdfs:range rdf:resource="http://arcos.rack/FILE#FILE"/>
-    <rdfs:domain rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="coverageFile">
-    <rdfs:range rdf:resource="http://arcos.rack/FILE#FILE"/>
-    <rdfs:domain rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="testBDDScenarioFile">
-    <rdfs:comment xml:lang="en">Behavior-driven development scenario defining this test</rdfs:comment>
-    <rdfs:range rdf:resource="http://arcos.rack/FILE#FILE"/>
-    <rdfs:domain rdf:resource="#AcertTest"/>
   </owl:ObjectProperty>
   <owl:DatatypeProperty rdf:ID="textConfidence">
     <rdfs:comment xml:lang="en">confidence that this was requirement text</rdfs:comment>

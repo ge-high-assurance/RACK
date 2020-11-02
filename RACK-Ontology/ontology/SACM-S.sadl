@@ -1,3 +1,15 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
 uri "http://arcos.rack/SACM-S" alias sacms
 (note "This ontology is based on a sub-set of the Structured Assurance Case Metamodel (SACM, https://omg.org/spec/SACM). This subset is the important elements for constructing the structure of a assurance argument, but does not include all information from the meta-model.").
 import "http://arcos.rack/PROV-S".

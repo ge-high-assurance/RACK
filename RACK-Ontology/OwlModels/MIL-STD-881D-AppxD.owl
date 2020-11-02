@@ -396,22 +396,22 @@
   <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D">
     <j.0:content>
       <j.2:SECTION rdf:ID="D.4">
-        <j.2:title>DEFINITIONS</j.2:title>
+        <j.0:title>DEFINITIONS</j.0:title>
       </j.2:SECTION>
     </j.0:content>
     <j.0:content>
       <j.2:SECTION rdf:ID="D.3">
-        <j.2:title>WORK BREAKDOWN STRUCTURE LEVELS</j.2:title>
+        <j.0:title>WORK BREAKDOWN STRUCTURE LEVELS</j.0:title>
       </j.2:SECTION>
     </j.0:content>
     <j.0:content>
       <j.2:SECTION rdf:ID="D.2">
-        <j.2:title>APPLICABLE DOCUMENTS</j.2:title>
+        <j.0:title>APPLICABLE DOCUMENTS</j.0:title>
       </j.2:SECTION>
     </j.0:content>
     <j.0:content>
       <j.2:SECTION rdf:ID="D.1">
-        <j.2:title>SCOPE</j.2:title>
+        <j.0:title>SCOPE</j.0:title>
       </j.2:SECTION>
     </j.0:content>
   </rdf:Description>
@@ -557,7 +557,7 @@
     <j.0:identifier>CybersecurityManagement-1.6.3</j.0:identifier>
   </j.1:SYSTEM>
   <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D-AppxD">
-    <j.2:title>STRATEGIC MISSILE SYSTEMS</j.2:title>
+    <j.0:title>STRATEGIC MISSILE SYSTEMS</j.0:title>
   </rdf:Description>
   <j.1:SYSTEM rdf:ID="PBACMSEITPMandSupportEquipment-1.2.9.1">
     <m881D:wbs>1.2.9.1</m881D:wbs>

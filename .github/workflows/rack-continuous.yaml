@@ -1,0 +1,58 @@
+# Lints the RACK source
+
+name: RACK continous lint
+on: [push]
+
+jobs:
+  lint:
+    name: Lint shell scripts and the RACK CLI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Lint shell scripts with ShellCheck
+        # This action is composite on master which `act` can't yet handle.
+        uses: ludeeus/action-shellcheck@fcee962fee3f87888d7992ab0560232aef368e89
+        env:
+          SHELLCHECK_OPTS: -e SC1008
+        with:
+          ignore: packer
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Cache RACK CLI development dependencies
+        uses: actions/cache@v2
+        with:
+          # This path is specific to Ubuntu
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('cli/dev/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
+
+      - name: Install development dependencies
+        run: |
+          pip install \
+            --quiet \
+            --requirement cli/dev/requirements.txt
+
+      - shell: bash
+        name: Lint the RACK CLI
+        run: |
+          cd cli
+          pylint .
+          mypy .
+
+      - shell: bash
+        name: Lint the ontology
+        continue-on-error: true
+        run: |
+          sudo apt-add-repository ppa:swi-prolog/stable
+          sudo apt-get update -qq --yes
+          sudo apt-get install -qq --yes swi-prolog
+
+          cd RACK-Ontology
+          ../assist/bin/check

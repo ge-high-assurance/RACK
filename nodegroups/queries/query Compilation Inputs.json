@@ -120,8 +120,8 @@
                             "?COMPILE"
                         ],
                         "UriConnectBy": "http://arcos.rack/SOFTWARE#createBy",
-                        "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
-                        "ValueType": "ACTIVITY"
+                        "UriValueType": "http://arcos.rack/SOFTWARE#FILE_CREATION",
+                        "ValueType": "FILE_CREATION"
                     }
                 ],
                 "propList": [
@@ -151,7 +151,7 @@
             {
                 "graph": "http://rack001/data",
                 "type": "fuseki",
-                "url": "http://localhost:8080/fuseki/SemTK"
+                "url": "http://localhost:3030/RACK"
             }
         ],
         "domain": "",
@@ -160,7 +160,7 @@
             {
                 "graph": "http://rack001/model",
                 "type": "fuseki",
-                "url": "http://localhost:8080/fuseki/SemTK"
+                "url": "http://localhost:3030/RACK"
             }
         ],
         "name": "MyDB"

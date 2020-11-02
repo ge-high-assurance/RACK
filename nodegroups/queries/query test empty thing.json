@@ -100,7 +100,7 @@
                     "http://arcos.rack/HAZARD#HAZARD_IDENTIFICATION",
                     "http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"
                 ],
-                "valueConstraint": "MINUS { ?THING ?p ?o.   FILTER ( ?p NOT IN (rdf:type, PROV_S:identifier) ). } FILTER ( ?THING_type NOT IN (PROV_S:System) ) ."
+                "valueConstraint": "MINUS { ?THING ?p ?o.   FILTER ( ?p NOT IN (rdf:type, PROV_S:identifier) ). } FILTER ( ?THING_type NOT IN (PROV_S:System) ) "
             }
         ],
         "version": 11

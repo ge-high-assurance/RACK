@@ -1,0 +1,124 @@
+# Builds a Docker image upon each push to master:
+#  - Caches files needed to build rack-box images
+#  - Builds rack-box:dev Docker image
+#  - Pushes rack-box:dev image to Docker Hub
+
+name: RACK-in-a-Box continous build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Check out RACK source
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK
+        token: ${{ secrets.RACK_CI_PAT }}
+        path: RACK
+
+    - name: Check out RACK wiki
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK.wiki
+        token: ${{ secrets.RACK_CI_PAT }}
+        path: RACK.wiki
+
+    - name: Cache Fuseki distribution
+      uses: actions/cache@v2
+      id: cache-fuseki
+      with:
+        path: RACK/rack-box/files/fuseki.tar.gz
+        key: fuseki-3.16.0
+
+    - name: Cache RACK CLI
+      uses: actions/cache@v2
+      id: cache-rack-cli
+      with:
+        path: RACK/rack-box/files/rack.tar.gz
+        key: rack-cli-${{ hashFiles('RACK/RACK-Ontology/**', 'RACK/nodegroups/**') }}
+
+    - name: Cache RACK documentation
+      uses: actions/cache@v2
+      id: cache-rack-doc
+      with:
+        path: |
+          RACK/rack-box/files/documentation.html
+          RACK/rack-box/files/index.html
+        key: rack-doc-${{ hashFiles('RACK.wiki/*.md') }}
+
+    - name: Cache SemTK distribution
+      uses: actions/cache@v2
+      id: cache-semtk
+      with:
+        path: RACK/rack-box/files/semtk.tar.gz
+        key: semtk-2.2.2-SNAPSHOT-v3
+
+    - name: Cache style spreadsheet
+      uses: actions/cache@v2
+      id: cache-style
+      with:
+        path: RACK/rack-box/files/style.css
+        key: style-db9e23f
+
+    - name: Cache systemctl script
+      uses: actions/cache@v2
+      id: cache-systemctl
+      with:
+        path: RACK/rack-box/files/systemctl3.py
+        key: systemctl-1.5.4260
+
+    - name: Download Fuseki distribution
+      if: steps.cache-fuseki.outputs.cache-hit != 'true'
+      run: curl -LSs https://apache.claz.org/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
+
+    - name: Package RACK CLI
+      if: steps.cache-rack-cli.outputs.cache-hit != 'true'
+      run: |
+        sudo apt-get install -y python3-virtualenv
+        cd RACK/cli
+        virtualenv venv
+        source venv/bin/activate
+        pip3 install -r requirements.txt
+        python3 setup.py --quiet install
+        find venv/bin -type f | xargs perl -p -i -e 's|${{ github.workspace }}|/home/ubuntu|g'
+        cd ${{ github.workspace }}
+        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=rack-box --exclude=tools RACK
+
+    - name: Generate RACK documentation
+      if: steps.cache-rack-doc.outputs.cache-hit != 'true'
+      run: |
+        sudo npm install -g github-wikito-converter markdown-to-html
+        gwtc -t RACK-in-a-Box RACK.wiki
+        markdown -t RACK-in-a-box -s style.css RACK.wiki/Welcome.md > index.html
+        mv documentation.html index.html RACK/rack-box/files
+
+    - name: Download SemTK distribution
+      if: steps.cache-semtk.outputs.cache-hit != 'true'
+      run: curl -LSs 'https://oss.sonatype.org/service/local/artifact/maven/content?r=snapshots&g=com.ge.research.semtk&a=distribution&v=2.2.2-SNAPSHOT&c=bin&e=tar.gz' -o RACK/rack-box/files/semtk.tar.gz
+
+    - name: Download style spreadsheet
+      if: steps.cache-style.outputs.cache-hit != 'true'
+      run: curl -LSs https://github.com/KrauseFx/markdown-to-html-github-style/raw/master/style.css -o RACK/rack-box/files/style.css
+
+    - name: Download systemctl script
+      if: steps.cache-systemctl.outputs.cache-hit != 'true'
+      run: curl -LSs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4260/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
+
+    - name: Build rack-box image
+      run: |
+        cd RACK/rack-box
+        packer build -var version=dev rack-box-docker.json
+
+    - name: Login to Docker Hub
+      if: github.base_ref == 'master'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Push rack-box image to Docker Hub
+      if: github.base_ref == 'master'
+      run: docker push interran/rack-box:dev

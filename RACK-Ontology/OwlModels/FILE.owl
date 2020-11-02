@@ -1,0 +1,106 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:provs="http://arcos.rack/PROV-S#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:file="http://arcos.rack/FILE#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://arcos.rack/FILE">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="PROV-S"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'FILE.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="FILE_CREATION">
+    <rdfs:comment xml:lang="en">An ACTIVITY that produces a FILE</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="FILE">
+    <rdfs:comment xml:lang="en">A file in the system</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="FORMAT">
+    <rdfs:comment xml:lang="en">The data format of a FILE</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
+  </owl:Class>
+  <owl:Class rdf:ID="HASH_TYPE">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:oneOf rdf:parseType="Collection">
+          <file:HASH_TYPE rdf:ID="MD5"/>
+          <file:HASH_TYPE rdf:ID="SHA1"/>
+          <file:HASH_TYPE rdf:ID="SHA2_256"/>
+          <file:HASH_TYPE rdf:ID="SHA2_512"/>
+        </owl:oneOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
+  </owl:Class>
+  <owl:Class rdf:ID="FILE_HASH">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="hashValue"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hashType"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A hash identifying a FILE</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="#hashType">
+    <rdfs:domain rdf:resource="#FILE_HASH"/>
+    <rdfs:range rdf:resource="#HASH_TYPE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fileParent">
+    <rdfs:comment xml:lang="en">The file an ENTITY is defined in</rdfs:comment>
+    <rdfs:range rdf:resource="#FILE"/>
+    <rdfs:domain rdf:resource="PROV-S#ENTITY"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="createBy">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
+    <rdfs:comment xml:lang="en">FILE_CREATION ACTIVITY that created this file</rdfs:comment>
+    <rdfs:range rdf:resource="#FILE_CREATION"/>
+    <rdfs:domain rdf:resource="#FILE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fileFormat">
+    <rdfs:comment xml:lang="en">The byte-level encoding of a file</rdfs:comment>
+    <rdfs:range rdf:resource="#FORMAT"/>
+    <rdfs:domain rdf:resource="#FILE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="satisfies">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#FILE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fileHash">
+    <rdfs:comment xml:lang="en">Hash of the file contents</rdfs:comment>
+    <rdfs:range rdf:resource="#FILE_HASH"/>
+    <rdfs:domain rdf:resource="#FILE"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="#hashValue">
+    <rdfs:domain rdf:resource="#FILE_HASH"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="filename">
+    <rdfs:comment xml:lang="en">A logical file path relative to the container of the file.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#FILE"/>
+  </owl:DatatypeProperty>
+</rdf:RDF>

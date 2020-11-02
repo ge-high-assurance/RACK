@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2086,SC2102,SC2044
+#
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
+
+bindir=$(dirname "${0:-pwd}")
+
+usage() {
+    echo Usage: $0 [INPUT_DIR] OUTPUT_DIR
+    echo ""
+    echo "   Converts SADL files in ontology directory into OWL files"
+    echo "   in the specified target directory"
+    exit 1
+}
+
+if [ "${1}" == "-h" ] ; then usage; fi
+
+case $# in
+    1) INPDIR=${bindir}/../../ontology;
+       OUTDIR=${1} ;;
+    2) INPDIR=${1};
+       OUTDIR=${2} ;;
+    *) usage
+esac
+
+if [ ! -d "${INPDIR}" ] ; then
+    echo "ERROR: input directory ${INPDIR} does not exist"
+    exit 1
+elif [ ! -d "${OUTDIR}" ] ; then
+    echo "ERROR: output directory ${OUTDIR} does not exist"
+    exit 1
+fi
+
+convert_file() { # $1 = input .sadl file path, $2 = output dir path or file path
+    inp=$1
+    outp=${2:-"$(dirname $1)"}
+    if [ -d "$outp" ] ; then
+        outp="${outp}/$(basename ${inp} .sadl).owl"
+    elif [ ! -d "$(dirname ${outp})" ] ; then
+        echo "ERROR: Cannot write to output directory or file: ${outp}"
+        exit 1
+    fi
+    echo Converting $inp
+    swipl -g "sadl_file_to_owl('$inp', '$outp')" -t halt ${bindir}/rack/sadl.pl
+}
+
+ok=0
+fail=0
+
+skip=(
+    GeneratePropInfoCSV.sadl
+)
+
+for SFile in $(find ${INPDIR} -name '*.sadl') ; do
+    for S in ${skip[*]} ; do
+        if [ "$(basename ${SFile})" = "$S" ] ; then
+            continue 2
+        fi
+    done
+    convert_file "${SFile}" "${OUTDIR}" && ok=$((ok+1)) || fail=$((fail+1))
+done
+
+echo Conversion results: $ok converted successfully, $fail failures
+                                                                  

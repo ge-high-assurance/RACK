@@ -1,26 +1,18 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
 uri "http://arcos.rack/SOFTWARE" alias sw.
 import "http://arcos.rack/PROV-S".
-
-FILE
-    (note "A file in the system")
-	is a type of ENTITY.
-	filename (note "A logical file path relative to the container of the file.") describes FILE with values of type string.
-
-	fileFormat (note "The byte-level encoding of a file") describes FILE with values of type FORMAT.
-
-    satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes FILE with values of type ENTITY.
-    satisfies is a type of wasDerivedFrom.
-
-    createBy (note "FILE_CREATION ACTIVITY that created this file") describes FILE with values of type FILE_CREATION.
-    createBy is a type of wasGeneratedBy.
-
-FORMAT
-    (note "The data format of a FILE")
-    is a type of THING.
-
-FILE_CREATION
-   (note "An ACTIVITY that produces a FILE")
-   is a type of ACTIVITY.
+import "http://arcos.rack/FILE".
 
 CODE_DEVELOPMENT
 	(note "An ACTIVITY that produces source code FILEs")

@@ -1,3 +1,15 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
 uri "http://arcos.rack/ANALYSIS" alias ^A.
 import "http://arcos.rack/PROV-S".
 
@@ -42,5 +54,4 @@ ANALYSIS_ANNOTATION
     (note "A result of the analysis that is linked to some specific part of the system.")
     is a type of ENTITY.
     fromReport (note "Which analysis report this annotation comes from.") describes ANALYSIS_ANNOTATION with values of type ENTITY.
-    description (note "The content of the annotation.") describes ANALYSIS_ANNOTATION with values of type string.
     annotationType (note "The type of the annotation.") describes ANALYSIS_ANNOTATION with values of type ANALYSIS_ANNOTATION_TYPE.

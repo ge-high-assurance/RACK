@@ -410,22 +410,22 @@
   <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D">
     <j.0:content>
       <j.2:SECTION rdf:ID="C.4">
-        <j.2:title>DEFINITIONS</j.2:title>
+        <j.0:title>DEFINITIONS</j.0:title>
       </j.2:SECTION>
     </j.0:content>
     <j.0:content>
       <j.2:SECTION rdf:ID="C.3">
-        <j.2:title>WORK BREAKDOWN STRUCTURE LEVELS</j.2:title>
+        <j.0:title>WORK BREAKDOWN STRUCTURE LEVELS</j.0:title>
       </j.2:SECTION>
     </j.0:content>
     <j.0:content>
       <j.2:SECTION rdf:ID="C.2">
-        <j.2:title>APPLICABLE DOCUMENTS</j.2:title>
+        <j.0:title>APPLICABLE DOCUMENTS</j.0:title>
       </j.2:SECTION>
     </j.0:content>
     <j.0:content>
       <j.2:SECTION rdf:ID="C.1">
-        <j.2:title>SCOPE</j.2:title>
+        <j.0:title>SCOPE</j.0:title>
       </j.2:SECTION>
     </j.0:content>
   </rdf:Description>
@@ -470,7 +470,7 @@
     <j.0:identifier>Actuators-1.2.7.4</j.0:identifier>
   </j.1:SYSTEM>
   <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D-AppxC">
-    <j.2:title>MISSILE/ORDNANCE SYSTEMS</j.2:title>
+    <j.0:title>MISSILE/ORDNANCE SYSTEMS</j.0:title>
   </rdf:Description>
   <j.1:SYSTEM rdf:ID="OtherAirframeComponents1TonSpecify-1.2.2.5">
     <m881D:wbs>1.2.2.5</m881D:wbs>

@@ -272,7 +272,7 @@
     <j.0:identifier>IntegratedLogisticsSupportILSSystemsEngineering-1.3.2</j.0:identifier>
   </j.1:SYSTEM>
   <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D-AppxB">
-    <j.2:title>ELECTRONIC OR GENERIC SYSTEMS</j.2:title>
+    <j.0:title>ELECTRONIC OR GENERIC SYSTEMS</j.0:title>
   </rdf:Description>
   <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentAirframeHullVehicle-1.8.1.1">
     <m881D:wbs>1.8.1.1</m881D:wbs>
@@ -307,22 +307,22 @@
   <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D">
     <j.0:content>
       <j.2:SECTION rdf:ID="B.4">
-        <j.2:title>DEFINITIONS</j.2:title>
+        <j.0:title>DEFINITIONS</j.0:title>
       </j.2:SECTION>
     </j.0:content>
     <j.0:content>
       <j.2:SECTION rdf:ID="B.3">
-        <j.2:title>WORK BREAKDOWN STRUCTURE LEVELS</j.2:title>
+        <j.0:title>WORK BREAKDOWN STRUCTURE LEVELS</j.0:title>
       </j.2:SECTION>
     </j.0:content>
     <j.0:content>
       <j.2:SECTION rdf:ID="B.2">
-        <j.2:title>APPLICABLE DOCUMENTS</j.2:title>
+        <j.0:title>APPLICABLE DOCUMENTS</j.0:title>
       </j.2:SECTION>
     </j.0:content>
     <j.0:content>
       <j.2:SECTION rdf:ID="B.1">
-        <j.2:title>SCOPE</j.2:title>
+        <j.0:title>SCOPE</j.0:title>
       </j.2:SECTION>
     </j.0:content>
   </rdf:Description>

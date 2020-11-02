@@ -75,11 +75,6 @@
     <rdfs:range rdf:resource="#ANALYSIS_RESULT"/>
     <rdfs:domain rdf:resource="#ANALYSIS_REPORT"/>
   </owl:ObjectProperty>
-  <owl:DatatypeProperty rdf:ID="description">
-    <rdfs:comment xml:lang="en">The content of the annotation.</rdfs:comment>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#ANALYSIS_ANNOTATION"/>
-  </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="metric">
     <rdfs:comment xml:lang="en">provides a numerical result value from the analysis that was performed</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>

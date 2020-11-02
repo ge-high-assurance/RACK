@@ -24,212 +24,212 @@
       <D:SECTION rdf:ID="ARP-4754A-AppendixA">
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4786-7.1">
-            <Pr:description>Assurance is obtained that necessary plans are developed and maintained for all aspects of system certification.</Pr:description>
+            <j.0:description>Assurance is obtained that necessary plans are developed and maintained for all aspects of system certification.</j.0:description>
             <j.0:identifier>ARP-4786-7.1</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4756-2.1">
-            <Pr:description>Aircraft-level functions, functional requirements, functional interfaces and assumptions are defined</Pr:description>
+            <j.0:description>Aircraft-level functions, functional requirements, functional interfaces and assumptions are defined</j.0:description>
             <j.0:identifier>ARP-4756-2.1</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4754-1.1">
-            <Pr:description>System development and integral process activities are defined</Pr:description>
+            <j.0:description>System development and integral process activities are defined</j.0:description>
             <j.0:identifier>ARP-4754-1.1</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4787-7.2">
-            <Pr:description>Development activities and processes are conducted in accordance with those plans.</Pr:description>
+            <j.0:description>Development activities and processes are conducted in accordance with those plans.</j.0:description>
             <j.0:identifier>ARP-4787-7.2</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4776-5.1">
-            <Pr:description>Test or demonstration procedures are correct.</Pr:description>
+            <j.0:description>Test or demonstration procedures are correct.</j.0:description>
             <j.0:identifier>ARP-4776-5.1</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4769-3.7">
-            <Pr:description>Independence requirements in functions, systems and items are captured.</Pr:description>
+            <j.0:description>Independence requirements in functions, systems and items are captured.</j.0:description>
             <j.0:identifier>ARP-4769-3.7</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4768-3.6">
-            <Pr:description>The system safety assessment is performed.</Pr:description>
+            <j.0:description>The system safety assessment is performed.</j.0:description>
             <j.0:identifier>ARP-4768-3.6</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4766-3.4">
-            <Pr:description>The common cause analyses are performed.</Pr:description>
+            <j.0:description>The common cause analyses are performed.</j.0:description>
             <j.0:identifier>ARP-4766-3.4</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
+        <j.0:title>PROCESS OBJECTIVES DATA</j.0:title>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4781-5.6">
-            <Pr:description>Assessment of deficiencies and their related impact on safety is identified.</Pr:description>
+            <j.0:description>Assessment of deficiencies and their related impact on safety is identified.</j.0:description>
             <j.0:identifier>ARP-4781-5.6</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4788-8.1">
-            <Pr:description>Compliance substantiation is provided.</Pr:description>
+            <j.0:description>Compliance substantiation is provided.</j.0:description>
             <j.0:identifier>ARP-4788-8.1</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4767-3.5">
-            <Pr:description>The aircraft safety assessment is performed.</Pr:description>
+            <j.0:description>The aircraft safety assessment is performed.</j.0:description>
             <j.0:identifier>ARP-4767-3.5</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4759-2.4">
-            <Pr:description>System derived requirements (including derived safety-related requirements) are defined and rationale explained</Pr:description>
+            <j.0:description>System derived requirements (including derived safety-related requirements) are defined and rationale explained</j.0:description>
             <j.0:identifier>ARP-4759-2.4</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4780-5.5">
-            <Pr:description>Verification compliance substantiation is included.</Pr:description>
+            <j.0:description>Verification compliance substantiation is included.</j.0:description>
             <j.0:identifier>ARP-4780-5.5</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4758-2.3">
-            <Pr:description>System requirements including assumptions and system interfaces are defined.</Pr:description>
+            <j.0:description>System requirements including assumptions and system interfaces are defined.</j.0:description>
             <j.0:identifier>ARP-4758-2.3</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4762-2.7">
-            <Pr:description>Appropriate item, system and aircraft integrations are performed.</Pr:description>
+            <j.0:description>Appropriate item, system and aircraft integrations are performed.</j.0:description>
             <j.0:identifier>ARP-4762-2.7</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4772-4.3">
-            <Pr:description>Derived requirements are justified and validated.</Pr:description>
+            <j.0:description>Derived requirements are justified and validated.</j.0:description>
             <j.0:identifier>ARP-4772-4.3</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4783-6.2">
-            <Pr:description>Configuration baseline and derivatives are established.</Pr:description>
+            <j.0:description>Configuration baseline and derivatives are established.</j.0:description>
             <j.0:identifier>ARP-4783-6.2</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4775-4.6">
-            <Pr:description>Validation compliance substantiation is provided.</Pr:description>
+            <j.0:description>Validation compliance substantiation is provided.</j.0:description>
             <j.0:identifier>ARP-4775-4.6</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4773-4.4">
-            <Pr:description>Requirements are traceable.</Pr:description>
+            <j.0:description>Requirements are traceable.</j.0:description>
             <j.0:identifier>ARP-4773-4.4</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4784-6.3">
-            <Pr:description>Problem reporting , change control, change review, and configuration status accounting are established.</Pr:description>
+            <j.0:description>Problem reporting , change control, change review, and configuration status accounting are established.</j.0:description>
             <j.0:identifier>ARP-4784-6.3</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4779-5.4">
-            <Pr:description>Safety requirements are verified.</Pr:description>
+            <j.0:description>Safety requirements are verified.</j.0:description>
             <j.0:identifier>ARP-4779-5.4</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4757-2.2">
-            <Pr:description>Aircraft functions are allocated to systems</Pr:description>
+            <j.0:description>Aircraft functions are allocated to systems</j.0:description>
             <j.0:identifier>ARP-4757-2.2</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4761-2.6">
-            <Pr:description>System requirements are allocated to items.</Pr:description>
+            <j.0:description>System requirements are allocated to items.</j.0:description>
             <j.0:identifier>ARP-4761-2.6</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4774-4.5">
-            <Pr:description></Pr:description>
+            <j.0:description></j.0:description>
             <j.0:identifier>ARP-4774-4.5</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4785-6.4">
-            <Pr:description>Archive and retrieval are established.</Pr:description>
+            <j.0:description>Archive and retrieval are established.</j.0:description>
             <j.0:identifier>ARP-4785-6.4</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4782-6.1">
-            <Pr:description>Configuration items are identified</Pr:description>
+            <j.0:description>Configuration items are identified</j.0:description>
             <j.0:identifier>ARP-4782-6.1</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4771-4.2">
-            <Pr:description>Assumptions are justified and validated.</Pr:description>
+            <j.0:description>Assumptions are justified and validated.</j.0:description>
             <j.0:identifier>ARP-4771-4.2</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4778-5.3">
-            <Pr:description>Product implementation complies with aircraft, and system requirements.</Pr:description>
+            <j.0:description>Product implementation complies with aircraft, and system requirements.</j.0:description>
             <j.0:identifier>ARP-4778-5.3</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4777-5.2">
-            <Pr:description>Verification demonstrates intended function and confidence of no unintended function impacts to safety.</Pr:description>
+            <j.0:description>Verification demonstrates intended function and confidence of no unintended function impacts to safety.</j.0:description>
             <j.0:identifier>ARP-4777-5.2</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4765-3.3">
-            <Pr:description>The preliminary system safety assessment is performed.</Pr:description>
+            <j.0:description>The preliminary system safety assessment is performed.</j.0:description>
             <j.0:identifier>ARP-4765-3.3</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4770-4.1">
-            <Pr:description>Aircraft, system, items requirements are complete and correct.</Pr:description>
+            <j.0:description>Aircraft, system, items requirements are complete and correct.</j.0:description>
             <j.0:identifier>ARP-4770-4.1</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4755-1.2">
-            <Pr:description>Transition criteria and inter-relationship among processes are defined</Pr:description>
+            <j.0:description>Transition criteria and inter-relationship among processes are defined</j.0:description>
             <j.0:identifier>ARP-4755-1.2</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
-        <D:title>PROCESS OBJECTIVES DATA</D:title>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4764-3.2">
-            <Pr:description>The preliminary aircraft safety assessment is performed.</Pr:description>
+            <j.0:description>The preliminary aircraft safety assessment is performed.</j.0:description>
             <j.0:identifier>ARP-4764-3.2</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4760-2.5">
-            <Pr:description>System architecture is defined.</Pr:description>
+            <j.0:description>System architecture is defined.</j.0:description>
             <j.0:identifier>ARP-4760-2.5</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>
         <j.0:content>
           <Pr:OBJECTIVE rdf:ID="ARP-4763-3.1">
-            <Pr:description>The aircraft/system functional hazard assessment is performed.</Pr:description>
+            <j.0:description>The aircraft/system functional hazard assessment is performed.</j.0:description>
             <j.0:identifier>ARP-4763-3.1</j.0:identifier>
           </Pr:OBJECTIVE>
         </j.0:content>

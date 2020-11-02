@@ -1,3 +1,15 @@
+/* Copyright (c) 2020, General Electric Company
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
 uri "http://arcos.rack/MIL-STD-881D/MIL-STD-881D-AppxC" alias MIL-STD-881D-AppxC.
 import "http://arcos.rack/MIL-STD-881D/MIL-STD-881D".
 
@@ -617,4 +629,4 @@ MaintenanceIndustrialFacilities-1.16.3 is a SYSTEM,
 InitialSparesandRepairParts-1.17 is a SYSTEM,
 	has identifier "InitialSparesandRepairParts-1.17",
 	has partOf MissileOrdnanceSystem-1,
-	has wbs "1.17".	
+	has wbs "1.17".

@@ -3,8 +3,8 @@
 Here are very brief instructions how to run the Docker RACK box.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Docker-RACK-Box) in the RACK Wiki.  You will need to give your Docker Hub username to the RACK team so you can be given access to our Docker Hub repository.
 
 1. Open a terminal window where you can run `docker`.
-2. Type `docker pull interran/rack-box:v3.0`
-3. Type `docker run --detach -p 80:80 -p 12050-12092:12050-12092 interran/rack-box:v3.0`
+2. Type `docker pull gehighassurance/rack-box:v3.0`
+3. Type `docker run --detach -p 80:80 -p 12050-12092:12050-12092 gehighassurance/rack-box:v3.0`
 4. Visit <http://localhost/> in your browser to view the RACK box's welcome page.
 
 ## Run the Virtual RACK box

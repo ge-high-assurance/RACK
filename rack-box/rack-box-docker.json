@@ -3,7 +3,7 @@
     "http_proxy": "{{env `http_proxy`}}",
     "https_proxy": "{{env `https_proxy`}}",
     "no_proxy": "{{env `no_proxy`}}",
-    "repository": "interran/rack-box",
+    "repository": "gehighassurance/rack-box",
     "tags": "{{user `version`}}",
     "version": "dev"
   },

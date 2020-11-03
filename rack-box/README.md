@@ -4,7 +4,7 @@ This README is for RACK developers and RACK-in-a-Box power users who
 want to know how to build rack-box images.  Normally we let our RACK
 repository's GitHub Actions workflow build rack-box images and push or
 upload them to our [Docker
-Hub](https://hub.docker.com/repository/docker/interran/rack-box) or
+Hub](https://hub.docker.com/repository/docker/gehighassurance/rack-box) or
 [GitHub Releases](https://github.com/ge-high-assurance/RACK/releases)
 pages automatically.
 
@@ -139,7 +139,7 @@ the following places:
 
 ### Download pages
 
-- [ ] [Docker Hub](https://hub.docker.com/repository/docker/interran/rack-box)
+- [ ] [Docker Hub](https://hub.docker.com/repository/docker/gehighassurance/rack-box)
 - [ ] [GitHub Releases](https://github.com/ge-high-assurance/RACK/releases)
 
 Our GitHub Actions release workflow automates building and uploading

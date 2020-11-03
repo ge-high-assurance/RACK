@@ -48,3 +48,7 @@ HASH_TYPE
     (note "A type of cryptographic hash")
     is a type of THING,
     must be one of { MD5, SHA1, SHA2_256, SHA2_512 }.
+MD5      is a HASH_TYPE with identifier "MD5".
+SHA1     is a HASH_TYPE with identifier "SHA1".
+SHA2_256 is a HASH_TYPE with identifier "SHA2_256".
+SHA2_512 is a HASH_TYPE with identifier "SHA2_512".

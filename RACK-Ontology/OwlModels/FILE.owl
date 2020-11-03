@@ -32,13 +32,22 @@
     <owl:equivalentClass>
       <owl:Class>
         <owl:oneOf rdf:parseType="Collection">
-          <file:HASH_TYPE rdf:ID="MD5"/>
-          <file:HASH_TYPE rdf:ID="SHA1"/>
-          <file:HASH_TYPE rdf:ID="SHA2_256"/>
-          <file:HASH_TYPE rdf:ID="SHA2_512"/>
+          <file:HASH_TYPE rdf:ID="MD5">
+            <provs:identifier>MD5</provs:identifier>
+          </file:HASH_TYPE>
+          <file:HASH_TYPE rdf:ID="SHA1">
+            <provs:identifier>SHA1</provs:identifier>
+          </file:HASH_TYPE>
+          <file:HASH_TYPE rdf:ID="SHA2_256">
+            <provs:identifier>SHA2_256</provs:identifier>
+          </file:HASH_TYPE>
+          <file:HASH_TYPE rdf:ID="SHA2_512">
+            <provs:identifier>SHA2_512</provs:identifier>
+          </file:HASH_TYPE>
         </owl:oneOf>
       </owl:Class>
     </owl:equivalentClass>
+    <rdfs:comment xml:lang="en">A type of cryptographic hash</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="FILE_HASH">

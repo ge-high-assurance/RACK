@@ -15,20 +15,31 @@ uri "http://arcos.rack/SACM-S" alias sacms
 import "http://arcos.rack/PROV-S".
 
 //not sure if Argument package is really needed for fragments, seems like this would really be something done by TA3
-ARGUMENT_PACKAGE is a type of ENTITY.
+ARGUMENT_PACKAGE
+    (note "Argument Package is the containing element for a structured argument represented using the SACM Argumentation
+Metamodel.")
+    is a type of ENTITY.
 	argumentationElement describes ARGUMENT_PACKAGE with values of type ENTITY.
 	argumentationElement is a type of wasDerivedFrom.
 
-CLAIM is a type of ENTITY.
+CLAIM
+    (note "Claims are used to record the propositions of any structured argument contained in an Argument Package.")
+    is a type of ENTITY.
 
-ASSERTED_CONTEXT is a type of ENTITY.
+ASSERTED_CONTEXT
+    (note "Asserted Context can be used to declare that the artifact cited by an ArtifactReference(s) provides the context for the
+interpretation and scoping of a Claim or ArgumentReasoning element.")
+    is a type of ENTITY.
 	source describes ASSERTED_CONTEXT  with values of type ENTITY.
 	source is a type of wasDerivedFrom.
 
 	target  describes ASSERTED_CONTEXT  with values of type ENTITY.
 	target is a type of wasDerivedFrom.
 
-ASSERTED_INFERENCE is a type of ENTITY.
+ASSERTED_INFERENCE
+    (note "Asserted Inference association records the inference that a user declares to exist between one or more Assertion (premise) and
+another Assertion (conclusion).")
+    is a type of ENTITY.
 	source describes ASSERTED_INFERENCE  with values of type ENTITY.
 	source is a type of wasDerivedFrom.
 
@@ -39,5 +50,10 @@ ASSERTED_INFERENCE is a type of ENTITY.
 	reasoning is a type of wasDerivedFrom.
 
 
-ARTIFACT_REFERENCE is a type of ENTITY.
-ARGUMENT_REASONING is a type of ENTITY.
+ARTIFACT_REFERENCE
+    (note "Artifact Reference enables the citation of an artifact as information that relates to the structured argument.")
+    is a type of ENTITY.
+
+ARGUMENT_REASONING
+    (note "Argument Reasoning can be used to provide additional description or explanation of the asserted relationship.")
+    is a type of ENTITY.

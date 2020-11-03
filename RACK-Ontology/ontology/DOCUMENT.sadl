@@ -86,4 +86,9 @@ SECTION (note "A SECTION is generic grouping of ENTITYs with a document") is a t
 
 	title describes SECTION with values of type string.  
 
-DOC_STATUS is a class, must be one of {In_Development, Released, Withdrawn}.
+DOC_STATUS (note "Life-cycle status of a document")
+    is a type of THING,
+    must be one of {In_Development, Released, Withdrawn}.
+In_Development is a DOC_STATUS with identifier "In Development".
+Released       is a DOC_STATUS with identifier "Released".
+Withdrawn      is a DOC_STATUS with identifier "Withdrawn".

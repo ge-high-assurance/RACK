@@ -24,15 +24,24 @@
     <owl:equivalentClass>
       <owl:Class>
         <owl:oneOf rdf:parseType="Collection">
-          <A:ANALYSIS_RESULT rdf:ID="Passed"/>
-          <A:ANALYSIS_RESULT rdf:ID="Failed"/>
-          <A:ANALYSIS_RESULT rdf:ID="Indeterminate"/>
+          <A:ANALYSIS_RESULT rdf:ID="Passed">
+            <provs:identifier>Passed</provs:identifier>
+          </A:ANALYSIS_RESULT>
+          <A:ANALYSIS_RESULT rdf:ID="Failed">
+            <provs:identifier>Failed</provs:identifier>
+          </A:ANALYSIS_RESULT>
+          <A:ANALYSIS_RESULT rdf:ID="Indeterminate">
+            <provs:identifier>Indeterminate</provs:identifier>
+          </A:ANALYSIS_RESULT>
         </owl:oneOf>
       </owl:Class>
     </owl:equivalentClass>
+    <rdfs:comment xml:lang="en">Outcome of an analysis report</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="ANALYSIS_ANNOTATION_TYPE">
     <rdfs:comment xml:lang="en">An open/extensible set of types of analysis annotations</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="ANALYSIS">
     <rdfs:comment xml:lang="en">ACTIVITY of running some analysis, supposedly creating some ANALYSIS_REPORT</rdfs:comment>
@@ -81,12 +90,15 @@
     <rdfs:domain rdf:resource="#ANALYSIS_REPORT"/>
   </owl:DatatypeProperty>
   <A:ANALYSIS_ANNOTATION_TYPE rdf:ID="POSTCONDITION">
+    <provs:identifier>Postcondition</provs:identifier>
     <rdfs:comment xml:lang="en">A constraint that should hold after of successful operation of this unit of code.</rdfs:comment>
   </A:ANALYSIS_ANNOTATION_TYPE>
   <A:ANALYSIS_ANNOTATION_TYPE rdf:ID="INVARIANT">
+    <provs:identifier>Invariant</provs:identifier>
     <rdfs:comment xml:lang="en">A constraint on this unit of code or data that is true at any point in the program's execution.</rdfs:comment>
   </A:ANALYSIS_ANNOTATION_TYPE>
   <A:ANALYSIS_ANNOTATION_TYPE rdf:ID="PRECONDITION">
+    <provs:identifier>Precondition</provs:identifier>
     <rdfs:comment xml:lang="en">A constraint that should hold in advance of successful operation of this unit of code.</rdfs:comment>
   </A:ANALYSIS_ANNOTATION_TYPE>
 </rdf:RDF>

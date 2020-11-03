@@ -65,11 +65,9 @@ of `Requirement`.
 
 ### TEST
 
-Added AcertTest subtype
-
 - verifies: Already set-valued
 - description: Mapped to `description` on THING
-- scenario: Open question but currently maps to `testBDDScenarioFile`
+- scenario: Not mapped after discussion
 
 ### ANALYSIS
 
@@ -111,6 +109,6 @@ Added `AcertTestResult` subtype
 - failureReason: Mapped to `failureReason`
 - cpuTime: Mapped to `cpuTime`
 - memory: Mapped to `memory`
-- coverage: Mapped to `coverageFile`, open question about a more structured view
-- outputs: Mapped to `outputFile`, open question about a more structured view
-- stateSnapshots: Mapped to `snapshotFile`, open question about a more structured view
+- coverage: Not mapped after discussion
+- outputs: Not mapped after discussion
+- stateSnapshots: Not mapped after discussion

@@ -25,13 +25,13 @@
       <j.0:SoftwareDesignReview rdf:ID="LlrReview1">
         <j.1:author rdf:resource="CounterApplicationDesignDescription#JaneDoe"/>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-4"/>
-        <j.1:governedBy rdf:resource="#SoftwareStandard"/>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-6"/>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-1"/>
         <j.1:reviewer>
           <j.0:Engineer rdf:ID="JohnQ"/>
         </j.1:reviewer>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-3"/>
+        <j.1:governedBy rdf:resource="DevelopmentPlanData#SoftwareStandard"/>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-5"/>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-2"/>
       </j.0:SoftwareDesignReview>
@@ -57,7 +57,7 @@
   <j.0:SoftwareDesignReviewArtifacts rdf:ID="LlrReview2Log-2">
     <j.1:createBy>
       <j.0:SoftwareDesignReview rdf:ID="LlrReview2">
-        <j.1:governedBy rdf:resource="#SoftwareStandard"/>
+        <j.1:governedBy rdf:resource="DevelopmentPlanData#SoftwareStandard"/>
         <j.1:reviewer rdf:resource="#JohnQ"/>
         <j.1:author rdf:resource="CounterApplicationDesignDescription#JaneDoe"/>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#OUT-LLR-2"/>
@@ -86,7 +86,7 @@
         <j.1:reviewed rdf:resource="CounterApplicationRequirementSpec#inflowEvent"/>
         <j.1:reviewed rdf:resource="CounterApplicationRequirementSpec#HLR-2"/>
         <j.1:reviewer rdf:resource="#JohnQ"/>
-        <j.1:governedBy rdf:resource="#RequirementStandard"/>
+        <j.1:governedBy rdf:resource="DevelopmentPlanData#RequirementStandard"/>
         <j.1:reviewed rdf:resource="CounterApplicationRequirementSpec#outflowEvent"/>
         <j.1:reviewed rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
         <j.1:reviewed rdf:resource="CounterApplicationRequirementSpec#counter"/>
@@ -113,7 +113,7 @@
   <j.0:SoftwareDesignReviewArtifacts rdf:ID="LlrReview3Log-1">
     <j.1:createBy>
       <j.0:SoftwareDesignReview rdf:ID="LlrReview3">
-        <j.1:governedBy rdf:resource="#SoftwareStandard"/>
+        <j.1:governedBy rdf:resource="DevelopmentPlanData#SoftwareStandard"/>
         <j.1:reviewer rdf:resource="#JohnQ"/>
         <j.1:author rdf:resource="CounterApplicationDesignDescription#JaneDoe"/>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#EXE-LLR-3"/>

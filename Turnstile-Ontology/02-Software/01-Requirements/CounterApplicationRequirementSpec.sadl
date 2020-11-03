@@ -10,16 +10,20 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
  uri "http://Turnstile/CounterApplicationRequirementSpec" alias cntrapprq.
-import "http://Turnstile/DevelopmentPlan".
+import "http://Turnstile/DevelopmentPlanData".
 import "http://Turnstile/TurnstileDesign".
 import "http://Turnstile/HazardAssessment".
 
 JohnDoe is a Engineer
-	has identifier "John Doe".
+	has identifier "125569538"
+	has AGENTS:name "Doe, John"
+	has emailAddress "john.doe@ge.com"
+	has employedBy General_Electric.
 
 HlrDev1 is a SoftwareRequirementsDefinition
 	has identifier "HLR Dev 1"
-	has Rq:author JohnDoe.
+	has Rq:author JohnDoe
+	has referenced RequirementStandard.
 	
 
 HLR-1 is a HighLevelRequirement,

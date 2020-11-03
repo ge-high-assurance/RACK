@@ -182,6 +182,7 @@ _DevelopmentPlan is a PLAN,
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterApplicationRequirementSpec
       CounterApplicationRequirementSpec is a SPECIFICATION
+      	has identifier "Counter-Req-Spec"
         has wasGeneratedBy SoftwareDevelopmentProcess.
 
 
@@ -191,17 +192,20 @@ _DevelopmentPlan is a PLAN,
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterApplicationSoftwareDesign
-      CounterApplicationSoftwareDesign is a DESCRIPTION
+      CounterApplicationSoftwareDesign is a DESCRIPTION      
+        has identifier "Counter-SW-Des"
         has wasGeneratedBy SoftwareDevelopmentProcess.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterApplicationSourceCode
-      CounterApplicationSourceCode is a SPECIFICATION
+      CounterApplicationSourceCode is a SPECIFICATION      
+        has identifier "SW-Code"
         has wasGeneratedBy SoftwareDevelopmentProcess.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterVerificationResults
       CounterVerificationResults is a REPORT
+      	has identifier "Counter-Ver-Rep"
         has wasGeneratedBy SoftwareVerficationProcess.
 
 
@@ -219,31 +223,37 @@ _DevelopmentPlan is a PLAN,
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SoftwareEnvironmentConfigurationIndex
       SoftwareEnvironmentConfigurationIndex is a REPORT
+        has identifier "SECI"
         has wasGeneratedBy SoftwareConfigurationManagementProcess.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SoftwareStandard
       SoftwareStandard is a SPECIFICATION
+        has identifier "SW-STD"
         has wasGeneratedBy SoftwarePlanningProcess.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SoftwareVersionDescription
       SoftwareVersionDescription is a DESCRIPTION
+        has identifier "SW-Ver-Des"
         has wasGeneratedBy SoftwareConfigurationManagementProcess.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SystemSpec
       SystemSpec is a SPECIFICATION
+        has identifier "Sys-Spec"
         has wasGeneratedBy System_Development_Process.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SystemVerificationReport
-      SystemVerificationReport is a REPORT
+      SystemVerificationReport is a REPORT      
+        has identifier "Sys-Ver-Rep"
         has wasGeneratedBy System_Development_Process.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.VerificationStandard
-      VerificationStandard is a SPECIFICATION
+      VerificationStandard is a SPECIFICATION      
+        has identifier "VER-STD"
         has wasGeneratedBy SoftwarePlanningProcess.
 
 
@@ -351,16 +361,13 @@ _DevelopmentPlan is a PLAN,
 
 
 
-      Rule C_Code_content:
-        given x is a  C_Code 
+
+
+
+      Rule SourceCode_content:
+        given x is a SourceCode 
         then CounterApplicationSourceCode has content x.
-
-
-
-      Rule C_Header_content:
-        given x is a  C_Header 
-        then CounterApplicationSourceCode has content x.
-        sw:satisfies of C_Header only has values of type LowLevelRequirement.
+        sw:satisfies of SourceCode only has values of type LowLevelRequirement.
 
 
 
@@ -419,35 +426,45 @@ _DevelopmentPlan is a PLAN,
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.CSourceFile
-      CSourceFile is a FORMAT.
+      CSourceFile is a FORMAT
+      	has identifier ".c".
 
+      CHeaderFile is a FORMAT
+      	has identifier ".h".
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.ElfFile
-      ElfFile is a FORMAT.
+      ElfFile is a FORMAT
+      	has identifier ".o".
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.GCC
-      GCC is a TOOL.
+      GCC is a TOOL
+      	has identifier "gcc".
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.General Electric
-      General_Electric is a ORGANIZATION.
+      General_Electric is a ORGANIZATION
+      	has identifier "GE".
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.JsonFile
-      JsonFile is a FORMAT.
+      JsonFile is a FORMAT
+      	has identifier ".json".
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.TAR
-      TAR is a TOOL.
+      TAR is a TOOL
+      	has identifier "tar".
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.TarFile
-      TarFile is a FORMAT.
+      TarFile is a FORMAT
+      	has identifier ".tar".
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.ZipFile
-      ZipFile is a FORMAT.
+      ZipFile is a FORMAT
+      	has identifier ".zip".
 
 
 

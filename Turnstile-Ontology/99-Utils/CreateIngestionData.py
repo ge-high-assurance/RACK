@@ -269,5 +269,5 @@ with open("DataQueries.sadl", "w") as outfile:
             outfile.write('Write: data {Ask '+c.split("-")[1]+'Csv:"\n\n')
             outfile.write(getSparqlFromNodeGroup("NodeGroups/"+c+".json"))
             outfile.write('".} to "99-Utils/Data/'+c.split("-")[1]+'.csv".\n\n')
-    
+
             

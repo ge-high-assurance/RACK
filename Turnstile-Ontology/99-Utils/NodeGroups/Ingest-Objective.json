@@ -1,0 +1,216 @@
+{
+	"version": 2,
+	"sparqlConn": {
+		"name": "RACK local fuseki",
+		"domain": "",
+		"enableOwlImports": true,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/data"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 11,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_ACTIVITY",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"NodeName": "ACTIVITY",
+				"fullURIName": "http://arcos.rack/PROV-S#ACTIVITY",
+				"subClassNames": [
+					"http://arcos.rack/SYSTEM#SYSTEM_DEVELOPMENT",
+					"http://arcos.rack/TESTING#TEST_DEVELOPMENT",
+					"http://Turnstile/DevelopmentPlan#DevelopComponentTests",
+					"http://Turnstile/DevelopmentPlan#DevelopUnitTests",
+					"http://Turnstile/DevelopmentPlan#DevelopSystemArchitecture",
+					"http://arcos.rack/ANALYSIS#ANALYSIS",
+					"http://Turnstile/DevelopmentPlan#ControlCouplingAnalysis",
+					"http://Turnstile/DevelopmentPlan#DataCouplingAnalysis",
+					"http://Turnstile/DevelopmentPlan#StructualCoverageAnalysis",
+					"http://arcos.rack/FILE#FILE_CREATION",
+					"http://arcos.rack/SOFTWARE#CODE_GEN",
+					"http://arcos.rack/SOFTWARE#PACKAGE",
+					"http://arcos.rack/SOFTWARE#COMPILE",
+					"http://Turnstile/DevelopmentPlan#SoftwareIntegration",
+					"http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT",
+					"http://Turnstile/DevelopmentPlan#SoftwareCoding",
+					"http://arcos.rack/SOFTWARE#BUILD",
+					"http://arcos.rack/CONFIDENCE#ASSESSING_CONFIDENCE",
+					"http://Turnstile/DevelopmentPlan#SourceConfigurationManagement",
+					"http://arcos.rack/REVIEW#REVIEW",
+					"http://Turnstile/DevelopmentPlan#SoftwareRequirementsReview",
+					"http://Turnstile/DevelopmentPlan#SoftwareCodeReview",
+					"http://Turnstile/DevelopmentPlan#SoftwareDesignReview",
+					"http://Turnstile/DevelopmentPlan#Problem_Reporting",
+					"http://Turnstile/DevelopmentPlan#Change_Authorization",
+					"http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT",
+					"http://Turnstile/DevelopmentPlan#SoftwareRequirementsDefinition",
+					"http://Turnstile/DevelopmentPlan#SoftwareDesign",
+					"http://Turnstile/DevelopmentPlan#SystemRequirementsDefinition",
+					"http://Turnstile/DevelopmentPlan#GenerateSoftwareReleaseDocumentation",
+					"http://Turnstile/DevelopmentPlan#RequirementConfigurationManagement",
+					"http://arcos.rack/TESTING#TEST_EXECUTION",
+					"http://Turnstile/DevelopmentPlan#SoftwareComponentTestExecution",
+					"http://Turnstile/DevelopmentPlan#SoftwareUnitTestExecution",
+					"http://Turnstile/DevelopmentPlan#DefineSystemInterfaces",
+					"http://Turnstile/DevelopmentPlan#ReviewConfigurationManagement",
+					"http://arcos.rack/HAZARD#HAZARD_IDENTIFICATION"
+				],
+				"SparqlID": "?ACTIVITY",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_OBJECTIVE",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [
+					{
+						"SnodeSparqlIDs": [
+							"?ACTIVITY"
+						],
+						"OptionalMinus": [
+							"1"
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"KeyName": "satisfiedBy",
+						"ValueType": "ACTIVITY",
+						"UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
+						"ConnectBy": "satisfiedBy",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/PROCESS#satisfiedBy"
+					}
+				],
+				"NodeName": "OBJECTIVE",
+				"fullURIName": "http://arcos.rack/PROCESS#OBJECTIVE",
+				"subClassNames": [],
+				"SparqlID": "?OBJECTIVE",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			}
+		],
+		"orderBy": []
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [
+			{
+				"colId": "col_0",
+				"colName": "identifier_ACTIVITY"
+			},
+			{
+				"colId": "col_1",
+				"colName": "identifier_OBJECTIVE"
+			}
+		],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [
+			{
+				"transId": "trans_0",
+				"name": "RemoveNulls",
+				"transType": "replaceAll",
+				"arg1": "null",
+				"arg2": ""
+			}
+		],
+		"nodes": [
+			{
+				"sparqlID": "?ACTIVITY",
+				"type": "http://arcos.rack/PROV-S#ACTIVITY",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?ACTIVITY"
+						],
+						"mapping": [
+							{
+								"colId": "col_0",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?OBJECTIVE",
+				"type": "http://arcos.rack/PROCESS#OBJECTIVE",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?OBJECTIVE"
+						],
+						"mapping": [
+							{
+								"colId": "col_1",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

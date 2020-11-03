@@ -48,6 +48,88 @@ where {
 
 }".} to "99-Utils/Data/LowLevelRequirements.csv".
 
+Write: data {Ask ObjectFileCsv:"
+
+select distinct ?identifier_FORMAT ?identifier_SoftwareIntegration ?filename_ObjectFile ?identifier_ObjectFile
+where {
+    ?ObjectFile a <http://Turnstile/DevelopmentPlan#ObjectFile> . 
+    ?ObjectFile <http://arcos.rack/FILE#filename> ?filename_ObjectFile . 
+    ?ObjectFile <http://arcos.rack/PROV-S#identifier> ?identifier_ObjectFile . 
+    optional{
+
+    ?ObjectFile <http://arcos.rack/FILE#createBy> ?SoftwareIntegration .
+        ?SoftwareIntegration a <http://Turnstile/DevelopmentPlan#SoftwareIntegration> . 
+        ?SoftwareIntegration <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareIntegration . 
+    }
+    optional{
+
+    ?ObjectFile <http://arcos.rack/FILE#fileFormat> ?FORMAT .
+        ?FORMAT a <http://arcos.rack/FILE#FORMAT> . 
+        ?FORMAT <http://arcos.rack/PROV-S#identifier> ?identifier_FORMAT . 
+    }
+
+}".} to "99-Utils/Data/ObjectFile.csv".
+
+Write: data {Ask SourceCodeCsv:"
+
+select distinct ?identifier_FORMAT ?identifier_SoftwareCoding ?filename_SourceCode ?identifier_SourceCode
+where {
+    ?SourceCode a <http://Turnstile/DevelopmentPlan#SourceCode> . 
+    ?SourceCode <http://arcos.rack/FILE#filename> ?filename_SourceCode . 
+    ?SourceCode <http://arcos.rack/PROV-S#identifier> ?identifier_SourceCode . 
+    optional{
+
+    ?SourceCode <http://arcos.rack/FILE#createBy> ?SoftwareCoding .
+        ?SoftwareCoding a <http://Turnstile/DevelopmentPlan#SoftwareCoding> . 
+        ?SoftwareCoding <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareCoding . 
+    }
+    optional{
+
+    ?SourceCode <http://arcos.rack/FILE#fileFormat> ?FORMAT .
+        ?FORMAT a <http://arcos.rack/FILE#FORMAT> . 
+        ?FORMAT <http://arcos.rack/PROV-S#identifier> ?identifier_FORMAT . 
+    }
+
+}".} to "99-Utils/Data/SourceCode.csv".
+
+Write: data {Ask SoftwareIntegrationCompileInputCsv:"
+
+select distinct ?identifier_ObjectFile ?identifier_SourceCode ?identifier_SoftwareIntegration
+where {
+    ?SoftwareIntegration a <http://Turnstile/DevelopmentPlan#SoftwareIntegration> . 
+    ?SoftwareIntegration <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareIntegration . 
+    optional{
+
+    ?SoftwareIntegration <http://arcos.rack/SOFTWARE#compileInput> ?SourceCode .
+        ?SourceCode a <http://Turnstile/DevelopmentPlan#SourceCode> . 
+        ?SourceCode <http://arcos.rack/PROV-S#identifier> ?identifier_SourceCode . 
+    }
+    optional{
+
+    ?SoftwareIntegration <http://arcos.rack/SOFTWARE#compileInput> ?ObjectFile .
+        ?ObjectFile a <http://Turnstile/DevelopmentPlan#ObjectFile> . 
+        ?ObjectFile <http://arcos.rack/PROV-S#identifier> ?identifier_ObjectFile . 
+    }
+
+}".} to "99-Utils/Data/SoftwareIntegrationCompileInput.csv".
+
+Write: data {Ask SoftwareIntegrationCsv:"
+
+select distinct ?identifier_TOOL ?compileWithOptimizations_SoftwareIntegration ?identifier_SoftwareIntegration ?linkerPath_SoftwareIntegration
+where {
+    ?SoftwareIntegration a <http://Turnstile/DevelopmentPlan#SoftwareIntegration> . 
+    optional{ ?SoftwareIntegration <http://Turnstile/DevelopmentPlan#compileWithOptimizations> ?compileWithOptimizations_SoftwareIntegration} . 
+    ?SoftwareIntegration <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareIntegration . 
+    optional{ ?SoftwareIntegration <http://Turnstile/DevelopmentPlan#linkerPath> ?linkerPath_SoftwareIntegration} . 
+    optional{
+
+    ?SoftwareIntegration <http://arcos.rack/SOFTWARE#performedBy> ?TOOL .
+        ?TOOL a <http://arcos.rack/AGENTS#TOOL> . 
+        ?TOOL <http://arcos.rack/PROV-S#identifier> ?identifier_TOOL . 
+    }
+
+}".} to "99-Utils/Data/SoftwareIntegration.csv".
+
 Write: data {Ask ThreadsCsv:"
 
 select distinct ?identifier_SoftwareDesign ?identifier_SYSTEM_0 ?identifier_SYSTEM
@@ -170,6 +252,33 @@ where {
     }
 
 }".} to "99-Utils/Data/HighLevelRequirements.csv".
+
+Write: data {Ask SourceCodeTracingCsv:"
+
+select distinct ?identifier_LowLevelRequirement ?identifier_SourceCode
+where {
+    ?SourceCode a <http://Turnstile/DevelopmentPlan#SourceCode> . 
+    ?SourceCode <http://arcos.rack/PROV-S#identifier> ?identifier_SourceCode . 
+    ?SourceCode <http://arcos.rack/FILE#satisfies> ?LowLevelRequirement .
+        ?LowLevelRequirement a <http://Turnstile/DevelopmentPlan#LowLevelRequirement> . 
+        ?LowLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_LowLevelRequirement . 
+
+}".} to "99-Utils/Data/SourceCodeTracing.csv".
+
+Write: data {Ask ObjectiveCsv:"
+
+select distinct ?identifier_ACTIVITY ?identifier_OBJECTIVE
+where {
+    ?OBJECTIVE a <http://arcos.rack/PROCESS#OBJECTIVE> . 
+    ?OBJECTIVE <http://arcos.rack/PROV-S#identifier> ?identifier_OBJECTIVE . 
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?ACTIVITY .
+        ?ACTIVITY a <http://arcos.rack/PROV-S#ACTIVITY> . 
+        ?ACTIVITY <http://arcos.rack/PROV-S#identifier> ?identifier_ACTIVITY . 
+    }
+
+}".} to "99-Utils/Data/Objective.csv".
 
 Write: data {Ask EngineerCsv:"
 

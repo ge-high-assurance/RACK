@@ -15,28 +15,6 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'DataQueries.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <sadlimplicitmodel:NamedQuery rdf:ID="ThreadsCsv">
-    <rdfs:isDefinedBy>
-
-select distinct ?identifier_SoftwareDesign ?identifier_SYSTEM_0 ?identifier_SYSTEM
-where {
-    ?SYSTEM a &lt;http://arcos.rack/SYSTEM#SYSTEM&gt; . 
-    ?SYSTEM &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SYSTEM . 
-    optional{
-
-    ?SYSTEM &lt;http://arcos.rack/SYSTEM#partOf&gt; ?SYSTEM_0 .
-        ?SYSTEM_0 a &lt;http://arcos.rack/SYSTEM#SYSTEM&gt; . 
-        ?SYSTEM_0 &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SYSTEM_0 . 
-    }
-    optional{
-
-    ?SYSTEM &lt;http://arcos.rack/SYSTEM#producedBy&gt; ?SoftwareDesign .
-        ?SoftwareDesign a &lt;http://Turnstile/DevelopmentPlan#SoftwareDesign&gt; . 
-        ?SoftwareDesign &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareDesign . 
-    }
-
-}</rdfs:isDefinedBy>
-  </sadlimplicitmodel:NamedQuery>
   <sadlimplicitmodel:NamedQuery rdf:ID="SoftwareDesignCsv">
     <rdfs:isDefinedBy>
 
@@ -113,6 +91,29 @@ where {
     ?SoftwareRequirementsDefinition &lt;http://arcos.rack/PROV-S#used&gt; ?SystemInterfaceDefinition .
         ?SystemInterfaceDefinition a &lt;http://Turnstile/DevelopmentPlan#SystemInterfaceDefinition&gt; . 
         ?SystemInterfaceDefinition &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SystemInterfaceDefinition . 
+    }
+
+}</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="ObjectFileCsv">
+    <rdfs:isDefinedBy>
+
+select distinct ?identifier_FORMAT ?identifier_SoftwareIntegration ?filename_ObjectFile ?identifier_ObjectFile
+where {
+    ?ObjectFile a &lt;http://Turnstile/DevelopmentPlan#ObjectFile&gt; . 
+    ?ObjectFile &lt;http://arcos.rack/FILE#filename&gt; ?filename_ObjectFile . 
+    ?ObjectFile &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_ObjectFile . 
+    optional{
+
+    ?ObjectFile &lt;http://arcos.rack/FILE#createBy&gt; ?SoftwareIntegration .
+        ?SoftwareIntegration a &lt;http://Turnstile/DevelopmentPlan#SoftwareIntegration&gt; . 
+        ?SoftwareIntegration &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareIntegration . 
+    }
+    optional{
+
+    ?ObjectFile &lt;http://arcos.rack/FILE#fileFormat&gt; ?FORMAT .
+        ?FORMAT a &lt;http://arcos.rack/FILE#FORMAT&gt; . 
+        ?FORMAT &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_FORMAT . 
     }
 
 }</rdfs:isDefinedBy>
@@ -218,6 +219,120 @@ where {
     ?LowLevelRequirement &lt;http://arcos.rack/REQUIREMENTS#satisfies&gt; ?HighLevelRequirement .
         ?HighLevelRequirement a &lt;http://Turnstile/DevelopmentPlan#HighLevelRequirement&gt; . 
         ?HighLevelRequirement &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_HighLevelRequirement . 
+    }
+
+}</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="SoftwareIntegrationCsv">
+    <rdfs:isDefinedBy>
+
+select distinct ?identifier_TOOL ?compileWithOptimizations_SoftwareIntegration ?identifier_SoftwareIntegration ?linkerPath_SoftwareIntegration
+where {
+    ?SoftwareIntegration a &lt;http://Turnstile/DevelopmentPlan#SoftwareIntegration&gt; . 
+    optional{ ?SoftwareIntegration &lt;http://Turnstile/DevelopmentPlan#compileWithOptimizations&gt; ?compileWithOptimizations_SoftwareIntegration} . 
+    ?SoftwareIntegration &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareIntegration . 
+    optional{ ?SoftwareIntegration &lt;http://Turnstile/DevelopmentPlan#linkerPath&gt; ?linkerPath_SoftwareIntegration} . 
+    optional{
+
+    ?SoftwareIntegration &lt;http://arcos.rack/SOFTWARE#performedBy&gt; ?TOOL .
+        ?TOOL a &lt;http://arcos.rack/AGENTS#TOOL&gt; . 
+        ?TOOL &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_TOOL . 
+    }
+
+}</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="SourceCodeTracingCsv">
+    <rdfs:isDefinedBy>
+
+select distinct ?identifier_LowLevelRequirement ?identifier_SourceCode
+where {
+    ?SourceCode a &lt;http://Turnstile/DevelopmentPlan#SourceCode&gt; . 
+    ?SourceCode &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SourceCode . 
+    ?SourceCode &lt;http://arcos.rack/FILE#satisfies&gt; ?LowLevelRequirement .
+        ?LowLevelRequirement a &lt;http://Turnstile/DevelopmentPlan#LowLevelRequirement&gt; . 
+        ?LowLevelRequirement &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_LowLevelRequirement . 
+
+}</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="ThreadsCsv">
+    <rdfs:isDefinedBy>
+
+select distinct ?identifier_SoftwareDesign ?identifier_SYSTEM_0 ?identifier_SYSTEM
+where {
+    ?SYSTEM a &lt;http://arcos.rack/SYSTEM#SYSTEM&gt; . 
+    ?SYSTEM &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SYSTEM . 
+    optional{
+
+    ?SYSTEM &lt;http://arcos.rack/SYSTEM#partOf&gt; ?SYSTEM_0 .
+        ?SYSTEM_0 a &lt;http://arcos.rack/SYSTEM#SYSTEM&gt; . 
+        ?SYSTEM_0 &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SYSTEM_0 . 
+    }
+    optional{
+
+    ?SYSTEM &lt;http://arcos.rack/SYSTEM#producedBy&gt; ?SoftwareDesign .
+        ?SoftwareDesign a &lt;http://Turnstile/DevelopmentPlan#SoftwareDesign&gt; . 
+        ?SoftwareDesign &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareDesign . 
+    }
+
+}</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="SourceCodeCsv">
+    <rdfs:isDefinedBy>
+
+select distinct ?identifier_FORMAT ?identifier_SoftwareCoding ?filename_SourceCode ?identifier_SourceCode
+where {
+    ?SourceCode a &lt;http://Turnstile/DevelopmentPlan#SourceCode&gt; . 
+    ?SourceCode &lt;http://arcos.rack/FILE#filename&gt; ?filename_SourceCode . 
+    ?SourceCode &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SourceCode . 
+    optional{
+
+    ?SourceCode &lt;http://arcos.rack/FILE#createBy&gt; ?SoftwareCoding .
+        ?SoftwareCoding a &lt;http://Turnstile/DevelopmentPlan#SoftwareCoding&gt; . 
+        ?SoftwareCoding &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareCoding . 
+    }
+    optional{
+
+    ?SourceCode &lt;http://arcos.rack/FILE#fileFormat&gt; ?FORMAT .
+        ?FORMAT a &lt;http://arcos.rack/FILE#FORMAT&gt; . 
+        ?FORMAT &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_FORMAT . 
+    }
+
+}</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="SoftwareIntegrationCompileInputCsv">
+    <rdfs:isDefinedBy>
+
+select distinct ?identifier_ObjectFile ?identifier_SourceCode ?identifier_SoftwareIntegration
+where {
+    ?SoftwareIntegration a &lt;http://Turnstile/DevelopmentPlan#SoftwareIntegration&gt; . 
+    ?SoftwareIntegration &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareIntegration . 
+    optional{
+
+    ?SoftwareIntegration &lt;http://arcos.rack/SOFTWARE#compileInput&gt; ?SourceCode .
+        ?SourceCode a &lt;http://Turnstile/DevelopmentPlan#SourceCode&gt; . 
+        ?SourceCode &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SourceCode . 
+    }
+    optional{
+
+    ?SoftwareIntegration &lt;http://arcos.rack/SOFTWARE#compileInput&gt; ?ObjectFile .
+        ?ObjectFile a &lt;http://Turnstile/DevelopmentPlan#ObjectFile&gt; . 
+        ?ObjectFile &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_ObjectFile . 
+    }
+
+}</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="ObjectiveCsv">
+    <rdfs:isDefinedBy>
+
+select distinct ?identifier_ACTIVITY ?identifier_OBJECTIVE
+where {
+    ?OBJECTIVE a &lt;http://arcos.rack/PROCESS#OBJECTIVE&gt; . 
+    ?OBJECTIVE &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_OBJECTIVE . 
+    optional{
+
+    ?OBJECTIVE &lt;http://arcos.rack/PROCESS#satisfiedBy&gt; ?ACTIVITY .
+        ?ACTIVITY a &lt;http://arcos.rack/PROV-S#ACTIVITY&gt; . 
+        ?ACTIVITY &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_ACTIVITY . 
     }
 
 }</rdfs:isDefinedBy>

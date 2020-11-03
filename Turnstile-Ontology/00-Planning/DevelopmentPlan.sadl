@@ -70,13 +70,12 @@ import "http://common/DO-178C".
         wasInformedBy of SoftwareRequirementsDefinition has values of type DefineSystemInterfaces.
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.C_Code
-      C_Code is a type of FILE.
-        wasGeneratedBy of C_Code only has values of type SoftwareCoding.
+      SourceCode is a type of FILE.
+        wasGeneratedBy of SourceCode only has values of type SoftwareCoding.
         
+      ObjectFile is a type of FILE.
+        wasGeneratedBy of ObjectFile only has values of type SoftwareIntegration.
         
-        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.C_Header
-      C_Header is a type of FILE.
-        wasGeneratedBy of C_Header only has values of type SoftwareCoding.
         
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.DataAndControlCouple
       DataAndControlCouple is a type of DATA_DICTIONARY_TERM.

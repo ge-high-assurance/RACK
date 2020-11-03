@@ -34,8 +34,8 @@
       <j.0:SoftwareComponentTest rdf:ID="TC-1-1">
         <j.3:producedBy>
           <j.0:DevelopComponentTests rdf:ID="CompTestDevelopment">
-            <j.1:used rdf:resource="#VerificationStandard"/>
-            <j.3:developedBy rdf:resource="#ASSERT"/>
+            <j.1:used rdf:resource="DevelopmentPlanData#VerificationStandard"/>
+            <j.3:developedBy rdf:resource="DevelopmentPlanData#ASSERT"/>
             <j.1:identifier>CompTestDevelopment</j.1:identifier>
           </j.0:DevelopComponentTests>
         </j.3:producedBy>

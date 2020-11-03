@@ -108,6 +108,7 @@
                 <j.3:wasGeneratedBy>
                   <j.3:ACTIVITY rdf:ID="SoftwarePlanningProcess"/>
                 </j.3:wasGeneratedBy>
+                <j.3:identifier>VER-STD</j.3:identifier>
               </j.1:SPECIFICATION>
             </j.3:used>
           </j.1:PLAN>
@@ -163,28 +164,44 @@
         <j.3:content>
           <j.1:SECTION rdf:ID="_03-SoftwareDevelopmentEnvironment">
             <j.3:content>
-              <j.5:FORMAT rdf:ID="ZipFile"/>
+              <j.5:FORMAT rdf:ID="ZipFile">
+                <j.3:identifier>.zip</j.3:identifier>
+              </j.5:FORMAT>
             </j.3:content>
             <j.3:content>
-              <j.5:FORMAT rdf:ID="TarFile"/>
+              <j.5:FORMAT rdf:ID="TarFile">
+                <j.3:identifier>.tar</j.3:identifier>
+              </j.5:FORMAT>
             </j.3:content>
             <j.3:content>
-              <j.0:TOOL rdf:ID="TAR"/>
+              <j.0:TOOL rdf:ID="TAR">
+                <j.3:identifier>tar</j.3:identifier>
+              </j.0:TOOL>
             </j.3:content>
             <j.3:content>
-              <j.5:FORMAT rdf:ID="JsonFile"/>
+              <j.5:FORMAT rdf:ID="JsonFile">
+                <j.3:identifier>.json</j.3:identifier>
+              </j.5:FORMAT>
             </j.3:content>
             <j.3:content>
-              <j.0:ORGANIZATION rdf:ID="General_Electric"/>
+              <j.0:ORGANIZATION rdf:ID="General_Electric">
+                <j.3:identifier>GE</j.3:identifier>
+              </j.0:ORGANIZATION>
             </j.3:content>
             <j.3:content>
-              <j.0:TOOL rdf:ID="GCC"/>
+              <j.0:TOOL rdf:ID="GCC">
+                <j.3:identifier>gcc</j.3:identifier>
+              </j.0:TOOL>
             </j.3:content>
             <j.3:content>
-              <j.5:FORMAT rdf:ID="ElfFile"/>
+              <j.5:FORMAT rdf:ID="ElfFile">
+                <j.3:identifier>.o</j.3:identifier>
+              </j.5:FORMAT>
             </j.3:content>
             <j.3:content>
-              <j.5:FORMAT rdf:ID="CSourceFile"/>
+              <j.5:FORMAT rdf:ID="CSourceFile">
+                <j.3:identifier>.c</j.3:identifier>
+              </j.5:FORMAT>
             </j.3:content>
           </j.1:SECTION>
         </j.3:content>
@@ -239,16 +256,19 @@
                                         <j.3:wasInformedBy rdf:resource="#SoftwareConfigurationManagementProcess"/>
                                       </j.3:ACTIVITY>
                                     </j.3:wasGeneratedBy>
+                                    <j.3:identifier>Sys-Ver-Rep</j.3:identifier>
                                   </j.1:REPORT>
                                 </j.3:used>
                                 <j.3:used>
                                   <j.1:SPECIFICATION rdf:ID="SystemSpec">
                                     <j.3:wasGeneratedBy rdf:resource="#System_Development_Process"/>
+                                    <j.3:identifier>Sys-Spec</j.3:identifier>
                                   </j.1:SPECIFICATION>
                                 </j.3:used>
                                 <j.3:used>
                                   <j.1:SPECIFICATION rdf:ID="SoftwareStandard">
                                     <j.3:wasGeneratedBy rdf:resource="#SoftwarePlanningProcess"/>
+                                    <j.3:identifier>SW-STD</j.3:identifier>
                                   </j.1:SPECIFICATION>
                                 </j.3:used>
                                 <j.3:used>
@@ -261,16 +281,19 @@
                                 <j.3:wasInformedBy rdf:resource="#System_Development_Process"/>
                               </j.3:ACTIVITY>
                             </j.3:wasGeneratedBy>
+                            <j.3:identifier>Counter-Req-Spec</j.3:identifier>
                           </j.1:SPECIFICATION>
                         </j.3:used>
                         <j.3:used>
                           <j.1:DESCRIPTION rdf:ID="CounterApplicationSoftwareDesign">
                             <j.3:wasGeneratedBy rdf:resource="#SoftwareDevelopmentProcess"/>
+                            <j.3:identifier>Counter-SW-Des</j.3:identifier>
                           </j.1:DESCRIPTION>
                         </j.3:used>
                         <j.3:used>
                           <j.1:SPECIFICATION rdf:ID="CounterApplicationSourceCode">
                             <j.3:wasGeneratedBy rdf:resource="#SoftwareDevelopmentProcess"/>
+                            <j.3:identifier>SW-Code</j.3:identifier>
                           </j.1:SPECIFICATION>
                         </j.3:used>
                         <j.3:used>
@@ -285,11 +308,13 @@
                     <j.3:wasInformedBy rdf:resource="#SoftwareDevelopmentProcess"/>
                   </j.3:ACTIVITY>
                 </j.3:wasGeneratedBy>
+                <j.3:identifier>SW-Ver-Des</j.3:identifier>
               </j.1:DESCRIPTION>
             </j.3:content>
             <j.3:content>
               <j.1:REPORT rdf:ID="SoftwareEnvironmentConfigurationIndex">
                 <j.3:wasGeneratedBy rdf:resource="#SoftwareConfigurationManagementProcess"/>
+                <j.3:identifier>SECI</j.3:identifier>
               </j.1:REPORT>
             </j.3:content>
             <j.3:content rdf:resource="#SoftwareStandard"/>
@@ -309,6 +334,7 @@
             <j.3:content>
               <j.1:REPORT rdf:ID="CounterVerificationResults">
                 <j.3:wasGeneratedBy rdf:resource="#SoftwareVerficationProcess"/>
+                <j.3:identifier>Counter-Ver-Rep</j.3:identifier>
               </j.1:REPORT>
             </j.3:content>
             <j.3:content rdf:resource="#CounterApplicationSoftwareDesign"/>
@@ -381,14 +407,6 @@
     </rdfs:subClassOf>
   </rdf:Description>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareDesignReview_A-4-2"/>
-  <rdf:Description rdf:about="DevelopmentPlan#C_Header">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="DevelopmentPlan#LowLevelRequirement"/>
-        <owl:onProperty rdf:resource="#sw:satisfies"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-  </rdf:Description>
   <sadlimplicitmodel:Rule rdf:ID="LowLevelRequirement_content"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareCodeReview_A-5-7"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareComponentTestExecution_A-6-2"/>
@@ -456,10 +474,11 @@
   <sadlimplicitmodel:Rule rdf:ID="SoftwareDesignReview_A-4-11"/>
   <j.4:INTERFACE rdf:ID="Inflow"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareComponentTestResult_content"/>
-  <sadlimplicitmodel:Rule rdf:ID="C_Code_content"/>
+  <j.5:FORMAT rdf:ID="CHeaderFile">
+    <j.3:identifier>.h</j.3:identifier>
+  </j.5:FORMAT>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareUnitTestExecution_A-7-2"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareDesignReview_A-4-5"/>
-  <sadlimplicitmodel:Rule rdf:ID="C_Header_content"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareCodeReviewArtifacts_content"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareRequirementsReview_A-3-1"/>
   <sadlimplicitmodel:Rule rdf:ID="DataCouplingAnalysis_A-7-8"/>
@@ -486,7 +505,16 @@
   <sadlimplicitmodel:Rule rdf:ID="SoftwareComponentTest_content"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareUnitTestResult_content"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareDesignReview_A-4-8"/>
+  <sadlimplicitmodel:Rule rdf:ID="SourceCode_content"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareRequirementsDefinition_A-2-1"/>
+  <rdf:Description rdf:about="DevelopmentPlan#SourceCode">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="DevelopmentPlan#LowLevelRequirement"/>
+        <owl:onProperty rdf:resource="#sw:satisfies"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </rdf:Description>
   <sadlimplicitmodel:Rule rdf:ID="SystemComponent_content"/>
   <sadlimplicitmodel:Rule rdf:ID="DataDictionary_content"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareCodeReview_A-5-5"/>

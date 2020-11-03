@@ -1,190 +1,197 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:j.0="http://arcos.rack/AGENTS#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
-    xmlns:j.0="http://Turnstile/DevelopmentPlan#"
+    xmlns:j.1="http://Turnstile/DevelopmentPlan#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
-    xmlns:j.1="http://arcos.rack/REQUIREMENTS#"
+    xmlns:j.2="http://arcos.rack/REQUIREMENTS#"
     xmlns:cntrappllr="http://Turnstile/CounterApplicationDesignDescription#"
-    xmlns:j.2="http://arcos.rack/PROV-S#"
-    xmlns:j.3="http://arcos.rack/SYSTEM#"
+    xmlns:j.3="http://arcos.rack/SOFTWARE#"
+    xmlns:j.4="http://arcos.rack/PROV-S#"
+    xmlns:j.5="http://arcos.rack/SYSTEM#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:cntrapprq="http://Turnstile/CounterApplicationRequirementSpec#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://Turnstile/CounterApplicationDesignDescription">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="CounterApplicationRequirementSpec"/>
-    <owl:imports rdf:resource="DevelopmentPlan"/>
+    <owl:imports rdf:resource="DevelopmentPlanData"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplicationDesignDescription.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.0:DataAndControlCouple rdf:ID="DCC-6">
-    <j.1:createdBy>
-      <j.0:SoftwareDesign rdf:ID="LlrDev1">
-        <j.1:author>
-          <j.0:Engineer rdf:ID="JaneDoe">
-            <j.2:identifier>Jane Doe</j.2:identifier>
-          </j.0:Engineer>
-        </j.1:author>
-        <j.2:identifier>LlrDev1</j.2:identifier>
-      </j.0:SoftwareDesign>
-    </j.1:createdBy>
-    <j.1:providedBy>
-      <j.0:LowLevelRequirement rdf:ID="IN-LLR-6">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs>
-          <j.3:SYSTEM rdf:ID="InputThread">
-            <j.3:producedBy>
-              <j.0:SoftwareDesign rdf:ID="SwDesign">
-                <j.1:author rdf:resource="#JaneDoe"/>
-                <j.2:identifier>SwDesign</j.2:identifier>
-              </j.0:SoftwareDesign>
-            </j.3:producedBy>
-            <j.3:partOf rdf:resource="TurnstileDesign#CounterApplication"/>
-            <j.2:identifier>InputThread</j.2:identifier>
-          </j.3:SYSTEM>
-        </j.1:governs>
-        <j.1:text>Input Thread shall print 'Limit Exceeded'' to the console when a valid UDP message is received and the park_count range is exceed.</j.1:text>
-        <j.2:identifier>IN-LLR-6</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:providedBy>
-    <j.1:providedBy>
-      <j.0:LowLevelRequirement rdf:ID="IN-LLR-5">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs rdf:resource="#InputThread"/>
-        <j.1:text>Input Thread shall print 'Invalid Message' to the console when a invalid UDP message is received.</j.1:text>
-        <j.2:identifier>IN-LLR-5</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:providedBy>
-    <j.1:providedBy>
-      <j.0:LowLevelRequirement rdf:ID="EXE-LLR-3">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs>
-          <j.3:SYSTEM rdf:ID="ExecutiveThread">
-            <j.3:producedBy rdf:resource="#SwDesign"/>
-            <j.3:partOf rdf:resource="TurnstileDesign#CounterApplication"/>
-            <j.2:identifier>ExecutiveThread</j.2:identifier>
-          </j.3:SYSTEM>
-        </j.1:governs>
-        <j.1:text>Executive shall print a single '.' character to the console every second when running.</j.1:text>
-        <j.2:identifier>EXE-LLR-3</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:providedBy>
-    <j.1:text>console</j.1:text>
-    <j.2:identifier>DCC-6</j.2:identifier>
-  </j.0:DataAndControlCouple>
-  <j.0:DataAndControlCouple rdf:ID="DCC-5">
-    <j.1:createdBy rdf:resource="#LlrDev1"/>
-    <j.1:providedBy>
-      <j.0:LowLevelRequirement rdf:ID="OUT-LLR-2">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs>
-          <j.3:SYSTEM rdf:ID="OutputThread">
-            <j.3:producedBy rdf:resource="#SwDesign"/>
-            <j.3:partOf rdf:resource="TurnstileDesign#CounterApplication"/>
-            <j.2:identifier>OutputThread</j.2:identifier>
-          </j.3:SYSTEM>
-        </j.1:governs>
-        <j.1:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-3"/>
-        <j.1:text>Output Thread shall broadcast a UDP message on port 62001 with the park_count every second.</j.1:text>
-        <j.2:identifier>OUT-LLR-2</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:providedBy>
-    <j.1:text>outgoing UDP message</j.1:text>
-    <j.2:identifier>DCC-5</j.2:identifier>
-  </j.0:DataAndControlCouple>
-  <j.0:DataAndControlCouple rdf:ID="DCC-4">
-    <j.1:createdBy rdf:resource="#LlrDev1"/>
-    <j.1:providedBy>
-      <j.0:LowLevelRequirement rdf:ID="IN-LLR-3">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs rdf:resource="#InputThread"/>
-        <j.1:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-2"/>
-        <j.1:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
-        <j.1:text>Input Thread shall add the delta value received by the UDP to the park_count and send the updated park_count to the Output Thread when a valid UDP message is received and the park_count range is not exceed.</j.1:text>
-        <j.2:identifier>IN-LLR-3</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:providedBy>
-    <j.1:providedBy>
-      <j.0:LowLevelRequirement rdf:ID="OUT-LLR-1">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs rdf:resource="#OutputThread"/>
-        <j.1:text>Output Thread shall initialize the park_count to 0 on powerup.</j.1:text>
-        <j.2:identifier>OUT-LLR-1</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:providedBy>
-    <j.1:consumedBy rdf:resource="#OUT-LLR-2"/>
-    <j.1:text>output_park_count</j.1:text>
-    <j.2:identifier>DCC-4</j.2:identifier>
-  </j.0:DataAndControlCouple>
-  <j.0:DataAndControlCouple rdf:ID="DCC-3">
-    <j.1:providedBy>
-      <j.0:LowLevelRequirement rdf:ID="IN-LLR-1">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs rdf:resource="#InputThread"/>
-        <j.1:text>Input Thread shall initialize the park_count to 0 on powerup.</j.1:text>
-        <j.2:identifier>IN-LLR-1</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:providedBy>
-    <j.1:providedBy>
-      <j.0:LowLevelRequirement rdf:ID="IN-LLR-4">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs rdf:resource="#InputThread"/>
-        <j.1:text>Input Thread shall limit park_count to between 0 and 1500.</j.1:text>
-        <j.2:identifier>IN-LLR-4</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:providedBy>
-    <j.1:consumedBy rdf:resource="#IN-LLR-4"/>
-    <j.1:consumedBy>
-      <j.0:LowLevelRequirement rdf:ID="IN-LLR-2">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs rdf:resource="#InputThread"/>
-        <j.1:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-2"/>
-        <j.1:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
-        <j.1:text>Input Thread shall check for a incoming UDP message on port 62000.</j.1:text>
-        <j.2:identifier>IN-LLR-2</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:consumedBy>
-    <j.1:createdBy rdf:resource="#LlrDev1"/>
-    <j.2:identifier>DCC-3</j.2:identifier>
-    <j.1:consumedBy rdf:resource="#IN-LLR-5"/>
-    <j.1:consumedBy rdf:resource="#IN-LLR-3"/>
-    <j.1:consumedBy rdf:resource="#IN-LLR-6"/>
-    <j.1:text>input_park_count</j.1:text>
-  </j.0:DataAndControlCouple>
-  <j.0:DataAndControlCouple rdf:ID="DCC-2">
-    <j.1:createdBy rdf:resource="#LlrDev1"/>
-    <j.1:consumedBy rdf:resource="#IN-LLR-6"/>
-    <j.1:consumedBy rdf:resource="#IN-LLR-5"/>
-    <j.1:consumedBy rdf:resource="#IN-LLR-3"/>
-    <j.1:consumedBy rdf:resource="#IN-LLR-2"/>
-    <j.1:text>incoming UDP message</j.1:text>
-    <j.2:identifier>DCC-2</j.2:identifier>
-  </j.0:DataAndControlCouple>
-  <j.0:DataAndControlCouple rdf:ID="DCC-1">
-    <j.1:createdBy rdf:resource="#LlrDev1"/>
-    <j.1:consumedBy rdf:resource="#OUT-LLR-1"/>
-    <j.1:consumedBy rdf:resource="#IN-LLR-1"/>
-    <j.1:consumedBy>
-      <j.0:LowLevelRequirement rdf:ID="EXE-LLR-2">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs rdf:resource="#ExecutiveThread"/>
-        <j.1:text>Executive shall spawn Output Thread on powerup.</j.1:text>
-        <j.2:identifier>EXE-LLR-2</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:consumedBy>
-    <j.1:consumedBy>
-      <j.0:LowLevelRequirement rdf:ID="EXE-LLR-1">
-        <j.1:createdBy rdf:resource="#LlrDev1"/>
-        <j.1:governs rdf:resource="#ExecutiveThread"/>
-        <j.1:text>Executive shall spawn Input Thread on powerup.</j.1:text>
-        <j.2:identifier>EXE-LLR-1</j.2:identifier>
-      </j.0:LowLevelRequirement>
-    </j.1:consumedBy>
-    <j.1:text>PowerUp</j.1:text>
-    <j.2:identifier>DCC-1</j.2:identifier>
-  </j.0:DataAndControlCouple>
+  <j.1:DataAndControlCouple rdf:ID="DCC-6">
+    <j.2:createdBy>
+      <j.1:SoftwareDesign rdf:ID="LlrDev1">
+        <j.3:referenced rdf:resource="DevelopmentPlanData#SoftwareStandard"/>
+        <j.2:author>
+          <j.1:Engineer rdf:ID="JaneDoe">
+            <j.0:employedBy rdf:resource="DevelopmentPlanData#General_Electric"/>
+            <j.0:emailAddress>jane.doe@ge.com</j.0:emailAddress>
+            <j.0:name>Doe, Jane</j.0:name>
+            <j.4:identifier>2125895152</j.4:identifier>
+          </j.1:Engineer>
+        </j.2:author>
+        <j.4:identifier>LlrDev1</j.4:identifier>
+      </j.1:SoftwareDesign>
+    </j.2:createdBy>
+    <j.2:providedBy>
+      <j.1:LowLevelRequirement rdf:ID="IN-LLR-6">
+        <j.2:createdBy rdf:resource="#LlrDev1"/>
+        <j.2:governs>
+          <j.5:SYSTEM rdf:about="DevelopmentPlanData#InputThread">
+            <j.5:producedBy>
+              <j.1:SoftwareDesign rdf:ID="SwDesign">
+                <j.3:referenced rdf:resource="DevelopmentPlanData#SoftwareStandard"/>
+                <j.2:author rdf:resource="#JaneDoe"/>
+                <j.4:identifier>SwDesign</j.4:identifier>
+              </j.1:SoftwareDesign>
+            </j.5:producedBy>
+            <j.5:partOf rdf:resource="DevelopmentPlanData#CounterApplication"/>
+            <j.4:identifier>InputThread</j.4:identifier>
+          </j.5:SYSTEM>
+        </j.2:governs>
+        <j.2:text>Input Thread shall print 'Limit Exceeded'' to the console when a valid UDP message is received and the park_count range is exceed.</j.2:text>
+        <j.4:identifier>IN-LLR-6</j.4:identifier>
+      </j.1:LowLevelRequirement>
+    </j.2:providedBy>
+    <j.2:providedBy>
+      <j.1:LowLevelRequirement rdf:ID="IN-LLR-5">
+        <j.2:createdBy rdf:resource="#LlrDev1"/>
+        <j.2:governs rdf:resource="DevelopmentPlanData#InputThread"/>
+        <j.2:text>Input Thread shall print 'Invalid Message' to the console when a invalid UDP message is received.</j.2:text>
+        <j.4:identifier>IN-LLR-5</j.4:identifier>
+      </j.1:LowLevelRequirement>
+    </j.2:providedBy>
+    <j.2:providedBy>
+      <j.1:LowLevelRequirement rdf:ID="EXE-LLR-3">
+        <j.2:createdBy rdf:resource="#LlrDev1"/>
+        <j.2:governs>
+          <j.5:SYSTEM rdf:about="DevelopmentPlanData#ExecutiveThread">
+            <j.5:producedBy rdf:resource="#SwDesign"/>
+            <j.5:partOf rdf:resource="DevelopmentPlanData#CounterApplication"/>
+            <j.4:identifier>ExecutiveThread</j.4:identifier>
+          </j.5:SYSTEM>
+        </j.2:governs>
+        <j.2:text>Executive shall print a single '.' character to the console every second when running.</j.2:text>
+        <j.4:identifier>EXE-LLR-3</j.4:identifier>
+      </j.1:LowLevelRequirement>
+    </j.2:providedBy>
+    <j.2:text>console</j.2:text>
+    <j.4:identifier>DCC-6</j.4:identifier>
+  </j.1:DataAndControlCouple>
+  <j.1:DataAndControlCouple rdf:ID="DCC-5">
+    <j.2:createdBy rdf:resource="#LlrDev1"/>
+    <j.2:providedBy>
+      <j.1:LowLevelRequirement rdf:ID="OUT-LLR-2">
+        <j.2:createdBy rdf:resource="#LlrDev1"/>
+        <j.2:governs>
+          <j.5:SYSTEM rdf:about="DevelopmentPlanData#OutputThread">
+            <j.5:producedBy rdf:resource="#SwDesign"/>
+            <j.5:partOf rdf:resource="DevelopmentPlanData#CounterApplication"/>
+            <j.4:identifier>OutputThread</j.4:identifier>
+          </j.5:SYSTEM>
+        </j.2:governs>
+        <j.2:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-3"/>
+        <j.2:text>Output Thread shall broadcast a UDP message on port 62001 with the park_count every second.</j.2:text>
+        <j.4:identifier>OUT-LLR-2</j.4:identifier>
+      </j.1:LowLevelRequirement>
+    </j.2:providedBy>
+    <j.2:text>outgoing UDP message</j.2:text>
+    <j.4:identifier>DCC-5</j.4:identifier>
+  </j.1:DataAndControlCouple>
+  <j.1:DataAndControlCouple rdf:ID="DCC-4">
+    <j.2:createdBy rdf:resource="#LlrDev1"/>
+    <j.2:providedBy>
+      <j.1:LowLevelRequirement rdf:ID="IN-LLR-3">
+        <j.2:createdBy rdf:resource="#LlrDev1"/>
+        <j.2:governs rdf:resource="DevelopmentPlanData#InputThread"/>
+        <j.2:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-2"/>
+        <j.2:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
+        <j.2:text>Input Thread shall add the delta value received by the UDP to the park_count and send the updated park_count to the Output Thread when a valid UDP message is received and the park_count range is not exceed.</j.2:text>
+        <j.4:identifier>IN-LLR-3</j.4:identifier>
+      </j.1:LowLevelRequirement>
+    </j.2:providedBy>
+    <j.2:providedBy>
+      <j.1:LowLevelRequirement rdf:ID="OUT-LLR-1">
+        <j.2:createdBy rdf:resource="#LlrDev1"/>
+        <j.2:governs rdf:resource="DevelopmentPlanData#OutputThread"/>
+        <j.2:text>Output Thread shall initialize the park_count to 0 on powerup.</j.2:text>
+        <j.4:identifier>OUT-LLR-1</j.4:identifier>
+      </j.1:LowLevelRequirement>
+    </j.2:providedBy>
+    <j.2:consumedBy rdf:resource="#OUT-LLR-2"/>
+    <j.2:text>output_park_count</j.2:text>
+    <j.4:identifier>DCC-4</j.4:identifier>
+  </j.1:DataAndControlCouple>
+  <j.1:DataAndControlCouple rdf:ID="DCC-3">
+    <j.2:providedBy>
+      <j.1:LowLevelRequirement rdf:ID="IN-LLR-1">
+        <j.2:createdBy rdf:resource="#LlrDev1"/>
+        <j.2:governs rdf:resource="DevelopmentPlanData#InputThread"/>
+        <j.2:text>Input Thread shall initialize the park_count to 0 on powerup.</j.2:text>
+        <j.4:identifier>IN-LLR-1</j.4:identifier>
+      </j.1:LowLevelRequirement>
+    </j.2:providedBy>
+    <j.2:providedBy>
+      <j.1:LowLevelRequirement rdf:ID="IN-LLR-4">
+        <j.2:createdBy rdf:resource="#LlrDev1"/>
+        <j.2:governs rdf:resource="DevelopmentPlanData#InputThread"/>
+        <j.2:text>Input Thread shall limit park_count to between 0 and 1500.</j.2:text>
+        <j.4:identifier>IN-LLR-4</j.4:identifier>
+      </j.1:LowLevelRequirement>
+    </j.2:providedBy>
+    <j.2:consumedBy rdf:resource="#IN-LLR-4"/>
+    <j.2:consumedBy>
+      <j.1:LowLevelRequirement rdf:ID="IN-LLR-2">
+        <j.2:createdBy rdf:resource="#LlrDev1"/>
+        <j.2:governs rdf:resource="DevelopmentPlanData#InputThread"/>
+        <j.2:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-2"/>
+        <j.2:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
+        <j.2:text>Input Thread shall check for a incoming UDP message on port 62000.</j.2:text>
+        <j.4:identifier>IN-LLR-2</j.4:identifier>
+      </j.1:LowLevelRequirement>
+    </j.2:consumedBy>
+    <j.2:createdBy rdf:resource="#LlrDev1"/>
+    <j.4:identifier>DCC-3</j.4:identifier>
+    <j.2:consumedBy rdf:resource="#IN-LLR-5"/>
+    <j.2:consumedBy rdf:resource="#IN-LLR-3"/>
+    <j.2:consumedBy rdf:resource="#IN-LLR-6"/>
+    <j.2:text>input_park_count</j.2:text>
+  </j.1:DataAndControlCouple>
+  <j.1:DataAndControlCouple rdf:ID="DCC-2">
+    <j.2:createdBy rdf:resource="#LlrDev1"/>
+    <j.2:consumedBy rdf:resource="#IN-LLR-6"/>
+    <j.2:consumedBy rdf:resource="#IN-LLR-5"/>
+    <j.2:consumedBy rdf:resource="#IN-LLR-3"/>
+    <j.2:consumedBy rdf:resource="#IN-LLR-2"/>
+    <j.2:text>incoming UDP message</j.2:text>
+    <j.4:identifier>DCC-2</j.4:identifier>
+  </j.1:DataAndControlCouple>
+  <j.1:DataAndControlCouple rdf:ID="DCC-1">
+    <j.2:createdBy rdf:resource="#LlrDev1"/>
+    <j.2:consumedBy rdf:resource="#OUT-LLR-1"/>
+    <j.2:consumedBy rdf:resource="#IN-LLR-1"/>
+    <j.2:consumedBy>
+      <j.1:LowLevelRequirement rdf:ID="EXE-LLR-2">
+        <j.2:createdBy rdf:resource="#LlrDev1"/>
+        <j.2:governs rdf:resource="DevelopmentPlanData#ExecutiveThread"/>
+        <j.2:text>Executive shall spawn Output Thread on powerup.</j.2:text>
+        <j.4:identifier>EXE-LLR-2</j.4:identifier>
+      </j.1:LowLevelRequirement>
+    </j.2:consumedBy>
+    <j.2:consumedBy>
+      <j.1:LowLevelRequirement rdf:ID="EXE-LLR-1">
+        <j.2:createdBy rdf:resource="#LlrDev1"/>
+        <j.2:governs rdf:resource="DevelopmentPlanData#ExecutiveThread"/>
+        <j.2:text>Executive shall spawn Input Thread on powerup.</j.2:text>
+        <j.4:identifier>EXE-LLR-1</j.4:identifier>
+      </j.1:LowLevelRequirement>
+    </j.2:consumedBy>
+    <j.2:text>PowerUp</j.2:text>
+    <j.4:identifier>DCC-1</j.4:identifier>
+  </j.1:DataAndControlCouple>
 </rdf:RDF>

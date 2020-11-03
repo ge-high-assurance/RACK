@@ -64,7 +64,6 @@ select ?Class (group_concat(distinct ?PropList; separator='} . OPTIONAL{') as ?F
        (group_concat(distinct ?ytemp1; separator=' ') as ?HeaderList)where
        { Let (?xClassVarInt := replace(str(?Class),'http.*#','?')) 							# making a variable (e.g. ?SYSTEM)
          . ?ClassProp &lt;http://TurnstileSystem/GenerateCSVQueries#propName&gt; ?xPropName 
-         . FILTER(!regex(str(?xPropName), 'http://arcos.rack/PROV-S#hasAttribute')) 		# drop hasAttribute because that is a bnode and we need to sort out how to handle it
          . FILTER NOT EXISTS {?ClassProp &lt;http://TurnstileSystem/GenerateCSVQueries#superPropName&gt; ?xPropName}	# discard if this property should be dropped
          . LET (?xVarNameInt := replace(str(?xPropName),'http.*#','&gt; ?')) 					# replace initial part of property with a ? to make it a variable in query (e.g. &gt; ?producedBy)
          . LET (?xtemp1 := concat(str(?xPropName),str(?xVarNameInt)))						# e.g. http://arcos.rack/SYSTEM#producedBy&gt; ?producedBy
@@ -79,7 +78,6 @@ select ?Class (group_concat(distinct ?PropList; separator='} . OPTIONAL{') as ?F
       (group_concat(distinct ?ztemp2; separator=' ') as ?HeaderList) where
         { Let (?ClassVarInt := replace(str(?Class),'http.*#','?')) 							# making a variable (e.g. ?SYSTEM)
           . ?ClassProp &lt;http://TurnstileSystem/GenerateCSVQueries#propName&gt; ?PropName
-          . FILTER(!regex(str(?PropName), 'http://arcos.rack/PROV-S#hasAttribute')) 		# drop hasAttribute because that is a bnode and we need to sort out how to handle it
           . FILTER NOT EXISTS {?ClassProp &lt;http://TurnstileSystem/GenerateCSVQueries#superPropName&gt; ?PropName}	# discard if this property should be dropped
           . LET (?VarNameInt := replace(str(?PropName),'http.*#','&gt; ?')) 					# replace initial part of property with a ? to make it a variable in query (e.g. &gt; ?producedBy)
           . LET (?temp1 := concat(str(?PropName),str(?VarNameInt)))							# e.g. http://arcos.rack/SYSTEM#producedBy&gt; ?producedBy

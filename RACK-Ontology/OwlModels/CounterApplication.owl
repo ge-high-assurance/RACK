@@ -200,22 +200,6 @@
                     <file:fileFormat rdf:resource="#ElfFile"/>
                     <file:createBy>
                       <sw:COMPILE rdf:ID="output_o_Compiling">
-                        <j.0:hasAttribute>
-                          <j.0:ATTRIBUTE>
-                            <j.0:fieldValue>/path/to/libraries</j.0:fieldValue>
-                            <j.0:field>
-                              <j.0:FIELD rdf:ID="LinkerPath"/>
-                            </j.0:field>
-                          </j.0:ATTRIBUTE>
-                        </j.0:hasAttribute>
-                        <j.0:hasAttribute>
-                          <j.0:ATTRIBUTE>
-                            <j.0:fieldValue>yes</j.0:fieldValue>
-                            <j.0:field>
-                              <j.0:FIELD rdf:ID="CompileWithOptimizations"/>
-                            </j.0:field>
-                          </j.0:ATTRIBUTE>
-                        </j.0:hasAttribute>
                         <sw:compiledBy rdf:resource="#cc"/>
                         <sw:compileInput>
                           <file:FILE rdf:ID="output_h">

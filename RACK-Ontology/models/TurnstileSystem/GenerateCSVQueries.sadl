@@ -85,11 +85,10 @@ Rule TagSuperProperties: // identifies ancestor properties that are made more sp
 // Note a number of CSV files generated are empty (as expected)
 // Other notes:
 //		Order of columns need not match what we were manually generating; 'identifier' may not be the first column
-//		Ignoring hasAttribute until we figure out what we want to do with bnodes.
 //		In Hazard, the sourceID is 1 column; SemTK wants it as 2 columns.
 //		Check ATTRIBUTE.csv
-//		Check COMPILE.csv : a COMPILE (like output_o_Compiling) can have multiple compileInput and multiple hasAttribute.
-//			So, after we sort out hasAttribute, there would be 4 rows of data for output_o_Compiling
+//		Check COMPILE.csv : a COMPILE (like output_o_Compiling) can have multiple compileInput.
+//			So there would be 4 rows of data for output_o_Compiling
 //			is that ok wrt SemTK?
 Ask GenQueryString: " select  ?QueryStr  where { {
 select ?Class (group_concat(distinct ?PropList; separator='} . OPTIONAL{') as ?FinalPropList) 
@@ -101,7 +100,6 @@ select ?Class (group_concat(distinct ?PropList; separator='} . OPTIONAL{') as ?F
        (group_concat(distinct ?ytemp1; separator=' ') as ?HeaderList)where
        { Let (?xClassVarInt := replace(str(?Class),'http.*#','?')) 							# making a variable (e.g. ?SYSTEM)
          . ?ClassProp <http://TurnstileSystem/GenerateCSVQueries#propName> ?xPropName 
-         . FILTER(!regex(str(?xPropName), 'http://arcos.rack/PROV-S#hasAttribute')) 		# drop hasAttribute because that is a bnode and we need to sort out how to handle it
          . FILTER NOT EXISTS {?ClassProp <http://TurnstileSystem/GenerateCSVQueries#superPropName> ?xPropName}	# discard if this property should be dropped
          . LET (?xVarNameInt := replace(str(?xPropName),'http.*#','> ?')) 					# replace initial part of property with a ? to make it a variable in query (e.g. > ?producedBy)
          . LET (?xtemp1 := concat(str(?xPropName),str(?xVarNameInt)))						# e.g. http://arcos.rack/SYSTEM#producedBy> ?producedBy
@@ -116,7 +114,6 @@ select ?Class (group_concat(distinct ?PropList; separator='} . OPTIONAL{') as ?F
       (group_concat(distinct ?ztemp2; separator=' ') as ?HeaderList) where
         { Let (?ClassVarInt := replace(str(?Class),'http.*#','?')) 							# making a variable (e.g. ?SYSTEM)
           . ?ClassProp <http://TurnstileSystem/GenerateCSVQueries#propName> ?PropName
-          . FILTER(!regex(str(?PropName), 'http://arcos.rack/PROV-S#hasAttribute')) 		# drop hasAttribute because that is a bnode and we need to sort out how to handle it
           . FILTER NOT EXISTS {?ClassProp <http://TurnstileSystem/GenerateCSVQueries#superPropName> ?PropName}	# discard if this property should be dropped
           . LET (?VarNameInt := replace(str(?PropName),'http.*#','> ?')) 					# replace initial part of property with a ? to make it a variable in query (e.g. > ?producedBy)
           . LET (?temp1 := concat(str(?PropName),str(?VarNameInt)))							# e.g. http://arcos.rack/SYSTEM#producedBy> ?producedBy

@@ -33,9 +33,8 @@ import "http://www.w3.org/2000/01/rdf-schema". // so as to use OWL_MEM reasoner 
 //		column names were altered to match ontology (e.g. replaced tcId by confirmsId)
 // Not yet done
 //		Not generating csv files where there is no data (e.g. BUILD.csv)
-//		Not showing hasAttribute column as that is a bnode - need to make sure how it will be handled in SemTK
 //		If there is a class with say 2 properties that each can appear multiple times (e.g. as in COMPILE)
-//			then are we handling it properly in SemTK? Note that in COMPILE one of the 2 properties is hasAttribute
+//			then are we handling it properly in SemTK?
 //			which we are currently ignoring.
 // Note: if the range of a property can be 2 different classes then currently we have multiple columns,
 //			one for each type of class. This does not seem to be a good approach.

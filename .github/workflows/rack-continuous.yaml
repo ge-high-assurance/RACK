@@ -12,48 +12,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out RACK source
-        uses: actions/checkout@v2
+    - name: Check out RACK source
+      uses: actions/checkout@v2
 
-      - name: Lint shell scripts with ShellCheck
-        # This action is composite on master which `act` can't yet handle.
-        uses: ludeeus/action-shellcheck@fcee962fee3f87888d7992ab0560232aef368e89
-        env:
-          SHELLCHECK_OPTS: -e SC1008
+    - name: Cache development dependencies
+      uses: actions/cache@v2
+      with:
+        # This path is specific to Ubuntu
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('cli/dev/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          ${{ runner.os }}-
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
+    - name: Install development dependencies
+      run: pip3 install -q -r cli/dev/requirements.txt
 
-      - name: Cache RACK CLI development dependencies
-        uses: actions/cache@v2
-        with:
-          # This path is specific to Ubuntu
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('cli/dev/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-            ${{ runner.os }}-
+    - name: Lint RACK CLI
+      run: |
+        cd cli
+        pylint .
+        mypy .
 
-      - name: Install development dependencies
-        run: |
-          pip install \
-            --quiet \
-            --requirement cli/dev/requirements.txt
+    - name: Lint RACK Ontology
+      continue-on-error: true
+      run: |
+        sudo apt-add-repository ppa:swi-prolog/stable
+        sudo apt-get update -qq --yes
+        sudo apt-get install -qq --yes swi-prolog
+        cd RACK-Ontology
+        ../assist/bin/check
 
-      - name: Lint the RACK CLI
-        run: |
-          cd cli
-          pylint .
-          mypy .
-
-      - name: Lint the ontology
-        continue-on-error: true
-        run: |
-          sudo apt-add-repository ppa:swi-prolog/stable
-          sudo apt-get update -qq --yes
-          sudo apt-get install -qq --yes swi-prolog
-
-          cd RACK-Ontology
-          ../assist/bin/check
+    - name: Lint shell scripts
+      # This action is composite on master which `act` can't yet handle.
+      uses: ludeeus/action-shellcheck@fcee962fee3f87888d7992ab0560232aef368e89
+      env:
+        SHELLCHECK_OPTS: -e SC1008

@@ -44,4 +44,7 @@ FILE_HASH
     described by hashType  with a single value of type HASH_TYPE,
     described by hashValue with a single value of type string.
 
-HASH_TYPE is a type of THING, must be one of { MD5, SHA1, SHA2_256, SHA2_512 }.
+HASH_TYPE
+    (note "A type of cryptographic hash")
+    is a type of THING,
+    must be one of { MD5, SHA1, SHA2_256, SHA2_512 }.

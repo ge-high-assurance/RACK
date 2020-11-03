@@ -6,6 +6,8 @@
 name: RACK-in-a-Box continous build
 
 on:
+  pull_request:
+    branches: [ master ]
   push:
     branches: [ '*' ]
     tags-ignore: [ '*' ]

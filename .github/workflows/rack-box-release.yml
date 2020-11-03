@@ -83,6 +83,7 @@ jobs:
     - name: Package RACK CLI
       run: |
         cd RACK/cli
+        python3 -m pip install --upgrade pip setuptools wheel
         pip3 wheel --wheel-dir=wheels -r requirements.txt
         pip3 wheel --wheel-dir=wheels .
         cd ${{ github.workspace }}

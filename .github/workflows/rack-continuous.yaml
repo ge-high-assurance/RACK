@@ -22,10 +22,16 @@ jobs:
       with:
         # This path is specific to Ubuntu
         path: ~/.cache/pip
+        # Look to see if there is a cache hit for the corresponding requirements file
         key: ${{ runner.os }}-pip-${{ hashFiles('cli/dev/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
 
     - name: Install development dependencies
       run: pip3 install -q -r cli/dev/requirements.txt

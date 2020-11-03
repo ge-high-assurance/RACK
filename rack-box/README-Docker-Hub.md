@@ -1,10 +1,12 @@
 # Install a Docker RACK Box
 
-You will need to increase the resources given to Docker in order to run a RACK box.  Click the right mouse button on Docker's whale icon in the system tray and select "Settings".  When the Settings window appears, click on Resources and make the following changes to the resource settings:
+You may need to increase the resources given to Docker in order to run a RACK box.  Click the right mouse button on Docker's whale icon in the system tray and select "Settings".  When the Settings window appears, click on Resources and if you see these resource settings, make the following changes:
 
 1. Increase the number of CPUs to 4 if you have enough CPUs (2 may be enough if you don't have many CPUs).
 2. Increase the amount of Memory to 4.00 GB (or more if you have plenty of RAM).
 3. Click the Apply & Restart button to restart Docker with the new resource settings.
+
+If you don't see these resource settings, it means Docker can use all of your computer's CPUs and 80% of your computer's RAM so you don't need to change anything.
 
 Now you are ready to start your RACK box.  Type the following commands to download the Docker RACK box and run it on your computer:
 

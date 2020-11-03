@@ -1,28 +1,34 @@
+from abc import ABC
 import libadalang as lal
 from typing import Callable, Dict, List, Optional, Set
 
 from ada_visitor import AdaVisitor
 
-def namespace_str(namespace: List[str]) -> str:
-    if len(namespace) == 1:
-        return namespace[0]
-    path = ".".join(namespace[1:])
-    return f"{namespace[0]}:{path}"
+def node_key(node: lal.AdaNode) -> str:
+    return node.p_gnat_xref().p_basic_decl.p_canonical_fully_qualified_name
 
-CallGraphType = Dict[str, Set[str]]
+class GraphNode(ABC):
+    pass
+
+class ToplevelNode(GraphNode):
+    def __init__(self, absolute_file_path: str):
+        self.absolute_file_path = absolute_file_path
+
+class CallableNode(GraphNode):
+    def __init__(self, node: lal.AdaNode):
+        self.node = node
 
 class StaticCallGraphVisitor(AdaVisitor):
 
     """
-    Computes the static call graph within some AST node. Once visit() has
-    completed, you can read the call graph in the call_graph instance
-    variable.
+    Computes the static call graph within some AST node. Once `visit()` has
+    completed, you can read the call graph in the `edges` instance variable.
     """
 
     def __init__(
         self,
-        callable_being_defined: Optional[lal.DefiningName],
-        namespace: List[str]
+        absolute_file_path: str,
+        callable_being_defined: Optional[lal.DefiningName]
     ) -> None:
         """
         Initialize the visitor.  Because it is not very practical to locally
@@ -30,6 +36,12 @@ class StaticCallGraphVisitor(AdaVisitor):
         instantiate a new local visitor, run it, and then gather from its final
         state whatever data you need.  Avoids code duplication, at the price of
         creating a bunch of short-lived instances.
+        """
+
+        self.absolute_file_path = absolute_file_path
+        """
+        Absolute file path of the file being analyzed.  Useful to give an
+        identity to the top-level node of the call graph.
         """
 
         self.callable_being_defined: Optional[lal.DefiningName] = callable_being_defined
@@ -40,38 +52,52 @@ class StaticCallGraphVisitor(AdaVisitor):
         the file name if needed.
         """
 
-        self.call_graph: CallGraphType = dict()
-        """
-        The call graph being computed.
-        """
+        # INVARIANT
+        # All nodes appearing in edges, either via their key, or in the set of
+        # destinations, should be in the nodes set.
+        # There may be nodes that participate in no edges.
 
-        # current enclosing namespace (can be arbitrarily initialized, say with
-        # a file name) then, traversed namespaces are added onto.
-        self.namespace = namespace
+        # We store nodes by key so that we can retrieve node instances by their
+        # key and avoid creating duplicates.
+        self.nodes: Dict[str, GraphNode] = dict()
+        """All nodes in the graph, unsorted."""
+
+        if callable_being_defined:
+            key = node_key(callable_being_defined)
+            self.nodes[key] = CallableNode(callable_being_defined)
+        else:
+            self.nodes[absolute_file_path] = ToplevelNode(absolute_file_path)
+
+        self.edges: Dict[str, Set[str]] = dict()
         """
-        The current enclosing namespace, as a sequence enclosing namespaces
-        (currently, the top-level will actually be the name of the enclosing
-        file).
+        Edges of the graph, keyed by their origin, valued by the set of
+        destinations for that origin.
         """
 
     def get_callable_being_defined_key(self) -> str:
         if not self.callable_being_defined:
-            return "top-level"
-        name = self.callable_being_defined.f_name.text
-        defined = self.callable_being_defined.p_basic_decl.p_defining_name
-        return f"{name} (defined at {defined})"
+            return "__TOPLEVEL__"
+        return node_key(self.callable_being_defined)
 
-    def record_call(self, callee: str) -> None:
+    def ensure_callable_is_registered(self, node: lal.Name):
+        key = node_key(node)
+        if key in self.nodes:
+            return
+        self.nodes[key] = CallableNode(node)
+
+    def record_call(self, callee: lal.Name) -> None:
         """Records a witnessed static function/procedure call to callee."""
-        key = self.get_callable_being_defined_key()
-        if key not in self.call_graph:
-            self.call_graph[key] = set()
-        self.call_graph[key].add(callee)
+        caller_key = self.get_callable_being_defined_key()
+        callee_key = node_key(callee)
+        self.ensure_callable_is_registered(callee)
+        if caller_key not in self.edges:
+            self.edges[caller_key] = set()
+        self.edges[caller_key].add(callee_key)
 
     def locally_visit(
         self,
+        absolute_file_path: str,
         callable_being_defined: Optional[lal.DefiningName],
-        namespace: List[str],
         callback: Callable[[AdaVisitor], None]
     ) -> None:
         """
@@ -79,40 +105,46 @@ class StaticCallGraphVisitor(AdaVisitor):
         variables.
         """
         local_visitor = StaticCallGraphVisitor(
-            callable_being_defined = callable_being_defined,
-            namespace = namespace
+            absolute_file_path = absolute_file_path,
+            callable_being_defined = callable_being_defined
         )
         callback(local_visitor)
 
-    def merge_call_graph(self, call_graph: CallGraphType) -> None:
+    # NOTE (val) I made it so that local visitors have their own set of nodes
+    # and edges, that the caller may then choose to merge. In practice we
+    # always do, so maybe we should just pass the nodes and edges and modify
+    # them...
+
+    def merge_nodes(self, nodes: Dict[str, GraphNode]) -> None:
+        """
+        Merges the given nodes to the self ones.
+        """
+        self.nodes.update(nodes)
+
+    def merge_edges(self, edges: Dict[str, str]) -> None:
         """
         Merges the given call graph to the current call graph (essentially a
         key-wise union).
         """
-        for key in call_graph:
-            if not key in self.call_graph:
-                self.call_graph[key] = set()
-            self.call_graph[key] = self.call_graph[key].union(call_graph[key])
+        for key in edges:
+            if not key in self.edges:
+                self.edges[key] = set()
+            self.edges[key] = self.edges[key].union(edges[key])
 
     def visit_CallExpr(self, node: lal.CallExpr):
-        defined = (
-            f"(defined at {node.f_name.p_referenced_decl()})"
-            if node.f_name.p_resolve_names
-            else "(could not locate definition)"
-        )
-        self.record_call(f"{node.f_name.text} {defined}")
+        self.record_call(node.f_name)
 
     def visit_PackageBody(self, node: lal.PackageBody) -> None:
-        name = node.f_package_name
 
         def callback(visitor):
             visitor.generic_visit(node.f_decls)
             visitor.generic_visit(node.f_stmts)
-            self.merge_call_graph(visitor.call_graph)
+            self.merge_nodes(visitor.nodes)
+            self.merge_edges(visitor.edges)
 
         self.locally_visit(
+            absolute_file_path = self.absolute_file_path,
             callable_being_defined = self.callable_being_defined,
-            namespace = self.namespace + [name.text],
             callback = callback
         )
 
@@ -124,10 +156,11 @@ class StaticCallGraphVisitor(AdaVisitor):
             # assumption: the spec does not contain calls, skipping it
             visitor.visit(node.f_decls)
             visitor.visit(node.f_stmts)
-            self.merge_call_graph(visitor.call_graph)
+            self.merge_nodes(visitor.nodes)
+            self.merge_edges(visitor.edges)
 
         self.locally_visit(
+            absolute_file_path = self.absolute_file_path,
             callable_being_defined = name,
-            namespace = self.namespace,
             callback = callback
         )

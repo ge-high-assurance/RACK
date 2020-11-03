@@ -4,9 +4,10 @@
 # needed for postponing type annotations, to allow a method returning its class
 # should be unnecessary in Python 3.10+
 from __future__ import annotations
-from typing import Iterable, List
+from typing import Iterable, List, Optional
 
 class AdaNode:
+    def p_gnat_xref(self, imprecise_fallback: Optional[bool] = False) -> DefiningName: ...
     @property
     def text(self) -> str: ...
 

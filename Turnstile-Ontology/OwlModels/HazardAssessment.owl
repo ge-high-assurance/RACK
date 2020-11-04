@@ -1,8 +1,9 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://arcos.rack/HAZARD#"
+    xmlns:trnstldpd="http://Turnstile/DevelopmentPlanData#"
     xmlns:j.1="http://arcos.rack/PROV-S#"
-    xmlns:ha="http://Turnstile/HazardAssessment#"
+    xmlns:trnstlha="http://Turnstile/HazardAssessment#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"

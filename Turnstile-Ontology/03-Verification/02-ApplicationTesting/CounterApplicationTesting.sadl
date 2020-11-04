@@ -69,8 +69,11 @@ TR-1-4-1 is a SoftwareComponentTestResult
 	has tst:result tst:Failed,
 	has executedBy TestRun1.
 	
-TargetHardware is a AGENT.
+TargetHardware is a AGENT
+	has identifier "TargetHardware".
+	
 TestRun1 is a SoftwareComponentTestExecution
+	has identifier "TestRun1"
 	has executedOn TargetHardware.	
 
 TR-1-1-2 is a SoftwareComponentTestResult
@@ -101,6 +104,7 @@ TR-1-4-2 is a SoftwareComponentTestResult
 	
 
 TestRun2 is a SoftwareComponentTestExecution
+	has identifier "TestRun2"
 	has executedOn TargetHardware.
 	
 	

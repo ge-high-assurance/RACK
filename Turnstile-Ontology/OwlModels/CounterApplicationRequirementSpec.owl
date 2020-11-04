@@ -7,10 +7,11 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:j.2="http://arcos.rack/REQUIREMENTS#"
+    xmlns:trnstldpd="http://Turnstile/DevelopmentPlanData#"
     xmlns:j.3="http://arcos.rack/PROV-S#"
-    xmlns:ha="http://Turnstile/HazardAssessment#"
+    xmlns:trnstlha="http://Turnstile/HazardAssessment#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:TSysDP="http://Turnstile/TurnstileDesign#"
+    xmlns:trnstsd="http://Turnstile/TurnstileDesign#"
     xmlns:cntrapprq="http://Turnstile/CounterApplicationRequirementSpec#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://Turnstile/CounterApplicationRequirementSpec">

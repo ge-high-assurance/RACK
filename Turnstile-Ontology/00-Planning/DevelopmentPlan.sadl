@@ -9,7 +9,7 @@
  * material are those of the author(s) and do not necessarily reflect the views
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
- uri "http://Turnstile/DevelopmentPlan" alias trnstlDevPlan.
+ uri "http://Turnstile/DevelopmentPlan" alias trnstldp.
 import "http://arcos.rack/DOCUMENT".
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/SOFTWARE".

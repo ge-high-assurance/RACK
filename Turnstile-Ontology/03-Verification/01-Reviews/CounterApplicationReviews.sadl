@@ -9,11 +9,15 @@
  * material are those of the author(s) and do not necessarily reflect the views
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
-  uri "http://Turnstile/CounterApplicationReviews".
+  uri "http://Turnstile/CounterApplicationReviews" alias cntrapprv.
  import "http://Turnstile/CounterApplicationRequirementSpec".
  import "http://Turnstile/CounterApplicationDesignDescription".
  
- JohnQ is an Engineer.
+ JohnQ is an Engineer
+	has identifier "259863025"
+	has AGENTS:name "Public, John"
+	has emailAddress "john.public@ge.com"
+	has employedBy General_Electric.
  
  HlrReview is a SoftwareRequirementsReview
     has identifier "HlrReview"

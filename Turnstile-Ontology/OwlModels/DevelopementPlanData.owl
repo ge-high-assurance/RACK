@@ -3,10 +3,11 @@
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:j.0="http://arcos.rack/AGENTS#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:trnstldp="http://Turnstile/DevelopmentPlan#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:j.1="http://arcos.rack/DOCUMENT#"
-    xmlns:trnstlDevPlanData="http://Turnstile/DevelopmentPlanData#"
+    xmlns:trnstldpd="http://Turnstile/DevelopmentPlanData#"
     xmlns:j.2="http://arcos.rack/SOFTWARE#"
     xmlns:j.3="http://arcos.rack/PROV-S#"
     xmlns:j.4="http://arcos.rack/SYSTEM#"
@@ -353,8 +354,11 @@
                 <j.4:partOf>
                   <j.4:SYSTEM rdf:ID="CounterApplication">
                     <j.4:partOf>
-                      <j.4:SYSTEM rdf:ID="Turnstile"/>
+                      <j.4:SYSTEM rdf:ID="Turnstile">
+                        <j.3:identifier>Turnstile</j.3:identifier>
+                      </j.4:SYSTEM>
                     </j.4:partOf>
+                    <rdf:type rdf:resource="DevelopmentPlan#SystemComponent"/>
                   </j.4:SYSTEM>
                 </j.4:partOf>
               </j.2:COMPONENT>
@@ -376,19 +380,21 @@
           <j.1:SECTION rdf:ID="_01-SystemOverview">
             <j.3:content rdf:resource="#Turnstile"/>
             <j.3:content>
-              <j.4:SYSTEM rdf:ID="OutGate">
+              <trnstldp:SystemComponent rdf:ID="OutGate">
                 <j.4:partOf rdf:resource="#Turnstile"/>
-              </j.4:SYSTEM>
+                <j.3:identifier>Out Gate</j.3:identifier>
+              </trnstldp:SystemComponent>
             </j.3:content>
             <j.3:content>
-              <j.4:SYSTEM rdf:ID="InGate">
+              <trnstldp:SystemComponent rdf:ID="InGate">
                 <j.4:partOf rdf:resource="#Turnstile"/>
-              </j.4:SYSTEM>
+                <j.3:identifier>In Gate</j.3:identifier>
+              </trnstldp:SystemComponent>
             </j.3:content>
             <j.3:content>
-              <j.4:SYSTEM rdf:ID="Display">
+              <trnstldp:SystemComponent rdf:ID="Display">
                 <j.4:partOf rdf:resource="#Turnstile"/>
-              </j.4:SYSTEM>
+              </trnstldp:SystemComponent>
             </j.3:content>
             <j.3:content rdf:resource="#CounterApplication"/>
           </j.1:SECTION>
@@ -436,7 +442,9 @@
     </rdfs:subClassOf>
   </rdf:Description>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareUnitTest_content"/>
-  <j.4:INTERFACE rdf:ID="Census"/>
+  <trnstldp:SystemInterfaceDefinition rdf:ID="Census">
+    <j.3:identifier>census</j.3:identifier>
+  </trnstldp:SystemInterfaceDefinition>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareUnitTestExecution_A-6-3"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareDesignReview_A-4-3"/>
   <sadlimplicitmodel:Rule rdf:ID="Problem_Reporting_A-7-2"/>
@@ -472,7 +480,9 @@
   <sadlimplicitmodel:Rule rdf:ID="SoftwareCodeReview_A-5-1"/>
   <sadlimplicitmodel:Rule rdf:ID="StructualCoverageAnalysis_A-7-6"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareDesignReview_A-4-11"/>
-  <j.4:INTERFACE rdf:ID="Inflow"/>
+  <trnstldp:SystemInterfaceDefinition rdf:ID="Inflow">
+    <j.3:identifier>inflow</j.3:identifier>
+  </trnstldp:SystemInterfaceDefinition>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareComponentTestResult_content"/>
   <j.5:FORMAT rdf:ID="CHeaderFile">
     <j.3:identifier>.h</j.3:identifier>
@@ -485,7 +495,9 @@
   <sadlimplicitmodel:Rule rdf:ID="SystemInterfaceDefinition_content"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareDesignReview_A-4-12"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareCodeReview_A-5-4"/>
-  <j.4:INTERFACE rdf:ID="Outflow"/>
+  <trnstldp:SystemInterfaceDefinition rdf:ID="Outflow">
+    <j.3:identifier>outflow</j.3:identifier>
+  </trnstldp:SystemInterfaceDefinition>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareDesignReview_A-4-6"/>
   <j.3:AGENT rdf:ID="ASSERT"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareComponentTestExecution_A-7-3"/>

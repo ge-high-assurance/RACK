@@ -36,7 +36,7 @@ employedBy is a type of actedOnBehalfOf.
 
 
 TOOL
-  (note "is a piece software that performs a specific activity.")
+  (note "An aid (software, hardware, etc) that automates the performance of a specific activity.")
   is a type of AGENT.
 
 SOFTWAREAGENT

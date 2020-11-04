@@ -9,7 +9,7 @@
  * material are those of the author(s) and do not necessarily reflect the views
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
- uri "http://Turnstile/DevelopmentPlanData" alias trnstlDevPlanData.
+ uri "http://Turnstile/DevelopmentPlanData" alias trnstldpd.
 import "http://Turnstile/DevelopmentPlan".
 
    //Model Location: DevelopmentPlan
@@ -47,39 +47,45 @@ _DevelopmentPlan is a PLAN,
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.CounterApplication
-      CounterApplication is a SYSTEM
+      CounterApplication is a SystemComponent
         has partOf Turnstile.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Display
-      Display is a SYSTEM
+      Display is a SystemComponent
         has partOf Turnstile.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.InGate
-      InGate is a SYSTEM
+      InGate is a SystemComponent
+		has identifier "In Gate"
         has partOf Turnstile.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.OutGate
-      OutGate is a SYSTEM
+      OutGate is a SystemComponent,
+		has identifier "Out Gate",
         has partOf Turnstile.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Turnstile
-      Turnstile is a SYSTEM.
+      Turnstile is a SYSTEM
+		has identifier "Turnstile".
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Census
-      Census is a INTERFACE.
+      Census is a SystemInterfaceDefinition
+		has identifier "census".
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Inflow
-      Inflow is a INTERFACE.
+      Inflow is a SystemInterfaceDefinition
+		has identifier "inflow".
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Outflow
-      Outflow is a INTERFACE.
+      Outflow is a SystemInterfaceDefinition
+		has identifier "outflow".
 
 
 

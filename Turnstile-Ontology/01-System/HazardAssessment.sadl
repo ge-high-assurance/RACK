@@ -9,7 +9,7 @@
  * material are those of the author(s) and do not necessarily reflect the views
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
- uri "http://Turnstile/HazardAssessment" alias ha.
+ uri "http://Turnstile/HazardAssessment" alias trnstlha.
 import "http://Turnstile/DevelopmentPlanData".
 
 //definition describes HAZARD with values of type string. 

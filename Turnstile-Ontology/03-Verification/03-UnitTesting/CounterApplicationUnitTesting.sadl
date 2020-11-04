@@ -14,6 +14,7 @@ import "http://Turnstile/DevelopmentPlan".
 import "http://Turnstile/CounterApplicationDesignDescription".
 
 UnitTestDevelopment is a DevelopUnitTests,
+	has identifier "UnitTestDevelopment"
 	has tst:developedBy JaneDoe.
 	
 UTC-1-1 is a SoftwareUnitTest
@@ -60,8 +61,10 @@ UTR-1-4-1 is a SoftwareUnitTestResult
 	has tst:result tst:Failed,
 	has executedBy SoftwareUnitTestRun1.
 	
-TestStation1 is an AGENT.
+TestStation1 is an AGENT
+	has identifier "TestStation1".
 SoftwareUnitTestRun1 is a SoftwareUnitTestExecution
+	has identifier "SoftwareUnitTestRun1"
 	has executedOn TestStation1.
 
 UTR-1-1-2 is a SoftwareUnitTestResult
@@ -88,6 +91,8 @@ UTR-1-4-2 is a SoftwareUnitTestResult
 	has tst:result tst:Failed,
 	has executedBy SoftwareUnitTestRun2.
 	
-TestStation2 is an AGENT.
+TestStation2 is an AGENT
+	has identifier "TestStation2".
 SoftwareUnitTestRun2 is a SoftwareUnitTestExecution
+	has identifier "SoftwareUnitTestRun2"
 	has executedOn TestStation2.

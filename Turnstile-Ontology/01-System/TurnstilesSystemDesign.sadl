@@ -9,28 +9,28 @@
  * material are those of the author(s) and do not necessarily reflect the views
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
- uri "http://Turnstile/TurnstileDesign" alias TSysDP.
+ uri "http://Turnstile/TurnstileDesign" alias trnstsd.
 import "http://Turnstile/DevelopmentPlanData".
 
-Turnstiles is a SYSTEM,
+Turnstile is a SYSTEM,
 	has identifier "Turnstile".
 	
 Ingate is a SystemComponent,
 	has identifier "In Gate",
-	has partOf Turnstiles.
+	has partOf Turnstile.
 	
 Outgate is a SystemComponent,
 	has identifier "Out Gate",
-	has partOf Turnstiles.
+	has partOf Turnstile.
 	
 	
 CounterApplication is a SystemComponent,
 	has identifier "Counter Application",
-	has partOf Turnstiles.
+	has partOf Turnstile.
 	
 Display is a SystemComponent,
 	has identifier "Display",
-	has partOf Turnstiles.
+	has partOf Turnstile.
 
 inflow is a SystemInterfaceDefinition,
 	has identifier "inflow",
@@ -51,15 +51,15 @@ census is a SystemInterfaceDefinition,
 Sys-1 is a SystemRequirement,
 	has identifier "Sys-1",
 	has text "Turnstile system shall track the number of people that travel through the in gate.",
-	has governs Turnstiles.
+	has governs Turnstile.
 
 Sys-2 is a SystemRequirement,
 	has identifier "Sys-2",
 	has text "Turnstile system shall track the number of people that travel through the out gate.	",
-	has governs Turnstiles.
+	has governs Turnstile.
  
 Sys-3 is a SystemRequirement,
 	has identifier "Sys-3",
 	has text "Turnstile system shall track the number of people are currently in the park.",
-	has governs Turnstiles.
+	has governs Turnstile.
 

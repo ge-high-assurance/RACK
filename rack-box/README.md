@@ -31,8 +31,13 @@ subdirectory before building your rack-box images:
   `apache-jena-fuseki-3.16.0.tar.gz` from
   <https://jena.apache.org/download/> and rename it)
 
-- `files/rack.tar.gz`: A binary distribution of the RACK CLI, see
+- `files/rack-cli.tar.gz`: A binary distribution of the RACK CLI, see
   [Build the RACK CLI](#Build-the-RACK-CLI).
+
+- `files/rack.tar.gz`: A copy of the RACK ontology and data (clone
+  this repo and run `tar cfz RACK/rack-box/files/rack.tar.gz
+  --exclude=.git --exclude=.github --exclude=assist --exclude=cli
+  --exclude=rack-box --exclude=tools RACK`)
 
 - `files/documentation.html`: RACK documentation (clone RACK.wiki, run
   `gwtc -t RACK-in-a-Box RACK.wiki/` using [Github Wikito
@@ -46,9 +51,8 @@ subdirectory before building your rack-box images:
   copy `index.html`)
 
 - `files/semtk.tar.gz`: A binary distribution of SemTK (download
-  `distribution-2.2.2-SNAPSHOT.tar.gz` from
-  <https://oss.sonatype.org/service/local/artifact/maven/content?r=snapshots&g=com.ge.research.semtk&a=distribution&v=2.2.2-SNAPSHOT&c=bin&e=tar.gz>
-  and rename it)
+  `semtk-opensource-v2.3.0-20201103-dist.tar.gz` or later from
+  <https://github.com/ge-semtk/semtk/releases> and rename it)
 
 - `files/style.css`: stylesheet for index.html (visit
   [markdown-to-html-github-style](https://github.com/KrauseFx/markdown-to-html-github-style)
@@ -75,14 +79,17 @@ the RACK CLI, clone the RACK git repository in your home directory
 Note for documentation authors: These instructions should be kept in sync with
 the Github Actions workflows.
 -->
+
 ```shell
 sudo apt update
 sudo apt install python3-pip
 cd $HOME
 git clone git@github.com:ge-high-assurance/RACK.git
 cd RACK/cli
+python3 -m pip install --upgrade pip setuptools wheel
 pip3 wheel --wheel-dir=wheels -r requirements.txt
 pip3 wheel --wheel-dir=wheels .
+python3 -m pip install ./wheels/*.whl
 cd $HOME
 tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/RACK-Ontology/cli/{setup-rack.sh,wheels}
 ```
@@ -167,23 +174,27 @@ The Docker image `nektos/act-environments-ubuntu:18.04` is quite large
 (approximately 18GB), so (1) you'll need enough free disk space to store it and
 (2) the first execution of `act` takes a while because it downloads this image.
 
-Only the "lint" job can be run this way, `act`
-[does not yet support Ubuntu 20.04](https://github.com/nektos/act-environments/issues/4).
+Unfortunately, `act` [does not yet support Ubuntu
+20.04](https://github.com/nektos/act-environments/issues/4).
 
 ### Troubleshooting
 
 #### "volume is in use"
 
 If you see a message like this:
-```
+
+```text
 Error: Error response from daemon: remove act-Build-Lint-shell-scripts-and-the-RACK-CLI: volume is in use
 ```
+
 You can forcibly stop and remove the `act` Docker containers and their volumes:
+
 ```bash
 docker stop $(docker ps -a | grep "nektos/act-environments-ubuntu:18.04" | awk '{print $1}')
 docker rm $(docker ps -a | grep "nektos/act-environments-ubuntu:18.04" | awk '{print $1}')
 docker volume rm $(docker volume ls --filter dangling=true | grep -o -E "act-.+$")
 ```
+
 There may also be a more precise solution to this issue, but the above works.
 
 #### "permission denied while trying to connect to the Docker daemon socket"

@@ -13,7 +13,7 @@
     xmlns:j.3="http://arcos.rack/REQUIREMENTS#"
   xml:base="http://Turnstile/TurnstileDesign">
   <owl:Ontology rdf:about="">
-    <owl:imports rdf:resource="DevelopmentPlan"/>
+    <owl:imports rdf:resource="DevelopmentPlanData"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
@@ -31,13 +31,13 @@
       </j.2:SystemComponent>
     </j.1:destination>
     <j.1:destination>
-      <j.2:SystemComponent rdf:ID="Display">
+      <j.2:SystemComponent rdf:about="DevelopmentPlanData#Display">
         <j.1:partOf rdf:resource="#Turnstiles"/>
         <j.0:identifier>Display</j.0:identifier>
       </j.2:SystemComponent>
     </j.1:destination>
     <j.1:source>
-      <j.2:SystemComponent rdf:ID="CounterApplication">
+      <j.2:SystemComponent rdf:about="DevelopmentPlanData#CounterApplication">
         <j.1:partOf rdf:resource="#Turnstiles"/>
         <j.0:identifier>Counter Application</j.0:identifier>
       </j.2:SystemComponent>
@@ -45,7 +45,7 @@
     <j.0:identifier>census</j.0:identifier>
   </j.2:SystemInterfaceDefinition>
   <j.2:SystemInterfaceDefinition rdf:ID="outflow">
-    <j.1:destination rdf:resource="#CounterApplication"/>
+    <j.1:destination rdf:resource="DevelopmentPlanData#CounterApplication"/>
     <j.1:source>
       <j.2:SystemComponent rdf:ID="Outgate">
         <j.1:partOf rdf:resource="#Turnstiles"/>
@@ -70,7 +70,7 @@
     <j.0:identifier>Sys-3</j.0:identifier>
   </j.2:SystemRequirement>
   <j.2:SystemInterfaceDefinition rdf:ID="inflow">
-    <j.1:destination rdf:resource="#CounterApplication"/>
+    <j.1:destination rdf:resource="DevelopmentPlanData#CounterApplication"/>
     <j.1:source rdf:resource="#Ingate"/>
     <j.0:identifier>inflow</j.0:identifier>
   </j.2:SystemInterfaceDefinition>

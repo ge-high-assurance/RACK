@@ -321,18 +321,62 @@ where {
 
 }</rdfs:isDefinedBy>
   </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="DevelopUnitTestsCsv">
+    <rdfs:isDefinedBy>
+
+select distinct ?identifier_DevelopUnitTests
+where {
+
+}</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
   <sadlimplicitmodel:NamedQuery rdf:ID="ObjectiveCsv">
     <rdfs:isDefinedBy>
 
-select distinct ?identifier_ACTIVITY ?identifier_OBJECTIVE
+select distinct ?identifier_SoftwareRequirementsDefinition ?identifier_SoftwareDesignReview ?identifier_SoftwareCodeReview ?identifier_SystemRequirementsDefinition ?identifier_SoftwareDesign ?identifier_DevelopUnitTests ?identifier_DevelopComponentTests ?identifier_OBJECTIVE
 where {
     ?OBJECTIVE a &lt;http://arcos.rack/PROCESS#OBJECTIVE&gt; . 
     ?OBJECTIVE &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_OBJECTIVE . 
     optional{
 
-    ?OBJECTIVE &lt;http://arcos.rack/PROCESS#satisfiedBy&gt; ?ACTIVITY .
-        ?ACTIVITY a &lt;http://arcos.rack/PROV-S#ACTIVITY&gt; . 
-        ?ACTIVITY &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_ACTIVITY . 
+    ?OBJECTIVE &lt;http://arcos.rack/PROCESS#satisfiedBy&gt; ?DevelopComponentTests .
+        ?DevelopComponentTests a &lt;http://Turnstile/DevelopmentPlan#DevelopComponentTests&gt; . 
+        ?DevelopComponentTests &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_DevelopComponentTests . 
+    }
+    optional{
+
+    ?OBJECTIVE &lt;http://arcos.rack/PROCESS#satisfiedBy&gt; ?DevelopUnitTests .
+        ?DevelopUnitTests a &lt;http://Turnstile/DevelopmentPlan#DevelopUnitTests&gt; . 
+        ?DevelopUnitTests &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_DevelopUnitTests . 
+    }
+    optional{
+
+    ?OBJECTIVE &lt;http://arcos.rack/PROCESS#satisfiedBy&gt; ?SoftwareDesign .
+        ?SoftwareDesign a &lt;http://Turnstile/DevelopmentPlan#SoftwareDesign&gt; . 
+        ?SoftwareDesign &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareDesign . 
+    }
+    optional{
+
+    ?OBJECTIVE &lt;http://arcos.rack/PROCESS#satisfiedBy&gt; ?SystemRequirementsDefinition .
+        ?SystemRequirementsDefinition a &lt;http://Turnstile/DevelopmentPlan#SystemRequirementsDefinition&gt; . 
+        ?SystemRequirementsDefinition &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SystemRequirementsDefinition . 
+    }
+    optional{
+
+    ?OBJECTIVE &lt;http://arcos.rack/PROCESS#satisfiedBy&gt; ?SoftwareCodeReview .
+        ?SoftwareCodeReview a &lt;http://Turnstile/DevelopmentPlan#SoftwareCodeReview&gt; . 
+        ?SoftwareCodeReview &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareCodeReview . 
+    }
+    optional{
+
+    ?OBJECTIVE &lt;http://arcos.rack/PROCESS#satisfiedBy&gt; ?SoftwareDesignReview .
+        ?SoftwareDesignReview a &lt;http://Turnstile/DevelopmentPlan#SoftwareDesignReview&gt; . 
+        ?SoftwareDesignReview &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareDesignReview . 
+    }
+    optional{
+
+    ?OBJECTIVE &lt;http://arcos.rack/PROCESS#satisfiedBy&gt; ?SoftwareRequirementsDefinition .
+        ?SoftwareRequirementsDefinition a &lt;http://Turnstile/DevelopmentPlan#SoftwareRequirementsDefinition&gt; . 
+        ?SoftwareRequirementsDefinition &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareRequirementsDefinition . 
     }
 
 }</rdfs:isDefinedBy>

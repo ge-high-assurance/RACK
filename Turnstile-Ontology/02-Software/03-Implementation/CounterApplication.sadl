@@ -84,7 +84,7 @@ output_o is a ObjectFile
 hw_c is a SourceCode
     has identifier "hw_c"
     has filename "hw.c"
-    has createBy CodeSW-1
+    has file:createBy CodeSW-1
     has fileFormat CSourceFile.
 hw_h is a SourceCode
     has identifier "hw_h"

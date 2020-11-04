@@ -92,6 +92,13 @@ where {
 
 }".} to "99-Utils/Data/SourceCode.csv".
 
+Write: data {Ask DevelopUnitTestsCsv:"
+
+select distinct ?identifier_DevelopUnitTests
+where {
+
+}".} to "99-Utils/Data/DevelopUnitTests.csv".
+
 Write: data {Ask SoftwareIntegrationCompileInputCsv:"
 
 select distinct ?identifier_ObjectFile ?identifier_SourceCode ?identifier_SoftwareIntegration
@@ -267,15 +274,51 @@ where {
 
 Write: data {Ask ObjectiveCsv:"
 
-select distinct ?identifier_ACTIVITY ?identifier_OBJECTIVE
+select distinct ?identifier_SoftwareRequirementsDefinition ?identifier_SoftwareDesignReview ?identifier_SoftwareCodeReview ?identifier_SystemRequirementsDefinition ?identifier_SoftwareDesign ?identifier_DevelopUnitTests ?identifier_DevelopComponentTests ?identifier_OBJECTIVE
 where {
     ?OBJECTIVE a <http://arcos.rack/PROCESS#OBJECTIVE> . 
     ?OBJECTIVE <http://arcos.rack/PROV-S#identifier> ?identifier_OBJECTIVE . 
     optional{
 
-    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?ACTIVITY .
-        ?ACTIVITY a <http://arcos.rack/PROV-S#ACTIVITY> . 
-        ?ACTIVITY <http://arcos.rack/PROV-S#identifier> ?identifier_ACTIVITY . 
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?DevelopComponentTests .
+        ?DevelopComponentTests a <http://Turnstile/DevelopmentPlan#DevelopComponentTests> . 
+        ?DevelopComponentTests <http://arcos.rack/PROV-S#identifier> ?identifier_DevelopComponentTests . 
+    }
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?DevelopUnitTests .
+        ?DevelopUnitTests a <http://Turnstile/DevelopmentPlan#DevelopUnitTests> . 
+        ?DevelopUnitTests <http://arcos.rack/PROV-S#identifier> ?identifier_DevelopUnitTests . 
+    }
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?SoftwareDesign .
+        ?SoftwareDesign a <http://Turnstile/DevelopmentPlan#SoftwareDesign> . 
+        ?SoftwareDesign <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareDesign . 
+    }
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?SystemRequirementsDefinition .
+        ?SystemRequirementsDefinition a <http://Turnstile/DevelopmentPlan#SystemRequirementsDefinition> . 
+        ?SystemRequirementsDefinition <http://arcos.rack/PROV-S#identifier> ?identifier_SystemRequirementsDefinition . 
+    }
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?SoftwareCodeReview .
+        ?SoftwareCodeReview a <http://Turnstile/DevelopmentPlan#SoftwareCodeReview> . 
+        ?SoftwareCodeReview <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareCodeReview . 
+    }
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?SoftwareDesignReview .
+        ?SoftwareDesignReview a <http://Turnstile/DevelopmentPlan#SoftwareDesignReview> . 
+        ?SoftwareDesignReview <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareDesignReview . 
+    }
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?SoftwareRequirementsDefinition .
+        ?SoftwareRequirementsDefinition a <http://Turnstile/DevelopmentPlan#SoftwareRequirementsDefinition> . 
+        ?SoftwareRequirementsDefinition <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareRequirementsDefinition . 
     }
 
 }".} to "99-Utils/Data/Objective.csv".

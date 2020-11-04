@@ -7,6 +7,7 @@ ingestion-steps:
 - {nodegroup: "Ingest-LowLevelRequirements", csv: "LowLevelRequirements.csv"}
 - {nodegroup: "Ingest-ObjectFile", csv: "ObjectFile.csv"}
 - {nodegroup: "Ingest-SourceCode", csv: "SourceCode.csv"}
+- {nodegroup: "Ingest-DevelopUnitTests", csv: "DevelopUnitTests.csv"}
 - {nodegroup: "Ingest-SoftwareIntegrationCompileInput", csv: "SoftwareIntegrationCompileInput.csv"}
 - {nodegroup: "Ingest-SoftwareIntegration", csv: "SoftwareIntegration.csv"}
 - {nodegroup: "Ingest-Threads", csv: "Threads.csv"}

@@ -23,7 +23,7 @@ JohnDoe is a Engineer
 HlrDev1 is a SoftwareRequirementsDefinition
 	has identifier "HLR Dev 1"
 	has Rq:author JohnDoe
-	has referenced RequirementStandard.
+	has Rq:referenced RequirementStandard.
 	
 
 HLR-1 is a HighLevelRequirement,
@@ -31,7 +31,7 @@ HLR-1 is a HighLevelRequirement,
 	has text "The Computer shall increment the counter when a inflow event is received and the counter is less than max int.",
 	has Rq:satisfies Sys-1,
 	has mitigates H-1.2,
-	has governs CounterApplication,
+	has Rq:governs CounterApplication,
 	has createdBy HlrDev1.	
 	
 HLR-2 is a HighLevelRequirement,
@@ -39,14 +39,14 @@ HLR-2 is a HighLevelRequirement,
 	has text "The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0.",
 	has Rq:satisfies Sys-2,
 	has mitigates H-1.1,
-	has governs CounterApplication,
+	has Rq:governs CounterApplication,
 	has createdBy HlrDev1.	
 	
 HLR-3 is a HighLevelRequirement,
 	has identifier "HLR-3",
 	has text "The Computer shall publish the counter at a 1 htz rate.",
 	has Rq:satisfies Sys-3,
-	has governs CounterApplication,
+	has Rq:governs CounterApplication,
 	has createdBy HlrDev1.	
 
 inflowEvent is a DataDictionary,

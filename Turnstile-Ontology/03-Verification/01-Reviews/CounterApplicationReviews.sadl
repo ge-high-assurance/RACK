@@ -16,6 +16,7 @@
  JohnQ is an Engineer.
  
  HlrReview is a SoftwareRequirementsReview
+    has identifier "HlrReview"
  	has reviewed HLR-1
  	has reviewed HLR-2
  	has reviewed HLR-3
@@ -29,22 +30,26 @@
  	
  	
  HlrReviewLog-1 is a SoftwareRequirementReviewArtifacts
+ 	has identifier "HlrReviewLog-1"
  	has reviews HLR-1
  	has reviewResult Rv:Passed
  	has Rv:createBy HlrReview.
 
  HlrReviewLog-2 is a SoftwareRequirementReviewArtifacts
+    has identifier "HlrReviewLog-2"
  	has reviews HLR-2
  	has reviewResult Rv:Passed
  	has Rv:createBy HlrReview.
  	
  HlrReviewLog-3 is a SoftwareRequirementReviewArtifacts
+    has identifier "HlrReviewLog-3"
  	has reviews HLR-3
  	has reviewResult ReviseWithoutReview
  	has Rv:createBy HlrReview.
 
  	
  LlrReview1 is a SoftwareDesignReview
+    has identifier "LlrReview1"
  	has reviewed IN-LLR-1
  	has reviewed IN-LLR-2
  	has reviewed IN-LLR-3
@@ -57,31 +62,37 @@
 
 
 LlrReview1Log-1 is a SoftwareDesignReviewArtifacts
+    has identifier "LlrReview1Log-1"
  	has reviews IN-LLR-1
  	has reviewResult Rv:Passed
  	has Rv:createBy LlrReview1.
 
 LlrReview1Log-2 is a SoftwareDesignReviewArtifacts
+    has identifier "LlrReview1Log-2"
  	has reviews IN-LLR-2
  	has reviewResult Rv:Passed
  	has Rv:createBy LlrReview1.
  	
 LlrReview1Log-3 is a SoftwareDesignReviewArtifacts
+    has identifier "LlrReview1Log-3"
  	has reviews IN-LLR-3
  	has reviewResult Rv:Passed
  	has Rv:createBy LlrReview1.
  	
 LlrReview1Log-4 is a SoftwareDesignReviewArtifacts
+    has identifier "LlrReview1Log-4"
  	has reviews IN-LLR-4
  	has reviewResult Rv:Passed
  	has Rv:createBy LlrReview1.
- 	
+ 
 LlrReview1Log-5 is a SoftwareDesignReviewArtifacts
+    has identifier "LlrReview1Log-5"
  	has reviews IN-LLR-5
  	has reviewResult Rv:Passed
  	has Rv:createBy LlrReview1.
  	
 LlrReview1Log-6 is a SoftwareDesignReviewArtifacts
+    has identifier "LlrReview1Log-6"
  	has reviews IN-LLR-6
  	has reviewResult Rv:Passed
  	has Rv:createBy LlrReview1.
@@ -91,6 +102,7 @@ LlrReview1Log-6 is a SoftwareDesignReviewArtifacts
 
  	
 LlrReview2 is a SoftwareDesignReview
+    has identifier "LlrReview2"
  	has reviewed OUT-LLR-1
  	has reviewed OUT-LLR-2
  	has Rv:author JaneDoe
@@ -98,16 +110,19 @@ LlrReview2 is a SoftwareDesignReview
  	has Rv:governedBy SoftwareStandard.
 
 LlrReview2Log-1 is a SoftwareDesignReviewArtifacts
+    has identifier "LlrReview2Log-1"
  	has reviews OUT-LLR-1
  	has reviewResult Rv:Passed
  	has Rv:createBy LlrReview2.
 
 LlrReview2Log-2 is a SoftwareDesignReviewArtifacts
+    has identifier "LlrReview2Log-2"
  	has reviews OUT-LLR-2
  	has reviewResult Rv:Passed
  	has Rv:createBy LlrReview2.
  	
 LlrReview3 is a SoftwareDesignReview
+    has identifier "LlrReview3"
  	has reviewed EXE-LLR-1
  	has reviewed EXE-LLR-2
  	has reviewed EXE-LLR-3
@@ -116,16 +131,19 @@ LlrReview3 is a SoftwareDesignReview
  	has Rv:governedBy SoftwareStandard. 	
 
 LlrReview3Log-1 is a SoftwareDesignReviewArtifacts
+    has identifier "LlrReview3Log-1"
  	has reviews EXE-LLR-1
  	has reviewResult Rv:Passed
  	has Rv:createBy LlrReview3. 	
 
 LlrReview3Log-2 is a SoftwareDesignReviewArtifacts
+    has identifier "LlrReview3Log-2"
  	has reviews EXE-LLR-2
  	has reviewResult Rv:Passed
  	has Rv:createBy LlrReview3.  	
 
 LlrReview3Log-3 is a SoftwareDesignReviewArtifacts
+    has identifier "LlrReview3Log-3"
  	has reviews EXE-LLR-3
  	has reviewResult Rv:Passed
  	has Rv:createBy LlrReview3.   	

@@ -1,15 +1,16 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:cntrappllr="http://Turnstile/CounterApplicationDesignDescription#"
-    xmlns="http://Turnstile/CounterApplicationReviews#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:j.0="http://Turnstile/DevelopmentPlan#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:j.1="http://arcos.rack/REVIEW#"
-    xmlns:cntrapprq="http://Turnstile/CounterApplicationRequirementSpec#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:cntrappllr="http://Turnstile/CounterApplicationDesignDescription#"
+    xmlns="http://Turnstile/CounterApplicationReviews#"
+    xmlns:j.2="http://arcos.rack/PROV-S#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:cntrapprq="http://Turnstile/CounterApplicationRequirementSpec#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://Turnstile/CounterApplicationReviews">
   <owl:Ontology rdf:about="">
@@ -32,27 +33,32 @@
         </j.1:reviewer>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-3"/>
         <j.1:governedBy rdf:resource="DevelopmentPlanData#SoftwareStandard"/>
+        <j.2:identifier>LlrReview1</j.2:identifier>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-5"/>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#IN-LLR-2"/>
       </j.0:SoftwareDesignReview>
     </j.1:createBy>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationDesignDescription#IN-LLR-3"/>
+    <j.2:identifier>LlrReview1Log-3</j.2:identifier>
   </j.0:SoftwareDesignReviewArtifacts>
   <j.0:SoftwareDesignReviewArtifacts rdf:ID="LlrReview1Log-2">
     <j.1:createBy rdf:resource="#LlrReview1"/>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationDesignDescription#IN-LLR-2"/>
+    <j.2:identifier>LlrReview1Log-2</j.2:identifier>
   </j.0:SoftwareDesignReviewArtifacts>
   <j.0:SoftwareDesignReviewArtifacts rdf:ID="LlrReview1Log-5">
     <j.1:createBy rdf:resource="#LlrReview1"/>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationDesignDescription#IN-LLR-5"/>
+    <j.2:identifier>LlrReview1Log-5</j.2:identifier>
   </j.0:SoftwareDesignReviewArtifacts>
   <j.0:SoftwareDesignReviewArtifacts rdf:ID="LlrReview1Log-4">
     <j.1:createBy rdf:resource="#LlrReview1"/>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationDesignDescription#IN-LLR-4"/>
+    <j.2:identifier>LlrReview1Log-4</j.2:identifier>
   </j.0:SoftwareDesignReviewArtifacts>
   <j.0:SoftwareDesignReviewArtifacts rdf:ID="LlrReview2Log-2">
     <j.1:createBy>
@@ -62,25 +68,30 @@
         <j.1:author rdf:resource="CounterApplicationDesignDescription#JaneDoe"/>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#OUT-LLR-2"/>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#OUT-LLR-1"/>
+        <j.2:identifier>LlrReview2</j.2:identifier>
       </j.0:SoftwareDesignReview>
     </j.1:createBy>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationDesignDescription#OUT-LLR-2"/>
+    <j.2:identifier>LlrReview2Log-2</j.2:identifier>
   </j.0:SoftwareDesignReviewArtifacts>
   <j.0:SoftwareDesignReviewArtifacts rdf:ID="LlrReview2Log-1">
     <j.1:createBy rdf:resource="#LlrReview2"/>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationDesignDescription#OUT-LLR-1"/>
+    <j.2:identifier>LlrReview2Log-1</j.2:identifier>
   </j.0:SoftwareDesignReviewArtifacts>
   <j.0:SoftwareDesignReviewArtifacts rdf:ID="LlrReview1Log-6">
     <j.1:createBy rdf:resource="#LlrReview1"/>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationDesignDescription#IN-LLR-6"/>
+    <j.2:identifier>LlrReview1Log-6</j.2:identifier>
   </j.0:SoftwareDesignReviewArtifacts>
   <j.0:SoftwareRequirementReviewArtifacts rdf:ID="HlrReviewLog-3">
     <j.1:createBy>
       <j.0:SoftwareRequirementsReview rdf:ID="HlrReview">
         <j.1:author rdf:resource="CounterApplicationRequirementSpec#JohnDoe"/>
+        <j.2:identifier>HlrReview</j.2:identifier>
         <j.1:reviewed rdf:resource="CounterApplicationRequirementSpec#HLR-3"/>
         <j.1:reviewed rdf:resource="CounterApplicationRequirementSpec#display"/>
         <j.1:reviewed rdf:resource="CounterApplicationRequirementSpec#inflowEvent"/>
@@ -94,21 +105,25 @@
     </j.1:createBy>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#ReviseWithoutReview"/>
     <j.1:reviews rdf:resource="CounterApplicationRequirementSpec#HLR-3"/>
+    <j.2:identifier>HlrReviewLog-3</j.2:identifier>
   </j.0:SoftwareRequirementReviewArtifacts>
   <j.0:SoftwareRequirementReviewArtifacts rdf:ID="HlrReviewLog-1">
     <j.1:createBy rdf:resource="#HlrReview"/>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
+    <j.2:identifier>HlrReviewLog-1</j.2:identifier>
   </j.0:SoftwareRequirementReviewArtifacts>
   <j.0:SoftwareDesignReviewArtifacts rdf:ID="LlrReview1Log-1">
     <j.1:createBy rdf:resource="#LlrReview1"/>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationDesignDescription#IN-LLR-1"/>
+    <j.2:identifier>LlrReview1Log-1</j.2:identifier>
   </j.0:SoftwareDesignReviewArtifacts>
   <j.0:SoftwareRequirementReviewArtifacts rdf:ID="HlrReviewLog-2">
     <j.1:createBy rdf:resource="#HlrReview"/>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationRequirementSpec#HLR-2"/>
+    <j.2:identifier>HlrReviewLog-2</j.2:identifier>
   </j.0:SoftwareRequirementReviewArtifacts>
   <j.0:SoftwareDesignReviewArtifacts rdf:ID="LlrReview3Log-1">
     <j.1:createBy>
@@ -119,19 +134,23 @@
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#EXE-LLR-3"/>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#EXE-LLR-2"/>
         <j.1:reviewed rdf:resource="CounterApplicationDesignDescription#EXE-LLR-1"/>
+        <j.2:identifier>LlrReview3</j.2:identifier>
       </j.0:SoftwareDesignReview>
     </j.1:createBy>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationDesignDescription#EXE-LLR-1"/>
+    <j.2:identifier>LlrReview3Log-1</j.2:identifier>
   </j.0:SoftwareDesignReviewArtifacts>
   <j.0:SoftwareDesignReviewArtifacts rdf:ID="LlrReview3Log-2">
     <j.1:createBy rdf:resource="#LlrReview3"/>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationDesignDescription#EXE-LLR-2"/>
+    <j.2:identifier>LlrReview3Log-2</j.2:identifier>
   </j.0:SoftwareDesignReviewArtifacts>
   <j.0:SoftwareDesignReviewArtifacts rdf:ID="LlrReview3Log-3">
     <j.1:createBy rdf:resource="#LlrReview3"/>
     <j.1:reviewResult rdf:resource="http://arcos.rack/REVIEW#Passed"/>
     <j.1:reviews rdf:resource="CounterApplicationDesignDescription#EXE-LLR-3"/>
+    <j.2:identifier>LlrReview3Log-3</j.2:identifier>
   </j.0:SoftwareDesignReviewArtifacts>
 </rdf:RDF>

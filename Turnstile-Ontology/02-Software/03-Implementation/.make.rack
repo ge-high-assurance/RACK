@@ -1,8 +1,0 @@
-:- multifile build_with/5, build_from/2, build_inputs/2, build_outputs/2, build_start/2, build_finished/3, build_step/2.
-build_with('n1603137211-8647', make, 'make', '/usr/bin/make', [  ] ).
-build_from('n1603137211-8647', '.').
-build_start('n1603137211-8647', date_time(2020,10,19,15,53,31,-0400)).
-build_step('n1603137211-8647', 'n1603137211-8668').
-build_step('n1603137211-8647', 'n1603137211-8706').
-build_step('n1603137211-8647', 'n1603137211-8744').
-build_finished('n1603137211-8647', date_time(2020,10,19,15,53,31,-0400), 0).

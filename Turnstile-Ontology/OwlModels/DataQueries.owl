@@ -321,14 +321,6 @@ where {
 
 }</rdfs:isDefinedBy>
   </sadlimplicitmodel:NamedQuery>
-  <sadlimplicitmodel:NamedQuery rdf:ID="DevelopUnitTestsCsv">
-    <rdfs:isDefinedBy>
-
-select distinct ?identifier_DevelopUnitTests
-where {
-
-}</rdfs:isDefinedBy>
-  </sadlimplicitmodel:NamedQuery>
   <sadlimplicitmodel:NamedQuery rdf:ID="ObjectiveCsv">
     <rdfs:isDefinedBy>
 

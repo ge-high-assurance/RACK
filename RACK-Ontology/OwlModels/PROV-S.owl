@@ -15,12 +15,6 @@
     <rdfs:comment xml:lang="en">a basic Implementation of PROV Data Model standard in SADL based on table https://www.w3.org/TR/prov-dm/#relations-at-a-glance</rdfs:comment>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'PROV-S.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:Class rdf:ID="FIELD">
-    <rdfs:comment xml:lang="en">Categories of information that can be associated with data in the ontology</rdfs:comment>
-    <rdfs:subClassOf>
-      <owl:Class rdf:ID="THING"/>
-    </rdfs:subClassOf>
-  </owl:Class>
   <owl:Class rdf:ID="COLLECTION">
     <rdfs:comment xml:lang="en">A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.</rdfs:comment>
     <rdfs:subClassOf>
@@ -30,7 +24,7 @@
   <owl:Class rdf:ID="AGENT">
     <rdfs:comment xml:lang="en">An agent is something that bears some form of responsibility for an activity taking place, for the existence of an entity, or for another agent's activity.</rdfs:comment>
     <rdfs:subClassOf>
-      <owl:Class rdf:about="#THING"/>
+      <owl:Class rdf:ID="THING"/>
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="#ENTITY">

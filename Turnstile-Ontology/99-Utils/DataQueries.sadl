@@ -92,13 +92,6 @@ where {
 
 }".} to "99-Utils/Data/SourceCode.csv".
 
-Write: data {Ask DevelopUnitTestsCsv:"
-
-select distinct ?identifier_DevelopUnitTests
-where {
-
-}".} to "99-Utils/Data/DevelopUnitTests.csv".
-
 Write: data {Ask SoftwareIntegrationCompileInputCsv:"
 
 select distinct ?identifier_ObjectFile ?identifier_SourceCode ?identifier_SoftwareIntegration

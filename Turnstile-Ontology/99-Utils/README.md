@@ -6,7 +6,7 @@ This directory contains utilities related to ingesting Turnstile Data into RACK.
 
 Creating a new CDR starts with generating a node group using SemTK. No import mapping is required, but care should be given to assigning parameter/connections as optional or not. Once the node group is constructed as desired download the node group from SemTK and place into /Turnstile-Ontology/99-Utils/NodeGroups folder. Rename the node group json using the following convention "Ingest-{Description}.json".
 
-Once the new node group is saved in the folder build the SADL project. The eclipse project is set up to run CreateIngestionData.py following the build process (this script can be ran manually as well). This script automates the following:
+Once the new node group is saved in the folder perform a clean build of the eclipse project. The eclipse project is set up to run CreateIngestionData.py before the build process (this script can be ran manually as well). This script automates the following:
 
 1. Updates the node group json file to add import mapping to the template CSV. Also adjusts the SparqlIDs to be more meaningfull names for the properties. New SparqlID follows the pattern {propType}_{nodeName}.  This fixes the issue of having "identifier", "identifier_0", "identifier_1", etc. The ingestion also replaces "null" with "". This may run into issues if a field has a string that includes "null". Currently this is not an issue.
 

@@ -18,7 +18,6 @@ THING (note "A piece of data stored in RACK") is a class.
     title (note "A short, human-readable identifying label.") describes THING with values of type string.
     description (note "A free-form, multi-line, human-readable explanation of this data element.") describes THING with values of type string.
 	dataInsertedBy (note "The activity that caused this data to be added to RACK") describes THING with values of type ACTIVITY.
-    hasAttribute (note "An extensible attribute instance") describes THING with values of type ATTRIBUTE.
 
 ENTITY (note "An entity is a physical, digital, conceptual, or other kind of thing with some fixed aspects; entities may be real or imaginary.")
     is a type of THING.
@@ -44,10 +43,3 @@ ACTIVITY (note "An activity is something that occurs over a period of time and a
 	endedAtTime (note "The time an activity was ended") describes ACTIVITY with values of type dateTime.
     used (note "Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)") describes ACTIVITY with values of type ENTITY.
 
-FIELD (note "Categories of information that can be associated with data in the ontology") 
-    is a type of THING.
-
-ATTRIBUTE (note "Extensible key-value pair information attached to a data element")
-  is a type of THING
-  described by field (note "extensible field") with a single value of type FIELD
-  described by fieldValue (note "extensible field value") with a single value of type string.

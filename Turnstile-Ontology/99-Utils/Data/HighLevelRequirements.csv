@@ -1,0 +1,5 @@
+"identifier_SystemRequirement","identifier_HAZARD","identifier_SYSTEM","identifier_SoftwareRequirementsDefinition","identifier_HighLevelRequirement","text_HighLevelRequirement"
+"Sys-3",null,"Counter Application","HLR Dev 1","HLR-3","The Computer shall publish the counter at a 1 htz rate."
+"Sys-2","H-1.1","Counter Application","HLR Dev 1","HLR-2","The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0."
+"Sys-1","H-1.2","Counter Application","HLR Dev 1","HLR-1","The Computer shall increment the counter when a inflow event is received and the counter is less than max int."
+

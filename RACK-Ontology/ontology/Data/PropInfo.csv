@@ -73,6 +73,7 @@
 "reviewed","used","REVIEW","ENTITY","ENTITY(s) being reviewed"
 "reviewer","wasAssociatedWith","REVIEW","AGENT","AGENT(s) performing the review"
 "reviews","wasDerivedFrom","REVIEW_LOG","ENTITY","ENTITY(s) that the review was performed on"
+"satisfiedBy",null,"OBJECTIVE","ACTIVITY","An ACTIVITY that demonstrates that the OBJECTIVE has been satisfied."
 "satisfies","wasDerivedFrom","REQUIREMENT","ENTITY","Parent ENTITY(s) (e.g. REQUIREMENT) that this REQUIREMENT is derived from"
 "satisfies","wasDerivedFrom","FILE","ENTITY","ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying"
 "source","wasDerivedFrom","HAZARD","ENTITY","ENTITY(s) that participate in causing this HAZARD"

@@ -1,6 +1,0 @@
-"identifier","definition","systemSourceId","hazardSourceId","dataInsertedBy","generatedAtTime","invalidatedAtTime","wasAttributedToId","identifiedId"
-"H-1","System Crash","TurnStileSystem",null,null,null,null,null,null
-"H-1.1","Integer Under Flow",null,"H-1",null,null,null,null,null
-"H-1.2","Integer Over Flow",null,"H-1",null,null,null,null,null
-"H-2","Park Exceeds Capacity","TurnStileSystem",null,null,null,null,null,null
-

@@ -22,6 +22,7 @@
   <Category rdf:about="http://com.ge.research.sadl.configuration#ReasonerSpec">
     <reasonerClassName>com.ge.research.sadl.jena.reasoner.JenaReasonerPlugin</reasonerClassName>
   </Category>
+  <Category rdf:about="http://com.ge.research.sadl.configuration#Builtin"/>
   <Category rdf:about="http://com.ge.research.sadl.configuration#Jena">
     <pModelSpec>OWL_MEM</pModelSpec>
     <pOWLTranslation rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"

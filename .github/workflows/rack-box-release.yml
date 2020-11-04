@@ -11,8 +11,29 @@ on:
     types: [ published ]
 
 jobs:
-  setup:
-    runs-on: ubuntu-20.04
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+# docker works on all, but ubuntu is cheapest
+        - builder: docker
+          os: ubuntu-20.04
+          shell: bash
+# hyperv isn't supported yet (https://github.com/actions/virtual-environments/issues/183#issuecomment-706244929)
+#        - builder: hyperv
+#          os: windows-latest
+#          shell: msys2 {0}
+# virtualbox works only on macos (VT-x is not available: VERR_VMK_NO_VMX)
+        - builder: virtualbox
+          os: macos-latest
+          shell: bash
+
+    name: build ${{ matrix.builder }} ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
 
     steps:
     - name: Check out RACK source
@@ -22,6 +43,54 @@ jobs:
         ref: ${{ github.event.release.tag_name }}
         token: ${{ secrets.RACK_CI_PAT }}
         path: RACK
+
+    - name: Cache Fuseki distribution
+      uses: actions/cache@v2
+      id: cache-fuseki
+      with:
+        path: RACK/rack-box/files/fuseki.tar.gz
+        key: fuseki-3.16.0
+
+    - name: Download Fuseki distribution
+      if: steps.cache-fuseki.outputs.cache-hit != 'true'
+      run: curl -LSs https://apache.claz.org/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
+
+    - name: Download SemTK distribution
+      run: curl -LSs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20201103/semtk-opensource-v2.3.0-20201103-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+
+    - name: Download style spreadsheet
+      run: curl -LSs https://github.com/KrauseFx/markdown-to-html-github-style/raw/master/style.css -o RACK/rack-box/files/style.css
+
+    - name: Download systemctl script
+      run: curl -LSs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4260/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
+
+    - name: Cache RACK CLI dependencies
+      uses: actions/cache@v2
+      with:
+        # This path is specific to Ubuntu
+        path: ~/.cache/pip
+        # Look to see if there is a cache hit for the corresponding requirements file
+        key: ${{ runner.os }}-pip-${{ hashFiles('RACK/cli/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          ${{ runner.os }}-
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Package RACK CLI
+      run: |
+        cd RACK/cli
+        python3 -m pip install --upgrade pip setuptools wheel
+        pip3 wheel --wheel-dir=wheels -r requirements.txt
+        pip3 wheel --wheel-dir=wheels .
+        cd ${{ github.workspace }}
+        tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
+
+    - name: Package RACK ontology and data
+      run: tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tools RACK
 
     - name: Check out RACK wiki
       uses: actions/checkout@v2
@@ -31,184 +100,25 @@ jobs:
         token: ${{ secrets.RACK_CI_PAT }}
         path: RACK.wiki
 
-    - name: Cache Fuseki distribution
-      uses: actions/cache@v2
-      id: cache-fuseki
-      with:
-        path: RACK/rack-box/files/fuseki.tar.gz
-        key: fuseki-3.16.0
-
-    - name: Cache RACK CLI
-      uses: actions/cache@v2
-      id: cache-rack-cli
-      with:
-        path: RACK/rack-box/files/rack-cli.tar.gz
-        key: rack-cli-${{ hashFiles('RACK/cli/**') }}
-
-    - name: Cache RACK CLI dependencies
-      if: steps.cache-rack-cli.outputs.cache-hit != 'true'
-      uses: actions/cache@v2
-      with:
-        # This path is specific to Ubuntu
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('RACK/cli/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-          ${{ runner.os }}-
-
-    - name: Cache RACK ontology and data
-      uses: actions/cache@v2
-      id: cache-rack-ontology
-      with:
-        path: RACK/rack-box/files/rack.tar.gz
-        key: rack-ontology-${{ hashFiles('RACK/RACK-Ontology/**', 'RACK/nodegroups/**') }}
-
-    - name: Cache RACK documentation
-      uses: actions/cache@v2
-      id: cache-rack-doc
-      with:
-        path: |
-          RACK/rack-box/files/documentation.html
-          RACK/rack-box/files/index.html
-        key: rack-doc-${{ hashFiles('RACK.wiki/*.md') }}
-
-    - name: Cache SemTK distribution
-      uses: actions/cache@v2
-      id: cache-semtk
-      with:
-        path: RACK/rack-box/files/semtk.tar.gz
-        key: semtk-2.2.2-SNAPSHOT-v3
-
-    - name: Cache style spreadsheet
-      uses: actions/cache@v2
-      id: cache-style
-      with:
-        path: RACK/rack-box/files/style.css
-        key: style-db9e23f
-
-    - name: Cache systemctl script
-      uses: actions/cache@v2
-      id: cache-systemctl
-      with:
-        path: RACK/rack-box/files/systemctl3.py
-        key: systemctl-1.5.4260
-
-    - name: Download Fuseki distribution
-      if: steps.cache-fuseki.outputs.cache-hit != 'true'
-      run: curl -LSs https://apache.claz.org/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
-
-    - name: Package RACK CLI
-      if: steps.cache-rack-cli.outputs.cache-hit != 'true'
-      run: |
-        cd RACK/cli
-        pip3 wheel --wheel-dir=wheels -r requirements.txt
-        pip3 wheel --wheel-dir=wheels .
-        cd ${{ github.workspace }}
-        tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
-
-    - name: Package RACK ontology and data
-      if: steps.cache-rack-ontology.outputs.cache-hit != 'true'
-      run: |
-        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tools RACK
-
     - name: Generate RACK documentation
-      if: steps.cache-rack-doc.outputs.cache-hit != 'true'
       run: |
         sudo npm install -g github-wikito-converter markdown-to-html
         gwtc -t RACK-in-a-Box RACK.wiki
         markdown -t RACK-in-a-box -s style.css RACK.wiki/Welcome.md > index.html
         mv documentation.html index.html RACK/rack-box/files
 
-    - name: Download SemTK distribution
-      if: steps.cache-semtk.outputs.cache-hit != 'true'
-      run: curl -LSs 'https://oss.sonatype.org/service/local/artifact/maven/content?r=snapshots&g=com.ge.research.semtk&a=distribution&v=2.2.2-SNAPSHOT&c=bin&e=tar.gz' -o RACK/rack-box/files/semtk.tar.gz
+    # Skip since windows-latest doesn't support nested virtualization yet
+    - name: Enable Hyper-V
+      if: matrix.builder == 'hyperv' && matrix.os == 'windows-latest'
+      shell: powershell
+      run: |
+        Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+        Add-WindowsFeature RSAT-Hyper-V-Tools -IncludeAllSubFeature
 
-    - name: Download style spreadsheet
-      if: steps.cache-style.outputs.cache-hit != 'true'
-      run: curl -LSs https://github.com/KrauseFx/markdown-to-html-github-style/raw/master/style.css -o RACK/rack-box/files/style.css
-
-    - name: Download systemctl script
-      if: steps.cache-systemctl.outputs.cache-hit != 'true'
-      run: curl -LSs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4260/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
-
-  build:
-    name: build ${{ matrix.builder }} ${{ matrix.os }}
-    needs: setup
-    runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        shell: ${{ matrix.shell }}
-
-# Unfortunately, ubuntu-latest can't run virtualbox (VT-x is not
-# available: VERR_VMK_NO_VMX) and windows-latest can't run Hyper-V
-# https://github.com/actions/virtual-environments/issues/183#issuecomment-706244929
-
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-        - builder: docker
-          os: ubuntu-20.04
-          shell: bash
-        - builder: virtualbox
-          os: macos-latest
-          shell: bash
-#        - builder: hyperv
-#          os: windows-latest
-#          shell: msys2 {0}
-
-    steps:
-    - name: Check out RACK source
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK
-        ref: ${{ github.event.release.tag_name }}
-        token: ${{ secrets.RACK_CI_PAT }}
-        path: RACK
-
-    - name: Cache Fuseki distribution
-      uses: actions/cache@v2
-      id: cache-fuseki
-      with:
-        path: RACK/rack-box/files/fuseki.tar.gz
-        key: fuseki-3.16.0
-
-    - name: Cache RACK CLI
-      uses: actions/cache@v2
-      id: cache-rack-cli
-      with:
-        path: RACK/rack-box/files/rack.tar.gz
-        key: rack-cli-${{ hashFiles('RACK/RACK-Ontology/**', 'RACK/nodegroups/**') }}
-
-    - name: Cache RACK documentation
-      uses: actions/cache@v2
-      id: cache-rack-doc
-      with:
-        path: |
-          RACK/rack-box/files/documentation.html
-          RACK/rack-box/files/index.html
-        key: rack-doc-${{ hashFiles('RACK.wiki/*.md') }}
-
-    - name: Cache SemTK distribution
-      uses: actions/cache@v2
-      id: cache-semtk
-      with:
-        path: RACK/rack-box/files/semtk.tar.gz
-        key: semtk-2.2.2-SNAPSHOT-v3
-
-    - name: Cache style spreadsheet
-      uses: actions/cache@v2
-      id: cache-style
-      with:
-        path: RACK/rack-box/files/style.css
-        key: style-db9e23f
-
-    - name: Cache systemctl script
-      uses: actions/cache@v2
-      id: cache-systemctl
-      with:
-        path: RACK/rack-box/files/systemctl3.py
-        key: systemctl-1.5.4260
+    # Skip since ubuntu-20.04 doesn't support nested virtualization yet
+    - name: Install VirtualBox
+      if: matrix.builder == 'virtualbox' && matrix.os == 'ubuntu-20.04'
+      run: sudo apt-get install -y virtualbox
 
     - name: Cache Ubuntu ISO
       if: matrix.builder != 'docker'
@@ -217,19 +127,6 @@ jobs:
       with:
         path: RACK/rack-box/packer_cache/e30b34e4d3c536763868a42bb9d5b8f14af297b8.iso
         key: ubuntu-20.04.1
-
-# Doesn't work on windows-latest (nested virtualization is unsupported)
-    - name: Enable Hyper-V
-      if: matrix.builder == 'hyperv' && matrix.os == 'windows-latest'
-      shell: powershell
-      run: |
-        Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
-        Add-WindowsFeature RSAT-Hyper-V-Tools -IncludeAllSubFeature
-
-# Doesn't work on ubuntu-20.04 (nested virtualization is unsupported)
-    - name: Install VirtualBox
-      if: matrix.builder == 'virtualbox' && matrix.os == 'ubuntu-20.04'
-      run: sudo apt-get install -y virtualbox
 
     - name: Build rack-box image
       run: |
@@ -247,7 +144,7 @@ jobs:
 
     - name: Push rack-box image to Docker Hub
       if: matrix.builder == 'docker'
-      run: docker push interran/rack-box:${{ github.event.release.tag_name }}
+      run: docker push gehighassurance/rack-box:${{ github.event.release.tag_name }}
 
     - name: Split rack-box image
       if: matrix.builder != 'docker'

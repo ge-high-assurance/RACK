@@ -2,7 +2,7 @@
 version: '2'
 services:
   rack:
-    image: "interran/rack-box:v0.9"
+    image: "gehighassurance/rack-box:v3.0"
     ports:
       - "80:80"
       - "3030:3030"

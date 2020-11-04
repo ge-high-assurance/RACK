@@ -9,7 +9,7 @@
  * material are those of the author(s) and do not necessarily reflect the views
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
- uri "http://Turnstile/DevelopmentPlanData".
+ uri "http://Turnstile/DevelopmentPlanData" alias trnstlDevPlanData.
 import "http://Turnstile/DevelopmentPlan".
 
    //Model Location: DevelopmentPlan

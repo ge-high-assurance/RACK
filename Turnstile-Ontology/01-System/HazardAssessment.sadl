@@ -10,7 +10,7 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
  uri "http://Turnstile/HazardAssessment" alias ha.
-import "http://Turnstile/DevelopmentPlan".
+import "http://Turnstile/DevelopmentPlanData".
 
 //definition describes HAZARD with values of type string. 
 

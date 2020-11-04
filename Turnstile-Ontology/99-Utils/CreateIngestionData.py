@@ -127,7 +127,10 @@ def CreateNodeGroupIngestionTemplate(nodeGroupPath):
                 colName = prop["SparqlID"].replace("?","")
                 
                 columnsList.append({"colId":colId,"colName":colName})
-                csvHeader += colName+", "
+                if csvHeader == "":
+                    csvHeader += colName
+                else:
+                    csvHeader += ","+colName
                 if primaryKey:
                     formatDescription += colName +"|"+ " primaryKey Key for "+node["SparqlID"].replace("?","")+ " | "+optional+"\n"
                     propList.append({

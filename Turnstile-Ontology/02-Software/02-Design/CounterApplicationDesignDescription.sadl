@@ -22,13 +22,13 @@ JaneDoe is a Engineer
 LlrDev1 is a SoftwareDesign
 	has identifier "LlrDev1"
 	has Rq:author JaneDoe
-	has referenced SoftwareStandard.
+	has Rq:referenced SoftwareStandard.
 
 
 SwDesign is a SoftwareDesign
 	has identifier "SwDesign"
 	has Rq:author JaneDoe
-	has referenced SoftwareStandard.
+	has Rq:referenced SoftwareStandard.
 	
 
 

@@ -2,27 +2,27 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns="http://com.ge.research.sadl.configuration#">
   <Category rdf:about="http://com.ge.research.sadl.configuration#ProjectDependencies">
-    <pDependsOn>file:/home/ubuntu/RACK/RACK-Ontology</pDependsOn>
+    <pDependsOn>file:/C:/ARCOS/Master/RACK/RACK-Ontology</pDependsOn>
   </Category>
   <Category rdf:about="http://com.ge.research.sadl.configuration#Jena-Based">
     <subcategory>
       <rdf:Bag>
         <rdf:li>
           <Builtin>
-            <class>com.ge.research.sadl.jena.reasoner.builtin.NoValue</class>
             <name>noValue</name>
+            <class>com.ge.research.sadl.jena.reasoner.builtin.NoValue</class>
           </Builtin>
         </rdf:li>
         <rdf:li>
           <Builtin>
-            <name>thereExists</name>
             <class>com.ge.research.sadl.jena.reasoner.builtin.ThereExists</class>
+            <name>thereExists</name>
           </Builtin>
         </rdf:li>
         <rdf:li>
           <Builtin>
-            <class>com.ge.research.sadl.jena.reasoner.builtin.Print</class>
             <name>print</name>
+            <class>com.ge.research.sadl.jena.reasoner.builtin.Print</class>
           </Builtin>
         </rdf:li>
       </rdf:Bag>

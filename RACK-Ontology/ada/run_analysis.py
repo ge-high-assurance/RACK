@@ -18,13 +18,14 @@ import static_call_graph as SCG
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--project", "-P", help="Project file (.gpr)", type=str)
-parser.add_argument("files", help="Files to analyze", type=str, nargs="+")
+parser.add_argument("--file", "-f", help="File to analyze (.ada, .adb, .ads)", type=str, required=True)
+parser.add_argument("others", help="Other files of the project", type=str, nargs="+")
 args = parser.parse_args()
 
 provider = (
     lal.UnitProvider.for_project(args.project)
     if args.project
-    else lal.UnitProvider.auto(input_files = args.files)
+    else lal.UnitProvider.auto(input_files=args.others)
 )
 
 context = lal.AnalysisContext(unit_provider=provider)
@@ -37,53 +38,49 @@ DATA = Namespace("http://data/")
 
 ada_format = FileFormat(FORMAT.ADA_FILE)
 
-def ensure_registered(components, component: SCG.GraphNode):
-    if isinstance(component, SCG.ToplevelNode):
-        key = component.absolute_file_path
-        if key in components:
-            return
-        components[key] = File(DATA[key], os.path.basename(key), ada_format)
-        return
-    if isinstance(component, SCG.CallableNode):
-        node = component.node
-        key = SCG.node_key(node)
-        if key in components:
-            return
-        components[key] = Component(DATA[key], key, ComponentType.SOURCE_FUNCTION)
-        return
-    raise Exception("Encountered a graph component of an unexpected class!")
+def register_component(components, component: SCG.GraphNode) -> None:
+    """
+    Makes sure that the component is already present in the components
+    dictionary.  Adds it if necessary.
+    """
+    key = component.get_key()
+    uri = component.get_uri()
+    name = component.get_name()
+    # TODO: check what we know about the actual component type
+    components[key] = Component(DATA[uri], name, ComponentType.SOURCE_FUNCTION)
 
-for file in args.files:
-    # print(f"Analyzing {file}")
-    unit = context.get_from_file(file)
-    if unit.root:
-        if debug:
-            adaVisitor = AdaPrintVisitor(max_depth = 20)
-            adaVisitor.visit(unit.root)
-        staticCallGraphVisitor = SCG.StaticCallGraphVisitor(
-            absolute_file_path = unit.filename,
-            callable_being_defined = None
-        )
+file_to_analyze = args.file
 
-        staticCallGraphVisitor.visit(unit.root)
+unit = context.get_from_file(file_to_analyze)
+if unit.root:
+    if debug:
+        adaVisitor = AdaPrintVisitor(max_depth=20)
+        adaVisitor.visit(unit.root)
+    staticCallGraphVisitor = SCG.StaticCallGraphVisitor(
+        caller_being_defined = SCG.ToplevelNode(unit.filename)
+    )
 
-        components: Dict[str, Component] = dict()
-        for component_key in staticCallGraphVisitor.nodes:
-            component: SCG.GraphNode = staticCallGraphVisitor.nodes[component_key]
-            ensure_registered(components, component)
-        for caller in staticCallGraphVisitor.edges:
-            for callee_key in staticCallGraphVisitor.edges[caller]:
-                components[caller].add_mention(components[callee_key])
-                # print(f"{caller} calls {callee}")
+    staticCallGraphVisitor.visit(unit.root)
 
-        g = Graph()
-        g.bind("dat", DATA)
-        g.bind("format", FORMAT)
-        ada_format.add_to_graph(g)
-        for component_key in components:
-            components[component_key].add_to_graph(g)
-        sys.stdout.buffer.write(g.serialize(format = "turtle"))
+    components: Dict[str, Component] = dict()
 
-    else:
-        print("No root found, diagnostics:")
-        print(unit.diagnostics)
+    # register all components
+    for component_key in staticCallGraphVisitor.nodes:
+        register_component(components, staticCallGraphVisitor.nodes[component_key])
+
+    # add "mentions" to all components that mention other components
+    for caller in staticCallGraphVisitor.edges:
+        for callee_key in staticCallGraphVisitor.edges[caller]:
+            components[caller].add_mention(components[callee_key])
+
+    g = Graph()
+    g.bind("dat", DATA)
+    g.bind("format", FORMAT)
+    ada_format.add_to_graph(g)
+    for component_key in components:
+        components[component_key].add_to_graph(g)
+    sys.stdout.buffer.write(g.serialize(format="turtle"))
+
+else:
+    print("No root found, diagnostics:")
+    print(unit.diagnostics)

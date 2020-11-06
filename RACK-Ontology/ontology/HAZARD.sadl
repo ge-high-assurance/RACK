@@ -12,18 +12,30 @@
 
 uri "http://arcos.rack/HAZARD" alias H.
 import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/SYSTEM".
 
+// Note that source of a HAZARD can be the environment as well as personnel operating the SYSTEM.
 HAZARD
 	(note "HAZARD as identified by some HAZARD_IDENTIFICATION ACTIVITY, to be assessed for certification")
 	is a type of ENTITY.
 
 	definition (note "Description of the HAZARD") describes HAZARD with values of type string.
 
-	source (note "ENTITY(s) that participate in causing this HAZARD") describes HAZARD with values of type ENTITY.
-	source is a type of wasDerivedFrom.
+	H:source (note "ENTITY(s) that participate in causing this HAZARD") describes HAZARD with values of type ENTITY.
+	H:source is a type of wasDerivedFrom.
 
    identified (note "how this HAZARD was identified") describes HAZARD with values of type HAZARD_IDENTIFICATION.
    identified is a type of wasGeneratedBy.
+
+	// Note that we are thinking of adding a human readable "description" to THING, then we could use that instead of "effect".
+	effect (note "consequence(s) of the HAZARD") describes HAZARD with a single value of type string.
+   
+	severity (note "the severity of the HAZARD") describes HAZARD with a single value of type float.
+
+	likelihood (note "the likelihood of the HAZARD happening") describes HAZARD with a single value of type float.
+
+	// A Hazard can be mitigated by a requirement, operating procedure etc., mitigation by REQUIREMENT is defined in REQUIREMENTS.sadl.
+	H:mitigates (note "a HAZARD may be mitigated by a OP_PROCEDURE") describes OP_PROCEDURE with values of type HAZARD.
 
 HAZARD_IDENTIFICATION
 	(note "ACTIVITY that identifies potential sources of HAZARD whose risk must be evaluated")

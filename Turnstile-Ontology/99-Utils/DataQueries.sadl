@@ -123,7 +123,7 @@ where {
 
 Write: data {Ask HighLevelRequirementsCsv:"
 
-select distinct ?identifier_SystemRequirement ?identifier_HAZARD ?identifier_SYSTEM ?identifier_SoftwareRequirementsDefinition ?identifier_HighLevelRequirement ?text_HighLevelRequirement
+select distinct ?identifier_SystemRequirement ?identifier_HAZARD ?identifier_SystemComponent ?identifier_SoftwareRequirementsDefinition ?identifier_HighLevelRequirement ?text_HighLevelRequirement
 where {
     ?HighLevelRequirement a <http://Turnstile/DevelopmentPlan#HighLevelRequirement> . 
     ?HighLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_HighLevelRequirement . 
@@ -136,9 +136,9 @@ where {
     }
     optional{
 
-    ?HighLevelRequirement <http://arcos.rack/REQUIREMENTS#governs> ?SYSTEM .
-        ?SYSTEM a <http://arcos.rack/SYSTEM#SYSTEM> . 
-        ?SYSTEM <http://arcos.rack/PROV-S#identifier> ?identifier_SYSTEM . 
+    ?HighLevelRequirement <http://arcos.rack/REQUIREMENTS#governs> ?SystemComponent .
+        ?SystemComponent a <http://Turnstile/DevelopmentPlan#SystemComponent> . 
+        ?SystemComponent <http://arcos.rack/PROV-S#identifier> ?identifier_SystemComponent . 
     }
     optional{
 

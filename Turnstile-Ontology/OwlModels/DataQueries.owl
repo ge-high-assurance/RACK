@@ -341,7 +341,7 @@ where {
   <sadlimplicitmodel:NamedQuery rdf:ID="HighLevelRequirementsCsv">
     <rdfs:isDefinedBy>
 
-select distinct ?identifier_SystemRequirement ?identifier_HAZARD ?identifier_SYSTEM ?identifier_SoftwareRequirementsDefinition ?identifier_HighLevelRequirement ?text_HighLevelRequirement
+select distinct ?identifier_SystemRequirement ?identifier_HAZARD ?identifier_SystemComponent ?identifier_SoftwareRequirementsDefinition ?identifier_HighLevelRequirement ?text_HighLevelRequirement
 where {
     ?HighLevelRequirement a &lt;http://Turnstile/DevelopmentPlan#HighLevelRequirement&gt; . 
     ?HighLevelRequirement &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_HighLevelRequirement . 
@@ -354,9 +354,9 @@ where {
     }
     optional{
 
-    ?HighLevelRequirement &lt;http://arcos.rack/REQUIREMENTS#governs&gt; ?SYSTEM .
-        ?SYSTEM a &lt;http://arcos.rack/SYSTEM#SYSTEM&gt; . 
-        ?SYSTEM &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SYSTEM . 
+    ?HighLevelRequirement &lt;http://arcos.rack/REQUIREMENTS#governs&gt; ?SystemComponent .
+        ?SystemComponent a &lt;http://Turnstile/DevelopmentPlan#SystemComponent&gt; . 
+        ?SystemComponent &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SystemComponent . 
     }
     optional{
 

@@ -166,6 +166,9 @@
   <owl:Class rdf:ID="Problem_Reporting">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
   </owl:Class>
+  <owl:Class rdf:ID="SoftwareThread">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SYSTEM#SYSTEM"/>
+  </owl:Class>
   <owl:Class rdf:ID="SoftwareCoding">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT"/>
   </owl:Class>

@@ -32,17 +32,17 @@ SwDesign is a SoftwareDesign
 	
 
 
-	InputThread is a SYSTEM
+	InputThread is a SoftwareThread
 	    has identifier "InputThread",
 		has partOf CounterApplication,
 		has sys:producedBy SwDesign.
 	
-	OutputThread is a SYSTEM
+	OutputThread is a SoftwareThread
 	    has identifier "OutputThread",
 		has partOf CounterApplication,
 		has sys:producedBy SwDesign.
 	
-	ExecutiveThread is a SYSTEM
+	ExecutiveThread is a SoftwareThread
 	    has identifier "ExecutiveThread",
 		has partOf CounterApplication,
 		has sys:producedBy SwDesign.

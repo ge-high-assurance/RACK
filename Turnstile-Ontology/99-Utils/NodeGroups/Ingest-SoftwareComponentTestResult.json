@@ -33,7 +33,7 @@
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?identifier_HighLevelRequirement",
+						"SparqlID": "?identifier_TEST_STATUS",
 						"isReturned": true,
 						"optMinus": 0,
 						"isRuntimeConstrained": false,
@@ -42,10 +42,10 @@
 					}
 				],
 				"nodeList": [],
-				"NodeName": "HighLevelRequirement",
-				"fullURIName": "http://Turnstile/DevelopmentPlan#HighLevelRequirement",
+				"NodeName": "TEST_STATUS",
+				"fullURIName": "http://arcos.rack/TESTING#TEST_STATUS",
 				"subClassNames": [],
-				"SparqlID": "?HighLevelRequirement",
+				"SparqlID": "?TEST_STATUS",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
 				"valueConstraint": "",
@@ -61,7 +61,7 @@
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?identifier_HAZARD",
+						"SparqlID": "?identifier_SoftwareComponentTestExecution",
 						"isReturned": true,
 						"optMinus": 0,
 						"isRuntimeConstrained": false,
@@ -70,10 +70,10 @@
 					}
 				],
 				"nodeList": [],
-				"NodeName": "HAZARD",
-				"fullURIName": "http://arcos.rack/HAZARD#HAZARD",
+				"NodeName": "SoftwareComponentTestExecution",
+				"fullURIName": "http://Turnstile/DevelopmentPlan#SoftwareComponentTestExecution",
 				"subClassNames": [],
-				"SparqlID": "?HAZARD",
+				"SparqlID": "?SoftwareComponentTestExecution",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
 				"valueConstraint": "",
@@ -89,7 +89,7 @@
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?identifier_SoftwareThread",
+						"SparqlID": "?identifier_SoftwareComponentTest",
 						"isReturned": true,
 						"optMinus": 0,
 						"isRuntimeConstrained": false,
@@ -98,10 +98,10 @@
 					}
 				],
 				"nodeList": [],
-				"NodeName": "SoftwareThread",
-				"fullURIName": "http://Turnstile/DevelopmentPlan#SoftwareThread",
+				"NodeName": "SoftwareComponentTest",
+				"fullURIName": "http://Turnstile/DevelopmentPlan#SoftwareComponentTest",
 				"subClassNames": [],
-				"SparqlID": "?SoftwareThread",
+				"SparqlID": "?SoftwareComponentTest",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
 				"valueConstraint": "",
@@ -117,51 +117,9 @@
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?identifier_SoftwareDesign",
+						"SparqlID": "?identifier_SoftwareComponentTestResult",
 						"isReturned": true,
 						"optMinus": 0,
-						"isRuntimeConstrained": false,
-						"instanceValues": [],
-						"isMarkedForDeletion": false
-					}
-				],
-				"nodeList": [],
-				"NodeName": "SoftwareDesign",
-				"fullURIName": "http://Turnstile/DevelopmentPlan#SoftwareDesign",
-				"subClassNames": [],
-				"SparqlID": "?SoftwareDesign",
-				"isReturned": false,
-				"isRuntimeConstrained": false,
-				"valueConstraint": "",
-				"instanceValue": null,
-				"deletionMode": "NO_DELETE"
-			},
-			{
-				"propList": [
-					{
-						"KeyName": "identifier",
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
-						"Constraints": "",
-						"fullURIName": "",
-						"SparqlID": "?identifier_LowLevelRequirement",
-						"isReturned": true,
-						"optMinus": 0,
-						"isRuntimeConstrained": false,
-						"instanceValues": [],
-						"isMarkedForDeletion": false
-					},
-					{
-						"KeyName": "text",
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/REQUIREMENTS#text",
-						"Constraints": "",
-						"fullURIName": "",
-						"SparqlID": "?text_LowLevelRequirement",
-						"isReturned": true,
-						"optMinus": 1,
 						"isRuntimeConstrained": false,
 						"instanceValues": [],
 						"isMarkedForDeletion": false
@@ -170,7 +128,27 @@
 				"nodeList": [
 					{
 						"SnodeSparqlIDs": [
-							"?SoftwareDesign"
+							"?SoftwareComponentTest"
+						],
+						"OptionalMinus": [
+							0
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"KeyName": "confirms",
+						"ValueType": "ENTITY",
+						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"ConnectBy": "confirms",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/TESTING#confirms"
+					},
+					{
+						"SnodeSparqlIDs": [
+							"?SoftwareComponentTestExecution"
 						],
 						"OptionalMinus": [
 							"1"
@@ -181,19 +159,19 @@
 						"DeletionMarkers": [
 							false
 						],
-						"KeyName": "createdBy",
+						"KeyName": "executedBy",
 						"ValueType": "ACTIVITY",
 						"UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
-						"ConnectBy": "createdBy",
+						"ConnectBy": "executedBy",
 						"Connected": true,
-						"UriConnectBy": "http://arcos.rack/REQUIREMENTS#createdBy"
+						"UriConnectBy": "http://arcos.rack/TESTING#executedBy"
 					},
 					{
 						"SnodeSparqlIDs": [
-							"?SoftwareThread"
+							"?TEST_STATUS"
 						],
 						"OptionalMinus": [
-							"1"
+							0
 						],
 						"Qualifiers": [
 							""
@@ -201,58 +179,18 @@
 						"DeletionMarkers": [
 							false
 						],
-						"KeyName": "governs",
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-						"ConnectBy": "governs",
+						"KeyName": "result",
+						"ValueType": "TEST_STATUS",
+						"UriValueType": "http://arcos.rack/TESTING#TEST_STATUS",
+						"ConnectBy": "result",
 						"Connected": true,
-						"UriConnectBy": "http://arcos.rack/REQUIREMENTS#governs"
-					},
-					{
-						"SnodeSparqlIDs": [
-							"?HAZARD"
-						],
-						"OptionalMinus": [
-							"1"
-						],
-						"Qualifiers": [
-							""
-						],
-						"DeletionMarkers": [
-							false
-						],
-						"KeyName": "mitigates",
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-						"ConnectBy": "mitigates",
-						"Connected": true,
-						"UriConnectBy": "http://arcos.rack/REQUIREMENTS#mitigates"
-					},
-					{
-						"SnodeSparqlIDs": [
-							"?HighLevelRequirement"
-						],
-						"OptionalMinus": [
-							"1"
-						],
-						"Qualifiers": [
-							""
-						],
-						"DeletionMarkers": [
-							false
-						],
-						"KeyName": "satisfies",
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-						"ConnectBy": "satisfies",
-						"Connected": true,
-						"UriConnectBy": "http://arcos.rack/REQUIREMENTS#satisfies"
+						"UriConnectBy": "http://arcos.rack/TESTING#result"
 					}
 				],
-				"NodeName": "LowLevelRequirement",
-				"fullURIName": "http://Turnstile/DevelopmentPlan#LowLevelRequirement",
+				"NodeName": "SoftwareComponentTestResult",
+				"fullURIName": "http://Turnstile/DevelopmentPlan#SoftwareComponentTestResult",
 				"subClassNames": [],
-				"SparqlID": "?LowLevelRequirement",
+				"SparqlID": "?SoftwareComponentTestResult",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
 				"valueConstraint": "",
@@ -268,27 +206,19 @@
 		"columns": [
 			{
 				"colId": "col_0",
-				"colName": "identifier_HighLevelRequirement"
+				"colName": "identifier_TEST_STATUS"
 			},
 			{
 				"colId": "col_1",
-				"colName": "identifier_HAZARD"
+				"colName": "identifier_SoftwareComponentTestExecution"
 			},
 			{
 				"colId": "col_2",
-				"colName": "identifier_SoftwareThread"
+				"colName": "identifier_SoftwareComponentTest"
 			},
 			{
 				"colId": "col_3",
-				"colName": "identifier_SoftwareDesign"
-			},
-			{
-				"colId": "col_4",
-				"colName": "identifier_LowLevelRequirement"
-			},
-			{
-				"colId": "col_5",
-				"colName": "text_LowLevelRequirement"
+				"colName": "identifier_SoftwareComponentTestResult"
 			}
 		],
 		"dataValidator": [],
@@ -304,15 +234,15 @@
 		],
 		"nodes": [
 			{
-				"sparqlID": "?HighLevelRequirement",
-				"type": "http://Turnstile/DevelopmentPlan#HighLevelRequirement",
+				"sparqlID": "?TEST_STATUS",
+				"type": "http://arcos.rack/TESTING#TEST_STATUS",
 				"URILookupMode": "createIfMissing",
 				"mapping": [],
 				"props": [
 					{
 						"URIRelation": "http://arcos.rack/PROV-S#identifier",
 						"URILookup": [
-							"?HighLevelRequirement"
+							"?TEST_STATUS"
 						],
 						"mapping": [
 							{
@@ -326,15 +256,15 @@
 				]
 			},
 			{
-				"sparqlID": "?HAZARD",
-				"type": "http://arcos.rack/HAZARD#HAZARD",
+				"sparqlID": "?SoftwareComponentTestExecution",
+				"type": "http://Turnstile/DevelopmentPlan#SoftwareComponentTestExecution",
 				"URILookupMode": "createIfMissing",
 				"mapping": [],
 				"props": [
 					{
 						"URIRelation": "http://arcos.rack/PROV-S#identifier",
 						"URILookup": [
-							"?HAZARD"
+							"?SoftwareComponentTestExecution"
 						],
 						"mapping": [
 							{
@@ -348,15 +278,15 @@
 				]
 			},
 			{
-				"sparqlID": "?SoftwareThread",
-				"type": "http://Turnstile/DevelopmentPlan#SoftwareThread",
+				"sparqlID": "?SoftwareComponentTest",
+				"type": "http://Turnstile/DevelopmentPlan#SoftwareComponentTest",
 				"URILookupMode": "createIfMissing",
 				"mapping": [],
 				"props": [
 					{
 						"URIRelation": "http://arcos.rack/PROV-S#identifier",
 						"URILookup": [
-							"?SoftwareThread"
+							"?SoftwareComponentTest"
 						],
 						"mapping": [
 							{
@@ -370,52 +300,19 @@
 				]
 			},
 			{
-				"sparqlID": "?SoftwareDesign",
-				"type": "http://Turnstile/DevelopmentPlan#SoftwareDesign",
+				"sparqlID": "?SoftwareComponentTestResult",
+				"type": "http://Turnstile/DevelopmentPlan#SoftwareComponentTestResult",
 				"URILookupMode": "createIfMissing",
 				"mapping": [],
 				"props": [
 					{
 						"URIRelation": "http://arcos.rack/PROV-S#identifier",
 						"URILookup": [
-							"?SoftwareDesign"
+							"?SoftwareComponentTestResult"
 						],
 						"mapping": [
 							{
 								"colId": "col_3",
-								"transformList": [
-									"trans_0"
-								]
-							}
-						]
-					}
-				]
-			},
-			{
-				"sparqlID": "?LowLevelRequirement",
-				"type": "http://Turnstile/DevelopmentPlan#LowLevelRequirement",
-				"URILookupMode": "createIfMissing",
-				"mapping": [],
-				"props": [
-					{
-						"URIRelation": "http://arcos.rack/PROV-S#identifier",
-						"URILookup": [
-							"?LowLevelRequirement"
-						],
-						"mapping": [
-							{
-								"colId": "col_4",
-								"transformList": [
-									"trans_0"
-								]
-							}
-						]
-					},
-					{
-						"URIRelation": "http://arcos.rack/REQUIREMENTS#text",
-						"mapping": [
-							{
-								"colId": "col_5",
 								"transformList": [
 									"trans_0"
 								]

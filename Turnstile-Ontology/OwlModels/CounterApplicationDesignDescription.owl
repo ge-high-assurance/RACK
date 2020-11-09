@@ -42,7 +42,7 @@
       <j.1:LowLevelRequirement rdf:ID="IN-LLR-6">
         <j.2:createdBy rdf:resource="#LlrDev1"/>
         <j.2:governs>
-          <j.4:SYSTEM rdf:about="DevelopmentPlanData#InputThread">
+          <j.1:SoftwareThread rdf:about="DevelopmentPlanData#InputThread">
             <j.4:producedBy>
               <j.1:SoftwareDesign rdf:ID="SwDesign">
                 <j.2:referenced rdf:resource="DevelopmentPlanData#SoftwareStandard"/>
@@ -52,7 +52,7 @@
             </j.4:producedBy>
             <j.4:partOf rdf:resource="DevelopmentPlanData#CounterApplication"/>
             <j.3:identifier>InputThread</j.3:identifier>
-          </j.4:SYSTEM>
+          </j.1:SoftwareThread>
         </j.2:governs>
         <j.2:text>Input Thread shall print 'Limit Exceeded'' to the console when a valid UDP message is received and the park_count range is exceed.</j.2:text>
         <j.3:identifier>IN-LLR-6</j.3:identifier>
@@ -70,11 +70,11 @@
       <j.1:LowLevelRequirement rdf:ID="EXE-LLR-3">
         <j.2:createdBy rdf:resource="#LlrDev1"/>
         <j.2:governs>
-          <j.4:SYSTEM rdf:about="DevelopmentPlanData#ExecutiveThread">
+          <j.1:SoftwareThread rdf:about="DevelopmentPlanData#ExecutiveThread">
             <j.4:producedBy rdf:resource="#SwDesign"/>
             <j.4:partOf rdf:resource="DevelopmentPlanData#CounterApplication"/>
             <j.3:identifier>ExecutiveThread</j.3:identifier>
-          </j.4:SYSTEM>
+          </j.1:SoftwareThread>
         </j.2:governs>
         <j.2:text>Executive shall print a single '.' character to the console every second when running.</j.2:text>
         <j.3:identifier>EXE-LLR-3</j.3:identifier>
@@ -89,11 +89,11 @@
       <j.1:LowLevelRequirement rdf:ID="OUT-LLR-2">
         <j.2:createdBy rdf:resource="#LlrDev1"/>
         <j.2:governs>
-          <j.4:SYSTEM rdf:about="DevelopmentPlanData#OutputThread">
+          <j.1:SoftwareThread rdf:about="DevelopmentPlanData#OutputThread">
             <j.4:producedBy rdf:resource="#SwDesign"/>
             <j.4:partOf rdf:resource="DevelopmentPlanData#CounterApplication"/>
             <j.3:identifier>OutputThread</j.3:identifier>
-          </j.4:SYSTEM>
+          </j.1:SoftwareThread>
         </j.2:governs>
         <j.2:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-3"/>
         <j.2:text>Output Thread shall broadcast a UDP message on port 62001 with the park_count every second.</j.2:text>

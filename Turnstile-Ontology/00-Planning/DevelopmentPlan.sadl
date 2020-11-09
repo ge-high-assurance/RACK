@@ -69,6 +69,8 @@ import "http://common/DO-178C".
         wasInformedBy of SoftwareRequirementsDefinition has values of type Change_Authorization.
         wasInformedBy of SoftwareRequirementsDefinition has values of type DefineSystemInterfaces.
 
+	SoftwareThread is a type of SYSTEM.
+
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.C_Code
       SourceCode is a type of FILE.
         wasGeneratedBy of SourceCode only has values of type SoftwareCoding.

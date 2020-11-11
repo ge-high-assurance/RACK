@@ -16,10 +16,11 @@
 :- use_module(rack(model)).
 
 opts_spec(Spec) :-
-    OwlDir='OwlModels',
-    DataDir='models/TurnstileSystem/src',
     paths_dir(Dir),
     file_directory_name(Dir, AssistDir),
+    file_directory_name(AssistDir, RACKRootDir),
+    atom_concat(RACKRootDir, '/RACK-Ontology/OwlModels', OwlDir),
+    atom_concat(RACKRootDir, '/Turnstile-Ontology/02-Software/03-Implementation', DataDir),
     atom_concat(AssistDir, '/databin', DataBinDir),
     atom_concat(DataBinDir, '/databin.rack', DBRack),
     Spec =
@@ -39,12 +40,16 @@ opts_spec(Spec) :-
       [opt(recognizers), meta('FILE'), type(atom),
        shortflags([r]), longflags(['recognizer', 'recognizers']),
        default(DBRack),
-       help('File containing data recognizers to use for loading data from tool generated output and converting it to ontology elements.')],
+       help(['File containing data recognizers to use for',
+             'loading data from tool generated output and',
+             'converting it to ontology elements.'])],
 
       [opt(data_dir), meta('DIR'), type(atom),
        shortflags([d]), longflags(['data']),
        default(DataDir),
-       help('Directory root to load tool-generated data from.  All tool generated files located in this tree will be imported and converted to ontology elements.')],
+       help(['Directory root to load tool-generated data from.',
+             'All tool generated files located in this tree',
+             'will be imported and converted to ontology elements.'])],
 
       [opt(data_namespace), meta('NS'), type(atom),
        shortflags([n]), longflags(['namespace']),

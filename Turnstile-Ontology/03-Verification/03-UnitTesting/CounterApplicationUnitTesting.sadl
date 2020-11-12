@@ -10,7 +10,6 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
  uri "http://Turnstile/CounterApplicationSoftwareUnitTesting" alias cntrapputst.
-import "http://Turnstile/DevelopmentPlan".
 import "http://Turnstile/CounterApplicationDesignDescription".
 
 UnitTestDevelopment is a DevelopUnitTests,

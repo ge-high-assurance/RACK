@@ -16,6 +16,8 @@ def node_key(node: lal.Name) -> str:
     exit(1)
 
 class GraphNode(ABC):
+    """Abstract class encompassing Toplevel and Callable nodes."""
+
     @abstractmethod
     def get_key(self) -> str:
         """
@@ -39,6 +41,8 @@ class GraphNode(ABC):
     pass
 
 class ToplevelNode(GraphNode):
+    """This graph node represents Ada files."""
+
     def __init__(self, absolute_file_path: str):
         self.absolute_file_path = absolute_file_path
 
@@ -52,6 +56,12 @@ class ToplevelNode(GraphNode):
         return self.absolute_file_path
 
 class CallableNode(GraphNode):
+
+    """
+    This graph node represents instances of either functions or procedures in
+    the analyzed Ada code.
+    """
+
     def __init__(self, node: lal.Name):
         self.node = node
 

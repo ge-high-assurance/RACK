@@ -15,7 +15,7 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:trnstsd="http://Turnstile/TurnstileDesign#"
     xmlns:cntrapprq="http://Turnstile/CounterApplicationRequirementSpec#"
-    xmlns="http://Turnstile/All#"
+    xmlns:all="http://Turnstile/All#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://Turnstile/All">
   <owl:Ontology rdf:about="">

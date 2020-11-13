@@ -9,7 +9,7 @@
  * material are those of the author(s) and do not necessarily reflect the views
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
- uri "http://Turnstile/All".
+ uri "http://Turnstile/All" alias all.
 import "http://Turnstile/TurnstileDesign".
 import "http://Turnstile/HazardAssessment".
 import "http://Turnstile/DevelopmentPlanData".

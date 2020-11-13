@@ -6,6 +6,7 @@
     xmlns="http://Turnstile/DataQueries#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:all="http://Turnstile/All#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://Turnstile/DataQueries">
   <owl:Ontology rdf:about="">
@@ -433,6 +434,7 @@ where {
         ?SystemInterfaceDefinition &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SystemInterfaceDefinition . 
     }
 
+
 }</rdfs:isDefinedBy>
   </sadlimplicitmodel:NamedQuery>
   <sadlimplicitmodel:NamedQuery rdf:ID="EngineerCsv">
@@ -510,6 +512,7 @@ where {
         ?AGENT a &lt;http://arcos.rack/PROV-S#AGENT&gt; . 
         ?AGENT &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_AGENT . 
 
+
 }</rdfs:isDefinedBy>
   </sadlimplicitmodel:NamedQuery>
   <sadlimplicitmodel:NamedQuery rdf:ID="DataAndControlCoupleCsv">
@@ -585,7 +588,9 @@ where {
   <sadlimplicitmodel:NamedQuery rdf:ID="LowLevelRequirementsCsv">
     <rdfs:isDefinedBy>
 
+
 select distinct ?identifier_HighLevelRequirement ?identifier_HAZARD ?identifier_SoftwareThread ?identifier_SoftwareDesign ?identifier_LowLevelRequirement ?text_LowLevelRequirement
+
 where {
     ?LowLevelRequirement a &lt;http://Turnstile/DevelopmentPlan#LowLevelRequirement&gt; . 
     ?LowLevelRequirement &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_LowLevelRequirement . 
@@ -597,6 +602,7 @@ where {
         ?SoftwareDesign &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareDesign . 
     }
     optional{
+
 
     ?LowLevelRequirement &lt;http://arcos.rack/REQUIREMENTS#governs&gt; ?SoftwareThread .
         ?SoftwareThread a &lt;http://Turnstile/DevelopmentPlan#SoftwareThread&gt; . 
@@ -614,6 +620,7 @@ where {
         ?HighLevelRequirement a &lt;http://Turnstile/DevelopmentPlan#HighLevelRequirement&gt; . 
         ?HighLevelRequirement &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_HighLevelRequirement . 
     }
+
 
 }</rdfs:isDefinedBy>
   </sadlimplicitmodel:NamedQuery>

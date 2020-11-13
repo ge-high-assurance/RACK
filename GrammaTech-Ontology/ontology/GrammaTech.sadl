@@ -19,7 +19,9 @@ AcertRequirement is a type of REQUIREMENT.
 AcertTestResult is a type of TEST_RESULT.
     failureReason (note "reason for failure, e.g.: timeout, crash, bad output")
         describes AcertTestResult with values of type FailureReason.
-    FailureReason is a class, must be one of {Timeout, Crash, BadOutput}.
+
+	failureDetails (note "Additional detail describing the failure reason")
+	    describes AcertTestResult with values of type string.
 
     /* Metrics */
     cpuTime (note "seconds of CPU time used when executing the test execution")
@@ -27,3 +29,11 @@ AcertTestResult is a type of TEST_RESULT.
 
     memory (note "maximum bytes of resident memory used by test execution")
         describes TEST_EXECUTION with values of type double.
+
+FailureReason (note "High-level reasons for ACERT test result failure")
+    is a type of THING,
+    must be one of {Timeout, Crash, DifferentOutput, Assert}.
+Timeout         is a FailureReason with identifier "Timeout".
+Crash           is a FailureReason with identifier "Crash".
+DifferentOutput is a FailureReason with identifier "DifferentOutput".
+Assert          is a FailureReason with identifier "Assert".

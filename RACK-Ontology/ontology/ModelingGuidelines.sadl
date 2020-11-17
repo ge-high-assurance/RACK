@@ -1,0 +1,53 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+ /************** edit history *****************
+  *
+  * dwa - 11 Nov 2020 - created file, initial entries
+  *
+  *********************************************/
+uri "http://arcos.rack/ModelGuidelines" alias MG.
+
+
+  /************** purpose **************
+   * The purpose of this material is to describe guidelines that should be followed when
+   * creating or modifying parts of the RACK data model (as reified in the SADL files
+   * in this folder).
+   *************************************/
+
+   /************ Guidelines ************
+    *
+    * 1. Set up the minimum cardinalities that represent the relevant relationships from the E-R model:
+    * 	1:1 should be described as 'with a single value of type'
+    * 	0:1 should be described as 'with at most one value of type' *** might need to be a separate statement
+    * 	0:N should be described as 'with values of type'
+    * 	1:N should be described, but I don't know the syntax at the moment...
+    *
+    * 2. Make sure to use PROV base class relationships correctly. The most common error so far is the
+    *    mis-use of 'wasDerivedFrom', which should only be used for a thing that is a revision of a similar thing.
+    *
+    * 3. If a portion of the model has an unambiguous use of a base PROV relationship, use the base relationship
+    *    instead. However, if there are more than one uses of a base PROV relationship, then specialize each one
+    *    as a subtype. For example,
+    * 		createdBy is a type of wasGeneratedBy
+    *    If a TA-1 or TA-3 performer requests it specifically, adding a subtype is fair game.
+    *
+    * 4. Use all capitals for entity class names. Use regularCasing for attribute and relationship class names
+    *
+    * 5. Only create entity and relationship classes when absolutely necessary. Use attributes of base or enum types when you can
+    *
+    * 6. Define relationships with specific entity targets wherever possible
+    * 
+    * 7. When in doubt about whether a construct is useful, leave it out until we have a client request for it
+    *
+    ************************************/
+

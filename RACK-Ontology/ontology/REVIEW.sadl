@@ -10,34 +10,48 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
+/************** edit history *****************
+  *
+  * dwa - 11 Nov 2020 - reduced cardinality of several
+  * dwa - 11 Nov 2020 - removed incorrect associations
+  * dwa - 11 Nov 2020 - removed unnecessary subclassing
+  *
+  *********************************************/
+
 uri "http://arcos.rack/REVIEW" alias Rv.
 import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/DOCUMENT".
 
+// dwa - review log is a type of REPORT
 REVIEW_LOG
 	(note "Outcome of a REVIEW ACTIVITY")
-	is a type of ENTITY.
+	is a type of REPORT.
 
-	reviews (note "ENTITY(s) that the review was performed on") describes REVIEW_LOG with values of type ENTITY.
-	reviews is a type of wasDerivedFrom.
+	reviewSubject (note "ENTITY(s) that the review was performed on") describes REVIEW_LOG with values of type ENTITY.
+// dwa - review subject is not what a review log is derived from - remove
+//	reviews is a type of wasDerivedFrom.
 
 	reviewResult (note "Review status descriptor") describes REVIEW_LOG with values of type REVIEW_STATE.
 
-	createBy (note "ACTIVITY(s) (e.g. REVIEW) that created this log") describes REVIEW_LOG with values of type ACTIVITY.
-	createBy is a type of wasGeneratedBy.
+// dwa - remove unnecessary subclass
+//	createBy (note "ACTIVITY(s) (e.g. REVIEW) that created this log") describes REVIEW_LOG with values of type ACTIVITY.
+//	createBy is a type of wasGeneratedBy.
 
 REVIEW_STATE (note "Life-cycle status of a review log")
     is a type of THING,
     must be one of {Passed, ReviseWithoutReview, ReviseWithReview}.
 Passed              is a REVIEW_STATE with identifier "Passed".
-ReviseWithoutReview is a REVIEW_STATE with identifier "Review Without Review".
+// dwa - fix spelling error
+ReviseWithoutReview is a REVIEW_STATE with identifier "Revise Without Review".
 ReviseWithReview    is a REVIEW_STATE with identifier "Revise With Review".
 
 REVIEW
-	(note "Code review ACTIVITY")
+	(note "Artifact review ACTIVITY")
 	is a type of ACTIVITY.
 
-	author (note "AGENT(s) putting items up for review") describes REVIEW with values of type AGENT.
-	author is a type of wasAssociatedWith.
+// dwa - changed 'author' to 'sponsor', since the two may be different, and author will appear elsewhere - in the activity that generated the reviewed entity
+	sponsor (note "AGENT(s) putting items up for review") describes REVIEW with a single value of type AGENT.
+	sponsor is a type of wasAssociatedWith.
 
 	reviewer (note "AGENT(s) performing the review") describes REVIEW with values of type AGENT.
 	reviewer is a type of wasAssociatedWith.
@@ -45,5 +59,6 @@ REVIEW
 	reviewed (note "ENTITY(s) being reviewed") describes REVIEW with values of type ENTITY.
 	reviewed is a type of used.
 
-	governedBy (note "ENTITY(s) (e.g. REQUIREMENT) used for performing the review") describes REVIEW with values of type ENTITY.
-	governedBy is a type of used.
+// TBR - dwa - remove - handled in REQUIREMENTS.governs
+//	governedBy (note "ENTITY(s) (e.g. REQUIREMENT) used for performing the review") describes REVIEW with values of type ENTITY.
+//	governedBy is a type of used.

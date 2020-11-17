@@ -10,6 +10,13 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
+/************** edit history *****************
+  *
+  * dwa - 11 Nov 2020 - removed incorrect usages of relationships
+  * dwa - 11 Nov 2020 - added that developedBy is a type of wasAssociatedWith
+  *
+  *********************************************/
+
 uri "http://arcos.rack/SYSTEM" alias sys.
 import "http://arcos.rack/PROV-S".
 import "http://arcos.rack/DOCUMENT".
@@ -20,35 +27,52 @@ SYSTEM
 	(note "SYSTEMs classify logical parts of the whole system being developed")
 	is a type of ENTITY.
 
-	partOf (note "Used to define a relationship to a higher level system") describes SYSTEM with values of type ENTITY.
-	partOf is a type of wasDerivedFrom.
+// dwa - make the hierarchy as pure as possible. Should we restrict to [0:1]?
+	partOf (note "Used to define a relationship to a higher level system") describes SYSTEM with values of type SYSTEM.
+// dwa - partOf is NOT a wasDerivedFrom - remove
+//	partOf is a type of wasDerivedFrom.
 
-	producedBy (note "ACTIVITY(s) participating in developing this SYSTEM") describes SYSTEM with values of type ACTIVITY.
+// dwa - limit cardinality of producing activity to 1.
+	producedBy (note "ACTIVITY(s) participating in developing this SYSTEM") describes SYSTEM with values of type SYSTEM_DEVELOPMENT.
+	producedBy describes SYSTEM with at most 1 value.
 	producedBy is a type of wasGeneratedBy.
 
-	provides (note "List of entities that this SYSTEM provides to others") describes SYSTEM with values of type ENTITY.
-	provides is a type of wasDerivedFrom.
+// restrict to FUNCTIONs as defined below
+	provides (note "List of entities that this SYSTEM provides to others") describes SYSTEM with values of type FUNCTION.
+// dwa - provides is NOT a wasDerivedFrom - remove
+//	provides is a type of wasDerivedFrom.
 
-	requires (note "List of entities that this SYSTEM requires from others") describes SYSTEM with values of type ENTITY.
-	requires is a type of wasDerivedFrom.
+// dwa - restrict to FUNCTIONs as defined below
+	requires (note "List of entities that this SYSTEM requires from others") describes SYSTEM with values of type FUNCTION.
+// dwa - requires is NOT a wasDerivedFrom - remove
+//	requires is a type of wasDerivedFrom.
 
-	function (note "functionality / capability of a SYSTEM") describes SYSTEM with values of type FUNCTION. 
-	function is a type of wasDerivedFrom. 
+// dwa change to string type, limit cardinality to 1
+	functionalityOverview (note "functionality / capability of a SYSTEM") describes SYSTEM with values of type string. 
+	functionalityOverview describes SYSTEM with at most 1 value.
+// dwa - function is NOT a wasDerivedFrom - remove
+//	function is a type of wasDerivedFrom. 
 	
 INTERFACE
-	(note "INTERFACEs describe directed connections between an ENTITY (e.g. SYSTEM) providing what another ENTITY (e.g. SYSTEM) requires")
+	(note "INTERFACEs describe directed connections between a SYSTEM providing what another SYSTEM requires")
 	is a type of ENTITY.
 
-	source (note "ENTITY (e.g. SYSTEM) that provides what the INTERFACE offers") describes INTERFACE with values of type ENTITY.
-	source is the inverse of provides.
-	source is a type of wasDerivedFrom.
+// dwa - need to define what it is that an Interface sources or sinks
+	commodity (note "the thing conveyed by the interface") describes INTERFACE with values of type string.
+	commodity describes INTERFACE with at most 1 value.
 
-	destination (note "ENTITY (e.g. SYSTEM) that requires what the INTERFACE offers") describes INTERFACE with values of type ENTITY.
-	destination is the inverse of requires.
-	destination is a type of wasDerivedFrom.
+	source (note "SYSTEM that provides what the INTERFACE offers") describes INTERFACE with values of type SYSTEM.
+//	source is the inverse of sink.
+// dwa - source is NOT a wasDerivedFrom
+//	source is a type of wasDerivedFrom.
+
+	sink (note "SYSTEM that requires what the INTERFACE offers") describes INTERFACE with values of type SYSTEM.
+//	sink is the inverse of source.
+// dwa - remove
+//	destination is a type of wasDerivedFrom.
 
 	identifiedBy (note "ACTIVITY out of which this INTERFACE was identified") describes INTERFACE with values of type ACTIVITY.
-	identifiedBy is a type of wasGeneratedBy.
+//	identifiedBy is a type of wasGeneratedBy.
 
 
 SYSTEM_DEVELOPMENT
@@ -56,25 +80,33 @@ SYSTEM_DEVELOPMENT
 	is a type of ACTIVITY.
 
 	developedBy (note "Organization that is responsible for producing a system") describes SYSTEM_DEVELOPMENT with values of type AGENT.
+// dwa - I think developedBy is a subtype of wasAssociatedWith
+	developedBy is a type of wasAssociatedWith.
 
+// dwa - remove FUNCTION - not seeing what this is for - suggest using string for type of 'functionality' in SYSTEM
 FUNCTION  
 	(note "defines functionality / capability")
 	is a type of ENTITY.
 
-	// If we introduce "parent" property for THING, then we could drop parentFunction.	
-	parentFunction (note "allows for decomposition of functionality") describes FUNCTION with a single value of type FUNCTION.
-	parentFunction is a type of wasDerivedFrom.
-	
-	// performedBy is inverse of function; so could be dropped.
-	performedBy (note "SYSTEM that is providing the functionality") describes FUNCTION with values of type SYSTEM.
-	performedBy is a type of wasDerivedFrom.
+// dwa - note: use description attribute of superclass to describe functionality / capability
 
+   parentFunction (note "allows for decomposition of functionality") describes FUNCTION with a single value of type FUNCTION.
+// dwa - remove
+//	parentFunction is a type of wasDerivedFrom.
+
+// dwa - remove - redundant to provides attribute of system, above	
+	// performedBy is inverse of function; so could be dropped.
+//	performedBy (note "SYSTEM that is providing the functionality") describes FUNCTION with values of type SYSTEM.
+// dwa - remove
+//	performedBy is a type of wasDerivedFrom.
+
+// dwa - remove the following two classes until we have a solid use case
 // Later we could add more structure to OP_ENV.
 OP_ENV   
 	(note "defines the operating environment assumptions and constraints")
 	is a type of THING. // should this be an ENTITY?
 
-	envConstraint (note "describes environmental constraints on system operations") describes OP_ENV with values of type string. 
+//	envConstraint (note "describes environmental constraints on system operations") describes OP_ENV with values of type string. 
 		
 OP_PROCEDURE  
 	(note "system operational procedures employed, e.g. going through a checklist, limiting people near runways, etc.")

@@ -13,6 +13,9 @@
 uri "http://arcos.rack/SOFTWARE" alias sw.
 import "http://arcos.rack/PROV-S".
 import "http://arcos.rack/FILE".
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/TESTING".
+import "http://arcos.rack/AGENTS".
 
 CODE_DEVELOPMENT
 	(note "An ACTIVITY that produces source code FILEs")
@@ -36,17 +39,20 @@ BUILD
 CODE_GEN
 	(note "ACTIVITY of running a CODE_GENERATOR to create source code FILEs")
 	is a type of FILE_CREATION.
-    performedBy (note "AGENT(s) (e.g. CODE_GENERATOR) generating the code") describes CODE_GEN with values of type AGENT.
-    performedBy is a type of wasAssociatedWith.
+    sw:performedBy (note "AGENT(s) (e.g. CODE_GENERATOR) generating the code") describes CODE_GEN with values of type AGENT. 
+    sw:performedBy of CODE_GEN must be one of {Ag:PERSON, Ag:ORGANIZATION}.
+    sw:performedBy is a type of wasAssociatedWith.
 
 COMPILE
 	(note "ACTIVITY of running a a COMPILER to produce executable and object FILEs")
 	is a type of FILE_CREATION.
-    performedBy (note "AGENT(s) (e.g. COMPILER) performing the compilation") describes COMPILE with values of type AGENT.
-    performedBy is a type of wasAssociatedWith.
+    sw:performedBy (note "AGENT(s) (e.g. COMPILER) performing the compilation") describes COMPILE with values of type AGENT. 
+    sw:performedBy of COMPILE must be one of {Ag:PERSON, Ag:ORGANIZATION}.
+    sw:performedBy is a type of wasAssociatedWith.
     
-    compiledBy (note "The tool that performed the compilation") describes COMPILE with values of type FILE.
-    compiledBy is a type of used.
+    
+    compiledBy (note "The tool that performed the compilation") describes COMPILE with values of type Ag:TOOL.
+    compiledBy is a type of wasAssociatedWith.
     
     compileInput (note "Source files that contributed to the compilation") describes COMPILE with values of type FILE.
     compileInput is a type of used.
@@ -55,11 +61,12 @@ PACKAGE
 	(note "ACTIVITY of running a PACKAGER to produce a package FILE")
 	is a type of FILE_CREATION.
 
-    performedBy (note "AGENT(s) (e.g. PACKAGER) performing the packaging") describes PACKAGE with values of type AGENT.
-    performedBy is a type of wasAssociatedWith.
+    sw:performedBy (note "AGENT(s) (e.g. PACKAGER) performing the packaging") describes PACKAGE with values of type AGENT.
+    sw:performedBy of PACKAGE must be one of {Ag:PERSON, Ag:ORGANIZATION}.
+    sw:performedBy is a type of wasAssociatedWith.
 
-	packagedBy (note "The tool used to generate the package output") describes PACKAGE with values of type FILE.
-	packagedBy is a type of used.
+	packagedBy (note "The tool used to generate the package output") describes PACKAGE with values of type Ag:TOOL.
+	packagedBy is a type of wasAssociatedWith.
 
 	packageInput (note "Source files used when generating the package output") describes PACKAGE with values of type FILE.
 	packageInput is a type of used.
@@ -115,16 +122,25 @@ NAMESPACE
     has identifier "NAMESPACE".
 
 COMPONENT
-    (note "An abstract software component")
+    (note "A concrete software component")
     is a type of ENTITY.
-    name describes COMPONENT with values of type string.
-    componentType describes COMPONENT with a single value of type COMPONENT_TYPE.
-    valueType (note "The type of this value, if applicable (e.g. for functions or variables).") describes COMPONENT with values of type string.
-    instantiates (note "What logical component (system) does this physical component (code) instantiate or implement?") describes COMPONENT with values of type ENTITY.
-    definedIn (note "Defining entity of this code structure. This is typically a FILE.") describes COMPONENT with values of type ENTITY.
-    mentions (note "A component referenced by this one, e.g., a callee or variable being used.") describes COMPONENT with values of type ENTITY.
-    subcomponentOf (note "A structural sub-component, e.g., a function might be a subcomponent of module.") describes COMPONENT with values of type ENTITY.
-    requirements (note "Low-level requirements that apply to this component.") describes COMPONENT with values of type ENTITY.
-    annotations (note "Analysis annotations that apply to this component.") describes COMPONENT with values of type ENTITY.
-    controlFlowsToUnconditionally (note "Control flows from this component to the target unconditionally.") describes COMPONENT with values of type COMPONENT.
-    controlFlowsToConditionally (note "Control flows from this component to the target conditionally.") describes COMPONENT with values of type COMPONENT.
+
+    componentType (note "Type of component")
+        describes COMPONENT with a single value of type COMPONENT_TYPE.
+
+    valueType (note "The type of this value, if applicable (e.g. for functions or variables).")
+        describes COMPONENT with values of type string.
+
+    /* How components relate to each other */
+
+    mentions (note "A component referenced by this one, e.g., a callee or variable being used.")
+        describes COMPONENT with values of type COMPONENT.
+
+    subcomponentOf (note "A structural sub-component, e.g., a function might be a subcomponent of module.")
+        describes COMPONENT with values of type COMPONENT.
+
+    /* How components relate to the system as a whole */
+
+    instantiates (note "What logical component (system) does this physical component (code) instantiate or implement?")
+        describes COMPONENT with values of type ENTITY. 
+    instantiates of COMPONENT must be one of {sys:SYSTEM, tst:TEST}.

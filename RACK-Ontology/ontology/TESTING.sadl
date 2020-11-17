@@ -10,6 +10,12 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
+ /************** edit history *****************
+  *
+  * dwa - 11 Nov 2020 - removed incorrect usages of relationships
+  *
+  *********************************************/
+
 uri "http://arcos.rack/TESTING" alias tst.
 import "http://arcos.rack/PROV-S".
 
@@ -17,8 +23,10 @@ TEST
 	(note "Description of a single test")
 	is a type of ENTITY.
 
+// dwa - suggest restricting to REQUIREMENT rather than ENTITY
 	verifies (note "Parent ENTITY(s) (e.g. REQUIREMENT) that this requirement is derived from") describes TEST with values of type ENTITY.
-	verifies is a type of wasDerivedFrom.
+// dwa - verifies is NOT a wasDerivedFrom
+//	verifies is a type of wasDerivedFrom.
 
 	producedBy (note "TEST_DEVELOPMENT activity(s) this test belongs to") describes TEST with values of type ACTIVITY.
 	producedBy is a type of wasGeneratedBy.
@@ -34,10 +42,12 @@ TEST_RESULT
 	(note "Result corresponding to one execution of one TEST")
 	is a type of ENTITY.
 
-	result (note "Pass/Failed/Indeterminate status resulting from a TEST_EXECUTION") describes TEST_RESULT with values of type TEST_STATUS.
+// dwa - reduce cardinality
+	result (note "Pass/Failed/Indeterminate status resulting from a TEST_EXECUTION") describes TEST_RESULT with a single value of type TEST_STATUS.
 
-	confirms (note "Parent test(s) of this test result") describes TEST_RESULT with values of type ENTITY.
-	confirms is a type of wasDerivedFrom.
+	confirms (note "Parent test(s) of this test result") describes TEST_RESULT with values of type TEST.
+// dwa - confirms is not a wasDerivedFrom
+//	confirms is a type of wasDerivedFrom.
 
 	executedBy (note "ACTIVITY(s) that created this test result") describes TEST_RESULT with values of type ACTIVITY.
 	executedBy is a type of wasGeneratedBy.

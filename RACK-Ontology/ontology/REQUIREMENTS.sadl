@@ -10,14 +10,28 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
+/************** edit history *****************
+  *
+  * dwa - 11 Nov 2020 - reduced cardinality of several
+  * dwa - 11 Nov 2020 - removed incorrect associations
+  * dwa - 11 Nov 2020 - removed unnecessary subclassing
+  *
+  *********************************************/
+
 uri "http://arcos.rack/REQUIREMENTS" alias Rq.
 import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/HAZARD".
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/TESTING".
+import "http://arcos.rack/REVIEW".
 
 REQUIREMENT
 	(note "Captures (both high- and low-level) properties of a process or artifact that are to be assessed")
 	is a type of ENTITY.
 
-	text (note "Description of the REQUIREMENT") describes REQUIREMENT with values of type string.
+// dwa - reduce cardinality to 1:1
+	text (note "Description of the REQUIREMENT") describes REQUIREMENT with a single value of type string.
 	// The "text" string can optionally be subdivided into sub-parts : givenText, ifText, thenText
 	// This corresponds to how rules are defined in SADL and note that in a SADL rule whatever is in
 	// givenText can simply be included in the ifText part.
@@ -25,47 +39,64 @@ REQUIREMENT
 	// that GrammaTech had which was : Given, When, Then parts.
 	// The structure of requirements in ASSERT subsume this structure of requirements. 
 	givenText (note "optional part that can be used to set certain conditions apart from other conditions in the ifText part") describes REQUIREMENT with values of type string.
+	givenText describes REQUIREMENT with at most 1 value.
 	ifText (note "conditions under which this requirement holds") describes REQUIREMENT with values of type string.
+	ifText describes REQUIREMENT with at most 1 value.
 	thenText (note "specifies what should hold by this requirement if the requirement conditions are met") describes REQUIREMENT with values of type string.
+	thenText describes REQUIREMENT with at least 1 value.
 
+// dwa - should be refined to SYSTEM, COMPONENT, or TEST, I think
 	governs (note "ENTITY(s) that are the subject of the requirement") describes REQUIREMENT with values of type ENTITY.
-	governs is a type of wasDerivedFrom.
+	governs of REQUIREMENT must be one of {SYSTEM, COMPONENT, TEST, FILE, REVIEW}.
+// dwa - governs is NOT a type of wasDerivedFrom - remove
+//	governs is a type of wasDerivedFrom.
 
+// TBR - dwa - should be refined
 	satisfies (note "Parent ENTITY(s) (e.g. REQUIREMENT) that this REQUIREMENT is derived from") describes REQUIREMENT with values of type ENTITY.
-	satisfies is a type of wasDerivedFrom.
+// dwa - satisfies is NOT a type of wasDerivedFrom - remove
+//	satisfies is a type of wasDerivedFrom.
 
-	mitigates (note "ENTITY(s) (e.g. HAZARD) that is being mitigated by this REQUIREMENT") describes REQUIREMENT with values of type ENTITY.
-	mitigates is a type of wasDerivedFrom.
+// dwa - refine to HAZARD, since mitigates doesn't seem to have any other reasonable objects
+	avoids (note "ENTITY(s) (e.g. HAZARD) that is being mitigated by this REQUIREMENT") describes REQUIREMENT with values of type HAZARD.
+// dwa - mitigates is NOT a type of wasDerivedFrom - remove
+//	mitigates is a type of wasDerivedFrom.
 
-	createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT") describes REQUIREMENT with values of type ACTIVITY.
-	createdBy is a type of wasGeneratedBy.
+// dwa - remove the subclass. Use base class wasGeneratedBy instead -- unambiguous use of superclass
+//	createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT") describes REQUIREMENT with values of type ACTIVITY.
+//	createdBy is a type of wasGeneratedBy.
 
 
-DATA_DICTIONARY_TERM
-	(note "Defines some conceptual data that may be collected somewhere and used somewhere else")
-	is a type of ENTITY.
+// dwa - remove - what's the intended use here?
 
-	text (note "Description of the term") describes DATA_DICTIONARY_TERM with values of type string.
+// DATA_DICTIONARY_TERM
+//	(note "Defines some conceptual data that may be collected somewhere and used somewhere else")
+//	is a type of ENTITY.
 
-	providedBy (note "ENTITY(s) (e.g. REQUIREMENT) that provides this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
-	providedBy is a type of wasDerivedFrom.
+//	text (note "Description of the term") describes DATA_DICTIONARY_TERM with values of type string.
 
-	consumedBy (note "ENTITY(s) (e.g. REQUIREMENT) that consumes this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
-	consumedBy is a type of wasDerivedFrom.
+// dwa - use wasDerivedFrom in the base class instead of this subclass
+//	providedBy (note "ENTITY(s) (e.g. REQUIREMENT) that provides this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
+//	providedBy is a type of wasDerivedFrom.
 
-	createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term") describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
-	createdBy is a type of wasGeneratedBy.
+// dwa - consumedBy implies an ACTIVITY, not an ENTITY. Use 'used' in the ACTIVITY base class for this purpose - remove
+//	consumedBy (note "ENTITY(s) (e.g. REQUIREMENT) that consumes this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
+//	consumedBy is a type of wasDerivedFrom.
+
+// dwa - Use wasGeneratedBy in base class for this purpose
+//	createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term") describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
+//	createdBy is a type of wasGeneratedBy.
 
 
 REQUIREMENT_DEVELOPMENT
 	(note "ACTIVITY that produces REQUIREMENTs")
 	is a type of ACTIVITY.
 
-	author (note "AGENT(s) responsible for producing a REQUIREMENT") describes REQUIREMENT_DEVELOPMENT with values of type AGENT.
-	author is a type of wasAssociatedWith.
+// dwa - use base class wasAssociatedWith
+//	author (note "AGENT(s) responsible for producing a REQUIREMENT") describes REQUIREMENT_DEVELOPMENT with values of type AGENT.
+//	author is a type of wasAssociatedWith.
 
-	referenced (note "Source materials (requirement and design docs) used during development") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
-	referenced is a type of used.
+	Rq:referenced (note "Source materials (requirement and design docs) used during development") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
+	Rq:referenced is a type of used.
 
-	governedBy (note "ENTITY(s) (e.g. REQUIREMENTS, any sort of document) used during this ACTIVITY") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
-	governedBy is a type of used.
+	Rq:governedBy (note "ENTITY(s) (e.g. REQUIREMENTS, any sort of document) used during this ACTIVITY") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
+	Rq:governedBy is a type of used.

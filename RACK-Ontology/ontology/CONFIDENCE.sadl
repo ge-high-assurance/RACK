@@ -34,9 +34,6 @@ CONFIDENCE_ASSESSMENT (note "Superclass for confidence assessments over some oth
 //    createBy (note "ACTIVITY(s) (e.g. ASSESSING_CONFIDENCE) that created this assessment.") describes CONFIDENCE_ASSESSMENT with values of type ACTIVITY.
 //    createBy is a type of wasGeneratedBy.
 
-// dwa - Where is this used? 
-// Probability (note "probability value between 0 and 1") is a type of float [0,1].
-
 BDU_CONFIDENCE_ASSESSMENT (note "A belief-disbelief-uncertainty confidence assessment, c.f. Subjective Logic. belief, disbelief, and uncertainty should sum to 1") is a type of CONFIDENCE_ASSESSMENT.
 // dwa - adjusted 3 statements below  to allow for NULL valuations, and to be probabilities rather than floats, so float[0,1] seems the right type.
     belief (note "belief that an assessment is true") describes CONFIDENCE_ASSESSMENT with values of type float [0,1].

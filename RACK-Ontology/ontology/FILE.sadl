@@ -33,7 +33,6 @@ FILE
 	filename (note "A logical file path relative to the container of the file.") describes FILE with a single value of type string.
 
 // dwa - reducing cardinality
-// dwa - simplify to string type, since we have no values under FORMAT - I can't imagine a TA3 needing to query against an enum of format of a file in the design environment...
 	fileFormat (note "The byte-level encoding of a file") describes FILE with values of type FORMAT.
 	fileFormat describes FILE with at most 1 value.
 

@@ -89,7 +89,7 @@
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?identifier_SYSTEM",
+						"SparqlID": "?identifier_SystemComponent",
 						"isReturned": true,
 						"optMinus": 0,
 						"isRuntimeConstrained": false,
@@ -98,13 +98,10 @@
 					}
 				],
 				"nodeList": [],
-				"NodeName": "SYSTEM",
-				"fullURIName": "http://arcos.rack/SYSTEM#SYSTEM",
-				"subClassNames": [
-					"http://Turnstile/DevelopmentPlan#SystemComponent",
-					"http://Turnstile/DevelopmentPlan#SoftwareModule"
-				],
-				"SparqlID": "?SYSTEM",
+				"NodeName": "SystemComponent",
+				"fullURIName": "http://Turnstile/DevelopmentPlan#SystemComponent",
+				"subClassNames": [],
+				"SparqlID": "?SystemComponent",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
 				"valueConstraint": "",
@@ -193,7 +190,7 @@
 					},
 					{
 						"SnodeSparqlIDs": [
-							"?SYSTEM"
+							"?SystemComponent"
 						],
 						"OptionalMinus": [
 							"1"
@@ -279,7 +276,7 @@
 			},
 			{
 				"colId": "col_2",
-				"colName": "identifier_SYSTEM"
+				"colName": "identifier_SystemComponent"
 			},
 			{
 				"colId": "col_3",
@@ -351,15 +348,15 @@
 				]
 			},
 			{
-				"sparqlID": "?SYSTEM",
-				"type": "http://arcos.rack/SYSTEM#SYSTEM",
+				"sparqlID": "?SystemComponent",
+				"type": "http://Turnstile/DevelopmentPlan#SystemComponent",
 				"URILookupMode": "createIfMissing",
 				"mapping": [],
 				"props": [
 					{
 						"URIRelation": "http://arcos.rack/PROV-S#identifier",
 						"URILookup": [
-							"?SYSTEM"
+							"?SystemComponent"
 						],
 						"mapping": [
 							{

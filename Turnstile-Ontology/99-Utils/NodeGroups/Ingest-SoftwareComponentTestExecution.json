@@ -33,7 +33,7 @@
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?identifier_SoftwareDesign",
+						"SparqlID": "?identifier_AGENT",
 						"isReturned": true,
 						"optMinus": 0,
 						"isRuntimeConstrained": false,
@@ -42,41 +42,16 @@
 					}
 				],
 				"nodeList": [],
-				"NodeName": "SoftwareDesign",
-				"fullURIName": "http://Turnstile/DevelopmentPlan#SoftwareDesign",
-				"subClassNames": [],
-				"SparqlID": "?SoftwareDesign",
-				"isReturned": false,
-				"isRuntimeConstrained": false,
-				"valueConstraint": "",
-				"instanceValue": null,
-				"deletionMode": "NO_DELETE"
-			},
-			{
-				"propList": [
-					{
-						"KeyName": "identifier",
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
-						"Constraints": "",
-						"fullURIName": "",
-						"SparqlID": "?identifier_SYSTEM_0",
-						"isReturned": true,
-						"optMinus": 0,
-						"isRuntimeConstrained": false,
-						"instanceValues": [],
-						"isMarkedForDeletion": false
-					}
-				],
-				"nodeList": [],
-				"NodeName": "SYSTEM",
-				"fullURIName": "http://arcos.rack/SYSTEM#SYSTEM",
+				"NodeName": "AGENT",
+				"fullURIName": "http://arcos.rack/PROV-S#AGENT",
 				"subClassNames": [
-					"http://Turnstile/DevelopmentPlan#SystemComponent",
-					"http://Turnstile/DevelopmentPlan#SoftwareModule"
+					"http://arcos.rack/AGENTS#ORGANIZATION",
+					"http://arcos.rack/AGENTS#PERSON",
+					"http://Turnstile/DevelopmentPlan#Engineer",
+					"http://arcos.rack/AGENTS#TOOL",
+					"http://arcos.rack/AGENTS#SOFTWAREAGENT"
 				],
-				"SparqlID": "?SYSTEM_0",
+				"SparqlID": "?AGENT",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
 				"valueConstraint": "",
@@ -92,7 +67,7 @@
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?identifier_SYSTEM",
+						"SparqlID": "?identifier_SoftwareComponentTestExecution",
 						"isReturned": true,
 						"optMinus": 0,
 						"isRuntimeConstrained": false,
@@ -103,7 +78,7 @@
 				"nodeList": [
 					{
 						"SnodeSparqlIDs": [
-							"?SYSTEM_0"
+							"?AGENT"
 						],
 						"OptionalMinus": [
 							"1"
@@ -114,41 +89,18 @@
 						"DeletionMarkers": [
 							false
 						],
-						"KeyName": "partOf",
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-						"ConnectBy": "partOf",
+						"KeyName": "executedOn",
+						"ValueType": "AGENT",
+						"UriValueType": "http://arcos.rack/PROV-S#AGENT",
+						"ConnectBy": "executedOn",
 						"Connected": true,
-						"UriConnectBy": "http://arcos.rack/SYSTEM#partOf"
-					},
-					{
-						"SnodeSparqlIDs": [
-							"?SoftwareDesign"
-						],
-						"OptionalMinus": [
-							"1"
-						],
-						"Qualifiers": [
-							""
-						],
-						"DeletionMarkers": [
-							false
-						],
-						"KeyName": "producedBy",
-						"ValueType": "ACTIVITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
-						"ConnectBy": "producedBy",
-						"Connected": true,
-						"UriConnectBy": "http://arcos.rack/SYSTEM#producedBy"
+						"UriConnectBy": "http://arcos.rack/TESTING#executedOn"
 					}
 				],
-				"NodeName": "SYSTEM",
-				"fullURIName": "http://arcos.rack/SYSTEM#SYSTEM",
-				"subClassNames": [
-					"http://Turnstile/DevelopmentPlan#SystemComponent",
-					"http://Turnstile/DevelopmentPlan#SoftwareModule"
-				],
-				"SparqlID": "?SYSTEM",
+				"NodeName": "SoftwareComponentTestExecution",
+				"fullURIName": "http://Turnstile/DevelopmentPlan#SoftwareComponentTestExecution",
+				"subClassNames": [],
+				"SparqlID": "?SoftwareComponentTestExecution",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
 				"valueConstraint": "",
@@ -164,15 +116,11 @@
 		"columns": [
 			{
 				"colId": "col_0",
-				"colName": "identifier_SoftwareDesign"
+				"colName": "identifier_AGENT"
 			},
 			{
 				"colId": "col_1",
-				"colName": "identifier_SYSTEM_0"
-			},
-			{
-				"colId": "col_2",
-				"colName": "identifier_SYSTEM"
+				"colName": "identifier_SoftwareComponentTestExecution"
 			}
 		],
 		"dataValidator": [],
@@ -188,15 +136,15 @@
 		],
 		"nodes": [
 			{
-				"sparqlID": "?SoftwareDesign",
-				"type": "http://Turnstile/DevelopmentPlan#SoftwareDesign",
+				"sparqlID": "?AGENT",
+				"type": "http://arcos.rack/PROV-S#AGENT",
 				"URILookupMode": "createIfMissing",
 				"mapping": [],
 				"props": [
 					{
 						"URIRelation": "http://arcos.rack/PROV-S#identifier",
 						"URILookup": [
-							"?SoftwareDesign"
+							"?AGENT"
 						],
 						"mapping": [
 							{
@@ -210,41 +158,19 @@
 				]
 			},
 			{
-				"sparqlID": "?SYSTEM_0",
-				"type": "http://arcos.rack/SYSTEM#SYSTEM",
+				"sparqlID": "?SoftwareComponentTestExecution",
+				"type": "http://Turnstile/DevelopmentPlan#SoftwareComponentTestExecution",
 				"URILookupMode": "createIfMissing",
 				"mapping": [],
 				"props": [
 					{
 						"URIRelation": "http://arcos.rack/PROV-S#identifier",
 						"URILookup": [
-							"?SYSTEM_0"
+							"?SoftwareComponentTestExecution"
 						],
 						"mapping": [
 							{
 								"colId": "col_1",
-								"transformList": [
-									"trans_0"
-								]
-							}
-						]
-					}
-				]
-			},
-			{
-				"sparqlID": "?SYSTEM",
-				"type": "http://arcos.rack/SYSTEM#SYSTEM",
-				"URILookupMode": "createIfMissing",
-				"mapping": [],
-				"props": [
-					{
-						"URIRelation": "http://arcos.rack/PROV-S#identifier",
-						"URILookup": [
-							"?SYSTEM"
-						],
-						"mapping": [
-							{
-								"colId": "col_2",
 								"transformList": [
 									"trans_0"
 								]

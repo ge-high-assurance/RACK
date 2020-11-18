@@ -17,11 +17,11 @@
     
 >>>Prop Notes...
 
->**SYSTEM** : SYSTEM
+>**SystemComponent** : SystemComponent
 
 >>Node Notes...
 
->>**identifier_SYSTEM** : string
+>>**identifier_SystemComponent** : string
     
 >>>Prop Notes...
 
@@ -49,7 +49,7 @@
 
 >**HighLevelRequirement** - createdBy -> **SoftwareRequirementsDefinition**
 
->**HighLevelRequirement** - governs -> **SYSTEM**
+>**HighLevelRequirement** - governs -> **SystemComponent**
 
 >**HighLevelRequirement** - mitigates -> **HAZARD**
 
@@ -61,7 +61,7 @@ Column Name | Description |Optional
 ------------|-------------|---
 identifier_SystemRequirement| primaryKey Key for SystemRequirement | Yes
 identifier_HAZARD| primaryKey Key for HAZARD | Yes
-identifier_SYSTEM| primaryKey Key for SYSTEM | Yes
+identifier_SystemComponent| primaryKey Key for SystemComponent | Yes
 identifier_SoftwareRequirementsDefinition| primaryKey Key for SoftwareRequirementsDefinition | Yes
 identifier_HighLevelRequirement| primaryKey Key for HighLevelRequirement | No
 text_HighLevelRequirement| | No

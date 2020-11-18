@@ -258,6 +258,7 @@ with open("NodeGroups/store_data.csv", "w") as outfile:
             comments = "Node group to "+ id.split("-")[0].lower() +" "+id.split("-")[1] +" data for the RACK-in-a-Box Turnstile example."
             outfile.write(id +","+ comments+","+"Turnstile"+ ","+ f+"\n")
             csvFiles.append(id)
+    csvFiles.sort()
 
 with open("Data/Model.yaml", "w") as outfile:
     outfile.write(yamlHeader+"\n")

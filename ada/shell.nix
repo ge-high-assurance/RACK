@@ -11,6 +11,7 @@ let
 in
 nixpkgs.mkShell {
   buildInputs = with nixpkgs; [
+    bash       # for using assist/databin wrappers
     gnat
     gprbuild
     libadalang

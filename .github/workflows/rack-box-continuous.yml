@@ -36,7 +36,7 @@ jobs:
       run: curl -LSs https://apache.claz.org/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
 
     - name: Download SemTK distribution
-      run: curl -LSs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20201103/semtk-opensource-v2.3.0-20201103-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+      run: curl -LSs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20201118/semtk-opensource-v2.3.0-20201118-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
 
     - name: Download style spreadsheet
       run: curl -LSs https://github.com/KrauseFx/markdown-to-html-github-style/raw/master/style.css -o RACK/rack-box/files/style.css

@@ -47,6 +47,7 @@ update_make_steps() {  # assumes nonce is set
 (
     export IFS=":"
     for to_make in ${MAKE_DATABIN:-""} ; do
+        [ -z "$to_make" ] && continue
         add_make_step "$to_make"
     done
 )

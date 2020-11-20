@@ -15,7 +15,7 @@
  
  JohnQ is an Engineer
 	has identifier "259863025"
-	has AGENTS:name "Public, John"
+	has agentName "Public, John"
 	has emailAddress "john.public@ge.com"
 	has employedBy General_Electric.
  
@@ -30,7 +30,7 @@
  	has reviewed display
  	has Rv:author JohnDoe
  	has reviewer JohnQ
- 	has Rv:governedBy RequirementStandard.
+ 	has Rq:governedBy RequirementStandard.
  	
  	
  HlrReviewLog-1 is a SoftwareRequirementReviewArtifacts
@@ -62,7 +62,7 @@
  	has reviewed IN-LLR-6
  	has Rv:author JaneDoe
  	has reviewer JohnQ
- 	has Rv:governedBy SoftwareStandard.
+ 	has Rq:governedBy SoftwareStandard.
 
 
 LlrReview1Log-1 is a SoftwareDesignReviewArtifacts
@@ -111,7 +111,7 @@ LlrReview2 is a SoftwareDesignReview
  	has reviewed OUT-LLR-2
  	has Rv:author JaneDoe
  	has reviewer JohnQ
- 	has Rv:governedBy SoftwareStandard.
+ 	has Rq:governedBy SoftwareStandard.
 
 LlrReview2Log-1 is a SoftwareDesignReviewArtifacts
     has identifier "LlrReview2Log-1"
@@ -132,7 +132,7 @@ LlrReview3 is a SoftwareDesignReview
  	has reviewed EXE-LLR-3
  	has Rv:author JaneDoe
  	has reviewer JohnQ
- 	has Rv:governedBy SoftwareStandard. 	
+ 	has Rq:governedBy SoftwareStandard. 	
 
 LlrReview3Log-1 is a SoftwareDesignReviewArtifacts
     has identifier "LlrReview3Log-1"

@@ -32,10 +32,7 @@ FILE
 // dwa - reducing cardinality, fixing to 1 - a file must always have a name
 	filename (note "A logical file path relative to the container of the file.") describes FILE with a single value of type string.
 
-// dwa - reducing cardinality
 	fileFormat (note "The byte-level encoding of a file") describes FILE with values of type FORMAT.
-	fileFormat describes FILE with at most 1 value.
-
 
 // dwa - FILE satisfies ENTITY is extremely ambiguous. Remove this in favor of specific relationships defined elsewhere
 //    satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes FILE with values of type ENTITY.
@@ -43,9 +40,9 @@ FILE
 //    satisfies is a type of wasDerivedFrom.
 
 // dwa - probably could remove this, since it would be unambiguous in this part of the model to just use wasGeneratedBy
-  createdBy (note "FILE_CREATION ACTIVITY that created this file") describes FILE with values of type FILE_CREATION.
-  createdBy describes FILE with at most 1 value.
-  createdBy is a type of wasGeneratedBy.
+  createBy (note "FILE_CREATION ACTIVITY that created this file") describes FILE with values of type FILE_CREATION.
+  createBy describes FILE with at most 1 value.
+  createBy is a type of wasGeneratedBy.
     
   fileHash (note "Hash of the file contents") describes FILE with values of type FILE_HASH.
 

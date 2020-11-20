@@ -15,7 +15,7 @@ import "http://Turnstile/CounterApplicationRequirementSpec".
 
 JaneDoe is a Engineer
 	has identifier "2125895152"
-	has AGENTS:name "Doe, Jane"
+	has agentName "Doe, Jane"
 	has emailAddress "jane.doe@ge.com"
 	has employedBy General_Electric.
 

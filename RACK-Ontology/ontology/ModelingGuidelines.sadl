@@ -33,10 +33,6 @@ uri "http://arcos.rack/ModelGuidelines" alias ModelGuidelines.
     * 2. Make sure to use PROV base class relationships correctly. If there's a question about correct use,.
     *    instead ask the question, "What is lost by using a new relationship unrelated to PROV?"
     *
-    * 3. If a portion of the model has an unambiguous correct use of a base PROV relationship, use the base relationship
-    *    instead. However, if there are more than one uses of a base PROV relationship in a part of the ontology, then specialize each one
-    *    as a subtype. For example,
-    *    If a TA-1 or TA-3 performer requests it specifically, adding a subtype is fair game.
     * 
     * 4. Only create new entity or relationship classes when absolutely necessary.
 	*

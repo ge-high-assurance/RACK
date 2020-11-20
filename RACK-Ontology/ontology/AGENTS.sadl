@@ -40,12 +40,10 @@ PERSON (note "Person agents are people - alias for User")
 emailAddress (note "Email address of person")
   describes PERSON with values of type string.
 
-// dwa - I think employedBy is not a type of actedOnBehalfOf. The two relationships don't have the same semantics, in many cases.
-// suggest removing this one, and use actedOnBehalfOf.
-// employedBy (note "Relates people to the company they were acting on behalf of.")
+ employedBy (note "Relates people to the company they were acting on behalf of.")
 // dwa - reduced to cardinality 1
-//  describes PERSON with at most one value of type AGENT.
-// employedBy is a type of actedOnBehalfOf.
+  describes PERSON with at most one value of type AGENT.
+ employedBy is a type of actedOnBehalfOf.
 
 
 TOOL

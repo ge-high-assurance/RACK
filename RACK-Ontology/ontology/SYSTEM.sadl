@@ -66,7 +66,7 @@ INTERFACE
 // dwa - source is NOT a wasDerivedFrom
 //	source is a type of wasDerivedFrom.
 
-	sink (note "SYSTEM that requires what the INTERFACE offers") describes INTERFACE with values of type SYSTEM.
+	destination (note "SYSTEM that requires what the INTERFACE offers") describes INTERFACE with values of type SYSTEM.
 //	sink is the inverse of source.
 // dwa - remove
 //	destination is a type of wasDerivedFrom.

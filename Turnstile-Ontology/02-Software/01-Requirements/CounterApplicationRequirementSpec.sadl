@@ -16,7 +16,7 @@ import "http://Turnstile/HazardAssessment".
 
 JohnDoe is a Engineer
 	has identifier "125569538"
-	has AGENTS:name "Doe, John"
+	has agentName "Doe, John"
 	has emailAddress "john.doe@ge.com"
 	has employedBy General_Electric.
 

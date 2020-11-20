@@ -35,9 +35,8 @@ HAZARD
 	definition (note "Description of the HAZARD") describes HAZARD with values of type string.
 	definition describes HAZARD with at most 1 value.
 
-// dwa - can we restrict this to, perhaps, sw:COMPONENT? or sys:SYSTEM?
 	H:source (note "ENTITY(s) that participate in causing this HAZARD") describes HAZARD with values of type ENTITY.
-	H:source of HAZARD must be one of {sw:COMPONENT, sys:SYSTEM}.
+//	H:source of HAZARD must be one of {HAZARD, sw:SWCOMPONENT, sys:SYSTEM}.
 // dwa - incorrect use of wasDerivedFrom - remove
 //	H:source is a type of wasDerivedFrom.
 
@@ -62,6 +61,5 @@ HAZARD_IDENTIFICATION
 	(note "ACTIVITY that identifies potential sources of HAZARD whose risk must be evaluated")
 	is a type of ACTIVITY.
 
-// dwa - suggest using the base class wasAssociatedWith, since unambiguous in this part of the model
-//	author (note "AGENT(s) who work on this ACTIVITY") describes HAZARD_IDENTIFICATION with values of type AGENT.
-//	author is a type of wasAssociatedWith.
+	H:author (note "AGENT(s) who work on this ACTIVITY") describes HAZARD_IDENTIFICATION with values of type AGENT.
+	H:author is a type of wasAssociatedWith.

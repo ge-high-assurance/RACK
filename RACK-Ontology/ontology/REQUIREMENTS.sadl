@@ -47,53 +47,44 @@ REQUIREMENT
 
 // dwa - should be refined to SYSTEM, COMPONENT, or TEST, I think
 	governs (note "ENTITY(s) that are the subject of the requirement") describes REQUIREMENT with values of type ENTITY.
-	governs of REQUIREMENT must be one of {SYSTEM, COMPONENT, TEST, FILE, REVIEW}.
 // dwa - governs is NOT a type of wasDerivedFrom - remove
 //	governs is a type of wasDerivedFrom.
 
-// TBR - dwa - should be refined
 	satisfies (note "Parent ENTITY(s) (e.g. REQUIREMENT) that this REQUIREMENT is derived from") describes REQUIREMENT with values of type ENTITY.
 // dwa - satisfies is NOT a type of wasDerivedFrom - remove
 //	satisfies is a type of wasDerivedFrom.
 
 // dwa - refine to HAZARD, since mitigates doesn't seem to have any other reasonable objects
-	avoids (note "ENTITY(s) (e.g. HAZARD) that is being mitigated by this REQUIREMENT") describes REQUIREMENT with values of type HAZARD.
+	Rq:mitigates (note "ENTITY(s) (e.g. HAZARD) that is being mitigated by this REQUIREMENT") describes REQUIREMENT with values of type HAZARD.
 // dwa - mitigates is NOT a type of wasDerivedFrom - remove
 //	mitigates is a type of wasDerivedFrom.
 
-// dwa - remove the subclass. Use base class wasGeneratedBy instead -- unambiguous use of superclass
-//	createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT") describes REQUIREMENT with values of type ACTIVITY.
-//	createdBy is a type of wasGeneratedBy.
+	Rq:createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT") describes REQUIREMENT with values of type ACTIVITY.
+	Rq:createdBy is a type of wasGeneratedBy.
 
+ DATA_DICTIONARY_TERM
+	(note "Defines some conceptual data that may be collected somewhere and used somewhere else")
+	is a type of ENTITY.
 
-// dwa - remove - what's the intended use here?
+	text (note "Description of the term") describes DATA_DICTIONARY_TERM with values of type string.
+	text describes DATA_DICTIONARY_TERM with at most 1 value.
 
-// DATA_DICTIONARY_TERM
-//	(note "Defines some conceptual data that may be collected somewhere and used somewhere else")
-//	is a type of ENTITY.
-
-//	text (note "Description of the term") describes DATA_DICTIONARY_TERM with values of type string.
-
-// dwa - use wasDerivedFrom in the base class instead of this subclass
-//	providedBy (note "ENTITY(s) (e.g. REQUIREMENT) that provides this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
+	providedBy (note "ENTITY(s) (e.g. REQUIREMENT) that provides this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
 //	providedBy is a type of wasDerivedFrom.
 
-// dwa - consumedBy implies an ACTIVITY, not an ENTITY. Use 'used' in the ACTIVITY base class for this purpose - remove
-//	consumedBy (note "ENTITY(s) (e.g. REQUIREMENT) that consumes this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
+	consumedBy (note "ENTITY(s) (e.g. REQUIREMENT) that consumes this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
 //	consumedBy is a type of wasDerivedFrom.
 
-// dwa - Use wasGeneratedBy in base class for this purpose
-//	createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term") describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
-//	createdBy is a type of wasGeneratedBy.
+	Rq:createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term") describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
+	Rq:createdBy is a type of wasGeneratedBy.
 
 
 REQUIREMENT_DEVELOPMENT
 	(note "ACTIVITY that produces REQUIREMENTs")
 	is a type of ACTIVITY.
 
-// dwa - use base class wasAssociatedWith
-//	author (note "AGENT(s) responsible for producing a REQUIREMENT") describes REQUIREMENT_DEVELOPMENT with values of type AGENT.
-//	author is a type of wasAssociatedWith.
+	Rq:author (note "AGENT(s) responsible for producing a REQUIREMENT") describes REQUIREMENT_DEVELOPMENT with values of type AGENT.
+	Rq:author is a type of wasAssociatedWith.
 
 	Rq:referenced (note "Source materials (requirement and design docs) used during development") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
 	Rq:referenced is a type of used.

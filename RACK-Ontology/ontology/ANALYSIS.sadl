@@ -41,9 +41,8 @@ ANALYSIS_REPORT
 // dwa - incorrect use of wasDerivedFrom - remove
 //    analyzes is a type of wasDerivedFrom.
 
-// dwa - remove in favor of base class wasGeneratedBy, since there's no ambiguity in use of wasGeneratedBy in this part of the model
-//  producedBy (note "ACTIVITY(s) (e.g. ANALYSIS) producing this report") describes ANALYSIS_REPORT with values of type ACTIVITY.
-//  producedBy is a type of wasGeneratedBy.
+  producedBy (note "ACTIVITY(s) (e.g. ANALYSIS) producing this report") describes ANALYSIS_REPORT with values of type ACTIVITY.
+  producedBy is a type of wasGeneratedBy.
 
 ANALYSIS_RESULT (note "Outcome of an analysis")
     is a type of THING,
@@ -56,12 +55,9 @@ ANALYSIS
 	(note "ACTIVITY of running some analysis, and as a result creating some ANALYSIS_REPORT")
 	is a type of ACTIVITY.
 
-// dwa - remove performedBy in favor of base class wasAssociatedWith, since there's no ambiguity in this part of the model for wasAssociatedWith
-//    performedBy (note "Entity that is responsible for producing an analysis, could be a person or a tool. ") describes ANALYSIS with values of type AGENT.
-//    performedBy is a type of wasAssociatedWith.
+    performedBy (note "Entity that is responsible for producing an analysis, could be a person or a tool. ") describes ANALYSIS with values of type AGENT.
+    performedBy is a type of wasAssociatedWith.
 
-// TBR - dwa - this section seems incomplete: No description of the ANALYSIS_ANNOTATION_TYPE is included anywhere. Suggest removing this entire section until we have a good example from a TA1.
-/* 
 ANALYSIS_ANNOTATION_TYPE
     (note "An open/extensible set of types of analysis annotations")
     is a type of THING.
@@ -86,4 +82,3 @@ ANALYSIS_ANNOTATION
     fromReport (note "Which analysis report this annotation comes from.") describes ANALYSIS_ANNOTATION with a single value of type ANALYSIS_REPORT.
 // dwa - reduce cardinality
     annotationType (note "The type of the annotation.") describes ANALYSIS_ANNOTATION with a single value of type ANALYSIS_ANNOTATION_TYPE.
-*/

@@ -30,21 +30,16 @@ CONFIDENCE_ASSESSMENT (note "Superclass for confidence assessments over some oth
 // dwa - assesses is NOT a type of wasDerivedFrom
 //  assesses is a type of wasDerivedFrom.
 
-// dwa - suggest leaving this as 'wasGeneratedBy' to avoid over-using subclasses, since thre's no ambiguity in this part of the model
-//    createBy (note "ACTIVITY(s) (e.g. ASSESSING_CONFIDENCE) that created this assessment.") describes CONFIDENCE_ASSESSMENT with values of type ACTIVITY.
-//    createBy is a type of wasGeneratedBy.
+    createBy (note "ACTIVITY(s) (e.g. ASSESSING_CONFIDENCE) that created this assessment.") describes CONFIDENCE_ASSESSMENT with values of type ACTIVITY.
+    createBy is a type of wasGeneratedBy.
 
 BDU_CONFIDENCE_ASSESSMENT (note "A belief-disbelief-uncertainty confidence assessment, c.f. Subjective Logic. belief, disbelief, and uncertainty should sum to 1") is a type of CONFIDENCE_ASSESSMENT.
 // dwa - adjusted 3 statements below  to allow for NULL valuations, and to be probabilities rather than floats, so float[0,1] seems the right type.
-    belief (note "belief that an assessment is true") describes CONFIDENCE_ASSESSMENT with values of type float [0,1].
-    belief describes CONFIDENCE_ASSESSMENT with at most 1 value.
-    disbelief (note "belief that an assessment is false") describes CONFIDENCE_ASSESSMENT with values of type float [0,1].
-    disbelief describes CONFIDENCE_ASSESSMENT with at most 1 value.
-    uncertainty (note "uncommitted belief") describes CONFIDENCE_ASSESSMENT with values of type float [0,1].
-    uncertainty describes CONFIDENCE_ASSESSMENT with at most 1 value.
+    belief (note "belief that an assessment is true") describes CONFIDENCE_ASSESSMENT with a single value of type float [0,1].
+    disbelief (note "belief that an assessment is false") describes CONFIDENCE_ASSESSMENT with a single value  of type float [0,1].
+    uncertainty (note "uncommitted belief") describes CONFIDENCE_ASSESSMENT with a single value  of type float [0,1].
 
 ASSESSING_CONFIDENCE (note "ACTIVITY that establishes a CONFIDENCE_ASSESSMENT") is a type of ACTIVITY.
 
-// dwa - suggest removing the subclass here, and using just 'wasAssociatedWith', since there's no ambiguity in this part of the model for wasAssociatedWith
-//    performedBy (note "ENTITY responsible for producing the assessment, could be a person or a tool") describes ASSESSING_CONFIDENCE with values of type AGENT.
-//  performedBy is a type of wasAssociatedWith.
+    performedBy (note "ENTITY responsible for producing the assessment, could be a person or a tool") describes ASSESSING_CONFIDENCE with values of type AGENT.
+    performedBy is a type of wasAssociatedWith.

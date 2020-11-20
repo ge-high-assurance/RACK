@@ -121,26 +121,25 @@ NAMESPACE
     is a COMPONENT_TYPE
     has identifier "NAMESPACE".
 
-COMPONENT
+SWCOMPONENT
     (note "A concrete software component")
     is a type of ENTITY.
 
     componentType (note "Type of component")
-        describes COMPONENT with a single value of type COMPONENT_TYPE.
+        describes SWCOMPONENT with a single value of type COMPONENT_TYPE.
 
     valueType (note "The type of this value, if applicable (e.g. for functions or variables).")
-        describes COMPONENT with values of type string.
+        describes SWCOMPONENT with values of type string.
 
     /* How components relate to each other */
 
     mentions (note "A component referenced by this one, e.g., a callee or variable being used.")
-        describes COMPONENT with values of type COMPONENT.
+        describes SWCOMPONENT with values of type SWCOMPONENT.
 
     subcomponentOf (note "A structural sub-component, e.g., a function might be a subcomponent of module.")
-        describes COMPONENT with values of type COMPONENT.
+        describes SWCOMPONENT with values of type SWCOMPONENT.
 
     /* How components relate to the system as a whole */
 
     instantiates (note "What logical component (system) does this physical component (code) instantiate or implement?")
-        describes COMPONENT with values of type ENTITY. 
-    instantiates of COMPONENT must be one of {sys:SYSTEM, tst:TEST}.
+        describes SWCOMPONENT with values of type ENTITY. 

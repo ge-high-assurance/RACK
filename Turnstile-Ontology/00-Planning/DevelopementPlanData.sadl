@@ -47,23 +47,23 @@ _DevelopmentPlan is a PLAN,
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.CounterApplication
-      CounterApplication is a SystemComponent
+      CounterApplication is a SYSTEM
         has partOf Turnstile.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Display
-      Display is a SystemComponent
+      Display is a SYSTEM
         has partOf Turnstile.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.InGate
-      InGate is a SystemComponent
+      InGate is a SYSTEM
 		has identifier "In Gate"
         has partOf Turnstile.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.OutGate
-      OutGate is a SystemComponent,
+      OutGate is a SYSTEM,
 		has identifier "Out Gate",
         has partOf Turnstile.
 
@@ -102,17 +102,17 @@ _DevelopmentPlan is a PLAN,
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.ExecutiveThread
-      ExecutiveThread is a COMPONENT
+      ExecutiveThread is a SYSTEM
         has partOf CounterApplication.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.InputThread
-      InputThread is a COMPONENT
+      InputThread is a SYSTEM
         has partOf CounterApplication.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.OutputThread
-      OutputThread is a COMPONENT
+      OutputThread is a SYSTEM
         has partOf CounterApplication.
 
 
@@ -303,8 +303,8 @@ _DevelopmentPlan is a PLAN,
     _02-SystemDesign is a SECTION.
 
 
-      Rule SystemComponent_content:
-        given x is a  SystemComponent 
+      Rule SWCOMPONENT_content:
+        given x is a  SWCOMPONENT 
         then SystemSpec has content x.
 
 

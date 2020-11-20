@@ -61,8 +61,8 @@ output_h is a SourceCode
     has filename "output.h"
     has file:createBy CodeSW-1
     has fileFormat CHeaderFile
-    has file:satisfies OUT-LLR-1
-    has file:satisfies OUT-LLR-2.
+    has Rq:satisfies OUT-LLR-1
+    has Rq:satisfies OUT-LLR-2.
 
 
 output_o_Compiling is a SoftwareIntegration
@@ -91,12 +91,12 @@ hw_h is a SourceCode
     has filename "hw.h"
     has file:createBy CodeSW-1
     has fileFormat CHeaderFile
-    has file:satisfies IN-LLR-1
-    has file:satisfies IN-LLR-2
-    has file:satisfies IN-LLR-3
-    has file:satisfies IN-LLR-4
-    has file:satisfies IN-LLR-5
-    has file:satisfies IN-LLR-6.
+    has Rq:satisfies IN-LLR-1
+    has Rq:satisfies IN-LLR-2
+    has Rq:satisfies IN-LLR-3
+    has Rq:satisfies IN-LLR-4
+    has Rq:satisfies IN-LLR-5
+    has Rq:satisfies IN-LLR-6.
 
 hw_o_Compiling is a SoftwareIntegration
     has identifier "hw_o_Compiling"
@@ -134,9 +134,9 @@ counter_h is a SourceCode
     has filename "counter.h"
     has file:createBy CodeSW-1
     has fileFormat CHeaderFile
-    has file:satisfies EXE-LLR-1
-    has file:satisfies EXE-LLR-2
-    has file:satisfies EXE-LLR-3.
+    has Rq:satisfies EXE-LLR-1
+    has Rq:satisfies EXE-LLR-2
+    has Rq:satisfies EXE-LLR-3.
 
 
 

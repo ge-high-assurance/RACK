@@ -33,9 +33,8 @@ REVIEW_LOG
 
 	reviewResult (note "Review status descriptor") describes REVIEW_LOG with values of type REVIEW_STATE.
 
-// dwa - remove unnecessary subclass
-//	createBy (note "ACTIVITY(s) (e.g. REVIEW) that created this log") describes REVIEW_LOG with values of type ACTIVITY.
-//	createBy is a type of wasGeneratedBy.
+	createBy (note "ACTIVITY(s) (e.g. REVIEW) that created this log") describes REVIEW_LOG with values of type ACTIVITY.
+	createBy is a type of wasGeneratedBy.
 
 REVIEW_STATE (note "Life-cycle status of a review log")
     is a type of THING,
@@ -49,9 +48,8 @@ REVIEW
 	(note "Artifact review ACTIVITY")
 	is a type of ACTIVITY.
 
-// dwa - changed 'author' to 'sponsor', since the two may be different, and author will appear elsewhere - in the activity that generated the reviewed entity
-	sponsor (note "AGENT(s) putting items up for review") describes REVIEW with a single value of type AGENT.
-	sponsor is a type of wasAssociatedWith.
+	author (note "AGENT(s) putting items up for review") describes REVIEW with a single value of type AGENT.
+	author is a type of wasAssociatedWith.
 
 	reviewer (note "AGENT(s) performing the review") describes REVIEW with values of type AGENT.
 	reviewer is a type of wasAssociatedWith.

@@ -63,12 +63,6 @@
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="performedBy">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">SYSTEM that is providing the functionality</rdfs:comment>
-    <rdfs:range rdf:resource="#SYSTEM"/>
-    <rdfs:domain rdf:resource="#FUNCTION"/>
-  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="function">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
     <rdfs:comment xml:lang="en">functionality / capability of a SYSTEM</rdfs:comment>

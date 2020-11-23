@@ -64,10 +64,6 @@ FUNCTION
 	// If we introduce "parent" property for THING, then we could drop parentFunction.	
 	parentFunction (note "allows for decomposition of functionality") describes FUNCTION with a single value of type FUNCTION.
 	parentFunction is a type of wasDerivedFrom.
-	
-	// performedBy is inverse of function; so could be dropped.
-	performedBy (note "SYSTEM that is providing the functionality") describes FUNCTION with values of type SYSTEM.
-	performedBy is a type of wasDerivedFrom.
 
 // Later we could add more structure to OP_ENV.
 OP_ENV   

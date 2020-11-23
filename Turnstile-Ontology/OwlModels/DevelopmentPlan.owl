@@ -1,12 +1,23 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:AGENTS="http://arcos.rack/AGENTS#"
+    xmlns:Pr="http://arcos.rack/PROCESS#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:trnstldp="http://Turnstile/DevelopmentPlan#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:Rv="http://arcos.rack/REVIEW#"
+    xmlns:D="http://arcos.rack/DOCUMENT#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:Rq="http://arcos.rack/REQUIREMENTS#"
+    xmlns:H="http://arcos.rack/HAZARD#"
+    xmlns:sw="http://arcos.rack/SOFTWARE#"
+    xmlns:A="http://arcos.rack/ANALYSIS#"
+    xmlns:sys="http://arcos.rack/SYSTEM#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:DO-178C="http://common/DO-178C#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:tst="http://arcos.rack/TESTING#"
   xml:base="http://Turnstile/DevelopmentPlan">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="http://arcos.rack/REVIEW"/>
@@ -28,17 +39,6 @@
   <owl:Class rdf:ID="StructualCoverageAnalysis">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/ANALYSIS#ANALYSIS"/>
   </owl:Class>
-  <owl:Class rdf:ID="ChangeRequest">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:ID="Change_Authorization"/>
-        </owl:allValuesFrom>
-        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/DOCUMENT#REQUEST"/>
-  </owl:Class>
   <owl:Class rdf:ID="LowLevelRequirement">
     <rdfs:subClassOf>
       <owl:Restriction>
@@ -49,6 +49,17 @@
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ChangeRequest">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Change_Authorization"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/DOCUMENT#REQUEST"/>
   </owl:Class>
   <owl:Class rdf:ID="DefineSystemInterfaces">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>

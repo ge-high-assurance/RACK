@@ -1,15 +1,14 @@
 #!/usr/bin/env python
 
 import argparse
-import libadalang as lal
-import os
-from typing import Dict
+from typing import Dict, List
 import sys
 
-from ada_print_visitor import AdaPrintVisitor
-from ontology import Component, ComponentType, File, FileFormat
+import libadalang as lal
 from rdflib import Graph, Namespace
-from typing import List
+
+from ada_print_visitor import AdaPrintVisitor
+from ontology import Component, ComponentType, FileFormat
 import static_call_graph as SCG
 
 # In order to do resolution at call sites, the analysis needs to resolve
@@ -29,8 +28,8 @@ provider = lal.UnitProvider.auto(input_files=args.others)
 
 def input_files_from_files_list(files_list: str) -> List[str]:
     """Returns the list of all non-empty lines from a given file."""
-    with open(files_list) as f:
-        lines = list(filter(None, f.read().splitlines()))
+    with open(files_list) as handle:
+        lines = list(filter(None, handle.read().splitlines()))
         return lines
 
 # If a gpr project file is passed, it is used.
@@ -48,9 +47,8 @@ provider = (
 
 context = lal.AnalysisContext(unit_provider=provider)
 
-debug = False
+DEBUG = False
 
-g = Graph()
 FORMAT = Namespace("http://data/format#")
 DATA = Namespace("http://data/")
 
@@ -67,38 +65,43 @@ def register_component(components, component: SCG.GraphNode) -> None:
     # TODO: check what we know about the actual component type
     components[key] = Component(DATA[uri], name, ComponentType.SOURCE_FUNCTION)
 
+def analyze_unit(unit: lal.AnalysisUnit) -> None:
+    """Computes and displays the static call graph of some unit."""
+    if unit.root:
+        if DEBUG:
+            ada_visitor = AdaPrintVisitor(max_depth=20)
+            ada_visitor.visit(unit.root)
+        static_call_graph_visitor = SCG.StaticCallGraphVisitor(
+            caller_being_defined = SCG.ToplevelNode(unit.filename),
+            edges = dict(),
+            nodes = dict()
+        )
+
+        static_call_graph_visitor.visit(unit.root)
+
+        components: Dict[str, Component] = dict()
+
+        # register all components
+        for component_key in static_call_graph_visitor.nodes:
+            register_component(components, static_call_graph_visitor.nodes[component_key])
+
+        # add "mentions" to all components that mention other components
+        for caller in static_call_graph_visitor.edges:
+            for callee_key in static_call_graph_visitor.edges[caller]:
+                components[caller].add_mention(components[callee_key])
+
+        graph = Graph()
+        graph.bind("dat", DATA)
+        graph.bind("format", FORMAT)
+        ada_format.add_to_graph(graph)
+        for component_key in components:
+            components[component_key].add_to_graph(graph)
+        sys.stdout.buffer.write(graph.serialize(format="turtle"))
+
+    else:
+        print("No root found, diagnostics:")
+        print(unit.diagnostics)
+
 file_to_analyze = args.analyze
 
-unit = context.get_from_file(file_to_analyze)
-if unit.root:
-    if debug:
-        adaVisitor = AdaPrintVisitor(max_depth=20)
-        adaVisitor.visit(unit.root)
-    staticCallGraphVisitor = SCG.StaticCallGraphVisitor(
-        caller_being_defined = SCG.ToplevelNode(unit.filename)
-    )
-
-    staticCallGraphVisitor.visit(unit.root)
-
-    components: Dict[str, Component] = dict()
-
-    # register all components
-    for component_key in staticCallGraphVisitor.nodes:
-        register_component(components, staticCallGraphVisitor.nodes[component_key])
-
-    # add "mentions" to all components that mention other components
-    for caller in staticCallGraphVisitor.edges:
-        for callee_key in staticCallGraphVisitor.edges[caller]:
-            components[caller].add_mention(components[callee_key])
-
-    g = Graph()
-    g.bind("dat", DATA)
-    g.bind("format", FORMAT)
-    ada_format.add_to_graph(g)
-    for component_key in components:
-        components[component_key].add_to_graph(g)
-    sys.stdout.buffer.write(g.serialize(format="turtle"))
-
-else:
-    print("No root found, diagnostics:")
-    print(unit.diagnostics)
+analyze_unit(context.get_from_file(file_to_analyze))

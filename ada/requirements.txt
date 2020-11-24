@@ -1,1 +1,4 @@
+mypy~=0.790
+pylint~=2.6.0
 rdflib==5.0.0
+git://github.com/matangover/mypyls.git#egg=mypyls

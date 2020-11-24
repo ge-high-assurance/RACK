@@ -15,7 +15,6 @@ nixpkgs.mkShell {
     gnat
     gprbuild
     libadalang
-    pipenv
     stubs
     xmlada
   ];
@@ -31,7 +30,7 @@ nixpkgs.mkShell {
   MYPYPATH="${stubs}";
 
   shellHook = ''
-    export PATH=${nixpkgs.glibc}/lib:${libadalang}/bin:$PATH
+    export PATH=${toString ./.}/venv/bin:${nixpkgs.glibc}/lib:${libadalang}/bin:$PATH
     export PYTHONPATH=${libadalang}/python:$PYTHONPATH
   '';
 }

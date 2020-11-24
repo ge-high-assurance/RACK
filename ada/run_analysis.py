@@ -9,6 +9,7 @@ import sys
 from ada_print_visitor import AdaPrintVisitor
 from ontology import Component, ComponentType, File, FileFormat
 from rdflib import Graph, Namespace
+from typing import List
 import static_call_graph as SCG
 
 # In order to do resolution at call sites, the analysis needs to resolve
@@ -26,7 +27,7 @@ args = parser.parse_args()
 # Default provider just looks through files listed as "others"
 provider = lal.UnitProvider.auto(input_files=args.others)
 
-def input_files_from_files_list(files_list: str) -> [str]:
+def input_files_from_files_list(files_list: str) -> List[str]:
     """Returns the list of all non-empty lines from a given file."""
     with open(files_list) as f:
         lines = list(filter(None, f.read().splitlines()))

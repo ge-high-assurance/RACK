@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
-import libadalang as lal
 import os
-from typing import Callable, Dict, List, Optional, Set
+import sys
+from typing import Callable, Dict, Set
+
+import libadalang as lal
 
 from ada_visitor import AdaVisitor
 
@@ -13,7 +15,7 @@ def node_key(node: lal.Name) -> str:
     loc = node.full_sloc_image[:-2]
     print(f"Could not resolve the name {name} as it appears in {loc}.")
     print("Make sure to include all project files.")
-    exit(1)
+    sys.exit(1)
 
 class GraphNode(ABC):
     """Abstract class encompassing Toplevel and Callable nodes."""
@@ -24,21 +26,18 @@ class GraphNode(ABC):
         Returns a unique identifying string suitable for use as dictionary
         key.
         """
-        ...
 
     @abstractmethod
     def get_name(self) -> str:
         """
         Returns a string suitable for displaying this node to the user.
         """
-        ...
 
     @abstractmethod
     def get_uri(self) -> str:
         """
         Returns an identifying string suitable for putting in a RDF URI.
         """
-    pass
 
 class ToplevelNode(GraphNode):
     """This graph node represents Ada files."""
@@ -70,7 +69,9 @@ class CallableNode(GraphNode):
 
     def get_name(self) -> str:
         if isinstance(self.node, lal.DefiningName):
-            return f"{self.node.f_name.p_relative_name.p_canonical_text} {self.node.full_sloc_image[:-2]}"
+            name = self.node.f_name.p_relative_name.p_canonical_text
+            location = self.node.full_sloc_image[:-2]
+            return f"{name} {location}"
         if isinstance(self.node, lal.Identifier):
             return f"{self.node.p_canonical_text} {self.node.full_sloc_image[-2]}"
         raise Exception(f"get_name: no implementation for CallableNode {self.node}")
@@ -91,8 +92,8 @@ class StaticCallGraphVisitor(AdaVisitor):
     def __init__(
         self,
         caller_being_defined: GraphNode,
-        nodes: Dict[str, GraphNode] = dict(),
-        edges: Dict[str, Set[str]] = dict()
+        nodes: Dict[str, GraphNode],
+        edges: Dict[str, Set[str]]
     ) -> None:
         """
         Initialize the visitor.  Because it is not very practical to locally

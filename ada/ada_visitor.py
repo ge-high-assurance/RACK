@@ -1,8 +1,9 @@
-import libadalang as lal
 from typing import TypeVar
 
+import libadalang as lal
+
 AdaVisitorT = TypeVar("AdaVisitorT", bound="AdaVisitor")
-AdaNodeT = TypeVar("AdaNodeT", bound="lal.AdaNode")
+AdaNodeT = TypeVar("AdaNodeT", bound=lal.AdaNode)
 
 class AdaVisitor():
 

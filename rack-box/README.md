@@ -51,7 +51,7 @@ subdirectory before building your rack-box images:
   copy `index.html`)
 
 - `files/semtk.tar.gz`: A binary distribution of SemTK (download
-  `semtk-opensource-v2.3.0-20201103-dist.tar.gz` or later from
+  `semtk-opensource-v2.3.0-20201124-dist.tar.gz` or later from
   <https://github.com/ge-semtk/semtk/releases> and rename it)
 
 - `files/style.css`: stylesheet for index.html (visit

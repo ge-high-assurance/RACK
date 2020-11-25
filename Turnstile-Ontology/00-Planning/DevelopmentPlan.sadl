@@ -81,7 +81,7 @@ import "http://common/DO-178C".
         
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.DataAndControlCouple
       DataAndControlCouple is a type of DATA_DICTIONARY_TERM.
-        wasGeneratedBy of DataAndControlCouple only has values of type SoftwareDesign.
+        createdBy of DataAndControlCouple only has values of type SoftwareDesign.
         
                         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.DataDictionary
       DataDictionary is a type of DATA_DICTIONARY_TERM.

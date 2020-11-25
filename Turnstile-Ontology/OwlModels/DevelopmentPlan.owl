@@ -152,7 +152,7 @@
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="#SoftwareDesign"/>
-        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/REQUIREMENTS#createdBy"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM"/>

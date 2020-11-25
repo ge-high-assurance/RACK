@@ -1,0 +1,79 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:STR="http://arcos.rack/STR#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://arcos.rack/STR">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="SOFTWARE"/>
+    <owl:imports rdf:resource="SYSTEM"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'STR.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="StrOutPort">
+    <rdfs:comment xml:lang="en">Output interface</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="StrPort">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="variableName"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">The communication interface of a concrete software component.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="StrComponent">
+    <rdfs:comment xml:lang="en">A concrete software component with an explicitly identified input/output interface</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="SOFTWARE#COMPONENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="StrSystem">
+    <rdfs:comment xml:lang="en">A component of the logical system with a concept of sequencing dependency</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="SYSTEM#SYSTEM"/>
+  </owl:Class>
+  <owl:Class rdf:ID="StrInPort">
+    <rdfs:comment xml:lang="en">Input interface</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="recvsVia">
+    <rdfs:comment xml:lang="en">Links a component to its incoming interface</rdfs:comment>
+    <rdfs:range rdf:resource="#StrInPort"/>
+    <rdfs:domain rdf:resource="#StrComponent"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sendsVia">
+    <rdfs:comment xml:lang="en">Links a component to its outgoing interface</rdfs:comment>
+    <rdfs:range rdf:resource="#StrOutPort"/>
+    <rdfs:domain rdf:resource="#StrComponent"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="connectsTo">
+    <rdfs:comment xml:lang="en">An association between input and output ports found in the system.</rdfs:comment>
+    <rdfs:range rdf:resource="#StrInPort"/>
+    <rdfs:domain rdf:resource="#StrOutPort"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="informs">
+    <rdfs:comment xml:lang="en">Informs represents a control or sequencing dependency in the software, with the source of the relationship earlier in the sequence than the target, or alternatively the source activating the target.</rdfs:comment>
+    <rdfs:range rdf:resource="#StrSystem"/>
+    <rdfs:domain rdf:resource="#StrSystem"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="#variableName">
+    <rdfs:comment xml:lang="en">Concrete variable name</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#StrPort"/>
+  </owl:DatatypeProperty>
+  <owl:FunctionalProperty rdf:ID="portType">
+    <rdfs:comment xml:lang="en">The type of information communicated over this port</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#StrPort"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+</rdf:RDF>

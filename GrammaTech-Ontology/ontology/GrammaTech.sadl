@@ -11,7 +11,7 @@ AcertRequirement is a type of REQUIREMENT.
         describes AcertRequirement with values of type double.
     ifTextConfidence (note "confidence that this was the if-portion of the text")
         describes AcertRequirement with values of type double.
-    whenTextConfidence (note "confidence that this was the when-portion of the text")
+    thenTextConfidence (note "confidence that this was the then-portion of the text")
         describes AcertRequirement with values of type double.
     givenTextConfidence (note "confidence that this was the given-portion of the text")
         describes AcertRequirement with values of type double.

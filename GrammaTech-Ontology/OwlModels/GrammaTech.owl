@@ -77,8 +77,8 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     <rdfs:domain rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>
   </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:ID="whenTextConfidence">
-    <rdfs:comment xml:lang="en">confidence that this was the when-portion of the text</rdfs:comment>
+  <owl:DatatypeProperty rdf:ID="thenTextConfidence">
+    <rdfs:comment xml:lang="en">confidence that this was the then-portion of the text</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     <rdfs:domain rdf:resource="#AcertRequirement"/>
   </owl:DatatypeProperty>

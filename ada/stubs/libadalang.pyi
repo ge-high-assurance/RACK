@@ -55,6 +55,8 @@ class Name(Expr):
     @property
     def p_resolve_names(self) -> bool: ...
 
+class DottedName(Name): ...
+
 class SingleTokNode(Name):
 
     @property

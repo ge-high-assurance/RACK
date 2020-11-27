@@ -67,11 +67,16 @@ class CallableNode(GraphNode):
     def get_key(self):
         return node_key(self.node)
 
+    def get_name_for_lal_name(self, name: lal.Name):
+        name_as_string = name.p_relative_name.p_canonical_text
+        location = name.full_sloc_image[:-2]
+        return f"{name_as_string} {location}"
+
     def get_name(self) -> str:
         if isinstance(self.node, lal.DefiningName):
-            name = self.node.f_name.p_relative_name.p_canonical_text
-            location = self.node.full_sloc_image[:-2]
-            return f"{name} {location}"
+            return self.get_name_for_lal_name(self.node.f_name)
+        if isinstance(self.node, lal.DottedName):
+            return self.get_name_for_lal_name(self.node)
         if isinstance(self.node, lal.Identifier):
             return f"{self.node.p_canonical_text} {self.node.full_sloc_image[-2]}"
         raise Exception(f"get_name: no implementation for CallableNode {self.node}")

@@ -65,7 +65,7 @@ class Component(Thing):
         graph.add((self.node, NS.name, Literal(self.name)))
 
         if self.defined_in is not None:
-            graph.add((self.node, NS.defined_in, self.defined_in.node))
+            graph.add((self.node, NS.definedIn, self.defined_in.node))
 
         for component in self.mentions:
             graph.add((self.node, NS.mentions, component.node))

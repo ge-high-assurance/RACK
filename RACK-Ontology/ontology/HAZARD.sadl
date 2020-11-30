@@ -24,7 +24,7 @@
 uri "http://arcos.rack/HAZARD" alias H.
 import "http://arcos.rack/PROV-S".
 import "http://arcos.rack/SYSTEM".
-import "http://arcos.rack/SOFTWARE".
+// import "http://arcos.rack/SOFTWARE".
 
 // Note that source of a HAZARD can be the environment as well as personnel operating the SYSTEM.
 HAZARD

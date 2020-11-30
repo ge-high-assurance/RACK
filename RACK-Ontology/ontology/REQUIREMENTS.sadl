@@ -19,12 +19,12 @@
   *********************************************/
 
 uri "http://arcos.rack/REQUIREMENTS" alias Rq.
-import "http://arcos.rack/PROV-S".
+// import "http://arcos.rack/PROV-S".
 import "http://arcos.rack/HAZARD".
-import "http://arcos.rack/SYSTEM".
-import "http://arcos.rack/SOFTWARE".
-import "http://arcos.rack/TESTING".
-import "http://arcos.rack/REVIEW".
+// import "http://arcos.rack/SYSTEM".
+// import "http://arcos.rack/SOFTWARE".
+// import "http://arcos.rack/TESTING".
+// import "http://arcos.rack/REVIEW".
 
 REQUIREMENT
 	(note "Captures (both high- and low-level) properties of a process or artifact that are to be assessed")

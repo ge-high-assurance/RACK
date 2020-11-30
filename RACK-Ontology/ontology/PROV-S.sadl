@@ -48,6 +48,7 @@ AGENT (note "An agent is something that bears some form of responsibility for an
     is a type of THING.
  // dwa - pushing name into the base class for all agents from AGENTS.SADL
     agentName describes AGENT with values of type string.
+    agentName describes AGENT with at most 1 value.
     
 	actedOnBehalfOf (note "Delegation is the assignment of authority and responsibility to an agent (by itself or by another agent) to carry out a specific activity as a delegate or representative, while the agent it acts on behalf of retains some responsibility for the outcome of the delegated work.") describes AGENT with values of type AGENT.
 

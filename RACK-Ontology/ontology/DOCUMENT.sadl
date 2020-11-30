@@ -22,7 +22,7 @@
 // namespace and imports
 uri "http://arcos.rack/DOCUMENT" alias doc.
 import "http://arcos.rack/PROV-S".
-import "http://arcos.rack/AGENTS".
+// import "http://arcos.rack/AGENTS".
 
 // These document types and properties are derived based off of ISO/IEC/IEEE 15289
 

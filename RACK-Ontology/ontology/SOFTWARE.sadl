@@ -13,8 +13,8 @@
 uri "http://arcos.rack/SOFTWARE" alias sw.
 import "http://arcos.rack/PROV-S".
 import "http://arcos.rack/FILE".
-import "http://arcos.rack/SYSTEM".
-import "http://arcos.rack/TESTING".
+// import "http://arcos.rack/SYSTEM".
+// import "http://arcos.rack/TESTING".
 import "http://arcos.rack/AGENTS".
 
 CODE_DEVELOPMENT
@@ -40,14 +40,14 @@ CODE_GEN
 	(note "ACTIVITY of running a CODE_GENERATOR to create source code FILEs")
 	is a type of FILE_CREATION.
     sw:performedBy (note "AGENT(s) (e.g. CODE_GENERATOR) generating the code") describes CODE_GEN with values of type AGENT. 
-    sw:performedBy of CODE_GEN must be one of {Ag:PERSON, Ag:ORGANIZATION}.
+//    sw:performedBy of CODE_GEN must be one of {Ag:PERSON, Ag:ORGANIZATION}.
     sw:performedBy is a type of wasAssociatedWith.
 
 COMPILE
 	(note "ACTIVITY of running a a COMPILER to produce executable and object FILEs")
 	is a type of FILE_CREATION.
     sw:performedBy (note "AGENT(s) (e.g. COMPILER) performing the compilation") describes COMPILE with values of type AGENT. 
-    sw:performedBy of COMPILE must be one of {Ag:PERSON, Ag:ORGANIZATION}.
+//    sw:performedBy of COMPILE must be one of {Ag:PERSON, Ag:ORGANIZATION}.
     sw:performedBy is a type of wasAssociatedWith.
     
     

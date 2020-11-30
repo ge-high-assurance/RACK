@@ -8,7 +8,7 @@ import libadalang as lal
 from rdflib import Graph, Namespace
 
 from ada_print_visitor import AdaPrintVisitor
-from ontology import Component, ComponentType, FileFormat
+from ontology import Component, ComponentType, File, FileFormat
 import static_call_graph as SCG
 
 # In order to do resolution at call sites, the analysis needs to resolve
@@ -65,6 +65,11 @@ def register_component(components, component: SCG.GraphNode) -> None:
     # TODO: check what we know about the actual component type
     components[key] = Component(DATA[uri], name, ComponentType.SOURCE_FUNCTION)
 
+def register_ada_file(files: Dict[str, File], file_key: str) -> File:
+    if file_key not in files:
+        files[file_key] = File(DATA[file_key], file_key, ada_format)
+    return files[file_key]
+
 def analyze_unit(unit: lal.AnalysisUnit) -> None:
     """Computes and displays the static call graph of some unit."""
     if unit.root:
@@ -72,18 +77,25 @@ def analyze_unit(unit: lal.AnalysisUnit) -> None:
             ada_visitor = AdaPrintVisitor(max_depth=20)
             ada_visitor.visit(unit.root)
         static_call_graph_visitor = SCG.StaticCallGraphVisitor(
-            caller_being_defined = SCG.ToplevelNode(unit.filename),
-            edges = dict(),
-            nodes = dict()
+            context=context,
+            caller_being_defined=SCG.ToplevelNode(unit.filename),
+            edges=dict(),
+            nodes=dict()
         )
 
         static_call_graph_visitor.visit(unit.root)
 
         components: Dict[str, Component] = dict()
+        files: Dict[str, File] = dict()
 
-        # register all components
+        # register all files and components (so as to have one unique instance
+        # for each)
         for component_key in static_call_graph_visitor.nodes:
-            register_component(components, static_call_graph_visitor.nodes[component_key])
+            component = static_call_graph_visitor.nodes[component_key]
+            register_component(components, component)
+            if isinstance(component, SCG.CallableNode):
+                file = register_ada_file(files, component.get_definition_file())
+                components[component_key].defined_in = file
 
         # add "mentions" to all components that mention other components
         for caller in static_call_graph_visitor.edges:

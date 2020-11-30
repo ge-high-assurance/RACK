@@ -61,25 +61,25 @@ class CallableNode(GraphNode):
     the analyzed Ada code.
     """
 
-    def __init__(self, node: lal.Name):
+    def __init__(self, context: lal.AnalysisContext, node: lal.Name):
+        self.context = context
         self.node = node
 
     def get_key(self):
         return node_key(self.node)
 
-    def get_name_for_lal_name(self, name: lal.Name):
-        name_as_string = name.p_relative_name.p_canonical_text
-        location = name.full_sloc_image[:-2]
-        return f"{name_as_string} ({location})"
+    def get_definition_file(self) -> str:
+        xref = self.node.p_gnat_xref()
+        if not xref:
+            raise Exception(f"The reference to node {self} could not be resolved.")
+        # NOTE: if we need the full path, we can use:
+        #   xref.p_basic_decl.unit.filename
+        # NOTE: full_sloc_image returns "file.ada:<line>:<column>: " but we just
+        # want the filename
+        return xref.p_basic_decl.full_sloc_image.split(":")[0]
 
     def get_name(self) -> str:
-        if isinstance(self.node, lal.DefiningName):
-            return self.get_name_for_lal_name(self.node.f_name)
-        if isinstance(self.node, lal.DottedName):
-            return self.get_name_for_lal_name(self.node)
-        if isinstance(self.node, lal.Identifier):
-            return f"{self.node.p_canonical_text} ({self.node.full_sloc_image[:-2]})"
-        raise Exception(f"get_name: no implementation for CallableNode {self.node}")
+        return self.node.text
 
     def get_uri(self) -> str:
         xref = self.node.p_gnat_xref()
@@ -96,6 +96,7 @@ class StaticCallGraphVisitor(AdaVisitor):
 
     def __init__(
         self,
+        context: lal.AnalysisContext,
         caller_being_defined: GraphNode,
         nodes: Dict[str, GraphNode],
         edges: Dict[str, Set[str]]
@@ -107,6 +108,8 @@ class StaticCallGraphVisitor(AdaVisitor):
         state whatever data you need.  Avoids code duplication, at the price of
         creating a bunch of short-lived instances.
         """
+
+        self.context = context
 
         self.caller_being_defined: GraphNode = caller_being_defined
         """
@@ -140,7 +143,7 @@ class StaticCallGraphVisitor(AdaVisitor):
         """Returns the graph node for a name, creating it if none exists yet."""
         key = node_key(node)
         if key not in self.nodes:
-            self.nodes[key] = CallableNode(node)
+            self.nodes[key] = CallableNode(self.context, node)
         return self.nodes[key]
 
     def record_call(self, callee: lal.Name) -> None:
@@ -161,6 +164,7 @@ class StaticCallGraphVisitor(AdaVisitor):
         variables.
         """
         local_visitor = StaticCallGraphVisitor(
+            context=self.context,
             caller_being_defined=caller_being_defined,
             nodes=self.nodes,
             edges=self.edges
@@ -191,6 +195,6 @@ class StaticCallGraphVisitor(AdaVisitor):
             visitor.visit(node.f_stmts)
 
         self.locally_visit(
-            caller_being_defined=CallableNode(name),
+            caller_being_defined=CallableNode(self.context, name),
             callback=callback
         )

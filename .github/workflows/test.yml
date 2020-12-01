@@ -1,4 +1,6 @@
-name: Test RACK
+# Tests RACK-in-a-Box upon every push (while ignoring tag-only pushes):
+
+name: RACK-in-a-Box continuous test
 
 on:
   pull_request:
@@ -19,54 +21,57 @@ jobs:
         token: ${{ secrets.RACK_CI_PAT }}
         path: RACK
 
+    - name: Cache Fuseki distribution
+      uses: actions/cache@v2
+      id: cache-fuseki
+      with:
+        path: RACK/rack-box/files/fuseki.tar.gz
+        key: fuseki-3.16.0
+
     - name: Download Fuseki distribution
       if: steps.cache-fuseki.outputs.cache-hit != 'true'
       run: curl -LSs https://apache.claz.org/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
 
     - name: Download SemTK distribution
-      run: curl -LSs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20201103/semtk-opensource-v2.3.0-20201103-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+      run: curl -LSs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20201201/semtk-opensource-v2.3.0-20201201-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
 
     - name: Cache RACK CLI dependencies
       uses: actions/cache@v2
       with:
         # This path is specific to Ubuntu
         path: ~/.cache/pip
+        # Look to see if there is a cache hit for the corresponding requirements file
         key: ${{ runner.os }}-pip-${{ hashFiles('RACK/cli/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
-
-    - name: Package RACK CLI
-      run: |
-        cd RACK/cli
-        python3 -m pip install --upgrade pip setuptools wheel
-        python3 -m pip wheel --wheel-dir=wheels -r requirements.txt
-        python3 -m pip wheel --wheel-dir=wheels .
-        cd ${{ github.workspace }}
-        tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
-
-    - name: Package RACK ontology and data
-      run: |
-        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests --exclude=tools RACK
-
-    - name: Download SemTK distribution
-      if: steps.cache-semtk.outputs.cache-hit != 'true'
-      run: curl -LSs 'https://oss.sonatype.org/service/local/artifact/maven/content?r=snapshots&g=com.ge.research.semtk&a=distribution&v=2.2.2-SNAPSHOT&c=bin&e=tar.gz' -o RACK/rack-box/files/semtk.tar.gz
 
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
 
+    - name: Package RACK CLI
+      run: |
+        cd RACK/cli
+        python3 -m pip install --upgrade pip setuptools wheel
+        pip3 wheel --wheel-dir=wheels -r requirements.txt
+        pip3 wheel --wheel-dir=wheels .
+        cd ${{ github.workspace }}
+        tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
+
+    - name: Package RACK ontology and data
+      run: tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests --exclude=tools RACK
+
     - name: Install RACK
       run: |
         cd RACK/rack-box
-        touch ./files/{documentation.html,index.html,style.css,systemctl3.py}
+        touch files/{documentation.html,index.html,style.css,systemctl3.py}
         mkdir -p /tmp/files
-        for f in ./files/*; do
-          ln -s $(realpath ${f}) /tmp/files/$(basename ${f})
+        for f in files/*; do
+          ln -s $(realpath $f) /tmp/files/$(basename $f)
         done
-        sudo bash ./scripts/install.sh ${USER}
+        sudo bash scripts/install.sh $USER
 
     - name: Run tests
       run: |

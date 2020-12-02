@@ -1,8 +1,8 @@
 """RACK Software ontology binding"""
 
-__copyright__ = "Copyright (c) 2020, Galois, Inc."
-
 from __future__ import annotations
+
+__copyright__ = "Copyright (c) 2020, Galois, Inc."
 
 from enum import Enum
 from rdflib import Graph, Literal, Namespace, URIRef

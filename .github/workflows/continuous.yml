@@ -20,7 +20,7 @@ jobs:
     - name: Check out RACK source
       uses: actions/checkout@v2
 
-    - name: Cache development dependencies
+    - name: Cache RACK CLI development dependencies
       uses: actions/cache@v2
       with:
         # This path is specific to Ubuntu
@@ -36,10 +36,8 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Install development dependencies
-      run: |
-        python3 -m pip install --upgrade pip
-        pip3 install -q -r cli/dev/requirements.txt
+    - name: Install RACK CLI development dependencies
+      run: pip3 install -q -r cli/dev/requirements.txt
 
     - name: Lint RACK CLI
       run: |

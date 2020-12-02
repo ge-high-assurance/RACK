@@ -2,4 +2,4 @@ mypy~=0.790
 pylint~=2.6.0
 rdflib==5.0.0
 rope~=0.18.0
-git://github.com/matangover/mypyls.git#egg=mypyls
+git+https://github.com/matangover/mypyls.git#egg=mypyls

@@ -8,13 +8,13 @@
                 "mapping": [],
                 "props": [],
                 "sparqlID": "?FILE",
-                "type": "http://arcos.rack/SOFTWARE#FILE"
+                "type": "http://arcos.rack/FILE#FILE"
             },
             {
                 "mapping": [],
                 "props": [],
                 "sparqlID": "?FORMAT",
-                "type": "http://arcos.rack/SOFTWARE#FORMAT"
+                "type": "http://arcos.rack/FILE#FORMAT"
             }
         ],
         "texts": [],
@@ -30,7 +30,7 @@
                 "NodeName": "FORMAT",
                 "SparqlID": "?FORMAT",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#FORMAT",
+                "fullURIName": "http://arcos.rack/FILE#FORMAT",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -58,7 +58,7 @@
                 "NodeName": "FILE",
                 "SparqlID": "?FILE",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#FILE",
+                "fullURIName": "http://arcos.rack/FILE#FILE",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -79,8 +79,8 @@
                         "SnodeSparqlIDs": [
                             "?FORMAT"
                         ],
-                        "UriConnectBy": "http://arcos.rack/SOFTWARE#fileFormat",
-                        "UriValueType": "http://arcos.rack/SOFTWARE#FORMAT",
+                        "UriConnectBy": "http://arcos.rack/FILE#fileFormat",
+                        "UriValueType": "http://arcos.rack/FILE#FORMAT",
                         "ValueType": "FORMAT"
                     }
                 ],
@@ -89,7 +89,7 @@
                         "Constraints": "",
                         "KeyName": "filename",
                         "SparqlID": "?filename",
-                        "UriRelationship": "http://arcos.rack/SOFTWARE#filename",
+                        "UriRelationship": "http://arcos.rack/FILE#filename",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],

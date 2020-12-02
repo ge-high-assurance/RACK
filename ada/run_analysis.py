@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+__copyright__ = "Copyright (c) 2020, Galois, Inc."
+
 import argparse
 from typing import Dict, List
 import sys
@@ -59,9 +61,9 @@ def register_component(components, component: SCG.GraphNode) -> None:
     Makes sure that the component is already present in the components
     dictionary.  Adds it if necessary.
     """
-    key = component.get_key()
-    uri = component.get_uri()
-    name = component.get_name()
+    key = SCG.node_key(component)
+    uri = SCG.get_uri(component)
+    name = SCG.get_name(component)
     # TODO: check what we know about the actual component type
     components[key] = Component(DATA[uri], name, ComponentType.SOURCE_FUNCTION)
 
@@ -78,7 +80,7 @@ def analyze_unit(unit: lal.AnalysisUnit) -> None:
             ada_visitor.visit(unit.root)
         static_call_graph_visitor = SCG.StaticCallGraphVisitor(
             context=context,
-            caller_being_defined=SCG.ToplevelNode(unit.filename),
+            caller_being_defined=None,
             edges=dict(),
             nodes=dict()
         )
@@ -93,9 +95,8 @@ def analyze_unit(unit: lal.AnalysisUnit) -> None:
         for component_key in static_call_graph_visitor.nodes:
             component = static_call_graph_visitor.nodes[component_key]
             register_component(components, component)
-            if isinstance(component, SCG.CallableNode):
-                file = register_ada_file(files, component.get_definition_file())
-                components[component_key].defined_in = file
+            file = register_ada_file(files, SCG.get_definition_file(component))
+            components[component_key].defined_in = file
 
         # add "mentions" to all components that mention other components
         for caller in static_call_graph_visitor.edges:

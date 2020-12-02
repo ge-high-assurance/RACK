@@ -1,3 +1,10 @@
+"""
+A simple instantiation of the 'AdaVisitor' to print out the program structure
+of an Ada file in a somewhat human-readable way.
+"""
+
+__copyright__ = "Copyright (c) 2020, Galois, Inc."
+
 from colorama import Fore
 
 from ada_visitor import AdaVisitor

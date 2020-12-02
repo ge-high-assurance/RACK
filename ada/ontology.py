@@ -1,5 +1,7 @@
 """RACK Software ontology binding"""
 
+__copyright__ = "Copyright (c) 2020, Galois, Inc."
+
 from __future__ import annotations
 
 from enum import Enum

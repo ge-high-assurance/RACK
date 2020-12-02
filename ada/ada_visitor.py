@@ -1,3 +1,5 @@
+__copyright__ = "Copyright (c) 2020, Galois, Inc."
+
 from typing import TypeVar
 
 import libadalang as lal

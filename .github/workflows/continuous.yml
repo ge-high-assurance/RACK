@@ -15,7 +15,12 @@ jobs:
 #  - Lints the RACK CLI, Ontology, and shell scripts
 
   lint:
-    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        os: [ ubuntu-20.04 ]
+        python-version: [ 3.8 ]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Check out RACK source
@@ -35,7 +40,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: ${{ matrix.python-version }}
 
     - name: Install RACK CLI development dependencies
       run: pip3 install -q -r cli/dev/requirements.txt
@@ -54,8 +59,7 @@ jobs:
         ./assist/bin/check
 
     - name: Lint shell scripts
-      # This action is composite on master which `act` can't yet handle.
-      uses: ludeeus/action-shellcheck@fcee962fee3f87888d7992ab0560232aef368e89
+      uses: ludeeus/action-shellcheck@v1
       env:
         SHELLCHECK_OPTS: -e SC1008
 
@@ -65,7 +69,12 @@ jobs:
 #  - Runs rack-box tests
 
   test:
-    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        os: [ ubuntu-20.04 ]
+        python-version: [ 3.8 ]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Check out RACK source
@@ -103,7 +112,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: ${{ matrix.python-version }}
 
     - name: Package RACK CLI
       run: |
@@ -141,7 +150,12 @@ jobs:
 #  - Pushes Docker image to Docker Hub
 
   build:
-    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        os: [ ubuntu-20.04 ]
+        python-version: [ 3.8 ]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Check out RACK source
@@ -185,7 +199,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: ${{ matrix.python-version }}
 
     - name: Package RACK CLI
       run: |

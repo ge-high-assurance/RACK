@@ -37,7 +37,7 @@ subdirectory before building your rack-box images:
 - `files/rack.tar.gz`: A copy of the RACK ontology and data (clone
   this repo and run `tar cfz RACK/rack-box/files/rack.tar.gz
   --exclude=.git --exclude=.github --exclude=assist --exclude=cli
-  --exclude=rack-box --exclude=tools --exclude=tests RACK`)
+  --exclude=rack-box --exclude=tests --exclude=tools RACK`)
 
 - `files/documentation.html`: RACK documentation (clone RACK.wiki, run
   `gwtc -t RACK-in-a-Box RACK.wiki/` using [Github Wikito
@@ -51,7 +51,7 @@ subdirectory before building your rack-box images:
   copy `index.html`)
 
 - `files/semtk.tar.gz`: A binary distribution of SemTK (download
-  `semtk-opensource-v2.3.0-20201124-dist.tar.gz` or later from
+  `semtk-opensource-v2.3.0-20201202-dist.tar.gz` or later from
   <https://github.com/ge-semtk/semtk/releases> and rename it)
 
 - `files/style.css`: stylesheet for index.html (visit
@@ -89,7 +89,8 @@ cd RACK/cli
 python3 -m pip install --upgrade pip setuptools wheel
 pip3 wheel --wheel-dir=wheels -r requirements.txt
 pip3 wheel --wheel-dir=wheels .
-python3 -m pip install ./wheels/*.whl
+# If you want to install the RACK CLI on your machine...
+#python3 -m pip install wheels/*.whl
 cd $HOME
 tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
 ```
@@ -129,8 +130,8 @@ To make a new release, we will need to perform the following steps:
 
 ## Update documentation pages
 
-Before making a new release, we will need to update version numbers in
-the following places:
+Before making a new release, we will need to update instructions or
+version numbers in the following places:
 
 ### RACK Box
 

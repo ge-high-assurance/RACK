@@ -18,6 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        python-version: [ 3.8 ]
         include:
 # docker works on all, but ubuntu is cheapest
         - builder: docker
@@ -32,7 +33,7 @@ jobs:
           os: macos-latest
           shell: bash
 
-    name: build ${{ matrix.builder }} ${{ matrix.os }}
+    name: build ${{ matrix.builder }} ${{ matrix.os }} ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -81,7 +82,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: ${{ matrix.python-version }}
 
     - name: Package RACK CLI
       run: |

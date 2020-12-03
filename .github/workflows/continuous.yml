@@ -104,7 +104,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: RACK/rack-box/files
-        key: files-${{ GITHUB_SHA }}
+        key: files-${{ github.sha }}
 
     - name: Cache Fuseki distribution
       uses: actions/cache@v2
@@ -192,7 +192,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: RACK/rack-box/files
-        key: files-${{ GITHUB_SHA }}
+        key: files-${{ github.sha }}
 
     - name: Install rack-box files on runner
       run: |
@@ -234,7 +234,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: RACK/rack-box/files
-        key: files-${{ GITHUB_SHA }}
+        key: files-${{ github.sha }}
 
     - name: Build rack-box Docker image
       run: |

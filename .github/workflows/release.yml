@@ -49,7 +49,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: RACK/rack-box/files
-        key: files-${{ GITHUB_SHA }}
+        key: files-${{ github.sha }}
 
     - name: Cache Fuseki distribution
       uses: actions/cache@v2
@@ -140,7 +140,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: RACK/rack-box/files
-        key: files-${{ GITHUB_SHA }}
+        key: files-${{ github.sha }}
 
     # Skip since windows-latest doesn't support nested virtualization yet
     - name: Enable Hyper-V

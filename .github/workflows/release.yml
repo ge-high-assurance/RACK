@@ -18,19 +18,21 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.8 ]
         include:
 # docker works on all, but ubuntu is cheapest
         - builder: docker
           os: ubuntu-20.04
+          python-version: 3.8
           shell: bash
 # hyperv isn't supported yet (https://github.com/actions/virtual-environments/issues/183#issuecomment-706244929)
 #        - builder: hyperv
 #          os: windows-latest
+#          python-version: 3.8
 #          shell: msys2 {0}
 # virtualbox works only on macos (VT-x is not available: VERR_VMK_NO_VMX)
         - builder: virtualbox
           os: macos-latest
+          python-version: 3.8
           shell: bash
 
     name: build ${{ matrix.builder }} ${{ matrix.os }} ${{ matrix.python-version }}

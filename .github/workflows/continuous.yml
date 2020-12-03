@@ -23,10 +23,12 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - name: Check out RACK source
-      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
 
-    - name: Cache RACK CLI development dependencies
+    - name: Cache Python dependencies
       uses: actions/cache@v2
       with:
         # This path is specific to Ubuntu
@@ -37,13 +39,11 @@ jobs:
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+    - name: Check out RACK source
+      uses: actions/checkout@v2
 
     - name: Install RACK CLI development dependencies
-      run: pip3 install -q -r cli/dev/requirements.txt
+      run: python3 -m pip install -q -r cli/dev/requirements.txt
 
     - name: Lint RACK CLI
       run: |
@@ -63,12 +63,12 @@ jobs:
       env:
         SHELLCHECK_OPTS: -e SC1008
 
-# Test job:
-#  - Downloads files needed by test job
+# Cache job:
+#  - Downloads files needed by rack-box
 #  - Packages rack-box components
-#  - Runs rack-box tests
+#  - Caches RACK/rack-box/files directory
 
-  test:
+  cache:
     strategy:
       matrix:
         os: [ ubuntu-20.04 ]
@@ -77,28 +77,12 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - name: Check out RACK source
-      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
       with:
-        repository: ge-high-assurance/RACK
-        token: ${{ secrets.RACK_CI_PAT }}
-        path: RACK
+        python-version: ${{ matrix.python-version }}
 
-    - name: Cache Fuseki distribution
-      uses: actions/cache@v2
-      id: cache-fuseki
-      with:
-        path: RACK/rack-box/files/fuseki.tar.gz
-        key: fuseki-3.16.0
-
-    - name: Download Fuseki distribution
-      if: steps.cache-fuseki.outputs.cache-hit != 'true'
-      run: curl -LSs https://apache.claz.org/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
-
-    - name: Download SemTK distribution
-      run: curl -LSs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20201202/semtk-opensource-v2.3.0-20201202-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
-
-    - name: Cache RACK CLI dependencies
+    - name: Cache Python dependencies
       uses: actions/cache@v2
       with:
         # This path is specific to Ubuntu
@@ -109,61 +93,18 @@ jobs:
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-
-    - name: Package RACK CLI
-      run: |
-        cd RACK/cli
-        python3 -m pip install --upgrade pip setuptools wheel
-        pip3 wheel --wheel-dir=wheels -r requirements.txt
-        pip3 wheel --wheel-dir=wheels .
-        cd ${{ github.workspace }}
-        tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
-
-    - name: Package RACK ontology and data
-      run: tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests --exclude=tools RACK
-
-    - name: Install rack-box locally
-      run: |
-        mkdir -p /tmp/files
-        cd RACK/rack-box
-        touch files/{documentation.html,index.html,style.css,systemctl3.py}
-        for f in files/*; do
-          ln -s $(realpath $f) /tmp/files/$(basename $f)
-        done
-        sudo bash scripts/install.sh $USER
-
-    - name: Run rack-box tests
-      run: |
-        cd RACK
-        python3 -m pip install cli/wheels/*.whl
-        python3 -m pip install -r tests/requirements.txt
-        python3 -m pytest tests
-
-# Build job:
-#  - Downloads files needed by build job
-#  - Packages rack-box components
-#  - Builds rack-box Docker image
-#  - Pushes Docker image to Docker Hub
-
-  build:
-    strategy:
-      matrix:
-        os: [ ubuntu-20.04 ]
-        python-version: [ 3.8 ]
-
-    runs-on: ${{ matrix.os }}
-
-    steps:
     - name: Check out RACK source
       uses: actions/checkout@v2
       with:
         repository: ge-high-assurance/RACK
         token: ${{ secrets.RACK_CI_PAT }}
         path: RACK
+
+    - name: Cache all files needed by rack-box
+      uses: actions/cache@v2
+      with:
+        path: RACK/rack-box/files
+        key: files-${{ GITHUB_SHA }}
 
     - name: Cache Fuseki distribution
       uses: actions/cache@v2
@@ -185,28 +126,12 @@ jobs:
     - name: Download systemctl script
       run: curl -LSs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4260/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
 
-    - name: Cache RACK CLI dependencies
-      uses: actions/cache@v2
-      with:
-        # This path is specific to Ubuntu
-        path: ~/.cache/pip
-        # Look to see if there is a cache hit for the corresponding requirements file
-        key: ${{ runner.os }}-pip-${{ hashFiles('RACK/cli/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-          ${{ runner.os }}-
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-
     - name: Package RACK CLI
       run: |
         cd RACK/cli
         python3 -m pip install --upgrade pip setuptools wheel
-        pip3 wheel --wheel-dir=wheels -r requirements.txt
-        pip3 wheel --wheel-dir=wheels .
+        python3 -m pip wheel --wheel-dir=wheels -r requirements.txt
+        python3 -m pip wheel --wheel-dir=wheels .
         cd ${{ github.workspace }}
         tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
 
@@ -220,12 +145,96 @@ jobs:
         token: ${{ secrets.RACK_CI_PAT }}
         path: RACK.wiki
 
-    - name: Generate RACK documentation
+    - name: Package RACK documentation
       run: |
         sudo npm install -g github-wikito-converter markdown-to-html
         gwtc -t RACK-in-a-Box RACK.wiki
         markdown -t RACK-in-a-box -s style.css RACK.wiki/Welcome.md > index.html
         mv documentation.html index.html RACK/rack-box/files
+
+# Test job:
+#  - Runs rack-box tests
+
+  test:
+    strategy:
+      matrix:
+        os: [ ubuntu-20.04 ]
+        python-version: [ 3.8 ]
+
+    runs-on: ${{ matrix.os }}
+    needs: cache
+
+    steps:
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Cache Python dependencies
+      uses: actions/cache@v2
+      with:
+        # This path is specific to Ubuntu
+        path: ~/.cache/pip
+        # Look to see if there is a cache hit for the corresponding requirements file
+        key: ${{ runner.os }}-pip-${{ hashFiles('RACK/tests/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          ${{ runner.os }}-
+
+    - name: Check out RACK source
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK
+        token: ${{ secrets.RACK_CI_PAT }}
+        path: RACK
+
+    - name: Get all files needed by rack-box
+      uses: actions/cache@v2
+      with:
+        path: RACK/rack-box/files
+        key: files-${{ GITHUB_SHA }}
+
+    - name: Install rack-box files on runner
+      run: |
+        mkdir -p /tmp/files
+        for f in RACK/rack-box/files/*; do
+          ln -s $(realpath $f) /tmp/files/$(basename $f)
+        done
+        sudo bash RACK/rack-box/scripts/install.sh $USER
+
+    - name: Run rack-box tests
+      run: |
+        cd RACK
+        python3 -m pip install cli/wheels/*.whl
+        python3 -m pip install -r tests/requirements.txt
+        python3 -m pytest tests
+
+# Build job:
+#  - Builds rack-box Docker image
+#  - Pushes Docker image to Docker Hub
+
+  build:
+    strategy:
+      matrix:
+        os: [ ubuntu-20.04 ]
+        python-version: [ 3.8 ]
+
+    runs-on: ${{ matrix.os }}
+    needs: cache
+
+    steps:
+    - name: Check out RACK source
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK
+        token: ${{ secrets.RACK_CI_PAT }}
+        path: RACK
+
+    - name: Get all files needed by rack-box
+      uses: actions/cache@v2
+      with:
+        path: RACK/rack-box/files
+        key: files-${{ GITHUB_SHA }}
 
     - name: Build rack-box Docker image
       run: |

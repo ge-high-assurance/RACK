@@ -26,6 +26,14 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
+    - name: Check out RACK source
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK
+        ref: ${{ github.event.release.tag_name }}
+        token: ${{ secrets.RACK_CI_PAT }}
+        path: RACK
+
     - name: Cache Python dependencies
       uses: actions/cache@v2
       with:
@@ -36,14 +44,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
-
-    - name: Check out RACK source
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK
-        ref: ${{ github.event.release.tag_name }}
-        token: ${{ secrets.RACK_CI_PAT }}
-        path: RACK
 
     - name: Cache all files needed by rack-box
       uses: actions/cache@v2

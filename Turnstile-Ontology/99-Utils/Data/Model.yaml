@@ -32,3 +32,4 @@ ingestion-steps:
 - {nodegroup: "Ingest-SystemComponent", csv: "SystemComponent.csv"}
 - {nodegroup: "Ingest-SystemInterfaceDefinition", csv: "SystemInterfaceDefinition.csv"}
 - {nodegroup: "Ingest-SystemRequirement", csv: "SystemRequirement.csv"}
+- {nodegroup: "Ingest-SoftwareComponent", csv: "SoftwareComponent.csv"}

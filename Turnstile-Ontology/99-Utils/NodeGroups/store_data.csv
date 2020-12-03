@@ -1,4 +1,5 @@
 ID,comments,creator,jsonFile
+Ingest-SoftwareComponent,Node group to ingest COMPONENT data for the RACK-in-a-Box Turnstile example.,Turnstile,Ingest-SoftwareComponent.json
 Ingest-SoftwareComponentTestResult,Node group to ingest SoftwareComponentTestResult data for the RACK-in-a-Box Turnstile example.,Turnstile,Ingest-SoftwareComponentTestResult.json
 Ingest-SoftwareUnitTest,Node group to ingest SoftwareUnitTest data for the RACK-in-a-Box Turnstile example.,Turnstile,Ingest-SoftwareUnitTest.json
 Ingest-SoftwareThread,Node group to ingest SoftwareThread data for the RACK-in-a-Box Turnstile example.,Turnstile,Ingest-SoftwareThread.json

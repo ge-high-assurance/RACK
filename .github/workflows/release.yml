@@ -75,8 +75,8 @@ jobs:
       run: |
         cd RACK/cli
         python3 -m pip install --upgrade pip setuptools wheel
-        python3 -m pip wheel --wheel-dir=wheels -r requirements.txt
-        python3 -m pip wheel --wheel-dir=wheels .
+        pip3 wheel --wheel-dir=wheels -r requirements.txt
+        pip3 wheel --wheel-dir=wheels .
         cd ${{ github.workspace }}
         tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
 

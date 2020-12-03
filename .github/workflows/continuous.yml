@@ -200,6 +200,7 @@ jobs:
         for f in RACK/rack-box/files/*; do
           ln -s $(realpath $f) /tmp/files/$(basename $f)
         done
+        python3 -m pip install --upgrade pip setuptools wheel
         sudo bash RACK/rack-box/scripts/install.sh $USER
 
     - name: Run rack-box tests

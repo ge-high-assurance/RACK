@@ -215,6 +215,8 @@ jobs:
     - name: Run rack-box tests
       run: |
         cd RACK
+        pip3 install -r cli/requirements.txt
+        pip3 install cli/.
         pip3 install -r tests/requirements.txt
         python3 -m pytest tests
 

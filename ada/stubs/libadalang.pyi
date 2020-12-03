@@ -1,3 +1,5 @@
+# pylint: skip-file
+
 # NOTE: Currently, I'm only putting the minimal amount of definitions here so
 # that mypy is happy. This is **not** exhaustive.
 
@@ -5,6 +7,8 @@
 # should be unnecessary in Python 3.10+
 from __future__ import annotations
 from typing import Iterable, List, Optional
+
+class PropertyError(Exception): ...
 
 class Sloc(object):
 

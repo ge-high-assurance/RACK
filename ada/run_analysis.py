@@ -3,7 +3,9 @@
 __copyright__ = "Copyright (c) 2020, Galois, Inc."
 
 import argparse
-from typing import Dict, List
+from colorama import Fore, Style
+import logging
+from typing import Dict, List, Optional
 import sys
 
 import libadalang as lal
@@ -24,6 +26,24 @@ parser.add_argument("--files",   help="Text file containing a list of project fi
 parser.add_argument("--analyze", help="File to analyze (.ada, .adb, .ads)", type=str, required=True)
 parser.add_argument("others",    help="List of project files (use --project-files if there are many)", type=str, nargs="*")
 args = parser.parse_args()
+
+class CustomFormatter(logging.Formatter):
+    """Add custom styles to our log"""
+
+    format_string = "[%(filename)s:%(lineno)d] %(levelname)s: %(message)s"
+
+    FORMATS = {
+        logging.DEBUG: format_string,
+        logging.INFO: f"{Fore.CYAN}{format_string}{Style.RESET_ALL}",
+        logging.WARNING: f"{Fore.YELLOW}{format_string}{Style.RESET_ALL}",
+        logging.ERROR: f"{Fore.YELLOW}{format_string}{Style.RESET_ALL}",
+        logging.CRITICAL: f"{Style.BRIGHT}{Fore.YELLOW}{format_string}{Style.RESET_ALL}",
+    }
+
+    def format(self, record: logging.LogRecord) -> str:
+        which_format = self.FORMATS.get(record.levelno)
+        formatter = logging.Formatter(which_format, "%H:%M:%S")
+        return formatter.format(record)
 
 # Default provider just looks through files listed as "others"
 provider = lal.UnitProvider.auto(input_files=args.others)
@@ -67,7 +87,9 @@ def register_component(components, component: SCG.GraphNode) -> None:
     # TODO: check what we know about the actual component type
     components[key] = Component(DATA[uri], name, ComponentType.SOURCE_FUNCTION)
 
-def register_ada_file(files: Dict[str, File], file_key: str) -> File:
+def register_ada_file(files: Dict[str, File], file_key: Optional[str]) -> Optional[File]:
+    if file_key is None:
+        return None
     if file_key not in files:
         files[file_key] = File(DATA[file_key], file_key, ada_format)
     return files[file_key]
@@ -114,6 +136,13 @@ def analyze_unit(unit: lal.AnalysisUnit) -> None:
     else:
         print("No root found, diagnostics:")
         print(unit.diagnostics)
+
+# Register our custom color formatter for our logger
+logger = logging.getLogger('ada')
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(CustomFormatter())
+logger.propagate = False
+logger.addHandler(stream_handler)
 
 file_to_analyze = args.analyze
 

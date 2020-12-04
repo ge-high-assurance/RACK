@@ -178,7 +178,7 @@ specification of a namespace for the triples.
 There are two forms for uploading the model in memory to a Fuseki instance:
 
 ```prolog
-upload_model_to_url('http://192.168.0.32:3030/RACK').
+upload_model_to_url('http://192.168.0.32:3030/').
 ```
 
 ---

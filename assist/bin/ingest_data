@@ -10,7 +10,7 @@ loads=(
 case $# in
     2) target="upload_model_to_rack" ;;
     3) if [ "$3" == "analysis" ]
-       then target="report"; loads+=(-f $(dirname "$0")/analyze_rack.pl)
+       then target="report(${1@Q}, [])"; loads+=(-f $(dirname "$0")/rack/analyze.pl)
        else target="save_model_to_file(${3@Q},${1@Q})"
        fi;;
     *) echo Usage: $(basename "$0") DATA_NAMESPACE DATA_DIR '[OwlFile|"analysis"]'
@@ -34,7 +34,7 @@ esac
 # add -g "debug(triples)" to see definitions as they occur
 
 # shellcheck disable=2086
-swipl -g "load_local_model('$(dirname $0)/../../OwlModels')" \
+swipl -g "load_local_model('$(dirname $0)/../../RACK-Ontology/OwlModels')" \
       -g "load_recognizer('$(dirname $0)/../databin/databin.rack')" \
       -g "load_data(${1@Q},${2@Q})" \
       -g "$target" \

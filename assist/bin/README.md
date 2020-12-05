@@ -6,10 +6,11 @@ the ontology.
 
 NOTE: For the following commands to work, you will want to have
 generated some data for them to use.  For instance, to get the
-"TurnstileSystem" data generated, you can run `make` on the `Makefile`
-in `Turnstile-Ontology/02-Software/03-Implementation` while prepending
-`RACK-Ontology/databin` to your `PATH`.  This will ensure that the
-script uses the instrumented `gcc` that records data.
+"TurnstileSystem" data generated, you can prepend
+`RACK-Ontology/databin` to your `PATH` and then run `make` on the
+`Makefile` in the `Turnstile-Ontology/02-Software/03-Implementation`
+directory.  The `databin` provides instrumented tools like `gcc` that
+record build-related data during the build.
 
 There are a number of command-line utilities that can be used with the
 Prolog modules in this directory:

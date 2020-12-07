@@ -109,7 +109,7 @@ jobs:
 
     - name: Download Fuseki distribution
       if: steps.cache-files.outputs.cache-hit != 'true'
-      run: curl -LSfs https://downloads.apache.org/jena/binaries/apache-jena-fuseki-3.17.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
+      run: curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
 
     - name: Download SemTK distribution
       if: steps.cache-files.outputs.cache-hit != 'true'

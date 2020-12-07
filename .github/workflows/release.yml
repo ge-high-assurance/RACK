@@ -90,23 +90,6 @@ jobs:
       if: steps.cache-files.outputs.cache-hit != 'true'
       run: tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests --exclude=tools RACK
 
-    - name: Check out RACK wiki
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK.wiki
-        ref: ${{ github.event.release.tag_name }}
-        token: ${{ secrets.RACK_CI_PAT }}
-        path: RACK.wiki
-
-    - name: Package RACK documentation
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      run: |
-        sudo npm install -g github-wikito-converter markdown-to-html
-        gwtc -t RACK-in-a-Box RACK.wiki
-        markdown -t RACK-in-a-box -s style.css RACK.wiki/Welcome.md > index.html
-        mv documentation.html index.html RACK/rack-box/files
-
 # Build job:
 #  - Builds rack-box Docker and VirtualBox images
 #  - Pushes Docker image to Docker Hub
@@ -150,6 +133,21 @@ jobs:
       with:
         path: RACK/rack-box/files
         key: files-${{ github.sha }}
+
+    - name: Check out RACK wiki
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK.wiki
+        ref: ${{ github.event.release.tag_name }}
+        token: ${{ secrets.RACK_CI_PAT }}
+        path: RACK.wiki
+
+    - name: Package RACK documentation
+      run: |
+        sudo npm install -g github-wikito-converter markdown-to-html
+        gwtc -t RACK-in-a-Box RACK.wiki
+        markdown -t RACK-in-a-box -s style.css RACK.wiki/Welcome.md > index.html
+        mv documentation.html index.html RACK/rack-box/files
 
     # Skip since windows-latest doesn't support nested virtualization yet
     - name: Enable Hyper-V

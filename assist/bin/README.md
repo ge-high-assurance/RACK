@@ -7,7 +7,7 @@ the ontology.
 NOTE: For the following commands to work, you will want to have
 generated some data for them to use.  For instance, to get the
 "TurnstileSystem" data generated, you can prepend
-`RACK-Ontology/databin` to your `PATH` and then run `make` on the
+`assist/databin` to your `PATH` and then run `make` on the
 `Makefile` in the `Turnstile-Ontology/02-Software/03-Implementation`
 directory.  The `databin` provides instrumented tools like `gcc` that
 record build-related data during the build.

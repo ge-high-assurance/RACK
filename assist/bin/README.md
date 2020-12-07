@@ -51,7 +51,7 @@ Prolog modules in this directory:
    ```
 
    The above would ingest all build/test datafiles generated during
-   the build process in the `models/TurnstileSystem/src` directory.
+   the build process in the `Turnstile-Ontology/02-Software/03-Implementation` directory.
    The results would be loaded into the RACK database being served at
    `http://localhost:3030` as instance data in the
    `http://TurnstileSystem/CounterApplication` namespace.

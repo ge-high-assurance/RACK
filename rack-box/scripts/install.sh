@@ -35,7 +35,7 @@ fi
 mkdir -p "/home/${USER}"
 tar xfzC fuseki.tar.gz /opt
 rm fuseki.tar.gz
-mv /opt/apache-jena-fuseki-3.16.0 /opt/fuseki
+mv /opt/apache-jena-fuseki-* /opt/fuseki
 tar xfzC rack.tar.gz "/home/${USER}"
 rm rack.tar.gz
 tar xfzC rack-cli.tar.gz "/home/${USER}"

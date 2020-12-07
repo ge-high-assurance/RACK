@@ -27,8 +27,7 @@ variables explicitly in your packer build command like this:
 You will need to copy the following files into the `files`
 subdirectory before building your rack-box images:
 
-- `files/fuseki.tar.gz`: latest Fuseki release (download
-  `apache-jena-fuseki-3.16.0.tar.gz` from
+- `files/fuseki.tar.gz`: latest Fuseki release (download tarball from
   <https://jena.apache.org/download/> and rename it)
 
 - `files/rack-cli.tar.gz`: A binary distribution of the RACK CLI, see
@@ -50,9 +49,9 @@ subdirectory before building your rack-box images:
   [markdown-to-html](https://github.com/cwjohan/markdown-to-html), and
   copy `index.html`)
 
-- `files/semtk.tar.gz`: A binary distribution of SemTK (download
-  `semtk-opensource-v2.3.0-20201202-dist.tar.gz` or later from
-  <https://github.com/ge-semtk/semtk/releases> and rename it)
+- `files/semtk.tar.gz`: latest SemTK binary distribution (download
+  tarball from <https://github.com/ge-semtk/semtk/releases> and rename
+  it)
 
 - `files/style.css`: stylesheet for index.html (visit
   [markdown-to-html-github-style](https://github.com/KrauseFx/markdown-to-html-github-style)

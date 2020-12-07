@@ -107,29 +107,21 @@ jobs:
         path: RACK/rack-box/files
         key: files-${{ github.sha }}
 
-    - name: Cache Fuseki distribution
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/cache@v2
-      id: cache-fuseki
-      with:
-        path: RACK/rack-box/files/fuseki.tar.gz
-        key: fuseki-3.16.0
-
     - name: Download Fuseki distribution
-      if: steps.cache-files.outputs.cache-hit != 'true' && steps.cache-fuseki.outputs.cache-hit != 'true'
-      run: curl -LSs https://apache.claz.org/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
+      if: steps.cache-files.outputs.cache-hit != 'true'
+      run: curl -LSfs https://downloads.apache.org/jena/binaries/apache-jena-fuseki-3.17.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
 
     - name: Download SemTK distribution
       if: steps.cache-files.outputs.cache-hit != 'true'
-      run: curl -LSs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20201202/semtk-opensource-v2.3.0-20201202-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+      run: curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20201202/semtk-opensource-v2.3.0-20201202-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
 
     - name: Download style spreadsheet
       if: steps.cache-files.outputs.cache-hit != 'true'
-      run: curl -LSs https://github.com/KrauseFx/markdown-to-html-github-style/raw/master/style.css -o RACK/rack-box/files/style.css
+      run: curl -LSfs https://github.com/KrauseFx/markdown-to-html-github-style/raw/master/style.css -o RACK/rack-box/files/style.css
 
     - name: Download systemctl script
       if: steps.cache-files.outputs.cache-hit != 'true'
-      run: curl -LSs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4260/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
+      run: curl -LSfs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4260/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
 
     - name: Package RACK CLI
       if: steps.cache-files.outputs.cache-hit != 'true'
@@ -210,7 +202,7 @@ jobs:
           ln -s $(realpath $f) /tmp/files/$(basename $f)
         done
         python3 -m pip install --upgrade pip setuptools wheel
-        sudo bash -x RACK/rack-box/scripts/install.sh $USER
+        sudo bash RACK/rack-box/scripts/install.sh $USER
 
     - name: Run rack-box tests
       run: |

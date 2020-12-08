@@ -16,6 +16,9 @@
 
 this_is_paths. % marker for obtaining the path to this file
 
+% paths_dir returns the directory where this file (paths.pl) exists.
+% It can be used as a relative basis for referring to other locations
+% in the RACK data tree.
 paths_dir(Dir) :- source_file(this_is_paths, DirAndFile), file_directory_name(DirAndFile, Dir).
 
 user:file_search_path(checks, P) :- paths_dir(D), directory_file_path(D, 'checks', P).

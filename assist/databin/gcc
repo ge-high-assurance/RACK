@@ -55,7 +55,7 @@ if [ -z "${inf}" ] ; then
 fi
 
 # shellcheck disable=SC2128
-outf="${outf:-$(basename "$inf" .c).o}"
+outf="${outf:-$(basename "$inf" | sed -e "s/\.[^.]*$/.o/")}"
 if [ -z "${inclf}" ] ; then
     # shellcheck disable=SC2128
     inclf="$(dirname "${inf}")/.$(basename "${inf}" .c).d"

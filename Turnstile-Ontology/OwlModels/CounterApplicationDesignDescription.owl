@@ -9,9 +9,8 @@
     xmlns:j.2="http://arcos.rack/REQUIREMENTS#"
     xmlns:cntrappllr="http://Turnstile/CounterApplicationDesignDescription#"
     xmlns:trnstldpd="http://Turnstile/DevelopmentPlanData#"
-    xmlns:j.3="http://arcos.rack/SOFTWARE#"
-    xmlns:j.4="http://arcos.rack/PROV-S#"
-    xmlns:j.5="http://arcos.rack/SYSTEM#"
+    xmlns:j.3="http://arcos.rack/PROV-S#"
+    xmlns:j.4="http://arcos.rack/SYSTEM#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:cntrapprq="http://Turnstile/CounterApplicationRequirementSpec#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
@@ -27,36 +26,36 @@
   <j.1:DataAndControlCouple rdf:ID="DCC-6">
     <j.2:createdBy>
       <j.1:SoftwareDesign rdf:ID="LlrDev1">
-        <j.3:referenced rdf:resource="DevelopmentPlanData#SoftwareStandard"/>
+        <j.2:referenced rdf:resource="DevelopmentPlanData#SoftwareStandard"/>
         <j.2:author>
           <j.1:Engineer rdf:ID="JaneDoe">
             <j.0:employedBy rdf:resource="DevelopmentPlanData#General_Electric"/>
             <j.0:emailAddress>jane.doe@ge.com</j.0:emailAddress>
             <j.0:name>Doe, Jane</j.0:name>
-            <j.4:identifier>2125895152</j.4:identifier>
+            <j.3:identifier>2125895152</j.3:identifier>
           </j.1:Engineer>
         </j.2:author>
-        <j.4:identifier>LlrDev1</j.4:identifier>
+        <j.3:identifier>LlrDev1</j.3:identifier>
       </j.1:SoftwareDesign>
     </j.2:createdBy>
     <j.2:providedBy>
       <j.1:LowLevelRequirement rdf:ID="IN-LLR-6">
         <j.2:createdBy rdf:resource="#LlrDev1"/>
         <j.2:governs>
-          <j.5:SYSTEM rdf:about="DevelopmentPlanData#InputThread">
-            <j.5:producedBy>
+          <j.1:SoftwareThread rdf:about="DevelopmentPlanData#InputThread">
+            <j.4:producedBy>
               <j.1:SoftwareDesign rdf:ID="SwDesign">
-                <j.3:referenced rdf:resource="DevelopmentPlanData#SoftwareStandard"/>
+                <j.2:referenced rdf:resource="DevelopmentPlanData#SoftwareStandard"/>
                 <j.2:author rdf:resource="#JaneDoe"/>
-                <j.4:identifier>SwDesign</j.4:identifier>
+                <j.3:identifier>SwDesign</j.3:identifier>
               </j.1:SoftwareDesign>
-            </j.5:producedBy>
-            <j.5:partOf rdf:resource="DevelopmentPlanData#CounterApplication"/>
-            <j.4:identifier>InputThread</j.4:identifier>
-          </j.5:SYSTEM>
+            </j.4:producedBy>
+            <j.4:partOf rdf:resource="DevelopmentPlanData#CounterApplication"/>
+            <j.3:identifier>InputThread</j.3:identifier>
+          </j.1:SoftwareThread>
         </j.2:governs>
         <j.2:text>Input Thread shall print 'Limit Exceeded'' to the console when a valid UDP message is received and the park_count range is exceed.</j.2:text>
-        <j.4:identifier>IN-LLR-6</j.4:identifier>
+        <j.3:identifier>IN-LLR-6</j.3:identifier>
       </j.1:LowLevelRequirement>
     </j.2:providedBy>
     <j.2:providedBy>
@@ -64,25 +63,25 @@
         <j.2:createdBy rdf:resource="#LlrDev1"/>
         <j.2:governs rdf:resource="DevelopmentPlanData#InputThread"/>
         <j.2:text>Input Thread shall print 'Invalid Message' to the console when a invalid UDP message is received.</j.2:text>
-        <j.4:identifier>IN-LLR-5</j.4:identifier>
+        <j.3:identifier>IN-LLR-5</j.3:identifier>
       </j.1:LowLevelRequirement>
     </j.2:providedBy>
     <j.2:providedBy>
       <j.1:LowLevelRequirement rdf:ID="EXE-LLR-3">
         <j.2:createdBy rdf:resource="#LlrDev1"/>
         <j.2:governs>
-          <j.5:SYSTEM rdf:about="DevelopmentPlanData#ExecutiveThread">
-            <j.5:producedBy rdf:resource="#SwDesign"/>
-            <j.5:partOf rdf:resource="DevelopmentPlanData#CounterApplication"/>
-            <j.4:identifier>ExecutiveThread</j.4:identifier>
-          </j.5:SYSTEM>
+          <j.1:SoftwareThread rdf:about="DevelopmentPlanData#ExecutiveThread">
+            <j.4:producedBy rdf:resource="#SwDesign"/>
+            <j.4:partOf rdf:resource="DevelopmentPlanData#CounterApplication"/>
+            <j.3:identifier>ExecutiveThread</j.3:identifier>
+          </j.1:SoftwareThread>
         </j.2:governs>
         <j.2:text>Executive shall print a single '.' character to the console every second when running.</j.2:text>
-        <j.4:identifier>EXE-LLR-3</j.4:identifier>
+        <j.3:identifier>EXE-LLR-3</j.3:identifier>
       </j.1:LowLevelRequirement>
     </j.2:providedBy>
     <j.2:text>console</j.2:text>
-    <j.4:identifier>DCC-6</j.4:identifier>
+    <j.3:identifier>DCC-6</j.3:identifier>
   </j.1:DataAndControlCouple>
   <j.1:DataAndControlCouple rdf:ID="DCC-5">
     <j.2:createdBy rdf:resource="#LlrDev1"/>
@@ -90,19 +89,19 @@
       <j.1:LowLevelRequirement rdf:ID="OUT-LLR-2">
         <j.2:createdBy rdf:resource="#LlrDev1"/>
         <j.2:governs>
-          <j.5:SYSTEM rdf:about="DevelopmentPlanData#OutputThread">
-            <j.5:producedBy rdf:resource="#SwDesign"/>
-            <j.5:partOf rdf:resource="DevelopmentPlanData#CounterApplication"/>
-            <j.4:identifier>OutputThread</j.4:identifier>
-          </j.5:SYSTEM>
+          <j.1:SoftwareThread rdf:about="DevelopmentPlanData#OutputThread">
+            <j.4:producedBy rdf:resource="#SwDesign"/>
+            <j.4:partOf rdf:resource="DevelopmentPlanData#CounterApplication"/>
+            <j.3:identifier>OutputThread</j.3:identifier>
+          </j.1:SoftwareThread>
         </j.2:governs>
         <j.2:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-3"/>
         <j.2:text>Output Thread shall broadcast a UDP message on port 62001 with the park_count every second.</j.2:text>
-        <j.4:identifier>OUT-LLR-2</j.4:identifier>
+        <j.3:identifier>OUT-LLR-2</j.3:identifier>
       </j.1:LowLevelRequirement>
     </j.2:providedBy>
     <j.2:text>outgoing UDP message</j.2:text>
-    <j.4:identifier>DCC-5</j.4:identifier>
+    <j.3:identifier>DCC-5</j.3:identifier>
   </j.1:DataAndControlCouple>
   <j.1:DataAndControlCouple rdf:ID="DCC-4">
     <j.2:createdBy rdf:resource="#LlrDev1"/>
@@ -113,7 +112,7 @@
         <j.2:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-2"/>
         <j.2:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
         <j.2:text>Input Thread shall add the delta value received by the UDP to the park_count and send the updated park_count to the Output Thread when a valid UDP message is received and the park_count range is not exceed.</j.2:text>
-        <j.4:identifier>IN-LLR-3</j.4:identifier>
+        <j.3:identifier>IN-LLR-3</j.3:identifier>
       </j.1:LowLevelRequirement>
     </j.2:providedBy>
     <j.2:providedBy>
@@ -121,12 +120,12 @@
         <j.2:createdBy rdf:resource="#LlrDev1"/>
         <j.2:governs rdf:resource="DevelopmentPlanData#OutputThread"/>
         <j.2:text>Output Thread shall initialize the park_count to 0 on powerup.</j.2:text>
-        <j.4:identifier>OUT-LLR-1</j.4:identifier>
+        <j.3:identifier>OUT-LLR-1</j.3:identifier>
       </j.1:LowLevelRequirement>
     </j.2:providedBy>
     <j.2:consumedBy rdf:resource="#OUT-LLR-2"/>
     <j.2:text>output_park_count</j.2:text>
-    <j.4:identifier>DCC-4</j.4:identifier>
+    <j.3:identifier>DCC-4</j.3:identifier>
   </j.1:DataAndControlCouple>
   <j.1:DataAndControlCouple rdf:ID="DCC-3">
     <j.2:providedBy>
@@ -134,7 +133,7 @@
         <j.2:createdBy rdf:resource="#LlrDev1"/>
         <j.2:governs rdf:resource="DevelopmentPlanData#InputThread"/>
         <j.2:text>Input Thread shall initialize the park_count to 0 on powerup.</j.2:text>
-        <j.4:identifier>IN-LLR-1</j.4:identifier>
+        <j.3:identifier>IN-LLR-1</j.3:identifier>
       </j.1:LowLevelRequirement>
     </j.2:providedBy>
     <j.2:providedBy>
@@ -142,7 +141,7 @@
         <j.2:createdBy rdf:resource="#LlrDev1"/>
         <j.2:governs rdf:resource="DevelopmentPlanData#InputThread"/>
         <j.2:text>Input Thread shall limit park_count to between 0 and 1500.</j.2:text>
-        <j.4:identifier>IN-LLR-4</j.4:identifier>
+        <j.3:identifier>IN-LLR-4</j.3:identifier>
       </j.1:LowLevelRequirement>
     </j.2:providedBy>
     <j.2:consumedBy rdf:resource="#IN-LLR-4"/>
@@ -153,11 +152,11 @@
         <j.2:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-2"/>
         <j.2:satisfies rdf:resource="CounterApplicationRequirementSpec#HLR-1"/>
         <j.2:text>Input Thread shall check for a incoming UDP message on port 62000.</j.2:text>
-        <j.4:identifier>IN-LLR-2</j.4:identifier>
+        <j.3:identifier>IN-LLR-2</j.3:identifier>
       </j.1:LowLevelRequirement>
     </j.2:consumedBy>
     <j.2:createdBy rdf:resource="#LlrDev1"/>
-    <j.4:identifier>DCC-3</j.4:identifier>
+    <j.3:identifier>DCC-3</j.3:identifier>
     <j.2:consumedBy rdf:resource="#IN-LLR-5"/>
     <j.2:consumedBy rdf:resource="#IN-LLR-3"/>
     <j.2:consumedBy rdf:resource="#IN-LLR-6"/>
@@ -170,7 +169,7 @@
     <j.2:consumedBy rdf:resource="#IN-LLR-3"/>
     <j.2:consumedBy rdf:resource="#IN-LLR-2"/>
     <j.2:text>incoming UDP message</j.2:text>
-    <j.4:identifier>DCC-2</j.4:identifier>
+    <j.3:identifier>DCC-2</j.3:identifier>
   </j.1:DataAndControlCouple>
   <j.1:DataAndControlCouple rdf:ID="DCC-1">
     <j.2:createdBy rdf:resource="#LlrDev1"/>
@@ -181,7 +180,7 @@
         <j.2:createdBy rdf:resource="#LlrDev1"/>
         <j.2:governs rdf:resource="DevelopmentPlanData#ExecutiveThread"/>
         <j.2:text>Executive shall spawn Output Thread on powerup.</j.2:text>
-        <j.4:identifier>EXE-LLR-2</j.4:identifier>
+        <j.3:identifier>EXE-LLR-2</j.3:identifier>
       </j.1:LowLevelRequirement>
     </j.2:consumedBy>
     <j.2:consumedBy>
@@ -189,10 +188,10 @@
         <j.2:createdBy rdf:resource="#LlrDev1"/>
         <j.2:governs rdf:resource="DevelopmentPlanData#ExecutiveThread"/>
         <j.2:text>Executive shall spawn Input Thread on powerup.</j.2:text>
-        <j.4:identifier>EXE-LLR-1</j.4:identifier>
+        <j.3:identifier>EXE-LLR-1</j.3:identifier>
       </j.1:LowLevelRequirement>
     </j.2:consumedBy>
     <j.2:text>PowerUp</j.2:text>
-    <j.4:identifier>DCC-1</j.4:identifier>
+    <j.3:identifier>DCC-1</j.3:identifier>
   </j.1:DataAndControlCouple>
 </rdf:RDF>

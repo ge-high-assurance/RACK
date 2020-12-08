@@ -22,27 +22,27 @@ JaneDoe is a Engineer
 LlrDev1 is a SoftwareDesign
 	has identifier "LlrDev1"
 	has Rq:author JaneDoe
-	has referenced SoftwareStandard.
+	has Rq:referenced SoftwareStandard.
 
 
 SwDesign is a SoftwareDesign
 	has identifier "SwDesign"
 	has Rq:author JaneDoe
-	has referenced SoftwareStandard.
+	has Rq:referenced SoftwareStandard.
 	
 
 
-	InputThread is a SYSTEM
+	InputThread is a SoftwareThread
 	    has identifier "InputThread",
 		has partOf CounterApplication,
 		has sys:producedBy SwDesign.
 	
-	OutputThread is a SYSTEM
+	OutputThread is a SoftwareThread
 	    has identifier "OutputThread",
 		has partOf CounterApplication,
 		has sys:producedBy SwDesign.
 	
-	ExecutiveThread is a SYSTEM
+	ExecutiveThread is a SoftwareThread
 	    has identifier "ExecutiveThread",
 		has partOf CounterApplication,
 		has sys:producedBy SwDesign.

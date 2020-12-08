@@ -3,7 +3,7 @@
 # Exit if anything goes wrong
 
 set -eo pipefail
-export USER=ubuntu
+export USER=${1:-ubuntu}
 cd /tmp/files
 
 # Execute this part of the script only if we're building a Docker image
@@ -26,22 +26,23 @@ if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
 
     # Create user
 
-    adduser --disabled-password --gecos '' $USER
+    adduser --disabled-password --gecos '' "${USER}"
 
 fi
 
 # Unpack Fuseki, RACK, and SemTK distributions
 
+mkdir -p "/home/${USER}"
 tar xfzC fuseki.tar.gz /opt
 rm fuseki.tar.gz
-mv /opt/apache-jena-fuseki-3.16.0 /opt/fuseki
-tar xfzC rack.tar.gz /home/${USER}
+mv /opt/apache-jena-fuseki-* /opt/fuseki
+tar xfzC rack.tar.gz "/home/${USER}"
 rm rack.tar.gz
-tar xfzC rack-cli.tar.gz /home/${USER}
+tar xfzC rack-cli.tar.gz "/home/${USER}"
 rm rack-cli.tar.gz
-tar xfzC semtk.tar.gz /home/${USER}
+tar xfzC semtk.tar.gz "/home/${USER}"
 rm semtk.tar.gz
-mv ENV_OVERRIDE /home/${USER}/semtk-opensource
+mv ENV_OVERRIDE "/home/${USER}/semtk-opensource"
 
 # Set up and start Fuseki system service
 
@@ -54,7 +55,7 @@ systemctl start fuseki
 
 # Initialize SemTK environment variables
 
-cd /home/${USER}/semtk-opensource
+cd "/home/${USER}/semtk-opensource"
 chmod 755 ./*.sh
 export SERVER_ADDRESS=localhost
 export SERVICE_HOST=localhost
@@ -76,13 +77,14 @@ done
 # Install the RACK landing page and SemTK webapps
 
 export WEBAPPS=/var/www/html
-./updateWebapps.sh ${WEBAPPS}
-mv /tmp/files/{documentation.html,index.html,style.css} ${WEBAPPS}
+mkdir -p "${WEBAPPS}"
+./updateWebapps.sh "${WEBAPPS}"
+mv /tmp/files/{documentation.html,index.html,style.css} "${WEBAPPS}"
 
 # Change file ownerships since all SemTK code runs as non-root ${USER}
 
-chown -R ${USER}.${USER} /home/${USER}
-chown -R ${USER}.${USER} ${WEBAPPS}
+chown -R "${USER}.${USER}" "/home/${USER}"
+chown -R "${USER}.${USER}" "${WEBAPPS}"
 
 # Wait for Fuseki to become ready
 
@@ -130,6 +132,6 @@ done
 
 # Setup the RACK dataset using the RACK CLI
 
-cd /home/${USER}/RACK/cli/
+cd "/home/${USER}/RACK/cli/"
 python3 -m pip install ./wheels/*.whl
 ./setup-rack.sh

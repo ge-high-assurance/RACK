@@ -10,7 +10,6 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
  uri "http://Turnstile/CounterApplicationTesting" alias cntrapptst.
-import "http://Turnstile/DevelopmentPlan".
 import "http://Turnstile/CounterApplicationRequirementSpec".
 
 
@@ -40,7 +39,7 @@ TC-1-3 is a SoftwareComponentTest
 TC-1-4 is a SoftwareComponentTest
 	has identifier "TC-1-4",
 	has verifies HLR-1
-	has producedBy CompTestDevelopment.
+	has tst:producedBy CompTestDevelopment.
 	
 	
 TR-1-1-1 is a SoftwareComponentTestResult

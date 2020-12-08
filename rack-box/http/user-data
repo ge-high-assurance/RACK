@@ -18,6 +18,7 @@ autoinstall:
     - linux-cloud-tools-virtual
     - nginx-light
     - python3
+    - python3-pip
     - unzip
   late-commands:
     - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu

@@ -40,6 +40,14 @@ pip install --force -r requirements.txt
 python3 setup.py install
 ```
 
+If running on Windows, GitBash can be used with the following commands.
+```shell
+virtualenv venv
+source venv/Scripts/activate
+pip install --force -r requirements.txt
+python setup.py install
+```
+
 ## Initialize RACK-in-a-Box
 
 We have written a shell script called `setup-rack.sh` which will call

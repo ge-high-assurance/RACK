@@ -17,11 +17,11 @@
     
 >>>Prop Notes...
 
->**SYSTEM** : SYSTEM
+>**SoftwareThread** : SoftwareThread
 
 >>Node Notes...
 
->>**identifier_SYSTEM** : string
+>>**identifier_SoftwareThread** : string
     
 >>>Prop Notes...
 
@@ -49,7 +49,7 @@
 
 >**LowLevelRequirement** - createdBy -> **SoftwareDesign**
 
->**LowLevelRequirement** - governs -> **SYSTEM**
+>**LowLevelRequirement** - governs -> **SoftwareThread**
 
 >**LowLevelRequirement** - mitigates -> **HAZARD**
 
@@ -61,7 +61,7 @@ Column Name | Description |Optional
 ------------|-------------|---
 identifier_HighLevelRequirement| primaryKey Key for HighLevelRequirement | Yes
 identifier_HAZARD| primaryKey Key for HAZARD | Yes
-identifier_SYSTEM| primaryKey Key for SYSTEM | Yes
+identifier_SoftwareThread| primaryKey Key for SoftwareThread | Yes
 identifier_SoftwareDesign| primaryKey Key for SoftwareDesign | Yes
 identifier_LowLevelRequirement| primaryKey Key for LowLevelRequirement | No
 text_LowLevelRequirement| | Yes

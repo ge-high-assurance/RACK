@@ -6,10 +6,11 @@ the ontology.
 
 NOTE: For the following commands to work, you will want to have
 generated some data for them to use.  For instance, to get the
-"TurnstileSystem" data generated, you can run `make` on the `Makefile`
-in `RACK-Ontology/models/TurnstileSystem/src` while prepending
-`RACK-Ontology/databin` to your `PATH`.  This will ensure that the
-script uses the instrumented `gcc` that records data.
+"TurnstileSystem" data generated, you can prepend
+`assist/databin` to your `PATH` and then run `make` on the
+`Makefile` in the `Turnstile-Ontology/02-Software/03-Implementation`
+directory.  The `databin` provides instrumented tools like `gcc` that
+record build-related data during the build.
 
 There are a number of command-line utilities that can be used with the
 Prolog modules in this directory:
@@ -50,7 +51,7 @@ Prolog modules in this directory:
    ```
 
    The above would ingest all build/test datafiles generated during
-   the build process in the `models/TurnstileSystem/src` directory.
+   the build process in the `Turnstile-Ontology/02-Software/03-Implementation` directory.
    The results would be loaded into the RACK database being served at
    `http://localhost:3030` as instance data in the
    `http://TurnstileSystem/CounterApplication` namespace.
@@ -112,10 +113,10 @@ This command should set up a local pldoc webserver instance listening at
 
 In order to load `rack_model.pl`, you will need a Prolog interpreter.  One such
 interpreter is the SWI Prolog implementation.  You can use it to load the module
-in a read-eval print loop (REPL) by doing:
+in a read-eval print loop (REPL) by running, from the `RACK/` folder:
 
 ```shell
-swipl -s rack_model.pl
+swipl -s ./assist/bin/rack/model.pl
 ```
 
 ## Manipulating models
@@ -125,16 +126,31 @@ swipl -s rack_model.pl
 You may load a model in memory using one of the three following forms:
 
 ```prolog
-load_local_model('../ontology/OwlModels').
-load_model_from_url('http://192.168.0.32:3030/RACK/').
+load_local_model('./Turnstile-Ontology/OwlModels').
+```
+
+The local form takes as argument a path to a directory containing OWL files
+to load.
+
+NOTE: The path in this example may not correspond to the path on your
+machine, please adapt the command accordingly.
+
+---
+
+```prolog
+load_model_from_url('http://192.168.0.32:3030/').
+```
+
+This form expects to find a Fuseki instance.
+NOTE: currently you should make sure to include the final '/'.
+
+---
+
+```prolog
 load_model_from_rack().
 ```
 
-The local form takes as argument a path to a directory containing OWL files to load.
-
-The URL form expects to find a Fuseki instance.
-
-The Rack form expects to find a Fuseki instance living at `localhost:3030/RACK`,
+This form expects to find a Fuseki instance living at `localhost:3030/RACK`,
 which can easily be obtained for testing by running:
 
 ```shell
@@ -147,6 +163,11 @@ There are two forms for saving the model in memory to a local file:
 
 ```prolog
 save_model_to_file('path/to/filename.owl').
+```
+
+---
+
+```prolog
 save_model_to_file('path/to/filename.owl', 'SomeNamespace').
 ```
 
@@ -158,13 +179,18 @@ specification of a namespace for the triples.
 There are two forms for uploading the model in memory to a Fuseki instance:
 
 ```prolog
-upload_model_to_url('http://192.168.0.32:3030/RACK').
+upload_model_to_url('http://192.168.0.32:3030/').
+```
+
+---
+
+```prolog
 upload_model_to_rack().
 ```
 
-As for loading, the `upload_model_to_url/1` expects to find a Fuseki instance at
-that location, while `upload_model_to_rack/0` expects the instance to live at
-`localhost:3030/RACK`.
+Like in the loading case, the `upload_model_to_url/1` expects to find a
+Fuseki instance at that location, while `upload_model_to_rack/0` expects the
+instance to live at `localhost:3030/RACK`.
 
 # Design Notes
 

@@ -61,34 +61,6 @@
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?identifier_0",
-						"isReturned": true,
-						"optMinus": 0,
-						"isRuntimeConstrained": false,
-						"instanceValues": [],
-						"isMarkedForDeletion": false
-					}
-				],
-				"nodeList": [],
-				"NodeName": "DATA_DICTIONARY_TERM",
-				"fullURIName": "http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM",
-				"subClassNames": [],
-				"SparqlID": "?DATA_DICTIONARY_TERM_part",
-				"isReturned": false,
-				"isRuntimeConstrained": false,
-				"valueConstraint": "",
-				"instanceValue": null,
-				"deletionMode": "NO_DELETE"
-			},
-			{
-				"propList": [
-					{
-						"KeyName": "identifier",
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
-						"Constraints": "",
-						"fullURIName": "",
 						"SparqlID": "?identifier_3",
 						"isReturned": true,
 						"optMinus": 0,
@@ -224,26 +196,6 @@
 					},
 					{
 						"SnodeSparqlIDs": [
-							"?DATA_DICTIONARY_TERM_part"
-						],
-						"OptionalMinus": [
-							"1"
-						],
-						"Qualifiers": [
-							""
-						],
-						"DeletionMarkers": [
-							false
-						],
-						"KeyName": "part",
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-						"ConnectBy": "part",
-						"Connected": true,
-						"UriConnectBy": "http://arcos.rack/REQUIREMENTS#part"
-					},
-					{
-						"SnodeSparqlIDs": [
 							"?REQUIREMENT_provided"
 						],
 						"OptionalMinus": [
@@ -303,10 +255,6 @@
 			{
 				"colId": "col_5",
 				"colName": "providedBy"
-			},
-			{
-				"colId": "col_6",
-				"colName": "part"
 			}
 		],
 		"dataValidator": [],
@@ -381,25 +329,6 @@
 						"mapping": [
 							{
 								"colId": "col_1"
-							}
-						]
-					}
-				]
-			},
-			{
-				"sparqlID": "?DATA_DICTIONARY_TERM_part",
-				"type": "http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM",
-				"URILookupMode": "createIfMissing",
-				"mapping": [],
-				"props": [
-					{
-						"URIRelation": "http://arcos.rack/PROV-S#identifier",
-						"URILookup": [
-							"?DATA_DICTIONARY_TERM_part"
-						],
-						"mapping": [
-							{
-								"colId": "col_6"
 							}
 						]
 					}

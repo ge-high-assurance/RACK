@@ -19,6 +19,7 @@ import json
 import uuid
 from ExtractRackData import createCSV
 import subprocess
+import os
 
 class DocTree(Frame):
 
@@ -163,6 +164,8 @@ class DocTree(Frame):
                 sadlFile.write(self.createSadlString(a))
     def loadToRACK(self, event=None):
         Logger.write("DocTree.loadToRACK")
+        if not os.path.exists("./Temp"):
+            os.makedirs("./Temp")
         xmlFileName ="./Temp/RACK-DATA.xml" 
         Logger.write("Writing to xml File to :", xmlFileName)
         with open(xmlFileName, "w") as xmlFile:

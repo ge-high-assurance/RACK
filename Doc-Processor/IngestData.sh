@@ -12,5 +12,5 @@ then
     echo "rack cli tool not found in PATH"
     exit 1
 fi
-
-rack data import --clear $BASEDIR/Model.yaml
+pwd
+rack data import --clear ../Doc-Processor/Model.yaml

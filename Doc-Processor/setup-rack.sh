@@ -1,5 +1,8 @@
 #!/bin/bash
-cd /home/ubuntu/RACK/cli
+BASEDIR=$(dirname "$0")
+echo "$BASEDIR"
+
+cd $BASEDIR/../cli
 source venv/bin/activate
 set -eu
 
@@ -11,6 +14,6 @@ fi
 
 rack model import ../RACK-Ontology/OwlModels/import.yaml
 
-rack nodegroups import ../Doc-Processor/nodegroups
+rack nodegroups import $BASEDIR/nodegroups
 
 

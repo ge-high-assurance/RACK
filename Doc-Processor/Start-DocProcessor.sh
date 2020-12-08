@@ -1,9 +1,9 @@
 #!/bin/bash
 
-
-/home/ubuntu/RACK/Doc-Processor/setup-rack.sh
 BASEDIR=$(dirname "$0")
 echo "$BASEDIR"
+$BASEDIR/setup-rack.sh
+
 
 cd $BASEDIR
-python3 ./DocProcessor.py
+python3 $BASEDIR/DocProcessor.py

@@ -1,3 +1,15 @@
+#!/bin/python3.8
+# Copyright (c) 2020, General Electric Company, Galois, Inc.
+#
+# All Rights Reserved
+#
+# This material is based upon work supported by the Defense Advanced Research
+# Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+#
+# Any opinions, findings and conclusions or recommendations expressed in this
+# material are those of the author(s) and do not necessarily reflect the views
+# of the Defense Advanced Research Projects Agency (DARPA).
+
 from tkinter import ttk
 from tkinter import filedialog
 from tkinter import *
@@ -10,6 +22,7 @@ from DocText import *
 from DocTree import *
 import Logger
 import subprocess
+import ExtractRackData
 
 class DocProcessor:
     # Document
@@ -22,7 +35,8 @@ class DocProcessor:
     useOcr = None
     useOcrCheckbutton = None
 
-    openButton = None
+    openPdfButton = None
+    openTxtButton = None
 
     documentOutline =None
 
@@ -48,9 +62,33 @@ class DocProcessor:
             self.docTree.selectedText = [self.docPath.split("/")[-1]]
         
 
-            
+    def openTxtFile(self):
+        '''----------------------------------------------------------
+            handler for the open file button, launches a dialog
+            to get the file path for the txt the user wants to 
+            process then initializes the GUI based on that txt        
+        ----------------------------------------------------------'''
         
-    def openFile(self):
+        
+        
+        
+        Logger.write("DocProcessorGui.openPdfFile")
+        filePath = filedialog.askopenfilename(initialdir = "../",title="Select PDF file to open",\
+                                          filetypes=(("txt files","*.txt"),("all files","*.*")))
+
+        if filePath:
+            self.docPath = filePath 
+        
+            self.mainWindow.title("ARCOS DocProcessor - "+self.docPath)
+            
+            # Intialize Document
+            fileName = self.docPath.split("/")[-1]
+            self.docTree.initializeDoc(fileName)
+            self.docText.loadDocument(self.docPath, "TXT")
+        else:
+            Logger.write("No File Chosen")            
+        
+    def openPdfFile(self):
         '''----------------------------------------------------------
             handler for the open file button, launches a dialog
             to get the file path for the pdf the user wants to 
@@ -60,7 +98,7 @@ class DocProcessor:
         
         
         
-        Logger.write("DocProcessorGui.openFile")
+        Logger.write("DocProcessorGui.openPdfFile")
         filePath = filedialog.askopenfilename(initialdir = "../",title="Select PDF file to open",\
                                           filetypes=(("pdf files","*.pdf"),("all files","*.*")))
 
@@ -82,7 +120,7 @@ class DocProcessor:
             # Intialize Document
             fileName = self.docPath.split("/")[-1]
             self.docTree.initializeDoc(fileName)
-            self.docText.loadDocument(self.docPath)
+            self.docText.loadDocument(self.docPath, "PDF")
         else:
             Logger.write("No File Chosen")
 
@@ -103,9 +141,14 @@ class DocProcessor:
         self.mainWindow.columnconfigure(7,weight=1)
         self.mainWindow.rowconfigure(14,weight=1)
 
-        # openButton
-        self.openButton = Button(self.mainWindow, command = self.openFile, text="Open PDF")
-        self.openButton.grid(row = 1, column = 1,\
+        # openPdfButton
+        self.openPdfButton = Button(self.mainWindow, command = self.openPdfFile, text="Open PDF")
+        self.openPdfButton.grid(row = 1, column = 1,\
+                             columnspan= 1, rowspan = 1,\
+                             sticky="NSEW")
+        # openPdfButton
+        self.openTxtButtonButton = Button(self.mainWindow, command = self.openTxtFile, text="Open Txt")
+        self.openTxtButtonButton.grid(row = 1, column = 2,\
                              columnspan= 1, rowspan = 1,\
                              sticky="NSEW")
         # useOcrCheckbutton
@@ -115,7 +158,7 @@ class DocProcessor:
                                              variable = self.useOcr,\
                                              onvalue = 1,\
                                              offvalue = 0)
-        self.useOcrCheckbutton.grid(row = 1, column = 2,\
+        self.useOcrCheckbutton.grid(row = 1, column = 3,\
                              columnspan= 1, rowspan = 1,\
                              sticky="NSEW")
         # docTree

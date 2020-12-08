@@ -1,3 +1,15 @@
+#!/bin/python3.8
+# Copyright (c) 2020, General Electric Company, Galois, Inc.
+#
+# All Rights Reserved
+#
+# This material is based upon work supported by the Defense Advanced Research
+# Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+#
+# Any opinions, findings and conclusions or recommendations expressed in this
+# material are those of the author(s) and do not necessarily reflect the views
+# of the Defense Advanced Research Projects Agency (DARPA).
+
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
@@ -5,6 +17,8 @@ import NLUtils as nlu
 import Logger
 import json
 import uuid
+from ExtractRackData import createCSV
+import subprocess
 
 class DocTree(Frame):
 
@@ -69,7 +83,7 @@ class DocTree(Frame):
         self.DocTree.configure(yscrollcommand=self.scroll.set)
 
         #Export to SADL Button
-        Button(self, command = self.exportToSadl, text="Export To SADL")\
+        Button(self, command = self.loadToRACK, text="Load To RACK")\
                      .grid(row = 5, column = 1,\
                            columnspan= 3, rowspan = 1,\
                            sticky="NSEW")
@@ -147,7 +161,20 @@ class DocTree(Frame):
             for a in self.DocTree.get_children():
                 Logger.write(a, self.entityTypes[a])
                 sadlFile.write(self.createSadlString(a))
-    
+    def loadToRACK(self, event=None):
+        Logger.write("DocTree.loadToRACK")
+        xmlFileName ="./Temp/RACK-DATA.xml" 
+        Logger.write("Writing to xml File to :", xmlFileName)
+        with open(xmlFileName, "w") as xmlFile:
+            xmlFile.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+            xmlFile.write('<RACK-DATA>\n')
+            for a in self.DocTree.get_children():
+                Logger.write(a, self.entityTypes[a])
+                front, back = self.createXmlString(a)
+                xmlFile.write(back+front)
+            xmlFile.write('</RACK-DATA>\n')   
+        createCSV(xmlFileName)
+        subprocess.call(['bash', './IngestData.sh']) 
     def getChildEntities(self, child):
         temp = list()
         for i in self.DocTree.get_children(child):
@@ -243,7 +270,65 @@ class DocTree(Frame):
         for a in self.DocTree.get_children(item):
                 children.append(self.createDictionary(a))
         return {"ItemKey":item,"text":text, "entityType":entityType, "Children":children}
-                            
+    def createXmlString(self, item, string="", appendString=""):
+        Logger.write("DocTree.createXmlString")
+        entityTypeList = ["SECTION",
+                          "SYSTEM",
+                          "REQUIREMENT",
+                          "TEST",
+                          "TEST_RESULT",
+                          "OBJECTIVE","ACTIVITY"]
+        relationshipList  = ["satisfies" , 
+                             "satisfiedBy",  
+                             "verifiedBy", 
+                             "verifies", 
+                             "wasInformedBy",
+                             "confirmedBy", 
+                             "confirms"]
+        primaryRelationshipList  = ["satisfies" , 
+                                     "verifies", 
+                                     "wasInformedBy",
+                                     "confirms"]
+        InverseDictionary = {"satisfiedBy":"satisfies",
+                             "verifiedBy":"verifies",
+                             "confirmedBy":"confirms"}
+        indent = "    "
+        objectString = ""
+        if item in self.entityTypes:
+            objectString +='    <'+self.entityTypes[item].upper()+'>\n'
+            objectString +='        <identifier>'+self.entityTypes[item].upper()+"-"+item+'</identifier>\n'
+            
+            
+            string += objectString
+            string +='        <title>'+self.DocTree.item(item)["text"]+'</title>\n'
+            string +='    </'+self.entityTypes[item].upper()+'>\n'
+            
+            for c in self.DocTree.get_children(item):
+                if self.entityTypes[c].upper() in entityTypeList:
+                    appendString +=objectString
+                    appendString +='        <content>'+self.entityTypes[c]+"-"+c+'</content>\n'
+                    appendString +='    </'+self.entityTypes[item].upper()+'>\n'
+                    string, appendString = self.createXmlString(c, string, appendString)
+                
+                elif self.entityTypes[c] in relationshipList:
+                    for gc in self.DocTree.get_children(c):                    
+                        string, appendString = self.createXmlString(gc, string, appendString)
+                        if self.entityTypes[c] in primaryRelationshipList:
+                            string +=objectString
+                            string +='        <'+self.entityTypes[gc]+'>'+self.entityTypes[item].upper()+"-"+item+'</'+self.entityTypes[gc]+'>\n'
+                            string +='    </'+self.entityTypes[item].upper()+'>\n'
+                        else:
+
+                            string +='    <'+self.entityTypes[gc].upper()+'>\n'
+                            string +='        <identifier>'+self.entityTypes[gc].upper()+"-"+gc+'</identifier>\n'
+                            string +='        <'+InverseDictionary[self.entityTypes[c]]+'>'+self.entityTypes[item].upper()+"-"+item+'</'+InverseDictionary[self.entityTypes[c]]+'>\n'
+                            string +='    </'+self.entityTypes[gc].upper()+'>\n'
+                else:
+                    string +=objectString
+                    string +='        <'+self.entityTypes[c]+'>'+self.DocTree.item(c)["text"]+'</'+self.entityTypes[c]+'>\n'
+                    string +='    </'+self.entityTypes[item].upper()+'>\n'
+        return string, appendString  
+                               
     def createSadlString(self, item, indent = ""):
         Logger.write("DocTree.createSadlString")
         string = ""

@@ -1,0 +1,8 @@
+ID,comments,creator,jsonFile
+Ingest-REQUIREMENT,Node group to ingest REQUIREMENT data for the RACK-in-a-Box for STITCHES.,Doc-Processor,Ingest-REQUIREMENT.json
+Ingest-SYSTEM,Node group to ingest SYSTEM data for the RACK-in-a-Box for STITCHES.,Doc-Processor,Ingest-SYSTEM.json
+Ingest-INTERFACE,Node group to ingest INTERFACE data for the RACK-in-a-Box for STITCHES.,Doc-Processor,Ingest-INTERFACE.json
+Ingest-DATA_DICTIONARY_TERM,Node group to ingest DATA_DICTIONARY_TERM data for the RACK-in-a-Box for STITCHES.,Doc-Processor,Ingest-DATA_DICTIONARY_TERM.json
+Ingest-OBJECTIVE,Node group to ingest OBJECTIVE data for the RACK-in-a-Box for STITCHES.,Doc-Processor,Ingest-OBJECTIVE.json
+Ingest-SECTION_1,Node group to ingest SECTION_1 data for the RACK-in-a-Box for STITCHES.,Doc-Processor,Ingest-SECTION_1.json
+Ingest-SECTION_2,Node group to ingest SECTION_2 data for the RACK-in-a-Box for STITCHES.,Doc-Processor,Ingest-SECTION_2.json

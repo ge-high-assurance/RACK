@@ -1,0 +1,269 @@
+{
+	"version": 2,
+	"sparqlConn": {
+		"name": "RACK local fuseki",
+		"domain": "",
+		"enableOwlImports": true,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/data"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 11,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_0",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"NodeName": "SYSTEM_DEVELOPMENT",
+				"fullURIName": "http://arcos.rack/SYSTEM#SYSTEM_DEVELOPMENT",
+				"subClassNames": [],
+				"SparqlID": "?SYSTEM_DEVELOPMENT",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_1",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"NodeName": "SYSTEM",
+				"fullURIName": "http://arcos.rack/SYSTEM#SYSTEM",
+				"subClassNames": [],
+				"SparqlID": "?SYSTEM_0",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					},
+					{
+						"KeyName": "title",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#title",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?title",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [
+					{
+						"SnodeSparqlIDs": [
+							"?SYSTEM_0"
+						],
+						"OptionalMinus": [
+							"1"
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"KeyName": "partOf",
+						"ValueType": "ENTITY",
+						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"ConnectBy": "partOf",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/SYSTEM#partOf"
+					},
+					{
+						"SnodeSparqlIDs": [
+							"?SYSTEM_DEVELOPMENT"
+						],
+						"OptionalMinus": [
+							"1"
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"KeyName": "producedBy",
+						"ValueType": "ACTIVITY",
+						"UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
+						"ConnectBy": "producedBy",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/SYSTEM#producedBy"
+					}
+				],
+				"NodeName": "SYSTEM",
+				"fullURIName": "http://arcos.rack/SYSTEM#SYSTEM",
+				"subClassNames": [],
+				"SparqlID": "?SYSTEM",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			}
+		],
+		"orderBy": []
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [
+			{
+				"colId": "col_0",
+				"colName": "identifier"
+			},
+			{
+				"colId": "col_1",
+				"colName": "title"
+			},
+			{
+				"colId": "col_2",
+				"colName": "partOf"
+			},
+			{
+				"colId": "col_3",
+				"colName": "provides"
+			},
+			{
+				"colId": "col_4",
+				"colName": "requires"
+			},
+			{
+				"colId": "col_5",
+				"colName": "producedBy"
+			}
+		],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [],
+		"nodes": [
+			{
+				"sparqlID": "?SYSTEM",
+				"type": "http://arcos.rack/SYSTEM#SYSTEM",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?SYSTEM"
+						],
+						"mapping": [
+							{
+								"colId": "col_0"
+							}
+						]
+					},
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#title",
+						"mapping": [
+							{
+								"colId": "col_1"
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?SYSTEM_0",
+				"type": "http://arcos.rack/SYSTEM#SYSTEM",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?SYSTEM_0"
+						],
+						"mapping": [
+							{
+								"colId": "col_2"
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?SYSTEM_DEVELOPMENT",
+				"type": "http://arcos.rack/SYSTEM#SYSTEM_DEVELOPMENT",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?SYSTEM_DEVELOPMENT"
+						],
+						"mapping": [
+							{
+								"colId": "col_5"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

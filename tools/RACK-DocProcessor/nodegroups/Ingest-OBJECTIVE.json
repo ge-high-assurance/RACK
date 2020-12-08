@@ -1,0 +1,179 @@
+{
+	"version": 2,
+	"sparqlConn": {
+		"name": "RACK local fuseki",
+		"domain": "",
+		"enableOwlImports": true,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/data"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 11,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_0",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"NodeName": "ACTIVITY",
+				"fullURIName": "http://arcos.rack/PROV-S#ACTIVITY",
+				"subClassNames": [
+					"http://arcos.rack/SYSTEM#SYSTEM_DEVELOPMENT",
+					"http://arcos.rack/TESTING#TEST_DEVELOPMENT",
+					"http://arcos.rack/ANALYSIS#ANALYSIS",
+					"http://arcos.rack/TESTING#TEST_EXECUTION",
+					"http://arcos.rack/FILE#FILE_CREATION",
+					"http://arcos.rack/SOFTWARE#CODE_GEN",
+					"http://arcos.rack/SOFTWARE#COMPILE",
+					"http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT",
+					"http://arcos.rack/SOFTWARE#PACKAGE",
+					"http://arcos.rack/SOFTWARE#BUILD",
+					"http://arcos.rack/CONFIDENCE#ASSESSING_CONFIDENCE",
+					"http://arcos.rack/REVIEW#REVIEW",
+					"http://arcos.rack/HAZARD#HAZARD_IDENTIFICATION",
+					"http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"
+				],
+				"SparqlID": "?ACTIVITY",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [
+					{
+						"SnodeSparqlIDs": [
+							"?ACTIVITY"
+						],
+						"OptionalMinus": [
+							"0"
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"KeyName": "satisfiedBy",
+						"ValueType": "ACTIVITY",
+						"UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
+						"ConnectBy": "satisfiedBy",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/PROCESS#satisfiedBy"
+					}
+				],
+				"NodeName": "OBJECTIVE",
+				"fullURIName": "http://arcos.rack/PROCESS#OBJECTIVE",
+				"subClassNames": [],
+				"SparqlID": "?OBJECTIVE",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			}
+		],
+		"orderBy": []
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [
+			{
+				"colId": "col_0",
+				"colName": "identifier"
+			},
+			{
+				"colId": "col_1",
+				"colName": "satisfiedBy"
+			}
+		],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [],
+		"nodes": [
+			{
+				"sparqlID": "?OBJECTIVE",
+				"type": "http://arcos.rack/PROCESS#OBJECTIVE",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?OBJECTIVE"
+						],
+						"mapping": [
+							{
+								"colId": "col_0"
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?ACTIVITY",
+				"type": "http://arcos.rack/PROV-S#ACTIVITY",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?ACTIVITY"
+						],
+						"mapping": [
+							{
+								"colId": "col_1"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

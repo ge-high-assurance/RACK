@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=true
+Exec=/home/ubuntu/RACK/Doc-Processor/Start-DocProcessor.sh
+Name=Doc Processor
+Comment=RACK Document Processor
+Icon=/home/ubuntu/RACK/Doc-Processor/icon.png

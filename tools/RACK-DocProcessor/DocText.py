@@ -1,3 +1,15 @@
+#!/bin/python3.8
+# Copyright (c) 2020, General Electric Company, Galois, Inc.
+#
+# All Rights Reserved
+#
+# This material is based upon work supported by the Defense Advanced Research
+# Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+#
+# Any opinions, findings and conclusions or recommendations expressed in this
+# material are those of the author(s) and do not necessarily reflect the views
+# of the Defense Advanced Research Projects Agency (DARPA).
+
 from tkinter import *
 from tkinter import ttk
 import re
@@ -212,9 +224,12 @@ class DocText(Frame):
             self.currentMatch = -1
             self.searchValidation()
             self.highlightValidation()
-        else:
+        elif self.txtDoc!= None:
             self.currentPageEntry.delete(0,END)
-            self.setText("")
+            bigS = ""
+            for l in self.txtDoc:
+                bigS += l
+            self.setText(bigS)
 
     def nextPage(self,event=None):
         '''----------------------------------------------
@@ -238,17 +253,24 @@ class DocText(Frame):
         self.text.delete(1.0,END)
         self.text.insert(END, text)
         
-    def loadDocument(self, docPath):
+    def loadDocument(self, docPath, docType):
         '''----------------------------------------------
             takes a file path and processes it as a pdf to display
         ----------------------------------------------'''  
-        
-        with open(docPath, "rb") as f:
-            self.pdfDoc = pdftotext.PDF(f)
-        self.totalPageButtons['text'] = "/" + str(len(self.pdfDoc))
-        self.currentPage = 1
-        self.pageUpdate()
-        
+        self.docType = docType
+        if docType == "PDF":
+            with open(docPath, "rb") as f:
+                self.pdfDoc = pdftotext.PDF(f)
+                self.txtDoc = None
+            self.totalPageButtons['text'] = "/" + str(len(self.pdfDoc))
+            self.currentPage = 1
+            self.pageUpdate()
+        elif docType == "TXT":
+            self.currentPage = None
+            with open(docPath, "r") as f:
+                self.pdfDoc = None
+                self.txtDoc = f.readlines()
+            self.pageUpdate()
     
 if __name__ == '__main__':
     def addNewReqCallback(self, text):

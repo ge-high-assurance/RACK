@@ -1,0 +1,198 @@
+{
+	"version": 2,
+	"sparqlConn": {
+		"name": "RACK local fuseki",
+		"domain": "",
+		"enableOwlImports": true,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/data"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 11,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_0",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"NodeName": "ENTITY",
+				"fullURIName": "http://arcos.rack/PROV-S#ENTITY",
+				"subClassNames": [
+					"http://arcos.rack/SACM-S#ASSERTED_CONTEXT",
+					"http://arcos.rack/SACM-S#ARGUMENT_REASONING",
+					"http://arcos.rack/SYSTEM#SYSTEM",
+					"http://arcos.rack/PROCESS#OBJECTIVE",
+					"http://arcos.rack/SACM-S#CLAIM",
+					"http://arcos.rack/SYSTEM#INTERFACE",
+					"http://arcos.rack/ANALYSIS#ANALYSIS_ANNOTATION",
+					"http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM",
+					"http://arcos.rack/HAZARD#HAZARD",
+					"http://arcos.rack/PROV-S#COLLECTION",
+					"http://arcos.rack/DOCUMENT#DESCRIPTION",
+					"http://arcos.rack/DOCUMENT#SECTION",
+					"http://arcos.rack/DOCUMENT#SPECIFICATION",
+					"http://arcos.rack/DOCUMENT#REPORT",
+					"http://arcos.rack/DOCUMENT#REQUEST",
+					"http://arcos.rack/DOCUMENT#PLAN",
+					"http://arcos.rack/DOCUMENT#PROCEDURE",
+					"http://arcos.rack/SYSTEM#OP_PROCEDURE",
+					"http://arcos.rack/ANALYSIS#ANALYSIS_REPORT",
+					"http://arcos.rack/SACM-S#ARGUMENT_PACKAGE",
+					"http://arcos.rack/TESTING#TEST",
+					"http://arcos.rack/TESTING#TEST_RESULT",
+					"http://arcos.rack/REVIEW#REVIEW_LOG",
+					"http://arcos.rack/FILE#FILE",
+					"http://arcos.rack/SACM-S#ASSERTED_INFERENCE",
+					"http://arcos.rack/SOFTWARE#COMPONENT",
+					"http://arcos.rack/SACM-S#ARTIFACT_REFERENCE",
+					"http://arcos.rack/SYSTEM#FUNCTION",
+					"http://arcos.rack/REQUIREMENTS#REQUIREMENT"
+				],
+				"SparqlID": "?ENTITY",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [
+					{
+						"SnodeSparqlIDs": [
+							"?ENTITY"
+						],
+						"OptionalMinus": [
+							"1"
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"KeyName": "content",
+						"ValueType": "ENTITY",
+						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"ConnectBy": "content",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/PROV-S#content"
+					}
+				],
+				"NodeName": "SECTION",
+				"fullURIName": "http://arcos.rack/DOCUMENT#SECTION",
+				"subClassNames": [],
+				"SparqlID": "?SECTION",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			}
+		],
+		"orderBy": []
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [
+			{
+				"colId": "col_0",
+				"colName": "identifier"
+			},
+			{
+				"colId": "col_1",
+				"colName": "title"
+			},
+			{
+				"colId": "col_2",
+				"colName": "content"
+			}
+		],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [],
+		"nodes": [
+			{
+				"sparqlID": "?SECTION",
+				"type": "http://arcos.rack/DOCUMENT#SECTION",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?SECTION"
+						],
+						"mapping": [
+							{
+								"colId": "col_0"
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?ENTITY",
+				"type": "http://arcos.rack/PROV-S#ENTITY",
+				"URILookupMode": "noCreate",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?ENTITY"
+						],
+						"mapping": [
+							{
+								"colId": "col_2"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

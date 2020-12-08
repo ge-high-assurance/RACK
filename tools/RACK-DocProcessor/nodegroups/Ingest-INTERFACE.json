@@ -1,0 +1,261 @@
+{
+	"version": 2,
+	"sparqlConn": {
+		"name": "RACK local fuseki",
+		"domain": "",
+		"enableOwlImports": true,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/data"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 11,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_0",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"NodeName": "SYSTEM",
+				"fullURIName": "http://arcos.rack/SYSTEM#SYSTEM",
+				"subClassNames": [],
+				"SparqlID": "?SYSTEM_source",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_1",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"NodeName": "SYSTEM",
+				"fullURIName": "http://arcos.rack/SYSTEM#SYSTEM",
+				"subClassNames": [],
+				"SparqlID": "?SYSTEM_destination",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					},
+					{
+						"KeyName": "title",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#title",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?title",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [
+					{
+						"SnodeSparqlIDs": [
+							"?SYSTEM_destination"
+						],
+						"OptionalMinus": [
+							"1"
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"KeyName": "destination",
+						"ValueType": "ENTITY",
+						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"ConnectBy": "destination",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/SYSTEM#destination"
+					},
+					{
+						"SnodeSparqlIDs": [
+							"?SYSTEM_source"
+						],
+						"OptionalMinus": [
+							"1"
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"KeyName": "source",
+						"ValueType": "ENTITY",
+						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"ConnectBy": "source",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/SYSTEM#source"
+					}
+				],
+				"NodeName": "INTERFACE",
+				"fullURIName": "http://arcos.rack/SYSTEM#INTERFACE",
+				"subClassNames": [],
+				"SparqlID": "?INTERFACE",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			}
+		],
+		"orderBy": []
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [
+			{
+				"colId": "col_0",
+				"colName": "identifier"
+			},
+			{
+				"colId": "col_1",
+				"colName": "title"
+			},
+			{
+				"colId": "col_2",
+				"colName": "source"
+			},
+			{
+				"colId": "col_3",
+				"colName": "destination"
+			}
+		],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [],
+		"nodes": [
+			{
+				"sparqlID": "?INTERFACE",
+				"type": "http://arcos.rack/SYSTEM#INTERFACE",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?INTERFACE"
+						],
+						"mapping": [
+							{
+								"colId": "col_0"
+							}
+						]
+					},
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#title",
+						"mapping": [
+							{
+								"colId": "col_1"
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?SYSTEM_destination",
+				"type": "http://arcos.rack/SYSTEM#SYSTEM",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?SYSTEM_destination"
+						],
+						"mapping": [
+							{
+								"colId": "col_3"
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?SYSTEM_source",
+				"type": "http://arcos.rack/SYSTEM#SYSTEM",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?SYSTEM_source"
+						],
+						"mapping": [
+							{
+								"colId": "col_2"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

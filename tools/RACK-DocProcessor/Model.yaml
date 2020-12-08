@@ -1,0 +1,13 @@
+# This file is intended to be used using the rack.py script found
+# in RACK-Ontology/scripts/
+#
+# Script documentation is available in RACK-Ontology/scripts/README.md
+data-graph: "http://rack001/data"
+ingestion-steps:
+- {nodegroup: "Ingest-REQUIREMENT", csv: "./Temp/RACK-DATA/REQUIREMENT.csv"}
+- {nodegroup: "Ingest-INTERFACE", csv: "./Temp/RACK-DATA/INTERFACE.csv"}
+- {nodegroup: "Ingest-SYSTEM", csv: "./Temp/RACK-DATA/SYSTEM.csv"}
+- {nodegroup: "Ingest-DATA_DICTIONARY_TERM", csv: "./Temp/RACK-DATA/DATA_DICTIONARY_TERM.csv"}
+- {nodegroup: "Ingest-OBJECTIVE", csv: "./Temp/RACK-DATA/OBJECTIVE.csv"}
+- {nodegroup: "Ingest-SECTION_1", csv: "./Temp/RACK-DATA/SECTION.csv"}
+- {nodegroup: "Ingest-SECTION_2", csv: "./Temp/RACK-DATA/SECTION.csv"}

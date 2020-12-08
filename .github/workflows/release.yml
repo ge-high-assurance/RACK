@@ -58,7 +58,7 @@ jobs:
 
     - name: Download SemTK distribution
       if: steps.cache-files.outputs.cache-hit != 'true'
-      run: curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20201202/semtk-opensource-v2.3.0-20201202-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+      run: curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20201208/semtk-opensource-v2.3.0-20201208-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
 
     - name: Download style spreadsheet
       if: steps.cache-files.outputs.cache-hit != 'true'

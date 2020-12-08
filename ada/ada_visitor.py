@@ -1,3 +1,8 @@
+"""
+Implements a Visitor pattern for the Ada abstract syntax tree from
+libadalang. See documentation of 'AdaVisitor' for usage information.
+"""
+
 __copyright__ = "Copyright (c) 2020, Galois, Inc."
 
 from typing import TypeVar

@@ -1,3 +1,15 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
 uri "http://arcos.rack/AGENTS" alias AGENTS.
 
 import "http://arcos.rack/PROV-S".
@@ -22,6 +34,10 @@ employedBy (note "Relates people to the company they were acting on behalf of.")
   describes PERSON with values of type AGENT.
 employedBy is a type of actedOnBehalfOf.
 
+
+TOOL
+  (note "An aid (software, hardware, etc) that automates the performance of a specific activity.")
+  is a type of AGENT.
 
 SOFTWAREAGENT
   (note "A software agent is running software.")

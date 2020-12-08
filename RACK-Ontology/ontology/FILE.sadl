@@ -1,0 +1,54 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.rack/FILE" alias file.
+import "http://arcos.rack/PROV-S".
+
+fileParent (note "The file an ENTITY is defined in") describes ENTITY with values of type FILE.
+
+FILE
+    (note "A file in the system")
+	is a type of ENTITY.
+	filename (note "A logical file path relative to the container of the file.") describes FILE with values of type string.
+
+	fileFormat (note "The byte-level encoding of a file") describes FILE with values of type FORMAT.
+
+    satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes FILE with values of type ENTITY.
+    satisfies is a type of wasDerivedFrom.
+
+    createBy (note "FILE_CREATION ACTIVITY that created this file") describes FILE with values of type FILE_CREATION.
+    createBy is a type of wasGeneratedBy.
+    
+    fileHash (note "Hash of the file contents") describes FILE with values of type FILE_HASH.
+
+FORMAT
+    (note "The data format of a FILE")
+    is a type of THING.
+
+FILE_CREATION
+   (note "An ACTIVITY that produces a FILE")
+   is a type of ACTIVITY.
+
+FILE_HASH
+    (note "A hash identifying a FILE")
+    is a type of THING,
+    described by hashType  with a single value of type HASH_TYPE,
+    described by hashValue with a single value of type string.
+
+HASH_TYPE
+    (note "A type of cryptographic hash")
+    is a type of THING,
+    must be one of { MD5, SHA1, SHA2_256, SHA2_512 }.
+MD5      is a HASH_TYPE with identifier "MD5".
+SHA1     is a HASH_TYPE with identifier "SHA1".
+SHA2_256 is a HASH_TYPE with identifier "SHA2_256".
+SHA2_512 is a HASH_TYPE with identifier "SHA2_512".

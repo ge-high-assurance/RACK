@@ -1,0 +1,4 @@
+mypy==0.790
+pylint==2.6.0
+pytest==6.1.2
+pytest-docker==0.10.1

@@ -1,3 +1,15 @@
+/* Copyright (c) 2020, General Electric Company
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
 uri "http://arcos.rack/MIL-STD-881D/MIL-STD-881D-AppxA" alias MIL-STD-881D-AppxA.
 import "http://arcos.rack/MIL-STD-881D/MIL-STD-881D".
 
@@ -24,522 +36,521 @@ A.4 is a SECTION
 	 		
 // SADL constructs 			
 AircraftSystem-1 is a SYSTEM,
-	has uniqueIdentifier "AircraftSystem-1",
+	has identifier "AircraftSystem-1",
 	has wbs "1".
 AircraftSystemIntegrationAssemblyTestandCheckout-1.1 is a SYSTEM,
-	has uniqueIdentifier "AircraftSystemIntegrationAssemblyTestandCheckout-1.1",
+	has identifier "AircraftSystemIntegrationAssemblyTestandCheckout-1.1",
 	has partOf AircraftSystem-1,
 	has wbs "1.1".
 AirVehicle-1.2 is a SYSTEM,
-	has uniqueIdentifier "AirVehicle-1.2",
+	has identifier "AirVehicle-1.2",
 	has partOf AircraftSystem-1,
 	has wbs "1.2".
 AirVehicleIntegrationAssemblyTestandCheckout-1.2.1 is a SYSTEM,
-	has uniqueIdentifier "AirVehicleIntegrationAssemblyTestandCheckout-1.2.1",
+	has identifier "AirVehicleIntegrationAssemblyTestandCheckout-1.2.1",
 	has partOf AirVehicle-1.2,
 	has wbs "1.2.1".
 Airframe-1.2.2 is a SYSTEM,
-	has uniqueIdentifier "Airframe-1.2.2",
+	has identifier "Airframe-1.2.2",
 	has partOf AirVehicle-1.2,
 	has wbs "1.2.2".
 AirframeIntegrationAssemblyTestandCheckout-1.2.2.1 is a SYSTEM,
-	has uniqueIdentifier "AirframeIntegrationAssemblyTestandCheckout-1.2.2.1",
+	has identifier "AirframeIntegrationAssemblyTestandCheckout-1.2.2.1",
 	has partOf Airframe-1.2.2,
 	has wbs "1.2.2.1".
 Fuselage-1.2.2.2 is a SYSTEM,
-	has uniqueIdentifier "Fuselage-1.2.2.2",
+	has identifier "Fuselage-1.2.2.2",
 	has partOf Airframe-1.2.2,
 	has wbs "1.2.2.2".
 Wing-1.2.2.3 is a SYSTEM,
-	has uniqueIdentifier "Wing-1.2.2.3",
+	has identifier "Wing-1.2.2.3",
 	has partOf Airframe-1.2.2,
 	has wbs "1.2.2.3".
 Empennage-1.2.2.4 is a SYSTEM,
-	has uniqueIdentifier "Empennage-1.2.2.4",
+	has identifier "Empennage-1.2.2.4",
 	has partOf Airframe-1.2.2,
 	has wbs "1.2.2.4".
 Nacelle-1.2.2.5 is a SYSTEM,
-	has uniqueIdentifier "Nacelle-1.2.2.5",
+	has identifier "Nacelle-1.2.2.5",
 	has partOf Airframe-1.2.2,
 	has wbs "1.2.2.5".
 OtherAirframeComponents1TonSpecify-1.2.2.6 is a SYSTEM,
-	has uniqueIdentifier "OtherAirframeComponents1TonSpecify-1.2.2.6",
+	has identifier "OtherAirframeComponents1TonSpecify-1.2.2.6",
 	has partOf Airframe-1.2.2,
 	has wbs "1.2.2.6".
 Propulsion-1.2.3 is a SYSTEM,
-	has uniqueIdentifier "Propulsion-1.2.3",
+	has identifier "Propulsion-1.2.3",
 	has partOf AirVehicle-1.2,
 	has wbs "1.2.3".
 VehicleSubsystems-1.2.4 is a SYSTEM,
-	has uniqueIdentifier "VehicleSubsystems-1.2.4",
+	has identifier "VehicleSubsystems-1.2.4",
 	has partOf AirVehicle-1.2,
 	has wbs "1.2.4".
 VehicleSubsystemIntegrationAssemblyTestandCheckout-1.2.4.1 is a SYSTEM,
-	has uniqueIdentifier "VehicleSubsystemIntegrationAssemblyTestandCheckout-1.2.4.1",
+	has identifier "VehicleSubsystemIntegrationAssemblyTestandCheckout-1.2.4.1",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.1".
 FlightControlSubsystem-1.2.4.2 is a SYSTEM,
-	has uniqueIdentifier "FlightControlSubsystem-1.2.4.2",
+	has identifier "FlightControlSubsystem-1.2.4.2",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.2".
 AuxiliaryPowerSubsystem-1.2.4.3 is a SYSTEM,
-	has uniqueIdentifier "AuxiliaryPowerSubsystem-1.2.4.3",
+	has identifier "AuxiliaryPowerSubsystem-1.2.4.3",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.3".
 HydraulicSubsystem-1.2.4.4 is a SYSTEM,
-	has uniqueIdentifier "HydraulicSubsystem-1.2.4.4",
+	has identifier "HydraulicSubsystem-1.2.4.4",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.4".
 ElectricalSubsystem-1.2.4.5 is a SYSTEM,
-	has uniqueIdentifier "ElectricalSubsystem-1.2.4.5",
+	has identifier "ElectricalSubsystem-1.2.4.5",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.5".
 CrewStationSubsystem-1.2.4.6 is a SYSTEM,
-	has uniqueIdentifier "CrewStationSubsystem-1.2.4.6",
+	has identifier "CrewStationSubsystem-1.2.4.6",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.6".
 EnvironmentalControlSubsystem-1.2.4.7 is a SYSTEM,
-	has uniqueIdentifier "EnvironmentalControlSubsystem-1.2.4.7",
+	has identifier "EnvironmentalControlSubsystem-1.2.4.7",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.7".
 FuelSubsystem-1.2.4.8 is a SYSTEM,
-	has uniqueIdentifier "FuelSubsystem-1.2.4.8",
+	has identifier "FuelSubsystem-1.2.4.8",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.8".
 LandingGear-1.2.4.9 is a SYSTEM,
-	has uniqueIdentifier "LandingGear-1.2.4.9",
+	has identifier "LandingGear-1.2.4.9",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.9".
 RotorGroup-1.2.4.10 is a SYSTEM,
-	has uniqueIdentifier "RotorGroup-1.2.4.10",
+	has identifier "RotorGroup-1.2.4.10",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.10".
 DriveGroup-1.2.4.11 is a SYSTEM,
-	has uniqueIdentifier "DriveGroup-1.2.4.11",
+	has identifier "DriveGroup-1.2.4.11",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.11".
 VehicleSubsystemSoftwareRelease1TonSpecify-1.2.4.12 is a SYSTEM,
-	has uniqueIdentifier "VehicleSubsystemSoftwareRelease1TonSpecify-1.2.4.12",
+	has identifier "VehicleSubsystemSoftwareRelease1TonSpecify-1.2.4.12",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.12".
 OtherSubsystems1TonSpecify-1.2.4.13 is a SYSTEM,
-	has uniqueIdentifier "OtherSubsystems1TonSpecify-1.2.4.13",
+	has identifier "OtherSubsystems1TonSpecify-1.2.4.13",
 	has partOf VehicleSubsystems-1.2.4,
 	has wbs "1.2.4.13".
 Avionics-1.2.5 is a SYSTEM,
-	has uniqueIdentifier "Avionics-1.2.5",
+	has identifier "Avionics-1.2.5",
 	has partOf AirVehicle-1.2,
 	has wbs "1.2.5".
 AvionicsIntegrationAssemblyTestandCheckout-1.2.5.1 is a SYSTEM,
-	has uniqueIdentifier "AvionicsIntegrationAssemblyTestandCheckout-1.2.5.1",
+	has identifier "AvionicsIntegrationAssemblyTestandCheckout-1.2.5.1",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.1".
 CommunicationIdentification-1.2.5.2 is a SYSTEM,
-	has uniqueIdentifier "CommunicationIdentification-1.2.5.2",
+	has identifier "CommunicationIdentification-1.2.5.2",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.2".
 NavigationGuidance-1.2.5.3 is a SYSTEM,
-	has uniqueIdentifier "NavigationGuidance-1.2.5.3",
+	has identifier "NavigationGuidance-1.2.5.3",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.3".
 MissionComputerProcessing-1.2.5.4 is a SYSTEM,
-	has uniqueIdentifier "MissionComputerProcessing-1.2.5.4",
+	has identifier "MissionComputerProcessing-1.2.5.4",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.4".
 FireControl-1.2.5.5 is a SYSTEM,
-	has uniqueIdentifier "FireControl-1.2.5.5",
+	has identifier "FireControl-1.2.5.5",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.5".
 DataDisplayandControls-1.2.5.6 is a SYSTEM,
-	has uniqueIdentifier "DataDisplayandControls-1.2.5.6",
+	has identifier "DataDisplayandControls-1.2.5.6",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.6".
 Survivability-1.2.5.7 is a SYSTEM,
-	has uniqueIdentifier "Survivability-1.2.5.7",
+	has identifier "Survivability-1.2.5.7",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.7".
 Reconnaissance-1.2.5.8 is a SYSTEM,
-	has uniqueIdentifier "Reconnaissance-1.2.5.8",
+	has identifier "Reconnaissance-1.2.5.8",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.8".
 ElectronicWarfare-1.2.5.9 is a SYSTEM,
-	has uniqueIdentifier "ElectronicWarfare-1.2.5.9",
+	has identifier "ElectronicWarfare-1.2.5.9",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.9".
 AutomaticFlightControl-1.2.5.10 is a SYSTEM,
-	has uniqueIdentifier "AutomaticFlightControl-1.2.5.10",
+	has identifier "AutomaticFlightControl-1.2.5.10",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.10".
 HealthMonitoringSystem-1.2.5.11 is a SYSTEM,
-	has uniqueIdentifier "HealthMonitoringSystem-1.2.5.11",
+	has identifier "HealthMonitoringSystem-1.2.5.11",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.11".
 StoresManagement-1.2.5.12 is a SYSTEM,
-	has uniqueIdentifier "StoresManagement-1.2.5.12",
+	has identifier "StoresManagement-1.2.5.12",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.12".
 AvionicsSoftwareRelease1TonSpecify-1.2.5.13 is a SYSTEM,
-	has uniqueIdentifier "AvionicsSoftwareRelease1TonSpecify-1.2.5.13",
+	has identifier "AvionicsSoftwareRelease1TonSpecify-1.2.5.13",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.13".
 OtherAvionicsSubsystems1TonSpecify-1.2.5.14 is a SYSTEM,
-	has uniqueIdentifier "OtherAvionicsSubsystems1TonSpecify-1.2.5.14",
+	has identifier "OtherAvionicsSubsystems1TonSpecify-1.2.5.14",
 	has partOf Avionics-1.2.5,
 	has wbs "1.2.5.14".
 ArmamentWeaponsDelivery-1.2.6 is a SYSTEM,
-	has uniqueIdentifier "ArmamentWeaponsDelivery-1.2.6",
+	has identifier "ArmamentWeaponsDelivery-1.2.6",
 	has partOf AirVehicle-1.2,
 	has wbs "1.2.6".
 AuxiliaryEquipment-1.2.7 is a SYSTEM,
-	has uniqueIdentifier "AuxiliaryEquipment-1.2.7",
+	has identifier "AuxiliaryEquipment-1.2.7",
 	has partOf AirVehicle-1.2,
 	has wbs "1.2.7".
 FurnishingsandEquipment-1.2.8 is a SYSTEM,
-	has uniqueIdentifier "FurnishingsandEquipment-1.2.8",
+	has identifier "FurnishingsandEquipment-1.2.8",
 	has partOf AirVehicle-1.2,
 	has wbs "1.2.8".
 AirVehicleSoftwareRelease1TonSpecify-1.2.9 is a SYSTEM,
-	has uniqueIdentifier "AirVehicleSoftwareRelease1TonSpecify-1.2.9",
+	has identifier "AirVehicleSoftwareRelease1TonSpecify-1.2.9",
 	has partOf AirVehicle-1.2,
 	has wbs "1.2.9".
 OtherAirVehicle1TonSpecify-1.2.10 is a SYSTEM,
-	has uniqueIdentifier "OtherAirVehicle1TonSpecify-1.2.10",
+	has identifier "OtherAirVehicle1TonSpecify-1.2.10",
 	has partOf AirVehicle-1.2,
 	has wbs "1.2.10".
 PayloadMissionSystem-1.3 is a SYSTEM,
-	has uniqueIdentifier "PayloadMissionSystem-1.3",
+	has identifier "PayloadMissionSystem-1.3",
 	has partOf AircraftSystem-1,
 	has wbs "1.3".
 PayloadIntegrationAssemblyTestandCheckout-1.3.1 is a SYSTEM,
-	has uniqueIdentifier "PayloadIntegrationAssemblyTestandCheckout-1.3.1",
+	has identifier "PayloadIntegrationAssemblyTestandCheckout-1.3.1",
 	has partOf PayloadMissionSystem-1.3,
 	has wbs "1.3.1".
 SurvivabilityPayload1TonSpecify-1.3.2 is a SYSTEM,
-	has uniqueIdentifier "SurvivabilityPayload1TonSpecify-1.3.2",
+	has identifier "SurvivabilityPayload1TonSpecify-1.3.2",
 	has partOf PayloadMissionSystem-1.3,
 	has wbs "1.3.2".
 ReconnaissancePayload1TonSpecify-1.3.3 is a SYSTEM,
-	has uniqueIdentifier "ReconnaissancePayload1TonSpecify-1.3.3",
+	has identifier "ReconnaissancePayload1TonSpecify-1.3.3",
 	has partOf PayloadMissionSystem-1.3,
 	has wbs "1.3.3".
 ElectronicWarfarePayload1TonSpecify-1.3.4 is a SYSTEM,
-	has uniqueIdentifier "ElectronicWarfarePayload1TonSpecify-1.3.4",
+	has identifier "ElectronicWarfarePayload1TonSpecify-1.3.4",
 	has partOf PayloadMissionSystem-1.3,
 	has wbs "1.3.4".
 ArmamentWeaponsDeliveryPayload1TonSpecify-1.3.5 is a SYSTEM,
-	has uniqueIdentifier "ArmamentWeaponsDeliveryPayload1TonSpecify-1.3.5",
+	has identifier "ArmamentWeaponsDeliveryPayload1TonSpecify-1.3.5",
 	has partOf PayloadMissionSystem-1.3,
 	has wbs "1.3.5".
 PayloadSoftwareRelease1TonSpecify-1.3.6 is a SYSTEM,
-	has uniqueIdentifier "PayloadSoftwareRelease1TonSpecify-1.3.6",
+	has identifier "PayloadSoftwareRelease1TonSpecify-1.3.6",
 	has partOf PayloadMissionSystem-1.3,
 	has wbs "1.3.6".
 OtherPayload1TonSpecify-1.3.7 is a SYSTEM,
-	has uniqueIdentifier "OtherPayload1TonSpecify-1.3.7",
+	has identifier "OtherPayload1TonSpecify-1.3.7",
 	has partOf PayloadMissionSystem-1.3,
 	has wbs "1.3.7".
 GroundHostSegment-1.4 is a SYSTEM,
-	has uniqueIdentifier "GroundHostSegment-1.4",
+	has identifier "GroundHostSegment-1.4",
 	has partOf AircraftSystem-1,
 	has wbs "1.4".
 GroundSegmentIntegrationAssemblyTestandCheckout-1.4.1 is a SYSTEM,
-	has uniqueIdentifier "GroundSegmentIntegrationAssemblyTestandCheckout-1.4.1",
+	has identifier "GroundSegmentIntegrationAssemblyTestandCheckout-1.4.1",
 	has partOf GroundHostSegment-1.4,
 	has wbs "1.4.1".
 GroundControlSystems-1.4.2 is a SYSTEM,
-	has uniqueIdentifier "GroundControlSystems-1.4.2",
+	has identifier "GroundControlSystems-1.4.2",
 	has partOf GroundHostSegment-1.4,
 	has wbs "1.4.2".
 CommandandControlSubsystem-1.4.3 is a SYSTEM,
-	has uniqueIdentifier "CommandandControlSubsystem-1.4.3",
+	has identifier "CommandandControlSubsystem-1.4.3",
 	has partOf GroundHostSegment-1.4,
 	has wbs "1.4.3".
 LaunchEquipment-1.4.4 is a SYSTEM,
-	has uniqueIdentifier "LaunchEquipment-1.4.4",
+	has identifier "LaunchEquipment-1.4.4",
 	has partOf GroundHostSegment-1.4,
 	has wbs "1.4.4".
 RecoveryEquipment-1.4.5 is a SYSTEM,
-	has uniqueIdentifier "RecoveryEquipment-1.4.5",
+	has identifier "RecoveryEquipment-1.4.5",
 	has partOf GroundHostSegment-1.4,
 	has wbs "1.4.5".
 TransportVehicles-1.4.6 is a SYSTEM,
-	has uniqueIdentifier "TransportVehicles-1.4.6",
+	has identifier "TransportVehicles-1.4.6",
 	has partOf GroundHostSegment-1.4,
 	has wbs "1.4.6".
 GroundSegmentSoftwareRelease1TonSpecify-1.4.7 is a SYSTEM,
-	has uniqueIdentifier "GroundSegmentSoftwareRelease1TonSpecify-1.4.7",
+	has identifier "GroundSegmentSoftwareRelease1TonSpecify-1.4.7",
 	has partOf GroundHostSegment-1.4,
 	has wbs "1.4.7".
 OtherGroundHostSegment1TonSpecify-1.4.8 is a SYSTEM,
-	has uniqueIdentifier "OtherGroundHostSegment1TonSpecify-1.4.8",
+	has identifier "OtherGroundHostSegment1TonSpecify-1.4.8",
 	has partOf GroundHostSegment-1.4,
 	has wbs "1.4.8".
 AircraftSystemSoftwareRelease1TonSpecify-1.5 is a SYSTEM,
-	has uniqueIdentifier "AircraftSystemSoftwareRelease1TonSpecify-1.5",
+	has identifier "AircraftSystemSoftwareRelease1TonSpecify-1.5",
 	has partOf AircraftSystem-1,
 	has wbs "1.5".
 SystemsEngineering-1.6 is a SYSTEM,
-	has uniqueIdentifier "SystemsEngineering-1.6",
+	has identifier "SystemsEngineering-1.6",
 	has partOf AircraftSystem-1,
 	has wbs "1.6".
 SoftwareSystemsEngineering-1.6.1 is a SYSTEM,
-	has uniqueIdentifier "SoftwareSystemsEngineering-1.6.1",
+	has identifier "SoftwareSystemsEngineering-1.6.1",
 	has partOf SystemsEngineering-1.6,
 	has wbs "1.6.1".
 IntegratedLogisticsSupportILSSystemsEngineering-1.6.2 is a SYSTEM,
-	has uniqueIdentifier "IntegratedLogisticsSupportILSSystemsEngineering-1.6.2",
+	has identifier "IntegratedLogisticsSupportILSSystemsEngineering-1.6.2",
 	has partOf SystemsEngineering-1.6,
 	has wbs "1.6.2".
 CybersecuritySystemsEngineering-1.6.3 is a SYSTEM,
-	has uniqueIdentifier "CybersecuritySystemsEngineering-1.6.3",
+	has identifier "CybersecuritySystemsEngineering-1.6.3",
 	has partOf SystemsEngineering-1.6,
 	has wbs "1.6.3".
 CoreSystemsEngineering-1.6.4 is a SYSTEM,
-	has uniqueIdentifier "CoreSystemsEngineering-1.6.4",
+	has identifier "CoreSystemsEngineering-1.6.4",
 	has partOf SystemsEngineering-1.6,
 	has wbs "1.6.4".
 OtherSystemsEngineering1TonSpecify-1.6.5 is a SYSTEM,
-	has uniqueIdentifier "OtherSystemsEngineering1TonSpecify-1.6.5",
+	has identifier "OtherSystemsEngineering1TonSpecify-1.6.5",
 	has partOf SystemsEngineering-1.6,
 	has wbs "1.6.5".
 ProgramManagement-1.7 is a SYSTEM,
-	has uniqueIdentifier "ProgramManagement-1.7",
+	has identifier "ProgramManagement-1.7",
 	has partOf AircraftSystem-1,
 	has wbs "1.7".
 SoftwareProgramManagement-1.7.1 is a SYSTEM,
-	has uniqueIdentifier "SoftwareProgramManagement-1.7.1",
+	has identifier "SoftwareProgramManagement-1.7.1",
 	has partOf ProgramManagement-1.7,
 	has wbs "1.7.1".
 IntegratedLogisticsSupportILSProgramManagement-1.7.2 is a SYSTEM,
-	has uniqueIdentifier "IntegratedLogisticsSupportILSProgramManagement-1.7.2",
+	has identifier "IntegratedLogisticsSupportILSProgramManagement-1.7.2",
 	has partOf ProgramManagement-1.7,
 	has wbs "1.7.2".
 CybersecurityManagement-1.7.3 is a SYSTEM,
-	has uniqueIdentifier "CybersecurityManagement-1.7.3",
+	has identifier "CybersecurityManagement-1.7.3",
 	has partOf ProgramManagement-1.7,
 	has wbs "1.7.3".
 CoreProgramManagement-1.7.4 is a SYSTEM,
-	has uniqueIdentifier "CoreProgramManagement-1.7.4",
+	has identifier "CoreProgramManagement-1.7.4",
 	has partOf ProgramManagement-1.7,
 	has wbs "1.7.4".
 OtherProgramManagement1TonSpecify-1.7.5 is a SYSTEM,
-	has uniqueIdentifier "OtherProgramManagement1TonSpecify-1.7.5",
+	has identifier "OtherProgramManagement1TonSpecify-1.7.5",
 	has partOf ProgramManagement-1.7,
 	has wbs "1.7.5".
 SystemTestandEvaluation-1.8 is a SYSTEM,
-	has uniqueIdentifier "SystemTestandEvaluation-1.8",
+	has identifier "SystemTestandEvaluation-1.8",
 	has partOf AircraftSystem-1,
 	has wbs "1.8".
 DevelopmentTestandEvaluation-1.8.1 is a SYSTEM,
-	has uniqueIdentifier "DevelopmentTestandEvaluation-1.8.1",
+	has identifier "DevelopmentTestandEvaluation-1.8.1",
 	has partOf SystemTestandEvaluation-1.8,
 	has wbs "1.8.1".
 OperationalTestandEvaluation-1.8.2 is a SYSTEM,
-	has uniqueIdentifier "OperationalTestandEvaluation-1.8.2",
+	has identifier "OperationalTestandEvaluation-1.8.2",
 	has partOf SystemTestandEvaluation-1.8,
 	has wbs "1.8.2".
 CybersecurityTestandEvaluation-1.8.3 is a SYSTEM,
-	has uniqueIdentifier "CybersecurityTestandEvaluation-1.8.3",
+	has identifier "CybersecurityTestandEvaluation-1.8.3",
 	has partOf SystemTestandEvaluation-1.8,
 	has wbs "1.8.3".
 Mock-upsSystemIntegrationLabsSILs-1.8.4 is a SYSTEM,
-	has uniqueIdentifier "Mock-upsSystemIntegrationLabsSILs-1.8.4",
+	has identifier "Mock-upsSystemIntegrationLabsSILs-1.8.4",
 	has partOf SystemTestandEvaluation-1.8,
 	has wbs "1.8.4".
 TestandEvaluationSupport-1.8.5 is a SYSTEM,
-	has uniqueIdentifier "TestandEvaluationSupport-1.8.5",
+	has identifier "TestandEvaluationSupport-1.8.5",
 	has partOf SystemTestandEvaluation-1.8,
 	has wbs "1.8.5".
 TestFacilities-1.8.6 is a SYSTEM,
-	has uniqueIdentifier "TestFacilities-1.8.6",
+	has identifier "TestFacilities-1.8.6",
 	has partOf SystemTestandEvaluation-1.8,
 	has wbs "1.8.6".
 Training-1.9 is a SYSTEM,
-	has uniqueIdentifier "Training-1.9",
+	has identifier "Training-1.9",
 	has partOf AircraftSystem-1,
 	has wbs "1.9".
 Equipment-1.9.1 is a SYSTEM,
-	has uniqueIdentifier "Equipment-1.9.1",
+	has identifier "Equipment-1.9.1",
 	has partOf Training-1.9,
 	has wbs "1.9.1".
 OperatorInstructionalEquipment-1.9.1.1 is a SYSTEM,
-	has uniqueIdentifier "OperatorInstructionalEquipment-1.9.1.1",
+	has identifier "OperatorInstructionalEquipment-1.9.1.1",
 	has partOf Equipment-1.9.1,
 	has wbs "1.9.1.1".
 MaintainerInstructionalEquipment-1.9.1.2 is a SYSTEM,
-	has uniqueIdentifier "MaintainerInstructionalEquipment-1.9.1.2",
+	has identifier "MaintainerInstructionalEquipment-1.9.1.2",
 	has partOf Equipment-1.9.1,
 	has wbs "1.9.1.2".
 Services-1.9.2 is a SYSTEM,
-	has uniqueIdentifier "Services-1.9.2",
+	has identifier "Services-1.9.2",
 	has partOf Training-1.9,
 	has wbs "1.9.2".
 OperatorInstructionalServices-1.9.2.1 is a SYSTEM,
-	has uniqueIdentifier "OperatorInstructionalServices-1.9.2.1",
+	has identifier "OperatorInstructionalServices-1.9.2.1",
 	has partOf Services-1.9.2,
 	has wbs "1.9.2.1".
 MaintainerInstructionalServices-1.9.2.2 is a SYSTEM,
-	has uniqueIdentifier "MaintainerInstructionalServices-1.9.2.2",
+	has identifier "MaintainerInstructionalServices-1.9.2.2",
 	has partOf Services-1.9.2,
 	has wbs "1.9.2.2".
 Facilities-1.9.3 is a SYSTEM,
-	has uniqueIdentifier "Facilities-1.9.3",
+	has identifier "Facilities-1.9.3",
 	has partOf Training-1.9,
 	has wbs "1.9.3".
 TrainingSoftware1TonSpecify-1.9.4 is a SYSTEM,
-	has uniqueIdentifier "TrainingSoftware1TonSpecify-1.9.4",
+	has identifier "TrainingSoftware1TonSpecify-1.9.4",
 	has partOf Training-1.9,
 	has wbs "1.9.4".
 Data-1.10 is a SYSTEM,
-	has uniqueIdentifier "Data-1.10",
+	has identifier "Data-1.10",
 	has partOf AircraftSystem-1,
 	has wbs "1.10".
 DataDeliverables1TonSpecify-1.10.1 is a SYSTEM,
-	has uniqueIdentifier "DataDeliverables1TonSpecify-1.10.1",
+	has identifier "DataDeliverables1TonSpecify-1.10.1",
 	has partOf Data-1.10,
 	has wbs "1.10.1".
 DataRepository-1.10.2 is a SYSTEM,
-	has uniqueIdentifier "DataRepository-1.10.2",
+	has identifier "DataRepository-1.10.2",
 	has partOf Data-1.10,
 	has wbs "1.10.2".
 DataRights1TonSpecify-1.10.3 is a SYSTEM,
-	has uniqueIdentifier "DataRights1TonSpecify-1.10.3",
+	has identifier "DataRights1TonSpecify-1.10.3",
 	has partOf Data-1.10,
 	has wbs "1.10.3".
 PeculiarSupportEquipment-1.11 is a SYSTEM,
-	has uniqueIdentifier "PeculiarSupportEquipment-1.11",
+	has identifier "PeculiarSupportEquipment-1.11",
 	has partOf AircraftSystem-1,
 	has wbs "1.11".
 TestandMeasurementEquipment-1.11.1 is a SYSTEM,
-	has uniqueIdentifier "TestandMeasurementEquipment-1.11.1",
+	has identifier "TestandMeasurementEquipment-1.11.1",
 	has partOf PeculiarSupportEquipment-1.11,
 	has wbs "1.11.1".
 TestandMeasurementEquipmentAirframeHullVehicle-1.11.1.1 is a SYSTEM,
-	has uniqueIdentifier "TestandMeasurementEquipmentAirframeHullVehicle-1.11.1.1",
+	has identifier "TestandMeasurementEquipmentAirframeHullVehicle-1.11.1.1",
 	has partOf TestandMeasurementEquipment-1.11.1,
 	has wbs "1.11.1.1".
 TestandMeasurementEquipmentPropulsion-1.11.1.2 is a SYSTEM,
-	has uniqueIdentifier "TestandMeasurementEquipmentPropulsion-1.11.1.2",
+	has identifier "TestandMeasurementEquipmentPropulsion-1.11.1.2",
 	has partOf TestandMeasurementEquipment-1.11.1,
 	has wbs "1.11.1.2".
 TestandMeasurementEquipmentElectronicsAvionics-1.11.1.3 is a SYSTEM,
-	has uniqueIdentifier "TestandMeasurementEquipmentElectronicsAvionics-1.11.1.3",
+	has identifier "TestandMeasurementEquipmentElectronicsAvionics-1.11.1.3",
 	has partOf TestandMeasurementEquipment-1.11.1,
 	has wbs "1.11.1.3".
 TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify-1.11.1.4 is a SYSTEM,
-	has uniqueIdentifier "TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify-1.11.1.4",
+	has identifier "TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify-1.11.1.4",
 	has partOf TestandMeasurementEquipment-1.11.1,
 	has wbs "1.11.1.4".
 SupportandHandlingEquipment-1.11.2 is a SYSTEM,
-	has uniqueIdentifier "SupportandHandlingEquipment-1.11.2",
+	has identifier "SupportandHandlingEquipment-1.11.2",
 	has partOf PeculiarSupportEquipment-1.11,
 	has wbs "1.11.2".
 SupportandHandlingEquipmentAirframeHullVehicle-1.11.2.1 is a SYSTEM,
-	has uniqueIdentifier "SupportandHandlingEquipmentAirframeHullVehicle-1.11.2.1",
+	has identifier "SupportandHandlingEquipmentAirframeHullVehicle-1.11.2.1",
 	has partOf SupportandHandlingEquipment-1.11.2,
 	has wbs "1.11.2.1".
 SupportandHandlingEquipmentPropulsion-1.11.2.2 is a SYSTEM,
-	has uniqueIdentifier "SupportandHandlingEquipmentPropulsion-1.11.2.2",
+	has identifier "SupportandHandlingEquipmentPropulsion-1.11.2.2",
 	has partOf SupportandHandlingEquipment-1.11.2,
 	has wbs "1.11.2.2".
 SupportandHandlingEquipmentElectronicsAvionics-1.11.2.3 is a SYSTEM,
-	has uniqueIdentifier "SupportandHandlingEquipmentElectronicsAvionics-1.11.2.3",
+	has identifier "SupportandHandlingEquipmentElectronicsAvionics-1.11.2.3",
 	has partOf SupportandHandlingEquipment-1.11.2,
 	has wbs "1.11.2.3".
 SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.11.2.4 is a SYSTEM,
-	has uniqueIdentifier "SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.11.2.4",
+	has identifier "SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.11.2.4",
 	has partOf SupportandHandlingEquipment-1.11.2,
 	has wbs "1.11.2.4".
 CommonSupportEquipment-1.12 is a SYSTEM,
-	has uniqueIdentifier "CommonSupportEquipment-1.12",
+	has identifier "CommonSupportEquipment-1.12",
 	has partOf AircraftSystem-1,
 	has wbs "1.12".
 TestandMeasurementEquipment-1.12.1 is a SYSTEM,
-	has uniqueIdentifier "TestandMeasurementEquipment-1.12.1",
+	has identifier "TestandMeasurementEquipment-1.12.1",
 	has partOf CommonSupportEquipment-1.12,
 	has wbs "1.12.1".
 TestandMeasurementEquipmentAirframeHullVehicle-1.12.1.1 is a SYSTEM,
-	has uniqueIdentifier "TestandMeasurementEquipmentAirframeHullVehicle-1.12.1.1",
+	has identifier "TestandMeasurementEquipmentAirframeHullVehicle-1.12.1.1",
 	has partOf TestandMeasurementEquipment-1.12.1,
 	has wbs "1.12.1.1".
 TestandMeasurementEquipmentPropulsion-1.12.1.2 is a SYSTEM,
-	has uniqueIdentifier "TestandMeasurementEquipmentPropulsion-1.12.1.2",
+	has identifier "TestandMeasurementEquipmentPropulsion-1.12.1.2",
 	has partOf TestandMeasurementEquipment-1.12.1,
 	has wbs "1.12.1.2".
 TestandMeasurementEquipmentElectronicsAvionics-1.12.1.3 is a SYSTEM,
-	has uniqueIdentifier "TestandMeasurementEquipmentElectronicsAvionics-1.12.1.3",
+	has identifier "TestandMeasurementEquipmentElectronicsAvionics-1.12.1.3",
 	has partOf TestandMeasurementEquipment-1.12.1,
 	has wbs "1.12.1.3".
 TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify-1.12.1.4 is a SYSTEM,
-	has uniqueIdentifier "TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify-1.12.1.4",
+	has identifier "TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify-1.12.1.4",
 	has partOf TestandMeasurementEquipment-1.12.1,
 	has wbs "1.12.1.4".
 SupportandHandlingEquipment-1.12.2 is a SYSTEM,
-	has uniqueIdentifier "SupportandHandlingEquipment-1.12.2",
+	has identifier "SupportandHandlingEquipment-1.12.2",
 	has partOf CommonSupportEquipment-1.12,
 	has wbs "1.12.2".
 SupportandHandlingEquipmentAirframeHullVehicle-1.12.2.1 is a SYSTEM,
-	has uniqueIdentifier "SupportandHandlingEquipmentAirframeHullVehicle-1.12.2.1",
+	has identifier "SupportandHandlingEquipmentAirframeHullVehicle-1.12.2.1",
 	has partOf SupportandHandlingEquipment-1.12.2,
 	has wbs "1.12.2.1".
 SupportandHandlingEquipmentPropulsion-1.12.2.2 is a SYSTEM,
-	has uniqueIdentifier "SupportandHandlingEquipmentPropulsion-1.12.2.2",
+	has identifier "SupportandHandlingEquipmentPropulsion-1.12.2.2",
 	has partOf SupportandHandlingEquipment-1.12.2,
 	has wbs "1.12.2.2".
 SupportandHandlingEquipmentElectronicsAvionics-1.12.2.3 is a SYSTEM,
-	has uniqueIdentifier "SupportandHandlingEquipmentElectronicsAvionics-1.12.2.3",
+	has identifier "SupportandHandlingEquipmentElectronicsAvionics-1.12.2.3",
 	has partOf SupportandHandlingEquipment-1.12.2,
 	has wbs "1.12.2.3".
 SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.12.2.4 is a SYSTEM,
-	has uniqueIdentifier "SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.12.2.4",
+	has identifier "SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.12.2.4",
 	has partOf SupportandHandlingEquipment-1.12.2,
 	has wbs "1.12.2.4".
 OperationalSiteActivationbySite1TonSpecify-1.13 is a SYSTEM,
-	has uniqueIdentifier "OperationalSiteActivationbySite1TonSpecify-1.13",
+	has identifier "OperationalSiteActivationbySite1TonSpecify-1.13",
 	has partOf AircraftSystem-1,
 	has wbs "1.13".
 SystemAssemblyInstallationandCheckoutonSite-1.13.1 is a SYSTEM,
-	has uniqueIdentifier "SystemAssemblyInstallationandCheckoutonSite-1.13.1",
+	has identifier "SystemAssemblyInstallationandCheckoutonSite-1.13.1",
 	has partOf OperationalSiteActivationbySite1TonSpecify-1.13,
 	has wbs "1.13.1".
 ContractorTechnicalSupport-1.13.2 is a SYSTEM,
-	has uniqueIdentifier "ContractorTechnicalSupport-1.13.2",
+	has identifier "ContractorTechnicalSupport-1.13.2",
 	has partOf OperationalSiteActivationbySite1TonSpecify-1.13,
 	has wbs "1.13.2".
 SiteConstruction-1.13.3 is a SYSTEM,
-	has uniqueIdentifier "SiteConstruction-1.13.3",
+	has identifier "SiteConstruction-1.13.3",
 	has partOf OperationalSiteActivationbySite1TonSpecify-1.13,
 	has wbs "1.13.3".
 SiteShipVehicleConversion-1.13.4 is a SYSTEM,
-	has uniqueIdentifier "SiteShipVehicleConversion-1.13.4",
+	has identifier "SiteShipVehicleConversion-1.13.4",
 	has partOf OperationalSiteActivationbySite1TonSpecify-1.13,
 	has wbs "1.13.4".
 InterimContractorSupportICS-1.13.5 is a SYSTEM,
-	has uniqueIdentifier "InterimContractorSupportICS-1.13.5",
+	has identifier "InterimContractorSupportICS-1.13.5",
 	has partOf OperationalSiteActivationbySite1TonSpecify-1.13,
 	has wbs "1.13.5".
 ContractorLogisticsSupportCLS-1.14 is a SYSTEM,
-	has uniqueIdentifier "ContractorLogisticsSupportCLS-1.14",
+	has identifier "ContractorLogisticsSupportCLS-1.14",
 	has partOf AircraftSystem-1,
 	has wbs "1.14".
 IndustrialFacilities-1.15 is a SYSTEM,
-	has uniqueIdentifier "IndustrialFacilities-1.15",
+	has identifier "IndustrialFacilities-1.15",
 	has partOf AircraftSystem-1,
 	has wbs "1.15".
 ConstructionConversionExpansion-1.15.1 is a SYSTEM,
-	has uniqueIdentifier "ConstructionConversionExpansion-1.15.1",
+	has identifier "ConstructionConversionExpansion-1.15.1",
 	has partOf IndustrialFacilities-1.15,
 	has wbs "1.15.1".
 EquipmentAcquisitionorModernization-1.15.2 is a SYSTEM,
-	has uniqueIdentifier "EquipmentAcquisitionorModernization-1.15.2",
+	has identifier "EquipmentAcquisitionorModernization-1.15.2",
 	has partOf IndustrialFacilities-1.15,
 	has wbs "1.15.2".
 MaintenanceIndustrialFacilities-1.15.3 is a SYSTEM,
-	has uniqueIdentifier "MaintenanceIndustrialFacilities-1.15.3",
+	has identifier "MaintenanceIndustrialFacilities-1.15.3",
 	has partOf IndustrialFacilities-1.15,
 	has wbs "1.15.3".
 InitialSparesandRepairParts-1.16 is a SYSTEM,
-	has uniqueIdentifier "InitialSparesandRepairParts-1.16",
+	has identifier "InitialSparesandRepairParts-1.16",
 	has partOf AircraftSystem-1,
 	has wbs "1.16".
-

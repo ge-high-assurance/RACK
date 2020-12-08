@@ -8,19 +8,19 @@
                 "mapping": [],
                 "props": [],
                 "sparqlID": "?FILE",
-                "type": "http://arcos.rack/SOFTWARE#FILE"
+                "type": "http://arcos.rack/FILE#FILE"
             },
             {
                 "mapping": [],
                 "props": [],
                 "sparqlID": "?COMPILE",
-                "type": "http://arcos.rack/SOFTWARE#COMPILE"
+                "type": "http://arcos.rack/FILE#COMPILE"
             },
             {
                 "mapping": [],
                 "props": [],
                 "sparqlID": "?FILE_0",
-                "type": "http://arcos.rack/SOFTWARE#FILE"
+                "type": "http://arcos.rack/FILE#FILE"
             }
         ],
         "texts": [],
@@ -36,7 +36,7 @@
                 "NodeName": "FILE",
                 "SparqlID": "?FILE_0",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#FILE",
+                "fullURIName": "http://arcos.rack/FILE#FILE",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -46,7 +46,7 @@
                         "Constraints": "",
                         "KeyName": "filename",
                         "SparqlID": "?input_file",
-                        "UriRelationship": "http://arcos.rack/SOFTWARE#filename",
+                        "UriRelationship": "http://arcos.rack/FILE#filename",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -86,7 +86,7 @@
                             "?FILE_0"
                         ],
                         "UriConnectBy": "http://arcos.rack/SOFTWARE#compileInput",
-                        "UriValueType": "http://arcos.rack/SOFTWARE#FILE",
+                        "UriValueType": "http://arcos.rack/FILE#FILE",
                         "ValueType": "FILE"
                     }
                 ],
@@ -98,7 +98,7 @@
                 "NodeName": "FILE",
                 "SparqlID": "?FILE",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#FILE",
+                "fullURIName": "http://arcos.rack/FILE#FILE",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -119,9 +119,9 @@
                         "SnodeSparqlIDs": [
                             "?COMPILE"
                         ],
-                        "UriConnectBy": "http://arcos.rack/SOFTWARE#createBy",
-                        "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
-                        "ValueType": "ACTIVITY"
+                        "UriConnectBy": "http://arcos.rack/FILE#createBy",
+                        "UriValueType": "http://arcos.rack/FILE#FILE_CREATION",
+                        "ValueType": "FILE_CREATION"
                     }
                 ],
                 "propList": [
@@ -129,7 +129,7 @@
                         "Constraints": "",
                         "KeyName": "filename",
                         "SparqlID": "?output_file",
-                        "UriRelationship": "http://arcos.rack/SOFTWARE#filename",
+                        "UriRelationship": "http://arcos.rack/FILE#filename",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -151,7 +151,7 @@
             {
                 "graph": "http://rack001/data",
                 "type": "fuseki",
-                "url": "http://localhost:8080/fuseki/SemTK"
+                "url": "http://localhost:3030/RACK"
             }
         ],
         "domain": "",
@@ -160,7 +160,7 @@
             {
                 "graph": "http://rack001/model",
                 "type": "fuseki",
-                "url": "http://localhost:8080/fuseki/SemTK"
+                "url": "http://localhost:3030/RACK"
             }
         ],
         "name": "MyDB"

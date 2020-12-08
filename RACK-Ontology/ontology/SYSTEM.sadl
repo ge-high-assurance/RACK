@@ -1,5 +1,20 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
 uri "http://arcos.rack/SYSTEM" alias sys.
 import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/DOCUMENT".
+
+// Do we want to add MTBF, type (software, hybrid etc.,) to SYSTEM? They would be needed in an assurance case.
 
 SYSTEM
 	(note "SYSTEMs classify logical parts of the whole system being developed")
@@ -17,6 +32,9 @@ SYSTEM
 	requires (note "List of entities that this SYSTEM requires from others") describes SYSTEM with values of type ENTITY.
 	requires is a type of wasDerivedFrom.
 
+	function (note "functionality / capability of a SYSTEM") describes SYSTEM with values of type FUNCTION. 
+	function is a type of wasDerivedFrom. 
+	
 INTERFACE
 	(note "INTERFACEs describe directed connections between an ENTITY (e.g. SYSTEM) providing what another ENTITY (e.g. SYSTEM) requires")
 	is a type of ENTITY.
@@ -38,3 +56,23 @@ SYSTEM_DEVELOPMENT
 	is a type of ACTIVITY.
 
 	developedBy (note "Organization that is responsible for producing a system") describes SYSTEM_DEVELOPMENT with values of type AGENT.
+
+FUNCTION  
+	(note "defines functionality / capability")
+	is a type of ENTITY.
+
+	// If we introduce "parent" property for THING, then we could drop parentFunction.	
+	parentFunction (note "allows for decomposition of functionality") describes FUNCTION with a single value of type FUNCTION.
+	parentFunction is a type of wasDerivedFrom.
+
+// Later we could add more structure to OP_ENV.
+OP_ENV   
+	(note "defines the operating environment assumptions and constraints")
+	is a type of THING. // should this be an ENTITY?
+
+	envConstraint (note "describes environmental constraints on system operations") describes OP_ENV with values of type string. 
+		
+OP_PROCEDURE  
+	(note "system operational procedures employed, e.g. going through a checklist, limiting people near runways, etc.")
+	is a type of PROCEDURE.		
+	

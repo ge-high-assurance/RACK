@@ -1,0 +1,16 @@
+attrs==19.3.0
+certifi==2020.6.20
+chardet==3.0.4
+colorama==0.4.3
+idna==2.10
+importlib-metadata==1.7.0
+jsonschema==3.2.0
+pyrsistent==0.16.0
+python-dateutil==2.8.1
+PyYAML==5.3.1
+requests==2.24.0
+semtk-python3 @ git+git://github.com/glguy/semtk-python3@d6c4966f461969c1e651a0ea05a3710579bbdbac
+six==1.15.0
+tabulate==0.8.7
+urllib3==1.25.9
+zipp==3.1.0

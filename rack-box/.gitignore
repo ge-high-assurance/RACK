@@ -1,0 +1,10 @@
+# Cache objects
+packer_cache/
+
+# Crash log
+crash.log
+
+# For built boxes
+files/
+output-*
+rack-box-*-v*

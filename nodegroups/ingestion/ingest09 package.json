@@ -16,7 +16,19 @@
             },
             {
                 "colId": "col_3",
-                "colName": "uniqueIdentifier"
+                "colName": "identifier"
+            },
+            {
+                "colId": "col_4",
+                "colName": "dataInsertedById"
+            },
+            {
+                "colId": "col_5",
+                "colName": "startedAtTime"
+            },
+            {
+                "colId": "col_6",
+                "colName": "endedAtTime"
             }
         ],
         "dataValidator": [],
@@ -26,13 +38,35 @@
                 "mapping": [],
                 "props": [
                     {
+                        "URIRelation": "http://arcos.rack/PROV-S#endedAtTime",
+                        "mapping": [
+                            {
+                                "colId": "col_6",
+                                "transformList": [
+                                    "trans_0"
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "URILookup": [
                             "?PACKAGE"
                         ],
-                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
                         "mapping": [
                             {
                                 "colId": "col_3"
+                            }
+                        ]
+                    },
+                    {
+                        "URIRelation": "http://arcos.rack/PROV-S#startedAtTime",
+                        "mapping": [
+                            {
+                                "colId": "col_5",
+                                "transformList": [
+                                    "trans_0"
+                                ]
                             }
                         ]
                     }
@@ -46,9 +80,31 @@
                 "props": [
                     {
                         "URILookup": [
+                            "?DATA_INSERTED_BY"
+                        ],
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
+                        "mapping": [
+                            {
+                                "colId": "col_4",
+                                "transformList": [
+                                    "trans_0"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "sparqlID": "?DATA_INSERTED_BY",
+                "type": "http://arcos.rack/PROV-S#ACTIVITY"
+            },
+            {
+                "URILookupMode": "createIfMissing",
+                "mapping": [],
+                "props": [
+                    {
+                        "URILookup": [
                             "?PACKAGE_INPUT"
                         ],
-                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
                         "mapping": [
                             {
                                 "colId": "col_0",
@@ -60,7 +116,7 @@
                     }
                 ],
                 "sparqlID": "?PACKAGE_INPUT",
-                "type": "http://arcos.rack/SOFTWARE#FILE"
+                "type": "http://arcos.rack/FILE#FILE"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -70,7 +126,7 @@
                         "URILookup": [
                             "?PACKAGED_BY"
                         ],
-                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
                         "mapping": [
                             {
                                 "colId": "col_1",
@@ -82,7 +138,7 @@
                     }
                 ],
                 "sparqlID": "?PACKAGED_BY",
-                "type": "http://arcos.rack/SOFTWARE#FILE"
+                "type": "http://arcos.rack/FILE#FILE"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -92,7 +148,7 @@
                         "URILookup": [
                             "?AGENT"
                         ],
-                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
                         "mapping": [
                             {
                                 "colId": "col_2",
@@ -135,9 +191,9 @@
                 "propList": [
                     {
                         "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
+                        "KeyName": "identifier",
                         "SparqlID": "?performedById",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -159,7 +215,7 @@
                 "NodeName": "FILE",
                 "SparqlID": "?PACKAGED_BY",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#FILE",
+                "fullURIName": "http://arcos.rack/FILE#FILE",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -167,9 +223,9 @@
                 "propList": [
                     {
                         "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
+                        "KeyName": "identifier",
                         "SparqlID": "?packagedById",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -187,7 +243,7 @@
                 "NodeName": "FILE",
                 "SparqlID": "?PACKAGE_INPUT",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#FILE",
+                "fullURIName": "http://arcos.rack/FILE#FILE",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -195,9 +251,9 @@
                 "propList": [
                     {
                         "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
+                        "KeyName": "identifier",
                         "SparqlID": "?packageInputId",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -212,6 +268,49 @@
                 "valueConstraint": ""
             },
             {
+                "NodeName": "ACTIVITY",
+                "SparqlID": "?DATA_INSERTED_BY",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/PROV-S#ACTIVITY",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "identifier",
+                        "SparqlID": "?dataInsertedById",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [
+                    "http://arcos.rack/SYSTEM#SYSTEM_DEVELOPMENT",
+                    "http://arcos.rack/TESTING#TEST_DEVELOPMENT",
+                    "http://arcos.rack/ANALYSIS#ANALYSIS",
+                    "http://arcos.rack/TESTING#TEST_EXECUTION",
+                    "http://arcos.rack/FILE#FILE_CREATION",
+                    "http://arcos.rack/SOFTWARE#CODE_GEN",
+                    "http://arcos.rack/SOFTWARE#COMPILE",
+                    "http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT",
+                    "http://arcos.rack/SOFTWARE#PACKAGE",
+                    "http://arcos.rack/SOFTWARE#BUILD",
+                    "http://arcos.rack/CONFIDENCE#ASSESSING_CONFIDENCE",
+                    "http://arcos.rack/REVIEW#REVIEW",
+                    "http://arcos.rack/HAZARD#HAZARD_IDENTIFICATION",
+                    "http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"
+                ],
+                "valueConstraint": ""
+            },
+            {
                 "NodeName": "PACKAGE",
                 "SparqlID": "?PACKAGE",
                 "deletionMode": "NO_DELETE",
@@ -219,6 +318,26 @@
                 "isReturned": false,
                 "isRuntimeConstrained": false,
                 "nodeList": [
+                    {
+                        "ConnectBy": "dataInsertedBy",
+                        "Connected": true,
+                        "DeletionMarkers": [
+                            false
+                        ],
+                        "KeyName": "dataInsertedBy",
+                        "OptionalMinus": [
+                            "1"
+                        ],
+                        "Qualifiers": [
+                            ""
+                        ],
+                        "SnodeSparqlIDs": [
+                            "?DATA_INSERTED_BY"
+                        ],
+                        "UriConnectBy": "http://arcos.rack/PROV-S#dataInsertedBy",
+                        "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
+                        "ValueType": "ACTIVITY"
+                    },
                     {
                         "ConnectBy": "packageInput",
                         "Connected": true,
@@ -236,7 +355,7 @@
                             "?PACKAGE_INPUT"
                         ],
                         "UriConnectBy": "http://arcos.rack/SOFTWARE#packageInput",
-                        "UriValueType": "http://arcos.rack/SOFTWARE#FILE",
+                        "UriValueType": "http://arcos.rack/FILE#FILE",
                         "ValueType": "FILE"
                     },
                     {
@@ -256,7 +375,7 @@
                             "?PACKAGED_BY"
                         ],
                         "UriConnectBy": "http://arcos.rack/SOFTWARE#packagedBy",
-                        "UriValueType": "http://arcos.rack/SOFTWARE#FILE",
+                        "UriValueType": "http://arcos.rack/FILE#FILE",
                         "ValueType": "FILE"
                     },
                     {
@@ -283,9 +402,23 @@
                 "propList": [
                     {
                         "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
-                        "SparqlID": "?uniqueIdentifier",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "KeyName": "endedAtTime",
+                        "SparqlID": "?endedAtTime",
+                        "UriRelationship": "http://arcos.rack/PROV-S#endedAtTime",
+                        "ValueType": "dateTime",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 1,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#dateTime"
+                    },
+                    {
+                        "Constraints": "",
+                        "KeyName": "identifier",
+                        "SparqlID": "?identifier",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -294,6 +427,20 @@
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
                         "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    },
+                    {
+                        "Constraints": "",
+                        "KeyName": "startedAtTime",
+                        "SparqlID": "?startedAtTime",
+                        "UriRelationship": "http://arcos.rack/PROV-S#startedAtTime",
+                        "ValueType": "dateTime",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 1,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#dateTime"
                     }
                 ],
                 "subClassNames": [],
@@ -307,7 +454,7 @@
             {
                 "graph": "http://rack001/data",
                 "type": "fuseki",
-                "url": "http://localhost:8080/fuseki/SemTK"
+                "url": "http://localhost:3030/RACK"
             }
         ],
         "domain": "",
@@ -316,7 +463,7 @@
             {
                 "graph": "http://rack001/model",
                 "type": "fuseki",
-                "url": "http://localhost:8080/fuseki/SemTK"
+                "url": "http://localhost:3030/RACK"
             }
         ],
         "name": "MyDB"

@@ -33,9 +33,6 @@
         "orderBy": [
             {
                 "sparqlID": "?subComp"
-            },
-            {
-                "sparqlID": "?parentComp"
             }
         ],
         "sNodeList": [
@@ -51,9 +48,9 @@
                 "propList": [
                     {
                         "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
+                        "KeyName": "identifier",
                         "SparqlID": "?anchorId",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -77,15 +74,15 @@
                 "nodeList": [],
                 "propList": [
                     {
-                        "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
+                        "Constraints": "FILTER(regex(str(%id), 'TurnStileSystem'))",
+                        "KeyName": "identifier",
                         "SparqlID": "?parentComp",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": true,
                         "optMinus": 0,
                         "relationship": "http://www.w3.org/2001/XMLSchema#string"
@@ -130,9 +127,9 @@
                 "propList": [
                     {
                         "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
+                        "KeyName": "identifier",
                         "SparqlID": "?subComp",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -154,7 +151,7 @@
             {
                 "graph": "http://rack001/data",
                 "type": "fuseki",
-                "url": "http://localhost:8080/fuseki/SemTK"
+                "url": "http://localhost:3030/RACK"
             }
         ],
         "domain": "",
@@ -163,10 +160,10 @@
             {
                 "graph": "http://rack001/model",
                 "type": "fuseki",
-                "url": "http://localhost:8080/fuseki/SemTK"
+                "url": "http://localhost:3030/RACK"
             }
         ],
-        "name": "MyDB"
+        "name": "RACK"
     },
     "version": 2
 }

@@ -1,3 +1,15 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
 uri "http://arcos.rack/DOCUMENT" alias D.
 import "http://arcos.rack/PROV-S".
 // These document types and properties are derived based off of ISO/IEC/IEEE 15289
@@ -74,4 +86,9 @@ SECTION (note "A SECTION is generic grouping of ENTITYs with a document") is a t
 
 	title describes SECTION with values of type string.  
 
-DOC_STATUS is a class, must be one of {In_Development, Released, Withdrawn}.
+DOC_STATUS (note "Life-cycle status of a document")
+    is a type of THING,
+    must be one of {In_Development, Released, Withdrawn}.
+In_Development is a DOC_STATUS with identifier "In Development".
+Released       is a DOC_STATUS with identifier "Released".
+Withdrawn      is a DOC_STATUS with identifier "Withdrawn".

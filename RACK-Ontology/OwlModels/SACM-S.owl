@@ -1,12 +1,12 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:provs="http://arcos.rack/PROV-S"
+    xmlns:provs="http://arcos.rack/PROV-S#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:sacms="http://arcos.rack/SACM-S#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.rack/SACM-S">
   <owl:Ontology rdf:about="">
@@ -18,21 +18,30 @@
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'SACM-S.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
   <owl:Class rdf:ID="ASSERTED_CONTEXT">
+    <rdfs:comment xml:lang="en">Asserted Context can be used to declare that the artifact cited by an ArtifactReference(s) provides the context for the&#xD;
+interpretation and scoping of a Claim or ArgumentReasoning element.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="ASSERTED_INFERENCE">
+    <rdfs:comment xml:lang="en">Asserted Inference association records the inference that a user declares to exist between one or more Assertion (premise) and&#xD;
+another Assertion (conclusion).</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="ARTIFACT_REFERENCE">
+    <rdfs:comment xml:lang="en">Artifact Reference enables the citation of an artifact as information that relates to the structured argument.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="ARGUMENT_PACKAGE">
+    <rdfs:comment xml:lang="en">Argument Package is the containing element for a structured argument represented using the SACM Argumentation&#xD;
+Metamodel.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="ARGUMENT_REASONING">
+    <rdfs:comment xml:lang="en">Argument Reasoning can be used to provide additional description or explanation of the asserted relationship.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="CLAIM">
+    <rdfs:comment xml:lang="en">Claims are used to record the propositions of any structured argument contained in an Argument Package.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="reasoning">

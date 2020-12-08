@@ -1,11 +1,11 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:provs="http://arcos.rack/PROV-S"
+    xmlns:provs="http://arcos.rack/PROV-S#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:tst="http://arcos.rack/TESTING#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.rack/TESTING">
@@ -28,12 +28,20 @@
     <owl:equivalentClass>
       <owl:Class>
         <owl:oneOf rdf:parseType="Collection">
-          <tst:TEST_STATUS rdf:ID="Passed"/>
-          <tst:TEST_STATUS rdf:ID="Failed"/>
-          <tst:TEST_STATUS rdf:ID="Indeterminate"/>
+          <tst:TEST_STATUS rdf:ID="Passed">
+            <provs:identifier>Passed</provs:identifier>
+          </tst:TEST_STATUS>
+          <tst:TEST_STATUS rdf:ID="Failed">
+            <provs:identifier>Failed</provs:identifier>
+          </tst:TEST_STATUS>
+          <tst:TEST_STATUS rdf:ID="Indeterminate">
+            <provs:identifier>Indeterminate</provs:identifier>
+          </tst:TEST_STATUS>
         </owl:oneOf>
       </owl:Class>
     </owl:equivalentClass>
+    <rdfs:comment xml:lang="en">The high-level outcome of a TEST_RESULT</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST_RESULT">
     <rdfs:comment xml:lang="en">Result corresponding to one execution of one TEST</rdfs:comment>

@@ -1,12 +1,12 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:provs="http://arcos.rack/PROV-S"
+    xmlns:provs="http://arcos.rack/PROV-S#"
     xmlns:AGENTS="http://arcos.rack/AGENTS#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.rack/AGENTS">
   <owl:Ontology rdf:about="">
@@ -16,6 +16,10 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'AGENTS.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
+  <owl:Class rdf:ID="TOOL">
+    <rdfs:comment xml:lang="en">An aid (software, hardware, etc) that automates the performance of a specific activity.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#AGENT"/>
+  </owl:Class>
   <owl:Class rdf:ID="SOFTWAREAGENT">
     <rdfs:comment xml:lang="en">A software agent is running software.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#AGENT"/>

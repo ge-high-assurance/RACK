@@ -1,0 +1,78 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:j.0="http://Turnstile/DevelopmentPlan#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:j.1="http://arcos.rack/REQUIREMENTS#"
+    xmlns:trnstldpd="http://Turnstile/DevelopmentPlanData#"
+    xmlns:j.2="http://arcos.rack/PROV-S#"
+    xmlns:j.3="http://arcos.rack/SYSTEM#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:trnstsd="http://Turnstile/TurnstileDesign#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://Turnstile/TurnstileDesign">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="DevelopmentPlanData"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'TurnstilesSystemDesign.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <j.0:SystemInterfaceDefinition rdf:ID="census">
+    <j.3:destination>
+      <j.0:SystemComponent rdf:ID="Ingate">
+        <j.3:partOf>
+          <j.3:SYSTEM rdf:about="DevelopmentPlanData#Turnstile">
+            <j.2:identifier>Turnstile</j.2:identifier>
+          </j.3:SYSTEM>
+        </j.3:partOf>
+        <j.2:identifier>In Gate</j.2:identifier>
+      </j.0:SystemComponent>
+    </j.3:destination>
+    <j.3:destination>
+      <j.0:SystemComponent rdf:about="DevelopmentPlanData#Display">
+        <j.3:partOf rdf:resource="DevelopmentPlanData#Turnstile"/>
+        <j.2:identifier>Display</j.2:identifier>
+      </j.0:SystemComponent>
+    </j.3:destination>
+    <j.3:source>
+      <j.0:SystemComponent rdf:about="DevelopmentPlanData#CounterApplication">
+        <j.3:partOf rdf:resource="DevelopmentPlanData#Turnstile"/>
+        <j.2:identifier>Counter Application</j.2:identifier>
+      </j.0:SystemComponent>
+    </j.3:source>
+    <j.2:identifier>census</j.2:identifier>
+  </j.0:SystemInterfaceDefinition>
+  <j.0:SystemInterfaceDefinition rdf:ID="outflow">
+    <j.3:destination rdf:resource="DevelopmentPlanData#CounterApplication"/>
+    <j.3:source>
+      <j.0:SystemComponent rdf:ID="Outgate">
+        <j.3:partOf rdf:resource="DevelopmentPlanData#Turnstile"/>
+        <j.2:identifier>Out Gate</j.2:identifier>
+      </j.0:SystemComponent>
+    </j.3:source>
+    <j.2:identifier>outflow</j.2:identifier>
+  </j.0:SystemInterfaceDefinition>
+  <j.0:SystemRequirement rdf:ID="Sys-2">
+    <j.1:governs rdf:resource="DevelopmentPlanData#Turnstile"/>
+    <j.1:text>Turnstile system shall track the number of people that travel through the out gate.	</j.1:text>
+    <j.2:identifier>Sys-2</j.2:identifier>
+  </j.0:SystemRequirement>
+  <j.0:SystemRequirement rdf:ID="Sys-1">
+    <j.1:governs rdf:resource="DevelopmentPlanData#Turnstile"/>
+    <j.1:text>Turnstile system shall track the number of people that travel through the in gate.</j.1:text>
+    <j.2:identifier>Sys-1</j.2:identifier>
+  </j.0:SystemRequirement>
+  <j.0:SystemRequirement rdf:ID="Sys-3">
+    <j.1:governs rdf:resource="DevelopmentPlanData#Turnstile"/>
+    <j.1:text>Turnstile system shall track the number of people are currently in the park.</j.1:text>
+    <j.2:identifier>Sys-3</j.2:identifier>
+  </j.0:SystemRequirement>
+  <j.0:SystemInterfaceDefinition rdf:ID="inflow">
+    <j.3:destination rdf:resource="DevelopmentPlanData#CounterApplication"/>
+    <j.3:source rdf:resource="#Ingate"/>
+    <j.2:identifier>inflow</j.2:identifier>
+  </j.0:SystemInterfaceDefinition>
+</rdf:RDF>

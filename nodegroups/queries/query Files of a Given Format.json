@@ -1,129 +1,129 @@
 {
-	"version": 2,
-	"sparqlConn": {
-		"name": "RACK local fuseki",
-		"domain": "",
-		"enableOwlImports": true,
-		"model": [
-			{
-				"type": "fuseki",
-				"url": "http://localhost:3030/RACK",
-				"graph": "http://rack001/model"
-			}
-		],
-		"data": [
-			{
-				"type": "fuseki",
-				"url": "http://localhost:3030/RACK",
-				"graph": "http://rack001/data"
-			}
-		]
-	},
-	"sNodeGroup": {
-		"version": 11,
-		"limit": 0,
-		"offset": 0,
-		"sNodeList": [
-			{
-				"propList": [
-					{
-						"KeyName": "uniqueIdentifier",
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
-						"Constraints": "",
-						"fullURIName": "",
-						"SparqlID": "?format",
-						"isReturned": true,
-						"optMinus": 0,
-						"isRuntimeConstrained": true,
-						"instanceValues": [],
-						"isMarkedForDeletion": false
-					}
-				],
-				"nodeList": [],
-				"NodeName": "FORMAT",
-				"fullURIName": "http://arcos.rack/SOFTWARE#FORMAT",
-				"subClassNames": [],
-				"SparqlID": "?FORMAT",
-				"isReturned": false,
-				"isRuntimeConstrained": false,
-				"valueConstraint": "",
-				"instanceValue": null,
-				"deletionMode": "NO_DELETE"
-			},
-			{
-				"propList": [
-					{
-						"KeyName": "filename",
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/SOFTWARE#filename",
-						"Constraints": "",
-						"fullURIName": "",
-						"SparqlID": "?filename",
-						"isReturned": true,
-						"optMinus": 0,
-						"isRuntimeConstrained": false,
-						"instanceValues": [],
-						"isMarkedForDeletion": false
-					}
-				],
-				"nodeList": [
-					{
-						"SnodeSparqlIDs": [
-							"?FORMAT"
-						],
-						"OptionalMinus": [
-							0
-						],
-						"Qualifiers": [
-							""
-						],
-						"DeletionMarkers": [
-							false
-						],
-						"KeyName": "fileFormat",
-						"ValueType": "FORMAT",
-						"UriValueType": "http://arcos.rack/SOFTWARE#FORMAT",
-						"ConnectBy": "fileFormat",
-						"Connected": true,
-						"UriConnectBy": "http://arcos.rack/SOFTWARE#fileFormat"
-					}
-				],
-				"NodeName": "FILE",
-				"fullURIName": "http://arcos.rack/SOFTWARE#FILE",
-				"subClassNames": [],
-				"SparqlID": "?FILE",
-				"isReturned": false,
-				"isRuntimeConstrained": false,
-				"valueConstraint": "",
-				"instanceValue": null,
-				"deletionMode": "NO_DELETE"
-			}
-		],
-		"orderBy": []
-	},
-	"importSpec": {
-		"version": "1",
-		"baseURI": "",
-		"columns": [],
-		"dataValidator": [],
-		"texts": [],
-		"transforms": [],
-		"nodes": [
-			{
-				"sparqlID": "?FILE",
-				"type": "http://arcos.rack/SOFTWARE#FILE",
-				"mapping": [],
-				"props": []
-			},
-			{
-				"sparqlID": "?FORMAT",
-				"type": "http://arcos.rack/SOFTWARE#FORMAT",
-				"mapping": [],
-				"props": []
-			}
-		]
-	}
+    "importSpec": {
+        "baseURI": "",
+        "columns": [],
+        "dataValidator": [],
+        "nodes": [
+            {
+                "mapping": [],
+                "props": [],
+                "sparqlID": "?FILE",
+                "type": "http://arcos.rack/FILE#FILE"
+            },
+            {
+                "mapping": [],
+                "props": [],
+                "sparqlID": "?FORMAT",
+                "type": "http://arcos.rack/FILE#FORMAT"
+            }
+        ],
+        "texts": [],
+        "transforms": [],
+        "version": "1"
+    },
+    "sNodeGroup": {
+        "limit": 0,
+        "offset": 0,
+        "orderBy": [],
+        "sNodeList": [
+            {
+                "NodeName": "FORMAT",
+                "SparqlID": "?FORMAT",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/FILE#FORMAT",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "identifier",
+                        "SparqlID": "?format",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": true,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [],
+                "valueConstraint": ""
+            },
+            {
+                "NodeName": "FILE",
+                "SparqlID": "?FILE",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/FILE#FILE",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [
+                    {
+                        "ConnectBy": "fileFormat",
+                        "Connected": true,
+                        "DeletionMarkers": [
+                            false
+                        ],
+                        "KeyName": "fileFormat",
+                        "OptionalMinus": [
+                            0
+                        ],
+                        "Qualifiers": [
+                            ""
+                        ],
+                        "SnodeSparqlIDs": [
+                            "?FORMAT"
+                        ],
+                        "UriConnectBy": "http://arcos.rack/FILE#fileFormat",
+                        "UriValueType": "http://arcos.rack/FILE#FORMAT",
+                        "ValueType": "FORMAT"
+                    }
+                ],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "filename",
+                        "SparqlID": "?filename",
+                        "UriRelationship": "http://arcos.rack/FILE#filename",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [],
+                "valueConstraint": ""
+            }
+        ],
+        "version": 11
+    },
+    "sparqlConn": {
+        "data": [
+            {
+                "graph": "http://rack001/data",
+                "type": "fuseki",
+                "url": "http://localhost:3030/RACK"
+            }
+        ],
+        "domain": "",
+        "enableOwlImports": true,
+        "model": [
+            {
+                "graph": "http://rack001/model",
+                "type": "fuseki",
+                "url": "http://localhost:3030/RACK"
+            }
+        ],
+        "name": "RACK local fuseki"
+    },
+    "version": 2
 }

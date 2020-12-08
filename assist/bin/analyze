@@ -1,0 +1,38 @@
+#!/usr/bin/env swipl
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
+%
+% All Rights Reserved
+%
+% This material is based upon work supported by the Defense Advanced Research
+% Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+%
+% Any opinions, findings and conclusions or recommendations expressed in this
+% material are those of the author(s) and do not necessarily reflect the views
+% of the Defense Advanced Research Projects Agency (DARPA).
+
+:- initialization(main, main).
+
+:- ensure_loaded('./paths').
+
+:- use_module(library(optparse)).
+:- consult(common_opts).
+:- consult(rack(analyze)).
+
+main :-
+    parse_args(
+        [
+            [opt(instance_prefix), meta('PREFIX'), type(atom),
+             shortflags([i]), longflags(['instance_prefix', 'instance']),
+             default(none),
+             help('Prefix of instances to analyze (or "all" to analyze all instances)')],
+
+            [opt(hide_ontology), type(boolean), default(false),
+             shortflags(['H']), longflags(['hide-ontology']),
+             help('Do not show core ontology details in output.')]
+
+        ], Opts, _PosArgs),
+    get_instance_pfx(Opts, Pfx),
+    (Pfx = none, !, report(Opts) ; report(Pfx, Opts)).
+
+get_instance_pfx(Opts, Pfx) :- member(instance_prefix(Pfx), Opts), !.
+get_instance_pfx(_, none).

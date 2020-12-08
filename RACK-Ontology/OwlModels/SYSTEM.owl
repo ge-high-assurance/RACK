@@ -1,21 +1,40 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:provs="http://arcos.rack/PROV-S"
+    xmlns:provs="http://arcos.rack/PROV-S#"
     xmlns:sys="http://arcos.rack/SYSTEM#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:D="http://arcos.rack/DOCUMENT#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.rack/SYSTEM">
   <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="DOCUMENT"/>
     <owl:imports rdf:resource="PROV-S"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'SYSTEM.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
+  <owl:Class rdf:ID="FUNCTION">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="parentFunction"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">defines functionality / capability</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="OP_ENV">
+    <rdfs:comment xml:lang="en">defines the operating environment assumptions and constraints</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
+  </owl:Class>
   <owl:Class rdf:ID="SYSTEM_DEVELOPMENT">
     <rdfs:comment xml:lang="en">ACTIVITY relating to the creation of one or more some SYSTEMs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
@@ -28,6 +47,10 @@
     <rdfs:comment xml:lang="en">INTERFACEs describe directed connections between an ENTITY (e.g. SYSTEM) providing what another ENTITY (e.g. SYSTEM) requires</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
+  <owl:Class rdf:ID="OP_PROCEDURE">
+    <rdfs:comment xml:lang="en">system operational procedures employed, e.g. going through a checklist, limiting people near runways, etc.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="DOCUMENT#PROCEDURE"/>
+  </owl:Class>
   <owl:ObjectProperty rdf:ID="provides">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
     <rdfs:comment xml:lang="en">List of entities that this SYSTEM provides to others</rdfs:comment>
@@ -38,6 +61,12 @@
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
     <rdfs:comment xml:lang="en">Used to define a relationship to a higher level system</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#SYSTEM"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="function">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:comment xml:lang="en">functionality / capability of a SYSTEM</rdfs:comment>
+    <rdfs:range rdf:resource="#FUNCTION"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="source">
@@ -52,6 +81,12 @@
     <rdfs:comment xml:lang="en">ACTIVITY(s) participating in developing this SYSTEM</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#parentFunction">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:comment xml:lang="en">allows for decomposition of functionality</rdfs:comment>
+    <rdfs:range rdf:resource="#FUNCTION"/>
+    <rdfs:domain rdf:resource="#FUNCTION"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="requires">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
@@ -77,4 +112,9 @@
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#INTERFACE"/>
   </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="envConstraint">
+    <rdfs:comment xml:lang="en">describes environmental constraints on system operations</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#OP_ENV"/>
+  </owl:DatatypeProperty>
 </rdf:RDF>

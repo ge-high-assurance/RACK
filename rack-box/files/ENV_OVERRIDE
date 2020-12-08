@@ -1,0 +1,7 @@
+## Use RACK / Fuseki for dataset / triplestore
+export PORT_SPARQLDB=3030
+export SERVICES_DATASET_SERVER_URL=http://${SERVICE_HOST}:${PORT_SPARQLDB}/RACK
+export SERVICES_DATASET_ENDPOINT_TYPE=fuseki
+
+## Don't load demo ontology
+export WEB_CUSTOM_AUTO_RUN_DEMO_FLAG=false

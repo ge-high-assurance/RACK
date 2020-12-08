@@ -1,16 +1,14 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:D="http://arcos.rack/DOCUMENT"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:j.0="http://arcos.rack/PROCESS#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:Pr="http://arcos.rack/PROCESS"
-    xmlns:ARP-4754A="http://common/ARP-4754A#"
-    xmlns:j.1="http://arcos.rack/DOCUMENT#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:j.2="http://arcos.rack/PROV-S#"
+    xmlns:j.0="http://arcos.rack/PROV-S#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:Pr="http://arcos.rack/PROCESS#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:ARP-4754A="http://common/ARP-4754A#"
+    xmlns:D="http://arcos.rack/DOCUMENT#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://common/ARP-4754A">
   <owl:Ontology rdf:about="">
@@ -21,233 +19,233 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'ARP-4754A.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.1:SPECIFICATION rdf:ID="ARP-4754A">
-    <j.2:content>
-      <j.1:SECTION rdf:ID="ARP-4754A-AppendixA">
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4786-7.1">
+  <D:SPECIFICATION rdf:ID="ARP-4754A">
+    <j.0:content>
+      <D:SECTION rdf:ID="ARP-4754A-AppendixA">
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4786-7.1">
             <j.0:description>Assurance is obtained that necessary plans are developed and maintained for all aspects of system certification.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4786-7.1</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4756-2.1">
+            <j.0:identifier>ARP-4786-7.1</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4756-2.1">
             <j.0:description>Aircraft-level functions, functional requirements, functional interfaces and assumptions are defined</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4756-2.1</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4754-1.1">
+            <j.0:identifier>ARP-4756-2.1</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4754-1.1">
             <j.0:description>System development and integral process activities are defined</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4754-1.1</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4787-7.2">
+            <j.0:identifier>ARP-4754-1.1</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4787-7.2">
             <j.0:description>Development activities and processes are conducted in accordance with those plans.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4787-7.2</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4776-5.1">
+            <j.0:identifier>ARP-4787-7.2</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4776-5.1">
             <j.0:description>Test or demonstration procedures are correct.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4776-5.1</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4769-3.7">
+            <j.0:identifier>ARP-4776-5.1</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4769-3.7">
             <j.0:description>Independence requirements in functions, systems and items are captured.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4769-3.7</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4768-3.6">
+            <j.0:identifier>ARP-4769-3.7</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4768-3.6">
             <j.0:description>The system safety assessment is performed.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4768-3.6</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4766-3.4">
+            <j.0:identifier>ARP-4768-3.6</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4766-3.4">
             <j.0:description>The common cause analyses are performed.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4766-3.4</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4781-5.6">
+            <j.0:identifier>ARP-4766-3.4</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:title>PROCESS OBJECTIVES DATA</j.0:title>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4781-5.6">
             <j.0:description>Assessment of deficiencies and their related impact on safety is identified.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4781-5.6</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4788-8.1">
+            <j.0:identifier>ARP-4781-5.6</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4788-8.1">
             <j.0:description>Compliance substantiation is provided.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4788-8.1</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4767-3.5">
+            <j.0:identifier>ARP-4788-8.1</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4767-3.5">
             <j.0:description>The aircraft safety assessment is performed.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4767-3.5</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4759-2.4">
+            <j.0:identifier>ARP-4767-3.5</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4759-2.4">
             <j.0:description>System derived requirements (including derived safety-related requirements) are defined and rationale explained</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4759-2.4</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4780-5.5">
+            <j.0:identifier>ARP-4759-2.4</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4780-5.5">
             <j.0:description>Verification compliance substantiation is included.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4780-5.5</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4758-2.3">
+            <j.0:identifier>ARP-4780-5.5</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4758-2.3">
             <j.0:description>System requirements including assumptions and system interfaces are defined.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4758-2.3</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4762-2.7">
+            <j.0:identifier>ARP-4758-2.3</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4762-2.7">
             <j.0:description>Appropriate item, system and aircraft integrations are performed.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4762-2.7</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4772-4.3">
+            <j.0:identifier>ARP-4762-2.7</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4772-4.3">
             <j.0:description>Derived requirements are justified and validated.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4772-4.3</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4783-6.2">
+            <j.0:identifier>ARP-4772-4.3</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4783-6.2">
             <j.0:description>Configuration baseline and derivatives are established.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4783-6.2</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4775-4.6">
+            <j.0:identifier>ARP-4783-6.2</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4775-4.6">
             <j.0:description>Validation compliance substantiation is provided.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4775-4.6</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4773-4.4">
+            <j.0:identifier>ARP-4775-4.6</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4773-4.4">
             <j.0:description>Requirements are traceable.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4773-4.4</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4784-6.3">
+            <j.0:identifier>ARP-4773-4.4</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4784-6.3">
             <j.0:description>Problem reporting , change control, change review, and configuration status accounting are established.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4784-6.3</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4779-5.4">
+            <j.0:identifier>ARP-4784-6.3</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4779-5.4">
             <j.0:description>Safety requirements are verified.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4779-5.4</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4757-2.2">
+            <j.0:identifier>ARP-4779-5.4</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4757-2.2">
             <j.0:description>Aircraft functions are allocated to systems</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4757-2.2</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4761-2.6">
+            <j.0:identifier>ARP-4757-2.2</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4761-2.6">
             <j.0:description>System requirements are allocated to items.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4761-2.6</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4774-4.5">
+            <j.0:identifier>ARP-4761-2.6</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4774-4.5">
             <j.0:description></j.0:description>
-            <j.2:uniqueIdentifier>ARP-4774-4.5</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4785-6.4">
+            <j.0:identifier>ARP-4774-4.5</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4785-6.4">
             <j.0:description>Archive and retrieval are established.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4785-6.4</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4782-6.1">
+            <j.0:identifier>ARP-4785-6.4</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4782-6.1">
             <j.0:description>Configuration items are identified</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4782-6.1</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4771-4.2">
+            <j.0:identifier>ARP-4782-6.1</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4771-4.2">
             <j.0:description>Assumptions are justified and validated.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4771-4.2</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4778-5.3">
+            <j.0:identifier>ARP-4771-4.2</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4778-5.3">
             <j.0:description>Product implementation complies with aircraft, and system requirements.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4778-5.3</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4777-5.2">
+            <j.0:identifier>ARP-4778-5.3</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4777-5.2">
             <j.0:description>Verification demonstrates intended function and confidence of no unintended function impacts to safety.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4777-5.2</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4765-3.3">
+            <j.0:identifier>ARP-4777-5.2</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4765-3.3">
             <j.0:description>The preliminary system safety assessment is performed.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4765-3.3</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4770-4.1">
+            <j.0:identifier>ARP-4765-3.3</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4770-4.1">
             <j.0:description>Aircraft, system, items requirements are complete and correct.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4770-4.1</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4755-1.2">
+            <j.0:identifier>ARP-4770-4.1</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4755-1.2">
             <j.0:description>Transition criteria and inter-relationship among processes are defined</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4755-1.2</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.1:title>PROCESS OBJECTIVES DATA</j.1:title>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4764-3.2">
+            <j.0:identifier>ARP-4755-1.2</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4764-3.2">
             <j.0:description>The preliminary aircraft safety assessment is performed.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4764-3.2</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4760-2.5">
+            <j.0:identifier>ARP-4764-3.2</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4760-2.5">
             <j.0:description>System architecture is defined.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4760-2.5</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-        <j.2:content>
-          <j.0:OBJECTIVE rdf:ID="ARP-4763-3.1">
+            <j.0:identifier>ARP-4760-2.5</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+        <j.0:content>
+          <Pr:OBJECTIVE rdf:ID="ARP-4763-3.1">
             <j.0:description>The aircraft/system functional hazard assessment is performed.</j.0:description>
-            <j.2:uniqueIdentifier>ARP-4763-3.1</j.2:uniqueIdentifier>
-          </j.0:OBJECTIVE>
-        </j.2:content>
-      </j.1:SECTION>
-    </j.2:content>
-    <j.1:approvalAuthority>
-      <j.2:AGENT rdf:ID="SAE"/>
-    </j.1:approvalAuthority>
-    <j.1:issuingOrganization>
-      <j.2:AGENT rdf:ID="WG-63"/>
-    </j.1:issuingOrganization>
-    <j.1:issuingOrganization>
-      <j.2:AGENT rdf:ID="S-18"/>
-    </j.1:issuingOrganization>
-    <j.1:status rdf:resource="http://arcos.rack/DOCUMENT#Released"/>
-    <j.1:dateOfIssue rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
-    >2010-12-01</j.1:dateOfIssue>
-  </j.1:SPECIFICATION>
+            <j.0:identifier>ARP-4763-3.1</j.0:identifier>
+          </Pr:OBJECTIVE>
+        </j.0:content>
+      </D:SECTION>
+    </j.0:content>
+    <D:approvalAuthority>
+      <j.0:AGENT rdf:ID="SAE"/>
+    </D:approvalAuthority>
+    <D:issuingOrganization>
+      <j.0:AGENT rdf:ID="WG-63"/>
+    </D:issuingOrganization>
+    <D:issuingOrganization>
+      <j.0:AGENT rdf:ID="S-18"/>
+    </D:issuingOrganization>
+    <D:status rdf:resource="http://arcos.rack/DOCUMENT#Released"/>
+    <D:dateOfIssue rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2010-12-01</D:dateOfIssue>
+  </D:SPECIFICATION>
 </rdf:RDF>

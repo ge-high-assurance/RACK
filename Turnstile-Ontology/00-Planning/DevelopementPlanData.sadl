@@ -1,0 +1,778 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+ uri "http://Turnstile/DevelopmentPlanData" alias trnstldpd.
+import "http://Turnstile/DevelopmentPlan".
+
+   //Model Location: DevelopmentPlan
+_DevelopmentPlan is a PLAN,
+    has content _01-PlanForSoftwareAspectsOfCertification,
+    has content _02-SystemDevelopement,
+    has content _03-SoftwareDevelopment,
+    has content _04-SoftwareVerification,
+    has content _05-SoftwareConfigurationManagment,
+    has content _06-SoftwareQualityAssurance,
+    has content _07-SoftwareStandards.
+
+
+
+      //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification
+  _01-PlanForSoftwareAspectsOfCertification is a PLAN,
+      has content _01-SystemOverview,
+      has content _02-SoftwareOverview,
+      has content _03-CertificationConsiderations,
+      has content _04-SoftwareLifeCycle,
+      has content _05-SoftwareLifeCycleData,
+      has content _06-Schedule,
+      has content _07-AdditionalConsiderations,
+      has content _08-SupplierOversite.
+
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview
+    _01-SystemOverview is a SECTION,
+        has content CounterApplication,
+        has content Display,
+        has content InGate,
+        has content OutGate,
+        has content Turnstile.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.CounterApplication
+      CounterApplication is a SystemComponent
+        has partOf Turnstile.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Display
+      Display is a SystemComponent
+        has partOf Turnstile.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.InGate
+      InGate is a SystemComponent
+		has identifier "In Gate"
+        has partOf Turnstile.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.OutGate
+      OutGate is a SystemComponent,
+		has identifier "Out Gate",
+        has partOf Turnstile.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Turnstile
+      Turnstile is a SYSTEM
+		has identifier "Turnstile".
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Census
+      Census is a SystemInterfaceDefinition
+		has identifier "census".
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Inflow
+      Inflow is a SystemInterfaceDefinition
+		has identifier "inflow".
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Outflow
+      Outflow is a SystemInterfaceDefinition
+		has identifier "outflow".
+
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview
+    _02-SoftwareOverview is a SECTION,
+        has content CounterApplication,
+        has content ExecutiveThread,
+        has content InputThread,
+        has content OutputThread.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.CounterApplication
+      CounterApplication is a SYSTEM.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.ExecutiveThread
+      ExecutiveThread is a COMPONENT
+        has partOf CounterApplication.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.InputThread
+      InputThread is a COMPONENT
+        has partOf CounterApplication.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.OutputThread
+      OutputThread is a COMPONENT
+        has partOf CounterApplication.
+
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.03-CertificationConsiderations
+    _03-CertificationConsiderations is a SECTION.
+
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle
+    _04-SoftwareLifeCycle is a SECTION.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle.SoftwareConfigurationManagementProcess
+      SoftwareConfigurationManagementProcess is a ACTIVITY
+        has wasInformedBy SoftwareDevelopmentProcess
+        has wasInformedBy SoftwareVerficationProcess.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle.SoftwareDevelopmentProcess
+      SoftwareDevelopmentProcess is a ACTIVITY
+        has wasInformedBy System_Development_Process
+        has wasInformedBy SoftwarePlanningProcess
+        has used RequirementStandard
+        has used SoftwareStandard
+        has used SystemSpec
+        has used SystemVerificationReport.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle.SoftwarePlanningProcess
+      SoftwarePlanningProcess is a ACTIVITY.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle.SoftwareQualityAssuranceProcess
+      SoftwareQualityAssuranceProcess is a ACTIVITY
+        has wasInformedBy SoftwarePlanningProcess
+        has wasInformedBy SoftwareDevelopmentProcess
+        has wasInformedBy SoftwareVerficationProcess.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle.SoftwareVerficationProcess
+      SoftwareVerficationProcess is a ACTIVITY
+        has wasInformedBy SoftwareDevelopmentProcess
+        has used VerificationStandard
+        has used CounterApplicationSoftware
+        has used CounterApplicationSourceCode
+        has used CounterApplicationSoftwareDesign
+        has used CounterApplicationRequirementSpec.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.04-SoftwareLifeCycle.System Development Process
+      System_Development_Process is a ACTIVITY
+        has wasInformedBy SoftwareConfigurationManagementProcess.
+
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData
+    _05-SoftwareLifeCycleData is a SECTION,
+        has content CounterApplicationRequirementSpec,
+        has content CounterApplicationSoftware,
+        has content CounterApplicationSoftwareDesign,
+        has content CounterApplicationSourceCode,
+        has content CounterVerificationResults,
+        has content RequirementStandard,
+        has content SoftwareConfigurationIndex,
+        has content SoftwareEnvironmentConfigurationIndex,
+        has content SoftwareStandard,
+        has content SoftwareVersionDescription,
+        has content SystemSpec,
+        has content SystemVerificationReport,
+        has content VerificationStandard.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterApplicationRequirementSpec
+      CounterApplicationRequirementSpec is a SPECIFICATION
+      	has identifier "Counter-Req-Spec"
+        has wasGeneratedBy SoftwareDevelopmentProcess.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterApplicationSoftware
+      CounterApplicationSoftware is a COLLECTION
+        has wasGeneratedBy SoftwareDevelopmentProcess.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterApplicationSoftwareDesign
+      CounterApplicationSoftwareDesign is a DESCRIPTION      
+        has identifier "Counter-SW-Des"
+        has wasGeneratedBy SoftwareDevelopmentProcess.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterApplicationSourceCode
+      CounterApplicationSourceCode is a SPECIFICATION      
+        has identifier "SW-Code"
+        has wasGeneratedBy SoftwareDevelopmentProcess.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.CounterVerificationResults
+      CounterVerificationResults is a REPORT
+      	has identifier "Counter-Ver-Rep"
+        has wasGeneratedBy SoftwareVerficationProcess.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.RequirementStandard
+      RequirementStandard is a SPECIFICATION
+      	has identifier "RQ-STD"
+        has wasGeneratedBy SoftwarePlanningProcess.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SoftwareConfigurationIndex
+      SoftwareConfigurationIndex is a REPORT
+      	has identifier "SCI"
+        has wasGeneratedBy SoftwareConfigurationManagementProcess.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SoftwareEnvironmentConfigurationIndex
+      SoftwareEnvironmentConfigurationIndex is a REPORT
+        has identifier "SECI"
+        has wasGeneratedBy SoftwareConfigurationManagementProcess.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SoftwareStandard
+      SoftwareStandard is a SPECIFICATION
+        has identifier "SW-STD"
+        has wasGeneratedBy SoftwarePlanningProcess.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SoftwareVersionDescription
+      SoftwareVersionDescription is a DESCRIPTION
+        has identifier "SW-Ver-Des"
+        has wasGeneratedBy SoftwareConfigurationManagementProcess.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SystemSpec
+      SystemSpec is a SPECIFICATION
+        has identifier "Sys-Spec"
+        has wasGeneratedBy System_Development_Process.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SystemVerificationReport
+      SystemVerificationReport is a REPORT      
+        has identifier "Sys-Ver-Rep"
+        has wasGeneratedBy System_Development_Process.
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.VerificationStandard
+      VerificationStandard is a SPECIFICATION      
+        has identifier "VER-STD"
+        has wasGeneratedBy SoftwarePlanningProcess.
+
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.06-Schedule
+    _06-Schedule is a SECTION.
+
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.07-AdditionalConsiderations
+    _07-AdditionalConsiderations is a SECTION.
+
+
+
+        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.08-SupplierOversite
+    _08-SupplierOversite is a SECTION.
+
+
+
+      //Model Location: DevelopmentPlan.02-SystemDevelopement
+  _02-SystemDevelopement is a PLAN,
+      has content _01-SystemRequirements,
+      has content _02-SystemDesign,
+      has content _03-HazardAssesment.
+
+
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.01-SystemRequirements
+    _01-SystemRequirements is a SECTION.
+    
+    
+
+
+      Rule SystemRequirement_content:
+        given x is a  SystemRequirement 
+        then SystemSpec has content x.
+
+
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.02-SystemDesign
+    _02-SystemDesign is a SECTION.
+
+
+      Rule SystemComponent_content:
+        given x is a  SystemComponent 
+        then SystemSpec has content x.
+
+
+       Rule SystemInterfaceDefinition_content:
+        given x is a  SystemInterfaceDefinition 
+        then SystemSpec has content x.
+
+
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.03-HazardAssesment
+    _03-HazardAssesment is a SECTION.
+
+
+
+      //Model Location: DevelopmentPlan.03-SoftwareDevelopment
+  _03-SoftwareDevelopment is a PLAN,
+      has content _01-Standards,
+      has content _02-SoftwareDevelopmentLifeCycle,
+      has content _03-SoftwareDevelopmentEnvironment.
+
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.01-Standards
+    _01-Standards is a SECTION.
+
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle
+    _02-SoftwareDevelopmentLifeCycle is a SECTION.
+
+
+
+      Rule SoftwareCoding_A-2-6:
+        given x is a  SoftwareCoding 
+        then A-2-6 has satisfiedBy x.
+
+
+
+      Rule SoftwareDesign_A-2-5:
+        given x is a  SoftwareDesign 
+        then A-2-5 has satisfiedBy x.
+      Rule SoftwareDesign_A-2-4:
+        given x is a  SoftwareDesign 
+        then A-2-4 has satisfiedBy x.
+
+
+
+      Rule SoftwareIntegration_A-2-7:
+        given x is a  SoftwareIntegration 
+        then A-2-7 has satisfiedBy x.
+
+
+
+      Rule SoftwareRequirementsDefinition_A-2-2:
+        given x is a  SoftwareRequirementsDefinition 
+        then A-2-2 has satisfiedBy x.
+      Rule SoftwareRequirementsDefinition_A-2-1:
+        given x is a  SoftwareRequirementsDefinition 
+        then A-2-1 has satisfiedBy x.
+
+
+
+
+
+
+      Rule SourceCode_content:
+        given x is a SourceCode 
+        then CounterApplicationSourceCode has content x.
+        sw:satisfies of SourceCode only has values of type LowLevelRequirement.
+
+
+
+      Rule DataAndControlCouple_content:
+        given x is a  DataAndControlCouple 
+        then CounterApplicationSoftwareDesign has content x.
+
+
+
+      Rule DataDictionary_content:
+        given x is a  DataDictionary 
+        then CounterApplicationRequirementSpec has content x.
+
+
+
+      Rule ExecutableObject_content:
+        given x is a  ExecutableObject 
+        then CounterApplicationSoftware has content x.
+
+
+      Rule HighLevelRequirement_content:
+        given x is a  HighLevelRequirement 
+        then CounterApplicationRequirementSpec has content x.
+        Rq:satisfies of HighLevelRequirement only has values of type SystemRequirement.
+
+
+      Rule LowLevelRequirement_content:
+        given x is a  LowLevelRequirement 
+        then CounterApplicationSoftwareDesign has content x.
+        Rq:satisfies of LowLevelRequirement only has values of type HighLevelRequirement.
+
+
+      Rule RpmFile_content:
+        given x is a  RpmFile 
+        then CounterApplicationSoftware has content x.
+
+
+      Rule SoftwareModule_content:
+        given x is a  SoftwareModule 
+        then CounterApplicationSoftwareDesign has content x.
+
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment
+    _03-SoftwareDevelopmentEnvironment is a SECTION,
+        has content CSourceFile,
+        has content ElfFile,
+        has content GCC,
+        has content General_Electric,
+        has content JsonFile,
+        has content TAR,
+        has content TarFile,
+        has content ZipFile.
+
+
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.CSourceFile
+      CSourceFile is a FORMAT
+      	has identifier ".c".
+
+      CHeaderFile is a FORMAT
+      	has identifier ".h".
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.ElfFile
+      ElfFile is a FORMAT
+      	has identifier ".o".
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.GCC
+      GCC is a TOOL
+      	has identifier "gcc".
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.General Electric
+      General_Electric is a ORGANIZATION
+      	has identifier "GE".
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.JsonFile
+      JsonFile is a FORMAT
+      	has identifier ".json".
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.TAR
+      TAR is a TOOL
+      	has identifier "tar".
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.TarFile
+      TarFile is a FORMAT
+      	has identifier ".tar".
+
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.ZipFile
+      ZipFile is a FORMAT
+      	has identifier ".zip".
+
+
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification
+  _04-SoftwareVerification is a PLAN,
+      has content _01-SoftwareReviewProcess,
+      has content _02-SoftwareTestGenerationProcess,
+      has content _04-SoftwareAnalysis,
+      has content _03-SoftwareTestExecutionProcess.
+
+ASSERT is a AGENT.
+    Rule ControlCoupleCoverageReport_content:
+      given x is a  ControlCoupleCoverageReport 
+      then SystemVerificationReport has content x.
+
+
+     Rule DataCoupleCoverageReport_content:
+      given x is a  DataCoupleCoverageReport 
+      then SystemVerificationReport has content x.
+
+
+    Rule SoftwareCodeReviewArtifacts_content:
+      given x is a  SoftwareCodeReviewArtifacts 
+      then SystemVerificationReport has content x.
+
+
+    Rule SoftwareComponentTest_content:
+      given x is a  SoftwareComponentTest 
+      then SystemVerificationReport has content x.
+      wasGeneratedBy of SoftwareComponentTest only has values of type DevelopComponentTests.
+      verifies of SoftwareComponentTest only has values of type HighLevelRequirement.
+
+
+    Rule SoftwareComponentTestResult_content:
+      given x is a  SoftwareComponentTestResult 
+      then SystemVerificationReport has content x.
+      confirms of SoftwareComponentTestResult only has values of type SoftwareComponentTest.
+
+
+    Rule SoftwareDesignReviewArtifacts_content:
+      given x is a  SoftwareDesignReviewArtifacts 
+      then SystemVerificationReport has content x.
+      reviews of SoftwareDesignReviewArtifacts only has values of type LowLevelRequirement.
+
+
+    Rule SoftwareRequirementReviewArtifacts_content:
+      given x is a  SoftwareRequirementReviewArtifacts 
+      then SystemVerificationReport has content x.
+      wasGeneratedBy of SoftwareRequirementReviewArtifacts only has values of type SoftwareRequirementsReview.
+      reviews of SoftwareRequirementReviewArtifacts only has values of type HighLevelRequirement.
+
+
+
+    Rule SoftwareUnitTest_content:
+      given x is a  SoftwareUnitTest 
+      then SystemVerificationReport has content x.
+      wasGeneratedBy of SoftwareUnitTest only has values of type DevelopUnitTests.
+      verifies of SoftwareUnitTest only has values of type LowLevelRequirement.
+
+
+    Rule SoftwareUnitTestResult_content:
+      given x is a  SoftwareUnitTestResult 
+      then SystemVerificationReport has content x.
+      confirms of SoftwareUnitTestResult only has values of type SoftwareUnitTest.
+
+
+    Rule StructuralCoverageReport_content:
+      given x is a  StructuralCoverageReport 
+      then SystemVerificationReport has content x.
+
+
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess
+    _01-SoftwareReviewProcess is a SECTION.
+
+
+      Rule SoftwareCodeReview_A-5-1:
+        given x is a  SoftwareCodeReview 
+        then A-5-1 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-2:
+        given x is a  SoftwareCodeReview 
+        then A-5-2 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-3:
+        given x is a  SoftwareCodeReview 
+        then A-5-3 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-4:
+        given x is a  SoftwareCodeReview 
+        then A-5-4 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-5:
+        given x is a  SoftwareCodeReview 
+        then A-5-5 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-6:
+        given x is a  SoftwareCodeReview 
+        then A-5-6 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-7:
+        given x is a  SoftwareCodeReview 
+        then A-5-7 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-8:
+        given x is a  SoftwareCodeReview 
+        then A-5-8 has satisfiedBy x.
+      Rule SoftwareCodeReview_A-5-9:
+        given x is a  SoftwareCodeReview 
+        then A-5-9 has satisfiedBy x.
+
+
+       Rule SoftwareDesignReview_A-4-1:
+        given x is a  SoftwareDesignReview 
+        then A-4-1 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-2:
+        given x is a  SoftwareDesignReview 
+        then A-4-2 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-3:
+        given x is a  SoftwareDesignReview 
+        then A-4-3 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-6:
+        given x is a  SoftwareDesignReview 
+        then A-4-6 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-7:
+        given x is a  SoftwareDesignReview 
+        then A-4-7 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-5:
+        given x is a  SoftwareDesignReview 
+        then A-4-5 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-4:
+        given x is a  SoftwareDesignReview 
+        then A-4-4 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-8:
+        given x is a  SoftwareDesignReview 
+        then A-4-8 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-9:
+        given x is a  SoftwareDesignReview 
+        then A-4-9 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-10:
+        given x is a  SoftwareDesignReview 
+        then A-4-10 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-11:
+        given x is a  SoftwareDesignReview 
+        then A-4-11 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-12:
+        given x is a  SoftwareDesignReview 
+        then A-4-12 has satisfiedBy x.
+      Rule SoftwareDesignReview_A-4-13:
+        given x is a  SoftwareDesignReview 
+        then A-4-13 has satisfiedBy x.
+
+
+      Rule SoftwareRequirementsReview_A-3-1:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-1 has satisfiedBy x.
+      Rule SoftwareRequirementsReview_A-3-2:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-2 has satisfiedBy x.
+      Rule SoftwareRequirementsReview_A-3-3:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-3 has satisfiedBy x.
+      Rule SoftwareRequirementsReview_A-3-4:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-4 has satisfiedBy x.
+      Rule SoftwareRequirementsReview_A-3-5:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-5 has satisfiedBy x.
+      Rule SoftwareRequirementsReview_A-3-6:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-6 has satisfiedBy x.
+      Rule SoftwareRequirementsReview_A-3-7:
+        given x is a  SoftwareRequirementsReview 
+        then A-3-7 has satisfiedBy x.
+
+
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.02-SoftwareTestGenerationProcess
+    _02-SoftwareTestGenerationProcess is a SECTION.
+
+
+      Rule DevelopComponentTests_A-7-1:
+        given x is a  DevelopComponentTests 
+        then A-7-1 has satisfiedBy x.
+
+
+      Rule DevelopUnitTests_A-7-1:
+        given x is a  DevelopUnitTests 
+        then A-7-1 has satisfiedBy x.
+
+
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis
+    _04-SoftwareAnalysis is a SECTION.
+
+
+      Rule ControlCouplingAnalysis_A-7-8:
+        given x is a  ControlCouplingAnalysis 
+        then A-7-8 has satisfiedBy x.
+
+
+      Rule DataCouplingAnalysis_A-7-8:
+        given x is a  DataCouplingAnalysis 
+        then A-7-8 has satisfiedBy x.
+
+
+      Rule StructualCoverageAnalysis_A-7-7:
+        given x is a  StructualCoverageAnalysis 
+        then A-7-7 has satisfiedBy x.
+      Rule StructualCoverageAnalysis_A-7-6:
+        given x is a  StructualCoverageAnalysis 
+        then A-7-6 has satisfiedBy x.
+      Rule StructualCoverageAnalysis_A-7-5:
+        given x is a  StructualCoverageAnalysis 
+        then A-7-5 has satisfiedBy x.
+
+
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.03-SoftwareTestExecutionProcess
+    _03-SoftwareTestExecutionProcess is a SECTION.
+
+
+      Rule SoftwareComponentTestExecution_A-6-1:
+        given x is a  SoftwareComponentTestExecution 
+        then A-6-1 has satisfiedBy x.
+      Rule SoftwareComponentTestExecution_A-6-2:
+        given x is a  SoftwareComponentTestExecution 
+        then A-6-2 has satisfiedBy x.
+      Rule SoftwareComponentTestExecution_A-6-5:
+        given x is a  SoftwareComponentTestExecution 
+        then A-6-5 has satisfiedBy x.
+      Rule SoftwareComponentTestExecution_A-7-2:
+        given x is a  SoftwareComponentTestExecution 
+        then A-7-2 has satisfiedBy x.
+      Rule SoftwareComponentTestExecution_A-7-3:
+        given x is a  SoftwareComponentTestExecution 
+        then A-7-3 has satisfiedBy x.
+
+
+      Rule SoftwareUnitTestExecution_A-6-3:
+        given x is a  SoftwareUnitTestExecution 
+        then A-6-3 has satisfiedBy x.
+      Rule SoftwareUnitTestExecution_A-6-4:
+        given x is a  SoftwareUnitTestExecution 
+        then A-6-4 has satisfiedBy x.
+      Rule SoftwareUnitTestExecution_A-7-2:
+        given x is a  SoftwareUnitTestExecution 
+        then A-7-2 has satisfiedBy x.
+      Rule SoftwareUnitTestExecution_A-7-4:
+        given x is a  SoftwareUnitTestExecution 
+        then A-7-4 has satisfiedBy x.
+
+
+
+      //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment
+  _05-SoftwareConfigurationManagment is a PLAN,
+      has content _01-ChangeManagement,
+      has content _02-SoftwareConfigurationManagementEnvironment.
+
+
+
+
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.01-ChangeManagement
+    _01-ChangeManagement is a SECTION.
+
+
+      Rule Problem_Reporting_A-7-2:
+        given x is a  Problem_Reporting 
+        then A-7-2 has satisfiedBy x.
+
+
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment
+    _02-SoftwareConfigurationManagementEnvironment is a SECTION.
+
+
+
+
+
+      //Model Location: DevelopmentPlan.06-SoftwareQualityAssurance
+  _06-SoftwareQualityAssurance is a PLAN.
+
+
+
+      //Model Location: DevelopmentPlan.07-SoftwareStandards
+  _07-SoftwareStandards is a PLAN,
+      has content SoftwareCodeReviewChecklist,
+      has content SoftwareDesignReviewChecklist,
+      has content SoftwareRequirementReviewChecklist,
+      has content SoftwareTestGuidance.
+
+
+      //Model Location: DevelopmentPlan.07-SoftwareStandards.SoftwareCodeReviewChecklist
+    SoftwareCodeReviewChecklist is a PLAN
+      has used VerificationStandard.
+
+
+      //Model Location: DevelopmentPlan.07-SoftwareStandards.SoftwareDesignReviewChecklist
+    SoftwareDesignReviewChecklist is a PLAN
+      has used VerificationStandard.
+
+
+      //Model Location: DevelopmentPlan.07-SoftwareStandards.SoftwareRequirementReviewChecklist
+    SoftwareRequirementReviewChecklist is a PLAN
+      has used VerificationStandard.
+
+
+      //Model Location: DevelopmentPlan.07-SoftwareStandards.SoftwareTestGuidance
+    SoftwareTestGuidance is a PLAN
+      has used VerificationStandard.
+    

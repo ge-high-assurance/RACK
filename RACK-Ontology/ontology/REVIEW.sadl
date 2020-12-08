@@ -1,3 +1,15 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
 uri "http://arcos.rack/REVIEW" alias Rv.
 import "http://arcos.rack/PROV-S".
 
@@ -9,10 +21,16 @@ REVIEW_LOG
 	reviews is a type of wasDerivedFrom.
 
 	reviewResult (note "Review status descriptor") describes REVIEW_LOG with values of type REVIEW_STATE.
-	REVIEW_STATE is a class, must be one of {Passed, ReviseWithoutReview, ReviseWithReview}.
 
 	createBy (note "ACTIVITY(s) (e.g. REVIEW) that created this log") describes REVIEW_LOG with values of type ACTIVITY.
 	createBy is a type of wasGeneratedBy.
+
+REVIEW_STATE (note "Life-cycle status of a review log")
+    is a type of THING,
+    must be one of {Passed, ReviseWithoutReview, ReviseWithReview}.
+Passed              is a REVIEW_STATE with identifier "Passed".
+ReviseWithoutReview is a REVIEW_STATE with identifier "Review Without Review".
+ReviseWithReview    is a REVIEW_STATE with identifier "Revise With Review".
 
 REVIEW
 	(note "Code review ACTIVITY")

@@ -1,0 +1,198 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+ uri "http://Turnstile/CounterApplication" alias cntrappcode.
+import "http://Turnstile/DevelopmentPlan".
+import "http://Turnstile/DevelopmentPlanData".
+import "http://Turnstile/CounterApplicationDesignDescription".
+
+
+CodeSW-1 is a SoftwareCoding
+	has identifier "CodeSW-1"
+	has author JaneDoe
+	has referenced SoftwareStandard.
+
+
+
+// input.o
+
+input_c is a SourceCode
+    has identifier "input_c"
+    has filename "input.c"
+    has createBy CodeSW-1
+    has fileFormat CSourceFile.
+
+input_h is a SourceCode
+    has identifier "input_h"
+    has filename "input.h"
+    has createBy CodeSW-1
+    has fileFormat CHeaderFile.
+
+
+input_o_Compiling is a SoftwareIntegration
+    has identifier "input_o_Compiling"
+    has performedBy GCC
+    has compileInput input_c
+    has compileInput input_h.
+
+input_o is a ObjectFile
+    has identifier "input_o"
+    has filename "input.o"
+    has file:createBy input_o_Compiling
+    has fileFormat ElfFile.
+
+// output.o
+
+output_c is a SourceCode
+    has identifier "output_c"
+    has filename "output.c"
+    has createBy CodeSW-1
+    has fileFormat CSourceFile.
+output_h is a SourceCode
+    has identifier "output_h"
+    has filename "output.h"
+    has createBy CodeSW-1
+    has fileFormat CHeaderFile
+    has satisfies OUT-LLR-1
+    has satisfies OUT-LLR-2.
+
+
+output_o_Compiling is a SoftwareIntegration
+    has identifier "output_o_Compiling"
+    has compileInput output_c
+    has compileInput output_h
+    has performedBy GCC
+    has compileWithOptimizations  true
+    has linkerPath "/path/to/libraries".
+
+output_o is a ObjectFile
+    has identifier "output_o"
+    has filename "output.o"
+    has file:createBy output_o_Compiling
+    has fileFormat ElfFile.
+
+// hw.o libhw.so
+
+hw_c is a SourceCode
+    has identifier "hw_c"
+    has filename "hw.c"
+    has file:createBy CodeSW-1
+    has fileFormat CSourceFile.
+hw_h is a SourceCode
+    has identifier "hw_h"
+    has filename "hw.h"
+    has createBy CodeSW-1
+    has fileFormat CHeaderFile
+    has file:satisfies IN-LLR-1
+    has file:satisfies IN-LLR-2
+    has file:satisfies IN-LLR-3
+    has file:satisfies IN-LLR-4
+    has file:satisfies IN-LLR-5
+    has file:satisfies IN-LLR-6.
+
+hw_o_Compiling is a SoftwareIntegration
+    has identifier "hw_o_Compiling"
+    has performedBy GCC
+    has compileInput hw_c
+    has compileInput hw_h.
+
+hw_o is a ObjectFile
+    has identifier "hw_o"
+    has filename "hw.o"
+    has file:createBy hw_o_Compiling
+    has fileFormat ElfFile.
+
+libhw_so_Compiling is a SoftwareIntegration
+    has identifier "libhw_so_Compiling"
+    has performedBy GCC
+    has compileInput hw_o.
+
+libhw_so is a ObjectFile
+    has identifier "libhw_so"
+    has filename "libhw.so"
+    has file:createBy libhw_so_Compiling
+    has fileFormat ElfFile.
+
+// counter.exe
+
+counter_c is a SourceCode
+    has identifier "counter_c"
+    has filename "counter.c"
+    has createBy CodeSW-1
+    has fileFormat CSourceFile.
+    
+counter_h is a SourceCode
+    has identifier "counter_h"
+    has filename "counter.h"
+    has createBy CodeSW-1
+    has fileFormat CHeaderFile
+    has file:satisfies EXE-LLR-1
+    has file:satisfies EXE-LLR-2
+    has file:satisfies EXE-LLR-3.
+
+
+
+counter_exe_Compiling is a SoftwareIntegration
+    has identifier "counter_exe_Compiling"
+    has performedBy GCC
+    has compileInput input_o
+    has compileInput output_o
+    has compileInput libhw_so
+    has compileInput counter_c
+    has compileInput counter_h.
+
+counter_exe is an ObjectFile
+    has identifier "counter_exe"
+    has filename "counter.exe"
+    has file:createBy counter_exe_Compiling
+    has fileFormat ElfFile.
+    
+// conf.json
+
+conf_json is a FILE
+    has identifier "conf_json"
+    has filename "conf.json"
+    has createBy CodeSW-1
+    has fileFormat JsonFile.
+
+// dist.tar.gz
+
+dist_tar is a FILE
+    has identifier "dist_tar"
+    has filename "dist.tar"
+	has wasGeneratedBy tarPackaging
+	has fileFormat TarFile.
+
+tarPackaging is a PACKAGE
+    has identifier "tarPackaging"
+    has performedBy TAR
+    has packageInput conf_json
+    has packageInput libhw_so
+    has packageInput counter_exe.
+
+// test.o
+
+test_c is a SourceCode
+    has identifier "test_c"
+    has filename "test.c"
+    has createBy CodeSW-1
+    has fileFormat CSourceFile.
+test_h is a SourceCode
+    has identifier "test_h"
+    has filename "test.h"
+    has createBy CodeSW-1
+    has fileFormat CHeaderFile.
+
+test_exe_Compiling is a SoftwareIntegration
+    has identifier "test_exe_Compiling"
+    has performedBy GCC
+    has compileInput test_c
+    has compileInput test_h.

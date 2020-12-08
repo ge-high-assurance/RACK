@@ -1,0 +1,202 @@
+% Copyright (c) 2020, General Electric Company and Galois, Inc.
+:- multifile data_instance/4, data_get/4.
+
+databin_name(MyName) :-
+    append_fld('v0.8', ingest_databin, MyName).
+
+% These are the various facts that might be emitted by the databin
+% wrappers that will be recognized here.
+
+:- discontiguous tar_access/3,
+                 tar_start/3,
+                 tar_finished/3,
+                 build_with/5,
+                 build_inputs/2,
+                 build_outputs/2,
+                 build_from/2,
+                 build_start/2,
+                 build_finished/3,
+                 file_sha1/3.
+
+%% Recognizers for matching tool output data
+
+% -- This ingestion activity
+
+data_instance('PROV-S#ACTIVITY', load_data_start, MyName, [uid(MyName),ingesting_data(StartTime)]) :-
+    databin_name(MyName),
+    get_time(TS), stamp_date_time(TS, date(_Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
+    StartTime = date_time(1999,Mo,D,H,Min,S,UTCOff).
+data_instance('PROV-S#ACTIVITY', load_data_finish, MyName, ingested_data(EndTime)) :-
+    databin_name(MyName),
+    get_time(TS), stamp_date_time(TS, date(Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
+    EndTime = date_time(Y,Mo,D,H,Min,S,UTCOff).
+data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime', ingesting_data(StartTime), StartTime).
+data_get('PROV-S#ACTIVITY', 'PROV-S#wasInformedBy', ingesting_data(_), ModelName) :-
+    rack_model_name(ModelName).
+data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', ingested_data(EndTime), EndTime).
+
+%% -- tar ------------------------------
+
+data_instance('SOFTWARE#FILE', load_data, Instance,
+              [ uid(Instance), sw_file_data(Nonce, Dir, File) ]) :-
+    tar_access(Nonce, File, create),
+    build_from(Nonce, Dir),
+    file_instance(Nonce, Dir, File, Instance).
+
+data_instance('SOFTWARE#FILE', load_data, Instance,
+              [ uid(Instance), sw_file_data(Nonce, Dir, File) ]) :-
+    tar_access(Nonce, File, open),
+    build_from(Nonce, Dir),
+    file_instance(Nonce, Dir, File, Instance).
+
+data_get('SOFTWARE#FILE', 'SOFTWARE#fileFormat',
+         sw_file_data(Nonce, _, File), 'TarFile') :-
+    tar_access(Nonce, File, create).
+
+data_instance('SOFTWARE#PACKAGE', load_data, Instance,
+              [ uid(Instance), package_tar(Nonce) ]) :-
+    tar_access(Nonce, _, create),
+    activity_instance(Nonce, tar, Instance).
+
+data_get('SOFTWARE#PACKAGE', 'SOFTWARE#packagedBy', package_tar(N), ToolPath) :-
+    tar_start(N, _, ToolPath).
+
+data_get('SOFTWARE#PACKAGE', 'SOFTWARE#packageInput', package_tar(Nonce), V) :-
+    tar_access(Nonce, File, open),
+    build_from(Nonce, Dir),
+    file_instance(Nonce, Dir, File, V).
+
+data_get(_, 'PROV-S#startedAtTime', package_tar(N), T) :- tar_start(N, T, _).
+data_get(_, 'PROV-S#endedAtTime', package_tar(N), T) :- tar_finished(N, T, _).
+
+data_instance('SOFTWARE#FILE', load_data, TarPath,
+              [uid(TarPath), sw_file_data(Nonce, '/tmp', TarPath)]) :-
+    tar_start(Nonce, _, TarPath).
+
+data_get('SOFTWARE#FILE', 'SOFTWARE#createBy', sw_file_data(Nonce, Dir, File), V) :-
+    tar_access(Nonce, File, create),
+    build_from(Nonce, Dir),
+    activity_instance(Nonce, tar, V).
+
+data_get('SOFTWARE#BUILD', 'SOFTWARE#step',
+         activity_data(build_with(BuildNonce, _, _, _, _),_,_), V) :-
+    build_step(BuildNonce, N),
+    tar_start(N, _, _),
+    activity_instance(N, tar, V).
+
+
+%% -- files ------------------------------
+
+file_instance(Nonce, _, Input, InstanceRef) :-
+    % The above failed so file was not an output of a previous build.
+    % It was probably created by a user, so it's a new, distinct file.
+    (file_sha1(Input, SHA1, Nonce), !, append_fld(SHA1, Input, InstanceRef);
+     atom_string(IA, Input), file_sha1(IA, SHA1, Nonce), !, append_fld(SHA1, IA, InstanceRef);
+     append_fld(Nonce, Input, InstanceRef)).
+
+data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
+    build_inputs(Nonce, Inputs),
+    build_from(Nonce, Dir),
+    member(Input, Inputs),
+    file_instance(Nonce, Dir, Input, Instance),
+    InstanceData = [uid(Instance), sw_file_data(Nonce, Dir, Input)].
+
+data_instance('SOFTWARE#FILE', load_data, Instance, InstanceData) :-
+    build_outputs(Nonce, Outputs),
+    build_from(Nonce, Dir),
+    member(Output, Outputs),
+    file_instance(Nonce, Dir, Output, Instance),
+    InstanceData = [uid(Instance), sw_file_data(Nonce, Dir, Output)].
+
+data_instance('SOFTWARE#FILE', load_data, ToolPath,
+              [uid(UID), sw_file_data(Nonce, '/tmp', ToolPath)]) :-
+    build_with(Nonce, _ToolType, _ToolName, ToolPath, _ToolArgs),
+    UID = ToolPath.
+
+data_get('SOFTWARE#FILE', 'SOFTWARE#fileFormat',
+         sw_file_data(Nonce, _, F), 'CSourceFile') :-
+    build_inputs(Nonce, FS),
+    member(F, FS),
+    build_with(Nonce, compile, _, _, _),
+    % now make sure this wasn't an output of a previous build step
+    % (e.g. a .o object file)
+    build_from(Nonce, Dir),
+    \+ output_of(compile, Dir, F, _).
+
+output_of(Tool, Dir, F, BuildNonce) :-
+    % File F in dir Dir might be the output of a previous build (if
+    % so, report the BuildNonce).  The Tool might be specified as a
+    % restriction, or it might also be an output.
+    build_from(BuildNonce, Dir),
+    build_with(BuildNonce, Tool, _, _, _),
+    build_outputs(BuildNonce, FS),
+    member(F, FS), !.  % red cut
+output_of(_, _, _, _) :- false.  % base case for checkout output_of
+
+data_get('SOFTWARE#FILE', 'SOFTWARE#fileFormat',
+         sw_file_data(Nonce, _, F), 'ElfFile') :-
+    build_outputs(Nonce, FS),
+    member(F, FS),
+    build_with(Nonce, compile, _, _, _).
+
+data_get('SOFTWARE#FILE', 'SOFTWARE#createBy', sw_file_data(Nonce, _, F), V) :-
+    build_outputs(Nonce, FS),
+    member(F, FS),
+    build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
+    append_fld(Nonce, ToolType, V).
+
+
+%% -- Formats ------------------------------
+
+data_instance('SOFTWARE#FORMAT', load_data, F, [uid(F), fmt(F)]) :-
+    member(F, [ 'CSourceFile', 'ElfFile', 'TarFile', 'ArchiveFile' ]).
+data_get('SOFTWARE#FORMAT', 'PROV-S#identifier', fmt(Fmt), FmtS) :-
+    atom_string(Fmt, FmtS).
+
+%% -- Activities ------------------------------
+
+activity_instance(Nonce, ToolType, InstanceName) :-
+    append_fld(Nonce, ToolType, InstanceName).
+
+data_instance('SOFTWARE#COMPILE', load_data, Instance,
+              [ uid(Instance), activity_data(BW,BS,BF) ]) :-
+    BW = build_with(Nonce, compile, _ToolName, _ToolPath, _ToolArgs),
+    BS = build_start(Nonce, _StartTime),
+    BF = build_finished(Nonce, _FinishTime, _ExitVal),
+    BW, BS, BF,
+    activity_instance(Nonce, compile, Instance).
+
+data_get('SOFTWARE#COMPILE', 'SOFTWARE#compiledBy',
+         activity_data(build_with(_, compile, _, ToolPath, _),_,_),
+         ToolPath).
+
+data_instance('SOFTWARE#BUILD', load_data, Instance,
+              [ uid(Instance), activity_data(BW,BS,BF) ]) :-
+    BW = build_with(Nonce, make, _ToolName, _ToolPath, _ToolArgs),
+    BS = build_start(Nonce, _StartTime),
+    BF = build_finished(Nonce, _FinishTime, _ExitVal),
+    BW, BS, BF,
+    activity_instance(Nonce, make, Instance).
+
+data_get('SOFTWARE#BUILD', 'SOFTWARE#step',
+         activity_data(build_with(BuildNonce, _, _, _, _),_,_), V) :-
+    build_with(BuildNonce, _, _, _, _),
+    build_with(ToolNonce, ToolType, _, _, _),
+    build_step(BuildNonce, ToolNonce),
+    activity_instance(ToolNonce, ToolType, V).
+
+
+data_instance('PROV-S#ACTIVITY', load_data, Instance,
+              [ uid(Instance), activity_data(BW,BS,BF) ]) :-
+    BW = build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
+    BS = build_start(Nonce, _StartTime),
+    BF = build_finished(Nonce, _FinishTime, _ExitVal),
+    BW, BS, BF,
+    ToolType \= compile,
+    ToolType \= make,
+    activity_instance(Nonce, ToolType, Instance).
+
+data_get(_, 'PROV-S#startedAtTime', activity_data(_,build_start(_,T),_), T).
+data_get(_, 'PROV-S#endedAtTime', activity_data(_,_,build_finished(_,T,_)), T).
+data_get(_, 'PROV-S#dataInsertedBy', _, MyName) :- databin_name(MyName).
+

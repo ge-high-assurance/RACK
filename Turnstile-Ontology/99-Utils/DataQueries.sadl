@@ -1,0 +1,395 @@
+
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+ uri "http://Turnstile/DataQueries".
+
+import "http://Turnstile/All".
+
+Write: data {Ask LowLevelRequirementsCsv:"
+
+select distinct ?identifier_HighLevelRequirement ?identifier_HAZARD ?identifier_SYSTEM ?identifier_SoftwareDesign ?identifier_LowLevelRequirement ?text_LowLevelRequirement
+where {
+    ?LowLevelRequirement a <http://Turnstile/DevelopmentPlan#LowLevelRequirement> . 
+    ?LowLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_LowLevelRequirement . 
+    optional{ ?LowLevelRequirement <http://arcos.rack/REQUIREMENTS#text> ?text_LowLevelRequirement} . 
+    optional{
+
+    ?LowLevelRequirement <http://arcos.rack/REQUIREMENTS#createdBy> ?SoftwareDesign .
+        ?SoftwareDesign a <http://Turnstile/DevelopmentPlan#SoftwareDesign> . 
+        ?SoftwareDesign <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareDesign . 
+    }
+    optional{
+
+    ?LowLevelRequirement <http://arcos.rack/REQUIREMENTS#governs> ?SYSTEM .
+        ?SYSTEM a <http://arcos.rack/SYSTEM#SYSTEM> . 
+        ?SYSTEM <http://arcos.rack/PROV-S#identifier> ?identifier_SYSTEM . 
+    }
+    optional{
+
+    ?LowLevelRequirement <http://arcos.rack/REQUIREMENTS#mitigates> ?HAZARD .
+        ?HAZARD a <http://arcos.rack/HAZARD#HAZARD> . 
+        ?HAZARD <http://arcos.rack/PROV-S#identifier> ?identifier_HAZARD . 
+    }
+    optional{
+
+    ?LowLevelRequirement <http://arcos.rack/REQUIREMENTS#satisfies> ?HighLevelRequirement .
+        ?HighLevelRequirement a <http://Turnstile/DevelopmentPlan#HighLevelRequirement> . 
+        ?HighLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_HighLevelRequirement . 
+    }
+
+}".} to "99-Utils/Data/LowLevelRequirements.csv".
+
+Write: data {Ask ObjectFileCsv:"
+
+select distinct ?identifier_FORMAT ?identifier_SoftwareIntegration ?filename_ObjectFile ?identifier_ObjectFile
+where {
+    ?ObjectFile a <http://Turnstile/DevelopmentPlan#ObjectFile> . 
+    ?ObjectFile <http://arcos.rack/FILE#filename> ?filename_ObjectFile . 
+    ?ObjectFile <http://arcos.rack/PROV-S#identifier> ?identifier_ObjectFile . 
+    optional{
+
+    ?ObjectFile <http://arcos.rack/FILE#createBy> ?SoftwareIntegration .
+        ?SoftwareIntegration a <http://Turnstile/DevelopmentPlan#SoftwareIntegration> . 
+        ?SoftwareIntegration <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareIntegration . 
+    }
+    optional{
+
+    ?ObjectFile <http://arcos.rack/FILE#fileFormat> ?FORMAT .
+        ?FORMAT a <http://arcos.rack/FILE#FORMAT> . 
+        ?FORMAT <http://arcos.rack/PROV-S#identifier> ?identifier_FORMAT . 
+    }
+
+}".} to "99-Utils/Data/ObjectFile.csv".
+
+Write: data {Ask SourceCodeCsv:"
+
+select distinct ?identifier_FORMAT ?identifier_SoftwareCoding ?filename_SourceCode ?identifier_SourceCode
+where {
+    ?SourceCode a <http://Turnstile/DevelopmentPlan#SourceCode> . 
+    ?SourceCode <http://arcos.rack/FILE#filename> ?filename_SourceCode . 
+    ?SourceCode <http://arcos.rack/PROV-S#identifier> ?identifier_SourceCode . 
+    optional{
+
+    ?SourceCode <http://arcos.rack/FILE#createBy> ?SoftwareCoding .
+        ?SoftwareCoding a <http://Turnstile/DevelopmentPlan#SoftwareCoding> . 
+        ?SoftwareCoding <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareCoding . 
+    }
+    optional{
+
+    ?SourceCode <http://arcos.rack/FILE#fileFormat> ?FORMAT .
+        ?FORMAT a <http://arcos.rack/FILE#FORMAT> . 
+        ?FORMAT <http://arcos.rack/PROV-S#identifier> ?identifier_FORMAT . 
+    }
+
+}".} to "99-Utils/Data/SourceCode.csv".
+
+Write: data {Ask SoftwareIntegrationCompileInputCsv:"
+
+select distinct ?identifier_ObjectFile ?identifier_SourceCode ?identifier_SoftwareIntegration
+where {
+    ?SoftwareIntegration a <http://Turnstile/DevelopmentPlan#SoftwareIntegration> . 
+    ?SoftwareIntegration <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareIntegration . 
+    optional{
+
+    ?SoftwareIntegration <http://arcos.rack/SOFTWARE#compileInput> ?SourceCode .
+        ?SourceCode a <http://Turnstile/DevelopmentPlan#SourceCode> . 
+        ?SourceCode <http://arcos.rack/PROV-S#identifier> ?identifier_SourceCode . 
+    }
+    optional{
+
+    ?SoftwareIntegration <http://arcos.rack/SOFTWARE#compileInput> ?ObjectFile .
+        ?ObjectFile a <http://Turnstile/DevelopmentPlan#ObjectFile> . 
+        ?ObjectFile <http://arcos.rack/PROV-S#identifier> ?identifier_ObjectFile . 
+    }
+
+}".} to "99-Utils/Data/SoftwareIntegrationCompileInput.csv".
+
+Write: data {Ask SoftwareIntegrationCsv:"
+
+select distinct ?identifier_TOOL ?compileWithOptimizations_SoftwareIntegration ?identifier_SoftwareIntegration ?linkerPath_SoftwareIntegration
+where {
+    ?SoftwareIntegration a <http://Turnstile/DevelopmentPlan#SoftwareIntegration> . 
+    optional{ ?SoftwareIntegration <http://Turnstile/DevelopmentPlan#compileWithOptimizations> ?compileWithOptimizations_SoftwareIntegration} . 
+    ?SoftwareIntegration <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareIntegration . 
+    optional{ ?SoftwareIntegration <http://Turnstile/DevelopmentPlan#linkerPath> ?linkerPath_SoftwareIntegration} . 
+    optional{
+
+    ?SoftwareIntegration <http://arcos.rack/SOFTWARE#performedBy> ?TOOL .
+        ?TOOL a <http://arcos.rack/AGENTS#TOOL> . 
+        ?TOOL <http://arcos.rack/PROV-S#identifier> ?identifier_TOOL . 
+    }
+
+}".} to "99-Utils/Data/SoftwareIntegration.csv".
+
+Write: data {Ask ThreadsCsv:"
+
+select distinct ?identifier_SoftwareDesign ?identifier_SYSTEM_0 ?identifier_SYSTEM
+where {
+    ?SYSTEM a <http://arcos.rack/SYSTEM#SYSTEM> . 
+    ?SYSTEM <http://arcos.rack/PROV-S#identifier> ?identifier_SYSTEM . 
+    optional{
+
+    ?SYSTEM <http://arcos.rack/SYSTEM#partOf> ?SYSTEM_0 .
+        ?SYSTEM_0 a <http://arcos.rack/SYSTEM#SYSTEM> . 
+        ?SYSTEM_0 <http://arcos.rack/PROV-S#identifier> ?identifier_SYSTEM_0 . 
+    }
+    optional{
+
+    ?SYSTEM <http://arcos.rack/SYSTEM#producedBy> ?SoftwareDesign .
+        ?SoftwareDesign a <http://Turnstile/DevelopmentPlan#SoftwareDesign> . 
+        ?SoftwareDesign <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareDesign . 
+    }
+
+}".} to "99-Utils/Data/Threads.csv".
+
+Write: data {Ask DataDictionaryCsv:"
+
+select distinct ?identifier_ProducingSystemInterfaceDefinition ?identifier_ProvidingHighLevelRequirement ?identifier_SoftwareRequirementsDefinition ?identifier_ConsumingSystemInterfaceDefinition ?identifier_ConsumingHighLevelRequirement ?identifier_DataDictionary ?text_DataDictionary
+where {
+    ?DataDictionary a <http://Turnstile/DevelopmentPlan#DataDictionary> . 
+    ?DataDictionary <http://arcos.rack/PROV-S#identifier> ?identifier_DataDictionary . 
+    optional{ ?DataDictionary <http://arcos.rack/REQUIREMENTS#text> ?text_DataDictionary} . 
+    optional{
+
+    ?DataDictionary <http://arcos.rack/REQUIREMENTS#consumedBy> ?ConsumingHighLevelRequirement .
+        ?ConsumingHighLevelRequirement a <http://Turnstile/DevelopmentPlan#HighLevelRequirement> . 
+        ?ConsumingHighLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_ConsumingHighLevelRequirement . 
+    }
+    optional{
+
+    ?DataDictionary <http://arcos.rack/REQUIREMENTS#consumedBy> ?ConsumingSystemInterfaceDefinition .
+        ?ConsumingSystemInterfaceDefinition a <http://Turnstile/DevelopmentPlan#SystemInterfaceDefinition> . 
+        ?ConsumingSystemInterfaceDefinition <http://arcos.rack/PROV-S#identifier> ?identifier_ConsumingSystemInterfaceDefinition . 
+    }
+    optional{
+
+    ?DataDictionary <http://arcos.rack/REQUIREMENTS#createdBy> ?SoftwareRequirementsDefinition .
+        ?SoftwareRequirementsDefinition a <http://Turnstile/DevelopmentPlan#SoftwareRequirementsDefinition> . 
+        ?SoftwareRequirementsDefinition <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareRequirementsDefinition . 
+    }
+    optional{
+
+    ?DataDictionary <http://arcos.rack/REQUIREMENTS#providedBy> ?ProvidingHighLevelRequirement .
+        ?ProvidingHighLevelRequirement a <http://Turnstile/DevelopmentPlan#HighLevelRequirement> . 
+        ?ProvidingHighLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_ProvidingHighLevelRequirement . 
+    }
+    optional{
+
+    ?DataDictionary <http://arcos.rack/REQUIREMENTS#providedBy> ?ProducingSystemInterfaceDefinition .
+        ?ProducingSystemInterfaceDefinition a <http://Turnstile/DevelopmentPlan#SystemInterfaceDefinition> . 
+        ?ProducingSystemInterfaceDefinition <http://arcos.rack/PROV-S#identifier> ?identifier_ProducingSystemInterfaceDefinition . 
+    }
+
+}".} to "99-Utils/Data/DataDictionary.csv".
+
+Write: data {Ask DataAndControlCoupleCsv:"
+
+select distinct ?ProducingLowLevelRequirement ?identifier_ProducingLowLevelRequirement ?identifier_SoftwareDesign ?ConsumingLowLevelRequirement ?identifier_ConsumingLowLevelRequirement ?identifier_DataAndControlCouple ?text_DataAndControlCouple
+where {
+    ?DataAndControlCouple a <http://Turnstile/DevelopmentPlan#DataAndControlCouple> . 
+    ?DataAndControlCouple <http://arcos.rack/PROV-S#identifier> ?identifier_DataAndControlCouple . 
+    optional{ ?DataAndControlCouple <http://arcos.rack/REQUIREMENTS#text> ?text_DataAndControlCouple} . 
+    optional{
+
+    ?DataAndControlCouple <http://arcos.rack/REQUIREMENTS#consumedBy> ?ConsumingLowLevelRequirement .
+        ?ConsumingLowLevelRequirement a <http://Turnstile/DevelopmentPlan#LowLevelRequirement> . 
+        ?ConsumingLowLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_ConsumingLowLevelRequirement . 
+    }
+    optional{
+
+    ?DataAndControlCouple <http://arcos.rack/REQUIREMENTS#createdBy> ?SoftwareDesign .
+        ?SoftwareDesign a <http://Turnstile/DevelopmentPlan#SoftwareDesign> . 
+        ?SoftwareDesign <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareDesign . 
+    }
+    optional{
+
+    ?DataAndControlCouple <http://arcos.rack/REQUIREMENTS#providedBy> ?ProducingLowLevelRequirement .
+        ?ProducingLowLevelRequirement a <http://Turnstile/DevelopmentPlan#LowLevelRequirement> . 
+        ?ProducingLowLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_ProducingLowLevelRequirement . 
+    }
+
+}".} to "99-Utils/Data/DataAndControlCouple.csv".
+
+Write: data {Ask HighLevelRequirementsCsv:"
+
+select distinct ?identifier_SystemRequirement ?identifier_HAZARD ?identifier_SYSTEM ?identifier_SoftwareRequirementsDefinition ?identifier_HighLevelRequirement ?text_HighLevelRequirement
+where {
+    ?HighLevelRequirement a <http://Turnstile/DevelopmentPlan#HighLevelRequirement> . 
+    ?HighLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_HighLevelRequirement . 
+    ?HighLevelRequirement <http://arcos.rack/REQUIREMENTS#text> ?text_HighLevelRequirement . 
+    optional{
+
+    ?HighLevelRequirement <http://arcos.rack/REQUIREMENTS#createdBy> ?SoftwareRequirementsDefinition .
+        ?SoftwareRequirementsDefinition a <http://Turnstile/DevelopmentPlan#SoftwareRequirementsDefinition> . 
+        ?SoftwareRequirementsDefinition <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareRequirementsDefinition . 
+    }
+    optional{
+
+    ?HighLevelRequirement <http://arcos.rack/REQUIREMENTS#governs> ?SYSTEM .
+        ?SYSTEM a <http://arcos.rack/SYSTEM#SYSTEM> . 
+        ?SYSTEM <http://arcos.rack/PROV-S#identifier> ?identifier_SYSTEM . 
+    }
+    optional{
+
+    ?HighLevelRequirement <http://arcos.rack/REQUIREMENTS#mitigates> ?HAZARD .
+        ?HAZARD a <http://arcos.rack/HAZARD#HAZARD> . 
+        ?HAZARD <http://arcos.rack/PROV-S#identifier> ?identifier_HAZARD . 
+    }
+    optional{
+
+    ?HighLevelRequirement <http://arcos.rack/REQUIREMENTS#satisfies> ?SystemRequirement .
+        ?SystemRequirement a <http://Turnstile/DevelopmentPlan#SystemRequirement> . 
+        ?SystemRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_SystemRequirement . 
+    }
+
+}".} to "99-Utils/Data/HighLevelRequirements.csv".
+
+Write: data {Ask SourceCodeTracingCsv:"
+
+select distinct ?identifier_LowLevelRequirement ?identifier_SourceCode
+where {
+    ?SourceCode a <http://Turnstile/DevelopmentPlan#SourceCode> . 
+    ?SourceCode <http://arcos.rack/PROV-S#identifier> ?identifier_SourceCode . 
+    ?SourceCode <http://arcos.rack/FILE#satisfies> ?LowLevelRequirement .
+        ?LowLevelRequirement a <http://Turnstile/DevelopmentPlan#LowLevelRequirement> . 
+        ?LowLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_LowLevelRequirement . 
+
+}".} to "99-Utils/Data/SourceCodeTracing.csv".
+
+Write: data {Ask ObjectiveCsv:"
+
+select distinct ?identifier_SoftwareRequirementsDefinition ?identifier_SoftwareDesignReview ?identifier_SoftwareCodeReview ?identifier_SystemRequirementsDefinition ?identifier_SoftwareDesign ?identifier_DevelopUnitTests ?identifier_DevelopComponentTests ?identifier_OBJECTIVE
+where {
+    ?OBJECTIVE a <http://arcos.rack/PROCESS#OBJECTIVE> . 
+    ?OBJECTIVE <http://arcos.rack/PROV-S#identifier> ?identifier_OBJECTIVE . 
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?DevelopComponentTests .
+        ?DevelopComponentTests a <http://Turnstile/DevelopmentPlan#DevelopComponentTests> . 
+        ?DevelopComponentTests <http://arcos.rack/PROV-S#identifier> ?identifier_DevelopComponentTests . 
+    }
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?DevelopUnitTests .
+        ?DevelopUnitTests a <http://Turnstile/DevelopmentPlan#DevelopUnitTests> . 
+        ?DevelopUnitTests <http://arcos.rack/PROV-S#identifier> ?identifier_DevelopUnitTests . 
+    }
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?SoftwareDesign .
+        ?SoftwareDesign a <http://Turnstile/DevelopmentPlan#SoftwareDesign> . 
+        ?SoftwareDesign <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareDesign . 
+    }
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?SystemRequirementsDefinition .
+        ?SystemRequirementsDefinition a <http://Turnstile/DevelopmentPlan#SystemRequirementsDefinition> . 
+        ?SystemRequirementsDefinition <http://arcos.rack/PROV-S#identifier> ?identifier_SystemRequirementsDefinition . 
+    }
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?SoftwareCodeReview .
+        ?SoftwareCodeReview a <http://Turnstile/DevelopmentPlan#SoftwareCodeReview> . 
+        ?SoftwareCodeReview <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareCodeReview . 
+    }
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?SoftwareDesignReview .
+        ?SoftwareDesignReview a <http://Turnstile/DevelopmentPlan#SoftwareDesignReview> . 
+        ?SoftwareDesignReview <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareDesignReview . 
+    }
+    optional{
+
+    ?OBJECTIVE <http://arcos.rack/PROCESS#satisfiedBy> ?SoftwareRequirementsDefinition .
+        ?SoftwareRequirementsDefinition a <http://Turnstile/DevelopmentPlan#SoftwareRequirementsDefinition> . 
+        ?SoftwareRequirementsDefinition <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareRequirementsDefinition . 
+    }
+
+}".} to "99-Utils/Data/Objective.csv".
+
+Write: data {Ask EngineerCsv:"
+
+select distinct ?identifier_ORGANIZATION ?emailAddress_Engineer ?identifier_Engineer ?name_Engineer
+where {
+    ?Engineer a <http://Turnstile/DevelopmentPlan#Engineer> . 
+    optional{ ?Engineer <http://arcos.rack/AGENTS#emailAddress> ?emailAddress_Engineer} . 
+    ?Engineer <http://arcos.rack/PROV-S#identifier> ?identifier_Engineer . 
+    optional{ ?Engineer <http://arcos.rack/AGENTS#name> ?name_Engineer} . 
+    optional{
+
+    ?Engineer <http://arcos.rack/AGENTS#employedBy> ?ORGANIZATION .
+        ?ORGANIZATION a <http://arcos.rack/AGENTS#ORGANIZATION> . 
+        ?ORGANIZATION <http://arcos.rack/PROV-S#identifier> ?identifier_ORGANIZATION . 
+    }
+
+}".} to "99-Utils/Data/Engineer.csv".
+
+Write: data {Ask SoftwareDesignCsv:"
+
+select distinct ?identifier_HighLevelRequirement ?identifier_DesignStandard ?identifier_Engineer ?identifier_SoftwareDesign
+where {
+    ?SoftwareDesign a <http://Turnstile/DevelopmentPlan#SoftwareDesign> . 
+    ?SoftwareDesign <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareDesign . 
+    optional{
+
+    ?SoftwareDesign <http://arcos.rack/REQUIREMENTS#author> ?Engineer .
+        ?Engineer a <http://Turnstile/DevelopmentPlan#Engineer> . 
+        ?Engineer <http://arcos.rack/PROV-S#identifier> ?identifier_Engineer . 
+    }
+    optional{
+
+    ?SoftwareDesign <http://arcos.rack/REQUIREMENTS#governedBy> ?DesignStandard .
+        ?DesignStandard a <http://arcos.rack/DOCUMENT#SPECIFICATION> . 
+        ?DesignStandard <http://arcos.rack/PROV-S#identifier> ?identifier_DesignStandard . 
+    }
+    optional{
+
+    ?SoftwareDesign <http://arcos.rack/PROV-S#used> ?HighLevelRequirement .
+        ?HighLevelRequirement a <http://Turnstile/DevelopmentPlan#HighLevelRequirement> . 
+        ?HighLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_HighLevelRequirement . 
+    }
+
+}".} to "99-Utils/Data/SoftwareDesign.csv".
+
+Write: data {Ask SoftwareRequirementsDefinitionCsv:"
+
+select distinct ?identifier_SystemInterfaceDefinition ?identifier_SystemRequirement ?identifier_RequirementStandard ?identifier_Engineer ?identifier_SoftwareRequirementsDefinition
+where {
+    ?SoftwareRequirementsDefinition a <http://Turnstile/DevelopmentPlan#SoftwareRequirementsDefinition> . 
+    ?SoftwareRequirementsDefinition <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareRequirementsDefinition . 
+    optional{
+
+    ?SoftwareRequirementsDefinition <http://arcos.rack/REQUIREMENTS#author> ?Engineer .
+        ?Engineer a <http://Turnstile/DevelopmentPlan#Engineer> . 
+        ?Engineer <http://arcos.rack/PROV-S#identifier> ?identifier_Engineer . 
+    }
+    optional{
+
+    ?SoftwareRequirementsDefinition <http://arcos.rack/REQUIREMENTS#governedBy> ?RequirementStandard .
+        ?RequirementStandard a <http://arcos.rack/DOCUMENT#SPECIFICATION> . 
+        ?RequirementStandard <http://arcos.rack/PROV-S#identifier> ?identifier_RequirementStandard . 
+    }
+    optional{
+
+    ?SoftwareRequirementsDefinition <http://arcos.rack/PROV-S#used> ?SystemRequirement .
+        ?SystemRequirement a <http://Turnstile/DevelopmentPlan#SystemRequirement> . 
+        ?SystemRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_SystemRequirement . 
+    }
+    optional{
+
+    ?SoftwareRequirementsDefinition <http://arcos.rack/PROV-S#used> ?SystemInterfaceDefinition .
+        ?SystemInterfaceDefinition a <http://Turnstile/DevelopmentPlan#SystemInterfaceDefinition> . 
+        ?SystemInterfaceDefinition <http://arcos.rack/PROV-S#identifier> ?identifier_SystemInterfaceDefinition . 
+    }
+
+}".} to "99-Utils/Data/SoftwareRequirementsDefinition.csv".
+

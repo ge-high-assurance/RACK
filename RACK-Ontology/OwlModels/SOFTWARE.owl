@@ -1,16 +1,17 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:sw="http://arcos.rack/SOFTWARE#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:j.0="http://arcos.rack/PROV-S#"
-    xmlns:provs="http://arcos.rack/PROV-S"
+    xmlns:provs="http://arcos.rack/PROV-S#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:file="http://arcos.rack/FILE#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.rack/SOFTWARE">
   <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="FILE"/>
     <owl:imports rdf:resource="PROV-S"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
@@ -19,26 +20,18 @@
   </owl:Ontology>
   <owl:Class rdf:ID="CODE_GEN">
     <rdfs:comment xml:lang="en">ACTIVITY of running a CODE_GENERATOR to create source code FILEs</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
+    <rdfs:subClassOf rdf:resource="FILE#FILE_CREATION"/>
   </owl:Class>
   <owl:Class rdf:ID="COMPILE">
     <rdfs:comment xml:lang="en">ACTIVITY of running a a COMPILER to produce executable and object FILEs</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
+    <rdfs:subClassOf rdf:resource="FILE#FILE_CREATION"/>
   </owl:Class>
   <owl:Class rdf:ID="BUILD">
     <rdfs:comment xml:lang="en">Describes a set of ACTIVITYs (e.g. CODE_GEN, COMPILE, ...) that together form some logical building unit</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
-  </owl:Class>
-  <owl:Class rdf:ID="FILE">
-    <rdfs:comment xml:lang="en">A file in the system</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subClassOf rdf:resource="FILE#FILE_CREATION"/>
   </owl:Class>
   <owl:Class rdf:ID="COMPONENT_TYPE">
     <rdfs:comment xml:lang="en">An open/extensible set of types of software components</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
-  </owl:Class>
-  <owl:Class rdf:ID="FORMAT">
-    <rdfs:comment xml:lang="en">The data format of a FILE</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="COMPONENT">
@@ -51,20 +44,21 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">An abstract software component</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="PACKAGE">
     <rdfs:comment xml:lang="en">ACTIVITY of running a PACKAGER to produce a package FILE</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
+    <rdfs:subClassOf rdf:resource="FILE#FILE_CREATION"/>
   </owl:Class>
   <owl:Class rdf:ID="CODE_DEVELOPMENT">
     <rdfs:comment xml:lang="en">An ACTIVITY that produces source code FILEs</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
+    <rdfs:subClassOf rdf:resource="FILE#FILE_CREATION"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="packageInput">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
     <rdfs:comment xml:lang="en">Source files used when generating the package output</rdfs:comment>
-    <rdfs:range rdf:resource="#FILE"/>
+    <rdfs:range rdf:resource="FILE#FILE"/>
     <rdfs:domain rdf:resource="#PACKAGE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="governedBy">
@@ -72,17 +66,6 @@
     <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT) that gave rise to this ACTIVITY</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#CODE_DEVELOPMENT"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="satisfies">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
-    <rdfs:domain rdf:resource="#FILE"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="fileFormat">
-    <rdfs:comment xml:lang="en">The byte-level encoding of a file</rdfs:comment>
-    <rdfs:range rdf:resource="#FORMAT"/>
-    <rdfs:domain rdf:resource="#FILE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="subcomponentOf">
     <rdfs:comment xml:lang="en">A structural sub-component, e.g., a function might be a subcomponent of module.</rdfs:comment>
@@ -122,7 +105,7 @@
   <owl:ObjectProperty rdf:ID="compiledBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
     <rdfs:comment xml:lang="en">The tool that performed the compilation</rdfs:comment>
-    <rdfs:range rdf:resource="#FILE"/>
+    <rdfs:range rdf:resource="FILE#FILE"/>
     <rdfs:domain rdf:resource="#COMPILE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="step">
@@ -136,12 +119,6 @@
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#COMPONENT"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="createBy">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:comment xml:lang="en">ACTIVITY(s) that created this file</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
-    <rdfs:domain rdf:resource="#FILE"/>
-  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="mentions">
     <rdfs:comment xml:lang="en">A component referenced by this one, e.g., a callee or variable being used.</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
@@ -150,14 +127,8 @@
   <owl:ObjectProperty rdf:ID="packagedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
     <rdfs:comment xml:lang="en">The tool used to generate the package output</rdfs:comment>
-    <rdfs:range rdf:resource="#FILE"/>
+    <rdfs:range rdf:resource="FILE#FILE"/>
     <rdfs:domain rdf:resource="#PACKAGE"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="compileInput">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
-    <rdfs:comment xml:lang="en">Source files that contributed to the compilation</rdfs:comment>
-    <rdfs:range rdf:resource="#FILE"/>
-    <rdfs:domain rdf:resource="#COMPILE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="performedBy">
     <rdfs:comment xml:lang="en">AGENT(s) (e.g. PACKAGER) performing the packaging</rdfs:comment>
@@ -174,6 +145,12 @@
     <rdfs:comment xml:lang="en">AGENT(s) (e.g. CODE_GENERATOR) generating the code</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="compileInput">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">Source files that contributed to the compilation</rdfs:comment>
+    <rdfs:range rdf:resource="FILE#FILE"/>
+    <rdfs:domain rdf:resource="#COMPILE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="author">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
@@ -195,53 +172,48 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#COMPONENT"/>
   </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:ID="filename">
-    <rdfs:comment xml:lang="en">A logical file path relative to the container of the file.</rdfs:comment>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#FILE"/>
-  </owl:DatatypeProperty>
-  <sw:COMPONENT_TYPE rdf:ID="MODULE">
-    <j.0:uniqueIdentifier>MODULE</j.0:uniqueIdentifier>
-    <rdfs:comment xml:lang="en">A collection of related code, usually grouped in a lexical scope.</rdfs:comment>
-  </sw:COMPONENT_TYPE>
-  <sw:COMPONENT_TYPE rdf:ID="CLASS_CONSTRUCTOR">
-    <j.0:uniqueIdentifier>CLASS_CONSTRUCTOR</j.0:uniqueIdentifier>
-    <rdfs:comment xml:lang="en">A constructor in an object-oriented language.</rdfs:comment>
-  </sw:COMPONENT_TYPE>
-  <sw:COMPONENT_TYPE rdf:ID="SOURCE_FUNCTION">
-    <j.0:uniqueIdentifier>SOURCE_FUNCTION</j.0:uniqueIdentifier>
-    <rdfs:comment xml:lang="en">A function or procedure declared or defined in source code.</rdfs:comment>
-  </sw:COMPONENT_TYPE>
-  <sw:COMPONENT_TYPE rdf:ID="BINARY_BASIC_BLOCK">
-    <j.0:uniqueIdentifier>BINARY_BASIC_BLOCK</j.0:uniqueIdentifier>
-    <rdfs:comment xml:lang="en">A basic block at the binary level.</rdfs:comment>
-  </sw:COMPONENT_TYPE>
-  <sw:COMPONENT_TYPE rdf:ID="BINARY_GLOBAL_VARIABLE">
-    <j.0:uniqueIdentifier>BINARY_GLOBAL_VARIABLE</j.0:uniqueIdentifier>
-    <rdfs:comment xml:lang="en">A global variable (generally in the .data or .bss sections).</rdfs:comment>
-  </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="CLASS_DEFINITION">
-    <j.0:uniqueIdentifier>CLASS</j.0:uniqueIdentifier>
+    <provs:identifier>CLASS</provs:identifier>
     <rdfs:comment xml:lang="en">A class in an object-oriented language.</rdfs:comment>
   </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="CLASS_METHOD">
-    <j.0:uniqueIdentifier>CLASS_METHOD</j.0:uniqueIdentifier>
+    <provs:identifier>CLASS_METHOD</provs:identifier>
     <rdfs:comment xml:lang="en">A method attached to a class in an object-oriented language.</rdfs:comment>
   </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="BINARY_FUNCTION">
-    <j.0:uniqueIdentifier>BINARY_FUNCTION</j.0:uniqueIdentifier>
+    <provs:identifier>BINARY_FUNCTION</provs:identifier>
     <rdfs:comment xml:lang="en">A function in a binary, as defined by the appropriate ABI.</rdfs:comment>
   </sw:COMPONENT_TYPE>
-  <sw:COMPONENT_TYPE rdf:ID="SOURCE_GLOBAL_VARIABLE">
-    <j.0:uniqueIdentifier>SOURCE_GLOBAL_VARIABLE</j.0:uniqueIdentifier>
-    <rdfs:comment xml:lang="en">A global variable declared or defined in source code.</rdfs:comment>
-  </sw:COMPONENT_TYPE>
-  <sw:COMPONENT_TYPE rdf:ID="NAMESPACE">
-    <j.0:uniqueIdentifier>NAMESPACE</j.0:uniqueIdentifier>
+  <sw:COMPONENT_TYPE rdf:ID="MODULE">
+    <provs:identifier>MODULE</provs:identifier>
     <rdfs:comment xml:lang="en">A collection of related code, usually grouped in a lexical scope.</rdfs:comment>
   </sw:COMPONENT_TYPE>
+  <sw:COMPONENT_TYPE rdf:ID="CLASS_CONSTRUCTOR">
+    <provs:identifier>CLASS_CONSTRUCTOR</provs:identifier>
+    <rdfs:comment xml:lang="en">A constructor in an object-oriented language.</rdfs:comment>
+  </sw:COMPONENT_TYPE>
+  <sw:COMPONENT_TYPE rdf:ID="SOURCE_GLOBAL_VARIABLE">
+    <provs:identifier>SOURCE_GLOBAL_VARIABLE</provs:identifier>
+    <rdfs:comment xml:lang="en">A global variable declared or defined in source code.</rdfs:comment>
+  </sw:COMPONENT_TYPE>
+  <sw:COMPONENT_TYPE rdf:ID="SOURCE_FUNCTION">
+    <provs:identifier>SOURCE_FUNCTION</provs:identifier>
+    <rdfs:comment xml:lang="en">A function or procedure declared or defined in source code.</rdfs:comment>
+  </sw:COMPONENT_TYPE>
+  <sw:COMPONENT_TYPE rdf:ID="NAMESPACE">
+    <provs:identifier>NAMESPACE</provs:identifier>
+    <rdfs:comment xml:lang="en">A collection of related code, usually grouped in a lexical scope.</rdfs:comment>
+  </sw:COMPONENT_TYPE>
+  <sw:COMPONENT_TYPE rdf:ID="BINARY_BASIC_BLOCK">
+    <provs:identifier>BINARY_BASIC_BLOCK</provs:identifier>
+    <rdfs:comment xml:lang="en">A basic block at the binary level.</rdfs:comment>
+  </sw:COMPONENT_TYPE>
   <sw:COMPONENT_TYPE rdf:ID="CLASS_MEMBER_VARIABLE">
-    <j.0:uniqueIdentifier>CLASS_MEMBER_VARIABLE</j.0:uniqueIdentifier>
+    <provs:identifier>CLASS_MEMBER_VARIABLE</provs:identifier>
     <rdfs:comment xml:lang="en">A variable attached to the instances of a class in an object-oriented language.</rdfs:comment>
+  </sw:COMPONENT_TYPE>
+  <sw:COMPONENT_TYPE rdf:ID="BINARY_GLOBAL_VARIABLE">
+    <provs:identifier>BINARY_GLOBAL_VARIABLE</provs:identifier>
+    <rdfs:comment xml:lang="en">A global variable (generally in the .data or .bss sections).</rdfs:comment>
   </sw:COMPONENT_TYPE>
 </rdf:RDF>

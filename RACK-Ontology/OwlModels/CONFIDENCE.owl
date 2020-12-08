@@ -1,12 +1,12 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:provs="http://arcos.rack/PROV-S"
+    xmlns:provs="http://arcos.rack/PROV-S#"
     xmlns:CONFIDENCE="http://arcos.rack/CONFIDENCE#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.rack/CONFIDENCE">
   <owl:Ontology rdf:about="">
@@ -21,8 +21,10 @@
       <rdfs:Datatype>
         <owl:withRestrictions rdf:parseType="Collection">
           <rdf:Description>
-            <xsd:maxInclusive>1</xsd:maxInclusive>
-            <xsd:minInclusive>0</xsd:minInclusive>
+            <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+            >1</xsd:maxInclusive>
+            <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+            >0</xsd:minInclusive>
           </rdf:Description>
         </owl:withRestrictions>
         <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>

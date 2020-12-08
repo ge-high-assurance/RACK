@@ -50,21 +50,21 @@
                         ]
                     },
                     {
-                        "URIRelation": "http://arcos.rack/CONFIDENCE#uncertainty",
+                        "URILookup": [
+                            "?CONFIDENCE_ASSESSMENT"
+                        ],
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
                         "mapping": [
                             {
-                                "colId": "col_5"
+                                "colId": "col_1"
                             }
                         ]
                     },
                     {
-                        "URILookup": [
-                            "?CONFIDENCE_ASSESSMENT"
-                        ],
-                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "URIRelation": "http://arcos.rack/CONFIDENCE#uncertainty",
                         "mapping": [
                             {
-                                "colId": "col_1"
+                                "colId": "col_5"
                             }
                         ]
                     }
@@ -80,7 +80,7 @@
                         "URILookup": [
                             "?TEST_RESULT"
                         ],
-                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
                         "mapping": [
                             {
                                 "colId": "col_0"
@@ -99,7 +99,7 @@
                         "URILookup": [
                             "?ASSESSING_CONFIDENCE"
                         ],
-                        "URIRelation": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
                         "mapping": [
                             {
                                 "colId": "col_3"
@@ -109,6 +109,12 @@
                 ],
                 "sparqlID": "?ASSESSING_CONFIDENCE",
                 "type": "http://arcos.rack/CONFIDENCE#ASSESSING_CONFIDENCE"
+            },
+            {
+                "mapping": [],
+                "props": [],
+                "sparqlID": "?DATA_INSERTED_BY",
+                "type": "http://arcos.rack/PROV-S#ACTIVITY"
             }
         ],
         "texts": [],
@@ -121,6 +127,49 @@
         "orderBy": [],
         "sNodeList": [
             {
+                "NodeName": "ACTIVITY",
+                "SparqlID": "?DATA_INSERTED_BY",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/PROV-S#ACTIVITY",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "identifier",
+                        "SparqlID": "?dataInsertedById",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "subClassNames": [
+                    "http://arcos.rack/SYSTEM#SYSTEM_DEVELOPMENT",
+                    "http://arcos.rack/TESTING#TEST_DEVELOPMENT",
+                    "http://arcos.rack/ANALYSIS#ANALYSIS",
+                    "http://arcos.rack/TESTING#TEST_EXECUTION",
+                    "http://arcos.rack/FILE#FILE_CREATION",
+                    "http://arcos.rack/SOFTWARE#CODE_GEN",
+                    "http://arcos.rack/SOFTWARE#COMPILE",
+                    "http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT",
+                    "http://arcos.rack/SOFTWARE#PACKAGE",
+                    "http://arcos.rack/SOFTWARE#BUILD",
+                    "http://arcos.rack/CONFIDENCE#ASSESSING_CONFIDENCE",
+                    "http://arcos.rack/REVIEW#REVIEW",
+                    "http://arcos.rack/HAZARD#HAZARD_IDENTIFICATION",
+                    "http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"
+                ],
+                "valueConstraint": ""
+            },
+            {
                 "NodeName": "ASSESSING_CONFIDENCE",
                 "SparqlID": "?ASSESSING_CONFIDENCE",
                 "deletionMode": "NO_DELETE",
@@ -132,9 +181,9 @@
                 "propList": [
                     {
                         "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
-                        "SparqlID": "?uniqueIdentifier_0",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "KeyName": "identifier",
+                        "SparqlID": "?identifier_0",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -160,9 +209,9 @@
                 "propList": [
                     {
                         "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
-                        "SparqlID": "?uniqueIdentifier",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
+                        "KeyName": "identifier",
+                        "SparqlID": "?identifier",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -191,7 +240,7 @@
                     "http://arcos.rack/DOCUMENT#REPORT",
                     "http://arcos.rack/DOCUMENT#REQUEST",
                     "http://arcos.rack/SACM-S#ARGUMENT_PACKAGE",
-                    "http://arcos.rack/SOFTWARE#FILE",
+                    "http://arcos.rack/FILE#FILE",
                     "http://arcos.rack/TESTING#TEST",
                     "http://arcos.rack/TESTING#TEST_RESULT",
                     "http://arcos.rack/DOCUMENT#PLAN",
@@ -252,6 +301,26 @@
                         "UriConnectBy": "http://arcos.rack/CONFIDENCE#createBy",
                         "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
                         "ValueType": "ACTIVITY"
+                    },
+                    {
+                        "ConnectBy": "dataInsertedBy",
+                        "Connected": true,
+                        "DeletionMarkers": [
+                            false
+                        ],
+                        "KeyName": "dataInsertedBy",
+                        "OptionalMinus": [
+                            "1"
+                        ],
+                        "Qualifiers": [
+                            ""
+                        ],
+                        "SnodeSparqlIDs": [
+                            "?DATA_INSERTED_BY"
+                        ],
+                        "UriConnectBy": "http://arcos.rack/PROV-S#dataInsertedBy",
+                        "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
+                        "ValueType": "ACTIVITY"
                     }
                 ],
                 "propList": [
@@ -285,6 +354,20 @@
                     },
                     {
                         "Constraints": "",
+                        "KeyName": "identifier",
+                        "SparqlID": "",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": false,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    },
+                    {
+                        "Constraints": "",
                         "KeyName": "uncertainty",
                         "SparqlID": "?uncertainty",
                         "UriRelationship": "http://arcos.rack/CONFIDENCE#uncertainty",
@@ -296,20 +379,6 @@
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
                         "relationship": "http://www.w3.org/2001/XMLSchema#float"
-                    },
-                    {
-                        "Constraints": "",
-                        "KeyName": "uniqueIdentifier",
-                        "SparqlID": "",
-                        "UriRelationship": "http://arcos.rack/PROV-S#uniqueIdentifier",
-                        "ValueType": "string",
-                        "fullURIName": "",
-                        "instanceValues": [],
-                        "isMarkedForDeletion": false,
-                        "isReturned": false,
-                        "isRuntimeConstrained": false,
-                        "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
                     }
                 ],
                 "subClassNames": [
@@ -325,7 +394,7 @@
             {
                 "graph": "http://rack001/data",
                 "type": "fuseki",
-                "url": "http://localhost:8080/fuseki/SemTK"
+                "url": "http://localhost:3030/RACK"
             }
         ],
         "domain": "",
@@ -334,7 +403,7 @@
             {
                 "graph": "http://rack001/model",
                 "type": "fuseki",
-                "url": "http://localhost:8080/fuseki/SemTK"
+                "url": "http://localhost:3030/RACK"
             }
         ],
         "name": "MyDB"

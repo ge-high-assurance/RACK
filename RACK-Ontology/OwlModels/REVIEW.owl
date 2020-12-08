@@ -1,12 +1,12 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:provs="http://arcos.rack/PROV-S"
+    xmlns:provs="http://arcos.rack/PROV-S#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:Rv="http://arcos.rack/REVIEW#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.rack/REVIEW">
   <owl:Ontology rdf:about="">
@@ -20,12 +20,20 @@
     <owl:equivalentClass>
       <owl:Class>
         <owl:oneOf rdf:parseType="Collection">
-          <Rv:REVIEW_STATE rdf:ID="Passed"/>
-          <Rv:REVIEW_STATE rdf:ID="ReviseWithoutReview"/>
-          <Rv:REVIEW_STATE rdf:ID="ReviseWithReview"/>
+          <Rv:REVIEW_STATE rdf:ID="Passed">
+            <provs:identifier>Passed</provs:identifier>
+          </Rv:REVIEW_STATE>
+          <Rv:REVIEW_STATE rdf:ID="ReviseWithoutReview">
+            <provs:identifier>Review Without Review</provs:identifier>
+          </Rv:REVIEW_STATE>
+          <Rv:REVIEW_STATE rdf:ID="ReviseWithReview">
+            <provs:identifier>Revise With Review</provs:identifier>
+          </Rv:REVIEW_STATE>
         </owl:oneOf>
       </owl:Class>
     </owl:equivalentClass>
+    <rdfs:comment xml:lang="en">Life-cycle status of a review log</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="REVIEW">
     <rdfs:comment xml:lang="en">Code review ACTIVITY</rdfs:comment>

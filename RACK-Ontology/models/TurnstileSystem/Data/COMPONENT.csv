@@ -1,6 +1,0 @@
-"uniqueIdentifier","name","componentTypeId","valueType","instantiateId","definedInId","mentionId","subcomponentId","requirementId","annotationId","controlFlowsToConditionallyId","controlFlowsToUnconditionallyId"
-"input_function","input","SOURCE_FUNCTION","void()",null,"input_c",null,null,null,null,null,null
-"main_function","main","SOURCE_FUNCTION","int(int argc, char* argv[])",null,"counter_c",null,null,null,null,null,"input_function"
-"main_function","main","SOURCE_FUNCTION","int(int argc, char* argv[])",null,"counter_c",null,null,null,null,null,"output_function"
-"output_function","output","SOURCE_FUNCTION","void()",null,"output_c",null,null,null,null,null,null
-

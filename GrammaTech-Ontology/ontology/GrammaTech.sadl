@@ -1,0 +1,29 @@
+uri "http://arcos.acert/Overlay" alias Acert.
+ 
+import "http://arcos.rack/TESTING".
+import "http://arcos.rack/DOCUMENT".
+import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/REQUIREMENTS".
+
+/* ACERT requirements have confidence parameters on text extraction */
+AcertRequirement is a type of REQUIREMENT.
+    textConfidence (note "confidence that this was requirement text")
+        describes AcertRequirement with values of type double.
+    ifTextConfidence (note "confidence that this was the if-portion of the text")
+        describes AcertRequirement with values of type double.
+    whenTextConfidence (note "confidence that this was the when-portion of the text")
+        describes AcertRequirement with values of type double.
+    givenTextConfidence (note "confidence that this was the given-portion of the text")
+        describes AcertRequirement with values of type double.
+
+AcertTestResult is a type of TEST_RESULT.
+    failureReason (note "reason for failure, e.g.: timeout, crash, bad output")
+        describes AcertTestResult with values of type FailureReason.
+    FailureReason is a class, must be one of {Timeout, Crash, BadOutput}.
+
+    /* Metrics */
+    cpuTime (note "seconds of CPU time used when executing the test execution")
+        describes TEST_EXECUTION with values of type double.
+
+    memory (note "maximum bytes of resident memory used by test execution")
+        describes TEST_EXECUTION with values of type double.

@@ -1,0 +1,98 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+ uri "http://Turnstile/CounterApplicationSoftwareUnitTesting" alias cntrapputst.
+import "http://Turnstile/DevelopmentPlan".
+import "http://Turnstile/CounterApplicationDesignDescription".
+
+UnitTestDevelopment is a DevelopUnitTests,
+	has identifier "UnitTestDevelopment"
+	has tst:developedBy JaneDoe.
+	
+UTC-1-1 is a SoftwareUnitTest
+	has identifier "UTC-1-1"
+	has verifies IN-LLR-1
+	has tst:producedBy UnitTestDevelopment.
+
+UTC-1-2 is a SoftwareUnitTest
+	has identifier "UTC-1-2"
+	has verifies IN-LLR-1
+	has tst:producedBy UnitTestDevelopment.
+
+UTC-1-3 is a SoftwareUnitTest
+	has identifier "UTC-1-3"
+	has verifies IN-LLR-1
+	has tst:producedBy UnitTestDevelopment.
+
+UTC-1-4 is a SoftwareUnitTest
+	has identifier "UTC-1-4"
+	has verifies IN-LLR-1
+	has tst:producedBy UnitTestDevelopment.
+
+UTR-1-1-1 is a SoftwareUnitTestResult
+	has identifier "UTR-1-1-1",
+	has confirms UTC-1-1,
+	has tst:result tst:Passed,
+	has executedBy SoftwareUnitTestRun1.
+
+UTR-1-2-1 is a SoftwareUnitTestResult
+	has identifier "UTR-1-2-1",
+	has confirms UTC-1-2,
+	has tst:result tst:Passed,
+	has executedBy SoftwareUnitTestRun1.
+
+UTR-1-3-1 is a SoftwareUnitTestResult
+	has identifier "UTR-1-3-1",
+	has confirms UTC-1-3,
+	has tst:result tst:Passed,
+	has executedBy SoftwareUnitTestRun1.
+
+UTR-1-4-1 is a SoftwareUnitTestResult
+	has identifier "UTR-1-4-1",
+	has confirms UTC-1-4,
+	has tst:result tst:Failed,
+	has executedBy SoftwareUnitTestRun1.
+	
+TestStation1 is an AGENT
+	has identifier "TestStation1".
+SoftwareUnitTestRun1 is a SoftwareUnitTestExecution
+	has identifier "SoftwareUnitTestRun1"
+	has executedOn TestStation1.
+
+UTR-1-1-2 is a SoftwareUnitTestResult
+	has identifier "UTR-1-1-2",
+	has confirms UTC-1-1,
+	has tst:result tst:Passed,
+	has executedBy SoftwareUnitTestRun2.
+
+UTR-1-2-2 is a SoftwareUnitTestResult
+	has identifier "UTR-1-2-2",
+	has confirms UTC-1-2,
+	has tst:result tst:Passed,
+	has executedBy SoftwareUnitTestRun2.
+
+UTR-1-3-2 is a SoftwareUnitTestResult
+	has identifier "UTR-1-3-2",
+	has confirms UTC-1-3,
+	has tst:result tst:Passed,
+	has executedBy SoftwareUnitTestRun2.
+
+UTR-1-4-2 is a SoftwareUnitTestResult
+	has identifier "UTR-1-4-2",
+	has confirms UTC-1-4,
+	has tst:result tst:Failed,
+	has executedBy SoftwareUnitTestRun2.
+	
+TestStation2 is an AGENT
+	has identifier "TestStation2".
+SoftwareUnitTestRun2 is a SoftwareUnitTestExecution
+	has identifier "SoftwareUnitTestRun2"
+	has executedOn TestStation2.

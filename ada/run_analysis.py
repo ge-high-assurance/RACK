@@ -1,12 +1,19 @@
 #!/usr/bin/env python
 
+"""
+Main module for the Ada analysis.
+
+Runs the analysis and displays the results in Turtle format.
+"""
+
 __copyright__ = "Copyright (c) 2020, Galois, Inc."
 
 import argparse
-from colorama import Fore, Style
 import logging
 from typing import Dict, List, Optional
 import sys
+
+from colorama import Fore, Style
 
 import libadalang as lal
 from rdflib import Graph, Namespace
@@ -21,10 +28,24 @@ import static_call_graph as SCG
 # contains a default implementation for projects that have a GPR project file.
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--gpr",     help="Project file (.gpr)", type=str)
-parser.add_argument("--files",   help="Text file containing a list of project files, one per line", type=str)
+
+parser.add_argument("--gpr", help="Project file (.gpr)", type=str)
+
+parser.add_argument(
+    "--files",
+    help="Text file containing a list of project files, one per line",
+    type=str
+)
+
 parser.add_argument("--analyze", help="File to analyze (.ada, .adb, .ads)", type=str, required=True)
-parser.add_argument("others",    help="List of project files (use --project-files if there are many)", type=str, nargs="*")
+
+parser.add_argument(
+    "others",
+    help="List of project files (use --project-files if there are many)",
+    type=str,
+    nargs="*"
+)
+
 args = parser.parse_args()
 
 class CustomFormatter(logging.Formatter):
@@ -84,10 +105,15 @@ def register_component(components, component: SCG.GraphNode) -> None:
     key = SCG.node_key(component)
     uri = SCG.get_uri(component)
     name = SCG.get_name(component)
-    # TODO: check what we know about the actual component type
     components[key] = Component(DATA[uri], name, ComponentType.SOURCE_FUNCTION)
 
 def register_ada_file(files: Dict[str, File], file_key: Optional[str]) -> Optional[File]:
+    """
+    Creates an ontology node corresponding to 'file_key', unless it already
+    exists, and stores it in 'files'.
+
+    Returns the existing or newly-created node.
+    """
     if file_key is None:
         return None
     if file_key not in files:

@@ -41,13 +41,13 @@ def safe_xref(node: lal.AdaNode) -> Optional[lal.DefiningName]:
         warn_about_node(node)
         return None
 
-def node_key(node: GraphNode) -> Optional[str]:
+def node_key(node: GraphNode) -> str:
     """
     Computes a key we can use for identifying this node uniquely.
     """
     xref = safe_xref(node)
     if xref is None:
-        return None
+        return str(node)
     return str(xref)
 
 def get_definition_file(node: GraphNode) -> Optional[str]:
@@ -72,7 +72,8 @@ def get_uri(node: GraphNode) -> str:
     """Computes the URI to use for a node."""
     xref = node.p_gnat_xref()
     if not xref:
-        raise Exception(f"The reference to node {node} could not be resolved.")
+        return f"__RACK__UNRESOLVED__{node.p_relative_name.p_canonical_text}"
+        # raise Exception(f"The reference to node {node} could not be resolved.")
     return xref.p_basic_decl.p_canonical_fully_qualified_name
 
 class StaticCallGraphVisitor(AdaVisitor):

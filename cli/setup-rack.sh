@@ -11,6 +11,7 @@ fi
 rack model import --clear ../RACK-Ontology/OwlModels/import.yaml
 rack model import ../Turnstile-Ontology/99-Utils/import.yaml
 rack model import ../GrammaTech-Ontology/import.yaml
+rack model import ../STR-Ontology/import.yaml
 
 rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest[0-9]+" "^query " "^Ingest-"
 rack nodegroups import ../Turnstile-Ontology/99-Utils/NodeGroups

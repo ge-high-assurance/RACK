@@ -1,0 +1,34 @@
+uri "http://arcos.rack/STR" alias STR.
+
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/SOFTWARE".
+
+StrSystem (note "A component of the logical system with a concept of sequencing dependency")
+    is a type of SYSTEM.
+    informs (note "Informs represents a control or sequencing dependency in the software, with the source of the relationship earlier in the sequence than the target, or alternatively the source activating the target.")
+        describes StrSystem with values of type StrSystem.
+        
+StrPort (note "The communication interface of a concrete software component.")
+    is a type of ENTITY.
+    // name is stored in title property
+    variableName (note "Concrete variable name")
+        describes StrPort with a single value of type string.
+    portType (note "The type of information communicated over this port")
+        describes StrPort with values of type string.
+    portType has a single value.
+
+StrInPort (note "Input interface")
+    is a type of ENTITY.
+
+StrOutPort (note "Output interface")
+    is a type of ENTITY.
+
+connectsTo (note "An association between input and output ports found in the system.")
+    describes StrOutPort with values of type StrInPort.
+        
+StrComponent (note "A concrete software component with an explicitly identified input/output interface")
+    is a type of COMPONENT.
+    sendsVia (note "Links a component to its outgoing interface")
+        describes StrComponent with values of type StrOutPort.
+    recvsVia (note "Links a component to its incoming interface")
+        describes StrComponent with values of type StrInPort.

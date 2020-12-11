@@ -1,4 +1,4 @@
-uri "http://arcos.rack/STR" alias STR.
+uri "http://arcos.arbiter/STR" alias Arbiter.
 
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/SOFTWARE".

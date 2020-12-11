@@ -37,7 +37,7 @@ FILE
 // dwa - FILE satisfies ENTITY is extremely ambiguous. Remove this in favor of specific relationships defined elsewhere
     satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes FILE with values of type ENTITY.
 // dwa - incorrect use of wasDerivedFrom - remove
-//    satisfies is a type of wasDerivedFrom.
+    satisfies is a type of wasImpactedBy.
 
 // dwa - probably could remove this, since it would be unambiguous in this part of the model to just use wasGeneratedBy
   createBy (note "FILE_CREATION ACTIVITY that created this file") describes FILE with values of type FILE_CREATION.

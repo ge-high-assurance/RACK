@@ -38,7 +38,7 @@ HAZARD
 	H:source (note "ENTITY(s) that participate in causing this HAZARD") describes HAZARD with values of type ENTITY.
 //	H:source of HAZARD must be one of {HAZARD, sw:SWCOMPONENT, sys:SYSTEM}.
 // dwa - incorrect use of wasDerivedFrom - remove
-//	H:source is a type of wasDerivedFrom.
+	H:source is a type of wasImpactedBy.
 
    identified (note "how this HAZARD was identified") describes HAZARD with values of type HAZARD_IDENTIFICATION.
 // dwa - semantics of identified and wasGeneratedBy aren't equivalent. I don't think we need to force this subclass.

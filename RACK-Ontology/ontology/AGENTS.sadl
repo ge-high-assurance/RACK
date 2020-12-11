@@ -43,7 +43,7 @@ emailAddress (note "Email address of person")
  employedBy (note "Relates people to the company they were acting on behalf of.")
 // dwa - reduced to cardinality 1
   describes PERSON with at most one value of type AGENT.
- employedBy is a type of actedOnBehalfOf.
+  employedBy is a type of actedOnBehalfOf.
 
 
 TOOL

@@ -29,7 +29,7 @@ REVIEW_LOG
 
 	reviewSubject (note "ENTITY(s) that the review was performed on") describes REVIEW_LOG with values of type ENTITY.
 // dwa - review subject is not what a review log is derived from - remove
-//	reviews is a type of wasDerivedFrom.
+	reviews is a type of wasImpactedBy.
 
 	reviewResult (note "Review status descriptor") describes REVIEW_LOG with values of type REVIEW_STATE.
 

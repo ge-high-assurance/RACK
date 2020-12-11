@@ -30,7 +30,7 @@ HLR-1 is a HighLevelRequirement,
 	has identifier "HLR-1",
 	has text "The Computer shall increment the counter when a inflow event is received and the counter is less than max int.",
 	has Rq:satisfies Sys-1,
-	has mitigates H-1.2,
+	has H:mitigates H-1.2,
 	has Rq:governs CounterApplication,
 	has createdBy HlrDev1.	
 	
@@ -38,7 +38,7 @@ HLR-2 is a HighLevelRequirement,
 	has identifier "HLR-2",
 	has text "The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0.",
 	has Rq:satisfies Sys-2,
-	has mitigates H-1.1,
+	has H:mitigates H-1.1,
 	has Rq:governs CounterApplication,
 	has createdBy HlrDev1.	
 	

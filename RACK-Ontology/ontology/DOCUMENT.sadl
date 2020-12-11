@@ -50,7 +50,7 @@ DOCUMENT is a type of COLLECTION.
 // dwa - quibble - the references relationship is too general, I think, for a TA3 to use
     references (note "Source Materials used in the development of a document.") describes DOCUMENT with values of type ENTITY.
 // dwa - wasDerivedFrom isn't the best choice, even if strictly speaking one of its PROV sub-classes, wasQuotedFrom, might be closer. I'd just delete the subclassing here.
-//    references is a type of wasDerivedFrom.
+    references is a type of wasImpactedBy.
 
 // dwa - what's the point of having all of these subtypes of DOCUMENT?
 /************************** DESCRIPTION *******************/

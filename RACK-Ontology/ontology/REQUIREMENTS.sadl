@@ -48,16 +48,16 @@ REQUIREMENT
 // dwa - should be refined to SYSTEM, COMPONENT, or TEST, I think
 	governs (note "ENTITY(s) that are the subject of the requirement") describes REQUIREMENT with values of type ENTITY.
 // dwa - governs is NOT a type of wasDerivedFrom - remove
-//	governs is a type of wasDerivedFrom.
+	governs is a type of wasImpactedBy.
 
 	satisfies (note "Parent ENTITY(s) (e.g. REQUIREMENT) that this REQUIREMENT is derived from") describes REQUIREMENT with values of type ENTITY.
 // dwa - satisfies is NOT a type of wasDerivedFrom - remove
-//	satisfies is a type of wasDerivedFrom.
+	satisfies is a type of wasImpactedBy.
 
 // dwa - refine to HAZARD, since mitigates doesn't seem to have any other reasonable objects
 	Rq:mitigates (note "ENTITY(s) (e.g. HAZARD) that is being mitigated by this REQUIREMENT") describes REQUIREMENT with values of type HAZARD.
 // dwa - mitigates is NOT a type of wasDerivedFrom - remove
-//	mitigates is a type of wasDerivedFrom.
+	Rq:mitigates is a type of wasImpactedBy.
 
 	Rq:createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT") describes REQUIREMENT with values of type ACTIVITY.
 	Rq:createdBy is a type of wasGeneratedBy.
@@ -70,10 +70,10 @@ REQUIREMENT
 	text describes DATA_DICTIONARY_TERM with at most 1 value.
 
 	providedBy (note "ENTITY(s) (e.g. REQUIREMENT) that provides this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
-//	providedBy is a type of wasDerivedFrom.
+	providedBy is a type of wasImpactedBy.
 
 	consumedBy (note "ENTITY(s) (e.g. REQUIREMENT) that consumes this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
-//	consumedBy is a type of wasDerivedFrom.
+	consumedBy is a type of wasImpactedBy.
 
 	Rq:createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term") describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
 	Rq:createdBy is a type of wasGeneratedBy.

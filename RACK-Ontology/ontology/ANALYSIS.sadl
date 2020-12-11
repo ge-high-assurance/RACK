@@ -39,7 +39,7 @@ ANALYSIS_REPORT
 
     analyzes (note "ENTITY(s) under analysis") describes ANALYSIS_REPORT with values of type ENTITY.
 // dwa - incorrect use of wasDerivedFrom - remove
-//    analyzes is a type of wasDerivedFrom.
+    analyzes is a type of wasImpactedBy.
 
   producedBy (note "ACTIVITY(s) (e.g. ANALYSIS) producing this report") describes ANALYSIS_REPORT with values of type ACTIVITY.
   producedBy is a type of wasGeneratedBy.

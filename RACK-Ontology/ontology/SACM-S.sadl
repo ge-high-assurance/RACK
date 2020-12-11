@@ -30,7 +30,7 @@ Metamodel.")
     is a type of ENTITY.
 	argumentationElement describes ARGUMENT_PACKAGE with values of type ENTITY.
 // dwa - incorrect use of wasDerivedFrom - remove
-//	argumentationElement is a type of wasDerivedFrom.
+	argumentationElement is a type of wasImpactedBy.
 
 CLAIM
     (note "Claims are used to record the propositions of any structured argument contained in an Argument Package.")
@@ -42,24 +42,24 @@ interpretation and scoping of a Claim or ArgumentReasoning element.")
     is a type of ENTITY.
 	source describes ASSERTED_CONTEXT  with values of type ENTITY.
 // dwa - incorrect use of wasDerivedFrom - remove
-//	source is a type of wasDerivedFrom.
+	source is a type of wasImpactedBy.
 
 	target  describes ASSERTED_CONTEXT  with values of type ENTITY.
 // dwa - incorrect use of wasDerivedFrom - remove
-//	target is a type of wasDerivedFrom.
+	target is a type of wasImpactedBy.
 
 ASSERTED_INFERENCE
     (note "Asserted Inference association records the inference that a user declares to exist between one or more Assertion (premise) and
 another Assertion (conclusion).")
     is a type of ENTITY.
 	source describes ASSERTED_INFERENCE  with values of type ENTITY.
-//	source is a type of wasDerivedFrom.
+	source is a type of wasImpactedBy.
 
 	target  describes ASSERTED_INFERENCE  with values of type ENTITY.
-//	target is a type of wasDerivedFrom.
+	target is a type of wasImpactedBy.
 
 	reasoning describes ASSERTED_INFERENCE  with values of type ENTITY.
-//	reasoning is a type of wasDerivedFrom.
+	reasoning is a type of wasImpactedBy.
 
 
 ARTIFACT_REFERENCE

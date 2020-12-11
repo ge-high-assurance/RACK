@@ -26,7 +26,7 @@ TEST
 // dwa - suggest restricting to REQUIREMENT rather than ENTITY
 	verifies (note "Parent ENTITY(s) (e.g. REQUIREMENT) that this requirement is derived from") describes TEST with values of type ENTITY.
 // dwa - verifies is NOT a wasDerivedFrom
-//	verifies is a type of wasDerivedFrom.
+	verifies is a type of wasImpactedBy.
 
 	producedBy (note "TEST_DEVELOPMENT activity(s) this test belongs to") describes TEST with values of type ACTIVITY.
 	producedBy is a type of wasGeneratedBy.
@@ -47,7 +47,7 @@ TEST_RESULT
 
 	confirms (note "Parent test(s) of this test result") describes TEST_RESULT with values of type TEST.
 // dwa - confirms is not a wasDerivedFrom
-//	confirms is a type of wasDerivedFrom.
+	confirms is a type of wasImpactedBy.
 
 	executedBy (note "ACTIVITY(s) that created this test result") describes TEST_RESULT with values of type ACTIVITY.
 	executedBy is a type of wasGeneratedBy.

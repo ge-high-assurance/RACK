@@ -28,7 +28,7 @@ CONFIDENCE_ASSESSMENT (note "Superclass for confidence assessments over some oth
     assesses (note "ENTITY(s) whose confidence is assessed") describes CONFIDENCE_ASSESSMENT with values of type ENTITY.
     assesses describes CONFIDENCE_ASSESSMENT with at most 1 value.
 // dwa - assesses is NOT a type of wasDerivedFrom
-//  assesses is a type of wasDerivedFrom.
+  assesses is a type of wasImpactedBy.
 
     createBy (note "ACTIVITY(s) (e.g. ASSESSING_CONFIDENCE) that created this assessment.") describes CONFIDENCE_ASSESSMENT with values of type ACTIVITY.
     createBy is a type of wasGeneratedBy.

@@ -206,6 +206,11 @@ data_get('SOFTWARE#BUILD', 'SOFTWARE#step',
     build_step(BuildNonce, ToolNonce),
     activity_instance(ToolNonce, ToolType, V).
 
+data_get(_, 'PROV-S#wasInformedBy', activity_data(build_with(ToolNonce, ToolType,_,_,_),_,_), MakeInstance) :-
+    build_with(MakeNonce, make, _, _, _),
+    build_with(ToolNonce, ToolType, _, _, _),
+    build_step(MakeNonce, ToolNonce),
+    activity_instance(MakeNonce, make, MakeInstance).
 
 data_instance('PROV-S#ACTIVITY', load_data, Instance,
               [ uid(Instance), activity_data(BW,BS,BF) ]) :-

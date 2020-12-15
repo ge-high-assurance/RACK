@@ -35,4 +35,4 @@ test: $(TESTEXE)
 
 .PHONY: clean
 clean:
-	rm -f $(OBJECTS) $(LIBS) $(EXE) $(DIST) $(TESTEXE)
+	rm -f $(OBJECTS) $(LIBS) $(EXE) $(DIST) $(TESTEXE) .*.d .*.rack

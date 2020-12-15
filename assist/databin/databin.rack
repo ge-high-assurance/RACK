@@ -160,6 +160,18 @@ data_instance('FILE#FORMAT', load_data, F, [uid(F), fmt(F)]) :-
 data_get('FILE#FORMAT', 'PROV-S#identifier', fmt(Fmt), FmtS) :-
     atom_string(Fmt, FmtS).
 
+data_get('FILE#FORMAT', 'PROV-S#title', fmt('CSourceFile'), "C-source").
+data_get('FILE#FORMAT', 'PROV-S#description', fmt('CSourceFile'), "Compileable source written in the C language").
+
+data_get('FILE#FORMAT', 'PROV-S#title', fmt('ElfFile'), "object/executable").
+data_get('FILE#FORMAT', 'PROV-S#description', fmt('ElfFile'), "Binary object or executable").
+
+data_get('FILE#FORMAT', 'PROV-S#title', fmt('TarFile'), "archive:tar").
+data_get('FILE#FORMAT', 'PROV-S#description', fmt('TarFile'), "Multi-file archive format (TAR)").
+
+data_get('FILE#FORMAT', 'PROV-S#title', fmt('ArchiveFile'), "archive:library").
+data_get('FILE#FORMAT', 'PROV-S#description', fmt('ArchiveFile'), "Multi-file library archive format (AR)").
+
 %% -- Activities ------------------------------
 
 activity_instance(Nonce, ToolType, InstanceName) :-

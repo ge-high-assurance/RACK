@@ -120,7 +120,7 @@ data_instance('FILE#FILE', load_data, ToolPath,
     build_with(Nonce, _ToolType, _ToolName, ToolPath, _ToolArgs),
     UID = ToolPath.
 
-data_get('SOFTWARE#FILE', 'SOFTWARE#fileFormat',
+data_get('FILE#FILE', 'FILE#fileFormat',
          sw_file_data(Nonce, _, F), 'CSourceFile') :-
     build_inputs(Nonce, FS),
     member(F, FS),

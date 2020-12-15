@@ -16,6 +16,7 @@ databin_name(MyName) :-
                  build_from/2,
                  build_start/2,
                  build_finished/3,
+                 build_user/2,
                  file_sha1/3.
 
 %% Recognizers for matching tool output data
@@ -169,6 +170,17 @@ data_instance('SOFTWARE#COMPILE', load_data, Instance,
 data_get('SOFTWARE#COMPILE', 'SOFTWARE#compiledBy',
          activity_data(build_with(_, compile, _, ToolPath, _),_,_),
          ToolPath).
+data_get('SOFTWARE#COMPILE', 'PROV-S#wasAssociatedWith',
+         activity_data(_,build_start(N,_),_),
+         UserInstance) :-
+    build_user(N, UserName),
+    user_instance_name(UserName, UserInstance).
+data_get('SOFTWARE#COMPILE', 'SOFTWARE#performedBy',
+         activity_data(_,build_start(N,_),_),
+         UserInstance) :-
+    build_user(N, UserName),
+    user_instance_name(UserName, UserInstance).
+
 
 data_instance('SOFTWARE#BUILD', load_data, Instance,
               [ uid(Instance), activity_data(BW,BS,BF) ]) :-
@@ -195,6 +207,20 @@ data_instance('PROV-S#ACTIVITY', load_data, Instance,
     ToolType \= compile,
     ToolType \= make,
     activity_instance(Nonce, ToolType, Instance).
+
+data_instance('PROV-S#AGENT', load_data, Instance, [ activity_data(user_instance(BU, Instance)) ]) :-
+    BU = build_user(_Nonce, UserName),
+    BU,
+    user_instance_name(UserName, Instance).
+user_instance_name(UserName, Instance) :- append_fld('User', UserName, Instance).
+data_get(_, 'PROV-S#identifier', activity_data(user_instance(build_user(_,User),_)), UserStr) :-
+    atom_string(User, UserStr).
+data_get(_, 'PROV-S#title', activity_data(user_instance(_,_)), "Username").
+data_get(_, 'PROV-S#description', activity_data(user_instance(_,_)), "The username of the user agent").
+data_get(_, 'PROV-S#wasAssociatedWith', activity_data(_,build_start(N,_),_), UserInstance) :-
+    build_user(N, UserName),
+    user_instance_name(UserName, UserInstance).
+
 
 data_get(_, 'PROV-S#startedAtTime', activity_data(_,build_start(_,T),_), T).
 data_get(_, 'PROV-S#endedAtTime', activity_data(_,_,build_finished(_,T,_)), T).

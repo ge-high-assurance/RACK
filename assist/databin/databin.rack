@@ -23,7 +23,11 @@ databin_name(MyName) :-
 
 % -- This ingestion activity
 
-data_instance('PROV-S#ACTIVITY', load_data_start, MyName, [uid(MyName),ingesting_data(StartTime)]) :-
+data_instance('PROV-S#ACTIVITY', % create an instance of this
+              load_data_start,   % on this event (starting ingestion)
+              MyName,            % output name
+              [uid(MyName),ingesting_data(StartTime)]   % output attributes ot match data_get operations
+             ) :-
     databin_name(MyName),
     get_time(TS), stamp_date_time(TS, date(_Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
     StartTime = date_time(1999,Mo,D,H,Min,S,UTCOff).
@@ -31,7 +35,11 @@ data_instance('PROV-S#ACTIVITY', load_data_finish, MyName, ingested_data(EndTime
     databin_name(MyName),
     get_time(TS), stamp_date_time(TS, date(Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
     EndTime = date_time(Y,Mo,D,H,Min,S,UTCOff).
-data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime', ingesting_data(StartTime), StartTime).
+data_get('PROV-S#ACTIVITY',         % for an instance of this
+         'PROV-S#startedAtTime',    % if this relation exists
+         ingesting_data(StartTime), % and this attribute is available from a data_instance
+         StartTime                  % then generate this value (here, an owl date_time atom)
+        ).
 data_get('PROV-S#ACTIVITY', 'PROV-S#wasInformedBy', ingesting_data(_), ModelName) :-
     rack_model_name(ModelName).
 data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', ingested_data(EndTime), EndTime).
@@ -89,8 +97,6 @@ data_get('SOFTWARE#BUILD', 'SOFTWARE#step',
 %% -------------------- MISC FILES
 
 file_instance(Nonce, _, Input, InstanceRef) :-
-    % The above failed so file was not an output of a previous build.
-    % It was probably created by a user, so it's a new, distinct file.
     (file_sha1(Input, SHA1, Nonce), !, append_fld(SHA1, Input, InstanceRef);
      atom_string(IA, Input), file_sha1(IA, SHA1, Nonce), !, append_fld(SHA1, IA, InstanceRef);
      append_fld(Nonce, Input, InstanceRef)).
@@ -159,9 +165,11 @@ data_get('FILE#FORMAT', 'PROV-S#identifier', fmt(Fmt), FmtS) :-
 activity_instance(Nonce, ToolType, InstanceName) :-
     append_fld(Nonce, ToolType, InstanceName).
 
+%% -------------------- COMPILE
+
 data_instance('SOFTWARE#COMPILE', load_data, Instance,
               [ uid(Instance), activity_data(BW,BS,BF) ]) :-
-    BW = build_with(Nonce, compile, _ToolName, _ToolPath, _ToolArgs),
+    BW = build_with(Nonce, compile, _ToolName, _ToolPath, _ToolArgs),  % compile tool
     BS = build_start(Nonce, _StartTime),
     BF = build_finished(Nonce, _FinishTime, _ExitVal),
     BW, BS, BF,
@@ -181,10 +189,11 @@ data_get('SOFTWARE#COMPILE', 'SOFTWARE#performedBy',
     build_user(N, UserName),
     user_instance_name(UserName, UserInstance).
 
+%% -------------------- MAKE
 
 data_instance('SOFTWARE#BUILD', load_data, Instance,
               [ uid(Instance), activity_data(BW,BS,BF) ]) :-
-    BW = build_with(Nonce, make, _ToolName, _ToolPath, _ToolArgs),
+    BW = build_with(Nonce, make, _ToolName, _ToolPath, _ToolArgs),   % make tool
     BS = build_start(Nonce, _StartTime),
     BF = build_finished(Nonce, _FinishTime, _ExitVal),
     BW, BS, BF,

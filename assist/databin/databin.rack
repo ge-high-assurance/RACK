@@ -152,6 +152,21 @@ data_get('FILE#FILE', 'FILE#createBy', sw_file_data(Nonce, _, F), V) :-
     build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
     append_fld(Nonce, ToolType, V).
 
+data_get('FILE#FILE', 'FILE#fileHash', uid(FileInstance), FileHashRef) :-
+    file_sha1(FName, _SHA1, Nonce),
+    file_instance(Nonce, _, FName, FileInstance),
+    append_fld(FileInstance, 'hash', FileHashRef).
+
+data_instance('FILE#FILE_HASH', generated_from(FileInstance), Instance, file_hash(FileInstance, SHA1)) :-
+    file_sha1(FName, SHA1, Nonce),
+    build_from(Nonce, Dir),
+    file_instance(Nonce, Dir, FName, FileInstance),
+    append_fld(FileInstance, 'hash', Instance).
+data_get('FILE#FILE_HASH', 'FILE#hashType', file_hash(_, Hash), HashRef) :-
+    file_sha1(_, Hash, _),
+    rack_ref('FILE#SHA1', HashRef).
+data_get('FILE#FILE_HASH', 'FILE#hashValue', file_hash(_, Hash), HashStr) :-
+    atom_string(Hash, HashStr).
 
 %% -- Formats ------------------------------
 

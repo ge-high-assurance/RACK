@@ -620,8 +620,11 @@ add_rdfproperty(ShortC, ShortP, _RDFClass, Property, DataRef, Data) :-
     data_get(ShortC, ShortP, Data, Value),
     (
         % If this is an atom, treat it as a shorthand reference to an
-        % object in the current namespace.
-        %
+        % object in the current namespace or the RACK ontology namespace
+        atom(Value),
+        rack_ref(_ShortVal, Value), !,
+        TargetRef = Value ;
+
         % Note that the reference might not have been explicitly
         % defined.  From an RDF-triple perspective, this is fine:
         % simply creating this property causes it to *exist* because

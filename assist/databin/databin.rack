@@ -157,7 +157,8 @@ data_get('FILE#FILE', 'FILE#fileHash', uid(FileInstance), FileHashRef) :-
     file_instance(Nonce, _, FName, FileInstance),
     append_fld(FileInstance, 'hash', FileHashRef).
 
-data_instance('FILE#FILE_HASH', generated_from(FileInstance), Instance, file_hash(FileInstance, SHA1)) :-
+data_instance('FILE#FILE_HASH', generated_from(FileInstance), Instance,
+              [uid(Instance), file_hash(FName, SHA1)]) :-
     file_sha1(FName, SHA1, Nonce),
     build_from(Nonce, Dir),
     file_instance(Nonce, Dir, FName, FileInstance),
@@ -167,13 +168,18 @@ data_get('FILE#FILE_HASH', 'FILE#hashType', file_hash(_, Hash), HashRef) :-
     rack_ref('FILE#SHA1', HashRef).
 data_get('FILE#FILE_HASH', 'FILE#hashValue', file_hash(_, Hash), HashStr) :-
     atom_string(Hash, HashStr).
+data_get('FILE#FILE_HASH', 'PROV-S#title', file_hash(FName, _), Title) :-
+    atom_string(FName, FNameStr),
+    string_concat(FNameStr, " hash", Title).
+data_get('FILE#FILE_HASH', 'PROV-S#description', file_hash(FName, Hash), Description) :-
+    atom_string(FName, FNameStr),
+    file_sha1(FName, Hash, _),
+    string_concat(FNameStr, " SHA1 hash value of file contents", Description).
 
 %% -- Formats ------------------------------
 
 data_instance('FILE#FORMAT', load_data, F, [uid(F), fmt(F)]) :-
     member(F, [ 'CSourceFile', 'ElfFile', 'TarFile', 'ArchiveFile' ]).
-data_get('FILE#FORMAT', 'PROV-S#identifier', fmt(Fmt), FmtS) :-
-    atom_string(Fmt, FmtS).
 
 data_get('FILE#FORMAT', 'PROV-S#title', fmt('CSourceFile'), "C-source").
 data_get('FILE#FORMAT', 'PROV-S#description', fmt('CSourceFile'), "Compileable source written in the C language").

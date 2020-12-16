@@ -341,6 +341,7 @@ ontology_leaf_class(C) :-
       findall(OtherPCRef,
               (rdf(OtherPCRef, rdf:type, owl:'Class'),
                rdf(OtherPCRef, rdfs:subClassOf, PCRef),
+               OtherPCRef \= C,  % because C is reachable from C below
                % OtherPCRef \= 'http://arcos.rack/PROV-S#THING',
                rdf_reachable(C, rdfs:subClassOf, OtherPCRef)),
               OtherRefs),

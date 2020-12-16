@@ -16,6 +16,7 @@ rack model import ../STR-Ontology/import.yaml
 rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest[0-9]+" "^query " "^Ingest-"
 rack nodegroups import ../Turnstile-Ontology/99-Utils/NodeGroups
 rack nodegroups import ../nodegroups/queries
+rack nodegroups import ../nodegroups/ingestion
 
 rack data import --clear ../RACK-Ontology/OwlModels/DO-178C.yaml
 rack data import ../Turnstile-Ontology/99-Utils/Data/Model.yaml

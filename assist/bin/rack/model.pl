@@ -518,7 +518,12 @@ realize_loaded_data :-
     findall(Instance, rdf_dataref(_RDFClass2, load_data, Instance), LdInstances),
     findall(Instance, rdf_dataref(_RDFClass3, load_data_finish, Instance), FiInstances),
     append(StInstances, LdInstances, StLdInstances),
-    append(StLdInstances, FiInstances, Instances),
+    append(StLdInstances, FiInstances, PrimaryInstances),
+    rack_namespace(NS),
+    findall(Instance, (member(PIRef, PrimaryInstances),
+                       ns_ref(NS, PI, PIRef),
+                       rdf_dataref(_RDFClass4, generated_from(PI), Instance)), GenInstances),
+    append(PrimaryInstances, GenInstances, Instances),
     length(Instances, Count),
     rack_namespace(Namespace),
     print_message(informational, loaded_data_instances(Namespace, Count)).

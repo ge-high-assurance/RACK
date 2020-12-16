@@ -608,9 +608,10 @@ add_each_rdfdata(RDFClass, Class, DataRef, DataList) :-
     add_rdfdata(RDFClass, Class, DataRef, Data).
 
 add_rdfdata(RDFClass, Class, DataRef, Data) :-
-    (rdf(Class, rdfs:subClassOf, Parent), !,
-     (add_rdfdata(RDFClass, Parent, DataRef, Data);true) ;
-     true),
+    rdf(Class, rdfs:subClassOf, Parent),
+    add_rdfdata(RDFClass, Parent, DataRef, Data).
+
+add_rdfdata(RDFClass, Class, DataRef, Data) :-
     property(Class, Property, _),
     rack_ref(ShortC, RDFClass),
     rack_ref(ShortP, Property),

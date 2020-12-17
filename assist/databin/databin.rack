@@ -96,6 +96,26 @@ data_get('SOFTWARE#PACKAGE', 'SOFTWARE#packageInput', package_tar(Nonce), V) :-
     build_from(Nonce, Dir),
     file_instance(Nonce, Dir, File, V).
 
+data_get('SOFTWARE#PACKAGE', 'SOFTWARE#packagedBy', package_tar(Nonce), TarPath) :-
+    tar_start(Nonce, _, TarPath).
+
+data_get('SOFTWARE#PACKAGE', 'PROV-S#wasAssociatedWith',
+         package_tar(N),
+         UserInstance) :-
+    build_user(N, UserName),
+    user_instance_name(UserName, UserInstance).
+data_get('SOFTWARE#PACKAGE', 'SOFTWARE#performedBy',
+         package_tar(N),
+         UserInstance) :-
+    build_user(N, UserName),
+    user_instance_name(UserName, UserInstance).
+
+
+data_get('FILE#FILE', 'FILE#fileParent', sw_file_data(Nonce, Dir, File), ParentInstance) :-
+    tar_access(Nonce, File, open),
+    tar_access(Nonce, ParentFile, create),
+    file_instance(Nonce, Dir, ParentFile, ParentInstance).
+
 data_get(_, 'PROV-S#startedAtTime', package_tar(N), T) :- tar_start(N, T, _).
 data_get(_, 'PROV-S#endedAtTime', package_tar(N), T) :- tar_finished(N, T, _).
 

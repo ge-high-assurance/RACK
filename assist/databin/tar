@@ -17,7 +17,7 @@ on_finish() {
 trap on_finish EXIT ERR
 
 echo ":- multifile tar_start/3, tar_finished/3, tar_access/3,
-                   build_from/2, file_sha1/3." > ${tmpfile}.out
+                   build_from/2, build_user/2, file_sha1/3, file_committer/2." > ${tmpfile}.out
 echo "tar_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), ${realtool@Q})." >> ${tmpfile}.out
 echo "build_user(${nonce@Q}, '"$(whoami)"')." >> ${tmpfile}.out
 
@@ -57,6 +57,8 @@ BEGIN { show=0;
              print "tar_access('${nonce}', '" unquoted_name "', open)."
              "sha1sum " name | getline shafilesum
              split(shafilesum, sha)
+             gitauth = "git log -n 1 --pretty=format:\"file_committer('" unquoted_name "', '%al').\" " name " 2>/dev/null" | getline
+             if (gitauth != 0) print
              print "file_sha1('" sha[2] "', '" sha[1] "', '${nonce}')."
            }
          }

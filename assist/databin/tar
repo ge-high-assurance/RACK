@@ -42,15 +42,19 @@ BEGIN { show=0;
       # Initialization command
     }
     show=1;
-    print "tar_access('${nonce}', ", p[2], "create)."
+    unquoted_fname = substr(p[2], 0, length(p[2])-1)
+    gsub("\"", "", unquoted_fname)
+    print "tar_access('${nonce}', '" unquoted_fname "', create)."
     "sha1sum " name | getline shafilesum
     split(shafilesum, sha)
     print "file_sha1('" sha[2] "', '" sha[1] "', '${nonce}')."
   }
 /openat/ { if (show==1) {
-             print "tar_access('${nonce}', ", \$3, "open)."
              name = \$3
              gsub(",$", "", name)
+             unquoted_name = name
+             gsub("\"", "", unquoted_name)
+             print "tar_access('${nonce}', '" unquoted_name "', open)."
              "sha1sum " name | getline shafilesum
              split(shafilesum, sha)
              print "file_sha1('" sha[2] "', '" sha[1] "', '${nonce}')."

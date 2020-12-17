@@ -734,6 +734,6 @@ data_get(_, 'PROV-S#identifier', uid(UID,_,_), UIDStr) :- atom_string(UID, UIDSt
 data_get(_, 'PROV-S#title', uid(_,Title,_), Title).
 data_get(_, 'PROV-S#description', uid(_,_,Description), Description).
 
-data_get('SOFTWARE#FILE', 'SOFTWARE#filename', sw_file_data(_, Dir, NameOrPath), Value) :-
+data_get('FILE#FILE', 'FILE#filename', sw_file_data(_, Dir, NameOrPath), Value) :-
     file_to_fpath(NameOrPath, Dir, Path),
     atom_string(Path, Value).

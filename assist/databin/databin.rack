@@ -225,6 +225,10 @@ data_get('FILE#FILE', 'PROV-S#wasDerivedFrom', sw_file_data(Nonce, Dir, File), I
     member(InpFile, InpFiles),
     file_instance(Nonce, Dir, InpFile, InputInstance).
 
+data_get('FILE#FILE', 'PROV-S#generatedAtTime', sw_file_data(Nonce, _, File), GenTime) :-
+    build_outputs(Nonce, OutFiles),
+    member(File, OutFiles),
+    build_finished(Nonce, GenTime, _).
 
 data_get('FILE#FILE', 'FILE#fileHash', uid(FileInstance, _, _), FileHashRef) :-
     file_sha1(FName, _SHA1, Nonce),

@@ -210,6 +210,14 @@ data_get('FILE#FILE', 'FILE#wasGeneratedBy', sw_file_data(Nonce, _, F), V) :-
     build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
     append_fld(Nonce, ToolType, V).
 
+data_get('FILE#FILE', 'PROV-S#wasAttributedTo',
+         sw_file_data(Nonce, _, File),
+         UserInstance) :-
+    build_user(Nonce, UserName),
+    build_outputs(Nonce, OutFiles),
+    member(File, OutFiles),
+    user_instance_name(UserName, UserInstance).
+
 
 data_get('FILE#FILE', 'FILE#fileHash', uid(FileInstance, _, _), FileHashRef) :-
     file_sha1(FName, _SHA1, Nonce),

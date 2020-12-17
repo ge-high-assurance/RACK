@@ -204,6 +204,12 @@ data_get('FILE#FILE', 'FILE#createBy', sw_file_data(Nonce, _, F), V) :-
     member(F, FS),
     build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
     append_fld(Nonce, ToolType, V).
+data_get('FILE#FILE', 'FILE#wasGeneratedBy', sw_file_data(Nonce, _, F), V) :-
+    build_outputs(Nonce, FS),
+    member(F, FS),
+    build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
+    append_fld(Nonce, ToolType, V).
+
 
 data_get('FILE#FILE', 'FILE#fileHash', uid(FileInstance, _, _), FileHashRef) :-
     file_sha1(FName, _SHA1, Nonce),

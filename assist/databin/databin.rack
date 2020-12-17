@@ -17,7 +17,8 @@ databin_name(MyName) :-
                  build_start/2,
                  build_finished/3,
                  build_user/2,
-                 file_sha1/3.
+                 file_sha1/3,
+                 file_committer/2.
 
 %% Recognizers for matching tool output data
 
@@ -182,6 +183,10 @@ data_get('FILE#FILE', 'FILE#fileFormat',
     % (e.g. a .o object file)
     build_from(Nonce, Dir),
     \+ output_of(compile, Dir, F, _).
+
+data_get('FILE#FILE', 'PROV-S#wasAttributedTo', sw_file_data(_, _, F), Committer) :-
+    file_committer(F, C),
+    atom_string(C, Committer).
 
 output_of(Tool, Dir, F, BuildNonce) :-
     % File F in dir Dir might be the output of a previous build (if

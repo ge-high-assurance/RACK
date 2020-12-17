@@ -59,25 +59,34 @@ data_instance('PROV-S#AGENT', ingesting_data(_), Instance,
 %% -------------------- TAR FILES
 
 data_instance('FILE#FILE', load_data, Instance,
-              [ uid(Instance), sw_file_data(Nonce, Dir, File) ]) :-
+              [ uid(Instance, Title, Descr),
+                sw_file_data(Nonce, Dir, File) ]) :-
     tar_access(Nonce, File, create),
     build_from(Nonce, Dir),
-    file_instance(Nonce, Dir, File, Instance).
+    file_instance(Nonce, Dir, File, Instance),
+    atom_string(File, Title),
+    string_concat(Title, " file", Descr).
 
 data_instance('FILE#FILE', load_data, Instance,
-              [ uid(Instance), sw_file_data(Nonce, Dir, File) ]) :-
+              [ uid(Instance, Title, Descr),
+                sw_file_data(Nonce, Dir, File) ]) :-
     tar_access(Nonce, File, open),
     build_from(Nonce, Dir),
-    file_instance(Nonce, Dir, File, Instance).
+    file_instance(Nonce, Dir, File, Instance),
+    atom_string(File, Title),
+    string_concat(Title, " file", Descr).
 
 data_get('FILE#FILE', 'FILE#fileFormat',
          sw_file_data(Nonce, _, File), 'TarFile') :-
     tar_access(Nonce, File, create).
 
 data_instance('SOFTWARE#PACKAGE', load_data, Instance,
-              [ uid(Instance), package_tar(Nonce) ]) :-
+              [ uid(Instance, Title, Descr),
+                package_tar(Nonce) ]) :-
     tar_access(Nonce, _, create),
-    activity_instance(Nonce, tar, Instance).
+    activity_instance(Nonce, tar, Instance),
+    Title = "package:tar",
+    Descr = "Software package file in TAR format".
 
 data_get('SOFTWARE#PACKAGE', 'SOFTWARE#packagedBy', package_tar(N), ToolPath) :-
     tar_start(N, _, ToolPath).

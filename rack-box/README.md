@@ -136,7 +136,6 @@ version numbers in the following places:
 
 - [ ] [README.md](README.md)
 - [ ] [README-Docker-Hub.md](README-Docker-Hub.md)
-- [ ] [README-GitHub-Release.md](README-GitHub-Release.md)
 
 ### RACK Wiki
 

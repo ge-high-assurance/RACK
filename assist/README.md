@@ -12,7 +12,6 @@ These tools additionally provide an alternate data ingestion method to
 the CSV file + RACK cli tooling.  Either is appropriate to use, based
 on the needs at the time.
 
-
 * `databin`
 
    This directory contains Linux wrappers for various tools that can
@@ -45,4 +44,4 @@ This material is based upon work supported by the Defense Advanced Research Proj
 
 Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the Defense Advanced Research Projects Agency (DARPA).
 
-Distribution Statement "A" (Approved for Public Release, Distribution Unlimited). 
+Distribution Statement "A" (Approved for Public Release, Distribution Unlimited).

@@ -33,6 +33,7 @@ to ensure reproducibility of results.
 Note for documentation authors: These instructions should be kept in sync with
 the RACK-Box README.
 -->
+
 ```shell
 virtualenv venv
 source venv/bin/activate
@@ -41,6 +42,7 @@ python3 setup.py install
 ```
 
 If running on Windows, GitBash can be used with the following commands.
+
 ```shell
 virtualenv venv
 source venv/Scripts/activate
@@ -124,27 +126,40 @@ optional arguments:
                         Assign logger severity level
 ```
 
-The `rack` command is split into three subcommands: `data`, `model`, and `nodegroups`. Each of these subcommands offers its own help listing. For example try `rack data --help` for more information about the flags available when interacting with the data store.
+The `rack` command is split into three subcommands: `data`, `model`,
+and `nodegroups`. Each of these subcommands offers its own help
+listing. For example try `rack data --help` for more information about
+the flags available when interacting with the data store.
 
-The `model` subcommand is used to load the ontology itself. This is typically only done at the initial configuration step for RACK.
+The `model` subcommand is used to load the ontology itself. This is
+typically only done at the initial configuration step for RACK.
 
-The `nodegroups` subcommand is used to import and export nodegroups from SemTK. This is useful both for initial configuration and also for persisting your generated nodegroups across RACK instances.
+The `nodegroups` subcommand is used to import and export nodegroups
+from SemTK. This is useful both for initial configuration and also for
+persisting your generated nodegroups across RACK instances.
 
-The `data` subcommand is used to import CSV and OWL data files using the RACK ontology as well as exporting CSV files using nodegroups stored in SemTK.
+The `data` subcommand is used to import CSV and OWL data files using
+the RACK ontology as well as exporting CSV files using nodegroups
+stored in SemTK.
 
 ## Data Ingestion Configuration file format
 
 The import configuration files are YAML files that specify the target
-`data-graph` and `ingestion-steps`. These files will be the argument to a `rack data import` command.
+`data-graph` and `ingestion-steps`. These files will be the argument
+to a `rack data import` command.
 
 `data-graph` is a graph identifier URL. This URL allows multiple
 datasets to be stored in the same triple store.
 
-`ingestion-steps` takes an ordered list of CSV and OWL file imports used to populate the graph.
+`ingestion-steps` takes an ordered list of CSV and OWL file imports
+used to populate the graph.
 
-CSV files can be ingested by adding list elements containing a `csv` path and a `nodegroup` that lists an existing nodegroup ID in RACK. CSV paths are resolved relative to the configuration file.
+CSV files can be ingested by adding list elements containing a `csv`
+path and a `nodegroup` that lists an existing nodegroup ID in
+RACK. CSV paths are resolved relative to the configuration file.
 
-OWL files can be ingested by adding list elements containing an `owl` path to the OWL file.
+OWL files can be ingested by adding list elements containing an `owl`
+path to the OWL file.
 
 ```text
 data-model: "http://rack001/data"
@@ -156,7 +171,10 @@ ingestion-steps:
 
 ## Overriding default RACK URLs
 
-Connecting to RACK requires knowledge of the SemTK and Fuseki URLs. The RACK cli assumes that these URLs will be at their default locations on `localhost`. These URLs can be overridden using either command-line flags or environment variables.
+Connecting to RACK requires knowledge of the SemTK and Fuseki
+URLs. The RACK cli assumes that these URLs will be at their default
+locations on `localhost`. These URLs can be overridden using either
+command-line flags or environment variables.
 
 ### SemTK URL
 

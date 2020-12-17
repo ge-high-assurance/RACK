@@ -11,8 +11,8 @@ If you don't see these resource settings, it means Docker can use all of your co
 Now you are ready to start your RACK box.  Type the following commands to download the Docker RACK box and run it on your computer:
 
 ```shell
-docker pull gehighassurance/rack-box:v4.0
-docker run --detach -p 80:80 -p 12050-12092:12050-12092 gehighassurance/rack-box:v4.0
+docker pull gehighassurance/rack-box:v4.1
+docker run --detach -p 80:80 -p 12050-12092:12050-12092 gehighassurance/rack-box:v4.1
 ```
 
 Type "localhost" in your web browser's address bar, hit Enter, and you should see your RACK box's welcome page appear in your browser.  The welcome page will tell you some things you can do with your RACK box.

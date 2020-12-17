@@ -26,7 +26,8 @@ databin_name(MyName) :-
 data_instance('PROV-S#ACTIVITY', % create an instance of this
               load_data_start,   % on this event (starting ingestion)
               MyName,            % output name
-              [uid(MyName),ingesting_data(StartTime)]   % output attributes ot match data_get operations
+              [uid(MyName, "assist ingestion", "The RACK ASSIST ingestion process"),
+               ingesting_data(StartTime)]   % output attributes ot match data_get operations
              ) :-
     databin_name(MyName),
     get_time(TS), stamp_date_time(TS, date(_Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
@@ -79,8 +80,11 @@ data_get(_, 'PROV-S#startedAtTime', package_tar(N), T) :- tar_start(N, T, _).
 data_get(_, 'PROV-S#endedAtTime', package_tar(N), T) :- tar_finished(N, T, _).
 
 data_instance('FILE#FILE', load_data, TarPath,
-              [uid(TarPath), sw_file_data(Nonce, '/tmp', TarPath)]) :-
-    tar_start(Nonce, _, TarPath).
+              [uid(TarPath, Title, Descr),
+               sw_file_data(Nonce, '/tmp', TarPath)]) :-
+    tar_start(Nonce, _, TarPath),
+    atom_string(TarPath, Title),
+    string_concat(Title, " file", Descr).
 
 data_get('FILE#FILE', 'FILE#createBy', sw_file_data(Nonce, Dir, File), V) :-
     tar_access(Nonce, File, create),
@@ -106,19 +110,28 @@ data_instance('FILE#FILE', load_data, Instance, InstanceData) :-
     build_from(Nonce, Dir),
     member(Input, Inputs),
     file_instance(Nonce, Dir, Input, Instance),
-    InstanceData = [uid(Instance), sw_file_data(Nonce, Dir, Input)].
+    atom_string(Input, Title),
+    string_concat(Title, " file", Descr),
+    InstanceData = [uid(Instance, Title, Descr),
+                    sw_file_data(Nonce, Dir, Input)].
 
 data_instance('FILE#FILE', load_data, Instance, InstanceData) :-
     build_outputs(Nonce, Outputs),
     build_from(Nonce, Dir),
     member(Output, Outputs),
     file_instance(Nonce, Dir, Output, Instance),
-    InstanceData = [uid(Instance), sw_file_data(Nonce, Dir, Output)].
+    atom_string(Output, Title),
+    string_concat(Title, " file", Descr),
+    InstanceData = [uid(Instance, Title, Descr),
+                    sw_file_data(Nonce, Dir, Output)].
 
 data_instance('FILE#FILE', load_data, ToolPath,
-              [uid(UID), sw_file_data(Nonce, '/tmp', ToolPath)]) :-
+              [uid(UID, Title, Descr),
+               sw_file_data(Nonce, '/tmp', ToolPath)]) :-
     build_with(Nonce, _ToolType, _ToolName, ToolPath, _ToolArgs),
-    UID = ToolPath.
+    UID = ToolPath,
+    Title = ToolPath,
+    string_concat(Title, " file", Descr).
 
 data_get('FILE#FILE', 'FILE#fileFormat',
          sw_file_data(Nonce, _, F), 'CSourceFile') :-
@@ -152,46 +165,34 @@ data_get('FILE#FILE', 'FILE#createBy', sw_file_data(Nonce, _, F), V) :-
     build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
     append_fld(Nonce, ToolType, V).
 
-data_get('FILE#FILE', 'FILE#fileHash', uid(FileInstance), FileHashRef) :-
+data_get('FILE#FILE', 'FILE#fileHash', uid(FileInstance, _, _), FileHashRef) :-
     file_sha1(FName, _SHA1, Nonce),
     file_instance(Nonce, _, FName, FileInstance),
     append_fld(FileInstance, 'hash', FileHashRef).
 
 data_instance('FILE#FILE_HASH', generated_from(FileInstance), Instance,
-              [uid(Instance), file_hash(FName, SHA1)]) :-
+              [uid(Instance, Title, Descr),
+               file_hash(FName, SHA1)]) :-
     file_sha1(FName, SHA1, Nonce),
     build_from(Nonce, Dir),
     file_instance(Nonce, Dir, FName, FileInstance),
-    append_fld(FileInstance, 'hash', Instance).
+    append_fld(FileInstance, 'hash', Instance),
+    atom_string(FName, FNameStr),
+    string_concat(FNameStr, " hash", Title),
+    string_concat(FNameStr, " SHA1 hash value of file contents", Descr).
 data_get('FILE#FILE_HASH', 'FILE#hashType', file_hash(_, Hash), HashRef) :-
     file_sha1(_, Hash, _),
     rack_ref('FILE#SHA1', HashRef).
 data_get('FILE#FILE_HASH', 'FILE#hashValue', file_hash(_, Hash), HashStr) :-
     atom_string(Hash, HashStr).
-data_get('FILE#FILE_HASH', 'PROV-S#title', file_hash(FName, _), Title) :-
-    atom_string(FName, FNameStr),
-    string_concat(FNameStr, " hash", Title).
-data_get('FILE#FILE_HASH', 'PROV-S#description', file_hash(FName, Hash), Description) :-
-    atom_string(FName, FNameStr),
-    file_sha1(FName, Hash, _),
-    string_concat(FNameStr, " SHA1 hash value of file contents", Description).
 
 %% -- Formats ------------------------------
 
-data_instance('FILE#FORMAT', load_data, F, [uid(F), fmt(F)]) :-
-    member(F, [ 'CSourceFile', 'ElfFile', 'TarFile', 'ArchiveFile' ]).
+data_instance('FILE#FORMAT', load_data, F, [uid(F, Title, Descr), fmt(F)]) :-
+    member(F, [ 'CSourceFile', 'ElfFile', 'TarFile', 'ArchiveFile' ]),
+    Title = F,
+    string_concat(Title, " file format", Descr).
 
-data_get('FILE#FORMAT', 'PROV-S#title', fmt('CSourceFile'), "C-source").
-data_get('FILE#FORMAT', 'PROV-S#description', fmt('CSourceFile'), "Compileable source written in the C language").
-
-data_get('FILE#FORMAT', 'PROV-S#title', fmt('ElfFile'), "object/executable").
-data_get('FILE#FORMAT', 'PROV-S#description', fmt('ElfFile'), "Binary object or executable").
-
-data_get('FILE#FORMAT', 'PROV-S#title', fmt('TarFile'), "archive:tar").
-data_get('FILE#FORMAT', 'PROV-S#description', fmt('TarFile'), "Multi-file archive format (TAR)").
-
-data_get('FILE#FORMAT', 'PROV-S#title', fmt('ArchiveFile'), "archive:library").
-data_get('FILE#FORMAT', 'PROV-S#description', fmt('ArchiveFile'), "Multi-file library archive format (AR)").
 
 %% -- Activities ------------------------------
 
@@ -201,12 +202,15 @@ activity_instance(Nonce, ToolType, InstanceName) :-
 %% -------------------- COMPILE
 
 data_instance('SOFTWARE#COMPILE', load_data, Instance,
-              [ uid(Instance), activity_data(BW,BS,BF) ]) :-
+              [ uid(Instance, Title, Descr),
+                activity_data(BW,BS,BF) ]) :-
     BW = build_with(Nonce, compile, _ToolName, _ToolPath, _ToolArgs),  % compile tool
     BS = build_start(Nonce, _StartTime),
     BF = build_finished(Nonce, _FinishTime, _ExitVal),
     BW, BS, BF,
-    activity_instance(Nonce, compile, Instance).
+    activity_instance(Nonce, compile, Instance),
+    Title = "compilation",
+    Descr = "Execution of the compiler".
 
 data_get('SOFTWARE#COMPILE', 'SOFTWARE#compiledBy',
          activity_data(build_with(_, compile, _, ToolPath, _),_,_),
@@ -225,12 +229,15 @@ data_get('SOFTWARE#COMPILE', 'SOFTWARE#performedBy',
 %% -------------------- MAKE
 
 data_instance('SOFTWARE#BUILD', load_data, Instance,
-              [ uid(Instance), activity_data(BW,BS,BF) ]) :-
+              [ uid(Instance, Title, Descr),
+                activity_data(BW,BS,BF) ]) :-
     BW = build_with(Nonce, make, _ToolName, _ToolPath, _ToolArgs),   % make tool
     BS = build_start(Nonce, _StartTime),
     BF = build_finished(Nonce, _FinishTime, _ExitVal),
     BW, BS, BF,
-    activity_instance(Nonce, make, Instance).
+    activity_instance(Nonce, make, Instance),
+    Title = "build",
+    Descr = "Build tool invocation".
 
 data_get('SOFTWARE#BUILD', 'SOFTWARE#step',
          activity_data(build_with(BuildNonce, _, _, _, _),_,_), V) :-
@@ -246,14 +253,16 @@ data_get(_, 'PROV-S#wasInformedBy', activity_data(build_with(ToolNonce, ToolType
     activity_instance(MakeNonce, make, MakeInstance).
 
 data_instance('PROV-S#ACTIVITY', load_data, Instance,
-              [ uid(Instance), activity_data(BW,BS,BF) ]) :-
+              [ uid(Instance, Title, Descr), activity_data(BW,BS,BF) ]) :-
     BW = build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
     BS = build_start(Nonce, _StartTime),
     BF = build_finished(Nonce, _FinishTime, _ExitVal),
     BW, BS, BF,
     ToolType \= compile,
     ToolType \= make,
-    activity_instance(Nonce, ToolType, Instance).
+    activity_instance(Nonce, ToolType, Instance),
+    atom_string(ToolType, Title),
+    string_concat(Title, " tool invocation", Descr).
 
 data_instance('PROV-S#AGENT', load_data, Instance, [ activity_data(user_instance(BU, Instance)) ]) :-
     BU = build_user(_Nonce, UserName),

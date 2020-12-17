@@ -709,8 +709,10 @@ load_recognizer(FPath) :-
 
 :- multifile data_instance/4, data_get/4.
 
-data_instance('PROV-S#ACTIVITY', load_data_start, ModelName, [uid(ModelName),
-                                                              model_start(ModelName, StartTime)]) :-
+data_instance('PROV-S#ACTIVITY', load_data_start, ModelName,
+              [uid(ModelName, "assist model",
+                   "The RACK ASSIST model for automated ingestion"),
+               model_start(ModelName, StartTime)]) :-
     rack_model_name(ModelName),
     % n.b. get_time/1 is impure and unstable, so call it in the
     % data_instance which is only called once as opposed to the
@@ -727,7 +729,9 @@ data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime', model_start(ModelName, Start
 data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', model_end(ModelName, EndTime), EndTime) :-
     rack_model_name(ModelName).
 
-data_get(_, 'PROV-S#identifier', uid(UID), UIDStr) :- atom_string(UID, UIDStr).
+data_get(_, 'PROV-S#identifier', uid(UID,_,_), UIDStr) :- atom_string(UID, UIDStr).
+data_get(_, 'PROV-S#title', uid(_,Title,_), Title).
+data_get(_, 'PROV-S#description', uid(_,_,Description), Description).
 
 data_get('SOFTWARE#FILE', 'SOFTWARE#filename', sw_file_data(_, Dir, NameOrPath), Value) :-
     file_to_fpath(NameOrPath, Dir, Path),

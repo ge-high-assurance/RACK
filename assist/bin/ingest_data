@@ -2,32 +2,51 @@
 # shellcheck disable=SC2207
 # Copyright (c) 2020, General Electric Company and Galois, Inc.
 
+usage_exit() {
+    echo Usage: $(basename "$0") '[-o OwlFile]' '[-a]' '[-r RecognizerFile]' DATA_NAMESPACE DATA_DIR
+    echo ""
+    echo "  Reads RACK ontology and creates instances from DATA_DIR data"
+    echo "  under the specified namespace.  The created instances are then"
+    echo "  uploaded to RACK (by default) or written to the specified OWL file."
+    echo ""
+    echo "  If the -a option is specified, the data is not uploaded or"
+    echo "  written to a file, but an analysis of the data is written to stdout."
+    echo ""
+    echo "  Example:"
+    # shellcheck disable=2086
+    echo "    $ $(basename $0) http://TurnstileSystem Turnstile-Ontology"
+    exit 1
+}
+
+
 loads=(
     -f $(dirname "$0")/rack/model.pl
 )
 
-# shellcheck disable=SC2046
-case $# in
-    2) target="upload_model_to_rack" ;;
-    3) if [ "$3" == "analysis" ]
-       then target="report(${1@Q}, [])"; loads+=(-f $(dirname "$0")/rack/analyze.pl)
-       else target="save_model_to_file(${3@Q},${1@Q})"
-       fi;;
-    *) echo Usage: $(basename "$0") DATA_NAMESPACE DATA_DIR '[OwlFile|"analysis"]'
-       echo ""
-       echo "  Reads RACK ontology and creates instances from DATA_DIR data"
-       echo "  under the specified namespace.  The created instances are then"
-       echo "  uploaded to RACK or written to the specified OWL file."
-       echo ""
-       echo "  If the third term is the word analysis, the data is not"
-       echo "  uploaded or written to a file, but an analysis of the data"
-       echo "  is written to stdout."
-       echo ""
-       echo "  Example:"
-       # shellcheck disable=2086
-       echo "    $ $(basename $0) http://TurnstileSystem/CounterApplication \ "
-       echo "           models/TurnstileSystem/src"
-       exit 1
+mode="upload"
+
+while getopts "ao:" opt ; do
+    case $opt in
+        a) mode="analyze";;
+        o) mode="$OPTARG";;
+        ?) echo "Unrecognized option argument: $opt" >&2
+           usage_exit >&2;;
+    esac
+done
+shift $((OPTIND-1))
+if [ $# -ne 2 ] ; then
+    echo "Invalid number of positional parameters" >&2
+    usage_exit >&2;
+fi
+
+case $mode in
+    upload) target="upload_model_to_rack"
+            ;;
+    analyze) target="report(${1@Q}, [])"
+             loads+=(-f $(dirname "$0")/rack/analyze.pl)
+             ;;
+    *) target="save_model_to_file(${mode@Q},${1@Q})"
+       ;;
 esac
 
 # add -q to suppress informational messages

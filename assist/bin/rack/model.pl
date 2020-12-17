@@ -602,6 +602,7 @@ rdf_dataref(RDFClass, Data, Instance) :-
     rack_namespace(NS),
     ns_ref(NS, InstanceSuffix, Instance),
     add_triple(Instance, rdf:type, RDFClass),
+    % Use InstanceData to drive data_get property relation definitions
     (is_list(InstanceData),
      add_each_rdfdata(RDFClass, RDFClass, Instance, InstanceData);
      \+ is_list(InstanceData),

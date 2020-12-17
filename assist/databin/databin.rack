@@ -44,6 +44,17 @@ data_get('PROV-S#ACTIVITY',         % for an instance of this
 data_get('PROV-S#ACTIVITY', 'PROV-S#wasInformedBy', ingesting_data(_), ModelName) :-
     rack_model_name(ModelName).
 data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', ingested_data(EndTime), EndTime).
+data_get('PROV-S#ACTIVITY', 'PROV-S#wasAssociatedWith', ingesting_data(_), UserInstance) :-
+    geteuid(UID),
+    user_info(UID, UserData),
+    user_data(name, UserData, UserName),
+    user_instance_name(UserName, UserInstance).
+data_instance('PROV-S#AGENT', ingesting_data(_), Instance,
+              activity_data(user_instance(UserName, Instance))) :-
+    geteuid(UID),
+    user_info(UID, UserData),
+    user_data(name, UserData, UserName),
+    user_instance_name(UserName, Instance).
 
 %% -------------------- TAR FILES
 

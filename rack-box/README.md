@@ -129,13 +129,14 @@ To make a new release, we will need to perform the following steps:
 
 ## Update documentation pages
 
-Before making a new release, we will need to update instructions or
-version numbers in the following places:
+Before making a new release, we will need to update version numbers or
+instructions in the following places:
 
 ### RACK Box
 
+- [ ] [Docker-Hub-README.md](Docker-Hub-README.md)
+- [ ] [GitHub-Release-README.md](GitHub-Release-README.md)
 - [ ] [README.md](README.md)
-- [ ] [README-Docker-Hub.md](README-Docker-Hub.md)
 
 ### RACK Wiki
 

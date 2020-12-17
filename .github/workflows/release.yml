@@ -172,6 +172,15 @@ jobs:
       if: matrix.builder == 'docker'
       run: docker push gehighassurance/rack-box:${{ github.event.release.tag_name }}
 
+    - name: Update Docker Hub Description
+      if: matrix.builder == 'docker'
+      uses: peter-evans/dockerhub-description@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        repository: gehighassurance/rack-box
+        readme-filepath: RACK/rack-box/Docker-Hub-README.md
+
     - name: Split rack-box image
       if: matrix.builder != 'docker'
       run: |
@@ -223,6 +232,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: RACK/rack-box/README-GitHub-Release.md
+        asset_path: RACK/rack-box/GitHub-Release-README.md
         asset_name: README.md
         asset_content_type: text/markdown; charset=UTF-8

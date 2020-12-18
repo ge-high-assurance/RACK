@@ -12,6 +12,9 @@ usage_exit() {
     echo "  If the -a option is specified, the data is not uploaded or"
     echo "  written to a file, but an analysis of the data is written to stdout."
     echo ""
+    echo "  The -r option can be used to specify additional data recognizer"
+    echo "  files to use (usually project-specific)."
+    echo ""
     echo "  Example:"
     # shellcheck disable=2086
     echo "    $ $(basename $0) http://TurnstileSystem Turnstile-Ontology"
@@ -25,10 +28,11 @@ loads=(
 
 mode="upload"
 
-while getopts "ao:" opt ; do
+while getopts "ao:r:" opt ; do
     case $opt in
         a) mode="analyze";;
         o) mode="$OPTARG";;
+        r) loads+=(-f $OPTARG);;
         ?) echo "Unrecognized option argument: $opt" >&2
            usage_exit >&2;;
     esac

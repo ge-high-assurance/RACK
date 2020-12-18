@@ -132,6 +132,11 @@ data_get('FILE#FILE', 'FILE#createBy', sw_file_data(Nonce, Dir, File), V) :-
     build_from(Nonce, Dir),
     activity_instance(Nonce, tar, V).
 
+data_get('FILE#FILE', 'PROV-S#wasGeneratedBy', sw_file_data(Nonce, Dir, File), V) :-
+    tar_access(Nonce, File, create),
+    build_from(Nonce, Dir),
+    activity_instance(Nonce, tar, V).
+
 data_get('SOFTWARE#BUILD', 'SOFTWARE#step',
          activity_data(build_with(BuildNonce, _, _, _, _),_,_), V) :-
     build_step(BuildNonce, N),

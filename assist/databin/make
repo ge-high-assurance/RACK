@@ -21,7 +21,7 @@ export MAKE_DATABIN="${outf}@${nonce}:${MAKE_DATABIN}"
     # shellcheck disable=SC2027,SC2046
     echo "build_from(${nonce@Q}, '"$(top_rel_curdir)"')."
     echo "build_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'))."
-    echo "build_user(${nonce@Q}, '"$(whoami)"')."
+    echo "build_user(${nonce@Q}, '$(whoami)')."
 ) > "${outf}"
 
 when_done() {

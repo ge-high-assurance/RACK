@@ -32,7 +32,7 @@ while getopts "ao:r:" opt ; do
     case $opt in
         a) mode="analyze";;
         o) mode="$OPTARG";;
-        r) loads+=(-f $OPTARG);;
+        r) loads+=(-g "load_recognizer(${OPTARG@Q})");;
         ?) echo "Unrecognized option argument: $opt" >&2
            usage_exit >&2;;
     esac
@@ -44,13 +44,11 @@ if [ $# -ne 2 ] ; then
 fi
 
 case $mode in
-    upload) target="upload_model_to_rack"
-            ;;
+    upload) target="upload_model_to_rack";;
     analyze) target="report(${1@Q}, [])"
              loads+=(-f $(dirname "$0")/rack/analyze.pl)
              ;;
-    *) target="save_model_to_file(${mode@Q},${1@Q})"
-       ;;
+    *) target="save_model_to_file(${mode@Q},${1@Q})";;
 esac
 
 # add -q to suppress informational messages

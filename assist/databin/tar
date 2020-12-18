@@ -21,7 +21,7 @@ echo ":- multifile tar_start/3, tar_finished/3, tar_access/3,
 echo "tar_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), ${realtool@Q})." >> ${tmpfile}.out
 echo "build_user(${nonce@Q}, '$(whoami)')." >> ${tmpfile}.out
 
-strace -f -e trace=file -e status=successful -o "$tmpfile" "$realtool" "${@}"
+strace -f -e trace=file -o "$tmpfile" "$realtool" "${@}"
 
 rval=$?
 echo "tar_finished(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> ${tmpfile}.out
@@ -31,6 +31,7 @@ awk -f <(
 BEGIN { show=0;
         print "build_from(${nonce@Q}, '$(top_rel_curdir)').";
       }
+/ = -1/ { next }
 /creat/ {
     split(\$2, p, "(");
     if (show==0) {

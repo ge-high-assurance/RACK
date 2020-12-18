@@ -627,7 +627,14 @@ add_rdfdata(RDFClass, Class, DataRef, Data) :-
 add_rdfproperty(ShortC, ShortP, _RDFClass, Property, DataRef, Data) :-
     data_get(ShortC, ShortP, Data, Value),
     (
-        % If this is an atom, treat it as a shorthand reference to an
+        % If this is an atom, it might be existing or might need to be created.
+
+        % Is it already full qualified and should be left untouched?
+        atom(Value),
+        atom_concat('http', _, Value), !,
+        TargetRef = Value;
+
+        % Check if it is a shorthand reference to an
         % object in the current namespace or the RACK ontology namespace
         atom(Value),
         rack_ref(_ShortVal, Value), !,

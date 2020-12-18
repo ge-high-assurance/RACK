@@ -5,7 +5,6 @@
 
 
 # TODO: use -M for internal assist of include files
-# TODO: get -L paths and -l libraries
 
 # shellcheck disable=SC2046
 . $(dirname "$0")/rackfuncs.sh
@@ -14,6 +13,8 @@ inf=()
 outf=''
 inclf=''
 opts=()
+libdirs=()
+libs=()
 
 outnxt=0
 inclnxt=0
@@ -25,6 +26,8 @@ for ARG ; do
         -o) outnxt=1 ;;
         -MF) inclnxt=1 ;;
         -MT) ignnxt=1 ;;
+        -L*) libdirs+=("${ARG:2}") ;;
+        -l*) libs+=("lib${ARG:2}") ;;
         *) if (( outnxt )) ; then
                outf="${ARG}"
                outnxt=0
@@ -80,6 +83,20 @@ nonce="n$(date +%s)-$$"
     echo "build_user(${nonce@Q}, '"$(whoami)"')."
     for inp in ${inf[*]} ; do
         git log -n 1 --pretty=format:"file_committer(${inp@Q}, '%al').%n" $inp 2>/dev/null
+    done
+    for lf in ${libs[*]} ; do
+        for ld in ${libdirs[*]} ; do
+            for ext in .so .a ; do
+                ldr=$(cd "${ld}"; echo $(top_rel_curdir))
+                if [ "$ldr" == "." ] ; then lp=${lf}${ext}; else lp=${ldr}/${lf}${ext}; fi
+                if [ -f ${lp} ] ; then
+                    echo "build_inputs(${nonce@Q}, [ ${lp@Q} ])."
+                    IFS=' ' read sum f < <(sha1sum "$lp")
+                    echo "file_sha1(${lp@Q}, ${sum@Q}, ${nonce@Q})."
+                    break 2
+                fi
+            done
+        done
     done
 ) > "${rackf}"
 

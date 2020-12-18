@@ -206,4 +206,4 @@ prolog:message(property_value_wrong_type(Instance, Property, DefType, Val, ValTy
       prefix_shorten(Val, SV)
     },
     [ 'Instance property ~w . ~w of ~w should be a ~w but is a ~w'-[
-          SI, SP, SV, SDTy, SVTy] ].
+          SI, SP, SV, SVTy, SDTy] ].

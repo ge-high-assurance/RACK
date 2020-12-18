@@ -21,7 +21,7 @@ lib%.so: %.o
 	$(CC) $(CFLAGS) -shared -o $@ $<
 
 $(EXE): $(APP).c $(APP).h $(OBJECTS) $(LIBS)
-	$(CC) $(CFLAGS) -L$(PWD) -lhw -o $@ $< $(OBJECTS)
+	$(CC) $(CFLAGS) -L../$$(basename $$(pwd)) -lhw -o $@ $< $(OBJECTS)
 
 $(DIST): conf.json $(LIBS) $(EXE)
 	$(TAR) cf $@ $^

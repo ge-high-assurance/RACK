@@ -318,7 +318,15 @@ data_instance('SOFTWARE#COMPILE', load_data, Instance,
     Title = "compilation",
     Descr = "Execution of the compiler".
 
-data_get('SOFTWARE#COMPILE', 'SOFTWARE#compiledBy',
+data_get(_, 'SOFTWARE#compileInput',
+         activity_data(build_with(Nonce, compile, _, _, _),_,_),
+         InputInstance) :-
+    build_inputs(Nonce, Inputs),
+    member(Input, Inputs),
+    build_from(Nonce, Dir),
+    file_instance(Nonce, Dir, Input, InputInstance).
+
+data_get(_, 'SOFTWARE#compiledBy',
          activity_data(build_with(_, compile, _, ToolPath, _),_,_),
          ToolPath).
 data_get('SOFTWARE#COMPILE', 'PROV-S#wasAssociatedWith',

@@ -97,6 +97,7 @@ when_done() {
             for F in "${fl[@]}"; do
                 read sum f < <(sha1sum "$F")
                 echo "file_sha1(${f@Q}, ${sum@Q}, ${nonce@Q})." >> "${rackf}"
+                git log -n 1 --pretty=format:"file_committer(${F@Q}, '%al').%n" $F 2>/dev/null >> "${rackf}"
             done
         fi
     fi

@@ -214,6 +214,11 @@ data_get('FILE#FILE', 'FILE#wasGeneratedBy', sw_file_data(Nonce, _, F), V) :-
     member(F, FS),
     build_with(Nonce, ToolType, _ToolName, _ToolPath, _ToolArgs),
     append_fld(Nonce, ToolType, V).
+data_get('FILE#FILE', 'FILE#createBy', sw_file_data(Nonce, _, File), V) :-
+    sw_dev_for_file(_FileInstance, Nonce, V, File, _Committer).
+data_get('FILE#FILE', 'PROV-S#wasGeneratedBy', sw_file_data(Nonce, _, File), V) :-
+    sw_dev_for_file(_FileInstance, Nonce, V, File, _Committer).
+
 
 data_get('FILE#FILE', 'PROV-S#wasAttributedTo',
          sw_file_data(Nonce, _, File),
@@ -268,6 +273,32 @@ data_instance('FILE#FORMAT', load_data, F, [uid(F, Title, Descr), fmt(F)]) :-
 
 activity_instance(Nonce, ToolType, InstanceName) :-
     append_fld(Nonce, ToolType, InstanceName).
+
+
+%% -------------------- CODE_DEVELOPMENT
+
+data_instance('SOFTWARE#CODE_DEVELOPMENT', generated_from(FileInstance), Instance,
+              [ uid(Instance, "sw-development", "User development of software"),
+                sw_devel(FileInstance, File, Committer)
+              ]) :-
+    sw_dev_for_file(FileInstance, _, Instance, File, Committer).
+
+% given FileInstance or Nonce+File, can generate the rest (if applicable)
+sw_dev_for_file(FileInstance, Nonce, Instance, File, Committer) :-
+    build_inputs(Nonce, Inputs),
+    build_from(Nonce, Dir),
+    member(File, Inputs),
+    file_instance(Nonce, Dir, File, FileInstance),
+    file_committer(File, Committer),
+    atom_concat('sw-dev-', FileInstance, Instance).
+
+data_get('SOFTWARE#CODE_DEVELOPMENT', 'SOFTWARE#author', sw_devel(_, _, C), Committer) :-
+    atom_string(C, Committer).
+
+data_get('SOFTWARE#CODE_DEVELOPMENT', 'PROV-S#wasAssociatedWith', sw_devel(_, _, C), Committer) :-
+    atom_string(C, Committer).
+
+data_get('SOFTWARE#CODE_DEVELOPMENT', 'PROV-S#used', sw_devel(I,_,_), I).
 
 %% -------------------- COMPILE
 

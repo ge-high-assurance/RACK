@@ -628,34 +628,44 @@ add_rdfproperty(ShortC, ShortP, _RDFClass, Property, DataRef, Data) :-
     data_get(ShortC, ShortP, Data, Value),
     (
         % If this is an atom, it might be existing or might need to be created.
+        add_atom(DataRef, Property, Value);
 
+        % It wasn't an atom, so it's probably a literal value (number,
+        % string, etc.) and can be used directly.
+        \+ atom(Value),
+        add_triple(DataRef, Property, Value)
+    ).
+
+add_atom(DataRef, Property, Value) :-
+    atom(Value),
+    (
         % Is it already full qualified and should be left untouched?
-        atom(Value),
-        atom_concat('http', _, Value), !,
-        TargetRef = Value;
+        add_fully_qualified(DataRef, Property, Value), !;
 
         % Check if it is a shorthand reference to an
         % object in the current namespace or the RACK ontology namespace
-        atom(Value),
-        rack_ref(_ShortVal, Value), !,
-        TargetRef = Value ;
+        add_rack_shorthand(DataRef, Property, Value), !;
 
         % Note that the reference might not have been explicitly
         % defined.  From an RDF-triple perspective, this is fine:
         % simply creating this property causes it to *exist* because
         % of it's relationship to the value; it might be
         % under-specified, but this is a valid state.
-        atom(Value),
-        rack_namespace(NS),
-        ns_ref(NS, Value, TargetRef) ;
+        add_atom_newref(DataRef, Property, Value)
+    ).
 
-        % It wasn't an atom, so it's probably a literal value (number,
-        % string, etc.) and can be used directly.
-        \+ atom(Value),
-        TargetRef = Value
-    ),
+add_fully_qualified(DataRef, Property, Value) :-
+    atom_concat('http', _, Value), !,
+    add_triple(DataRef, Property, Value).
+
+add_rack_shorthand(DataRef, Property, Value) :-
+    rack_ref(_ShortVal, Value), !,
+    add_triple(DataRef, Property, Value).
+
+add_atom_newref(DataRef, Property, Value) :-
+    rack_namespace(NS),
+    ns_ref(NS, Value, TargetRef),
     add_triple(DataRef, Property, TargetRef).
-
 
 %% ----------------------------------------------------------------------
 %% ----+ Recognizers for Loaded Data

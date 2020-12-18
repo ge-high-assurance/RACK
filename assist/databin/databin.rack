@@ -176,7 +176,7 @@ data_instance('FILE#FILE', load_data, ToolPath,
                sw_file_data(Nonce, '/tmp', ToolPath)]) :-
     build_with(Nonce, _ToolType, _ToolName, ToolPath, _ToolArgs),
     UID = ToolPath,
-    Title = ToolPath,
+    atom_string(ToolPath, Title),
     string_concat(Title, " file", Descr).
 
 data_get('FILE#FILE', 'FILE#fileFormat',
@@ -270,7 +270,7 @@ data_get('FILE#FILE_HASH', 'FILE#hashValue', file_hash(_, Hash), HashStr) :-
 
 data_instance('FILE#FORMAT', load_data, F, [uid(F, Title, Descr), fmt(F)]) :-
     member(F, [ 'CSourceFile', 'ElfFile', 'TarFile', 'ArchiveFile' ]),
-    Title = F,
+    atom_string(F, Title),
     string_concat(Title, " file format", Descr).
 
 

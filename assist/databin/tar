@@ -46,7 +46,7 @@ BEGIN { show=0;
     unquoted_fname = substr(p[2], 0, length(p[2])-1)
     gsub("\"", "", unquoted_fname)
     print "tar_access('${nonce}', '" unquoted_fname "', create)."
-    "sha1sum " name | getline shafilesum
+    ("sha1sum " name) | getline shafilesum
     split(shafilesum, sha)
     print "file_sha1('" sha[2] "', '" sha[1] "', '${nonce}')."
   }
@@ -56,9 +56,9 @@ BEGIN { show=0;
              unquoted_name = name
              gsub("\"", "", unquoted_name)
              print "tar_access('${nonce}', '" unquoted_name "', open)."
-             "sha1sum " name | getline shafilesum
+             ("sha1sum " name) | getline shafilesum
              split(shafilesum, sha)
-             gitauth = "git log -n 1 --pretty=format:\"file_committer('" unquoted_name "', '%al').\" " name " 2>/dev/null" | getline
+             gitauth = ("git log -n 1 --pretty=format:\"file_committer('" unquoted_name "', '%al').\" " name " 2>/dev/null") | getline
              if (gitauth != 0) print
              print "file_sha1('" sha[2] "', '" sha[1] "', '${nonce}')."
            }

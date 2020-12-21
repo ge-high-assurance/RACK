@@ -1,0 +1,50 @@
+# Download action:
+#  - Downloads rack-box files
+#  - Packages rack-box files
+
+name: 'Download rack-box files'
+description: 'Download files into rack-box/files'
+
+# Assumes the following actions have already been called:
+# - Check out RACK source
+# - Check out RACK wiki
+# - Set up Python
+# - Cache Python dependencies
+
+# These actions can't be moved here because a composite action can
+# hold only run steps, not calls to other actions.
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: Download Fuseki distribution
+      run: curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
+
+    - name: Download SemTK distribution
+      run: curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20201208/semtk-opensource-v2.3.0-20201208-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+
+    - name: Download style spreadsheet
+      run: curl -LSfs https://github.com/KrauseFx/markdown-to-html-github-style/raw/master/style.css -o RACK/rack-box/files/style.css
+
+    - name: Download systemctl script
+      run: curl -LSfs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4505/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
+
+    - name: Package RACK CLI
+      run: |
+        cd RACK/cli
+        python3 -m pip install --upgrade pip setuptools wheel
+        pip3 wheel --wheel-dir=wheels -r requirements.txt
+        pip3 wheel --wheel-dir=wheels .
+        cd ${{ github.workspace }}
+        tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
+
+    - name: Package RACK documentation
+      run: |
+        sudo npm install -g github-wikito-converter markdown-to-html
+        gwtc -t RACK-in-a-Box RACK.wiki
+        markdown -t RACK-in-a-box -s style.css RACK.wiki/Welcome.md > index.html
+        mv documentation.html index.html RACK/rack-box/files
+
+    - name: Package RACK ontology and data
+      run: tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests --exclude=tools RACK

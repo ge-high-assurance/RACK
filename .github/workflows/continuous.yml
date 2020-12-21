@@ -23,13 +23,13 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+    - name: Check out RACK source
+      uses: actions/checkout@v2
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-
-    - name: Check out RACK source
-      uses: actions/checkout@v2
 
     - name: Cache Python dependencies
       uses: actions/cache@v2
@@ -64,9 +64,8 @@ jobs:
         SHELLCHECK_OPTS: -e SC1008
 
 # Cache job:
-#  - Downloads files needed by rack-box
-#  - Packages rack-box components
-#  - Caches RACK/rack-box/files directory
+#  - Downloads rack-box files
+#  - Caches rack-box files
 
   cache:
     strategy:
@@ -77,19 +76,37 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - name: Set up Python
-      uses: actions/setup-python@v2
+    - name: Cache rack-box files
+      uses: actions/cache@v2
+      id: cache-files
       with:
-        python-version: ${{ matrix.python-version }}
+        path: RACK/rack-box/files
+        key: files-${{ github.sha }}
 
     - name: Check out RACK source
+      if: steps.cache-files.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
       with:
         repository: ge-high-assurance/RACK
         token: ${{ secrets.RACK_CI_PAT }}
         path: RACK
 
+    - name: Check out RACK wiki
+      if: steps.cache-files.outputs.cache-hit != 'true'
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK.wiki
+        token: ${{ secrets.RACK_CI_PAT }}
+        path: RACK.wiki
+
+    - name: Set up Python
+      if: steps.cache-files.outputs.cache-hit != 'true'
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
     - name: Cache Python dependencies
+      if: steps.cache-files.outputs.cache-hit != 'true'
       uses: actions/cache@v2
       with:
         # This path is specific to Ubuntu
@@ -100,58 +117,9 @@ jobs:
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
 
-    - name: Cache all files needed by rack-box
-      uses: actions/cache@v2
-      id: cache-files
-      with:
-        path: RACK/rack-box/files
-        key: files-${{ github.sha }}
-
-    - name: Download Fuseki distribution
+    - name: Download rack-box files
       if: steps.cache-files.outputs.cache-hit != 'true'
-      run: curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
-
-    - name: Download SemTK distribution
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      run: curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20201208/semtk-opensource-v2.3.0-20201208-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
-
-    - name: Download style spreadsheet
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      run: curl -LSfs https://github.com/KrauseFx/markdown-to-html-github-style/raw/master/style.css -o RACK/rack-box/files/style.css
-
-    - name: Download systemctl script
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      run: curl -LSfs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4260/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
-
-    - name: Package RACK CLI
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      run: |
-        cd RACK/cli
-        python3 -m pip install --upgrade pip setuptools wheel
-        pip3 wheel --wheel-dir=wheels -r requirements.txt
-        pip3 wheel --wheel-dir=wheels .
-        cd ${{ github.workspace }}
-        tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
-
-    - name: Package RACK ontology and data
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      run: tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests --exclude=tools RACK
-
-    - name: Check out RACK wiki
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK.wiki
-        token: ${{ secrets.RACK_CI_PAT }}
-        path: RACK.wiki
-
-    - name: Package RACK documentation
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      run: |
-        sudo npm install -g github-wikito-converter markdown-to-html
-        gwtc -t RACK-in-a-Box RACK.wiki
-        markdown -t RACK-in-a-box -s style.css RACK.wiki/Welcome.md > index.html
-        mv documentation.html index.html RACK/rack-box/files
+      uses: ./.github/workflows/actions/download
 
 # Test job:
 #  - Runs rack-box tests
@@ -166,17 +134,17 @@ jobs:
     needs: cache
 
     steps:
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-
     - name: Check out RACK source
       uses: actions/checkout@v2
       with:
         repository: ge-high-assurance/RACK
         token: ${{ secrets.RACK_CI_PAT }}
         path: RACK
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
 
     - name: Cache Python dependencies
       uses: actions/cache@v2

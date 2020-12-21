@@ -10,35 +10,35 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
-uri "http://arcos.rack/AGENTS" alias AGENTS.
-
+/******* URIs and imports ***************/
+uri "http://arcos.rack/AGENTS" alias Ag.
 import "http://arcos.rack/PROV-S".
+
+
+/************** edit history *****************
+ *
+ * dwa - 11 Nov 2020 - reduced cardinality of 'employedBy' to 1, because N seems ill-defined or unnecessary
+ * dwa - 11 Nov 2020 - removed 'name' as a string property because it was pushed down into the AGENT base class - see edit in PROV-S.sadl
+ * dwa - 11 Nov 2020 - added 'version' as a string property for TOOL agents
+ */
 
 ORGANIZATION
   (note "An organization is a social or legal institution such as a company, society, etc.")
   is a type of AGENT.
 
-name (note "Full name of an organization")
-  describes ORGANIZATION with values of type string.
-
-PERSON (note "Person agents are people")
+PERSON (note "Person agents are people - alias for User")
   is a type of AGENT.
-
-name (note "Full name of a person")
-  describes PERSON with values of type string.
 
 emailAddress (note "Email address of person")
   describes PERSON with values of type string.
 
-employedBy (note "Relates people to the company they were acting on behalf of.")
-  describes PERSON with values of type AGENT.
-employedBy is a type of actedOnBehalfOf.
-
+ employedBy (note "Relates people to the company they were acting on behalf of.")
+  describes PERSON with at most one value of type AGENT.
+  employedBy is a type of actedOnBehalfOf.
 
 TOOL
-  (note "An aid (software, hardware, etc) that automates the performance of a specific activity.")
+  (note "An aid (software, hardware, etc) that automates the performance of an activity.")
   is a type of AGENT.
-
-SOFTWAREAGENT
-  (note "A software agent is running software.")
-  is a type of AGENT.
+  toolVersion (note "The release version of the tool") describes TOOL with values of type string.
+  toolVersion describes TOOL with at most 1 value.
+ 

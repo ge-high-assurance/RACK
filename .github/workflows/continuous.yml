@@ -119,7 +119,7 @@ jobs:
 
     - name: Download rack-box files
       if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: ./.github/workflows/actions/download
+      uses: ./RACK/.github/workflows/actions/download
 
 # Test job:
 #  - Runs rack-box tests

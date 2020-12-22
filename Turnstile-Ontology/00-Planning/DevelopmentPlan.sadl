@@ -111,11 +111,11 @@ import "http://common/DO-178C".
       Engineer is a type of PERSON.
 
       //Model Location: DevelopmentPlan.04-SoftwareVerification.ControlCoupleCoverageReport
-    ControlCoupleCoverageReport is a type of ANALYSIS_REPORT.
+    ControlCoupleCoverageReport is a type of ANALYSIS_OUTPUT.
       wasGeneratedBy of ControlCoupleCoverageReport only has values of type ControlCouplingAnalysis.
 
      //Model Location: DevelopmentPlan.04-SoftwareVerification.DataCoupleCoverageReport
-    DataCoupleCoverageReport is a type of ANALYSIS_REPORT.
+    DataCoupleCoverageReport is a type of ANALYSIS_OUTPUT.
       wasGeneratedBy of DataCoupleCoverageReport only has values of type DataCouplingAnalysis.
 
       //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareCodeReviewArtifacts
@@ -141,7 +141,7 @@ import "http://common/DO-178C".
       wasGeneratedBy of SoftwareUnitTestResult only has values of type SoftwareUnitTestExecution.
 
       //Model Location: DevelopmentPlan.04-SoftwareVerification.StructuralCoverageReport
-    StructuralCoverageReport is a type of ANALYSIS_REPORT.
+    StructuralCoverageReport is a type of ANALYSIS_OUTPUT.
       wasGeneratedBy of StructuralCoverageReport only has values of type StructualCoverageAnalysis.
 
         //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess.SoftwareCodeReview

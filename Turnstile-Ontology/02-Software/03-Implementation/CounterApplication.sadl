@@ -14,161 +14,20 @@ import "http://Turnstile/DevelopmentPlanData".
 import "http://Turnstile/CounterApplicationDesignDescription".
 
 
-CodeSW-1 is a SoftwareCoding
-	has identifier "CodeSW-1"
-	has sw:author JaneDoe
-	has sw:referenced SoftwareStandard.
-
-
-
-// input.o
-
-input_c is a SourceCode
-    has identifier "input_c"
-    has filename "input.c"
-    has file:createBy CodeSW-1
-    has fileFormat CSourceFile.
-
-input_h is a SourceCode
-    has identifier "input_h"
-    has filename "input.h"
-    has file:createBy CodeSW-1
-    has fileFormat CHeaderFile.
-
-
-input_o_Compiling is a SoftwareIntegration
-    has identifier "input_o_Compiling"
-    has sw:performedBy GCC
-    has compileInput input_c
-    has compileInput input_h.
-
-input_o is a ObjectFile
-    has identifier "input_o"
-    has filename "input.o"
-    has file:createBy input_o_Compiling
-    has fileFormat ElfFile.
-
 input_function is a COMPONENT
     has identifier "input_function"
     has dataInsertedBy Mockup
     has componentType SOURCE_FUNCTION
     has sw:name "input"
-    has valueType "void()"
-    has definedIn input_c.
-
-// output.o
-
-output_c is a SourceCode
-    has identifier "output_c"
-    has filename "output.c"
-    has file:createBy CodeSW-1
-    has fileFormat CSourceFile.
-output_h is a SourceCode
-    has identifier "output_h"
-    has filename "output.h"
-    has file:createBy CodeSW-1
-    has fileFormat CHeaderFile
-    has file:satisfies OUT-LLR-1
-    has file:satisfies OUT-LLR-2.
-
-
-output_o_Compiling is a SoftwareIntegration
-    has identifier "output_o_Compiling"
-    has compileInput output_c
-    has compileInput output_h
-    has sw:performedBy GCC
-    has compileWithOptimizations  true
-    has linkerPath "/path/to/libraries".
-
-output_o is a ObjectFile
-    has identifier "output_o"
-    has filename "output.o"
-    has file:createBy output_o_Compiling
-    has fileFormat ElfFile.
+    has valueType "void()".
 
 output_function is a COMPONENT
     has identifier "output_function"
     has dataInsertedBy Mockup
     has componentType SOURCE_FUNCTION
     has sw:name "output"
-    has valueType "void()"
-    has definedIn output_c.
+    has valueType "void()".
 
-// hw.o libhw.so
-
-hw_c is a SourceCode
-    has identifier "hw_c"
-    has filename "hw.c"
-    has file:createBy CodeSW-1
-    has fileFormat CSourceFile.
-hw_h is a SourceCode
-    has identifier "hw_h"
-    has filename "hw.h"
-    has file:createBy CodeSW-1
-    has fileFormat CHeaderFile
-    has file:satisfies IN-LLR-1
-    has file:satisfies IN-LLR-2
-    has file:satisfies IN-LLR-3
-    has file:satisfies IN-LLR-4
-    has file:satisfies IN-LLR-5
-    has file:satisfies IN-LLR-6.
-
-hw_o_Compiling is a SoftwareIntegration
-    has identifier "hw_o_Compiling"
-    has sw:performedBy GCC
-    has compileInput hw_c
-    has compileInput hw_h.
-
-hw_o is a ObjectFile
-    has identifier "hw_o"
-    has filename "hw.o"
-    has file:createBy hw_o_Compiling
-    has fileFormat ElfFile.
-
-libhw_so_Compiling is a SoftwareIntegration
-    has identifier "libhw_so_Compiling"
-    has sw:performedBy GCC
-    has compileInput hw_o.
-
-libhw_so is a ObjectFile
-    has identifier "libhw_so"
-    has filename "libhw.so"
-    has file:createBy libhw_so_Compiling
-    has fileFormat ElfFile.
-
-// counter.exe
-
-counter_c is a SourceCode
-    has identifier "counter_c"
-    has filename "counter.c"
-    has file:createBy CodeSW-1
-    has fileFormat CSourceFile.
-
-counter_h is a SourceCode
-    has identifier "counter_h"
-    has filename "counter.h"
-    has file:createBy CodeSW-1
-    has fileFormat CHeaderFile
-    has file:satisfies EXE-LLR-1
-    has file:satisfies EXE-LLR-2
-    has file:satisfies EXE-LLR-3.
-
-
-
-counter_exe_Compiling is a SoftwareIntegration
-    has identifier "counter_exe_Compiling"
-    has sw:performedBy GCC
-    has compileInput input_o
-    has compileInput output_o
-    has compileInput libhw_so
-    has compileInput counter_c
-    has compileInput counter_h.
-
-counter_exe is an ObjectFile
-    has identifier "counter_exe"
-    has filename "counter.exe"
-    has file:createBy counter_exe_Compiling
-    has fileFormat ElfFile.
 
 main_function is a COMPONENT
     has identifier "main_function"
@@ -177,47 +36,5 @@ main_function is a COMPONENT
     has sw:name "main"
     has valueType "int(int argc, char* argv[])"
     has controlFlowsToUnconditionally input_function
-    has controlFlowsToUnconditionally output_function
-    has definedIn counter_c.
+    has controlFlowsToUnconditionally output_function.
 
-// conf.json
-
-conf_json is a FILE
-    has identifier "conf_json"
-    has filename "conf.json"
-    has file:createBy CodeSW-1
-    has fileFormat JsonFile.
-
-// dist.tar.gz
-
-dist_tar is a FILE
-    has identifier "dist_tar"
-    has filename "dist.tar"
-	has wasGeneratedBy tarPackaging
-	has fileFormat TarFile.
-
-tarPackaging is a PACKAGE
-    has identifier "tarPackaging"
-    has sw:performedBy TAR
-    has packageInput conf_json
-    has packageInput libhw_so
-    has packageInput counter_exe.
-
-// test.o
-
-test_c is a SourceCode
-    has identifier "test_c"
-    has filename "test.c"
-    has file:createBy CodeSW-1
-    has fileFormat CSourceFile.
-test_h is a SourceCode
-    has identifier "test_h"
-    has filename "test.h"
-    has file:createBy CodeSW-1
-    has fileFormat CHeaderFile.
-
-test_exe_Compiling is a SoftwareIntegration
-    has identifier "test_exe_Compiling"
-    has sw:performedBy GCC
-    has compileInput test_c
-    has compileInput test_h.

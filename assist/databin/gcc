@@ -5,7 +5,6 @@
 
 
 # TODO: use -M for internal assist of include files
-# TODO: get -L paths and -l libraries
 
 # shellcheck disable=SC2046
 . $(dirname "$0")/rackfuncs.sh
@@ -14,6 +13,8 @@ inf=()
 outf=''
 inclf=''
 opts=()
+libdirs=()
+libs=()
 
 outnxt=0
 inclnxt=0
@@ -25,6 +26,8 @@ for ARG ; do
         -o) outnxt=1 ;;
         -MF) inclnxt=1 ;;
         -MT) ignnxt=1 ;;
+        -L*) libdirs+=("${ARG:2}") ;;
+        -l*) libs+=("lib${ARG:2}") ;;
         *) if (( outnxt )) ; then
                outf="${ARG}"
                outnxt=0
@@ -68,7 +71,8 @@ nonce="n$(date +%s)-$$"
 (
     export IFS=","
     echo ":- multifile build_with/5, build_from/2, build_inputs/2, build_outputs/2,
-                       build_start/2, build_finished/3, file_sha1/3."
+                       build_start/2, build_finished/3, build_user/2, file_sha1/3,
+                       file_committer/2."
     # shellcheck disable=SC2086
     echo "build_with(${nonce@Q}, compile," ${tool@Q}, ${realtool@Q}, [ "${opts[*]@Q}" ] ")."
     # shellcheck disable=SC2086,SC2027,SC2046
@@ -76,6 +80,25 @@ nonce="n$(date +%s)-$$"
     echo "build_inputs(${nonce@Q}, [ ${inf[*]@Q} ])."
     echo "build_outputs(${nonce@Q}, [ ${outf@Q} ])."
     echo "build_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'))."
+    echo "build_user(${nonce@Q}, '$(whoami)')."
+    for inp in ${inf[*]} ; do
+        git log -n 1 --pretty=format:"file_committer(${inp@Q}, '%al').%n" "$inp" 2>/dev/null
+    done
+    for lf in ${libs[*]} ; do
+        for ld in ${libdirs[*]} ; do
+            for ext in .so .a ; do
+                # shellcheck disable=SC2005,SC2164
+                ldr=$(cd "${ld}"; echo $(top_rel_curdir))
+                if [ "$ldr" == "." ] ; then lp=${lf}${ext}; else lp=${ldr}/${lf}${ext}; fi
+                if [ -f "${lp}" ] ; then
+                    echo "build_inputs(${nonce@Q}, [ ${lp@Q} ])."
+                    IFS=' ' read sum f < <(sha1sum "$lp")
+                    echo "file_sha1(${lp@Q}, ${sum@Q}, ${nonce@Q})."
+                    break 2
+                fi
+            done
+        done
+    done
 ) > "${rackf}"
 
 update_make_steps
@@ -92,6 +115,7 @@ when_done() {
             for F in "${fl[@]}"; do
                 read sum f < <(sha1sum "$F")
                 echo "file_sha1(${f@Q}, ${sum@Q}, ${nonce@Q})." >> "${rackf}"
+                git log -n 1 --pretty=format:"file_committer(${F@Q}, '%al').%n" "$F" 2>/dev/null >> "${rackf}"
             done
         fi
     fi

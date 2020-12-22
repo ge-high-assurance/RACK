@@ -21,7 +21,7 @@ lib%.so: %.o
 	$(CC) $(CFLAGS) -shared -o $@ $<
 
 $(EXE): $(APP).c $(APP).h $(OBJECTS) $(LIBS)
-	$(CC) $(CFLAGS) -L$(PWD) -lhw -o $@ $< $(OBJECTS)
+	$(CC) $(CFLAGS) -L../$$(basename $$(pwd)) -lhw -o $@ $< $(OBJECTS)
 
 $(DIST): conf.json $(LIBS) $(EXE)
 	$(TAR) cf $@ $^
@@ -35,4 +35,4 @@ test: $(TESTEXE)
 
 .PHONY: clean
 clean:
-	rm -f $(OBJECTS) $(LIBS) $(EXE) $(DIST) $(TESTEXE)
+	rm -f $(OBJECTS) $(LIBS) $(EXE) $(DIST) $(TESTEXE) .*.d .*.rack

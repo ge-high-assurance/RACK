@@ -341,6 +341,7 @@ ontology_leaf_class(C) :-
       findall(OtherPCRef,
               (rdf(OtherPCRef, rdf:type, owl:'Class'),
                rdf(OtherPCRef, rdfs:subClassOf, PCRef),
+               OtherPCRef \= C,  % because C is reachable from C below
                % OtherPCRef \= 'http://arcos.rack/PROV-S#THING',
                rdf_reachable(C, rdfs:subClassOf, OtherPCRef)),
               OtherRefs),
@@ -517,7 +518,12 @@ realize_loaded_data :-
     findall(Instance, rdf_dataref(_RDFClass2, load_data, Instance), LdInstances),
     findall(Instance, rdf_dataref(_RDFClass3, load_data_finish, Instance), FiInstances),
     append(StInstances, LdInstances, StLdInstances),
-    append(StLdInstances, FiInstances, Instances),
+    append(StLdInstances, FiInstances, PrimaryInstances),
+    rack_namespace(NS),
+    findall(Instance, (member(PIRef, PrimaryInstances),
+                       ns_ref(NS, PI, PIRef),
+                       rdf_dataref(_RDFClass4, generated_from(PI), Instance)), GenInstances),
+    append(PrimaryInstances, GenInstances, Instances),
     length(Instances, Count),
     rack_namespace(Namespace),
     print_message(informational, loaded_data_instances(Namespace, Count)).
@@ -596,6 +602,7 @@ rdf_dataref(RDFClass, Data, Instance) :-
     rack_namespace(NS),
     ns_ref(NS, InstanceSuffix, Instance),
     add_triple(Instance, rdf:type, RDFClass),
+    % Use InstanceData to drive data_get property relation definitions
     (is_list(InstanceData),
      add_each_rdfdata(RDFClass, RDFClass, Instance, InstanceData);
      \+ is_list(InstanceData),
@@ -608,9 +615,10 @@ add_each_rdfdata(RDFClass, Class, DataRef, DataList) :-
     add_rdfdata(RDFClass, Class, DataRef, Data).
 
 add_rdfdata(RDFClass, Class, DataRef, Data) :-
-    (rdf(Class, rdfs:subClassOf, Parent), !,
-     (add_rdfdata(RDFClass, Parent, DataRef, Data);true) ;
-     true),
+    rdf(Class, rdfs:subClassOf, Parent),
+    add_rdfdata(RDFClass, Parent, DataRef, Data).
+
+add_rdfdata(RDFClass, Class, DataRef, Data) :-
     property(Class, Property, _),
     rack_ref(ShortC, RDFClass),
     rack_ref(ShortP, Property),
@@ -619,25 +627,45 @@ add_rdfdata(RDFClass, Class, DataRef, Data) :-
 add_rdfproperty(ShortC, ShortP, _RDFClass, Property, DataRef, Data) :-
     data_get(ShortC, ShortP, Data, Value),
     (
-        % If this is an atom, treat it as a shorthand reference to an
-        % object in the current namespace.
-        %
+        % If this is an atom, it might be existing or might need to be created.
+        add_atom(DataRef, Property, Value);
+
+        % It wasn't an atom, so it's probably a literal value (number,
+        % string, etc.) and can be used directly.
+        \+ atom(Value),
+        add_triple(DataRef, Property, Value)
+    ).
+
+add_atom(DataRef, Property, Value) :-
+    atom(Value),
+    (
+        % Is it already full qualified and should be left untouched?
+        add_fully_qualified(DataRef, Property, Value), !;
+
+        % Check if it is a shorthand reference to an
+        % object in the current namespace or the RACK ontology namespace
+        add_rack_shorthand(DataRef, Property, Value), !;
+
         % Note that the reference might not have been explicitly
         % defined.  From an RDF-triple perspective, this is fine:
         % simply creating this property causes it to *exist* because
         % of it's relationship to the value; it might be
         % under-specified, but this is a valid state.
-        atom(Value),
-        rack_namespace(NS),
-        ns_ref(NS, Value, TargetRef) ;
+        add_atom_newref(DataRef, Property, Value)
+    ).
 
-        % It wasn't an atom, so it's probably a literal value (number,
-        % string, etc.) and can be used directly.
-        \+ atom(Value),
-        TargetRef = Value
-    ),
+add_fully_qualified(DataRef, Property, Value) :-
+    atom_concat('http', _, Value), !,
+    add_triple(DataRef, Property, Value).
+
+add_rack_shorthand(DataRef, Property, Value) :-
+    rack_ref(_ShortVal, Value), !,
+    add_triple(DataRef, Property, Value).
+
+add_atom_newref(DataRef, Property, Value) :-
+    rack_namespace(NS),
+    ns_ref(NS, Value, TargetRef),
     add_triple(DataRef, Property, TargetRef).
-
 
 %% ----------------------------------------------------------------------
 %% ----+ Recognizers for Loaded Data
@@ -699,8 +727,10 @@ load_recognizer(FPath) :-
 
 :- multifile data_instance/4, data_get/4.
 
-data_instance('PROV-S#ACTIVITY', load_data_start, ModelName, [uid(ModelName),
-                                                              model_start(ModelName, StartTime)]) :-
+data_instance('PROV-S#ACTIVITY', load_data_start, ModelName,
+              [uid(ModelName, "assist model",
+                   "The RACK ASSIST model for automated ingestion"),
+               model_start(ModelName, StartTime)]) :-
     rack_model_name(ModelName),
     % n.b. get_time/1 is impure and unstable, so call it in the
     % data_instance which is only called once as opposed to the
@@ -717,8 +747,10 @@ data_get('PROV-S#ACTIVITY', 'PROV-S#startedAtTime', model_start(ModelName, Start
 data_get('PROV-S#ACTIVITY', 'PROV-S#endedAtTime', model_end(ModelName, EndTime), EndTime) :-
     rack_model_name(ModelName).
 
-data_get(_, 'PROV-S#identifier', uid(UID), UIDStr) :- atom_string(UID, UIDStr).
+data_get(_, 'PROV-S#identifier', uid(UID,_,_), UIDStr) :- atom_string(UID, UIDStr).
+data_get(_, 'PROV-S#title', uid(_,Title,_), Title).
+data_get(_, 'PROV-S#description', uid(_,_,Description), Description).
 
-data_get('SOFTWARE#FILE', 'SOFTWARE#filename', sw_file_data(_, Dir, NameOrPath), Value) :-
+data_get('FILE#FILE', 'FILE#filename', sw_file_data(_, Dir, NameOrPath), Value) :-
     file_to_fpath(NameOrPath, Dir, Path),
     atom_string(Path, Value).

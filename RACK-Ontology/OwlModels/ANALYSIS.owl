@@ -63,10 +63,6 @@
     <rdfs:comment xml:lang="en">An open/extensible set of types of analysis annotations</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
-  <owl:Class rdf:ID="ANALYSIS">
-    <rdfs:comment xml:lang="en">ACTIVITY of running some analysis, and as a result creating some ANALYSIS_REPORT</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
-  </owl:Class>
   <owl:Class rdf:ID="ANALYSIS_OUTPUT">
     <rdfs:subClassOf>
       <owl:Restriction>
@@ -79,6 +75,10 @@
     </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">Output of an ANALYSIS</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ANALYSIS">
+    <rdfs:comment xml:lang="en">ACTIVITY of running some analysis, and as a result creating some ANALYSIS_REPORT</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="producedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>

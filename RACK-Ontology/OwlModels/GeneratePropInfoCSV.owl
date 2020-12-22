@@ -1,7 +1,7 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:Ag="http://arcos.rack/AGENTS#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:AGENTS="http://arcos.rack/AGENTS#"
     xmlns:CONFIDENCE="http://arcos.rack/CONFIDENCE#"
     xmlns:Pr="http://arcos.rack/PROCESS#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
@@ -14,8 +14,8 @@
     xmlns:H="http://arcos.rack/HAZARD#"
     xmlns:sw="http://arcos.rack/SOFTWARE#"
     xmlns:genpropinfo="http://arcos.rack/GeneratePropInfoCSV#"
+    xmlns:A="http://arcos.rack/ANALYSIS#"
     xmlns:sys="http://arcos.rack/SYSTEM#"
-    xmlns:An="http://arcos.rack/ANALYSIS#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:tst="http://arcos.rack/TESTING#"

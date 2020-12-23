@@ -10,81 +10,71 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
+
+/************** edit history *****************
+  *
+  * dwa - 11 Nov 2020 - reduced cardinalities for many relationships
+  * dwa - 11 Nov 2020 - removed several connections to 'wasDerivedFrom'
+  * dwa - 11 Nov 2020 - removed many incorrect uses of 'wasGeneratedBy'
+  *
+  *********************************************/
+
+// namespace and imports
 uri "http://arcos.rack/DOCUMENT" alias D.
 import "http://arcos.rack/PROV-S".
+
 // These document types and properties are derived based off of ISO/IEC/IEEE 15289
 
+// Note: all DOCUMENT classes are COLLECTIONs. They can contain other entities by virtue of "hadMember" in PROV
 
+DOCUMENT is a type of COLLECTION.
+    versionNumber describes DOCUMENT with values of type string.
+    versionNumber describes DOCUMENT with at most 1 value.
 
-DESCRIPTION (note "A DESCRIPTION represents a planned or actual concept, function, design or object.") is a type of COLLECTION.
-    dateOfIssue (note "Release date for the document.") describes DESCRIPTION with values of type date.
+    dateOfIssue (note "Release date for the document.") describes DOCUMENT with values of type date.
+    dateOfIssue describes DOCUMENT with at most 1 value.
     
-    status (note "Identifies the maturity of the document, In_Development, Released, Withdrawn.") describes DESCRIPTION with values of type DOC_STATUS.
+    status (note "Identifies the maturity of the document, In_Development, Released, Withdrawn.") describes DOCUMENT with values of type DOC_STATUS.
+    status describes DOCUMENT with at most 1 value.
     
-    issuingOrganization (note "AGENT responsible for producing a document.") describes DESCRIPTION with values of type AGENT.
-    issuingOrganization is a type of wasGeneratedBy.
+    issuingOrganization (note "AGENT responsible for producing a document.") describes DOCUMENT with values of type AGENT.
+	issuingOrganization describes DOCUMENT with at most 1 value.
+    issuingOrganization is a type of wasAttributedTo.
 
-    references (note "Source Materials used in the development of a document.") describes DESCRIPTION with values of type ENTITY.
-    references is a type of wasDerivedFrom.
+    approvalAuthority (note "AGENT responsible for approving a document.") describes DOCUMENT with values of type AGENT.
 
-PLAN (note "A PLAN presents a systematic course of action for achieving a declared purpose, including when, how, and by whom specified activities are to be performed. ")is a type of COLLECTION.
-    dateOfIssue describes PLAN with values of type date.
-    
-    status describes PLAN with values of type DOC_STATUS.
-    
-    issuingOrganization  describes PLAN with values of type AGENT.
-    issuingOrganization is a type of wasGeneratedBy.
+    references (note "Source Materials used in the development of a document.") describes DOCUMENT with values of type ENTITY.
+    references is a type of wasImpactedBy.
 
-    approvalAuthority (note "AGENT responsible for approving a document.") describes PLAN with values of type AGENT.
-    approvalAuthority is a type of wasGeneratedBy.
-    
-    references describes PLAN with values of type ENTITY.
-    references is a type of wasDerivedFrom.
+/************************** DESCRIPTION *******************/
 
-PROCEDURE (note "A PROCEDURE presents an ordered series of steps to perform a process, activity, or task") is a type of COLLECTION.
-    dateOfIssue describes PROCEDURE with values of type date.
-    
-    status describes PROCEDURE with values of type DOC_STATUS.
-    
-    issuingOrganization describes PROCEDURE with values of type AGENT.
-    issuingOrganization is a type of wasGeneratedBy.
+DESCRIPTION (note "A DESCRIPTION document represents a planned or actual concept, function, design or object.") is a type of DOCUMENT.
 
-    approvalAuthority describes PROCEDURE with values of type AGENT.
-    approvalAuthority is a type of wasGeneratedBy.
+/************************** PLAN *******************/
 
-REPORT (note "A REPORT describes the results of activities such as investigations, observations, assessments, or test.") is a type of COLLECTION.
-    dateOfIssue describes REPORT with values of type date.
-    
-    status describes REPORT with values of type DOC_STATUS.
-    
-    issuingOrganization describes REPORT with values of type AGENT.
-    issuingOrganization is a type of wasGeneratedBy.
+PLAN (note "A PLAN presents a systematic course of action for achieving a declared purpose, including when, how, and by whom specified activities are to be performed. ")is a type of DOCUMENT.
 
-REQUEST (note "A REQUEST initiates a defined course of action or changed to fulfill a need.") is a type of COLLECTION.
-    dateOfInitiation describes REQUEST with values of type date.
-    
-    status describes REQUEST with values of type DOC_STATUS.
-    
-    originatorOfRequest describes REQUEST with values of type AGENT.
-    originatorOfRequest is a type of wasGeneratedBy.
+/************************** PROCEDURE *******************/
 
-SPECIFICATION (note "A SPECIFICATION identifies, in a complete, precise, and verifiable manner, the requirements, design, behavior, or other expected characteristics of a system, service or process.") is a type of COLLECTION.
-    dateOfIssue describes SPECIFICATION with values of type date.
-    
-    status describes SPECIFICATION with values of type DOC_STATUS.
-    
-    issuingOrganization describes SPECIFICATION with values of type AGENT.
-    issuingOrganization is a type of wasGeneratedBy.
+PROCEDURE (note "A PROCEDURE presents an ordered series of steps to perform a process, activity, or task") is a type of DOCUMENT.
 
-    approvalAuthority describes SPECIFICATION with values of type AGENT.
-    approvalAuthority is a type of wasGeneratedBy.
-    
-    references describes SPECIFICATION with values of type ENTITY.
-    references is a type of wasDerivedFrom.
-    
+/************************** REPORT *******************/
+
+REPORT (note "A REPORT describes the results of activities such as investigations, observations, assessments, or test.") is a type of DOCUMENT.
+
+/************************** REQUEST *******************/
+
+REQUEST (note "A REQUEST initiates a defined course of action or changed to fulfill a need.") is a type of DOCUMENT.
+
+/************************** SPECIFICATION *******************/
+
+SPECIFICATION (note "A SPECIFICATION identifies the requirements, design, behavior, or other expected characteristics of a system, service or process.") is a type of DOCUMENT.
+
+/************************** SECTION *******************/
+
 SECTION (note "A SECTION is generic grouping of ENTITYs with a document") is a type of COLLECTION.
 
-	title describes SECTION with values of type string.  
+/************************** DOC_STATUS *******************/
 
 DOC_STATUS (note "Life-cycle status of a document")
     is a type of THING,

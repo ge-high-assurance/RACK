@@ -6,10 +6,12 @@
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:Rv="http://arcos.rack/REVIEW#"
+    xmlns:D="http://arcos.rack/DOCUMENT#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.rack/REVIEW">
   <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="DOCUMENT"/>
     <owl:imports rdf:resource="PROV-S"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
@@ -24,7 +26,7 @@
             <provs:identifier>Passed</provs:identifier>
           </Rv:REVIEW_STATE>
           <Rv:REVIEW_STATE rdf:ID="ReviseWithoutReview">
-            <provs:identifier>Review Without Review</provs:identifier>
+            <provs:identifier>Revise Without Review</provs:identifier>
           </Rv:REVIEW_STATE>
           <Rv:REVIEW_STATE rdf:ID="ReviseWithReview">
             <provs:identifier>Revise With Review</provs:identifier>
@@ -36,12 +38,21 @@
     <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="REVIEW">
-    <rdfs:comment xml:lang="en">Code review ACTIVITY</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="author"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">Artifact review ACTIVITY</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="REVIEW_LOG">
     <rdfs:comment xml:lang="en">Outcome of a REVIEW ACTIVITY</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subClassOf rdf:resource="DOCUMENT#REPORT"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="reviewer">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
@@ -57,7 +68,7 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="governedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
-    <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT) used for performing the review</rdfs:comment>
+    <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT or SPECIFICATION) used for performing the review</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#REVIEW"/>
   </owl:ObjectProperty>
@@ -73,12 +84,12 @@
     <rdfs:domain rdf:resource="#REVIEW_LOG"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="reviews">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:comment xml:lang="en">ENTITY(s) that the review was performed on</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
+    <rdfs:comment xml:lang="en">The subject being reviewed</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#REVIEW_LOG"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="author">
+  <owl:ObjectProperty rdf:about="#author">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
     <rdfs:comment xml:lang="en">AGENT(s) putting items up for review</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>

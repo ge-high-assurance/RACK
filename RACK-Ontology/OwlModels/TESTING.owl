@@ -44,6 +44,15 @@
     <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST_RESULT">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="result"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">Result corresponding to one execution of one TEST</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
@@ -58,7 +67,7 @@
     <rdfs:domain rdf:resource="#TEST_DEVELOPMENT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="verifies">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
     <rdfs:comment xml:lang="en">Parent ENTITY(s) (e.g. REQUIREMENT) that this requirement is derived from</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#TEST"/>
@@ -75,9 +84,9 @@
     <rdfs:domain rdf:resource="#TEST"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="confirms">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
     <rdfs:comment xml:lang="en">Parent test(s) of this test result</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:range rdf:resource="#TEST"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="executedBy">
@@ -86,7 +95,7 @@
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="result">
+  <owl:ObjectProperty rdf:about="#result">
     <rdfs:comment xml:lang="en">Pass/Failed/Indeterminate status resulting from a TEST_EXECUTION</rdfs:comment>
     <rdfs:range rdf:resource="#TEST_STATUS"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>

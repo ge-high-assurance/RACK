@@ -193,10 +193,10 @@
     <j.2:identifier>dist_tar</j.2:identifier>
   </j.3:FILE>
   <j.1:COMPONENT rdf:ID="main_function">
-    <j.1:definedIn rdf:resource="#counter_c"/>
+    <j.3:definedIn rdf:resource="#counter_c"/>
     <j.1:controlFlowsToUnconditionally>
       <j.1:COMPONENT rdf:ID="output_function">
-        <j.1:definedIn rdf:resource="#output_c"/>
+        <j.3:definedIn rdf:resource="#output_c"/>
         <j.1:valueType>void()</j.1:valueType>
         <j.1:name>output</j.1:name>
         <j.1:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
@@ -206,7 +206,7 @@
     </j.1:controlFlowsToUnconditionally>
     <j.1:controlFlowsToUnconditionally>
       <j.1:COMPONENT rdf:ID="input_function">
-        <j.1:definedIn rdf:resource="#input_c"/>
+        <j.3:definedIn rdf:resource="#input_c"/>
         <j.1:valueType>void()</j.1:valueType>
         <j.1:name>input</j.1:name>
         <j.1:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>

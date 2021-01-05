@@ -121,7 +121,6 @@ COMPONENT
     componentType describes COMPONENT with a single value of type COMPONENT_TYPE.
     valueType (note "The type of this value, if applicable (e.g. for functions or variables).") describes COMPONENT with values of type string.
     instantiates (note "What logical component (system) does this physical component (code) instantiate or implement?") describes COMPONENT with values of type ENTITY.
-    definedIn (note "Defining entity of this code structure. This is typically a FILE.") describes COMPONENT with values of type ENTITY.
     mentions (note "A component referenced by this one, e.g., a callee or variable being used.") describes COMPONENT with values of type ENTITY.
     subcomponentOf (note "A structural sub-component, e.g., a function might be a subcomponent of module.") describes COMPONENT with values of type ENTITY.
     requirements (note "Low-level requirements that apply to this component.") describes COMPONENT with values of type ENTITY.

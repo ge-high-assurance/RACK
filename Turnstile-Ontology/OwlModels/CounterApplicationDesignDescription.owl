@@ -31,7 +31,7 @@
           <j.1:Engineer rdf:ID="JaneDoe">
             <j.0:employedBy rdf:resource="DevelopmentPlanData#General_Electric"/>
             <j.0:emailAddress>jane.doe@ge.com</j.0:emailAddress>
-            <j.0:name>Doe, Jane</j.0:name>
+            <j.3:title>Doe, Jane</j.3:title>
             <j.3:identifier>2125895152</j.3:identifier>
           </j.1:Engineer>
         </j.2:author>

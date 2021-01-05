@@ -27,7 +27,9 @@ import "http://arcos.rack/PROV-S".
 
 // Note: all DOCUMENT classes are COLLECTIONs. They can contain other entities by virtue of "hadMember" in PROV
 
-DOCUMENT is a type of COLLECTION.
+DOCUMENT
+    (note "A piece of written, printed, or electronic matter that provides information or evidence or that serves as an official record.")
+    is a type of COLLECTION.
     versionNumber describes DOCUMENT with values of type string.
     versionNumber describes DOCUMENT with at most 1 value.
 

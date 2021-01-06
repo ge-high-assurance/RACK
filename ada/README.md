@@ -35,7 +35,7 @@ To run the analysis on the regression test (NOTE: this is likely to change
 shortly, so this may not be up to date):
 
 ```shell
-./venv/bin/python3 ./run_analysis.py --project ./regression.gpr ./regression.adb
+./venv/bin/python3 ./run_analysis.py --gpr ./example/regression/regression.gpr --analyze ./regression.adb
 ```
 
 # Linting your code

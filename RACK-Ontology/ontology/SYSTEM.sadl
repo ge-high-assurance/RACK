@@ -27,7 +27,7 @@ SYSTEM
 
 	partOf (note "Used to define a relationship to a higher level system") describes SYSTEM with values of type SYSTEM.
 
-	producedBy (note "ACTIVITY(s) participating in developing this SYSTEM") describes SYSTEM with values of type SYSTEM_DEVELOPMENT.
+	producedBy (note "ACTIVITY(s) participating in developing this SYSTEM") describes SYSTEM with values of type ACTIVITY.
 	producedBy describes SYSTEM with at most 1 value.
 	producedBy is a type of wasGeneratedBy.
 
@@ -46,11 +46,11 @@ INTERFACE
 	commodity describes INTERFACE with at most 1 value.
 
 	source (note "SYSTEM that provides what the INTERFACE offers") describes INTERFACE with values of type SYSTEM.
-	// source is the inverse of sink.
+	source is the inverse of destination.
 	source is a type of wasImpactedBy.
 
 	destination (note "SYSTEM that requires what the INTERFACE offers") describes INTERFACE with values of type SYSTEM.
-	// sink is the inverse of source.
+	destination is the inverse of source.
 	destination is a type of wasImpactedBy.
 
 	identifiedBy (note "ACTIVITY out of which this INTERFACE was identified") describes INTERFACE with values of type ACTIVITY.

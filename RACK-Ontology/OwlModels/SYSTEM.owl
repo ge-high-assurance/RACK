@@ -90,6 +90,9 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="source">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="destination"/>
+    </owl:inverseOf>
     <rdfs:comment xml:lang="en">SYSTEM that provides what the INTERFACE offers</rdfs:comment>
     <rdfs:range rdf:resource="#SYSTEM"/>
     <rdfs:domain rdf:resource="#INTERFACE"/>
@@ -97,7 +100,7 @@
   <owl:ObjectProperty rdf:about="#producedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
     <rdfs:comment xml:lang="en">ACTIVITY(s) participating in developing this SYSTEM</rdfs:comment>
-    <rdfs:range rdf:resource="#SYSTEM_DEVELOPMENT"/>
+    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#parentFunction">
@@ -121,8 +124,9 @@
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#INTERFACE"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="destination">
+  <owl:ObjectProperty rdf:about="#destination">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
+    <owl:inverseOf rdf:resource="#source"/>
     <rdfs:comment xml:lang="en">SYSTEM that requires what the INTERFACE offers</rdfs:comment>
     <rdfs:range rdf:resource="#SYSTEM"/>
     <rdfs:domain rdf:resource="#INTERFACE"/>

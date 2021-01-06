@@ -25,7 +25,6 @@ REQUIREMENT
 	(note "Captures (both high- and low-level) properties of a process or artifact that are to be assessed")
 	is a type of ENTITY.
 
-	text (note "Description of the REQUIREMENT") describes REQUIREMENT with a single value of type string.
 	// The "text" string can optionally be subdivided into sub-parts : givenText, ifText, thenText
 	// This corresponds to how rules are defined in SADL and note that in a SADL rule whatever is in
 	// givenText can simply be included in the ifText part.
@@ -45,7 +44,7 @@ REQUIREMENT
 	satisfies (note "Parent ENTITY(s) (e.g. REQUIREMENT) that this REQUIREMENT is derived from") describes REQUIREMENT with values of type ENTITY.
 	satisfies is a type of wasImpactedBy.
 
-	Rq:mitigates (note "ENTITY(s) (e.g. HAZARD) that is being mitigated by this REQUIREMENT") describes REQUIREMENT with values of type HAZARD.
+	Rq:mitigates (note "ENTITY(s) (e.g. HAZARD) that is being mitigated by this REQUIREMENT") describes REQUIREMENT with values of type ENTITY.
 	Rq:mitigates is a type of wasImpactedBy.
 
 	Rq:createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT") describes REQUIREMENT with values of type ACTIVITY.
@@ -54,9 +53,6 @@ REQUIREMENT
 DATA_DICTIONARY_TERM
 	(note "Defines some conceptual data that may be collected somewhere and used somewhere else")
 	is a type of ENTITY.
-
-	text (note "Description of the term") describes DATA_DICTIONARY_TERM with values of type string.
-	text describes DATA_DICTIONARY_TERM with at most 1 value.
 
 	providedBy (note "ENTITY(s) (e.g. REQUIREMENT) that provides this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
 	providedBy is a type of wasImpactedBy.

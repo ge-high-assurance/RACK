@@ -104,6 +104,7 @@ ExplanatoryRequirement
   is a REQUIREMENT
   createdBy DefineRequirements
   dataInsertedBy WriteSomeSadl
-  text "Help RACK users understand the difference between
+  description
+        "Help RACK users understand the difference between
         authorship of a requirement and the process of ingesting
         that requirement into RACK itself".

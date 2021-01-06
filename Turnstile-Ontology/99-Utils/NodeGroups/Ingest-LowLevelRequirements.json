@@ -156,7 +156,7 @@
 						"KeyName": "text",
 						"ValueType": "string",
 						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/REQUIREMENTS#text",
+						"UriRelationship": "http://arcos.rack/PROV-S#description",
 						"Constraints": "",
 						"fullURIName": "",
 						"SparqlID": "?text_LowLevelRequirement",
@@ -412,7 +412,7 @@
 						]
 					},
 					{
-						"URIRelation": "http://arcos.rack/REQUIREMENTS#text",
+						"URIRelation": "http://arcos.rack/PROV-S#description",
 						"mapping": [
 							{
 								"colId": "col_5",

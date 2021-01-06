@@ -45,9 +45,6 @@ FILE
 FORMAT
     (note "The data format of a FILE")
     is a type of THING.
-ADA is a FORMAT with identifier "ADA".
-C   is a FORMAT with identifier "C".
-PDF is a FORMAT with identifier "PDF".
 
 FILE_CREATION
    (note "An ACTIVITY that produces a FILE")

@@ -130,13 +130,4 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#FILE"/>
   </owl:DatatypeProperty>
-  <file:FORMAT rdf:ID="C">
-    <provs:identifier>C</provs:identifier>
-  </file:FORMAT>
-  <file:FORMAT rdf:ID="PDF">
-    <provs:identifier>PDF</provs:identifier>
-  </file:FORMAT>
-  <file:FORMAT rdf:ID="ADA">
-    <provs:identifier>ADA</provs:identifier>
-  </file:FORMAT>
 </rdf:RDF>

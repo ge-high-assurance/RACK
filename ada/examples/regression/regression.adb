@@ -2,6 +2,11 @@ with Regression_Library; use Regression_Library;
 
 package body Regression is
 
+    function "&" (Left, Right : String) return String is
+    begin
+        return Left;
+    end "&";
+
     package body Outer is
 
         function OuterFun (Input : Boolean) return Boolean is

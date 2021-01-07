@@ -2,6 +2,8 @@ with Regression_Library;
 
 package Regression is
 
+    function "&" (Left, Right : String) return String;
+
     package Outer is
 
         function OuterFun (Input : Boolean) return Boolean;

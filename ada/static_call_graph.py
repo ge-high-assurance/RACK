@@ -10,6 +10,7 @@ __copyright__ = "Copyright (c) 2020, Galois, Inc."
 
 import logging
 from typing import Callable, Dict, Optional, Set
+import urllib
 
 import libadalang as lal
 
@@ -70,11 +71,15 @@ def get_name(node: GraphNode) -> str:
 
 def get_uri(node: GraphNode) -> str:
     """Computes the URI to use for a node."""
+    # NOTE: we need some encoding scheme, because Ada allows operator
+    # overloading, so the functions may be called "&" for instance.
+    encode = urllib.parse.quote_plus
     xref = node.p_gnat_xref()
     if not xref:
-        return f"__RACK__UNRESOLVED__{node.p_relative_name.p_canonical_text}"
+        urlencoded = encode(node.p_relative_name.p_canonical_text)
+        return f"__RACK__UNRESOLVED__{urlencoded}"
         # raise Exception(f"The reference to node {node} could not be resolved.")
-    return xref.p_basic_decl.p_canonical_fully_qualified_name
+    return encode(xref.p_basic_decl.p_canonical_fully_qualified_name)
 
 class StaticCallGraphVisitor(AdaVisitor):
 

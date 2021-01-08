@@ -13,7 +13,7 @@
 uri "http://arcos.rack/FILE" alias file.
 import "http://arcos.rack/PROV-S".
 
-fileParent (note "The file an ENTITY is defined in") describes ENTITY with values of type FILE.
+definedIn (note "The file an ENTITY is defined in") describes ENTITY with values of type FILE.
 
 FILE
     (note "A file in the system")

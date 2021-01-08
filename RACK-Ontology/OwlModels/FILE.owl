@@ -76,7 +76,7 @@
     <rdfs:domain rdf:resource="#FILE_HASH"/>
     <rdfs:range rdf:resource="#HASH_TYPE"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="fileParent">
+  <owl:ObjectProperty rdf:ID="definedIn">
     <rdfs:comment xml:lang="en">The file an ENTITY is defined in</rdfs:comment>
     <rdfs:range rdf:resource="#FILE"/>
     <rdfs:domain rdf:resource="PROV-S#ENTITY"/>

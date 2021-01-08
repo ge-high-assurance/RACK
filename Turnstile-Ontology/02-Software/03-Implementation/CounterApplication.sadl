@@ -50,7 +50,6 @@ input_o is a ObjectFile
 
 input_function is a SWCOMPONENT
     has identifier "input_function"
-    has dataInsertedBy Mockup
     has componentType SOURCE_FUNCTION
     has title "input"
     has valueType "void()"
@@ -88,7 +87,6 @@ output_o is a ObjectFile
 
 output_function is a SWCOMPONENT
     has identifier "output_function"
-    has dataInsertedBy Mockup
     has componentType SOURCE_FUNCTION
     has title "output"
     has valueType "void()"

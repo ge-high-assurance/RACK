@@ -206,7 +206,7 @@ def format_semtk_table(semtk_table: SemtkTable, export_format: ExportFormat = Ex
 def run_query(conn: Connection, nodegroup: str, export_format: ExportFormat = ExportFormat.TEXT, headers: bool = True, path: Optional[Path] = None) -> None:
     semtk3.SEMTK3_CONN_OVERRIDE = conn
     semtk_table = semtk3.select_by_id(nodegroup)
-    formatted_table = format_semtk_table(semtk_table, format=export_format, headers=headers)
+    formatted_table = format_semtk_table(semtk_table, export_format=export_format, headers=headers)
     if path is None:
         print()
         print(formatted_table)

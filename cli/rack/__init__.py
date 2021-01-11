@@ -369,7 +369,7 @@ def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
 
 def dispatch_data_export(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
-    run_query(conn, args.nodegroup, format=args.format, headers=not args.no_headers, path=args.file)
+    run_query(conn, args.nodegroup, export_format=args.format, headers=not args.no_headers, path=args.file)
 
 def dispatch_data_count(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)

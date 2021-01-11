@@ -53,6 +53,15 @@ class Graph(Enum):
     DATA = "data"
     MODEL = "model"
 
+class CLIMethod(Enum):
+    """Enumeration of the CLI methods (for context in error reporting)"""
+    DATA_IMPORT = "data import"
+    MODEL_IMPORT = "model import"
+    OTHER_CLI_METHOD = "..."
+
+# In the absence of overwrite, this will be the default
+cliMethod = CLIMethod.OTHER_CLI_METHOD
+
 @unique
 class ExportFormat(Enum):
     """Enumeration of data export formats"""
@@ -377,10 +386,12 @@ def dispatch_data_count(args: SimpleNamespace) -> None:
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
+    cliMethod = CLIMethod.DATA_IMPORT
     ingest_data_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store, args.clear)
 
 def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
+    cliMethod = CLIMethod.MODEL_IMPORT
     ingest_owl_driver(Path(args.config), args.base_url, args.triple_store, args.clear)
 
 def dispatch_nodegroups_import(args: SimpleNamespace) -> None:

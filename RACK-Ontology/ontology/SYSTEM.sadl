@@ -46,11 +46,11 @@ INTERFACE
 	commodity describes INTERFACE with at most 1 value.
 
 	source (note "SYSTEM that provides what the INTERFACE offers") describes INTERFACE with values of type SYSTEM.
-	source is the inverse of destination.
+	source is the inverse of provides.
 	source is a type of wasImpactedBy.
 
 	destination (note "SYSTEM that requires what the INTERFACE offers") describes INTERFACE with values of type SYSTEM.
-	destination is the inverse of source.
+	destination is the inverse of requires.
 	destination is a type of wasImpactedBy.
 
 	identifiedBy (note "ACTIVITY out of which this INTERFACE was identified") describes INTERFACE with values of type ACTIVITY.

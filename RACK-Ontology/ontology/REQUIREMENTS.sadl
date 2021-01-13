@@ -32,11 +32,10 @@ REQUIREMENT
 	// that GrammaTech had which was : Given, When, Then parts.
 	// The structure of requirements in ASSERT subsume this structure of requirements. 
 	givenText (note "optional part that can be used to set certain conditions apart from other conditions in the ifText part") describes REQUIREMENT with values of type string.
-	givenText describes REQUIREMENT with at most 1 value.
+
 	ifText (note "conditions under which this requirement holds") describes REQUIREMENT with values of type string.
-	ifText describes REQUIREMENT with at most 1 value.
+
 	thenText (note "specifies what should hold by this requirement if the requirement conditions are met") describes REQUIREMENT with values of type string.
-	thenText describes REQUIREMENT with at least 1 value.
 
 	governs (note "ENTITY(s) that are the subject of the requirement") describes REQUIREMENT with values of type ENTITY.
 	governs is a type of wasImpactedBy.

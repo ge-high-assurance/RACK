@@ -14,6 +14,7 @@
 import sys
 import colorama
 from colorama import Fore, Style
+colorama.init()
 
 __LogFile__ = None
 DEBUG = False

@@ -1,0 +1,1102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="RACK-DATA">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ACTIVITY">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="AGENT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="actedOnBehalfOf_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ANALYSIS">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="performedBy_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ANALYSIS_ANNOTATION">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="annotationType_identifier" type="xs:string"/>
+                            <xs:element name="fromReport_identifier" type="xs:string"/>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ANALYSIS_ANNOTATION_TYPE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ANALYSIS_REPORT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="analyzes_identifier" type="xs:string"/>
+                            <xs:element name="metric" type="xs:float"/>
+                            <xs:element name="producedBy_identifier" type="xs:string"/>
+                            <xs:element name="result_identifier" type="xs:string"/>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ANALYSIS_RESULT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ARGUMENT_PACKAGE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                            <xs:element name="argumentationElement_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ARGUMENT_REASONING">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ARTIFACT_REFERENCE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ASSERTED_CONTEXT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                            <xs:element name="source_identifier" type="xs:string"/>
+                            <xs:element name="target_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ASSERTED_INFERENCE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                            <xs:element name="reasoning_identifier" type="xs:string"/>
+                            <xs:element name="source_identifier" type="xs:string"/>
+                            <xs:element name="target_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ASSESSING_CONFIDENCE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="performedBy_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="BDU_CONFIDENCE_ASSESSMENT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="assesses_identifier" type="xs:string"/>
+                            <xs:element name="belief" type="xs:float"/>
+                            <xs:element name="createBy_identifier" type="xs:string"/>
+                            <xs:element name="disbelief" type="xs:float"/>
+                            <xs:element name="uncertainty" type="xs:float"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="BUILD">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                            <xs:element name="step_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CLAIM">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CODE_DEVELOPMENT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                            <xs:element name="author_identifier" type="xs:string"/>
+                            <xs:element name="governedBy_identifier" type="xs:string"/>
+                            <xs:element name="referenced_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CODE_GEN">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                            <xs:element name="performedBy_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="COLLECTION">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="content_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="COMPILE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                            <xs:element name="compileInput_identifier" type="xs:string"/>
+                            <xs:element name="compiledBy_identifier" type="xs:string"/>
+                            <xs:element name="performedBy_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="COMPONENT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                            <xs:element name="annotations_identifier" type="xs:string"/>
+                            <xs:element name="componentType_identifier" type="xs:string"/>
+                            <xs:element name="controlFlowsToConditionally_identifier" type="xs:string"/>
+                            <xs:element name="controlFlowsToUnconditionally_identifier" type="xs:string"/>
+                            <xs:element name="definedIn_identifier" type="xs:string"/>
+                            <xs:element name="instantiates_identifier" type="xs:string"/>
+                            <xs:element name="mentions_identifier" type="xs:string"/>
+                            <xs:element name="name" type="xs:string"/>
+                            <xs:element name="requirements_identifier" type="xs:string"/>
+                            <xs:element name="subcomponentOf_identifier" type="xs:string"/>
+                            <xs:element name="valueType" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="COMPONENT_TYPE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CONFIDENCE_ASSESSMENT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="assesses_identifier" type="xs:string"/>
+                            <xs:element name="belief" type="xs:float"/>
+                            <xs:element name="createBy_identifier" type="xs:string"/>
+                            <xs:element name="disbelief" type="xs:float"/>
+                            <xs:element name="uncertainty" type="xs:float"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="DATA_DICTIONARY_TERM">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                            <xs:element name="consumedBy_identifier" type="xs:string"/>
+                            <xs:element name="createdBy_identifier" type="xs:string"/>
+                            <xs:element name="providedBy_identifier" type="xs:string"/>
+                            <xs:element name="text" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="DESCRIPTION">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dateOfIssue" type="xs:date"/>
+                            <xs:element name="issuingOrganization_identifier" type="xs:string"/>
+                            <xs:element name="references_identifier" type="xs:string"/>
+                            <xs:element name="status_identifier" type="xs:string"/>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="content_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="DOC_STATUS">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ENTITY">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="FILE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="createBy_identifier" type="xs:string"/>
+                            <xs:element name="fileFormat_identifier" type="xs:string"/>
+                            <xs:element name="fileHash_identifier" type="xs:string"/>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="filename" type="xs:string"/>
+                            <xs:element name="satisfies_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="FILE_CREATION">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="FILE_HASH">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="hashType_identifier" type="xs:string"/>
+                            <xs:element name="hashValue" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="FORMAT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="FUNCTION">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                            <xs:element name="parentFunction_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="HASH_TYPE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="HAZARD">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="definition" type="xs:string"/>
+                            <xs:element name="effect" type="xs:string"/>
+                            <xs:element name="identified_identifier" type="xs:string"/>
+                            <xs:element name="likelihood" type="xs:float"/>
+                            <xs:element name="severity" type="xs:float"/>
+                            <xs:element name="source_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="HAZARD_IDENTIFICATION">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="author_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="INTERFACE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                            <xs:element name="destination_identifier" type="xs:string"/>
+                            <xs:element name="identifiedBy_identifier" type="xs:string"/>
+                            <xs:element name="source_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="OBJECTIVE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="satisfiedBy_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="OP_ENV">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="envConstraint" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="OP_PROCEDURE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="approvalAuthority_identifier" type="xs:string"/>
+                            <xs:element name="dateOfIssue" type="xs:date"/>
+                            <xs:element name="issuingOrganization_identifier" type="xs:string"/>
+                            <xs:element name="status_identifier" type="xs:string"/>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="mitigates_identifier" type="xs:string"/>
+                            <xs:element name="content_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ORGANIZATION">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="name" type="xs:string"/>
+                            <xs:element name="actedOnBehalfOf_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="PACKAGE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                            <xs:element name="packageInput_identifier" type="xs:string"/>
+                            <xs:element name="packagedBy_identifier" type="xs:string"/>
+                            <xs:element name="performedBy_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="PERSON">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="emailAddress" type="xs:string"/>
+                            <xs:element name="employedBy_identifier" type="xs:string"/>
+                            <xs:element name="name" type="xs:string"/>
+                            <xs:element name="actedOnBehalfOf_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="PLAN">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="approvalAuthority_identifier" type="xs:string"/>
+                            <xs:element name="dateOfIssue" type="xs:date"/>
+                            <xs:element name="issuingOrganization_identifier" type="xs:string"/>
+                            <xs:element name="references_identifier" type="xs:string"/>
+                            <xs:element name="status_identifier" type="xs:string"/>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="content_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="PROCEDURE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="approvalAuthority_identifier" type="xs:string"/>
+                            <xs:element name="dateOfIssue" type="xs:date"/>
+                            <xs:element name="issuingOrganization_identifier" type="xs:string"/>
+                            <xs:element name="status_identifier" type="xs:string"/>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="content_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="REPORT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dateOfIssue" type="xs:date"/>
+                            <xs:element name="issuingOrganization_identifier" type="xs:string"/>
+                            <xs:element name="status_identifier" type="xs:string"/>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="content_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="REQUEST">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dateOfInitiation" type="xs:date"/>
+                            <xs:element name="originatorOfRequest_identifier" type="xs:string"/>
+                            <xs:element name="status_identifier" type="xs:string"/>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="content_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="REQUIREMENT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                            <xs:element name="createdBy_identifier" type="xs:string"/>
+                            <xs:element name="givenText" type="xs:string"/>
+                            <xs:element name="governs_identifier" type="xs:string"/>
+                            <xs:element name="ifText" type="xs:string"/>
+                            <xs:element name="mitigates_identifier" type="xs:string"/>
+                            <xs:element name="satisfies_identifier" type="xs:string"/>
+                            <xs:element name="text" type="xs:string"/>
+                            <xs:element name="thenText" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="REQUIREMENT_DEVELOPMENT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                            <xs:element name="author_identifier" type="xs:string"/>
+                            <xs:element name="governedBy_identifier" type="xs:string"/>
+                            <xs:element name="referenced_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="REVIEW">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                            <xs:element name="author_identifier" type="xs:string"/>
+                            <xs:element name="governedBy_identifier" type="xs:string"/>
+                            <xs:element name="reviewed_identifier" type="xs:string"/>
+                            <xs:element name="reviewer_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="REVIEW_LOG">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                            <xs:element name="createBy_identifier" type="xs:string"/>
+                            <xs:element name="reviewResult_identifier" type="xs:string"/>
+                            <xs:element name="reviews_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="REVIEW_STATE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SECTION">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="content_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SOFTWAREAGENT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="actedOnBehalfOf_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SPECIFICATION">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="approvalAuthority_identifier" type="xs:string"/>
+                            <xs:element name="dateOfIssue" type="xs:date"/>
+                            <xs:element name="issuingOrganization_identifier" type="xs:string"/>
+                            <xs:element name="references_identifier" type="xs:string"/>
+                            <xs:element name="status_identifier" type="xs:string"/>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="content_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SYSTEM">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                            <xs:element name="function_identifier" type="xs:string"/>
+                            <xs:element name="partOf_identifier" type="xs:string"/>
+                            <xs:element name="producedBy_identifier" type="xs:string"/>
+                            <xs:element name="provides_identifier" type="xs:string"/>
+                            <xs:element name="requires_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SYSTEM_DEVELOPMENT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                            <xs:element name="developedBy_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="TEST">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                            <xs:element name="producedBy_identifier" type="xs:string"/>
+                            <xs:element name="verifies_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="TEST_DEVELOPMENT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                            <xs:element name="developedBy_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="TEST_EXECUTION">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="endedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="startedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="used_identifier" type="xs:string"/>
+                            <xs:element name="wasAssociatedWith_identifier" type="xs:string"/>
+                            <xs:element name="wasInformedBy_identifier" type="xs:string"/>
+                            <xs:element name="executedOn_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="TEST_RESULT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="fileParent_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="generatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="invalidatedAtTime" type="xs:dateTime"/>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="wasAttributedTo_identifier" type="xs:string"/>
+                            <xs:element name="wasDerivedFrom_identifier" type="xs:string"/>
+                            <xs:element name="wasGeneratedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasImpactedBy_identifier" type="xs:string"/>
+                            <xs:element name="wasRevisionOf_identifier" type="xs:string"/>
+                            <xs:element name="confirms_identifier" type="xs:string"/>
+                            <xs:element name="executedBy_identifier" type="xs:string"/>
+                            <xs:element name="result_identifier" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="TEST_STATUS">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="THING">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="TOOL">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="actedOnBehalfOf_identifier" type="xs:string"/>
+                            <xs:element name="dataInsertedBy_identifier" type="xs:string"/>
+                            <xs:element name="description" type="xs:string"/>
+                            <xs:element name="identifier" type="xs:string"/>
+                            <xs:element name="title" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -86,7 +86,7 @@
 						"KeyName": "name",
 						"ValueType": "string",
 						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#agentName",
+						"UriRelationship": "http://arcos.rack/PROV-S#title",
 						"Constraints": "",
 						"fullURIName": "",
 						"SparqlID": "?name_Engineer",
@@ -219,7 +219,7 @@
 						]
 					},
 					{
-						"URIRelation": "http://arcos.rack/PROV-S#agentName",
+						"URIRelation": "http://arcos.rack/PROV-S#title",
 						"mapping": [
 							{
 								"colId": "col_3",

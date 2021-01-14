@@ -9,6 +9,7 @@ nixpkgs.mkShell {
     git
     myPythonPackages.python
     myPythonPackages.venvShellHook
+    myPythonPackages.wheel
   ];
 
   # Python wheel creation uses zip, but zip does not support timestamps prior

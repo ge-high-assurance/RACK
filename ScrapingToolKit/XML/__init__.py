@@ -40,10 +40,9 @@ def scrap(xmlPath, Config):
     trace()
     if not os.path.exists(xmlPath):
         return "XML file not found"    
-    
-    tree = etree.parse(xmlPath)        
-    Config.initialize(tree.getroot())
-    genericHandler(tree.getroot(),Config)
+     
+    Config.initialize(xmlPath)
+    genericHandler(Config.getroot(),Config)
     
     return None
     

@@ -16,6 +16,7 @@ from Logging import *
 from lxml import etree
 
 __xmlroot__ = None
+__xmlpath__ = None
 handlers = None
 ignoredTags = None
     
@@ -121,10 +122,15 @@ def getQualifiedTag(tag ,ns=None, e=__xmlroot__):
         return "{<<NS>>}<<tag>>".replace("<<NS>>", __xmlroot__.nsmap[ns]).replace("<<tag>>", tag)
     else:
         return tag
-
-def initialize(e):
-    global __xmlroot__, handlers
-    __xmlroot__ = e    
+        
+def getroot():
+    global __xmlroot__
+    return __xmlroot__
+    
+def initialize(xmlPath):
+    global __xmlroot__, handlers, __xmlpath__
+    __xmlpath__ = xmlPath
+    __xmlroot__ = etree.parse(xmlPath).getroot()    
     # Initialize the tag handlers.
     handlers = {getQualifiedTag("Block",ns="sysml"):sysml_Block,
                 getQualifiedTag("ItemFlow",ns="sysml"):sysml_itemflow,

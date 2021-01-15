@@ -52,7 +52,7 @@
   </owl:Class>
   <owl:Class rdf:ID="REVIEW_LOG">
     <rdfs:comment xml:lang="en">Outcome of a REVIEW ACTIVITY</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="DOCUMENT#REPORT"/>
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="reviewer">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>

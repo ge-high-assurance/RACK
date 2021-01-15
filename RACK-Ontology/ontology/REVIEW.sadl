@@ -45,7 +45,7 @@ REVIEW
 	(note "Artifact review ACTIVITY")
 	is a type of ACTIVITY.
 
-	author (note "AGENT(s) putting items up for review") describes REVIEW with a single value of type AGENT.
+	author (note "AGENT(s) putting items up for review") describes REVIEW with values of type AGENT.
 	author is a type of wasAssociatedWith.
 
 	reviewer (note "AGENT(s) performing the review") describes REVIEW with values of type AGENT.

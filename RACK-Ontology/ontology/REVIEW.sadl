@@ -24,7 +24,7 @@ import "http://arcos.rack/DOCUMENT".
 
 REVIEW_LOG
 	(note "Outcome of a REVIEW ACTIVITY")
-	is a type of REPORT.
+	is a type of ENTITY.
 
 	reviews (note "The subject being reviewed") describes REVIEW_LOG with values of type ENTITY.
 	reviews is a type of wasImpactedBy.

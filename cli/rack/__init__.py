@@ -165,7 +165,7 @@ def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Ca
     return decorator
 # pylint: enable=unused-argument
 
-def sparql_connection(base_url: Url, data_graph: Optional[Url], extra_data_graphs: [Url], triple_store: Optional[Url]) -> Connection:
+def sparql_connection(base_url: Url, data_graph: Optional[Url], extra_data_graphs: List[Url], triple_store: Optional[Url]) -> Connection:
     """Generate a SPARQL connection value."""
 
     semtk3.set_host(base_url)

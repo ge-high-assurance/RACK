@@ -83,14 +83,19 @@ INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
                         'required': ['nodegroup', 'csv'],
                         'properties': {
                             'nodegroup': {'type': 'string'},
-                            'csv': {'type': 'string'}
-                        }
+                            'csv': {'type': 'string'}}
                     },
                     {
                         'type': 'object',
                         'addtionalProperties': False,
                         'required': ['owl'],
                         'properties': {'owl': {'type': 'string'}}
+                    },
+                    {
+                        'type': 'object',
+                        'addtionalProperties': False,
+                        'required': ['ttl'],
+                        'properties': {'ttl': {'type': 'string'}}
                     }
                 ]
             }
@@ -245,6 +250,13 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
     go()
 
+def ingest_turtle(conn: Connection, turtle_file: Path) -> None:
+    """Upload a TTL file into the model graph."""
+    @with_status(f'Ingesting {str_highlight(str(turtle_file))}')
+    def go() -> None:
+        return semtk3.upload_turtle(turtle_file, conn, "rack", "rack")
+    go()
+
 def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
     with open(config_path, 'r') as config_file:
@@ -274,6 +286,15 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Ur
             print(f'Ingesting {str_highlight(str(owl_file)): <40}', end="")
             try:
                 semtk3.upload_owl(base_path / owl_file, conn, "rack", "rack", semtk3.SEMTK3_CONN_DATA)
+            except Exception as e:
+                print(str_bad(' FAIL'))
+                raise e
+            print(str_good(' OK'))
+        elif 'ttl' in step:
+            ttl_file = step['ttl']
+            print(f'Ingesting {str_highlight(str(ttl_file)): <40}', end="")
+            try:
+                semtk3.upload_turtle(base_path / ttl_file, conn, "rack", "rack", semtk3.SEMTK3_CONN_DATA)
             except Exception as e:
                 print(str_bad(' FAIL'))
                 raise e

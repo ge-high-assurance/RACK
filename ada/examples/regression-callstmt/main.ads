@@ -1,0 +1,2 @@
+WITH aux;
+PROCEDURE main;

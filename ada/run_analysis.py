@@ -10,6 +10,7 @@ __copyright__ = "Copyright (c) 2020, Galois, Inc."
 
 import argparse
 import logging
+import os
 from typing import Dict, List, Optional
 import sys
 
@@ -69,10 +70,16 @@ class CustomFormatter(logging.Formatter):
 # Default provider just looks through files listed as "others"
 provider = lal.UnitProvider.auto(input_files=args.others)
 
-def input_files_from_files_list(files_list: str) -> List[str]:
-    """Returns the list of all non-empty lines from a given file."""
-    with open(files_list) as handle:
-        lines = list(filter(None, handle.read().splitlines()))
+def input_files_from_files_list(files_file: str) -> List[str]:
+    """
+    Takes as input a path to a file containing a list of filepaths (one per
+    line, empty lines are ignored). Returns the list of filepaths, all
+    prefixed by the path to that listing file (so that the paths in that list file
+    may be relative to the list file location).
+    """
+    root = os.path.dirname(files_file)
+    with open(files_file) as handle:
+        lines = [f"{root}/{file}" for file in list(filter(None, handle.read().splitlines()))]
         return lines
 
 # If a gpr project file is passed, it is used.

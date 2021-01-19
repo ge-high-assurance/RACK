@@ -123,10 +123,12 @@
     <rdfs:subClassOf rdf:resource="#THING"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="wasImpactedBy">
-    <rdfs:comment xml:lang="en">Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter.</rdfs:comment>
     <rdfs:subPropertyOf>
       <owl:ObjectProperty rdf:ID="wasDerivedFrom"/>
     </rdfs:subPropertyOf>
+    <rdfs:comment xml:lang="en">Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter.</rdfs:comment>
+    <rdfs:range rdf:resource="#ENTITY"/>
+    <rdfs:domain rdf:resource="#ENTITY"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#wasGeneratedBy">
     <rdfs:comment xml:lang="en">Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.</rdfs:comment>
@@ -154,8 +156,10 @@
     <rdfs:domain rdf:resource="#ENTITY"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="wasRevisionOf">
-    <rdfs:comment xml:lang="en">Indicates a direct line of primary descendancy from one entity to a derivative entity.</rdfs:comment>
     <rdfs:subPropertyOf rdf:resource="#wasDerivedFrom"/>
+    <rdfs:comment xml:lang="en">Indicates a direct line of primary descendancy from one entity to a derivative entity.</rdfs:comment>
+    <rdfs:range rdf:resource="#ENTITY"/>
+    <rdfs:domain rdf:resource="#ENTITY"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="wasAssociatedWith">
     <rdfs:comment xml:lang="en">An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity.</rdfs:comment>

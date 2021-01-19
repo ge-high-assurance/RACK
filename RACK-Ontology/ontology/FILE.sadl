@@ -41,8 +41,8 @@ FILE_CREATION
 FILE_HASH
     (note "A hash identifying a FILE")
     is a type of THING,
-    described by hashType  with a single value of type HASH_TYPE,
-    described by hashValue with a single value of type string.
+    described by hashType (note "Hash algorithm")  with a single value of type HASH_TYPE,
+    described by hashValue (note "Hash value") with a single value of type string.
 
 HASH_TYPE
     (note "A type of cryptographic hash")

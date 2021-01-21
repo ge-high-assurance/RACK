@@ -162,8 +162,13 @@ def analyze_unit(unit: lal.AnalysisUnit) -> None:
         graph.bind("dat", DATA)
         graph.bind("format", FORMAT)
         ada_format.add_to_graph(graph)
+
         for component_key in components:
             components[component_key].add_to_graph(graph)
+
+        for file_key in files:
+            files[file_key].add_to_graph(graph)
+
         sys.stdout.buffer.write(graph.serialize(format="turtle"))
 
     else:

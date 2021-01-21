@@ -808,9 +808,9 @@
                         "SnodeSparqlIDs": [
                             "?DEFINE_IN"
                         ],
-                        "UriConnectBy": "http://arcos.rack/SOFTWARE#definedIn",
-                        "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-                        "ValueType": "ENTITY"
+                        "UriConnectBy": "http://arcos.rack/FILE#definedIn",
+                        "UriValueType": "http://arcos.rack/FILE#FILE",
+                        "ValueType": "FILE"
                     },
                     {
                         "ConnectBy": "instantiates",

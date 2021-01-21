@@ -78,10 +78,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?verifies_REQUIREMENT_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],
@@ -90,7 +92,7 @@
             {
                 "NodeName": "TEST",
                 "SparqlID": "?TEST_1",
-                "binding": "?TEST",
+				"binding": "?TESTwithNoTestResult",
                 "deletionMode": "NO_DELETE",
                 "fullURIName": "http://arcos.rack/TESTING#TEST",
                 "instanceValue": null,
@@ -126,7 +128,7 @@
                         "SparqlID": "?test_id_not_run",
                         "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
-                        "binding": "?test_id",
+						"binding": "?confirms_TESTwithNoTestResult_identifier",
                         "fullURIName": "",
                         "instanceValues": [],
                         "isBindingReturned": true,
@@ -146,11 +148,11 @@
             {
                 "NodeName": "TEST_RESULT",
                 "SparqlID": "?TEST_RESULT_0",
-                "binding": "?TEST_RESULT_NOT_EXIST",
+				"binding": "?no_TEST_RESULT",
                 "deletionMode": "NO_DELETE",
                 "fullURIName": "http://arcos.rack/TESTING#TEST_RESULT",
                 "instanceValue": null,
-                "isBindingReturned": true,
+                "isBindingReturned": false,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
                 "nodeList": [
@@ -185,7 +187,7 @@
             {
                 "NodeName": "TEST",
                 "SparqlID": "?TEST_0",
-                "binding": "?TEST_NONEXIST",
+				"binding": "?noTEST",
                 "deletionMode": "NO_DELETE",
                 "fullURIName": "http://arcos.rack/TESTING#TEST",
                 "instanceValue": null,
@@ -226,12 +228,14 @@
                 "SparqlID": "?TEST_STATUS",
                 "deletionMode": "NO_DELETE",
                 "fullURIName": "http://arcos.rack/TESTING#TEST_STATUS",
-                "isReturned": true,
+                "isReturned": false,
                 "isRuntimeConstrained": false,
                 "nodeList": [],
                 "propList": [],
                 "subClassNames": [],
-                "valueConstraint": "FILTER ( ?TEST_STATUS IN (<http://arcos.rack/TESTING#Failed> ) ) "
+                "valueConstraint": "FILTER ( ?TEST_STATUS IN (<http://arcos.rack/TESTING#Failed> ) ) ",
+				"binding": "?result_TEST_STATUS",
+				"isBindingReturned": true
             },
             {
                 "NodeName": "TEST",
@@ -269,7 +273,7 @@
                         "SparqlID": "?test",
                         "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
-                        "binding": "?test_id",
+						"binding": "?confirms_failedTEST_identifier",
                         "fullURIName": "",
                         "instanceValues": [],
                         "isBindingReturned": true,
@@ -339,7 +343,7 @@
                         "SparqlID": "?test_result",
                         "UriRelationship": "http://arcos.rack/PROV-S#identifier",
                         "ValueType": "string",
-                        "binding": "?failed_test_result_id",
+						"binding": "?TEST_RESULT_identifier",
                         "fullURIName": "",
                         "instanceValues": [],
                         "isBindingReturned": true,

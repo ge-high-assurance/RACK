@@ -22,7 +22,7 @@ __EvidenceDir__ = None
 
 def getXsd():
     rackData = {}
-    AutoGenerationDir = os.path.join(os.path.split(__file__)[0],"..","AutoGeneration")
+    AutoGenerationDir = os.path.split(__file__)[0]
     xsd = etree.parse(os.path.join(AutoGenerationDir, "RACK-DATA.xsd"))
     root = xsd.getroot()
     for c in list(root):

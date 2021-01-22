@@ -12,8 +12,9 @@
 # of the Defense Advanced Research Projects Agency (DARPA).
 
 from setuptools import setup, find_packages
-
+print(find_packages())
 setup(
     name="ScrapingToolKit",
-    packages=find_packages(),
+    packages = find_packages(),
+    package_data = {'Evidence':['RACK-DATA.xsd']}
 )

@@ -127,7 +127,7 @@ keyList = list(rackDataDict.keys())
 keyList.sort()
 
 # Create the XSD for the SemTK Data Dictionary
-with open("RACK-DATA.xsd","w") as xmlFile:
+with open(r"..\Evidence\RACK-DATA.xsd","w") as xmlFile:
     xmlFile.write('''<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:element name="RACK-DATA">

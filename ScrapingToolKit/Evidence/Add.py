@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (c) 2021, General Electric Company, Inc.
+# Copyright (c) 2021, General Electric Company, Galois, Inc.
 #
 # All Rights Reserved
 #
@@ -10,7 +10,6 @@
 # Any opinions, findings and conclusions or recommendations expressed in this
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
-
 from Logging import *
 from Evidence import *
 '''

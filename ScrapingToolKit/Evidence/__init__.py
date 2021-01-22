@@ -61,10 +61,13 @@ def createCDR():
             with open(os.path.join(outputDir,thing+"1.csv"), 'w') as outFile:
                 outwriter = csv.writer(outFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 outwriter.writerow(["identifier"])
+                loaded = list()
 
                 for c in root.iter(thing):
                     if c.find("identifier") is not None:
-                        outwriter.writerow([c.find("identifier").text])
+                        if c.find("identifier").text not in loaded:
+                            outwriter.writerow([c.find("identifier").text])
+                            loaded.append(c.find("identifier").text)
                     else:
                         log("Identifier not found.")
             with open(os.path.join(outputDir,thing+"2.csv"), 'w') as outFile:

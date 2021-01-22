@@ -19,7 +19,7 @@ from Logging import *
 from lxml import etree
 
 __EvidenceDir__ = None
-
+__Evidence__ = None
 def getXsd():
     rackData = {}
     AutoGenerationDir = os.path.split(__file__)[0]
@@ -42,7 +42,11 @@ def createCDR():
     Creating the CDR is done in two phases the first CDR only has the identifiers so that it will create all the objects
     the second phase has all the data, by splitting this into two phase ths allows the lookups to succeed regardless of load order
     '''
-    global __EvidenceDir__
+    global __EvidenceDir__, __Evidence__
+    __Evidence__.write(__EvidenceDir__, 
+               pretty_print=True,
+               xml_declaration=True,
+               encoding='UTF-8')
     cdrFiles = list()
     xsdSpec = getXsd()
     outputDir = __EvidenceDir__.replace(".xml","")
@@ -104,7 +108,7 @@ def createEvidenceFile(filePath="RACK-DATA.xml"):
     
 def addEvidenceObject(eObject):   
     trace()
-    global __EvidenceDir__
+    global __EvidenceDir__, __Evidence__
     # Currently this function and really the whole module is not very efficient in that 
     #  it write to the hard drive every call, this could be improved by storing the xml data in 
     #  memory until a flush call or something similar.  This works well for now as you can 
@@ -112,23 +116,18 @@ def addEvidenceObject(eObject):
     __EvidenceDir__ = "RACK-DATA.xml"
     if not os.path.exists(__EvidenceDir__):
         createEvidenceFile(__EvidenceDir__)
-        
-    # Load the existing evidence data
-    evidence = etree.parse(__EvidenceDir__, 
-                           etree.XMLParser(remove_blank_text=True))
-    # Append the new element
-    evidence.getroot().append(eObject)
-    # Write the file 
-    evidence.write(__EvidenceDir__, 
-                   pretty_print=True,
-                   xml_declaration=True,
-                   encoding='UTF-8')
+    if __Evidence__ is None:
+        __Evidence__ = etree.parse(__EvidenceDir__, 
+                                   etree.XMLParser(remove_blank_text=True))
+    __Evidence__.getroot().append(eObject)
+
+
 
 def objectDataString(typeStr, value):
     trace()
     rtnStr = ""
     if value != None:
-        rtnStr+='<{type}>"{value}"</{type}>'\
+        rtnStr+='<{type}>{value}</{type}>'\
             .replace("{type}",typeStr)\
             .replace("{value}", value)
     return rtnStr

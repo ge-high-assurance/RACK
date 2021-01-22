@@ -99,7 +99,7 @@
         <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/ANALYSIS#ANALYSIS_REPORT"/>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/ANALYSIS#ANALYSIS_OUTPUT"/>
   </owl:Class>
   <owl:Class rdf:about="#SoftwareDesign">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"/>
@@ -181,7 +181,7 @@
         <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/ANALYSIS#ANALYSIS_REPORT"/>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/ANALYSIS#ANALYSIS_OUTPUT"/>
   </owl:Class>
   <owl:Class rdf:ID="SystemRequirement">
     <rdfs:subClassOf>
@@ -259,7 +259,7 @@
         <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/ANALYSIS#ANALYSIS_REPORT"/>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/ANALYSIS#ANALYSIS_OUTPUT"/>
   </owl:Class>
   <owl:Class rdf:about="#SoftwareUnitTestExecution">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_EXECUTION"/>

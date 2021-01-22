@@ -139,6 +139,8 @@ class CustomFormatter(logging.Formatter):
 
 Decoratee = TypeVar('Decoratee', bound=Callable[..., Any])
 
+# Bug https://github.com/PyCQA/pylint/issues/1953
+# pylint: disable=unused-argument
 def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Callable[[Decoratee], Decoratee]:
     """This decorator writes the prefix, followed by three dots, then runs the
     decorated function.  Upon success, it appends OK, upon failure, it appends
@@ -158,6 +160,7 @@ def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Ca
             return result
         return cast(Decoratee, wrapper)
     return decorator
+# pylint: enable=unused-argument
 
 def sparql_connection(base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> Connection:
     """Generate a SPARQL connection value."""
@@ -180,15 +183,15 @@ def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
     result = semtk3.clear_graph(conn, which_graph.value, 0)
     print(result.lstrip())
 
-def format_semtk_table(semtk_table: SemtkTable, format: ExportFormat = ExportFormat.TEXT, headers: bool = True) -> str:
+def format_semtk_table(semtk_table: SemtkTable, export_format: ExportFormat = ExportFormat.TEXT, headers: bool = True) -> str:
 
-    if format == ExportFormat.TEXT:
+    if export_format == ExportFormat.TEXT:
         if headers is True:
             return tabulate(semtk_table.get_rows(), headers=semtk_table.get_column_names())
         else:
             return tabulate(semtk_table.get_rows())
 
-    elif format == ExportFormat.CSV:
+    elif export_format == ExportFormat.CSV:
         output = StringIO()
         writer = csv.writer(output)
         if headers is True:
@@ -197,13 +200,13 @@ def format_semtk_table(semtk_table: SemtkTable, format: ExportFormat = ExportFor
             writer.writerow(row)
         return output.getvalue()
 
-    print(str_bad(f"Internal error: incomplete implementation of run_query for '{format}'"))
+    print(str_bad(f"Internal error: incomplete implementation of run_query for '{export_format}'"))
     sys.exit(1)
 
-def run_query(conn: Connection, nodegroup: str, format: ExportFormat = ExportFormat.TEXT, headers: bool = True, path: Optional[Path] = None) -> None:
+def run_query(conn: Connection, nodegroup: str, export_format: ExportFormat = ExportFormat.TEXT, headers: bool = True, path: Optional[Path] = None) -> None:
     semtk3.SEMTK3_CONN_OVERRIDE = conn
     semtk_table = semtk3.select_by_id(nodegroup)
-    formatted_table = format_semtk_table(semtk_table, format=format, headers=headers)
+    formatted_table = format_semtk_table(semtk_table, export_format=export_format, headers=headers)
     if path is None:
         print()
         print(formatted_table)
@@ -366,7 +369,7 @@ def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
 
 def dispatch_data_export(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
-    run_query(conn, args.nodegroup, format=args.format, headers=not args.no_headers, path=args.file)
+    run_query(conn, args.nodegroup, export_format=args.format, headers=not args.no_headers, path=args.file)
 
 def dispatch_data_count(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)

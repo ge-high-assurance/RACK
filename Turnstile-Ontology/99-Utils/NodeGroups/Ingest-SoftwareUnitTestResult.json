@@ -140,8 +140,8 @@
 							false
 						],
 						"KeyName": "confirms",
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"ValueType": "TEST",
+						"UriValueType": "http://arcos.rack/TESTING#TEST",
 						"ConnectBy": "confirms",
 						"Connected": true,
 						"UriConnectBy": "http://arcos.rack/TESTING#confirms"

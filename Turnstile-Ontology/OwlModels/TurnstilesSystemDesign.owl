@@ -57,17 +57,17 @@
   </j.0:SystemInterfaceDefinition>
   <j.0:SystemRequirement rdf:ID="Sys-2">
     <j.1:governs rdf:resource="DevelopmentPlanData#Turnstile"/>
-    <j.1:text>Turnstile system shall track the number of people that travel through the out gate.	</j.1:text>
+    <j.2:description>Turnstile system shall track the number of people that travel through the out gate.	</j.2:description>
     <j.2:identifier>Sys-2</j.2:identifier>
   </j.0:SystemRequirement>
   <j.0:SystemRequirement rdf:ID="Sys-1">
     <j.1:governs rdf:resource="DevelopmentPlanData#Turnstile"/>
-    <j.1:text>Turnstile system shall track the number of people that travel through the in gate.</j.1:text>
+    <j.2:description>Turnstile system shall track the number of people that travel through the in gate.</j.2:description>
     <j.2:identifier>Sys-1</j.2:identifier>
   </j.0:SystemRequirement>
   <j.0:SystemRequirement rdf:ID="Sys-3">
     <j.1:governs rdf:resource="DevelopmentPlanData#Turnstile"/>
-    <j.1:text>Turnstile system shall track the number of people are currently in the park.</j.1:text>
+    <j.2:description>Turnstile system shall track the number of people are currently in the park.</j.2:description>
     <j.2:identifier>Sys-3</j.2:identifier>
   </j.0:SystemRequirement>
   <j.0:SystemInterfaceDefinition rdf:ID="inflow">

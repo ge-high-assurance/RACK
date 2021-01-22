@@ -10,22 +10,34 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
+/************** edit history *****************
+  *
+  * dwa - 11 Nov 2020 - reduced cardinality of fileParent and several others
+  * dwa - 11 Nov 2020 - removed incorrect use of wasDerivedFrom
+  * dwa - 11 Nov 2020 - removed createBy in favor of base class wasGeneratedBy
+  * dwa - 11 Nov 2020 - removed FILE_CREATION activity as unnecessary
+  *
+  *********************************************/
+
+
 uri "http://arcos.rack/FILE" alias file.
 import "http://arcos.rack/PROV-S".
 
-definedIn (note "The file an ENTITY is defined in") describes ENTITY with values of type FILE.
+definedIn (note "The file an ENTITY is defined or contained in") describes ENTITY with values of type FILE.
 
 FILE
-    (note "A file in the system")
+	(note "A file in a filesystem")
 	is a type of ENTITY.
-	filename (note "A logical file path relative to the container of the file.") describes FILE with values of type string.
+
+	filename (note "A logical file path relative to the container of the file.") describes FILE with a single value of type string.
 
 	fileFormat (note "The byte-level encoding of a file") describes FILE with values of type FORMAT.
 
     satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes FILE with values of type ENTITY.
-    satisfies is a type of wasDerivedFrom.
+    satisfies is a type of wasImpactedBy.
 
     createBy (note "FILE_CREATION ACTIVITY that created this file") describes FILE with values of type FILE_CREATION.
+    createBy describes FILE with at most 1 value.
     createBy is a type of wasGeneratedBy.
     
     fileHash (note "Hash of the file contents") describes FILE with values of type FILE_HASH.
@@ -41,8 +53,8 @@ FILE_CREATION
 FILE_HASH
     (note "A hash identifying a FILE")
     is a type of THING,
-    described by hashType  with a single value of type HASH_TYPE,
-    described by hashValue with a single value of type string.
+    described by hashType (note "Hash algorithm")  with a single value of type HASH_TYPE,
+    described by hashValue (note "Hash value") with a single value of type string.
 
 HASH_TYPE
     (note "A type of cryptographic hash")

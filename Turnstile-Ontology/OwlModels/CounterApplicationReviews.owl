@@ -33,7 +33,7 @@
           <j.1:Engineer rdf:ID="JohnQ">
             <j.0:employedBy rdf:resource="DevelopmentPlanData#General_Electric"/>
             <j.0:emailAddress>john.public@ge.com</j.0:emailAddress>
-            <j.0:name>Public, John</j.0:name>
+            <j.3:title>Public, John</j.3:title>
             <j.3:identifier>259863025</j.3:identifier>
           </j.1:Engineer>
         </j.2:reviewer>

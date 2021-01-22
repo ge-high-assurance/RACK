@@ -431,47 +431,10 @@ _DevelopmentPlan is a PLAN,
 
 
 
-        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.CSourceFile
-      CSourceFile is a FORMAT
-      	has identifier ".c".
-
-      CHeaderFile is a FORMAT
-      	has identifier ".h".
-
-        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.ElfFile
-      ElfFile is a FORMAT
-      	has identifier ".o".
-
-
-        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.GCC
-      GCC is a TOOL
-      	has identifier "gcc".
-
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.General Electric
       General_Electric is a ORGANIZATION
       	has identifier "GE".
-
-
-        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.JsonFile
-      JsonFile is a FORMAT
-      	has identifier ".json".
-
-
-        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.TAR
-      TAR is a TOOL
-      	has identifier "tar".
-
-
-        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.TarFile
-      TarFile is a FORMAT
-      	has identifier ".tar".
-
-
-        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.ZipFile
-      ZipFile is a FORMAT
-      	has identifier ".zip".
-		
 
 
       //Model Location: DevelopmentPlan.04-SoftwareVerification

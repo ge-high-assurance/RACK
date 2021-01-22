@@ -32,7 +32,7 @@
           <j.1:Engineer rdf:ID="JohnDoe">
             <j.0:employedBy rdf:resource="DevelopmentPlanData#General_Electric"/>
             <j.0:emailAddress>john.doe@ge.com</j.0:emailAddress>
-            <j.0:name>Doe, John</j.0:name>
+            <j.3:title>Doe, John</j.3:title>
             <j.3:identifier>125569538</j.3:identifier>
           </j.1:Engineer>
         </j.2:author>
@@ -45,7 +45,7 @@
         <j.2:createdBy rdf:resource="#HlrDev1"/>
         <j.2:governs rdf:resource="DevelopmentPlanData#CounterApplication"/>
         <j.2:satisfies rdf:resource="TurnstileDesign#Sys-3"/>
-        <j.2:text>The Computer shall publish the counter at a 1 htz rate.</j.2:text>
+        <j.3:description>The Computer shall publish the counter at a 1 htz rate.</j.3:description>
         <j.3:identifier>HLR-3</j.3:identifier>
       </j.1:HighLevelRequirement>
     </j.2:providedBy>
@@ -60,7 +60,7 @@
         <j.2:governs rdf:resource="DevelopmentPlanData#CounterApplication"/>
         <j.2:mitigates rdf:resource="HazardAssessment#H-1.1"/>
         <j.2:satisfies rdf:resource="TurnstileDesign#Sys-2"/>
-        <j.2:text>The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0.</j.2:text>
+        <j.3:description>The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0.</j.3:description>
         <j.3:identifier>HLR-2</j.3:identifier>
       </j.1:HighLevelRequirement>
     </j.2:providedBy>
@@ -70,7 +70,7 @@
         <j.2:governs rdf:resource="DevelopmentPlanData#CounterApplication"/>
         <j.2:mitigates rdf:resource="HazardAssessment#H-1.2"/>
         <j.2:satisfies rdf:resource="TurnstileDesign#Sys-1"/>
-        <j.2:text>The Computer shall increment the counter when a inflow event is received and the counter is less than max int.</j.2:text>
+        <j.3:description>The Computer shall increment the counter when a inflow event is received and the counter is less than max int.</j.3:description>
         <j.3:identifier>HLR-1</j.3:identifier>
       </j.1:HighLevelRequirement>
     </j.2:providedBy>
@@ -80,7 +80,7 @@
     <j.2:createdBy rdf:resource="#HlrDev1"/>
     <j.2:consumedBy rdf:resource="#HLR-1"/>
     <j.2:providedBy rdf:resource="TurnstileDesign#inflow"/>
-    <j.2:text>Signal indicating that a person has passed through the ingate</j.2:text>
+    <j.3:description>Signal indicating that a person has passed through the ingate</j.3:description>
     <j.3:identifier>inflowEvent</j.3:identifier>
   </j.1:DataDictionary>
   <j.1:DataDictionary rdf:ID="outflowEvent">

@@ -2,7 +2,7 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:sw="http://arcos.rack/SOFTWARE#"
     xmlns:provs="http://arcos.rack/PROV-S#"
-    xmlns:AGENTS="http://arcos.rack/AGENTS#"
+    xmlns:Ag="http://arcos.rack/AGENTS#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
@@ -55,8 +55,8 @@
         <owl:someValuesFrom>
           <owl:Class>
             <owl:oneOf rdf:parseType="Collection">
-              <rdf:Description rdf:about="#Ag:PERSON"/>
-              <rdf:Description rdf:about="#Ag:ORGANIZATION"/>
+              <rdf:Description rdf:about="AGENTS#PERSON"/>
+              <rdf:Description rdf:about="AGENTS#ORGANIZATION"/>
             </owl:oneOf>
           </owl:Class>
         </owl:someValuesFrom>

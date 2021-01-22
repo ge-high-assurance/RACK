@@ -173,8 +173,8 @@
                             "?TEST_1"
                         ],
                         "UriConnectBy": "http://arcos.rack/TESTING#confirms",
-                        "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-                        "ValueType": "ENTITY"
+                        "UriValueType": "http://arcos.rack/TESTING#TEST",
+                        "ValueType": "TEST"
                     }
                 ],
                 "propList": [],
@@ -312,8 +312,8 @@
                             "?TEST"
                         ],
                         "UriConnectBy": "http://arcos.rack/TESTING#confirms",
-                        "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-                        "ValueType": "ENTITY"
+                        "UriValueType": "http://arcos.rack/TESTING#TEST",
+                        "ValueType": "TEST"
                     },
                     {
                         "ConnectBy": "result",

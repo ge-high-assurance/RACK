@@ -250,6 +250,7 @@ def output_using_scrapingtoolkit(
             identifier=component_identifier,
             componentType_identifier=component.component_type,
             title=escape(component.title),
+            definedIn_identifier=component.defined_in.identifier if component.defined_in else None
         )
         for callee in component.mentions:
             Evidence.Add.SWCOMPONENT(
@@ -273,8 +274,11 @@ def analyze_traceability(unit: lal.AnalysisUnit) -> None:
     for component_id, requirement_ids in analysis_output.items():
         for requirement_id in requirement_ids:
             Evidence.Add.REQUIREMENT(
-                identifier=requirement_id,
-                governs_identifier=component_id,
+                identifier=requirement_id
+            )
+            Evidence.Add.SWCOMPONENT(
+                identifier=component_id,
+                wasImpactedBy_identifier=requirement_id,
             )
 
 def analyze_structure(unit: lal.AnalysisUnit) -> None:

@@ -33,7 +33,7 @@ class StructureExtractor(AdaVisitor):
         functions = []
         self.packages[name] = functions
         self.current_package = functions
-        self.visit(node.f_decls)
+        self.generic_visit(node)
     # pylint: enable=invalid-name, missing-function-docstring
 
     # pylint: disable=invalid-name, missing-function-docstring

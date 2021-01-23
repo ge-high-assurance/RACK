@@ -144,7 +144,6 @@ def register_component(
     components = analysis_output["components"]
     component_identifier = ontology.SoftwareComponentIdentifier(get_node_identifier(component))
     if component_identifier not in components:
-        print(component.doc_name)
         components[component_identifier] = ontology.SoftwareComponent(
             identifier=component_identifier,
             # does not work because display names may contain special characters
@@ -225,8 +224,6 @@ def output_using_scrapingtoolkit(
 ) -> None:
     """Outputs the analysis output using ScrapingToolKit."""
 
-    # NOTE: overwrites pre-existing evidence file
-
     for component_type in analysis_output["component_types"]:
         Evidence.Add.COMPONENT_TYPE(
             identifier=component_type,
@@ -263,43 +260,47 @@ def output_using_scrapingtoolkit(
 def analyze_traceability(unit: lal.AnalysisUnit) -> None:
     """Extracts traceability identifiers from subprograms."""
 
-    if unit.root:
-        visitor = TE.TraceabilityExtraction(
-            context=context,
-        )
+    if not unit.root:
+        return
 
-        visitor.visit(unit.root)
-        analysis_output = visitor.traceability
+    visitor = TE.TraceabilityExtraction(
+        context=context,
+    )
 
-        for component_id, requirement_ids in analysis_output.items():
-            for requirement_id in requirement_ids:
-                Evidence.Add.REQUIREMENT(
-                    identifier=requirement_id,
-                    governs_identifier=component_id,
-                )
+    visitor.visit(unit.root)
+    analysis_output = visitor.traceability
+
+    for component_id, requirement_ids in analysis_output.items():
+        for requirement_id in requirement_ids:
+            Evidence.Add.REQUIREMENT(
+                identifier=requirement_id,
+                governs_identifier=component_id,
+            )
 
 def analyze_structure(unit: lal.AnalysisUnit) -> None:
     """Extracts traceability identifiers from subprograms."""
 
-    if unit.root:
-        visitor = PS.StructureExtractor(
+    if not unit.root:
+        return
+        
+    visitor = PS.StructureExtractor(
+    )
+
+    visitor.visit(unit.root)
+    analysis_output = visitor.packages
+
+    for package, components in analysis_output.items():
+        Evidence.Add.SWCOMPONENT(
+            identifier=get_node_identifier(package),
+            title=escape(package.doc_name),
+            componentType_identifier=ontology.MODULE,
+                
         )
-
-        visitor.visit(unit.root)
-        analysis_output = visitor.packages
-
-        for package, components in analysis_output.items():
+        for component in components:
             Evidence.Add.SWCOMPONENT(
-                identifier=get_node_identifier(package),
-                title=escape(package.doc_name),
-                componentType_identifier=ontology.MODULE,
-                    
+                identifier=get_node_identifier(component),
+                subcomponentOf_identifier=get_node_identifier(package),
             )
-            for component in components:
-                Evidence.Add.SWCOMPONENT(
-                    identifier=get_node_identifier(component),
-                    subcomponentOf_identifier=get_node_identifier(package),
-                )
 
 def analyze_unit(unit: lal.AnalysisUnit) -> None:
     """Computes and displays the static call graph of some unit."""

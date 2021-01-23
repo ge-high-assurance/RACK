@@ -5,14 +5,14 @@ This module contains facilities for extracting traceability-comments Ada program
 __copyright__ = "Copyright (c) 2020, Galois, Inc."
 
 import logging
-from typing import Callable, Dict, NewType, Optional, Set
+from typing import Callable, Dict, NewType, Optional, Set, List
 import urllib.parse
 import re
 
 import libadalang as lal
 
 from ada_visitor import AdaVisitor
-from node_naming import get_node_identifier
+from node_naming import GraphNode, get_node_identifier
 
 class TraceabilityExtraction(AdaVisitor):
 
@@ -25,9 +25,9 @@ class TraceabilityExtraction(AdaVisitor):
         self,
         context: lal.AnalysisContext,
     ) -> None:
-        self.context = context
-        self.traceability = {}
-        self.seen = set()
+        self.context: lal.AnalysisContext = context
+        self.traceability: Dict[GraphNode, List[str]] = {}
+        self.seen: Set[int] = set()
 
     def match_trace_token(self, token: lal.Token):
         """Detect unmatched traceability comments and return traceability identifier."""
@@ -40,10 +40,9 @@ class TraceabilityExtraction(AdaVisitor):
 
     # pylint: disable=invalid-name, missing-function-docstring
     def visit_PackageBody(self, node: lal.PackageBody) -> None:
+        self.generic_visit(node)
+
         name = node.f_package_name
-
-        self.visit(node.f_decls)
-
         for token in node.tokens:
             trace_id = self.match_trace_token(token)
             if trace_id is not None:
@@ -52,9 +51,10 @@ class TraceabilityExtraction(AdaVisitor):
 
     # pylint: disable=invalid-name, missing-function-docstring
     def visit_SubpBody(self, node: lal.SubpBody) -> None:
+        self.generic_visit(node)
+
         spec = node.f_subp_spec
         name = spec.f_subp_name
-
         for token in node.tokens:
             trace_id = self.match_trace_token(token)
             if trace_id:

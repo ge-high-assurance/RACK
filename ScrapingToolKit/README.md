@@ -82,9 +82,10 @@ Evidence.createCDR()
 ```
 This will result in an ingestion error `PARENT-1` for the `satisfies_identifier` could be either `SPECIFICATION` or `REQUIREMENT`.
 
-# Example Plain Text Files
+# Example Plain Text
 
-Ingesting of Test Files is entirely up to the user on how the data if formatted and how they are processing it.  This example is created just to show the how the STK can be used, it is not the only way.  
+Ingesting of Test Files is entirely up to the user on how the data if formatted and how they are processing it.  This example is created just to show the how the STK can be used, it is not the only way. Any processing begins by examining the data to be ingested. For this short tutorial we are going to look at a simple text file "REQs.txt"
+
 Example File REQs.txt: 
 ```
 [REQ-1] - System shall do something.
@@ -95,8 +96,7 @@ SourceCode:{SourceCodeFile1,SourceCodeFile2}
 ParentRequirement:{Parent-1,Parent-2}
 SourceCode:{SourceCodeFile}
 ```
-
-
+First thing to do is to identify how the text can be processed for a more complex file the use of RegEx might be simplier, but for this example each line starts with a token that can be used to identify the data that is in the line. So this can be accomplished by simply reading through the file line by line and processing the data.  The one complication is that a record of the last requirement line identifier needs to be maintained. 
 
 ```
 import Evidence
@@ -134,8 +134,6 @@ if __name__=="__main__":
   ingest("REQs.txt")
   Evidence.createCDR()
 ```
-
-
 
 # Example XMLs
 

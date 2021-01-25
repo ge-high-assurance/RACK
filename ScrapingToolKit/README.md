@@ -8,12 +8,23 @@ The Scraping Tool Kit (STK) is a series of python packages that provide utilitie
 
 After installing, the STK there are two modules that need to be imported into your python script in order use.
 
+## Evidence Module
 `Evidence` - Provides two critical function:
-  `createEvidenceFile()` - Initializes an new RACK-DATA.xml for the collecting of data when the `Add` functions are called
-  `createCDR()` - Curates the data collected in RACK-DATA.xml and generates CDR CSV files as well as the RACK CLI import.yaml for ingesting the data.
-  
-`Evidence.Add` - This file is provided all the `Add` functions for adding data the the RACK-DATA.xml.  For each class from the ontology there is a function that allows you to add a evidence record to the RACK-DATA.xml.  Each function has a series of option arguments that correspond to the properties of the class. Every property is optional and are defaulted to `None`, for example:
+
+### createEvidenceFile
+`Evidence.createEvidenceFile()` - Initializes an new RACK-DATA.xml for the collecting of data when the `Add` functions are called
+
+### createCDR  
+`Evidence.createCDR()` - Curates the data collected in RACK-DATA.xml and generates CDR CSV files as well as the RACK CLI import.yaml for ingesting the data.
+
+## Evidence.Add Module
+`Evidence.Add` - This module is provided all the `Add` functions for adding data the the RACK-DATA.xml.  For each class from the ontology there is a function that allows you to add a evidence record to the RACK-DATA.xml.  
+
+### <CLASS>
+  `Evidence.Add.<CLASS>` - Each function has a series of option arguments that correspond to the properties of the class. Every property is optional and are defaulted to `None`, for example:
     `def FILE(createBy_identifier=None, fileFormat_identifier=None, fileHash_identifier=None, fileParent_identifier=None, filename=None, satisfies_identifier=None, dataInsertedBy_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None)`
+
+When this function is call the RACK-DATA.xml is populated with a Evidence Record based on the data provided.
 
 Note: Currently there is no error checking for this but the `identifier` argument should not be treated as optional as this would generate CDR files that cannot be ingested into rack as every piece of evidence needs an `identifier`. Currently while there is no restriction in that this `identifier` is unique throughout to project, the current CDR ingestion will run into issues while looking up items during ingestion if the same identifier is used for items of different class. Therefore it is typlically best to make the identifier unique. For example of this issue if you have a `REQUIREMENT:identifier` of `R-1` and a `REVIEW:identifier` of `R-1`, if you are ingesting a `TEST` that `verifies` the `R-1` (`REQUIREMENT`), the CDR `verified_identifier` column will have issues looking up `R-1` as it is ambiguous as to if it is the `REQUIREMENT` or `REVIEW` that has the `identifier` of `R-1`.
 

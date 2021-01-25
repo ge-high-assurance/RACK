@@ -84,6 +84,59 @@ This will result in an ingestion error `PARENT-1` for the `satisfies_identifier`
 
 # Example Plain Text Files
 
+Ingesting of Test Files is entirely up to the user on how the data if formatted and how they are processing it.  This example is created just to show the how the STK can be used, it is not the only way.  
+Example File REQs.txt: 
+```
+[REQ-1] - System shall do something.
+ParentRequirement:{Parent-1}
+SourceCode:{SourceCodeFile1,SourceCodeFile2}
+
+[REQ-2] - System shall do something else.
+ParentRequirement:{Parent-1,Parent-2}
+SourceCode:{SourceCodeFile}
+```
+
+
+
+```
+import Evidence
+import Evidence.Add
+
+def ingest(filePath):
+  with open(filePath, "r") as txtFile:
+    lastReqId = None
+    for l in txtFile.readlines():
+      if l.startwith("["):
+        # Square bracket undicates a requirement
+        reqId, reqDesc = l.split("-")
+        reqId = reqId.lstrip().rstrip()
+        reqDesc = reqDesc.lstrip().rstrip()
+        Evidence.Add.REQUIREMENT(identifier = reqId, description = reqDesc)
+        lastReqId = reqId
+      elif l.startswith("ParentRequirement"):
+        # Found Parent Requirement List
+        start = line.find("{")
+        end = line.rfind("}")
+        parIds = line[start,end].split(",")
+        for pId in parIds:
+          Evidence.Add.REQUIREMENT(identifier = lastReqId, satisfies_identifier = pId)
+          Evidence.Add.REQUIREMENT(identifier = pId)
+      elif l.startswith("SourceCode"):
+        # Found Parent Requirement List
+        start = line.find("{")
+        end = line.rfind("}")
+        sourceIds = line[start,end].split(",")
+        for sId in sourceIds:
+          Evidence.Add.FILE(identifier = sId, satisfies_identifier = lastReqId)        
+
+if __name__=="__main__":
+  Evidence.createEvidenceFile()
+  ingest("REQs.txt")
+  Evidence.createCDR()
+```
+
+
+
 # Example XMLs
 
 # Ingesting Resulting Data

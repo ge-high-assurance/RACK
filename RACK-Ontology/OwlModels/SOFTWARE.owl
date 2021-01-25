@@ -88,11 +88,6 @@
     <rdfs:range rdf:resource="#COMPONENT"/>
     <rdfs:domain rdf:resource="#COMPONENT"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="definedIn">
-    <rdfs:comment xml:lang="en">Defining entity of this code structure. This is typically a FILE.</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
-    <rdfs:domain rdf:resource="#COMPONENT"/>
-  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#componentType">
     <rdfs:range rdf:resource="#COMPONENT_TYPE"/>
     <rdfs:domain rdf:resource="#COMPONENT"/>

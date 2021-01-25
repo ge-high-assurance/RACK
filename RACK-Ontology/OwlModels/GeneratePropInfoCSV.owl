@@ -17,12 +17,14 @@
     xmlns:sys="http://arcos.rack/SYSTEM#"
     xmlns:An="http://arcos.rack/ANALYSIS#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:file="http://arcos.rack/FILE#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:tst="http://arcos.rack/TESTING#"
   xml:base="http://arcos.rack/GeneratePropInfoCSV">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="ANALYSIS"/>
     <owl:imports rdf:resource="DOCUMENT"/>
+    <owl:imports rdf:resource="FILE"/>
     <owl:imports rdf:resource="SYSTEM"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'GeneratePropInfoCSV.sadl' and should not be directly edited.</rdfs:comment>

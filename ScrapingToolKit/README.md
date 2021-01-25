@@ -6,19 +6,75 @@ The Scraping Tool Kit (STK) is a series of python packages that provide utilitie
 
 # Usage
 
-```
-from Evidence import createEvidenceFile, createCDR
-import Evidence.Add as Add
+After installing, the STK there are two modules that need to be imported into your python script in order use.
 
-createEvidenceFile()
-Add.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
-Add.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
-Add.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
-createCDR()
+`Evidence` - Provides two critical function:
+  `createEvidenceFile()` - Initializes an new RACK-DATA.xml for the collecting of data when the `Add` functions are called
+  `createCDR()` - Curates the data collected in RACK-DATA.xml and generates CDR CSV files as well as the RACK CLI import.yaml for ingesting the data.
+  
+`Evidence.Add` - This file is provided all the `Add` functions for adding data the the RACK-DATA.xml.  For each class from the ontology there is a function that allows you to add a evidence record to the RACK-DATA.xml.  Each function has a series of option arguments that correspond to the properties of the class. Every property is optional and are defaulted to `None`, for example:
+    `def FILE(createBy_identifier=None, fileFormat_identifier=None, fileHash_identifier=None, fileParent_identifier=None, filename=None, satisfies_identifier=None, dataInsertedBy_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None)`
+
+Note: Currently there is no error checking for this but the `identifier` argument should not be treated as optional as this would generate CDR files that cannot be ingested into rack as every piece of evidence needs an `identifier`. Currently while there is no restriction in that this `identifier` is unique throughout to project, the current CDR ingestion will run into issues while looking up items during ingestion if the same identifier is used for items of different class. Therefore it is typlically best to make the identifier unique. For example of this issue if you have a `REQUIREMENT:identifier` of `R-1` and a `REVIEW:identifier` of `R-1`, if you are ingesting a `TEST` that `verifies` the `R-1` (`REQUIREMENT`), the CDR `verified_identifier` column will have issues looking up `R-1` as it is ambiguous as to if it is the `REQUIREMENT` or `REVIEW` that has the `identifier` of `R-1`.
+
+If a `identifier` is referenced that is not defined in greater detail else where it will be ingested as the simpliest class possible, which typically will be the PROV-S classes of `ACTIVITY`, `ENTITY`, or `AGENT`.  This definition can be done before or after the reference but must be done prior to creating the CDR. For Example:
+
 ```
+import Evidence
+import Evidence.Add
+
+Evidence.createEvidenceFile()
+Evidence.Add.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
+Evidence.Add.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
+Evidence.Add.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
+Evidence.createCDR()
+```
+This will create a `ENTITY` for `PARENT-1`.
+
+```
+import Evidence
+import Evidence.Add
+
+Evidence.createEvidenceFile()
+Evidence.Add.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
+Evidence.Add.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
+Evidence.Add.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
+Evidence.Add.REQUIREMENT(identifier = "Parent-1")
+Evidence.createCDR()
+```
+This will create `PARENT-1` as a `REQUIREMENT`.
+
+```
+import Evidence
+import Evidence.Add
+
+Evidence.createEvidenceFile()
+Evidence.Add.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
+Evidence.Add.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
+Evidence.Add.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
+Evidence.Add.SPECIFICATION(identifier = "Parent-1")
+Evidence.createCDR()
+```
+This will create `PARENT-1` as a `SPECIFICATION`.
+
+```
+import Evidence
+import Evidence.Add
+
+Evidence.createEvidenceFile()
+Evidence.Add.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
+Evidence.Add.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
+Evidence.Add.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
+Evidence.Add.SPECIFICATION(identifier = "Parent-1")
+Evidence.Add.REQUIREMENT(identifier = "Parent-1")
+Evidence.createCDR()
+```
+This will result in an ingestion error `PARENT-1` for the `satisfies_identifier` could be either `SPECIFICATION` or `REQUIREMENT`.
 
 # Example Plain Text Files
 
 # Example XMLs
 
 # Ingesting Resulting Data
+
+# Updating STK

@@ -582,7 +582,7 @@ where {
 
 Write: data {Ask SoftwareUnitTestResultCsv:"
 
-select distinct ?identifier_TEST_STATUS ?identifier_SoftwareUnitTestExecution ?identifier_SoftwareUnitTest ?identifier_SoftwareUnitTestResult
+select distinct ?identifier_TEST_STATUS ?generatedAtTime_SoftwareUnitTestResult ?identifier_SoftwareUnitTestExecution ?identifier_SoftwareUnitTest ?identifier_SoftwareUnitTestResult
 where {
     ?SoftwareUnitTestResult a <http://Turnstile/DevelopmentPlan#SoftwareUnitTestResult> . 
     ?SoftwareUnitTestResult <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareUnitTestResult . 
@@ -595,6 +595,8 @@ where {
         ?SoftwareUnitTestExecution a <http://Turnstile/DevelopmentPlan#SoftwareUnitTestExecution> . 
         ?SoftwareUnitTestExecution <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareUnitTestExecution . 
     }
+. optional {?SoftwareUnitTestResult <generatedAtTime> ?generatedAtTime_SoftwareUnitTestResult
+}
     ?SoftwareUnitTestResult <http://arcos.rack/TESTING#result> ?TEST_STATUS .
         ?TEST_STATUS a <http://arcos.rack/TESTING#TEST_STATUS> . 
         ?TEST_STATUS <http://arcos.rack/PROV-S#identifier> ?identifier_TEST_STATUS . 

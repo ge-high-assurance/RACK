@@ -182,7 +182,7 @@ class StaticCallGraphVisitor(AdaVisitor):
     # pylint: enable=invalid-name, missing-function-docstring
 
     # pylint: disable=invalid-name, missing-function-docstring
-    def visit_CallStmt(self, node: lal.CallExpr):
+    def visit_CallStmt(self, node: lal.CallStmt):
         self.record_call(node.f_call)
     # pylint: enable=invalid-name, missing-function-docstring
 

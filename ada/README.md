@@ -41,7 +41,13 @@ shortly, so this may not be up to date):
 # Linting your code
 
 The requirements also contain development dependencies like mypy and pylint.
-You can run these in the expected way:
+
+In order for mypy to work, you will need to generate type stubs.  For doing so,
+while working in the virtual environment, you can enter the `stubs` directory,
+and run `make` there.  If successful, you should see a bunch of new
+directories, ignored by git, containing `.pyi` files.
+
+You can then run these in the expected way, from the `ada` directory:
 
 ```shell
 ./venv/bin/mypy .

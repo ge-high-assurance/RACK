@@ -35,6 +35,8 @@
                 "isReturned": false,
                 "isRuntimeConstrained": false,
                 "nodeList": [],
+				"binding": "?COMPONENT_0",
+				"isBindingReturned": false,				
                 "propList": [
                     {
                         "Constraints": "",
@@ -45,10 +47,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?controlFlowsToUnconditionally_COMPONENT_name",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],

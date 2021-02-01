@@ -8,7 +8,7 @@ from time import sleep
 from semtk3 import check_services, set_host
 
 @pytest.fixture(scope="session")
-def rack_in_a_box(docker_ip, docker_services) -> str:
+def rack_in_a_box(docker_ip: str, docker_services: str) -> str:
     """Ensure that RACK-in-a-box is up and responsive."""
     url = "http://{}".format(docker_ip)
     set_host(url)

@@ -2,11 +2,8 @@
 # in RACK-Ontology/scripts/
 #
 # Script documentation is available in RACK-Ontology/scripts/README.md
-data-graph: "http://rack001/data"
+data-graph: "http://rack001/mil-std-881d"
 ingestion-steps:
-- { owl: "ARP-4754A.owl"}
-- { owl: "DO-178C.owl"}
-- { owl: "DO-330.owl"}
 - { owl: "MIL-STD-881D.owl"}
 - { owl: "MIL-STD-881D-AppxB.owl"}
 - { owl: "MIL-STD-881D-AppxD.owl"}

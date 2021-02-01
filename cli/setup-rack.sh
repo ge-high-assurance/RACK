@@ -17,5 +17,8 @@ rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest[0-9]+" "^que
 rack nodegroups import ../Turnstile-Ontology/99-Utils/NodeGroups
 rack nodegroups import ../nodegroups/queries
 
+rack data import --clear ../RACK-Ontology/OwlModels/ARP-4754A.yaml
+rack data import --clear ../RACK-Ontology/OwlModels/DO-330.yaml
 rack data import --clear ../RACK-Ontology/OwlModels/DO-178C.yaml
-rack data import ../Turnstile-Ontology/99-Utils/Data/Model.yaml
+rack data import --clear ../RACK-Ontology/OwlModels/MIL-STD-881D.yaml
+rack data import --clear ../Turnstile-Ontology/99-Utils/Data/Model.yaml

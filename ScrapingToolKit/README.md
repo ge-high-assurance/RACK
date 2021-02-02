@@ -144,7 +144,53 @@ if __name__=="__main__":
 
 STK contains additional module for helping to process XML source files.  While one could implement there own processing just as is done for other documents, the XML utilies provides a simple framework for processing XML file.
 
-The approach in the XML is to recursively loop through all elements in the source file and check if a handlers function has been identified for that element's tag; if one has been that handler is called, if not processing continues through all the child elements.
+The approach in the XML is to recursively loop through all elements in the source file and check if a handlers function has been identified for that element's tag; if one has been that handler is called, if not processing continues through all the child elements.  To use as a example consider the xml file defined below (`reqs.xml`):
+
+```
+<Reqs>
+  <Req id="R-1>
+    <ParentReq id="P-1">
+    <ParentReq id="P-2">
+    <Source id="file1.ada">
+  </Req>
+  <Req id="R-2>
+    <ParentReq id="P-1">
+    <ParentReq id="P-2">
+    <Source id="file2.ada">
+  </Req>
+</Reqs>
+```
+
+Customizations for the handling of XML data is created by making a python module that encasulates the uniqueness of the XML file format being processed.  Below is an example of this:
+```
+#!/usr/bin/env python3
+import Evidence.Add as Add
+from lxml import etree
+
+__xmlroot__ = None
+__xmlpath__ = None
+handlers = None
+
+def req(e):
+    reqId = e.attrib["id"]
+    Add.REQUIREMENT(identifier=reqId)
+    for p in e.iter("ParentReq"):
+      parentId = p.attrib["id"]
+      Add.REQUIREMENT(identifier=parentId)
+      Add.REQUIREMENT(identifier=reqId, satisfies_identifier=parentId)
+    for f in e.iter("Source"):
+      fileId = f.attrib["id"]
+      Add.FILE(identifier=fileId)
+      Add.FILE(identifier=fileId, satisfies_identifier=reqId)
+
+def initialize(xmlPath):
+    global __xmlroot__, handlers, __xmlpath__
+    Add.FILE(identifier=xmlPath)
+    # Initialize the tag handlers.
+    handlers = {"Req", req}
+
+```
+The key parts to this are the initialize function that is called to start processing an XML, and the handlers dictionary that is initialized as part of this function, these handlers identify the tag and the handler function that should be called when that tag is encountered.
 
 # Ingesting Resulting Data
 

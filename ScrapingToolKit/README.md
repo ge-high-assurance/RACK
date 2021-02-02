@@ -7,7 +7,7 @@ STK is installed by downloading the files to your local machine.  This can eithe
 
 Note: Sometimes for linux machines that have multiple versions of Python installed the command will be `pip3 install .`
 
-TODO: May need to add more instructions to make sure any missing dependencies are installed as well, possible set up as a virturalenv
+TODO: May need to add more instructions to make sure any missing dependencies are installed as well, possible set up as a virtualenv
 
 # Usage
 

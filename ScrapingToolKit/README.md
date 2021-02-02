@@ -142,6 +142,10 @@ if __name__=="__main__":
 
 # Example XMLs
 
+STK contains additional module for helping to process XML source files.  While one could implement there own processing just as is done for other documents, the XML utilies provides a simple framework for processing XML file.
+
+The approach in the XML is to recursively loop through all elements in the source file and check if a handlers function has been identified for that element's tag; if one has been that handler is called, if not processing continues through all the child elements.
+
 # Ingesting Resulting Data
 
 Resulting data can be ingested into RACK by using the CLI command:

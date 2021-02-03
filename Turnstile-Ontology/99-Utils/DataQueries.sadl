@@ -20,7 +20,7 @@ select distinct ?ProducingLowLevelRequirement ?identifier_ProducingLowLevelRequi
 where {
     ?DataAndControlCouple a <http://Turnstile/DevelopmentPlan#DataAndControlCouple> . 
     ?DataAndControlCouple <http://arcos.rack/PROV-S#identifier> ?identifier_DataAndControlCouple . 
-    optional{ ?DataAndControlCouple <http://arcos.rack/REQUIREMENTS#text> ?text_DataAndControlCouple} . 
+    optional{ ?DataAndControlCouple <http://arcos.rack/PROV-S#description> ?text_DataAndControlCouple} . 
     optional{
 
     ?DataAndControlCouple <http://arcos.rack/REQUIREMENTS#consumedBy> ?ConsumingLowLevelRequirement .
@@ -48,7 +48,7 @@ select distinct ?identifier_ProducingSystemInterfaceDefinition ?identifier_Provi
 where {
     ?DataDictionary a <http://Turnstile/DevelopmentPlan#DataDictionary> . 
     ?DataDictionary <http://arcos.rack/PROV-S#identifier> ?identifier_DataDictionary . 
-    optional{ ?DataDictionary <http://arcos.rack/REQUIREMENTS#text> ?text_DataDictionary} . 
+    optional{ ?DataDictionary <http://arcos.rack/PROV-S#description> ?text_DataDictionary} . 
     optional{
 
     ?DataDictionary <http://arcos.rack/REQUIREMENTS#consumedBy> ?ConsumingHighLevelRequirement .
@@ -89,7 +89,7 @@ where {
     ?Engineer a <http://Turnstile/DevelopmentPlan#Engineer> . 
     optional{ ?Engineer <http://arcos.rack/AGENTS#emailAddress> ?emailAddress_Engineer} . 
     ?Engineer <http://arcos.rack/PROV-S#identifier> ?identifier_Engineer . 
-    optional{ ?Engineer <http://arcos.rack/AGENTS#name> ?name_Engineer} . 
+    optional{ ?Engineer <http://arcos.rack/PROV-S#title> ?name_Engineer} . 
     optional{
 
     ?Engineer <http://arcos.rack/AGENTS#employedBy> ?ORGANIZATION .
@@ -127,7 +127,7 @@ select distinct ?identifier_SystemRequirement ?identifier_HAZARD ?identifier_Sys
 where {
     ?HighLevelRequirement a <http://Turnstile/DevelopmentPlan#HighLevelRequirement> . 
     ?HighLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_HighLevelRequirement . 
-    ?HighLevelRequirement <http://arcos.rack/REQUIREMENTS#text> ?text_HighLevelRequirement . 
+    ?HighLevelRequirement <http://arcos.rack/PROV-S#description> ?text_HighLevelRequirement . 
     optional{
 
     ?HighLevelRequirement <http://arcos.rack/REQUIREMENTS#createdBy> ?SoftwareRequirementsDefinition .
@@ -161,7 +161,7 @@ select distinct ?identifier_HighLevelRequirement ?identifier_HAZARD ?identifier_
 where {
     ?LowLevelRequirement a <http://Turnstile/DevelopmentPlan#LowLevelRequirement> . 
     ?LowLevelRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_LowLevelRequirement . 
-    optional{ ?LowLevelRequirement <http://arcos.rack/REQUIREMENTS#text> ?text_LowLevelRequirement} . 
+    optional{ ?LowLevelRequirement <http://arcos.rack/PROV-S#description> ?text_LowLevelRequirement} . 
     optional{
 
     ?LowLevelRequirement <http://arcos.rack/REQUIREMENTS#createdBy> ?SoftwareDesign .
@@ -679,7 +679,7 @@ select distinct ?identifier_SystemComponent ?identifier_SystemRequirement ?text_
 where {
     ?SystemRequirement a <http://Turnstile/DevelopmentPlan#SystemRequirement> . 
     ?SystemRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_SystemRequirement . 
-    optional{ ?SystemRequirement <http://arcos.rack/REQUIREMENTS#text> ?text_SystemRequirement} . 
+    optional{ ?SystemRequirement <http://arcos.rack/PROV-S#description> ?text_SystemRequirement} . 
     optional{
 
     ?SystemRequirement <http://arcos.rack/REQUIREMENTS#governs> ?SystemComponent .

@@ -82,7 +82,7 @@ def sysml_itemflow(e):
         debug("Found SysML:Itemflow")
         debug(getAttribute(baseInformationFlow,"id", ns="xmi"))
         debug(getAttribute(destination,"idref",ns="xmi"))
-        denug(getAttribute(source,"idref",ns="xmi"))
+        debug(getAttribute(source,"idref",ns="xmi"))
         INTERFACE(identifier=getAttribute(baseInformationFlow,"id", ns="xmi"), 
                   title = getAttribute(baseInformationFlow,"name"),
                   destination_identifier = getAttribute(destination,"idref",ns="xmi"),

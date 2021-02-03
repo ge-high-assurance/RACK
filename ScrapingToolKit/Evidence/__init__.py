@@ -58,7 +58,7 @@ def createCDR():
         root = data.getroot()
         if root.find(thing)!=None:
             cdrFiles.append(thing)
-            with open(os.path.join(outputDir,thing+"1.csv"), 'w') as outFile:
+            with open(os.path.join(outputDir,thing+"1.csv"), 'w', encoding="utf-8") as outFile:
                 outwriter = csv.writer(outFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 outwriter.writerow(["identifier"])
                 loaded = list()
@@ -70,7 +70,7 @@ def createCDR():
                             loaded.append(c.find("identifier").text)
                     else:
                         log("Identifier not found.")
-            with open(os.path.join(outputDir,thing+"2.csv"), 'w') as outFile:
+            with open(os.path.join(outputDir,thing+"2.csv"), 'w', encoding="utf-8") as outFile:
                 outwriter = csv.writer(outFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 outwriter.writerow(headers)
 
@@ -87,7 +87,7 @@ def createCDR():
                             rowData.append("")
                     outwriter.writerow(rowData)
           
-    with open(os.path.join(outputDir,"import.yaml"), 'w') as outFile:
+    with open(os.path.join(outputDir,"import.yaml"), 'w', encoding="utf-8") as outFile:
         outFile.write('''data-graph: "http://rack001/data"
 ingestion-steps:
 #Phase1: Identifiers Only

@@ -39,6 +39,7 @@ def scrap(xmlPath, Config):
     '''
     trace()
     if not os.path.exists(xmlPath):
+        log("XML file not found")
         return "XML file not found"    
      
     Config.initialize(xmlPath)

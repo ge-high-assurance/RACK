@@ -149,10 +149,10 @@ def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Ca
     decorated function.  Upon success, it appends OK, upon failure, it appends
     FAIL.  If suffix is set, the result of the computation is passed to suffix,
     and the resulting string is appended after OK."""
+    prefix += '...'
     def decorator(func: Decoratee) -> Decoratee:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             nonlocal prefix
-            prefix += '...'
             print(f'{prefix: <60}', end='', flush=True)
             try:
                 result = func(*args, **kwargs)

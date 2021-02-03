@@ -31,9 +31,6 @@
         "limit": 0,
         "offset": 0,
         "orderBy": [
-            {
-                "sparqlID": "?interface"
-            }
         ],
         "sNodeList": [
             {
@@ -54,10 +51,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?source_SYSTEM_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],
@@ -81,10 +80,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?destination_SYSTEM_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],
@@ -149,10 +150,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": true,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?INTERFACE_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],

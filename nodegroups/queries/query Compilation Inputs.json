@@ -51,10 +51,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?compileInput_FILE_0_filename",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],
@@ -134,10 +136,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?FILE_filename",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],

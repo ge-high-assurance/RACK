@@ -10,6 +10,17 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
+/************** edit history *****************
+  *
+  * dwa - 11 Nov 2020 - reduced cardinality of several
+  * dwa - 11 Nov 2020 - removed incorrect use of wasDerivedFrom
+  * dwa - 11 Nov 2020 - removed ambiguous relationship to wasGeneratedBy
+  * dwa - 11 Nov 2020 - fixed likelihood to be a probability rather than a float
+  * dwa - 11 Nov 2020 - removed author in favor of wasAsssociatedWith
+  *
+  *********************************************/
+
+
 uri "http://arcos.rack/HAZARD" alias H.
 import "http://arcos.rack/PROV-S".
 import "http://arcos.rack/SYSTEM".
@@ -20,19 +31,18 @@ HAZARD
 	is a type of ENTITY.
 
 	definition (note "Description of the HAZARD") describes HAZARD with values of type string.
+	definition describes HAZARD with at most 1 value.
 
 	H:source (note "ENTITY(s) that participate in causing this HAZARD") describes HAZARD with values of type ENTITY.
-	H:source is a type of wasDerivedFrom.
+	H:source is a type of wasImpactedBy.
 
-   identified (note "how this HAZARD was identified") describes HAZARD with values of type HAZARD_IDENTIFICATION.
-   identified is a type of wasGeneratedBy.
+	identified (note "how this HAZARD was identified") describes HAZARD with values of type HAZARD_IDENTIFICATION.
 
-	// Note that we are thinking of adding a human readable "description" to THING, then we could use that instead of "effect".
 	effect (note "consequence(s) of the HAZARD") describes HAZARD with a single value of type string.
    
-	severity (note "the severity of the HAZARD") describes HAZARD with a single value of type float.
+	severity (note "the severity of the HAZARD") describes HAZARD with a single value of type float [0,1].
 
-	likelihood (note "the likelihood of the HAZARD happening") describes HAZARD with a single value of type float.
+	likelihood (note "probability value between 0 and 1") describes HAZARD with a single value of type float [0,1].
 
 	// A Hazard can be mitigated by a requirement, operating procedure etc., mitigation by REQUIREMENT is defined in REQUIREMENTS.sadl.
 	H:mitigates (note "a HAZARD may be mitigated by a OP_PROCEDURE") describes OP_PROCEDURE with values of type HAZARD.
@@ -41,5 +51,5 @@ HAZARD_IDENTIFICATION
 	(note "ACTIVITY that identifies potential sources of HAZARD whose risk must be evaluated")
 	is a type of ACTIVITY.
 
-	author (note "AGENT(s) who work on this ACTIVITY") describes HAZARD_IDENTIFICATION with values of type AGENT.
-	author is a type of wasAssociatedWith.
+	H:author (note "AGENT(s) who work on this ACTIVITY") describes HAZARD_IDENTIFICATION with values of type AGENT.
+	H:author is a type of wasAssociatedWith.

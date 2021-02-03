@@ -50,16 +50,16 @@ census is a SystemInterfaceDefinition,
 
 Sys-1 is a SystemRequirement,
 	has identifier "Sys-1",
-	has text "Turnstile system shall track the number of people that travel through the in gate.",
+	has description "Turnstile system shall track the number of people that travel through the in gate.",
 	has governs Turnstile.
 
 Sys-2 is a SystemRequirement,
 	has identifier "Sys-2",
-	has text "Turnstile system shall track the number of people that travel through the out gate.	",
+	has description "Turnstile system shall track the number of people that travel through the out gate.	",
 	has governs Turnstile.
  
 Sys-3 is a SystemRequirement,
 	has identifier "Sys-3",
-	has text "Turnstile system shall track the number of people are currently in the park.",
+	has description "Turnstile system shall track the number of people are currently in the park.",
 	has governs Turnstile.
 

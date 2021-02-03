@@ -112,7 +112,7 @@ data_get('SOFTWARE#PACKAGE', 'SOFTWARE#performedBy',
     user_instance_name(UserName, UserInstance).
 
 
-data_get('FILE#FILE', 'FILE#fileParent', sw_file_data(Nonce, Dir, File), ParentInstance) :-
+data_get('FILE#FILE', 'FILE#definedIn', sw_file_data(Nonce, Dir, File), ParentInstance) :-
     tar_access(Nonce, File, open),
     tar_access(Nonce, ParentFile, create),
     file_instance(Nonce, Dir, ParentFile, ParentInstance).
@@ -180,7 +180,7 @@ data_instance('FILE#FILE', load_data, ToolPath,
     string_concat(Title, " file", Descr).
 
 data_get('FILE#FILE', 'FILE#fileFormat',
-         sw_file_data(Nonce, _, F), 'CSourceFile') :-
+         sw_file_data(Nonce, _, F), 'C') :-
     build_inputs(Nonce, FS),
     member(F, FS),
     build_with(Nonce, compile, _, _, _),
@@ -269,7 +269,7 @@ data_get('FILE#FILE_HASH', 'FILE#hashValue', file_hash(_, Hash), HashStr) :-
 %% -- Formats ------------------------------
 
 data_instance('FILE#FORMAT', load_data, F, [uid(F, Title, Descr), fmt(F)]) :-
-    member(F, [ 'CSourceFile', 'ElfFile', 'TarFile', 'ArchiveFile' ]),
+    member(F, [ 'C', 'ElfFile', 'TarFile', 'ArchiveFile' ]),
     atom_string(F, Title),
     string_concat(Title, " file format", Descr).
 

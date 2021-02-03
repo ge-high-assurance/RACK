@@ -10,6 +10,14 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
+/************** edit history *****************
+  *
+  * dwa - 11 Nov 2020 - removed connection between 'assesses' and 'wasDerivedFrom'
+  * dwa - 11 Nov 2020 - removed 'createdBy' in favor of using the base class attribute 'wasGeneratedBy'
+  * dwa - 11 Nov 2020 - allowed NULL values in BDU attributes
+  * dwa - 11 Nov 2020 - removed 'performedBy' in favor of using base class attribute 'wasAssociatedWith'
+  */
+
 uri "http://arcos.rack/CONFIDENCE" alias CONFIDENCE.
 import "http://arcos.rack/PROV-S".
 
@@ -17,18 +25,16 @@ import "http://arcos.rack/PROV-S".
 CONFIDENCE_ASSESSMENT (note "Superclass for confidence assessments over some other data in the ontology.") is a type of THING.
 
     assesses (note "ENTITY(s) whose confidence is assessed") describes CONFIDENCE_ASSESSMENT with values of type ENTITY.
-    assesses is a type of wasDerivedFrom.
+    assesses describes CONFIDENCE_ASSESSMENT with at most 1 value.
+    assesses is a type of wasImpactedBy.
 
     createBy (note "ACTIVITY(s) (e.g. ASSESSING_CONFIDENCE) that created this assessment.") describes CONFIDENCE_ASSESSMENT with values of type ACTIVITY.
     createBy is a type of wasGeneratedBy.
 
-Probability (note "probability value between 0 and 1") is a type of float [0,1].
-
 BDU_CONFIDENCE_ASSESSMENT (note "A belief-disbelief-uncertainty confidence assessment, c.f. Subjective Logic. belief, disbelief, and uncertainty should sum to 1") is a type of CONFIDENCE_ASSESSMENT.
-
-    belief (note "belief that an assessment is true") describes CONFIDENCE_ASSESSMENT with a single value of type float.
-    disbelief (note "belief that an assessment is false") describes CONFIDENCE_ASSESSMENT with a single value of type float.
-    uncertainty (note "uncommitted belief") describes CONFIDENCE_ASSESSMENT with a single value of type float.
+    belief (note "belief that an assessment is true") describes CONFIDENCE_ASSESSMENT with a single value of type float [0,1].
+    disbelief (note "belief that an assessment is false") describes CONFIDENCE_ASSESSMENT with a single value of type float [0,1].
+    uncertainty (note "uncommitted belief") describes CONFIDENCE_ASSESSMENT with a single value of type float [0,1].
 
 ASSESSING_CONFIDENCE (note "ACTIVITY that establishes a CONFIDENCE_ASSESSMENT") is a type of ACTIVITY.
 

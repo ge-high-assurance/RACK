@@ -1,0 +1,7 @@
+# This file is intended to be used using the rack.py script found
+# in RACK-Ontology/scripts/
+#
+# Script documentation is available in RACK-Ontology/scripts/README.md
+data-graph: "http://rack001/arp-475a"
+ingestion-steps:
+- { owl: "ARP-4754A.owl"}

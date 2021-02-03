@@ -26,6 +26,7 @@ from os import environ
 from pathlib import Path
 import re
 import sys
+import time
 from typing import Any, Callable, Dict, List, Optional, NewType, TypeVar, cast
 from types import SimpleNamespace
 
@@ -142,6 +143,19 @@ class CustomFormatter(logging.Formatter):
 
 Decoratee = TypeVar('Decoratee', bound=Callable[..., Any])
 
+def retry_on_exception(func: Decoratee) -> Decoratee:
+    RETRY_DELAY = 3
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            print(e)
+            print(f"This command raised an exception, will attempt retrying in {RETRY_DELAY} seconds... Press ^C to abort.")
+            time.sleep(RETRY_DELAY)
+            return wrapper(*args, **kwargs)
+        return result
+    return cast(Decoratee, wrapper)
+
 # Bug https://github.com/PyCQA/pylint/issues/1953
 # pylint: disable=unused-argument
 def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Callable[[Decoratee], Decoratee]:
@@ -230,6 +244,7 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     def suffix(result: dict) -> str:
         return f' Records: {result["recordsProcessed"]: <7} Failures: {result["failuresEncountered"]}'
 
+    @retry_on_exception
     @with_status(f'Loading {str_highlight(nodegroup)}', suffix)
     def go() -> dict:
         with open(csv_name, "r") as csv_file:
@@ -240,9 +255,12 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
 
 def ingest_owl(conn: Connection, owl_file: Path) -> None:
     """Upload an OWL file into the model graph."""
+
+    @retry_on_exception
     @with_status(f'Ingesting {str_highlight(str(owl_file))}')
     def go() -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
+
     go()
 
 def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url], clear: bool) -> None:
@@ -298,11 +316,13 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
     for file in files:
         ingest_owl(conn, base_path / file)
 
+@retry_on_exception
 @with_status('Storing nodegroups')
 def store_nodegroups_driver(directory: Path, base_url: Url) -> None:
     sparql_connection(base_url, None, [], None)
     semtk3.store_nodegroups(directory)
 
+@retry_on_exception
 @with_status('Retrieving nodegroups')
 def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url) -> None:
     sparql_connection(base_url, None, [], None)
@@ -310,6 +330,7 @@ def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url) -> N
 
 def list_nodegroups_driver(base_url: Url) -> None:
 
+    @retry_on_exception
     @with_status('Listing nodegroups')
     def list_nodegroups() -> SemtkTable:
         sparql_connection(base_url, None, [], None)
@@ -329,6 +350,7 @@ def confirm(on_confirmed: Callable[[], None], yes: bool = False) -> None:
         print(str_bad('Aborted.'))
 
 def delete_nodegroup(nodegroup: str) -> None:
+    @retry_on_exception
     @with_status(f'Deleting {str_highlight(nodegroup)}')
     def delete() -> None:
         semtk3.delete_nodegroup_from_store(nodegroup)

@@ -153,7 +153,6 @@ def retry_on_exception(func: Decoratee) -> Decoratee:
             print(f"This command raised an exception, will attempt retrying in {RETRY_DELAY} seconds... Press ^C to abort.")
             time.sleep(RETRY_DELAY)
             return wrapper(*args, **kwargs)
-        return result
     return cast(Decoratee, wrapper)
 
 # Bug https://github.com/PyCQA/pylint/issues/1953

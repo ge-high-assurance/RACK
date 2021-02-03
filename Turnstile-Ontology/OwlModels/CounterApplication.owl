@@ -20,29 +20,22 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplication.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.0:COMPONENT rdf:ID="main_function">
-    <j.0:controlFlowsToUnconditionally>
-      <j.0:COMPONENT rdf:ID="output_function">
-        <j.0:valueType>void()</j.0:valueType>
-        <j.0:name>output</j.0:name>
-        <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-        <j.1:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.1:identifier>output_function</j.1:identifier>
-      </j.0:COMPONENT>
-    </j.0:controlFlowsToUnconditionally>
-    <j.0:controlFlowsToUnconditionally>
-      <j.0:COMPONENT rdf:ID="input_function">
-        <j.0:valueType>void()</j.0:valueType>
-        <j.0:name>input</j.0:name>
-        <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-        <j.1:dataInsertedBy rdf:resource="#Mockup"/>
-        <j.1:identifier>input_function</j.1:identifier>
-      </j.0:COMPONENT>
-    </j.0:controlFlowsToUnconditionally>
+  <j.0:SWCOMPONENT rdf:ID="output_function">
+    <j.0:valueType>void()</j.0:valueType>
+    <j.1:title>output</j.1:title>
+    <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
+    <j.1:identifier>output_function</j.1:identifier>
+  </j.0:SWCOMPONENT>
+  <j.0:SWCOMPONENT rdf:ID="input_function">
+    <j.0:valueType>void()</j.0:valueType>
+    <j.1:title>input</j.1:title>
+    <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
+    <j.1:identifier>input_function</j.1:identifier>
+  </j.0:SWCOMPONENT>
+  <j.0:SWCOMPONENT rdf:ID="main_function">
     <j.0:valueType>int(int argc, char* argv[])</j.0:valueType>
-    <j.0:name>main</j.0:name>
-    <j.1:dataInsertedBy rdf:resource="#Mockup"/>
+    <j.1:title>main</j.1:title>
     <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
     <j.1:identifier>main_function</j.1:identifier>
-  </j.0:COMPONENT>
+  </j.0:SWCOMPONENT>
 </rdf:RDF>

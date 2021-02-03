@@ -87,8 +87,8 @@
 							false
 						],
 						"KeyName": "partOf",
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"ValueType": "SYSTEM",
+						"UriValueType": "http://arcos.rack/SYSTEM#SYSTEM",
 						"ConnectBy": "partOf",
 						"Connected": true,
 						"UriConnectBy": "http://arcos.rack/SYSTEM#partOf"

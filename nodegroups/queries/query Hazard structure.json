@@ -43,9 +43,6 @@
         "limit": 0,
         "offset": 0,
         "orderBy": [
-            {
-                "sparqlID": "?hazard"
-            }
         ],
         "sNodeList": [
             {
@@ -66,10 +63,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?source_ENTITY_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [
@@ -137,10 +136,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": true,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?mitigates_HAZARD_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],
@@ -185,10 +186,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?satisfies_REQUIREMENT_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],
@@ -266,10 +269,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?TEST_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],

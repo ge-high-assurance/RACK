@@ -43,7 +43,7 @@
   </owl:Class>
   <owl:Class rdf:ID="StrComponent">
     <rdfs:comment xml:lang="en">A concrete software component with an explicitly identified input/output interface</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#COMPONENT"/>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#SWCOMPONENT"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="informs">
     <rdfs:comment xml:lang="en">Informs represents a control or sequencing dependency in the software, with the source of the relationship earlier in the sequence than the target, or alternatively the source activating the target.</rdfs:comment>

@@ -27,7 +27,7 @@ connectsTo (note "An association between input and output ports found in the sys
     describes StrOutPort with values of type StrInPort.
         
 StrComponent (note "A concrete software component with an explicitly identified input/output interface")
-    is a type of COMPONENT.
+    is a type of SWCOMPONENT.
     sendsVia (note "Links a component to its outgoing interface")
         describes StrComponent with values of type StrOutPort.
     recvsVia (note "Links a component to its incoming interface")

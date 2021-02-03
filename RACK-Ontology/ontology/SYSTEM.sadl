@@ -35,8 +35,8 @@ SYSTEM
 
 	requires (note "List of entities that this SYSTEM requires from others") describes SYSTEM with values of type FUNCTION.
 
-	functionalityOverview (note "functionality / capability of a SYSTEM") describes SYSTEM with values of type string. 
-	functionalityOverview describes SYSTEM with at most 1 value.
+	function (note "functionality / capability of a SYSTEM") describes SYSTEM with values of type FUNCTION. 
+	function is a type of wasImpactedBy. 
 	
 INTERFACE
 	(note "INTERFACEs describe directed connections between a SYSTEM providing what another SYSTEM requires")
@@ -54,7 +54,6 @@ INTERFACE
 	destination is a type of wasImpactedBy.
 
 	identifiedBy (note "ACTIVITY out of which this INTERFACE was identified") describes INTERFACE with values of type ACTIVITY.
-
 
 SYSTEM_DEVELOPMENT
 	(note "ACTIVITY relating to the creation of one or more some SYSTEMs")

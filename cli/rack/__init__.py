@@ -162,7 +162,7 @@ def retry_on_exception(func: Decoratee) -> Decoratee:
                 time.sleep(RETRY_DELAY)
                 return try_and_retry(attempts + 1)
 
-        try_and_retry(0)
+        return try_and_retry(0)
 
     return cast(Decoratee, wrapper)
 

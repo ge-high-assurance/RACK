@@ -102,17 +102,17 @@ _DevelopmentPlan is a PLAN,
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.ExecutiveThread
-      ExecutiveThread is a COMPONENT
+      ExecutiveThread is a SWCOMPONENT
         has partOf CounterApplication.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.InputThread
-      InputThread is a COMPONENT
+      InputThread is a SWCOMPONENT
         has partOf CounterApplication.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.OutputThread
-      OutputThread is a COMPONENT
+      OutputThread is a SWCOMPONENT
         has partOf CounterApplication.
 
 

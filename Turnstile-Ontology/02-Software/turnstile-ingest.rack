@@ -63,19 +63,19 @@ data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'),
 % files and the corresponding software functions and data declared in
 % those files.
 
-data_instance('SOFTWARE#COMPONENT', load_data, 'output_function',
+data_instance('SOFTWARE#SWCOMPONENT', load_data, 'output_function',
               [uid('output_function',
                    "output",
                    "C Function: 'output'"),
                func_decl('output_function', 'output.c')]).
 
-data_instance('SOFTWARE#COMPONENT', load_data, 'input_function',
+data_instance('SOFTWARE#SWCOMPONENT', load_data, 'input_function',
               [uid('input_function',
                    "input function",
                    "C Function: 'input'"),
                func_decl('input_function', 'input.c')]).
 
-data_instance('SOFTWARE#COMPONENT', load_data, 'main_function',
+data_instance('SOFTWARE#SWCOMPONENT', load_data, 'main_function',
               [uid('main_function',
                    "main function",
                    "C Function: 'main'"),

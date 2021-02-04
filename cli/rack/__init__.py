@@ -95,7 +95,10 @@ INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
                 ]
             }
         },
-        'data-graph': {'type': 'string'}
+        'data-graph': {'type': 'string'},
+        'extra-data-graphs': {
+            'type': 'array',
+            'contains': {'type': 'string'}}
     }
 }
 
@@ -146,10 +149,10 @@ def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Ca
     decorated function.  Upon success, it appends OK, upon failure, it appends
     FAIL.  If suffix is set, the result of the computation is passed to suffix,
     and the resulting string is appended after OK."""
+    prefix += '...'
     def decorator(func: Decoratee) -> Decoratee:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             nonlocal prefix
-            prefix += '...'
             print(f'{prefix: <60}', end='', flush=True)
             try:
                 result = func(*args, **kwargs)
@@ -162,7 +165,7 @@ def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Ca
     return decorator
 # pylint: enable=unused-argument
 
-def sparql_connection(base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> Connection:
+def sparql_connection(base_url: Url, data_graph: Optional[Url], extra_data_graphs: List[Url], triple_store: Optional[Url]) -> Connection:
     """Generate a SPARQL connection value."""
 
     semtk3.set_host(base_url)
@@ -175,6 +178,8 @@ def sparql_connection(base_url: Url, data_graph: Optional[Url], triple_store: Op
         }
     if data_graph is not None:
         conn["data"].append({"type": "fuseki", "url": triple_store, "graph": data_graph})
+    for graph in extra_data_graphs:
+        conn["data"].append({"type": "fuseki", "url": triple_store, "graph": graph})
     return Connection(json.dumps(conn))
 
 def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
@@ -249,12 +254,16 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Ur
     steps = config['ingestion-steps']
     data_graph = data_graph or config['data-graph']
     base_path = config_path.parent
+    if 'extra-data-graphs' in config:
+        extra_data_graphs = config['extra-data-graphs']
+    else:
+        extra_data_graphs = []
 
     if data_graph is None:
         logger.warning("Defaulting data-graph to %s", DEFAULT_DATA_GRAPH)
         data_graph = DEFAULT_DATA_GRAPH
 
-    conn = sparql_connection(base_url, data_graph, triple_store)
+    conn = sparql_connection(base_url, data_graph, extra_data_graphs, triple_store)
 
     if clear:
         clear_graph(conn)
@@ -281,7 +290,7 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
     files = config['files']
     base_path = config_path.parent
 
-    conn = sparql_connection(base_url, None, triple_store)
+    conn = sparql_connection(base_url, None, [], triple_store)
 
     if clear:
         clear_graph(conn, which_graph=Graph.MODEL)
@@ -291,19 +300,19 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
 
 @with_status('Storing nodegroups')
 def store_nodegroups_driver(directory: Path, base_url: Url) -> None:
-    sparql_connection(base_url, None, None)
+    sparql_connection(base_url, None, [], None)
     semtk3.store_nodegroups(directory)
 
 @with_status('Retrieving nodegroups')
 def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url) -> None:
-    sparql_connection(base_url, None, None)
+    sparql_connection(base_url, None, [], None)
     semtk3.retrieve_from_store(regexp, directory)
 
 def list_nodegroups_driver(base_url: Url) -> None:
 
     @with_status('Listing nodegroups')
     def list_nodegroups() -> SemtkTable:
-        sparql_connection(base_url, None, None)
+        sparql_connection(base_url, None, [], None)
         return semtk3.get_nodegroup_store_data()
 
     print(format_semtk_table(list_nodegroups()))
@@ -330,7 +339,7 @@ def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, ye
         print('No nodegroups specified for deletion: doing nothing.')
         return
 
-    sparql_connection(base_url, None, None)
+    sparql_connection(base_url, None, [], None)
     allIDs = semtk3.get_nodegroup_store_data().get_column('ID')
 
     if use_regexp:
@@ -356,7 +365,7 @@ def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, ye
     confirm(on_confirmed, yes)
 
 def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
-    sparql_connection(base_url, None, None)
+    sparql_connection(base_url, None, [], None)
     allIDs = semtk3.get_nodegroup_store_data().get_column('ID')
 
     if not yes:
@@ -368,11 +377,11 @@ def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
     confirm(on_confirmed, yes)
 
 def dispatch_data_export(args: SimpleNamespace) -> None:
-    conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
+    conn = sparql_connection(args.base_url, args.data_graph, [], args.triple_store)
     run_query(conn, args.nodegroup, export_format=args.format, headers=not args.no_headers, path=args.file)
 
 def dispatch_data_count(args: SimpleNamespace) -> None:
-    conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
+    conn = sparql_connection(args.base_url, args.data_graph, [], args.triple_store)
     run_count_query(conn, args.nodegroup)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:

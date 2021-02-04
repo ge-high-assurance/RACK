@@ -152,7 +152,7 @@ def retry_on_exception(func: Decoratee) -> Decoratee:
 
     def wrapper(*args: Any, **kwargs: Any) -> Any:
 
-        def try_and_retry(attempts: int):
+        def try_and_retry(attempts: int) -> Any:
             try:
                 return func(*args, **kwargs)
             except Exception as e:

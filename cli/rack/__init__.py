@@ -144,15 +144,26 @@ class CustomFormatter(logging.Formatter):
 Decoratee = TypeVar('Decoratee', bound=Callable[..., Any])
 
 def retry_on_exception(func: Decoratee) -> Decoratee:
-    RETRY_DELAY = 3
+
+    RETRY_DELAY = 3 # seconds
+
+    # After this many retries, warn the user
+    SILENT_RETRIES = 10
+
     def wrapper(*args: Any, **kwargs: Any) -> Any:
-        try:
-            return func(*args, **kwargs)
-        except Exception as e:
-            print(e)
-            print(f"This command raised an exception, will attempt retrying in {RETRY_DELAY} seconds... Press ^C to abort.")
-            time.sleep(RETRY_DELAY)
-            return wrapper(*args, **kwargs)
+
+        def try_and_retry(attempts: int):
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                if attempts == SILENT_RETRIES:
+                    logger.warn(f"This command raised the following exception, will keep retrying every {RETRY_DELAY} seconds... Press ^C to abort.")
+                    logger.error(e)
+                time.sleep(RETRY_DELAY)
+                return try_and_retry(attempts + 1)
+
+        try_and_retry(0)
+
     return cast(Decoratee, wrapper)
 
 # Bug https://github.com/PyCQA/pylint/issues/1953
@@ -243,8 +254,8 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     def suffix(result: dict) -> str:
         return f' Records: {result["recordsProcessed"]: <7} Failures: {result["failuresEncountered"]}'
 
-    @retry_on_exception
     @with_status(f'Loading {str_highlight(nodegroup)}', suffix)
+    @retry_on_exception
     def go() -> dict:
         with open(csv_name, "r") as csv_file:
             csv = csv_file.read()
@@ -255,8 +266,8 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
 def ingest_owl(conn: Connection, owl_file: Path) -> None:
     """Upload an OWL file into the model graph."""
 
-    @retry_on_exception
     @with_status(f'Ingesting {str_highlight(str(owl_file))}')
+    @retry_on_exception
     def go() -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
 
@@ -315,22 +326,22 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
     for file in files:
         ingest_owl(conn, base_path / file)
 
-@retry_on_exception
 @with_status('Storing nodegroups')
+@retry_on_exception
 def store_nodegroups_driver(directory: Path, base_url: Url) -> None:
     sparql_connection(base_url, None, [], None)
     semtk3.store_nodegroups(directory)
 
-@retry_on_exception
 @with_status('Retrieving nodegroups')
+@retry_on_exception
 def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url) -> None:
     sparql_connection(base_url, None, [], None)
     semtk3.retrieve_from_store(regexp, directory)
 
 def list_nodegroups_driver(base_url: Url) -> None:
 
-    @retry_on_exception
     @with_status('Listing nodegroups')
+    @retry_on_exception
     def list_nodegroups() -> SemtkTable:
         sparql_connection(base_url, None, [], None)
         return semtk3.get_nodegroup_store_data()
@@ -349,8 +360,8 @@ def confirm(on_confirmed: Callable[[], None], yes: bool = False) -> None:
         print(str_bad('Aborted.'))
 
 def delete_nodegroup(nodegroup: str) -> None:
-    @retry_on_exception
     @with_status(f'Deleting {str_highlight(nodegroup)}')
+    @retry_on_exception
     def delete() -> None:
         semtk3.delete_nodegroup_from_store(nodegroup)
     delete()

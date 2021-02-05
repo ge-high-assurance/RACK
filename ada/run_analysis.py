@@ -20,7 +20,7 @@ import libadalang as lal
 from rdflib import Graph, Namespace
 
 from ada_print_visitor import AdaPrintVisitor
-from ontology import Component, ComponentType, File, FileFormat
+import ontology
 import static_call_graph as SCG
 
 # In order to do resolution at call sites, the analysis needs to resolve
@@ -99,10 +99,11 @@ context = lal.AnalysisContext(unit_provider=provider)
 
 DEBUG = False
 
+FILE = Namespace("http://data/file#")
 FORMAT = Namespace("http://data/format#")
-DATA = Namespace("http://data/")
+SOFTWARE_COMPONENT = Namespace("http://data/software-component#")
 
-ada_format = FileFormat(FORMAT.ADA_FILE)
+ada_format = ontology.FileFormat("Ada", FORMAT.ADA_FILE)
 
 def register_component(components, component: SCG.GraphNode) -> None:
     """
@@ -112,9 +113,17 @@ def register_component(components, component: SCG.GraphNode) -> None:
     key = SCG.node_key(component)
     uri = SCG.get_uri(component)
     name = SCG.get_name(component)
-    components[key] = Component(DATA[uri], name, ComponentType.SOURCE_FUNCTION)
+    components[key] = ontology.SoftwareComponent(
+        identifier=uri,
+        uri=SOFTWARE_COMPONENT[uri],
+        title=name,
+        ty=ontology.ComponentType.SOURCE_FUNCTION
+    )
 
-def register_ada_file(files: Dict[str, File], file_key: Optional[str]) -> Optional[File]:
+def register_ada_file(
+    files: Dict[str, ontology.File],
+    file_key: Optional[str]
+) -> Optional[ontology.File]:
     """
     Creates an ontology node corresponding to 'file_key', unless it already
     exists, and stores it in 'files'.
@@ -124,7 +133,12 @@ def register_ada_file(files: Dict[str, File], file_key: Optional[str]) -> Option
     if file_key is None:
         return None
     if file_key not in files:
-        files[file_key] = File(DATA[file_key], file_key, ada_format)
+        files[file_key] = ontology.File(
+            identifier=file_key,
+            uri=FILE[file_key],
+            filename=file_key,
+            file_format=ada_format
+        )
     return files[file_key]
 
 def analyze_unit(unit: lal.AnalysisUnit) -> None:
@@ -142,8 +156,8 @@ def analyze_unit(unit: lal.AnalysisUnit) -> None:
 
         static_call_graph_visitor.visit(unit.root)
 
-        components: Dict[str, Component] = dict()
-        files: Dict[str, File] = dict()
+        components: Dict[str, ontology.SoftwareComponent] = dict()
+        files: Dict[str, ontology.File] = dict()
 
         # register all files and components (so as to have one unique instance
         # for each)
@@ -159,8 +173,9 @@ def analyze_unit(unit: lal.AnalysisUnit) -> None:
                 components[caller].add_mention(components[callee_key])
 
         graph = Graph()
-        graph.bind("dat", DATA)
-        graph.bind("format", FORMAT)
+        graph.bind("data:file", FILE)
+        graph.bind("data:format", FORMAT)
+        graph.bind("data:software-component", SOFTWARE_COMPONENT)
         ada_format.add_to_graph(graph)
 
         for component_key in components:

@@ -4,7 +4,8 @@
 
 import sys
 from rdflib import Graph, Namespace
-from ontology import Component, ComponentType, File, FileFormat
+
+import ontology
 
 g = Graph()
 FORMAT = Namespace("http://data/format#")
@@ -13,14 +14,24 @@ DATA = Namespace("http://data/")
 g.bind("dat", DATA)
 g.bind("format", FORMAT)
 
-txt_format = FileFormat(FORMAT.TEXT_FILE)
+txt_format = ontology.FileFormat("txt", FORMAT.TEXT_FILE)
 
-my_file = File(DATA["src.txt"], "src.txt", txt_format)
+my_file = ontology.File("src.txt", DATA["src.txt"], "src.txt", txt_format)
 
-c1 = Component(DATA["fun1"], "fun1", ComponentType.SOURCE_FUNCTION)
+c1 = ontology.SoftwareComponent(
+    "fun1",
+    DATA["fun1"],
+    "fun1",
+    ontology.ComponentType.SOURCE_FUNCTION
+)
 c1.defined_in = my_file
 
-c2 = Component(DATA["fun2"], "fun2", ComponentType.SOURCE_FUNCTION)
+c2 = ontology.SoftwareComponent(
+    "fun2",
+    DATA["fun2"],
+    "fun2",
+    ontology.ComponentType.SOURCE_FUNCTION
+)
 c2.defined_in = my_file
 c2.add_mention(c1)
 

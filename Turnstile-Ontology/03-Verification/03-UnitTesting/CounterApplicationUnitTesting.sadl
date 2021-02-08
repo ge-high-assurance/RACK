@@ -39,6 +39,7 @@ UTC-1-4 is a SoftwareUnitTest
 UTR-1-1-1 is a SoftwareUnitTestResult
 	has identifier "UTR-1-1-1",
 	has confirms UTC-1-1,
+	has generatedAtTime "2017-03-23 10:03:16 UTC"
 	has tst:result tst:Passed,
 	has executedBy SoftwareUnitTestRun1.
 

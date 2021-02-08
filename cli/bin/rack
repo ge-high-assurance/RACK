@@ -24,6 +24,7 @@ import yaml
 from jsonschema import ValidationError
 
 from rack import CustomFormatter, get_argument_parser
+from rack import cliMethod, CLIMethod, INGEST_CSV_CONFIG_SCHEMA, INGEST_OWL_CONFIG_SCHEMA
 
 __author__ = "Eric Mertens"
 __email__ = "emertens@galois.com"
@@ -79,6 +80,11 @@ if __name__ == "__main__":
         logger.error('Failed to load YAML configuration file: %s\n%s', args.config, exc)
         sys.exit(1)
     except ValidationError as exc:
+        instance_keys = set(exc.instance.keys())
+        if instance_keys == set(INGEST_CSV_CONFIG_SCHEMA['properties']) and not cliMethod == CLIMethod.DATA_IMPORT:
+            logger.warning('This looks like a data ingestion schema. Did you want "rack data import"?')
+        if instance_keys == set(INGEST_OWL_CONFIG_SCHEMA['properties']) and not cliMethod == CLIMethod.MODEL_IMPORT:
+            logger.warning('This looks like an OWL ingestion schema. Did you want "rack model import"?')
         logger.error('Bad configuration file: %s\n%s', args.config, exc)
         sys.exit(1)
     except re.error as exc:

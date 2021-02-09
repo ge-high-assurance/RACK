@@ -8,3 +8,4 @@ class Config:
         self.ChunksServiceURL = config["DEFAULT"]["ChunksServiceURL"]
         self.ChunksSubsetServiceURL = config["DEFAULT"]["ChunksSubsetServiceURL"]
         self.AutomatesServiceURL = config["DEFAULT"]["AutomatesServiceURL"]
+        self.model_file_path = config["DEFAULT"]["RequirementsModelNERPath"]

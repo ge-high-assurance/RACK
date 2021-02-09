@@ -227,7 +227,7 @@ container on `localhost`:
 
 ```shell
 $ source venv/bin/activate
-(venv) $ rack data export "ingest01 system" http://rack001/data
+(venv) $ rack data export --data-graph http://rack001/data "ingest01 system"
 
 identifier     identifier_parent
 -------------------  -------------------------
@@ -251,7 +251,7 @@ The number of results a nodegroup would generate can be obtained
 using the `count` sub-command.
 
 ```shell
-(venv) $ rack data count "ingest07 test results" "http://rack001/data"
+(venv) $ rack data count --data-graph "http://rack001/data" "ingest07 test results" 
 16
 ```
 

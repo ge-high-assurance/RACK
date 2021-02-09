@@ -53,7 +53,6 @@ ingest_REQUIREMENT_DEVELOPMENT,Auto-generated ingestion for REQUIREMENT_DEVELOPM
 ingest_ExecutableObject,Auto-generated ingestion for ExecutableObject,auto,ingest_ExecutableObject.json
 ingest_FILE,Auto-generated ingestion for FILE,auto,ingest_FILE.json
 ingest_ControlCouplingAnalysis,Auto-generated ingestion for ControlCouplingAnalysis,auto,ingest_ControlCouplingAnalysis.json
-ingest_COMPONENT,Auto-generated ingestion for COMPONENT,auto,ingest_COMPONENT.json
 ingest_SoftwareRequirementReviewArtifacts,Auto-generated ingestion for SoftwareRequirementReviewArtifacts,auto,ingest_SoftwareRequirementReviewArtifacts.json
 ingest_SoftwareIntegration,Auto-generated ingestion for SoftwareIntegration,auto,ingest_SoftwareIntegration.json
 ingest_PROCEDURE,Auto-generated ingestion for PROCEDURE,auto,ingest_PROCEDURE.json
@@ -98,6 +97,7 @@ ingest_DataCoupleCoverageReport,Auto-generated ingestion for DataCoupleCoverageR
 ingest_FORMAT,Auto-generated ingestion for FORMAT,auto,ingest_FORMAT.json
 ingest_DataCouplingAnalysis,Auto-generated ingestion for DataCouplingAnalysis,auto,ingest_DataCouplingAnalysis.json
 ingest_SoftwareUnitTestExecution,Auto-generated ingestion for SoftwareUnitTestExecution,auto,ingest_SoftwareUnitTestExecution.json
+ingest_SWCOMPONENT,Auto-generated ingestion for SWCOMPONENT,auto,ingest_SWCOMPONENT.json
 ingest_PERSON,Auto-generated ingestion for PERSON,auto,ingest_PERSON.json
 ingest_REPORT,Auto-generated ingestion for REPORT,auto,ingest_REPORT.json
 ingest_StructualCoverageAnalysis,Auto-generated ingestion for StructualCoverageAnalysis,auto,ingest_StructualCoverageAnalysis.json

@@ -179,7 +179,7 @@ def sparql_connection(base_url: Url, data_graph: Optional[Url], extra_data_graph
 
     semtk3.set_host(base_url)
     # Default to RACK in a Box triple-store location
-    triple_store = triple_store or Url(base_url + ":3030/RACK")
+    triple_store = triple_store or Url("http://localhost:3030/RACK")
     conn: Dict[str, Any] = {
         "name": "%NODEGROUP%",
         "model": [{"type": "fuseki", "url": triple_store, "graph": MODEL_GRAPH}],
@@ -254,16 +254,24 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
     go()
 
-def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url], clear: bool) -> None:
+def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
         validate(config, INGEST_CSV_CONFIG_SCHEMA)
 
     steps = config['ingestion-steps']
-    data_graph = data_graph or config['data-graph']
+    
+    if data_graphs is None:
+        data_graph = Url("http://rack001/data")
+    else:
+        data_graph = data_graphs[0]
+
     base_path = config_path.parent
-    if 'extra-data-graphs' in config:
+
+    if data_graphs is not None:
+        extra_data_graphs = data_graphs[1:]
+    elif 'extra-data-graphs' in config:
         extra_data_graphs = config['extra-data-graphs']
     else:
         extra_data_graphs = []
@@ -386,11 +394,11 @@ def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
     confirm(on_confirmed, yes)
 
 def dispatch_data_export(args: SimpleNamespace) -> None:
-    conn = sparql_connection(args.base_url, args.data_graph, [], args.triple_store)
+    conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store)
     run_query(conn, args.nodegroup, export_format=args.format, headers=not args.no_headers, path=args.file)
 
 def dispatch_data_count(args: SimpleNamespace) -> None:
-    conn = sparql_connection(args.base_url, args.data_graph, [], args.triple_store)
+    conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store)
     run_count_query(conn, args.nodegroup)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
@@ -446,19 +454,19 @@ def get_argument_parser() -> argparse.ArgumentParser:
     nodegroups_deleteall_parser = nodegroups_subparsers.add_parser('delete-all', help='Delete all nodegroups from RACK')
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
-    data_import_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
+    data_import_parser.add_argument('--data-graph', type=str, action='append', help='Data graph URL')
     data_import_parser.add_argument('--clear', action='store_true', help='Clear data graph before import')
     data_import_parser.set_defaults(func=dispatch_data_import)
 
     data_export_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
-    data_export_parser.add_argument('data_graph', type=str, help='Data graph URL')
+    data_export_parser.add_argument('--data-graph', type=str, required=True, action='append', help='Data graph URL')
     data_export_parser.add_argument('--format', type=ExportFormat, help='Export format', choices=list(ExportFormat), default=ExportFormat.TEXT)
     data_export_parser.add_argument('--no-headers', action='store_true', help='Omit header row')
     data_export_parser.add_argument('--file', type=Path, help='Output to file')
     data_export_parser.set_defaults(func=dispatch_data_export)
 
     data_count_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
-    data_count_parser.add_argument('data_graph', type=str, help='Data graph URL')
+    data_count_parser.add_argument('--data-graph', type=str, required=True, action='append', help='Data graph URL')
     data_count_parser.set_defaults(func=dispatch_data_count)
 
     model_import_parser.add_argument('config', type=str, help='Configuration YAML file')

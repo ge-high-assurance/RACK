@@ -179,7 +179,7 @@ def sparql_connection(base_url: Url, data_graph: Optional[Url], extra_data_graph
 
     semtk3.set_host(base_url)
     # Default to RACK in a Box triple-store location
-    triple_store = triple_store or Url(base_url + ":3030/RACK")
+    triple_store = triple_store or Url("http://localhost:3030/RACK")
     conn: Dict[str, Any] = {
         "name": "%NODEGROUP%",
         "model": [{"type": "fuseki", "url": triple_store, "graph": MODEL_GRAPH}],

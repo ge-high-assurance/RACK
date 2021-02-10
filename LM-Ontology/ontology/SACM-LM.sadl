@@ -1,0 +1,151 @@
+/* Copyright Lockheed Martin 2021 */
+
+uri "http://arcos.rack/SACM-LM" alias sacm.
+import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/SACM-S".
+
+
+/* Base Classes. */
+
+Element
+    is a type of ENTITY.
+        uuid describes Element with a single value of type string.
+
+MultiLangString
+    is a type of Element.
+        HAS_VALUE describes MultiLangString with values of type LangString.
+
+LangString
+    is a type of Element.
+        sacm:lang describes LangString with values of type string.
+        sacm:lang describes LangString with at most 1 value.
+        sacm:content describes LangString with values of type string.
+        sacm:content describes LangString with at most 1 value.
+
+ExpressionLangString
+    is a type of LangString.
+        EXPRESSES describes ExpressionLangString with values of type ExpressionElement.
+
+SacmElement
+    is a type of Element.
+        gid describes SacmElement with values of type string.
+        gid describes SacmElement with at most 1 value.
+        isCitation describes SacmElement with values of type boolean.
+        isCitation describes SacmElement with at most 1 value.
+        isAbstract describes SacmElement with values of type boolean.
+        isAbstract describes SacmElement with at most 1 value.
+        CITES describes SacmElement with values of type SacmElement.
+        IMPLEMENTS describes SacmElement with values of type SacmElement.
+
+UtilityElement
+    is a type of SacmElement.
+        HAS_CONTENT describes UtilityElement with values of type MultiLangString.
+
+TaggedValue
+    is a type of UtilityElement.
+        HAS_KEY describes TaggedValue with values of type MultiLangString.
+
+Note
+    is a type of UtilityElement.
+
+ImplementationConstraint
+    is a type of UtilityElement.
+
+Description
+    is a type of UtilityElement.
+
+ModelElement
+    is a type of SacmElement.
+        HAS_TAGGEDVALUE describes ModelElement with values of type TaggedValue.
+        HAS_IMPLEMENTATIONCONSTRAINT describes ModelElement with values of type ImplementationConstraint.
+        HAS_DESCRIPTION describes ModelElement with values of type Description.
+        HAS_NOTE describes ModelElement with values of type Note.
+        HAS_NAME describes ModelElement with values of type LangString.
+
+ArtifactElement
+    is a type of ModelElement.
+
+/* Assurance Case Package Classes. */
+
+AssuranceCasePackage
+    is a type of ArtifactElement.
+        HAS_PACKAGE describes AssuranceCasePackage with values of type AssuranceCasePackage.
+        USES_TERMINOLOGY describes AssuranceCasePackage with values of type TerminologyPackage.
+        HAS_ARGUMENT describes AssuranceCasePackage with values of type sacms:ARGUMENT_PACKAGE.
+
+/* Terminology Classes. */
+
+TerminologyElement
+    is a type of ArtifactElement.
+
+TerminologyPackage
+    is a type of TerminologyElement.
+        HAS_ELEMENT describes TerminologyPackage with values of type TerminologyElement.
+
+TerminologyGroup
+    is a type of TerminologyElement.
+        HAS_ELEMENT describes TerminologyGroup with values of type TerminologyElement.
+
+TerminologyAsset
+    is a type of TerminologyElement.
+
+Category
+    is a type of TerminologyAsset.
+
+ExpressionElement
+    is a type of TerminologyAsset.
+        val describes ExpressionElement with values of type string.
+        val describes ExpressionElement with at most 1 value.
+        IN_CATEGORY describes ExpressionElement with values of type Category.
+
+Expression
+    is a type of ExpressionElement.
+        USES_ELEMENT describes Expression with values of type ExpressionElement.
+
+Term
+    is a type of ExpressionElement.
+        externalReference describes Term with values of type string.
+        HAS_ORIGIN describes Term with values of type ModelElement.
+
+/* Argumentation Classes. */
+
+ArgumentationElement
+    is a type of ArtifactElement.
+
+sacms:ARGUMENT_PACKAGE
+    is a type of ArgumentationElement.
+        HAS_ELEMENT describes sacms:ARGUMENT_PACKAGE with values of type ArgumentationElement.
+
+ArgumentAsset
+    is a type of ArgumentationElement.
+        HAS_CONTENT describes ArgumentAsset with values of type MultiLangString.
+
+sacms:ARGUMENT_REASONING
+    is a type of ArgumentAsset.
+
+sacms:ARTIFACT_REFERENCE
+    is a type of ArgumentAsset.
+        REFERENCES describes sacms:ARTIFACT_REFERENCE with values of type ArtifactElement.
+
+Assertion
+    is a type of ArgumentAsset.
+        assertionDeclaration describes Assertion with values of type string.
+
+sacms:CLAIM
+    is a type of Assertion.
+
+AssertedRelationship
+    is a type of Assertion.
+        isCounter describes AssertedRelationship with values of type boolean.
+        SOURCE describes AssertedRelationship with values of type ArgumentAsset.
+        TARGET describes AssertedRelationship with values of type ArgumentAsset.
+        REASONING describes AssertedRelationship with values of type sacms:ARGUMENT_REASONING.
+
+sacms:ASSERTED_CONTEXT
+    is a type of AssertedRelationship.
+
+AssertedEvidence
+    is a type of AssertedRelationship.
+
+sacms:ARTIFACT_REFERENCE
+    is a type of AssertedRelationship.

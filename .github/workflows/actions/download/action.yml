@@ -49,7 +49,8 @@ runs:
       run: |
         sudo npm install -g github-wikito-converter markdown-to-html
         gwtc -t RACK-in-a-Box RACK.wiki
-        markdown -t RACK-in-a-box -s style.css RACK.wiki/Welcome.md > index.html
+        markdown -t RACK-in-a-box -s style.css RACK.wiki/_Welcome.md > index.html
+        sed -i -e 's/>NodeGroupService/ onclick="javascript:event.target.port=12058">NodeGroupService' index.html
         mv documentation.html index.html RACK/rack-box/files
 
     - name: Package RACK ontology and data

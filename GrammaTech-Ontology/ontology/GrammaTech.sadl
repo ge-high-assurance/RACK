@@ -3,28 +3,28 @@ uri "http://arcos.acert/GrammaTech" alias Acert.
 import "http://arcos.rack/TESTING".
 import "http://arcos.rack/DOCUMENT".
 import "http://arcos.rack/SOFTWARE".
-import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/MODEL".
 
 /* ACERT requirements have confidence parameters on text extraction */
-AcertRequirementStatement is a type of REQUIREMENT_STATEMENT.
+AcertRequirementModel is a type of MODEL.
 
     textConfidence (note "confidence that this was requirement text")
-        describes AcertRequirementStatement with values of type double.
+        describes AcertRequirementModel with values of type double.
 	
 	ifText (note "conditions under which this requirement holds")
-	    describes AcertRequirementStatement with values of type string.
+	    describes AcertRequirementModel with values of type string.
     ifTextConfidence (note "confidence that this was the if-portion of the text")
-        describes AcertRequirementStatement with values of type double.
+        describes AcertRequirementModel with values of type double.
 
 	thenText (note "specifies what should hold by this requirement if the requirement conditions are met")
-		describes AcertRequirementStatement with values of type string.    
+		describes AcertRequirementModel with values of type string.    
     thenTextConfidence (note "confidence that this was the then-portion of the text")
-        describes AcertRequirementStatement with values of type double.
+        describes AcertRequirementModel with values of type double.
 	
 	givenText (note "optional part that can be used to set certain conditions apart from other conditions in the ifText part")
-		describes AcertRequirementStatement with values of type string.
+		describes AcertRequirementModel with values of type string.
     givenTextConfidence (note "confidence that this was the given-portion of the text")
-        describes AcertRequirementStatement with values of type double.
+        describes AcertRequirementModel with values of type double.
 
 AcertTestResult is a type of TEST_RESULT.
     failureReason (note "reason for failure, e.g.: timeout, crash, bad output")

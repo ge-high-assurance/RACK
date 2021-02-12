@@ -10,7 +10,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.acert/GrammaTech">
   <owl:Ontology rdf:about="">
-    <owl:imports rdf:resource="http://arcos.rack/REQUIREMENTS"/>
+    <owl:imports rdf:resource="http://arcos.rack/MODEL"/>
     <owl:imports rdf:resource="http://arcos.rack/SOFTWARE"/>
     <owl:imports rdf:resource="http://arcos.rack/DOCUMENT"/>
     <owl:imports rdf:resource="http://arcos.rack/TESTING"/>
@@ -21,9 +21,6 @@
   </owl:Ontology>
   <owl:Class rdf:ID="AcertTestResult">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_RESULT"/>
-  </owl:Class>
-  <owl:Class rdf:ID="AcertRequirement">
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
   </owl:Class>
   <owl:Class rdf:ID="FailureReason">
     <owl:equivalentClass>
@@ -47,11 +44,24 @@
     <rdfs:comment xml:lang="en">High-level reasons for ACERT test result failure</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#THING"/>
   </owl:Class>
+  <owl:Class rdf:ID="AcertRequirementModel">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/MODEL#MODEL"/>
+  </owl:Class>
   <owl:ObjectProperty rdf:ID="failureReason">
     <rdfs:comment xml:lang="en">reason for failure, e.g.: timeout, crash, bad output</rdfs:comment>
     <rdfs:range rdf:resource="#FailureReason"/>
     <rdfs:domain rdf:resource="#AcertTestResult"/>
   </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="thenText">
+    <rdfs:comment xml:lang="en">specifies what should hold by this requirement if the requirement conditions are met</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#AcertRequirementModel"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="givenText">
+    <rdfs:comment xml:lang="en">optional part that can be used to set certain conditions apart from other conditions in the ifText part</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#AcertRequirementModel"/>
+  </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="failureDetails">
     <rdfs:comment xml:lang="en">Additional detail describing the failure reason</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
@@ -60,12 +70,17 @@
   <owl:DatatypeProperty rdf:ID="givenTextConfidence">
     <rdfs:comment xml:lang="en">confidence that this was the given-portion of the text</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
-    <rdfs:domain rdf:resource="#AcertRequirement"/>
+    <rdfs:domain rdf:resource="#AcertRequirementModel"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="textConfidence">
     <rdfs:comment xml:lang="en">confidence that this was requirement text</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
-    <rdfs:domain rdf:resource="#AcertRequirement"/>
+    <rdfs:domain rdf:resource="#AcertRequirementModel"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="ifText">
+    <rdfs:comment xml:lang="en">conditions under which this requirement holds</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#AcertRequirementModel"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="memory">
     <rdfs:comment xml:lang="en">maximum bytes of resident memory used by test execution</rdfs:comment>
@@ -80,11 +95,11 @@
   <owl:DatatypeProperty rdf:ID="thenTextConfidence">
     <rdfs:comment xml:lang="en">confidence that this was the then-portion of the text</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
-    <rdfs:domain rdf:resource="#AcertRequirement"/>
+    <rdfs:domain rdf:resource="#AcertRequirementModel"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="ifTextConfidence">
     <rdfs:comment xml:lang="en">confidence that this was the if-portion of the text</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
-    <rdfs:domain rdf:resource="#AcertRequirement"/>
+    <rdfs:domain rdf:resource="#AcertRequirementModel"/>
   </owl:DatatypeProperty>
 </rdf:RDF>

@@ -30,8 +30,6 @@ REQUIREMENT
 	(note "Captures (both high- and low-level) properties of a process or artifact that are to be assessed")
 	is a type of ENTITY.
 
-	states (note "Structured form of the requirement statement") describes REQUIREMENT with values of type REQUIREMENT_STATEMENT.
-
 	governs (note "ENTITY(s) that are the subject of the requirement") describes REQUIREMENT with values of type ENTITY.
 	governs is a type of wasImpactedBy.
 

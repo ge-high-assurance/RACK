@@ -6,15 +6,25 @@ import "http://arcos.rack/SOFTWARE".
 import "http://arcos.rack/REQUIREMENTS".
 
 /* ACERT requirements have confidence parameters on text extraction */
-AcertRequirement is a type of REQUIREMENT.
+AcertRequirementStatement is a type of REQUIREMENT_STATEMENT.
+
     textConfidence (note "confidence that this was requirement text")
-        describes AcertRequirement with values of type double.
+        describes AcertRequirementStatement with values of type double.
+	
+	ifText (note "conditions under which this requirement holds")
+	    describes AcertRequirementStatement with values of type string.
     ifTextConfidence (note "confidence that this was the if-portion of the text")
-        describes AcertRequirement with values of type double.
+        describes AcertRequirementStatement with values of type double.
+
+	thenText (note "specifies what should hold by this requirement if the requirement conditions are met")
+		describes AcertRequirementStatement with values of type string.    
     thenTextConfidence (note "confidence that this was the then-portion of the text")
-        describes AcertRequirement with values of type double.
+        describes AcertRequirementStatement with values of type double.
+	
+	givenText (note "optional part that can be used to set certain conditions apart from other conditions in the ifText part")
+		describes AcertRequirementStatement with values of type string.
     givenTextConfidence (note "confidence that this was the given-portion of the text")
-        describes AcertRequirement with values of type double.
+        describes AcertRequirementStatement with values of type double.
 
 AcertTestResult is a type of TEST_RESULT.
     failureReason (note "reason for failure, e.g.: timeout, crash, bad output")

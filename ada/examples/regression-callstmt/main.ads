@@ -1,2 +1,2 @@
-WITH aux;
+WITH auxiliary;
 PROCEDURE main;

@@ -1,5 +1,5 @@
-WITH aux;
+WITH auxiliary;
 PROCEDURE main IS
 BEGIN
-   aux.start;
+   auxiliary.start;
 END main;

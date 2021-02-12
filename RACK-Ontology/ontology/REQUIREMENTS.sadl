@@ -21,9 +21,6 @@
 uri "http://arcos.rack/REQUIREMENTS" alias Rq.
 import "http://arcos.rack/HAZARD".
 
-REQUIREMENT_STATEMENT
-    is a type of ENTITY.
-
 // The natural language text of a requirement can be captured in the
 // *description* property common to all RACK data.
 REQUIREMENT

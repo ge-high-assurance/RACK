@@ -28,9 +28,6 @@
     <rdfs:comment xml:lang="en">Defines some conceptual data that may be collected somewhere and used somewhere else</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
-  <owl:Class rdf:ID="REQUIREMENT_STATEMENT">
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
-  </owl:Class>
   <owl:ObjectProperty rdf:ID="consumedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
     <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT) that consumes this information</rdfs:comment>

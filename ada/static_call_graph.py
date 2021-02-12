@@ -9,8 +9,8 @@ its result call graph in the 'nodes' and 'edges' member variables.
 __copyright__ = "Copyright (c) 2020, Galois, Inc."
 
 import logging
-from typing import Callable, Dict, Optional, Set
-import urllib
+from typing import Callable, Dict, NewType, Optional, Set
+import urllib.parse
 
 import libadalang as lal
 
@@ -42,16 +42,17 @@ def safe_xref(node: lal.AdaNode) -> Optional[lal.DefiningName]:
         warn_about_node(node)
         return None
 
-def node_key(node: GraphNode) -> str:
-    """
-    Computes a key we can use for identifying this node uniquely.
-    """
-    xref = safe_xref(node)
-    if xref is None:
-        return str(node)
-    return str(xref)
+NodeDisplayName = NewType("NodeDisplayName", str)
+NodeFile = NewType("NodeFile", str)
+NodeIdentifier = NewType("NodeIdentifier", str)
+NodeKey = NewType("NodeKey", str)
+NodeURI = NewType("NodeURI", str)
 
-def get_definition_file(node: GraphNode) -> Optional[str]:
+def get_node_display_name(node: GraphNode) -> NodeDisplayName:
+    """Computes the name to display for a node."""
+    return NodeDisplayName(node.text)
+
+def get_node_file(node: GraphNode) -> Optional[NodeFile]:
     """"
     Returns the name of the file within which this node was defined, assuming
     we succeed to resolve the reference.
@@ -63,13 +64,24 @@ def get_definition_file(node: GraphNode) -> Optional[str]:
     # want the filename
     if xref is None:
         return None
-    return xref.p_basic_decl.full_sloc_image.split(":")[0]
+    return NodeFile(xref.p_basic_decl.full_sloc_image.split(":")[0])
 
-def get_name(node: GraphNode) -> str:
-    """Computes the name to display for a node."""
-    return node.text
+def get_node_key(node: GraphNode) -> NodeKey:
+    """
+    Computes a key we can use for identifying this node uniquely.
+    """
+    xref = safe_xref(node)
+    if xref is None:
+        return NodeKey(str(node))
+    return NodeKey(str(xref))
 
-def get_uri(node: GraphNode) -> str:
+def get_node_identifier(node: GraphNode) -> NodeIdentifier:
+    """
+    Computes the identifier to use in the database.
+    """
+    return NodeIdentifier(get_node_uri(node))
+
+def get_node_uri(node: GraphNode) -> NodeURI:
     """Computes the URI to use for a node."""
     # NOTE: we need some encoding scheme, because Ada allows operator
     # overloading, so the functions may be called "&" for instance.
@@ -77,9 +89,9 @@ def get_uri(node: GraphNode) -> str:
     xref = node.p_gnat_xref()
     if not xref:
         urlencoded = encode(node.p_relative_name.p_canonical_text)
-        return f"__RACK__UNRESOLVED__{urlencoded}"
+        return NodeURI(f"__RACK__UNRESOLVED__{urlencoded}")
         # raise Exception(f"The reference to node {node} could not be resolved.")
-    return encode(xref.p_basic_decl.p_canonical_fully_qualified_name)
+    return NodeURI(encode(xref.p_basic_decl.p_canonical_fully_qualified_name))
 
 class StaticCallGraphVisitor(AdaVisitor):
 
@@ -92,8 +104,8 @@ class StaticCallGraphVisitor(AdaVisitor):
         self,
         context: lal.AnalysisContext,
         caller_being_defined: Optional[GraphNode],
-        nodes: Dict[str, GraphNode],
-        edges: Dict[str, Set[str]]
+        nodes: Dict[NodeKey, GraphNode],
+        edges: Dict[NodeKey, Set[NodeKey]]
     ) -> None:
         """
         Initialize the visitor.  Because it is not very practical to locally
@@ -103,9 +115,9 @@ class StaticCallGraphVisitor(AdaVisitor):
         creating a bunch of short-lived instances.
         """
 
-        self.context = context
+        self.context: lal.AnalysisContext = context
 
-        self.caller_being_defined = caller_being_defined
+        self.caller_being_defined: Optional[GraphNode] = caller_being_defined
         """
         Name of the caller currently being defined, that will be deemed the
         caller of whatever call expression we encounter. This can either be a
@@ -119,16 +131,16 @@ class StaticCallGraphVisitor(AdaVisitor):
 
         # We store nodes by key so that we can retrieve node instances by their
         # key and avoid creating duplicates.
-        self.nodes = nodes
+        self.nodes: Dict[NodeKey, GraphNode] = nodes
         """All nodes in the graph, unsorted."""
 
         if caller_being_defined:
             # Register the caller as a node
-            caller_key = node_key(caller_being_defined)
+            caller_key = get_node_key(caller_being_defined)
             if caller_key is not None and caller_key not in nodes:
                 nodes[caller_key] = caller_being_defined
 
-        self.edges: Dict[str, Set[str]] = edges
+        self.edges: Dict[NodeKey, Set[NodeKey]] = edges
         """
         Edges of the graph, keyed by their origin, valued by the set of
         destinations for that origin.
@@ -136,7 +148,7 @@ class StaticCallGraphVisitor(AdaVisitor):
 
     def get_graph_node_for_name(self, node: lal.Name) -> Optional[GraphNode]:
         """Returns the graph node for a name, creating it if none exists yet."""
-        key = node_key(node)
+        key = get_node_key(node)
         if key is None:
             return None
         if key not in self.nodes:
@@ -146,13 +158,13 @@ class StaticCallGraphVisitor(AdaVisitor):
     def record_call(self, callee: lal.Name) -> None:
         """Records a witnessed static function/procedure call to callee."""
         if self.caller_being_defined is not None:
-            caller_key = node_key(self.caller_being_defined)
+            caller_key = get_node_key(self.caller_being_defined)
             if caller_key is None:
                 return
             callee_node = self.get_graph_node_for_name(callee)
             if callee_node is None:
                 return
-            callee_key = node_key(callee_node)
+            callee_key = get_node_key(callee_node)
             if callee_key is None:
                 return
             if caller_key not in self.edges:

@@ -22,4 +22,4 @@ import "http://arcos.rack/PROV-S".
 
 MODEL (note "A physical, mathematical, or otherwise logical representation of a system, entity, phenomenon, or process")
     is a type of ENTITY.
-    models (note "The thing being modeled") describes MODEL with values of type THING.
+    models (note "The thing being modeled") describes MODEL with a single value of type THING.

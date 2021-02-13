@@ -11,13 +11,14 @@
   xml:base="http://arcos.acert/GrammaTech">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="http://arcos.rack/MODEL"/>
-    <owl:imports rdf:resource="http://arcos.rack/SOFTWARE"/>
-    <owl:imports rdf:resource="http://arcos.rack/DOCUMENT"/>
-    <owl:imports rdf:resource="http://arcos.rack/TESTING"/>
-    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
-    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://arcos.rack/SOFTWARE"/>
+    <owl:imports rdf:resource="http://arcos.rack/TESTING"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'GrammaTech.sadl' and should not be directly edited.</rdfs:comment>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <owl:imports rdf:resource="http://arcos.rack/DOCUMENT"/>
+    <owl:imports rdf:resource="http://arcos.rack/REQUIREMENTS"/>
   </owl:Ontology>
   <owl:Class rdf:ID="AcertTestResult">
     <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_RESULT"/>
@@ -45,8 +46,22 @@
     <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="AcertRequirementModel">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="modelsRequirement"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:subClassOf rdf:resource="http://arcos.rack/MODEL#MODEL"/>
   </owl:Class>
+  <owl:ObjectProperty rdf:about="#modelsRequirement">
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/MODEL#models"/>
+    <rdfs:range rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+    <rdfs:domain rdf:resource="#AcertRequirementModel"/>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="failureReason">
     <rdfs:comment xml:lang="en">reason for failure, e.g.: timeout, crash, bad output</rdfs:comment>
     <rdfs:range rdf:resource="#FailureReason"/>

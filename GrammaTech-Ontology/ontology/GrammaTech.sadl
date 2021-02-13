@@ -3,10 +3,15 @@ uri "http://arcos.acert/GrammaTech" alias Acert.
 import "http://arcos.rack/TESTING".
 import "http://arcos.rack/DOCUMENT".
 import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/REQUIREMENTS".
 import "http://arcos.rack/MODEL".
 
 /* ACERT requirements have confidence parameters on text extraction */
 AcertRequirementModel is a type of MODEL.
+
+	modelsRequirement
+	    describes AcertRequirementModel with a single value of type REQUIREMENT.
+	modelsRequirement is a type of models.
 
     textConfidence (note "confidence that this was requirement text")
         describes AcertRequirementModel with values of type double.

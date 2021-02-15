@@ -9,10 +9,6 @@ import "http://arcos.rack/MODEL".
 /* ACERT requirements have confidence parameters on text extraction */
 AcertRequirementModel is a type of MODEL.
 
-	modelsRequirement
-	    describes AcertRequirementModel with a single value of type REQUIREMENT.
-	modelsRequirement is a type of models.
-
     textConfidence (note "confidence that this was requirement text")
         describes AcertRequirementModel with values of type double.
 	

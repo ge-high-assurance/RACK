@@ -267,6 +267,7 @@ rack data export "query Requirements decomposition" \
   --constraint req=HLR-1 \
   --constraint decomposition=IN-LLR-2 
 
+# Example using regular expressions
 rack data export "query Requirements decomposition" \
   --data-graph http://rack001/data \
   --constraint "req~^HLR-.$" \

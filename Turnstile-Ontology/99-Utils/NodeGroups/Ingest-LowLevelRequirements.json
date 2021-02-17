@@ -3,7 +3,7 @@
 	"sparqlConn": {
 		"name": "RACK local fuseki",
 		"domain": "",
-		"enableOwlImports": true,
+		"enableOwlImports": false,
 		"model": [
 			{
 				"type": "fuseki",

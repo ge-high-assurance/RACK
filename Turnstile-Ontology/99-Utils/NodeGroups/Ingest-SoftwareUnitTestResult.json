@@ -3,7 +3,7 @@
 	"sparqlConn": {
 		"name": "RACK local fuseki",
 		"domain": "",
-		"enableOwlImports": true,
+		"enableOwlImports": false,
 		"model": [
 			{
 				"type": "fuseki",
@@ -20,7 +20,7 @@
 		]
 	},
 	"sNodeGroup": {
-		"version": 11,
+		"version": 12,
 		"limit": 0,
 		"offset": 0,
 		"sNodeList": [
@@ -111,6 +111,20 @@
 			{
 				"propList": [
 					{
+						"KeyName": "generatedAtTime",
+						"ValueType": "dateTime",
+						"relationship": "http://www.w3.org/2001/XMLSchema#dateTime",
+						"UriRelationship": "http://arcos.rack/PROV-S#generatedAtTime",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?generatedAtTime_SoftwareUnitTestResult",
+						"isReturned": true,
+						"optMinus": 1,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					},
+					{
 						"KeyName": "identifier",
 						"ValueType": "string",
 						"relationship": "http://www.w3.org/2001/XMLSchema#string",
@@ -198,7 +212,8 @@
 				"deletionMode": "NO_DELETE"
 			}
 		],
-		"orderBy": []
+		"orderBy": [],
+		"unionHash": {}
 	},
 	"importSpec": {
 		"version": "1",
@@ -219,6 +234,10 @@
 			{
 				"colId": "col_3",
 				"colName": "identifier_SoftwareUnitTestResult"
+			},
+			{
+				"colId": "col_4",
+				"colName": "generatedAtTime_SoftwareUnitTestResult"
 			}
 		],
 		"dataValidator": [],
@@ -234,41 +253,30 @@
 		],
 		"nodes": [
 			{
-				"sparqlID": "?TEST_STATUS",
-				"type": "http://arcos.rack/TESTING#TEST_STATUS",
+				"sparqlID": "?SoftwareUnitTestResult",
+				"type": "http://Turnstile/DevelopmentPlan#SoftwareUnitTestResult",
 				"URILookupMode": "createIfMissing",
 				"mapping": [],
 				"props": [
 					{
-						"URIRelation": "http://arcos.rack/PROV-S#identifier",
-						"URILookup": [
-							"?TEST_STATUS"
-						],
+						"URIRelation": "http://arcos.rack/PROV-S#generatedAtTime",
 						"mapping": [
 							{
-								"colId": "col_0",
+								"colId": "col_4",
 								"transformList": [
 									"trans_0"
 								]
 							}
 						]
-					}
-				]
-			},
-			{
-				"sparqlID": "?SoftwareUnitTestExecution",
-				"type": "http://Turnstile/DevelopmentPlan#SoftwareUnitTestExecution",
-				"URILookupMode": "createIfMissing",
-				"mapping": [],
-				"props": [
+					},
 					{
 						"URIRelation": "http://arcos.rack/PROV-S#identifier",
 						"URILookup": [
-							"?SoftwareUnitTestExecution"
+							"?SoftwareUnitTestResult"
 						],
 						"mapping": [
 							{
-								"colId": "col_1",
+								"colId": "col_3",
 								"transformList": [
 									"trans_0"
 								]
@@ -300,19 +308,41 @@
 				]
 			},
 			{
-				"sparqlID": "?SoftwareUnitTestResult",
-				"type": "http://Turnstile/DevelopmentPlan#SoftwareUnitTestResult",
+				"sparqlID": "?SoftwareUnitTestExecution",
+				"type": "http://Turnstile/DevelopmentPlan#SoftwareUnitTestExecution",
 				"URILookupMode": "createIfMissing",
 				"mapping": [],
 				"props": [
 					{
 						"URIRelation": "http://arcos.rack/PROV-S#identifier",
 						"URILookup": [
-							"?SoftwareUnitTestResult"
+							"?SoftwareUnitTestExecution"
 						],
 						"mapping": [
 							{
-								"colId": "col_3",
+								"colId": "col_1",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?TEST_STATUS",
+				"type": "http://arcos.rack/TESTING#TEST_STATUS",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?TEST_STATUS"
+						],
+						"mapping": [
+							{
+								"colId": "col_0",
 								"transformList": [
 									"trans_0"
 								]

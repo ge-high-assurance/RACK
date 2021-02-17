@@ -10,15 +10,24 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
+/************** edit history *****************
+  *
+  * dwa - 11 Nov 2020 - reduced cardinality of several
+  * dwa - 11 Nov 2020 - removed incorrect associations
+  * dwa - 11 Nov 2020 - removed unnecessary subclassing
+  *
+  *********************************************/
+
 uri "http://arcos.rack/REVIEW" alias Rv.
 import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/DOCUMENT".
 
 REVIEW_LOG
 	(note "Outcome of a REVIEW ACTIVITY")
 	is a type of ENTITY.
 
-	reviews (note "ENTITY(s) that the review was performed on") describes REVIEW_LOG with values of type ENTITY.
-	reviews is a type of wasDerivedFrom.
+	reviews (note "The subject being reviewed") describes REVIEW_LOG with values of type ENTITY.
+	reviews is a type of wasImpactedBy.
 
 	reviewResult (note "Review status descriptor") describes REVIEW_LOG with values of type REVIEW_STATE.
 
@@ -29,11 +38,11 @@ REVIEW_STATE (note "Life-cycle status of a review log")
     is a type of THING,
     must be one of {Passed, ReviseWithoutReview, ReviseWithReview}.
 Passed              is a REVIEW_STATE with identifier "Passed".
-ReviseWithoutReview is a REVIEW_STATE with identifier "Review Without Review".
+ReviseWithoutReview is a REVIEW_STATE with identifier "Revise Without Review".
 ReviseWithReview    is a REVIEW_STATE with identifier "Revise With Review".
 
 REVIEW
-	(note "Code review ACTIVITY")
+	(note "Artifact review ACTIVITY")
 	is a type of ACTIVITY.
 
 	author (note "AGENT(s) putting items up for review") describes REVIEW with values of type AGENT.
@@ -45,5 +54,5 @@ REVIEW
 	reviewed (note "ENTITY(s) being reviewed") describes REVIEW with values of type ENTITY.
 	reviewed is a type of used.
 
-	governedBy (note "ENTITY(s) (e.g. REQUIREMENT) used for performing the review") describes REVIEW with values of type ENTITY.
+	governedBy (note "ENTITY(s) (e.g. REQUIREMENT or SPECIFICATION) used for performing the review") describes REVIEW with values of type ENTITY.
 	governedBy is a type of used.

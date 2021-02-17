@@ -1,0 +1,2 @@
+WITH auxiliary;
+PROCEDURE main;

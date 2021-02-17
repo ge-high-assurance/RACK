@@ -659,8 +659,9 @@ add_fully_qualified(DataRef, Property, Value) :-
     add_triple(DataRef, Property, Value).
 
 add_rack_shorthand(DataRef, Property, Value) :-
-    rack_ref(_ShortVal, Value), !,
-    add_triple(DataRef, Property, Value).
+    rack_ref(Value, FullValue),
+    rdf_node(FullValue), !,
+    add_triple(DataRef, Property, FullValue).
 
 add_atom_newref(DataRef, Property, Value) :-
     rack_namespace(NS),

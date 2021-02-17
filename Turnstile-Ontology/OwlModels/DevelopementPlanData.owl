@@ -12,7 +12,6 @@
     xmlns:j.3="http://arcos.rack/PROV-S#"
     xmlns:j.4="http://arcos.rack/SYSTEM#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.5="http://arcos.rack/FILE#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://Turnstile/DevelopmentPlanData">
   <owl:Ontology rdf:about="">
@@ -164,46 +163,18 @@
       <j.1:PLAN rdf:ID="_03-SoftwareDevelopment">
         <j.3:content>
           <j.1:SECTION rdf:ID="_03-SoftwareDevelopmentEnvironment">
-            <j.3:content>
-              <j.5:FORMAT rdf:ID="ZipFile">
-                <j.3:identifier>.zip</j.3:identifier>
-              </j.5:FORMAT>
-            </j.3:content>
-            <j.3:content>
-              <j.5:FORMAT rdf:ID="TarFile">
-                <j.3:identifier>.tar</j.3:identifier>
-              </j.5:FORMAT>
-            </j.3:content>
-            <j.3:content>
-              <j.0:TOOL rdf:ID="TAR">
-                <j.3:identifier>tar</j.3:identifier>
-              </j.0:TOOL>
-            </j.3:content>
-            <j.3:content>
-              <j.5:FORMAT rdf:ID="JsonFile">
-                <j.3:identifier>.json</j.3:identifier>
-              </j.5:FORMAT>
-            </j.3:content>
+            <j.3:content rdf:resource="#ZipFile"/>
+            <j.3:content rdf:resource="#TarFile"/>
+            <j.3:content rdf:resource="#TAR"/>
+            <j.3:content rdf:resource="#JsonFile"/>
             <j.3:content>
               <j.0:ORGANIZATION rdf:ID="General_Electric">
                 <j.3:identifier>GE</j.3:identifier>
               </j.0:ORGANIZATION>
             </j.3:content>
-            <j.3:content>
-              <j.0:TOOL rdf:ID="GCC">
-                <j.3:identifier>gcc</j.3:identifier>
-              </j.0:TOOL>
-            </j.3:content>
-            <j.3:content>
-              <j.5:FORMAT rdf:ID="ElfFile">
-                <j.3:identifier>.o</j.3:identifier>
-              </j.5:FORMAT>
-            </j.3:content>
-            <j.3:content>
-              <j.5:FORMAT rdf:ID="CSourceFile">
-                <j.3:identifier>.c</j.3:identifier>
-              </j.5:FORMAT>
-            </j.3:content>
+            <j.3:content rdf:resource="#GCC"/>
+            <j.3:content rdf:resource="#ElfFile"/>
+            <j.3:content rdf:resource="#CSourceFile"/>
           </j.1:SECTION>
         </j.3:content>
         <j.3:content>
@@ -350,7 +321,7 @@
         <j.3:content>
           <j.1:SECTION rdf:ID="_02-SoftwareOverview">
             <j.3:content>
-              <j.2:COMPONENT rdf:ID="OutputThread">
+              <j.2:SWCOMPONENT rdf:ID="OutputThread">
                 <j.4:partOf>
                   <j.4:SYSTEM rdf:ID="CounterApplication">
                     <j.4:partOf>
@@ -361,17 +332,17 @@
                     <rdf:type rdf:resource="DevelopmentPlan#SystemComponent"/>
                   </j.4:SYSTEM>
                 </j.4:partOf>
-              </j.2:COMPONENT>
+              </j.2:SWCOMPONENT>
             </j.3:content>
             <j.3:content>
-              <j.2:COMPONENT rdf:ID="InputThread">
+              <j.2:SWCOMPONENT rdf:ID="InputThread">
                 <j.4:partOf rdf:resource="#CounterApplication"/>
-              </j.2:COMPONENT>
+              </j.2:SWCOMPONENT>
             </j.3:content>
             <j.3:content>
-              <j.2:COMPONENT rdf:ID="ExecutiveThread">
+              <j.2:SWCOMPONENT rdf:ID="ExecutiveThread">
                 <j.4:partOf rdf:resource="#CounterApplication"/>
-              </j.2:COMPONENT>
+              </j.2:SWCOMPONENT>
             </j.3:content>
             <j.3:content rdf:resource="#CounterApplication"/>
           </j.1:SECTION>
@@ -484,9 +455,6 @@
     <j.3:identifier>inflow</j.3:identifier>
   </trnstldp:SystemInterfaceDefinition>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareComponentTestResult_content"/>
-  <j.5:FORMAT rdf:ID="CHeaderFile">
-    <j.3:identifier>.h</j.3:identifier>
-  </j.5:FORMAT>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareUnitTestExecution_A-7-2"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareDesignReview_A-4-5"/>
   <sadlimplicitmodel:Rule rdf:ID="SoftwareCodeReviewArtifacts_content"/>

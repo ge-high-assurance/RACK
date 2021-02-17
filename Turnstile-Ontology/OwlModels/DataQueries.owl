@@ -19,7 +19,7 @@
   <sadlimplicitmodel:NamedQuery rdf:ID="SoftwareUnitTestResultCsv">
     <rdfs:isDefinedBy>
 
-select distinct ?identifier_TEST_STATUS ?identifier_SoftwareUnitTestExecution ?identifier_SoftwareUnitTest ?identifier_SoftwareUnitTestResult
+select distinct ?identifier_TEST_STATUS ?generatedAtTime_SoftwareUnitTestResult ?identifier_SoftwareUnitTestExecution ?identifier_SoftwareUnitTest ?identifier_SoftwareUnitTestResult
 where {
     ?SoftwareUnitTestResult a &lt;http://Turnstile/DevelopmentPlan#SoftwareUnitTestResult&gt; . 
     ?SoftwareUnitTestResult &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareUnitTestResult . 
@@ -32,6 +32,8 @@ where {
         ?SoftwareUnitTestExecution a &lt;http://Turnstile/DevelopmentPlan#SoftwareUnitTestExecution&gt; . 
         ?SoftwareUnitTestExecution &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareUnitTestExecution . 
     }
+. optional {?SoftwareUnitTestResult &lt;http://arcos.rack/PROV-S#generatedAtTime&gt; ?generatedAtTime_SoftwareUnitTestResult
+}
     ?SoftwareUnitTestResult &lt;http://arcos.rack/TESTING#result&gt; ?TEST_STATUS .
         ?TEST_STATUS a &lt;http://arcos.rack/TESTING#TEST_STATUS&gt; . 
         ?TEST_STATUS &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_TEST_STATUS . 
@@ -255,7 +257,7 @@ select distinct ?identifier_SystemComponent ?identifier_SystemRequirement ?text_
 where {
     ?SystemRequirement a &lt;http://Turnstile/DevelopmentPlan#SystemRequirement&gt; . 
     ?SystemRequirement &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SystemRequirement . 
-    optional{ ?SystemRequirement &lt;http://arcos.rack/REQUIREMENTS#text&gt; ?text_SystemRequirement} . 
+    optional{ ?SystemRequirement &lt;http://arcos.rack/PROV-S#description&gt; ?text_SystemRequirement} . 
     optional{
 
     ?SystemRequirement &lt;http://arcos.rack/REQUIREMENTS#governs&gt; ?SystemComponent .
@@ -346,7 +348,7 @@ select distinct ?identifier_SystemRequirement ?identifier_HAZARD ?identifier_Sys
 where {
     ?HighLevelRequirement a &lt;http://Turnstile/DevelopmentPlan#HighLevelRequirement&gt; . 
     ?HighLevelRequirement &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_HighLevelRequirement . 
-    ?HighLevelRequirement &lt;http://arcos.rack/REQUIREMENTS#text&gt; ?text_HighLevelRequirement . 
+    ?HighLevelRequirement &lt;http://arcos.rack/PROV-S#description&gt; ?text_HighLevelRequirement . 
     optional{
 
     ?HighLevelRequirement &lt;http://arcos.rack/REQUIREMENTS#createdBy&gt; ?SoftwareRequirementsDefinition .
@@ -444,7 +446,7 @@ where {
     ?Engineer a &lt;http://Turnstile/DevelopmentPlan#Engineer&gt; . 
     optional{ ?Engineer &lt;http://arcos.rack/AGENTS#emailAddress&gt; ?emailAddress_Engineer} . 
     ?Engineer &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_Engineer . 
-    optional{ ?Engineer &lt;http://arcos.rack/AGENTS#name&gt; ?name_Engineer} . 
+    optional{ ?Engineer &lt;http://arcos.rack/PROV-S#title&gt; ?name_Engineer} . 
     optional{
 
     ?Engineer &lt;http://arcos.rack/AGENTS#employedBy&gt; ?ORGANIZATION .
@@ -520,7 +522,7 @@ select distinct ?ProducingLowLevelRequirement ?identifier_ProducingLowLevelRequi
 where {
     ?DataAndControlCouple a &lt;http://Turnstile/DevelopmentPlan#DataAndControlCouple&gt; . 
     ?DataAndControlCouple &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_DataAndControlCouple . 
-    optional{ ?DataAndControlCouple &lt;http://arcos.rack/REQUIREMENTS#text&gt; ?text_DataAndControlCouple} . 
+    optional{ ?DataAndControlCouple &lt;http://arcos.rack/PROV-S#description&gt; ?text_DataAndControlCouple} . 
     optional{
 
     ?DataAndControlCouple &lt;http://arcos.rack/REQUIREMENTS#consumedBy&gt; ?ConsumingLowLevelRequirement .
@@ -549,7 +551,7 @@ select distinct ?identifier_ProducingSystemInterfaceDefinition ?identifier_Provi
 where {
     ?DataDictionary a &lt;http://Turnstile/DevelopmentPlan#DataDictionary&gt; . 
     ?DataDictionary &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_DataDictionary . 
-    optional{ ?DataDictionary &lt;http://arcos.rack/REQUIREMENTS#text&gt; ?text_DataDictionary} . 
+    optional{ ?DataDictionary &lt;http://arcos.rack/PROV-S#description&gt; ?text_DataDictionary} . 
     optional{
 
     ?DataDictionary &lt;http://arcos.rack/REQUIREMENTS#consumedBy&gt; ?ConsumingHighLevelRequirement .
@@ -590,7 +592,7 @@ select distinct ?identifier_HighLevelRequirement ?identifier_HAZARD ?identifier_
 where {
     ?LowLevelRequirement a &lt;http://Turnstile/DevelopmentPlan#LowLevelRequirement&gt; . 
     ?LowLevelRequirement &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_LowLevelRequirement . 
-    optional{ ?LowLevelRequirement &lt;http://arcos.rack/REQUIREMENTS#text&gt; ?text_LowLevelRequirement} . 
+    optional{ ?LowLevelRequirement &lt;http://arcos.rack/PROV-S#description&gt; ?text_LowLevelRequirement} . 
     optional{
 
     ?LowLevelRequirement &lt;http://arcos.rack/REQUIREMENTS#createdBy&gt; ?SoftwareDesign .

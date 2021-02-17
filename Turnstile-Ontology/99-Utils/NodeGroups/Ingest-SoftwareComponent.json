@@ -3,24 +3,8 @@
         "baseURI": "http://arcos.data/software",
         "columns": [
             {
-                "colId": "col_0",
-                "colName": "annotationId"
-            },
-            {
                 "colId": "col_1",
                 "colName": "componentTypeId"
-            },
-            {
-                "colId": "col_2",
-                "colName": "controlFlowUnconditionallyId"
-            },
-            {
-                "colId": "col_3",
-                "colName": "controlFlowsToConditionallyId"
-            },
-            {
-                "colId": "col_4",
-                "colName": "controlFlowsToUnconditionallyId"
             },
             {
                 "colId": "col_5",
@@ -37,10 +21,6 @@
             {
                 "colId": "col_8",
                 "colName": "name"
-            },
-            {
-                "colId": "col_9",
-                "colName": "requirementId"
             },
             {
                 "colId": "col_10",
@@ -62,7 +42,7 @@
                 "mapping": [],
                 "props": [
                     {
-                        "URIRelation": "http://arcos.rack/SOFTWARE#name",
+                        "URIRelation": "http://arcos.rack/PROV-S#title",
                         "mapping": [
                             {
                                 "colId": "col_8",
@@ -96,29 +76,7 @@
                     }
                 ],
                 "sparqlID": "?COMPONENT",
-                "type": "http://arcos.rack/SOFTWARE#COMPONENT"
-            },
-            {
-                "URILookupMode": "createIfMissing",
-                "mapping": [],
-                "props": [
-                    {
-                        "URILookup": [
-                            "?ANNOTATION"
-                        ],
-                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
-                        "mapping": [
-                            {
-                                "colId": "col_0",
-                                "transformList": [
-                                    "trans_0"
-                                ]
-                            }
-                        ]
-                    }
-                ],
-                "sparqlID": "?ANNOTATION",
-                "type": "http://arcos.rack/PROV-S#ENTITY"
+                "type": "http://arcos.rack/SOFTWARE#SWCOMPONENT"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -138,50 +96,6 @@
                 ],
                 "sparqlID": "?COMPONENT_TYPE",
                 "type": "http://arcos.rack/SOFTWARE#COMPONENT_TYPE"
-            },
-            {
-                "URILookupMode": "createIfMissing",
-                "mapping": [],
-                "props": [
-                    {
-                        "URILookup": [
-                            "?CONTROL_FLOW_CONDITIONAL"
-                        ],
-                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
-                        "mapping": [
-                            {
-                                "colId": "col_3",
-                                "transformList": [
-                                    "trans_0"
-                                ]
-                            }
-                        ]
-                    }
-                ],
-                "sparqlID": "?CONTROL_FLOW_CONDITIONAL",
-                "type": "http://arcos.rack/SOFTWARE#COMPONENT"
-            },
-            {
-                "URILookupMode": "createIfMissing",
-                "mapping": [],
-                "props": [
-                    {
-                        "URILookup": [
-                            "?CONTROL_FLOW_UNCONDITIONAL"
-                        ],
-                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
-                        "mapping": [
-                            {
-                                "colId": "col_4",
-                                "transformList": [
-                                    "trans_0"
-                                ]
-                            }
-                        ]
-                    }
-                ],
-                "sparqlID": "?CONTROL_FLOW_UNCONDITIONAL",
-                "type": "http://arcos.rack/SOFTWARE#COMPONENT"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -247,29 +161,7 @@
                     }
                 ],
                 "sparqlID": "?MENTION",
-                "type": "http://arcos.rack/PROV-S#ENTITY"
-            },
-            {
-                "URILookupMode": "createIfMissing",
-                "mapping": [],
-                "props": [
-                    {
-                        "URILookup": [
-                            "?REQUIREMENT"
-                        ],
-                        "URIRelation": "http://arcos.rack/PROV-S#identifier",
-                        "mapping": [
-                            {
-                                "colId": "col_9",
-                                "transformList": [
-                                    "trans_0"
-                                ]
-                            }
-                        ]
-                    }
-                ],
-                "sparqlID": "?REQUIREMENT",
-                "type": "http://arcos.rack/PROV-S#ENTITY"
+                "type": "http://arcos.rack/SOFTWARE#SWCOMPONENT"
             },
             {
                 "URILookupMode": "createIfMissing",
@@ -291,7 +183,7 @@
                     }
                 ],
                 "sparqlID": "?SUBCOMPONENT",
-                "type": "http://arcos.rack/SOFTWARE#COMPONENT"
+                "type": "http://arcos.rack/SOFTWARE#SWCOMPONENT"
             }
         ],
         "texts": [],
@@ -312,10 +204,10 @@
         "orderBy": [],
         "sNodeList": [
             {
-                "NodeName": "COMPONENT",
+                "NodeName": "SWCOMPONENT",
                 "SparqlID": "?SUBCOMPONENT",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#COMPONENT",
+                "fullURIName": "http://arcos.rack/SOFTWARE#SWCOMPONENT",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -399,7 +291,7 @@
                 "NodeName": "ENTITY",
                 "SparqlID": "?MENTION",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/PROV-S#ENTITY",
+                "fullURIName": "http://arcos.rack/SOFTWARE#SWCOMPONENT",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
@@ -444,7 +336,7 @@
                     "http://arcos.rack/DOCUMENT#PLAN",
                     "http://arcos.rack/REVIEW#REVIEW_LOG",
                     "http://arcos.rack/SACM-S#ASSERTED_INFERENCE",
-                    "http://arcos.rack/SOFTWARE#COMPONENT",
+                    "http://arcos.rack/SOFTWARE#SWCOMPONENT",
                     "http://arcos.rack/SACM-S#ARTIFACT_REFERENCE",
                     "http://arcos.rack/DOCUMENT#PROCEDURE",
                     "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
@@ -500,7 +392,7 @@
                     "http://arcos.rack/DOCUMENT#PLAN",
                     "http://arcos.rack/REVIEW#REVIEW_LOG",
                     "http://arcos.rack/SACM-S#ASSERTED_INFERENCE",
-                    "http://arcos.rack/SOFTWARE#COMPONENT",
+                    "http://arcos.rack/SOFTWARE#SWCOMPONENT",
                     "http://arcos.rack/SACM-S#ARTIFACT_REFERENCE",
                     "http://arcos.rack/DOCUMENT#PROCEDURE",
                     "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
@@ -556,67 +448,11 @@
                     "http://arcos.rack/DOCUMENT#PLAN",
                     "http://arcos.rack/REVIEW#REVIEW_LOG",
                     "http://arcos.rack/SACM-S#ASSERTED_INFERENCE",
-                    "http://arcos.rack/SOFTWARE#COMPONENT",
+                    "http://arcos.rack/SOFTWARE#SWCOMPONENT",
                     "http://arcos.rack/SACM-S#ARTIFACT_REFERENCE",
                     "http://arcos.rack/DOCUMENT#PROCEDURE",
                     "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
                 ],
-                "valueConstraint": ""
-            },
-            {
-                "NodeName": "COMPONENT",
-                "SparqlID": "?CONTROL_FLOW_UNCONDITIONAL",
-                "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#COMPONENT",
-                "instanceValue": null,
-                "isReturned": false,
-                "isRuntimeConstrained": false,
-                "nodeList": [],
-                "propList": [
-                    {
-                        "Constraints": "",
-                        "KeyName": "identifier",
-                        "SparqlID": "?controlFlowsToUnconditionallyId",
-                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
-                        "ValueType": "string",
-                        "fullURIName": "",
-                        "instanceValues": [],
-                        "isMarkedForDeletion": false,
-                        "isReturned": true,
-                        "isRuntimeConstrained": false,
-                        "optMinus": 1,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                ],
-                "subClassNames": [],
-                "valueConstraint": ""
-            },
-            {
-                "NodeName": "COMPONENT",
-                "SparqlID": "?CONTROL_FLOW_CONDITIONAL",
-                "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#COMPONENT",
-                "instanceValue": null,
-                "isReturned": false,
-                "isRuntimeConstrained": false,
-                "nodeList": [],
-                "propList": [
-                    {
-                        "Constraints": "",
-                        "KeyName": "identifier",
-                        "SparqlID": "?controlFlowConditionalId",
-                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
-                        "ValueType": "string",
-                        "fullURIName": "",
-                        "instanceValues": [],
-                        "isMarkedForDeletion": false,
-                        "isReturned": true,
-                        "isRuntimeConstrained": false,
-                        "optMinus": 1,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                ],
-                "subClassNames": [],
                 "valueConstraint": ""
             },
             {
@@ -696,7 +532,7 @@
                     "http://arcos.rack/DOCUMENT#PLAN",
                     "http://arcos.rack/REVIEW#REVIEW_LOG",
                     "http://arcos.rack/SACM-S#ASSERTED_INFERENCE",
-                    "http://arcos.rack/SOFTWARE#COMPONENT",
+                    "http://arcos.rack/SOFTWARE#SWCOMPONENT",
                     "http://arcos.rack/SACM-S#ARTIFACT_REFERENCE",
                     "http://arcos.rack/DOCUMENT#PROCEDURE",
                     "http://arcos.rack/REQUIREMENTS#REQUIREMENT"
@@ -707,31 +543,11 @@
                 "NodeName": "COMPONENT",
                 "SparqlID": "?COMPONENT",
                 "deletionMode": "NO_DELETE",
-                "fullURIName": "http://arcos.rack/SOFTWARE#COMPONENT",
+                "fullURIName": "http://arcos.rack/SOFTWARE#SWCOMPONENT",
                 "instanceValue": null,
                 "isReturned": false,
                 "isRuntimeConstrained": false,
                 "nodeList": [
-                    {
-                        "ConnectBy": "annotations",
-                        "Connected": true,
-                        "DeletionMarkers": [
-                            false
-                        ],
-                        "KeyName": "annotations",
-                        "OptionalMinus": [
-                            "1"
-                        ],
-                        "Qualifiers": [
-                            ""
-                        ],
-                        "SnodeSparqlIDs": [
-                            "?ANNOTATION"
-                        ],
-                        "UriConnectBy": "http://arcos.rack/SOFTWARE#annotations",
-                        "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-                        "ValueType": "ENTITY"
-                    },
                     {
                         "ConnectBy": "componentType",
                         "Connected": true,
@@ -753,46 +569,6 @@
                         "ValueType": "COMPONENT_TYPE"
                     },
                     {
-                        "ConnectBy": "controlFlowsToConditionally",
-                        "Connected": true,
-                        "DeletionMarkers": [
-                            false
-                        ],
-                        "KeyName": "controlFlowsToConditionally",
-                        "OptionalMinus": [
-                            "1"
-                        ],
-                        "Qualifiers": [
-                            ""
-                        ],
-                        "SnodeSparqlIDs": [
-                            "?CONTROL_FLOW_CONDITIONAL"
-                        ],
-                        "UriConnectBy": "http://arcos.rack/SOFTWARE#controlFlowsToConditionally",
-                        "UriValueType": "http://arcos.rack/SOFTWARE#COMPONENT",
-                        "ValueType": "COMPONENT"
-                    },
-                    {
-                        "ConnectBy": "controlFlowsToUnconditionally",
-                        "Connected": true,
-                        "DeletionMarkers": [
-                            false
-                        ],
-                        "KeyName": "controlFlowsToUnconditionally",
-                        "OptionalMinus": [
-                            "1"
-                        ],
-                        "Qualifiers": [
-                            ""
-                        ],
-                        "SnodeSparqlIDs": [
-                            "?CONTROL_FLOW_UNCONDITIONAL"
-                        ],
-                        "UriConnectBy": "http://arcos.rack/SOFTWARE#controlFlowsToUnconditionally",
-                        "UriValueType": "http://arcos.rack/SOFTWARE#COMPONENT",
-                        "ValueType": "COMPONENT"
-                    },
-                    {
                         "ConnectBy": "definedIn",
                         "Connected": true,
                         "DeletionMarkers": [
@@ -808,9 +584,9 @@
                         "SnodeSparqlIDs": [
                             "?DEFINE_IN"
                         ],
-                        "UriConnectBy": "http://arcos.rack/SOFTWARE#definedIn",
-                        "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-                        "ValueType": "ENTITY"
+                        "UriConnectBy": "http://arcos.rack/FILE#definedIn",
+                        "UriValueType": "http://arcos.rack/FILE#FILE",
+                        "ValueType": "FILE"
                     },
                     {
                         "ConnectBy": "instantiates",
@@ -849,28 +625,8 @@
                             "?MENTION"
                         ],
                         "UriConnectBy": "http://arcos.rack/SOFTWARE#mentions",
-                        "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-                        "ValueType": "ENTITY"
-                    },
-                    {
-                        "ConnectBy": "requirements",
-                        "Connected": true,
-                        "DeletionMarkers": [
-                            false
-                        ],
-                        "KeyName": "requirements",
-                        "OptionalMinus": [
-                            "1"
-                        ],
-                        "Qualifiers": [
-                            ""
-                        ],
-                        "SnodeSparqlIDs": [
-                            "?REQUIREMENT"
-                        ],
-                        "UriConnectBy": "http://arcos.rack/SOFTWARE#requirements",
-                        "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-                        "ValueType": "ENTITY"
+                        "UriValueType": "http://arcos.rack/SOFTWARE#SWCOMPONENT",
+                        "ValueType": "SWCOMPONENT"
                     },
                     {
                         "ConnectBy": "subcomponentOf",
@@ -889,8 +645,8 @@
                             "?SUBCOMPONENT"
                         ],
                         "UriConnectBy": "http://arcos.rack/SOFTWARE#subcomponentOf",
-                        "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-                        "ValueType": "ENTITY"
+                        "UriValueType": "http://arcos.rack/SOFTWARE#SWCOMPONENT",
+                        "ValueType": "SWCOMPONENT"
                     }
                 ],
                 "propList": [
@@ -898,7 +654,7 @@
                         "Constraints": "",
                         "KeyName": "name",
                         "SparqlID": "?name",
-                        "UriRelationship": "http://arcos.rack/SOFTWARE#name",
+                        "UriRelationship": "http://arcos.rack/PROV-S#title",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
@@ -952,7 +708,7 @@
             }
         ],
         "domain": "",
-        "enableOwlImports": true,
+        "enableOwlImports": false,
         "model": [
             {
                 "graph": "http://rack001/model",

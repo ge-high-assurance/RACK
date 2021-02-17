@@ -1,0 +1,5 @@
+[LOGGING]
+logging-format-style=new
+
+[MESSAGES CONTROL]
+disable=logging-fstring-interpolation

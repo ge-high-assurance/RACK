@@ -34,8 +34,10 @@ ENTITY (note "An entity is a physical, digital, conceptual, or other kind of thi
 	is a type of THING.
 
 	wasDerivedFrom (note "A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity.") describes ENTITY with values of type ENTITY.
-	wasRevisionOf (note "Indicates a direct line of primary descendancy from one entity to a derivative entity.") is a type of wasDerivedFrom.
-	wasImpactedBy (note "Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter.") is a type of wasDerivedFrom.
+	wasRevisionOf (note "Indicates a direct line of primary descendancy from one entity to a derivative entity.") describes ENTITY with values of type ENTITY.
+	wasRevisionOf is a type of wasDerivedFrom.
+	wasImpactedBy (note "Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter.") describes ENTITY with values of type ENTITY.
+	wasImpactedBy is a type of wasDerivedFrom.
 	wasGeneratedBy (note "Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.")describes ENTITY with values of type ACTIVITY.
 	wasGeneratedBy describes ENTITY with at most 1 value.
 	wasAttributedTo (note "Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution" ) describes ENTITY with values of type AGENT.

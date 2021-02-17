@@ -9,6 +9,7 @@ nixpkgs.mkShell {
     git
     myPythonPackages.python
     myPythonPackages.venvShellHook
+    myPythonPackages.wheel
   ];
 
   # Python wheel creation uses zip, but zip does not support timestamps prior
@@ -16,7 +17,7 @@ nixpkgs.mkShell {
   postVenvCreation = ''
     export SOURCE_DATE_EPOCH=315532800
     pip install -r ${./requirements.txt}
-    pip install -r ${./requirements-dev.txt}
+    pip install -r ${./dev/requirements.txt}
   '';
 
   venvDir = ".venv";

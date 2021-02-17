@@ -3,6 +3,7 @@
 #
 # Script documentation is available in RACK-Ontology/scripts/README.md
 data-graph: "http://rack001/data"
+extra-data-graphs: ["http://rack001/do-178c"]
 ingestion-steps:
 - {nodegroup: "Ingest-DataAndControlCouple", csv: "DataAndControlCouple.csv"}
 - {nodegroup: "Ingest-DataDictionary", csv: "DataDictionary.csv"}

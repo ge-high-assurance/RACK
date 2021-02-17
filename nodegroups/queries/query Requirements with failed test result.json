@@ -43,9 +43,6 @@
         "limit": 0,
         "offset": 0,
         "orderBy": [
-            {
-                "sparqlID": "?req"
-            }
         ],
         "sNodeList": [
             {
@@ -66,10 +63,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?verifies_REQUIREMENT_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],
@@ -105,10 +104,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?executedBy_TEST_EXECUTION_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],
@@ -153,10 +154,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?confirms_TEST_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],
@@ -187,8 +190,8 @@
                             "?TEST"
                         ],
                         "UriConnectBy": "http://arcos.rack/TESTING#confirms",
-                        "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-                        "ValueType": "ENTITY"
+                        "UriValueType": "http://arcos.rack/TESTING#TEST",
+                        "ValueType": "TEST"
                     },
                     {
                         "ConnectBy": "executedBy",
@@ -241,10 +244,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?TEST_RESULT_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],

@@ -69,15 +69,17 @@
                         "Constraints": "",
                         "KeyName": "text",
                         "SparqlID": "?req_text",
-                        "UriRelationship": "http://arcos.rack/REQUIREMENTS#text",
+                        "UriRelationship": "http://arcos.rack/PROV-S#description",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?consumedBy_REQUIREMENT_text",
+						"isBindingReturned": true
                     },
                     {
                         "Constraints": "",
@@ -88,10 +90,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?consumedBy_REQUIREMENT_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],
@@ -132,15 +136,17 @@
                         "Constraints": "",
                         "KeyName": "text",
                         "SparqlID": "?term_text",
-                        "UriRelationship": "http://arcos.rack/REQUIREMENTS#text",
+                        "UriRelationship": "http://arcos.rack/PROV-S#description",
                         "ValueType": "string",
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": false,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?DATA_DICTIONARY_TERM_text",
+						"isBindingReturned": true
                     },
                     {
                         "Constraints": "",
@@ -151,10 +157,12 @@
                         "fullURIName": "",
                         "instanceValues": [],
                         "isMarkedForDeletion": false,
-                        "isReturned": true,
+                        "isReturned": false,
                         "isRuntimeConstrained": true,
                         "optMinus": 0,
-                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"binding": "?DATA_DICTIONARY_TERM_identifier",
+						"isBindingReturned": true
                     }
                 ],
                 "subClassNames": [],

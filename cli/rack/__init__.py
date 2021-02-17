@@ -53,6 +53,15 @@ class Graph(Enum):
     DATA = "data"
     MODEL = "model"
 
+class CLIMethod(Enum):
+    """Enumeration of the CLI methods (for context in error reporting)"""
+    DATA_IMPORT = "data import"
+    MODEL_IMPORT = "model import"
+    OTHER_CLI_METHOD = "..."
+
+# In the absence of overwrite, this will be the default
+cliMethod = CLIMethod.OTHER_CLI_METHOD
+
 @unique
 class ExportFormat(Enum):
     """Enumeration of data export formats"""
@@ -95,7 +104,10 @@ INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
                 ]
             }
         },
-        'data-graph': {'type': 'string'}
+        'data-graph': {'type': 'string'},
+        'extra-data-graphs': {
+            'type': 'array',
+            'contains': {'type': 'string'}}
     }
 }
 
@@ -146,10 +158,10 @@ def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Ca
     decorated function.  Upon success, it appends OK, upon failure, it appends
     FAIL.  If suffix is set, the result of the computation is passed to suffix,
     and the resulting string is appended after OK."""
+    prefix += '...'
     def decorator(func: Decoratee) -> Decoratee:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             nonlocal prefix
-            prefix += '...'
             print(f'{prefix: <60}', end='', flush=True)
             try:
                 result = func(*args, **kwargs)
@@ -162,12 +174,12 @@ def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Ca
     return decorator
 # pylint: enable=unused-argument
 
-def sparql_connection(base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url]) -> Connection:
+def sparql_connection(base_url: Url, data_graph: Optional[Url], extra_data_graphs: List[Url], triple_store: Optional[Url]) -> Connection:
     """Generate a SPARQL connection value."""
 
     semtk3.set_host(base_url)
     # Default to RACK in a Box triple-store location
-    triple_store = triple_store or Url(base_url + ":3030/RACK")
+    triple_store = triple_store or Url("http://localhost:3030/RACK")
     conn: Dict[str, Any] = {
         "name": "%NODEGROUP%",
         "model": [{"type": "fuseki", "url": triple_store, "graph": MODEL_GRAPH}],
@@ -175,6 +187,8 @@ def sparql_connection(base_url: Url, data_graph: Optional[Url], triple_store: Op
         }
     if data_graph is not None:
         conn["data"].append({"type": "fuseki", "url": triple_store, "graph": data_graph})
+    for graph in extra_data_graphs:
+        conn["data"].append({"type": "fuseki", "url": triple_store, "graph": graph})
     return Connection(json.dumps(conn))
 
 def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
@@ -203,9 +217,40 @@ def format_semtk_table(semtk_table: SemtkTable, export_format: ExportFormat = Ex
     print(str_bad(f"Internal error: incomplete implementation of run_query for '{export_format}'"))
     sys.exit(1)
 
-def run_query(conn: Connection, nodegroup: str, export_format: ExportFormat = ExportFormat.TEXT, headers: bool = True, path: Optional[Path] = None) -> None:
+def generate_constraints(constraint_texts: List[str]) -> List[Any]:
+    constraint_re = re.compile(r'^(?P<var>[^<>=~:]*)((:(?P<val1>.*)(?P<op2><=?>)(?P<val2>.*))|(?P<op>~|<=|>=|=|<|>)(?P<val>.*))$')
+    operators = {
+        '~': semtk3.OP_REGEX,
+        '=': semtk3.OP_MATCHES,
+        '>': semtk3.OP_GREATERTHAN,
+        '>=': semtk3.OP_GREATERTHANOREQUALS,
+        '<': semtk3.OP_LESSTHAN,
+        '<=': semtk3.OP_LESSTHANOREQUALS,
+        '<>': semtk3.OP_VALUEBETWEEN,
+        '<=>': semtk3.OP_VALUEBETWEENUNINCLUSIVE
+    }
+
+    result = []
+    for constraint_text in constraint_texts:
+        match = constraint_re.match(constraint_text)
+        if match is None:
+            print(str_bad('Unsupported constraint: ' + constraint_text))
+            sys.exit(1)
+        
+        if match['op'] is not None:
+            c = semtk3.build_constraint(match['var'], operators[match['op']], [match['val']])
+        else:
+            c = semtk3.build_constraint(match['var'], operators[match['op2']], [match['val1'], match['val2']])
+        result.append(c)
+
+    return result
+
+def run_query(conn: Connection, nodegroup: str, export_format: ExportFormat = ExportFormat.TEXT, headers: bool = True, path: Optional[Path] = None, constraints: Optional[List[str]] = None) -> None:
     semtk3.SEMTK3_CONN_OVERRIDE = conn
-    semtk_table = semtk3.select_by_id(nodegroup)
+
+    runtime_constraints = generate_constraints(constraints or [])
+
+    semtk_table = semtk3.select_by_id(nodegroup, runtime_constraints=runtime_constraints)
     formatted_table = format_semtk_table(semtk_table, export_format=export_format, headers=headers)
     if path is None:
         print()
@@ -214,9 +259,12 @@ def run_query(conn: Connection, nodegroup: str, export_format: ExportFormat = Ex
         with open(path, mode="w") as f:
             print(formatted_table, file=f)
 
-def run_count_query(conn: Connection, nodegroup: str) -> None:
+def run_count_query(conn: Connection, nodegroup: str, constraints: Optional[List[str]] = None) -> None:
     semtk3.SEMTK3_CONN_OVERRIDE = conn
-    semtk_table = semtk3.count_by_id(nodegroup)
+
+    runtime_constraints = generate_constraints(constraints or [])
+
+    semtk_table = semtk3.count_by_id(nodegroup, runtime_constraints=runtime_constraints)
     print(semtk_table.get_rows()[0][0])
 
 def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
@@ -240,21 +288,33 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
     go()
 
-def ingest_data_driver(config_path: Path, base_url: Url, data_graph: Optional[Url], triple_store: Optional[Url], clear: bool) -> None:
+def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
     with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
         validate(config, INGEST_CSV_CONFIG_SCHEMA)
 
     steps = config['ingestion-steps']
-    data_graph = data_graph or config['data-graph']
+    
+    if data_graphs is None:
+        data_graph = Url("http://rack001/data")
+    else:
+        data_graph = data_graphs[0]
+
     base_path = config_path.parent
+
+    if data_graphs is not None:
+        extra_data_graphs = data_graphs[1:]
+    elif 'extra-data-graphs' in config:
+        extra_data_graphs = config['extra-data-graphs']
+    else:
+        extra_data_graphs = []
 
     if data_graph is None:
         logger.warning("Defaulting data-graph to %s", DEFAULT_DATA_GRAPH)
         data_graph = DEFAULT_DATA_GRAPH
 
-    conn = sparql_connection(base_url, data_graph, triple_store)
+    conn = sparql_connection(base_url, data_graph, extra_data_graphs, triple_store)
 
     if clear:
         clear_graph(conn)
@@ -281,7 +341,7 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
     files = config['files']
     base_path = config_path.parent
 
-    conn = sparql_connection(base_url, None, triple_store)
+    conn = sparql_connection(base_url, None, [], triple_store)
 
     if clear:
         clear_graph(conn, which_graph=Graph.MODEL)
@@ -291,19 +351,19 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
 
 @with_status('Storing nodegroups')
 def store_nodegroups_driver(directory: Path, base_url: Url) -> None:
-    sparql_connection(base_url, None, None)
+    sparql_connection(base_url, None, [], None)
     semtk3.store_nodegroups(directory)
 
 @with_status('Retrieving nodegroups')
 def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url) -> None:
-    sparql_connection(base_url, None, None)
+    sparql_connection(base_url, None, [], None)
     semtk3.retrieve_from_store(regexp, directory)
 
 def list_nodegroups_driver(base_url: Url) -> None:
 
     @with_status('Listing nodegroups')
     def list_nodegroups() -> SemtkTable:
-        sparql_connection(base_url, None, None)
+        sparql_connection(base_url, None, [], None)
         return semtk3.get_nodegroup_store_data()
 
     print(format_semtk_table(list_nodegroups()))
@@ -330,7 +390,7 @@ def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, ye
         print('No nodegroups specified for deletion: doing nothing.')
         return
 
-    sparql_connection(base_url, None, None)
+    sparql_connection(base_url, None, [], None)
     allIDs = semtk3.get_nodegroup_store_data().get_column('ID')
 
     if use_regexp:
@@ -356,7 +416,7 @@ def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, ye
     confirm(on_confirmed, yes)
 
 def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
-    sparql_connection(base_url, None, None)
+    sparql_connection(base_url, None, [], None)
     allIDs = semtk3.get_nodegroup_store_data().get_column('ID')
 
     if not yes:
@@ -368,19 +428,21 @@ def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
     confirm(on_confirmed, yes)
 
 def dispatch_data_export(args: SimpleNamespace) -> None:
-    conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
-    run_query(conn, args.nodegroup, export_format=args.format, headers=not args.no_headers, path=args.file)
+    conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store)
+    run_query(conn, args.nodegroup, export_format=args.format, headers=not args.no_headers, path=args.file, constraints=args.constraint)
 
 def dispatch_data_count(args: SimpleNamespace) -> None:
-    conn = sparql_connection(args.base_url, args.data_graph, args.triple_store)
-    run_count_query(conn, args.nodegroup)
+    conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store)
+    run_count_query(conn, args.nodegroup, constraints=args.constraint)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
+    cliMethod = CLIMethod.DATA_IMPORT
     ingest_data_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store, args.clear)
 
 def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
+    cliMethod = CLIMethod.MODEL_IMPORT
     ingest_owl_driver(Path(args.config), args.base_url, args.triple_store, args.clear)
 
 def dispatch_nodegroups_import(args: SimpleNamespace) -> None:
@@ -426,19 +488,21 @@ def get_argument_parser() -> argparse.ArgumentParser:
     nodegroups_deleteall_parser = nodegroups_subparsers.add_parser('delete-all', help='Delete all nodegroups from RACK')
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
-    data_import_parser.add_argument('--data-graph', type=str, help='Override data graph URL')
+    data_import_parser.add_argument('--data-graph', type=str, action='append', help='Data graph URL')
     data_import_parser.add_argument('--clear', action='store_true', help='Clear data graph before import')
     data_import_parser.set_defaults(func=dispatch_data_import)
 
     data_export_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
-    data_export_parser.add_argument('data_graph', type=str, help='Data graph URL')
+    data_export_parser.add_argument('--data-graph', type=str, required=True, action='append', help='Data graph URL')
     data_export_parser.add_argument('--format', type=ExportFormat, help='Export format', choices=list(ExportFormat), default=ExportFormat.TEXT)
     data_export_parser.add_argument('--no-headers', action='store_true', help='Omit header row')
     data_export_parser.add_argument('--file', type=Path, help='Output to file')
+    data_export_parser.add_argument('--constraint', type=str, action='append', help='Runtime constraint: key=value')
     data_export_parser.set_defaults(func=dispatch_data_export)
 
     data_count_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
-    data_count_parser.add_argument('data_graph', type=str, help='Data graph URL')
+    data_count_parser.add_argument('--data-graph', type=str, required=True, action='append', help='Data graph URL')
+    data_count_parser.add_argument('--constraint', type=str, action='append', help='Runtime constraint: key=value')
     data_count_parser.set_defaults(func=dispatch_data_count)
 
     model_import_parser.add_argument('config', type=str, help='Configuration YAML file')

@@ -1,0 +1,9 @@
+/.envrc
+/.vscode
+/monkeytype.sqlite3
+/venv
+*.ali
+*.o
+*.rack
+*.stderr
+*.stdout

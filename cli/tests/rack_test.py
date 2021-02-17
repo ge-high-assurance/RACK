@@ -12,12 +12,12 @@ from rack import DEFAULT_BASE_URL, ingest_data_driver, ingest_owl_driver, run_qu
 
 def test_load_csv(rack_in_a_box: str) -> None:
     # Just test that it doesn't raise an exception
-    ingest_data_driver(Path("../models/TurnstileSystem/Data/import.yaml"), Url(rack_in_a_box), None, None)
+    ingest_data_driver(Path("../Turnstile-Ontology/99-Utils/Data/Model.yaml"), Url(rack_in_a_box), None, None, False)
 
 def test_load_owl(rack_in_a_box: str) -> None:
     # Just test that it doesn't raise an exception
-    ingest_owl_driver(Path("../OwlModels/import.yaml"), Url(rack_in_a_box), None)
+    ingest_owl_driver(Path("../RACK-Ontology/OwlModels/import.yaml"), Url(rack_in_a_box), None, False)
 
-def test_run_query(rack_in_a_box) -> None:
-    conn = sparql_connection(rack_in_a_box, Url("http://rack001/data"), None)
-    run_query(conn, "ingest01 system")
+def test_run_query(rack_in_a_box: str) -> None:
+    conn = sparql_connection(Url(rack_in_a_box), Url("http://rack001/data"), [], None)
+    run_query(conn, "Ingest-SystemComponent")

@@ -3,7 +3,7 @@
 	"sparqlConn": {
 		"name": "RACK local fuseki",
 		"domain": "",
-		"enableOwlImports": true,
+		"enableOwlImports": false,
 		"model": [
 			{
 				"type": "fuseki",
@@ -112,8 +112,8 @@
 							false
 						],
 						"KeyName": "destination",
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"ValueType": "SYSTEM",
+						"UriValueType": "http://arcos.rack/SYSTEM#SYSTEM",
 						"ConnectBy": "destination",
 						"Connected": true,
 						"UriConnectBy": "http://arcos.rack/SYSTEM#destination"
@@ -132,8 +132,8 @@
 							false
 						],
 						"KeyName": "source",
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"ValueType": "SYSTEM",
+						"UriValueType": "http://arcos.rack/SYSTEM#SYSTEM",
 						"ConnectBy": "source",
 						"Connected": true,
 						"UriConnectBy": "http://arcos.rack/SYSTEM#source"

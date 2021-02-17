@@ -1,0 +1,86 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+
+/************** edit history *****************
+  *
+  * dwa - 11 Nov 2020 - reduced cardinalities for many relationships
+  * dwa - 11 Nov 2020 - removed several connections to 'wasDerivedFrom'
+  * dwa - 11 Nov 2020 - removed many incorrect uses of 'wasGeneratedBy'
+  *
+  *********************************************/
+
+// namespace and imports
+uri "http://arcos.rack/DOCUMENT" alias D.
+import "http://arcos.rack/PROV-S".
+
+// These document types and properties are derived based off of ISO/IEC/IEEE 15289
+
+// Note: all DOCUMENT classes are COLLECTIONs. They can contain other entities by virtue of "hadMember" in PROV
+
+DOCUMENT
+    (note "A piece of written, printed, or electronic matter that provides information or evidence or that serves as an official record.")
+    is a type of COLLECTION.
+    versionNumber describes DOCUMENT with values of type string.
+    versionNumber describes DOCUMENT with at most 1 value.
+
+    dateOfIssue (note "Release date for the document.") describes DOCUMENT with values of type date.
+    dateOfIssue describes DOCUMENT with at most 1 value.
+    
+    status (note "Identifies the maturity of the document, In_Development, Released, Withdrawn.") describes DOCUMENT with values of type DOC_STATUS.
+    status describes DOCUMENT with at most 1 value.
+    
+    issuingOrganization (note "AGENT responsible for producing a document.") describes DOCUMENT with values of type AGENT.
+	issuingOrganization describes DOCUMENT with at most 1 value.
+    issuingOrganization is a type of wasAttributedTo.
+
+    approvalAuthority (note "AGENT responsible for approving a document.") describes DOCUMENT with values of type AGENT.
+
+    references (note "Source Materials used in the development of a document.") describes DOCUMENT with values of type ENTITY.
+    references is a type of wasImpactedBy.
+
+/************************** DESCRIPTION *******************/
+
+DESCRIPTION (note "A DESCRIPTION document represents a planned or actual concept, function, design or object.") is a type of DOCUMENT.
+
+/************************** PLAN *******************/
+
+PLAN (note "A PLAN presents a systematic course of action for achieving a declared purpose, including when, how, and by whom specified activities are to be performed. ")is a type of DOCUMENT.
+
+/************************** PROCEDURE *******************/
+
+PROCEDURE (note "A PROCEDURE presents an ordered series of steps to perform a process, activity, or task") is a type of DOCUMENT.
+
+/************************** REPORT *******************/
+
+REPORT (note "A REPORT describes the results of activities such as investigations, observations, assessments, or test.") is a type of DOCUMENT.
+
+/************************** REQUEST *******************/
+
+REQUEST (note "A REQUEST initiates a defined course of action or changed to fulfill a need.") is a type of DOCUMENT.
+
+/************************** SPECIFICATION *******************/
+
+SPECIFICATION (note "A SPECIFICATION identifies the requirements, design, behavior, or other expected characteristics of a system, service or process.") is a type of DOCUMENT.
+
+/************************** SECTION *******************/
+
+SECTION (note "A SECTION is generic grouping of ENTITYs with a document") is a type of COLLECTION.
+
+/************************** DOC_STATUS *******************/
+
+DOC_STATUS (note "Life-cycle status of a document")
+    is a type of THING,
+    must be one of {In_Development, Released, Withdrawn}.
+In_Development is a DOC_STATUS with identifier "In Development".
+Released       is a DOC_STATUS with identifier "Released".
+Withdrawn      is a DOC_STATUS with identifier "Withdrawn".

@@ -1,0 +1,78 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+
+/************** edit history *****************
+  *
+  * dwa - 11 Nov 2020 - changed ANALYSIS_REPORT to a kind of REPORT vs. ENTITY, since REPORT is defined already
+  * dwa - 11 Nov 2020 - minor updates to note fields
+  * dwa - 11 Nov 2020 - reduced cardinality of result in ANALYSIS_REPORT to 1, since N seems ill-defined
+  * dwa - 11 Nov 2020 - reduced cardinality of ANALYSIS_REPORT in ANALYSIS_ANNOTATION to 1, since an annotation will naturally come from a single report
+  * dwa - 13 Nov 2020 - added import for DOCUMENT to allow ANALYSIS_REPORT to be a kind of REPORT
+  */
+  
+uri "http://arcos.rack/ANALYSIS" alias ^An.
+import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/DOCUMENT".
+
+ANALYSIS_OUTPUT
+    (note "Output of an ANALYSIS")
+    is a type of ENTITY.
+
+    result (note "Passed/Failed/Indeterminate status of this report") describes ANALYSIS_OUTPUT with values of type ANALYSIS_RESULT.
+    result describes ANALYSIS_OUTPUT with at most 1 value.
+    
+    metric (note "provides a numerical result value from the analysis that was performed") describes ANALYSIS_OUTPUT with values of type float.
+
+    analyzes (note "ENTITY(s) under analysis") describes ANALYSIS_OUTPUT with values of type ENTITY.
+    analyzes is a type of wasImpactedBy.
+
+    producedBy (note "ACTIVITY(s) (e.g. ANALYSIS) producing this report") describes ANALYSIS_OUTPUT with values of type ACTIVITY.
+    producedBy is a type of wasGeneratedBy.
+
+ANALYSIS_RESULT (note "Outcome of an analysis")
+    is a type of THING,
+    must be one of {Passed, Failed, Indeterminate}.
+Passed        is an ANALYSIS_RESULT with identifier "Passed".
+Failed        is an ANALYSIS_RESULT with identifier "Failed".
+Indeterminate is an ANALYSIS_RESULT with identifier "Indeterminate".
+
+ANALYSIS
+	(note "ACTIVITY of running some analysis, and as a result creating some ANALYSIS_REPORT")
+	is a type of ACTIVITY.
+
+    performedBy (note "Entity that is responsible for producing an analysis, could be a person or a tool. ") describes ANALYSIS with values of type AGENT.
+    performedBy is a type of wasAssociatedWith.
+
+ANALYSIS_ANNOTATION_TYPE
+    (note "An open/extensible set of types of analysis annotations")
+    is a type of THING.
+
+// A few common instances:
+PRECONDITION
+    (note "A constraint that should hold in advance of successful operation of this unit of code.")
+    is an ANALYSIS_ANNOTATION_TYPE,
+    with identifier "Precondition".
+POSTCONDITION
+    (note "A constraint that should hold after of successful operation of this unit of code.")
+    is an ANALYSIS_ANNOTATION_TYPE,
+    with identifier "Postcondition".
+INVARIANT
+    (note "A constraint on this unit of code or data that is true at any point in the program's execution.")
+    is an ANALYSIS_ANNOTATION_TYPE,
+    with identifier "Invariant".
+
+ANALYSIS_ANNOTATION
+    (note "A result of the analysis that is linked to some specific part of the system.")
+    is a type of ENTITY.
+    fromReport (note "Which analysis report this annotation comes from.") describes ANALYSIS_ANNOTATION with a single value of type ANALYSIS_OUTPUT.
+    annotationType (note "The type of the annotation.") describes ANALYSIS_ANNOTATION with a single value of type ANALYSIS_ANNOTATION_TYPE.

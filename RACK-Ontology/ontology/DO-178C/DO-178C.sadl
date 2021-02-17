@@ -1,0 +1,426 @@
+/* Copyright (c) 2020, General Electric Company
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://common/DO-178C" alias DO-178C.
+import "http://arcos.rack/PROCESS".
+import "http://arcos.rack/DOCUMENT".
+
+A-1 is a SECTION,
+	has title "Software Planning Process",
+	has content A-1-1,
+	has content A-1-2,
+	has content A-1-3,
+	has content A-1-4,
+	has content A-1-5,
+	has content A-1-6,
+	has content A-1-7.
+
+A-1-1 is a OBJECTIVE,
+    has identifier "A-1-1"
+    has description "The activities of the software life cycle processes are defined. ".
+
+A-1-2 is a OBJECTIVE,
+    has identifier "A-1-2"
+    has description "The software life cycle(s), including the inter-relationships between the processes, their sequencing, feedback mechanisms, and transition criteria, is defined. ".
+
+A-1-3 is a OBJECTIVE,
+    has identifier "A-1-3"
+    has description "Software life cycle environment is selected and defined. ".
+
+A-1-4 is a OBJECTIVE,
+    has identifier "A-1-4"
+    has description "Additional considerations are addressed. ".
+
+A-1-5 is a OBJECTIVE,
+    has identifier "A-1-5"
+    has description "Software development standards are defined. ".
+
+A-1-6 is a OBJECTIVE,
+    has identifier "A-1-6"
+    has description "Software plans comply with this document. ".
+
+A-1-7 is a OBJECTIVE,
+    has identifier "A-1-7"
+    has description "Development and revision of software plans are coordinated. ".
+
+A-2 is a SECTION,
+	has title "Software Development Process",
+	has content A-2-1,
+	has content A-2-2,
+	has content A-2-3,
+	has content A-2-4,
+	has content A-2-5,
+	has content A-2-6,
+	has content A-2-7.
+
+A-2-1 is a OBJECTIVE,
+    has identifier "A-2-1"
+    has description "High-level requirements are developed. ".
+
+A-2-2 is a OBJECTIVE,
+    has identifier "A-2-2"
+    has description "Derived highlevel requirements are defined and provided to the system processes, including the system safety assessment process. ".
+
+A-2-3 is a OBJECTIVE,
+    has identifier "A-2-3"
+    has description "Software architecture is developed. ".
+
+A-2-4 is a OBJECTIVE,
+    has identifier "A-2-4"
+    has description "Low-level requirements are developed. ".
+
+A-2-5 is a OBJECTIVE,
+    has identifier "A-2-5"
+    has description "Derived lowlevel requirements are defined and provided to the system processes, including the system safety assessment process. ".
+
+A-2-6 is a OBJECTIVE,
+    has identifier "A-2-6"
+    has description "Source Code is developed. ".
+
+A-2-7 is a OBJECTIVE,
+    has identifier "A-2-7"
+    has description "Executable Object Code and Parameter Data Item Files, if any, are produced and loaded in the target computer. ".
+
+A-3 is a SECTION,
+	has title "Verification of Outputs of Software Requirements Process",
+	has content A-3-1,
+	has content A-3-2,
+	has content A-3-3,
+	has content A-3-4,
+	has content A-3-5,
+	has content A-3-6,
+	has content A-3-7.
+
+A-3-1 is a OBJECTIVE,
+    has identifier "A-3-1"
+    has description "High-level requirements comply with system requirements. ".
+
+A-3-2 is a OBJECTIVE,
+    has identifier "A-3-2"
+    has description "High-level requirements are accurate and consistent. ".
+
+A-3-3 is a OBJECTIVE,
+    has identifier "A-3-3"
+    has description "High-level requirements are compatible with target computer. ".
+
+A-3-4 is a OBJECTIVE,
+    has identifier "A-3-4"
+    has description "High-level requirements are verifiable. ".
+
+A-3-5 is a OBJECTIVE,
+    has identifier "A-3-5"
+    has description "High-level requirements conform to standards. ".
+
+A-3-6 is a OBJECTIVE,
+    has identifier "A-3-6"
+    has description "High-level requirements are traceable to system requirements. ".
+
+A-3-7 is a OBJECTIVE,
+    has identifier "A-3-7"
+    has description "Algorithms are accurate. ".
+
+A-4 is a SECTION,
+	has title "Verification of Outputs of Software Design Process",
+	has content A-4-1,
+	has content A-4-2,
+	has content A-4-3,
+	has content A-4-4,
+	has content A-4-5,
+	has content A-4-6,
+	has content A-4-7,
+	has content A-4-8,
+	has content A-4-9,
+	has content A-4-10,
+	has content A-4-11,
+	has content A-4-12,
+	has content A-4-13.
+
+A-4-1 is a OBJECTIVE,
+    has identifier "A-4-1"
+    has description "Low-level requirements comply with high-level requirements. ".
+
+A-4-2 is a OBJECTIVE,
+    has identifier "A-4-2"
+    has description "Low-level requirements are accurate and consistent. ".
+
+A-4-3 is a OBJECTIVE,
+    has identifier "A-4-3"
+    has description "Low-level requirements are compatible with target computer. ".
+
+A-4-4 is a OBJECTIVE,
+    has identifier "A-4-4"
+    has description "Low-level requirements are verifiable. ".
+
+A-4-5 is a OBJECTIVE,
+    has identifier "A-4-5"
+    has description "Low-level requirements conform to standards. ".
+
+A-4-6 is a OBJECTIVE,
+    has identifier "A-4-6"
+    has description "Low-level requirements are traceable to highlevel requirements. ".
+
+A-4-7 is a OBJECTIVE,
+    has identifier "A-4-7"
+    has description "Algorithms are accurate. ".
+
+A-4-8 is a OBJECTIVE,
+    has identifier "A-4-8"
+    has description "Software architecture is compatible with highlevel requirements. ".
+
+A-4-9 is a OBJECTIVE,
+    has identifier "A-4-9"
+    has description "Software architecture is consistent. ".
+
+A-4-10 is a OBJECTIVE,
+    has identifier "A-4-10"
+    has description "Software architecture is compatible with target computer. ".
+
+A-4-11 is a OBJECTIVE,
+    has identifier "A-4-11"
+    has description "Software architecture is verifiable. ".
+
+A-4-12 is a OBJECTIVE,
+    has identifier "A-4-12"
+    has description "Software architecture conforms to standards. ".
+
+A-4-13 is a OBJECTIVE,
+    has identifier "A-4-13"
+    has description "Software partitioning integrity is confirmed. ".
+
+A-5 is a SECTION,
+	has title "Verification of Outputs of Software Coding & Integration Processes",
+	has content A-5-1,
+	has content A-5-2,
+	has content A-5-3,
+	has content A-5-4,
+	has content A-5-5,
+	has content A-5-6,
+	has content A-5-7,
+	has content A-5-8,
+	has content A-5-9.
+
+A-5-1 is a OBJECTIVE,
+    has identifier "A-5-1"
+    has description "Source Code complies with low-level requirements. ".
+
+A-5-2 is a OBJECTIVE,
+    has identifier "A-5-2"
+    has description "Source Code complies with software architecture. ".
+
+A-5-3 is a OBJECTIVE,
+    has identifier "A-5-3"
+    has description "Source Code is verifiable. ".
+
+A-5-4 is a OBJECTIVE,
+    has identifier "A-5-4"
+    has description "Source Code conforms to standards. ".
+
+A-5-5 is a OBJECTIVE,
+    has identifier "A-5-5"
+    has description "Source Code is traceable to low-level requirements. ".
+
+A-5-6 is a OBJECTIVE,
+    has identifier "A-5-6"
+    has description "Source Code is accurate and consistent. ".
+
+A-5-7 is a OBJECTIVE,
+    has identifier "A-5-7"
+    has description "Output of software integration process is complete and correct. ".
+
+A-5-8 is a OBJECTIVE,
+    has identifier "A-5-8"
+    has description "Parameter Data Item File is correct and complete ".
+
+A-5-9 is a OBJECTIVE,
+    has identifier "A-5-9"
+    has description "Verification of Parameter Data Item File is achieved. ".
+
+A-6 is a SECTION,
+	has title "Verification of Outputs of Integration Process",
+	has content A-6-1,
+	has content A-6-2,
+	has content A-6-3,
+	has content A-6-4,
+	has content A-6-5.
+
+A-6-1 is a OBJECTIVE,
+    has identifier "A-6-1"
+    has description "Executable Object Code complies with high-level requirements. ".
+
+A-6-2 is a OBJECTIVE,
+    has identifier "A-6-2"
+    has description "Executable Object Code is robust with high-level requirements. ".
+
+A-6-3 is a OBJECTIVE,
+    has identifier "A-6-3"
+    has description "Executable Object Code complies with low-level requirements. ".
+
+A-6-4 is a OBJECTIVE,
+    has identifier "A-6-4"
+    has description "Executable Object Code is robust with low-level requirements. ".
+
+A-6-5 is a OBJECTIVE,
+    has identifier "A-6-5"
+    has description "Executable Object Code is compatible with target computer. ".
+
+A-7 is a SECTION,
+	has title "Verification of Verification Process Results",
+	has content A-7-1,
+	has content A-7-2,
+	has content A-7-3,
+	has content A-7-4,
+	has content A-7-5,
+	has content A-7-6,
+	has content A-7-7,
+	has content A-7-8,
+	has content A-7-9.
+
+A-7-1 is a OBJECTIVE,
+    has identifier "A-7-1"
+    has description "Test procedures are correct. ".
+
+A-7-2 is a OBJECTIVE,
+    has identifier "A-7-2"
+    has description "Test results are correct and discrepancies explained. ".
+
+A-7-3 is a OBJECTIVE,
+    has identifier "A-7-3"
+    has description "Test coverage of high-level requirements is achieved. ".
+
+A-7-4 is a OBJECTIVE,
+    has identifier "A-7-4"
+    has description "Test coverage of low-level requirements is achieved. ".
+
+A-7-5 is a OBJECTIVE,
+    has identifier "A-7-5"
+    has description "Test coverage of software structure (modified condition/decision coverage) is achieved. ".
+
+A-7-6 is a OBJECTIVE,
+    has identifier "A-7-6"
+    has description "Test coverage of software structure (decision coverage) is achieved. ".
+
+A-7-7 is a OBJECTIVE,
+    has identifier "A-7-7"
+    has description "Test coverage of software structure (statement coverage) is achieved. ".
+
+A-7-8 is a OBJECTIVE,
+    has identifier "A-7-8"
+    has description "Test coverage of software structure (data coupling and control coupling) is achieved. ".
+
+A-7-9 is a OBJECTIVE,
+    has identifier "A-7-9"
+    has description "Verification of additional code, that cannot be traced to Source Code, is achieved. ".
+
+A-8 is a SECTION,
+	has title "Software Configuration Management Process",
+	has content A-8-1,
+	has content A-8-2,
+	has content A-8-3,
+	has content A-8-4,
+	has content A-8-5,
+	has content A-8-6.
+
+A-8-1 is a OBJECTIVE,
+    has identifier "A-8-1"
+    has description "Configuration items are identified. ".
+
+A-8-2 is a OBJECTIVE,
+    has identifier "A-8-2"
+    has description "Baselines and traceability are established. ".
+
+A-8-3 is a OBJECTIVE,
+    has identifier "A-8-3"
+    has description "Problem reporting, change control, change review, and configuration status accounting are established. ".
+
+A-8-4 is a OBJECTIVE,
+    has identifier "A-8-4"
+    has description "Archive, retrieval, and release are established. ".
+
+A-8-5 is a OBJECTIVE,
+    has identifier "A-8-5"
+    has description "Software load control is established. ".
+
+A-8-6 is a OBJECTIVE,
+    has identifier "A-8-6"
+    has description "Software life cycle environment control is established. ".
+
+A-9 is a SECTION,
+	has title "Software Quality Assurance Process",
+	has content A-9-1,
+	has content A-9-2,
+	has content A-9-3,
+	has content A-9-4,
+	has content A-9-5.
+
+A-9-1 is a OBJECTIVE,
+    has identifier "A-9-1"
+    has description "Assurance is obtained that software plans and standards are developed and reviewed for compliance with this document and for consistency. ".
+
+A-9-2 is a OBJECTIVE,
+    has identifier "A-9-2"
+    has description "Assurance is obtained that software life cycle processes comply with approved software plans. ".
+
+A-9-3 is a OBJECTIVE,
+    has identifier "A-9-3"
+    has description "Assurance is obtained that software life cycle processes comply with approved software standards. ".
+
+A-9-4 is a OBJECTIVE,
+    has identifier "A-9-4"
+    has description "Assurance is obtained that transition criteria for the software life cycle processes are satisfied. ".
+
+A-9-5 is a OBJECTIVE,
+    has identifier "A-9-5"
+    has description "Assurance is obtained that software conformity review is conducted. ".
+
+A-10 is a SECTION,
+	has title "Certification Liaison Process",
+	has content A-10-1,
+	has content A-10-2,
+	has content A-10-3.
+
+A-10-1 is a OBJECTIVE,
+    has identifier "A-10-1"
+    has description "Communication and understanding between the applicant and the certification authority is established. ".
+
+A-10-2 is a OBJECTIVE,
+    has identifier "A-10-2"
+    has description "The means of compliance is proposed and agreement with the Plan for Software Aspects of Certification is obtained. ".
+
+A-10-3 is a OBJECTIVE,
+    has identifier "A-10-3"
+    has description "Compliance substantiation is provided. ".
+
+
+DO-178C-AnnexA is a SECTION,
+	has title "PROCESS OBJECTIVES AND OUTPUTS BY SOFTWARE LEVEL",
+    has content A-1,
+    has content A-2,
+    has content A-3,
+    has content A-4,
+    has content A-5,
+    has content A-6,
+    has content A-7,
+    has content A-8,
+    has content A-9,
+    has content A-10.
+    
+DO-178C is a SPECIFICATION,
+	has dateOfIssue "12/13/2011",
+	has status Released,
+	has issuingOrganization SC-205,
+	has approvalAuthority RTCA,
+	has content DO-178C-AnnexA.
+
+
+//
+SC-205 is an AGENT.
+RTCA is an AGENT.

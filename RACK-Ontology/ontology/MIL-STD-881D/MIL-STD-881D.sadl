@@ -1,0 +1,57 @@
+/* Copyright (c) 2020, General Electric Company
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.rack/MIL-STD-881D/MIL-STD-881D" alias m881D.
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/PROCESS".
+import "http://arcos.rack/DOCUMENT".
+
+// Chose to keep the details of each Appendix in a separate file 
+// as you would only import a subset of them for the system under analysis.
+
+wbs (note "This is the WBS (Work Breakdown Structure) string from MIL-STD-881D") 
+    describes SYSTEM with values of type string.
+
+wbs has a single value. // defines wbs to be "functional" and thus have *at most* one value
+
+// TBD: Need to identify issuingOrganization and approvalAuthority.
+MIL-STD-881D is a SPECIFICATION,
+	has dateOfIssue "04/09/2018",
+	has status Released,
+//	has issuingOrganization ????,
+//	has approvalAuthority ????,
+	has content MIL-STD-881D-AppxA
+	has content MIL-STD-881D-AppxB
+	has content MIL-STD-881D-AppxC
+	has content MIL-STD-881D-AppxD	
+	has content MIL-STD-881D-AppxE
+	has content MIL-STD-881D-AppxF
+	has content MIL-STD-881D-AppxG
+	has content MIL-STD-881D-AppxH
+	has content MIL-STD-881D-AppxI
+	has content MIL-STD-881D-AppxJ
+	has content MIL-STD-881D-AppxK
+	has content MIL-STD-881D-AppxL.	
+
+MIL-STD-881D-AppxA is a SECTION.
+MIL-STD-881D-AppxB is a SECTION.
+MIL-STD-881D-AppxC is a SECTION.
+MIL-STD-881D-AppxD is a SECTION.
+MIL-STD-881D-AppxE is a SECTION.
+MIL-STD-881D-AppxF is a SECTION.
+MIL-STD-881D-AppxG is a SECTION.
+MIL-STD-881D-AppxH is a SECTION.
+MIL-STD-881D-AppxI is a SECTION.
+MIL-STD-881D-AppxJ is a SECTION.
+MIL-STD-881D-AppxK is a SECTION.
+MIL-STD-881D-AppxL is a SECTION.
+	

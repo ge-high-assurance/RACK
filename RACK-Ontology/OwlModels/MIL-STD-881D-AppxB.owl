@@ -1,0 +1,450 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:MIL-STD-881D-AppxB="http://arcos.rack/MIL-STD-881D/MIL-STD-881D-AppxB#"
+    xmlns:j.0="http://arcos.rack/PROV-S#"
+    xmlns:m881D="http://arcos.rack/MIL-STD-881D/MIL-STD-881D#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:j.1="http://arcos.rack/SYSTEM#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:j.2="http://arcos.rack/DOCUMENT#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://arcos.rack/MIL-STD-881D/MIL-STD-881D-AppxB">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="MIL-STD-881D"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'MIL-STD-881D-AppxB.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <j.1:SYSTEM rdf:ID="ContractorTechnicalSupport-1.10.2">
+    <m881D:wbs>1.10.2</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="OperationalSiteActivationbySite1TonSpecify-1.10">
+        <m881D:wbs>1.10</m881D:wbs>
+        <j.1:partOf>
+          <j.1:SYSTEM rdf:ID="ElectronicSystemGenericSystem-1">
+            <m881D:wbs>1</m881D:wbs>
+            <j.0:identifier>ElectronicSystemGenericSystem-1</j.0:identifier>
+          </j.1:SYSTEM>
+        </j.1:partOf>
+        <j.0:identifier>OperationalSiteActivationbySite1TonSpecify-1.10</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>ContractorTechnicalSupport-1.10.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentElectronicsAvionics-1.9.1.3">
+    <m881D:wbs>1.9.1.3</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="TestandMeasurementEquipment-1.9.1">
+        <m881D:wbs>1.9.1</m881D:wbs>
+        <j.1:partOf>
+          <j.1:SYSTEM rdf:ID="CommonSupportEquipment-1.9">
+            <m881D:wbs>1.9</m881D:wbs>
+            <j.1:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+            <j.0:identifier>CommonSupportEquipment-1.9</j.0:identifier>
+          </j.1:SYSTEM>
+        </j.1:partOf>
+        <j.0:identifier>TestandMeasurementEquipment-1.9.1</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>TestandMeasurementEquipmentElectronicsAvionics-1.9.1.3</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SupportandHandlingEquipmentElectronicsAvionics-1.9.2.3">
+    <m881D:wbs>1.9.2.3</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="SupportandHandlingEquipment-1.9.2">
+        <m881D:wbs>1.9.2</m881D:wbs>
+        <j.1:partOf rdf:resource="#CommonSupportEquipment-1.9"/>
+        <j.0:identifier>SupportandHandlingEquipment-1.9.2</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>SupportandHandlingEquipmentElectronicsAvionics-1.9.2.3</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify-1.9.1.4">
+    <m881D:wbs>1.9.1.4</m881D:wbs>
+    <j.1:partOf rdf:resource="#TestandMeasurementEquipment-1.9.1"/>
+    <j.0:identifier>TestandMeasurementEquipmentOtherMajorSubsystems1TonSpecify-1.9.1.4</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentOtherMajorSubsystems1Ton-1.8.1.4">
+    <m881D:wbs>1.8.1.4</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="TestandMeasurementEquipment-1.8.1">
+        <m881D:wbs>1.8.1</m881D:wbs>
+        <j.1:partOf>
+          <j.1:SYSTEM rdf:ID="PeculiarSupportEquipment-1.8">
+            <m881D:wbs>1.8</m881D:wbs>
+            <j.1:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+            <j.0:identifier>PeculiarSupportEquipment-1.8</j.0:identifier>
+          </j.1:SYSTEM>
+        </j.1:partOf>
+        <j.0:identifier>TestandMeasurementEquipment-1.8.1</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>TestandMeasurementEquipmentOtherMajorSubsystems1Ton-1.8.1.4</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OperationalTestandEvaluation-1.5.2">
+    <m881D:wbs>1.5.2</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="SystemTestandEvaluation-1.5">
+        <m881D:wbs>1.5</m881D:wbs>
+        <j.1:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+        <j.0:identifier>SystemTestandEvaluation-1.5</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>OperationalTestandEvaluation-1.5.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="ConstructionConversionExpansion-1.12.1">
+    <m881D:wbs>1.12.1</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="IndustrialFacilities-1.12">
+        <m881D:wbs>1.12</m881D:wbs>
+        <j.1:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+        <j.0:identifier>IndustrialFacilities-1.12</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>ConstructionConversionExpansion-1.12.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="PMPSoftwareIntegrationAssemblyTestandCheckout-1.1.3.2">
+    <m881D:wbs>1.1.3.2</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="PMPSoftwareRelease1TonSpecify-1.1.3">
+        <m881D:wbs>1.1.3</m881D:wbs>
+        <j.1:partOf>
+          <j.1:SYSTEM rdf:ID="PrimeMissionProductPMP1TonSpecify-1.1">
+            <m881D:wbs>1.1</m881D:wbs>
+            <j.1:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+            <j.0:identifier>PrimeMissionProductPMP1TonSpecify-1.1</j.0:identifier>
+          </j.1:SYSTEM>
+        </j.1:partOf>
+        <j.0:identifier>PMPSoftwareRelease1TonSpecify-1.1.3</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>PMPSoftwareIntegrationAssemblyTestandCheckout-1.1.3.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="MaintainerInstructionalServices-1.6.2.2">
+    <m881D:wbs>1.6.2.2</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="Services-1.6.2">
+        <m881D:wbs>1.6.2</m881D:wbs>
+        <j.1:partOf>
+          <j.1:SYSTEM rdf:ID="Training-1.6">
+            <m881D:wbs>1.6</m881D:wbs>
+            <j.1:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+            <j.0:identifier>Training-1.6</j.0:identifier>
+          </j.1:SYSTEM>
+        </j.1:partOf>
+        <j.0:identifier>Services-1.6.2</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>MaintainerInstructionalServices-1.6.2.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SupportandHandlingEquipmentPropulsion-1.9.2.2">
+    <m881D:wbs>1.9.2.2</m881D:wbs>
+    <j.1:partOf rdf:resource="#SupportandHandlingEquipment-1.9.2"/>
+    <j.0:identifier>SupportandHandlingEquipmentPropulsion-1.9.2.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="Facilities-1.6.3">
+    <m881D:wbs>1.6.3</m881D:wbs>
+    <j.1:partOf rdf:resource="#Training-1.6"/>
+    <j.0:identifier>Facilities-1.6.3</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandEvaluationSupport-1.5.5">
+    <m881D:wbs>1.5.5</m881D:wbs>
+    <j.1:partOf rdf:resource="#SystemTestandEvaluation-1.5"/>
+    <j.0:identifier>TestandEvaluationSupport-1.5.5</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="IntegratedLogisticsSupportILSProgramManagement-1.4.2">
+    <m881D:wbs>1.4.2</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="ProgramManagement-1.4">
+        <m881D:wbs>1.4</m881D:wbs>
+        <j.1:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+        <j.0:identifier>ProgramManagement-1.4</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>IntegratedLogisticsSupportILSProgramManagement-1.4.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SubsystemHardware1TonSpecify-1.1.2.2">
+    <m881D:wbs>1.1.2.2</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="PMPSubsystem1TonSpecify-1.1.2">
+        <m881D:wbs>1.1.2</m881D:wbs>
+        <j.1:partOf rdf:resource="#PrimeMissionProductPMP1TonSpecify-1.1"/>
+        <j.0:identifier>PMPSubsystem1TonSpecify-1.1.2</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>SubsystemHardware1TonSpecify-1.1.2.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CybersecurityManagement-1.4.3">
+    <m881D:wbs>1.4.3</m881D:wbs>
+    <j.1:partOf rdf:resource="#ProgramManagement-1.4"/>
+    <j.0:identifier>CybersecurityManagement-1.4.3</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SubsystemIntegrationAssemblyTestandCheckout-1.1.2.1">
+    <m881D:wbs>1.1.2.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#PMPSubsystem1TonSpecify-1.1.2"/>
+    <j.0:identifier>SubsystemIntegrationAssemblyTestandCheckout-1.1.2.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentElectronicsAvionics-1.8.1.3">
+    <m881D:wbs>1.8.1.3</m881D:wbs>
+    <j.1:partOf rdf:resource="#TestandMeasurementEquipment-1.8.1"/>
+    <j.0:identifier>TestandMeasurementEquipmentElectronicsAvionics-1.8.1.3</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SupportandHandlingEquipmentPropulsion-1.8.2.2">
+    <m881D:wbs>1.8.2.2</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="SupportandHandliSngEqifuipment-1.8.2">
+        <m881D:wbs>1.8.2</m881D:wbs>
+        <j.1:partOf rdf:resource="#PeculiarSupportEquipment-1.8"/>
+        <j.0:identifier>SupportandHandliSngEqifuipment-1.8.2</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>SupportandHandlingEquipmentPropulsion-1.8.2.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="InitialSparesandRepairParts-1.13">
+    <m881D:wbs>1.13</m881D:wbs>
+    <j.1:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+    <j.0:identifier>InitialSparesandRepairParts-1.13</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SiteConstruction-1.10.3">
+    <m881D:wbs>1.10.3</m881D:wbs>
+    <j.1:partOf rdf:resource="#OperationalSiteActivationbySite1TonSpecify-1.10"/>
+    <j.0:identifier>SiteConstruction-1.10.3</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SoftwareSystemsEngineering-1.3.1">
+    <m881D:wbs>1.3.1</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="SystemsEngineering-1.3">
+        <m881D:wbs>1.3</m881D:wbs>
+        <j.1:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+        <j.0:identifier>SystemsEngineering-1.3</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>SoftwareSystemsEngineering-1.3.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SoftwareProgramManagement-1.4.1">
+    <m881D:wbs>1.4.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#ProgramManagement-1.4"/>
+    <j.0:identifier>SoftwareProgramManagement-1.4.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="MaintainerInstructionalEquipment-1.6.1.2">
+    <m881D:wbs>1.6.1.2</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="Equipment-1.6.1">
+        <m881D:wbs>1.6.1</m881D:wbs>
+        <j.1:partOf rdf:resource="#Training-1.6"/>
+        <j.0:identifier>Equipment-1.6.1</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>MaintainerInstructionalEquipment-1.6.1.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SupportandHandlingEquipmentAirframeHullVehicle-1.9.2.1">
+    <m881D:wbs>1.9.2.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#SupportandHandlingEquipment-1.9.2"/>
+    <j.0:identifier>SupportandHandlingEquipmentAirframeHullVehicle-1.9.2.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CybersecurityTestandEvaluation-1.5.3">
+    <m881D:wbs>1.5.3</m881D:wbs>
+    <j.1:partOf rdf:resource="#SystemTestandEvaluation-1.5"/>
+    <j.0:identifier>CybersecurityTestandEvaluation-1.5.3</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="PMPIntegrationAssemblyTestandCheckout-1.1.1">
+    <m881D:wbs>1.1.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#PrimeMissionProductPMP1TonSpecify-1.1"/>
+    <j.0:identifier>PMPIntegrationAssemblyTestandCheckout-1.1.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TrainingSoftware1TonSpecify-1.6.4">
+    <m881D:wbs>1.6.4</m881D:wbs>
+    <j.1:partOf rdf:resource="#Training-1.6"/>
+    <j.0:identifier>TrainingSoftware1TonSpecify-1.6.4</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OperatorInstructionalServices-1.6.2.1">
+    <m881D:wbs>1.6.2.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#Services-1.6.2"/>
+    <j.0:identifier>OperatorInstructionalServices-1.6.2.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="IntegratedLogisticsSupportILSSystemsEngineering-1.3.2">
+    <m881D:wbs>1.3.2</m881D:wbs>
+    <j.1:partOf rdf:resource="#SystemsEngineering-1.3"/>
+    <j.0:identifier>IntegratedLogisticsSupportILSSystemsEngineering-1.3.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D-AppxB">
+    <j.0:title>ELECTRONIC OR GENERIC SYSTEMS</j.0:title>
+  </rdf:Description>
+  <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentAirframeHullVehicle-1.8.1.1">
+    <m881D:wbs>1.8.1.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#TestandMeasurementEquipment-1.8.1"/>
+    <j.0:identifier>TestandMeasurementEquipmentAirframeHullVehicle-1.8.1.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="ComputerSoftwareConfigurationItemCSCI1TonSpecify-1.1.3.1">
+    <m881D:wbs>1.1.3.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#PMPSoftwareRelease1TonSpecify-1.1.3"/>
+    <j.0:identifier>ComputerSoftwareConfigurationItemCSCI1TonSpecify-1.1.3.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="DevelopmentTestandEvaluation-1.5.1">
+    <m881D:wbs>1.5.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#SystemTestandEvaluation-1.5"/>
+    <j.0:identifier>DevelopmentTestandEvaluation-1.5.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SiteShipVehicleConversion-1.10.4">
+    <m881D:wbs>1.10.4</m881D:wbs>
+    <j.1:partOf rdf:resource="#OperationalSiteActivationbySite1TonSpecify-1.10"/>
+    <j.0:identifier>SiteShipVehicleConversion-1.10.4</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="MaintenanceIndustrialFacilities-1.12.3">
+    <m881D:wbs>1.12.3</m881D:wbs>
+    <j.1:partOf rdf:resource="#IndustrialFacilities-1.12"/>
+    <j.0:identifier>MaintenanceIndustrialFacilities-1.12.3</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SupportandHandlingEquipmentAirframeHullVehicle-1.8.2.1">
+    <m881D:wbs>1.8.2.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#SupportandHandliSngEqifuipment-1.8.2"/>
+    <j.0:identifier>SupportandHandlingEquipmentAirframeHullVehicle-1.8.2.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <rdf:Description rdf:about="MIL-STD-881D#MIL-STD-881D">
+    <j.0:content>
+      <j.2:SECTION rdf:ID="B.4">
+        <j.0:title>DEFINITIONS</j.0:title>
+      </j.2:SECTION>
+    </j.0:content>
+    <j.0:content>
+      <j.2:SECTION rdf:ID="B.3">
+        <j.0:title>WORK BREAKDOWN STRUCTURE LEVELS</j.0:title>
+      </j.2:SECTION>
+    </j.0:content>
+    <j.0:content>
+      <j.2:SECTION rdf:ID="B.2">
+        <j.0:title>APPLICABLE DOCUMENTS</j.0:title>
+      </j.2:SECTION>
+    </j.0:content>
+    <j.0:content>
+      <j.2:SECTION rdf:ID="B.1">
+        <j.0:title>SCOPE</j.0:title>
+      </j.2:SECTION>
+    </j.0:content>
+  </rdf:Description>
+  <j.1:SYSTEM rdf:ID="SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.9.2.4">
+    <m881D:wbs>1.9.2.4</m881D:wbs>
+    <j.1:partOf rdf:resource="#SupportandHandlingEquipment-1.9.2"/>
+    <j.0:identifier>SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.9.2.4</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentPropulsion-1.8.1.2">
+    <m881D:wbs>1.8.1.2</m881D:wbs>
+    <j.1:partOf rdf:resource="#TestandMeasurementEquipment-1.8.1"/>
+    <j.0:identifier>TestandMeasurementEquipmentPropulsion-1.8.1.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentAirframeHullVehicle-1.9.1.1">
+    <m881D:wbs>1.9.1.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#TestandMeasurementEquipment-1.9.1"/>
+    <j.0:identifier>TestandMeasurementEquipmentAirframeHullVehicle-1.9.1.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SystemAssemblyInstallationandCheckoutonSite-1.10.1">
+    <m881D:wbs>1.10.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#OperationalSiteActivationbySite1TonSpecify-1.10"/>
+    <j.0:identifier>SystemAssemblyInstallationandCheckoutonSite-1.10.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="DataRepository-1.7.2">
+    <m881D:wbs>1.7.2</m881D:wbs>
+    <j.1:partOf>
+      <j.1:SYSTEM rdf:ID="Data-1.7">
+        <m881D:wbs>1.7</m881D:wbs>
+        <j.1:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+        <j.0:identifier>Data-1.7</j.0:identifier>
+      </j.1:SYSTEM>
+    </j.1:partOf>
+    <j.0:identifier>DataRepository-1.7.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="ContractorLogisticsSupportCLS-1.11">
+    <m881D:wbs>1.11</m881D:wbs>
+    <j.1:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+    <j.0:identifier>ContractorLogisticsSupportCLS-1.11</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestandMeasurementEquipmentPropulsion-1.9.1.2">
+    <m881D:wbs>1.9.1.2</m881D:wbs>
+    <j.1:partOf rdf:resource="#TestandMeasurementEquipment-1.9.1"/>
+    <j.0:identifier>TestandMeasurementEquipmentPropulsion-1.9.1.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OperatorInstructionalEquipment-1.6.1.1">
+    <m881D:wbs>1.6.1.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#Equipment-1.6.1"/>
+    <j.0:identifier>OperatorInstructionalEquipment-1.6.1.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OtherProgramManagement1TonSpecify-1.4.5">
+    <m881D:wbs>1.4.5</m881D:wbs>
+    <j.1:partOf rdf:resource="#ProgramManagement-1.4"/>
+    <j.0:identifier>OtherProgramManagement1TonSpecify-1.4.5</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="EquipmentAcquisitionorModernization-1.12.2">
+    <m881D:wbs>1.12.2</m881D:wbs>
+    <j.1:partOf rdf:resource="#IndustrialFacilities-1.12"/>
+    <j.0:identifier>EquipmentAcquisitionorModernization-1.12.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CoreProgramManagement-1.4.4">
+    <m881D:wbs>1.4.4</m881D:wbs>
+    <j.1:partOf rdf:resource="#ProgramManagement-1.4"/>
+    <j.0:identifier>CoreProgramManagement-1.4.4</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CoreSystemsEngineering-1.3.4">
+    <m881D:wbs>1.3.4</m881D:wbs>
+    <j.1:partOf rdf:resource="#SystemsEngineering-1.3"/>
+    <j.0:identifier>CoreSystemsEngineering-1.3.4</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.8.2.4">
+    <m881D:wbs>1.8.2.4</m881D:wbs>
+    <j.1:partOf rdf:resource="#SupportandHandliSngEqifuipment-1.8.2"/>
+    <j.0:identifier>SupportandHandlingEquipmentOtherMajorSubsystems1TonSpecify-1.8.2.4</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="PlatformIntegrationAssemblyTestandCheckout-1.2">
+    <m881D:wbs>1.2</m881D:wbs>
+    <j.1:partOf rdf:resource="#ElectronicSystemGenericSystem-1"/>
+    <j.0:identifier>PlatformIntegrationAssemblyTestandCheckout-1.2</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="TestFacilities-1.5.6">
+    <m881D:wbs>1.5.6</m881D:wbs>
+    <j.1:partOf rdf:resource="#SystemTestandEvaluation-1.5"/>
+    <j.0:identifier>TestFacilities-1.5.6</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="OtherSystemsEngineering1TonSpecify-1.3.5">
+    <m881D:wbs>1.3.5</m881D:wbs>
+    <j.1:partOf rdf:resource="#SystemsEngineering-1.3"/>
+    <j.0:identifier>OtherSystemsEngineering1TonSpecify-1.3.5</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="InterimContractorSupportICS-1.10.5">
+    <m881D:wbs>1.10.5</m881D:wbs>
+    <j.1:partOf rdf:resource="#OperationalSiteActivationbySite1TonSpecify-1.10"/>
+    <j.0:identifier>InterimContractorSupportICS-1.10.5</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SupportandHandlingEquipmentElectronicsAvionics-1.8.2.3">
+    <m881D:wbs>1.8.2.3</m881D:wbs>
+    <j.1:partOf rdf:resource="#SupportandHandliSngEqifuipment-1.8.2"/>
+    <j.0:identifier>SupportandHandlingEquipmentElectronicsAvionics-1.8.2.3</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="Mock-upsSystemIntegrationLabsSILs-1.5.4">
+    <m881D:wbs>1.5.4</m881D:wbs>
+    <j.1:partOf rdf:resource="#SystemTestandEvaluation-1.5"/>
+    <j.0:identifier>Mock-upsSystemIntegrationLabsSILs-1.5.4</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="DataRights1TonSpecify-1.7.3">
+    <m881D:wbs>1.7.3</m881D:wbs>
+    <j.1:partOf rdf:resource="#Data-1.7"/>
+    <j.0:identifier>DataRights1TonSpecify-1.7.3</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="DataDeliverables1TonSpecify-1.7.1">
+    <m881D:wbs>1.7.1</m881D:wbs>
+    <j.1:partOf rdf:resource="#Data-1.7"/>
+    <j.0:identifier>DataDeliverables1TonSpecify-1.7.1</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="SubsystemSoftwareRelease1TonSpecify-1.1.2.3">
+    <m881D:wbs>1.1.2.3</m881D:wbs>
+    <j.1:partOf rdf:resource="#PMPSubsystem1TonSpecify-1.1.2"/>
+    <j.0:identifier>SubsystemSoftwareRelease1TonSpecify-1.1.2.3</j.0:identifier>
+  </j.1:SYSTEM>
+  <j.1:SYSTEM rdf:ID="CybersecuritySystemsEngineering-1.3.3">
+    <m881D:wbs>1.3.3</m881D:wbs>
+    <j.1:partOf rdf:resource="#SystemsEngineering-1.3"/>
+    <j.0:identifier>CybersecuritySystemsEngineering-1.3.3</j.0:identifier>
+  </j.1:SYSTEM>
+</rdf:RDF>

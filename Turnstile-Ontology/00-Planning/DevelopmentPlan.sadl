@@ -1,0 +1,250 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+ uri "http://Turnstile/DevelopmentPlan" alias trnstldp.
+import "http://arcos.rack/DOCUMENT".
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/REVIEW".
+import "http://arcos.rack/TESTING".
+import "http://arcos.rack/HAZARD".
+import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/PROCESS".
+import "http://arcos.rack/AGENTS".
+import "http://common/DO-178C".
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.01-SystemRequirements.SystemRequirementsDefinition
+      SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
+        wasInformedBy of SystemRequirementsDefinition has values of type DevelopSystemArchitecture.
+
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.01-SystemRequirements.SystemRequirement
+      SystemRequirement is a type of REQUIREMENT.
+        wasGeneratedBy of SystemRequirement only has values of type SystemRequirementsDefinition.
+        
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.02-SystemDesign.DefineSystemInterfaces
+      DefineSystemInterfaces is a type of ACTIVITY.
+        wasInformedBy of DefineSystemInterfaces has values of type SystemRequirementsDefinition.
+
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.02-SystemDesign.DevelopSystemArchitecture
+      DevelopSystemArchitecture is a type of ACTIVITY.
+
+
+        //Model Location: DevelopmentPlan.02-SystemDevelopement.02-SystemDesign.SystemComponent
+      SystemComponent is a type of SYSTEM.
+        wasGeneratedBy of SystemComponent only has values of type DevelopSystemArchitecture.
+
+       //Model Location: DevelopmentPlan.02-SystemDevelopement.02-SystemDesign.SystemInterfaceDefinition
+      SystemInterfaceDefinition is a type of INTERFACE.
+        wasGeneratedBy of SystemInterfaceDefinition only has values of type DefineSystemInterfaces.
+        
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareCoding
+      SoftwareCoding is a type of CODE_DEVELOPMENT.
+        wasInformedBy of SoftwareCoding has values of type Change_Authorization.
+        wasInformedBy of SoftwareCoding has values of type SoftwareDesign.        
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareDesign
+      SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
+        wasInformedBy of SoftwareDesign has values of type SoftwareRequirementsDefinition.
+        wasInformedBy of SoftwareDesign has values of type Change_Authorization.        
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareIntegration
+      SoftwareIntegration is a type of COMPILE.
+        wasInformedBy of SoftwareIntegration has values of type SoftwareCoding.
+        compileWithOptimizations describes  SoftwareIntegration with values of type boolean.     
+        linkerPath describes  SoftwareIntegration with values of type string.       
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareRequirementsDefinition
+      SoftwareRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
+        wasInformedBy of SoftwareRequirementsDefinition has values of type Change_Authorization.
+        wasInformedBy of SoftwareRequirementsDefinition has values of type DefineSystemInterfaces.
+
+	SoftwareThread is a type of SYSTEM.
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.C_Code
+      SourceCode is a type of FILE.
+        wasGeneratedBy of SourceCode only has values of type SoftwareCoding.
+        
+      ObjectFile is a type of FILE.
+        wasGeneratedBy of ObjectFile only has values of type SoftwareIntegration.
+        
+        
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.DataAndControlCouple
+      DataAndControlCouple is a type of DATA_DICTIONARY_TERM.
+        createdBy of DataAndControlCouple only has values of type SoftwareDesign.
+        
+                        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.DataDictionary
+      DataDictionary is a type of DATA_DICTIONARY_TERM.
+        wasGeneratedBy of DataDictionary only has values of type SoftwareRequirementsDefinition.
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.ExecutableObject
+      ExecutableObject is a type of FILE.
+        wasGeneratedBy of ExecutableObject only has values of type SoftwareIntegration.
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.HighLevelRequirement
+      HighLevelRequirement is a type of REQUIREMENT.
+        wasGeneratedBy of HighLevelRequirement only has values of type SoftwareRequirementsDefinition.
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.LowLevelRequirement
+      LowLevelRequirement is a type of REQUIREMENT.
+        wasGeneratedBy of LowLevelRequirement only has values of type SoftwareDesign.
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.RpmFile
+      RpmFile is a type of FILE.
+        wasGeneratedBy of RpmFile only has values of type SoftwareIntegration.
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareModule
+      SoftwareModule is a type of SYSTEM.
+        wasGeneratedBy of SoftwareModule only has values of type SoftwareDesign.
+
+        //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.Engineer
+      Engineer is a type of PERSON.
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.ControlCoupleCoverageReport
+    ControlCoupleCoverageReport is a type of ANALYSIS_OUTPUT.
+      wasGeneratedBy of ControlCoupleCoverageReport only has values of type ControlCouplingAnalysis.
+
+     //Model Location: DevelopmentPlan.04-SoftwareVerification.DataCoupleCoverageReport
+    DataCoupleCoverageReport is a type of ANALYSIS_OUTPUT.
+      wasGeneratedBy of DataCoupleCoverageReport only has values of type DataCouplingAnalysis.
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareCodeReviewArtifacts
+    SoftwareCodeReviewArtifacts is a type of REVIEW_LOG.
+      wasGeneratedBy of SoftwareCodeReviewArtifacts only has values of type SoftwareCodeReview.
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareComponentTest
+    SoftwareComponentTest is a type of TEST.
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareComponentTestResult
+    SoftwareComponentTestResult is a type of TEST_RESULT.
+      wasGeneratedBy of SoftwareComponentTestResult only has values of type SoftwareComponentTestExecution.
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareDesignReviewArtifacts
+    SoftwareDesignReviewArtifacts is a type of REVIEW_LOG.
+      wasGeneratedBy of SoftwareDesignReviewArtifacts only has values of type SoftwareDesignReview.
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareRequirementReviewArtifacts
+    SoftwareRequirementReviewArtifacts is a type of REVIEW_LOG.
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareUnitTestResult
+    SoftwareUnitTestResult is a type of TEST_RESULT.
+      wasGeneratedBy of SoftwareUnitTestResult only has values of type SoftwareUnitTestExecution.
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.StructuralCoverageReport
+    StructuralCoverageReport is a type of ANALYSIS_OUTPUT.
+      wasGeneratedBy of StructuralCoverageReport only has values of type StructualCoverageAnalysis.
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess.SoftwareCodeReview
+      SoftwareCodeReview is a type of REVIEW.
+        wasInformedBy of SoftwareCodeReview has values of type SoftwareDesignReview.
+        wasInformedBy of SoftwareCodeReview has values of type SoftwareCoding.
+
+       //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess.SoftwareDesignReview
+      SoftwareDesignReview is a type of REVIEW.
+        wasInformedBy of SoftwareDesignReview has values of type SoftwareRequirementsReview.
+        wasInformedBy of SoftwareDesignReview has values of type SoftwareDesign.
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess.SoftwareRequirementsReview
+      SoftwareRequirementsReview is a type of REVIEW.
+        wasInformedBy of SoftwareRequirementsReview has values of type SoftwareRequirementsDefinition.
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.02-SoftwareTestGenerationProcess.DevelopComponentTests
+      DevelopComponentTests is a type of TEST_DEVELOPMENT.
+        wasInformedBy of DevelopComponentTests has values of type DevelopUnitTests.
+        wasInformedBy of DevelopComponentTests has values of type SoftwareRequirementsReview.
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.02-SoftwareTestGenerationProcess.DevelopUnitTests
+      DevelopUnitTests is a type of TEST_DEVELOPMENT.
+        wasInformedBy of DevelopUnitTests has values of type SoftwareDesignReview.
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis.ControlCouplingAnalysis
+      ControlCouplingAnalysis is a type of ANALYSIS.
+        wasInformedBy of ControlCouplingAnalysis has values of type SoftwareComponentTestExecution.
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis.DataCouplingAnalysis
+      DataCouplingAnalysis is a type of ANALYSIS.
+        wasInformedBy of DataCouplingAnalysis has values of type SoftwareComponentTestExecution.
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis.StructualCoverageAnalysis
+      StructualCoverageAnalysis is a type of ANALYSIS.
+        CoveredNodes describes StructualCoverageAnalysis with values of type int.
+        UncoveredNodes describes StructualCoverageAnalysis with values of type int.
+        wasInformedBy of StructualCoverageAnalysis has values of type SoftwareComponentTestExecution.
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.03-SoftwareTestExecutionProcess.SoftwareComponentTestExecution
+      SoftwareComponentTestExecution is a type of TEST_EXECUTION.
+        wasInformedBy of SoftwareComponentTestExecution has values of type SoftwareIntegration.
+        wasInformedBy of SoftwareComponentTestExecution has values of type DevelopComponentTests.
+
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.03-SoftwareTestExecutionProcess.SoftwareUnitTestExecution
+      SoftwareUnitTestExecution is a type of TEST_EXECUTION.
+        wasInformedBy of SoftwareUnitTestExecution has values of type DevelopUnitTests.
+        wasInformedBy of SoftwareUnitTestExecution has values of type SoftwareCoding.
+
+      //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.ChangeRequest
+    ChangeRequest is a type of REQUEST.
+      wasGeneratedBy of ChangeRequest only has values of type Change_Authorization.
+
+      //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.ProblemReport
+    ProblemReport is a type of REPORT.
+      wasGeneratedBy of ProblemReport only has values of type Problem_Reporting.
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.01-ChangeManagement.Change Authorization
+      Change_Authorization is a type of ACTIVITY.
+        wasInformedBy of Change_Authorization has values of type Problem_Reporting.
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.01-ChangeManagement.Problem Reporting
+      Problem_Reporting is a type of ACTIVITY.
+        wasInformedBy of Problem_Reporting has values of type SoftwareComponentTestExecution.
+        wasInformedBy of Problem_Reporting has values of type SoftwareRequirementsReview.
+        wasInformedBy of Problem_Reporting has values of type SoftwareDesignReview.
+        wasInformedBy of Problem_Reporting has values of type SoftwareCodeReview.
+        wasInformedBy of Problem_Reporting has values of type SoftwareUnitTestExecution.
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.GenerateSoftwareReleaseDocumentation
+      GenerateSoftwareReleaseDocumentation is a type of ACTIVITY.
+        wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type SourceConfigurationManagement.
+        wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type RequirementConfigurationManagement.
+        wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type ReviewConfigurationManagement.
+
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.RequirementConfigurationManagement
+      RequirementConfigurationManagement is a type of ACTIVITY.
+        wasInformedBy of RequirementConfigurationManagement has values of type SoftwareRequirementsDefinition.
+        wasInformedBy of RequirementConfigurationManagement has values of type SoftwareDesign.
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.ReviewConfigurationManagement
+      ReviewConfigurationManagement is a type of ACTIVITY.
+        wasInformedBy of ReviewConfigurationManagement has values of type SoftwareRequirementsReview.
+        wasInformedBy of ReviewConfigurationManagement has values of type SoftwareDesignReview.
+        wasInformedBy of ReviewConfigurationManagement has values of type SoftwareCodeReview.
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.SourceConfigurationManagement
+      SourceConfigurationManagement is a type of ACTIVITY.
+        wasInformedBy of SourceConfigurationManagement has values of type DevelopComponentTests.
+        wasInformedBy of SourceConfigurationManagement has values of type DevelopUnitTests.
+        wasInformedBy of SourceConfigurationManagement has values of type SoftwareUnitTestExecution.
+        wasInformedBy of SourceConfigurationManagement has values of type SoftwareComponentTestExecution.
+        wasInformedBy of SourceConfigurationManagement has values of type SoftwareCoding.
+
+        //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.SoftwareAccomplishmentSummary
+      SoftwareAccomplishmentSummary is a type of REPORT.
+        wasGeneratedBy of SoftwareAccomplishmentSummary only has values of type GenerateSoftwareReleaseDocumentation.
+
+      //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareUnitTest
+    SoftwareUnitTest is a type of TEST.
+
+
+
+
+                

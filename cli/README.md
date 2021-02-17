@@ -245,6 +245,46 @@ See `rack data export --help` for options, including different export
 formats (such as CSV), emitting to a file, and omitting the header
 row.
 
+Runtime constraints can be specified with the `--constraint` flag.
+We support the following constraint operations:
+
+- `=` matches
+- `<` less-than
+- `<=` less-than or equal-to
+- `>` greater-than
+- `<=` greater-than or equal-to
+- `~` regular expression
+- `:...<>...` between
+- `:...<=>...` inclusive-between 
+
+To specify a constraint you'll pass a string containing the: constraint ID,
+operator, and value. Multiple constraint variables can be specified at the same time,
+but you should only provide one constraint per variable.
+
+The constraint syntax is very limited. Please do not add extra whitespace or
+operators.
+
+Examples:
+
+```
+# Example using exact matches
+rack data export "query Requirements decomposition" \
+  --data-graph http://rack001/data \
+  --constraint req=HLR-1 \
+  --constraint decomposition=IN-LLR-2 
+
+# Example using regular expressions
+rack data export "query Requirements decomposition" \
+  --data-graph http://rack001/data \
+  --constraint "req~^HLR-.$" \
+  --constraint "decomposition~^IN-"
+
+rack data export "example nodegroup" \
+  --data-graph http://rack001/data \
+  --constraint "generatedAtTime:2020-01-01T00:00:00Z<=>2020-12-31T23:59:59:59Z"
+```
+
+
 ### Count result rows
 
 The number of results a nodegroup would generate can be obtained

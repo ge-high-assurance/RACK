@@ -217,9 +217,40 @@ def format_semtk_table(semtk_table: SemtkTable, export_format: ExportFormat = Ex
     print(str_bad(f"Internal error: incomplete implementation of run_query for '{export_format}'"))
     sys.exit(1)
 
-def run_query(conn: Connection, nodegroup: str, export_format: ExportFormat = ExportFormat.TEXT, headers: bool = True, path: Optional[Path] = None) -> None:
+def generate_constraints(constraint_texts: List[str]) -> List[Any]:
+    constraint_re = re.compile(r'^(?P<var>[^<>=~:]*)((:(?P<val1>.*)(?P<op2><=?>)(?P<val2>.*))|(?P<op>~|<=|>=|=|<|>)(?P<val>.*))$')
+    operators = {
+        '~': semtk3.OP_REGEX,
+        '=': semtk3.OP_MATCHES,
+        '>': semtk3.OP_GREATERTHAN,
+        '>=': semtk3.OP_GREATERTHANOREQUALS,
+        '<': semtk3.OP_LESSTHAN,
+        '<=': semtk3.OP_LESSTHANOREQUALS,
+        '<>': semtk3.OP_VALUEBETWEEN,
+        '<=>': semtk3.OP_VALUEBETWEENUNINCLUSIVE
+    }
+
+    result = []
+    for constraint_text in constraint_texts:
+        match = constraint_re.match(constraint_text)
+        if match is None:
+            print(str_bad('Unsupported constraint: ' + constraint_text))
+            sys.exit(1)
+        
+        if match['op'] is not None:
+            c = semtk3.build_constraint(match['var'], operators[match['op']], [match['val']])
+        else:
+            c = semtk3.build_constraint(match['var'], operators[match['op2']], [match['val1'], match['val2']])
+        result.append(c)
+
+    return result
+
+def run_query(conn: Connection, nodegroup: str, export_format: ExportFormat = ExportFormat.TEXT, headers: bool = True, path: Optional[Path] = None, constraints: Optional[List[str]] = None) -> None:
     semtk3.SEMTK3_CONN_OVERRIDE = conn
-    semtk_table = semtk3.select_by_id(nodegroup)
+
+    runtime_constraints = generate_constraints(constraints or [])
+
+    semtk_table = semtk3.select_by_id(nodegroup, runtime_constraints=runtime_constraints)
     formatted_table = format_semtk_table(semtk_table, export_format=export_format, headers=headers)
     if path is None:
         print()
@@ -228,9 +259,12 @@ def run_query(conn: Connection, nodegroup: str, export_format: ExportFormat = Ex
         with open(path, mode="w") as f:
             print(formatted_table, file=f)
 
-def run_count_query(conn: Connection, nodegroup: str) -> None:
+def run_count_query(conn: Connection, nodegroup: str, constraints: Optional[List[str]] = None) -> None:
     semtk3.SEMTK3_CONN_OVERRIDE = conn
-    semtk_table = semtk3.count_by_id(nodegroup)
+
+    runtime_constraints = generate_constraints(constraints or [])
+
+    semtk_table = semtk3.count_by_id(nodegroup, runtime_constraints=runtime_constraints)
     print(semtk_table.get_rows()[0][0])
 
 def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
@@ -395,11 +429,11 @@ def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
 
 def dispatch_data_export(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store)
-    run_query(conn, args.nodegroup, export_format=args.format, headers=not args.no_headers, path=args.file)
+    run_query(conn, args.nodegroup, export_format=args.format, headers=not args.no_headers, path=args.file, constraints=args.constraint)
 
 def dispatch_data_count(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store)
-    run_count_query(conn, args.nodegroup)
+    run_count_query(conn, args.nodegroup, constraints=args.constraint)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
@@ -463,10 +497,12 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_export_parser.add_argument('--format', type=ExportFormat, help='Export format', choices=list(ExportFormat), default=ExportFormat.TEXT)
     data_export_parser.add_argument('--no-headers', action='store_true', help='Omit header row')
     data_export_parser.add_argument('--file', type=Path, help='Output to file')
+    data_export_parser.add_argument('--constraint', type=str, action='append', help='Runtime constraint: key=value')
     data_export_parser.set_defaults(func=dispatch_data_export)
 
     data_count_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
     data_count_parser.add_argument('--data-graph', type=str, required=True, action='append', help='Data graph URL')
+    data_count_parser.add_argument('--constraint', type=str, action='append', help='Runtime constraint: key=value')
     data_count_parser.set_defaults(func=dispatch_data_count)
 
     model_import_parser.add_argument('config', type=str, help='Configuration YAML file')

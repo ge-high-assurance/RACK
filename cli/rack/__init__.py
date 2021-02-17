@@ -218,14 +218,16 @@ def format_semtk_table(semtk_table: SemtkTable, export_format: ExportFormat = Ex
     sys.exit(1)
 
 def generate_constraints(constraint_texts: List[str]) -> List[Any]:
-    constraint_re = re.compile(r'(?P<var>.*?)(?P<op>~|<=|>=|=|<|>)(?P<val>.*)')
+    constraint_re = re.compile(r'^(?P<var>[^<>=~:]*)((:(?P<val1>.*)(?P<op2><=?>)(?P<val2>.*))|(?P<op>~|<=|>=|=|<|>)(?P<val>.*))$')
     operators = {
         '~': semtk3.OP_REGEX,
         '=': semtk3.OP_MATCHES,
         '>': semtk3.OP_GREATERTHAN,
         '>=': semtk3.OP_GREATERTHANOREQUALS,
         '<': semtk3.OP_LESSTHAN,
-        '<=': semtk3.OP_LESSTHANOREQUALS
+        '<=': semtk3.OP_LESSTHANOREQUALS,
+        '<>': semtk3.OP_VALUEBETWEEN,
+        '<=>': semtk3.OP_VALUEBETWEENUNINCLUSIVE
     }
 
     result = []
@@ -234,7 +236,12 @@ def generate_constraints(constraint_texts: List[str]) -> List[Any]:
         if match is None:
             print(str_bad('Unsupported constraint: ' + constraint_text))
             sys.exit(1)
-        result.append(semtk3.build_constraint(match['var'], operators[match['op']], [match['val']]))
+        
+        if match['op'] is not None:
+            c = semtk3.build_constraint(match['var'], operators[match['op']], [match['val']])
+        else:
+            c = semtk3.build_constraint(match['var'], operators[match['op2']], [match['val1'], match['val2']])
+        result.append(c)
 
     return result
 
@@ -242,24 +249,6 @@ def run_query(conn: Connection, nodegroup: str, export_format: ExportFormat = Ex
     semtk3.SEMTK3_CONN_OVERRIDE = conn
 
     runtime_constraints = generate_constraints(constraints or [])
-
-    if constraints is not None:
-        constraint_re = re.compile(r'(?P<var>.*?)(?P<op>~|<=|>=|=|<|>)(?P<val>.*)')
-        operators = {
-            '~': semtk3.OP_REGEX,
-            '=': semtk3.OP_MATCHES,
-            '>': semtk3.OP_GREATERTHAN,
-            '>=': semtk3.OP_GREATERTHANOREQUALS,
-            '<': semtk3.OP_LESSTHAN,
-            '<=': semtk3.OP_LESSTHANOREQUALS
-        }
-
-        for constraint_text in constraints:
-            match = constraint_re.match(constraint_text)
-            if match is None:
-                print(str_bad('Unsupported constraint: ' + constraint_text))
-                sys.exit(1)
-            runtime_constraints.append(semtk3.build_constraint(match['var'], operators[match['op']], [match['val']]))
 
     semtk_table = semtk3.select_by_id(nodegroup, runtime_constraints=runtime_constraints)
     formatted_table = format_semtk_table(semtk_table, export_format=export_format, headers=headers)

@@ -254,9 +254,15 @@ We support the following constraint operations:
 - `>` greater-than
 - `<=` greater-than or equal-to
 - `~` regular expression
+- `:...<>...` between
+- `:...<=>...` inclusive-between 
 
 To specify a constraint you'll pass a string containing the: constraint ID,
-operator, and value. Multiple constraint variables can be specified at the same time.
+operator, and value. Multiple constraint variables can be specified at the same time,
+but you should only provide one constraint per variable.
+
+The constraint syntax is very limited. Please do not add extra whitespace or
+operators.
 
 Examples:
 
@@ -273,6 +279,9 @@ rack data export "query Requirements decomposition" \
   --constraint "req~^HLR-.$" \
   --constraint "decomposition~^IN-"
 
+rack data export "example nodegroup" \
+  --data-graph http://rack001/data \
+  --constraint "generatedAtTime:2020-01-01T00:00:00Z<=>2020-12-31T23:59:59:59Z"
 ```
 
 

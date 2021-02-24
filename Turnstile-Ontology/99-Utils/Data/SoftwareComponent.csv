@@ -1,4 +1,5 @@
-"identifier","componentTypeId","name","valueType","instantiateId","definedInId","mentionId","subcomponentId","requirementId","annotationId","controlFlowsToConditionallyId","controlFlowsToUnconditionallyId","dataInsertedById","generatedAtTime","invalidatedAtTime","wasAttributedToId","wasDerivedFromId","wasGeneratedById"	
-"input_function","SOURCE_FUNCTION","input","void()",null,null,null,null,null,null,null,null,"ACTIVITY-Turnstile software data mockup",null,null,null,null,null	
-"main_function","SOURCE_FUNCTION","main","int(int argc, char* argv[])",null,null,null,null,null,null,"input_function","input_function","ACTIVITY-Turnstile software data mockup",null,null,null,null,null	
-"output_function","SOURCE_FUNCTION","output","void()",null,null,null,null,null,null,null,null,"ACTIVITY-Turnstile software data mockup",null,null,null,null,null	
+"identifier_SUBCOMPONENT","identifier_REQUIREMENT","identifier_MENTION","identifier_INSTANTIATE","identifier_DEFINE_IN","identifier_COMPONENT_TYPE","identifier_ANNOTATION","name_COMPONENT","identifier_COMPONENT","valueType_COMPONENT"
+null,null,null,null,null,"SOURCE_FUNCTION",null,"main","main_function","int(int argc, char* argv[])"
+null,null,null,null,null,"SOURCE_FUNCTION",null,"output","output_function","void()"
+null,null,null,null,null,"SOURCE_FUNCTION",null,"input","input_function","void()"
+

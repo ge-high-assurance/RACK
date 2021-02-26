@@ -13,8 +13,8 @@ FileIdentifier = NewType("FileIdentifier", str)
 FormatIdentifier = NewType("FormatIdentifier", str)
 SoftwareComponentIdentifier = NewType("SoftwareComponentIdentifier", str)
 
-MODULE = ComponentTypeIdentifier("MODULE")
-SOURCE_FUNCTION = ComponentTypeIdentifier("SOURCE_FUNCTION")
+MODULE = ComponentTypeIdentifier("Module")
+SOURCE_FUNCTION = ComponentTypeIdentifier("SourceFunction")
 
 # SoftwareComponent = TypedDict("SoftwareComponent", {
 #     "mentions": Set[SoftwareComponentIdentifier],

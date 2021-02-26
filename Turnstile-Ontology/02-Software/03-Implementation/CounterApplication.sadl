@@ -15,19 +15,19 @@ import "http://Turnstile/CounterApplicationDesignDescription".
 
 input_function is a SWCOMPONENT
     has identifier "input_function"
-    has componentType SOURCE_FUNCTION
+    has componentType SourceFunction
     has title "input"
     has valueType "void()".
 
 output_function is a SWCOMPONENT
     has identifier "output_function"
-    has componentType SOURCE_FUNCTION
+    has componentType SourceFunction
     has title "output"
     has valueType "void()".
 
 
 main_function is a SWCOMPONENT
     has identifier "main_function"
-    has componentType SOURCE_FUNCTION
+    has componentType SourceFunction
     has title "main"
     has valueType "int(int argc, char* argv[])".

@@ -72,50 +72,50 @@ COMPONENT_TYPE
     is a type of THING.
 
 // A few common instances:
-SOURCE_FUNCTION
+SourceFunction
     (note "A function or procedure declared or defined in source code.")
     is a COMPONENT_TYPE
-    has identifier "SOURCE_FUNCTION".
-BINARY_FUNCTION
+    has identifier "SourceFunction".
+BinaryFunction
     (note "A function in a binary, as defined by the appropriate ABI.")
     is a COMPONENT_TYPE
-    has identifier "BINARY_FUNCTION".
-SOURCE_GLOBAL_VARIABLE
+    has identifier "BinaryFunction".
+SourceGlobalVariable
     (note "A global variable declared or defined in source code.")
     is a COMPONENT_TYPE
-    has identifier "SOURCE_GLOBAL_VARIABLE".
-BINARY_GLOBAL_VARIABLE
+    has identifier "SourceGlobalVariable".
+BinaryGlobalVariable
     (note "A global variable (generally in the .data or .bss sections).")
     is a COMPONENT_TYPE
-    has identifier "BINARY_GLOBAL_VARIABLE".
-BINARY_BASIC_BLOCK
+    has identifier "BinaryGlobalVariable".
+BinaryBasicBlock
     (note "A basic block at the binary level.")
     is a COMPONENT_TYPE
-    has identifier "BINARY_BASIC_BLOCK".
-CLASS_DEFINITION
+    has identifier "BinaryBasicBlock".
+ClassDefinition
     (note "A class in an object-oriented language.")
     is a COMPONENT_TYPE
-    has identifier "CLASS".
-CLASS_METHOD
+    has identifier "ClassDefinition".
+ClassMethod
     (note "A method attached to a class in an object-oriented language.")
     is a COMPONENT_TYPE
-    has identifier "CLASS_METHOD".
-CLASS_MEMBER_VARIABLE
+    has identifier "ClassMethod".
+ClassMemberVariable
     (note "A variable attached to the instances of a class in an object-oriented language.")
     is a COMPONENT_TYPE
-    has identifier "CLASS_MEMBER_VARIABLE".
-CLASS_CONSTRUCTOR
+    has identifier "ClassMemberVariable".
+ClassConstructor
     (note "A constructor in an object-oriented language.")
     is a COMPONENT_TYPE
-    has identifier "CLASS_CONSTRUCTOR".
-MODULE
+    has identifier "ClassConstructor".
+Module
     (note "A collection of related code, usually grouped in a lexical scope.")
     is a COMPONENT_TYPE
-    has identifier "MODULE".
-NAMESPACE
+    has identifier "Module".
+Namespace
     (note "A collection of related code, usually grouped in a lexical scope.")
     is a COMPONENT_TYPE
-    has identifier "NAMESPACE".
+    has identifier "Namespace".
 
 SWCOMPONENT
     (note "A concrete software component")

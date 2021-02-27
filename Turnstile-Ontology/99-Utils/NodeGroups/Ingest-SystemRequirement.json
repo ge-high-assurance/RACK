@@ -20,7 +20,7 @@
 		]
 	},
 	"sNodeGroup": {
-		"version": 11,
+		"version": 12,
 		"limit": 0,
 		"offset": 0,
 		"sNodeList": [
@@ -33,7 +33,7 @@
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?identifier_SystemComponent",
+						"SparqlID": "?identifier_SYSTEM",
 						"isReturned": true,
 						"optMinus": 0,
 						"isRuntimeConstrained": false,
@@ -42,10 +42,9 @@
 					}
 				],
 				"nodeList": [],
-				"NodeName": "SystemComponent",
-				"fullURIName": "http://Turnstile/DevelopmentPlan#SystemComponent",
-				"subClassNames": [],
-				"SparqlID": "?SystemComponent",
+				"NodeName": "SYSTEM",
+				"fullURIName": "http://arcos.rack/SYSTEM#SYSTEM",
+				"SparqlID": "?SYSTEM",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
 				"valueConstraint": "",
@@ -54,20 +53,6 @@
 			},
 			{
 				"propList": [
-					{
-						"KeyName": "identifier",
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
-						"Constraints": "",
-						"fullURIName": "",
-						"SparqlID": "?identifier_SystemRequirement",
-						"isReturned": true,
-						"optMinus": 0,
-						"isRuntimeConstrained": false,
-						"instanceValues": [],
-						"isMarkedForDeletion": false
-					},
 					{
 						"KeyName": "text",
 						"ValueType": "string",
@@ -81,15 +66,29 @@
 						"isRuntimeConstrained": false,
 						"instanceValues": [],
 						"isMarkedForDeletion": false
+					},
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"fullURIName": "",
+						"SparqlID": "?identifier_SystemRequirement",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
 					}
 				],
 				"nodeList": [
 					{
 						"SnodeSparqlIDs": [
-							"?SystemComponent"
+							"?SYSTEM"
 						],
 						"OptionalMinus": [
-							"1"
+							1
 						],
 						"Qualifiers": [
 							""
@@ -107,7 +106,6 @@
 				],
 				"NodeName": "SystemRequirement",
 				"fullURIName": "http://Turnstile/DevelopmentPlan#SystemRequirement",
-				"subClassNames": [],
 				"SparqlID": "?SystemRequirement",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
@@ -116,7 +114,8 @@
 				"deletionMode": "NO_DELETE"
 			}
 		],
-		"orderBy": []
+		"orderBy": [],
+		"unionHash": {}
 	},
 	"importSpec": {
 		"version": "1",
@@ -124,11 +123,11 @@
 		"columns": [
 			{
 				"colId": "col_0",
-				"colName": "identifier_SystemComponent"
+				"colName": "identifier_SystemRequirement"
 			},
 			{
 				"colId": "col_1",
-				"colName": "identifier_SystemRequirement"
+				"colName": "identifier_SYSTEM"
 			},
 			{
 				"colId": "col_2",
@@ -137,38 +136,8 @@
 		],
 		"dataValidator": [],
 		"texts": [],
-		"transforms": [
-			{
-				"transId": "trans_0",
-				"name": "RemoveNulls",
-				"transType": "replaceAll",
-				"arg1": "null",
-				"arg2": ""
-			}
-		],
+		"transforms": [],
 		"nodes": [
-			{
-				"sparqlID": "?SystemComponent",
-				"type": "http://Turnstile/DevelopmentPlan#SystemComponent",
-				"URILookupMode": "createIfMissing",
-				"mapping": [],
-				"props": [
-					{
-						"URIRelation": "http://arcos.rack/PROV-S#identifier",
-						"URILookup": [
-							"?SystemComponent"
-						],
-						"mapping": [
-							{
-								"colId": "col_0",
-								"transformList": [
-									"trans_0"
-								]
-							}
-						]
-					}
-				]
-			},
 			{
 				"sparqlID": "?SystemRequirement",
 				"type": "http://Turnstile/DevelopmentPlan#SystemRequirement",
@@ -176,27 +145,40 @@
 				"mapping": [],
 				"props": [
 					{
+						"URIRelation": "http://arcos.rack/PROV-S#description",
+						"mapping": [
+							{
+								"colId": "col_2"
+							}
+						]
+					},
+					{
 						"URIRelation": "http://arcos.rack/PROV-S#identifier",
 						"URILookup": [
 							"?SystemRequirement"
 						],
 						"mapping": [
 							{
-								"colId": "col_1",
-								"transformList": [
-									"trans_0"
-								]
+								"colId": "col_0"
 							}
 						]
-					},
+					}
+				]
+			},
+			{
+				"sparqlID": "?SYSTEM",
+				"type": "http://arcos.rack/SYSTEM#SYSTEM",
+				"URILookupMode": "noCreate",
+				"mapping": [],
+				"props": [
 					{
-						"URIRelation": "http://arcos.rack/PROV-S#description",
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?SYSTEM"
+						],
 						"mapping": [
 							{
-								"colId": "col_2",
-								"transformList": [
-									"trans_0"
-								]
+								"colId": "col_1"
 							}
 						]
 					}

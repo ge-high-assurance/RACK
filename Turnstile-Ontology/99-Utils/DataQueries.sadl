@@ -535,11 +535,11 @@ where {
     ?SystemComponent <http://arcos.rack/SYSTEM#producedBy> ?SoftwareDesign .
         ?SoftwareDesign a <http://Turnstile/DevelopmentPlan#SoftwareDesign> . 
         ?SoftwareDesign <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareDesign . 
-    }
-    ?SoftwareThread a <http://Turnstile/DevelopmentPlan#SoftwareThread> . 
-    ?SoftwareThread <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareThread . 
+    } 
     optional{
 
+    ?SoftwareThread a <http://Turnstile/DevelopmentPlan#SoftwareThread> . 
+    ?SoftwareThread <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareThread .
     ?SoftwareThread <http://arcos.rack/SYSTEM#partOf> ?SystemComponent .
         ?SystemComponent a <http://Turnstile/DevelopmentPlan#SystemComponent> . 
         ?SystemComponent <http://arcos.rack/PROV-S#identifier> ?identifier_SystemComponent . 
@@ -675,17 +675,24 @@ where {
 
 Write: data {Ask SystemRequirementCsv:"
 
-select distinct ?identifier_SystemComponent ?identifier_SystemRequirement ?text_SystemRequirement
+select distinct ?identifier_SystemRequirement ?identifier_SYSTEM ?text_SystemRequirement
 where {
     ?SystemRequirement a <http://Turnstile/DevelopmentPlan#SystemRequirement> . 
     ?SystemRequirement <http://arcos.rack/PROV-S#identifier> ?identifier_SystemRequirement . 
     optional{ ?SystemRequirement <http://arcos.rack/PROV-S#description> ?text_SystemRequirement} . 
     optional{
 
-    ?SystemRequirement <http://arcos.rack/REQUIREMENTS#governs> ?SystemComponent .
-        ?SystemComponent a <http://Turnstile/DevelopmentPlan#SystemComponent> . 
-        ?SystemComponent <http://arcos.rack/PROV-S#identifier> ?identifier_SystemComponent . 
+    ?SystemRequirement <http://arcos.rack/REQUIREMENTS#createdBy> ?SoftwareRequirementsDefinition .
+        ?SoftwareRequirementsDefinition a <http://Turnstile/DevelopmentPlan#SoftwareRequirementsDefinition> . 
+        ?SoftwareRequirementsDefinition <http://arcos.rack/PROV-S#identifier> ?identifier_SoftwareRequirementsDefinition . 
+    }
+    optional{
+
+    ?SystemRequirement <http://arcos.rack/REQUIREMENTS#governs> ?SYSTEM .
+#        ?SYSTEM a <http://Turnstile/DevelopmentPlanData#SYSTEM> . 
+        ?SYSTEM <http://arcos.rack/PROV-S#identifier> ?identifier_SYSTEM . 
     }
 
 }".} to "99-Utils/Data/SystemRequirement.csv".
+
 

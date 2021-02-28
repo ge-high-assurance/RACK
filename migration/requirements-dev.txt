@@ -1,0 +1,5 @@
+black
+mypy~=0.812
+git+https://github.com/matangover/mypyls.git#egg=mypyls
+pylint
+rope

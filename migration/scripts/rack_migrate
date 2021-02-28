@@ -1,0 +1,106 @@
+#!/usr/bin/env python3
+#
+# Copyright (c) 2020, Galois, Inc.
+#
+# All Rights Reserved
+#
+# This material is based upon work supported by the Defense Advanced Research
+# Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+#
+# Any opinions, findings and conclusions or recommendations expressed in this
+# material are those of the author(s) and do not necessarily reflect the views
+# of the Defense Advanced Research Projects Agency (DARPA).
+
+import argparse
+import logging
+import sys
+from pathlib import Path
+
+import semtk
+from colorama import Fore, Style
+from ontology_changes.ontology_change import LOGGER_ID, stylize_file_name
+from rack.commits import commits_in_chronological_order
+
+
+class CustomFormatter(logging.Formatter):
+    """Add custom styles to our log"""
+
+    FORMATS: dict[int, str] = {
+        logging.DEBUG: "[DEBUG]",
+        logging.INFO: f"{Fore.CYAN}[INFO]{Style.RESET_ALL}",
+        logging.WARNING: f"{Fore.YELLOW}[WARNING]{Style.RESET_ALL}",
+        logging.ERROR: f"{Fore.RED}[ERROR]{Style.RESET_ALL}",
+        logging.CRITICAL: f"{Style.BRIGHT}{Fore.RED}[CRITICAL]{Style.RESET_ALL}",
+    }
+
+    def format(self, record: logging.LogRecord) -> str:
+        prefix = self.FORMATS.get(record.levelno)
+        if not prefix:
+            return "%(message)s"
+        formatter = logging.Formatter(f"{prefix} %(message)s", "%H:%M:%S")
+        return formatter.format(record)
+
+
+logger = logging.getLogger(LOGGER_ID)
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(CustomFormatter())
+logger.addHandler(stream_handler)
+logger.propagate = False
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument(
+    "--from-folder",
+    help="Folder of JSON files to migrate",
+    type=str,
+    required=True,
+)
+
+parser.add_argument(
+    "--log-level",
+    help="Assign logger severity level",
+    type=str,
+    default="INFO",
+)
+
+parser.add_argument(
+    "--to-folder",
+    help="Folder to output the migrated JSON files",
+    type=str,
+    required=True,
+)
+
+args = parser.parse_args()
+
+try:
+    logging.basicConfig(level=args.log_level)
+except ValueError:
+    logger.error("Bad log level specified")
+    sys.exit(1)
+
+from_folder = Path(args.from_folder)
+to_folder = Path(args.to_folder)
+
+if not Path.exists(from_folder):
+    print("from_folder does not exist, quitting.")
+    sys.exit(1)
+
+if not Path.exists(to_folder):
+    print("to_folder does not exist, quitting.")
+    sys.exit(1)
+
+for json_file_path in from_folder.glob("*.json"):
+    input_file = f"{from_folder}/{json_file_path.name}"
+    output_file = f"{to_folder}/{json_file_path.name}"
+    logger.info(
+        f" Migrating from {stylize_file_name(input_file)} to {stylize_file_name(output_file)}"
+    )
+    with open(json_file_path) as json_file:
+        my_json = semtk.SemTKJSON.parse_raw(json_file.read())
+        for commit in commits_in_chronological_order:
+            commit_number = commit["number"]
+            logger.debug(f"Processing commit {commit_number}")
+            for change in commit["changes"]:
+                change.migrate_json(my_json)
+        with open(f"{to_folder}/{json_file_path.name}", mode="w") as out_file:
+            out_file.write(my_json.json(exclude_unset=True, indent=4))

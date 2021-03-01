@@ -1,20 +1,118 @@
-<a name="unreleased"></a>
-## [Unreleased]
+# RACK Change Log
 
 
-<a name="v5.0"></a>
-## [v5.0] - 2021-02-02
+## [v5.0] - 2021-02-27
+
+### Ada
+
+- use ScrapingToolKit as output ([#300](https://github.com/ge-high-assurance/RACK/issues/300))
+- do not use "aux" filename for Windows users
+- update wrt. ontology changes
+- auto-generate stubs
+- fix incorrect type annotation
+- list files in output
+- add regression for CallStmt support
+- improve shell.nix
+- CallStmt support
+- fix input to file provider
+- split apart dev requirements
+- update niv
+- add 'files' file to regression
+- attempt at escaping special characters for URIs
+- update README
+- emit warnings but continue on unresolved nodes
+- lint pass
+- add colorama to requirements
+- continue analysis upon unresolved references
+- move test files into own directory
+- importing future must happen first
+- update format for github requirements
+- copyrights and docstrings
+- improve handling of filenames
+- add unit method to AdaNode typings
+- match ontology in naming for "definedIn"
+- parenthesize name location
+- support DottedName nodes
+- add more typings
+- implement some pylint suggestions
+- switch from pipenv to pip+venv
+- fix incorrect mypy annotation
+- allow a file arg for listing project files
+- have bash present in the shell
+- documentation
+- move folder out of RACK-Ontology
+- simplify treatment of files vs. bodies
+- connect static call graph to rdf outputter
+- add .gitignore
+- add missing regression.gpr
+- add definition site for the caller
+- factor out local visitor and call graph merge
+- properly remove params everywhere
+- describe regression in README
+- add higher-order function to regression.adb
+- remove unused params, finish pydoc
+- replace comments with pydoc
+- separate printing from call graph calculation
+- uniform quoting style
+- make rack_rdf.py executable
+- more typings for rdflib
+- stubs for rdflib
+- rename analyze_libadalang to run_analysis
+- update README
+- implement unit provider
+- add regression.adb and type stubs
+- handle namespaces better
+- actually add Python stubs and more types
+- fix definition site for SubpBody declarations
+- fix missing visit of declarations in SubpBody
+- better display of found static calls
+- add some documentation
+- prototype static call graph explorer
+- add type stubs and some Python typings
+- add colored indentation to Ada AST printer
+- fix bug where nodes were displayed twice
+- remove safeguards no longer needed
+- generic AST visitor and printer
+- add basic python script based on Eric's
+- add environment var pointing to adb files
+- add pylint and uniform pythonPackages
+- add env variable pointing to HTML doc
+- libadalang now working
+- lots of small fixes to derivations
+- unify gnat, attempt to build ASIS
+- working on supporting gnat_util
+- cosmetic change
+- remove unused in gnatcoll-core
+- update README
+- fix markdown
+- working environment to build libadalang
+- derivations now working up to gnatcoll-core
+- add gnatcore-coll derivation
+- remove xmlada-source-configured
+- gprbuild needs a configured xmlada source
+
 ### Cli
+
+- append ellipsis only once ([#286](https://github.com/ge-high-assurance/RACK/issues/286))
 - use dev requirements from the dev/ directory
+- emit a warning guessing command to correct mistake
 - add wheel for nix users
 - fix some pylint warnings
 - set epoch in shell.nix to avoid zip errors
 - add requirements-dev for dev dependencies
 
+### WIP
+
+- libadalang nix expressions
+
 ### Reverts
+
 - cli: add requirements-dev for dev dependencies
 
 ### Pull Requests
+
+- Merge pull request [#311](https://github.com/ge-high-assurance/RACK/issues/311) from ge-high-assurance/am/ts-sadl-queries
+- Merge pull request [#310](https://github.com/ge-high-assurance/RACK/issues/310) from ge-high-assurance/em/sw-naming-convention
 - Merge pull request [#279](https://github.com/ge-high-assurance/RACK/issues/279) from ge-high-assurance/ks/queryNodegroups
 - Merge pull request [#253](https://github.com/ge-high-assurance/RACK/issues/253) from ge-high-assurance/turnstile_assist
 - Merge pull request [#250](https://github.com/ge-high-assurance/RACK/issues/250) from ge-high-assurance/ontology-review/agents
@@ -23,40 +121,47 @@
 - Merge pull request [#251](https://github.com/ge-high-assurance/RACK/issues/251) from ge-high-assurance/ji/composite-action
 
 
-<a name="v4.1"></a>
 ## [v4.1] - 2020-12-17
+
 ### Pull Requests
+
 - Merge pull request [#248](https://github.com/ge-high-assurance/RACK/issues/248) from ge-high-assurance/em/wasDerivedFrom
 - Merge pull request [#247](https://github.com/ge-high-assurance/RACK/issues/247) from ge-high-assurance/em/str-uri
 - Merge pull request [#237](https://github.com/ge-high-assurance/RACK/issues/237) from ge-high-assurance/em/str-overlay
 
 
-<a name="v4.0"></a>
 ## [v4.0] - 2020-12-07
+
 ### Assist
+
 - update documentation
 - update documentation
 
 ### Pull Requests
+
 - Merge pull request [#242](https://github.com/ge-high-assurance/RACK/issues/242) from ge-high-assurance/glguy-patch-1
 
 
-<a name="v3.9"></a>
 ## [v3.9] - 2020-12-03
+
 ### Assist
+
 - remove generated Prolog files, update doc
 
 ### Ci
+
 - Test RACK with pytest
 - Don't allow failure in ontology linting step
 - Package RACK CLI and requirements as wheels
 - Always build RACK-box image, only publish from master branch
 
 ### Databin
+
 - fix bash loop over empty strings
 - gcc wrapper support other extensions
 
 ### Pull Requests
+
 - Merge pull request [#241](https://github.com/ge-high-assurance/RACK/issues/241) from ge-high-assurance/em/restore-components
 - Merge pull request [#239](https://github.com/ge-high-assurance/RACK/issues/239) from ge-high-assurance/ji/combine-workflows
 - Merge pull request [#236](https://github.com/ge-high-assurance/RACK/issues/236) from ge-high-assurance/em/when-then
@@ -79,31 +184,36 @@
 - Merge pull request [#199](https://github.com/ge-high-assurance/RACK/issues/199) from ge-high-assurance/lb/always-build-rack-box
 
 
-<a name="v3.0"></a>
 ## [v3.0] - 2020-10-23
+
 ### Ci
+
 - Lint every branch, not just master
 - Remove duplicated Packer build configuration
 - Use the Prolog "check" tool to lint the ontology
 
 ### Pull Requests
+
 - Merge pull request [#184](https://github.com/ge-high-assurance/RACK/issues/184) from ge-high-assurance/add_assist_to_dist
 - Merge pull request [#186](https://github.com/ge-high-assurance/RACK/issues/186) from ge-high-assurance/fix_copyright_notices
 
 
-<a name="v2.9"></a>
 ## [v2.9] - 2020-10-20
+
 ### Ci
+
 - Minimize the source tarball for the Packer image
 - Use `type -P`, not `command -v`
 - Require manual download of Packer for use with `act`
 - Document running Github Actions workflows locally with `act`
 
 ### Packer
+
 - Update documentation to reflect the new build process
 - reuse setup-rack.sh
 
 ### Prolog
+
 - add graphviz-based visualization script
 - add missing utils/float_equality
 - add BDU checks
@@ -122,6 +232,7 @@
 - add paths.pl and a hazard query
 
 ### Pull Requests
+
 - Merge pull request [#180](https://github.com/ge-high-assurance/RACK/issues/180) from ge-high-assurance/ji/add-rack-box
 - Merge pull request [#175](https://github.com/ge-high-assurance/RACK/issues/175) from ge-high-assurance/em/copyright
 - Merge pull request [#178](https://github.com/ge-high-assurance/RACK/issues/178) from ge-high-assurance/updateCSV
@@ -134,19 +245,22 @@
 - Merge pull request [#151](https://github.com/ge-high-assurance/RACK/issues/151) from ge-high-assurance/em/bdu-notes
 
 
-<a name="v2.0"></a>
 ## [v2.0] - 2020-08-27
 
-<a name="v1.9"></a>
+
 ## [v1.9] - 2020-08-25
+
 ### Cli
+
 - don't require a command
 - Update semtk-python3 in requirements.txt
 
 ### Ontology
+
 - add confidence meta-model
 
 ### Pull Requests
+
 - Merge pull request [#120](https://github.com/ge-high-assurance/RACK/issues/120) from ge-high-assurance/vr/confidence
 - Merge pull request [#139](https://github.com/ge-high-assurance/RACK/issues/139) from ge-high-assurance/Issue[#109](https://github.com/ge-high-assurance/RACK/issues/109)
 - Merge pull request [#134](https://github.com/ge-high-assurance/RACK/issues/134) from ge-high-assurance/assessment
@@ -165,12 +279,13 @@
 - Merge pull request [#99](https://github.com/ge-high-assurance/RACK/issues/99) from ge-high-assurance/em/metadata
 
 
-<a name="v1.0"></a>
 ## [v1.0] - 2020-08-01
 
-<a name="v0.9"></a>
+
 ## [v0.9] - 2020-07-29
+
 ### TurnstileSystem
+
 - Fix typo (LANGAUGE -> LANGUAGE)
 - Revert changes to INTERFACE.csv
 - Update CSV files
@@ -181,10 +296,12 @@
 - Add software sources
 
 ### TurnstyleSystem
+
 - Add uniqueIdentifier to every class
 - Add structure of counter application to SADL
 
 ### Pull Requests
+
 - Merge pull request [#91](https://github.com/ge-high-assurance/RACK/issues/91) from ge-high-assurance/vr/fix-type-of-with-status
 - Merge pull request [#88](https://github.com/ge-high-assurance/RACK/issues/88) from ge-high-assurance/vr/with-status-decorator
 - Merge pull request [#87](https://github.com/ge-high-assurance/RACK/issues/87) from ge-high-assurance/vr/nicer-output
@@ -202,16 +319,18 @@
 - Merge pull request [#50](https://github.com/ge-high-assurance/RACK/issues/50) from ge-high-assurance/em/remove-properties-sadl
 
 
-<a name="v0.1"></a>
 ## [v0.1] - 2020-07-02
 
-<a name="v0.0"></a>
+
 ## v0.0 - 2020-06-29
+
 ### TurnstileSystem
+
 - Remove Sample2.sadl
 - Fix typo (TurnStiles -> Turnstiles)
 
 ### Pull Requests
+
 - Merge pull request [#33](https://github.com/ge-high-assurance/RACK/issues/33) from ge-high-assurance/em/project-file
 - Merge pull request [#26](https://github.com/ge-high-assurance/RACK/issues/26) from ge-high-assurance/em/uniqueIdentifier
 - Merge pull request [#15](https://github.com/ge-high-assurance/RACK/issues/15) from ge-high-assurance/AssuranceOntologyModel

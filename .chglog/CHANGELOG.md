@@ -295,7 +295,7 @@
 - Add CounterApplicationUnitTesting
 - Add software sources
 
-### TurnstyleSystem
+### TurnstileSystem
 
 - Add uniqueIdentifier to every class
 - Add structure of counter application to SADL

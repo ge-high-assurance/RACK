@@ -15,6 +15,8 @@
 - Added example to Turnstile illustrating how to provide dateTime
   information in a CSV file (click [here](https://github.com/ge-high-assurance/RACK/wiki/RACK-dateTime) for more details)
 - Added Ada analysis tooling from Galois
+- Improved performance for data ingestion and querying
+- Scripts and data for loading in Boeing example: RACK V5 is not preloaded with this data but these have been sent to all ARCOS performers.
 
 ## [v4.1] - 2020-12-17
 

@@ -17,7 +17,8 @@
 - Added Ada analysis tooling from Galois
 - Improved performance for data ingestion and querying
 - Scripts and data for loading in Boeing example: RACK V5 is not preloaded with this data but these have been sent to all ARCOS performers.
-
+- Added support for runtime constraints and multiple data-graphs to the RACK CLI
+  (click [here](https://github.com/ge-high-assurance/RACK/wiki/RACK-CLI) for more details)
 ## [v4.1] - 2020-12-17
 
 - Added STR ontology overlays

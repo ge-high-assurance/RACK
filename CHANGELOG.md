@@ -1,6 +1,6 @@
 # RACK Change Log
 
-## [v5.0] - 2021-02-27
+## [v5.0] - 2021-03-08
 
 - Made some changes to RACK ontology (click
   [here](https://github.com/ge-high-assurance/RACK/wiki/RACK-v5.0-Ontology-Changelog)

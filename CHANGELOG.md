@@ -3,17 +3,17 @@
 ## [v5.0] - 2021-02-27
 
 - Made some changes to RACK ontology (click
-  [here](https://github.com/ge-high-assurance/RACK/wiki/RACK-Ontology-Change-Log)
+  [here](https://github.com/ge-high-assurance/RACK/wiki/RACK-v5.0-Ontology-Changelog)
   for more details)
 - Updated ASSIST tooling with ability to use additional recognizers
 - Updated Turnstile example to use ASSIST for software structure data
   generation and ingestion
 - Pulled process data into extra data graphs with separate names
   (ARP-475A, DO-330, DO-178C, MIL-STD-881D)
-- Updated names of nodegroups' returned results to follow same
-  convention
+- Updated names of query nodegroups' returned results to follow naming
+  convention (click [here](https://github.com/ge-high-assurance/RACK/blob/master/nodegroups/queries/README.md) for more details)
 - Added example to Turnstile illustrating how to provide dateTime
-  information in a CSV file
+  information in a CSV file (click [here](https://github.com/ge-high-assurance/RACK/wiki/RACK-dateTime) for more details)
 - Added Ada analysis tooling from Galois
 
 ## [v4.1] - 2020-12-17

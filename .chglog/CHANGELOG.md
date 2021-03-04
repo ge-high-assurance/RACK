@@ -2,6 +2,8 @@
 
 ## [v5.0] - 2021-03-08
 
+This release has the following changes:
+
 - Made some changes to RACK ontology (click [here](https://github.com/ge-high-assurance/RACK/wiki/RACK-v5.0-Ontology-Changelog) for more details)
 - Updated ASSIST tooling with ability to use additional recognizers
 - Updated Turnstile example to use ASSIST for software structure data generation and ingestion
@@ -15,15 +17,19 @@
 
 ## [v4.1] - 2020-12-17
 
-- Added STR ontology overlays
-- Added a set of generic ingestion nodegroups and CDRs
+This release has the following changes:
+
+- Added [STR ontology](https://github.com/ge-high-assurance/RACK/tree/master/STR-Ontology) overlays
+- Added a set of generic [ingestion nodegroups](https://github.com/ge-high-assurance/RACK/tree/master/nodegroups/ingestion) and [CDRs](https://github.com/ge-high-assurance/RACK/tree/master/nodegroups/CDR)
 - Created finer wasDerivedFrom distinctions in RACK ontology
 
 ## [v4.0] - 2020-12-07
 
+This release has the following changes:
+
 - Moved a few directories out of RACK-Ontology to their own places
-- Added SPARQLgraph union queries
-- Added GrammaTech ontology overlays
-- Added Provenance-Example illustrating how to record who, when, and how data is entered into RACK
-- Updated Turnstile sample data with examples of satisfiedBy DO-178C objectives (see Objective.csv and the Objective ingest nodegroup)
+- Added [GrammaTech ontology](https://github.com/ge-high-assurance/RACK/tree/master/GrammaTech-Ontology) overlays
+- Added SPARQLgraph [union queries](https://github.com/ge-semtk/semtk/wiki/Queries-Advanced-Topics)
+- Added [Provenance-Example](https://github.com/ge-high-assurance/RACK/tree/master/Provenance-Example) illustrating how to record who, when, and how data is entered into RACK
+- Updated Turnstile sample data with examples of `satisfiedBy` DO-178C objectives (see [Objective.csv](https://github.com/ge-high-assurance/RACK/blob/master/Turnstile-Ontology/99-Utils/Data/Objective.csv) and the [Objective ingest nodegroup](https://github.com/ge-high-assurance/RACK/blob/master/Turnstile-Ontology/99-Utils/NodeGroups/Ingest-Objective.json))
 - Automated ingestion for Turnstile data (node groups and SADL files used to generate CSV files, in turn used to run queries, in turn used to generate CSV files for data ingestion)

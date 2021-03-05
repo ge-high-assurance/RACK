@@ -1,6 +1,6 @@
-In a hurry? Skip this introduction and just[learn how to install and use RACK](https://github.com/ge-high-assurance/RACK/wiki).
+In a hurry? Skip this introduction and just [learn how to install and use RACK](https://github.com/ge-high-assurance/RACK/wiki).
 
-# Introducing RACK   
+# Introducing RACK
 
 RACK (Rapid Assurance Curation Kit) is a research-grade database that uses a structured semantic data model tuned to the domain of the DARPA ARCOS (Automated Rapid Certificaiton Of Software) program.
 
@@ -17,7 +17,7 @@ To make RACK easy for all ARCOS performers to use, we deploy RACK as a software 
 RACK is available either as a virtual machine image or a Docker container, and is supported on Linux, Windows, and MacOS systems. To learn more and get detailed instructions on how to get started, see [our online User Guide](https://github.com/ge-high-assurance/RACK/wiki/RACK-in-a-Box-User-Guide).
 
 ---
-Copyright (c) 2020, General Electric Company, Galois, Inc.
+Copyright (c) 2021, General Electric Company, Galois, Inc.
 
 All Rights Reserved
 

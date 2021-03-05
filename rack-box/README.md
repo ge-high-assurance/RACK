@@ -206,7 +206,7 @@ There may also be a more precise solution to this issue, but the above works.
 [PAT]: https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token
 
 ---
-Copyright (c) 2020, General Electric Company, Galois, Inc.
+Copyright (c) 2021, General Electric Company, Galois, Inc.
 
 All Rights Reserved
 

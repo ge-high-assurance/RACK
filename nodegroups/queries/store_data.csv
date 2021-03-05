@@ -11,7 +11,6 @@ query Trace Hazards to Tests,Trace hazard down to test case,200001934,query Trac
 query Trace Requirements to Tests,Recursively show all requirements which satisfy and verify a testcase,200001934,query Trace Requirements to Tests.json
 query Hazard structure,Find system component associated with the hazards,200001934,query Hazard structure.json
 query Terms consumedBy Requirement,Find data dictionary terms consumed by requirement(s),200001934,query Terms consumedBy Requirement.json
-query Control Flow From Function,Find functions called by specified function,eric,query Control Flow From Function.json
 query Compilation Inputs,Find inputs used in compilation of executables,langston,query Compilation Inputs.json
 query System Structure,Extract system subcomponent structure contained under a given top-level anchor system,eric,query System Structure.json
 query test empty thing,Check for non-SYSTEM typed things with identifer and no other properties,200001934,query test empty thing.json

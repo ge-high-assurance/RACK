@@ -1,10 +1,12 @@
-<!---
-NOTE: This file should be copied to this wiki page before each release:
+# RACK CLI
 
+<!--
+NOTE: Copy the file between here and copyright to the wiki before each release:
 https://github.com/ge-high-assurance/RACK/wiki/RACK-CLI
 -->
 
-# RACK CLI
+<!-- markdownlint-disable first-line-heading -->
+<!-- markdownlint-disable line-length -->
 
 The RACK command-line interface (the `rack` program) can
 
@@ -255,7 +257,7 @@ We support the following constraint operations:
 - `<=` greater-than or equal-to
 - `~` regular expression
 - `:...<>...` between
-- `:...<=>...` inclusive-between 
+- `:...<=>...` inclusive-between
 
 To specify a constraint you'll pass a string containing the: constraint ID,
 operator, and value. Multiple constraint variables can be specified at the same time,
@@ -266,12 +268,12 @@ operators.
 
 Examples:
 
-```
+```shell
 # Example using exact matches
 rack data export "query Requirements decomposition" \
   --data-graph http://rack001/data \
   --constraint req=HLR-1 \
-  --constraint decomposition=IN-LLR-2 
+  --constraint decomposition=IN-LLR-2
 
 # Example using regular expressions
 rack data export "query Requirements decomposition" \
@@ -284,14 +286,13 @@ rack data export "example nodegroup" \
   --constraint "generatedAtTime:2020-01-01T00:00:00Z<=>2020-12-31T23:59:59:59Z"
 ```
 
-
 ### Count result rows
 
 The number of results a nodegroup would generate can be obtained
 using the `count` sub-command.
 
 ```shell
-(venv) $ rack data count --data-graph "http://rack001/data" "ingest07 test results" 
+(venv) $ rack data count --data-graph "http://rack001/data" "ingest07 test results"
 16
 ```
 
@@ -321,10 +322,14 @@ query Control Flow From Function.json           query System Structure.json
 
 ## Hacking
 
-See [dev/README.md](dev/README.md).
+See [dev/README.md](https://github.com/ge-high-assurance/RACK/tree/master/cli/dev).
+
+<!--
+Don't copy below to wiki; wiki already has copyright in _Footer.md
+-->
 
 ---
-Copyright (c) 2020, Galois, Inc.
+Copyright (c) 2021, Galois, Inc.
 
 All Rights Reserved
 

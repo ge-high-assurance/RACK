@@ -48,6 +48,7 @@ runs:
       shell: bash
       run: |
         sudo npm install -g github-wikito-converter markdown-to-html
+        cp RACK.wiki/_Footer.md RACK.wiki/Copyright.md
         gwtc -t RACK-in-a-Box RACK.wiki
         markdown -t RACK-in-a-box -s style.css RACK.wiki/_Welcome.md > index.html
         sed -i -e 's/>NodeGroupService/ onclick="javascript:event.target.port=12058">NodeGroupService/' index.html

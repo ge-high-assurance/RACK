@@ -25,7 +25,8 @@ jobs:
       id: cache-files
       with:
         path: RACK/rack-box/files
-        key: files-${{ github.event.release.tag_name }}
+        # Use different key because we check out source & wiki with tag
+        key: files-${{ github.sha }}-${{ github.event.release.tag_name }}
 
     - name: Check out RACK source
       if: steps.cache-files.outputs.cache-hit != 'true'

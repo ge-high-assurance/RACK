@@ -25,7 +25,7 @@ jobs:
       id: cache-files
       with:
         path: RACK/rack-box/files
-        key: files-${{ github.sha }}
+        key: files-${{ github.event.release.tag_name }}
 
     - name: Check out RACK source
       if: steps.cache-files.outputs.cache-hit != 'true'
@@ -105,26 +105,11 @@ jobs:
         token: ${{ secrets.RACK_CI_PAT }}
         path: RACK
 
-    - name: Check out RACK wiki
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK.wiki
-        ref: ${{ github.event.release.tag_name }}
-        token: ${{ secrets.RACK_CI_PAT }}
-        path: RACK.wiki
-
     - name: Get all files needed by rack-box
       uses: actions/cache@v2
       with:
         path: RACK/rack-box/files
         key: files-${{ github.sha }}
-
-    - name: Package RACK documentation
-      run: |
-        sudo npm install -g github-wikito-converter markdown-to-html
-        gwtc -t RACK-in-a-Box RACK.wiki
-        markdown -t RACK-in-a-box -s style.css RACK.wiki/Welcome.md > index.html
-        mv documentation.html index.html RACK/rack-box/files
 
     # Skip since windows-latest doesn't support nested virtualization yet
     - name: Enable Hyper-V
@@ -139,7 +124,7 @@ jobs:
       if: matrix.builder == 'virtualbox' && matrix.os == 'ubuntu-20.04'
       run: sudo apt-get install -y virtualbox
 
-    - name: Build rack-box image
+    - name: Build rack-box ${{ matrix.builder }} image
       run: |
         b=${{ matrix.builder }}
         v=${{ github.event.release.tag_name }}

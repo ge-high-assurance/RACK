@@ -119,8 +119,8 @@
                             "?ANCHOR_SYSTEM"
                         ],
                         "UriConnectBy": "http://arcos.rack/SYSTEM#partOf",
-                        "UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-                        "ValueType": "ENTITY"
+                        "UriValueType": "http://arcos.rack/SYSTEM#SYSTEM",
+                        "ValueType": "SYSTEM"
                     }
                 ],
                 "propList": [

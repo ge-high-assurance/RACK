@@ -16,7 +16,7 @@
         "graph": "http://rack001/model"
       }
     ],
-    "enableOwlImports": true
+    "enableOwlImports": false
   },
   "sNodeGroup": {
     "offset": 0,

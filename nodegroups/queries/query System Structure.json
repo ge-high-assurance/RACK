@@ -156,7 +156,7 @@
             }
         ],
         "domain": "",
-        "enableOwlImports": true,
+        "enableOwlImports": false,
         "model": [
             {
                 "graph": "http://rack001/model",

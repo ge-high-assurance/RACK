@@ -140,7 +140,24 @@
 	"importSpec": {
 		"version": "1",
 		"baseURI": "",
-		"columns": [],
+		"columns": [
+			{
+				"colId": "col_0",
+				"colName": "identifier_ORGANIZATION"
+			},
+			{
+				"colId": "col_1",
+				"colName": "emailAddress_Engineer"
+			},
+			{
+				"colId": "col_2",
+				"colName": "identifier_Engineer"
+			},
+			{
+				"colId": "col_3",
+				"colName": "title_Engineer"
+			}
+		],
 		"dataValidator": [],
 		"texts": [],
 		"transforms": [],
@@ -148,14 +165,56 @@
 			{
 				"sparqlID": "?Engineer",
 				"type": "http://Turnstile/DevelopmentPlan#Engineer",
+				"URILookupMode": "createIfMissing",
 				"mapping": [],
-				"props": []
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/AGENTS#emailAddress",
+						"mapping": [
+							{
+								"colId": "col_1"
+							}
+						]
+					},
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?Engineer"
+						],
+						"mapping": [
+							{
+								"colId": "col_2"
+							}
+						]
+					},
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#title",
+						"mapping": [
+							{
+								"colId": "col_3"
+							}
+						]
+					}
+				]
 			},
 			{
 				"sparqlID": "?ORGANIZATION",
 				"type": "http://arcos.rack/AGENTS#ORGANIZATION",
+				"URILookupMode": "noCreate",
 				"mapping": [],
-				"props": []
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?ORGANIZATION"
+						],
+						"mapping": [
+							{
+								"colId": "col_0"
+							}
+						]
+					}
+				]
 			}
 		]
 	}

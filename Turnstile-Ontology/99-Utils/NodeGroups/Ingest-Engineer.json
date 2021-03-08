@@ -20,7 +20,7 @@
 		]
 	},
 	"sNodeGroup": {
-		"version": 11,
+		"version": 12,
 		"limit": 0,
 		"offset": 0,
 		"sNodeList": [
@@ -44,7 +44,6 @@
 				"nodeList": [],
 				"NodeName": "ORGANIZATION",
 				"fullURIName": "http://arcos.rack/AGENTS#ORGANIZATION",
-				"subClassNames": [],
 				"SparqlID": "?ORGANIZATION",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
@@ -61,12 +60,14 @@
 						"UriRelationship": "http://arcos.rack/AGENTS#emailAddress",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?emailAddress_Engineer",
-						"isReturned": true,
+						"SparqlID": "?emailAddress",
+						"isReturned": false,
 						"optMinus": 1,
 						"isRuntimeConstrained": false,
 						"instanceValues": [],
-						"isMarkedForDeletion": false
+						"isMarkedForDeletion": false,
+						"binding": "?emailAddress_Engineer",
+						"isBindingReturned": true
 					},
 					{
 						"KeyName": "identifier",
@@ -75,26 +76,30 @@
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?identifier_Engineer",
-						"isReturned": true,
+						"SparqlID": "?identifier",
+						"isReturned": false,
 						"optMinus": 0,
 						"isRuntimeConstrained": false,
 						"instanceValues": [],
-						"isMarkedForDeletion": false
+						"isMarkedForDeletion": false,
+						"binding": "?identifier_Engineer",
+						"isBindingReturned": true
 					},
 					{
-						"KeyName": "name",
+						"KeyName": "title",
 						"ValueType": "string",
 						"relationship": "http://www.w3.org/2001/XMLSchema#string",
 						"UriRelationship": "http://arcos.rack/PROV-S#title",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?name_Engineer",
-						"isReturned": true,
+						"SparqlID": "?title",
+						"isReturned": false,
 						"optMinus": 1,
 						"isRuntimeConstrained": false,
 						"instanceValues": [],
-						"isMarkedForDeletion": false
+						"isMarkedForDeletion": false,
+						"binding": "?title_Engineer",
+						"isBindingReturned": true
 					}
 				],
 				"nodeList": [
@@ -103,7 +108,7 @@
 							"?ORGANIZATION"
 						],
 						"OptionalMinus": [
-							"1"
+							1
 						],
 						"Qualifiers": [
 							""
@@ -121,7 +126,6 @@
 				],
 				"NodeName": "Engineer",
 				"fullURIName": "http://Turnstile/DevelopmentPlan#Engineer",
-				"subClassNames": [],
 				"SparqlID": "?Engineer",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
@@ -130,106 +134,28 @@
 				"deletionMode": "NO_DELETE"
 			}
 		],
-		"orderBy": []
+		"orderBy": [],
+		"unionHash": {}
 	},
 	"importSpec": {
 		"version": "1",
 		"baseURI": "",
-		"columns": [
-			{
-				"colId": "col_0",
-				"colName": "identifier_ORGANIZATION"
-			},
-			{
-				"colId": "col_1",
-				"colName": "emailAddress_Engineer"
-			},
-			{
-				"colId": "col_2",
-				"colName": "identifier_Engineer"
-			},
-			{
-				"colId": "col_3",
-				"colName": "name_Engineer"
-			}
-		],
+		"columns": [],
 		"dataValidator": [],
 		"texts": [],
-		"transforms": [
-			{
-				"transId": "trans_0",
-				"name": "RemoveNulls",
-				"transType": "replaceAll",
-				"arg1": "null",
-				"arg2": ""
-			}
-		],
+		"transforms": [],
 		"nodes": [
-			{
-				"sparqlID": "?ORGANIZATION",
-				"type": "http://arcos.rack/AGENTS#ORGANIZATION",
-				"URILookupMode": "createIfMissing",
-				"mapping": [],
-				"props": [
-					{
-						"URIRelation": "http://arcos.rack/PROV-S#identifier",
-						"URILookup": [
-							"?ORGANIZATION"
-						],
-						"mapping": [
-							{
-								"colId": "col_0",
-								"transformList": [
-									"trans_0"
-								]
-							}
-						]
-					}
-				]
-			},
 			{
 				"sparqlID": "?Engineer",
 				"type": "http://Turnstile/DevelopmentPlan#Engineer",
-				"URILookupMode": "createIfMissing",
 				"mapping": [],
-				"props": [
-					{
-						"URIRelation": "http://arcos.rack/AGENTS#emailAddress",
-						"mapping": [
-							{
-								"colId": "col_1",
-								"transformList": [
-									"trans_0"
-								]
-							}
-						]
-					},
-					{
-						"URIRelation": "http://arcos.rack/PROV-S#identifier",
-						"URILookup": [
-							"?Engineer"
-						],
-						"mapping": [
-							{
-								"colId": "col_2",
-								"transformList": [
-									"trans_0"
-								]
-							}
-						]
-					},
-					{
-						"URIRelation": "http://arcos.rack/PROV-S#title",
-						"mapping": [
-							{
-								"colId": "col_3",
-								"transformList": [
-									"trans_0"
-								]
-							}
-						]
-					}
-				]
+				"props": []
+			},
+			{
+				"sparqlID": "?ORGANIZATION",
+				"type": "http://arcos.rack/AGENTS#ORGANIZATION",
+				"mapping": [],
+				"props": []
 			}
 		]
 	}

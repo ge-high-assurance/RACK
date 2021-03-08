@@ -200,7 +200,7 @@
 			{
 				"sparqlID": "?ORGANIZATION",
 				"type": "http://arcos.rack/AGENTS#ORGANIZATION",
-				"URILookupMode": "noCreate",
+				"URILookupMode": "createIfMissing",
 				"mapping": [],
 				"props": [
 					{

@@ -66,11 +66,13 @@ source .env
 
 for service in *Service; do
   (
-    cd "${service}"
-    unzip -q target/*.jar
-    rm -rf pom.xml target
-    envsubst <../service.unit >/etc/systemd/system/"${service}".service
-    systemctl enable "${service}"
+    if [[ "$ENABLED_SERVICES" == *"$service"* ]]; then
+       cd "${service}"
+       unzip -q target/*.jar
+       rm -rf pom.xml target
+       envsubst <../service.unit >/etc/systemd/system/"${service}".service
+       systemctl enable "${service}"
+    fi
   )
 done
 

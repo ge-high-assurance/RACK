@@ -1,0 +1,141 @@
+{
+    "importSpec": {
+        "baseURI": "",
+        "columns": [],
+        "dataValidator": [],
+        "nodes": [
+            {
+                "mapping": [],
+                "props": [],
+                "sparqlID": "?MODEL",
+                "type": "http://arcos.rack/MODEL#MODEL"
+            },
+            {
+                "mapping": [],
+                "props": [],
+                "sparqlID": "?THING",
+                "type": "http://arcos.rack/PROV-S#THING"
+            }
+        ],
+        "texts": [],
+        "transforms": [],
+        "version": "1"
+    },
+    "sNodeGroup": {
+        "limit": 0,
+        "offset": 0,
+        "orderBy": [],
+        "sNodeList": [
+            {
+                "NodeName": "THING",
+                "SparqlID": "?THING",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/PROV-S#THING",
+                "instanceValue": null,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "nodeList": [],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "identifier",
+                        "SparqlID": "?thing_id",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": false,
+                        "isRuntimeConstrained": true,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "valueConstraint": ""
+            },
+            {
+                "NodeName": "MODEL",
+                "SparqlID": "?MODEL",
+                "binding": "?model",
+                "deletionMode": "NO_DELETE",
+                "fullURIName": "http://arcos.rack/MODEL#MODEL",
+                "instanceValue": null,
+                "isBindingReturned": true,
+                "isReturned": false,
+                "isRuntimeConstrained": false,
+                "isTypeReturned": true,
+                "nodeList": [
+                    {
+                        "ConnectBy": "models",
+                        "Connected": true,
+                        "DeletionMarkers": [
+                            false
+                        ],
+                        "KeyName": "models",
+                        "OptionalMinus": [
+                            0
+                        ],
+                        "Qualifiers": [
+                            ""
+                        ],
+                        "SnodeSparqlIDs": [
+                            "?THING"
+                        ],
+                        "UriConnectBy": "http://arcos.rack/MODEL#models",
+                        "UriValueType": "http://arcos.rack/PROV-S#THING",
+                        "ValueType": "THING"
+                    }
+                ],
+                "propList": [
+                    {
+                        "Constraints": "",
+                        "KeyName": "identifier",
+                        "SparqlID": "?model_id",
+                        "UriRelationship": "http://arcos.rack/PROV-S#identifier",
+                        "ValueType": "string",
+                        "fullURIName": "",
+                        "instanceValues": [],
+                        "isMarkedForDeletion": false,
+                        "isReturned": true,
+                        "isRuntimeConstrained": false,
+                        "optMinus": 0,
+                        "relationship": "http://www.w3.org/2001/XMLSchema#string"
+                    }
+                ],
+                "valueConstraint": ""
+            }
+        ],
+        "unionHash": {},
+        "version": 12
+    },
+    "sparqlConn": {
+        "data": [
+            {
+                "graph": "http://rack001/data",
+                "type": "fuseki",
+                "url": "http://localhost:3030/RACK"
+            },
+            {
+                "graph": "http://rack001/do-178c",
+                "type": "fuseki",
+                "url": "http://localhost:3030/RACK"
+            },
+            {
+                "graph": "http://rack001/boeing",
+                "type": "fuseki",
+                "url": "http://localhost:3030/RACK"
+            }
+        ],
+        "domain": "",
+        "enableOwlImports": true,
+        "model": [
+            {
+                "graph": "http://rack001/model",
+                "type": "fuseki",
+                "url": "http://localhost:3030/RACK"
+            }
+        ],
+        "name": "RACK"
+    },
+    "version": 2
+}

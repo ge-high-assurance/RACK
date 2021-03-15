@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml = "http://www.omg.org/spec/UML/20090901" xmlns:sysml = "http://www.omg.org/spec/SysML/20100301/SysML-profile">
+  <uml:Model name = "TestCase11" xmi:id = "_7d873f3f-2de1-4dfa-a4e2-56db32af023f">
+    <packagedElement xmi:type = "uml:Package" xmi:id = "_3a5aad4d-2ad3-47cd-9779-b131fd4c2074" name = "Specifications">
+      <packagedElement xmi:type = "uml:Class" xmi:id = "_3de73975-dbcb-4fc0-876f-7f727864f844" name = "E1">
+      </packagedElement>
+      <packagedElement xmi:type = "uml:Class" xmi:id = "_68996413-437c-4337-b7bd-0f677c0e5f11" name = "ER1">
+      </packagedElement>
+      <packagedElement xmi:type = "uml:Class" xmi:id = "_e07abae2-f6a2-48bf-a862-1b2e0cb5cd25" name = "SR1">
+        <nestedClassifier xmi:type = "uml:Class" xmi:id = "_eaf3dc99-5766-4472-b57f-3dea4c9c84c7" name = "SR1.1">
+        </nestedClassifier>
+        <nestedClassifier xmi:type = "uml:Class" xmi:id = "_1df48eef-734c-4c87-aa7d-56ae45c75a78" name = "SR1.2">
+        </nestedClassifier>
+      </packagedElement>
+      <packagedElement xmi:type = "uml:Interaction" xmi:id = "_e7c36f53-2110-4670-bb3d-7a186a91db19" name = "TCn">
+		  <ownedParameter xmi:type = "uml:Parameter" xmi:id = "d99c1807-24ce-486b-8770-4a7bcccbc5eareturn" direction = "return">
+			  <type xmi:type = "uml:Enumeration" href = "http://www.omg.org/spec/SysML/20100301/SysML-profile.uml#VerdictKind">
+			  </type>
+		  </ownedParameter>		  
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type = "uml:Abstraction" xmi:id = "_15aac950-f0ae-473e-8ca3-d943e8008bc2" client = "_68996413-437c-4337-b7bd-0f677c0e5f11" supplier = "_1df48eef-734c-4c87-aa7d-56ae45c75a78">
+      <ownedComment xmi:type = "uml:Comment" xmi:id = "_55cb62d7-5374-49b8-8933-9322d780b7ba" annotatedElement = "_15aac950-f0ae-473e-8ca3-d943e8008bc2" body = "Refer to the xyz analysis report for the basis for deriving this requirement">
+      </ownedComment>
+    </packagedElement>
+    <packagedElement xmi:type = "uml:Abstraction" xmi:id = "_5478b132-6f6e-4134-97eb-78731009d7f1" client = "_3de73975-dbcb-4fc0-876f-7f727864f844" supplier = "_68996413-437c-4337-b7bd-0f677c0e5f11">
+    </packagedElement>
+    <packagedElement xmi:type = "uml:Abstraction" xmi:id = "_dc7036e9-a66d-4a13-8116-e26378d67b5d" client = "_e7c36f53-2110-4670-bb3d-7a186a91db19" supplier = "_1df48eef-734c-4c87-aa7d-56ae45c75a78">
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_profileApplication0">
+      <appliedProfile  xmi:type="uml:Profile" href="http://www.omg.org/spec/SysML/20100301/SysML-profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <sysml:Block base_Class = "_3de73975-dbcb-4fc0-876f-7f727864f844" xmi:id = "_19580ff0-b23c-4ed9-94ff-de3a6b16fbad" />
+  <sysml:RequirementRelated base_NamedElement = "_3de73975-dbcb-4fc0-876f-7f727864f844" xmi:id = "_14f4e1d6-f67b-4fef-9a4c-859aec836cef" />
+  <sysml:Requirement base_Class = "_68996413-437c-4337-b7bd-0f677c0e5f11" xmi:id = "_cbaf1110-3912-41cd-ab50-e372bf1b8a9c" Text = "The element 1 shall do ER1" Id = "1" />
+  <sysml:Requirement base_Class = "_e07abae2-f6a2-48bf-a862-1b2e0cb5cd25" xmi:id = "_2ced544b-f356-4b3f-8739-3936bcff02c1" Text = "The system shall do SR1.1 and SR1.2" Id = "1.0" />
+  <sysml:Requirement base_Class = "_eaf3dc99-5766-4472-b57f-3dea4c9c84c7" xmi:id = "_c33c6d4c-dbb3-4800-b3c8-e95447160775" Text = "The system shall do SR1.1" Id = "1.1" />
+  <sysml:Requirement base_Class = "_1df48eef-734c-4c87-aa7d-56ae45c75a78" xmi:id = "_99591362-bc15-4db9-bf5c-3f5f5ddcbfc5" Text = "The system shall do SR1.2" Id = "1.2" />
+  <sysml:RequirementRelated base_NamedElement = "_e7c36f53-2110-4670-bb3d-7a186a91db19" xmi:id = "_e677a170-24e1-4a06-a241-7eb0accce00d" />
+  <sysml:TestCase base_Behavior = "_e7c36f53-2110-4670-bb3d-7a186a91db19" xmi:id = "_afe97ece-ea6b-427e-b09a-6e36b8bd6a3d" />
+  <sysml:DeriveReqt base_Abstraction = "_15aac950-f0ae-473e-8ca3-d943e8008bc2" xmi:id = "_26e4295a-5dd9-4ce0-bb63-8449ac705e1e" />
+  <sysml:Rationale base_Comment = "_55cb62d7-5374-49b8-8933-9322d780b7ba" xmi:id = "_a5315c5f-e6c4-42c0-bd7a-14cfb8e8786d" />
+  <sysml:Satisfy base_Abstraction = "_5478b132-6f6e-4134-97eb-78731009d7f1" xmi:id = "_749544dd-0f33-4587-a4b4-636146514d45" />
+  <sysml:Verify base_Abstraction = "_dc7036e9-a66d-4a13-8116-e26378d67b5d" xmi:id = "_a5d27bd9-0c7d-418a-bb24-28c47f29bfbc" />
+</xmi:XMI>

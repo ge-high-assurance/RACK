@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml = "http://www.omg.org/spec/UML/20090901" xmlns:sysml = "http://www.omg.org/spec/SysML/20100301/SysML-profile">
+  <uml:Model name = "TestCase10" xmi:id = "_2edc224b-a24e-4dff-84cd-3ec2e1fc2121">
+    <packagedElement xmi:type = "uml:Class" xmi:id = "_c37be8b9-c7b1-42fa-89af-38c04c034301" name = "B0"  >
+      <ownedAttribute xmi:type = "uml:Property" xmi:id="_3a0f1fb7-2b45-4285-bb4f-0dcef2dd459b" name = "b1" type = "_6dfd74f0-29fa-46aa-b9bf-0c21fcb08400"  aggregation = "composite" association = "_7b09c54a-ec4e-4cf3-ab9b-17b40f0f9653" >
+        <upperValue xmi:type = "uml:LiteralInteger" xmi:id = "_3a0f1fb7-2b45-4285-bb4f-0dcef2dd459bupper" value = "1"/>
+        <lowerValue xmi:type = "uml:LiteralInteger" xmi:id = "_3a0f1fb7-2b45-4285-bb4f-0dcef2dd459blower" value = "1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type = "uml:Property" xmi:id="_d143e812-5d3c-448f-aeee-88517a6a885a" name = "b2" type = "_d30eae6b-ac74-4f6f-9ad3-353aedc2f214" aggregation = "composite" association = "_20c7086f-a4fa-47db-9bae-a5e8c5da7a6b"  >
+        <upperValue xmi:type = "uml:LiteralInteger" xmi:id = "_d143e812-5d3c-448f-aeee-88517a6a885aupper" value = "1"/>
+        <lowerValue xmi:type = "uml:LiteralInteger" xmi:id = "_d143e812-5d3c-448f-aeee-88517a6a885alower" value = "1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type = "uml:Property" xmi:id="_8a391be9-56c3-4b36-95b3-7c696a6f40ca" name = "i" type = "_c6d41703-7dfc-4ef2-b324-e09cc1acc959" visibility = "private" aggregation = "composite" association = "_38251253-8fb3-4c44-b63e-93c520016195"  >
+        <upperValue xmi:type = "uml:LiteralInteger" xmi:id = "_8a391be9-56c3-4b36-95b3-7c696a6f40caupper" value = "1"/>
+        <lowerValue xmi:type = "uml:LiteralInteger" xmi:id = "_8a391be9-56c3-4b36-95b3-7c696a6f40calower" value = "1"/>
+      </ownedAttribute>
+      <ownedConnector xmi:type = "uml:Connector" name = "Connects" xmi:id = "_ac15c7cb-4c4b-4cce-90bb-414e6a7afcdb">
+        <end xmi:type = "uml:ConnectorEnd" xmi:id = "_8ec81a66-b782-42d9-89be-7405affd1856" partWithPort = "_3a0f1fb7-2b45-4285-bb4f-0dcef2dd459b" role = "_ad4945c2-9061-41a0-92d9-4f70544e219a">
+          <upperValue xmi:type = "uml:LiteralInteger" xmi:id = "_8ec81a66-b782-42d9-89be-7405affd1856upper" value = "1"/>
+          <lowerValue xmi:type = "uml:LiteralInteger" xmi:id = "_8ec81a66-b782-42d9-89be-7405affd1856lower" value = "1"/>
+        </end>
+        <end xmi:type = "uml:ConnectorEnd" xmi:id = "_5cb97e53-2c3e-41cd-8750-331bca1f98ce" partWithPort = "_d143e812-5d3c-448f-aeee-88517a6a885a" role = "_a6515d86-7b4d-48e5-a86e-aeba15892ef1">
+          <upperValue xmi:type = "uml:LiteralInteger" xmi:id = "_5cb97e53-2c3e-41cd-8750-331bca1f98ceupper" value = "1"/>
+          <lowerValue xmi:type = "uml:LiteralInteger" xmi:id = "_5cb97e53-2c3e-41cd-8750-331bca1f98celower" value = "1"/>
+        </end>
+      </ownedConnector>
+    </packagedElement>
+    <packagedElement xmi:type = "uml:Class" xmi:id = "_6dfd74f0-29fa-46aa-b9bf-0c21fcb08400" name = "B1"  >
+      <ownedAttribute xmi:type = "uml:Port" xmi:id = "_ad4945c2-9061-41a0-92d9-4f70544e219a" name = "p1" type = "_24f583c4-4af2-43e0-b8f2-c1e42bf13773"  aggregation = "composite">
+        <upperValue xmi:type = "uml:LiteralInteger" xmi:id = "_ad4945c2-9061-41a0-92d9-4f70544e219aupper" value = "1"/>
+        <lowerValue xmi:type = "uml:LiteralInteger" xmi:id = "_ad4945c2-9061-41a0-92d9-4f70544e219alower" value = "1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type = "uml:Class" xmi:id = "_d30eae6b-ac74-4f6f-9ad3-353aedc2f214" name = "B2"  >
+      <ownedAttribute xmi:type = "uml:Port" xmi:id = "_a6515d86-7b4d-48e5-a86e-aeba15892ef1" name = "p1" type = "_24f583c4-4af2-43e0-b8f2-c1e42bf13773"   aggregation = "composite" isConjugated = "true">
+        <upperValue xmi:type = "uml:LiteralInteger" xmi:id = "_a6515d86-7b4d-48e5-a86e-aeba15892ef1upper" value = "1"/>
+        <lowerValue xmi:type = "uml:LiteralInteger" xmi:id = "_a6515d86-7b4d-48e5-a86e-aeba15892ef1lower" value = "1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type = "uml:Class" xmi:id = "_c6d41703-7dfc-4ef2-b324-e09cc1acc959" name = "F0" >
+    </packagedElement>
+    <packagedElement xmi:type = "uml:Interface" xmi:id = "_24f583c4-4af2-43e0-b8f2-c1e42bf13773" name = "FS1" isAbstract = "true" >
+      <ownedAttribute xmi:type = "uml:Property" xmi:id = "_e5b065d6-5924-4fa2-8d51-13dc7795acbd" name = "fp1" type = "_c6d41703-7dfc-4ef2-b324-e09cc1acc959" aggregation = "composite" visibility = "public">
+        <upperValue xmi:type = "uml:LiteralInteger" xmi:id = "_e5b065d6-5924-4fa2-8d51-13dc7795acbdupper" value = "1"/>
+        <lowerValue xmi:type = "uml:LiteralInteger" xmi:id = "_e5b065d6-5924-4fa2-8d51-13dc7795acbdlower" value = "1"/>
+      </ownedAttribute>
+    </packagedElement>
+   <packagedElement xmi:type = "uml:Association" xmi:id = "_20c7086f-a4fa-47db-9bae-a5e8c5da7a6b" memberEnd = "_f1e6dbd1-49fd-4785-a99c-e37e6787211d _d143e812-5d3c-448f-aeee-88517a6a885a">
+      <ownedEnd xmi:type = "uml:Property" xmi:id = "_f1e6dbd1-49fd-4785-a99c-e37e6787211d" type = "_c37be8b9-c7b1-42fa-89af-38c04c034301" visibility = "private"  association = "_20c7086f-a4fa-47db-9bae-a5e8c5da7a6b">
+        <upperValue xmi:type = "uml:LiteralInteger" xmi:id = "_f1e6dbd1-49fd-4785-a99c-e37e6787211dupper" value = "1"/>
+        <lowerValue xmi:type = "uml:LiteralInteger" xmi:id = "_f1e6dbd1-49fd-4785-a99c-e37e6787211dlower" value = "1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type = "uml:Association" xmi:id = "_38251253-8fb3-4c44-b63e-93c520016195" memberEnd = "_a0d1b46f-7315-4f01-a223-0abbb547a188 _8a391be9-56c3-4b36-95b3-7c696a6f40ca">
+      <ownedEnd xmi:type = "uml:Property" xmi:id = "_a0d1b46f-7315-4f01-a223-0abbb547a188" type = "_c37be8b9-c7b1-42fa-89af-38c04c034301" visibility = "private"  association = "_38251253-8fb3-4c44-b63e-93c520016195">
+        <upperValue xmi:type = "uml:LiteralInteger" xmi:id = "_a0d1b46f-7315-4f01-a223-0abbb547a188upper" value = "1"/>
+        <lowerValue xmi:type = "uml:LiteralInteger" xmi:id = "_a0d1b46f-7315-4f01-a223-0abbb547a188lower" value = "1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type = "uml:Association" xmi:id = "_7b09c54a-ec4e-4cf3-ab9b-17b40f0f9653" memberEnd = "_047d7fb7-08a7-4083-8120-f8b4db0797b0 _3a0f1fb7-2b45-4285-bb4f-0dcef2dd459b">
+      <ownedEnd xmi:type = "uml:Property" xmi:id = "_047d7fb7-08a7-4083-8120-f8b4db0797b0" type = "_c37be8b9-c7b1-42fa-89af-38c04c034301" visibility = "private"  association = "_7b09c54a-ec4e-4cf3-ab9b-17b40f0f9653">
+        <upperValue xmi:type = "uml:LiteralInteger" xmi:id = "_047d7fb7-08a7-4083-8120-f8b4db0797b0upper" value = "1"/>
+        <lowerValue xmi:type = "uml:LiteralInteger" xmi:id = "_047d7fb7-08a7-4083-8120-f8b4db0797b0lower" value = "1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type = "uml:InformationFlow" xmi:id = "_598f6a90-adb8-434d-96dc-345a2441ec6f" 
+    name = "i" realizingConnector = "_ac15c7cb-4c4b-4cce-90bb-414e6a7afcdb" 
+    conveyed = "_c6d41703-7dfc-4ef2-b324-e09cc1acc959" 
+    informationSource = "_ad4945c2-9061-41a0-92d9-4f70544e219a" 
+    informationTarget = "_a6515d86-7b4d-48e5-a86e-aeba15892ef1">
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_profileApplication0">
+      <appliedProfile  xmi:type="uml:Profile" href="http://www.omg.org/spec/SysML/20100301/SysML-profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <sysml:Block base_Class = "_c37be8b9-c7b1-42fa-89af-38c04c034301" xmi:id = "_5ee7b004-e4ec-493b-8803-70a01951031d" />
+  <sysml:Block base_Class = "_6dfd74f0-29fa-46aa-b9bf-0c21fcb08400" xmi:id = "_80994910-9a91-4725-b31a-51d5cc9edea2" />
+  <sysml:FlowPort base_Port = "_ad4945c2-9061-41a0-92d9-4f70544e219a" xmi:id = "_13b1eeb7-4c5c-4dd9-9d56-f94b3bd8f5b4" direction = "out" />
+  <sysml:NestedConnectorEnd base_ConnectorEnd = "_8ec81a66-b782-42d9-89be-7405affd1856" xmi:id = "_49b496c6-25b9-4cba-bfb9-a6a821b5116d" propertyPath = "_3a0f1fb7-2b45-4285-bb4f-0dcef2dd459b"/>
+  <sysml:NestedConnectorEnd base_ConnectorEnd = "_5cb97e53-2c3e-41cd-8750-331bca1f98ce" xmi:id = "_42f00f57-66f4-417f-b870-229663533a8b" propertyPath = "_d143e812-5d3c-448f-aeee-88517a6a885a"/>
+  <sysml:Block base_Class = "_d30eae6b-ac74-4f6f-9ad3-353aedc2f214" xmi:id = "_6b8b1a2b-77cf-4133-87f0-35dc83e4af84" />
+  <sysml:FlowPort base_Port = "_a6515d86-7b4d-48e5-a86e-aeba15892ef1" xmi:id = "_ece94d11-7613-40af-b695-72675e3eb86b" direction = "in" />
+  <sysml:Block base_Class = "_c6d41703-7dfc-4ef2-b324-e09cc1acc959" xmi:id = "_13b35343-9997-4431-8cbd-b908a585ce02" />
+  <sysml:FlowSpecification base_Interface = "_24f583c4-4af2-43e0-b8f2-c1e42bf13773" xmi:id = "_e9e82d23-4636-4e5f-953d-3679dacf328c" />
+  <sysml:FlowProperty base_Property = "_e5b065d6-5924-4fa2-8d51-13dc7795acbd" xmi:id = "_42210db6-7084-4222-a5db-f32c4d412b41" direction = "out" />
+  <sysml:ItemFlow base_InformationFlow = "_598f6a90-adb8-434d-96dc-345a2441ec6f" xmi:id = "_c7ec64e8-cea8-410d-bb82-0d5e0684dfdc" itemProperty ="_8a391be9-56c3-4b36-95b3-7c696a6f40ca"/>
+ </xmi:XMI>

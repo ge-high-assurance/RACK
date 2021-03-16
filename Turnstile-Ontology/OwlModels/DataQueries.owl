@@ -447,12 +447,12 @@ where {&#xD;
   <sadlimplicitmodel:NamedQuery rdf:ID="EngineerCsv">
     <rdfs:isDefinedBy>&#xD;
 &#xD;
-select distinct ?identifier_ORGANIZATION ?emailAddress_Engineer ?identifier_Engineer ?name_Engineer&#xD;
+select distinct ?identifier_ORGANIZATION ?emailAddress_Engineer ?identifier_Engineer ?title_Engineer&#xD;
 where {&#xD;
     ?Engineer a &lt;http://Turnstile/DevelopmentPlan#Engineer&gt; . &#xD;
     optional{ ?Engineer &lt;http://arcos.rack/AGENTS#emailAddress&gt; ?emailAddress_Engineer} . &#xD;
     ?Engineer &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_Engineer . &#xD;
-    optional{ ?Engineer &lt;http://arcos.rack/PROV-S#title&gt; ?name_Engineer} . &#xD;
+    optional{ ?Engineer &lt;http://arcos.rack/PROV-S#title&gt; ?title_Engineer} . &#xD;
     optional{&#xD;
 &#xD;
     ?Engineer &lt;http://arcos.rack/AGENTS#employedBy&gt; ?ORGANIZATION .&#xD;

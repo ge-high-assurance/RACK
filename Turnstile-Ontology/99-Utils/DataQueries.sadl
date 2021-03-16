@@ -84,12 +84,12 @@ where {
 
 Write: data {Ask EngineerCsv:"
 
-select distinct ?identifier_ORGANIZATION ?emailAddress_Engineer ?identifier_Engineer ?name_Engineer
+select distinct ?identifier_ORGANIZATION ?emailAddress_Engineer ?identifier_Engineer ?title_Engineer
 where {
     ?Engineer a <http://Turnstile/DevelopmentPlan#Engineer> . 
     optional{ ?Engineer <http://arcos.rack/AGENTS#emailAddress> ?emailAddress_Engineer} . 
     ?Engineer <http://arcos.rack/PROV-S#identifier> ?identifier_Engineer . 
-    optional{ ?Engineer <http://arcos.rack/PROV-S#title> ?name_Engineer} . 
+    optional{ ?Engineer <http://arcos.rack/PROV-S#title> ?title_Engineer} . 
     optional{
 
     ?Engineer <http://arcos.rack/AGENTS#employedBy> ?ORGANIZATION .

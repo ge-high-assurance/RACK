@@ -14,6 +14,7 @@
     xmlns:H="http://arcos.rack/HAZARD#"
     xmlns:sw="http://arcos.rack/SOFTWARE#"
     xmlns:genpropinfo="http://arcos.rack/GeneratePropInfoCSV#"
+    xmlns:M="http://arcos.rack/MODEL#"
     xmlns:sys="http://arcos.rack/SYSTEM#"
     xmlns:An="http://arcos.rack/ANALYSIS#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
@@ -22,6 +23,7 @@
     xmlns:tst="http://arcos.rack/TESTING#"
   xml:base="http://arcos.rack/GeneratePropInfoCSV">
   <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="MODEL"/>
     <owl:imports rdf:resource="ANALYSIS"/>
     <owl:imports rdf:resource="DOCUMENT"/>
     <owl:imports rdf:resource="FILE"/>

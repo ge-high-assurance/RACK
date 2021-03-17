@@ -23,13 +23,17 @@
   </owl:Class>
   <owl:Class rdf:ID="StrOutPort">
     <rdfs:comment xml:lang="en">Output interface</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="StrPort"/>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="StrInPort">
     <rdfs:comment xml:lang="en">Input interface</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#StrPort"/>
+    </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="StrPort">
+  <owl:Class rdf:about="#StrPort">
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"

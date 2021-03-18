@@ -13,7 +13,7 @@ from dataclasses import dataclass
 
 import semtk
 
-from ontology_changes.ontology_change import OntologyChange
+from ontology_changes.ontology_change import stylize_property, OntologyChange
 
 
 @dataclass
@@ -33,8 +33,15 @@ class ChangeIsATypeOf(OntologyChange):
     from_property_id: str
     to_property_id: str
 
+    def text_description(self) -> str:
+        prop = stylize_property(self.property_id)
+        from_str = stylize_property(self.from_property_id)
+        to_str = stylize_property(self.to_property_id)
+        return f"Property {prop} used to be a type of {from_str}, is now a type of {to_str}"
+
     def migrate_json(self, json: semtk.SemTKJSON) -> None:
         json.accept(MigrationVisitor(self))
+
 
 class MigrationVisitor(semtk.DefaultSemTKVisitor):
     def __init__(self, data: ChangeIsATypeOf):

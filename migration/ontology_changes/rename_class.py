@@ -37,10 +37,13 @@ class RenameClass(OntologyChange):
     to_name_space: NameSpace
     to_name: str
 
-    def migrate_json(self, json: semtk.SemTKJSON) -> None:
+    def text_description(self) -> str:
         from_class = stylize_class(get_uri(self.from_name_space, self.from_name))
         to_class = stylize_class(get_uri(self.to_name_space, self.to_name))
-        log_apply_change(f"{RenameClass.__name__} {from_class} → {to_class}")
+        return f"Class {from_class} was renamed to {to_class}"
+
+    def migrate_json(self, json: semtk.SemTKJSON) -> None:
+        log_apply_change(self.text_description())
         json.accept(MigrationVisitor(self))
 
 

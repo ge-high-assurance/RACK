@@ -34,9 +34,12 @@ class DeleteProperty(OntologyChange):
     name_space: NameSpace
     property_id: str
 
-    def migrate_json(self, json: semtk.SemTKJSON) -> None:
+    def text_description(self) -> str:
         prop = stylize_property(get_uri(self.name_space, self.property_id))
-        log_apply_change(f"{DeleteProperty.__name__} {prop}")
+        return f"{DeleteProperty.__name__} {prop}"
+
+    def migrate_json(self, json: semtk.SemTKJSON) -> None:
+        log_apply_change(self.text_description())
         json.accept(MigrationVisitor(self))
 
 

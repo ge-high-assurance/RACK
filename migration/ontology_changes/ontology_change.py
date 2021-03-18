@@ -104,6 +104,10 @@ class OntologyChange(ABC):
     #     ...
 
     @abstractmethod
+    def text_description(self) -> str:
+        ...
+
+    @abstractmethod
     def migrate_json(self, json: SemTKJSON) -> None:
         """In-place migration of SemTK JSON."""
         ...

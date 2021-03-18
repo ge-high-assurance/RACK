@@ -53,7 +53,12 @@ parser.add_argument(
     "--from-folder",
     help="Folder of JSON files to migrate",
     type=str,
-    required=True,
+)
+
+parser.add_argument(
+    "--list-changes-only",
+    help="Have the tool only list changes in a human-readable format",
+    action="store_true",
 )
 
 parser.add_argument(
@@ -67,7 +72,6 @@ parser.add_argument(
     "--to-folder",
     help="Folder to output the migrated JSON files",
     type=str,
-    required=True,
 )
 
 args = parser.parse_args()
@@ -78,13 +82,25 @@ except ValueError:
     logger.error("Bad log level specified")
     sys.exit(1)
 
-from_folder = Path(args.from_folder)
+if args.list_changes_only:
+    for commit in commits_in_chronological_order:
+        commit_number = commit["number"]
+        print(f"Commit {commit_number} https://github.com/ge-high-assurance/RACK/commit/{commit_number}")
+        for change in commit["changes"]:
+            print(f"  {change.text_description()}")
+    sys.exit(0)
+
 to_folder = Path(args.to_folder)
 
+if not args.from_folder:
+    print("from_folder argument missing, quitting.")
+from_folder = Path(args.from_folder)
 if not Path.exists(from_folder):
     print("from_folder does not exist, quitting.")
     sys.exit(1)
 
+if not args.to_folder:
+    print("to_folder argument missing, quitting.")
 if not Path.exists(to_folder):
     print("to_folder does not exist, quitting.")
     sys.exit(1)

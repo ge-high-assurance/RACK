@@ -23,7 +23,7 @@
 uri "http://arcos.rack/FILE" alias file.
 import "http://arcos.rack/PROV-S".
 
-definedIn (note "The file an ENTITY is defined or contained in") describes ENTITY with values of type FILE.
+definedIn (note "The file a THING is defined or contained in") describes THING with values of type FILE.
 
 FILE
 	(note "A file in a filesystem")

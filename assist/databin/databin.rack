@@ -10,6 +10,7 @@ databin_name(MyName) :-
 :- discontiguous tar_access/3,
                  tar_start/3,
                  tar_finished/3,
+                 tool/3,
                  build_with/5,
                  build_inputs/2,
                  build_outputs/2,
@@ -89,16 +90,14 @@ data_instance('SOFTWARE#PACKAGE', load_data, Instance,
     Title = "package:tar",
     Descr = "Software package file in TAR format".
 
-data_get('SOFTWARE#PACKAGE', 'SOFTWARE#packagedBy', package_tar(N), ToolPath) :-
-    tar_start(N, _, ToolPath).
+data_get('SOFTWARE#PACKAGE', 'SOFTWARE#packagedBy', package_tar(N), Name) :-
+    tar_start(N, _, ToolPath),
+    toolName(N, "tar", ToolPath, Name).
 
 data_get('SOFTWARE#PACKAGE', 'SOFTWARE#packageInput', package_tar(Nonce), V) :-
     tar_access(Nonce, File, open),
     build_from(Nonce, Dir),
     file_instance(Nonce, Dir, File, V).
-
-data_get('SOFTWARE#PACKAGE', 'SOFTWARE#packagedBy', package_tar(Nonce), TarPath) :-
-    tar_start(Nonce, _, TarPath).
 
 data_get('SOFTWARE#PACKAGE', 'PROV-S#wasAssociatedWith',
          package_tar(N),
@@ -279,6 +278,21 @@ data_instance('FILE#FORMAT', load_data, F, [uid(F, Title, Descr), fmt(F)]) :-
 activity_instance(Nonce, ToolType, InstanceName) :-
     append_fld(Nonce, ToolType, InstanceName).
 
+toolName(Nonce, ToolName, _ToolPath, Name) :-
+    string_concat(ToolName, "--:", N1),
+    string_concat(N1, Nonce, StrName),
+    atom_string(Name, StrName).
+
+data_instance('AGENTS#TOOL', load_data, Name, [toolSpec(Name, ToolPath)]) :-
+    tar_start(Nonce, _, ToolPath),
+    toolName(Nonce, "tar", ToolPath, Name).
+
+data_instance('AGENTS#TOOL', load_data, Name, [toolSpec(Name, ToolPath)]) :-
+    build_with(Nonce, _ToolType, ToolName, ToolPath, _ToolArgs),
+    toolName(Nonce, ToolName, ToolPath, Name).
+
+data_get('AGENTS#TOOL', 'FILE#definedIn', toolSpec(_Name, ToolPath), ToolPath).
+
 
 %% -------------------- CODE_DEVELOPMENT
 
@@ -327,8 +341,8 @@ data_get(_, 'SOFTWARE#compileInput',
     file_instance(Nonce, Dir, Input, InputInstance).
 
 data_get(_, 'SOFTWARE#compiledBy',
-         activity_data(build_with(_, compile, _, ToolPath, _),_,_),
-         ToolPath).
+         activity_data(build_with(Nonce, compile, ToolName, ToolPath, _ToolArgs),_,_), Name) :-
+    toolName(Nonce, ToolName, ToolPath, Name).
 data_get('SOFTWARE#COMPILE', 'PROV-S#wasAssociatedWith',
          activity_data(_,build_start(N,_),_),
          UserInstance) :-

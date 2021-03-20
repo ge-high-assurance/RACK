@@ -11,6 +11,8 @@ databin_name(MyName) :-
                  tar_start/3,
                  tar_finished/3,
                  tool/3,
+                 user_instance_name/2,
+                 sw_dev_for_file/5,
                  build_with/5,
                  build_inputs/2,
                  build_outputs/2,
@@ -283,16 +285,22 @@ toolName(Nonce, ToolName, _ToolPath, Name) :-
     string_concat(N1, Nonce, StrName),
     atom_string(Name, StrName).
 
-data_instance('AGENTS#TOOL', load_data, Name, [toolSpec(Name, ToolPath)]) :-
+data_instance('AGENTS#TOOL', load_data, Name, [toolSpec(Name, ToolPath, UserInstance)]) :-
     tar_start(Nonce, _, ToolPath),
+    userForToolUsage(Nonce, UserInstance),
     toolName(Nonce, "tar", ToolPath, Name).
 
-data_instance('AGENTS#TOOL', load_data, Name, [toolSpec(Name, ToolPath)]) :-
+data_instance('AGENTS#TOOL', load_data, Name, [toolSpec(Name, ToolPath, UserInstance)]) :-
     build_with(Nonce, _ToolType, ToolName, ToolPath, _ToolArgs),
+    userForToolUsage(Nonce, UserInstance),
     toolName(Nonce, ToolName, ToolPath, Name).
 
-data_get('AGENTS#TOOL', 'FILE#definedIn', toolSpec(_Name, ToolPath), ToolPath).
+data_get('AGENTS#TOOL', 'FILE#definedIn', toolSpec(_Name, ToolPath, _User), ToolPath).
+data_get('AGENTS#TOOL', 'PROV-S#actedOnBehalfOf', toolSpec(_Name, _ToolPath, User), User).
 
+userForToolUsage(Nonce, UserInstance) :-
+    build_user(Nonce, UserName), !, user_instance_name(UserName, UserInstance).
+userForToolUsage(_, 'userUnknown').
 
 %% -------------------- CODE_DEVELOPMENT
 

@@ -151,9 +151,9 @@ parent_path(E, []) :-
     % nodes (although there can be blank nodes, e.g. a link from the
     % base class to the _::file in which it was defined).
     rdf_subject(E),
-    findall(P, (rdf(E, rdfs:subClassOf, P), \+ rdf_bnode(P)), PS),
-    length(PS, PSL),
-    PSL == 0.
+    has_no_regular_parent(E).
+has_no_regular_parent(E) :- rdf(E, rdfs:subClassOf, P), \+ rdf_bnode(P), !, fail.
+has_no_regular_parent(_E).
 
 % ----------------------------------------------------------------------
 

@@ -33,7 +33,7 @@ opts_spec(Spec) :-
        help('Declare generated RDF triples to stdout')],
 
       [opt(ontology_dir), meta('DIR_OR_URL'), type(atom),
-       shortflags([o]), longflags(['ontology', 'model']),
+       shortflags([m]), longflags(['ontology', 'model']),
        default(OwlDir),
        help('Where to load ontology .Owl files from')],
 

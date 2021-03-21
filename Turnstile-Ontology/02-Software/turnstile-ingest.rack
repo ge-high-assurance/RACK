@@ -83,6 +83,8 @@ data_instance('SOFTWARE#SWCOMPONENT', load_data, 'main_function',
                    "C Function: 'main'"),
                func_decl('main_function', 'counter.c')]).
 
+data_get('SOFTWARE#SWCOMPONENT', 'SOFTWARE#componentType', func_decl(_, _), 'SourceFunction').
+
 % conf.json is not part of a build, so the format is indeterminate
 
 data_get('FILE#FILE', 'FILE#fileFormat', sw_file_data(_,_,'conf.json'),

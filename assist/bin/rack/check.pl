@@ -195,7 +195,7 @@ prolog:message(value_outside_range(Instance, Property, Ty, V, MinV, MaxV)) -->
           SI, SP, Val, T, Min, Max ] ].
 prolog:message(multiple_types_for_instance(Instance, Types)) -->
     { prefix_shorten(Instance, SI),
-      maplist(prefix_shorten(Types, STys))
+      maplist(prefix_shorten, Types, STys)
     },
     [ 'Instance ~w has multiple types: ~w~n'-[SI, STys] ].
 prolog:message(property_value_wrong_type(Instance, Property, DefType, Val, ValType)) -->

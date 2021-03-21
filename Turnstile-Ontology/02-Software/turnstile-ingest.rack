@@ -23,7 +23,9 @@ data_get('SOFTWARE#COMPILE', 'PROV-S#identifier', uid(Instance,_,_), Instance) :
     rack_namespace(NS),
     ns_ref(NS, Instance, RDFInstance),
     add_triple(RDFInstance, rdf:type,
-               'http://Turnstile/DevelopmentPlan#SoftwareIntegration').
+               'http://Turnstile/DevelopmentPlan#SoftwareIntegration'),
+    rack_ref('SOFTWARE#COMPILE', RACK_Compile),
+    rdf_retractall(RDFInstance, rdf:type, RACK_Compile, NS).
 
 % Explicit links between software files and documented requirements.
 % These cannot be automatically discovered and are project specific.

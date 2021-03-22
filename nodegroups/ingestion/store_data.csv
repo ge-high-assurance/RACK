@@ -2,6 +2,7 @@ ID,comments,creator,jsonFile
 ingest_CODE_GEN,Auto-generated ingestion for CODE_GEN,auto,ingest_CODE_GEN.json
 ingest_SYSTEM_DEVELOPMENT,Auto-generated ingestion for SYSTEM_DEVELOPMENT,auto,ingest_SYSTEM_DEVELOPMENT.json
 ingest_ASSERTED_CONTEXT,Auto-generated ingestion for ASSERTED_CONTEXT,auto,ingest_ASSERTED_CONTEXT.json
+ingest_MODEL,Auto-generated ingestion for MODEL,auto,ingest_MODEL.json
 ingest_TEST_DEVELOPMENT,Auto-generated ingestion for TEST_DEVELOPMENT,auto,ingest_TEST_DEVELOPMENT.json
 ingest_StrPort,Auto-generated ingestion for StrPort,auto,ingest_StrPort.json
 ingest_AGENT,Auto-generated ingestion for AGENT,auto,ingest_AGENT.json
@@ -52,6 +53,7 @@ ingest_TEST_RESULT,Auto-generated ingestion for TEST_RESULT,auto,ingest_TEST_RES
 ingest_REQUIREMENT_DEVELOPMENT,Auto-generated ingestion for REQUIREMENT_DEVELOPMENT,auto,ingest_REQUIREMENT_DEVELOPMENT.json
 ingest_ExecutableObject,Auto-generated ingestion for ExecutableObject,auto,ingest_ExecutableObject.json
 ingest_FILE,Auto-generated ingestion for FILE,auto,ingest_FILE.json
+ingest_AcertRequirementModel,Auto-generated ingestion for AcertRequirementModel,auto,ingest_AcertRequirementModel.json
 ingest_ControlCouplingAnalysis,Auto-generated ingestion for ControlCouplingAnalysis,auto,ingest_ControlCouplingAnalysis.json
 ingest_SoftwareRequirementReviewArtifacts,Auto-generated ingestion for SoftwareRequirementReviewArtifacts,auto,ingest_SoftwareRequirementReviewArtifacts.json
 ingest_SoftwareIntegration,Auto-generated ingestion for SoftwareIntegration,auto,ingest_SoftwareIntegration.json
@@ -92,7 +94,7 @@ ingest_DataDictionary,Auto-generated ingestion for DataDictionary,auto,ingest_Da
 ingest_ORGANIZATION,Auto-generated ingestion for ORGANIZATION,auto,ingest_ORGANIZATION.json
 ingest_COLLECTION,Auto-generated ingestion for COLLECTION,auto,ingest_COLLECTION.json
 ingest_COMPONENT_TYPE,Auto-generated ingestion for COMPONENT_TYPE,auto,ingest_COMPONENT_TYPE.json
-ingest_AcertRequirement,Auto-generated ingestion for AcertRequirement,auto,ingest_AcertRequirement.json
+ingest_StrEarsModel,Auto-generated ingestion for StrEarsModel,auto,ingest_StrEarsModel.json
 ingest_DataCoupleCoverageReport,Auto-generated ingestion for DataCoupleCoverageReport,auto,ingest_DataCoupleCoverageReport.json
 ingest_FORMAT,Auto-generated ingestion for FORMAT,auto,ingest_FORMAT.json
 ingest_DataCouplingAnalysis,Auto-generated ingestion for DataCouplingAnalysis,auto,ingest_DataCouplingAnalysis.json

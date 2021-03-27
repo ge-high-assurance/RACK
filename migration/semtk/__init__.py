@@ -13,7 +13,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 
 class SemTKVisitor(ABC):
@@ -85,7 +85,7 @@ class SNodeProp(BaseModel):
     isReturned: bool
     optMinus: int
     isRuntimeConstrained: bool
-    instanceValues: List[None]  # not sure what goes in there
+    instanceValues: List[str]
     isMarkedForDeletion: bool
 
 
@@ -105,7 +105,7 @@ class SNodeNode(BaseModel):
 class SNode(BaseModel):
     deletionMode: str
     fullURIName: str
-    instanceValue: Optional[None]  # not sure what goes in there
+    instanceValue: Optional[str]
     isReturned: bool
     isRuntimeConstrained: bool
     nodeList: List[SNodeNode]
@@ -129,8 +129,8 @@ class SNodeGroup(BaseModel):
     limit: int
     offset: int
     sNodeList: List[SNode]
-    orderBy: List[None]  # not sure what goes in there
-    unionHash: Optional[None] = None  # not sure what goes in there
+    orderBy: List[Dict[str, str]]  # not sure what goes in there
+    unionHash: Optional[Dict[str, List[str]]]
 
 
 class Mapping(BaseModel):
@@ -161,18 +161,37 @@ class Transform(BaseModel):
     transType: str
 
 
+class DataValidator(BaseModel):
+    colName: str
+    gt: Optional[int]
+    gte: Optional[int]
+    lt: Optional[int]
+    lte: Optional[int]
+    mustExist: Optional[bool]
+    ne: Optional[int]
+    notEmpty: Optional[bool]
+    type: Optional[str]
+    regexMatches: Optional[str]
+    regexNoMatch: Optional[str]
+
+
+class Texts(BaseModel):
+    textId: str
+    text: str
+
+
 class ImportSpec(BaseModel):
     version: int
     baseURI: str
     columns: List[Mapping]
-    dataValidator: List[None]  # not sure what goes in there
-    texts: List[None]  # not sure what goes in there
+    dataValidator: List[DataValidator]
+    texts: List[Texts]
     transforms: List[Transform]
     nodes: List[ImportSpecNode]
 
 
 class SemTKJSON(BaseModel):
-    version: int
+    version: Optional[int]
     sparqlConn: SparqlConn
     sNodeGroup: SNodeGroup
     importSpec: ImportSpec

@@ -184,7 +184,7 @@ class ImportSpec(BaseModel):
     version: int
     baseURI: str
     columns: List[Mapping]
-    dataValidator: List[DataValidator]
+    dataValidator: Optional[List[DataValidator]]
     texts: List[Texts]
     transforms: List[Transform]
     nodes: List[ImportSpecNode]

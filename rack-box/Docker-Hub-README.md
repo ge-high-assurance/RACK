@@ -1,3 +1,5 @@
+<!-- markdownlint-disable line-length -->
+
 # Install a Docker RACK Box
 
 You may need to increase the resources given to Docker in order to run a RACK box.  Click the right mouse button on Docker's whale icon in the system tray and select "Settings".  When the Settings window appears, click on Resources and see whether the following resource settings appear.  If you don't see these resource settings, it means you don't need to change anything; Docker can use all of your computer's CPUs and 80% of your computer's RAM if it needs to.
@@ -11,8 +13,8 @@ If you do see these resource settings, make the following changes:
 Now you are ready to start your RACK box.  Type the following commands to download the Docker RACK box and run it on your computer:
 
 ```shell
-docker pull gehighassurance/rack-box:v5.0
-docker run --detach -p 80:80 -p 12050-12092:12050-12092 gehighassurance/rack-box:v5.0
+docker pull gehighassurance/rack-box:v5.1
+docker run --detach -p 80:80 -p 12050-12092:12050-12092 gehighassurance/rack-box:v5.1
 ```
 
 Type "localhost" in your web browser's address bar, hit Enter, and you should see your RACK box's welcome page appear in your browser.  The welcome page will tell you some things you can do with your RACK box.

@@ -1,3 +1,5 @@
+<!-- markdownlint-disable line-length -->
+
 # RACK-box
 
 This README is for RACK developers and RACK-in-a-Box power users who
@@ -143,16 +145,6 @@ instructions in the following places:
 - [ ] [Install-a-Docker-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Docker-RACK-Box)
 - [ ] [Install-a-Virtual-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Virtual-RACK-Box)
 - [ ] [Welcome](https://github.com/ge-high-assurance/RACK/wiki/Welcome)
-
-### Download pages
-
-- [ ] [Docker Hub](https://hub.docker.com/repository/docker/gehighassurance/rack-box)
-- [ ] [GitHub Releases](https://github.com/ge-high-assurance/RACK/releases)
-
-Our GitHub Actions release workflow automates building and uploading
-the rack-box images to Docker Hub and GitHub, but we need to update
-the description of these rack-box images with the new release version,
-changes, etc.
 
 Note that creating a GitHub release tags the RACK repo automatically,
 but we need to manually tag the RACK wiki with the same tag in advance

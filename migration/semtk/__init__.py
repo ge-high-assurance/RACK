@@ -124,12 +124,17 @@ class SparqlConn(BaseModel):
     data: List[ModelOrData]
 
 
+class OrderBy(BaseModel):
+    sparqlID: str
+    func: Optional[str]
+
+
 class SNodeGroup(BaseModel):
     version: int
     limit: int
     offset: int
     sNodeList: List[SNode]
-    orderBy: List[Dict[str, str]]  # not sure what goes in there
+    orderBy: List[OrderBy]
     unionHash: Optional[Dict[str, List[str]]]
 
 

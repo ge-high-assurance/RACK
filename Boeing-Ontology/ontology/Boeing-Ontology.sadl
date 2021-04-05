@@ -1,20 +1,20 @@
-uri "http://BoeingModel" alias BoeingModel.
+uri "http://arcos.AH-64D/Boeing" alias BoeingModel.
 import "http://arcos.rack/REQUIREMENTS".
 import "http://arcos.rack/TESTING".
 
-PIDS (note "Prime Item Development Specification") is a type of REQUIREMENT.
+PIDS_Req (note "A Requirement identified in the Prime Item Development Specification")is a type of REQUIREMENT.
 
-SRS (note "Software Requirements Specification") is a type of REQUIREMENT.
-satisfies of SRS only has values of type PIDS.
+CSID_Req (note "A Requirement identified in the Crew Systems Interface Document") is a type of REQUIREMENT.
 
-SubDD (note "Subsystem Design Document") is a type of REQUIREMENT.
-satisfies of SubDD only has values of type SRS.
+SRS_Req (note "A Requirement identified in the Software Requirements Specification")is a type of REQUIREMENT.
+//satisfies of SRS_Req only has values of type {PIDS_Req or CSID_Req}.
 
-CSID (note "Crew Systems Interface Document") is a type of REQUIREMENT.
-satisfies of CSID only has values of type SRS.
+SubDD_Req (note "A Requirement identified in the Subsystem Design Document")is a type of REQUIREMENT.
+satisfies of SubDD_Req only has values of type SRS_Req.
 
-SBVT (note "Software Baseline Verification Test") is a type of TEST.
-verifies of SBVT only has values of type {SRS or SubDD}.
+SBVT_Test (note "A test identified in the Software Baseline Verification Tests") is a type of TEST.
+//verifies of SBVT_Test only has values of type {SRS_Req or SubDD_Req}.
+verifies of SBVT_Test has at least 1 value.
 
-SBVT_Result is a type of TEST_RESULT.
-confirms of SBVT_Result only has values of type SBVT.
+SBVT_Result (note "A result identified for a SBVT_Test (Software Baseline Verification Tests)") is a type of TEST_RESULT.
+confirms of SBVT_Result only has values of type SBVT_Test.

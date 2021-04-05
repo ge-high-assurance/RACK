@@ -1,0 +1,20 @@
+uri "http://BoeingModel" alias BoeingModel.
+import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/TESTING".
+
+PIDS (note "Prime Item Development Specification") is a type of REQUIREMENT.
+
+SRS (note "Software Requirements Specification") is a type of REQUIREMENT.
+satisfies of SRS only has values of type PIDS.
+
+SubDD (note "Subsystem Design Document") is a type of REQUIREMENT.
+satisfies of SubDD only has values of type SRS.
+
+CSID (note "Crew Systems Interface Document") is a type of REQUIREMENT.
+satisfies of CSID only has values of type SRS.
+
+SBVT (note "Software Baseline Verification Test") is a type of TEST.
+verifies of SBVT only has values of type {SRS or SubDD}.
+
+SBVT_Result is a type of TEST_RESULT.
+confirms of SBVT_Result only has values of type SBVT.

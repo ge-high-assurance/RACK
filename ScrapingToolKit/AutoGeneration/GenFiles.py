@@ -88,15 +88,21 @@ class OntClass:
         if rowData['PROPERTY']!="" and rowData['DATA TYPE']!="":
             self.properties.append(ontProperty(rowData))
     def getPy(self):
+        propList = list()
         pyStr = 'def '+self.name+'('
         for p in self.properties:
-            pyStr += p.getPy() + "=None, "
+            if p.getPy() not in propList:
+                pyStr += p.getPy() + "=None, "
+                propList.append(p.getPy())
         pyStr = pyStr.rstrip(', ') + '):\n'
         pyStr += '    trace()\n'
         pyStr += '    log("Adding Evidence:",str_good("'+self.name+'"))\n'
         pyStr += '    objStr = "<'+self.name+'>"\n'
+        propList = list()
         for p in self.properties:
-            pyStr += '    objStr += objectDataString("{propName}", {propName})\n'.replace('{propName}',p.getPy())
+            if p.getPy() not in propList:
+                pyStr += '    objStr += objectDataString("{propName}", {propName})\n'.replace('{propName}',p.getPy())
+                propList.append(p.getPy())
         pyStr += '    objStr += "</'+self.name+'>"\n'
         pyStr += '    addEvidenceObject(etree.fromstring(objStr))\n\n'
         return(pyStr)

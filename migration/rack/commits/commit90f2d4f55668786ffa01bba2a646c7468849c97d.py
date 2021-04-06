@@ -1,4 +1,4 @@
-# Copyright (c) 2020, Galois, Inc.
+# Copyright (c) 2021, Galois, Inc.
 #
 # All Rights Reserved
 #
@@ -10,14 +10,13 @@
 # of the Defense Advanced Research Projects Agency (DARPA).
 
 from migration_helpers.name_space import rack
-from ontology_changes import ChangeIsATypeOf, Commit, RenameClass
+from ontology_changes import Commit, ChangeIsATypeOf, RenameClass
 
 ANALYSIS = rack("ANALYSIS")
 
-
-commit: Commit = {
-    "number": "90f2d4f55668786ffa01bba2a646c7468849c97d",
-    "changes": [
+commit = Commit(
+    number="90f2d4f55668786ffa01bba2a646c7468849c97d",
+    changes=[
         # ANALYSIS.sadl
         RenameClass(
             from_name_space=ANALYSIS,
@@ -32,4 +31,4 @@ commit: Commit = {
             to_property_id="wasImpactedBy",
         ),
     ],
-}
+)

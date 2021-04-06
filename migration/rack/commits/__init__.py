@@ -13,19 +13,28 @@ from typing import List
 
 from ontology_changes.ontology_change import Commit
 from rack.commits import (
+    # <CHANGE_CRAWLER_IMPORTS> DO NOT EDIT OR MOVE THIS LINE
+    commitae0a7660b0afdd53ff334577fbdea7749abe6cf6,
+    commit2e079bb2a32b3cc1b3153d44ad0c21e27507937f,
+    commit9af9030fe191d564875c067f6e0319ca6b52b798,
     commit05a03cd687e3bdce425794763e0957d3ccaf8ff0,
-    commit13ed266ba5730cebe75c0c48f6ba83af69429122,
-    commit182d0483a73cdc221c692c71e0d4e64f92f5079a,
-    commit1c25a1b83e76eb9ca94b86402bcd335f79f80528,
-    commit404e3e78ff5f554d8edbc4238f64bd3797d8829f,
-    commit404e3e78ff5f554d8edbc4238f64bd3797d8829f,
-    commit49db2186193711fa5d2609af0c6c30f56ea6ebbd,
-    commit643839e7d8036731ba1da767942c8e74c2876e2e,
-    commit6d141fa6699de1aa48b8ccd55f6942f791872ff0,
-    commit7d88c0285a32107a18e439242b9ba326d6a02210,
-    commit833ef18f5024fee255f77887de2c8e9bc136e56d,
+    commitfa603aad886439eb6a94e44e2c6f4851af16c9a3,
+    commit10da69db606ebdc721fd3f8e003ef2099a5fdc43,
+    commitd48e208669c589d070c7c5fb7e3129ababbb9193,
     commit90f2d4f55668786ffa01bba2a646c7468849c97d,
-    commitd69285ee059a6c2c2b3ec793aa4abe71bce79189,
+    commit833ef18f5024fee255f77887de2c8e9bc136e56d,
+    commitd8271d216704351cf0007a04abac47f4abc993ad,
+    commit13ed266ba5730cebe75c0c48f6ba83af69429122,
+    commitff31a28051a5e348fd2474fce5360195999ddb3a,
+    commit44393cc30bb0ba7482acd21b2e68576b577179f9,
+    commit581f1820855eee2445d9e8bfdbb639e169e9391e,
+    commitb721c16f0f7420a8ccd92bda0d98a96c16dc62b8,
+    commitc6692fed3e150e7df53d4a2a8f8c84f760087420,
+    commit4f9fce78e36a6dc75f1702ab50da6a4ac801dd5e,
+    commit643839e7d8036731ba1da767942c8e74c2876e2e,
+    commitbdfef3d7ea9b3c9fc085defa8e26256f646097d9,
+    commit78eaae3db5ed184c90f4f14d34a4fc000f04bdac,
+    commitb25d07626e4693cd370a2070e17f6baa825a1d43,
 )
 
 # WARNING: commit dates may not reflect the history order, and are not even the
@@ -38,23 +47,40 @@ from rack.commits import (
 # to figure out the respective order of some commits, and use the reverse of
 # that order in this list.
 
-commits_in_git_log_order: List[Commit] = [
-    # most recent (in history)
-    commit6d141fa6699de1aa48b8ccd55f6942f791872ff0.commit,  # 2021-02-25
-    commit49db2186193711fa5d2609af0c6c30f56ea6ebbd.commit,  # 2021-02-03
-    commit643839e7d8036731ba1da767942c8e74c2876e2e.commit,  # 2021-01-21
-    commit13ed266ba5730cebe75c0c48f6ba83af69429122.commit,  # 2021-01-12
-    commit833ef18f5024fee255f77887de2c8e9bc136e56d.commit,  # 2021-01-12
-    commit90f2d4f55668786ffa01bba2a646c7468849c97d.commit,  # 2020-12-22
-    commit404e3e78ff5f554d8edbc4238f64bd3797d8829f.commit,  # 2021-01-05
-    commit05a03cd687e3bdce425794763e0957d3ccaf8ff0.commit,  # 2020-12-22
-    commit7d88c0285a32107a18e439242b9ba326d6a02210.commit,  # 2021-12-22
-    commit1c25a1b83e76eb9ca94b86402bcd335f79f80528.commit,  # 2020-12-22
-    commit182d0483a73cdc221c692c71e0d4e64f92f5079a.commit,  # 2020-12-22
-    commitd69285ee059a6c2c2b3ec793aa4abe71bce79189.commit,  # 2020-12-21
+commits_in_chronological_order: List[Commit] = [
+    # <CHANGE_CRAWLER_COMMITS> DO NOT EDIT OR MOVE THIS LINE
+
     # oldest (in history)
+
+    # v4.0
+    commitae0a7660b0afdd53ff334577fbdea7749abe6cf6.commit,  # 2020 Dec 15
+    # v4.1
+    commit2e079bb2a32b3cc1b3153d44ad0c21e27507937f.commit,  # 2021 Jan 5
+    commit9af9030fe191d564875c067f6e0319ca6b52b798.commit,  # 2021 Jan 5
+    commit05a03cd687e3bdce425794763e0957d3ccaf8ff0.commit,  # 2020 Dec 22
+    commitfa603aad886439eb6a94e44e2c6f4851af16c9a3.commit,  # 2020 Dec 22
+    commit10da69db606ebdc721fd3f8e003ef2099a5fdc43.commit,  # 2020 Dec 22
+    commitd48e208669c589d070c7c5fb7e3129ababbb9193.commit,  # 2021 Jan 5
+    commit90f2d4f55668786ffa01bba2a646c7468849c97d.commit,  # 2020 Dec 22
+    commit833ef18f5024fee255f77887de2c8e9bc136e56d.commit,  # 2021 Jan 12
+    commitd8271d216704351cf0007a04abac47f4abc993ad.commit,  # 2020 Dec 22
+    commit13ed266ba5730cebe75c0c48f6ba83af69429122.commit,  # 2021 Jan 12
+    commitff31a28051a5e348fd2474fce5360195999ddb3a.commit,  # 2021 Jan 12
+    commit44393cc30bb0ba7482acd21b2e68576b577179f9.commit,  # 2020 Dec 22
+    commit581f1820855eee2445d9e8bfdbb639e169e9391e.commit,  # 2021 Jan 15
+    commitb721c16f0f7420a8ccd92bda0d98a96c16dc62b8.commit,  # 2021 Jan 15
+    commitc6692fed3e150e7df53d4a2a8f8c84f760087420.commit,  # 2021 Jan 19
+    commit4f9fce78e36a6dc75f1702ab50da6a4ac801dd5e.commit,  # 2021 Jan 19
+    commit643839e7d8036731ba1da767942c8e74c2876e2e.commit,  # 2021 Jan 21
+    commitbdfef3d7ea9b3c9fc085defa8e26256f646097d9.commit,  # 2021 Feb 4
+    # v4.8
+    commit78eaae3db5ed184c90f4f14d34a4fc000f04bdac.commit,  # FIXME: ORGANIZE ME
+    # v5.0
+    commitb25d07626e4693cd370a2070e17f6baa825a1d43.commit,  # 2021-03-15
+
+    # most recent (in history)
 ]
 
-commits_in_chronological_order: List[Commit] = list(
-    reversed(commits_in_git_log_order)
+commits_in_git_log_order: List[Commit] = list(
+    reversed(commits_in_chronological_order)
 )

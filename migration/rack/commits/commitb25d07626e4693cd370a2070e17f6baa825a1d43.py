@@ -10,20 +10,18 @@
 # of the Defense Advanced Research Projects Agency (DARPA).
 
 from migration_helpers.name_space import rack
-from ontology_changes import Commit, RenameProperty
+from ontology_changes import Commit, DeleteProperty
 
-PROV_S = rack("PROV-S")
+REQUIREMENTS = rack("REQUIREMENTS")
 
 commit = Commit(
-    number="833ef18f5024fee255f77887de2c8e9bc136e56d",
+    number="b25d07626e4693cd370a2070e17f6baa825a1d43",
     changes=[
-        RenameProperty(
-            from_name_space=PROV_S,
-            from_class="AGENT",
-            from_name="agentName",
-            to_name_space=PROV_S,
-            to_class="THING",
-            to_name="title",
-        ),
+        # MODEL.sadl
+        # AddedClass MODEL
+        # REQUIREMENTS.sadl
+        DeleteProperty(name_space=REQUIREMENTS, property_id="givenText"),
+        DeleteProperty(name_space=REQUIREMENTS, property_id="ifText"),
+        DeleteProperty(name_space=REQUIREMENTS, property_id="thenText"),
     ],
 )

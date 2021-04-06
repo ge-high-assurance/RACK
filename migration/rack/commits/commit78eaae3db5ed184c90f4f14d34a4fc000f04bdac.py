@@ -1,4 +1,4 @@
-# Copyright (c) 2020, Galois, Inc.
+# Copyright (c) 2021, Galois, Inc.
 #
 # All Rights Reserved
 #
@@ -14,9 +14,9 @@ from ontology_changes import Commit, RenameClass
 
 SOFTWARE = rack("SOFTWARE")
 
-commit: Commit = {
-    "number": "6d141fa6699de1aa48b8ccd55f6942f791872ff0",
-    "changes": [
+commit = Commit(
+    number="78eaae3db5ed184c90f4f14d34a4fc000f04bdac",
+    changes=[
         # SOFTWARE.sadl
         RenameClass(
             from_name_space=SOFTWARE,
@@ -85,4 +85,4 @@ commit: Commit = {
             to_name="Namespace",
         ),
     ],
-}
+)

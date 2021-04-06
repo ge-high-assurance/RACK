@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+#
+# Copyright (c) 2021, Galois, Inc.
+#
+# All Rights Reserved
+#
+# This material is based upon work supported by the Defense Advanced Research
+# Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+#
+# Any opinions, findings and conclusions or recommendations expressed in this
+# material are those of the author(s) and do not necessarily reflect the views
+# of the Defense Advanced Research Projects Agency (DARPA).
+
+import argparse
+import os
+
+from rack_crawl.crawler import CrawlerConfiguration, crawl_repository
+
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument(
+    "--old-ref",
+    help="Old reference to integrate the changes from",
+    type=str,
+    required=True,
+)
+
+parser.add_argument(
+    "--new-ref",
+    help="More recent reference to integrate the changes up to",
+    type=str,
+    default="master",
+)
+
+args = parser.parse_args()
+
+
+crawler_configuration = CrawlerConfiguration(
+    abort_or_done_commit_ref="vr/migration",
+    old_commit_ref=args.old_ref,
+    repository_path=os.path.dirname(os.getcwd()),
+    new_commit_ref=args.new_ref,
+)
+
+crawl_repository(crawler_configuration)

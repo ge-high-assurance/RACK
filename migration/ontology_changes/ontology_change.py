@@ -9,6 +9,7 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
+from dataclasses import dataclass
 import logging
 from abc import ABC, abstractmethod
 from typing import List
@@ -16,12 +17,6 @@ import sys
 
 from colorama import Fore, Style
 from semtk import SemTKJSON
-
-# c.f. https://github.com/python/typeshed/issues/3500
-if sys.version_info >= (3, 8):
-    from typing import TypedDict
-else:
-    from typing_extensions import TypedDict
 
 LOGGER_ID = "migration-logger"
 
@@ -124,10 +119,7 @@ class OntologyChange(ABC):
     #     ...
 
 
-Commit = TypedDict(
-    "Commit",
-    {
-        "number": str,
-        "changes": List[OntologyChange],
-    },
-)
+@dataclass
+class Commit:
+    changes: List[OntologyChange]
+    number: str

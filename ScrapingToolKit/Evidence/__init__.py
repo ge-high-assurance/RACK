@@ -121,7 +121,8 @@ ingestion-steps:
 
 def createEvidenceFile(ingestionTitle="ScrapingToolKitIngestion", ingestionDescription="Data that was ingested using the ARCOS Scraping Tool Kit.", filePath="RACK-DATA.xml"):   
     trace()
-    global __EvidenceDir__, __ingestionIdentifier__
+    global __EvidenceDir__, __ingestionIdentifier__, __Evidence__
+    __Evidence__ = None
     __EvidenceDir__ = filePath
     log("Created Evidence File:", str_highlight(__EvidenceDir__))
     with open(__EvidenceDir__, "w") as eFile:
@@ -142,7 +143,6 @@ def addEvidenceObject(eObject):
     #  it write to the hard drive every call, this could be improved by storing the xml data in 
     #  memory until a flush call or something similar.  This works well for now as you can 
     #  as it will log the data up to the point where a exception occurs
-    __EvidenceDir__ = "RACK-DATA.xml"
     if not os.path.exists(__EvidenceDir__):
         createEvidenceFile(__EvidenceDir__)
     if __Evidence__ is None:

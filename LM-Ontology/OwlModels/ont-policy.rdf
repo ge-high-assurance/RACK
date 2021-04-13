@@ -1,0 +1,80 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://jena.hpl.hp.com/schemas/2003/03/ont-manager#">
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/home/project/RACK/OwlModels/PROV-S.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/PROV-S.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:publicURI rdf:resource="http://sadl.org/builtinfunctions"/>
+    <j.0:altURL rdf:resource="file:/home/project/RACK/OwlModels/SadlBuiltinFunctions.owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >builtinfunctions</j.0:prefix>
+    <j.0:sadlSourceURL>platform:/resource/RACK/ImplicitModel/SadlBuiltinFunctions.sadl</j.0:sadlSourceURL>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:publicURI rdf:resource="http://arcos.rack/SACM-S"/>
+    <j.0:altURL rdf:resource="file:/home/project/RACK/OwlModels/SACM-S.owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >sacms</j.0:prefix>
+    <j.0:sadlSourceURL>platform:/resource/RACK/SACM-S.sadl</j.0:sadlSourceURL>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix>sadllistmodel</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/Users/pdibona/Projects/certgate/ontologies/RACK/OwlModels/SadlListModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadllistmodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix>sadlbasemodel</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/Users/pdibona/Projects/certgate/ontologies/RACK/OwlModels/SadlBaseModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlbasemodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <j.0:prefix>sadlimplicitmodel</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/Users/pdibona/Projects/certgate/ontologies/RACK/OwlModels/SadlImplicitModel.owl"/>
+    <j.0:sadlSourceURL>platform:/resource/RACK/ImplicitModel/SadlImplicitModel.sadl</j.0:sadlSourceURL>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:publicURI rdf:resource="http://arcos.rack/PROV-S"/>
+    <j.0:altURL rdf:resource="file:/home/project/RACK/OwlModels/PROV-S.owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >provs</j.0:prefix>
+    <j.0:sadlSourceURL>platform:/resource/RACK/PROV-S.sadl</j.0:sadlSourceURL>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/home/project/RACK/OwlModels/SACM-S.sadl.metrics.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/SACM-S.metrics"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:publicURI rdf:resource="http://arcos.rack/SACM.metrics"/>
+    <j.0:altURL rdf:resource="file:/home/project/RACK/OwlModels/SACM.sadl.metrics.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SRL_Metrics</j.0:createdBy>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >sacm</j.0:prefix>
+    <j.0:publicURI rdf:resource="http://arcos.rack/SACM"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:altURL rdf:resource="file:/home/project/RACK/OwlModels/SACM.owl"/>
+    <j.0:sadlSourceURL>platform:/resource/RACK/SACM-LM.sadl</j.0:sadlSourceURL>
+  </j.0:OntologySpec>
+</rdf:RDF>

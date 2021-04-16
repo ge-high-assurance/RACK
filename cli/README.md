@@ -296,7 +296,7 @@ using the `count` sub-command.
 16
 ```
 
-### Update Nodegroups
+### Nodegroups
 
 The script can automate loading a directory full of nodegroups
 indexed by a `store_data.csv` file.
@@ -318,6 +318,18 @@ Retrieving nodegroups...                                    OK
 query Compilation Inputs.json                   query Requirements without Tests.json
 query Control Flow From Function.json           query System Structure.json
 ...
+```
+
+The tool can also list the currently loaded nodegroups.
+
+```
+(venv) $ rack nodegroups list
+Listing nodegroups...                                       OK
+ID                                           comments                [...]
+-------------------------------------------  ------------------------[...]
+Ingest-SoftwareComponent                     Node group to ingest COM[...]
+Ingest-SoftwareComponentTestResult           Node group to ingest Sof[...]
+[...]
 ```
 
 ## Hacking

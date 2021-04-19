@@ -1,5 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // DesCert Ontology
+// Copyright 2021. Honeywell International and SRI International.
 
 // namespace and imports
 uri "http://arcos.descert/DesCert" alias DesCert.
@@ -76,9 +77,9 @@ import "http://arcos.rack/MODEL".
       // relevant properties inherited from ANALYSIS_OUTPUT
       //   analyzes is not used since goalProperty captures the information
       //   result of type ANALYSIS_RESULT defined in the base RACK ontology is used as is
-      // We are adding more properties to ANALYSIS_OUTPUT
+      // new properties for ANALYSIS_OUTPUT
       analysisDiagnostics (note "counter examples, other diagnsotics") describes ANALYSIS_OUTPUT with values of type string.
-      goalProperty (note "SpecificProperty or GenericProperty that is the objective of anlaysis") describes ANALYSIS_OUTPUT with values of type {GenericProperty, SpecificProperty}.
+      goalProperty (note "SpecificProperty or GenericProperty that is the objective of anlaysis") describes ANALYSIS_OUTPUT with values of type {GenericProperty or SpecificProperty}.
       
       // Note: base RACK ontology class ANALYSIS_ANNOTATION is not used since we capture the property independently and not as part of ANALYSIS_OUTPUT
       
@@ -94,7 +95,7 @@ import "http://arcos.rack/MODEL".
          propertyScope is a type of wasImpactedBy.
          propertyBasis (note "entity impacting the property definition - e.g. SystemconOps") describes SpecificProperty with values of type ENTITY.
          propertyBasis is a type of wasImpactedBy.
-         H:mitigates describes SpecificProperty with values of type HAZARD.
+         H:mitigates (note "a hazard (if any) the property mitigates") describes SpecificProperty with values of type HAZARD.
          // NOTE: a SpecificProperty is modeled by entities such as SallyPropertyModel; that's where the property text is contained
          
      ////////////////////////////////////////////////
@@ -135,7 +136,7 @@ import "http://arcos.rack/MODEL".
         toolInvocation describes RadlerArchitectureAnalysis with a single value of type ToolInvocation.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
-        used of RadlerArchitectureAnalysis only has values of type {RadlArchitectureModel, RadlGenericProperty}.
+        used of RadlerArchitectureAnalysis only has values of type {RadlArchitectureModel or RadlGenericProperty}.
       
       ///////////////////////////////////////////////////
       // System, Software requirements, design, code
@@ -144,16 +145,17 @@ import "http://arcos.rack/MODEL".
       //    denotes a system component allocted to software; corresponds to node in Radl
       
       SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
-         wasInformedBy of SystemRequirementsDefinition only has values of type SystemConOps. // type of used
-        // inherited properties:
+        wasInformedBy of SystemRequirementsDefinition only has values of type SystemConOps. // type of used
+        Rq:governedBy of SystemRequirementsDefinition only has values of type {SystemConOps or SystemArchitecture}.
+        // other inherited properties:
         //    Rq:author
         //    Rq:referenced (e.g. requirement standard)
-        // use DOCUMENT for req standard
+        // use DOCUMENT for req standard, not CLEAR yet
 
       SystemRequirementSet is a type of COLLECTION.
        content describes SystemRequirementSet with values of type SystemRequirement.
-       Rq:createdBy describes SystemRequirementSet with values of type SystemRequirementsDefinition.
-       // createdBy is type of wasGeneratedBy. not needed since it is defined earlier under system architecture
+       Rq:createdBy describes SystemRequirementSet with values of type SystemRequirementsDefinition. 
+       // createdBy is type of wasGeneratedBy- subtyping not needed since it is defined earlier under system architecture
        governs describes SystemRequirementSet with values of type SYSTEM.
        // inherited properties:
        //   title: name given to this requirement set
@@ -162,10 +164,11 @@ import "http://arcos.rack/MODEL".
         clearUserGuide describes ClearNotation with a single value of type DOCUMENT.
         clearSemantics describes ClearNotation with a single value of type DOCUMENT.
           
-      DesCertRequirementModel (note "The model of requirement in DesCert") is a type of MODEL.
+      DesCertRequirementModel (note "The model of requirement in DesCert in CLEAR notation") is a type of MODEL.
         requirementNotation describes DesCertRequirementModel with a single value of type ClearNotation. 
         requirementNotation is a type of wasImpactedBy.
         requirementText describes DesCertRequirementModel with a single value of type string.
+        models of DesCertRequirementModel only has values of type {SoftwareHighLevelRequirement or SoftwareLowLevelRequirement}.
 
       SystemRequirement is a type of REQUIREMENT.
         wasGeneratedBy of SystemRequirement only has values of type SystemRequirementsDefinition.
@@ -175,9 +178,9 @@ import "http://arcos.rack/MODEL".
         //  Question: should we put a link to the SystemRequirementSet in which this requirement is contained?
         
       SoftwareHighLevelRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
-        wasInformedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementsDefinition, DevelopSystemArchitecture}.
-        // governedBy of SoftwareHighLevelRequirementsDefinition has a single value of type SystemArchitecture.
-        // inherited properties:
+        wasInformedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementsDefinition or DevelopSystemArchitecture}.
+        Rq:governedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementSet or SystemArchitecture}.
+        // other inherited properties:
         //    Rq:author
         //    Rq:referenced (e.g. requirement standard)
        
@@ -187,20 +190,19 @@ import "http://arcos.rack/MODEL".
        // inheirted properties:
        //   title: name given to this requirement set
        governs describes SoftwareHighLevelRequirementSet with values of type SWCOMPONENT. 
+       // governs is a type of wasImpactedBy.
         
       SoftwareHighLevelRequirement is a type of REQUIREMENT.
         wasGeneratedBy of SoftwareHighLevelRequirementsDefinition only has values of type SoftwareHighLevelRequirementsDefinition.
-        // NOTE: need to add Model construct here
-        ////
         //  Question: should we put a link to the SoftwareHighLevelRequirementSet in which this requirement is contained?
       
       SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
         // inherited properties:
         //    Rq:author
         //    Rq:referenced (e.g. requirement/design standard)
-        wasInformedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementsDefinition, SystemArchitecture}.
+        wasInformedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementsDefinition or SystemArchitecture}.
         // The following give error
-        //   Rq:governedBy of SoftwareDesign has values of type SoftwareHighLevelRequirementsDefinition.
+        Rq:governedBy of SoftwareDesign only has values of type SoftwareHighLevelRequirementSet.
         //   Rq:governedBy of SoftwareDesign has values of type SystemArchitecture.
         
       SoftwareLowLevelRequirementSet is a type of COLLECTION.
@@ -213,12 +215,10 @@ import "http://arcos.rack/MODEL".
        
       SoftwareLowLevelRequirement is a type of REQUIREMENT.
         wasGeneratedBy of SoftwareLowLevelRequirement only has values of type SoftwareDesign.
-        // NOTE: need to add Model construct here
-        ////
         //  Question: should we put a link to the SoftwareHighLevelRequirementSet oin which this requirement is contained?
        
       SoftwareCoding is a type of CODE_DEVELOPMENT.
-        // wasInformedBy of SoftwareCoding has values of type Change_Authorization.
+        // wasInformedBy of SoftwareCoding has values of type Change_Authorization. (not sure of this yet)
         wasInformedBy of SoftwareCoding only has values of type SoftwareDesign.        
 
       SoftwareIntegration is a type of COMPILE.
@@ -236,7 +236,7 @@ import "http://arcos.rack/MODEL".
       DataDictionary is a type of DATA_DICTIONARY_TERM.
         // NOTE: we will not be tracing each individual data dictionalry terms to/from requirements
         //  the whole disctionary will be traced to the SoftwareCompnent
-        // Question: Can the class DATA_DICTIONARY
+        // Question: Can the class DATA_DICTIONARY contain all terms?
         wasGeneratedBy of DataDictionary only has values of type SoftwareHighLevelRequirementsDefinition.
 
       ExecutableObject is a type of FILE.
@@ -268,13 +268,13 @@ import "http://arcos.rack/MODEL".
         toolInvocation describes SallyModelChecking with a single value of type ToolInvocation.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
-        used of SallyModelChecking only has values of type {SallyTransitionSystemModel, SpecificProperty}.
+        used of SallyModelChecking only has values of type {SallyTransitionSystemModel or SpecificProperty}.
       
       SallyNotation (note "Sally notation for creating models and property queries") is a type of ENTITY.
         sallyUserGuide describes SallyNotation with a single value of type DOCUMENT.
         sallySemantics describes SallyNotation with a single value of type DOCUMENT.
       
-      SallyPropertyModel is a type of MODEL.
+      SallyPropertyModel (note "the MODEL class that is used to model a SpecificProperty") is a type of MODEL.
         // this entity models a SpecificProperty that is checked by Sally
         sallyPropertyNotation describes SallyPropertyModel with a single value of type SallyNotation. 
         sallyPropertyNotation is a type of wasImpactedBy.
@@ -287,11 +287,11 @@ import "http://arcos.rack/MODEL".
        
        ClearTestAndOracleGeneration is a type of TEST_DEVELOPMENT.
          // Test oracles and test generation by Text2Test tool from CLEAR requirements
-        toolInvocation (note "Text2Test tool") describes ClearTestAndOracleGeneration with a single value of type ToolInvocation.
+        toolInvocation (note "Text2Test tool usgae instance") describes ClearTestAndOracleGeneration with a single value of type ToolInvocation.
         // Inherited porperties
         //   developedBy: refers to Text2Test tool
         //   wasInformedBy: activity that was a precursor to this
-        used of ClearTestAndOracleGeneration only has values of type {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary}.
+        used of ClearTestAndOracleGeneration only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary}.
          
        ClearTestingTheory is a type of ENTITY. 
           testingTheoryDoc describes ClearTestingTheory with a single value of type DOCUMENT. 
@@ -314,9 +314,23 @@ import "http://arcos.rack/MODEL".
        
        // TEST_EXECUTION class in RACK base ontology is extended with further attributes
        // New attributes
-       testEnvironment (note "test environment description, configration parameters") describes TEST_EXECUTION with a single value of type string.
-       
+       testEnvironment (note "test environment description, configuration parameters") describes TEST_EXECUTION with a single value of type string.
+              
        // TEST_RESULT class in RACK base ontology is used as is
+       
+       ///////////////////////////////////////////////////////////////////////
+       // Requirement analysis by Text2Test tool from CLEAR requirements
+       
+       CLEARGenericProperty is a type of GenericProperty.
+        propertyScope of CLEARGenericProperty only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary}.
+        
+       RequirementAnalysis is a type of ANALYSIS.
+        // Inherited properties from ANALYSIS
+        //   performedBy - refers to Text2Test tool
+        toolInvocation describes RequirementAnalysis with a single value of type ToolInvocation.
+        // Inherited from ACTIVITY:
+        //   wasInformedBy: activity that was a precursor to this
+        used of RequirementAnalysis only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary or CLEARGenericProperty}.
        
        ////////////////////////////////
        // Test generation by Randoop tool

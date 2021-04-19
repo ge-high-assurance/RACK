@@ -172,10 +172,10 @@ ARTIFACT
         artifactVersion describes ARTIFACT with values of type string.
         artifactDate describes ARTIFACT with values of type string.
 
-ACTIVITY
+SACM_ACTIVITY
     is a type of ARTIFACT_ASSET.
-        startTime describes ACTIVITY with values of type string.
-        endTime describes ACTIVITY with values of type string.
+        startTime describes SACM_ACTIVITY with values of type string.
+        endTime describes SACM_ACTIVITY with values of type string.
 
 EVENT
     is a type of ARTIFACT_ASSET.

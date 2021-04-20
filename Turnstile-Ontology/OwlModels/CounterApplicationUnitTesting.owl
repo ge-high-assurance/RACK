@@ -112,7 +112,7 @@
     <j.2:executedBy rdf:resource="#SoftwareUnitTestRun1"/>
     <j.2:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.0:generatedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2017-03-23T06:03:16-04:00</j.0:generatedAtTime>
+    >2017-03-23T03:03:16-07:00</j.0:generatedAtTime>
     <j.2:confirms rdf:resource="#UTC-1-1"/>
     <j.0:identifier>UTR-1-1-1</j.0:identifier>
   </j.1:SoftwareUnitTestResult>

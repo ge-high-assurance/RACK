@@ -61,7 +61,7 @@ jobs:
     - name: Lint shell scripts
       uses: ludeeus/action-shellcheck@1.0.0
       env:
-        SHELLCHECK_OPTS: -P assist/databin -e SC1008
+        SHELLCHECK_OPTS: -x -P assist/databin -e SC1008
 
 # Cache job:
 #  - Downloads rack-box files

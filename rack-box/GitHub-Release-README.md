@@ -1,10 +1,13 @@
+<!-- markdownlint-disable first-line-heading -->
+<!-- markdownlint-disable line-length -->
+
 ## Run the Docker RACK box
 
 Here are very brief instructions how to run the Docker RACK box.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Docker-RACK-Box) in the RACK Wiki.  You will need to give your Docker Hub username to the RACK team so you can be given access to our Docker Hub repository.
 
 1. Open a terminal window where you can run `docker`.
-2. Type `docker pull gehighassurance/rack-box:v4.1`
-3. Type `docker run --detach -p 80:80 -p 12050-12092:12050-12092 gehighassurance/rack-box:v4.1`
+2. Type `docker pull gehighassurance/rack-box:v5.1`
+3. Type `docker run --detach -p 80:80 -p 12050-12092:12050-12092 gehighassurance/rack-box:v5.1`
 4. Visit <http://localhost/> in your browser to view the RACK box's welcome page.
 
 ## Run the Virtual RACK box
@@ -15,7 +18,7 @@ Here are very brief instructions how to run the Virtual RACK box.  You will find
 2. Concatenate the split VirtualBox zip files together.
 3. Unzip the newly concatenated zip file.
 4. Start VirtualBox.
-5. Import the VirtualBox VM from the rack-box-virtualbox-v4.1 folder.
+5. Import the VirtualBox VM from the rack-box-virtualbox-v5.1 folder.
 6. Open the VM's Settings.
 7. Click on Network.
 8. Change the first network adapter from NAT to Bridged.
@@ -35,7 +38,7 @@ You will need to know which IP address the VM is using after it starts up.  If y
 Type that IP address in your web browser's address bar, hit Enter, and you should see the RACK box's welcome page appear in your browser.
 
 ---
-Copyright (c) 2020, General Electric Company, Galois, Inc.
+Copyright (c) 2021, General Electric Company, Galois, Inc.
 
 All Rights Reserved
 

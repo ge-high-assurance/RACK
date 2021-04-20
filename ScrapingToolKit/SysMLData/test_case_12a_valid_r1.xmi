@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmlns:xmi="http://schema.omg.org/spec/XMI/2.1"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:sysml="http://www.omg.org/spec/SysML/20100301/SysML-profile"
+        xmlns:uml="http://www.omg.org/spec/UML/20090901" xmi:version="2.1">
+        <uml:Model xmi:id="_V4UzwMS7Ed-Mdez391WBpQ" name="TestCase12a">
+                <packagedElement xmi:type="uml:Package" xmi:id="_V4UzwcS7Ed-Mdez391WBpQ"
+                        name="Structure">
+                        <packagedElement xmi:type="uml:Class" xmi:id="_V4UzwsS7Ed-Mdez391WBpQ"
+                                name="Detection System" isActive="true"
+                                classifierBehavior="_V4Uz4sS7Ed-Mdez391WBpQ">
+                                <ownedAttribute xmi:type="uml:Property"
+                                        xmi:id="_V4Uzw8S7Ed-Mdez391WBpQ" name="sensor"
+                                        type="_V4Uz2MS7Ed-Mdez391WBpQ" aggregation="composite"
+                                        association="_V4Uzz8S7Ed-Mdez391WBpQ"/>
+                                <ownedAttribute xmi:type="uml:Property"
+                                        xmi:id="_V4UzxsS7Ed-Mdez391WBpQ" name="processor"
+                                        type="_V4Uz2cS7Ed-Mdez391WBpQ" aggregation="composite"
+                                        association="_V4Uz0sS7Ed-Mdez391WBpQ"/>
+                                <ownedAttribute xmi:type="uml:Property"
+                                        xmi:id="_V4UzycS7Ed-Mdez391WBpQ" name="alarm"
+                                        type="_V4Uz2sS7Ed-Mdez391WBpQ" aggregation="composite"
+                                        association="_V4Uz1cS7Ed-Mdez391WBpQ"/>
+                                <ownedReception xmi:type="uml:Reception"
+                                        xmi:id="_V4UzzcS7Ed-Mdez391WBpQ" name="Set"
+                                        signal="_V4Uz38S7Ed-Mdez391WBpQ"/>
+                                <ownedReception xmi:type="uml:Reception"
+                                        xmi:id="_V4UzzsS7Ed-Mdez391WBpQ" name="Reset"
+                                        signal="_V4Uz4MS7Ed-Mdez391WBpQ"/>
+                                <ownedBehavior xmi:type="uml:Activity"
+                                        xmi:id="_V4Uz4sS7Ed-Mdez391WBpQ" name="Detect Intruder"
+                                        partition="_V4U0DsS7Ed-Mdez391WBpQ _V4U0D8S7Ed-Mdez391WBpQ _V4U0EMS7Ed-Mdez391WBpQ">
+                                        <ownedParameter xmi:type="uml:Parameter"
+                                                xmi:id="_V4Uz5MS7Ed-Mdez391WBpQ" name="Parameter1"
+                                                type="_V4Uz28S7Ed-Mdez391WBpQ" isStream="true">
+                                                <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                                                  xmi:id="_V4Uz5cS7Ed-Mdez391WBpQ" value="1"/>
+                                                <lowerValue xmi:type="uml:LiteralInteger"
+                                                  xmi:id="_V4Uz5sS7Ed-Mdez391WBpQ" value="1"/>
+                                        </ownedParameter>
+                                        <ownedParameter xmi:type="uml:Parameter"
+                                                xmi:id="_V4Uz58S7Ed-Mdez391WBpQ" name="Parameter2"
+                                                direction="out" type="_V4Uz3sS7Ed-Mdez391WBpQ"
+                                                isStream="true">
+                                                <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                                                  xmi:id="_V4Uz6MS7Ed-Mdez391WBpQ" value="1"/>
+                                                <lowerValue xmi:type="uml:LiteralInteger"
+                                                  xmi:id="_V4Uz6cS7Ed-Mdez391WBpQ" value="1"/>
+                                        </ownedParameter>
+                                        <node xmi:type="uml:AcceptEventAction"
+                                                xmi:id="_V4Uz6sS7Ed-Mdez391WBpQ" name="Set"
+                                                outgoing="_V4U0AsS7Ed-Mdez391WBpQ"
+                                                inPartition="_V4U0DsS7Ed-Mdez391WBpQ">
+                                                <trigger xmi:type="uml:Trigger"
+                                                  xmi:id="_V4Uz68S7Ed-Mdez391WBpQ"
+                                                  event="_V4U0EsS7Ed-Mdez391WBpQ"/>
+                                        </node>
+                                        <node xmi:type="uml:CallBehaviorAction"
+                                                xmi:id="_V4Uz7MS7Ed-Mdez391WBpQ" name="Sense Input"
+                                                incoming="_V4U0AsS7Ed-Mdez391WBpQ"
+                                                inPartition="_V4U0DsS7Ed-Mdez391WBpQ"
+                                                inInterruptibleRegion="_V4U0EcS7Ed-Mdez391WBpQ"
+                                                behavior="_BHYewdqQEd-8dry8mMKGdg">
+                                                <argument xmi:type="uml:InputPin"
+                                                  xmi:id="_V4Uz7cS7Ed-Mdez391WBpQ" name="in"
+                                                  incoming="_V4U0CsS7Ed-Mdez391WBpQ"
+                                                  type="_V4Uz28S7Ed-Mdez391WBpQ"/> 
+                                                <result xmi:type="uml:OutputPin"
+                                                  xmi:id="_V4Uz78S7Ed-Mdez391WBpQ" name="out"
+                                                  outgoing="_V4U0BMS7Ed-Mdez391WBpQ"
+                                                  type="_V4Uz3MS7Ed-Mdez391WBpQ"/> 
+                                        </node>
+                                        <node xmi:type="uml:CallBehaviorAction"
+                                                xmi:id="_V4Uz8cS7Ed-Mdez391WBpQ"
+                                                name="Process Signal"
+                                                inPartition="_V4U0D8S7Ed-Mdez391WBpQ"
+                                                inInterruptibleRegion="_V4U0EcS7Ed-Mdez391WBpQ"
+                                                behavior="_BHYezNqQEd-8dry8mMKGdg">
+                                                <argument xmi:type="uml:InputPin"
+                                                  xmi:id="_V4Uz8sS7Ed-Mdez391WBpQ" name="in"
+                                                  incoming="_V4U0BMS7Ed-Mdez391WBpQ"
+                                                  type="_V4Uz3MS7Ed-Mdez391WBpQ"/> 
+                                                <result xmi:type="uml:OutputPin"
+                                                  xmi:id="_V4Uz9MS7Ed-Mdez391WBpQ" name="out"
+                                                  outgoing="_V4U0BsS7Ed-Mdez391WBpQ"
+                                                  type="_V4Uz3cS7Ed-Mdez391WBpQ"/> 
+                                        </node>
+                                        <node xmi:type="uml:CallBehaviorAction"
+                                                xmi:id="_V4Uz9sS7Ed-Mdez391WBpQ" name="Set Alarm"
+                                                inPartition="_V4U0EMS7Ed-Mdez391WBpQ"
+                                                inInterruptibleRegion="_V4U0EcS7Ed-Mdez391WBpQ"
+                                                behavior="_BHYe0dqQEd-8dry8mMKGdg">
+                                                <argument xmi:type="uml:InputPin"
+                                                  xmi:id="_V4Uz98S7Ed-Mdez391WBpQ" name="in"
+                                                  incoming="_V4U0BsS7Ed-Mdez391WBpQ"
+                                                  type="_V4Uz3cS7Ed-Mdez391WBpQ"/> 
+                                                <result xmi:type="uml:OutputPin"
+                                                  xmi:id="_V4Uz-cS7Ed-Mdez391WBpQ" name="out"
+                                                  outgoing="_V4U0CMS7Ed-Mdez391WBpQ"
+                                                  type="_V4Uz3sS7Ed-Mdez391WBpQ"/> 
+                                        </node>
+                                        <node xmi:type="uml:ActivityParameterNode"
+                                                xmi:id="_V4Uz-8S7Ed-Mdez391WBpQ"
+                                                outgoing="_V4U0CsS7Ed-Mdez391WBpQ"
+                                                type="_V4Uz28S7Ed-Mdez391WBpQ"
+                                                parameter="_V4Uz5MS7Ed-Mdez391WBpQ"/>
+                                        <node xmi:type="uml:ActivityParameterNode"
+                                                xmi:id="_V4Uz_cS7Ed-Mdez391WBpQ"
+                                                incoming="_V4U0CMS7Ed-Mdez391WBpQ"
+                                                type="_V4Uz3sS7Ed-Mdez391WBpQ"
+                                                parameter="_V4Uz58S7Ed-Mdez391WBpQ"/>
+                                        <node xmi:type="uml:AcceptEventAction"
+                                                xmi:id="_V4Uz_8S7Ed-Mdez391WBpQ" name="Reset"
+                                                inInterruptibleRegion="_V4U0EcS7Ed-Mdez391WBpQ"
+                                                outgoing="_V4U0DMS7Ed-Mdez391WBpQ">
+                                                <trigger xmi:type="uml:Trigger"
+                                                  xmi:id="_V4U0AMS7Ed-Mdez391WBpQ"
+                                                  event="_V4U0E8S7Ed-Mdez391WBpQ"/>
+                                        </node>
+                                        <node xmi:type="uml:FlowFinalNode"
+                                                xmi:id="_V4U0AcS7Ed-Mdez391WBpQ"
+                                                incoming="_V4U0DMS7Ed-Mdez391WBpQ"/>
+                                        <edge xmi:type="uml:ControlFlow"
+                                                xmi:id="_V4U0AsS7Ed-Mdez391WBpQ"
+                                                source="_V4Uz6sS7Ed-Mdez391WBpQ"
+                                                target="_V4Uz7MS7Ed-Mdez391WBpQ"
+                                                inPartition="_V4U0DsS7Ed-Mdez391WBpQ"/>
+                                        <edge xmi:type="uml:ObjectFlow"
+                                                xmi:id="_V4U0BMS7Ed-Mdez391WBpQ"
+                                                source="_V4Uz78S7Ed-Mdez391WBpQ"
+                                                target="_V4Uz8sS7Ed-Mdez391WBpQ"/>
+                                        <edge xmi:type="uml:ObjectFlow"
+                                                xmi:id="_V4U0BsS7Ed-Mdez391WBpQ"
+                                                source="_V4Uz9MS7Ed-Mdez391WBpQ"
+                                                target="_V4Uz98S7Ed-Mdez391WBpQ"/>
+                                        <edge xmi:type="uml:ObjectFlow"
+                                                xmi:id="_V4U0CMS7Ed-Mdez391WBpQ"
+                                                source="_V4Uz-cS7Ed-Mdez391WBpQ"
+                                                target="_V4Uz_cS7Ed-Mdez391WBpQ"/>
+                                        <edge xmi:type="uml:ObjectFlow"
+                                                xmi:id="_V4U0CsS7Ed-Mdez391WBpQ"
+                                                source="_V4Uz-8S7Ed-Mdez391WBpQ"
+                                                target="_V4Uz7cS7Ed-Mdez391WBpQ"/>
+                                        <edge xmi:type="uml:ControlFlow"
+                                                xmi:id="_V4U0DMS7Ed-Mdez391WBpQ"
+                                                source="_V4Uz_8S7Ed-Mdez391WBpQ"
+                                                target="_V4U0AcS7Ed-Mdez391WBpQ"
+                                                interrupts="_V4U0EcS7Ed-Mdez391WBpQ"/>
+                                        <group xmi:type="uml:ActivityPartition"
+                                                xmi:id="_V4U0DsS7Ed-Mdez391WBpQ"
+                                                node="_V4Uz6sS7Ed-Mdez391WBpQ _V4Uz7MS7Ed-Mdez391WBpQ"
+                                                edge="_V4U0AsS7Ed-Mdez391WBpQ"
+                                                represents="_V4Uz2MS7Ed-Mdez391WBpQ"/>
+                                        <group xmi:type="uml:ActivityPartition"
+                                                xmi:id="_V4U0D8S7Ed-Mdez391WBpQ"
+                                                node="_V4Uz8cS7Ed-Mdez391WBpQ"
+                                                represents="_V4Uz2cS7Ed-Mdez391WBpQ"/>
+                                        <group xmi:type="uml:ActivityPartition"
+                                                xmi:id="_V4U0EMS7Ed-Mdez391WBpQ"
+                                                node="_V4Uz9sS7Ed-Mdez391WBpQ"
+                                                represents="_V4Uz2sS7Ed-Mdez391WBpQ"/>
+                                        <group xmi:type="uml:InterruptibleActivityRegion"
+                                                xmi:id="_V4U0EcS7Ed-Mdez391WBpQ"
+                                                node="_V4Uz7MS7Ed-Mdez391WBpQ _V4Uz8cS7Ed-Mdez391WBpQ _V4Uz9sS7Ed-Mdez391WBpQ _V4Uz_8S7Ed-Mdez391WBpQ"
+                                                interruptingEdge="_V4U0DMS7Ed-Mdez391WBpQ"/>
+                                </ownedBehavior>
+                        </packagedElement>
+                        <packagedElement xmi:type="uml:Association" xmi:id="_V4Uzz8S7Ed-Mdez391WBpQ"
+                                name="Association1"
+                                memberEnd="_V4Uzw8S7Ed-Mdez391WBpQ _V4Uz0MS7Ed-Mdez391WBpQ">
+                                <ownedEnd xmi:type="uml:Property" xmi:id="_V4Uz0MS7Ed-Mdez391WBpQ"
+                                        name="" type="_V4UzwsS7Ed-Mdez391WBpQ" isUnique="false"
+                                        association="_V4Uzz8S7Ed-Mdez391WBpQ"/>
+                        </packagedElement>
+                        <packagedElement xmi:type="uml:Association" xmi:id="_V4Uz0sS7Ed-Mdez391WBpQ"
+                                name="Association2"
+                                memberEnd="_V4UzxsS7Ed-Mdez391WBpQ _V4Uz08S7Ed-Mdez391WBpQ">
+                                <ownedEnd xmi:type="uml:Property" xmi:id="_V4Uz08S7Ed-Mdez391WBpQ"
+                                        name="" type="_V4UzwsS7Ed-Mdez391WBpQ" isUnique="false"
+                                        association="_V4Uz0sS7Ed-Mdez391WBpQ"/>
+                        </packagedElement>
+                        <packagedElement xmi:type="uml:Association" xmi:id="_V4Uz1cS7Ed-Mdez391WBpQ"
+                                name="Association3"
+                                memberEnd="_V4UzycS7Ed-Mdez391WBpQ _V4Uz1sS7Ed-Mdez391WBpQ">
+                                <ownedEnd xmi:type="uml:Property" xmi:id="_V4Uz1sS7Ed-Mdez391WBpQ"
+                                        name="" type="_V4UzwsS7Ed-Mdez391WBpQ" isUnique="false"
+                                        association="_V4Uz1cS7Ed-Mdez391WBpQ"/>
+                        </packagedElement>
+                        <packagedElement xmi:type="uml:Class" xmi:id="_V4Uz2MS7Ed-Mdez391WBpQ"
+                                name="Sensor"/>
+                        <packagedElement xmi:type="uml:Class" xmi:id="_V4Uz2cS7Ed-Mdez391WBpQ"
+                                name="Processor"/>
+                        <packagedElement xmi:type="uml:Class" xmi:id="_V4Uz2sS7Ed-Mdez391WBpQ"
+                                name="Alarm"/>
+                        <packagedElement xmi:type="uml:Class" xmi:id="_V4Uz28S7Ed-Mdez391WBpQ"
+                                name="Sensor Input"/>
+                        <packagedElement xmi:type="uml:Class" xmi:id="_V4Uz3MS7Ed-Mdez391WBpQ"
+                                name="Sensor Signal"/>
+                        <packagedElement xmi:type="uml:Class" xmi:id="_V4Uz3cS7Ed-Mdez391WBpQ"
+                                name="Alert"/>
+                        <packagedElement xmi:type="uml:Class" xmi:id="_V4Uz3sS7Ed-Mdez391WBpQ"
+                                name="Alarm Signal"/>
+                        <packagedElement xmi:type="uml:Signal" xmi:id="_V4Uz38S7Ed-Mdez391WBpQ"
+                                name="Set"/>
+                        <packagedElement xmi:type="uml:Signal" xmi:id="_V4Uz4MS7Ed-Mdez391WBpQ"
+                                name="Reset"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Package" xmi:id="_V4Uz4cS7Ed-Mdez391WBpQ"
+                        name="Behavior">
+                        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_V4U0EsS7Ed-Mdez391WBpQ"
+                                signal="_V4Uz38S7Ed-Mdez391WBpQ"/>
+                        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_V4U0E8S7Ed-Mdez391WBpQ"
+                                signal="_V4Uz4MS7Ed-Mdez391WBpQ"/>
+                        <packagedElement xmi:type="uml:Activity" xmi:id="_BHYewdqQEd-8dry8mMKGdg"
+                                name="Sense Input">
+                                <ownedParameter xmi:type="uml:Parameter"
+                                        xmi:id="_VZIj4tqUEd-8dry8mMKGdg" name="in" isStream="true"
+                                        type="_V4Uz28S7Ed-Mdez391WBpQ"/>
+                                <ownedParameter xmi:type="uml:Parameter"
+                                        xmi:id="_VZIj5dqUEd-8dry8mMKGdg" name="out" isStream="true"
+                                        direction="out" type="_V4Uz3MS7Ed-Mdez391WBpQ"/>
+                                <node xmi:type="uml:ActivityParameterNode"
+                                        xmi:id="_16_9_1a900482_1296500715265_363998_1515"
+                                        type="_V4Uz3cS7Ed-Mdez391WBpQ"
+                                        parameter="_VZIj_tqUEd-8dry8mMKGdg"/>
+                                <node xmi:type="uml:ActivityParameterNode"
+                                        xmi:id="_16_9_1a900482_1296500715265_660085_1516"
+                                        type="_V4Uz3sS7Ed-Mdez391WBpQ"
+                                        parameter="_VZIkAdqUEd-8dry8mMKGdg"/>
+                        </packagedElement>
+                        <packagedElement xmi:type="uml:Activity" xmi:id="_BHYezNqQEd-8dry8mMKGdg"
+                                name="Process Signal">
+                                <ownedParameter xmi:type="uml:Parameter"
+                                        xmi:id="_VZIj89qUEd-8dry8mMKGdg" isStream="true" name="in"
+                                        type="_V4Uz3MS7Ed-Mdez391WBpQ"/>
+                                <ownedParameter xmi:type="uml:Parameter"
+                                        xmi:id="_VZIj9tqUEd-8dry8mMKGdg" name="out" direction="out"
+                                        type="_V4Uz3cS7Ed-Mdez391WBpQ"/>
+                                <node xmi:type="uml:ActivityParameterNode"
+                                        xmi:id="_16_9_1a900482_1296500698046_824146_1511"
+                                        visibility="public" type="_V4Uz3MS7Ed-Mdez391WBpQ"
+                                        parameter="_VZIj89qUEd-8dry8mMKGdg"/>
+                                <node xmi:type="uml:ActivityParameterNode"
+                                        xmi:id="_16_9_1a900482_1296500698046_810544_1512"
+                                        visibility="public" type="_V4Uz3cS7Ed-Mdez391WBpQ"
+                                        parameter="_VZIj9tqUEd-8dry8mMKGdg"/>
+                        </packagedElement>
+                        <packagedElement xmi:type="uml:Activity" xmi:id="_BHYe0dqQEd-8dry8mMKGdg"
+                                name="Set Alarm">
+                                <ownedParameter xmi:type="uml:Parameter"
+                                        xmi:id="_VZIj_tqUEd-8dry8mMKGdg" name="in"
+                                        type="_V4Uz3cS7Ed-Mdez391WBpQ"/>
+                                <ownedParameter xmi:type="uml:Parameter"
+                                        xmi:id="_VZIkAdqUEd-8dry8mMKGdg" isStream="true" name="out"
+                                        direction="out" type="_V4Uz3sS7Ed-Mdez391WBpQ"/>
+                                <node xmi:type="uml:ActivityParameterNode"
+                                        xmi:id="_16_9_1a900482_1296500705390_780379_1513"
+                                        visibility="public" type="_V4Uz28S7Ed-Mdez391WBpQ"
+                                        parameter="_VZIj4tqUEd-8dry8mMKGdg"/>
+                                <node xmi:type="uml:ActivityParameterNode"
+                                        xmi:id="_16_9_1a900482_1296500705390_945503_1514"
+                                        visibility="public" type="_V4Uz3MS7Ed-Mdez391WBpQ"
+                                        parameter="_VZIj5dqUEd-8dry8mMKGdg"/>
+                        </packagedElement>
+                </packagedElement>
+                <profileApplication xmi:type="uml:ProfileApplication"
+                        xmi:id="_WEZg4MS7Ed-Mdez391WBpQ">
+                        <appliedProfile xmi:type="uml:Profile"
+                                href="http://www.omg.org/spec/SysML/20100301/SysML-profile.uml#_0"/>
+                </profileApplication>
+        </uml:Model>
+        <sysml:Block xmi:id="_WEiq0cS7Ed-Mdez391WBpQ" base_Class="_V4UzwsS7Ed-Mdez391WBpQ"/>
+        <sysml:Block xmi:id="_WEiq0sS7Ed-Mdez391WBpQ" base_Class="_V4Uz2MS7Ed-Mdez391WBpQ"/>
+        <sysml:Block xmi:id="_WEsb0MS7Ed-Mdez391WBpQ" base_Class="_V4Uz2cS7Ed-Mdez391WBpQ"/>
+        <sysml:Block xmi:id="_WEsb0cS7Ed-Mdez391WBpQ" base_Class="_V4Uz2sS7Ed-Mdez391WBpQ"/>
+        <sysml:Block xmi:id="_WEsb0sS7Ed-Mdez391WBpQ" base_Class="_V4Uz28S7Ed-Mdez391WBpQ"/>
+        <sysml:Block xmi:id="_WEsb08S7Ed-Mdez391WBpQ" base_Class="_V4Uz3MS7Ed-Mdez391WBpQ"/>
+        <sysml:Block xmi:id="_WEsb1MS7Ed-Mdez391WBpQ" base_Class="_V4Uz3cS7Ed-Mdez391WBpQ"/>
+        <sysml:Block xmi:id="_WEsb1cS7Ed-Mdez391WBpQ" base_Class="_V4Uz3sS7Ed-Mdez391WBpQ"/>
+        <sysml:Continuous xmi:id="_WEsb1sS7Ed-Mdez391WBpQ"
+                base_ActivityEdge="_V4U0BMS7Ed-Mdez391WBpQ"/>
+        <sysml:Continuous xmi:id="_WEsb18S7Ed-Mdez391WBpQ"
+                base_ActivityEdge="_V4U0CMS7Ed-Mdez391WBpQ"/>
+        <sysml:Continuous xmi:id="_WEsb2MS7Ed-Mdez391WBpQ"
+                base_ActivityEdge="_V4U0CsS7Ed-Mdez391WBpQ"/>
+</xmi:XMI>

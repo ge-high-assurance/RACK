@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Main module for the Ada analysis.
@@ -11,17 +11,24 @@ __copyright__ = "Copyright (c) 2020, Galois, Inc."
 import argparse
 import logging
 import os
-from typing import Dict, List, Optional
 import sys
+from xml.sax.saxutils import escape
 
+from typing import Dict, List, Optional, Set
+from typing_extensions import TypedDict
+
+import Evidence
+import Evidence.Add
 from colorama import Fore, Style
-
 import libadalang as lal
 from rdflib import Graph, Namespace
 
 from ada_print_visitor import AdaPrintVisitor
 import ontology
 import static_call_graph as SCG
+import traceability_extraction as TE
+import package_structure as PS
+from node_naming import GraphNode, get_node_identifier, get_node_uri, get_node_file
 
 # In order to do resolution at call sites, the analysis needs to resolve
 # packages to files that contain their spec/implementation.  It can do so with a
@@ -38,7 +45,7 @@ parser.add_argument(
     type=str
 )
 
-parser.add_argument("--analyze", help="File to analyze (.ada, .adb, .ads)", type=str, required=True)
+parser.add_argument("--analyze", help="File to analyze (.ada, .adb, .ads)", type=str, action='append', required=True)
 
 parser.add_argument(
     "others",
@@ -97,49 +104,203 @@ provider = (
 
 context = lal.AnalysisContext(unit_provider=provider)
 
+# This structure captures the output of the analysis in a structured way that
+# can be passed to different backends to output in different formats.
+AnalysisOutput = TypedDict(
+    "AnalysisOutput",
+    {
+        "component_types": Set[ontology.ComponentTypeIdentifier],
+        "components": Dict[
+            ontology.SoftwareComponentIdentifier,
+            ontology.SoftwareComponent
+        ],
+        "files": Dict[ontology.FileIdentifier, ontology.File],
+        "formats": Set[ontology.Format],
+    }
+)
+
+FILE_NS = Namespace("http://data/file#")
+FORMAT_NS = Namespace("http://data/format#")
+SOFTWARE_COMPONENT_NS = Namespace("http://data/software-component#")
+
 DEBUG = False
 
-FILE = Namespace("http://data/file#")
-FORMAT = Namespace("http://data/format#")
-SOFTWARE_COMPONENT = Namespace("http://data/software-component#")
+DEBUG_TURTLE = False
 
-ada_format = ontology.FileFormat("Ada", FORMAT.ADA_FILE)
+ADA_FORMAT = ontology.Format(
+    identifier=ontology.FormatIdentifier("Ada"),
+    uri=FORMAT_NS["ADA_FILE"],
+)
 
-def register_component(components, component: SCG.GraphNode) -> None:
+def register_component(
+    analysis_output: AnalysisOutput,
+    component: GraphNode,
+    component_type: ontology.ComponentTypeIdentifier,
+) -> ontology.SoftwareComponent:
     """
     Makes sure that the component is already present in the components
     dictionary.  Adds it if necessary.
     """
-    key = SCG.node_key(component)
-    uri = SCG.get_uri(component)
-    name = SCG.get_name(component)
-    components[key] = ontology.SoftwareComponent(
-        identifier=uri,
-        uri=SOFTWARE_COMPONENT[uri],
-        title=name,
-        ty=ontology.ComponentType.SOURCE_FUNCTION
-    )
+    components = analysis_output["components"]
+    component_identifier = ontology.SoftwareComponentIdentifier(get_node_identifier(component))
+    if component_identifier not in components:
+        components[component_identifier] = ontology.SoftwareComponent(
+            identifier=component_identifier,
+            # does not work because display names may contain special characters
+            # title=SCG.get_node_display_name(component),
+            # using this instead even though less ideal:
+            title=component.doc_name,
+            component_type=ontology.SOURCE_FUNCTION,
+            uri=SOFTWARE_COMPONENT_NS[component_identifier],
+        )
+    return components[component_identifier]
 
 def register_ada_file(
-    files: Dict[str, ontology.File],
-    file_key: Optional[str]
+    analysis_output: AnalysisOutput,
+    file_identifier: Optional[ontology.FileIdentifier],
 ) -> Optional[ontology.File]:
     """
-    Creates an ontology node corresponding to 'file_key', unless it already
-    exists, and stores it in 'files'.
-
-    Returns the existing or newly-created node.
+    Creates an entry corresponding to 'file_key', unless it already exists,
+    and stores it in "files".
     """
-    if file_key is None:
+    if file_identifier is None:
         return None
-    if file_key not in files:
-        files[file_key] = ontology.File(
-            identifier=file_key,
-            uri=FILE[file_key],
-            filename=file_key,
-            file_format=ada_format
+    files = analysis_output["files"]
+    if file_identifier not in files:
+        files[file_identifier] = ontology.File(
+            format_=ADA_FORMAT,
+            identifier=file_identifier,
+            name=file_identifier,
+            uri=FILE_NS[file_identifier],
         )
-    return files[file_key]
+    return files[file_identifier]
+
+def as_optional_file_identifier(
+    filename: Optional[str]
+) -> Optional[ontology.FileIdentifier]:
+    """Applies the FileIdentifier newtype within an Optional."""
+    if filename is None:
+        return None
+    return ontology.FileIdentifier(filename)
+
+def make_empty_analysis_output() -> AnalysisOutput:
+    """Creates an empty output, to be populated by mutation."""
+    return AnalysisOutput({
+        "component_types": set(),
+        "components": dict(),
+        "files": dict(),
+        "formats": set(),
+    })
+
+def output_as_turtle(
+    analysis_output: AnalysisOutput,
+) -> None:
+    """
+    Outputs the analysis results as Turtle, currently to stdout but could be
+    made to output in a file.
+    """
+
+    graph = Graph()
+
+    graph.bind("data:file", FILE_NS)
+    graph.bind("data:format", FORMAT_NS)
+    graph.bind("data:software-component", SOFTWARE_COMPONENT_NS)
+
+    for format_ in analysis_output["formats"]:
+        format_.add_to_graph(graph)
+
+    for file_key in analysis_output["files"]:
+        file = analysis_output["files"][file_key]
+        file.add_to_graph(graph)
+
+    for component_key in analysis_output["components"]:
+        component = analysis_output["components"][component_key]
+        component.add_to_graph(graph)
+
+    sys.stdout.buffer.write(graph.serialize(format="turtle"))
+
+def output_using_scrapingtoolkit(
+    analysis_output: AnalysisOutput,
+) -> None:
+    """Outputs the analysis output using ScrapingToolKit."""
+
+    for component_type in analysis_output["component_types"]:
+        Evidence.Add.COMPONENT_TYPE(
+            identifier=component_type,
+        )
+
+    for format_ in analysis_output["formats"]:
+        Evidence.Add.FORMAT(
+            identifier=format_.identifier,
+        )
+
+    files = analysis_output["files"]
+    for file_identifier in files:
+        file: ontology.File = files[file_identifier]
+        Evidence.Add.FILE(
+            fileFormat_identifier=format_.identifier,
+            filename=file.name,
+            identifier=file_identifier,
+        )
+
+    components = analysis_output["components"]
+    for component_identifier in components:
+        component: ontology.SoftwareComponent = components[component_identifier]
+        Evidence.Add.SWCOMPONENT(
+            identifier=component_identifier,
+            componentType_identifier=component.component_type,
+            title=escape(component.title),
+        )
+        for callee in component.mentions:
+            Evidence.Add.SWCOMPONENT(
+                identifier=component_identifier,
+                mentions_identifier=callee.identifier,
+            )
+
+def analyze_traceability(unit: lal.AnalysisUnit) -> None:
+    """Extracts traceability identifiers from subprograms."""
+
+    if not unit.root:
+        return
+
+    visitor = TE.TraceabilityExtraction(
+        context=context,
+    )
+
+    visitor.visit(unit.root)
+    analysis_output = visitor.traceability
+
+    for component_id, requirement_ids in analysis_output.items():
+        for requirement_id in requirement_ids:
+            Evidence.Add.REQUIREMENT(
+                identifier=requirement_id,
+                governs_identifier=component_id,
+            )
+
+def analyze_structure(unit: lal.AnalysisUnit) -> None:
+    """Extracts traceability identifiers from subprograms."""
+
+    if not unit.root:
+        return
+        
+    visitor = PS.StructureExtractor(
+    )
+
+    visitor.visit(unit.root)
+    analysis_output = visitor.packages
+
+    for package, components in analysis_output.items():
+        Evidence.Add.SWCOMPONENT(
+            identifier=get_node_identifier(package),
+            title=escape(package.doc_name),
+            componentType_identifier=ontology.MODULE,
+                
+        )
+        for component in components:
+            Evidence.Add.SWCOMPONENT(
+                identifier=get_node_identifier(component),
+                subcomponentOf_identifier=get_node_identifier(package),
+            )
 
 def analyze_unit(unit: lal.AnalysisUnit) -> None:
     """Computes and displays the static call graph of some unit."""
@@ -147,6 +308,7 @@ def analyze_unit(unit: lal.AnalysisUnit) -> None:
         if DEBUG:
             ada_visitor = AdaPrintVisitor(max_depth=20)
             ada_visitor.visit(unit.root)
+
         static_call_graph_visitor = SCG.StaticCallGraphVisitor(
             context=context,
             caller_being_defined=None,
@@ -156,35 +318,42 @@ def analyze_unit(unit: lal.AnalysisUnit) -> None:
 
         static_call_graph_visitor.visit(unit.root)
 
-        components: Dict[str, ontology.SoftwareComponent] = dict()
-        files: Dict[str, ontology.File] = dict()
+        analysis_output = make_empty_analysis_output()
 
-        # register all files and components (so as to have one unique instance
-        # for each)
+        component_types = analysis_output["component_types"]
+        component_types.add(ontology.SOURCE_FUNCTION)
+        component_types.add(ontology.MODULE)
+
+        formats = analysis_output["formats"]
+        formats.add(ADA_FORMAT)
+
+        components = analysis_output["components"]
+
+        # register all components and the files they live in
         for component_key in static_call_graph_visitor.nodes:
-            component = static_call_graph_visitor.nodes[component_key]
-            register_component(components, component)
-            file = register_ada_file(files, SCG.get_definition_file(component))
-            components[component_key].defined_in = file
+            component_node = static_call_graph_visitor.nodes[component_key]
+            component = register_component(analysis_output, component_node, ontology.SOURCE_FUNCTION)
+            file_ = register_ada_file(
+                analysis_output,
+                as_optional_file_identifier(get_node_file(component_node))
+            )
+            component.defined_in = file_
 
-        # add "mentions" to all components that mention other components
-        for caller in static_call_graph_visitor.edges:
-            for callee_key in static_call_graph_visitor.edges[caller]:
-                components[caller].add_mention(components[callee_key])
+        # add "mentions"
+        for caller_key in static_call_graph_visitor.edges:
+            caller_node = static_call_graph_visitor.nodes[caller_key]
+            caller_identifier = ontology.SoftwareComponentIdentifier(get_node_identifier(caller_node))
+            for callee_key in static_call_graph_visitor.edges[caller_key]:
+                callee_node = static_call_graph_visitor.nodes[callee_key]
+                callee_identifier = ontology.SoftwareComponentIdentifier(get_node_identifier(callee_node))
+                callee = components[callee_identifier]
+                caller = components[caller_identifier]
+                caller.add_mention(callee)
 
-        graph = Graph()
-        graph.bind("data:file", FILE)
-        graph.bind("data:format", FORMAT)
-        graph.bind("data:software-component", SOFTWARE_COMPONENT)
-        ada_format.add_to_graph(graph)
-
-        for component_key in components:
-            components[component_key].add_to_graph(graph)
-
-        for file_key in files:
-            files[file_key].add_to_graph(graph)
-
-        sys.stdout.buffer.write(graph.serialize(format="turtle"))
+        if DEBUG_TURTLE:
+            output_as_turtle(analysis_output)
+        else:
+            output_using_scrapingtoolkit(analysis_output)
 
     else:
         print("No root found, diagnostics:")
@@ -197,6 +366,10 @@ stream_handler.setFormatter(CustomFormatter())
 logger.propagate = False
 logger.addHandler(stream_handler)
 
-file_to_analyze = args.analyze
-
-analyze_unit(context.get_from_file(file_to_analyze))
+Evidence.createEvidenceFile()
+for file_to_analyze in args.analyze:
+    unit = context.get_from_file(file_to_analyze)
+    analyze_unit(unit)
+    analyze_traceability(unit)
+    analyze_structure(unit)
+Evidence.createCDR()

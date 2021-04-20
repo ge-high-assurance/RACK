@@ -131,11 +131,11 @@ where {
     ?SystemComponent &lt;http://arcos.rack/SYSTEM#producedBy&gt; ?SoftwareDesign .
         ?SoftwareDesign a &lt;http://Turnstile/DevelopmentPlan#SoftwareDesign&gt; . 
         ?SoftwareDesign &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareDesign . 
-    }
-    ?SoftwareThread a &lt;http://Turnstile/DevelopmentPlan#SoftwareThread&gt; . 
-    ?SoftwareThread &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareThread . 
+    } 
     optional{
 
+    ?SoftwareThread a &lt;http://Turnstile/DevelopmentPlan#SoftwareThread&gt; . 
+    ?SoftwareThread &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareThread .
     ?SoftwareThread &lt;http://arcos.rack/SYSTEM#partOf&gt; ?SystemComponent .
         ?SystemComponent a &lt;http://Turnstile/DevelopmentPlan#SystemComponent&gt; . 
         ?SystemComponent &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SystemComponent . 
@@ -252,16 +252,22 @@ where {
   <sadlimplicitmodel:NamedQuery rdf:ID="SystemRequirementCsv">
     <rdfs:isDefinedBy>
 
-select distinct ?identifier_SystemComponent ?identifier_SystemRequirement ?text_SystemRequirement
+select distinct ?identifier_SystemRequirement ?identifier_SYSTEM ?text_SystemRequirement
 where {
     ?SystemRequirement a &lt;http://Turnstile/DevelopmentPlan#SystemRequirement&gt; . 
     ?SystemRequirement &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SystemRequirement . 
     optional{ ?SystemRequirement &lt;http://arcos.rack/PROV-S#description&gt; ?text_SystemRequirement} . 
     optional{
 
-    ?SystemRequirement &lt;http://arcos.rack/REQUIREMENTS#governs&gt; ?SystemComponent .
-        ?SystemComponent a &lt;http://Turnstile/DevelopmentPlan#SystemComponent&gt; . 
-        ?SystemComponent &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SystemComponent . 
+    ?SystemRequirement &lt;http://arcos.rack/REQUIREMENTS#createdBy&gt; ?SoftwareRequirementsDefinition .
+        ?SoftwareRequirementsDefinition a &lt;http://Turnstile/DevelopmentPlan#SoftwareRequirementsDefinition&gt; . 
+        ?SoftwareRequirementsDefinition &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareRequirementsDefinition . 
+    }
+    optional{
+
+    ?SystemRequirement &lt;http://arcos.rack/REQUIREMENTS#governs&gt; ?SYSTEM .
+#        ?SYSTEM a &lt;http://Turnstile/DevelopmentPlanData#SYSTEM&gt; . 
+        ?SYSTEM &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SYSTEM . 
     }
 
 }</rdfs:isDefinedBy>
@@ -440,12 +446,12 @@ where {
   <sadlimplicitmodel:NamedQuery rdf:ID="EngineerCsv">
     <rdfs:isDefinedBy>
 
-select distinct ?identifier_ORGANIZATION ?emailAddress_Engineer ?identifier_Engineer ?name_Engineer
+select distinct ?identifier_ORGANIZATION ?emailAddress_Engineer ?identifier_Engineer ?title_Engineer
 where {
     ?Engineer a &lt;http://Turnstile/DevelopmentPlan#Engineer&gt; . 
     optional{ ?Engineer &lt;http://arcos.rack/AGENTS#emailAddress&gt; ?emailAddress_Engineer} . 
     ?Engineer &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_Engineer . 
-    optional{ ?Engineer &lt;http://arcos.rack/PROV-S#title&gt; ?name_Engineer} . 
+    optional{ ?Engineer &lt;http://arcos.rack/PROV-S#title&gt; ?title_Engineer} . 
     optional{
 
     ?Engineer &lt;http://arcos.rack/AGENTS#employedBy&gt; ?ORGANIZATION .

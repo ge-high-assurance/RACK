@@ -9,6 +9,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.arbiter/STR">
   <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://arcos.rack/MODEL"/>
     <owl:imports rdf:resource="http://arcos.rack/SOFTWARE"/>
     <owl:imports rdf:resource="http://arcos.rack/SYSTEM"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
@@ -22,13 +23,17 @@
   </owl:Class>
   <owl:Class rdf:ID="StrOutPort">
     <rdfs:comment xml:lang="en">Output interface</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="StrPort"/>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="StrInPort">
     <rdfs:comment xml:lang="en">Input interface</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#StrPort"/>
+    </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="StrPort">
+  <owl:Class rdf:about="#StrPort">
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
@@ -40,6 +45,10 @@
     </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">The communication interface of a concrete software component.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="StrEarsModel">
+    <rdfs:comment xml:lang="en">A requirement statement written in the Easy Approach to Requirements Syntax language.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/MODEL#MODEL"/>
   </owl:Class>
   <owl:Class rdf:ID="StrComponent">
     <rdfs:comment xml:lang="en">A concrete software component with an explicitly identified input/output interface</rdfs:comment>
@@ -69,6 +78,11 @@
     <rdfs:comment xml:lang="en">Concrete variable name</rdfs:comment>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#StrPort"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="earsStatement">
+    <rdfs:comment xml:lang="en">Text of statement written in the EARS requirements language.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#StrEarsModel"/>
   </owl:DatatypeProperty>
   <owl:FunctionalProperty rdf:ID="portType">
     <rdfs:comment xml:lang="en">The type of information communicated over this port</rdfs:comment>

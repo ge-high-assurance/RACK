@@ -15,8 +15,7 @@
       "pull": false,
       "commit": true,
       "changes": [
-        "ENTRYPOINT [ \"/usr/bin/python3\", \"/usr/bin/systemctl\" ]",
-        "EXPOSE 80 3030 12050 12051 12052 12053 12054 12055 12056 12057 12058 12059 12060 12062 12064 12065 12066 12068 12091 12092"
+        "ENTRYPOINT [ \"/usr/bin/python3\", \"/usr/bin/systemctl\" ]"
       ]
     }
   ],

@@ -102,17 +102,17 @@ _DevelopmentPlan is a PLAN,
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.ExecutiveThread
-      ExecutiveThread is a SWCOMPONENT
+      ExecutiveThread is a SYSTEM
         has partOf CounterApplication.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.InputThread
-      InputThread is a SWCOMPONENT
+      InputThread is a SYSTEM
         has partOf CounterApplication.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.OutputThread
-      OutputThread is a SWCOMPONENT
+      OutputThread is a SYSTEM
         has partOf CounterApplication.
 
 
@@ -418,18 +418,7 @@ _DevelopmentPlan is a PLAN,
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment
-    _03-SoftwareDevelopmentEnvironment is a SECTION,
-        has content CSourceFile,
-        has content ElfFile,
-        has content GCC,
-        has content General_Electric,
-        has content JsonFile,
-        has content TAR,
-        has content TarFile,
-        has content ZipFile.
-
-
-
+    _03-SoftwareDevelopmentEnvironment is a SECTION.
 
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.03-SoftwareDevelopmentEnvironment.General Electric

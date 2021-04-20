@@ -1,14 +1,8 @@
 "identifier_SoftwareDesign","identifier_SystemComponent","identifier_SoftwareThread"
-null,"Display","ExecutiveThread"
-null,"Display","OutputThread"
-null,"Display","InputThread"
-null,"Counter Application","ExecutiveThread"
+null,"Display",null
 null,"Counter Application","OutputThread"
 null,"Counter Application","InputThread"
-null,"Out Gate","ExecutiveThread"
-null,"Out Gate","OutputThread"
-null,"Out Gate","InputThread"
-null,"In Gate","ExecutiveThread"
-null,"In Gate","OutputThread"
-null,"In Gate","InputThread"
+null,"Counter Application","ExecutiveThread"
+null,"Out Gate",null
+null,"In Gate",null
 

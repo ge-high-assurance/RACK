@@ -64,7 +64,7 @@ source .env
 
 # Set up each SemTK system service
 
-for service in *Service; do
+for service in ${ENABLED_SERVICES}; do
   (
     cd "${service}"
     unzip -q target/*.jar
@@ -114,7 +114,7 @@ systemctl start ontologyInfoService
 
 # For the rest of the services, no start order dependencies are known
 
-for service in *Service; do
+for service in ${ENABLED_SERVICES}; do
   [ "${service}" != ontologyInfoService ] && systemctl start "${service}"
 done
 

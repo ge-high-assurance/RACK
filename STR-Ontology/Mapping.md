@@ -9,7 +9,7 @@ These subsections describe the mapping of the diagram boxes into the RACK ontolo
 ### Function
 
 - Software syntactic elements map onto the `COMPONENT` class.
-- Functions in particular will have `componentType` `SOURCE_FUNCTION`; other levels of software abstraction are also supported using different component types.
+- Functions in particular will have `componentType` `SourceFunction`; other levels of software abstraction are also supported using different component types.
 - The function name maps to our `title` property.
 - The component type can describe many levels of software structure beyond function including classes, modules, variables, etc.
 

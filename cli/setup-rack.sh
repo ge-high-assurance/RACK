@@ -25,8 +25,9 @@ rack model import ../Turnstile-Ontology/99-Utils/import.yaml
 rack model import ../GrammaTech-Ontology/import.yaml
 rack model import ../STR-Ontology/import.yaml
 
-rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest[0-9]+" "^query " "^Ingest-"
+rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest" "^query " "^Ingest-"
 rack nodegroups import ../Turnstile-Ontology/99-Utils/NodeGroups
+rack nodegroups import ../nodegroups/ingestion
 rack nodegroups import ../nodegroups/queries
 
 rack data import --clear ../RACK-Ontology/OwlModels/ARP-4754A.yaml

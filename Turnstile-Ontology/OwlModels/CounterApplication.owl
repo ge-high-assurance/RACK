@@ -20,22 +20,29 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplication.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <j.0:SWCOMPONENT rdf:ID="output_function">
-    <j.0:valueType>void()</j.0:valueType>
-    <j.1:title>output</j.1:title>
-    <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-    <j.1:identifier>output_function</j.1:identifier>
-  </j.0:SWCOMPONENT>
-  <j.0:SWCOMPONENT rdf:ID="input_function">
-    <j.0:valueType>void()</j.0:valueType>
-    <j.1:title>input</j.1:title>
-    <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
-    <j.1:identifier>input_function</j.1:identifier>
-  </j.0:SWCOMPONENT>
   <j.0:SWCOMPONENT rdf:ID="main_function">
+    <j.0:instantiates rdf:resource="DevelopmentPlanData#ExecutiveThread"/>
+    <j.0:mentions>
+      <j.0:SWCOMPONENT rdf:ID="input_function">
+        <j.0:instantiates rdf:resource="DevelopmentPlanData#InputThread"/>
+        <j.0:valueType>void()</j.0:valueType>
+        <j.1:title>input</j.1:title>
+        <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SourceFunction"/>
+        <j.1:identifier>input_function</j.1:identifier>
+      </j.0:SWCOMPONENT>
+    </j.0:mentions>
+    <j.0:mentions>
+      <j.0:SWCOMPONENT rdf:ID="output_function">
+        <j.0:instantiates rdf:resource="DevelopmentPlanData#OutputThread"/>
+        <j.0:valueType>void()</j.0:valueType>
+        <j.1:title>output</j.1:title>
+        <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SourceFunction"/>
+        <j.1:identifier>output_function</j.1:identifier>
+      </j.0:SWCOMPONENT>
+    </j.0:mentions>
     <j.0:valueType>int(int argc, char* argv[])</j.0:valueType>
     <j.1:title>main</j.1:title>
-    <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SOURCE_FUNCTION"/>
+    <j.0:componentType rdf:resource="http://arcos.rack/SOFTWARE#SourceFunction"/>
     <j.1:identifier>main_function</j.1:identifier>
   </j.0:SWCOMPONENT>
 </rdf:RDF>

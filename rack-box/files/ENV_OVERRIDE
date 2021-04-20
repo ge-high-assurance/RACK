@@ -5,3 +5,6 @@ export SERVICES_DATASET_ENDPOINT_TYPE=fuseki
 
 ## Don't load demo ontology
 export WEB_CUSTOM_AUTO_RUN_DEMO_FLAG=false
+
+## Start only a subset of SemTK services
+export ENABLED_SERVICES="nodeGroupExecutionService nodeGroupService nodeGroupStoreService ontologyInfoService sparqlExtDispatchService sparqlGraphIngestionService sparqlGraphResultsService sparqlGraphStatusService sparqlQueryService utilityService"

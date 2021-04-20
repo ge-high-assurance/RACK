@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xmi:XMI xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.omg.org/spec/UML/20090901" xmlns:sysml="http://www.omg.org/spec/SysML/20100301/SysML-profile">
+  <uml:Model xmi:id="A_TestCase16">
+    <name>TestCase16</name>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="B_ProfileApplication_TestCase16_-1">
+      <appliedProfile href="http://www.omg.org/spec/SysML/20100301/SysML-profile.uml#_0"/>
+    </profileApplication>
+    <packagedElement xmi:type="uml:Package" xmi:id="A_TestCase16-Test-Case-16">
+      <name>Test Case 16</name>
+      <packagedElement xmi:type="uml:Activity" xmi:id="A_TestCase16-Test-Case-16-Activity-1">
+        <name>Activity 1</name>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="A_TestCase16-Test-Case-16-Block-0">
+        <name>Block 0</name>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="A_TestCase16-Test-Case-16-Block-0-part-3">
+          <name>part 3</name>
+          <type xmi:idref="A_TestCase16-Test-Case-16-Block-3"/>
+          <association xmi:idref="B_Association_TestCase16.Test-Case-16_-2"/>
+          <aggregation>composite</aggregation>
+        </ownedAttribute>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="A_TestCase16-Test-Case-16-Block-0-part-2">
+          <name>part 2</name>
+          <type xmi:idref="A_TestCase16-Test-Case-16-Block-2"/>
+          <association xmi:idref="B_Association_TestCase16.Test-Case-16_-1"/>
+          <aggregation>composite</aggregation>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="A_TestCase16-Test-Case-16-Block-1">
+        <name>Block 1</name>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="A_TestCase16-Test-Case-16-Block-2">
+        <name>Block 2</name>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="A_TestCase16-Test-Case-16-Block-2-part-2-1">
+          <name>part 2-1</name>
+          <type xmi:idref="A_TestCase16-Test-Case-16-Block-2-1"/>
+          <association xmi:idref="B_Association_TestCase16.Test-Case-16_-3"/>
+          <aggregation>composite</aggregation>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="A_TestCase16-Test-Case-16-Block-2-1">
+        <name>Block 2-1</name>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="A_TestCase16-Test-Case-16-Block-3">
+        <name>Block 3</name>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="A_TestCase16-Test-Case-16-Block-3-part-3-1">
+          <name>part 3-1</name>
+          <type xmi:idref="A_TestCase16-Test-Case-16-Block-3-1"/>
+          <association xmi:idref="B_Association_TestCase16.Test-Case-16_-4"/>
+          <aggregation>composite</aggregation>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="A_TestCase16-Test-Case-16-Block-3-1">
+        <name>Block 3-1</name>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="B_Abstraction---Allocate--_TestCase16.Test-Case-16_-1">
+        <supplier xmi:idref="A_TestCase16-Test-Case-16-Block-1"/>
+        <client xmi:idref="A_TestCase16-Test-Case-16-Activity-1"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="B_Abstraction---Allocate--_TestCase16.Test-Case-16_-2">
+        <supplier xmi:idref="A_TestCase16-Test-Case-16-Block-3-part-3-1"/>
+        <client xmi:idref="A_TestCase16-Test-Case-16-Block-2-part-2-1"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="B_Association_TestCase16.Test-Case-16_-1">
+        <ownedEnd xmi:type="uml:Property" xmi:id="B_Property_TestCase16.Test-Case-16.._-1">
+          <type xmi:idref="A_TestCase16-Test-Case-16-Block-0"/>
+          <association xmi:idref="B_Association_TestCase16.Test-Case-16_-1"/>
+        </ownedEnd>
+        <memberEnd xmi:idref="B_Property_TestCase16.Test-Case-16.._-1"/>
+        <memberEnd xmi:idref="A_TestCase16-Test-Case-16-Block-0-part-2"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="B_Association_TestCase16.Test-Case-16_-2">
+        <ownedEnd xmi:type="uml:Property" xmi:id="B_Property_TestCase16.Test-Case-16.._-2">
+          <type xmi:idref="A_TestCase16-Test-Case-16-Block-0"/>
+          <association xmi:idref="B_Association_TestCase16.Test-Case-16_-2"/>
+        </ownedEnd>
+        <memberEnd xmi:idref="B_Property_TestCase16.Test-Case-16.._-2"/>
+        <memberEnd xmi:idref="A_TestCase16-Test-Case-16-Block-0-part-3"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="B_Association_TestCase16.Test-Case-16_-3">
+        <ownedEnd xmi:type="uml:Property" xmi:id="B_Property_TestCase16.Test-Case-16.._-3">
+          <type xmi:idref="A_TestCase16-Test-Case-16-Block-2"/>
+          <association xmi:idref="B_Association_TestCase16.Test-Case-16_-3"/>
+        </ownedEnd>
+        <memberEnd xmi:idref="B_Property_TestCase16.Test-Case-16.._-3"/>
+        <memberEnd xmi:idref="A_TestCase16-Test-Case-16-Block-2-part-2-1"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="B_Association_TestCase16.Test-Case-16_-4">
+        <ownedEnd xmi:type="uml:Property" xmi:id="B_Property_TestCase16.Test-Case-16.._-4">
+          <type xmi:idref="A_TestCase16-Test-Case-16-Block-3"/>
+          <association xmi:idref="B_Association_TestCase16.Test-Case-16_-4"/>
+        </ownedEnd>
+        <memberEnd xmi:idref="B_Property_TestCase16.Test-Case-16.._-4"/>
+        <memberEnd xmi:idref="A_TestCase16-Test-Case-16-Block-3-part-3-1"/>
+      </packagedElement>
+    </packagedElement>
+  </uml:Model>
+  <sysml:Allocate xmi:id="B_Allocate_B_Abstraction---Allocate--_TestCase16.Test-Case-16_-1">
+    <base_Abstraction xmi:idref="B_Abstraction---Allocate--_TestCase16.Test-Case-16_-1"/>
+  </sysml:Allocate>
+  <sysml:Allocate xmi:id="B_Allocate_B_Abstraction---Allocate--_TestCase16.Test-Case-16_-2">
+    <base_Abstraction xmi:idref="B_Abstraction---Allocate--_TestCase16.Test-Case-16_-2"/>
+  </sysml:Allocate>
+  <sysml:Allocated xmi:id="B_Allocated_A_TestCase16-Test-Case-16-Activity-1_-1">
+    <base_NamedElement xmi:idref="A_TestCase16-Test-Case-16-Activity-1"/>
+  </sysml:Allocated>
+  <sysml:Allocated xmi:id="B_Allocated_A_TestCase16-Test-Case-16-Block-1_-1">
+    <base_NamedElement xmi:idref="A_TestCase16-Test-Case-16-Block-1"/>
+  </sysml:Allocated>
+  <sysml:Allocated xmi:id="B_Allocated_A_TestCase16-Test-Case-16-Block-2-part-2-1_-1">
+    <base_NamedElement xmi:idref="A_TestCase16-Test-Case-16-Block-2-part-2-1"/>
+  </sysml:Allocated>
+  <sysml:Allocated xmi:id="B_Allocated_A_TestCase16-Test-Case-16-Block-3-part-3-1_-1">
+    <base_NamedElement xmi:idref="A_TestCase16-Test-Case-16-Block-3-part-3-1"/>
+  </sysml:Allocated>
+  <sysml:Block xmi:id="B_Block_A_TestCase16-Test-Case-16-Block-0_-1">
+    <base_Class xmi:idref="A_TestCase16-Test-Case-16-Block-0"/>
+  </sysml:Block>
+  <sysml:Block xmi:id="B_Block_A_TestCase16-Test-Case-16-Block-1_-1">
+    <base_Class xmi:idref="A_TestCase16-Test-Case-16-Block-1"/>
+  </sysml:Block>
+  <sysml:Block xmi:id="B_Block_A_TestCase16-Test-Case-16-Block-2-1_-1">
+    <base_Class xmi:idref="A_TestCase16-Test-Case-16-Block-2-1"/>
+  </sysml:Block>
+  <sysml:Block xmi:id="B_Block_A_TestCase16-Test-Case-16-Block-2_-1">
+    <base_Class xmi:idref="A_TestCase16-Test-Case-16-Block-2"/>
+  </sysml:Block>
+  <sysml:Block xmi:id="B_Block_A_TestCase16-Test-Case-16-Block-3-1_-1">
+    <base_Class xmi:idref="A_TestCase16-Test-Case-16-Block-3-1"/>
+  </sysml:Block>
+  <sysml:Block xmi:id="B_Block_A_TestCase16-Test-Case-16-Block-3_-1">
+    <base_Class xmi:idref="A_TestCase16-Test-Case-16-Block-3"/>
+  </sysml:Block>
+</xmi:XMI>

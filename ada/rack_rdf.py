@@ -14,23 +14,28 @@ DATA = Namespace("http://data/")
 g.bind("dat", DATA)
 g.bind("format", FORMAT)
 
-txt_format = ontology.FileFormat("txt", FORMAT.TEXT_FILE)
+txt_format = ontology.Format(ontology.FormatIdentifier("txt"), FORMAT.TEXT_FILE)
 
-my_file = ontology.File("src.txt", DATA["src.txt"], "src.txt", txt_format)
+my_file = ontology.File(
+    identifier="src.txt",
+    uri=DATA["src.txt"],
+    name="src.txt",
+    format_=txt_format,
+)
 
 c1 = ontology.SoftwareComponent(
-    "fun1",
-    DATA["fun1"],
-    "fun1",
-    ontology.ComponentType.SOURCE_FUNCTION
+    component_type=ontology.SOURCE_FUNCTION,
+    identifier=ontology.SoftwareComponentIdentifier("fun1"),
+    title="fun1",
+    uri=DATA["fun1"],
 )
 c1.defined_in = my_file
 
 c2 = ontology.SoftwareComponent(
-    "fun2",
-    DATA["fun2"],
-    "fun2",
-    ontology.ComponentType.SOURCE_FUNCTION
+    component_type=ontology.SOURCE_FUNCTION,
+    identifier=ontology.SoftwareComponentIdentifier("fun2"),
+    title="fun2",
+    uri=DATA["fun2"],
 )
 c2.defined_in = my_file
 c2.add_mention(c1)

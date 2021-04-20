@@ -1,0 +1,782 @@
+CLASS,PROPERTY,DATA TYPE,LABEL(S),COMMENT(S)
+ORGANIZATION,,,,"An organization is a social or legal institution such as a company, society, etc."
+ORGANIZATION,name (SHARED PROPERTY),string,,Full name of a person ; Full name of an organization (SHARED PROPERTY)
+ORGANIZATION,actedOnBehalfOf,AGENT,,"Delegation is the assignment of authority and responsibility to an agent (by itself or by another agent) to carry out a specific activity as a delegate or representative, while the agent it acts on behalf of retains some responsibility for the outcome of the delegated work."
+ORGANIZATION,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ORGANIZATION,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ORGANIZATION,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ORGANIZATION,title,string,,"A short, human-readable identifying label."
+PERSON,,,,Person agents are people
+PERSON,emailAddress,string,,Email address of person
+PERSON,employedBy,AGENT,,Relates people to the company they were acting on behalf of.
+PERSON,name (SHARED PROPERTY),string,,Full name of a person ; Full name of an organization (SHARED PROPERTY)
+PERSON,actedOnBehalfOf,AGENT,,"Delegation is the assignment of authority and responsibility to an agent (by itself or by another agent) to carry out a specific activity as a delegate or representative, while the agent it acts on behalf of retains some responsibility for the outcome of the delegated work."
+PERSON,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+PERSON,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+PERSON,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+PERSON,title,string,,"A short, human-readable identifying label."
+SOFTWAREAGENT,,,,A software agent is running software.
+SOFTWAREAGENT,actedOnBehalfOf,AGENT,,"Delegation is the assignment of authority and responsibility to an agent (by itself or by another agent) to carry out a specific activity as a delegate or representative, while the agent it acts on behalf of retains some responsibility for the outcome of the delegated work."
+SOFTWAREAGENT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+SOFTWAREAGENT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+SOFTWAREAGENT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+SOFTWAREAGENT,title,string,,"A short, human-readable identifying label."
+TOOL,,,,"An aid (software, hardware, etc) that automates the performance of a specific activity."
+TOOL,actedOnBehalfOf,AGENT,,"Delegation is the assignment of authority and responsibility to an agent (by itself or by another agent) to carry out a specific activity as a delegate or representative, while the agent it acts on behalf of retains some responsibility for the outcome of the delegated work."
+TOOL,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+TOOL,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+TOOL,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+TOOL,title,string,,"A short, human-readable identifying label."
+ANALYSIS,,,,"ACTIVITY of running some analysis, supposedly creating some ANALYSIS_REPORT"
+ANALYSIS,performedBy,AGENT,,"Entity that is responsible for producing an analysis, could be a person or a tool. "
+ANALYSIS,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ANALYSIS,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ANALYSIS,endedAtTime,dateTime,,The time an activity was ended
+ANALYSIS,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ANALYSIS,startedAtTime,dateTime,,The time an activity was started
+ANALYSIS,title,string,,"A short, human-readable identifying label."
+ANALYSIS,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+ANALYSIS,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+ANALYSIS,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+ANALYSIS_ANNOTATION,,,,A result of the analysis that is linked to some specific part of the system.
+ANALYSIS_ANNOTATION,annotationType,ANALYSIS_ANNOTATION_TYPE,,The type of the annotation.
+ANALYSIS_ANNOTATION,fromReport,ENTITY,,Which analysis report this annotation comes from.
+ANALYSIS_ANNOTATION,fileParent,FILE,,The file an ENTITY is defined in
+ANALYSIS_ANNOTATION,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ANALYSIS_ANNOTATION,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ANALYSIS_ANNOTATION,generatedAtTime,dateTime,,The time this entity was created and available for use
+ANALYSIS_ANNOTATION,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ANALYSIS_ANNOTATION,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+ANALYSIS_ANNOTATION,title,string,,"A short, human-readable identifying label."
+ANALYSIS_ANNOTATION,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+ANALYSIS_ANNOTATION,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+ANALYSIS_ANNOTATION,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+ANALYSIS_ANNOTATION,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+ANALYSIS_ANNOTATION,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+ANALYSIS_ANNOTATION_TYPE,,,,An open/extensible set of types of analysis annotations
+ANALYSIS_ANNOTATION_TYPE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ANALYSIS_ANNOTATION_TYPE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ANALYSIS_ANNOTATION_TYPE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ANALYSIS_ANNOTATION_TYPE,title,string,,"A short, human-readable identifying label."
+ANALYSIS_REPORT,,,,Output of an ANALYSIS
+ANALYSIS_REPORT,analyzes,ENTITY,,ENTITY(s) under analysis
+ANALYSIS_REPORT,metric,float,,provides a numerical result value from the analysis that was performed
+ANALYSIS_REPORT,producedBy,ACTIVITY,,ACTIVITY(s) (e.g. ANALYSIS) producing this report
+ANALYSIS_REPORT,result,ANALYSIS_RESULT,,Passed/Failed/Indeterminate status of this report
+ANALYSIS_REPORT,fileParent,FILE,,The file an ENTITY is defined in
+ANALYSIS_REPORT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ANALYSIS_REPORT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ANALYSIS_REPORT,generatedAtTime,dateTime,,The time this entity was created and available for use
+ANALYSIS_REPORT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ANALYSIS_REPORT,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+ANALYSIS_REPORT,title,string,,"A short, human-readable identifying label."
+ANALYSIS_REPORT,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+ANALYSIS_REPORT,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+ANALYSIS_REPORT,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+ANALYSIS_REPORT,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+ANALYSIS_REPORT,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+ANALYSIS_RESULT,,"enumeration: [http://arcos.rack/ANALYSIS#Passed, http://arcos.rack/ANALYSIS#Failed, http://arcos.rack/ANALYSIS#Indeterminate]",,Outcome of an analysis report
+ANALYSIS_RESULT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ANALYSIS_RESULT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ANALYSIS_RESULT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ANALYSIS_RESULT,title,string,,"A short, human-readable identifying label."
+ASSESSING_CONFIDENCE,,,,ACTIVITY that establishes a CONFIDENCE_ASSESSMENT
+ASSESSING_CONFIDENCE,performedBy,AGENT,,"ENTITY responsible for producing the assessment, could be a person or a tool"
+ASSESSING_CONFIDENCE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ASSESSING_CONFIDENCE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ASSESSING_CONFIDENCE,endedAtTime,dateTime,,The time an activity was ended
+ASSESSING_CONFIDENCE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ASSESSING_CONFIDENCE,startedAtTime,dateTime,,The time an activity was started
+ASSESSING_CONFIDENCE,title,string,,"A short, human-readable identifying label."
+ASSESSING_CONFIDENCE,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+ASSESSING_CONFIDENCE,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+ASSESSING_CONFIDENCE,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+BDU_CONFIDENCE_ASSESSMENT,,,,"A belief-disbelief-uncertainty confidence assessment, c.f. Subjective Logic. belief, disbelief, and uncertainty should sum to 1"
+BDU_CONFIDENCE_ASSESSMENT,assesses,ENTITY,,ENTITY(s) whose confidence is assessed
+BDU_CONFIDENCE_ASSESSMENT,belief,float,,belief that an assessment is true
+BDU_CONFIDENCE_ASSESSMENT,createBy,ACTIVITY,,ACTIVITY(s) (e.g. ASSESSING_CONFIDENCE) that created this assessment.
+BDU_CONFIDENCE_ASSESSMENT,disbelief,float,,belief that an assessment is false
+BDU_CONFIDENCE_ASSESSMENT,uncertainty,float,,uncommitted belief
+BDU_CONFIDENCE_ASSESSMENT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+BDU_CONFIDENCE_ASSESSMENT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+BDU_CONFIDENCE_ASSESSMENT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+BDU_CONFIDENCE_ASSESSMENT,title,string,,"A short, human-readable identifying label."
+CONFIDENCE_ASSESSMENT,,,,Superclass for confidence assessments over some other data in the ontology.
+CONFIDENCE_ASSESSMENT,assesses,ENTITY,,ENTITY(s) whose confidence is assessed
+CONFIDENCE_ASSESSMENT,belief,float,,belief that an assessment is true
+CONFIDENCE_ASSESSMENT,createBy,ACTIVITY,,ACTIVITY(s) (e.g. ASSESSING_CONFIDENCE) that created this assessment.
+CONFIDENCE_ASSESSMENT,disbelief,float,,belief that an assessment is false
+CONFIDENCE_ASSESSMENT,uncertainty,float,,uncommitted belief
+CONFIDENCE_ASSESSMENT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+CONFIDENCE_ASSESSMENT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+CONFIDENCE_ASSESSMENT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+CONFIDENCE_ASSESSMENT,title,string,,"A short, human-readable identifying label."
+DESCRIPTION,,,,"A DESCRIPTION represents a planned or actual concept, function, design or object."
+DESCRIPTION,dateOfIssue (SHARED PROPERTY),date,,Release date for the document. (SHARED PROPERTY)
+DESCRIPTION,issuingOrganization (SHARED PROPERTY),AGENT,,AGENT responsible for producing a document. (SHARED PROPERTY)
+DESCRIPTION,references (SHARED PROPERTY),ENTITY,,Source Materials used in the development of a document. (SHARED PROPERTY)
+DESCRIPTION,status (SHARED PROPERTY),DOC_STATUS,,"Identifies the maturity of the document, In_Development, Released, Withdrawn. (SHARED PROPERTY)"
+DESCRIPTION,fileParent,FILE,,The file an ENTITY is defined in
+DESCRIPTION,content,ENTITY,,"A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections."
+DESCRIPTION,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+DESCRIPTION,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+DESCRIPTION,generatedAtTime,dateTime,,The time this entity was created and available for use
+DESCRIPTION,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+DESCRIPTION,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+DESCRIPTION,title,string,,"A short, human-readable identifying label."
+DESCRIPTION,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+DESCRIPTION,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+DESCRIPTION,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+DESCRIPTION,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+DESCRIPTION,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+DOC_STATUS,,"enumeration: [http://arcos.rack/DOCUMENT#In_Development, http://arcos.rack/DOCUMENT#Released, http://arcos.rack/DOCUMENT#Withdrawn]",,Life-cycle status of a document
+DOC_STATUS,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+DOC_STATUS,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+DOC_STATUS,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+DOC_STATUS,title,string,,"A short, human-readable identifying label."
+PLAN,,,,"A PLAN presents a systematic course of action for achieving a declared purpose, including when, how, and by whom specified activities are to be performed. "
+PLAN,approvalAuthority (SHARED PROPERTY),AGENT,,AGENT responsible for approving a document. (SHARED PROPERTY)
+PLAN,dateOfIssue (SHARED PROPERTY),date,,Release date for the document. (SHARED PROPERTY)
+PLAN,issuingOrganization (SHARED PROPERTY),AGENT,,AGENT responsible for producing a document. (SHARED PROPERTY)
+PLAN,references (SHARED PROPERTY),ENTITY,,Source Materials used in the development of a document. (SHARED PROPERTY)
+PLAN,status (SHARED PROPERTY),DOC_STATUS,,"Identifies the maturity of the document, In_Development, Released, Withdrawn. (SHARED PROPERTY)"
+PLAN,fileParent,FILE,,The file an ENTITY is defined in
+PLAN,content,ENTITY,,"A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections."
+PLAN,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+PLAN,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+PLAN,generatedAtTime,dateTime,,The time this entity was created and available for use
+PLAN,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+PLAN,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+PLAN,title,string,,"A short, human-readable identifying label."
+PLAN,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+PLAN,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+PLAN,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+PLAN,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+PLAN,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+PROCEDURE,,,,"A PROCEDURE presents an ordered series of steps to perform a process, activity, or task"
+PROCEDURE,approvalAuthority (SHARED PROPERTY),AGENT,,AGENT responsible for approving a document. (SHARED PROPERTY)
+PROCEDURE,dateOfIssue (SHARED PROPERTY),date,,Release date for the document. (SHARED PROPERTY)
+PROCEDURE,issuingOrganization (SHARED PROPERTY),AGENT,,AGENT responsible for producing a document. (SHARED PROPERTY)
+PROCEDURE,status (SHARED PROPERTY),DOC_STATUS,,"Identifies the maturity of the document, In_Development, Released, Withdrawn. (SHARED PROPERTY)"
+PROCEDURE,fileParent,FILE,,The file an ENTITY is defined in
+PROCEDURE,content,ENTITY,,"A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections."
+PROCEDURE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+PROCEDURE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+PROCEDURE,generatedAtTime,dateTime,,The time this entity was created and available for use
+PROCEDURE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+PROCEDURE,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+PROCEDURE,title,string,,"A short, human-readable identifying label."
+PROCEDURE,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+PROCEDURE,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+PROCEDURE,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+PROCEDURE,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+PROCEDURE,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+REPORT,,,,"A REPORT describes the results of activities such as investigations, observations, assessments, or test."
+REPORT,dateOfIssue (SHARED PROPERTY),date,,Release date for the document. (SHARED PROPERTY)
+REPORT,issuingOrganization (SHARED PROPERTY),AGENT,,AGENT responsible for producing a document. (SHARED PROPERTY)
+REPORT,status (SHARED PROPERTY),DOC_STATUS,,"Identifies the maturity of the document, In_Development, Released, Withdrawn. (SHARED PROPERTY)"
+REPORT,fileParent,FILE,,The file an ENTITY is defined in
+REPORT,content,ENTITY,,"A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections."
+REPORT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+REPORT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+REPORT,generatedAtTime,dateTime,,The time this entity was created and available for use
+REPORT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+REPORT,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+REPORT,title,string,,"A short, human-readable identifying label."
+REPORT,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+REPORT,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+REPORT,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+REPORT,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+REPORT,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+REQUEST,,,,A REQUEST initiates a defined course of action or changed to fulfill a need.
+REQUEST,dateOfInitiation,date,,
+REQUEST,originatorOfRequest,AGENT,,
+REQUEST,status (SHARED PROPERTY),DOC_STATUS,,"Identifies the maturity of the document, In_Development, Released, Withdrawn. (SHARED PROPERTY)"
+REQUEST,fileParent,FILE,,The file an ENTITY is defined in
+REQUEST,content,ENTITY,,"A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections."
+REQUEST,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+REQUEST,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+REQUEST,generatedAtTime,dateTime,,The time this entity was created and available for use
+REQUEST,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+REQUEST,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+REQUEST,title,string,,"A short, human-readable identifying label."
+REQUEST,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+REQUEST,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+REQUEST,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+REQUEST,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+REQUEST,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+SECTION,,,,A SECTION is generic grouping of ENTITYs with a document
+SECTION,fileParent,FILE,,The file an ENTITY is defined in
+SECTION,content,ENTITY,,"A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections."
+SECTION,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+SECTION,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+SECTION,generatedAtTime,dateTime,,The time this entity was created and available for use
+SECTION,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+SECTION,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+SECTION,title,string,,"A short, human-readable identifying label."
+SECTION,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+SECTION,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+SECTION,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+SECTION,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+SECTION,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+SPECIFICATION,,,,"A SPECIFICATION identifies, in a complete, precise, and verifiable manner, the requirements, design, behavior, or other expected characteristics of a system, service or process."
+SPECIFICATION,approvalAuthority (SHARED PROPERTY),AGENT,,AGENT responsible for approving a document. (SHARED PROPERTY)
+SPECIFICATION,dateOfIssue (SHARED PROPERTY),date,,Release date for the document. (SHARED PROPERTY)
+SPECIFICATION,issuingOrganization (SHARED PROPERTY),AGENT,,AGENT responsible for producing a document. (SHARED PROPERTY)
+SPECIFICATION,references (SHARED PROPERTY),ENTITY,,Source Materials used in the development of a document. (SHARED PROPERTY)
+SPECIFICATION,status (SHARED PROPERTY),DOC_STATUS,,"Identifies the maturity of the document, In_Development, Released, Withdrawn. (SHARED PROPERTY)"
+SPECIFICATION,fileParent,FILE,,The file an ENTITY is defined in
+SPECIFICATION,content,ENTITY,,"A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections."
+SPECIFICATION,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+SPECIFICATION,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+SPECIFICATION,generatedAtTime,dateTime,,The time this entity was created and available for use
+SPECIFICATION,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+SPECIFICATION,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+SPECIFICATION,title,string,,"A short, human-readable identifying label."
+SPECIFICATION,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+SPECIFICATION,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+SPECIFICATION,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+SPECIFICATION,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+SPECIFICATION,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+FILE,,,,A file in the system
+FILE,createBy,FILE_CREATION,,FILE_CREATION ACTIVITY that created this file
+FILE,fileFormat,FORMAT,,The byte-level encoding of a file
+FILE,fileHash,FILE_HASH,,Hash of the file contents
+FILE,fileParent,FILE,,The file an ENTITY is defined in
+FILE,filename,string,,A logical file path relative to the container of the file.
+FILE,satisfies,ENTITY,,ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying
+FILE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+FILE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+FILE,generatedAtTime,dateTime,,The time this entity was created and available for use
+FILE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+FILE,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+FILE,title,string,,"A short, human-readable identifying label."
+FILE,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+FILE,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+FILE,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+FILE,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+FILE,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+FILE_CREATION,,,,An ACTIVITY that produces a FILE
+FILE_CREATION,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+FILE_CREATION,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+FILE_CREATION,endedAtTime,dateTime,,The time an activity was ended
+FILE_CREATION,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+FILE_CREATION,startedAtTime,dateTime,,The time an activity was started
+FILE_CREATION,title,string,,"A short, human-readable identifying label."
+FILE_CREATION,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+FILE_CREATION,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+FILE_CREATION,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+FILE_HASH,,,,A hash identifying a FILE
+FILE_HASH,hashType,HASH_TYPE,,
+FILE_HASH,hashValue,string,,
+FILE_HASH,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+FILE_HASH,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+FILE_HASH,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+FILE_HASH,title,string,,"A short, human-readable identifying label."
+FORMAT,,,,The data format of a FILE
+FORMAT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+FORMAT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+FORMAT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+FORMAT,title,string,,"A short, human-readable identifying label."
+HASH_TYPE,,"enumeration: [http://arcos.rack/FILE#MD5, http://arcos.rack/FILE#SHA1, http://arcos.rack/FILE#SHA2_256, http://arcos.rack/FILE#SHA2_512]",,A type of cryptographic hash
+HASH_TYPE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+HASH_TYPE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+HASH_TYPE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+HASH_TYPE,title,string,,"A short, human-readable identifying label."
+HAZARD,,,,"HAZARD as identified by some HAZARD_IDENTIFICATION ACTIVITY, to be assessed for certification"
+HAZARD,fileParent,FILE,,The file an ENTITY is defined in
+HAZARD,definition,string,,Description of the HAZARD
+HAZARD,effect,string,,consequence(s) of the HAZARD
+HAZARD,identified,HAZARD_IDENTIFICATION,,how this HAZARD was identified
+HAZARD,likelihood,float,,the likelihood of the HAZARD happening
+HAZARD,severity,float,,the severity of the HAZARD
+HAZARD,source,ENTITY,,ENTITY(s) that participate in causing this HAZARD
+HAZARD,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+HAZARD,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+HAZARD,generatedAtTime,dateTime,,The time this entity was created and available for use
+HAZARD,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+HAZARD,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+HAZARD,title,string,,"A short, human-readable identifying label."
+HAZARD,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+HAZARD,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+HAZARD,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+HAZARD,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+HAZARD,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+HAZARD_IDENTIFICATION,,,,ACTIVITY that identifies potential sources of HAZARD whose risk must be evaluated
+HAZARD_IDENTIFICATION,author,AGENT,,AGENT(s) who work on this ACTIVITY
+HAZARD_IDENTIFICATION,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+HAZARD_IDENTIFICATION,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+HAZARD_IDENTIFICATION,endedAtTime,dateTime,,The time an activity was ended
+HAZARD_IDENTIFICATION,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+HAZARD_IDENTIFICATION,startedAtTime,dateTime,,The time an activity was started
+HAZARD_IDENTIFICATION,title,string,,"A short, human-readable identifying label."
+HAZARD_IDENTIFICATION,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+HAZARD_IDENTIFICATION,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+HAZARD_IDENTIFICATION,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+OBJECTIVE,,,,An OBJECTIVE identifies tasks from a process for which evidence must be provided to show that the task has been completed. 
+OBJECTIVE,fileParent,FILE,,The file an ENTITY is defined in
+OBJECTIVE,satisfiedBy,ACTIVITY,,An ACTIVITY that demonstrates that the OBJECTIVE has been satisfied.
+OBJECTIVE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+OBJECTIVE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+OBJECTIVE,generatedAtTime,dateTime,,The time this entity was created and available for use
+OBJECTIVE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+OBJECTIVE,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+OBJECTIVE,title,string,,"A short, human-readable identifying label."
+OBJECTIVE,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+OBJECTIVE,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+OBJECTIVE,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+OBJECTIVE,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+OBJECTIVE,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+ACTIVITY,,,,"An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities."
+ACTIVITY,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ACTIVITY,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ACTIVITY,endedAtTime,dateTime,,The time an activity was ended
+ACTIVITY,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ACTIVITY,startedAtTime,dateTime,,The time an activity was started
+ACTIVITY,title,string,,"A short, human-readable identifying label."
+ACTIVITY,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+ACTIVITY,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+ACTIVITY,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+AGENT,,,,"An agent is something that bears some form of responsibility for an activity taking place, for the existence of an entity, or for another agent's activity."
+AGENT,actedOnBehalfOf,AGENT,,"Delegation is the assignment of authority and responsibility to an agent (by itself or by another agent) to carry out a specific activity as a delegate or representative, while the agent it acts on behalf of retains some responsibility for the outcome of the delegated work."
+AGENT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+AGENT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+AGENT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+AGENT,title,string,,"A short, human-readable identifying label."
+COLLECTION,,,,"A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections."
+COLLECTION,fileParent,FILE,,The file an ENTITY is defined in
+COLLECTION,content,ENTITY,,"A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections."
+COLLECTION,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+COLLECTION,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+COLLECTION,generatedAtTime,dateTime,,The time this entity was created and available for use
+COLLECTION,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+COLLECTION,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+COLLECTION,title,string,,"A short, human-readable identifying label."
+COLLECTION,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+COLLECTION,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+COLLECTION,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+COLLECTION,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+COLLECTION,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+ENTITY,,,,"An entity is a physical, digital, conceptual, or other kind of thing with some fixed aspects; entities may be real or imaginary."
+ENTITY,fileParent,FILE,,The file an ENTITY is defined in
+ENTITY,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ENTITY,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ENTITY,generatedAtTime,dateTime,,The time this entity was created and available for use
+ENTITY,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ENTITY,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+ENTITY,title,string,,"A short, human-readable identifying label."
+ENTITY,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+ENTITY,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+ENTITY,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+ENTITY,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+ENTITY,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+THING,,,,A piece of data stored in RACK
+THING,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+THING,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+THING,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+THING,title,string,,"A short, human-readable identifying label."
+DATA_DICTIONARY_TERM,,,,Defines some conceptual data that may be collected somewhere and used somewhere else
+DATA_DICTIONARY_TERM,fileParent,FILE,,The file an ENTITY is defined in
+DATA_DICTIONARY_TERM,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+DATA_DICTIONARY_TERM,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+DATA_DICTIONARY_TERM,generatedAtTime,dateTime,,The time this entity was created and available for use
+DATA_DICTIONARY_TERM,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+DATA_DICTIONARY_TERM,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+DATA_DICTIONARY_TERM,title,string,,"A short, human-readable identifying label."
+DATA_DICTIONARY_TERM,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+DATA_DICTIONARY_TERM,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+DATA_DICTIONARY_TERM,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+DATA_DICTIONARY_TERM,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+DATA_DICTIONARY_TERM,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+DATA_DICTIONARY_TERM,consumedBy,ENTITY,,ENTITY(s) (e.g. REQUIREMENT) that consumes this information
+DATA_DICTIONARY_TERM,createdBy (SHARED PROPERTY),ACTIVITY,,ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term ; ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT (SHARED PROPERTY)
+DATA_DICTIONARY_TERM,providedBy,ENTITY,,ENTITY(s) (e.g. REQUIREMENT) that provides this information
+DATA_DICTIONARY_TERM,text (SHARED PROPERTY),string,,Description of the term ; Description of the REQUIREMENT (SHARED PROPERTY)
+REQUIREMENT,,,,Captures (both high- and low-level) properties of a process or artifact that are to be assessed
+REQUIREMENT,fileParent,FILE,,The file an ENTITY is defined in
+REQUIREMENT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+REQUIREMENT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+REQUIREMENT,generatedAtTime,dateTime,,The time this entity was created and available for use
+REQUIREMENT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+REQUIREMENT,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+REQUIREMENT,title,string,,"A short, human-readable identifying label."
+REQUIREMENT,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+REQUIREMENT,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+REQUIREMENT,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+REQUIREMENT,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+REQUIREMENT,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+REQUIREMENT,createdBy (SHARED PROPERTY),ACTIVITY,,ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term ; ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT (SHARED PROPERTY)
+REQUIREMENT,givenText,string,,optional part that can be used to set certain conditions apart from other conditions in the ifText part
+REQUIREMENT,governs,ENTITY,,ENTITY(s) that are the subject of the requirement
+REQUIREMENT,ifText,string,,conditions under which this requirement holds
+REQUIREMENT,mitigates,ENTITY,,ENTITY(s) (e.g. HAZARD) that is being mitigated by this REQUIREMENT
+REQUIREMENT,satisfies,ENTITY,,Parent ENTITY(s) (e.g. REQUIREMENT) that this REQUIREMENT is derived from
+REQUIREMENT,text (SHARED PROPERTY),string,,Description of the term ; Description of the REQUIREMENT (SHARED PROPERTY)
+REQUIREMENT,thenText,string,,specifies what should hold by this requirement if the requirement conditions are met
+REQUIREMENT_DEVELOPMENT,,,,ACTIVITY that produces REQUIREMENTs
+REQUIREMENT_DEVELOPMENT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+REQUIREMENT_DEVELOPMENT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+REQUIREMENT_DEVELOPMENT,endedAtTime,dateTime,,The time an activity was ended
+REQUIREMENT_DEVELOPMENT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+REQUIREMENT_DEVELOPMENT,startedAtTime,dateTime,,The time an activity was started
+REQUIREMENT_DEVELOPMENT,title,string,,"A short, human-readable identifying label."
+REQUIREMENT_DEVELOPMENT,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+REQUIREMENT_DEVELOPMENT,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+REQUIREMENT_DEVELOPMENT,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+REQUIREMENT_DEVELOPMENT,author,AGENT,,AGENT(s) responsible for producing a REQUIREMENT
+REQUIREMENT_DEVELOPMENT,governedBy,ENTITY,,"ENTITY(s) (e.g. REQUIREMENTS, any sort of document) used during this ACTIVITY"
+REQUIREMENT_DEVELOPMENT,referenced,ENTITY,,Source materials (requirement and design docs) used during development
+REVIEW,,,,Code review ACTIVITY
+REVIEW,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+REVIEW,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+REVIEW,endedAtTime,dateTime,,The time an activity was ended
+REVIEW,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+REVIEW,startedAtTime,dateTime,,The time an activity was started
+REVIEW,title,string,,"A short, human-readable identifying label."
+REVIEW,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+REVIEW,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+REVIEW,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+REVIEW,author,AGENT,,AGENT(s) putting items up for review
+REVIEW,governedBy,ENTITY,,ENTITY(s) (e.g. REQUIREMENT) used for performing the review
+REVIEW,reviewed,ENTITY,,ENTITY(s) being reviewed
+REVIEW,reviewer,AGENT,,AGENT(s) performing the review
+REVIEW_LOG,,,,Outcome of a REVIEW ACTIVITY
+REVIEW_LOG,fileParent,FILE,,The file an ENTITY is defined in
+REVIEW_LOG,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+REVIEW_LOG,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+REVIEW_LOG,generatedAtTime,dateTime,,The time this entity was created and available for use
+REVIEW_LOG,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+REVIEW_LOG,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+REVIEW_LOG,title,string,,"A short, human-readable identifying label."
+REVIEW_LOG,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+REVIEW_LOG,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+REVIEW_LOG,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+REVIEW_LOG,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+REVIEW_LOG,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+REVIEW_LOG,createBy,ACTIVITY,,ACTIVITY(s) (e.g. REVIEW) that created this log
+REVIEW_LOG,reviewResult,REVIEW_STATE,,Review status descriptor
+REVIEW_LOG,reviews,ENTITY,,ENTITY(s) that the review was performed on
+REVIEW_STATE,,"enumeration: [http://arcos.rack/REVIEW#Passed, http://arcos.rack/REVIEW#ReviseWithoutReview, http://arcos.rack/REVIEW#ReviseWithReview]",,Life-cycle status of a review log
+REVIEW_STATE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+REVIEW_STATE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+REVIEW_STATE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+REVIEW_STATE,title,string,,"A short, human-readable identifying label."
+ARGUMENT_PACKAGE,,,,"Argument Package is the containing element for a structured argument represented using the SACM Argumentation
+Metamodel."
+ARGUMENT_PACKAGE,fileParent,FILE,,The file an ENTITY is defined in
+ARGUMENT_PACKAGE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ARGUMENT_PACKAGE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ARGUMENT_PACKAGE,generatedAtTime,dateTime,,The time this entity was created and available for use
+ARGUMENT_PACKAGE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ARGUMENT_PACKAGE,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+ARGUMENT_PACKAGE,title,string,,"A short, human-readable identifying label."
+ARGUMENT_PACKAGE,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+ARGUMENT_PACKAGE,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+ARGUMENT_PACKAGE,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+ARGUMENT_PACKAGE,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+ARGUMENT_PACKAGE,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+ARGUMENT_PACKAGE,argumentationElement,ENTITY,,
+ARGUMENT_REASONING,,,,Argument Reasoning can be used to provide additional description or explanation of the asserted relationship.
+ARGUMENT_REASONING,fileParent,FILE,,The file an ENTITY is defined in
+ARGUMENT_REASONING,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ARGUMENT_REASONING,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ARGUMENT_REASONING,generatedAtTime,dateTime,,The time this entity was created and available for use
+ARGUMENT_REASONING,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ARGUMENT_REASONING,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+ARGUMENT_REASONING,title,string,,"A short, human-readable identifying label."
+ARGUMENT_REASONING,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+ARGUMENT_REASONING,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+ARGUMENT_REASONING,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+ARGUMENT_REASONING,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+ARGUMENT_REASONING,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+ARTIFACT_REFERENCE,,,,Artifact Reference enables the citation of an artifact as information that relates to the structured argument.
+ARTIFACT_REFERENCE,fileParent,FILE,,The file an ENTITY is defined in
+ARTIFACT_REFERENCE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ARTIFACT_REFERENCE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ARTIFACT_REFERENCE,generatedAtTime,dateTime,,The time this entity was created and available for use
+ARTIFACT_REFERENCE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ARTIFACT_REFERENCE,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+ARTIFACT_REFERENCE,title,string,,"A short, human-readable identifying label."
+ARTIFACT_REFERENCE,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+ARTIFACT_REFERENCE,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+ARTIFACT_REFERENCE,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+ARTIFACT_REFERENCE,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+ARTIFACT_REFERENCE,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+ASSERTED_CONTEXT,,,,"Asserted Context can be used to declare that the artifact cited by an ArtifactReference(s) provides the context for the
+interpretation and scoping of a Claim or ArgumentReasoning element."
+ASSERTED_CONTEXT,fileParent,FILE,,The file an ENTITY is defined in
+ASSERTED_CONTEXT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ASSERTED_CONTEXT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ASSERTED_CONTEXT,generatedAtTime,dateTime,,The time this entity was created and available for use
+ASSERTED_CONTEXT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ASSERTED_CONTEXT,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+ASSERTED_CONTEXT,title,string,,"A short, human-readable identifying label."
+ASSERTED_CONTEXT,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+ASSERTED_CONTEXT,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+ASSERTED_CONTEXT,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+ASSERTED_CONTEXT,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+ASSERTED_CONTEXT,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+ASSERTED_CONTEXT,source (SHARED PROPERTY),ENTITY,,
+ASSERTED_CONTEXT,target (SHARED PROPERTY),ENTITY,,
+ASSERTED_INFERENCE,,,,"Asserted Inference association records the inference that a user declares to exist between one or more Assertion (premise) and
+another Assertion (conclusion)."
+ASSERTED_INFERENCE,fileParent,FILE,,The file an ENTITY is defined in
+ASSERTED_INFERENCE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+ASSERTED_INFERENCE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+ASSERTED_INFERENCE,generatedAtTime,dateTime,,The time this entity was created and available for use
+ASSERTED_INFERENCE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+ASSERTED_INFERENCE,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+ASSERTED_INFERENCE,title,string,,"A short, human-readable identifying label."
+ASSERTED_INFERENCE,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+ASSERTED_INFERENCE,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+ASSERTED_INFERENCE,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+ASSERTED_INFERENCE,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+ASSERTED_INFERENCE,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+ASSERTED_INFERENCE,reasoning,ENTITY,,
+ASSERTED_INFERENCE,source (SHARED PROPERTY),ENTITY,,
+ASSERTED_INFERENCE,target (SHARED PROPERTY),ENTITY,,
+CLAIM,,,,Claims are used to record the propositions of any structured argument contained in an Argument Package.
+CLAIM,fileParent,FILE,,The file an ENTITY is defined in
+CLAIM,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+CLAIM,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+CLAIM,generatedAtTime,dateTime,,The time this entity was created and available for use
+CLAIM,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+CLAIM,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+CLAIM,title,string,,"A short, human-readable identifying label."
+CLAIM,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+CLAIM,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+CLAIM,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+CLAIM,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+CLAIM,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+BUILD,,,,"Describes a set of ACTIVITYs (e.g. CODE_GEN, COMPILE, ...) that together form some logical building unit"
+BUILD,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+BUILD,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+BUILD,endedAtTime,dateTime,,The time an activity was ended
+BUILD,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+BUILD,startedAtTime,dateTime,,The time an activity was started
+BUILD,title,string,,"A short, human-readable identifying label."
+BUILD,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+BUILD,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+BUILD,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+BUILD,step,ACTIVITY,,A BUILD may be comprised of any number of sub-ACTIVITY(s)
+CODE_DEVELOPMENT,,,,An ACTIVITY that produces source code FILEs
+CODE_DEVELOPMENT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+CODE_DEVELOPMENT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+CODE_DEVELOPMENT,endedAtTime,dateTime,,The time an activity was ended
+CODE_DEVELOPMENT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+CODE_DEVELOPMENT,startedAtTime,dateTime,,The time an activity was started
+CODE_DEVELOPMENT,title,string,,"A short, human-readable identifying label."
+CODE_DEVELOPMENT,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+CODE_DEVELOPMENT,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+CODE_DEVELOPMENT,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+CODE_DEVELOPMENT,author,AGENT,,AGENT(s) who participated in this ACTIVITY
+CODE_DEVELOPMENT,governedBy,ENTITY,,ENTITY(s) (e.g. REQUIREMENT) that gave rise to this ACTIVITY
+CODE_DEVELOPMENT,referenced,ENTITY,,ENTITY(s) (e.g. REQUIREMENT) that were referenced during this ACTIVITY
+CODE_GEN,,,,ACTIVITY of running a CODE_GENERATOR to create source code FILEs
+CODE_GEN,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+CODE_GEN,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+CODE_GEN,endedAtTime,dateTime,,The time an activity was ended
+CODE_GEN,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+CODE_GEN,startedAtTime,dateTime,,The time an activity was started
+CODE_GEN,title,string,,"A short, human-readable identifying label."
+CODE_GEN,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+CODE_GEN,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+CODE_GEN,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+CODE_GEN,performedBy (SHARED PROPERTY),AGENT,,AGENT(s) (e.g. PACKAGER) performing the packaging ; AGENT(s) (e.g. COMPILER) performing the compilation ; AGENT(s) (e.g. CODE_GENERATOR) generating the code (SHARED PROPERTY)
+COMPILE,,,,ACTIVITY of running a a COMPILER to produce executable and object FILEs
+COMPILE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+COMPILE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+COMPILE,endedAtTime,dateTime,,The time an activity was ended
+COMPILE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+COMPILE,startedAtTime,dateTime,,The time an activity was started
+COMPILE,title,string,,"A short, human-readable identifying label."
+COMPILE,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+COMPILE,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+COMPILE,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+COMPILE,compileInput,FILE,,Source files that contributed to the compilation
+COMPILE,compiledBy,FILE,,The tool that performed the compilation
+COMPILE,performedBy (SHARED PROPERTY),AGENT,,AGENT(s) (e.g. PACKAGER) performing the packaging ; AGENT(s) (e.g. COMPILER) performing the compilation ; AGENT(s) (e.g. CODE_GENERATOR) generating the code (SHARED PROPERTY)
+COMPONENT,,,,An abstract software component
+COMPONENT,fileParent,FILE,,The file an ENTITY is defined in
+COMPONENT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+COMPONENT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+COMPONENT,generatedAtTime,dateTime,,The time this entity was created and available for use
+COMPONENT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+COMPONENT,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+COMPONENT,title,string,,"A short, human-readable identifying label."
+COMPONENT,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+COMPONENT,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+COMPONENT,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+COMPONENT,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+COMPONENT,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+COMPONENT,annotations,ENTITY,,Analysis annotations that apply to this component.
+COMPONENT,componentType,COMPONENT_TYPE,,
+COMPONENT,controlFlowsToConditionally,COMPONENT,,Control flows from this component to the target conditionally.
+COMPONENT,controlFlowsToUnconditionally,COMPONENT,,Control flows from this component to the target unconditionally.
+COMPONENT,definedIn,ENTITY,,Defining entity of this code structure. This is typically a FILE.
+COMPONENT,instantiates,ENTITY,,What logical component (system) does this physical component (code) instantiate or implement?
+COMPONENT,mentions,ENTITY,,"A component referenced by this one, e.g., a callee or variable being used."
+COMPONENT,name,string,,
+COMPONENT,requirements,ENTITY,,Low-level requirements that apply to this component.
+COMPONENT,subcomponentOf,ENTITY,,"A structural sub-component, e.g., a function might be a subcomponent of module."
+COMPONENT,valueType,string,,"The type of this value, if applicable (e.g. for functions or variables)."
+COMPONENT_TYPE,,,,An open/extensible set of types of software components
+COMPONENT_TYPE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+COMPONENT_TYPE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+COMPONENT_TYPE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+COMPONENT_TYPE,title,string,,"A short, human-readable identifying label."
+PACKAGE,,,,ACTIVITY of running a PACKAGER to produce a package FILE
+PACKAGE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+PACKAGE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+PACKAGE,endedAtTime,dateTime,,The time an activity was ended
+PACKAGE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+PACKAGE,startedAtTime,dateTime,,The time an activity was started
+PACKAGE,title,string,,"A short, human-readable identifying label."
+PACKAGE,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+PACKAGE,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+PACKAGE,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+PACKAGE,packageInput,FILE,,Source files used when generating the package output
+PACKAGE,packagedBy,FILE,,The tool used to generate the package output
+PACKAGE,performedBy (SHARED PROPERTY),AGENT,,AGENT(s) (e.g. PACKAGER) performing the packaging ; AGENT(s) (e.g. COMPILER) performing the compilation ; AGENT(s) (e.g. CODE_GENERATOR) generating the code (SHARED PROPERTY)
+FUNCTION,,,,defines functionality / capability
+FUNCTION,fileParent,FILE,,The file an ENTITY is defined in
+FUNCTION,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+FUNCTION,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+FUNCTION,generatedAtTime,dateTime,,The time this entity was created and available for use
+FUNCTION,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+FUNCTION,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+FUNCTION,title,string,,"A short, human-readable identifying label."
+FUNCTION,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+FUNCTION,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+FUNCTION,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+FUNCTION,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+FUNCTION,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+FUNCTION,parentFunction,FUNCTION,,allows for decomposition of functionality
+INTERFACE,,,,INTERFACEs describe directed connections between an ENTITY (e.g. SYSTEM) providing what another ENTITY (e.g. SYSTEM) requires
+INTERFACE,fileParent,FILE,,The file an ENTITY is defined in
+INTERFACE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+INTERFACE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+INTERFACE,generatedAtTime,dateTime,,The time this entity was created and available for use
+INTERFACE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+INTERFACE,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+INTERFACE,title,string,,"A short, human-readable identifying label."
+INTERFACE,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+INTERFACE,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+INTERFACE,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+INTERFACE,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+INTERFACE,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+INTERFACE,destination,ENTITY,,ENTITY (e.g. SYSTEM) that requires what the INTERFACE offers
+INTERFACE,identifiedBy,ACTIVITY,,ACTIVITY out of which this INTERFACE was identified
+INTERFACE,source,ENTITY,,ENTITY (e.g. SYSTEM) that provides what the INTERFACE offers
+OP_ENV,,,,defines the operating environment assumptions and constraints
+OP_ENV,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+OP_ENV,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+OP_ENV,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+OP_ENV,title,string,,"A short, human-readable identifying label."
+OP_ENV,envConstraint,string,,describes environmental constraints on system operations
+OP_PROCEDURE,,,,"system operational procedures employed, e.g. going through a checklist, limiting people near runways, etc."
+OP_PROCEDURE,approvalAuthority (SHARED PROPERTY),AGENT,,AGENT responsible for approving a document. (SHARED PROPERTY)
+OP_PROCEDURE,dateOfIssue (SHARED PROPERTY),date,,Release date for the document. (SHARED PROPERTY)
+OP_PROCEDURE,issuingOrganization (SHARED PROPERTY),AGENT,,AGENT responsible for producing a document. (SHARED PROPERTY)
+OP_PROCEDURE,status (SHARED PROPERTY),DOC_STATUS,,"Identifies the maturity of the document, In_Development, Released, Withdrawn. (SHARED PROPERTY)"
+OP_PROCEDURE,fileParent,FILE,,The file an ENTITY is defined in
+OP_PROCEDURE,mitigates,HAZARD,,a HAZARD may be mitigated by a OP_PROCEDURE
+OP_PROCEDURE,content,ENTITY,,"A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections."
+OP_PROCEDURE,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+OP_PROCEDURE,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+OP_PROCEDURE,generatedAtTime,dateTime,,The time this entity was created and available for use
+OP_PROCEDURE,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+OP_PROCEDURE,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+OP_PROCEDURE,title,string,,"A short, human-readable identifying label."
+OP_PROCEDURE,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+OP_PROCEDURE,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+OP_PROCEDURE,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+OP_PROCEDURE,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+OP_PROCEDURE,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+SYSTEM,,,,SYSTEMs classify logical parts of the whole system being developed
+SYSTEM,fileParent,FILE,,The file an ENTITY is defined in
+SYSTEM,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+SYSTEM,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+SYSTEM,generatedAtTime,dateTime,,The time this entity was created and available for use
+SYSTEM,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+SYSTEM,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+SYSTEM,title,string,,"A short, human-readable identifying label."
+SYSTEM,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+SYSTEM,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+SYSTEM,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+SYSTEM,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+SYSTEM,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+SYSTEM,function,FUNCTION,,functionality / capability of a SYSTEM
+SYSTEM,partOf,ENTITY,,Used to define a relationship to a higher level system
+SYSTEM,producedBy,ACTIVITY,,ACTIVITY(s) participating in developing this SYSTEM
+SYSTEM,provides,ENTITY,,List of entities that this SYSTEM provides to others
+SYSTEM,requires,ENTITY,,List of entities that this SYSTEM requires from others
+SYSTEM_DEVELOPMENT,,,,ACTIVITY relating to the creation of one or more some SYSTEMs
+SYSTEM_DEVELOPMENT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+SYSTEM_DEVELOPMENT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+SYSTEM_DEVELOPMENT,endedAtTime,dateTime,,The time an activity was ended
+SYSTEM_DEVELOPMENT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+SYSTEM_DEVELOPMENT,startedAtTime,dateTime,,The time an activity was started
+SYSTEM_DEVELOPMENT,title,string,,"A short, human-readable identifying label."
+SYSTEM_DEVELOPMENT,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+SYSTEM_DEVELOPMENT,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+SYSTEM_DEVELOPMENT,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+SYSTEM_DEVELOPMENT,developedBy,AGENT,,Organization that is responsible for producing a system
+TEST,,,,Description of a single test
+TEST,fileParent,FILE,,The file an ENTITY is defined in
+TEST,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+TEST,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+TEST,generatedAtTime,dateTime,,The time this entity was created and available for use
+TEST,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+TEST,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+TEST,title,string,,"A short, human-readable identifying label."
+TEST,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+TEST,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+TEST,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+TEST,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+TEST,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+TEST,producedBy,ACTIVITY,,TEST_DEVELOPMENT activity(s) this test belongs to
+TEST,verifies,ENTITY,,Parent ENTITY(s) (e.g. REQUIREMENT) that this requirement is derived from
+TEST_DEVELOPMENT,,,,ACTIVITY of creating a TEST to participate in the evaluation of a requirement
+TEST_DEVELOPMENT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+TEST_DEVELOPMENT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+TEST_DEVELOPMENT,endedAtTime,dateTime,,The time an activity was ended
+TEST_DEVELOPMENT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+TEST_DEVELOPMENT,startedAtTime,dateTime,,The time an activity was started
+TEST_DEVELOPMENT,title,string,,"A short, human-readable identifying label."
+TEST_DEVELOPMENT,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+TEST_DEVELOPMENT,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+TEST_DEVELOPMENT,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+TEST_DEVELOPMENT,developedBy,AGENT,,"Entity that is responsible for producing a test, could be a person or a tool. "
+TEST_EXECUTION,,,,ACTIVITY of performing a TEST and record its corresponding TEST_RESULT
+TEST_EXECUTION,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+TEST_EXECUTION,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+TEST_EXECUTION,endedAtTime,dateTime,,The time an activity was ended
+TEST_EXECUTION,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+TEST_EXECUTION,startedAtTime,dateTime,,The time an activity was started
+TEST_EXECUTION,title,string,,"A short, human-readable identifying label."
+TEST_EXECUTION,used,ENTITY,,"Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
+TEST_EXECUTION,wasAssociatedWith,AGENT,,"An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
+TEST_EXECUTION,wasInformedBy,ACTIVITY,,"a Communication, the exchange of some unspecified entity by two activities, one activity using some entity generated by the other."
+TEST_EXECUTION,executedOn,AGENT,,
+TEST_RESULT,,,,Result corresponding to one execution of one TEST
+TEST_RESULT,fileParent,FILE,,The file an ENTITY is defined in
+TEST_RESULT,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+TEST_RESULT,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+TEST_RESULT,generatedAtTime,dateTime,,The time this entity was created and available for use
+TEST_RESULT,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+TEST_RESULT,invalidatedAtTime,dateTime,,The time at which this entity was no longer usable
+TEST_RESULT,title,string,,"A short, human-readable identifying label."
+TEST_RESULT,wasAttributedTo,AGENT,,Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution
+TEST_RESULT,wasDerivedFrom,ENTITY,,"A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."
+TEST_RESULT,wasGeneratedBy,ACTIVITY,,Generation is the completion of production of a new entity by an activity. This entity did not exist before generation and becomes available for usage after this generation.
+TEST_RESULT,wasImpactedBy,ENTITY,,"Indicates that an entity materially affected another entity, and changing the former might affect or invalidate the latter."
+TEST_RESULT,wasRevisionOf,ENTITY,,Indicates a direct line of primary descendancy from one entity to a derivative entity.
+TEST_RESULT,confirms,ENTITY,,Parent test(s) of this test result
+TEST_RESULT,executedBy,ACTIVITY,,ACTIVITY(s) that created this test result
+TEST_RESULT,result,TEST_STATUS,,Pass/Failed/Indeterminate status resulting from a TEST_EXECUTION
+TEST_STATUS,,"enumeration: [http://arcos.rack/TESTING#Passed, http://arcos.rack/TESTING#Failed, http://arcos.rack/TESTING#Indeterminate]",,The high-level outcome of a TEST_RESULT
+TEST_STATUS,dataInsertedBy,ACTIVITY,,The activity that caused this data to be added to RACK
+TEST_STATUS,description,string,,"A free-form, multi-line, human-readable explanation of this data element."
+TEST_STATUS,identifier,string,,identifier is any data item that is used to associate items on when loading into the data store.
+TEST_STATUS,title,string,,"A short, human-readable identifying label."

@@ -33,7 +33,7 @@
     
 >>>Prop Notes...
 
->>**text_DataAndControlCouple** : string
+>>**description_DataAndControlCouple** : string
     
 >>>Prop Notes...
 
@@ -53,4 +53,4 @@ identifier_ProducingLowLevelRequirement| primaryKey Key for ProducingLowLevelReq
 identifier_SoftwareDesign| primaryKey Key for SoftwareDesign | Yes
 identifier_ConsumingLowLevelRequirement| primaryKey Key for ConsumingLowLevelRequirement | Yes
 identifier_DataAndControlCouple| primaryKey Key for DataAndControlCouple | No
-text_DataAndControlCouple| | Yes
+description_DataAndControlCouple| | Yes

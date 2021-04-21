@@ -19,9 +19,10 @@
   <sadlimplicitmodel:NamedQuery rdf:ID="SoftwareUnitTestResultCsv">
     <rdfs:isDefinedBy>
 
-select distinct ?identifier_TEST_STATUS ?generatedAtTime_SoftwareUnitTestResult ?identifier_SoftwareUnitTestExecution ?identifier_SoftwareUnitTest ?identifier_SoftwareUnitTestResult
+select distinct ?identifier_TEST_STATUS ?identifier_SoftwareUnitTestExecution ?identifier_SoftwareUnitTest ?generatedAtTime_SoftwareUnitTestResult ?identifier_SoftwareUnitTestResult
 where {
     ?SoftwareUnitTestResult a &lt;http://Turnstile/DevelopmentPlan#SoftwareUnitTestResult&gt; . 
+    optional{ ?SoftwareUnitTestResult &lt;http://arcos.rack/PROV-S#generatedAtTime&gt; ?generatedAtTime_SoftwareUnitTestResult} . 
     ?SoftwareUnitTestResult &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareUnitTestResult . 
     ?SoftwareUnitTestResult &lt;http://arcos.rack/TESTING#confirms&gt; ?SoftwareUnitTest .
         ?SoftwareUnitTest a &lt;http://Turnstile/DevelopmentPlan#SoftwareUnitTest&gt; . 
@@ -32,8 +33,6 @@ where {
         ?SoftwareUnitTestExecution a &lt;http://Turnstile/DevelopmentPlan#SoftwareUnitTestExecution&gt; . 
         ?SoftwareUnitTestExecution &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SoftwareUnitTestExecution . 
     }
-. optional {?SoftwareUnitTestResult &lt;http://arcos.rack/PROV-S#generatedAtTime&gt; ?generatedAtTime_SoftwareUnitTestResult
-}
     ?SoftwareUnitTestResult &lt;http://arcos.rack/TESTING#result&gt; ?TEST_STATUS .
         ?TEST_STATUS a &lt;http://arcos.rack/TESTING#TEST_STATUS&gt; . 
         ?TEST_STATUS &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_TEST_STATUS . 
@@ -524,11 +523,11 @@ where {
   <sadlimplicitmodel:NamedQuery rdf:ID="DataAndControlCoupleCsv">
     <rdfs:isDefinedBy>
 
-select distinct ?ProducingLowLevelRequirement ?identifier_ProducingLowLevelRequirement ?identifier_SoftwareDesign ?ConsumingLowLevelRequirement ?identifier_ConsumingLowLevelRequirement ?identifier_DataAndControlCouple ?text_DataAndControlCouple
+select distinct ?ProducingLowLevelRequirement ?identifier_ProducingLowLevelRequirement ?identifier_SoftwareDesign ?ConsumingLowLevelRequirement ?identifier_ConsumingLowLevelRequirement ?identifier_DataAndControlCouple ?description_DataAndControlCouple
 where {
     ?DataAndControlCouple a &lt;http://Turnstile/DevelopmentPlan#DataAndControlCouple&gt; . 
     ?DataAndControlCouple &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_DataAndControlCouple . 
-    optional{ ?DataAndControlCouple &lt;http://arcos.rack/PROV-S#description&gt; ?text_DataAndControlCouple} . 
+    optional{ ?DataAndControlCouple &lt;http://arcos.rack/PROV-S#description&gt; ?description_DataAndControlCouple} . 
     optional{
 
     ?DataAndControlCouple &lt;http://arcos.rack/REQUIREMENTS#consumedBy&gt; ?ConsumingLowLevelRequirement .
@@ -702,6 +701,45 @@ where {
     ?SourceCode &lt;http://arcos.rack/FILE#fileFormat&gt; ?FORMAT .
         ?FORMAT a &lt;http://arcos.rack/FILE#FORMAT&gt; . 
         ?FORMAT &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_FORMAT . 
+    }
+
+}</rdfs:isDefinedBy>
+  </sadlimplicitmodel:NamedQuery>
+  <sadlimplicitmodel:NamedQuery rdf:ID="SoftwareComponentCsv">
+    <rdfs:isDefinedBy>
+
+select distinct ?identifier_SUBCOMPONENT ?identifier_REQUIREMENT ?identifier_MENTION ?identifier_INSTANTIATE ?identifier_DEFINE_IN ?identifier_COMPONENT_TYPE ?identifier_ANNOTATION ?name_COMPONENT ?identifier_COMPONENT ?valueType_COMPONENT
+where {
+    ?COMPONENT a &lt;http://arcos.rack/SOFTWARE#SWCOMPONENT&gt; . 
+    optional{ ?COMPONENT &lt;http://arcos.rack/PROV-S#title&gt; ?name_COMPONENT} . 
+    ?COMPONENT &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_COMPONENT . 
+    optional{ ?COMPONENT &lt;http://arcos.rack/SOFTWARE#valueType&gt; ?valueType_COMPONENT} . 
+    ?COMPONENT &lt;http://arcos.rack/SOFTWARE#componentType&gt; ?COMPONENT_TYPE .
+        ?COMPONENT_TYPE a &lt;http://arcos.rack/SOFTWARE#COMPONENT_TYPE&gt; . 
+        ?COMPONENT_TYPE &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_COMPONENT_TYPE . 
+    optional{
+
+    ?COMPONENT &lt;http://arcos.rack/FILE#definedIn&gt; ?DEFINE_IN .
+        ?DEFINE_IN a &lt;http://arcos.rack/FILE#FILE&gt; . 
+        optional{ ?DEFINE_IN &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_DEFINE_IN} . 
+    }
+    optional{
+
+    ?COMPONENT &lt;http://arcos.rack/SOFTWARE#instantiates&gt; ?INSTANTIATE .
+        ?INSTANTIATE a &lt;http://arcos.rack/PROV-S#ENTITY&gt; . 
+        optional{ ?INSTANTIATE &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_INSTANTIATE} . 
+    }
+    optional{
+
+    ?COMPONENT &lt;http://arcos.rack/SOFTWARE#mentions&gt; ?MENTION .
+        ?MENTION a &lt;http://arcos.rack/SOFTWARE#SWCOMPONENT&gt; . 
+        optional{ ?MENTION &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_MENTION} . 
+    }
+    optional{
+
+    ?COMPONENT &lt;http://arcos.rack/SOFTWARE#subcomponentOf&gt; ?SUBCOMPONENT .
+        ?SUBCOMPONENT a &lt;http://arcos.rack/SOFTWARE#SWCOMPONENT&gt; . 
+        optional{ ?SUBCOMPONENT &lt;http://arcos.rack/PROV-S#identifier&gt; ?identifier_SUBCOMPONENT} . 
     }
 
 }</rdfs:isDefinedBy>

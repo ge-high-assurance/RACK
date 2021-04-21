@@ -48,7 +48,8 @@ import "http://arcos.rack/MODEL".
        toolSummaryDescription (note "concise description of tool function, inputs, outputs") describes TOOL with a single value of type string.
          // note: we don't want to subtype description from THING since it is intended for a different purpose and cardinality of description is "at most 1"
        toolUserGuide describes TOOL with a single value of type FILE.
-       toolQualificationData describes TOOL with a single value of type ToolQualificationData.
+       toolQualificationData describes TOOL with values of type ToolQualificationData.
+       toolQualificationData describes TOOL with at most 1 value.
        
       ToolInvocation (note "the instance of tool execution, used as a noun") is a type of ENTITY.
         toolParamaters (note "all parameters/options used to run the tool") describes ToolInvocation with values of type string.
@@ -67,7 +68,9 @@ import "http://arcos.rack/MODEL".
        // relationships inherited from ENTITY that are subtyped:
        wasQualifiedBy (note "organization qualifying this tool") describes ToolQualificationData with values of type ORGANIZATION.
        wasQualifiedBy is a type of wasAttributedTo.
-       toolQualificationSummary (note "summary of tool qualification argument and roadmap of artifacts") describes ToolQualificationData with a single value of type string.
+       toolQualificationSummary (note "summary of tool qualification argument and roadmap of artifacts") describes ToolQualificationData with values of type string.
+       toolQualificationSummary describes ToolQualificationData with at most 1 value.
+       
        toolQualificationArtifacts (note "each tool qualification artifact in a separate file") describes ToolQualificationData with values of type {DOCUMENT or FILE}.
      
      ////////////////////////////////////////////////
@@ -118,8 +121,8 @@ import "http://arcos.rack/MODEL".
        governs describes SystemArchitecture with values of type SYSTEM.
      
      RadlNotation (note "Radl notation for architecture specification") is a type of ENTITY.
-        radlUserGuide describes RadlNotation with a single value of type DOCUMENT.
-        radlSemantics describes RadlNotation with a single value of type DOCUMENT.
+        radlUserGuide describes RadlNotation with values of type DOCUMENT.
+        radlSemantics describes RadlNotation with values of type DOCUMENT.
         
      RadlArchitectureModel (note "The model of architecture in Radl") is a type of MODEL.
         radlArchitectureNotation describes RadlArchitectureModel with a single value of type RadlNotation. 
@@ -133,7 +136,8 @@ import "http://arcos.rack/MODEL".
       RadlerArchitectureAnalysis (note "Analysis done by Radler tool on Radl architecure spec") is a type of ANALYSIS.
         // Inherited properties from ANALYSIS
         //   performedBy - refers to Radler tool
-        toolInvocation describes RadlerArchitectureAnalysis with a single value of type ToolInvocation.
+        toolInvocation describes RadlerArchitectureAnalysis with values of type ToolInvocation.
+        toolInvocation describes RadlerArchitectureAnalysis with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
         used of RadlerArchitectureAnalysis only has values of type {RadlArchitectureModel or RadlGenericProperty}.
@@ -161,8 +165,8 @@ import "http://arcos.rack/MODEL".
        //   title: name given to this requirement set
        
       ClearNotation (note "CLEAR notation for writing requirements") is a type of ENTITY.
-        clearUserGuide describes ClearNotation with a single value of type DOCUMENT.
-        clearSemantics describes ClearNotation with a single value of type DOCUMENT.
+        clearUserGuide describes ClearNotation with values of type DOCUMENT.
+        clearSemantics describes ClearNotation with values of type DOCUMENT.
           
       DesCertRequirementModel (note "The model of requirement in DesCert in CLEAR notation") is a type of MODEL.
         requirementNotation describes DesCertRequirementModel with a single value of type ClearNotation. 
@@ -209,7 +213,8 @@ import "http://arcos.rack/MODEL".
        content describes SoftwareLowLevelRequirementSet with values of type SoftwareLowLevelRequirement.
        // Note: DesCert qualifier is used since this doesn't diretly relate to rq qualifier in RACK base ontology
        Rq:createdBy describes SoftwareLowLevelRequirementSet with values of type SoftwareDesign. 
-       governs describes SoftwareLowLevelRequirementSet with a single value of type SWCOMPONENT.
+       governs describes SoftwareLowLevelRequirementSet with values of type SWCOMPONENT.
+       governs describes SoftwareLowLevelRequirementSet with at most 1 value.
        // inheirted properties:
        //   title: name given to this requirement set
        
@@ -252,12 +257,13 @@ import "http://arcos.rack/MODEL".
         //   wasImpactedBy refers to dictionary entities used
         //   wasGeneratedBy refers to ToolExecution that generated this
         // new relationships:
-        sallyModelContents describes SallyTransitionSystemModel with a single value of type FILE.
+        sallyModelContents describes SallyTransitionSystemModel with values of type FILE.
         sallyModelNotation describes SallyTransitionSystemModel with a single value of type SallyNotation. 
         sallyModelNotation is a type of wasImpactedBy.
       
       SallyTransitionSystemModelGeneration is a type of ACTIVITY.
-        toolInvocation (note "using Text2Test tool on a requirement set that generates Sally input model") describes SallyTransitionSystemModelGeneration with a single value of type ToolInvocation.
+        toolInvocation (note "using Text2Test tool on a requirement set that generates Sally input model") describes SallyTransitionSystemModelGeneration with values of type ToolInvocation.
+        toolInvocation describes SallyTransitionSystemModelGeneration with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
         used of SallyTransitionSystemModelGeneration only has values of type SoftwareHighLevelRequirementSet.
@@ -265,14 +271,15 @@ import "http://arcos.rack/MODEL".
       SallyModelChecking is a type of ANALYSIS.
         // Inherited properties from ANALYSIS
         //   performedBy - refers to SALLY tool
-        toolInvocation describes SallyModelChecking with a single value of type ToolInvocation.
+        toolInvocation describes SallyModelChecking with values of type ToolInvocation.
+        toolInvocation describes SallyModelChecking with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
         used of SallyModelChecking only has values of type {SallyTransitionSystemModel or SpecificProperty}.
       
       SallyNotation (note "Sally notation for creating models and property queries") is a type of ENTITY.
-        sallyUserGuide describes SallyNotation with a single value of type DOCUMENT.
-        sallySemantics describes SallyNotation with a single value of type DOCUMENT.
+        sallyUserGuide describes SallyNotation with values of type DOCUMENT.
+        sallySemantics describes SallyNotation with values of type DOCUMENT.
       
       SallyPropertyModel (note "the MODEL class that is used to model a SpecificProperty") is a type of MODEL.
         // this entity models a SpecificProperty that is checked by Sally
@@ -287,19 +294,20 @@ import "http://arcos.rack/MODEL".
        
        ClearTestAndOracleGeneration is a type of TEST_DEVELOPMENT.
          // Test oracles and test generation by Text2Test tool from CLEAR requirements
-        toolInvocation (note "Text2Test tool usgae instance") describes ClearTestAndOracleGeneration with a single value of type ToolInvocation.
+        toolInvocation (note "Text2Test tool usgae instance") describes ClearTestAndOracleGeneration with values of type ToolInvocation.
+        toolInvocation describes ClearTestAndOracleGeneration with at most 1 value.
         // Inherited porperties
         //   developedBy: refers to Text2Test tool
         //   wasInformedBy: activity that was a precursor to this
         used of ClearTestAndOracleGeneration only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary}.
          
        ClearTestingTheory is a type of ENTITY. 
-          testingTheoryDoc describes ClearTestingTheory with a single value of type DOCUMENT. 
+          testingTheoryDoc describes ClearTestingTheory with values of type DOCUMENT. 
          
        TestOracle is a type of ENTITY.
          verifiesRequirement describes TestOracle with a single value of type REQUIREMENT.
          verifiesRequirement is a type of wasDerivedFrom.
-         requirementSubclause (note "part (subclause) of the requirement this test oracle tests") describes TestOracle with a single value of type string.
+         requirementSubclause (note "part (subclause) of the requirement this test oracle tests") describes TestOracle with values of type string.
          testOracleCriteria (note "e.g., equiv class, boundary value") describes TestOracle with a single value of type string.
          testOracleTheory describes TestOracle with a single value of type ClearTestingTheory.
          // inherited attribute:
@@ -314,7 +322,8 @@ import "http://arcos.rack/MODEL".
        
        // TEST_EXECUTION class in RACK base ontology is extended with further attributes
        // New attributes
-       testEnvironment (note "test environment description, configuration parameters") describes TEST_EXECUTION with a single value of type string.
+       testEnvironment (note "test environment description, configuration parameters") describes TEST_EXECUTION with values of type string.
+       testEnvironment describes TEST_EXECUTION with at most 1 value.
               
        // TEST_RESULT class in RACK base ontology is used as is
        
@@ -327,7 +336,8 @@ import "http://arcos.rack/MODEL".
        RequirementAnalysis is a type of ANALYSIS.
         // Inherited properties from ANALYSIS
         //   performedBy - refers to Text2Test tool
-        toolInvocation describes RequirementAnalysis with a single value of type ToolInvocation.
+        toolInvocation describes RequirementAnalysis with values of type ToolInvocation.
+        toolInvocation describes RequirementAnalysis with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
         used of RequirementAnalysis only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary or CLEARGenericProperty}.
@@ -336,7 +346,8 @@ import "http://arcos.rack/MODEL".
        // Test generation by Randoop tool
        
        RandoopJUnitTestGeneration is a type of TEST_DEVELOPMENT.
-        toolInvocation (note "Randoop tool") describes RandoopJUnitTestGeneration with a single value of type ToolInvocation.
+        toolInvocation (note "Randoop tool") describes RandoopJUnitTestGeneration with values of type ToolInvocation.
+        toolInvocation describes RandoopJUnitTestGeneration with at most 1 value.
         // Inherited porperties
         //   developedBy: refers to Randoop tool
         //   wasInformedBy: activity that was a precursor to this
@@ -361,3 +372,4 @@ import "http://arcos.rack/MODEL".
         tst:producedBy is a type of wasGeneratedBy.
         verifies describes RandoopTestsAndMetrics with values of type SourceCode.
         // verifies is a type of wasImpactedBy.
+     

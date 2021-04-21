@@ -46,7 +46,7 @@
         "dataValidator": [],
         "nodes": [
             {
-                "URILookupMode": "noCreate",
+                "URILookupMode": "createIfMissing",
                 "mapping": [],
                 "props": [
                     {

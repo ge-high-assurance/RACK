@@ -43,11 +43,13 @@ import "http://arcos.rack/MODEL".
        //   identifier
        //   title - name of tool
        //   toolVersion
+       // NOTE: actedOnBehalfOf property of AGENT is not used 
        // We are adding more properties to TOOL here
-       toolInstallationConfiguration describes TOOL with a single value of type string.
+       toolInstallationConfiguration describes TOOL with values of type string.
+       toolInstallationConfiguration describes TOOL with at most 1 value.
        toolSummaryDescription (note "concise description of tool function, inputs, outputs") describes TOOL with a single value of type string.
          // note: we don't want to subtype description from THING since it is intended for a different purpose and cardinality of description is "at most 1"
-       toolUserGuide describes TOOL with a single value of type FILE.
+       userGuide describes TOOL with values of type DOCUMENT. // userGuide may be in mutliple documents
        toolQualificationData describes TOOL with values of type ToolQualificationData.
        toolQualificationData describes TOOL with at most 1 value.
        
@@ -56,7 +58,7 @@ import "http://arcos.rack/MODEL".
         // new relationships:
         toolUsed (note "the tool that is invoked") describes ToolInvocation with a single value of type TOOL.
         toolUsed is a type of wasAssociatedWith.
-        invokedBy (note "person or DevOps running the tool") describes ToolInvocation with a single value of type AGENT.
+        invokedBy (note "person or DevOps running the tool") describes ToolInvocation with values of type AGENT.
         invokedBy is a type of wasAssociatedWith.
       
       ToolQualificationData
@@ -121,8 +123,8 @@ import "http://arcos.rack/MODEL".
        governs describes SystemArchitecture with values of type SYSTEM.
      
      RadlNotation (note "Radl notation for architecture specification") is a type of ENTITY.
-        radlUserGuide describes RadlNotation with values of type DOCUMENT.
-        radlSemantics describes RadlNotation with values of type DOCUMENT.
+        userGuide describes RadlNotation with values of type DOCUMENT.
+        semantics describes RadlNotation with values of type DOCUMENT.
         
      RadlArchitectureModel (note "The model of architecture in Radl") is a type of MODEL.
         radlArchitectureNotation describes RadlArchitectureModel with a single value of type RadlNotation. 
@@ -165,8 +167,8 @@ import "http://arcos.rack/MODEL".
        //   title: name given to this requirement set
        
       ClearNotation (note "CLEAR notation for writing requirements") is a type of ENTITY.
-        clearUserGuide describes ClearNotation with values of type DOCUMENT.
-        clearSemantics describes ClearNotation with values of type DOCUMENT.
+        userGuide describes ClearNotation with values of type DOCUMENT.
+        semantics describes ClearNotation with values of type DOCUMENT.
           
       DesCertRequirementModel (note "The model of requirement in DesCert in CLEAR notation") is a type of MODEL.
         requirementNotation describes DesCertRequirementModel with a single value of type ClearNotation. 
@@ -278,8 +280,8 @@ import "http://arcos.rack/MODEL".
         used of SallyModelChecking only has values of type {SallyTransitionSystemModel or SpecificProperty}.
       
       SallyNotation (note "Sally notation for creating models and property queries") is a type of ENTITY.
-        sallyUserGuide describes SallyNotation with values of type DOCUMENT.
-        sallySemantics describes SallyNotation with values of type DOCUMENT.
+        userGuide describes SallyNotation with values of type DOCUMENT.
+        semantics describes SallyNotation with values of type DOCUMENT.
       
       SallyPropertyModel (note "the MODEL class that is used to model a SpecificProperty") is a type of MODEL.
         // this entity models a SpecificProperty that is checked by Sally
@@ -372,4 +374,3 @@ import "http://arcos.rack/MODEL".
         tst:producedBy is a type of wasGeneratedBy.
         verifies describes RandoopTestsAndMetrics with values of type SourceCode.
         // verifies is a type of wasImpactedBy.
-     

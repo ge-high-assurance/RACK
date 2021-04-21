@@ -33,7 +33,7 @@ opts_spec(Spec) :-
        help('Declare generated RDF triples to stdout')],
 
       [opt(ontology_dir), meta('DIR_OR_URL'), type(atom),
-       shortflags([o]), longflags(['ontology', 'model']),
+       shortflags([m]), longflags(['ontology', 'model']),
        default(OwlDir),
        help('Where to load ontology .Owl files from')],
 
@@ -73,7 +73,9 @@ parse_args(ExtraArgs, Opts, PosArgs) :-
     set_declaration_level(Opts),
     get_ontology_dir(Opts, ODir),
     print_message(informational, loading_ontology_dir(ODir)),
-    load_local_model(ODir),
+    catch( (exists_directory(ODir), load_local_model(ODir)),
+           error(existence_error(iri_scheme,http),_),
+           load_model_from_url(ODir)),
     load_recognizers(Opts),
     load_data_from_dir(Opts).
 

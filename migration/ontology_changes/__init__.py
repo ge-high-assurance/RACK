@@ -9,6 +9,7 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
+from ontology_changes.change_cardinality import ChangeCardinality
 from ontology_changes.change_is_a_type_of import ChangeIsATypeOf
 from ontology_changes.change_property_range import ChangePropertyRange
 from ontology_changes.delete_property import DeleteProperty

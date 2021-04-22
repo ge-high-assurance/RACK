@@ -56,8 +56,11 @@ commits_in_chronological_order: List[Commit] = [
     # oldest (in history)
 
     # v4.0
+
     commitae0a7660b0afdd53ff334577fbdea7749abe6cf6.commit,  # 2020 Dec 15
+
     # v4.1
+
     commit2e079bb2a32b3cc1b3153d44ad0c21e27507937f.commit,  # 2021 Jan 5
     commit9af9030fe191d564875c067f6e0319ca6b52b798.commit,  # 2021 Jan 5
     commit05a03cd687e3bdce425794763e0957d3ccaf8ff0.commit,  # 2020 Dec 22
@@ -76,10 +79,17 @@ commits_in_chronological_order: List[Commit] = [
     commit4f9fce78e36a6dc75f1702ab50da6a4ac801dd5e.commit,  # 2021 Jan 19
     commit643839e7d8036731ba1da767942c8e74c2876e2e.commit,  # 2021 Jan 21
     commitbdfef3d7ea9b3c9fc085defa8e26256f646097d9.commit,  # 2021 Feb 4
+
     # v4.8
+
     commit78eaae3db5ed184c90f4f14d34a4fc000f04bdac.commit,  # 2021 Feb 26
+
     # v5.0
+
     commitb25d07626e4693cd370a2070e17f6baa825a1d43.commit,  # 2021 Mar 15
+
+    # v5.1
+
     commit09b79d6c0e7f72b533a3ad21e776b200a973698a.commit,  # 2021 Apr 20
     commite18de6ebaa298881aab7e8e69580905ffb97e0c4.commit,  # 2021 Apr 21
     commit7202dbdb81274e521b0e2cdd3afedeb2a6204567.commit,  # 2021 Apr 22

@@ -1,4 +1,4 @@
-# Copyright (c) 2020, Galois, Inc.
+# Copyright (c) 2021, Galois, Inc.
 #
 # All Rights Reserved
 #
@@ -15,16 +15,25 @@ from ontology_changes import Commit, RenameProperty
 AGENTS = rack("AGENTS")
 PROV_S = rack("PROV-S")
 
-commit: Commit = {
-    "number": "d69285ee059a6c2c2b3ec793aa4abe71bce79189",
-    "changes": [
+commit = Commit(
+    number="9af9030fe191d564875c067f6e0319ca6b52b798",
+    changes=[
         # AGENTS.sadl
         RenameProperty(
             from_name_space=AGENTS,
+            from_class="ORGANIZATION",
             from_name="name",
             to_name_space=PROV_S,
+            to_class="AGENT",
             to_name="agentName",
         ),
-        # AddedProperty toolVersion?
+        RenameProperty(
+            from_name_space=AGENTS,
+            from_class="PERSON",
+            from_name="name",
+            to_name_space=PROV_S,
+            to_class="AGENT",
+            to_name="agentName",
+        ),
     ],
-}
+)

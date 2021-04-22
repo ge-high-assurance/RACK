@@ -34,9 +34,11 @@ class RenameProperty(OntologyChange):
     """
 
     from_name_space: NameSpace
+    from_class: str
     from_name: str
 
     to_name_space: NameSpace
+    to_class: str
     to_name: str
 
     def text_description(self) -> str:

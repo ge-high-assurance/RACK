@@ -1,4 +1,4 @@
-# Copyright (c) 2020, Galois, Inc.
+# Copyright (c) 2021, Galois, Inc.
 #
 # All Rights Reserved
 #
@@ -11,21 +11,21 @@
 
 from migration_helpers.name_space import rack
 from ontology_changes import (
+    Commit,
     ChangeIsATypeOf,
     ChangePropertyRange,
-    Commit,
     DeleteProperty,
     RenameClass,
     RenameProperty,
 )
 
-FILE = rack("FILE")
 PROV_S = rack("PROV-S")
 SOFTWARE = rack("SOFTWARE")
+SYSTEM = rack("SYSTEM")
 
-commit: Commit = {
-    "number": "182d0483a73cdc221c692c71e0d4e64f92f5079a",
-    "changes": [
+commit = Commit(
+    number="bdfef3d7ea9b3c9fc085defa8e26256f646097d9",
+    changes=[
         # SOFTWARE.sadl
         ChangeIsATypeOf(
             class_id="COMPILE",
@@ -39,21 +39,13 @@ commit: Commit = {
             from_property_id="used",
             to_property_id="wasAssociatedWith",
         ),
-        RenameClass(
-            from_name_space=SOFTWARE,
-            from_name="COMPONENT",
-            to_name_space=SOFTWARE,
-            to_name="SWCOMPONENT",
-        ),
-        # WARNING: if you move the above RenameClass further down, you need to
-        # beware of using the correct one of COMPONENT vs. SWCOMPONENT
         ChangePropertyRange(
             prop_name_space=SOFTWARE,
             prop_name="mentions",
             from_name_space=PROV_S,
             from_range="ENTITY",
             to_name_space=SOFTWARE,
-            to_range="SWCOMPONENT",
+            to_range="COMPONENT",
         ),
         ChangePropertyRange(
             prop_name_space=SOFTWARE,
@@ -61,18 +53,24 @@ commit: Commit = {
             from_name_space=PROV_S,
             from_range="ENTITY",
             to_name_space=SOFTWARE,
-            to_range="SWCOMPONENT",
+            to_range="COMPONENT",
         ),
         RenameProperty(
             from_name_space=SOFTWARE,
+            from_class="COMPONENT",
             from_name="name",
             to_name_space=PROV_S,
+            to_class="THING",
             to_name="title",
         ),
-        # Technically, this commit deletes the COMPONENT#definedIn property.
-        # However, a concurrent commit (643839e7) renamed it to FILE#definedIn,
-        # so let's just skip it here so that the other commit does the patching
-        # work.
+        # NOTE: renaming class last so that the previous changes can be in terms
+        # of 'COMPONENT' rather than 'SWCOMPONENT'
+        RenameClass(
+            from_name_space=SOFTWARE,
+            from_name="COMPONENT",
+            to_name_space=SOFTWARE,
+            to_name="SWCOMPONENT",
+        ),
         DeleteProperty(
             name_space=SOFTWARE,
             property_id="requirements",
@@ -89,5 +87,29 @@ commit: Commit = {
             name_space=SOFTWARE,
             property_id="controlFlowsToConditionally",
         ),
+        # SYSTEM.sadl
+        # RemoveIsATypeOf SYSTEM partOf
+        # RemoveIsATypeOf SYSTEM provides
+        # RemoveIsATypeOf SYSTEM requires
+        ChangeIsATypeOf(
+            class_id="SYSTEM",
+            property_id="function",
+            from_property_id="wasDerivedFrom",
+            to_property_id="wasImpactedBy",
+        ),
+        # AddedProperty commodity
+        ChangeIsATypeOf(
+            class_id="INTERFACE",
+            property_id="source",
+            from_property_id="wasDerivedFrom",
+            to_property_id="wasImpactedBy",
+        ),
+        # RemoveIsATypeOf INTERFACE identifiedBy
+        # AddIsATypeOf SYSTEM_DEVELOPMENT developedBy
+        # RemoveIsATypeOf FUNCTION parentFunction
+        DeleteProperty(
+            name_space=SYSTEM,
+            property_id="envConstraint",
+        ),
     ],
-}
+)

@@ -1,4 +1,4 @@
-# Copyright (c) 2020, Galois, Inc.
+# Copyright (c) 2021, Galois, Inc.
 #
 # All Rights Reserved
 #
@@ -12,9 +12,9 @@
 from ontology_changes import ChangeIsATypeOf, Commit
 
 
-commit: Commit = {
-    "number": "05a03cd687e3bdce425794763e0957d3ccaf8ff0",
-    "changes": [
+commit = Commit(
+    number="05a03cd687e3bdce425794763e0957d3ccaf8ff0",
+    changes=[
         # HAZARD.sadl
         ChangeIsATypeOf(
             class_id="HAZARD",
@@ -24,4 +24,4 @@ commit: Commit = {
         ),
         # RemoveIsATypeOf on identified?
     ],
-}
+)

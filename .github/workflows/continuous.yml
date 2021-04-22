@@ -88,11 +88,10 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: ge-high-assurance/RACK
-        token: ${{ secrets.RACK_CI_PAT }}
         path: RACK
 
     - name: Check out RACK wiki
-      if: steps.cache-files.outputs.cache-hit != 'true'
+      if: steps.cache-files.outputs.cache-hit != 'true' && github.repository == 'ge-high-assurance/RACK'
       uses: actions/checkout@v2
       with:
         repository: ge-high-assurance/RACK.wiki
@@ -138,7 +137,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: ge-high-assurance/RACK
-        token: ${{ secrets.RACK_CI_PAT }}
         path: RACK
 
     - name: Set up Python
@@ -198,7 +196,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: ge-high-assurance/RACK
-        token: ${{ secrets.RACK_CI_PAT }}
         path: RACK
 
     - name: Get all files needed by rack-box

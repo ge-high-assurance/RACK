@@ -14,27 +14,30 @@ from typing import List
 from ontology_changes.ontology_change import Commit
 from rack.commits import (
     # <CHANGE_CRAWLER_IMPORTS> DO NOT EDIT OR MOVE THIS LINE
-    commitae0a7660b0afdd53ff334577fbdea7749abe6cf6,
-    commit2e079bb2a32b3cc1b3153d44ad0c21e27507937f,
-    commit9af9030fe191d564875c067f6e0319ca6b52b798,
     commit05a03cd687e3bdce425794763e0957d3ccaf8ff0,
-    commitfa603aad886439eb6a94e44e2c6f4851af16c9a3,
+    commit09b79d6c0e7f72b533a3ad21e776b200a973698a,
     commit10da69db606ebdc721fd3f8e003ef2099a5fdc43,
-    commitd48e208669c589d070c7c5fb7e3129ababbb9193,
-    commit90f2d4f55668786ffa01bba2a646c7468849c97d,
-    commit833ef18f5024fee255f77887de2c8e9bc136e56d,
-    commitd8271d216704351cf0007a04abac47f4abc993ad,
     commit13ed266ba5730cebe75c0c48f6ba83af69429122,
-    commitff31a28051a5e348fd2474fce5360195999ddb3a,
+    commit2e079bb2a32b3cc1b3153d44ad0c21e27507937f,
     commit44393cc30bb0ba7482acd21b2e68576b577179f9,
-    commit581f1820855eee2445d9e8bfdbb639e169e9391e,
-    commitb721c16f0f7420a8ccd92bda0d98a96c16dc62b8,
-    commitc6692fed3e150e7df53d4a2a8f8c84f760087420,
     commit4f9fce78e36a6dc75f1702ab50da6a4ac801dd5e,
+    commit581f1820855eee2445d9e8bfdbb639e169e9391e,
     commit643839e7d8036731ba1da767942c8e74c2876e2e,
-    commitbdfef3d7ea9b3c9fc085defa8e26256f646097d9,
+    commit7202dbdb81274e521b0e2cdd3afedeb2a6204567,
     commit78eaae3db5ed184c90f4f14d34a4fc000f04bdac,
+    commit833ef18f5024fee255f77887de2c8e9bc136e56d,
+    commit90f2d4f55668786ffa01bba2a646c7468849c97d,
+    commit9af9030fe191d564875c067f6e0319ca6b52b798,
+    commitae0a7660b0afdd53ff334577fbdea7749abe6cf6,
     commitb25d07626e4693cd370a2070e17f6baa825a1d43,
+    commitb721c16f0f7420a8ccd92bda0d98a96c16dc62b8,
+    commitbdfef3d7ea9b3c9fc085defa8e26256f646097d9,
+    commitc6692fed3e150e7df53d4a2a8f8c84f760087420,
+    commitd48e208669c589d070c7c5fb7e3129ababbb9193,
+    commitd8271d216704351cf0007a04abac47f4abc993ad,
+    commite18de6ebaa298881aab7e8e69580905ffb97e0c4,
+    commitfa603aad886439eb6a94e44e2c6f4851af16c9a3,
+    commitff31a28051a5e348fd2474fce5360195999ddb3a,
 )
 
 # WARNING: commit dates may not reflect the history order, and are not even the
@@ -74,9 +77,12 @@ commits_in_chronological_order: List[Commit] = [
     commit643839e7d8036731ba1da767942c8e74c2876e2e.commit,  # 2021 Jan 21
     commitbdfef3d7ea9b3c9fc085defa8e26256f646097d9.commit,  # 2021 Feb 4
     # v4.8
-    commit78eaae3db5ed184c90f4f14d34a4fc000f04bdac.commit,  # FIXME: ORGANIZE ME
+    commit78eaae3db5ed184c90f4f14d34a4fc000f04bdac.commit,  # 2021 Feb 26
     # v5.0
-    commitb25d07626e4693cd370a2070e17f6baa825a1d43.commit,  # 2021-03-15
+    commitb25d07626e4693cd370a2070e17f6baa825a1d43.commit,  # 2021 Mar 15
+    commit09b79d6c0e7f72b533a3ad21e776b200a973698a.commit,  # 2021 Apr 20
+    commite18de6ebaa298881aab7e8e69580905ffb97e0c4.commit,  # 2021 Apr 21
+    commit7202dbdb81274e521b0e2cdd3afedeb2a6204567.commit,  # 2021 Apr 22
 
     # most recent (in history)
 ]

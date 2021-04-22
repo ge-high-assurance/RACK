@@ -271,7 +271,7 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     """Ingest a CSV file using the named nodegroup."""
 
     def suffix(result: dict) -> str:
-        return f' Records: {result["recordsProcessed"]: <7} Failures: {result["failuresEncountered"]}'
+        return f' Result: {result}'
 
     @with_status(f'Loading {str_highlight(nodegroup)}', suffix)
     def go() -> dict:

@@ -9,11 +9,19 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from ontology_changes import Commit
+from migration_helpers.name_space import rack
+from ontology_changes import ChangeCardinality, Commit, Unconstrained
+
+REVIEW = rack("REVIEW")
 
 commit = Commit(
     number="b721c16f0f7420a8ccd92bda0d98a96c16dc62b8",
     changes=[
-        # nothing relevant
+        ChangeCardinality(
+            name_space=REVIEW,
+            class_id="REVIEW",
+            property_id="author",
+            to_cardinality=Unconstrained(),
+        ),
     ],
 )

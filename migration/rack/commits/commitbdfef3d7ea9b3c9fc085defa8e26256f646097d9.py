@@ -11,12 +11,17 @@
 
 from migration_helpers.name_space import rack
 from ontology_changes import (
-    Commit,
-    ChangeIsATypeOf,
+    AddPropertyIsATypeOf,
+    AtMost,
+    ChangeCardinality,
+    ChangePropertyIsATypeOf,
     ChangePropertyRange,
+    Commit,
+    CreateProperty,
     DeleteProperty,
     RenameClass,
     RenameProperty,
+    RemoveIsATypeOf,
 )
 
 PROV_S = rack("PROV-S")
@@ -27,16 +32,22 @@ commit = Commit(
     number="bdfef3d7ea9b3c9fc085defa8e26256f646097d9",
     changes=[
         # SOFTWARE.sadl
-        ChangeIsATypeOf(
+        ChangePropertyIsATypeOf(
+            name_space=SOFTWARE,
             class_id="COMPILE",
             property_id="compiledBy",
+            from_name_space=PROV_S,
             from_property_id="used",
+            to_name_space=PROV_S,
             to_property_id="wasAssociatedWith",
         ),
-        ChangeIsATypeOf(
+        ChangePropertyIsATypeOf(
+            name_space=SOFTWARE,
             class_id="PACKAGE",
             property_id="packagedBy",
+            from_name_space=PROV_S,
             from_property_id="used",
+            to_name_space=PROV_S,
             to_property_id="wasAssociatedWith",
         ),
         ChangePropertyRange(
@@ -88,25 +99,89 @@ commit = Commit(
             property_id="controlFlowsToConditionally",
         ),
         # SYSTEM.sadl
-        # RemoveIsATypeOf SYSTEM partOf
-        # RemoveIsATypeOf SYSTEM provides
-        # RemoveIsATypeOf SYSTEM requires
-        ChangeIsATypeOf(
+        RemoveIsATypeOf(
+            name_space=SYSTEM,
+            class_id="SYSTEM",
+            property_id="partOf",
+            range_id="wasDerivedFrom",
+        ),
+        ChangeCardinality(
+            name_space=SYSTEM,
+            class_id="SYSTEM",
+            property_id="producedBy",
+            to_cardinality=AtMost(1),
+        ),
+        RemoveIsATypeOf(
+            name_space=SYSTEM,
+            class_id="SYSTEM",
+            property_id="provides",
+            range_id="wasDerivedFrom",
+        ),
+        RemoveIsATypeOf(
+            name_space=SYSTEM,
+            class_id="SYSTEM",
+            property_id="requires",
+            range_id="wasDerivedFrom",
+        ),
+        ChangePropertyIsATypeOf(
+            name_space=SYSTEM,
             class_id="SYSTEM",
             property_id="function",
+            from_name_space=PROV_S,
             from_property_id="wasDerivedFrom",
+            to_name_space=PROV_S,
             to_property_id="wasImpactedBy",
         ),
-        # AddedProperty commodity
-        ChangeIsATypeOf(
+        CreateProperty(
+            name_space=SYSTEM,
+            class_id="INTERFACE",
+            property_id="commodity",
+        ),
+        ChangePropertyIsATypeOf(
+            name_space=SYSTEM,
             class_id="INTERFACE",
             property_id="source",
+            from_name_space=PROV_S,
             from_property_id="wasDerivedFrom",
+            to_name_space=PROV_S,
             to_property_id="wasImpactedBy",
         ),
-        # RemoveIsATypeOf INTERFACE identifiedBy
-        # AddIsATypeOf SYSTEM_DEVELOPMENT developedBy
-        # RemoveIsATypeOf FUNCTION parentFunction
+        ChangePropertyRange(
+            prop_name_space=SYSTEM,
+            prop_name="destination",
+            from_name_space=PROV_S,
+            from_range="ENTITY",
+            to_name_space=SYSTEM,
+            to_range="SYSTEM",
+        ),
+        ChangePropertyIsATypeOf(
+            name_space=SYSTEM,
+            class_id="INTERFACE",
+            property_id="destination",
+            from_name_space=PROV_S,
+            from_property_id="wasDerivedFrom",
+            to_name_space=PROV_S,
+            to_property_id="wasImpactedBy",
+        ),
+        RemoveIsATypeOf(
+            name_space=SYSTEM,
+            class_id="INTERFACE",
+            property_id="identifiedBy",
+            range_id="wasGeneratedBy",
+        ),
+        AddPropertyIsATypeOf(
+            name_space=SYSTEM,
+            class_id="SYSTEM_DEVELOPMENT",
+            property_id="developedBy",
+            range_name_space=PROV_S,
+            range="wasAssociatedWith",
+        ),
+        RemoveIsATypeOf(
+            name_space=SYSTEM,
+            class_id="FUNCTION",
+            property_id="parentFunction",
+            range_id="wasDerivedFrom",
+        ),
         DeleteProperty(
             name_space=SYSTEM,
             property_id="envConstraint",

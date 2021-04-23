@@ -9,13 +9,24 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from ontology_changes import Commit
+from migration_helpers.name_space import rack
+from ontology_changes import Commit, CreateProperty
+
+PROV_S = rack("PROV-S")
 
 commit = Commit(
     number="ae0a7660b0afdd53ff334577fbdea7749abe6cf6",
     changes=[
         # PROV-S.sadl
-        # AddedProperty ENTITY wasRevisionOf
-        # AddedProperty ENTITY wasImpactedBy
+        CreateProperty(
+            name_space=PROV_S,
+            class_id="ENTITY",
+            property_id="wasRevisionOf",
+        ),
+        CreateProperty(
+            name_space=PROV_S,
+            class_id="ENTITY",
+            property_id="wasImpactedBy",
+        ),
     ],
 )

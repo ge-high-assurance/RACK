@@ -14,6 +14,6 @@ from ontology_changes import Commit
 commit = Commit(
     number="c6692fed3e150e7df53d4a2a8f8c84f760087420",
     changes=[
-        # nothing relevant
+        # makes domain and range more explicit, don't think it changes?
     ],
 )

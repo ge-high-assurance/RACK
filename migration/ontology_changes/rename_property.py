@@ -20,6 +20,7 @@ from ontology_changes.ontology_change import (
     log_additional_change,
     log_apply_change,
     log_change,
+    stylize_class,
     stylize_json,
     stylize_property,
 )
@@ -44,7 +45,9 @@ class RenameProperty(OntologyChange):
     def text_description(self) -> str:
         from_prop = stylize_property(get_uri(self.from_name_space, self.from_name))
         to_prop = stylize_property(get_uri(self.from_name_space, self.from_name))
-        return f"Property {from_prop} was renamed to {to_prop}"
+        from_class = stylize_class(get_uri(self.from_name_space, self.from_class))
+        to_class = stylize_class(get_uri(self.from_name_space, self.to_class))
+        return f"Property {from_prop} (ranging over {from_class}) was renamed to {to_prop} (ranging over {to_class})."
 
     def migrate_json(self, json: semtk.SemTKJSON) -> None:
         log_apply_change(self.text_description())

@@ -101,6 +101,7 @@ import "http://arcos.rack/MODEL".
          propertyBasis (note "entity impacting the property definition - e.g. SystemconOps") describes SpecificProperty with values of type ENTITY.
          propertyBasis is a type of wasImpactedBy.
          H:mitigates (note "a hazard (if any) the property mitigates") describes SpecificProperty with values of type HAZARD.
+         verficationObjective (note "") describes GenericProperty with values of type ENTITY. 
          // NOTE: a SpecificProperty is modeled by entities such as SallyPropertyModel; that's where the property text is contained
          
      ////////////////////////////////////////////////
@@ -117,7 +118,7 @@ import "http://arcos.rack/MODEL".
         //    startedAtTime
         //    endedAtTime
      
-     SystemArchitecture (note "Radl specification of system architecture") is a type of ENTITY.
+     SystemArchitecture (note "specification of system architecture") is a type of ENTITY.
        DesCert:createdBy describes SystemArchitecture with a single value of type DevelopSystemArchitecture.
        DesCert:createdBy is a type of wasGeneratedBy.
        governs describes SystemArchitecture with values of type SYSTEM.
@@ -287,7 +288,7 @@ import "http://arcos.rack/MODEL".
         // this entity models a SpecificProperty that is checked by Sally
         sallyPropertyNotation describes SallyPropertyModel with a single value of type SallyNotation. 
         sallyPropertyNotation is a type of wasImpactedBy.
-        sallyPropertySpecification (note "the property text") describes SallyPropertyModel with a single value of type string.
+        sallyPropertySpecification (note "the property content/text") describes SallyPropertyModel with a single value of type string.
         // inherited property
         models of SallyPropertyModel only has values of type SpecificProperty. 
 
@@ -296,7 +297,7 @@ import "http://arcos.rack/MODEL".
        
        ClearTestAndOracleGeneration is a type of TEST_DEVELOPMENT.
          // Test oracles and test generation by Text2Test tool from CLEAR requirements
-        toolInvocation (note "Text2Test tool usgae instance") describes ClearTestAndOracleGeneration with values of type ToolInvocation.
+        toolInvocation (note "Text2Test tool usage instance") describes ClearTestAndOracleGeneration with values of type ToolInvocation.
         toolInvocation describes ClearTestAndOracleGeneration with at most 1 value.
         // Inherited porperties
         //   developedBy: refers to Text2Test tool
@@ -374,3 +375,34 @@ import "http://arcos.rack/MODEL".
         tst:producedBy is a type of wasGeneratedBy.
         verifies describes RandoopTestsAndMetrics with values of type SourceCode.
         // verifies is a type of wasImpactedBy.
+        
+        /////////////////////////////////////////////
+        // Invariant detection by Daikon
+        DaikonInvariantDetection is a type of ACTIVITY.
+          toolInvocation (note "Daikon tool invocation") describes DaikonInvariantDetection with values of type ToolInvocation.
+          toolInvocation describes DaikonInvariantDetection with at most 1 value.
+          // Inherited porperties
+          //   developedBy: refers to Randoop tool
+          //   wasInformedBy: activity that was a precursor to this
+          used of DaikonInvariantDetection only has values of type {SourceCode, RandoopTestsAndMetrics}.
+          
+        DaikonInvariantOutput is a type of ENTITY.
+          // inherited properties from ENTITY:
+          //   identifier
+          //   generatedAtTime
+          //   wasImpactedBy of DaikonInvariantOutput has values of type RandoopTestsAndMetrics.
+          // new properties:
+          verifies describes DaikonInvariantOutput with values of type SourceCode.
+          tst:producedBy describes DaikonInvariantOutput with a single value of type DaikonInvariantDetection.
+          tst:producedBy is a type of wasGeneratedBy.
+          invariantCount describes DaikonInvariantOutput with a single value of type int.
+          classesCount describes DaikonInvariantOutput with a single value of type int.
+          testsCount describes DaikonInvariantOutput with a single value of type int.
+          supportFiles describes DaikonInvariantOutput with values of type FILE.
+          testDriver describes DaikonInvariantOutput with values of type FILE.
+          likelyInvariants describes DaikonInvariantOutput with values of type SpecificProperty.
+        
+        LikelyInvariantModel (note "model of invariant detected by Daikon") is a type of MODEL.
+          invariantSpecification (note "the likely invariant text") describes LikelyInvariantModel with a single value of type string.
+          // inherited property
+          models of LikelyInvariantModel only has values of type SpecificProperty.

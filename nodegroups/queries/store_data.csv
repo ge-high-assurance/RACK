@@ -17,3 +17,14 @@ query test empty thing,Check for non-SYSTEM typed things with identifer and no o
 query Requirements without passed test,"No Test, or no test result, or failure",200001934,query Requirements without passed test.json
 query Models for Thing,Query that finds all the models and their types given a target THING identifier,em,query Models for Thing.json
 query Get DataInsertedBy From Guid,Query that finds all all dataInsertedBy infromation for a THING selected by guid,dr,GetDataInsertedByFromGuid.json
+query dataVal INTERFACE without destination SYSTEM,number of INTERFACE w/o -destination-> SYSTEM should be 0,rack,query dataVal INTERFACE without destination SYSTEM.json
+query dataVal INTERFACE without source SYSTEM,number of INTERFACE w/o -source-> SYSTEM should be 0,rack,query dataVal INTERFACE without source SYSTEM.json
+query dataVal only REQUIREMENT subclasses,number of REQUIREMENT != {SRS_Req or SubDD or CIDS or PIDS} should be 0,rack,query dataVal only REQUIREMENT subclasses.json
+query dataVal SBVT_Result without confirms_SBVT_Test,number of SBVT_Result w/o -confirms->SBVT_Test should be 0,rack,query dataVal SBVT_Result without confirms_SBVT_Test.json
+query dataVal SBVT_Test without REQUIREMENT,number of SBVT_Test w/o -verifies->REQUIREMENT should be 0,rack,query dataVal SBVT_Test without REQUIREMENT.json
+query dataVal SRS_Req dataInsertedBy other than SRS Data Ingestion,number of SRS_Req w/o -dataInsertedBy-> SRS Data Ingestion should be 0,rack,query dataVal SRS_Req dataInsertedBy other than SRS Data Ingestion.json
+query dataVal SRS_Req without CSID or PIDS,number of SRS_Req w/o -satisfies-> {CSID or PIDS} should be 0,rack,query dataVal SRS_Req without CSID_PIDS.json
+query dataVal SRS_Req without description,number of SRS_Req w/o descriptions should be 0,rack,query dataVal SRS_Req without description.json
+query dataVal SRS_Req without verifies SBVT_Test,number of SRS_Req w/o <-verifies- SBVT_Test should be 0,rack,query dataVal SRS_Req without verifies SBVT_Test.json
+query dataVal SubDD_Req without satisfies SRS_Req,number of SubDD w/o -satisfies-> SRS_Req should be 0,rack,query dataVal SubDD_Req without satisfies SRS_Req.json
+query dataVal SYSTEM without partOf SYSTEM,number of SYSTEM w/o -partOf-> SYSTEM should be 1,rack,query dataVal SYSTEM without partOf SYSTEM.json

@@ -1,7 +1,6 @@
 ID,comments,creator,jsonFile
 ingest_CODE_GEN,Auto-generated ingestion for CODE_GEN,auto,ingest_CODE_GEN.json
 ingest_SYSTEM_DEVELOPMENT,Auto-generated ingestion for SYSTEM_DEVELOPMENT,auto,ingest_SYSTEM_DEVELOPMENT.json
-ingest_ASSERTED_CONTEXT,Auto-generated ingestion for ASSERTED_CONTEXT,auto,ingest_ASSERTED_CONTEXT.json
 ingest_MODEL,Auto-generated ingestion for MODEL,auto,ingest_MODEL.json
 ingest_TEST_DEVELOPMENT,Auto-generated ingestion for TEST_DEVELOPMENT,auto,ingest_TEST_DEVELOPMENT.json
 ingest_StrPort,Auto-generated ingestion for StrPort,auto,ingest_StrPort.json
@@ -14,7 +13,6 @@ ingest_SourceCode,Auto-generated ingestion for SourceCode,auto,ingest_SourceCode
 ingest_SoftwareComponentTestResult,Auto-generated ingestion for SoftwareComponentTestResult,auto,ingest_SoftwareComponentTestResult.json
 ingest_SystemInterfaceDefinition,Auto-generated ingestion for SystemInterfaceDefinition,auto,ingest_SystemInterfaceDefinition.json
 ingest_THING,Auto-generated ingestion for THING,auto,ingest_THING.json
-ingest_CLAIM,Auto-generated ingestion for CLAIM,auto,ingest_CLAIM.json
 ingest_INTERFACE,Auto-generated ingestion for INTERFACE,auto,ingest_INTERFACE.json
 ingest_OP_ENV,Auto-generated ingestion for OP_ENV,auto,ingest_OP_ENV.json
 ingest_DevelopSystemArchitecture,Auto-generated ingestion for DevelopSystemArchitecture,auto,ingest_DevelopSystemArchitecture.json
@@ -43,7 +41,6 @@ ingest_SoftwareComponentTest,Auto-generated ingestion for SoftwareComponentTest,
 ingest_SoftwareUnitTestResult,Auto-generated ingestion for SoftwareUnitTestResult,auto,ingest_SoftwareUnitTestResult.json
 ingest_PACKAGE,Auto-generated ingestion for PACKAGE,auto,ingest_PACKAGE.json
 ingest_REQUEST,Auto-generated ingestion for REQUEST,auto,ingest_REQUEST.json
-ingest_ARGUMENT_PACKAGE,Auto-generated ingestion for ARGUMENT_PACKAGE,auto,ingest_ARGUMENT_PACKAGE.json
 ingest_Change_Authorization,Auto-generated ingestion for Change_Authorization,auto,ingest_Change_Authorization.json
 ingest_SoftwareThread,Auto-generated ingestion for SoftwareThread,auto,ingest_SoftwareThread.json
 ingest_SoftwareDesignReviewArtifacts,Auto-generated ingestion for SoftwareDesignReviewArtifacts,auto,ingest_SoftwareDesignReviewArtifacts.json
@@ -66,7 +63,6 @@ ingest_RequirementConfigurationManagement,Auto-generated ingestion for Requireme
 ingest_StrComponent,Auto-generated ingestion for StrComponent,auto,ingest_StrComponent.json
 ingest_SoftwareCodeReview,Auto-generated ingestion for SoftwareCodeReview,auto,ingest_SoftwareCodeReview.json
 ingest_HASH_TYPE,Auto-generated ingestion for HASH_TYPE,auto,ingest_HASH_TYPE.json
-ingest_ARGUMENT_REASONING,Auto-generated ingestion for ARGUMENT_REASONING,auto,ingest_ARGUMENT_REASONING.json
 ingest_DESCRIPTION,Auto-generated ingestion for DESCRIPTION,auto,ingest_DESCRIPTION.json
 ingest_SYSTEM,Auto-generated ingestion for SYSTEM,auto,ingest_SYSTEM.json
 ingest_TEST_STATUS,Auto-generated ingestion for TEST_STATUS,auto,ingest_TEST_STATUS.json
@@ -117,8 +113,6 @@ ingest_REVIEW_LOG,Auto-generated ingestion for REVIEW_LOG,auto,ingest_REVIEW_LOG
 ingest_SoftwareCoding,Auto-generated ingestion for SoftwareCoding,auto,ingest_SoftwareCoding.json
 ingest_TOOL,Auto-generated ingestion for TOOL,auto,ingest_TOOL.json
 ingest_DevelopUnitTests,Auto-generated ingestion for DevelopUnitTests,auto,ingest_DevelopUnitTests.json
-ingest_ASSERTED_INFERENCE,Auto-generated ingestion for ASSERTED_INFERENCE,auto,ingest_ASSERTED_INFERENCE.json
 ingest_SystemRequirementsDefinition,Auto-generated ingestion for SystemRequirementsDefinition,auto,ingest_SystemRequirementsDefinition.json
-ingest_ARTIFACT_REFERENCE,Auto-generated ingestion for ARTIFACT_REFERENCE,auto,ingest_ARTIFACT_REFERENCE.json
 ingest_REQUIREMENT,Auto-generated ingestion for REQUIREMENT,auto,ingest_REQUIREMENT.json
 ingest_ACTIVITY,Auto-generated ingestion for ACTIVITY,auto,ingest_ACTIVITY.json

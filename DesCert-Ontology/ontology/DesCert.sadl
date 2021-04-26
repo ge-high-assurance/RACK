@@ -91,7 +91,7 @@ import "http://arcos.rack/MODEL".
       GenericProperty is a type of ENTITY.
         propertyScope (note "entity(ies) over which this property must hold; e.g., a model, a requirement set, code, etc.") describes GenericProperty with values of type ENTITY.
         propertyScope is a type of wasImpactedBy.
-        H:mitigates (note "a hazard (if any) the property mitigates; GenericProperty typcially doesn't mitigate any specific hazard") describes GenericProperty with values of type HAZARD.
+        H:mitigates describes GenericProperty with values of type HAZARD.
         propertyDescription (note "propety objective: e.g., 'architecture is conformant', 'requirements are consistent', 'code is free of runtime errors, etc.") describes GenericProperty with a single value of type string.
         verficationObjective (note "") describes GenericProperty with values of type ENTITY.
      
@@ -100,7 +100,7 @@ import "http://arcos.rack/MODEL".
          propertyScope is a type of wasImpactedBy.
          propertyBasis (note "entity impacting the property definition - e.g. SystemconOps") describes SpecificProperty with values of type ENTITY.
          propertyBasis is a type of wasImpactedBy.
-         H:mitigates (note "a hazard (if any) the property mitigates") describes SpecificProperty with values of type HAZARD.
+         H:mitigates describes SpecificProperty with values of type HAZARD.
          verficationObjective (note "") describes GenericProperty with values of type ENTITY. 
          // NOTE: a SpecificProperty is modeled by entities such as SallyPropertyModel; that's where the property text is contained
          
@@ -384,7 +384,7 @@ import "http://arcos.rack/MODEL".
           // Inherited porperties
           //   developedBy: refers to Randoop tool
           //   wasInformedBy: activity that was a precursor to this
-          used of DaikonInvariantDetection only has values of type {SourceCode, RandoopTestsAndMetrics}.
+          used of DaikonInvariantDetection only has values of type {SourceCode or RandoopTestsAndMetrics}.
           
         DaikonInvariantOutput is a type of ENTITY.
           // inherited properties from ENTITY:

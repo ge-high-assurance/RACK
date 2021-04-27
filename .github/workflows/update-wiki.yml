@@ -1,10 +1,9 @@
-# Runs after every push (except tag-only pushes) to the nodegroups/queries/store_data.csv on master branch
+# Runs after every push to the nodegroups/queries/store_data.csv on master branch
 
 name: RACK Update Wiki Workflow
 on:
   push:
     branches: [ master ]
-    tags-ignore: [ '*' ]
     paths:
       - 'nodegroups/queries/store_data.csv'
   workflow_dispatch:

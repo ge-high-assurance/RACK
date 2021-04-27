@@ -14,6 +14,6 @@ from ontology_changes import Commit
 commit = Commit(
     number="d48e208669c589d070c7c5fb7e3129ababbb9193",
     changes=[
-        # nothing relevant
+        # note change only
     ],
 )

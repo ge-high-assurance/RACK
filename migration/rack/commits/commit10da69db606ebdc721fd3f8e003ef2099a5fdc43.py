@@ -10,7 +10,7 @@
 # of the Defense Advanced Research Projects Agency (DARPA).
 
 from migration_helpers.name_space import rack
-from ontology_changes import Commit, RenameProperty
+from ontology_changes import Commit, CreateClass, RenameProperty
 
 DOCUMENT = rack("DOCUMENT")
 PROV_S = rack("PROV-S")
@@ -19,7 +19,10 @@ commit = Commit(
     number="10da69db606ebdc721fd3f8e003ef2099a5fdc43",
     changes=[
         # DOCUMENT.sadl
-        # AddedClass DOCUMENT that replaces a lot of classes!
+        CreateClass(
+            name_space=DOCUMENT,
+            class_id="DOCUMENT",
+        ),
         # DOCUMENT#DESCRIPTION
         RenameProperty(
             from_name_space=DOCUMENT,

@@ -51,7 +51,7 @@ class ChangePropertyRange(OntologyChange):
         prop = stylize_property(get_uri(self.prop_name_space, self.prop_name))
         from_range = stylize_class(get_uri(self.from_name_space, self.from_range))
         to_range = stylize_class(get_uri(self.to_name_space, self.to_range))
-        return f"Range of property {prop} was changed from {from_range} to {to_range}"
+        return f"Range of property {prop} was changed from {from_range} to {to_range}."
 
     def migrate_json(self, json: semtk.SemTKJSON) -> None:
         log_apply_change(self.text_description())

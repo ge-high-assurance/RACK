@@ -36,7 +36,7 @@ class DeleteProperty(OntologyChange):
 
     def text_description(self) -> str:
         prop = stylize_property(get_uri(self.name_space, self.property_id))
-        return f"{DeleteProperty.__name__} {prop}"
+        return f"Property {prop} was deleted."
 
     def migrate_json(self, json: semtk.SemTKJSON) -> None:
         log_apply_change(self.text_description())

@@ -10,7 +10,7 @@
 # of the Defense Advanced Research Projects Agency (DARPA).
 
 from migration_helpers.name_space import rack
-from ontology_changes import ChangeCardinality, Commit
+from ontology_changes import AtMost, ChangeCardinality, Commit
 
 HAZARD = rack("HAZARD")
 SYSTEM = rack("SYSTEM")
@@ -24,16 +24,19 @@ commit = Commit(
             name_space=HAZARD,
             class_id="HAZARD",
             property_id="effect",
+            to_cardinality=AtMost(1),
         ),
         ChangeCardinality(
             name_space=HAZARD,
             class_id="HAZARD",
             property_id="severity",
+            to_cardinality=AtMost(1),
         ),
         ChangeCardinality(
             name_space=HAZARD,
             class_id="HAZARD",
             property_id="likelihood",
+            to_cardinality=AtMost(1),
         ),
 
         # SYSTEM.sadl
@@ -41,6 +44,7 @@ commit = Commit(
             name_space=SYSTEM,
             class_id="FUNCTION",
             property_id="parentFunction",
+            to_cardinality=AtMost(1),
         ),
 
     ],

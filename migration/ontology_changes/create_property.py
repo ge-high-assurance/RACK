@@ -14,37 +14,33 @@ from dataclasses import dataclass
 import semtk
 from migration_helpers.name_space import NameSpace, get_uri
 
-from ontology_changes.cardinality import Cardinality
 from ontology_changes.ontology_change import (
     OntologyChange,
     log_apply_change,
-    stylize_class,
     stylize_property,
 )
 
 
 @dataclass
-class ChangeCardinality(OntologyChange):
+class CreateProperty(OntologyChange):
     """
-    Represents some change of cardinality.  We don't use this for migration yet.
+    Represents an ontology change where a property has been created.
     """
 
     name_space: NameSpace
     class_id: str
     property_id: str
-    to_cardinality: Cardinality
 
     def text_description(self) -> str:
         prop = stylize_property(get_uri(self.name_space, self.property_id))
-        class_str = stylize_class(get_uri(self.name_space, self.class_id))
-        return f"Property {prop} (ranging over {class_str}) changed cardinality to {self.to_cardinality.text_description()}."
+        return f"Property {prop} was created."
 
     def migrate_json(self, json: semtk.SemTKJSON) -> None:
         log_apply_change(self.text_description())
-        # Currently, do nothing, uncomment if you want to migrate:
+        # do nothing
         # json.accept(MigrationVisitor(self))
 
 
-# class MigrationVisitor(semtk.DefaultSemTKVisitor):
-#     def __init__(self, data: ChangeCardinality):
-#         self.data = data
+class MigrationVisitor(semtk.DefaultSemTKVisitor):
+    def __init__(self, data: CreateProperty):
+        self.data = data

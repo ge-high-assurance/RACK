@@ -10,9 +10,17 @@
 # of the Defense Advanced Research Projects Agency (DARPA).
 
 from migration_helpers.name_space import rack
-from ontology_changes import Commit, ChangeIsATypeOf, RenameClass
+from ontology_changes import (
+    AtMost,
+    Commit,
+    ChangeCardinality,
+    ChangePropertyIsATypeOf,
+    RenameClass,
+    SingleValue,
+)
 
 ANALYSIS = rack("ANALYSIS")
+PROV_S = rack("PROV-S")
 
 commit = Commit(
     number="90f2d4f55668786ffa01bba2a646c7468849c97d",
@@ -24,11 +32,32 @@ commit = Commit(
             to_name_space=ANALYSIS,
             to_name="ANALYSIS_OUTPUT",
         ),
-        ChangeIsATypeOf(
+        ChangeCardinality(
+            name_space=ANALYSIS,
+            class_id="ANALYSIS_OUTPUT",
+            property_id="result",
+            to_cardinality=AtMost(1),
+        ),
+        ChangePropertyIsATypeOf(
+            name_space=ANALYSIS,
             class_id="ANALYSIS_OUTPUT",
             property_id="analyzes",
+            from_name_space=PROV_S,
             from_property_id="wasDerivedFrom",
+            to_name_space=PROV_S,
             to_property_id="wasImpactedBy",
+        ),
+        ChangeCardinality(
+            name_space=ANALYSIS,
+            class_id="ANALYSIS_ANNOTATION",
+            property_id="fromReport",
+            to_cardinality=SingleValue(),
+        ),
+        ChangeCardinality(
+            name_space=ANALYSIS,
+            class_id="ANALYSIS_ANNOTATION",
+            property_id="annotationType",
+            to_cardinality=SingleValue(),
         ),
     ],
 )

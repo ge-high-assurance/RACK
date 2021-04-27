@@ -9,13 +9,24 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-# from migration_helpers.name_space import rack
-from ontology_changes import Commit
+from migration_helpers.name_space import rack
+from ontology_changes import ChangeClassIsATypeOf, Commit
+
+DOCUMENT = rack("DOCUMENT")
+PROV_S = rack("PROV-S")
+REVIEW = rack("REVIEW")
 
 commit = Commit(
     number="581f1820855eee2445d9e8bfdbb639e169e9391e",
     changes=[
         # REVIEW.sadl
-        # ChangeClassIsATypeOf
+        ChangeClassIsATypeOf(
+            name_space=REVIEW,
+            class_id="REVIEW_LOG",
+            from_name_space=DOCUMENT,
+            from_class_id="REPORT",
+            to_name_space=PROV_S,
+            to_class_id="ENTITY",
+        ),
     ],
 )

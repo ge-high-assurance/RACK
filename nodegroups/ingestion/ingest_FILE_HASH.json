@@ -22,7 +22,6 @@
     "offset": 0,
     "sNodeList": [
       {
-        "isReturned": false,
         "propList": [
           {
             "KeyName": "description",
@@ -90,13 +89,8 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?ACTIVITY",
+        "NodeName": "ACTIVITY",
         "binding": "?dataInsertedBy_ACTIVITY",
-        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
             "KeyName": "definedIn",
@@ -159,10 +153,16 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           }
         ],
+        "isReturned": false,
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?ACTIVITY",
+        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/PROV-S#ACTIVITY"
       },
       {
-        "isReturned": false,
         "propList": [
           {
             "KeyName": "description",
@@ -204,13 +204,8 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?HASH_TYPE",
+        "NodeName": "HASH_TYPE",
         "binding": "?hashType_HASH_TYPE",
-        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
             "KeyName": "definedIn",
@@ -237,10 +232,16 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           }
         ],
+        "isReturned": false,
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?HASH_TYPE",
+        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/FILE#HASH_TYPE"
       },
       {
-        "isReturned": false,
         "propList": [
           {
             "KeyName": "filename",
@@ -321,13 +322,8 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?FILE",
+        "NodeName": "FILE",
         "binding": "?definedIn_FILE",
-        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
             "KeyName": "createBy",
@@ -462,6 +458,13 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           }
         ],
+        "isReturned": false,
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?FILE",
+        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/FILE#FILE"
       },
       {
@@ -521,6 +524,7 @@
           }
         ],
         "Constraints": "",
+        "NodeName": "FILE_HASH",
         "isRuntimeConstrained": false,
         "valueConstraint": "",
         "SparqlID": "?FILE_HASH",
@@ -592,7 +596,7 @@
     ],
     "limit": 0,
     "orderBy": [],
-    "version": 13,
+    "version": 12,
     "unionHash": {}
   },
   "importSpec": {

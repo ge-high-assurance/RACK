@@ -22,7 +22,6 @@
     "offset": 0,
     "sNodeList": [
       {
-        "isReturned": false,
         "propList": [
           {
             "KeyName": "description",
@@ -90,13 +89,8 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?ACTIVITY",
+        "NodeName": "ACTIVITY",
         "binding": "?dataInsertedBy_ACTIVITY",
-        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
             "KeyName": "definedIn",
@@ -159,10 +153,16 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           }
         ],
+        "isReturned": false,
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?ACTIVITY",
+        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/PROV-S#ACTIVITY"
       },
       {
-        "isReturned": false,
         "propList": [
           {
             "KeyName": "filename",
@@ -243,13 +243,8 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?FILE",
+        "NodeName": "FILE",
         "binding": "?definedIn_FILE",
-        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
             "KeyName": "createBy",
@@ -384,6 +379,13 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           }
         ],
+        "isReturned": false,
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?FILE",
+        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/FILE#FILE"
       },
       {
@@ -430,6 +432,7 @@
           }
         ],
         "Constraints": "",
+        "NodeName": "DOC_STATUS",
         "isRuntimeConstrained": false,
         "valueConstraint": "",
         "SparqlID": "?DOC_STATUS",
@@ -481,7 +484,7 @@
     ],
     "limit": 0,
     "orderBy": [],
-    "version": 13,
+    "version": 12,
     "unionHash": {}
   },
   "importSpec": {

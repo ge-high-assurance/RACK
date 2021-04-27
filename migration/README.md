@@ -38,7 +38,7 @@ Once in an environment where the tool has been installed, the current invocation
 is:
 
 ```
-rack_migrate --from-folder <path> --to-folder <path>
+rack_migrate --from-folder <path> --to-folder <path> --old-ref <git_reference> --new-ref <git_reference>
 ```
 
 and it will try and migrate all JSON files from the "from" folder, outputting to
@@ -48,6 +48,19 @@ is still in development.
 You can pass an additional `--log-level=<LEVEL>` where `<LEVEL>` can be one
 of `INFO` (default verbosity), or `DEBUG` for details about every step being
 taken.
+
+The mandatory `old-ref` and `new-ref` arguments allow the tool to know which
+time frame you're looking to migrate between.  We recommend using tags like
+`v4.0`, `v5.0`, `master`, but the command also accepts individual commits. To
+ensure the tool will work, you should only use commits from the main development
+branch.
+
+You can also use the following command to list all known changes between two
+revisions without migrating anything:
+
+```
+rack_migrate --list-changes-only --old-ref <git_reference> --new-ref <git_reference>
+```
 
 # RACK crawler
 

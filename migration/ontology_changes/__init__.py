@@ -20,6 +20,7 @@ from ontology_changes.create_class import CreateClass
 from ontology_changes.create_property import CreateProperty
 from ontology_changes.delete_class import DeleteClass
 from ontology_changes.delete_property import DeleteProperty
+from ontology_changes.freeform_notes import FreeformNotes
 from ontology_changes.ontology_change import Commit
 from ontology_changes.rename_class import RenameClass
 from ontology_changes.rename_property import RenameProperty

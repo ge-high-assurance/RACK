@@ -1,4 +1,4 @@
-# Runs after every push (except tag-only pushes) to the stoe_data.csv on master branch
+# Runs after every push (except tag-only pushes) to the nodegroups/queries/store_data.csv on master branch
 
 name: RACK Update Wiki Workflow
 on:
@@ -6,7 +6,7 @@ on:
     branches: [ master ]
     tags-ignore: [ '*' ]
     paths:
-      - 'ge-high-assurance/RACK/nodegroups/queries/store_data.csv'
+      - 'nodegroups/queries/store_data.csv'
   workflow_dispatch:
 
 jobs:

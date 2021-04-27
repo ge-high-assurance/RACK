@@ -19,7 +19,7 @@ query Models for Thing,Query that finds all the models and their types given a t
 query Get DataInsertedBy From Guid,Query that finds all all dataInsertedBy infromation for a THING selected by guid,dr,GetDataInsertedByFromGuid.json
 query dataVal INTERFACE without destination SYSTEM,number of INTERFACE w/o -destination-> SYSTEM should be 0,rack,query dataVal INTERFACE without destination SYSTEM.json
 query dataVal INTERFACE without source SYSTEM,number of INTERFACE w/o -source-> SYSTEM should be 0,rack,query dataVal INTERFACE without source SYSTEM.json
-query dataVal only REQUIREMENT subclasses,number of REQUIREMENT != {SRS_Req or SubDD or CIDS or PIDS} should be 0,rack,query dataVal only REQUIREMENT subclasses.json
+query dataVal only REQUIREMENT subclasses,number of REQUIREMENT != {SRS_Req or SubDD or CSID or PIDS} should be 0,rack,query dataVal only REQUIREMENT subclasses.json
 query dataVal SBVT_Result without confirms_SBVT_Test,number of SBVT_Result w/o -confirms->SBVT_Test should be 0,rack,query dataVal SBVT_Result without confirms_SBVT_Test.json
 query dataVal SBVT_Test without REQUIREMENT,number of SBVT_Test w/o -verifies->REQUIREMENT should be 0,rack,query dataVal SBVT_Test without REQUIREMENT.json
 query dataVal SRS_Req dataInsertedBy other than SRS Data Ingestion,number of SRS_Req w/o -dataInsertedBy-> SRS Data Ingestion should be 0,rack,query dataVal SRS_Req dataInsertedBy other than SRS Data Ingestion.json

@@ -24,14 +24,16 @@ rack model import --clear ../RACK-Ontology/OwlModels/import.yaml
 rack model import ../Turnstile-Ontology/99-Utils/import.yaml
 rack model import ../GrammaTech-Ontology/import.yaml
 rack model import ../STR-Ontology/import.yaml
+rack model import ../DesCert-Ontology/import.yaml
+rack model import ../LM-Ontology/import.yaml
 
 rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest" "^query " "^Ingest-"
 rack nodegroups import ../Turnstile-Ontology/99-Utils/NodeGroups
 rack nodegroups import ../nodegroups/ingestion
 rack nodegroups import ../nodegroups/queries
 
-rack data import --clear ../RACK-Ontology/OwlModels/ARP-4754A.yaml
-rack data import --clear ../RACK-Ontology/OwlModels/DO-330.yaml
-rack data import --clear ../RACK-Ontology/OwlModels/DO-178C.yaml
-rack data import --clear ../RACK-Ontology/OwlModels/MIL-STD-881D.yaml
-rack data import --clear ../Turnstile-Ontology/99-Utils/Data/Model.yaml
+# rack data import --clear ../RACK-Ontology/OwlModels/ARP-4754A.yaml     # from datagraph http://rack001/arp-475a
+# rack data import --clear ../RACK-Ontology/OwlModels/DO-330.yaml        # from datagraph http://rack001/do-330
+rack data import --clear ../RACK-Ontology/OwlModels/DO-178C.yaml         # from datagraph http://rack001/do-178c
+# rack data import --clear ../RACK-Ontology/OwlModels/MIL-STD-881D.yaml  # from datagraph http://rack001/mil-std-881d
+rack data import --clear ../Turnstile-Ontology/99-Utils/Data/Model.yaml  # from datagraph http://rack001/data

@@ -144,7 +144,7 @@ instructions in the following places:
 
 - [ ] [Install-a-Docker-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Docker-RACK-Box)
 - [ ] [Install-a-Virtual-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Virtual-RACK-Box)
-- [ ] [Welcome](https://github.com/ge-high-assurance/RACK/wiki/Welcome)
+- [ ] [Welcome](https://github.com/ge-high-assurance/RACK/wiki/_Welcome)
 
 Note that creating a GitHub release tags the RACK repo automatically,
 but we need to manually tag the RACK wiki with the same tag in advance

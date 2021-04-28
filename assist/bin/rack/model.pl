@@ -25,10 +25,10 @@ description DSL into instances in the model.
               save_model_to_file/2,
 
               load_model_from_url/1,
-              upload_model_to_url/1,
+              upload_model_to_url/2,
 
               load_model_from_rack/0,
-              upload_model_to_rack/0,
+              upload_model_to_rack/1,
 
               % Ontology relationship predicates
               rack_ref/2,
@@ -159,13 +159,14 @@ load_model_from_rack :-
     load_model_from_url('http://localhost:3030/').
 
 
-%! upload_model_to_url(+URL:atom) is semidet.
+%! upload_model_to_url(+URL:atom, +Graph:atom) is semidet.
 %
-% Uploads the local RDF/OWL triples to the specified triple-store HTTP
-% URL.
+% Uploads the local RDF/OWL triples to the specified triple-store
+% graph at the HTTP URL.
 
-upload_model_to_url(URL) :-
-    atom_concat(URL, 'RACK/upload', Tgt),
+upload_model_to_url(URL, NS) :-
+    atom_concat(URL, 'RACK/data?graph=', T1),
+    atom_concat(T1, NS, Tgt),
     with_output_to(string(C), (current_output(S), rdf_save(stream(S),[]))),
     % n.b. Fuseki requires a filename for the upload, but subsequently
     % seems to ignore it, so supply a dummy.  The response is HTML
@@ -179,14 +180,14 @@ upload_model_to_url(URL) :-
               _Response, []).
 
 
-%! upload_model_to_rack is semidet.
+%! upload_model_to_rack(+Graph:atom) is semidet.
 %
 % Uploads the local RDF/OWL triples to the RACK fuseki endpoint.
 %
 % See also upload_model_to_url/1 and save_model_to_file/1.
 
-upload_model_to_rack :-
-    upload_model_to_url('http://localhost:3030/').
+upload_model_to_rack(NS) :-
+    upload_model_to_url('http://localhost:3030/', NS).
 
 
 %! save_model_to_file(+Filename:string) is semidet.

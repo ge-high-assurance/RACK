@@ -23,7 +23,7 @@ query dataVal only REQUIREMENT subclasses,number of REQUIREMENT != {SRS_Req or S
 query dataVal SBVT_Result without confirms_SBVT_Test,number of SBVT_Result w/o -confirms->SBVT_Test should be 0,rack,query dataVal SBVT_Result without confirms_SBVT_Test.json
 query dataVal SBVT_Test without REQUIREMENT,number of SBVT_Test w/o -verifies->REQUIREMENT should be 0,rack,query dataVal SBVT_Test without REQUIREMENT.json
 query dataVal SRS_Req dataInsertedBy other than SRS Data Ingestion,number of SRS_Req w/o -dataInsertedBy-> SRS Data Ingestion should be 0,rack,query dataVal SRS_Req dataInsertedBy other than SRS Data Ingestion.json
-query dataVal SRS_Req without CSID or PIDS,number of SRS_Req w/o -satisfies-> {CSID or PIDS} should be 0,rack,query dataVal SRS_Req without CSID_PIDS.json
+query dataVal SRS_Req without CSID or PIDS,number of SRS_Req w/o -satisfies-> {CSID or PIDS} should be 0,rack,query dataVal SRS_Req without CSID or PIDS.json
 query dataVal SRS_Req without description,number of SRS_Req w/o descriptions should be 0,rack,query dataVal SRS_Req without description.json
 query dataVal SRS_Req without verifies SBVT_Test,number of SRS_Req w/o <-verifies- SBVT_Test should be 0,rack,query dataVal SRS_Req without verifies SBVT_Test.json
 query dataVal SubDD_Req without satisfies SRS_Req,number of SubDD w/o -satisfies-> SRS_Req should be 0,rack,query dataVal SubDD_Req without satisfies SRS_Req.json

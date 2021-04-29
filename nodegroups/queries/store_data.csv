@@ -9,7 +9,7 @@ query Interface structure,Find system source and destination for interface,20000
 query Requirements with Tests,Find requirements verified by testcase,200001934,query Requirements with Tests.json
 query Trace Hazards to Tests,Trace hazard down to test case,200001934,query Trace Hazards to Tests.json
 query Trace Requirements to Tests,Recursively show all requirements which satisfy and verify a testcase,200001934,query Trace Requirements to Tests.json
-query Hazard structure,Find system component associated with the hazards,200001934,query Hazard structure.json
+query Hazard structure,Find system component associated with the hazards traced to tests,200001934,query Hazard structure.json
 query Terms consumedBy Requirement,Find data dictionary terms consumed by requirement(s),200001934,query Terms consumedBy Requirement.json
 query Compilation Inputs,Find inputs used in compilation of executables,langston,query Compilation Inputs.json
 query System Structure,Extract system subcomponent structure contained under a given top-level anchor system,eric,query System Structure.json

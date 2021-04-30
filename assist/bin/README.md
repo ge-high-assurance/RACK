@@ -121,7 +121,7 @@ Prolog modules in this directory:
   2. Generate data for the build process of the Turnstile
 
     ```shell
-    $ cd ../Trunstile-Onotology/02-Software/03-Implementation
+    $ cd ../Turnstile-Ontology/02-Software/03-Implementation
     $ make clean
     $ make test
     # ... note that the test results include a failure; this is expected.

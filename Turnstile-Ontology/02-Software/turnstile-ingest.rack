@@ -19,9 +19,10 @@ data_get('SOFTWARE#CODE_DEVELOPMENT', 'SOFTWARE#referenced',
 % explicit using predicates not normally needed for data recognizers.
 % If the DevelopmentPlan simply specified a SOFTWARE#COMPILE, then
 % this data_get recognizer could be removed.
-data_get('SOFTWARE#COMPILE', 'PROV-S#identifier', uid(Instance,_,_), RDFInstance) :-
+data_get('SOFTWARE#COMPILE', 'PROV-S#identifier', uid(Instance,_,_), Identifier) :-
     rack_namespace(NS),
     ns_ref(NS, Instance, RDFInstance),
+    atom_string(Instance, Identifier),
     add_triple(RDFInstance, rdf:type,
                'http://Turnstile/DevelopmentPlan#SoftwareIntegration').
 

@@ -294,20 +294,21 @@ specification of a namespace for the triples.
 
 ### Uploading to Fuseki
 
-There are two forms for uploading the model in memory to a Fuseki instance:
+There are two forms for uploading the model in memory to a Fuseki
+instance.  Both specify the Graph to upload to:
 
 ```prolog
-upload_model_to_url('http://192.168.0.32:3030/').
+upload_model_to_url('http://192.168.0.32:3030/', 'http://graph/name').
 ```
 
 ---
 
 ```prolog
-upload_model_to_rack().
+upload_model_to_rack('http://graph/name').
 ```
 
-Like in the loading case, the `upload_model_to_url/1` expects to find a
-Fuseki instance at that location, while `upload_model_to_rack/0` expects the
+Like in the loading case, the `upload_model_to_url/2` expects to find a
+Fuseki instance at that location, while `upload_model_to_rack/1` expects the
 instance to live at `localhost:3030/RACK`.
 
 # Design Notes

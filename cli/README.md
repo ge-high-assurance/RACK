@@ -28,8 +28,7 @@ The rack program requires the
 other requirements listed in `requirements.txt`.
 
 We recommend installing these dependencies in an isolated virtual
-environment using [virtualenv](https://pypi.org/project/virtualenv/)
-to ensure reproducibility of results.
+environment to ensure reproducibility of results.
 
 <!--
 Note for documentation authors: These instructions should be kept in sync with
@@ -37,7 +36,7 @@ the RACK-Box README.
 -->
 
 ```shell
-virtualenv venv
+python -m venv venv
 source venv/bin/activate
 pip install --force -r requirements.txt
 python3 setup.py install

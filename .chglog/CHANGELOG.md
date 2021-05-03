@@ -4,9 +4,9 @@
 
 This release has the following changes:
 
-- Loaded LMCO & SRI ontology overlays
-- Loaded only DO-178C, made ARP-4754A, DO-330, & MIL-STD-881D optional
-- Added Boeing data validation query nodegreoup
+- Added LMCO & SRI ontology overlays
+- Loaded only DO-178C in RiB, made ARP-4754A, DO-330, & MIL-STD-881D optional
+- Added Boeing data validation query nodegreoups
 - Added [dataInsertedBy](https://github.com/ge-high-assurance/RACK/wiki/How-to-use-dataInsertedBy) property and predefined nodegroup
 - Improved construct query UI and functionality
 - Added [RACK migration tool](https://github.com/ge-high-assurance/RACK/tree/master/migration)

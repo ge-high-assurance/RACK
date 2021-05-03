@@ -1,12 +1,12 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel"
-    xmlns:provs="http://arcos.rack/PROV-S"
+    xmlns:provs="http://arcos.rack/PROV-S#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sacm="http://arcos.rack/SACM#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.rack/SACM">
   <owl:Ontology rdf:about="">
@@ -16,76 +16,37 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'SACM.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:Class rdf:ID="ARTIFACT_REFERENCE">
+  <owl:Class rdf:ID="Tagged_Value">
     <rdfs:subClassOf>
-      <owl:Class rdf:ID="ARGUMENT_ASSET"/>
+      <owl:Class rdf:ID="Utility_Element"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="TERM">
+  <owl:Class rdf:ID="Terminology_Asset">
     <rdfs:subClassOf>
-      <owl:Class rdf:ID="EXPRESSION_ELEMENT"/>
+      <owl:Class rdf:ID="Terminology_Element"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="TERMINOLOGY_ELEMENT">
+  <owl:Class rdf:ID="Resource">
     <rdfs:subClassOf>
-      <owl:Class rdf:ID="ARTIFACT_ELEMENT"/>
+      <owl:Class rdf:ID="Artifact_Asset"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="TERMINOLOGY_ASSET">
-    <rdfs:subClassOf rdf:resource="#TERMINOLOGY_ELEMENT"/>
-  </owl:Class>
-  <owl:Class rdf:ID="CATEGORY">
-    <rdfs:subClassOf rdf:resource="#TERMINOLOGY_ASSET"/>
-  </owl:Class>
-  <owl:Class rdf:ID="CLAIM">
+  <owl:Class rdf:ID="Activity">
     <rdfs:subClassOf>
-      <owl:Class rdf:ID="ASSERTION"/>
+      <owl:Class rdf:about="#Artifact_Asset"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="TERMINOLOGY_PACKAGE">
-    <rdfs:subClassOf rdf:resource="#TERMINOLOGY_ELEMENT"/>
-  </owl:Class>
-  <owl:Class rdf:ID="MULTI_LANG_STRING">
+  <owl:Class rdf:ID="Artifact">
     <rdfs:subClassOf>
-      <owl:Class rdf:ID="ELEMENT"/>
+      <owl:Class rdf:about="#Artifact_Asset"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="ASSERTED_RELATIONSHIP">
+  <owl:Class rdf:ID="Term">
     <rdfs:subClassOf>
-      <owl:Class rdf:about="#ASSERTION"/>
+      <owl:Class rdf:ID="Expression_Element"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="RESOURCE">
-    <rdfs:subClassOf>
-      <owl:Class rdf:ID="ARTIFACT_ASSET"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="DESCRIPTION">
-    <rdfs:subClassOf>
-      <owl:Class rdf:ID="UTILITY_ELEMENT"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="IMPLEMENTATION_CONSTRAINT">
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#UTILITY_ELEMENT"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="ARTIFACT_ASSET_RELATIONSHIP">
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#ARTIFACT_ASSET"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="PROPERTY">
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#ARTIFACT_ASSET"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="NOTE">
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#UTILITY_ELEMENT"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="LANG_STRING">
+  <owl:Class rdf:ID="Lang_String">
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
@@ -105,53 +66,123 @@
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
-      <owl:Class rdf:about="#ELEMENT"/>
+      <owl:Class rdf:ID="Element"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:about="#ARGUMENT_ASSET">
+  <owl:Class rdf:ID="Assurance_Case_Package">
     <rdfs:subClassOf>
-      <owl:Class rdf:ID="ARGUMENTATION_ELEMENT"/>
+      <owl:Class rdf:ID="Artifact_Element"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="ASSERTED_CONTEXT">
-    <rdfs:subClassOf rdf:resource="#ASSERTED_RELATIONSHIP"/>
-  </owl:Class>
-  <owl:Class rdf:about="#ASSERTION">
-    <rdfs:subClassOf rdf:resource="#ARGUMENT_ASSET"/>
-  </owl:Class>
-  <owl:Class rdf:ID="ARTIFACT">
+  <owl:Class rdf:about="#Artifact_Asset">
     <rdfs:subClassOf>
-      <owl:Class rdf:about="#ARTIFACT_ASSET"/>
+      <owl:Class rdf:about="#Artifact_Element"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="ASSURANCE_CASE_PACKAGE">
+  <owl:Class rdf:ID="Participant">
+    <rdfs:subClassOf rdf:resource="#Artifact_Asset"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Expression_Lang_String">
+    <rdfs:subClassOf rdf:resource="#Lang_String"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Claim">
     <rdfs:subClassOf>
-      <owl:Class rdf:about="#ARTIFACT_ELEMENT"/>
+      <owl:Class rdf:ID="Assertion"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:about="#ARTIFACT_ASSET">
+  <owl:Class rdf:ID="Property">
+    <rdfs:subClassOf rdf:resource="#Artifact_Asset"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Asserted_Evidence">
     <rdfs:subClassOf>
-      <owl:Class rdf:about="#ARTIFACT_ELEMENT"/>
+      <owl:Class rdf:ID="Asserted_Relationship"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="ASSERTED_EVIDENCE">
-    <rdfs:subClassOf rdf:resource="#ASSERTED_RELATIONSHIP"/>
-  </owl:Class>
-  <owl:Class rdf:ID="EVENT">
-    <rdfs:subClassOf rdf:resource="#ARTIFACT_ASSET"/>
-  </owl:Class>
-  <owl:Class rdf:ID="TECHNIQUE">
-    <rdfs:subClassOf rdf:resource="#ARTIFACT_ASSET"/>
-  </owl:Class>
-  <owl:Class rdf:about="#UTILITY_ELEMENT">
+  <owl:Class rdf:ID="Model_Element">
     <rdfs:subClassOf>
-      <owl:Class rdf:ID="SACM_ELEMENT"/>
+      <owl:Class rdf:ID="Sacm_Element"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="TAGGED_VALUE">
-    <rdfs:subClassOf rdf:resource="#UTILITY_ELEMENT"/>
+  <owl:Class rdf:ID="Argument_Reasoning">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Argument_Asset"/>
+    </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:about="#SACM_ELEMENT">
+  <owl:Class rdf:ID="Technique">
+    <rdfs:subClassOf rdf:resource="#Artifact_Asset"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Argument_Package">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Argumentation_Element"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Note">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Utility_Element"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Terminology_Group">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Terminology_Element"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Asserted_Relationship">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Assertion"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Artifact_Element">
+    <rdfs:subClassOf rdf:resource="#Model_Element"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Argumentation_Element">
+    <rdfs:subClassOf rdf:resource="#Artifact_Element"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Expression">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Expression_Element"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Artifact_Asset_Relationship">
+    <rdfs:subClassOf rdf:resource="#Artifact_Asset"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Multi_Lang_String">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Element"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Element">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="uuid"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Implementation_Constraint">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Utility_Element"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Asserted_Context">
+    <rdfs:subClassOf rdf:resource="#Asserted_Relationship"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Argument_Asset">
+    <rdfs:subClassOf rdf:resource="#Argumentation_Element"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Event">
+    <rdfs:subClassOf rdf:resource="#Artifact_Asset"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Terminology_Element">
+    <rdfs:subClassOf rdf:resource="#Artifact_Element"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Assertion">
+    <rdfs:subClassOf rdf:resource="#Argument_Asset"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Sacm_Element">
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
@@ -179,17 +210,27 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#ELEMENT"/>
-    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Element"/>
   </owl:Class>
-  <owl:Class rdf:ID="ARGUMENT_REASONING">
-    <rdfs:subClassOf rdf:resource="#ARGUMENT_ASSET"/>
+  <owl:Class rdf:about="#Utility_Element">
+    <rdfs:subClassOf rdf:resource="#Sacm_Element"/>
   </owl:Class>
-  <owl:Class rdf:ID="TERMINOLOGY_GROUP">
-    <rdfs:subClassOf rdf:resource="#TERMINOLOGY_ELEMENT"/>
+  <owl:Class rdf:ID="Artifact_Reference">
+    <rdfs:subClassOf rdf:resource="#Argument_Asset"/>
   </owl:Class>
-  <owl:Class rdf:about="#EXPRESSION_ELEMENT">
+  <owl:Class rdf:ID="Category">
+    <rdfs:subClassOf rdf:resource="#Terminology_Asset"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Description">
+    <rdfs:subClassOf rdf:resource="#Utility_Element"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Artifact_Package">
+    <rdfs:subClassOf rdf:resource="#Artifact_Element"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Terminology_Package">
+    <rdfs:subClassOf rdf:resource="#Terminology_Element"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Expression_Element">
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
@@ -199,251 +240,208 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="#TERMINOLOGY_ASSET"/>
-  </owl:Class>
-  <owl:Class rdf:about="#ARGUMENTATION_ELEMENT">
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#ARTIFACT_ELEMENT"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="ARTIFACT_PACKAGE">
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="#ARTIFACT_ELEMENT"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="MODEL_ELEMENT">
-    <rdfs:subClassOf rdf:resource="#SACM_ELEMENT"/>
-  </owl:Class>
-  <owl:Class rdf:ID="SACM_ACTIVITY">
-    <rdfs:subClassOf rdf:resource="#ARTIFACT_ASSET"/>
-  </owl:Class>
-  <owl:Class rdf:ID="ARGUMENT_PACKAGE">
-    <rdfs:subClassOf rdf:resource="#ARGUMENTATION_ELEMENT"/>
-  </owl:Class>
-  <owl:Class rdf:about="#ELEMENT">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:ID="uuid"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
-  </owl:Class>
-  <owl:Class rdf:ID="EXPRESSION_LANG_STRING">
-    <rdfs:subClassOf rdf:resource="#LANG_STRING"/>
-  </owl:Class>
-  <owl:Class rdf:about="#ARTIFACT_ELEMENT">
-    <rdfs:subClassOf rdf:resource="#MODEL_ELEMENT"/>
-  </owl:Class>
-  <owl:Class rdf:ID="PARTICIPANT">
-    <rdfs:subClassOf rdf:resource="#ARTIFACT_ASSET"/>
-  </owl:Class>
-  <owl:Class rdf:ID="EXPRESSION">
-    <rdfs:subClassOf rdf:resource="#EXPRESSION_ELEMENT"/>
+    <rdfs:subClassOf rdf:resource="#Terminology_Asset"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="hasImplementationConstraint">
-    <rdfs:range rdf:resource="#IMPLEMENTATION_CONSTRAINT"/>
-    <rdfs:domain rdf:resource="#MODEL_ELEMENT"/>
+    <rdfs:range rdf:resource="#Implementation_Constraint"/>
+    <rdfs:domain rdf:resource="#Model_Element"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hasElement">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
     <rdfs:range>
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#TERMINOLOGY_ELEMENT"/>
-          <owl:Class rdf:about="#ARGUMENTATION_ELEMENT"/>
+          <owl:Class rdf:about="#Terminology_Element"/>
+          <owl:Class rdf:about="#Argumentation_Element"/>
         </owl:unionOf>
       </owl:Class>
     </rdfs:range>
     <rdfs:domain>
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#TERMINOLOGY_PACKAGE"/>
-          <owl:Class rdf:about="#TERMINOLOGY_GROUP"/>
-          <owl:Class rdf:about="#ARGUMENT_PACKAGE"/>
+          <owl:Class rdf:about="#Terminology_Package"/>
+          <owl:Class rdf:about="#Terminology_Group"/>
+          <owl:Class rdf:about="#Argument_Package"/>
         </owl:unionOf>
       </owl:Class>
     </rdfs:domain>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hasName">
-    <rdfs:range rdf:resource="#LANG_STRING"/>
-    <rdfs:domain rdf:resource="#MODEL_ELEMENT"/>
+    <rdfs:range rdf:resource="#Lang_String"/>
+    <rdfs:domain rdf:resource="#Model_Element"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hasValue">
-    <rdfs:range rdf:resource="#LANG_STRING"/>
-    <rdfs:domain rdf:resource="#MULTI_LANG_STRING"/>
+    <rdfs:range rdf:resource="#Lang_String"/>
+    <rdfs:domain rdf:resource="#Multi_Lang_String"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hasArgument">
-    <rdfs:range rdf:resource="#ARGUMENT_PACKAGE"/>
-    <rdfs:domain rdf:resource="#ASSURANCE_CASE_PACKAGE"/>
+    <rdfs:range rdf:resource="#Argument_Package"/>
+    <rdfs:domain rdf:resource="#Assurance_Case_Package"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="inCategory">
-    <rdfs:range rdf:resource="#CATEGORY"/>
-    <rdfs:domain rdf:resource="#EXPRESSION_ELEMENT"/>
+    <rdfs:range rdf:resource="#Category"/>
+    <rdfs:domain rdf:resource="#Expression_Element"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="references">
-    <rdfs:range rdf:resource="#ARTIFACT_ELEMENT"/>
-    <rdfs:domain rdf:resource="#ARTIFACT_REFERENCE"/>
+    <rdfs:range rdf:resource="#Artifact_Element"/>
+    <rdfs:domain rdf:resource="#Artifact_Reference"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hasNote">
-    <rdfs:range rdf:resource="#NOTE"/>
-    <rdfs:domain rdf:resource="#MODEL_ELEMENT"/>
+    <rdfs:range rdf:resource="#Note"/>
+    <rdfs:domain rdf:resource="#Model_Element"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="source">
     <rdfs:range>
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#ARGUMENT_ASSET"/>
-          <owl:Class rdf:about="#ARTIFACT_ASSET"/>
+          <owl:Class rdf:about="#Argument_Asset"/>
+          <owl:Class rdf:about="#Artifact_Asset"/>
         </owl:unionOf>
       </owl:Class>
     </rdfs:range>
     <rdfs:domain>
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#ASSERTED_RELATIONSHIP"/>
-          <owl:Class rdf:about="#ARTIFACT_ASSET_RELATIONSHIP"/>
+          <owl:Class rdf:about="#Asserted_Relationship"/>
+          <owl:Class rdf:about="#Artifact_Asset_Relationship"/>
         </owl:unionOf>
       </owl:Class>
     </rdfs:domain>
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hasTaggedValue">
-    <rdfs:range rdf:resource="#TAGGED_VALUE"/>
-    <rdfs:domain rdf:resource="#MODEL_ELEMENT"/>
+    <rdfs:range rdf:resource="#Tagged_Value"/>
+    <rdfs:domain rdf:resource="#Model_Element"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hasContent">
     <rdfs:domain>
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#UTILITY_ELEMENT"/>
-          <owl:Class rdf:about="#ARGUMENT_ASSET"/>
+          <owl:Class rdf:about="#Utility_Element"/>
+          <owl:Class rdf:about="#Argument_Asset"/>
         </owl:unionOf>
       </owl:Class>
     </rdfs:domain>
-    <rdfs:range rdf:resource="#MULTI_LANG_STRING"/>
+    <rdfs:range rdf:resource="#Multi_Lang_String"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hasPackage">
-    <rdfs:range rdf:resource="#ASSURANCE_CASE_PACKAGE"/>
-    <rdfs:domain rdf:resource="#ASSURANCE_CASE_PACKAGE"/>
+    <rdfs:range rdf:resource="#Assurance_Case_Package"/>
+    <rdfs:domain rdf:resource="#Assurance_Case_Package"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="cites">
-    <rdfs:range rdf:resource="#SACM_ELEMENT"/>
-    <rdfs:domain rdf:resource="#SACM_ELEMENT"/>
+    <rdfs:range rdf:resource="#Sacm_Element"/>
+    <rdfs:domain rdf:resource="#Sacm_Element"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="implements">
-    <rdfs:range rdf:resource="#SACM_ELEMENT"/>
-    <rdfs:domain rdf:resource="#SACM_ELEMENT"/>
+    <rdfs:range rdf:resource="#Sacm_Element"/>
+    <rdfs:domain rdf:resource="#Sacm_Element"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="reasoning">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
-    <rdfs:range rdf:resource="#ARGUMENT_REASONING"/>
-    <rdfs:domain rdf:resource="#ASSERTED_RELATIONSHIP"/>
+    <rdfs:range rdf:resource="#Argument_Reasoning"/>
+    <rdfs:domain rdf:resource="#Asserted_Relationship"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="expresses">
-    <rdfs:range rdf:resource="#EXPRESSION_ELEMENT"/>
-    <rdfs:domain rdf:resource="#EXPRESSION_LANG_STRING"/>
+    <rdfs:range rdf:resource="#Expression_Element"/>
+    <rdfs:domain rdf:resource="#Expression_Lang_String"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hasDescription">
-    <rdfs:range rdf:resource="#DESCRIPTION"/>
-    <rdfs:domain rdf:resource="#MODEL_ELEMENT"/>
+    <rdfs:range rdf:resource="#Description"/>
+    <rdfs:domain rdf:resource="#Model_Element"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hasOrigin">
-    <rdfs:range rdf:resource="#MODEL_ELEMENT"/>
-    <rdfs:domain rdf:resource="#TERM"/>
+    <rdfs:range rdf:resource="#Model_Element"/>
+    <rdfs:domain rdf:resource="#Term"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="hasKey">
-    <rdfs:range rdf:resource="#MULTI_LANG_STRING"/>
-    <rdfs:domain rdf:resource="#TAGGED_VALUE"/>
+    <rdfs:range rdf:resource="#Multi_Lang_String"/>
+    <rdfs:domain rdf:resource="#Tagged_Value"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="usesElement">
-    <rdfs:range rdf:resource="#EXPRESSION_ELEMENT"/>
-    <rdfs:domain rdf:resource="#EXPRESSION"/>
+    <rdfs:range rdf:resource="#Expression_Element"/>
+    <rdfs:domain rdf:resource="#Expression"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="target">
     <rdfs:range>
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#ARGUMENT_ASSET"/>
-          <owl:Class rdf:about="#ARTIFACT_ASSET"/>
+          <owl:Class rdf:about="#Argument_Asset"/>
+          <owl:Class rdf:about="#Artifact_Asset"/>
         </owl:unionOf>
       </owl:Class>
     </rdfs:range>
     <rdfs:domain>
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#ASSERTED_RELATIONSHIP"/>
-          <owl:Class rdf:about="#ARTIFACT_ASSET_RELATIONSHIP"/>
+          <owl:Class rdf:about="#Asserted_Relationship"/>
+          <owl:Class rdf:about="#Artifact_Asset_Relationship"/>
         </owl:unionOf>
       </owl:Class>
     </rdfs:domain>
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasDerivedFrom"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="usesTerminology">
-    <rdfs:range rdf:resource="#TERMINOLOGY_PACKAGE"/>
-    <rdfs:domain rdf:resource="#ASSURANCE_CASE_PACKAGE"/>
+    <rdfs:range rdf:resource="#Terminology_Package"/>
+    <rdfs:domain rdf:resource="#Assurance_Case_Package"/>
   </owl:ObjectProperty>
   <owl:DatatypeProperty rdf:ID="artifactVersion">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#ARTIFACT"/>
+    <rdfs:domain rdf:resource="#Artifact"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:about="#gid">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#SACM_ELEMENT"/>
+    <rdfs:domain rdf:resource="#Sacm_Element"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="startTime">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#SACM_ACTIVITY"/>
+    <rdfs:domain rdf:resource="#Activity"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:about="#lang">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#LANG_STRING"/>
+    <rdfs:domain rdf:resource="#Lang_String"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:about="#isAbstract">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-    <rdfs:domain rdf:resource="#SACM_ELEMENT"/>
+    <rdfs:domain rdf:resource="#Sacm_Element"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="externalReference">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#TERM"/>
+    <rdfs:domain rdf:resource="#Term"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="occurence">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#EVENT"/>
+    <rdfs:domain rdf:resource="#Event"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="endTime">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#SACM_ACTIVITY"/>
+    <rdfs:domain rdf:resource="#Activity"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:about="#uuid">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#ELEMENT"/>
+    <rdfs:domain rdf:resource="#Element"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="artifactDate">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#ARTIFACT"/>
+    <rdfs:domain rdf:resource="#Artifact"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:about="#contents">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#LANG_STRING"/>
+    <rdfs:domain rdf:resource="#Lang_String"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="assertionDeclaration">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#ASSERTION"/>
+    <rdfs:domain rdf:resource="#Assertion"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:about="#val">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#EXPRESSION_ELEMENT"/>
+    <rdfs:domain rdf:resource="#Expression_Element"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:about="#isCitation">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-    <rdfs:domain rdf:resource="#SACM_ELEMENT"/>
+    <rdfs:domain rdf:resource="#Sacm_Element"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="isCounter">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-    <rdfs:domain rdf:resource="#ASSERTED_RELATIONSHIP"/>
+    <rdfs:domain rdf:resource="#Asserted_Relationship"/>
   </owl:DatatypeProperty>
 </rdf:RDF>

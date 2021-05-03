@@ -253,7 +253,6 @@ def run_query(conn: Connection, nodegroup: str, export_format: ExportFormat = Ex
     semtk_table = semtk3.select_by_id(nodegroup, runtime_constraints=runtime_constraints)
     formatted_table = format_semtk_table(semtk_table, export_format=export_format, headers=headers)
     if path is None:
-        print()
         print(formatted_table)
     else:
         with open(path, mode="w") as f:

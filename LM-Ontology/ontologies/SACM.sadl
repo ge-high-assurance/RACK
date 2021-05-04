@@ -9,183 +9,183 @@ import "http://arcos.rack/PROV-S".
 Element is a type of ENTITY.
         uuid describes Element with a single value of type string.
 
-Multi_Lang_String
+MultiLangString
     is a type of Element.
-        hasValue describes Multi_Lang_String with values of type Lang_String.
+        hasValue describes MultiLangString with values of type LangString.
 
-Lang_String
+LangString
     is a type of Element.
-        lang describes Lang_String with values of type string.
-        lang of Lang_String has at most 1 value.
-        contents describes Lang_String with values of type string.
-        contents of Lang_String has at most 1 value.
+        lang describes LangString with values of type string.
+        lang of LangString has at most 1 value.
+        contents describes LangString with values of type string.
+        contents of LangString has at most 1 value.
 
-Expression_Lang_String
-    is a type of Lang_String.
-        expresses describes Expression_Lang_String with values of type Expression_Element.
+ExpressionLangString
+    is a type of LangString.
+        expresses describes ExpressionLangString with values of type ExpressionElement.
 
-Sacm_Element
+SacmElement
     is a type of Element.
-        gid describes Sacm_Element with values of type string.
-        gid of Sacm_Element has at most 1 value.
-        isCitation describes Sacm_Element with values of type boolean.
-        isCitation of Sacm_Element has at most 1 value.
-        isAbstract describes Sacm_Element with values of type boolean.
-        isAbstract of Sacm_Element has at most 1 value.
-        cites describes Sacm_Element with values of type Sacm_Element.
-        implements describes Sacm_Element with values of type Sacm_Element.
+        gid describes SacmElement with values of type string.
+        gid of SacmElement has at most 1 value.
+        isCitation describes SacmElement with values of type boolean.
+        isCitation of SacmElement has at most 1 value.
+        isAbstract describes SacmElement with values of type boolean.
+        isAbstract of SacmElement has at most 1 value.
+        cites describes SacmElement with values of type SacmElement.
+        implements describes SacmElement with values of type SacmElement.
 
-Utility_Element
-    is a type of Sacm_Element.
-        hasContent describes Utility_Element with values of type Multi_Lang_String.
+UtilityElement
+    is a type of SacmElement.
+        hasContent describes UtilityElement with values of type MultiLangString.
 
-Tagged_Value
-    is a type of Utility_Element.
-        hasKey describes Tagged_Value with values of type Multi_Lang_String.
+TaggedValue
+    is a type of UtilityElement.
+        hasKey describes TaggedValue with values of type MultiLangString.
 
 Note
-    is a type of Utility_Element.
+    is a type of UtilityElement.
 
-Implementation_Constraint
-    is a type of Utility_Element.
+ImplementationConstraint
+    is a type of UtilityElement.
 
 Description
-    is a type of Utility_Element.
+    is a type of UtilityElement.
 
-Model_Element
-    is a type of Sacm_Element.
-        hasTaggedValue describes Model_Element with values of type Tagged_Value.
-        hasImplementationConstraint describes Model_Element with values of type Implementation_Constraint.
-        hasDescription describes Model_Element with values of type Description.
-        hasNote describes Model_Element with values of type Note.
-        hasName describes Model_Element with values of type Lang_String.
+ModelElement
+    is a type of SacmElement.
+        hasTaggedValue describes ModelElement with values of type TaggedValue.
+        hasImplementationConstraint describes ModelElement with values of type ImplementationConstraint.
+        hasDescription describes ModelElement with values of type Description.
+        hasNote describes ModelElement with values of type Note.
+        hasName describes ModelElement with values of type LangString.
 
-Artifact_Element
-    is a type of Model_Element.
+ArtifactElement
+    is a type of ModelElement.
 
 /* Assurance Case Package Classes. */
 
-Assurance_Case_Package
-    is a type of Artifact_Element.
-        hasPackage describes Assurance_Case_Package with values of type Assurance_Case_Package.
-        usesTerminology describes Assurance_Case_Package with values of type Terminology_Package.
-        hasArgument describes Assurance_Case_Package with values of type Argument_Package.
+AssuranceCasePackage
+    is a type of ArtifactElement.
+        hasPackage describes AssuranceCasePackage with values of type AssuranceCasePackage.
+        usesTerminology describes AssuranceCasePackage with values of type TerminologyPackage.
+        hasArgument describes AssuranceCasePackage with values of type ArgumentPackage.
 
 /* TERMinology Classes. */
 
-Terminology_Element
-    is a type of Artifact_Element.
+TerminologyElement
+    is a type of ArtifactElement.
 
-Terminology_Package
-    is a type of Terminology_Element.
-        hasElement describes Terminology_Package with values of type Terminology_Element.
+TerminologyPackage
+    is a type of TerminologyElement.
+        hasElement describes TerminologyPackage with values of type TerminologyElement.
 
-Terminology_Group
-    is a type of Terminology_Element.
-        hasElement describes Terminology_Group with values of type Terminology_Element.
+TerminologyGroup
+    is a type of TerminologyElement.
+        hasElement describes TerminologyGroup with values of type TerminologyElement.
 
-Terminology_Asset
-    is a type of Terminology_Element.
+TerminologyAsset
+    is a type of TerminologyElement.
 
 Category
-    is a type of Terminology_Asset.
+    is a type of TerminologyAsset.
 
-Expression_Element
-    is a type of Terminology_Asset.
-        val describes Expression_Element with values of type string.
-        val of Expression_Element has at most 1 value.
-        inCategory describes Expression_Element with values of type Category.
+ExpressionElement
+    is a type of TerminologyAsset.
+        val describes ExpressionElement with values of type string.
+        val of ExpressionElement has at most 1 value.
+        inCategory describes ExpressionElement with values of type Category.
 
 Expression
-    is a type of Expression_Element.
-        usesElement describes Expression with values of type Expression_Element.
+    is a type of ExpressionElement.
+        usesElement describes Expression with values of type ExpressionElement.
 
 Term
-    is a type of Expression_Element.
+    is a type of ExpressionElement.
         externalReference describes Term with values of type string.
-        hasOrigin describes Term with values of type Model_Element.
+        hasOrigin describes Term with values of type ModelElement.
 
 /* Argumentation Classes. */
 
-Argumentation_Element
-    is a type of Artifact_Element.
+ArgumentationElement
+    is a type of ArtifactElement.
 
-Argument_Package
-    is a type of Argumentation_Element.
-        hasElement describes Argument_Package with values of type Argumentation_Element.
+ArgumentPackage
+    is a type of ArgumentationElement.
+        hasElement describes ArgumentPackage with values of type ArgumentationElement.
         hasElement is a type of wasDerivedFrom.
 
-Argument_Asset
-    is a type of Argumentation_Element.
-        hasContent describes Argument_Asset with values of type Multi_Lang_String.
+ArgumentAsset
+    is a type of ArgumentationElement.
+        hasContent describes ArgumentAsset with values of type MultiLangString.
 
-Argument_Reasoning
-    is a type of Argument_Asset.
+ArgumentReasoning
+    is a type of ArgumentAsset.
 
-Artifact_Reference
-    is a type of Argument_Asset.
-        references describes Artifact_Reference with values of type Artifact_Element.
+ArtifactReference
+    is a type of ArgumentAsset.
+        references describes ArtifactReference with values of type ArtifactElement.
 
 Assertion
-    is a type of Argument_Asset.
+    is a type of ArgumentAsset.
         assertionDeclaration describes Assertion with values of type string.
 
 Claim
     is a type of Assertion.
 
-Asserted_Relationship
+AssertedRelationship
     is a type of Assertion.
-        isCounter describes Asserted_Relationship with values of type boolean.
-        source describes Asserted_Relationship with values of type Argument_Asset.
+        isCounter describes AssertedRelationship with values of type boolean.
+        source describes AssertedRelationship with values of type ArgumentAsset.
         source is a type of wasDerivedFrom.
-        target describes Asserted_Relationship with values of type Argument_Asset.
+        target describes AssertedRelationship with values of type ArgumentAsset.
         target is a type of wasDerivedFrom.
-        reasoning describes Asserted_Relationship with values of type Argument_Reasoning.
+        reasoning describes AssertedRelationship with values of type ArgumentReasoning.
         reasoning is a type of wasDerivedFrom.
 
-Asserted_Context
-    is a type of Asserted_Relationship.
+AssertedContext
+    is a type of AssertedRelationship.
 
-Asserted_Evidence
-    is a type of Asserted_Relationship.
+AssertedEvidence
+    is a type of AssertedRelationship.
 
 /* Artifact Classes. */
 
-Artifact_Package
-    is a type of Artifact_Element.
+ArtifactPackage
+    is a type of ArtifactElement.
 
-Artifact_Asset
-    is a type of Artifact_Element.
+ArtifactAsset
+    is a type of ArtifactElement.
 
 Property
-    is a type of Artifact_Asset.
+    is a type of ArtifactAsset.
 
-Artifact_Asset_Relationship
-    is a type of Artifact_Asset.
-        source describes Artifact_Asset_Relationship with values of type Artifact_Asset.
+ArtifactAssetRelationship
+    is a type of ArtifactAsset.
+        source describes ArtifactAssetRelationship with values of type ArtifactAsset.
         source is a type of wasDerivedFrom.
-        target describes Artifact_Asset_Relationship with values of type Artifact_Asset.
+        target describes ArtifactAssetRelationship with values of type ArtifactAsset.
         target is a type of wasDerivedFrom.
 
 Artifact
-    is a type of Artifact_Asset.
+    is a type of ArtifactAsset.
         artifactVersion describes Artifact with values of type string.
         artifactDate describes Artifact with values of type string.
 
-Activity
-    is a type of Artifact_Asset.
-        startTime describes Activity with values of type string.
-        endTime describes Activity with values of type string.
+SacmActivity
+    is a type of ArtifactAsset.
+        startTime describes SacmActivity with values of type string.
+        endTime describes SacmActivity with values of type string.
 
 Event
-    is a type of Artifact_Asset.
+    is a type of ArtifactAsset.
         occurence describes Event with values of type string.
 
 Participant
-    is a type of Artifact_Asset.
+    is a type of ArtifactAsset.
 
 Technique
-    is a type of Artifact_Asset.
+    is a type of ArtifactAsset.
 
 Resource
-    is a type of Artifact_Asset.
+    is a type of ArtifactAsset.

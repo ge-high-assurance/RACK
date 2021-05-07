@@ -28,6 +28,7 @@ from rack.commits import (
     commit581f1820855eee2445d9e8bfdbb639e169e9391e,
     commit643839e7d8036731ba1da767942c8e74c2876e2e,
     commit7202dbdb81274e521b0e2cdd3afedeb2a6204567,
+    commit76de25ee930683871febc1b4cc1e4386aca16d42,
     commit78eaae3db5ed184c90f4f14d34a4fc000f04bdac,
     commit833ef18f5024fee255f77887de2c8e9bc136e56d,
     commit90f2d4f55668786ffa01bba2a646c7468849c97d,
@@ -103,6 +104,8 @@ commits_in_chronological_order: List[Commit] = [
     commit0a89f70ff929380269a79fe2fc82f5dde346ed8c.commit, # 2021 Apr 23
 
     commit4f60f85168ff8ef2513fa0e2f144c2ea5c3f87a3.commit, # v5.9
+
+    commit76de25ee930683871febc1b4cc1e4386aca16d42.commit, # v6.0
 
     # most recent (in history)
 ]

@@ -71,6 +71,7 @@ check_instance_property_violations(Property) :-
      check_cardinality_max(Property, I, T);
      check_maybe_prop(Property, I, T);
      check_target_type(Property, I, T);
+     check_values_from(Property, I, T);
      check_invalid_value(Property, I, T)).
 
 check_cardinality_exact(Property, I, T) :-
@@ -119,6 +120,16 @@ check_target_type(Property, I, T) :-
     DefTy \= Target,
     \+ rdf_reachable(DefTy, rdfs:subClassOf, Target),
     print_message(error, property_value_wrong_type(I, Property, DefTy, Val, Target)).
+
+check_values_from(Property, I, T) :-
+    property_target(T, Property, _PUsage, _Target, value_from(Cls)),
+    has_interesting_prefix(Property),
+    rdf(I, Property, Val),
+    \+ rdf_is_literal(Val),  % TODO check these as well?
+    rdf(Val, rdf:type, DefTy),
+    DefTy \= Cls,
+    \+ rdf_reachable(DefTy, rdfs:subClassOf, Cls),
+    print_message(error, property_value_wrong_type(I, Property, DefTy, Val, Cls)).
 
 check_invalid_value(Property, I, T) :-
     property_target(T, Property, _PUsage, _Target, _Restr),

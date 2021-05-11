@@ -440,6 +440,12 @@ property_extra(Class, Property, _Target, max_cardinality(N)) :-
     rdf(B, owl:maxCardinality, I),
     rdf_literal(I),
     rdf_numeric(I, N).
+property_extra(Class, Property, _Target, value_from(Cls)) :-
+    rdf(Class, rdfs:subClassOf, B),
+    rdf_bnode(B),
+    rdf(B, owl:onProperty, Property),
+    rdf(B, rdf:type, owl:'Restriction'), !,
+    rdf(B, owl:someValuesFrom, Cls).
 
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:int).
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:integer).

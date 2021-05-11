@@ -408,6 +408,12 @@ property_target(Class, Property, PropUsage, Target, Restrictions) :-
     rdf(Class, rdfs:subClassOf, Parent),
     property_target(Parent, Property, PropUsage, Target, Restrictions).
 
+% Various recognizers used by property_target to translate RDF
+% relation restrictions into an identified local restriction type like
+% "cardinality(N)", "maybe", "normal", etc.
+%
+% For Cardinality information, see: https://w3.org/2001/sw/BestPratices/OEP/QCR
+
 property_extra(Class, Property, _Target, cardinality(N)) :-
     rdf(Class, rdfs:subClassOf, B),
     rdf_bnode(B),
@@ -419,6 +425,21 @@ property_extra(Class, Property, _Target, cardinality(N)) :-
 property_extra(_Class, Property, _Target, maybe) :-
     rdf(Property, rdf:type, owl:'FunctionalProperty'), !.
 property_extra(_Class, _Property, _Target, normal).
+property_extra(Class, Property, _Target, min_cardinality(N)) :-
+    rdf(Class, rdfs:subClassOf, B),
+    rdf_bnode(B),
+    rdf(B, owl:onProperty, Property),
+    rdf(B, rdf:type, owl:'Restriction'), !,
+    (rdf(B, owl:minCardinality, I), rdf_literal(I), rdf_numeric(I, N) ;
+     rdf(B, owl:someValuesFrom, _T), N == 1).
+property_extra(Class, Property, _Target, max_cardinality(N)) :-
+    rdf(Class, rdfs:subClassOf, B),
+    rdf_bnode(B),
+    rdf(B, owl:onProperty, Property),
+    rdf(B, rdf:type, owl:'Restriction'), !,
+    rdf(B, owl:maxCardinality, I),
+    rdf_literal(I),
+    rdf_numeric(I, N).
 
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:int).
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:integer).

@@ -66,12 +66,14 @@ check_instance_property_violations(Property) :-
     % Exclude namespaces we aren't interested in
     has_interesting_prefix(I),
     % Find a required property defined on that instance type (or parent type)
-    (check_cardinality(Property, I, T);
+    (check_cardinality_exact(Property, I, T);
+     check_cardinality_min(Property, I, T);
+     check_cardinality_max(Property, I, T);
      check_maybe_prop(Property, I, T);
      check_target_type(Property, I, T);
      check_invalid_value(Property, I, T)).
 
-check_cardinality(Property, I, T) :-
+check_cardinality_exact(Property, I, T) :-
     property_target(T, Property, _PUsage, _Target, cardinality(N)),
     has_interesting_prefix(Property),
     % How many actual values for that property on this instance
@@ -79,6 +81,24 @@ check_cardinality(Property, I, T) :-
     length(VS, VSLen),
     VSLen \= N,
     print_message(error, cardinality_violation(I, Property, N, VSLen)).
+
+check_cardinality_min(Property, I, T) :-
+    property_target(T, Property, _PUsage, _Target, min_cardinality(N)),
+    has_interesting_prefix(Property),
+    % How many actual values for that property on this instance
+    findall(V, rdf(I, Property, V), VS),
+    length(VS, VSLen),
+    VSLen < N,
+    print_message(error, min_cardinality_violation(I, Property, N, VSLen)).
+
+check_cardinality_max(Property, I, T) :-
+    property_target(T, Property, _PUsage, _Target, max_cardinality(N)),
+    has_interesting_prefix(Property),
+    % How many actual values for that property on this instance
+    findall(V, rdf(I, Property, V), VS),
+    length(VS, VSLen),
+    VSLen > N,
+    print_message(error, max_cardinality_violation(I, Property, N, VSLen)).
 
 check_maybe_prop(Property, I, T) :-
     property_target(T, Property, _PUsage, _Target, maybe),
@@ -167,7 +187,19 @@ prolog:message(cardinality_violation(Instance, Property, Specified, Actual)) -->
     { prefix_shorten(Instance, SI),
       prefix_shorten(Property, SP)
     },
-    [ '~w . ~w has ~d values but cardinality of ~d~n'-[
+    [ '~w . ~w has ~d values but an allowed cardinality of ~d~n'-[
+          SI, SP, Actual, Specified] ].
+prolog:message(min_cardinality_violation(Instance, Property, Specified, Actual)) -->
+    { prefix_shorten(Instance, SI),
+      prefix_shorten(Property, SP)
+    },
+    [ '~w . ~w has ~d values but a minimum allowed cardinality of ~d~n'-[
+          SI, SP, Actual, Specified] ].
+prolog:message(max_cardinality_violation(Instance, Property, Specified, Actual)) -->
+    { prefix_shorten(Instance, SI),
+      prefix_shorten(Property, SP)
+    },
+    [ '~w . ~w has ~d values but a maximum allowed cardinality of ~d~n'-[
           SI, SP, Actual, Specified] ].
 prolog:message(maybe_restriction(Instance, Property, Actual)) -->
     { prefix_shorten(Instance, SI),

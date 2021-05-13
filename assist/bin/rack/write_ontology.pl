@@ -9,10 +9,12 @@
 % material are those of the author(s) and do not necessarily reflect the views
 % of the Defense Advanced Research Projects Agency (DARPA).
 
-:- module(write_ontology,
-          [
-           write_ontology/0
-          ]).
+:- module(
+    write_ontology,
+    [
+        write_ontology/0
+    ]
+).
 
 :- ensure_loaded('../paths').
 
@@ -81,34 +83,40 @@ ontology_file_path(Namespace, FilePath) :-
     atom_concat(Module, '.pl', FileName),
     directory_file_path(OntologyDir, FileName, FilePath).
 
-%! write_export_for_thing(+Handle, +Thing) is det.
+
+%! export_thing(+Thing, -Export) is det.
 %
-%    Writes the module export line for a given ontology thing.
-write_export_for_thing(Handle, Thing) :-
+%    Gives the export string for a thing.
+export_thing(Thing, Export) :-
     string_lower(Thing, LowercaseThing),
-    write(Handle, '            '),
-    write(Handle, LowercaseThing),
-    writeln(Handle, '/1,').
+    atomic_list_concat([LowercaseThing, '/1'], Export).
 
-%! write_export_for_things(+Handle, +Things) is det.
-%
-%    Writes the module export lines for all given ontology things.
-write_exports_for_things(Handle, Things) :-
-    forall(member(Thing, Things), write_export_for_thing(Handle, Thing)).
 
-%! write_export_for_properties(+Handle, +Thing) is det.
+%! export_property(+Property, -Export) is det.
 %
-%    Writes the module export lines for all given ontology properties.
-write_exports_for_properties(_, []).
-write_exports_for_properties(Handle, [Property|Properties]) :-
-    write(Handle, '            '),
-    write(Handle, Property),
-    write(Handle, '/2'),
-    % No comma after the last property
-    ( length(Properties, 0)
-    -> nl(Handle)
-    ; writeln(Handle, ','), write_exports_for_properties(Handle, Properties)
-    ).
+%    Gives the export string for a property.
+export_property(Property, Export) :-
+    string_lower(Property, LowercaseProperty),
+    atomic_list_concat([LowercaseProperty, '/2'], Export).
+
+
+export_indentation(Indent) :- atom_string('        ', Indent).
+
+
+%! write_exports(+Handle, +Things, +Properties) is det.
+%
+%    Writes the module export lines for all given ontology things and
+%    properties.
+write_exports(Handle, Things, Properties) :-
+    export_indentation(Indent),
+    atomic_list_concat([',\n', Indent], Separator),
+    maplist(export_thing, Things, ExportThings),
+    maplist(export_property, Properties, ExportProperties),
+    append([ExportThings, ExportProperties], AllExports),
+    atomic_list_concat(AllExports, Separator, Exports),
+    write(Handle, Indent),
+    writeln(Handle, Exports).
+
 
 %! class_declaration(+Namespace, +Class, -Declaration) is det.
 %
@@ -153,12 +161,12 @@ write_ontology_file(Namespace, Things, Properties) :-
     string_lower(Namespace, Module),
     writeln(Handle, '% THIS FILE WAS AUTOMATICALLY GENERATED, SEE README'),
     nl(Handle),
-    atomic_list_concat([':- module(', Module, ','], FirstLine),
-    writeln(Handle, FirstLine),
-    writeln(Handle, '          ['),
-    write_exports_for_things(Handle, Things),
-    write_exports_for_properties(Handle, Properties),
-    writeln(Handle, '          ]).'),
+    writeln(Handle, ':- module('),
+    atomic_list_concat(['    ', Module, ','], ModuleLine),
+    writeln(Handle, ModuleLine),
+    writeln(Handle, '    ['),
+    write_exports(Handle, Things, Properties),
+    writeln(Handle, '    ]).'),
     nl(Handle),
     writeln(Handle, ':- ensure_loaded(\'../paths\').'),
     nl(Handle),

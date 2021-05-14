@@ -7,13 +7,15 @@ RACK ASSIST
 
 The ASSIST toolkit contains several tools that can be used with RACK.
 
- * ASSIST-DC  -- Data Collection
- * ASSIST-DI  -- Data Ingestion
- * ASSIST-DV  -- Data Verification
- * ASSIST-SADL  -- SADL translation
+ * ASSIST-DC -- Data Collection
+ * ASSIST-DI -- Data Ingestion
+ * ASSIST-DV -- Data Verification
+ * ASSIST-SADL -- SADL translation
  * ASSIST-RACKLIB -- RACK library
 
-## ASSIST-DC  -- Data Collection
+## ASSIST-DC -- Data Collection
+
+  > Tools: `assist/databin/{ar,gcc,make,tar,...}`
 
   This portion of the toolkit represents a case study in the
   integration of ARCOS data collection into the development process
@@ -35,21 +37,29 @@ The ASSIST toolkit contains several tools that can be used with RACK.
 
   These tools are used by adding the `assist/databin` directory to the
   current `PATH` before performing development processes; no
-  additional work is needed to enable ASSIST-DC data collection.  The
-  information collection can be enhanced easily by adding new
-  collectors to this directory.
+  additional work is needed to enable ASSIST-DC data collection. This
+  directory contains wrappers around the standard development tools;
+  by appearing first in the `PATH`, the wrapper will collect
+  information and then invoke the actual tool to perform the work.
+  Collected information is stored in `.{file}.rack` files in the same
+  directory as the corresponding input file(s) where it will be
+  processed by the ASSIST-DI tools (described below).  The information
+  collection can be enhanced easily by adding new collectors to this
+  directory.
 
   The intent of the ASSIST-DC set of tools is to model how a
   development process might be captured for RACK in a deployed
   program.
 
 
-## ASSIST-DI  -- Data Ingestion
+## ASSIST-DI -- Data Ingestion
 
-  The ASSIST-DC subset of tools provides a set of tools that are used
-  to generate local data during the build process.  That local data
-  exists only in the development workspace, and the ASSIST-DI tools
-  are used to ingest that collected data and upload it into a RACK store.
+  > Tools: `assist/bin/ingest_data`
+
+  The ASSIST-DC subset of tools generate local data during the build
+  process.  That local data exists only in the development workspace,
+  and the ASSIST-DI tools are used to ingest that collected data and
+  upload it into a RACK store.
 
   The ASSIST-DI utilizes a flexible data recognition system and logic
   programming techniques (written in Prolog) to automatically generate
@@ -57,17 +67,17 @@ The ASSIST toolkit contains several tools that can be used with RACK.
   ontology and the data extracted from the artifacts being described.
   This extracted data can be in any number of forms (the canonical
   example is the ASSIST-DC-generated data), and ASSIST-DI provides the
-  ability to recognize those input forms and convert them with proper
-  ontology-based relationships for either direct upload to RACK or
+  ability to recognize those input forms and convert them (via proper
+  ontology-based relationships) for either direct upload to RACK or
   output as OWL files that can later be uploaded to RACK.
 
   One particular advantage of ASSIST-DI is that it does not need
-  explicit code updates for changes in the ontology.  There are a
+  explicit code updates when there are changes in the ontology.  There are a
   lightweight set of data recognizers that can perform the conversion
   of the extracted data into specific objects or fields, but the
   relationships between these objects and the set of fields associated
-  with each object is dictated by the ontology itself, which is
-  automatically used by ASSIST-DI for this purpose.  This allows the
+  with each object is dictated by the ontology itself.  The ontology is
+  automatically imported and used by ASSIST-DI for this data recognition.  This allows the
   ASSIST-DI to be flexible in the face of changes to the ontology, and
   easily extensible to support newly extracted data.
 
@@ -86,7 +96,9 @@ The ASSIST toolkit contains several tools that can be used with RACK.
   ASSIST-DI toolkit is the `bin/ingest_data` tool.
 
 
-## ASSIST-DV  -- Data Verification
+## ASSIST-DV -- Data Verification
+
+ > Tools: `assist/bin/check`, `assist/bin/analyze`
 
  The ASSIST-DV set of tools provides an automated verification process
  to be used on the data uploaded into RACK.  This toolset provides the
@@ -115,7 +127,9 @@ The ASSIST toolkit contains several tools that can be used with RACK.
  used in ASSIST-DI; there is a companion `bin/analyze` tool that
  generates a human-readable report of the full set of data.
 
-## ASSIST-SADL  -- SADL translation
+## ASSIST-SADL -- SADL translation
+
+ > Tools: `assist/bin/sadl2owl`
 
  The ASSIST-SADL is an experimental implementation of a POC for
  offline translation of SADL into OWL.  The canonical translation
@@ -129,7 +143,7 @@ The ASSIST toolkit contains several tools that can be used with RACK.
 ## ASSIST-RACKLIB -- RACK library
 
  The ASSIST-RACKLIB is a library of (primarily Prolog) functionality
- that can be used to work with RACK RDF, Owl, and triple-store
+ that can be used to work with RACK RDF, OWL, and triple-store
  databases to develop related functionality.  The ASSIST-RACKLIB is
  used by ASSIST-DI and ASSIST-DV and could be used for development of
  other tools in this space.

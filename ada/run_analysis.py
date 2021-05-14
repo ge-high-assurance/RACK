@@ -370,7 +370,9 @@ stream_handler.setFormatter(CustomFormatter())
 logger.propagate = False
 logger.addHandler(stream_handler)
 
-Evidence.createEvidenceFile()
+Evidence.createEvidenceFile(
+        ingestionTitle="AdaSourceIngestion",
+        ingestionDescription="libadalang-based extraction of source code defined functions and links to requirements")
 for file_to_analyze in args.analyze:
     unit = context.get_from_file(file_to_analyze)
     analyze_unit(unit)

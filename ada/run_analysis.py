@@ -250,6 +250,7 @@ def output_using_scrapingtoolkit(
             identifier=component_identifier,
             componentType_identifier=component.component_type,
             title=escape(component.title),
+            definedIn_identifier=component.defined_in.identifier if component.defined_in else None
         )
         for callee in component.mentions:
             Evidence.Add.SWCOMPONENT(
@@ -273,8 +274,11 @@ def analyze_traceability(unit: lal.AnalysisUnit) -> None:
     for component_id, requirement_ids in analysis_output.items():
         for requirement_id in requirement_ids:
             Evidence.Add.REQUIREMENT(
-                identifier=requirement_id,
-                governs_identifier=component_id,
+                identifier=requirement_id
+            )
+            Evidence.Add.SWCOMPONENT(
+                identifier=component_id,
+                wasImpactedBy_identifier=requirement_id,
             )
 
 def analyze_structure(unit: lal.AnalysisUnit) -> None:
@@ -366,7 +370,9 @@ stream_handler.setFormatter(CustomFormatter())
 logger.propagate = False
 logger.addHandler(stream_handler)
 
-Evidence.createEvidenceFile()
+Evidence.createEvidenceFile(
+        ingestionTitle="AdaSourceIngestion",
+        ingestionDescription="libadalang-based extraction of source code defined functions and links to requirements")
 for file_to_analyze in args.analyze:
     unit = context.get_from_file(file_to_analyze)
     analyze_unit(unit)

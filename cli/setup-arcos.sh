@@ -20,12 +20,27 @@ then
 	exit 1
 fi
 
-rack model import ../GrammaTech-Ontology/import.yaml
-rack model import ../LM-Ontology/import.yaml
-# rack model import ../DesCert-Ontology/import.yaml
-rack model import ../STR-Ontology/import.yaml
-rack model import ../Boeing-Ontology/import.yaml
+# Boeing model & auto-generated nodegroups
+rack model import ../Boeing-Ontology/OwlModels/import.yaml
+rack nodegroups import ../nodegroups/ingestion/Boeing
 
+# GrammaTech model & auto-generated nodegroups
+rack model import ../GrammaTech-Ontology/OwlModels/import.yaml
+rack nodegroups import ../nodegroups/ingestion/GrammaTech
+
+# LM model & auto-generated nodegroups
+rack model import ../LM-Ontology/OwlModels/import.yaml
+rack nodegroups import ../nodegroups/ingestion/LM
+
+# SRI model & auto-generated nodegroups
+rack model import ../DesCert-Ontology/OwlModels/import.yaml
+rack nodegroups import ../nodegroups/ingestion/SRI
+
+# STR model & auto-generated nodegroups
+rack model import ../STR-Ontology/OwlModels/import.yaml
+rack nodegroups import ../nodegroups/ingestion/STR
+
+# load applicable standards
 # rack data import --clear ../RACK-Ontology/OwlModels/ARP-4754A.yaml     # from datagraph http://rack001/arp-475a
 # rack data import --clear ../RACK-Ontology/OwlModels/DO-330.yaml        # from datagraph http://rack001/do-330
 rack data import --clear ../RACK-Ontology/OwlModels/DO-178C.yaml         # from datagraph http://rack001/do-178c

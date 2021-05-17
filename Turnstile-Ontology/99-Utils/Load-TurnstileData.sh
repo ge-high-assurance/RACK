@@ -1,7 +1,8 @@
 #!/bin/sh
 # Copyright (c) 2020, General Electric Company and Galois, Inc.
 set -eu
-
+BASEDIR=$(dirname "$0")
+echo "$BASEDIR"
 if ! command -v rack > /dev/null
 then
 	cat <<-END
@@ -20,10 +21,11 @@ then
 	exit 1
 fi
 
-# RACK core ontology
-rack model import ../RACK-Ontology/OwlModels/import.yaml
+# Turnstile ontology overlay
+rack model import $BASEDIR/import.yaml
 
-# ingestion nodegroups auto-generated from RACK core ontology, and a set of sample query nodegroups 
-rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest" "^query"
-rack nodegroups import ../nodegroups/ingestion
-rack nodegroups import ../nodegroups/queries
+# nodegroups created specifically for Turnstile ingestion
+rack nodegroups import $BASEDIR/NodeGroups
+
+# Turnstile instance data
+rack data import $BASEDIR/Data/Model.yaml

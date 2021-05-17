@@ -2,7 +2,7 @@
 # Copyright (c) 2020, General Electric Company and Galois, Inc.
 set -eu
 BASEDIR=$(dirname "$0")
-echo "$BASEDIR"
+
 if ! command -v rack > /dev/null
 then
 	cat <<-END

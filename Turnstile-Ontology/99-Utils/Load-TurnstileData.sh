@@ -22,10 +22,10 @@ then
 fi
 
 # Turnstile ontology overlay
-rack model import $BASEDIR/import.yaml
+rack model import "$BASEDIR/import.yaml"
 
 # nodegroups created specifically for Turnstile ingestion
-rack nodegroups import $BASEDIR/NodeGroups
+rack nodegroups import "$BASEDIR/NodeGroups"
 
 # Turnstile instance data
-rack data import $BASEDIR/Data/Model.yaml
+rack data import "$BASEDIR/Data/Model.yaml"

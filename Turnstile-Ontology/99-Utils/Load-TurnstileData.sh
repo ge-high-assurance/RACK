@@ -29,3 +29,6 @@ rack nodegroups import "$BASEDIR/NodeGroups"
 
 # Turnstile instance data
 rack data import "$BASEDIR/Data/Model.yaml"
+
+# Load applicable standards
+rack data import --clear ../../RACK-Ontology/OwlModels/DO-178C.yaml         # from datagraph http://rack001/do-178c

@@ -3,7 +3,7 @@
 // Copyright 2021. Honeywell International and SRI International.
 
 // namespace and imports
-uri "http://arcos.descert/DesCert" alias DesCert.
+uri "http://arcos.descert/SRI" alias DesCert.
 import "http://arcos.rack/PROV-S".
 import "http://arcos.rack/DOCUMENT".
 import "http://arcos.rack/SYSTEM".

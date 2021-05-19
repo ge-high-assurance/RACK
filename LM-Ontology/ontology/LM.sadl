@@ -1,6 +1,6 @@
 /* Copyright 2021 by Lockheed Martin. */
 
-uri "http://arcos.rack/SACM" alias sacm.
+uri "http://arcos.certgate/LM" alias sacm.
 import "http://arcos.rack/PROV-S".
 
 

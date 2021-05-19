@@ -131,7 +131,7 @@
 						"UriRelationship": "http://arcos.rack/PROV-S#description",
 						"Constraints": "",
 						"fullURIName": "",
-						"SparqlID": "?text_DataAndControlCouple",
+						"SparqlID": "?description_DataAndControlCouple",
 						"isReturned": true,
 						"optMinus": 1,
 						"isRuntimeConstrained": false,
@@ -236,7 +236,7 @@
 			},
 			{
 				"colId": "col_4",
-				"colName": "text_DataAndControlCouple"
+				"colName": "description_DataAndControlCouple"
 			}
 		],
 		"dataValidator": [],

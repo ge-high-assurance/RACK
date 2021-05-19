@@ -20,18 +20,10 @@ then
 	exit 1
 fi
 
-rack model import --clear ../RACK-Ontology/OwlModels/import.yaml
-rack model import ../Turnstile-Ontology/99-Utils/import.yaml
-rack model import ../GrammaTech-Ontology/import.yaml
-rack model import ../STR-Ontology/import.yaml
+# RACK core ontology
+rack model import ../RACK-Ontology/OwlModels/import.yaml
 
-rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest" "^query " "^Ingest-"
-rack nodegroups import ../Turnstile-Ontology/99-Utils/NodeGroups
-rack nodegroups import ../nodegroups/ingestion
+# ingestion nodegroups auto-generated from RACK core ontology, and a set of sample query nodegroups 
+rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest" "^query"
+rack nodegroups import ../nodegroups/ingestion/arcos.rack
 rack nodegroups import ../nodegroups/queries
-
-rack data import --clear ../RACK-Ontology/OwlModels/ARP-4754A.yaml
-rack data import --clear ../RACK-Ontology/OwlModels/DO-330.yaml
-rack data import --clear ../RACK-Ontology/OwlModels/DO-178C.yaml
-rack data import --clear ../RACK-Ontology/OwlModels/MIL-STD-881D.yaml
-rack data import --clear ../Turnstile-Ontology/99-Utils/Data/Model.yaml

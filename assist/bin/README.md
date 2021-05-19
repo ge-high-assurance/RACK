@@ -38,6 +38,16 @@ Prolog modules in this directory:
   extensible.  Adding new checks for ontology invariants is
   encouraged by both RACK developers and users.
 
+  By default, check loads the ontology (model) from the RACK-Ontology
+  directory, recognizers from the databin directory, and instance data
+  from the Turnstile software implementation directory.  The -m flag
+  can be used to select a different ontology, and the -d flag can
+  specify a different data location.
+
+  By default, check will ingest all .owl files in the directories
+  identified.  It can alternatively read from a live RDF database
+  (e.g. Fuseki) if given a URL instead.
+
 * `ingest_data` Loads the ontology model (from disk or RACK/Fuseki),
   a set of data recognizers, and then the data to be recognized,
   instantiating that data against the ontology model.  Writes the
@@ -95,6 +105,115 @@ Prolog modules in this directory:
 
   * Does not support the SADL active operators (e.g. `Ask`,
     `Rule`, or `Test`).
+
+
+# Usage Examples
+
+## Local OWL files, no RDF server
+
+  1. Initial setup
+
+    ```shell
+    $ cd assist
+    $ export PATH=$(pwd)/bin:$(pwd)/databin:$PATH
+    ```
+
+  2. Generate data for the build process of the Turnstile
+
+    ```shell
+    $ cd ../Turnstile-Ontology/02-Software/03-Implementation
+    $ make clean
+    $ make test
+    # ... note that the test results include a failure; this is expected.
+    $ make dist
+    ```
+
+  3. Create an OWL file for the build process data.  This will use a
+     turnstile-specific recognizer that makes the additional
+     associations between elements based on the PLAN for the
+     Turnstile that are not part of the base RACK ontology.
+
+     ```shell
+     $ ingest_data -r ../turnstile-ingest.rack -o BUILD_DESC.OWL \
+         http://Turnstile/CounterApplication \
+         ../../../Turnstile-Ontology
+     $ ls BUILD_DESC.OWL
+     ```
+
+  4. Run a verification that the BUILD_DESC.OWL data doesn't violate
+     any of the constraints or other restrictions associated with the
+     RACK ontology:
+
+     ```shell
+     $ check -v -d ../../../Turnstile-Ontology
+     ```
+
+     Additionally, a summary of the information generated can be seen
+     using the analyze tool:
+
+     ```shell
+     $ analyze -i http://testdata.org
+     ```
+
+## Interacting with an RDF server
+
+  Assuming an RDF server (e.g. Fuseki) is running at localhost port
+  3030, the scenario is the same as the local OWL file scenario for
+  the first 2 steps, but beginning with step 3:
+
+  3. Upload the data to the RDF service.
+
+     ```shell
+     $ ingest_data -r ../turnstile-ingest.rack \
+         http://Turnstile/CounterApplication \
+         ../../../Turnstile-Ontology
+     $ ls BUILD_DESC.OWL
+     ```
+
+     This is the same command, but without the specification to output
+     to an OWL file; when no output OWL file is specified the
+     automatic operation is to upload to the RDF server at localhost
+     port 3030.
+
+     Note that if the server is running but not setup yet, this will
+     typically result in an error:
+
+     ```
+     url `'http://localhost:3030/RACK/upload'' does not exist (status(404,Not Found))
+     ```
+
+     To resolve this error, the server must be setup to define the
+     RACK dataset.  For Fuseki, this is easily done by opening a
+     browser window to http://localhost:3030 and clicking on the
+     "manage datasets" tab and "add a new dataset", then specifying
+     the "Dataset name" to be "RACK".
+
+     Once the RACK dataset is defined, the above `ingest_data`
+     operation should run successfully.
+
+  4. Run a verification that the data in the RDB database doesn't
+     violate any of the constraints or other restrictions associated
+     with the RACK ontology.  To read from the server, use the `-m`
+     argument to specify the URL instead of a directory.
+
+     ```shell
+     $ check -v -m http://localhost:3030/
+     ```
+
+     Or similarly the analyze command can access the live RDB database:
+
+     ```shell
+     $ analyze -m http://localhost:3030/ -i http://testdata.org
+     ```
+
+     Note that when reading OWL files from the local filesystem, the
+     ontology model exists in a different location than the instance
+     data (e.g. Turnstile), so the `check` and `analyze` commands
+     allow the `-m` and `-d` flags to specify both locations,
+     respectively.  When reading from an RDF database (e.g. Fuseki),
+     all of the information is available in a single place, so only
+     the `-m` specification is needed.
+
 
 # Prolog API Usage
 
@@ -175,20 +294,21 @@ specification of a namespace for the triples.
 
 ### Uploading to Fuseki
 
-There are two forms for uploading the model in memory to a Fuseki instance:
+There are two forms for uploading the model in memory to a Fuseki
+instance.  Both specify the Graph to upload to:
 
 ```prolog
-upload_model_to_url('http://192.168.0.32:3030/').
+upload_model_to_url('http://192.168.0.32:3030/', 'http://graph/name').
 ```
 
 ---
 
 ```prolog
-upload_model_to_rack().
+upload_model_to_rack('http://graph/name').
 ```
 
-Like in the loading case, the `upload_model_to_url/1` expects to find a
-Fuseki instance at that location, while `upload_model_to_rack/0` expects the
+Like in the loading case, the `upload_model_to_url/2` expects to find a
+Fuseki instance at that location, while `upload_model_to_rack/1` expects the
 instance to live at `localhost:3030/RACK`.
 
 # Design Notes

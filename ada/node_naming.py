@@ -76,7 +76,11 @@ def get_node_identifier(node: GraphNode) -> NodeIdentifier:
     """
     Computes the identifier to use in the database.
     """
-    return NodeIdentifier(get_node_uri(node))
+    xref = node.p_gnat_xref()
+    if not xref:
+        return NodeURI(f'SWCOM_{node.p_relative_name.p_canonical_text}')
+        # raise Exception(f"The reference to node {node} could not be resolved.")
+    return NodeURI(f'SWCOM_{xref.p_basic_decl.p_canonical_fully_qualified_name}')
 
 def get_node_uri(node: GraphNode) -> NodeURI:
     """Computes the URI to use for a node."""

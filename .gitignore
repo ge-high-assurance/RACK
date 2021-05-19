@@ -23,6 +23,7 @@ lib
 lib64
 include
 .Python
+wheels/
 
 # Installer logs
 pip-log.txt
@@ -56,3 +57,4 @@ TODO.org
 /.metadata/
 debug.log
 *.swp
+cli/env/

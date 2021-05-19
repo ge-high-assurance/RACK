@@ -41,7 +41,6 @@ class TraceabilityExtraction(AdaVisitor):
     # pylint: disable=invalid-name, missing-function-docstring
     def visit_PackageBody(self, node: lal.PackageBody) -> None:
         self.generic_visit(node)
-
         name = node.f_package_name
         for token in node.tokens:
             trace_id = self.match_trace_token(token)

@@ -28,8 +28,7 @@ The rack program requires the
 other requirements listed in `requirements.txt`.
 
 We recommend installing these dependencies in an isolated virtual
-environment using [virtualenv](https://pypi.org/project/virtualenv/)
-to ensure reproducibility of results.
+environment to ensure reproducibility of results.
 
 <!--
 Note for documentation authors: These instructions should be kept in sync with
@@ -37,13 +36,13 @@ the RACK-Box README.
 -->
 
 ```shell
-virtualenv venv
+python -m venv venv
 source venv/bin/activate
 pip install --force -r requirements.txt
 python3 setup.py install
 ```
 
-If running on Windows, GitBash can be used with the following commands.
+If running on Windows, [GitBash](https://gitforwindows.org/) can be used with the following commands.
 
 ```shell
 virtualenv venv
@@ -296,7 +295,7 @@ using the `count` sub-command.
 16
 ```
 
-### Update Nodegroups
+### Nodegroups
 
 The script can automate loading a directory full of nodegroups
 indexed by a `store_data.csv` file.
@@ -318,6 +317,18 @@ Retrieving nodegroups...                                    OK
 query Compilation Inputs.json                   query Requirements without Tests.json
 query Control Flow From Function.json           query System Structure.json
 ...
+```
+
+The tool can also list the currently loaded nodegroups.
+
+```
+(venv) $ rack nodegroups list
+Listing nodegroups...                                       OK
+ID                                           comments                [...]
+-------------------------------------------  ------------------------[...]
+Ingest-SoftwareComponent                     Node group to ingest COM[...]
+Ingest-SoftwareComponentTestResult           Node group to ingest Sof[...]
+[...]
 ```
 
 ## Hacking

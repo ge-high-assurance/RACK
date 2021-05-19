@@ -1,0 +1,165 @@
+{
+	"version": 3,
+	"sparqlConn": {
+		"name": "RACK",
+		"domain": "",
+		"enableOwlImports": false,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/data"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 12,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?identifier_2",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"NodeName": "PIDS_Req",
+				"fullURIName": "http://arcos.AH-64D/Boeing#PIDS_Req",
+				"SparqlID": "?PIDS_Req",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?identifier_1",
+						"isReturned": false,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false,
+						"binding": "?identifier_0",
+						"isBindingReturned": true
+					}
+				],
+				"nodeList": [],
+				"NodeName": "CSID_Req",
+				"fullURIName": "http://arcos.AH-64D/Boeing#CSID_Req",
+				"SparqlID": "?CSID_Req",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [
+					{
+						"SnodeSparqlIDs": [
+							"?CSID_Req",
+							"?PIDS_Req"
+						],
+						"OptionalMinus": [
+							2,
+							2
+						],
+						"Qualifiers": [
+							"",
+							""
+						],
+						"DeletionMarkers": [
+							false,
+							false
+						],
+						"KeyName": "satisfies",
+						"ValueType": "ENTITY",
+						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"ConnectBy": "satisfies",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/REQUIREMENTS#satisfies"
+					}
+				],
+				"NodeName": "SRS_Req",
+				"fullURIName": "http://arcos.AH-64D/Boeing#SRS_Req",
+				"SparqlID": "?SRS_Req",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			}
+		],
+		"orderBy": [],
+		"unionHash": {}
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [],
+		"nodes": [
+			{
+				"sparqlID": "?SRS_Req",
+				"type": "http://arcos.AH-64D/Boeing#SRS_Req",
+				"mapping": [],
+				"props": []
+			},
+			{
+				"sparqlID": "?CSID_Req",
+				"type": "http://arcos.AH-64D/Boeing#CSID_Req",
+				"mapping": [],
+				"props": []
+			},
+			{
+				"sparqlID": "?PIDS_Req",
+				"type": "http://arcos.AH-64D/Boeing#PIDS_Req",
+				"mapping": [],
+				"props": []
+			}
+		]
+	},
+	"plotSpecs": null
+}

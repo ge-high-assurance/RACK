@@ -1,4 +1,4 @@
-# Copyright (c) 2020, Galois, Inc.
+# Copyright (c) 2021, Galois, Inc.
 #
 # All Rights Reserved
 #
@@ -15,23 +15,25 @@ from ontology_changes import Commit, RenameProperty
 PROV_S = rack("PROV-S")
 REQUIREMENTS = rack("REQUIREMENTS")
 
-
-commit: Commit = {
-    "number": "13ed266ba5730cebe75c0c48f6ba83af69429122",
-    "changes": [
+commit = Commit(
+    number="13ed266ba5730cebe75c0c48f6ba83af69429122",
+    changes=[
         # REQUIREMENTS.sadl
         RenameProperty(
             from_name_space=REQUIREMENTS,
+            from_class="REQUIREMENT",
             from_name="text",
             to_name_space=PROV_S,
+            to_class="THING",
             to_name="description",
         ),
         RenameProperty(
             from_name_space=REQUIREMENTS,
+            from_class="DATA_DICTIONARY",
             from_name="text",
             to_name_space=PROV_S,
+            to_class="THING",
             to_name="description",
         ),
-        # RemoveIsATypeOf on identified?
     ],
-}
+)

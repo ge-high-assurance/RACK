@@ -19,9 +19,10 @@ data_get('SOFTWARE#CODE_DEVELOPMENT', 'SOFTWARE#referenced',
 % explicit using predicates not normally needed for data recognizers.
 % If the DevelopmentPlan simply specified a SOFTWARE#COMPILE, then
 % this data_get recognizer could be removed.
-data_get('SOFTWARE#COMPILE', 'PROV-S#identifier', uid(Instance,_,_), Instance) :-
+data_get('SOFTWARE#COMPILE', 'PROV-S#identifier', uid(Instance,_,_), Identifier) :-
     rack_namespace(NS),
     ns_ref(NS, Instance, RDFInstance),
+    atom_string(Instance, Identifier),
     add_triple(RDFInstance, rdf:type,
                'http://Turnstile/DevelopmentPlan#SoftwareIntegration').
 
@@ -81,10 +82,12 @@ data_instance('SOFTWARE#SWCOMPONENT', load_data, 'main_function',
                    "C Function: 'main'"),
                func_decl('main_function', 'counter.c')]).
 
+data_get('SOFTWARE#SWCOMPONENT', 'SOFTWARE#componentType', func_decl(_, _), 'SourceFunction').
+
 % conf.json is not part of a build, so the format is indeterminate
 
 data_get('FILE#FILE', 'FILE#fileFormat', sw_file_data(_,_,'conf.json'),
          'JSONFile').
 data_instance('FILE#FORMAT', load_data, 'JSONFile',
-              [ uid('JSONFile', 'JSONFile', 'JSON file format'),
+              [ uid('JSONFile', 'JSONFile', 'JSONFileFormat'),
                 fmt('JSONFile')]).

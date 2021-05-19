@@ -92,7 +92,7 @@
 "uncertainty",null,"CONFIDENCE_ASSESSMENT","float","uncommitted belief"
 "used",null,"ACTIVITY","ENTITY","Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)"
 "valueType",null,"SWCOMPONENT","string","The type of this value, if applicable (e.g. for functions or variables)."
-"verifies","wasImpactedBy","TEST","ENTITY","Parent ENTITY(s) (e.g. REQUIREMENT) that this requirement is derived from"
+"verifies","wasImpactedBy","TEST","ENTITY","ENTITY(s) (e.g. REQUIREMENT) that this test verifies"
 "wasAssociatedWith",null,"ACTIVITY","AGENT","An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity."
 "wasAttributedTo",null,"ENTITY","AGENT","Attribution is the ascribing of an entity to an agent. https://www.w3.org/TR/prov-dm/#concept-attribution"
 "wasDerivedFrom",null,"ENTITY","ENTITY","A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity."

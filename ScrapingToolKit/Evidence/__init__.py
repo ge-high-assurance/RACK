@@ -15,11 +15,15 @@ import os
 import os.path
 import sys
 import csv
+from datetime import datetime
 from Logging import *
 from lxml import etree
 
 __EvidenceDir__ = None
 __Evidence__ = None
+
+__ingestionIdentifier__ = None
+
 def getXsd():
     rackData = {}
     AutoGenerationDir = os.path.split(__file__)[0]
@@ -42,23 +46,28 @@ def createCDR():
     Creating the CDR is done in two phases the first CDR only has the identifiers so that it will create all the objects
     the second phase has all the data, by splitting this into two phase ths allows the lookups to succeed regardless of load order
     '''
-    global __EvidenceDir__, __Evidence__
+    global __EvidenceDir__, __Evidence__, __ingestionIdentifier__
+
+    Add.ACTIVITY(identifier=__ingestionIdentifier__,endedAtTime=str(datetime.now()).split(".")[0])
+
     __Evidence__.write(__EvidenceDir__, 
                pretty_print=True,
                xml_declaration=True,
                encoding='UTF-8')
+
     cdrFiles = list()
     xsdSpec = getXsd()
     outputDir = __EvidenceDir__.replace(".xml","")
     if not os.path.exists(outputDir):
         os.makedirs(outputDir)
     for thing in xsdSpec:
-        headers = xsdSpec[thing] 
+        headers = xsdSpec[thing]
+        usedHeaders = list(["identifier", "dataInsertedBy_identifier"]) # all CDRs will have at least these columns
         data = etree.parse(__EvidenceDir__)
         root = data.getroot()
         if root.find(thing)!=None:
             cdrFiles.append(thing)
-            with open(os.path.join(outputDir,thing+"1.csv"), 'w', encoding="utf-8") as outFile:
+            with open(os.path.join(outputDir,thing+"1.csv"), 'w', newline='', encoding="utf-8") as outFile:
                 outwriter = csv.writer(outFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 outwriter.writerow(["identifier"])
                 loaded = list()
@@ -68,21 +77,32 @@ def createCDR():
                         if c.find("identifier").text not in loaded:
                             outwriter.writerow([c.find("identifier").text])
                             loaded.append(c.find("identifier").text)
+                        # Check to see if the header item 
+                        for k in headers:
+                            if c.find(k) is not None:
+                                if k not in usedHeaders:
+                                    usedHeaders.append(k)
+
                     else:
                         log("Identifier not found.")
-            with open(os.path.join(outputDir,thing+"2.csv"), 'w', encoding="utf-8") as outFile:
+
+            print("Found the following data for "+thing+":", str(usedHeaders))
+            with open(os.path.join(outputDir,thing+"2.csv"), 'w', newline='', encoding="utf-8") as outFile:
                 outwriter = csv.writer(outFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-                outwriter.writerow(headers)
+                outwriter.writerow(usedHeaders)
 
                 for c in root.iter(thing):
                     rowData = list()
                     thingData = {}
-                    for k in headers:
+                    for k in usedHeaders:
                         thingData[k] = c.find(k)
                     dataString = ""        
-                    for k in headers:
+                    for k in usedHeaders:
                         if thingData[k] is not None:
                             rowData.append(thingData[k].text)
+                        elif k == "dataInsertedBy_identifier":
+                            rowData.append(__ingestionIdentifier__)
+
                         else:
                             rowData.append("")
                     outwriter.writerow(rowData)
@@ -94,21 +114,28 @@ ingestion-steps:
 ''')
         for cdr in cdrFiles:
             outFile.write('- {nodegroup: "ingest_{{THING}}", csv: "{{THING}}1.csv"}\n'.replace("{{THING}}",cdr))
-        outFile.write("\n#Phase2: All Evidence Only\n")
+        outFile.write("\n#Phase2: All Evidence\n")
         for cdr in cdrFiles:
             outFile.write('- {nodegroup: "ingest_{{THING}}", csv: "{{THING}}2.csv"}\n'.replace("{{THING}}",cdr))
     return os.path.join(outputDir,"import.yaml")
 
-def createEvidenceFile(filePath="RACK-DATA.xml"):   
+def createEvidenceFile(ingestionTitle="ScrapingToolKitIngestion", ingestionDescription="Data that was ingested using the ARCOS Scraping Tool Kit.", filePath="RACK-DATA.xml"):   
     trace()
-    global __EvidenceDir__
+    global __EvidenceDir__, __ingestionIdentifier__, __Evidence__
+    __Evidence__ = None
     __EvidenceDir__ = filePath
     log("Created Evidence File:", str_highlight(__EvidenceDir__))
     with open(__EvidenceDir__, "w") as eFile:
         eFile.write('<?xml version="1.0" encoding="UTF-8"?>')
         eFile.write('<RACK-DATA>')
         eFile.write('</RACK-DATA>')
-    
+
+    __ingestionIdentifier__ = ingestionTitle
+
+    Add.ACTIVITY(identifier=__ingestionIdentifier__,description = ingestionDescription,
+                 title= ingestionTitle,
+                 startedAtTime=str(datetime.now()).split(".")[0])
+
 def addEvidenceObject(eObject):   
     trace()
     global __EvidenceDir__, __Evidence__
@@ -116,7 +143,6 @@ def addEvidenceObject(eObject):
     #  it write to the hard drive every call, this could be improved by storing the xml data in 
     #  memory until a flush call or something similar.  This works well for now as you can 
     #  as it will log the data up to the point where a exception occurs
-    __EvidenceDir__ = "RACK-DATA.xml"
     if not os.path.exists(__EvidenceDir__):
         createEvidenceFile(__EvidenceDir__)
     if __Evidence__ is None:

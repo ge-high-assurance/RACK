@@ -66,9 +66,10 @@ FUNCTION
 	(note "defines functionality / capability")
 	is a type of ENTITY.
 
-   parentFunction (note "allows for decomposition of functionality") describes FUNCTION with a single value of type FUNCTION.
-
-OP_ENV   
+    parentFunction (note "allows for decomposition of functionality") describes FUNCTION with values of type FUNCTION.
+    parentFunction describes FUNCTION with at most 1 value.
+    
+OP_ENV
 	(note "defines the operating environment assumptions and constraints")
 	is a type of THING. // should this be an ENTITY?
 		

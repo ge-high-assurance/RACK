@@ -1,4 +1,4 @@
-# Copyright (c) 2020, Galois, Inc.
+# Copyright (c) 2021, Galois, Inc.
 #
 # All Rights Reserved
 #
@@ -11,37 +11,59 @@
 
 from migration_helpers.name_space import rack
 from ontology_changes import (
-    ChangeIsATypeOf,
+    AtMost,
+    ChangeCardinality,
+    ChangePropertyIsATypeOf,
     ChangePropertyRange,
     Commit,
     RenameProperty,
+    SingleValue,
 )
 
 FILE = rack("FILE")
 PROV_S = rack("PROV-S")
 SOFTWARE = rack("SOFTWARE")
 
-commit: Commit = {
-    "number": "643839e7d8036731ba1da767942c8e74c2876e2e",
-    "changes": [
+commit = Commit(
+    number="643839e7d8036731ba1da767942c8e74c2876e2e",
+    changes=[
         # FILE.sadl
+        ChangeCardinality(
+            name_space=FILE,
+            class_id="FILE",
+            property_id="filename",
+            to_cardinality=SingleValue(),
+        ),
         RenameProperty(
             from_name_space=FILE,
+            from_class="FILE",
             from_name="fileParent",
             to_name_space=FILE,
+            to_class="FILE",
             to_name="definedIn",
         ),
-        ChangeIsATypeOf(
+        ChangePropertyIsATypeOf(
+            name_space=FILE,
             class_id="FILE",
             property_id="satisfies",
+            from_name_space=PROV_S,
             from_property_id="wasDerivedFrom",
+            to_name_space=PROV_S,
             to_property_id="wasImpactedBy",
         ),
+        ChangeCardinality(
+            name_space=FILE,
+            class_id="FILE",
+            property_id="createBy",
+            to_cardinality=AtMost(1),
+        ),
         # FILE.sadl / SOFTWARE.sadl
-       RenameProperty(
+        RenameProperty(
             from_name_space=SOFTWARE,
+            from_class="FILE",
             from_name="definedIn",
             to_name_space=FILE,
+            to_class="FILE",
             to_name="definedIn",
         ),
         ChangePropertyRange(
@@ -52,5 +74,5 @@ commit: Commit = {
             to_name_space=FILE,
             to_range="FILE",
         ),
-     ],
-}
+    ],
+)

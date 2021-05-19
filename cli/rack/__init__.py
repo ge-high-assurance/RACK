@@ -253,10 +253,9 @@ def run_query(conn: Connection, nodegroup: str, export_format: ExportFormat = Ex
     semtk_table = semtk3.select_by_id(nodegroup, runtime_constraints=runtime_constraints)
     formatted_table = format_semtk_table(semtk_table, export_format=export_format, headers=headers)
     if path is None:
-        print()
         print(formatted_table)
     else:
-        with open(path, mode="w") as f:
+        with open(path, mode='w', encoding='utf-8') as f:
             print(formatted_table, file=f)
 
 def run_count_query(conn: Connection, nodegroup: str, constraints: Optional[List[str]] = None) -> None:
@@ -271,12 +270,13 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     """Ingest a CSV file using the named nodegroup."""
 
     def suffix(result: dict) -> str:
-        return f' Records: {result["recordsProcessed"]: <7} Failures: {result["failuresEncountered"]}'
+        return f' Records: {result}'
 
     @with_status(f'Loading {str_highlight(nodegroup)}', suffix)
     def go() -> dict:
-        with open(csv_name, "r") as csv_file:
+        with open(csv_name, 'r', encoding='utf-8') as csv_file:
             csv = csv_file.read()
+
         return semtk3.ingest_by_id(nodegroup, csv, conn)
 
     go()
@@ -290,7 +290,7 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
 
 def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
-    with open(config_path, 'r') as config_file:
+    with open(config_path, 'r', encoding='utf-8') as config_file:
         config = yaml.safe_load(config_file)
         validate(config, INGEST_CSV_CONFIG_SCHEMA)
 
@@ -334,7 +334,7 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
 
 def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple OWL files into the model graph."""
-    with open(config_path, 'r') as config_file:
+    with open(config_path, 'r', encoding='utf-8') as config_file:
         config = yaml.safe_load(config_file)
         validate(config, INGEST_OWL_CONFIG_SCHEMA)
 

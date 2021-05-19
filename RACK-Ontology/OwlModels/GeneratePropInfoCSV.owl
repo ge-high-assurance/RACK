@@ -9,12 +9,10 @@
     xmlns:Rv="http://arcos.rack/REVIEW#"
     xmlns:D="http://arcos.rack/DOCUMENT#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
-    xmlns:sacms="http://arcos.rack/SACM-S#"
     xmlns:Rq="http://arcos.rack/REQUIREMENTS#"
     xmlns:H="http://arcos.rack/HAZARD#"
     xmlns:sw="http://arcos.rack/SOFTWARE#"
     xmlns:genpropinfo="http://arcos.rack/GeneratePropInfoCSV#"
-    xmlns:M="http://arcos.rack/MODEL#"
     xmlns:sys="http://arcos.rack/SYSTEM#"
     xmlns:An="http://arcos.rack/ANALYSIS#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
@@ -35,7 +33,6 @@
     <owl:imports rdf:resource="PROCESS"/>
     <owl:imports rdf:resource="REVIEW"/>
     <owl:imports rdf:resource="AGENTS"/>
-    <owl:imports rdf:resource="SACM-S"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="REQUIREMENTS"/>
     <owl:imports rdf:resource="CONFIDENCE"/>

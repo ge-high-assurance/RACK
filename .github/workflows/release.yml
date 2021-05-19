@@ -34,7 +34,6 @@ jobs:
       with:
         repository: ge-high-assurance/RACK
         ref: ${{ github.event.release.tag_name }}
-        token: ${{ secrets.RACK_CI_PAT }}
         path: RACK
 
     - name: Check out RACK wiki
@@ -103,7 +102,6 @@ jobs:
       with:
         repository: ge-high-assurance/RACK
         ref: ${{ github.event.release.tag_name }}
-        token: ${{ secrets.RACK_CI_PAT }}
         path: RACK
 
     - name: Get all files needed by rack-box

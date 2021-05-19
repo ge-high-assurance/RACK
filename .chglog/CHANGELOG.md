@@ -1,5 +1,19 @@
 # RACK Change Log
 
+## [v6.0] - 2021-05-03
+
+This release has the following changes:
+
+- Added LMCO & SRI ontology overlays
+- Loaded only DO-178C in RiB, made ARP-4754A, DO-330, & MIL-STD-881D optional
+- Added Boeing data validation query nodegreoups
+- Added [dataInsertedBy](https://github.com/ge-high-assurance/RACK/wiki/How-to-use-dataInsertedBy) property and predefined nodegroup
+- Improved construct query UI and functionality
+- Added [RACK migration tool](https://github.com/ge-high-assurance/RACK/tree/master/migration)
+- Automatically generated Wiki page for [RACK ontology changes](https://github.com/ge-high-assurance/RACK/wiki/RACK-ontology-detailed-changelogs)
+- Automatically generated Wiki page for [RACK predefined queries](https://github.com/ge-high-assurance/RACK/wiki/RACK-Predefined-Queries)
+- Streamlined Wiki (custom sidebar)
+
 ## [v5.0] - 2021-03-08
 
 This release has the following changes:

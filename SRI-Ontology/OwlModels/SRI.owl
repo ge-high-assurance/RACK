@@ -1,0 +1,1154 @@
+<rdf:RDF
+    xmlns:DesCert="http://arcos.descert/DesCert#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://arcos.descert/DesCert">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <owl:imports rdf:resource="http://arcos.rack/DOCUMENT"/>
+    <owl:imports rdf:resource="http://arcos.rack/TESTING"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://arcos.rack/PROCESS"/>
+    <owl:imports rdf:resource="http://arcos.rack/AGENTS"/>
+    <owl:imports rdf:resource="http://arcos.rack/PROV-S"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'DesCert.sadl' and should not be directly edited.</rdfs:comment>
+    <owl:imports rdf:resource="http://arcos.rack/SYSTEM"/>
+    <owl:imports rdf:resource="http://arcos.rack/HAZARD"/>
+    <owl:imports rdf:resource="http://arcos.rack/ANALYSIS"/>
+    <owl:imports rdf:resource="http://arcos.rack/REQUIREMENTS"/>
+    <owl:imports rdf:resource="http://arcos.rack/SOFTWARE"/>
+    <owl:imports rdf:resource="http://arcos.rack/MODEL"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="DaikonInvariantDetection">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:ID="SourceCode"/>
+              <owl:Class rdf:ID="RandoopTestsAndMetrics"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#used"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="toolInvocation"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareHighLevelRequirement">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="TestOracle">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="testOracleTheory"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="testOracleCriteria"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="verifiesRequirement"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SallyTransitionSystemModel">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="sallyModelNotation"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SystemArchitecture">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="createdBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">specification of system architecture</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ClearNotation">
+    <rdfs:comment xml:lang="en">CLEAR notation for writing requirements</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="RequirementAnalysis">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:ID="SoftwareHighLevelRequirementSet"/>
+              <owl:Class rdf:ID="SoftwareLowLevelRequirementSet"/>
+              <owl:Class rdf:ID="DataDictionary"/>
+              <owl:Class rdf:ID="CLEARGenericProperty"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#used"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#toolInvocation"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/ANALYSIS#ANALYSIS"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DaikonInvariantOutput">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="testsCount"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="classesCount"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="invariantCount"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://arcos.rack/TESTING#producedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SallyPropertyModel">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="SpecificProperty"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/MODEL#models"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="sallyPropertySpecification"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="sallyPropertyNotation"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">the MODEL class that is used to model a SpecificProperty</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/MODEL#MODEL"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareCoding">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="SoftwareDesign"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasInformedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#CODE_DEVELOPMENT"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SoftwareHighLevelRequirementSet">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#COLLECTION"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareLowLevelRequirement">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#SoftwareDesign"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+  </owl:Class>
+  <owl:Class rdf:about="#RandoopTestsAndMetrics">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://arcos.rack/TESTING#producedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="numberOfErrorRevealingTestCases"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="numberOfReducedViolationInducingTestCases"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="numberOfViolationInducingTestCases"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="numberOfRegressionTestCases"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="totalNumberOfTestCases"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">the set of JUNIT tests/results generated and executed by Randoop with corresponding test clasification metrics</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ClearTestAndOracleGeneration">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#SoftwareHighLevelRequirementSet"/>
+              <owl:Class rdf:about="#SoftwareLowLevelRequirementSet"/>
+              <owl:Class rdf:about="#DataDictionary"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#used"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#toolInvocation"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_DEVELOPMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ToolInvocation">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="toolUsed"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">the instance of tool execution, used as a noun</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SallyNotation">
+    <rdfs:comment xml:lang="en">Sally notation for creating models and property queries</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Engineer">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/AGENTS#PERSON"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ClearTestingTheory">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="RadlNotation">
+    <rdfs:comment xml:lang="en">Radl notation for architecture specification</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="RadlArchitectureModel">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SystemArchitecture"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/MODEL#models"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="radlSpecification"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="radlArchitectureNotation"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">The model of architecture in Radl</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/MODEL#MODEL"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SallyTransitionSystemModelGeneration">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareHighLevelRequirementSet"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#used"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#toolInvocation"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SallyModelChecking">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#SallyTransitionSystemModel"/>
+              <owl:Class rdf:about="#SpecificProperty"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#used"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#toolInvocation"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/ANALYSIS#ANALYSIS"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SpecificProperty">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SystemConOps">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="DevelopSystemConOps"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SourceCode">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareCoding"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/FILE#FILE"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SystemRequirementSet">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#COLLECTION"/>
+  </owl:Class>
+  <owl:Class rdf:ID="RadlerArchitectureAnalysis">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#RadlArchitectureModel"/>
+              <owl:Class rdf:ID="RadlGenericProperty"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#used"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#toolInvocation"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">Analysis done by Radler tool on Radl architecure spec</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/ANALYSIS#ANALYSIS"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SoftwareLowLevelRequirementSet">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <rdf:Description rdf:about="http://arcos.rack/REQUIREMENTS#governs">
+            <rdfs:domain>
+              <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#SystemArchitecture"/>
+                  <owl:Class rdf:about="#SystemRequirementSet"/>
+                  <owl:Class rdf:about="#SoftwareHighLevelRequirementSet"/>
+                  <owl:Class rdf:about="#SoftwareLowLevelRequirementSet"/>
+                </owl:unionOf>
+              </owl:Class>
+            </rdfs:domain>
+          </rdf:Description>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#COLLECTION"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SystemRequirementsDefinition">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#SystemConOps"/>
+              <owl:Class rdf:about="#SystemArchitecture"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/REQUIREMENTS#governedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SystemConOps"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasInformedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareIntegration">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareCoding"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasInformedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/SOFTWARE#COMPILE"/>
+  </owl:Class>
+  <owl:Class rdf:ID="LikelyInvariantModel">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SpecificProperty"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/MODEL#models"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="invariantSpecification"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">model of invariant detected by Daikon</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/MODEL#MODEL"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DesCertRequirementModel">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#SoftwareHighLevelRequirement"/>
+              <owl:Class rdf:about="#SoftwareLowLevelRequirement"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/MODEL#models"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="requirementText"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requirementNotation"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">The model of requirement in DesCert in CLEAR notation</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/MODEL#MODEL"/>
+  </owl:Class>
+  <owl:Class rdf:ID="DevelopSystemArchitecture">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SystemConOps"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#used"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:about="#DevelopSystemConOps">
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ToolQualificationData">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="toolQualificationSummary"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">tool qualification evidence including tool qualification plan, tool operational requirements, and tool verfication procedures</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ObjectFile">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareIntegration"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/FILE#FILE"/>
+  </owl:Class>
+  <owl:Class rdf:ID="RandoopJUnitTestGeneration">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SourceCode"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#used"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#toolInvocation"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_DEVELOPMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SoftwareHighLevelRequirementsDefinition">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareHighLevelRequirementsDefinition"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#SystemRequirementSet"/>
+              <owl:Class rdf:about="#SystemArchitecture"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/REQUIREMENTS#governedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#SystemRequirementsDefinition"/>
+              <owl:Class rdf:about="#DevelopSystemArchitecture"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasInformedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SystemRequirement">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SystemRequirementsDefinition"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ExecutableObject">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareIntegration"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/FILE#FILE"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SoftwareDesign">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareHighLevelRequirementSet"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/REQUIREMENTS#governedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#SoftwareHighLevelRequirementsDefinition"/>
+              <owl:Class rdf:about="#SystemArchitecture"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasInformedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT_DEVELOPMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="GenericProperty">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="propertyDescription"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:about="#CLEARGenericProperty">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#SoftwareHighLevelRequirementSet"/>
+              <owl:Class rdf:about="#SoftwareLowLevelRequirementSet"/>
+              <owl:Class rdf:about="#DataDictionary"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="propertyScope"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#GenericProperty"/>
+  </owl:Class>
+  <owl:Class rdf:about="#DataDictionary">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SoftwareHighLevelRequirementsDefinition"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM"/>
+  </owl:Class>
+  <owl:Class rdf:about="#RadlGenericProperty">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#RadlArchitectureModel"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#propertyScope"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#GenericProperty"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="#createdBy">
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+    <rdfs:range rdf:resource="#DevelopSystemArchitecture"/>
+    <rdfs:domain rdf:resource="#SystemArchitecture"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="author">
+    <rdfs:comment xml:lang="en">author(s) of system architecture</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasAssociatedWith"/>
+    <rdfs:comment xml:lang="en">author(s) of ConOps - organizations, persons</rdfs:comment>
+    <rdfs:range rdf:resource="http://arcos.rack/PROV-S#AGENT"/>
+    <rdfs:domain rdf:resource="#DevelopSystemArchitecture"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="jUnitTestFile">
+    <rdfs:range rdf:resource="http://arcos.rack/FILE#FILE"/>
+    <rdfs:domain rdf:resource="#RandoopTestsAndMetrics"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testingTheoryDoc">
+    <rdfs:range rdf:resource="http://arcos.rack/DOCUMENT#DOCUMENT"/>
+    <rdfs:domain rdf:resource="#ClearTestingTheory"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sallyModelContents">
+    <rdfs:range rdf:resource="http://arcos.rack/FILE#FILE"/>
+    <rdfs:domain rdf:resource="#SallyTransitionSystemModel"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="semantics">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#RadlNotation"/>
+          <owl:Class rdf:about="#ClearNotation"/>
+          <owl:Class rdf:about="#SallyNotation"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://arcos.rack/DOCUMENT#DOCUMENT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#verifiesRequirement">
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasDerivedFrom"/>
+    <rdfs:range rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+    <rdfs:domain rdf:resource="#TestOracle"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="goalProperty">
+    <rdfs:comment xml:lang="en">SpecificProperty or GenericProperty that is the objective of anlaysis</rdfs:comment>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#GenericProperty"/>
+          <owl:Class rdf:about="#SpecificProperty"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+    <rdfs:domain rdf:resource="http://arcos.rack/ANALYSIS#ANALYSIS_OUTPUT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#testOracleTheory">
+    <rdfs:range rdf:resource="#ClearTestingTheory"/>
+    <rdfs:domain rdf:resource="#TestOracle"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#radlArchitectureNotation">
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasImpactedBy"/>
+    <rdfs:range rdf:resource="#RadlNotation"/>
+    <rdfs:domain rdf:resource="#RadlArchitectureModel"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testDriver">
+    <rdfs:range rdf:resource="http://arcos.rack/FILE#FILE"/>
+    <rdfs:domain rdf:resource="#DaikonInvariantOutput"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="toolQualificationData">
+    <rdfs:range rdf:resource="#ToolQualificationData"/>
+    <rdfs:domain>
+      <rdf:Description rdf:about="http://arcos.rack/AGENTS#TOOL">
+        <rdfs:subClassOf>
+          <owl:Restriction>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >1</owl:maxCardinality>
+            <owl:onProperty rdf:resource="#toolQualificationData"/>
+          </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >1</owl:cardinality>
+            <owl:onProperty>
+              <owl:DatatypeProperty rdf:ID="toolSummaryDescription"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+          <owl:Restriction>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >1</owl:maxCardinality>
+            <owl:onProperty>
+              <owl:DatatypeProperty rdf:ID="toolInstallationConfiguration"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </rdfs:subClassOf>
+      </rdf:Description>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="userGuide">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://arcos.rack/AGENTS#TOOL"/>
+          <owl:Class rdf:about="#RadlNotation"/>
+          <owl:Class rdf:about="#ClearNotation"/>
+          <owl:Class rdf:about="#SallyNotation"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://arcos.rack/DOCUMENT#DOCUMENT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://arcos.rack/TESTING#producedBy">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#RandoopTestsAndMetrics"/>
+          <owl:Class rdf:about="#DaikonInvariantOutput"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasGeneratedBy"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#toolInvocation">
+    <rdfs:comment xml:lang="en">Daikon tool invocation</rdfs:comment>
+    <rdfs:comment xml:lang="en">Randoop tool</rdfs:comment>
+    <rdfs:comment xml:lang="en">Text2Test tool usage instance</rdfs:comment>
+    <rdfs:comment xml:lang="en">using Text2Test tool on a requirement set that generates Sally input model</rdfs:comment>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#RadlerArchitectureAnalysis"/>
+          <owl:Class rdf:about="#SallyTransitionSystemModelGeneration"/>
+          <owl:Class rdf:about="#SallyModelChecking"/>
+          <owl:Class rdf:about="#ClearTestAndOracleGeneration"/>
+          <owl:Class rdf:about="#RequirementAnalysis"/>
+          <owl:Class rdf:about="#RandoopJUnitTestGeneration"/>
+          <owl:Class rdf:about="#DaikonInvariantDetection"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#ToolInvocation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#sallyModelNotation">
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasImpactedBy"/>
+    <rdfs:range rdf:resource="#SallyNotation"/>
+    <rdfs:domain rdf:resource="#SallyTransitionSystemModel"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="supportFiles">
+    <rdfs:range rdf:resource="http://arcos.rack/FILE#FILE"/>
+    <rdfs:domain rdf:resource="#DaikonInvariantOutput"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#toolUsed">
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasAssociatedWith"/>
+    <rdfs:comment xml:lang="en">the tool that is invoked</rdfs:comment>
+    <rdfs:range rdf:resource="http://arcos.rack/AGENTS#TOOL"/>
+    <rdfs:domain rdf:resource="#ToolInvocation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="testVectorFile">
+    <rdfs:comment xml:lang="en">file containing tests in format of test vectors</rdfs:comment>
+    <rdfs:range rdf:resource="http://arcos.rack/FILE#FILE"/>
+    <rdfs:domain>
+      <rdf:Description rdf:about="http://arcos.rack/TESTING#TEST">
+        <rdfs:subClassOf>
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >1</owl:cardinality>
+            <owl:onProperty rdf:resource="#testVectorFile"/>
+          </owl:Restriction>
+        </rdfs:subClassOf>
+      </rdf:Description>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="wasQualifiedBy">
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasAttributedTo"/>
+    <rdfs:comment xml:lang="en">organization qualifying this tool</rdfs:comment>
+    <rdfs:range rdf:resource="http://arcos.rack/AGENTS#ORGANIZATION"/>
+    <rdfs:domain rdf:resource="#ToolQualificationData"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="invokedBy">
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasAssociatedWith"/>
+    <rdfs:comment xml:lang="en">person or DevOps running the tool</rdfs:comment>
+    <rdfs:range rdf:resource="http://arcos.rack/PROV-S#AGENT"/>
+    <rdfs:domain rdf:resource="#ToolInvocation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="propertyBasis">
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasImpactedBy"/>
+    <rdfs:comment xml:lang="en">entity impacting the property definition - e.g. SystemconOps</rdfs:comment>
+    <rdfs:range rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#SpecificProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#sallyPropertyNotation">
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasImpactedBy"/>
+    <rdfs:range rdf:resource="#SallyNotation"/>
+    <rdfs:domain rdf:resource="#SallyPropertyModel"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="likelyInvariants">
+    <rdfs:range rdf:resource="#SpecificProperty"/>
+    <rdfs:domain rdf:resource="#DaikonInvariantOutput"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#propertyScope">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#GenericProperty"/>
+          <owl:Class rdf:about="#SpecificProperty"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:comment xml:lang="en">entity(ies) over which this property must hold; e.g., a model, a requirement set, code, etc.</rdfs:comment>
+    <rdfs:range rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasImpactedBy"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="conOpsDocs">
+    <rdfs:range rdf:resource="http://arcos.rack/DOCUMENT#DOCUMENT"/>
+    <rdfs:domain rdf:resource="#SystemConOps"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="toolQualificationArtifacts">
+    <rdfs:comment xml:lang="en">each tool qualification artifact in a separate file</rdfs:comment>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://arcos.rack/DOCUMENT#DOCUMENT"/>
+          <rdf:Description rdf:about="http://arcos.rack/FILE#FILE"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+    <rdfs:domain rdf:resource="#ToolQualificationData"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="verficationObjective">
+    <rdfs:comment xml:lang="en"></rdfs:comment>
+    <rdfs:range rdf:resource="http://arcos.rack/PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#GenericProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requirementNotation">
+    <rdfs:subPropertyOf rdf:resource="http://arcos.rack/PROV-S#wasImpactedBy"/>
+    <rdfs:range rdf:resource="#ClearNotation"/>
+    <rdfs:domain rdf:resource="#DesCertRequirementModel"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="#toolQualificationSummary">
+    <rdfs:comment xml:lang="en">summary of tool qualification argument and roadmap of artifacts</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#ToolQualificationData"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#invariantSpecification">
+    <rdfs:comment xml:lang="en">the likely invariant text</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#LikelyInvariantModel"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#numberOfViolationInducingTestCases">
+    <rdfs:comment xml:lang="en">tests that indicate a method contract violation</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#RandoopTestsAndMetrics"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#requirementText">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#DesCertRequirementModel"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="linkerPath">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#SoftwareIntegration"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#classesCount">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#DaikonInvariantOutput"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="testEnvironment">
+    <rdfs:comment xml:lang="en">test environment description, configuration parameters</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain>
+      <rdf:Description rdf:about="http://arcos.rack/TESTING#TEST_EXECUTION">
+        <rdfs:subClassOf>
+          <owl:Restriction>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >1</owl:maxCardinality>
+            <owl:onProperty rdf:resource="#testEnvironment"/>
+          </owl:Restriction>
+        </rdfs:subClassOf>
+      </rdf:Description>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#toolInstallationConfiguration">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://arcos.rack/AGENTS#TOOL"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#testsCount">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#DaikonInvariantOutput"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#propertyDescription">
+    <rdfs:comment xml:lang="en">propety objective: e.g., 'architecture is conformant', 'requirements are consistent', 'code is free of runtime errors, etc.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#GenericProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="analysisDiagnostics">
+    <rdfs:comment xml:lang="en">counter examples, other diagnsotics</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://arcos.rack/ANALYSIS#ANALYSIS_OUTPUT"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="requirementSubclause">
+    <rdfs:comment xml:lang="en">part (subclause) of the requirement this test oracle tests</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#TestOracle"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#testOracleCriteria">
+    <rdfs:comment xml:lang="en">e.g., equiv class, boundary value</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#TestOracle"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#numberOfRegressionTestCases">
+    <rdfs:comment xml:lang="en">tests that pass on the code and should continue to pass on regressions</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#RandoopTestsAndMetrics"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="toolParamaters">
+    <rdfs:comment xml:lang="en">all parameters/options used to run the tool</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#ToolInvocation"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="compileWithOptimizations">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:domain rdf:resource="#SoftwareIntegration"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#toolSummaryDescription">
+    <rdfs:comment xml:lang="en">concise description of tool function, inputs, outputs</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://arcos.rack/AGENTS#TOOL"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#radlSpecification">
+    <rdfs:comment xml:lang="en">the Radl specification text</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#RadlArchitectureModel"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#numberOfReducedViolationInducingTestCases">
+    <rdfs:comment xml:lang="en">numberOfViolationInducingTestCases reduced by filtering out redundant test cases in the same equivalance class</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#RandoopTestsAndMetrics"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#invariantCount">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#DaikonInvariantOutput"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#totalNumberOfTestCases">
+    <rdfs:comment xml:lang="en">size of test set</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#RandoopTestsAndMetrics"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#numberOfErrorRevealingTestCases">
+    <rdfs:comment xml:lang="en">tests that were determined to reveal actual errors in code</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#RandoopTestsAndMetrics"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#sallyPropertySpecification">
+    <rdfs:comment xml:lang="en">the property content/text</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#SallyPropertyModel"/>
+  </owl:DatatypeProperty>
+  <rdf:Description rdf:about="http://arcos.rack/REQUIREMENTS#createdBy">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#SystemRequirementSet"/>
+          <owl:Class rdf:about="#SoftwareHighLevelRequirementSet"/>
+          <owl:Class rdf:about="#SoftwareLowLevelRequirementSet"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://arcos.rack/HAZARD#mitigates">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#GenericProperty"/>
+          <owl:Class rdf:about="#SpecificProperty"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://arcos.rack/PROV-S#content">
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#SystemRequirement"/>
+          <owl:Class rdf:about="#SoftwareHighLevelRequirement"/>
+          <owl:Class rdf:about="#SoftwareLowLevelRequirement"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://arcos.rack/TESTING#verifies">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#RandoopTestsAndMetrics"/>
+          <owl:Class rdf:about="#DaikonInvariantOutput"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </rdf:Description>
+</rdf:RDF>

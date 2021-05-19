@@ -1,3 +1,4 @@
+ase==3.21.1
 attrs==19.3.0
 certifi==2020.6.20
 chardet==3.0.4
@@ -9,7 +10,8 @@ pyrsistent==0.16.0
 python-dateutil==2.8.1
 PyYAML==5.4
 requests==2.24.0
-semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@d44a45941d06ec6466bbe61bfd81cd667d6a5137
+plotly==4.14.3
+semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@1b61fffa5557bb5c2f124394934a2e6bcef86538
 six==1.15.0
 tabulate==0.8.7
 urllib3==1.25.9

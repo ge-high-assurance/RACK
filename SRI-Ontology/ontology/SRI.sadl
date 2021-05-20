@@ -336,8 +336,8 @@ import "http://arcos.rack/MODEL".
        ///////////////////////////////////////////////////////////////////////
        // Requirement analysis by Text2Test tool from CLEAR requirements
        
-       CLEARGenericProperty is a type of GenericProperty.
-        propertyScope of CLEARGenericProperty only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary}.
+       ClearGenericProperty is a type of GenericProperty.
+        propertyScope of ClearGenericProperty only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary}.
         
        RequirementAnalysis is a type of ANALYSIS.
         // Inherited properties from ANALYSIS
@@ -346,7 +346,7 @@ import "http://arcos.rack/MODEL".
         toolInvocation describes RequirementAnalysis with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
-        used of RequirementAnalysis only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary or CLEARGenericProperty}.
+        used of RequirementAnalysis only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary or ClearGenericProperty}.
        
        ////////////////////////////////
        // Test generation by Randoop tool
@@ -375,8 +375,8 @@ import "http://arcos.rack/MODEL".
         jUnitTestFile describes RandoopTestsAndMetrics with values of type FILE.
         DesCert:producedBy describes RandoopTestsAndMetrics with values of type RandoopJUnitTestGeneration.
         DesCert:producedBy is a type of wasGeneratedBy.
-        verifies describes RandoopTestsAndMetrics with values of type SourceCode.
-           // note: in core ontology, verifies is a type of wasImpactedBy.
+        DesCert:verifies describes RandoopTestsAndMetrics with values of type SourceCode.
+        DesCert:verifies is a type of wasImpactedBy.
         
         /////////////////////////////////////////////
         // Invariant detection by Daikon
@@ -386,7 +386,7 @@ import "http://arcos.rack/MODEL".
           // Inherited porperties
           //   developedBy: refers to Randoop tool
           //   wasInformedBy: activity that was a precursor to this
-          used of DaikonInvariantDetection only has values of type {SourceCode, RandoopTestsAndMetrics}.
+          used of DaikonInvariantDetection only has values of type {SourceCode or RandoopTestsAndMetrics}.
           
         DaikonInvariantOutput is a type of ENTITY.
           // inherited properties from ENTITY:
@@ -394,7 +394,7 @@ import "http://arcos.rack/MODEL".
           //   generatedAtTime
           //   wasImpactedBy of DaikonInvariantOutput has values of type RandoopTestsAndMetrics.
           // new properties:
-          verifies describes DaikonInvariantOutput with values of type SourceCode.
+          DesCert:verifies describes DaikonInvariantOutput with values of type SourceCode.
           DesCert:producedBy describes DaikonInvariantOutput with values of type DaikonInvariantDetection.
           DesCert:producedBy describes DaikonInvariantOutput with at most 1 value.
           invariantCount describes DaikonInvariantOutput with a single value of type int.

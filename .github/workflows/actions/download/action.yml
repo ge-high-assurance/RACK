@@ -24,7 +24,7 @@ runs:
 
     - name: Download SemTK distribution
       shell: bash
-      run: curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20210507/semtk-opensource-v2.3.0-20210507-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+      run: curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20210519/semtk-opensource-v2.3.0-20210519-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
 
     - name: Download style spreadsheet
       shell: bash

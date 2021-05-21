@@ -4,6 +4,7 @@ name: RACK Continuous Integration Workflow
 on:
   pull_request:
   push:
+    branches: [ '**' ]
     tags-ignore: [ '**' ]
   workflow_dispatch:
 

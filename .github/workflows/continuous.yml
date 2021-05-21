@@ -93,7 +93,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: ge-high-assurance/RACK.wiki
-        token: ${{ secrets.RACK_CI_PAT }}
         path: RACK.wiki
 
     - name: Set up Python

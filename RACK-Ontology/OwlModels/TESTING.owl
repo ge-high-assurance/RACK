@@ -68,7 +68,7 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="verifies">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
-    <rdfs:comment xml:lang="en">Parent ENTITY(s) (e.g. REQUIREMENT) that this requirement is derived from</rdfs:comment>
+    <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT) that this test verifies</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#TEST"/>
   </owl:ObjectProperty>

@@ -48,12 +48,8 @@ runs:
       shell: bash
       run: |
         sudo npm install -g github-wikito-converter markdown-to-html
-        # In case job couldn't check out RACK.wiki
-        mkdir -p RACK.wiki/
-        touch -a RACK.wiki/_Footer.md
         cp RACK.wiki/_Footer.md RACK.wiki/Copyright.md
         gwtc -t RACK-in-a-Box RACK.wiki
-        touch -a RACK.wiki/_Welcome.md
         markdown -t RACK-in-a-box -s style.css RACK.wiki/_Welcome.md > index.html
         sed -i -e 's/>NodeGroupService/ onclick="javascript:event.target.port=12058">NodeGroupService/' index.html
         mv documentation.html index.html RACK/rack-box/files

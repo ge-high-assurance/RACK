@@ -89,7 +89,7 @@ jobs:
         path: RACK
 
     - name: Check out RACK wiki
-      if: ${{ steps.cache-files.outputs.cache-hit != 'true' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == 'ge-high-assurance/RACK') }}
+      if: steps.cache-files.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
       with:
         repository: ge-high-assurance/RACK.wiki

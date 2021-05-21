@@ -16,14 +16,12 @@
   * dwa - 11 Nov 2020 - removed incorrect use of wasDerivedFrom
   * dwa - 11 Nov 2020 - removed createBy in favor of base class wasGeneratedBy
   * dwa - 11 Nov 2020 - removed FILE_CREATION activity as unnecessary
-  *
+  * am - 19 May2021 - definedIn property is altered and moved to PROV-S.sadl
   *********************************************/
 
 
 uri "http://arcos.rack/FILE" alias file.
 import "http://arcos.rack/PROV-S".
-
-definedIn (note "The file a THING is defined or contained in") describes THING with values of type FILE.
 
 FILE
 	(note "A file in a filesystem")

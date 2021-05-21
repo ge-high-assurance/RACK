@@ -20,7 +20,16 @@ jobs:
     steps:
     - name: Check out RACK source
       uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK
+        path: RACK
 
+    - name: Check out RACK wiki
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK.wiki
+        path: RACK.wiki
+        
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -40,19 +49,6 @@ jobs:
     - name: Install csvtomd
       run: pip3 install csvtomd --user
       
-    - name: Check out RACK source
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK
-        path: RACK
-
-    - name: Check out RACK wiki
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK.wiki
-        token: ${{ secrets.RACK_CI_PAT }}
-        path: RACK.wiki
-        
     - name: Update query wiki page
       run: |
         csvtomd RACK/nodegroups/queries/store_data.csv > temp.md

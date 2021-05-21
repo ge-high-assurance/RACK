@@ -42,7 +42,6 @@ jobs:
       with:
         repository: ge-high-assurance/RACK.wiki
         ref: ${{ github.event.release.tag_name }}
-        token: ${{ secrets.RACK_CI_PAT }}
         path: RACK.wiki
 
     - name: Set up Python

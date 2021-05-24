@@ -28,3 +28,6 @@ query dataVal SRS_Req without description,number of SRS_Req w/o descriptions sho
 query dataVal SRS_Req without verifies SBVT_Test,number of SRS_Req w/o <-verifies- SBVT_Test should be 0,rack,query dataVal SRS_Req without verifies SBVT_Test.json
 query dataVal SubDD_Req without satisfies SRS_Req,number of SubDD w/o -satisfies-> SRS_Req should be 0,rack,query dataVal SubDD_Req without satisfies SRS_Req.json
 query dataVal SYSTEM without partOf SYSTEM,number of SYSTEM w/o -partOf-> SYSTEM should be 1,rack,query dataVal SYSTEM without partOf SYSTEM.json
+query dataVal UnlinkedSubcomponent,number of SWCOMPONENT w/o –wasImpactedBy-> REQUIREMENT  or  w/o -subcomponentOf -> SWCOMPONENT should be 0,rack,query dataVal UnlinkedSubcomponent.json
+,,,
+,,,

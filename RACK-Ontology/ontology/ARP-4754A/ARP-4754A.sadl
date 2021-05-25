@@ -196,11 +196,11 @@ ARP-4788-8.1 is a OBJECTIVE,
 ARP-4754A is a SPECIFICATION,
 	has dateOfIssue "2010-12",
 	has status Released,
-	has issuingOrganization S-18,
 	has issuingOrganization WG-63,
 	has approvalAuthority SAE
 	has content ARP-4754A-AppendixA.
 
 S-18 is an AGENT.
-WG-63 is an AGENT.
+WG-63 is an AGENT
+   has actedOnBehalfOf S-18.
 SAE is an AGENT.

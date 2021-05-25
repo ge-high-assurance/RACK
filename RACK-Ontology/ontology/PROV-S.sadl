@@ -32,7 +32,6 @@ THING (note "A piece of data stored in RACK") is a class.
 ENTITY (note "An entity is a physical, digital, conceptual, or other kind of thing with some fixed aspects; entities may be real or imaginary.")
 	is a type of THING.
 
-    definedIn (note "The ENTITY (or its representation information) is defined or contained in an ENTITY, such as a FILE") describes ENTITY with values of type ENTITY.
 	wasDerivedFrom (note "A derivation is a transformation of an entity into another, an update of an entity resulting in a new one, or the construction of a new entity based on a pre-existing entity.") describes ENTITY with values of type ENTITY.
 	wasRevisionOf (note "Indicates a direct line of primary descendancy from one entity to a derivative entity.") describes ENTITY with values of type ENTITY.
 	wasRevisionOf is a type of wasDerivedFrom.

@@ -95,6 +95,11 @@
     <rdfs:comment xml:lang="en">Hash algorithm</rdfs:comment>
     <rdfs:range rdf:resource="#HASH_TYPE"/>
   </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="definedIn">
+    <rdfs:comment xml:lang="en">The file a THING is defined or contained in</rdfs:comment>
+    <rdfs:range rdf:resource="#FILE"/>
+    <rdfs:domain rdf:resource="PROV-S#THING"/>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#createBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
     <rdfs:comment xml:lang="en">FILE_CREATION ACTIVITY that created this file</rdfs:comment>

@@ -22,9 +22,9 @@
     "offset": 0,
     "sNodeList": [
       {
+        "isReturned": false,
         "propList": [
           {
-            "KeyName": "description",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -37,7 +37,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "generatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -50,7 +49,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#generatedAtTime"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -63,7 +61,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "invalidatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -76,7 +73,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#invalidatedAtTime"
           },
           {
-            "KeyName": "title",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -89,11 +85,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "NodeName": "FUNCTION",
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?FUNCTION_1",
         "binding": "?requires_FUNCTION",
+        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
             "Connected": false,
@@ -105,7 +105,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -117,7 +116,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasAttributedTo",
             "SnodeSparqlIDs": [],
             "ValueType": "AGENT",
             "Connected": false,
@@ -129,7 +127,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "wasDerivedFrom",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -141,7 +138,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasGeneratedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -153,7 +149,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasImpactedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -165,7 +160,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasRevisionOf",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -177,7 +171,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "parentFunction",
             "SnodeSparqlIDs": [],
             "ValueType": "FUNCTION",
             "Connected": false,
@@ -189,19 +182,12 @@
             "UriValueType": "http://arcos.rack/SYSTEM#FUNCTION"
           }
         ],
-        "isReturned": false,
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?FUNCTION_1",
-        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/SYSTEM#FUNCTION"
       },
       {
+        "isReturned": false,
         "propList": [
           {
-            "KeyName": "description",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -214,7 +200,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "generatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -227,7 +212,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#generatedAtTime"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -240,7 +224,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "invalidatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -253,7 +236,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#invalidatedAtTime"
           },
           {
-            "KeyName": "title",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -266,11 +248,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "NodeName": "FUNCTION",
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?FUNCTION_0",
         "binding": "?provides_FUNCTION",
+        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
             "Connected": false,
@@ -282,7 +268,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -294,7 +279,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasAttributedTo",
             "SnodeSparqlIDs": [],
             "ValueType": "AGENT",
             "Connected": false,
@@ -306,7 +290,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "wasDerivedFrom",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -318,7 +301,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasGeneratedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -330,7 +312,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasImpactedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -342,7 +323,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasRevisionOf",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -354,7 +334,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "parentFunction",
             "SnodeSparqlIDs": [],
             "ValueType": "FUNCTION",
             "Connected": false,
@@ -366,19 +345,12 @@
             "UriValueType": "http://arcos.rack/SYSTEM#FUNCTION"
           }
         ],
-        "isReturned": false,
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?FUNCTION_0",
-        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/SYSTEM#FUNCTION"
       },
       {
+        "isReturned": false,
         "propList": [
           {
-            "KeyName": "description",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -391,7 +363,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "endedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -404,7 +375,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#endedAtTime"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -417,7 +387,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "startedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -430,7 +399,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#startedAtTime"
           },
           {
-            "KeyName": "title",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -443,11 +411,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "NodeName": "ACTIVITY",
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?ACTIVITY_1",
         "binding": "?producedBy_ACTIVITY",
+        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
             "Connected": false,
@@ -459,7 +431,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -471,7 +442,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "used",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -483,7 +453,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasAssociatedWith",
             "SnodeSparqlIDs": [],
             "ValueType": "AGENT",
             "Connected": false,
@@ -495,7 +464,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "wasInformedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -507,19 +475,12 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           }
         ],
-        "isReturned": false,
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?ACTIVITY_1",
-        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/PROV-S#ACTIVITY"
       },
       {
+        "isReturned": false,
         "propList": [
           {
-            "KeyName": "description",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -532,7 +493,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "generatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -545,7 +505,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#generatedAtTime"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -558,7 +517,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "invalidatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -571,7 +529,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#invalidatedAtTime"
           },
           {
-            "KeyName": "title",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -584,11 +541,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "NodeName": "SYSTEM",
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?SYSTEM_0",
         "binding": "?partOf_SYSTEM",
+        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
             "Connected": false,
@@ -600,7 +561,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -612,7 +572,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasAttributedTo",
             "SnodeSparqlIDs": [],
             "ValueType": "AGENT",
             "Connected": false,
@@ -624,7 +583,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "wasDerivedFrom",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -636,7 +594,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasGeneratedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -648,7 +605,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasImpactedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -660,7 +616,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasRevisionOf",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -672,7 +627,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "function",
             "SnodeSparqlIDs": [],
             "ValueType": "FUNCTION",
             "Connected": false,
@@ -684,7 +638,6 @@
             "UriValueType": "http://arcos.rack/SYSTEM#FUNCTION"
           },
           {
-            "KeyName": "partOf",
             "SnodeSparqlIDs": [],
             "ValueType": "SYSTEM",
             "Connected": false,
@@ -696,7 +649,6 @@
             "UriValueType": "http://arcos.rack/SYSTEM#SYSTEM"
           },
           {
-            "KeyName": "producedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -708,7 +660,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "provides",
             "SnodeSparqlIDs": [],
             "ValueType": "FUNCTION",
             "Connected": false,
@@ -720,7 +671,6 @@
             "UriValueType": "http://arcos.rack/SYSTEM#FUNCTION"
           },
           {
-            "KeyName": "requires",
             "SnodeSparqlIDs": [],
             "ValueType": "FUNCTION",
             "Connected": false,
@@ -732,19 +682,12 @@
             "UriValueType": "http://arcos.rack/SYSTEM#FUNCTION"
           }
         ],
-        "isReturned": false,
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?SYSTEM_0",
-        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/SYSTEM#SYSTEM"
       },
       {
+        "isReturned": false,
         "propList": [
           {
-            "KeyName": "description",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -757,7 +700,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "generatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -770,7 +712,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#generatedAtTime"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -783,7 +724,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "invalidatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -796,7 +736,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#invalidatedAtTime"
           },
           {
-            "KeyName": "title",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -809,11 +748,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "NodeName": "FUNCTION",
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?FUNCTION",
         "binding": "?function_FUNCTION",
+        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
             "Connected": false,
@@ -825,7 +768,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -837,7 +779,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasAttributedTo",
             "SnodeSparqlIDs": [],
             "ValueType": "AGENT",
             "Connected": false,
@@ -849,7 +790,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "wasDerivedFrom",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -861,7 +801,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasGeneratedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -873,7 +812,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasImpactedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -885,7 +823,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasRevisionOf",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -897,7 +834,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "parentFunction",
             "SnodeSparqlIDs": [],
             "ValueType": "FUNCTION",
             "Connected": false,
@@ -909,19 +845,12 @@
             "UriValueType": "http://arcos.rack/SYSTEM#FUNCTION"
           }
         ],
-        "isReturned": false,
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?FUNCTION",
-        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/SYSTEM#FUNCTION"
       },
       {
+        "isReturned": false,
         "propList": [
           {
-            "KeyName": "description",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -934,7 +863,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "generatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -947,7 +875,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#generatedAtTime"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -960,7 +887,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "invalidatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -973,7 +899,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#invalidatedAtTime"
           },
           {
-            "KeyName": "title",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -986,11 +911,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "NodeName": "ENTITY",
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?ENTITY_1",
         "binding": "?wasRevisionOf_ENTITY",
+        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
             "Connected": false,
@@ -1002,7 +931,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1014,7 +942,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasAttributedTo",
             "SnodeSparqlIDs": [],
             "ValueType": "AGENT",
             "Connected": false,
@@ -1026,7 +953,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "wasDerivedFrom",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1038,7 +964,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasGeneratedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1050,7 +975,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasImpactedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1062,7 +986,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasRevisionOf",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1074,19 +997,12 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           }
         ],
-        "isReturned": false,
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?ENTITY_1",
-        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/PROV-S#ENTITY"
       },
       {
+        "isReturned": false,
         "propList": [
           {
-            "KeyName": "description",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1099,7 +1015,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "generatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1112,7 +1027,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#generatedAtTime"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -1125,7 +1039,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "invalidatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1138,7 +1051,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#invalidatedAtTime"
           },
           {
-            "KeyName": "title",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1151,11 +1063,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "NodeName": "ENTITY",
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?ENTITY_0",
         "binding": "?wasImpactedBy_ENTITY",
+        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
             "Connected": false,
@@ -1167,7 +1083,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1179,7 +1094,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasAttributedTo",
             "SnodeSparqlIDs": [],
             "ValueType": "AGENT",
             "Connected": false,
@@ -1191,7 +1105,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "wasDerivedFrom",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1203,7 +1116,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasGeneratedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1215,7 +1127,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasImpactedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1227,7 +1138,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasRevisionOf",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1239,19 +1149,12 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           }
         ],
-        "isReturned": false,
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?ENTITY_0",
-        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/PROV-S#ENTITY"
       },
       {
+        "isReturned": false,
         "propList": [
           {
-            "KeyName": "description",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1264,7 +1167,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "endedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1277,7 +1179,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#endedAtTime"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -1290,7 +1191,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "startedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1303,7 +1203,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#startedAtTime"
           },
           {
-            "KeyName": "title",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1316,11 +1215,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "NodeName": "ACTIVITY",
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?ACTIVITY_0",
         "binding": "?wasGeneratedBy_ACTIVITY",
+        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
             "Connected": false,
@@ -1332,7 +1235,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1344,7 +1246,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "used",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1356,7 +1257,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasAssociatedWith",
             "SnodeSparqlIDs": [],
             "ValueType": "AGENT",
             "Connected": false,
@@ -1368,7 +1268,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "wasInformedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1380,19 +1279,12 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           }
         ],
-        "isReturned": false,
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?ACTIVITY_0",
-        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/PROV-S#ACTIVITY"
       },
       {
+        "isReturned": false,
         "propList": [
           {
-            "KeyName": "description",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1405,7 +1297,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "generatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1418,7 +1309,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#generatedAtTime"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -1431,7 +1321,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "invalidatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1444,7 +1333,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#invalidatedAtTime"
           },
           {
-            "KeyName": "title",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1457,11 +1345,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "NodeName": "ENTITY",
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?ENTITY",
         "binding": "?wasDerivedFrom_ENTITY",
+        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
             "Connected": false,
@@ -1473,7 +1365,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1485,7 +1376,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasAttributedTo",
             "SnodeSparqlIDs": [],
             "ValueType": "AGENT",
             "Connected": false,
@@ -1497,7 +1387,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "wasDerivedFrom",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1509,7 +1398,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasGeneratedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1521,7 +1409,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasImpactedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1533,7 +1420,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasRevisionOf",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1545,19 +1431,12 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           }
         ],
-        "isReturned": false,
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?ENTITY",
-        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/PROV-S#ENTITY"
       },
       {
+        "isReturned": false,
         "propList": [
           {
-            "KeyName": "description",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1570,7 +1449,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -1583,7 +1461,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "title",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1596,11 +1473,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "NodeName": "AGENT",
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?AGENT",
         "binding": "?wasAttributedTo_AGENT",
+        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
             "Connected": false,
@@ -1612,7 +1493,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "actedOnBehalfOf",
             "SnodeSparqlIDs": [],
             "ValueType": "AGENT",
             "Connected": false,
@@ -1624,7 +1504,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1636,19 +1515,12 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           }
         ],
-        "isReturned": false,
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?AGENT",
-        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/PROV-S#AGENT"
       },
       {
+        "isReturned": false,
         "propList": [
           {
-            "KeyName": "description",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1661,7 +1533,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "endedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1674,7 +1545,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#endedAtTime"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -1687,7 +1557,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "startedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1700,7 +1569,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#startedAtTime"
           },
           {
-            "KeyName": "title",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1713,11 +1581,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "NodeName": "ACTIVITY",
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?ACTIVITY",
         "binding": "?dataInsertedBy_ACTIVITY",
+        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
             "Connected": false,
@@ -1729,7 +1601,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1741,7 +1612,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "used",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1753,7 +1623,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasAssociatedWith",
             "SnodeSparqlIDs": [],
             "ValueType": "AGENT",
             "Connected": false,
@@ -1765,7 +1634,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "wasInformedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1777,19 +1645,12 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           }
         ],
-        "isReturned": false,
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?ACTIVITY",
-        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/PROV-S#ACTIVITY"
       },
       {
+        "isReturned": false,
         "propList": [
           {
-            "KeyName": "filename",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1802,7 +1663,6 @@
             "UriRelationship": "http://arcos.rack/FILE#filename"
           },
           {
-            "KeyName": "description",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1815,7 +1675,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "generatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1828,7 +1687,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#generatedAtTime"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -1841,7 +1699,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "invalidatedAtTime",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1854,7 +1711,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#invalidatedAtTime"
           },
           {
-            "KeyName": "title",
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
@@ -1867,11 +1723,15 @@
             "UriRelationship": "http://arcos.rack/PROV-S#title"
           }
         ],
-        "NodeName": "FILE",
+        "Constraints": "",
+        "isBindingReturned": false,
+        "isRuntimeConstrained": false,
+        "valueConstraint": "",
+        "SparqlID": "?FILE",
         "binding": "?definedIn_FILE",
+        "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "createBy",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE_CREATION",
             "Connected": false,
@@ -1883,7 +1743,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE_CREATION"
           },
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
             "Connected": false,
@@ -1895,7 +1754,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "fileFormat",
             "SnodeSparqlIDs": [],
             "ValueType": "FORMAT",
             "Connected": false,
@@ -1907,7 +1765,6 @@
             "UriValueType": "http://arcos.rack/FILE#FORMAT"
           },
           {
-            "KeyName": "fileHash",
             "SnodeSparqlIDs": [],
             "ValueType": "FILE_HASH",
             "Connected": false,
@@ -1919,7 +1776,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE_HASH"
           },
           {
-            "KeyName": "satisfies",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1931,7 +1787,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1943,7 +1798,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasAttributedTo",
             "SnodeSparqlIDs": [],
             "ValueType": "AGENT",
             "Connected": false,
@@ -1955,7 +1809,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "wasDerivedFrom",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1967,7 +1820,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasGeneratedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ACTIVITY",
             "Connected": false,
@@ -1979,7 +1831,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasImpactedBy",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -1991,7 +1842,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasRevisionOf",
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
             "Connected": false,
@@ -2003,20 +1853,12 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           }
         ],
-        "isReturned": false,
-        "Constraints": "",
-        "isBindingReturned": false,
-        "isRuntimeConstrained": false,
-        "valueConstraint": "",
-        "SparqlID": "?FILE",
-        "deletionMode": "NO_DELETE",
         "fullURIName": "http://arcos.rack/FILE#FILE"
       },
       {
         "isReturned": false,
         "propList": [
           {
-            "KeyName": "description",
             "optMinus": 1,
             "isReturned": true,
             "Constraints": "",
@@ -2029,7 +1871,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#description"
           },
           {
-            "KeyName": "generatedAtTime",
             "optMinus": 1,
             "isReturned": true,
             "Constraints": "",
@@ -2042,7 +1883,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#generatedAtTime"
           },
           {
-            "KeyName": "identifier",
             "optMinus": 0,
             "isReturned": true,
             "Constraints": "",
@@ -2055,7 +1895,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#identifier"
           },
           {
-            "KeyName": "invalidatedAtTime",
             "optMinus": 1,
             "isReturned": true,
             "Constraints": "",
@@ -2068,7 +1907,6 @@
             "UriRelationship": "http://arcos.rack/PROV-S#invalidatedAtTime"
           },
           {
-            "KeyName": "title",
             "optMinus": 1,
             "isReturned": true,
             "Constraints": "",
@@ -2082,14 +1920,12 @@
           }
         ],
         "Constraints": "",
-        "NodeName": "SYSTEM",
         "isRuntimeConstrained": false,
         "valueConstraint": "",
         "SparqlID": "?SYSTEM",
         "deletionMode": "NO_DELETE",
         "nodeList": [
           {
-            "KeyName": "definedIn",
             "SnodeSparqlIDs": [
               "?FILE"
             ],
@@ -2109,7 +1945,6 @@
             "UriValueType": "http://arcos.rack/FILE#FILE"
           },
           {
-            "KeyName": "dataInsertedBy",
             "SnodeSparqlIDs": [
               "?ACTIVITY"
             ],
@@ -2129,7 +1964,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasAttributedTo",
             "SnodeSparqlIDs": [
               "?AGENT"
             ],
@@ -2149,7 +1983,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#AGENT"
           },
           {
-            "KeyName": "wasDerivedFrom",
             "SnodeSparqlIDs": [
               "?ENTITY"
             ],
@@ -2169,7 +2002,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasGeneratedBy",
             "SnodeSparqlIDs": [
               "?ACTIVITY_0"
             ],
@@ -2189,7 +2021,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "wasImpactedBy",
             "SnodeSparqlIDs": [
               "?ENTITY_0"
             ],
@@ -2209,7 +2040,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "wasRevisionOf",
             "SnodeSparqlIDs": [
               "?ENTITY_1"
             ],
@@ -2229,7 +2059,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
           },
           {
-            "KeyName": "function",
             "SnodeSparqlIDs": [
               "?FUNCTION"
             ],
@@ -2249,7 +2078,6 @@
             "UriValueType": "http://arcos.rack/SYSTEM#FUNCTION"
           },
           {
-            "KeyName": "partOf",
             "SnodeSparqlIDs": [
               "?SYSTEM_0"
             ],
@@ -2269,7 +2097,6 @@
             "UriValueType": "http://arcos.rack/SYSTEM#SYSTEM"
           },
           {
-            "KeyName": "producedBy",
             "SnodeSparqlIDs": [
               "?ACTIVITY_1"
             ],
@@ -2289,7 +2116,6 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           },
           {
-            "KeyName": "provides",
             "SnodeSparqlIDs": [
               "?FUNCTION_0"
             ],
@@ -2309,7 +2135,6 @@
             "UriValueType": "http://arcos.rack/SYSTEM#FUNCTION"
           },
           {
-            "KeyName": "requires",
             "SnodeSparqlIDs": [
               "?FUNCTION_1"
             ],
@@ -2334,7 +2159,7 @@
     ],
     "limit": 0,
     "orderBy": [],
-    "version": 12,
+    "version": 13,
     "unionHash": {}
   },
   "importSpec": {

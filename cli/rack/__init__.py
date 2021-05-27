@@ -350,7 +350,7 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
         ingest_owl(conn, base_path / file)
 
 @with_status('Clearing')
-def clear_driver(base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], graph: Graph):
+def clear_driver(base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], graph: Graph) -> None:
     """Clear the given data graphs"""
     if data_graphs is None:
         conn = sparql_connection(base_url, DEFAULT_DATA_GRAPH, [], triple_store)

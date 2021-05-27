@@ -99,16 +99,33 @@ export_property(Property, Export) :-
     string_lower(Property, LowercaseProperty),
     atomic_list_concat([LowercaseProperty, '/2'], Export).
 
+replicate(Item, Count, List) :-
+    length(List, Count),
+    maplist(=(Item), List).
 
-export_indentation(Indent) :- atom_string('        ', Indent).
+indentation_spaces(Spaces) :- Spaces is 4.
 
+increase_indentation(OldIndentation, NewIndentation) :-
+    indentation_spaces(Spaces),
+    replicate(' ', Spaces, IndentationList),
+    atomic_list_concat(IndentationList, Indentation),
+    atomic_list_concat([OldIndentation, Indentation], NewIndentation).
 
-%! write_exports(+Handle, +Things, +Properties) is det.
+decrease_indentation(OldIndentation, NewIndentation) :-
+    string_length(OldIndentation, OldLength),
+    indentation_spaces(Spaces),
+    NewLength is OldLength - Spaces,
+    sub_string(OldIndentation, 0, NewLength, _, NewIndentation).
+
+writeln_indented(Handle, Indentation, Contents) :-
+    atomic_list_concat([Indentation, Contents], WhatToWrite),
+    writeln(Handle, WhatToWrite).
+
+%! write_exports(+Handle, +Indent, +Things, +Properties) is det.
 %
 %    Writes the module export lines for all given ontology things and
 %    properties.
-write_exports(Handle, Things, Properties) :-
-    export_indentation(Indent),
+write_exports(Handle, Indent, Things, Properties) :-
     atomic_list_concat([',\n', Indent], Separator),
     maplist(export_thing, Things, ExportThings),
     maplist(export_property, Properties, ExportProperties),
@@ -162,11 +179,14 @@ write_ontology_file(Namespace, Things, Properties) :-
     writeln(Handle, '% THIS FILE WAS AUTOMATICALLY GENERATED, SEE README'),
     nl(Handle),
     writeln(Handle, ':- module('),
-    atomic_list_concat(['    ', Module, ','], ModuleLine),
-    writeln(Handle, ModuleLine),
-    writeln(Handle, '    ['),
-    write_exports(Handle, Things, Properties),
-    writeln(Handle, '    ]).'),
+    NoIndentation = '',
+    increase_indentation(NoIndentation, OneIndentation),
+    increase_indentation(OneIndentation, TwoIndentation),
+    atomic_list_concat([Module, ','], ModuleLine),
+    writeln_indented(Handle, OneIndentation, ModuleLine),
+    writeln_indented(Handle, OneIndentation, '['),
+    write_exports(Handle, TwoIndentation, Things, Properties),
+    writeln_indented(Handle, OneIndentation, ']).'),
     nl(Handle),
     writeln(Handle, ':- ensure_loaded(\'../paths\').'),
     nl(Handle),

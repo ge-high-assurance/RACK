@@ -20,7 +20,8 @@ from typing import Callable, List, NoReturn, Tuple
 import semtk
 
 import git_helpers as git
-from ontology_changes.ontology_change import Commit, logger, stylize_file_name
+from ontology_changes.ontology_change import Commit, LOGGER_ID, logger, stylize_file_name
+from rack_crawl.crawler import commit_touches_ontology
 from rack.commits import commits_in_chronological_order
 
 
@@ -69,7 +70,7 @@ parser.add_argument(
 parser.add_argument(
     "--format-for-wiki",
     help="Format the output of --list-changes-only to the RACK wiki format",
-    action='store_true',
+    action="store_true",
 )
 
 args = parser.parse_args()
@@ -156,6 +157,13 @@ if len(commits_to_consider_in_chronological_order) == 0:
     sys.exit(1)
 
 
+def markdown_link_to_commit(
+    commit_id: str,
+    link_text: str,
+) -> str:
+    return f"[{link_text}](https://github.com/ge-high-assurance/RACK/commit/{commit_id})"
+
+
 if args.list_changes_only:
 
     if args.format_for_wiki:
@@ -173,25 +181,38 @@ in reverse chronological order.  Even within each section, commits are ordered
 from most recent to oldest.  Changes prior to version 4.0 have not been tracked.
 
 ---
-
 """
         )
 
     for commit in commits_to_consider_in_git_log_order:
         if len(commit.changes) > 0:
-            print(
-                f"\n[Commit {commit.number}](https://github.com/ge-high-assurance/RACK/commit/{commit.number})\n"
-            )
+            link_text = git.get_commit_subject(commit.number)
+            print(f"{markdown_link_to_commit(commit.number, link_text)}\n")
+            subject = git.get_commit_subject(commit.number)
+            if subject.startswith("Merge"):
+                for hash_subject in git.get_merge_commit_subjects(commit.number)[:-1]:
+                    space_index = hash_subject.index(" ")
+                    hash = hash_subject[:space_index]
+                    subject = hash_subject[space_index + 1 :]
+                    # A lot of the commits in a merge may have nothing to do
+                    # with the ontology, so we only show those that actually
+                    # touch the ontology.
+                    if commit_touches_ontology(hash):
+                        print(f"> - {markdown_link_to_commit(hash, subject)}<br/>")
+                print("")
             for change in commit.changes:
                 print(f"- {change.text_description()}")
-        if commit.tag:
+            print()
+
+        # Show tag for major releases
+        if commit.tag and commit.tag.endswith(".0"):
             this_tag = f"[{commit.tag}](https://github.com/ge-high-assurance/RACK/commit/{commit.number})"
-            print(f"\n# Changes for {this_tag}")
+            print(f"# Changes for {this_tag}\n")
 
     if args.format_for_wiki:
-        print("\n- Changes prior to version 4.0 are not tracked.")
+        print("- Changes prior to version 4.0 are not tracked.")
 
-    print("\n")
+    print()
     sys.exit(0)
 
 to_folder = Path(args.to_folder)

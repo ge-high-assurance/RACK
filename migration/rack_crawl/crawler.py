@@ -86,7 +86,7 @@ def add_commit_to_list_of_all_commits(commits_file: str, commit_id: str) -> None
         if "<CHANGE_CRAWLER_IMPORTS>" in line:
             sys.stdout.write(f"    commit{commit_id},\n")
         if "<CHANGE_CRAWLER_COMMITS>" in line:
-            sys.stdout.write(f"    commit{commit_id}.commit,  # FIXME: ORGANIZE ME\n")
+            sys.stdout.write(f"    commit{commit_id}.commit, # FIXME: ORGANIZE ME\n")
 
 
 def is_ontology_file(file: str) -> bool:

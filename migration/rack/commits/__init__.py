@@ -19,13 +19,16 @@ from rack.commits import (
     commit0a89f70ff929380269a79fe2fc82f5dde346ed8c,
     commit10da69db606ebdc721fd3f8e003ef2099a5fdc43,
     commit13ed266ba5730cebe75c0c48f6ba83af69429122,
+    commit183dbba72623c2585a0451a19ac1ddb30f8a0ea6,
     commit2e079bb2a32b3cc1b3153d44ad0c21e27507937f,
     commit389424cb974164f552b6b6bf8aab504d23bf079b,
     commit44393cc30bb0ba7482acd21b2e68576b577179f9,
     commit44da44c6877c881240c418d084ecb17de9443373,
     commit4f60f85168ff8ef2513fa0e2f144c2ea5c3f87a3,
     commit4f9fce78e36a6dc75f1702ab50da6a4ac801dd5e,
+    commit5329c949815afea87d8bae3768bf132258aad9a0,
     commit581f1820855eee2445d9e8bfdbb639e169e9391e,
+    commit620b89db747b9834013502061040f179da67f123,
     commit643839e7d8036731ba1da767942c8e74c2876e2e,
     commit7202dbdb81274e521b0e2cdd3afedeb2a6204567,
     commit76de25ee930683871febc1b4cc1e4386aca16d42,
@@ -37,9 +40,11 @@ from rack.commits import (
     commita95a46dec5162e65979d96ba140559dfb3013d23,
     commitae0a7660b0afdd53ff334577fbdea7749abe6cf6,
     commitb25d07626e4693cd370a2070e17f6baa825a1d43,
+    commitb6796936abe054edc9c4f9657c34bb0eadf0757a,
     commitb721c16f0f7420a8ccd92bda0d98a96c16dc62b8,
     commitbdfef3d7ea9b3c9fc085defa8e26256f646097d9,
     commitc6692fed3e150e7df53d4a2a8f8c84f760087420,
+    commitcafce30763b5332106340cc8cbeb8fdac3b8132d,
     commitd48e208669c589d070c7c5fb7e3129ababbb9193,
     commitd8271d216704351cf0007a04abac47f4abc993ad,
     commite18de6ebaa298881aab7e8e69580905ffb97e0c4,
@@ -106,6 +111,13 @@ commits_in_chronological_order: List[Commit] = [
     commit4f60f85168ff8ef2513fa0e2f144c2ea5c3f87a3.commit, # v5.9
 
     commit76de25ee930683871febc1b4cc1e4386aca16d42.commit, # v6.0
+
+    commit183dbba72623c2585a0451a19ac1ddb30f8a0ea6.commit, # 2021 May 21
+    commit5329c949815afea87d8bae3768bf132258aad9a0.commit, # 2021 May 21
+    commit620b89db747b9834013502061040f179da67f123.commit, # 2021 May 25
+    commitb6796936abe054edc9c4f9657c34bb0eadf0757a.commit, # 2021 May 26
+
+    commitcafce30763b5332106340cc8cbeb8fdac3b8132d.commit, # v7.0
 
     # most recent (in history)
 ]

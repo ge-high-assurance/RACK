@@ -44,9 +44,9 @@ class RenameProperty(OntologyChange):
 
     def text_description(self) -> str:
         from_prop = stylize_property(get_uri(self.from_name_space, self.from_name))
-        to_prop = stylize_property(get_uri(self.from_name_space, self.from_name))
+        to_prop = stylize_property(get_uri(self.to_name_space, self.to_name))
         from_class = stylize_class(get_uri(self.from_name_space, self.from_class))
-        to_class = stylize_class(get_uri(self.from_name_space, self.to_class))
+        to_class = stylize_class(get_uri(self.to_name_space, self.to_class))
         return f"Property {from_prop} (ranging over {from_class}) was renamed to {to_prop} (ranging over {to_class})."
 
     def migrate_json(self, json: semtk.SemTKJSON) -> None:

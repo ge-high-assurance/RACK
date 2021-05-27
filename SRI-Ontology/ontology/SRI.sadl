@@ -84,7 +84,8 @@ import "http://arcos.rack/MODEL".
       //   result of type ANALYSIS_RESULT defined in the base RACK ontology is used as is
       // new properties for ANALYSIS_OUTPUT
       analysisDiagnostics (note "counter examples, other diagnostics") describes ANALYSIS_OUTPUT with values of type string.
-      goalProperty (note "SpecificProperty or GenericProperty that is the objective of analysis") describes ANALYSIS_OUTPUT with values of type {GenericProperty or SpecificProperty}.
+      goalProperty (note "SpecificProperty or GenericProperty that is the objective of analysis") describes ANALYSIS_OUTPUT with values of type ENTITY.
+      goalProperty of ANALYSIS_OUTPUT must be one of {GenericProperty, SpecificProperty}.
       
       // Note: base RACK ontology class ANALYSIS_ANNOTATION is not used since we capture the property independently and not as part of ANALYSIS_OUTPUT
       
@@ -142,7 +143,8 @@ import "http://arcos.rack/MODEL".
         toolInvocation describes RadlerArchitectureAnalysis with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
-        used of RadlerArchitectureAnalysis only has values of type {RadlArchitectureModel or RadlGenericProperty}.
+		used describes RadlerArchitectureAnalysis with values of type ENTITY.
+        used of RadlerArchitectureAnalysis must be one of {RadlArchitectureModel, RadlGenericProperty}.
       
       ///////////////////////////////////////////////////
       // System, Software requirements, design, code
@@ -152,7 +154,8 @@ import "http://arcos.rack/MODEL".
       
       SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
         wasInformedBy of SystemRequirementsDefinition only has values of type DevelopSystemConOps. // type of used
-        DesCert:governedBy describes SystemRequirementsDefinition with values of type {SystemConOps or SystemArchitecture}.
+		DesCert:governedBy describes SystemRequirementsDefinition with values of type ENTITY.
+        DesCert:governedBy of SystemRequirementsDefinition must be one of {SystemConOps, SystemArchitecture}.
         DesCert:governedBy is a type of used.
            // note: the imported domain of Rq:goveredBy is REQUIREMENT_DEVELOPMENT
         // other inherited properties:
@@ -177,7 +180,8 @@ import "http://arcos.rack/MODEL".
         requirementNotation describes DesCertRequirementModel with a single value of type ClearNotation. 
         requirementNotation is a type of wasImpactedBy.
         requirementText describes DesCertRequirementModel with a single value of type string.
-        models of DesCertRequirementModel only has values of type {SoftwareHighLevelRequirement or SoftwareLowLevelRequirement}.
+		models describes DesCertRequirementModel with values of type THING.
+        models of DesCertRequirementModel must be one of {SoftwareHighLevelRequirement, SoftwareLowLevelRequirement}.
 
       SystemRequirement is a type of REQUIREMENT.
         wasGeneratedBy of SystemRequirement only has values of type SystemRequirementsDefinition.
@@ -187,8 +191,10 @@ import "http://arcos.rack/MODEL".
         //  Question: should we put a link to the SystemRequirementSet in which this requirement is contained?
         
       SoftwareHighLevelRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
-        wasInformedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementsDefinition or DevelopSystemArchitecture}.
-        DesCert:governedBy describes SoftwareHighLevelRequirementsDefinition with values of type {SystemRequirementSet or SystemArchitecture}.
+        wasInformedBy describes SoftwareHighLevelRequirementsDefinition with values of type ACTIVITY.
+		wasInformedBy of SoftwareHighLevelRequirementsDefinition must be one of {SystemRequirementsDefinition, DevelopSystemArchitecture}.
+		DesCert:governedBy describes SoftwareHighLevelRequirementsDefinition with values of type ENTITY.
+        DesCert:governedBy of SoftwareHighLevelRequirementsDefinition must be one of {SystemRequirementSet, SystemArchitecture}.
            // note: this is similar to Rq:goverenedBy
         // other inherited properties:
         //    Rq:author
@@ -210,9 +216,11 @@ import "http://arcos.rack/MODEL".
         // inherited properties:
         //    Rq:author
         //    Rq:referenced (e.g. requirement/design standard)
-        wasInformedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementsDefinition or DevelopSystemArchitecture}.
+        wasInformedBy describes SoftwareDesign with values of type ACTIVITY.
+		wasInformedBy of SoftwareDesign must be one of {SoftwareHighLevelRequirementsDefinition, DevelopSystemArchitecture}.
         // Note: the range of the following includes a COLLECTION (subtype of ENTITY) and ENTITY
-        DesCert:governedBy describes SoftwareDesign with values of type {SoftwareHighLevelRequirementSet or SystemArchitecture}.
+		DesCert:governedBy describes SoftwareDesign with values of type ENTITY.
+        DesCert:governedBy of SoftwareDesign must be one of {SoftwareHighLevelRequirementSet, SystemArchitecture}.
         
       SoftwareLowLevelRequirementSet is a type of COLLECTION.
        content of SoftwareLowLevelRequirementSet only has values of type SoftwareLowLevelRequirement.
@@ -281,7 +289,8 @@ import "http://arcos.rack/MODEL".
         toolInvocation describes SallyModelChecking with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
-        used of SallyModelChecking only has values of type {SallyTransitionSystemModel or SpecificProperty}.
+		used describes SallyModelChecking with values of type ENTITY.
+        used of SallyModelChecking must be one of {SallyTransitionSystemModel, SpecificProperty}.
       
       SallyNotation (note "Sally notation for creating models and property queries") is a type of ENTITY.
         userGuide describes SallyNotation with values of type DOCUMENT.
@@ -305,7 +314,8 @@ import "http://arcos.rack/MODEL".
         // Inherited properties
         //   developedBy: refers to Text2Test tool
         //   wasInformedBy: activity that was a precursor to this
-        used of ClearTestAndOracleGeneration only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary}.
+		used describes ClearTestAndOracleGeneration with values of type ENTITY.
+        used of ClearTestAndOracleGeneration must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary}.
          
        ClearTestingTheory is a type of ENTITY. 
           testingTheoryDoc describes ClearTestingTheory with values of type DOCUMENT. 
@@ -337,7 +347,8 @@ import "http://arcos.rack/MODEL".
        // Requirement analysis by Text2Test tool from CLEAR requirements
        
        ClearGenericProperty is a type of GenericProperty.
-        propertyScope of ClearGenericProperty only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary}.
+        propertyScope describes ClearGenericProperty with values of type ENTITY.
+        propertyScope of ClearGenericProperty must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary}.
         
        RequirementAnalysis is a type of ANALYSIS.
         // Inherited properties from ANALYSIS
@@ -346,7 +357,8 @@ import "http://arcos.rack/MODEL".
         toolInvocation describes RequirementAnalysis with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
-        used of RequirementAnalysis only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary or ClearGenericProperty}.
+        used describes RequirementAnalysis with values of type ENTITY.
+        used of RequirementAnalysis must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary, ClearGenericProperty}.
        
        ////////////////////////////////
        // Test generation by Randoop tool
@@ -386,7 +398,9 @@ import "http://arcos.rack/MODEL".
           // Inherited porperties
           //   developedBy: refers to Randoop tool
           //   wasInformedBy: activity that was a precursor to this
-          used of DaikonInvariantDetection only has values of type {SourceCode or RandoopTestsAndMetrics}.
+          used describes DaikonInvariantDetection with values of type ENTITY.
+          used of DaikonInvariantDetection must be one of {SourceCode, RandoopTestsAndMetrics}. 
+
           
         DaikonInvariantOutput is a type of ENTITY.
           // inherited properties from ENTITY:

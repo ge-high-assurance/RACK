@@ -18,7 +18,7 @@ To do its work, the rack program uses the Node Execution Group REST
 API which is documented in the [REST API Swagger
 Demo](https://github.com/ge-high-assurance/RACK/wiki/REST-API-Swagger-Demo)
 and [REST
-cookbook](https://github.com/ge-semtk/semtk/wiki/REST-cookbook) wiki
+cookbook](https://github.com/ge-semtk/semtk/wiki/REST-API) wiki
 pages.
 
 ## Install dependencies

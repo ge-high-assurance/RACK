@@ -16,10 +16,9 @@ import json
 
 csvHeader = "ID,comments,creator,jsonFile"
 
-yamlHeader = '''# This file is intended to be used using the rack.py script found
-# in RACK-Ontology/scripts/
+yamlHeader = '''# This file is intended to be used with the rack CLI script found in RACK/cli/
 #
-# Script documentation is available in RACK-Ontology/scripts/README.md
+# Script documentation is available in RACK/cli/README.md
 data-graph: "http://rack001/data"
 ingestion-steps:'''
 

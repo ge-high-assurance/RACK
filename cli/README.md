@@ -295,6 +295,17 @@ using the `count` sub-command.
 16
 ```
 
+### Clear data graph
+
+Data can be cleared from RACK by graph name. Use `--data-graph` to override the
+default `http://rack001/data`. Multiple data graphs can be specified.
+
+```shell
+(venv) $ rack data clear
+(venv) $ rack data clear --data-graph http://rack001/Example
+(venv) $ rack data clear --data-graph http://rack001/ex1 --data-graph http://rack001/ex2
+```
+
 ### Nodegroups
 
 The script can automate loading a directory full of nodegroups

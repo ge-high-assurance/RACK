@@ -40,6 +40,8 @@ tar xfzC rack.tar.gz "/home/${USER}"
 rm rack.tar.gz
 tar xfzC rack-cli.tar.gz "/home/${USER}"
 rm rack-cli.tar.gz
+tar xfzC rack-assist.tar.gz "/home/${USER}"
+rm rack-assist.tar.gz
 tar xfzC semtk.tar.gz "/home/${USER}"
 rm semtk.tar.gz
 mv ENV_OVERRIDE "/home/${USER}/semtk-opensource"

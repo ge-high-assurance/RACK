@@ -7,7 +7,7 @@ Here are very brief instructions how to run the Docker RACK box.  You will find 
 
 1. Open a terminal window where you can run `docker`.
 2. Type `docker pull gehighassurance/rack-box:v6.0`
-3. Type `docker run --detach -p 80:80 -p 12050-12092:12050-12092 gehighassurance/rack-box:v6.0`
+3. Type `docker run --detach -p 80:80 -p 12050-12092:12050-12092 -p 3030:3030 gehighassurance/rack-box:v6.0`
 4. Visit <http://localhost/> in your browser to view the RACK box's welcome page.
 
 ## Run the Virtual RACK box

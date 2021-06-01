@@ -96,6 +96,20 @@ cd $HOME
 tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{setup-rack.sh,wheels}
 ```
 
+## ASSIST
+
+The RACK distribution also includes a number of ASSIST tools to
+analyze and verify the RACK data and collect and ingest information
+during the build process.
+
+```shell
+sudo add-apt-repository ppa:swi-prolog/stable
+sudo apt-get update
+sudo apt-get install swi-prolog
+cd $HOME
+tar cvz RACK/rack-box/files/rack-assist.tar.gz RACK/assist
+```
+
 ## Build the rack-box images
 
 You will need to install [Packer](https://www.packer.io/) if you don't

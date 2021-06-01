@@ -14,7 +14,7 @@ Now you are ready to start your RACK box.  Type the following commands to downlo
 
 ```shell
 docker pull gehighassurance/rack-box:v6.0
-docker run --detach -p 80:80 -p 12050-12092:12050-12092 gehighassurance/rack-box:v6.0
+docker run --detach -p 80:80 -p 12050-12092:12050-12092 -p 3030:3030 gehighassurance/rack-box:v6.0
 ```
 
 Type "localhost" in your web browser's address bar, hit Enter, and you should see your RACK box's welcome page appear in your browser.  The welcome page will tell you some things you can do with your RACK box.

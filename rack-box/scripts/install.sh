@@ -10,13 +10,27 @@ cd /tmp/files
 
 if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
 
-    # Install necessary packages
+    # Install necessary packages non-interactively
 
     export DEBIAN_FRONTEND=noninteractive
     export DEBCONF_NONINTERACTIVE_SEEN=true
-
     apt-get update -yqq
-    apt-get install -yqq curl default-jre gettext-base nano nginx-light python3 python3-pip software-properties-common unzip
+    apt-get install -yqq software-properties-common
+    add-apt-repository -yu ppa:swi-prolog/stable
+
+    # If you change this, change packages in rack-box/http/user-data too
+    # Note VM image already has curl, gettext-base, nano, etc.
+
+    apt-get install -yqq \
+            curl \
+            default-jre \
+            gettext-base \
+            nano \
+            nginx-light \
+            python3 \
+            python3-pip \
+            swi-prolog \
+            unzip
 
     # Install docker-systemctl-replaement
 
@@ -38,10 +52,10 @@ rm fuseki.tar.gz
 mv /opt/apache-jena-fuseki-* /opt/fuseki
 tar xfzC rack.tar.gz "/home/${USER}"
 rm rack.tar.gz
-tar xfzC rack-cli.tar.gz "/home/${USER}"
-rm rack-cli.tar.gz
 tar xfzC rack-assist.tar.gz "/home/${USER}"
 rm rack-assist.tar.gz
+tar xfzC rack-cli.tar.gz "/home/${USER}"
+rm rack-cli.tar.gz
 tar xfzC semtk.tar.gz "/home/${USER}"
 rm semtk.tar.gz
 mv ENV_OVERRIDE "/home/${USER}/semtk-opensource"

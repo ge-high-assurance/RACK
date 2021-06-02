@@ -86,19 +86,35 @@ ontology_file_path(Namespace, FilePath) :-
     directory_file_path(OntologyDir, FileName, FilePath).
 
 
-%! export_thing(+Thing, -Export) is det.
+%! export_class(+Class, -Export) is det.
 %
-%    Gives the export string for a thing.
-export_thing(Thing, Export) :-
-    string_lower(Thing, LowercaseThing),
-    atomic_list_concat([LowercaseThing, '/1'], Export).
+%    Gives the export string for RDF query of a class.
+export_class(Class, Export) :-
+    string_lower(Class, LowercaseClass),
+    atomic_list_concat([LowercaseClass, '/1'], Export).
+
+
+%! export_assert_class(+Class, -Export) is det.
+%
+%    Gives the export string for RDF assertion of a class.
+export_assert_class(Class, Export) :-
+    string_lower(Class, LowercaseClass),
+    atomic_list_concat(['assert_', LowercaseClass, '/1'], Export).
 
 
 %! export_property(+Property, -Export) is det.
 %
-%    Gives the export string for a property.
+%    Gives the export string for RDF query of a property.
 export_property(Property, Export) :-
     atomic_list_concat([Property, '/2'], Export).
+
+
+%! export_assert_property(+Property, -Export) is det.
+%
+%    Gives the export string for RDF assertion of a property.
+export_assert_property(Property, Export) :-
+    atomic_list_concat(['assert_', Property, '/2'], Export).
+
 
 replicate(Item, Count, List) :-
     length(List, Count),
@@ -122,51 +138,101 @@ writeln_indented(Handle, Indentation, Contents) :-
     atomic_list_concat([Indentation, Contents], WhatToWrite),
     writeln(Handle, WhatToWrite).
 
-%! write_exports(+Handle, +Indent, +Things, +Properties) is det.
+%! write_exports(+Handle, +Indent, +Classes, +Properties) is det.
 %
-%    Writes the module export lines for all given ontology things and
+%    Writes the module export lines for all given ontology classes and
 %    properties.
-write_exports(Handle, Indent, Things, Properties) :-
+write_exports(Handle, Indent, Classes, Properties) :-
     atomic_list_concat([',\n', Indent], Separator),
-    maplist(export_thing, Things, ExportThings),
+    maplist(export_assert_class, Classes, ExportAssertClasses),
+    maplist(export_class, Classes, ExportClasses),
+    maplist(export_assert_property, Properties, ExportAssertProperties),
     maplist(export_property, Properties, ExportProperties),
-    append([ExportThings, ExportProperties], AllExports),
+    append([
+        ExportAssertClasses,
+        ExportClasses,
+        ExportAssertProperties,
+        ExportProperties
+    ], AllExports),
     atomic_list_concat(AllExports, Separator, Exports),
     write(Handle, Indent),
     writeln(Handle, Exports).
 
 
-%! class_declaration(+Namespace, +Class, -Declaration) is det.
+%! class_query_declaration(+Namespace, +Class, -Declaration) is det.
 %
 %    Computes the text declaration for a given class in some namespace.
-class_declaration(Namespace, Class, Declaration) :-
+class_query_declaration(Namespace, Class, Declaration) :-
     string_lower(Class, Predicate),
     atomic_list_concat(
-     [ Predicate, '(C) :- rack_instance(\'', Namespace, '#', Class, '\', C).'],
-     Declaration
+        [ Predicate, '(C) :- rack_instance(\'', Namespace, '#', Class, '\', C).'],
+        Declaration
     ).
 
-%! write_class(+Handle, +Namespace, +Class) is det.
+
+%! class_assert_declaration(+Namespace, +Class, -Declaration) is det.
+%
+%    Computes the text declaration for a given class in some namespace.
+class_assert_declaration(Namespace, Class, Declaration) :-
+    string_lower(Class, PredicateSuffix),
+    atomic_list_concat(['assert_', PredicateSuffix], Predicate),
+    atomic_list_concat(
+        [ Predicate, '(C) :- rack_instance_assert(\'', Namespace, '#', Class, '\', C).'],
+        Declaration
+    ).
+
+
+%! write_class_query(+Handle, +Namespace, +Class) is det.
 %
 %    Writes the text declaration for a given class in some namespace.
-write_class(Handle, Namespace, Class) :-
-    class_declaration(Namespace, Class, Declaration),
+write_class_query(Handle, Namespace, Class) :-
+    class_query_declaration(Namespace, Class, Declaration),
     writeln(Handle, Declaration).
 
-%! property_declaration(Namespace, Property, Declaration) is det.
+
+%! write_class_assert(+Handle, +Namespace, +Class) is det.
+%
+%    Writes the text declaration for a given class in some namespace.
+write_class_assert(Handle, Namespace, Class) :-
+    class_assert_declaration(Namespace, Class, Declaration),
+    writeln(Handle, Declaration).
+
+
+%! property_query_declaration(Namespace, Property, Declaration) is det.
 %
 %    Computes the text declaration for a given property in some namespace.
-property_declaration(Namespace, Property, Declaration) :-
+property_query_declaration(Namespace, Property, Declaration) :-
     atomic_list_concat(
-     [ Property, '(A, B) :- rdf(A, rack:\'', Namespace, '#', Property, '\', B).'],
-     Declaration
+        [ Property, '(A, B) :- rdf(A, rack:\'', Namespace, '#', Property, '\', B).'],
+        Declaration
     ).
 
-%! write_property(+Handle, +Namespace, +Property) is det.
+%! property_assert_declaration(Namespace, Property, Declaration) is det.
+%
+%    Computes the text declaration for a given property in some namespace.
+property_assert_declaration(Namespace, Property, Declaration) :-
+    atomic_list_concat(['assert_', Property], AssertProperty),
+    atomic_list_concat(
+        [
+            AssertProperty,
+            '(A, B) :- rack_property_assert(A, rack:\'', Namespace, '#', Property, '\', B).'
+        ],
+        Declaration
+    ).
+
+%! write_property_query(+Handle, +Namespace, +Property) is det.
 %
 %    Writes the text declaration for a given property in some namespace.
-write_property(Handle, Namespace, Property) :-
-    property_declaration(Namespace, Property, Declaration),
+write_property_query(Handle, Namespace, Property) :-
+    property_query_declaration(Namespace, Property, Declaration),
+    writeln(Handle, Declaration).
+
+
+%! write_property_assert(+Handle, +Namespace, +Property) is det.
+%
+%    Writes the text declaration for a given property in some namespace.
+write_property_assert(Handle, Namespace, Property) :-
+    property_assert_declaration(Namespace, Property, Declaration),
     writeln(Handle, Declaration).
 
 
@@ -179,11 +245,11 @@ use_quotes_if_contains_dashes(Bad, Good) :-
     sub_string(Bad, _, 1, _, '-'), atomic_list_concat(['\'', Bad, '\''], Good).
 
 
-%! write_ontolofy_file(+Handle, +Namespace, +Things, +Properties) is det.
+%! write_ontolofy_file(+Handle, +Namespace, +Classes, +Properties) is det.
 %
-%    Writes the ontology file for a given namespace, list of ontology things,
+%    Writes the ontology file for a given namespace, list of ontology classes,
 %    and list of ontology properties.
-write_ontology_file(Namespace, Things, Properties) :-
+write_ontology_file(Namespace, Classes, Properties) :-
     ontology_file_path(Namespace, FilePath),
     open(FilePath, write, Handle),
     % trick for "function composition"
@@ -202,30 +268,41 @@ write_ontology_file(Namespace, Things, Properties) :-
     atomic_list_concat([Module, ','], ModuleLine),
     writeln_indented(Handle, OneIndentation, ModuleLine),
     writeln_indented(Handle, OneIndentation, '['),
-    write_exports(Handle, TwoIndentation, Things, Properties),
+    write_exports(Handle, TwoIndentation, Classes, Properties),
     writeln_indented(Handle, OneIndentation, ']).'),
     nl(Handle),
     writeln(Handle, ':- ensure_loaded(\'../paths\').'),
     nl(Handle),
     writeln(Handle, ':- use_module(library(semweb/rdf11)).'),
-    writeln(Handle, ':- use_module(rack(model)).'),
+    writeln(Handle, ':- use_module('),
+    writeln(Handle, '    rack(model),'),
+    writeln(Handle, '    ['),
+    writeln(Handle, '        rack_instance/2,'),
+    writeln(Handle, '        rack_instance_assert/2,'),
+    writeln(Handle, '        rack_property_assert/3'),
+    writeln(Handle, '    ]'),
+    writeln(Handle, ').'),
     nl(Handle),
-    forall(member(Thing, Things), write_class(Handle, Namespace, Thing)),
+    forall(member(Class, Classes), write_class_assert(Handle, Namespace, Class)),
     nl(Handle),
-    forall(member(Property, Properties), write_property(Handle, Namespace, Property)),
+    forall(member(Class, Classes), write_class_query(Handle, Namespace, Class)),
+    nl(Handle),
+    forall(member(Property, Properties), write_property_assert(Handle, Namespace, Property)),
+    nl(Handle),
+    forall(member(Property, Properties), write_property_query(Handle, Namespace, Property)),
     close(Handle),
     % let the user know which files are being written
     print_message(informational, wrote_ontology(FilePath)).
 
 %! write_ontology is det.
 %
-%    Writes the ontology files for all things and properties in the in-memory
+%    Writes the ontology files for all classes and properties in the in-memory
 %    model, outputting Prolog files in the ontology folder.
 write_ontology :-
     rack_classes(ClassesGroups),
     rack_properties(PropertiesGroups),
     zip_by_key(ClassesGroups, [], PropertiesGroups, [], Groups),
     forall(
-     member(Namespace-Classes-Properties, Groups),
-     write_ontology_file(Namespace, Classes, Properties)
+        member(Namespace-Classes-Properties, Groups),
+        write_ontology_file(Namespace, Classes, Properties)
     ).

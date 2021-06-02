@@ -197,6 +197,10 @@ lstream([]) --> blnks, [].  % Blanks at the end of the file
 lstream([]) --> [].
 
 comment(S) --> ['/', '/'], c2eol(CS), { atom_chars(S, CS) }.
+comment(S) --> ['/', '*'], cbody(S), ['*', '/'].
+cbody(S) --> [C1], { C1 \= '*' }, cbody(Ss), { atom_chars(CS, [C1]), string_concat(CS, Ss, S) }.
+cbody(S) --> ['*', C2], { C2 \= '/' }, cbody(Ss), {atom_chars(CS, ['*', C2]), string_concat(CS, Ss, S) }.
+cbody("") --> [].
 
 token(T)   --> ['"'], qc(S), ['"'], { atom_chars(T,S) }.
 token('(') --> ['('].

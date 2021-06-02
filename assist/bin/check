@@ -26,7 +26,7 @@ main :-
             check_rack
         ) ;
         print_message(error, bad_arguments),
-        help_abort(B)
+        help_abort(none, B)
     )
 .
 

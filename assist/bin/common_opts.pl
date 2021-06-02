@@ -67,7 +67,7 @@ parse_args(ExtraArgs, Opts, PosArgs, HelpBanner) :-
     opt_arguments(OptSpec, Opts, PosArgs),
     % write('Opts: '), write(Opts), nl,
     % write('PosArgs: '), write(PosArgs), nl,
-    display_help(Opts, HelpBanner),
+    display_help(Opts, OptSpec, HelpBanner),
     set_verbosity(Opts),
     set_declaration_level(Opts),
     get_ontology_dir(Opts, ODir),
@@ -90,15 +90,19 @@ parse_args(ExtraArgs, Opts, PosArgs, HelpBanner) :-
     load_recognizers(Opts),
     load_data_from_dir(Opts).
 
-display_help(Opts, HelpBanner) :-
+display_help(Opts, OptSpec, HelpBanner) :-
     member(help(true), Opts),
-    help_abort(HelpBanner).
-display_help(Opts, _) :- member(help(false), Opts).
+    help_abort(OptSpec, HelpBanner).
+display_help(Opts, _, _) :- member(help(false), Opts).
 
-help_abort(HelpBanner) :-
-    display_banner(HelpBanner),
+help_abort(none, HelpBanner) :-
     opts_spec(Spec),
-    opt_help(Spec, Help),
+    !,
+    help_abort(Spec, HelpBanner).
+
+help_abort(OptSpec, HelpBanner) :-
+    display_banner(HelpBanner),
+    opt_help(OptSpec, Help),
     write(Help),
     halt.
 

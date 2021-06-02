@@ -25,9 +25,11 @@
 %     :- debug(parsing).
 %     :- debug(importing).
 %
-% or
+% or (from the top level)
 %
-%     swipl -g 'debug(parsing)' ... rack_sadl.pl
+%     swipl -g 'debug(parsing)' \
+%           -g "sadl_file_to_owl('RACK-Ontology/ontology/MODEL.sadl', 'RACK-ontology/OwlModels/MODEL.owl')" \
+%           -t halt assist/bin/rack/sadl.pl
 %
 % This script will attempt to display useful error messages for
 % showing what syntax it has encountered that it doesn't support

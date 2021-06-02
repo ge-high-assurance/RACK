@@ -20,7 +20,6 @@ opts_spec(Spec) :-
     file_directory_name(Dir, AssistDir),
     file_directory_name(AssistDir, RACKRootDir),
     atom_concat(RACKRootDir, '/RACK-Ontology/OwlModels', OwlDir),
-    atom_concat(RACKRootDir, '/Turnstile-Ontology/02-Software/03-Implementation', DataDir),
     atom_concat(AssistDir, '/databin', DataBinDir),
     atom_concat(DataBinDir, '/databin.rack', DBRack),
     Spec =
@@ -46,7 +45,7 @@ opts_spec(Spec) :-
 
       [opt(data_dir), meta('DIR'), type(atom),
        shortflags([d]), longflags(['data']),
-       default(DataDir),
+       default(skip),
        help(['Directory root to load tool-generated data from.',
              'All tool generated files located in this tree',
              'will be imported and converted to ontology elements.'])],
@@ -62,30 +61,53 @@ opts_spec(Spec) :-
 
     ].
 
-parse_args(ExtraArgs, Opts, PosArgs) :-
+parse_args(ExtraArgs, Opts, PosArgs, HelpBanner) :-
     opts_spec(OptsSpec),
     append(OptsSpec, ExtraArgs, OptSpec),
     opt_arguments(OptSpec, Opts, PosArgs),
     % write('Opts: '), write(Opts), nl,
     % write('PosArgs: '), write(PosArgs), nl,
-    display_help(Opts),
+    display_help(Opts, OptSpec, HelpBanner),
     set_verbosity(Opts),
     set_declaration_level(Opts),
     get_ontology_dir(Opts, ODir),
     print_message(informational, loading_ontology_dir(ODir)),
-    catch( (exists_directory(ODir), load_local_model(ODir)),
-           error(existence_error(iri_scheme,http),_),
-           load_model_from_url(ODir)),
+
+    ((catch(exists_directory(ODir),
+            % If the above throws the following error, run the
+            % following step instead.  This looks wrong... one would
+            % expect the iri_scheme error to be thrown by an attempt
+            % to use the ODir as a URL, but oddly this is the error
+            % that exists_directory returns if given input like
+            % 'http://something...', and the web-based access does
+            % *not* throw this error.
+            error(existence_error(iri_scheme,http),_),
+            fail),
+      !, % The directory exists, so commit to loading from it
+      load_local_model(ODir)) ;
+     load_model_from_url(ODir)
+    ),
     load_recognizers(Opts),
     load_data_from_dir(Opts).
 
-display_help(Opts) :-
+display_help(Opts, OptSpec, HelpBanner) :-
     member(help(true), Opts),
+    help_abort(OptSpec, HelpBanner).
+display_help(Opts, _, _) :- member(help(false), Opts).
+
+help_abort(none, HelpBanner) :-
     opts_spec(Spec),
-    opt_help(Spec, Help),
+    !,
+    help_abort(Spec, HelpBanner).
+
+help_abort(OptSpec, HelpBanner) :-
+    display_banner(HelpBanner),
+    opt_help(OptSpec, Help),
     write(Help),
     halt.
-display_help(Opts) :- member(help(false), Opts).
+
+display_banner([]).
+display_banner([L|Ls]) :- writeln(L), display_banner(Ls).
 
 get_ontology_dir(Opts, Path) :- member(ontology_dir(Path), Opts), !.
 get_ontology_dir(_, '.').
@@ -96,9 +118,11 @@ load_recognizers(Opts) :-
 
 load_data_from_dir(Opts) :-
     member(data_dir(D), Opts),
-    member(data_namespace(NS), Opts),
-    print_message(informational, loading_data(NS, D)),
-    load_data(NS, D).
+    (D == skip, !;
+     member(data_namespace(NS), Opts),
+     print_message(informational, loading_data(NS, D)),
+     load_data(NS, D)
+    ).
 
 set_verbosity([]).
 set_verbosity([verbose(true)|_]) :- set_prolog_flag(verbose, normal).
@@ -115,3 +139,5 @@ prolog:message(loading_ontology_dir(D)) -->
     [ 'loading ontology from ~w'-[D] ].
 prolog:message(loading_data(NS, D)) -->
     [ 'loading data from ~w into ~w'-[D, NS] ].
+prolog:message(bad_arguments) -->
+    [ 'Bad argument specification!' ].

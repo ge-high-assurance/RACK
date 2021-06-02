@@ -19,5 +19,35 @@
 :- consult(rack(check)).
 
 main :-
-    parse_args([], _Opts, _PosArgs),
-    check_rack.
+    help_banner(B),
+    (
+        (
+            parse_args([], _Opts, _PosArgs, B),
+            check_rack
+        ) ;
+        print_message(error, bad_arguments),
+        help_abort(B)
+    )
+.
+
+help_banner(
+    [ "The check tool will perform verification of RACK data.",
+      "It will verify any available instance data against the",
+      "model data, and can do this verification from the ",
+      "possible following sources:",
+      "",
+      "  1. A live RACK database.",
+      "     Example: $ check -m http://localhost:3030/",
+      "  2. Local OWL files defining model and data",
+      "     Example: $ check -m RACK-Ontology/OwlModels",
+      "  3. The above, plus any data collected by ASSIST-DG",
+      "     during a build process.",
+      "     Example: $ check -m {above} \\ ",
+      "                [-r Turnstile-Ontology/02-Software/turnstile-ingest.rack \\",
+      "                -d Turnstile-Ontology/02-Software/03-Implementation",
+      "",
+      "Any data validity or consistency issues will reported",
+      "with a final summary; the exit code will be zero on",
+      "success, or non-zero on detection of verification problems.",
+      ""
+    ]).

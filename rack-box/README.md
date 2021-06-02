@@ -151,9 +151,12 @@ the following places:
 - [ ] [Install-a-Virtual-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Virtual-RACK-Box)
 - [ ] [Welcome](https://github.com/ge-high-assurance/RACK/wiki/_Welcome)
 
-Note that creating a GitHub release tags the RACK repo automatically,
-but we need to manually tag the RACK wiki with the same tag in advance
-since its pages must go into the rack-box image too.
+After you edit these files, commit and push the changes to the RACK
+and RACK.wiki repositories.  Then return to step 2 in the Release
+process above and manually tag the RACK.wiki repository with the new
+version number (note that creating a GitHub release tags the RACK repo
+automatically, but we need to manually tag the RACK wiki with the same
+tag in advance since its pages must go into the rack-box image too).
 
 ## Using `act` to Run CI Locally
 

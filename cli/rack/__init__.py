@@ -296,10 +296,13 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
 
     steps = config['ingestion-steps']
     
-    if data_graphs is None:
-        data_graph = Url("http://rack001/data")
-    else:
+    if data_graphs is not None:
         data_graph = data_graphs[0]
+    elif 'data-graph' in config:
+        data_graph = config['data-graph']
+    else:
+        logger.warning("Defaulting data-graph to %s", DEFAULT_DATA_GRAPH)
+        data_graph = DEFAULT_DATA_GRAPH
 
     base_path = config_path.parent
 
@@ -309,10 +312,6 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
         extra_data_graphs = config['extra-data-graphs']
     else:
         extra_data_graphs = []
-
-    if data_graph is None:
-        logger.warning("Defaulting data-graph to %s", DEFAULT_DATA_GRAPH)
-        data_graph = DEFAULT_DATA_GRAPH
 
     conn = sparql_connection(base_url, data_graph, extra_data_graphs, triple_store)
 

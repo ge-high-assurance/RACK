@@ -1,17 +1,17 @@
 <!-- markdownlint-disable line-length -->
 
-# RACK-box
+# How to build rack-box images
 
 This README is for RACK developers and RACK-in-a-Box power users who
-want to build their own rack-box images instead of downloading
-already-built images from our [Docker
+want to build their own rack-box images manually instead of
+downloading already-built images from our [Docker
 Hub](https://hub.docker.com/repository/docker/gehighassurance/rack-box)
 or [GitHub
 Releases](https://github.com/ge-high-assurance/RACK/releases) pages.
-Note that these already-built images were built automatically by our
-RACK repository's continuous integration and release workflows.
-Please see these [workflows](../.github/workflows) for the most up to
-date way to build rack-box images since this README may be out of
+Note that our RACK repository's continuous integration and release
+workflows built these rak-box images automatically.  Please see these
+[workflows](../.github/workflows) for the most up to date way to build
+rack-box images since the instructions in this README may be out of
 date.
 
 ## Environment variables needed before building
@@ -38,7 +38,7 @@ although we will mention each file here as well:
 
 - `files/fuseki.tar.gz`: Download latest Fuseki release tarball from
   <https://jena.apache.org/download/> and rename it (note we still are
-  using version 3.16.0, not the latest release, though)
+  using version 3.16.0 instead of the latest release, though)
 
 - `files/semtk.tar.gz`: Download latest SemTK release tarball from
   <https://github.com/ge-semtk/semtk/releases> and rename it
@@ -66,14 +66,16 @@ although we will mention each file here as well:
 
 - `files/{documentation.html,index.html}`: Package the RACK
   documentation, see [Package RACK
-  documentation](#Package-RACK-documentation) for commands
+  documentation](#Package-RACK-documentation) for instructions
 
-Once you have downloaded these files, skip to [Build the rack-box
-images](#Build-the-rack-box-images) for the next step.
+Once you have put these 9 files into the `files` subdirectory, skip to
+[Build the rack-box images](#Build-the-rack-box-images) for the next
+step.
 
 ## Build the RACK CLI
 
-You will need to install these packages before building the RACK CLI:
+You will need to install these Ubuntu and Python packages before
+building the RACK CLI:
 
     sudo apt install python3-pip
     python3 -m pip install --upgrade pip setuptools wheel
@@ -121,47 +123,12 @@ VirtualBox rack-box images to new subdirectories called
 VirtualBox GUI program can import these subdirectories directly into
 newly created virtual machines.
 
-## Release process
+### Troubleshooting
 
-When it is time to make a new release, perform the following steps:
-
-1. Update version numbers in some files (see the next section).
-2. Tag the RACK wiki with the version tag name since our GitHub
-   Actions workflow will check out the wiki using the same tag.
-3. Click the `Draft a new release` button in the GitHub Releases page,
-   enter the release name, version tag name, and description, and
-   click the `Publish release` button.
-4. Our GitHub Actions release workflow will build and push or upload
-   the rack-box images to Docker Hub and GitHub automatically.
-
-## Update documentation pages
-
-Before making a new release, update version numbers or instructions in
-the following places:
-
-### RACK Box
-
-- [ ] [Docker-Hub-README.md](Docker-Hub-README.md)
-- [ ] [GitHub-Release-README.md](GitHub-Release-README.md)
-- [ ] [README.md](README.md)
-
-### RACK Wiki
-
-- [ ] [Install-a-Docker-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Docker-RACK-Box)
-- [ ] [Install-a-Virtual-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Virtual-RACK-Box)
-- [ ] [Welcome](https://github.com/ge-high-assurance/RACK/wiki/_Welcome)
-
-After you edit these files, commit and push the changes to the RACK
-and RACK.wiki repositories.  Then return to step 2 in the Release
-process above and manually tag the RACK.wiki repository with the new
-version number (note that creating a GitHub release tags the RACK repo
-automatically, but we need to manually tag the RACK wiki with the same
-tag in advance since its pages must go into the rack-box image too).
-
-## Using `act` to Run CI Locally
+### Using `act` to run CI locally
 
 The [act](https://github.com/nektos/act) tool can be used to run (an
-approximation of) the Github Actions workflow locally:
+approximation of) the Github Actions workflows locally:
 
 - Download a binary release of Packer for Ubuntu, and place the
   `packer` executable in the `rack-box/` directory
@@ -180,8 +147,6 @@ downloads this image.
 
 Unfortunately, `act` [does not yet support Ubuntu
 20.04](https://github.com/nektos/act-environments/issues/4).
-
-### Troubleshooting
 
 #### "volume is in use"
 

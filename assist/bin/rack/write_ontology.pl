@@ -57,8 +57,10 @@ rack_classes(Classes) :-
     setof(Namespace-Name, rack_class_decomposed(Namespace, Name), Pairs),
     group_pairs_by_key(Pairs, Classes).
 
-rack_property(Qualified) :-
-    rdf(_, Class, _), rack_ref(Qualified, Class).
+rack_property(Property) :-
+    rdf(Qualified, rdf:type, owl:'DatatypeProperty'), rack_ref(Property, Qualified).
+rack_property(Property) :-
+    rdf(Qualified, rdf:type, owl:'ObjectProperty'), rack_ref(Property, Qualified).
 
 rack_property_decomposed(Namespace, Name) :-
     rack_property(Property), rack_qualified(Namespace, Name, Property).
@@ -96,8 +98,7 @@ export_thing(Thing, Export) :-
 %
 %    Gives the export string for a property.
 export_property(Property, Export) :-
-    string_lower(Property, LowercaseProperty),
-    atomic_list_concat([LowercaseProperty, '/2'], Export).
+    atomic_list_concat([Property, '/2'], Export).
 
 replicate(Item, Count, List) :-
     length(List, Count),

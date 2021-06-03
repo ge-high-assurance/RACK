@@ -62,7 +62,6 @@ how to run `setup-rack.sh` and what its output may look like:
 
 ```shell
 (venv) $ ./setup-rack.sh
-<<<<<<< HEAD
 Clearing graph
 Success Update succeeded
 Ingesting ../RACK-Ontology/OwlModels/AGENTS.owl...               OK
@@ -98,14 +97,6 @@ Ingesting ../SRI-Ontology/OwlModels/SRI.owl...                   OK
 Storing nodegroups...                                            OK
 Ingesting ../STR-Ontology/OwlModels/STR.owl...                   OK
 Storing nodegroups...                                            OK
-=======
-Ingesting ../RACK-Ontology/OwlModels/AGENTS.owl... OK
-Ingesting ../RACK-Ontology/OwlModels/ANALYSIS.owl...OK
-Ingesting ../RACK-Ontology/OwlModels/CONFIDENCE.owl...OK
-[...]
-Storing nodegroups...                                       OK
-Storing nodegroups...                                       OK
->>>>>>> cbadd7a5923dc61ebacf33d024128ccf4ea51c09
 ```
 
 ## How to use the rack program
@@ -206,7 +197,6 @@ instance running in a Docker container on `localhost`:
 
 ```shell
 $ source venv/bin/activate
-<<<<<<< HEAD
 (venv) $ rack model import ../Turnstile-Ontology/99-Utils/import.yaml
 Ingesting ../Turnstile-Ontology/99-Utils/../OwlModels/DevelopmentPlan.owl...   OK
 
@@ -214,9 +204,6 @@ Ingesting ../Turnstile-Ontology/99-Utils/../OwlModels/DevelopmentPlan.owl...   O
 Storing nodegroups...
 
 (venv) $ rack data import --clear ../RACK-Ontology/OwlModels/DO-178C.yaml
-=======
-(venv) $ rack data import --clear ../Turnstile-Ontology/99-Utils/Data/Model.yaml
->>>>>>> cbadd7a5923dc61ebacf33d024128ccf4ea51c09
 Clearing graph
 Success Update succeeded
 Ingesting DO-178C.owl                     OK
@@ -333,11 +320,7 @@ The script can automate loading a directory full of nodegroups
 indexed by a `store_data.csv` file.
 
 ```shell
-<<<<<<< HEAD
 (venv) $ rack nodegroups import ../nodegroups/ingestion/arcos.rack
-=======
-(venv) $ rack nodegroups import ../nodegroups/ingestion
->>>>>>> cbadd7a5923dc61ebacf33d024128ccf4ea51c09
 Storing nodegroups...                                       OK
 ```
 

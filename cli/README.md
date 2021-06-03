@@ -62,45 +62,12 @@ how to run `setup-rack.sh` and what its output may look like:
 
 ```shell
 (venv) $ ./setup-rack.sh
-Clearing graph
-Success Update succeeded
-Ingesting ../OwlModels/AGENTS.owl...               OK
-Ingesting ../OwlModels/ANALYSIS.owl...             OK
-Ingesting ../OwlModels/DOCUMENT.owl...             OK
-Ingesting ../OwlModels/HAZARD.owl...               OK
-Ingesting ../OwlModels/PROCESS.owl...              OK
-Ingesting ../OwlModels/PROV-S.owl...               OK
-Ingesting ../OwlModels/REQUIREMENTS.owl...         OK
-Ingesting ../OwlModels/REVIEW.owl...               OK
-Ingesting ../OwlModels/SACM-S.owl...               OK
-Ingesting ../OwlModels/SOFTWARE.owl...             OK
-Ingesting ../OwlModels/SYSTEM.owl...               OK
-Ingesting ../OwlModels/TESTING.owl...              OK
+Ingesting ../RACK-Ontology/OwlModels/AGENTS.owl... OK
+Ingesting ../RACK-Ontology/OwlModels/ANALYSIS.owl...OK
+Ingesting ../RACK-Ontology/OwlModels/CONFIDENCE.owl...OK
+[...]
 Storing nodegroups...                                       OK
 Storing nodegroups...                                       OK
-Clearing graph
-Success Update succeeded
-Loading ingest01 system...                         OK Records: 8       Failures: 0
-Loading ingest02 interface...                      OK Records: 4       Failures: 0
-Loading ingest03 hazard...                         OK Records: 4       Failures: 0
-Loading ingest04 requirement...                    OK Records: 22      Failures: 0
-Loading ingest05 data dict...                      OK Records: 29      Failures: 0
-Loading ingest06 test...                           OK Records: 8       Failures: 0
-Loading ingest07 test results...                   OK Records: 16      Failures: 0
-Loading ingest08 agent...                          OK Records: 1       Failures: 0
-Loading ingest09 package...                        OK Records: 3       Failures: 0
-Loading ingest10 compile...                        OK Records: 14      Failures: 0
-Loading ingest11 format...                         OK Records: 6       Failures: 0
-Loading ingest12 file...                           OK Records: 19      Failures: 0
-Loading ingest13 component...                      OK Records: 4       Failures: 0
-Ingesting ARP-4754A.owl                   OK
-Ingesting DO-178C.owl                     OK
-Ingesting DO-330.owl                      OK
-Ingesting MIL-STD-881D.owl                OK
-Ingesting MIL-STD-881D-AppxB.owl          OK
-Ingesting MIL-STD-881D-AppxD.owl          OK
-Ingesting MIL-STD-881D-AppxA.owl          OK
-Ingesting MIL-STD-881D-AppxC.owl          OK
 ```
 
 ## How to use the rack program
@@ -201,7 +168,7 @@ instance running in a Docker container on `localhost`:
 
 ```shell
 $ source venv/bin/activate
-(venv) $ rack data import --clear ../models/TurnstileSystem/Data/import.yaml
+(venv) $ rack data import --clear ../Turnstile-Ontology/99-Utils/Data/Model.yaml
 Clearing graph
 Success Update succeeded
 Loading ingest01 system...                         OK Records: 8       Failures: 0
@@ -312,7 +279,7 @@ The script can automate loading a directory full of nodegroups
 indexed by a `store_data.csv` file.
 
 ```shell
-(venv) $ rack nodegroups import ../../nodegroups/ingestion
+(venv) $ rack nodegroups import ../nodegroups/ingestion
 Storing nodegroups...                                       OK
 ```
 

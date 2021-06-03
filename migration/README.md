@@ -1,8 +1,11 @@
 # RACK migration tool
 
-NOTE: eventually we can have the tool migrate between different named versions
-of RACK revisions.  This current prototype solely works on updating nodegroups
-from the v4.1 to the v5.0 revision.
+The RACK migration tool allows one to automatically perform most of the updating
+needed for nodegroups when the RACK ontology changes.  Most required changes are
+entirely determined by the nature of the ontology change, and so the migration
+tool can perform these automatically.  Some ontology changes, however, have
+consequences on the nodegroups that are best resolved by an advised human
+operator, and so the tool does not attempt to solve those.
 
 Some changes may have been missed as they were manually listed. If you encounter
 issues with some migration, feel free to reach out to Val (val@galois.com) for
@@ -10,25 +13,31 @@ help.
 
 ## How to build?
 
-To set up, we suggest using Python's virtualenv.  A possible setup is to run:
+To set up, we suggest using Python's virtualenv.  A possible setup is to run
+(replacing `env` with the name of the folder you want your virtual environment
+saved in):
 
 ```
 python3 -m venv env       # Creates a virtual environment in the 'env' directory
 source env/bin/activate   # Sets up the virtual environment in the **current** shell
 ```
 
+The rest of the procedure uses `pip`, which is added to your `PATH` by the
+virtual environment activation command.  If you open a new shell, make sure to
+run `source` again to reopen the virtual environment!
+
 In a shell where the environment is activated, you ought to be able to:
 
 ```
-python3 -m pip install -r requirements.txt
-# or, if you intend to modify the tool:
-python3 -m pip install -r requirements.txt -r requirements-dev.txt
+pip install -r requirements.txt
+# or, if you intend to work on the tool:
+pip install -e -r requirements.txt -r requirements-dev.txt
 ```
 
 And finally build and set up the tool with:
 
 ```
-# from the migration directory
+# still from the migration directory
 pip install .
 ```
 

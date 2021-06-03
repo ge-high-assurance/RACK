@@ -55,19 +55,57 @@ python setup.py install
 
 We have written a shell script called `setup-rack.sh` which will call
 the `rack` program to initialize a RACK-in-a-Box instance with the
-RACK ontology model and some default data.  It is assumed that you are
+RACK core ontology model.  It is assumed that you are
 still in the isolated Python virtual environment and running a
 RACK-in-a-Box instance in a Docker container on `localhost`.  Here is
 how to run `setup-rack.sh` and what its output may look like:
 
 ```shell
 (venv) $ ./setup-rack.sh
+<<<<<<< HEAD
+Clearing graph
+Success Update succeeded
+Ingesting ../RACK-Ontology/OwlModels/AGENTS.owl...               OK
+Ingesting ../RACK-Ontology/OwlModels/ANALYSIS.owl...             OK
+Ingesting ../RACK-Ontology/OwlModels/CONFIDENCE.owl...           OK
+Ingesting ../RACK-Ontology/OwlModels/DOCUMENT.owl...             OK
+Ingesting ../RACK-Ontology/OwlModels/FILE.owl...                 OK
+Ingesting ../RACK-Ontology/OwlModels/HAZARD.owl...               OK
+Ingesting ../RACK-Ontology/OwlModels/MODEL.owl...                OK
+Ingesting ../RACK-Ontology/OwlModels/PROCESS.owl...              OK
+Ingesting ../RACK-Ontology/OwlModels/PROV-S.owl...               OK
+Ingesting ../RACK-Ontology/OwlModels/REQUIREMENTS.owl...         OK
+Ingesting ../RACK-Ontology/OwlModels/REVIEW.owl...               OK
+Ingesting ../RACK-Ontology/OwlModels/SOFTWARE.owl...             OK
+Ingesting ../RACK-Ontology/OwlModels/SYSTEM.owl...               OK
+Ingesting ../RACK-Ontology/OwlModels/TESTING.owl...              OK
+Storing nodegroups...                                       OK
+Storing nodegroups...                                       OK
+```
+We have written a separate shell script called `setup-arcos.sh` which will call
+the `rack` program to load RACK-in-a-Box instance with the
+ARCOS program ontology overlays. Here is what its output may look like:
+
+```shell
+(venv) $ ./setup-arcos.sh
+Ingesting ../Boeing-Ontology/OwlModels/Boeing.owl...             OK
+Storing nodegroups...                                            OK
+Ingesting ../GrammaTech-Ontology/OwlModels/GrammaTech.owl...     OK
+Storing nodegroups...                                            OK
+Ingesting ../LM-Ontology/OwlModels/LM.owl...                     OK
+Storing nodegroups...                                            OK
+Ingesting ../SRI-Ontology/OwlModels/SRI.owl...                   OK
+Storing nodegroups...                                            OK
+Ingesting ../STR-Ontology/OwlModels/STR.owl...                   OK
+Storing nodegroups...                                            OK
+=======
 Ingesting ../RACK-Ontology/OwlModels/AGENTS.owl... OK
 Ingesting ../RACK-Ontology/OwlModels/ANALYSIS.owl...OK
 Ingesting ../RACK-Ontology/OwlModels/CONFIDENCE.owl...OK
 [...]
 Storing nodegroups...                                       OK
 Storing nodegroups...                                       OK
+>>>>>>> cbadd7a5923dc61ebacf33d024128ccf4ea51c09
 ```
 
 ## How to use the rack program
@@ -132,8 +170,8 @@ path to the OWL file.
 ```text
 data-model: "http://rack001/data"
 ingestion-steps:
-- {nodegroup: "ingest01 system",    csv: "SYSTEM.csv"}
-- {nodegroup: "ingest02 interface", csv: "INTERFACE.csv"}
+- {nodegroup: "ingest_SYSTEM",    csv: "SYSTEM.csv"}
+- {nodegroup: "ingest_INTERFACE", csv: "INTERFACE.csv"}
 - {owl: "example.owl"}
 ```
 
@@ -168,23 +206,48 @@ instance running in a Docker container on `localhost`:
 
 ```shell
 $ source venv/bin/activate
+<<<<<<< HEAD
+(venv) $ rack model import ../Turnstile-Ontology/99-Utils/import.yaml
+Ingesting ../Turnstile-Ontology/99-Utils/../OwlModels/DevelopmentPlan.owl...   OK
+
+(venv) $ rack nodegroups import ../Turnstile-Ontology/99-Utils/NodeGroups
+Storing nodegroups...
+
+(venv) $ rack data import --clear ../RACK-Ontology/OwlModels/DO-178C.yaml
+=======
+(venv) $ rack data import --clear ../Turnstile-Ontology/99-Utils/Data/Model.yaml
+>>>>>>> cbadd7a5923dc61ebacf33d024128ccf4ea51c09
+Clearing graph
+Success Update succeeded
+Ingesting DO-178C.owl                     OK
+
 (venv) $ rack data import --clear ../Turnstile-Ontology/99-Utils/Data/Model.yaml
 Clearing graph
 Success Update succeeded
-Loading ingest01 system...                         OK Records: 8       Failures: 0
-Loading ingest02 interface...                      OK Records: 4       Failures: 0
-Loading ingest03 hazard...                         OK Records: 4       Failures: 0
-Loading ingest04 requirement...                    OK Records: 22      Failures: 0
-Loading ingest05 data dict...                      OK Records: 29      Failures: 0
-Loading ingest06 test...                           OK Records: 8       Failures: 0
-Loading ingest07 test results...                   OK Records: 16      Failures: 0
-Loading ingest08 agent...                          OK Records: 1       Failures: 0
-Loading ingest09 package...                        OK Records: 3       Failures: 0
-Loading ingest10 compile...                        OK Records: 14      Failures: 0
-Loading ingest11 format...                         OK Records: 6       Failures: 0
-Loading ingest12 file...                           OK Records: 19      Failures: 0
-Loading ingest13 component...                      OK Records: 4       Failures: 0
-Loading ingest14 confidence...                     OK Records: 2       Failures: 0
+Loading Ingest-DataAndControlCouple...             OK Records: 24
+Loading Ingest-DataDictionary...                   OK Records: 5
+Loading Ingest-Engineer...                         OK Records: 3
+Loading Ingest-HAZARD...                           OK Records: 4
+Loading Ingest-HighLevelRequirements...            OK Records: 3
+Loading Ingest-LowLevelRequirements...             OK Records: 13
+Loading Ingest-Objective...                        OK Records: 99
+Loading Ingest-SoftwareComponentTest...            OK Records: 4
+Loading Ingest-SoftwareComponentTestExecution...   OK Records: 2
+Loading Ingest-SoftwareComponentTestResult...      OK Records: 8
+Loading Ingest-SoftwareDesign...                   OK Records: 2
+Loading Ingest-SoftwareDesignReview...             OK Records: 11
+Loading Ingest-SoftwareDesignReviewArtifacts...    OK Records: 11
+Loading Ingest-SoftwareRequirementsDefinition...   OK Records: 1
+Loading Ingest-SoftwareRequirementsReview...       OK Records: 9
+Loading Ingest-SoftwareRequirementsReviewArtifacts...OK Records: 3
+Loading Ingest-SoftwareThread...                   OK Records: 6
+Loading Ingest-SoftwareUnitTest...                 OK Records: 4
+Loading Ingest-SoftwareUnitTestExecution...        OK Records: 2
+Loading Ingest-SoftwareUnitTestResult...           OK Records: 8
+Loading Ingest-SystemComponent...                  OK Records: 4
+Loading Ingest-SystemInterfaceDefinition...        OK Records: 7
+Loading Ingest-SystemRequirement...                OK Records: 3
+Loading Ingest-SoftwareComponent...                OK Records: 3
 ```
 
 ### Export data
@@ -195,18 +258,13 @@ container on `localhost`:
 
 ```shell
 $ source venv/bin/activate
-(venv) $ rack data export --data-graph http://rack001/data "ingest01 system"
-
-identifier     identifier_parent
--------------------  -------------------------
-TurnStileSystem
-Counter Application  TurnStileSystem
-Display              TurnStileSystem
-ExecutiveThread      Counter Application
-In Gate              TurnStileSystem
-InputThread          Counter Application
-Out Gate             TurnStileSystem
-OutputThread         Counter Application
+(venv) $ rack data export --data-graph http://rack001/data "Ingest-SystemComponent"
+identifier_SystemComponent    identifier_SYSTEM
+----------------------------  -------------------
+Counter Application           Turnstile
+Display                       Turnstile
+Out Gate                      Turnstile
+In Gate                       Turnstile
 ```
 
 See `rack data export --help` for options, including different export
@@ -246,10 +304,6 @@ rack data export "query Requirements decomposition" \
   --data-graph http://rack001/data \
   --constraint "req~^HLR-.$" \
   --constraint "decomposition~^IN-"
-
-rack data export "example nodegroup" \
-  --data-graph http://rack001/data \
-  --constraint "generatedAtTime:2020-01-01T00:00:00Z<=>2020-12-31T23:59:59:59Z"
 ```
 
 ### Count result rows
@@ -258,8 +312,8 @@ The number of results a nodegroup would generate can be obtained
 using the `count` sub-command.
 
 ```shell
-(venv) $ rack data count --data-graph "http://rack001/data" "ingest07 test results"
-16
+(venv) $ data count --data-graph http://rack001/data "query Requirements with Tests"
+8
 ```
 
 ### Clear data graph
@@ -279,7 +333,11 @@ The script can automate loading a directory full of nodegroups
 indexed by a `store_data.csv` file.
 
 ```shell
+<<<<<<< HEAD
+(venv) $ rack nodegroups import ../nodegroups/ingestion/arcos.rack
+=======
 (venv) $ rack nodegroups import ../nodegroups/ingestion
+>>>>>>> cbadd7a5923dc61ebacf33d024128ccf4ea51c09
 Storing nodegroups...                                       OK
 ```
 
@@ -289,7 +347,7 @@ loads.
 
 ```shell
 (venv) $ mkdir outdir
-(venv) $ rack nodegroups export ^queries outdir
+(venv) $ rack nodegroups export ^query outdir
 Retrieving nodegroups...                                    OK
 (venv) $ ls outdir
 query Compilation Inputs.json                   query Requirements without Tests.json
@@ -299,7 +357,7 @@ query Control Flow From Function.json           query System Structure.json
 
 The tool can also list the currently loaded nodegroups.
 
-```
+```shell
 (venv) $ rack nodegroups list
 Listing nodegroups...                                       OK
 ID                                           comments                [...]

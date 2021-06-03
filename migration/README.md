@@ -14,25 +14,24 @@ help.
 ## How to build?
 
 To set up, we suggest using Python's virtualenv.  A possible setup is to run
-(replacing `<env>` with the name of the folder you want your virtual environment
+(replacing `env` with the name of the folder you want your virtual environment
 saved in):
 
 ```
-python3 -m venv <env>       # Creates a virtual environment in the 'env' directory
-source <env>/bin/activate   # Sets up the virtual environment in the **current** shell
+python3 -m venv env       # Creates a virtual environment in the 'env' directory
+source env/bin/activate   # Sets up the virtual environment in the **current** shell
 ```
 
-The rest of the procedure uses `pip`.  You can choose to install it globally
-using your package manager of choice, or locally via `python3 -m pip install
-pip`, or you can just always use `python3 -m pip` where we use `pip` in the
-following commands.
+The rest of the procedure uses `pip`, which is added to your `PATH` by the
+virtual environment activation command.  If you open a new shell, make sure to
+run `source` again to reopen the virtual environment!
 
 In a shell where the environment is activated, you ought to be able to:
 
 ```
 pip install -r requirements.txt
 # or, if you intend to work on the tool:
-pip install -r requirements.txt -r requirements-dev.txt
+pip install -e -r requirements.txt -r requirements-dev.txt
 ```
 
 And finally build and set up the tool with:

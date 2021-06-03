@@ -19,15 +19,10 @@ from typing import Callable, List, NoReturn, Tuple
 
 import semtk
 
-from custom_formatter import stream_handler
 import git_helpers as git
-from ontology_changes.ontology_change import Commit, LOGGER_ID, stylize_file_name
+from ontology_changes.ontology_change import Commit, logger, stylize_file_name
 from rack.commits import commits_in_chronological_order
 
-
-logger = logging.getLogger(LOGGER_ID)
-logger.addHandler(stream_handler)
-logger.propagate = False
 
 parser = argparse.ArgumentParser()
 
@@ -82,6 +77,7 @@ args = parser.parse_args()
 
 try:
     logging.basicConfig(level=args.log_level)
+    logger.setLevel(args.log_level)
 except ValueError:
     logger.error("Bad log level specified")
     sys.exit(1)
@@ -101,13 +97,13 @@ def get_commit_by_id(
             commit for commit in enumerate(commits) if commit[1].number == commit_id
         )
     except StopIteration as e:
-        print(e)
+        logger.error(e)
         abort()
 
 
 def make_abort(message: str) -> Callable[[], NoReturn]:
     def abort() -> NoReturn:
-        print(message)
+        logger.error(message)
         sys.exit(1)
 
     return abort
@@ -156,7 +152,7 @@ commits_to_consider_in_git_log_order = reversed(
 
 
 if len(commits_to_consider_in_chronological_order) == 0:
-    print("We did not find any commits in the range you specified, aborting.")
+    logger.error("We did not find any commits in the range you specified, aborting.")
     sys.exit(1)
 
 
@@ -201,16 +197,16 @@ from most recent to oldest.  Changes prior to version 4.0 have not been tracked.
 to_folder = Path(args.to_folder)
 
 if not args.from_folder:
-    print("from_folder argument missing, quitting.")
+    logger.error("from_folder argument missing, quitting.")
 from_folder = Path(args.from_folder)
 if not Path.exists(from_folder):
-    print("from_folder does not exist, quitting.")
+    logger.error("from_folder does not exist, quitting.")
     sys.exit(1)
 
 if not args.to_folder:
-    print("to_folder argument missing, quitting.")
+    logger.error("to_folder argument missing, quitting.")
 if not Path.exists(to_folder):
-    print("to_folder does not exist, quitting.")
+    logger.error("to_folder does not exist, quitting.")
     sys.exit(1)
 
 for json_file_path in from_folder.glob("*.json"):

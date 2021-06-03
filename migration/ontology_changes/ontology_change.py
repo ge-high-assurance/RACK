@@ -17,9 +17,13 @@ from typing import List, Optional
 from colorama import Fore, Style
 from semtk import SemTKJSON
 
+from custom_formatter import stream_handler
+
 LOGGER_ID = "migration-logger"
 
 logger = logging.getLogger(LOGGER_ID)
+logger.addHandler(stream_handler)
+logger.propagate = False
 
 
 def log_apply_change(which_change: str) -> None:

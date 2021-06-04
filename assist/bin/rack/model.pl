@@ -43,6 +43,8 @@ description DSL into instances in the model.
               property/3,
               property_target/5,
               rack_instance/2,
+              rack_instance_assert/2,
+              rack_property_assert/3,
               rack_entity_instance/1,
               rack_entity_instance/3,
               rack_ontology_node/3,
@@ -484,6 +486,12 @@ rack_instance(OntologyClassName, InstanceURL) :-
     rack_ref(OntologyClassName, Ref),
     rdf(InstanceURL, rdf:type, Ref).
 
+rack_instance_assert(OntologyClassName, InstanceURL) :-
+    rack_ref(OntologyClassName, Ref),
+    add_triple(InstanceURL, rdf:type, Ref).
+
+rack_property_assert(Source, Property, Target) :-
+    add_triple(Source, Property, Target).
 
 %! rack_entity_instance(-InstanceURL:atom) is nondet
 %

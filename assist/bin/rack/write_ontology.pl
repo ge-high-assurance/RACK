@@ -161,7 +161,8 @@ write_exports(Handle, Indent, Classes, Properties) :-
 
 %! class_query_declaration(+Namespace, +Class, -Declaration) is det.
 %
-%    Computes the text declaration for a given class in some namespace.
+%    Computes the text declaration for the RDF query of a given class in some
+%    namespace.
 class_query_declaration(Namespace, Class, Declaration) :-
     string_lower(Class, Predicate),
     atomic_list_concat(
@@ -172,7 +173,8 @@ class_query_declaration(Namespace, Class, Declaration) :-
 
 %! class_assert_declaration(+Namespace, +Class, -Declaration) is det.
 %
-%    Computes the text declaration for a given class in some namespace.
+%    Computes the text declaration for the RDF assertion of a given class in
+%    some namespace.
 class_assert_declaration(Namespace, Class, Declaration) :-
     string_lower(Class, PredicateSuffix),
     atomic_list_concat(['assert_', PredicateSuffix], Predicate),
@@ -184,7 +186,8 @@ class_assert_declaration(Namespace, Class, Declaration) :-
 
 %! write_class_query(+Handle, +Namespace, +Class) is det.
 %
-%    Writes the text declaration for a given class in some namespace.
+%    Writes the text declaration for the RDF query of a given class in some
+%    namespace.
 write_class_query(Handle, Namespace, Class) :-
     class_query_declaration(Namespace, Class, Declaration),
     writeln(Handle, Declaration).
@@ -192,7 +195,8 @@ write_class_query(Handle, Namespace, Class) :-
 
 %! write_class_assert(+Handle, +Namespace, +Class) is det.
 %
-%    Writes the text declaration for a given class in some namespace.
+%    Writes the text declaration for the RDF query of a given class in some
+%    namespace.
 write_class_assert(Handle, Namespace, Class) :-
     class_assert_declaration(Namespace, Class, Declaration),
     writeln(Handle, Declaration).
@@ -283,12 +287,16 @@ write_ontology_file(Namespace, Classes, Properties) :-
     writeln(Handle, '    ]'),
     writeln(Handle, ').'),
     nl(Handle),
+    writeln(Handle, '% Assert RACK classes: always succeeds, adding to the database.'),
     forall(member(Class, Classes), write_class_assert(Handle, Namespace, Class)),
     nl(Handle),
+    writeln(Handle, '% Query RACK classes: returns existing instances in the database, if any.'),
     forall(member(Class, Classes), write_class_query(Handle, Namespace, Class)),
     nl(Handle),
+    writeln(Handle, '% Assert RACK properties: always succeeds, adding to the database.'),
     forall(member(Property, Properties), write_property_assert(Handle, Namespace, Property)),
     nl(Handle),
+    writeln(Handle, '% Query RACK properties: returns existing instances in the database, if any.'),
     forall(member(Property, Properties), write_property_query(Handle, Namespace, Property)),
     close(Handle),
     % let the user know which files are being written

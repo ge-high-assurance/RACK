@@ -169,6 +169,16 @@ write_property(Handle, Namespace, Property) :-
     property_declaration(Namespace, Property, Declaration),
     writeln(Handle, Declaration).
 
+
+%! use_quotes_if_contains_dashes(+In, -Out) is det.
+%
+%    Adds single quotes around input string if it contains dashes.
+use_quotes_if_contains_dashes(Good, Good) :-
+    \+ sub_string(Good, _, 1, _, '-').
+use_quotes_if_contains_dashes(Bad, Good) :-
+    sub_string(Bad, _, 1, _, '-'), atomic_list_concat(['\'', Bad, '\''], Good).
+
+
 %! write_ontolofy_file(+Handle, +Namespace, +Things, +Properties) is det.
 %
 %    Writes the ontology file for a given namespace, list of ontology things,
@@ -176,7 +186,13 @@ write_property(Handle, Namespace, Property) :-
 write_ontology_file(Namespace, Things, Properties) :-
     ontology_file_path(Namespace, FilePath),
     open(FilePath, write, Handle),
-    string_lower(Namespace, Module),
+    % trick for "function composition"
+    foldl(
+        call,
+        [string_lower, use_quotes_if_contains_dashes],
+        Namespace,
+        Module
+    ),
     writeln(Handle, '% THIS FILE WAS AUTOMATICALLY GENERATED, SEE README'),
     nl(Handle),
     writeln(Handle, ':- module('),

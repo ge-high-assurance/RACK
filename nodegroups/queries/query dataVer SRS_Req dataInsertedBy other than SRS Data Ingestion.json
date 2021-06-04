@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"sparqlConn": {
-		"name": "RACK local fuseki",
+		"name": "RACK",
 		"domain": "",
 		"enableOwlImports": false,
 		"model": [
@@ -20,18 +20,17 @@
 		]
 	},
 	"sNodeGroup": {
-		"version": 12,
+		"version": 13,
 		"limit": 0,
 		"offset": 0,
 		"sNodeList": [
 			{
 				"propList": [
 					{
-						"KeyName": "identifier",
 						"ValueType": "string",
 						"relationship": "http://www.w3.org/2001/XMLSchema#string",
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
-						"Constraints": "FILTER (?identifier_ACTIVITY != \"SRS Data Ingestion\")",
+						"Constraints": "FILTER (?identifier_ACTIVITY = \"SRS Data Ingestion\")",
 						"SparqlID": "?identifier_0",
 						"isReturned": false,
 						"optMinus": 0,
@@ -39,11 +38,10 @@
 						"instanceValues": [],
 						"isMarkedForDeletion": false,
 						"binding": "?identifier_ACTIVITY",
-						"isBindingReturned": true
+						"isBindingReturned": false
 					}
 				],
 				"nodeList": [],
-				"NodeName": "ACTIVITY",
 				"fullURIName": "http://arcos.rack/PROV-S#ACTIVITY",
 				"SparqlID": "?ACTIVITY",
 				"isReturned": false,
@@ -55,7 +53,6 @@
 			{
 				"propList": [
 					{
-						"KeyName": "identifier",
 						"ValueType": "string",
 						"relationship": "http://www.w3.org/2001/XMLSchema#string",
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
@@ -74,7 +71,7 @@
 							"?ACTIVITY"
 						],
 						"OptionalMinus": [
-							0
+							2
 						],
 						"Qualifiers": [
 							""
@@ -82,7 +79,6 @@
 						"DeletionMarkers": [
 							false
 						],
-						"KeyName": "dataInsertedBy",
 						"ValueType": "ACTIVITY",
 						"UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
 						"ConnectBy": "dataInsertedBy",
@@ -90,7 +86,6 @@
 						"UriConnectBy": "http://arcos.rack/PROV-S#dataInsertedBy"
 					}
 				],
-				"NodeName": "SRS_Req",
 				"fullURIName": "http://arcos.AH-64D/Boeing#SRS_Req",
 				"SparqlID": "?SRS_Req",
 				"isReturned": false,

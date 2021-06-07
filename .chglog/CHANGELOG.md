@@ -1,5 +1,17 @@
 # RACK Change Log
 
+## [v7.0] - 2021-06-07
+
+This release has the following changes:
+
+- Made cli/setup-rack.sh load only core ontology; added cli/setup-arcos.sh to load ARCOS ontology overlays
+- Stopped pre-loading Turnstile data; added Turnstile-Ontology/99-Utils/Load-TurnstileData.sh to load it
+- Added [ASSIST](https://github.com/ge-high-assurance/RACK/tree/master/assist) tools to collect and ingest activity-related Turnstile data via ASSIST-DC and ASSIST-DI
+- Improved RACK ingestion performance and Fuseki reliability
+- Added positional arguments to CLI: rack data _clear_ and rack model _clear_
+- Moved core and overlay ontologies into separate nodegroups/ingestion subdirectories
+- Updated [RACK ontology detailed changelogs](https://github.com/ge-high-assurance/RACK/wiki/RACK-ontology-detailed-changelogs) using RACK migration tool
+
 ## [v6.0] - 2021-05-03
 
 This release has the following changes:

@@ -161,6 +161,7 @@ def markdown_link_to_commit(
     commit_id: str,
     link_text: str,
 ) -> str:
+    link_text = link_text.replace('([][])','\\$1') # escapes '[' and ']'
     return f"[{link_text}](https://github.com/ge-high-assurance/RACK/commit/{commit_id})"
 
 

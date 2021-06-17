@@ -299,7 +299,7 @@ The number of results a nodegroup would generate can be obtained
 using the `count` sub-command.
 
 ```shell
-(venv) $ data count --data-graph http://rack001/data "query Requirements with Tests"
+(venv) $ rack data count --data-graph http://rack001/data "query Requirements with Tests"
 8
 ```
 

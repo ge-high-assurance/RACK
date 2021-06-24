@@ -38,8 +38,11 @@
 % to develop valid SADL files and that this tool is used for
 % subsequent automation, such as CI tasks.
 
+:- ensure_loaded('../paths').
+
 :- use_module(library(semweb/rdf11)).
 :- use_module(library(semweb/rdfs)).
+:- use_module(rack(owl)).
 
 :- op(500,xfy,::).
 
@@ -108,33 +111,6 @@ rel_loc(FName, OutFURLs, FLoc) :-
     atom_concat(BaseDirN, '/', BaseDir),
     absolute_file_name(FName, FPath),
     atom_concat(BaseDir, FLoc, FPath).
-
-% Writes the OWL definitions to the specified file, with the provided
-% BaseURI and additional namespace declarations.  Note that only the
-% definitions from this SADL file are emitted (specified by
-% 'graph(G)') to avoid emitting any imported externals.
-write_owl(File, BaseURI, [none]) :-
-    rdf_default_graph(G), !,
-    rdf_save(File, [graph(G), base_uri(BaseURI),
-                    sorted(true),
-                    % xml_attributes(false),
-                    document_language(en)
-                   ]).
-write_owl(File, BaseURI, NS) :-
-    rdf_default_graph(G),
-    valid_nslist(NS),
-    rdf_save(File, [graph(G), base_uri(BaseURI),
-                    sorted(true),
-                    % xml_attributes(false),
-                    document_language(en),
-                    namespaces([owl,xsd|NS])
-                   ]).
-
-valid_nslist([]).
-valid_nslist([N|Ns]) :-
-    (rdf_current_prefix(N,_), ! ;
-     print_message(error, bad_ns_spec(N)), fail),
-    valid_nslist(Ns).
 
 
 % ----------------------------------------------------------------------

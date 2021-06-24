@@ -9,10 +9,14 @@
 % material are those of the author(s) and do not necessarily reflect the views
 % of the Defense Advanced Research Projects Agency (DARPA).
 
-:- module(paths,
-          [
-              paths_dir/1
-          ]).
+:- module(
+    paths,
+    [
+        paths_dir/1
+    ]
+).
+
+:- use_module(library(filesex)).
 
 this_is_paths. % marker for obtaining the path to this file
 

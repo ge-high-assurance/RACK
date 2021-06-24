@@ -12,6 +12,7 @@
 :- module(
     write_ontology,
     [
+        rack_property/1,
         write_ontology/0
     ]
 ).

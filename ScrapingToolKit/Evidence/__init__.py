@@ -112,11 +112,12 @@ def createCDR():
 ingestion-steps:
 #Phase1: Identifiers Only
 ''')
+        import Evidence.CONSTANTS as CONSTANTS
         for cdr in cdrFiles:
-            outFile.write('- {nodegroup: "ingest_{{THING}}", csv: "{{THING}}1.csv"}\n'.replace("{{THING}}",cdr))
+            outFile.write('- {nodegroup: "{{NODEGROUP}}", csv: "{{THING}}1.csv"}\n'.replace("{{THING}}",cdr).replace("{{NODEGROUP}}",CONSTANTS.nodegroupMapping[cdr]))
         outFile.write("\n#Phase2: All Evidence\n")
         for cdr in cdrFiles:
-            outFile.write('- {nodegroup: "ingest_{{THING}}", csv: "{{THING}}2.csv"}\n'.replace("{{THING}}",cdr))
+            outFile.write('- {nodegroup: "{{NODEGROUP}}", csv: "{{THING}}2.csv"}\n'.replace("{{THING}}",cdr).replace("{{NODEGROUP}}",CONSTANTS.nodegroupMapping[cdr]))
     return os.path.join(outputDir,"import.yaml")
 
 def createEvidenceFile(ingestionTitle="ScrapingToolKitIngestion", ingestionDescription="Data that was ingested using the ARCOS Scraping Tool Kit.", filePath="RACK-DATA.xml"):   

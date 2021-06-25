@@ -14,7 +14,7 @@ To make RACK easy for all ARCOS performers to use, we deploy RACK as a software 
 
 ## Getting Started with RACK
 
-RACK is available either as a virtual machine image or a Docker container, and is supported on Linux, Windows, and MacOS systems. To learn more and get detailed instructions on how to get started, see [our online User Guide](https://github.com/ge-high-assurance/RACK/wiki/RACK-in-a-Box-User-Guide).
+RACK is available either as a virtual machine image or a Docker container, and is supported on Linux, Windows, and MacOS systems. To learn more and get detailed instructions on how to get started, see our [Installation Instructions](https://github.com/ge-high-assurance/RACK/wiki/Home#installation-instructions).
 
 ---
 Copyright (c) 2021, General Electric Company, Galois, Inc.

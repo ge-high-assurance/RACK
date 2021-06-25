@@ -816,42 +816,6 @@
             "optMinus": 1,
             "isReturned": true,
             "Constraints": "",
-            "ValueType": "double",
-            "instanceValues": [],
-            "isRuntimeConstrained": false,
-            "isMarkedForDeletion": false,
-            "SparqlID": "?cpuTime",
-            "relationship": "http://www.w3.org/2001/XMLSchema#double",
-            "UriRelationship": "http://arcos.acert/GrammaTech#cpuTime"
-          },
-          {
-            "optMinus": 1,
-            "isReturned": true,
-            "Constraints": "",
-            "ValueType": "double",
-            "instanceValues": [],
-            "isRuntimeConstrained": false,
-            "isMarkedForDeletion": false,
-            "SparqlID": "?memory",
-            "relationship": "http://www.w3.org/2001/XMLSchema#double",
-            "UriRelationship": "http://arcos.acert/GrammaTech#memory"
-          },
-          {
-            "optMinus": 1,
-            "isReturned": true,
-            "Constraints": "",
-            "ValueType": "string",
-            "instanceValues": [],
-            "isRuntimeConstrained": false,
-            "isMarkedForDeletion": false,
-            "SparqlID": "?testEnvironment",
-            "relationship": "http://www.w3.org/2001/XMLSchema#string",
-            "UriRelationship": "http://arcos.descert/SRI#testEnvironment"
-          },
-          {
-            "optMinus": 1,
-            "isReturned": true,
-            "Constraints": "",
             "ValueType": "string",
             "instanceValues": [],
             "isRuntimeConstrained": false,
@@ -1055,7 +1019,7 @@
                 ]
               }
             ],
-            "URIRelation": "http://arcos.acert/GrammaTech#cpuTime"
+            "URIRelation": "http://arcos.rack/PROV-S#description"
           },
           {
             "mapping": [
@@ -1066,45 +1030,12 @@
                 ]
               }
             ],
-            "URIRelation": "http://arcos.acert/GrammaTech#memory"
-          },
-          {
-            "mapping": [
-              {
-                "colId": "col_2",
-                "transformList": [
-                  "trans_0"
-                ]
-              }
-            ],
-            "URIRelation": "http://arcos.descert/SRI#testEnvironment"
-          },
-          {
-            "mapping": [
-              {
-                "colId": "col_3",
-                "transformList": [
-                  "trans_0"
-                ]
-              }
-            ],
-            "URIRelation": "http://arcos.rack/PROV-S#description"
-          },
-          {
-            "mapping": [
-              {
-                "colId": "col_4",
-                "transformList": [
-                  "trans_0"
-                ]
-              }
-            ],
             "URIRelation": "http://arcos.rack/PROV-S#endedAtTime"
           },
           {
             "mapping": [
               {
-                "colId": "col_5",
+                "colId": "col_2",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1118,7 +1049,7 @@
           {
             "mapping": [
               {
-                "colId": "col_6",
+                "colId": "col_3",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1129,7 +1060,7 @@
           {
             "mapping": [
               {
-                "colId": "col_7",
+                "colId": "col_4",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1141,14 +1072,14 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?FILE",
         "type": "http://arcos.rack/FILE#FILE",
         "props": [
           {
             "mapping": [
               {
-                "colId": "col_8",
+                "colId": "col_5",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1163,14 +1094,14 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?ACTIVITY",
         "type": "http://arcos.rack/PROV-S#ACTIVITY",
         "props": [
           {
             "mapping": [
               {
-                "colId": "col_9",
+                "colId": "col_6",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1185,14 +1116,14 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?ENTITY",
         "type": "http://arcos.rack/PROV-S#ENTITY",
         "props": [
           {
             "mapping": [
               {
-                "colId": "col_10",
+                "colId": "col_7",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1207,14 +1138,14 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?AGENT",
         "type": "http://arcos.rack/PROV-S#AGENT",
         "props": [
           {
             "mapping": [
               {
-                "colId": "col_11",
+                "colId": "col_8",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1229,14 +1160,14 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?ACTIVITY_0",
         "type": "http://arcos.rack/PROV-S#ACTIVITY",
         "props": [
           {
             "mapping": [
               {
-                "colId": "col_12",
+                "colId": "col_9",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1251,14 +1182,14 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?AGENT_0",
         "type": "http://arcos.rack/PROV-S#AGENT",
         "props": [
           {
             "mapping": [
               {
-                "colId": "col_13",
+                "colId": "col_10",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1275,60 +1206,48 @@
     "texts": [],
     "columns": [
       {
-        "colName": "cpuTime",
+        "colName": "description",
         "colId": "col_0"
       },
       {
-        "colName": "memory",
+        "colName": "endedAtTime",
         "colId": "col_1"
       },
       {
-        "colName": "testEnvironment",
+        "colName": "identifier",
         "colId": "col_2"
       },
       {
-        "colName": "description",
+        "colName": "startedAtTime",
         "colId": "col_3"
       },
       {
-        "colName": "endedAtTime",
+        "colName": "title",
         "colId": "col_4"
       },
       {
-        "colName": "identifier",
+        "colName": "definedIn_identifier",
         "colId": "col_5"
       },
       {
-        "colName": "startedAtTime",
+        "colName": "dataInsertedBy_identifier",
         "colId": "col_6"
       },
       {
-        "colName": "title",
+        "colName": "used_identifier",
         "colId": "col_7"
       },
       {
-        "colName": "definedIn_identifier",
+        "colName": "wasAssociatedWith_identifier",
         "colId": "col_8"
       },
       {
-        "colName": "dataInsertedBy_identifier",
+        "colName": "wasInformedBy_identifier",
         "colId": "col_9"
       },
       {
-        "colName": "used_identifier",
-        "colId": "col_10"
-      },
-      {
-        "colName": "wasAssociatedWith_identifier",
-        "colId": "col_11"
-      },
-      {
-        "colName": "wasInformedBy_identifier",
-        "colId": "col_12"
-      },
-      {
         "colName": "executedOn_identifier",
-        "colId": "col_13"
+        "colId": "col_10"
       }
     ],
     "baseURI": "",

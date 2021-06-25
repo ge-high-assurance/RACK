@@ -303,17 +303,6 @@
             "DeletionMarkers": [],
             "OptionalMinus": [],
             "Qualifiers": [],
-            "UriConnectBy": "http://arcos.descert/SRI#testVectorFile",
-            "ConnectBy": "",
-            "UriValueType": "http://arcos.rack/FILE#FILE"
-          },
-          {
-            "SnodeSparqlIDs": [],
-            "ValueType": "FILE",
-            "Connected": false,
-            "DeletionMarkers": [],
-            "OptionalMinus": [],
-            "Qualifiers": [],
             "UriConnectBy": "http://arcos.rack/FILE#definedIn",
             "ConnectBy": "",
             "UriValueType": "http://arcos.rack/FILE#FILE"

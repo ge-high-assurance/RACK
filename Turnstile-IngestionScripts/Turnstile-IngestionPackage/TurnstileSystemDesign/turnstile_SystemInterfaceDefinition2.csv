@@ -1,0 +1,5 @@
+identifier,dataInsertedBy_identifier,destination_identifier,source_identifier
+inflow,TurnstileIngestion-SystemDesign,CounterApplication,In Gate
+outflow,TurnstileIngestion-SystemDesign,CounterApplication,Out Gate
+census,TurnstileIngestion-SystemDesign,Display,CounterApplication
+census,TurnstileIngestion-SystemDesign,In Gate,

@@ -1,0 +1,13 @@
+data-graph: "http://rack001/data"
+ingestion-steps:
+#Phase1: Identifiers Only
+- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}
+- {nodegroup: "ingest_SYSTEM", csv: "SYSTEM1.csv"}
+- {nodegroup: "ingest_turnstile_SystemComponent", csv: "turnstile_SystemComponent1.csv"}
+- {nodegroup: "ingest_turnstile_SystemInterfaceDefinition", csv: "turnstile_SystemInterfaceDefinition1.csv"}
+
+#Phase2: All Evidence
+- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
+- {nodegroup: "ingest_SYSTEM", csv: "SYSTEM2.csv"}
+- {nodegroup: "ingest_turnstile_SystemComponent", csv: "turnstile_SystemComponent2.csv"}
+- {nodegroup: "ingest_turnstile_SystemInterfaceDefinition", csv: "turnstile_SystemInterfaceDefinition2.csv"}

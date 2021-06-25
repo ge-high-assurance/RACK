@@ -22,6 +22,6 @@ then
 fi
 
 echo "Ingesting Hazard Assesment Evidence..."
-rack data import $BASEDIR/HazardAssessment/import.yaml
+rack data import "$BASEDIR"/HazardAssessment/import.yaml
 echo "Ingesting System Design Evidence..."
-rack data import $BASEDIR/TurnstileSystemDesign/import.yaml
+rack data import "$BASEDIR"/TurnstileSystemDesign/import.yaml

@@ -248,6 +248,11 @@ use_quotes_if_contains_dashes(Good, Good) :-
 use_quotes_if_contains_dashes(Bad, Good) :-
     sub_string(Bad, _, 1, _, '-'), atomic_list_concat(['\'', Bad, '\''], Good).
 
+% Prolog gets unhappy when we try to name a module 'system'.  It works fine with
+% 'use_module', but the documentation is generated using 'load_files', and
+% modules named 'system' cause permission errors.
+special_case_for_system("system", "'rack-system'") :- !.
+special_case_for_system(In, In) :- \+ In = "system".
 
 %! write_ontolofy_file(+Handle, +Namespace, +Classes, +Properties) is det.
 %
@@ -259,7 +264,11 @@ write_ontology_file(Namespace, Classes, Properties) :-
     % trick for "function composition"
     foldl(
         call,
-        [string_lower, use_quotes_if_contains_dashes],
+        [
+            string_lower,
+            use_quotes_if_contains_dashes,
+            special_case_for_system
+        ],
         Namespace,
         Module
     ),

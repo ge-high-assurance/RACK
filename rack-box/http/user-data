@@ -11,6 +11,10 @@ autoinstall:
   storage:
     layout:
       name: direct
+  apt:
+    sources:
+      swi-prolog:
+        source: "ppa:swi-prolog/stable"
   ssh:
     install-server: true
   packages:
@@ -19,6 +23,7 @@ autoinstall:
     - nginx-light
     - python3
     - python3-pip
+    - swi-prolog
     - unzip
   late-commands:
     - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu

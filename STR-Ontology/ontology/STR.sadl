@@ -2,6 +2,7 @@ uri "http://arcos.arbiter/STR" alias Arbiter.
 
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/MODEL".
 
 StrSystem (note "A component of the logical system with a concept of sequencing dependency")
     is a type of SYSTEM.
@@ -18,10 +19,10 @@ StrPort (note "The communication interface of a concrete software component.")
     portType has a single value.
 
 StrInPort (note "Input interface")
-    is a type of ENTITY.
+    is a type of StrPort.
 
 StrOutPort (note "Output interface")
-    is a type of ENTITY.
+    is a type of StrPort.
 
 connectsTo (note "An association between input and output ports found in the system.")
     describes StrOutPort with values of type StrInPort.
@@ -32,3 +33,9 @@ StrComponent (note "A concrete software component with an explicitly identified 
         describes StrComponent with values of type StrOutPort.
     recvsVia (note "Links a component to its incoming interface")
         describes StrComponent with values of type StrInPort.
+
+StrEarsModel (note "A requirement statement written in the Easy Approach to Requirements Syntax language.")
+    is a type of MODEL.
+    
+    earsStatement (note "Text of statement written in the EARS requirements language.")
+        describes StrEarsModel with values of type string.

@@ -18,21 +18,31 @@ runs:
   using: 'composite'
 
   steps:
-    - name: Download Fuseki distribution
+    - name: Download Fuseki release
       shell: bash
       run: curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-3.16.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
 
-    - name: Download SemTK distribution
+    - name: Download SemTK release
       shell: bash
-      run: curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20210301/semtk-opensource-v2.3.0-20210301-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+      run: curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.3.0-20210526/semtk-opensource-v2.3.0-20210526-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
 
-    - name: Download style spreadsheet
+    - name: Download CSS stylesheet
       shell: bash
       run: curl -LSfs https://github.com/KrauseFx/markdown-to-html-github-style/raw/master/style.css -o RACK/rack-box/files/style.css
 
     - name: Download systemctl script
       shell: bash
       run: curl -LSfs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4505/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
+
+    - name: Package RACK ontology and data
+      shell: bash
+      run: |
+        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests --exclude=tools RACK
+
+    - name: Package RACK ASSIST
+      shell: bash
+      run: |
+        tar cfz RACK/rack-box/files/rack-assist.tar.gz RACK/assist
 
     - name: Package RACK CLI
       shell: bash
@@ -53,7 +63,3 @@ runs:
         markdown -t RACK-in-a-box -s style.css RACK.wiki/_Welcome.md > index.html
         sed -i -e 's/>NodeGroupService/ onclick="javascript:event.target.port=12058">NodeGroupService/' index.html
         mv documentation.html index.html RACK/rack-box/files
-
-    - name: Package RACK ontology and data
-      shell: bash
-      run: tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests --exclude=tools RACK

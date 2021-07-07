@@ -2,7 +2,7 @@ In a hurry? Skip this introduction and just [learn how to install and use RACK](
 
 # Introducing RACK
 
-RACK (Rapid Assurance Curation Kit) is a research-grade database that uses a structured semantic data model tuned to the domain of the DARPA ARCOS (Automated Rapid Certificaiton Of Software) program.
+RACK (Rapid Assurance Curation Kit) is a research-grade database that uses a structured semantic data model tuned to the domain of the DARPA ARCOS (Automated Rapid Certification Of Software) program.
 
 <img src="https://github.com/ge-high-assurance/RACK/wiki/images/RACK_cartoon.jpg" alt="RACK Overview Diagram" width="300" align="middle">
 

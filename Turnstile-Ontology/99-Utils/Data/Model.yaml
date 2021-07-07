@@ -1,7 +1,6 @@
-# This file is intended to be used using the rack.py script found
-# in RACK-Ontology/scripts/
+# This file is intended to be used with the rack CLI script found in RACK/cli/
 #
-# Script documentation is available in RACK-Ontology/scripts/README.md
+# Script documentation is available in RACK/cli/README.md
 data-graph: "http://rack001/data"
 extra-data-graphs: ["http://rack001/do-178c"]
 ingestion-steps:
@@ -11,7 +10,6 @@ ingestion-steps:
 - {nodegroup: "Ingest-HAZARD", csv: "HAZARD.csv"}
 - {nodegroup: "Ingest-HighLevelRequirements", csv: "HighLevelRequirements.csv"}
 - {nodegroup: "Ingest-LowLevelRequirements", csv: "LowLevelRequirements.csv"}
-- {nodegroup: "Ingest-ObjectFile", csv: "ObjectFile.csv"}
 - {nodegroup: "Ingest-Objective", csv: "Objective.csv"}
 - {nodegroup: "Ingest-SoftwareComponentTest", csv: "SoftwareComponentTest.csv"}
 - {nodegroup: "Ingest-SoftwareComponentTestExecution", csv: "SoftwareComponentTestExecution.csv"}
@@ -19,8 +17,6 @@ ingestion-steps:
 - {nodegroup: "Ingest-SoftwareDesign", csv: "SoftwareDesign.csv"}
 - {nodegroup: "Ingest-SoftwareDesignReview", csv: "SoftwareDesignReview.csv"}
 - {nodegroup: "Ingest-SoftwareDesignReviewArtifacts", csv: "SoftwareDesignReviewArtifacts.csv"}
-- {nodegroup: "Ingest-SoftwareIntegration", csv: "SoftwareIntegration.csv"}
-- {nodegroup: "Ingest-SoftwareIntegrationCompileInput", csv: "SoftwareIntegrationCompileInput.csv"}
 - {nodegroup: "Ingest-SoftwareRequirementsDefinition", csv: "SoftwareRequirementsDefinition.csv"}
 - {nodegroup: "Ingest-SoftwareRequirementsReview", csv: "SoftwareRequirementsReview.csv"}
 - {nodegroup: "Ingest-SoftwareRequirementsReviewArtifacts", csv: "SoftwareRequirementsReviewArtifacts.csv"}
@@ -28,8 +24,6 @@ ingestion-steps:
 - {nodegroup: "Ingest-SoftwareUnitTest", csv: "SoftwareUnitTest.csv"}
 - {nodegroup: "Ingest-SoftwareUnitTestExecution", csv: "SoftwareUnitTestExecution.csv"}
 - {nodegroup: "Ingest-SoftwareUnitTestResult", csv: "SoftwareUnitTestResult.csv"}
-- {nodegroup: "Ingest-SourceCode", csv: "SourceCode.csv"}
-- {nodegroup: "Ingest-SourceCodeTracing", csv: "SourceCodeTracing.csv"}
 - {nodegroup: "Ingest-SystemComponent", csv: "SystemComponent.csv"}
 - {nodegroup: "Ingest-SystemInterfaceDefinition", csv: "SystemInterfaceDefinition.csv"}
 - {nodegroup: "Ingest-SystemRequirement", csv: "SystemRequirement.csv"}

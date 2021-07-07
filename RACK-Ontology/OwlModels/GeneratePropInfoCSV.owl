@@ -9,7 +9,6 @@
     xmlns:Rv="http://arcos.rack/REVIEW#"
     xmlns:D="http://arcos.rack/DOCUMENT#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
-    xmlns:sacms="http://arcos.rack/SACM-S#"
     xmlns:Rq="http://arcos.rack/REQUIREMENTS#"
     xmlns:H="http://arcos.rack/HAZARD#"
     xmlns:sw="http://arcos.rack/SOFTWARE#"
@@ -22,6 +21,7 @@
     xmlns:tst="http://arcos.rack/TESTING#"
   xml:base="http://arcos.rack/GeneratePropInfoCSV">
   <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="MODEL"/>
     <owl:imports rdf:resource="ANALYSIS"/>
     <owl:imports rdf:resource="DOCUMENT"/>
     <owl:imports rdf:resource="FILE"/>
@@ -33,7 +33,6 @@
     <owl:imports rdf:resource="PROCESS"/>
     <owl:imports rdf:resource="REVIEW"/>
     <owl:imports rdf:resource="AGENTS"/>
-    <owl:imports rdf:resource="SACM-S"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="REQUIREMENTS"/>
     <owl:imports rdf:resource="CONFIDENCE"/>

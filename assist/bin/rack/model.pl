@@ -25,10 +25,10 @@ description DSL into instances in the model.
               save_model_to_file/2,
 
               load_model_from_url/1,
-              upload_model_to_url/1,
+              upload_model_to_url/2,
 
               load_model_from_rack/0,
-              upload_model_to_rack/0,
+              upload_model_to_rack/1,
 
               % Ontology relationship predicates
               rack_ref/2,
@@ -43,6 +43,8 @@ description DSL into instances in the model.
               property/3,
               property_target/5,
               rack_instance/2,
+              rack_instance_assert/2,
+              rack_property_assert/3,
               rack_entity_instance/1,
               rack_entity_instance/3,
               rack_ontology_node/3,
@@ -159,13 +161,14 @@ load_model_from_rack :-
     load_model_from_url('http://localhost:3030/').
 
 
-%! upload_model_to_url(+URL:atom) is semidet.
+%! upload_model_to_url(+URL:atom, +Graph:atom) is semidet.
 %
-% Uploads the local RDF/OWL triples to the specified triple-store HTTP
-% URL.
+% Uploads the local RDF/OWL triples to the specified triple-store
+% graph at the HTTP URL.
 
-upload_model_to_url(URL) :-
-    atom_concat(URL, 'RACK/upload', Tgt),
+upload_model_to_url(URL, NS) :-
+    atom_concat(URL, 'RACK/data?graph=', T1),
+    atom_concat(T1, NS, Tgt),
     with_output_to(string(C), (current_output(S), rdf_save(stream(S),[]))),
     % n.b. Fuseki requires a filename for the upload, but subsequently
     % seems to ignore it, so supply a dummy.  The response is HTML
@@ -179,14 +182,14 @@ upload_model_to_url(URL) :-
               _Response, []).
 
 
-%! upload_model_to_rack is semidet.
+%! upload_model_to_rack(+Graph:atom) is semidet.
 %
 % Uploads the local RDF/OWL triples to the RACK fuseki endpoint.
 %
 % See also upload_model_to_url/1 and save_model_to_file/1.
 
-upload_model_to_rack :-
-    upload_model_to_url('http://localhost:3030/').
+upload_model_to_rack(NS) :-
+    upload_model_to_url('http://localhost:3030/', NS).
 
 
 %! save_model_to_file(+Filename:string) is semidet.
@@ -407,6 +410,12 @@ property_target(Class, Property, PropUsage, Target, Restrictions) :-
     rdf(Class, rdfs:subClassOf, Parent),
     property_target(Parent, Property, PropUsage, Target, Restrictions).
 
+% Various recognizers used by property_target to translate RDF
+% relation restrictions into an identified local restriction type like
+% "cardinality(N)", "maybe", "normal", etc.
+%
+% For Cardinality information, see: https://w3.org/2001/sw/BestPratices/OEP/QCR
+
 property_extra(Class, Property, _Target, cardinality(N)) :-
     rdf(Class, rdfs:subClassOf, B),
     rdf_bnode(B),
@@ -418,6 +427,27 @@ property_extra(Class, Property, _Target, cardinality(N)) :-
 property_extra(_Class, Property, _Target, maybe) :-
     rdf(Property, rdf:type, owl:'FunctionalProperty'), !.
 property_extra(_Class, _Property, _Target, normal).
+property_extra(Class, Property, _Target, min_cardinality(N)) :-
+    rdf(Class, rdfs:subClassOf, B),
+    rdf_bnode(B),
+    rdf(B, owl:onProperty, Property),
+    rdf(B, rdf:type, owl:'Restriction'), !,
+    (rdf(B, owl:minCardinality, I), rdf_literal(I), rdf_numeric(I, N) ;
+     rdf(B, owl:someValuesFrom, _T), N == 1).
+property_extra(Class, Property, _Target, max_cardinality(N)) :-
+    rdf(Class, rdfs:subClassOf, B),
+    rdf_bnode(B),
+    rdf(B, owl:onProperty, Property),
+    rdf(B, rdf:type, owl:'Restriction'), !,
+    rdf(B, owl:maxCardinality, I),
+    rdf_literal(I),
+    rdf_numeric(I, N).
+property_extra(Class, Property, _Target, value_from(Cls)) :-
+    rdf(Class, rdfs:subClassOf, B),
+    rdf_bnode(B),
+    rdf(B, owl:onProperty, Property),
+    rdf(B, rdf:type, owl:'Restriction'), !,
+    rdf(B, owl:someValuesFrom, Cls).
 
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:int).
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:integer).
@@ -456,6 +486,12 @@ rack_instance(OntologyClassName, InstanceURL) :-
     rack_ref(OntologyClassName, Ref),
     rdf(InstanceURL, rdf:type, Ref).
 
+rack_instance_assert(OntologyClassName, InstanceURL) :-
+    rack_ref(OntologyClassName, Ref),
+    add_triple(InstanceURL, rdf:type, Ref).
+
+rack_property_assert(Source, Property, Target) :-
+    add_triple(Source, Property, Target).
 
 %! rack_entity_instance(-InstanceURL:atom) is nondet
 %
@@ -502,10 +538,12 @@ load_data(Namespace, Dir) :-
     % Globally asserts current namespace so that this doesn't need to
     % be threaded as an argument through all the rules.
     assert(rack_namespace(Namespace), SetNS),
-    % Find all files admitted by 'rack_datafile' recursively starting at 'Dir'
-    load_data_dir(Dir),
-    % Instantiate all the loaded data
-    realize_loaded_data,
+    catch(
+        ( % Find all files admitted by 'rack_datafile' recursively starting at 'Dir'
+            load_data_dir(Dir),
+            % Instantiate all the loaded data
+            realize_loaded_data
+        ), _, writeln('Warning: data directory not accessible.')),
     % Remove the global namespace assertion
     erase(SetNS).
 

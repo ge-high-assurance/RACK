@@ -1,0 +1,3 @@
+ID,comments,creator,jsonFile
+query nonuniqueIdentifiers,Find identifiers that are not unique,eric,query nonuniqueIdentifiers.json
+query test empty thing,Check for non-SYSTEM typed things with identifer and no other properties,200001934,query test empty thing.json

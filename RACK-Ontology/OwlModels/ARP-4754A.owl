@@ -239,10 +239,11 @@
       <j.0:AGENT rdf:ID="SAE"/>
     </D:approvalAuthority>
     <D:issuingOrganization>
-      <j.0:AGENT rdf:ID="WG-63"/>
-    </D:issuingOrganization>
-    <D:issuingOrganization>
-      <j.0:AGENT rdf:ID="S-18"/>
+      <j.0:AGENT rdf:ID="WG-63">
+        <j.0:actedOnBehalfOf>
+          <j.0:AGENT rdf:ID="S-18"/>
+        </j.0:actedOnBehalfOf>
+      </j.0:AGENT>
     </D:issuingOrganization>
     <D:status rdf:resource="http://arcos.rack/DOCUMENT#Released"/>
     <D:dateOfIssue rdf:datatype="http://www.w3.org/2001/XMLSchema#date"

@@ -23,7 +23,7 @@ TEST
 	(note "Description of a single test")
 	is a type of ENTITY.
 
-	verifies (note "Parent ENTITY(s) (e.g. REQUIREMENT) that this requirement is derived from") describes TEST with values of type ENTITY.
+	verifies (note "ENTITY(s) (e.g. REQUIREMENT) that this test verifies") describes TEST with values of type ENTITY.
 	verifies is a type of wasImpactedBy.
 
 	producedBy (note "TEST_DEVELOPMENT activity(s) this test belongs to") describes TEST with values of type ACTIVITY.

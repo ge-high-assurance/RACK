@@ -45,7 +45,7 @@ if [ $# -ne 2 ] ; then
 fi
 
 case $mode in
-    upload) target="upload_model_to_rack";;
+    upload) target="upload_model_to_rack(${1@Q})";;
     analyze) target="report(${1@Q}, [])"
              loads+=(-f $(dirname "$0")/rack/analyze.pl)
              ;;

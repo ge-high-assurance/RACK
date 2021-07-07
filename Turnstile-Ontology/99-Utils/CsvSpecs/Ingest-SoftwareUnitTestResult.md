@@ -29,6 +29,10 @@
 
 >>Node Notes...
 
+>>**generatedAtTime_SoftwareUnitTestResult** : dateTime
+    
+>>>Prop Notes...
+
 >>**identifier_SoftwareUnitTestResult** : string
     
 >>>Prop Notes...
@@ -48,4 +52,5 @@ Column Name | Description |Optional
 identifier_TEST_STATUS| primaryKey Key for TEST_STATUS | No
 identifier_SoftwareUnitTestExecution| primaryKey Key for SoftwareUnitTestExecution | Yes
 identifier_SoftwareUnitTest| primaryKey Key for SoftwareUnitTest | No
+generatedAtTime_SoftwareUnitTestResult| | Yes
 identifier_SoftwareUnitTestResult| primaryKey Key for SoftwareUnitTestResult | No

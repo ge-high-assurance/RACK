@@ -19,6 +19,7 @@
 :- consult(rack(analyze)).
 
 main :-
+    help_banner(B),
     parse_args(
         [
             [opt(instance_prefix), meta('PREFIX'), type(atom),
@@ -30,9 +31,23 @@ main :-
              shortflags(['H']), longflags(['hide-ontology']),
              help('Do not show core ontology details in output.')]
 
-        ], Opts, _PosArgs),
+        ], Opts, _PosArgs, B),
     get_instance_pfx(Opts, Pfx),
     (Pfx = none, !, report(Opts) ; report(Pfx, Opts)).
 
 get_instance_pfx(Opts, Pfx) :- member(instance_prefix(Pfx), Opts), !.
 get_instance_pfx(_, none).
+
+help_banner(
+    [ "The analyze tool will read and display information from either",
+      "local OWL files or a live RACK database.  The information is",
+      "displayed in a concise summary form, differentiating between",
+      "RDF data classes and instances of those data classes.",
+      "Optionally, a data directory can be scanned for data generated",
+      "by ASSIST-DB to include in the displayed output.",
+      "",
+      "Examples:",
+      "  $ analyze -m RACK-Ontology/OWLModels",
+      "  $ analyze -m http://localhost:3030/",
+      ""
+    ]).

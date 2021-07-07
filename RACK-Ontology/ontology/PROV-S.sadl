@@ -14,7 +14,6 @@
   *
   * dwa - 11 Nov 2020 - reduced cardinalities of properties in several places to 1, where N was ill-defined or unnecessary
   * dwa - 11 Nov 2020 - pushed 'name' as a string property down into the base AGENT class, because all agent subclasses appear amenable to having a name
-  * dwa - 11 Nov 2020 - changed 'content' under Collection to 'hadMember', respecting the PROV data model.
   */
 
 uri "http://arcos.rack/PROV-S" alias provs 
@@ -48,7 +47,7 @@ ENTITY (note "An entity is a physical, digital, conceptual, or other kind of thi
 
 COLLECTION (note "A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.")
 	is a type of ENTITY.
-	content (note "A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.") describes COLLECTION with values of type ENTITY.
+	content (note "An entity in a collection.") describes COLLECTION with values of type ENTITY.
 
 AGENT (note "An agent is something that bears some form of responsibility for an activity taking place, for the existence of an entity, or for another agent's activity.")
 	is a type of THING.

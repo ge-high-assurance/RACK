@@ -1,7 +1,6 @@
-# This file is intended to be used using the rack.py script found
-# in RACK-Ontology/scripts/
+# This file is intended to be used with the rack CLI script found in RACK/cli/
 #
-# Script documentation is available in RACK-Ontology/scripts/README.md
+# Script documentation is available in RACK/cli/README.md
 files:
 - AGENTS.owl
 - ANALYSIS.owl
@@ -9,11 +8,11 @@ files:
 - DOCUMENT.owl
 - FILE.owl
 - HAZARD.owl
+- MODEL.owl
 - PROCESS.owl
 - PROV-S.owl
 - REQUIREMENTS.owl
 - REVIEW.owl
-- SACM-S.owl
 - SOFTWARE.owl
 - SYSTEM.owl
 - TESTING.owl

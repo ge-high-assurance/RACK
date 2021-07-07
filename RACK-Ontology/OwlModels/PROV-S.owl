@@ -167,7 +167,7 @@
     <rdfs:domain rdf:resource="#ACTIVITY"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="content">
-    <rdfs:comment xml:lang="en">A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.</rdfs:comment>
+    <rdfs:comment xml:lang="en">An entity in a collection.</rdfs:comment>
     <rdfs:range rdf:resource="#ENTITY"/>
     <rdfs:domain rdf:resource="#COLLECTION"/>
   </owl:ObjectProperty>

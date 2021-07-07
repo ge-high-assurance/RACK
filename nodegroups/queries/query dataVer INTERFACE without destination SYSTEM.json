@@ -1,0 +1,113 @@
+{
+	"version": 3,
+	"sparqlConn": {
+		"name": "RACK",
+		"domain": "",
+		"enableOwlImports": false,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/data"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 12,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [],
+				"nodeList": [],
+				"NodeName": "SYSTEM",
+				"fullURIName": "http://arcos.rack/SYSTEM#SYSTEM",
+				"SparqlID": "?SYSTEM",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"KeyName": "identifier",
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [
+					{
+						"SnodeSparqlIDs": [
+							"?SYSTEM"
+						],
+						"OptionalMinus": [
+							2
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"KeyName": "destination",
+						"ValueType": "SYSTEM",
+						"UriValueType": "http://arcos.rack/SYSTEM#SYSTEM",
+						"ConnectBy": "destination",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/SYSTEM#destination"
+					}
+				],
+				"NodeName": "INTERFACE",
+				"fullURIName": "http://arcos.rack/SYSTEM#INTERFACE",
+				"SparqlID": "?INTERFACE",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			}
+		],
+		"orderBy": [],
+		"unionHash": {}
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [],
+		"nodes": [
+			{
+				"sparqlID": "?INTERFACE",
+				"type": "http://arcos.rack/SYSTEM#INTERFACE",
+				"mapping": [],
+				"props": []
+			},
+			{
+				"sparqlID": "?SYSTEM",
+				"type": "http://arcos.rack/SYSTEM#SYSTEM",
+				"mapping": [],
+				"props": []
+			}
+		]
+	},
+	"plotSpecs": null
+}

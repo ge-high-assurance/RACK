@@ -253,10 +253,9 @@ def run_query(conn: Connection, nodegroup: str, export_format: ExportFormat = Ex
     semtk_table = semtk3.select_by_id(nodegroup, runtime_constraints=runtime_constraints)
     formatted_table = format_semtk_table(semtk_table, export_format=export_format, headers=headers)
     if path is None:
-        print()
         print(formatted_table)
     else:
-        with open(path, mode="w") as f:
+        with open(path, mode='w', encoding='utf-8') as f:
             print(formatted_table, file=f)
 
 def run_count_query(conn: Connection, nodegroup: str, constraints: Optional[List[str]] = None) -> None:
@@ -271,12 +270,13 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     """Ingest a CSV file using the named nodegroup."""
 
     def suffix(result: dict) -> str:
-        return f' Records: {result["recordsProcessed"]: <7} Failures: {result["failuresEncountered"]}'
+        return f' Records: {result}'
 
     @with_status(f'Loading {str_highlight(nodegroup)}', suffix)
     def go() -> dict:
-        with open(csv_name, "r") as csv_file:
+        with open(csv_name, 'r', encoding='utf-8') as csv_file:
             csv = csv_file.read()
+
         return semtk3.ingest_by_id(nodegroup, csv, conn)
 
     go()
@@ -290,16 +290,19 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
 
 def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
-    with open(config_path, 'r') as config_file:
+    with open(config_path, 'r', encoding='utf-8') as config_file:
         config = yaml.safe_load(config_file)
         validate(config, INGEST_CSV_CONFIG_SCHEMA)
 
     steps = config['ingestion-steps']
     
-    if data_graphs is None:
-        data_graph = Url("http://rack001/data")
-    else:
+    if data_graphs is not None:
         data_graph = data_graphs[0]
+    elif 'data-graph' in config:
+        data_graph = config['data-graph']
+    else:
+        logger.warning("Defaulting data-graph to %s", DEFAULT_DATA_GRAPH)
+        data_graph = DEFAULT_DATA_GRAPH
 
     base_path = config_path.parent
 
@@ -309,10 +312,6 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
         extra_data_graphs = config['extra-data-graphs']
     else:
         extra_data_graphs = []
-
-    if data_graph is None:
-        logger.warning("Defaulting data-graph to %s", DEFAULT_DATA_GRAPH)
-        data_graph = DEFAULT_DATA_GRAPH
 
     conn = sparql_connection(base_url, data_graph, extra_data_graphs, triple_store)
 
@@ -334,7 +333,7 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
 
 def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple OWL files into the model graph."""
-    with open(config_path, 'r') as config_file:
+    with open(config_path, 'r', encoding='utf-8') as config_file:
         config = yaml.safe_load(config_file)
         validate(config, INGEST_OWL_CONFIG_SCHEMA)
 
@@ -348,6 +347,17 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
 
     for file in files:
         ingest_owl(conn, base_path / file)
+
+@with_status('Clearing')
+def clear_driver(base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], graph: Graph) -> None:
+    """Clear the given data graphs"""
+    if data_graphs is None:
+        conn = sparql_connection(base_url, DEFAULT_DATA_GRAPH, [], triple_store)
+        clear_graph(conn, which_graph=graph)
+    else:
+        for data_graph in data_graphs:
+            conn = sparql_connection(base_url, data_graph, [], triple_store)
+            clear_graph(conn, which_graph=graph)
 
 @with_status('Storing nodegroups')
 def store_nodegroups_driver(directory: Path, base_url: Url) -> None:
@@ -445,6 +455,14 @@ def dispatch_model_import(args: SimpleNamespace) -> None:
     cliMethod = CLIMethod.MODEL_IMPORT
     ingest_owl_driver(Path(args.config), args.base_url, args.triple_store, args.clear)
 
+def dispatch_data_clear(args: SimpleNamespace) -> None:
+    """Implementation of the data clear subcommand"""
+    clear_driver(args.base_url, args.data_graph, args.triple_store, Graph.DATA)
+
+def dispatch_model_clear(args: SimpleNamespace) -> None:
+    """Implementation of the model clear subcommand"""
+    clear_driver(args.base_url, None, args.triple_store, Graph.MODEL)
+
 def dispatch_nodegroups_import(args: SimpleNamespace) -> None:
     store_nodegroups_driver(args.directory, args.base_url)
 
@@ -474,10 +492,12 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_import_parser = data_subparsers.add_parser('import', help='Import CSV data')
     data_export_parser = data_subparsers.add_parser('export', help='Export query results')
     data_count_parser = data_subparsers.add_parser('count', help='Count matched query rows')
+    data_clear_parser = data_subparsers.add_parser('clear', help='Clear data graph')
 
     model_parser = subparsers.add_parser('model', help='Interact with SemTK model')
     model_subparsers = model_parser.add_subparsers(dest='command')
     model_import_parser = model_subparsers.add_parser('import', help='Modify the data model')
+    model_clear_parser = model_subparsers.add_parser('clear', help='Clear model graph')
 
     nodegroups_parser = subparsers.add_parser('nodegroups', help='Interact with SemTK nodegroups')
     nodegroups_subparsers = nodegroups_parser.add_subparsers(dest='command')
@@ -505,9 +525,14 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_count_parser.add_argument('--constraint', type=str, action='append', help='Runtime constraint: key=value')
     data_count_parser.set_defaults(func=dispatch_data_count)
 
+    data_clear_parser.add_argument('--data-graph', type=str, action='append', help='Data graph URL')
+    data_clear_parser.set_defaults(func=dispatch_data_clear)
+
     model_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     model_import_parser.set_defaults(func=dispatch_model_import)
     model_import_parser.add_argument('--clear', action='store_true', help='Clear model graph before import')
+
+    model_clear_parser.set_defaults(func=dispatch_model_clear)
 
     nodegroups_import_parser.add_argument('directory', type=str, help='Nodegroup directory')
     nodegroups_import_parser.set_defaults(func=dispatch_nodegroups_import)

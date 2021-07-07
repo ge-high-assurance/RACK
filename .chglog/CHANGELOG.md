@@ -1,5 +1,31 @@
 # RACK Change Log
 
+## [v7.0] - 2021-06-07
+
+This release has the following changes:
+
+- Made cli/setup-rack.sh load only core ontology; added cli/setup-arcos.sh to load ARCOS ontology overlays
+- Stopped pre-loading Turnstile data; added Turnstile-Ontology/99-Utils/Load-TurnstileData.sh to load it
+- Added [ASSIST](https://github.com/ge-high-assurance/RACK/tree/master/assist) tools to collect and ingest activity-related Turnstile data via ASSIST-DC and ASSIST-DI
+- Improved RACK ingestion performance and Fuseki reliability
+- Added positional arguments to CLI: rack data _clear_ and rack model _clear_
+- Moved core and overlay ontologies into separate nodegroups/ingestion subdirectories
+- Updated [RACK ontology detailed changelogs](https://github.com/ge-high-assurance/RACK/wiki/RACK-ontology-detailed-changelogs) using RACK migration tool
+
+## [v6.0] - 2021-05-03
+
+This release has the following changes:
+
+- Added LMCO & SRI ontology overlays
+- Loaded only DO-178C in RiB, made ARP-4754A, DO-330, & MIL-STD-881D optional
+- Added Boeing data validation query nodegreoups
+- Added [dataInsertedBy](https://github.com/ge-high-assurance/RACK/wiki/How-to-use-dataInsertedBy) property and predefined nodegroup
+- Improved construct query UI and functionality
+- Added [RACK migration tool](https://github.com/ge-high-assurance/RACK/tree/master/migration)
+- Automatically generated Wiki page for [RACK ontology changes](https://github.com/ge-high-assurance/RACK/wiki/RACK-ontology-detailed-changelogs)
+- Automatically generated Wiki page for [RACK predefined queries](https://github.com/ge-high-assurance/RACK/wiki/RACK-Predefined-Queries)
+- Streamlined Wiki (custom sidebar)
+
 ## [v5.0] - 2021-03-08
 
 This release has the following changes:

@@ -1,0 +1,64 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:BoeingModel="http://arcos.AH-64D/Boeing#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://arcos.AH-64D/Boeing">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://arcos.rack/TESTING"/>
+    <owl:imports rdf:resource="http://arcos.rack/REQUIREMENTS"/>
+    <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'Boeing-Ontology.sadl' and should not be directly edited.</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="SubDD_Req">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="SRS_Req"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://arcos.rack/REQUIREMENTS#satisfies"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A Requirement identified in the Subsystem Design Document</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SRS_Req">
+    <rdfs:comment xml:lang="en">A Requirement identified in the Software Requirements Specification</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SBVT_Test">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:minCardinality>
+        <owl:onProperty rdf:resource="http://arcos.rack/TESTING#verifies"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A test identified in the Software Baseline Verification Tests</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST"/>
+  </owl:Class>
+  <owl:Class rdf:ID="PIDS_Req">
+    <rdfs:comment xml:lang="en">A Requirement identified in the Prime Item Development Specification</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="CSID_Req">
+    <rdfs:comment xml:lang="en">A Requirement identified in the Crew Systems Interface Document</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#REQUIREMENT"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SBVT_Result">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#SBVT_Test"/>
+        <owl:onProperty rdf:resource="http://arcos.rack/TESTING#confirms"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A result identified for a SBVT_Test (Software Baseline Verification Tests)</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://arcos.rack/TESTING#TEST_RESULT"/>
+  </owl:Class>
+</rdf:RDF>

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Main module for the Ada analysis.
@@ -12,6 +12,8 @@ import argparse
 import logging
 import os
 import sys
+from xml.sax.saxutils import escape
+
 from typing import Dict, List, Optional, Set
 from typing_extensions import TypedDict
 
@@ -24,6 +26,9 @@ from rdflib import Graph, Namespace
 from ada_print_visitor import AdaPrintVisitor
 import ontology
 import static_call_graph as SCG
+import traceability_extraction as TE
+import package_structure as PS
+from node_naming import GraphNode, get_node_identifier, get_node_uri, get_node_file
 
 # In order to do resolution at call sites, the analysis needs to resolve
 # packages to files that contain their spec/implementation.  It can do so with a
@@ -40,7 +45,7 @@ parser.add_argument(
     type=str
 )
 
-parser.add_argument("--analyze", help="File to analyze (.ada, .adb, .ads)", type=str, required=True)
+parser.add_argument("--analyze", help="File to analyze (.ada, .adb, .ads)", type=str, action='append', required=True)
 
 parser.add_argument(
     "others",
@@ -129,21 +134,22 @@ ADA_FORMAT = ontology.Format(
 
 def register_component(
     analysis_output: AnalysisOutput,
-    component: SCG.GraphNode
+    component: GraphNode,
+    component_type: ontology.ComponentTypeIdentifier,
 ) -> ontology.SoftwareComponent:
     """
     Makes sure that the component is already present in the components
     dictionary.  Adds it if necessary.
     """
     components = analysis_output["components"]
-    component_identifier = ontology.SoftwareComponentIdentifier(SCG.get_node_identifier(component))
+    component_identifier = ontology.SoftwareComponentIdentifier(get_node_identifier(component))
     if component_identifier not in components:
         components[component_identifier] = ontology.SoftwareComponent(
             identifier=component_identifier,
             # does not work because display names may contain special characters
             # title=SCG.get_node_display_name(component),
             # using this instead even though less ideal:
-            title=SCG.get_node_uri(component),
+            title=component.doc_name,
             component_type=ontology.SOURCE_FUNCTION,
             uri=SOFTWARE_COMPONENT_NS[component_identifier],
         )
@@ -218,9 +224,6 @@ def output_using_scrapingtoolkit(
 ) -> None:
     """Outputs the analysis output using ScrapingToolKit."""
 
-    # NOTE: overwrites pre-existing evidence file
-    Evidence.createEvidenceFile()
-
     for component_type in analysis_output["component_types"]:
         Evidence.Add.COMPONENT_TYPE(
             identifier=component_type,
@@ -235,7 +238,7 @@ def output_using_scrapingtoolkit(
     for file_identifier in files:
         file: ontology.File = files[file_identifier]
         Evidence.Add.FILE(
-            fileFormat_identifier=file.identifier,
+            fileFormat_identifier=format_.identifier,
             filename=file.name,
             identifier=file_identifier,
         )
@@ -246,7 +249,8 @@ def output_using_scrapingtoolkit(
         Evidence.Add.SWCOMPONENT(
             identifier=component_identifier,
             componentType_identifier=component.component_type,
-            title=component.title,
+            title=escape(component.title),
+            definedIn_identifier=component.defined_in.identifier if component.defined_in else None
         )
         for callee in component.mentions:
             Evidence.Add.SWCOMPONENT(
@@ -254,7 +258,53 @@ def output_using_scrapingtoolkit(
                 mentions_identifier=callee.identifier,
             )
 
-    Evidence.createCDR()
+def analyze_traceability(unit: lal.AnalysisUnit) -> None:
+    """Extracts traceability identifiers from subprograms."""
+
+    if not unit.root:
+        return
+
+    visitor = TE.TraceabilityExtraction(
+        context=context,
+    )
+
+    visitor.visit(unit.root)
+    analysis_output = visitor.traceability
+
+    for component_id, requirement_ids in analysis_output.items():
+        for requirement_id in requirement_ids:
+            Evidence.Add.REQUIREMENT(
+                identifier=requirement_id
+            )
+            Evidence.Add.SWCOMPONENT(
+                identifier=component_id,
+                wasImpactedBy_identifier=requirement_id,
+            )
+
+def analyze_structure(unit: lal.AnalysisUnit) -> None:
+    """Extracts traceability identifiers from subprograms."""
+
+    if not unit.root:
+        return
+        
+    visitor = PS.StructureExtractor(
+    )
+
+    visitor.visit(unit.root)
+    analysis_output = visitor.packages
+
+    for package, components in analysis_output.items():
+        Evidence.Add.SWCOMPONENT(
+            identifier=get_node_identifier(package),
+            title=escape(package.doc_name),
+            componentType_identifier=ontology.MODULE,
+                
+        )
+        for component in components:
+            Evidence.Add.SWCOMPONENT(
+                identifier=get_node_identifier(component),
+                subcomponentOf_identifier=get_node_identifier(package),
+            )
 
 def analyze_unit(unit: lal.AnalysisUnit) -> None:
     """Computes and displays the static call graph of some unit."""
@@ -276,6 +326,7 @@ def analyze_unit(unit: lal.AnalysisUnit) -> None:
 
         component_types = analysis_output["component_types"]
         component_types.add(ontology.SOURCE_FUNCTION)
+        component_types.add(ontology.MODULE)
 
         formats = analysis_output["formats"]
         formats.add(ADA_FORMAT)
@@ -285,20 +336,20 @@ def analyze_unit(unit: lal.AnalysisUnit) -> None:
         # register all components and the files they live in
         for component_key in static_call_graph_visitor.nodes:
             component_node = static_call_graph_visitor.nodes[component_key]
-            component = register_component(analysis_output, component_node)
+            component = register_component(analysis_output, component_node, ontology.SOURCE_FUNCTION)
             file_ = register_ada_file(
                 analysis_output,
-                as_optional_file_identifier(SCG.get_node_file(component_node))
+                as_optional_file_identifier(get_node_file(component_node))
             )
             component.defined_in = file_
 
         # add "mentions"
         for caller_key in static_call_graph_visitor.edges:
             caller_node = static_call_graph_visitor.nodes[caller_key]
-            caller_identifier = ontology.SoftwareComponentIdentifier(SCG.get_node_identifier(caller_node))
+            caller_identifier = ontology.SoftwareComponentIdentifier(get_node_identifier(caller_node))
             for callee_key in static_call_graph_visitor.edges[caller_key]:
                 callee_node = static_call_graph_visitor.nodes[callee_key]
-                callee_identifier = ontology.SoftwareComponentIdentifier(SCG.get_node_identifier(callee_node))
+                callee_identifier = ontology.SoftwareComponentIdentifier(get_node_identifier(callee_node))
                 callee = components[callee_identifier]
                 caller = components[caller_identifier]
                 caller.add_mention(callee)
@@ -319,6 +370,12 @@ stream_handler.setFormatter(CustomFormatter())
 logger.propagate = False
 logger.addHandler(stream_handler)
 
-file_to_analyze = args.analyze
-
-analyze_unit(context.get_from_file(file_to_analyze))
+Evidence.createEvidenceFile(
+        ingestionTitle="AdaSourceIngestion",
+        ingestionDescription="libadalang-based extraction of source code defined functions and links to requirements")
+for file_to_analyze in args.analyze:
+    unit = context.get_from_file(file_to_analyze)
+    analyze_unit(unit)
+    analyze_traceability(unit)
+    analyze_structure(unit)
+Evidence.createCDR()

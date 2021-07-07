@@ -138,6 +138,7 @@ subclass_path(E, Path) :-
      atomics_to_string(ES, '.', PPath),
      string_concat(PPath, '.', Path) ;
      Path = "").
+%% Given an element E, find the inheritance list through superclasses to the base class
 parent_path(E, [R|RS]) :-
     rdf(E, rdfs:subClassOf, LR),
     % Some nodes have multiple parent classes; the additional classes
@@ -145,7 +146,14 @@ parent_path(E, [R|RS]) :-
     \+ rdf_bnode(LR),
     prefix_shorten(LR, R),
     parent_path(LR, RS).
-parent_path(E, []) :- rdf_subject(E), \+ rdf(E, rdfs:subClassOf, _).
+parent_path(E, []) :-
+    % Is this the top of the inheritance heirarchy?  No more regular
+    % nodes (although there can be blank nodes, e.g. a link from the
+    % base class to the _::file in which it was defined).
+    rdf_subject(E),
+    has_no_regular_parent(E).
+has_no_regular_parent(E) :- rdf(E, rdfs:subClassOf, P), \+ rdf_bnode(P), !, fail.
+has_no_regular_parent(_E).
 
 % ----------------------------------------------------------------------
 

@@ -12,6 +12,7 @@ The ASSIST toolkit contains several tools that can be used with RACK.
  * ASSIST-DV -- Data Verification
  * ASSIST-SADL -- SADL translation
  * ASSIST-RACKLIB -- RACK library
+ * ASSIST-ONT -- Prolog form of RACK Ontology
 
 ## ASSIST-DC -- Data Collection
 
@@ -181,6 +182,25 @@ on the needs at the time.
    `PATH` variable.
 
    See the [bin/README.md](bin/README.md) for more details.
+
+## ASSIST-ONT -- RACK Ontology Prolog predicates
+
+ > Tools: `assist/bin/ontology`
+
+This module provides various Prolog predicates generated from the
+`RACK-Ontology` definitions.  The intend of this module is to provide
+various helpers that allow Prolog statements referencing specific
+ontology elements directly (the other ASSIST tools operate at a
+lower-level and are not specific to the `RACK-Ontology` definitions.
+
+This is an optional library that can be used by those wishing to
+develop ontology-based Prolog extensions for working with RACK data.
+
+Note that the ASSIST-ONT is dynamically generated from the actual
+`RACK-Ontology` to ensure that it is synchronized with any changes in
+that canonical source; instructions for (re-)generating the ASSIST-ONT
+files are described in the `assist/bin/ontology/README.md` file.
+
 
 ---
 Copyright (c) 2020, Galois, Inc.

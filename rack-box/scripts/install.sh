@@ -80,9 +80,6 @@ source .env
 
 # Set up each SemTK system service
 
-# PEC turning on debugging in John's absence
-set -x
-
 for service in ${ENABLED_SERVICES}; do
   (
     cd "${service}"
@@ -97,7 +94,6 @@ done
 
 export WEBAPPS=/var/www/html
 mkdir -p "${WEBAPPS}"
-chmod +x ./updateWebapps.sh
 ./updateWebapps.sh "${WEBAPPS}"
 mv /tmp/files/{documentation.html,index.html,style.css} "${WEBAPPS}"
 
@@ -154,4 +150,4 @@ done
 
 cd "/home/${USER}/RACK/cli/"
 python3 -m pip install ./wheels/*.whl
-./setup-rack.sh
+. /setup-rack.sh

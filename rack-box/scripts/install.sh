@@ -150,4 +150,4 @@ done
 
 cd "/home/${USER}/RACK/cli/"
 python3 -m pip install ./wheels/*.whl
-. /setup-rack.sh
+./setup-rack.sh

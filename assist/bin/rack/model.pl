@@ -116,6 +116,8 @@ load_local_model(Dir) :-
                 fs_path(Dir, E, F),
                 owlfile(F)),
             Files),
+    length(Files, NFiles),
+    print_message(informational, loading_owl_from_dir(Dir, NFiles)),
     load_local_model_files(Files),
     findall(D, subdir(Dir, D), Subdirs),
     load_local_model_dirs(Subdirs).
@@ -609,6 +611,8 @@ prolog:message(url_triple_count_invalid_warning) -->
     [ 'NOTE: loading triples from an online database can improperly'
     , ' report "0 triples" loaded.'
     ].
+prolog:message(loading_owl_from_dir(Dir, NFiles)) -->
+    [ 'loading ~d OWL files from ~w'-[NFiles, Dir] ].
 prolog:message(loading_rack_datafile(Namespace, FP)) -->
     [ 'loading data into ~w from ~w ... '-[Namespace, FP] ].
 prolog:message(loaded_data_instances(Namespace, Count)) -->

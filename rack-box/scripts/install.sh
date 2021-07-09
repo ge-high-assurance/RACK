@@ -80,6 +80,9 @@ source .env
 
 # Set up each SemTK system service
 
+# PEC turning on debugging in John's absence
+set -x
+
 for service in ${ENABLED_SERVICES}; do
   (
     cd "${service}"

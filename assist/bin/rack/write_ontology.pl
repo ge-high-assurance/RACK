@@ -90,6 +90,7 @@ ontology_file_path(Namespace, FilePath) :-
 %
 %    Gives the export string for RDF query of a class.
 export_class(Class, Export) :-
+    % Lowercase the (usually all-caps) name to be a valid Prolog atom.
     string_lower(Class, LowercaseClass),
     atomic_list_concat([LowercaseClass, '/1'], Export).
 
@@ -98,15 +99,24 @@ export_class(Class, Export) :-
 %
 %    Gives the export string for RDF assertion of a class.
 export_assert_class(Class, Export) :-
+    % Lowercase the (usually all-caps) name to be a valid Prolog atom.
     string_lower(Class, LowercaseClass),
     atomic_list_concat(['assert_', LowercaseClass, '/1'], Export).
 
+
+lower_first_char(InpStr, OutStr) :-
+    string_chars(InpStr, [FirstChar|Chars]),
+    char_type(LCFirst, to_lower(FirstChar)),
+    string_chars(OutStr, [LCFirst|Chars]).
 
 %! export_property(+Property, -Export) is det.
 %
 %    Gives the export string for RDF query of a property.
 export_property(Property, Export) :-
-    atomic_list_concat([Property, '/2'], Export).
+    % Properties can be mixed case; ensure they start with a lowercase
+    % letter to be a valid Prolog atom.
+    lower_first_char(Property, PropertyDecl),
+    atomic_list_concat([PropertyDecl, '/2'], Export).
 
 
 %! export_assert_property(+Property, -Export) is det.
@@ -164,9 +174,11 @@ write_exports(Handle, Indent, Classes, Properties) :-
 %    Computes the text declaration for the RDF query of a given class in some
 %    namespace.
 class_query_declaration(Namespace, Class, Declaration) :-
-    string_lower(Class, Predicate),
+    % Classes are frequently all-caps, but Prolog requires
+    % non-capitalized atomics.
+    string_lower(Class, DeclName),
     atomic_list_concat(
-        [ Predicate, '(C) :- rack_instance(\'', Namespace, '#', Class, '\', C).'],
+        [ DeclName, '(C) :- rack_instance(\'', Namespace, '#', Class, '\', C).'],
         Declaration
     ).
 
@@ -176,10 +188,12 @@ class_query_declaration(Namespace, Class, Declaration) :-
 %    Computes the text declaration for the RDF assertion of a given class in
 %    some namespace.
 class_assert_declaration(Namespace, Class, Declaration) :-
-    string_lower(Class, PredicateSuffix),
-    atomic_list_concat(['assert_', PredicateSuffix], Predicate),
+    % Classes are frequently all-caps, but Prolog requires
+    % non-capitalized atomics.
+    string_lower(Class, DeclNameSuffix),
+    atomic_list_concat(['assert_', DeclNameSuffix], DeclName),
     atomic_list_concat(
-        [ Predicate, '(C) :- rack_instance_assert(\'', Namespace, '#', Class, '\', C).'],
+        [ DeclName, '(C) :- rack_instance_assert(\'', Namespace, '#', Class, '\', C).'],
         Declaration
     ).
 
@@ -265,6 +279,8 @@ write_ontology_file(Namespace, Classes, Properties) :-
     foldl(
         call,
         [
+            % Prolog names must not start with capitals; some modules are
+            % uppercase acronyms, so shift entirely to lower to prefer
             string_lower,
             special_case_for_system
         ],

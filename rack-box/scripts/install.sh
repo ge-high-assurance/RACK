@@ -97,6 +97,7 @@ done
 
 export WEBAPPS=/var/www/html
 mkdir -p "${WEBAPPS}"
+chmod +x ./updateWebapps.sh
 ./updateWebapps.sh "${WEBAPPS}"
 mv /tmp/files/{documentation.html,index.html,style.css} "${WEBAPPS}"
 

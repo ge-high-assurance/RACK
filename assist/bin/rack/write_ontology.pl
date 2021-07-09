@@ -278,7 +278,7 @@ write_ontology_file(Namespace, Classes, Properties) :-
     NoIndentation = '',
     increase_indentation(NoIndentation, OneIndentation),
     increase_indentation(OneIndentation, TwoIndentation),
-    atomic_list_concat([Module, ','], ModuleLine),
+    atomic_list_concat(['\'', Module, '\','], ModuleLine),
     writeln_indented(Handle, OneIndentation, ModuleLine),
     writeln_indented(Handle, OneIndentation, '['),
     write_exports(Handle, TwoIndentation, Classes, Properties),

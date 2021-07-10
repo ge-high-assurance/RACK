@@ -188,10 +188,10 @@ on the needs at the time.
  > Tools: `assist/bin/ontology`
 
 This module provides various Prolog predicates generated from the
-`RACK-Ontology` definitions.  The intend of this module is to provide
+`RACK-Ontology` definitions.  The intent of this module is to provide
 various helpers that allow Prolog statements referencing specific
 ontology elements directly (the other ASSIST tools operate at a
-lower-level and are not specific to the `RACK-Ontology` definitions.
+lower-level and are not specific to the `RACK-Ontology` definitions).
 
 This is an optional library that can be used by those wishing to
 develop ontology-based Prolog extensions for working with RACK data.

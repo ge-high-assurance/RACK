@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 
 from SPARQLWrapper import SPARQLWrapper, JSON
-from graphviz import Digraph
+from graphviz import Graph
 from urllib.parse import urlparse
 import argparse
+
+from rdflib.term import Identifier
 
 DEFAULT_TRIPLESTORE = 'http://localhost:3030/RACK'
 OWL_URL='http://www.w3.org/2002/07/owl#'
 PREFIXES = f"""
   PREFIX owl:<{OWL_URL}>
+  PREFIX PROV-S:<http://arcos.rack/PROV-S#>
 """
 CLASS = urlparse(f"{OWL_URL}Class")
 DATATYPE_PROPERTY = urlparse(f"{OWL_URL}DatatypeProperty")
@@ -52,37 +55,37 @@ class Session:
     self.sparql.setQuery(query_string)
     return self.sparql.queryAndConvert()["results"]["bindings"]
 
-def count_nodes(session):
+def optional_url(d, k):
+  if k in d:
+    return urlparse(d[k]["value"])
+  else:
+    return None
+
+def get_nodes(session):
   results = session.query(f"""
     {PREFIXES}
-    SELECT ?t (COUNT(*) as ?n)
+    SELECT DISTINCT ?a ?i
     {session.graphs}
     WHERE {{
-      ?_ a ?t
+      ?_ PROV-S:dataInsertedBy ?a.
+      ?a PROV-S:identifier ?i.
     }}
-    GROUP BY ?t
     """)
   print('Classes: ', len(results))
 
-  nodes = {}
-  for result in results:
-      t = urlparse(result["t"]["value"])
-      n = result["n"]["value"]
-      if not session.has_type(t, CLASS):
-        continue
-      nodes[t] = n
-  return nodes
+  return { urlparse(result["a"]["value"]): result["i"]["value"] for result in results}
+
 
 def count_properties(session):
   results = session.query(f"""
     {PREFIXES}
-    SELECT ?S ?p (COUNT(*) as ?n)
+    SELECT ?S ?a (COUNT(*) as ?n)
     {session.graphs}
     WHERE {{
-      ?s ?p ?_ .
-      ?s a  ?S .
+      ?s a ?S .
+      ?s PROV-S:dataInsertedBy ?a.
     }}
-    GROUP BY ?S ?p
+    GROUP BY ?S ?a
     """)
   print('Data properties: ', len(results))
 
@@ -90,99 +93,69 @@ def count_properties(session):
 
   for result in results:
       t = urlparse(result["S"]["value"])
-      p = urlparse(result["p"]["value"])
+      a = urlparse(result["a"]["value"])
       n = result["n"]["value"]
-      if not session.has_type(t, CLASS) or not session.has_type(p, DATATYPE_PROPERTY):
+      if not session.has_type(t, CLASS):
         continue
-      properties.setdefault(t, {})[p] = n
+      properties.setdefault(a, {})[t] = n
   return properties
 
 
 def count_relations(session):
   results = session.query(f"""
     {PREFIXES}
-    SELECT ?S ?p ?O (COUNT(*) as ?n)
+    SELECT ?sa ?oa (COUNT(*) as ?n)
     {session.graphs}
     WHERE {{
-      ?s a  ?S .
-      ?s ?p ?o .
-      ?o a  ?O .
+      ?s ?p ?o.
+      ?s PROV-S:dataInsertedBy ?sa.
+      ?o PROV-S:dataInsertedBy ?oa.
+      FILTER (?sa != ?oa).
       }}
-    GROUP BY ?S ?p ?O
+    GROUP BY ?sa ?oa
     """)
   print('Object properties:', len(results))
 
   relations = {}
 
   for result in results:
-      s = urlparse(result["S"]["value"])
-      p = urlparse(result["p"]["value"])
-      o = urlparse(result["O"]["value"])
-      n = result["n"]["value"]
-
-      if not session.has_type(s, CLASS) or not session.has_type(p, OBJECT_PROPERTY) or not session.has_type(o, CLASS):
-        continue
-
-      if p.fragment == "dataInsertedBy":
-          continue
+      sa = urlparse(result["sa"]["value"])
+      oa = urlparse(result["oa"]["value"])
+      n = int(result["n"]["value"])
       
-      relations[s, o, p] = n
+      relations[sa, oa] = n
   return relations
 
-def group_null(session, nodes):
-  return { None: nodes }
-
-def group_dataInsertedBy(session, nodes):
-  session.query(f"""
-    {PREFIXES}
-    SELECT ?S ?i
-    {session.graphs}
-    WHERE {{
-      ?s a  ?S .
-      ?s ?p ?o .
-      ?o a  ?O .
-      }}
-    GROUP BY ?S ?p ?O
-    """)
-  return { None: nodes }
-
-def make_dot(session, make_clusters):
-  nodes = count_nodes(session)
+def make_dot(session):
+  nodes = get_nodes(session)
   properties = count_properties(session)
   relations = count_relations(session)
-  clusters = make_clusters(session, nodes)
 
-  dot = Digraph(comment='Imported data shape')
-
+  dot = Graph()
   nodeIds = {}
 
-  for cluster_name, cluster_nodes in clusters.items():
-    if cluster_name is None:
-      g = dot
-    else:
-      g = dot.subgraph(name=cluster_name)
+  for node, identifier in nodes.items():
 
-    for node in cluster_nodes:
-        n = nodes[node]
-        txt = f"<<table cellborder=\"1\" border=\"0\" cellspacing=\"0\">\
-                <tr><td bgcolor=\"orange\"><b>{node.fragment or 'X'}</b></td>\
-                <td bgcolor=\"orange\">{n}</td></tr>"
+    txt = f"<<table cellborder=\"1\" border=\"0\" cellspacing=\"0\">\
+            <tr><td colspan=\"2\" bgcolor=\"orange\"><b>{identifier}</b></td></tr>"
 
-        tprops = properties.setdefault(node, [])
-        for p in tprops:
-            if p.fragment == "identifier":
-                continue
-            txt += f"<tr><td bgcolor=\"lightblue\" align=\"left\">{p.fragment}</td>\
-                    <td bgcolor=\"lightblue\">{tprops[p]}</td></tr>"
-        txt += "</table>>"
+    tprops = properties.setdefault(node, {})
+    for klass, count in tprops.items():
+        txt += f"<tr><td bgcolor=\"lightblue\" align=\"left\">{klass.fragment}</td>\
+                <td bgcolor=\"lightblue\">{count}</td></tr>"
+    txt += "</table>>"
 
-        nodeId = f"n{len(nodeIds)}"
-        nodeIds[node] = nodeId
+    nodeId = f"n{len(nodeIds)}"
+    nodeIds[node] = nodeId
 
-        g.node(nodeId, txt, shape='plaintext')
+    dot.node(nodeId, txt, shape='plaintext')
 
-    for (s, o, p), n in relations.items():
-      dot.edge(nodeIds[s], nodeIds[o], f"{p.fragment} {n}")
+  for (s, o), n in relations.items():
+    if o > s and (s,o) in relations:
+      continue
+
+    n += relations.get((o,s), 0)
+    dot.edge(nodeIds[s], nodeIds[o], label=f"{n}", decorate="true")
 
   return dot
 
@@ -190,7 +163,7 @@ def main():
   args = parse_args()
   session = Session(args.triple_store, args.graphs)
   session.load_types()
-  dot = make_dot(session, group_null)
+  dot = make_dot(session)
 
   if args.output is None:
     dot.view()

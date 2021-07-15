@@ -56,8 +56,7 @@ def CreateCdrs():
     Add.turnstile_SystemInterfaceDefinition (identifier="census",
                 destination_identifier = "In Gate")
 
-    createCDR()
-
+    createCDR("http://rack001/turnstiledata")
 
 if __name__=="__main__":
     if os.path.exists(os.path.join(".","Turnstile-IngestionPackage/TurnstileSystemDesign")):

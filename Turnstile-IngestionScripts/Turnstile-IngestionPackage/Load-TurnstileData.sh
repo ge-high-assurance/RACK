@@ -21,6 +21,8 @@ then
 	exit 1
 fi
 
+echo "First, clear data-graph http://rack001/turnstiledata"
+rack data clear --data-graph "http://rack001/turnstiledata"
 echo "Ingesting Hazard Assesment Evidence ..."
 rack data import "$BASEDIR"/HazardAssessment/import.yaml
 echo "Ingesting System Design Evidence ..."

@@ -1,8 +1,7 @@
-data-graph: "http://rack001/data"
+data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
 #Phase1: Identifiers Only
 - {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}
-- {nodegroup: "ingest_ORGANIZATION", csv: "ORGANIZATION1.csv"}
 - {nodegroup: "ingest_turnstile_Engineer", csv: "turnstile_Engineer1.csv"}
 - {nodegroup: "ingest_turnstile_SoftwareDesignReview", csv: "turnstile_SoftwareDesignReview1.csv"}
 - {nodegroup: "ingest_turnstile_SoftwareDesignReviewArtifacts", csv: "turnstile_SoftwareDesignReviewArtifacts1.csv"}
@@ -11,7 +10,6 @@ ingestion-steps:
 
 #Phase2: All Evidence
 - {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
-- {nodegroup: "ingest_ORGANIZATION", csv: "ORGANIZATION2.csv"}
 - {nodegroup: "ingest_turnstile_Engineer", csv: "turnstile_Engineer2.csv"}
 - {nodegroup: "ingest_turnstile_SoftwareDesignReview", csv: "turnstile_SoftwareDesignReview2.csv"}
 - {nodegroup: "ingest_turnstile_SoftwareDesignReviewArtifacts", csv: "turnstile_SoftwareDesignReviewArtifacts2.csv"}

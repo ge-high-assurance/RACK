@@ -45,8 +45,7 @@ def CreateCdrs():
                 definition="Park Exceeds Capacity",
                 source_identifier = "Turnstile")
 
-    createCDR()
-
+    createCDR("http://rack001/turnstiledata")
 
 if __name__=="__main__":
     if os.path.exists(os.path.join(".","Turnstile-IngestionPackage/HazardAssessment")):

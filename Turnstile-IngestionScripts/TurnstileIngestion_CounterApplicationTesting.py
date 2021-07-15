@@ -96,8 +96,7 @@ def CreateCdrs():
     Add.turnstile_SoftwareComponentTestExecution(identifier="TestRun2",
                 executedOn_identifier = "TargetHardware")
 
-    createCDR()
-
+    createCDR("http://rack001/turnstiledata")
 
 if __name__=="__main__":
     if os.path.exists(os.path.join(".","Turnstile-IngestionPackage/CounterApplicationTesting")):

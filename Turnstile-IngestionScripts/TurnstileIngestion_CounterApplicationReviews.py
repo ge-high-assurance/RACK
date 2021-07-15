@@ -26,8 +26,6 @@ def CreateCdrs():
 
     createEvidenceFile(ingestionTitle="TurnstileIngestion-SystemReview", ingestionDescription="Manual ingestion of Counter Application Reviews")
 
-    Add.ORGANIZATION(identifier="GE")
- 
     Add.turnstile_Engineer(identifier="259863025",
                 title = "Public, John",
                 emailAddress = "john.public@ge.com",
@@ -158,7 +156,8 @@ def CreateCdrs():
                 reviews_identifier = "EXE-LLR-3",
                 reviewResult_identifier = "Passed",
                 createBy_identifier = "LlrReview3")
-    createCDR()
+
+    createCDR("http://rack001/turnstiledata")
 
 
 if __name__=="__main__":

@@ -116,6 +116,8 @@ load_local_model(Dir) :-
                 fs_path(Dir, E, F),
                 owlfile(F)),
             Files),
+    length(Files, NFiles),
+    print_message(informational, loading_owl_from_dir(Dir, NFiles)),
     load_local_model_files(Files),
     findall(D, subdir(Dir, D), Subdirs),
     load_local_model_dirs(Subdirs).
@@ -141,11 +143,16 @@ owlfile(F) :- file_name_extension(_, ".owl", F).
 %  Load an OWL model from an HTTP triple-store
 %  (e.g. Jena/Fuseki). This defaults to Turtle (trig) format.
 %
+%  Note that this will not correctly report the number of triples
+%  loaded and will always claim "0 triples" despite the actual number
+%  loaded.
+%
 %  See also load_model_from_rack/0.
 %
 %  To import from a directory containing =.owl= files, see load_local_model/1.
 
 load_model_from_url(URL) :-
+    print_message(information, url_triple_count_invalid_warning),
     atom_concat(URL, 'RACK', Src),
     rdf_load(Src, [register_namespaces(true), format(trig)]).
 
@@ -154,6 +161,10 @@ load_model_from_url(URL) :-
 %
 % Load an OWL model from a RACK server's Fuseki endpoint, using Turtle
 % (trig) format.
+%
+%  Note that this will not correctly report the number of triples
+%  loaded and will always claim "0 triples" despite the actual number
+%  loaded.
 %
 % See also load_local_model/1 and load_model_from_url/1.
 
@@ -596,6 +607,12 @@ rack_datafile(F) :- file_name_extension(_, ".rack", F).
 
 prolog:message(invalid_directory_spec(_Dir)) -->
     [ 'invalid directory specification, must be an atom or a string' ].
+prolog:message(url_triple_count_invalid_warning) -->
+    [ 'NOTE: loading triples from an online database can improperly'
+    , ' report "0 triples" loaded.'
+    ].
+prolog:message(loading_owl_from_dir(Dir, NFiles)) -->
+    [ 'loading ~d OWL files from ~w'-[NFiles, Dir] ].
 prolog:message(loading_rack_datafile(Namespace, FP)) -->
     [ 'loading data into ~w from ~w ... '-[Namespace, FP] ].
 prolog:message(loaded_data_instances(Namespace, Count)) -->

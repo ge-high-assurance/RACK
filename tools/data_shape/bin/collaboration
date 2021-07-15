@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+
+from SPARQLWrapper import SPARQLWrapper, JSON
+from graphviz import Digraph
+from urllib.parse import urlparse
+
+triple_store = 'http://localhost:3030/RACK'
+sparql = SPARQLWrapper(triple_store, returnFormat=JSON)
+
+colorMap = {
+    '/data': 'green',
+    '/gtdata': 'blue',
+    '/model': 'red',
+}
+
+
+sparql.setQuery("""
+    SELECT ?g ?type (COUNT(*) as ?n) WHERE { GRAPH ?g {?s a ?type} } GROUP BY ?g ?type
+    """)
+results = sparql.queryAndConvert()
+nodeIds = {}
+nodeCount = 0
+
+dot = Digraph(comment='Imported data shape')
+
+for result in results["results"]["bindings"]:
+    g = urlparse(result["g"]["value"])
+    t = urlparse(result["type"]["value"])
+    n = result["n"]["value"]
+    if g.hostname != 'rack001':
+        continue
+
+    nodeCount += 1
+    nodeIds[(g,t)] = nodeCount
+
+    dot.node(f"n{nodeCount}", f"{t.fragment} {n}", color=colorMap[g.path])
+
+sparql.setQuery("""
+  SELECT ?g1 ?g2 ?typeS ?p ?typeO (COUNT(*) as ?n)
+  WHERE {
+    GRAPH ?g1 { ?s a ?typeS } .
+    GRAPH ?g3 { ?s ?p ?o } .
+    GRAPH ?g2 { ?o a ?typeO } }
+  GROUP BY ?g1 ?g2 ?typeS ?p ?typeO
+  """)
+results = sparql.queryAndConvert()
+for result in results["results"]["bindings"]:
+    g1 = urlparse(result["g1"]["value"])
+    g2 = urlparse(result["g2"]["value"])
+    s = urlparse(result["typeS"]["value"])
+    p = urlparse(result["p"]["value"])
+    o = urlparse(result["typeO"]["value"])
+    n = result["n"]["value"]
+
+    if p.fragment == "dataInsertedBy":
+        continue
+    if g1.hostname != 'rack001' or g2.hostname != 'rack001':
+        continue
+
+    dot.edge(f"n{nodeIds[(g1,s)]}", f"n{nodeIds[(g2,o)]}", f"{p.fragment} {n}")
+
+dot.view()

@@ -3,7 +3,7 @@
   <ACTIVITY>
     <description>Manual ingestion of Turnstile System Design</description>
     <identifier>TurnstileIngestion-SystemDesign</identifier>
-    <startedAtTime>2021-06-25 14:40:19</startedAtTime>
+    <startedAtTime>2021-07-15 16:46:09</startedAtTime>
     <title>TurnstileIngestion-SystemDesign</title>
   </ACTIVITY>
   <SYSTEM>
@@ -45,7 +45,7 @@
     <identifier>census</identifier>
   </turnstile_SystemInterfaceDefinition>
   <ACTIVITY>
-    <endedAtTime>2021-06-25 14:40:19</endedAtTime>
+    <endedAtTime>2021-07-15 16:46:09</endedAtTime>
     <identifier>TurnstileIngestion-SystemDesign</identifier>
   </ACTIVITY>
 </RACK-DATA>

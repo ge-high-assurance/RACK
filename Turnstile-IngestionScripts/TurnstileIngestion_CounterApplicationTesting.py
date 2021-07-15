@@ -33,19 +33,19 @@ def CreateCdrs():
                 used_identifier = "VER-STD")
 
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-1",
-                verifies_identifier = "HLR-1",
+                verifies_identifier = "HLR-1:v1",
                 producedBy_identifier = "CompTestDevelopment")
 
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-2",
-                verifies_identifier = "HLR-1",
+                verifies_identifier = "HLR-1:v1",
                 producedBy_identifier = "CompTestDevelopment")
 
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-3",
-                verifies_identifier = "HLR-1",
+                verifies_identifier = "HLR-1:v1",
                 producedBy_identifier = "CompTestDevelopment")
 
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-4",
-                verifies_identifier = "HLR-1",
+                verifies_identifier = "HLR-1:v1",
                 producedBy_identifier = "CompTestDevelopment")
 
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-1-1",

@@ -1,4 +1,4 @@
 identifier,dataInsertedBy_identifier,createBy_identifier,reviewResult_identifier,reviews_identifier
-HlrReviewLog-1,TurnstileIngestion-SystemReview,HlrReview,Passed,HLR-1
-HlrReviewLog-2,TurnstileIngestion-SystemReview,HlrReview,Passed,HLR-2
-HlrReviewLog-3,TurnstileIngestion-SystemReview,HlrReview,ReviseWithoutReview,HLR-3
+HlrReviewLog-1,TurnstileIngestion-SystemReview,HlrReview,Passed,HLR-1:v1
+HlrReviewLog-2,TurnstileIngestion-SystemReview,HlrReview,Passed,HLR-2:v1
+HlrReviewLog-3,TurnstileIngestion-SystemReview,HlrReview,ReviseWithoutReview,HLR-3:v1

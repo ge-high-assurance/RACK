@@ -32,11 +32,11 @@ def CreateCdrs():
                 employedBy_identifier = "GE")
     
     Add.turnstile_SoftwareRequirementsReview(identifier="HlrReview",
-                reviewed_identifier = "HLR-1")
+                reviewed_identifier = "HLR-1:v1")
     Add.turnstile_SoftwareRequirementsReview(identifier="HlrReview",
-                reviewed_identifier = "HLR-2")
+                reviewed_identifier = "HLR-2:v1")
     Add.turnstile_SoftwareRequirementsReview(identifier="HlrReview",
-                reviewed_identifier = "HLR-3")
+                reviewed_identifier = "HLR-3:v1")
     Add.turnstile_SoftwareRequirementsReview(identifier="HlrReview",
                 reviewed_identifier = "inflowEvent")
     Add.turnstile_SoftwareRequirementsReview(identifier="HlrReview",
@@ -51,17 +51,17 @@ def CreateCdrs():
                 governedBy_identifier = "RQ-STD")
 
     Add.turnstile_SoftwareRequirementReviewArtifacts(identifier="HlrReviewLog-1",
-                reviews_identifier = "HLR-1",
+                reviews_identifier = "HLR-1:v1",
                 reviewResult_identifier = "Passed",
                 createBy_identifier = "HlrReview")
 
     Add.turnstile_SoftwareRequirementReviewArtifacts(identifier="HlrReviewLog-2",
-                reviews_identifier = "HLR-2",
+                reviews_identifier = "HLR-2:v1",
                 reviewResult_identifier = "Passed",
                 createBy_identifier = "HlrReview")
 
     Add.turnstile_SoftwareRequirementReviewArtifacts(identifier="HlrReviewLog-3",
-                reviews_identifier = "HLR-3",
+                reviews_identifier = "HLR-3:v1",
                 reviewResult_identifier = "ReviseWithoutReview",
                 createBy_identifier = "HlrReview")
 

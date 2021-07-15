@@ -1,0 +1,15 @@
+data-graph: "http://rack001/data"
+ingestion-steps:
+#Phase1: Identifiers Only
+- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}
+- {nodegroup: "ingest_turnstile_DataDictionary", csv: "turnstile_DataDictionary1.csv"}
+- {nodegroup: "ingest_turnstile_Engineer", csv: "turnstile_Engineer1.csv"}
+- {nodegroup: "ingest_turnstile_HighLevelRequirement", csv: "turnstile_HighLevelRequirement1.csv"}
+- {nodegroup: "ingest_turnstile_SoftwareRequirementsDefinition", csv: "turnstile_SoftwareRequirementsDefinition1.csv"}
+
+#Phase2: All Evidence
+- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
+- {nodegroup: "ingest_turnstile_DataDictionary", csv: "turnstile_DataDictionary2.csv"}
+- {nodegroup: "ingest_turnstile_Engineer", csv: "turnstile_Engineer2.csv"}
+- {nodegroup: "ingest_turnstile_HighLevelRequirement", csv: "turnstile_HighLevelRequirement2.csv"}
+- {nodegroup: "ingest_turnstile_SoftwareRequirementsDefinition", csv: "turnstile_SoftwareRequirementsDefinition2.csv"}

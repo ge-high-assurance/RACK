@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+
+from SPARQLWrapper import SPARQLWrapper, JSON
+from graphviz import Digraph
+from urllib.parse import urlparse
+import argparse
+
+DEFAULT_TRIPLESTORE = 'http://localhost:3030/RACK'
+OWL_URL='http://www.w3.org/2002/07/owl#'
+PREFIXES = f"""
+  PREFIX owl:<{OWL_URL}>
+"""
+CLASS = urlparse(f"{OWL_URL}Class")
+DATATYPE_PROPERTY = urlparse(f"{OWL_URL}DatatypeProperty")
+OBJECT_PROPERTY = urlparse(f"{OWL_URL}ObjectProperty")
+
+def parse_args():
+  parser = argparse.ArgumentParser(description='Data shape visualization tool')
+  parser.add_argument('--graph', action='append', required=True, dest='graphs', type=str)
+  parser.add_argument('--triple-store', default=DEFAULT_TRIPLESTORE, dest='triple_store', type=str)
+  parser.add_argument('--output', dest='output', type=str)
+  return parser.parse_args()
+
+class Session:
+  def __init__(self, triple_store, graphs):
+    self.sparql = SPARQLWrapper(triple_store, returnFormat=JSON)
+    self.graphs = "FROM <http://rack001/model>"
+    for graph in graphs:
+      self.graphs += f" FROM <{graph}>"
+
+  def has_type(self, x, t):
+    return t in self.types.get(x, set())
+
+  def load_types(self):
+    results = self.query(f"""
+      {PREFIXES}
+      SELECT ?s ?t
+      {self.graphs}
+      WHERE {{
+        ?s a ?t
+      }}
+      """)
+    print('Types: ', len(results))
+
+    self.types = {}
+    for result in results:
+      s = urlparse(result["s"]["value"])
+      t = urlparse(result["t"]["value"])
+      self.types.setdefault(s,set()).add(t)
+
+  def query(self, query_string):
+    self.sparql.setQuery(query_string)
+    return self.sparql.queryAndConvert()["results"]["bindings"]
+
+def count_nodes(session):
+  results = session.query(f"""
+    {PREFIXES}
+    SELECT ?t (COUNT(*) as ?n)
+    {session.graphs}
+    WHERE {{
+      ?_ a ?t
+    }}
+    GROUP BY ?t
+    """)
+  print('Classes: ', len(results))
+
+  nodes = {}
+  for result in results:
+      t = urlparse(result["t"]["value"])
+      n = result["n"]["value"]
+      if not session.has_type(t, CLASS):
+        continue
+      nodes[t] = n
+  return nodes
+
+def count_properties(session):
+  results = session.query(f"""
+    {PREFIXES}
+    SELECT ?S ?p (COUNT(*) as ?n)
+    {session.graphs}
+    WHERE {{
+      ?s ?p ?_ .
+      ?s a  ?S .
+    }}
+    GROUP BY ?S ?p
+    """)
+  print('Data properties: ', len(results))
+
+  properties = {}
+
+  for result in results:
+      t = urlparse(result["S"]["value"])
+      p = urlparse(result["p"]["value"])
+      n = result["n"]["value"]
+      if not session.has_type(t, CLASS) or not session.has_type(p, DATATYPE_PROPERTY):
+        continue
+      properties.setdefault(t, {})[p] = n
+  return properties
+
+
+def count_relations(session):
+  results = session.query(f"""
+    {PREFIXES}
+    SELECT ?S ?p ?O (COUNT(*) as ?n)
+    {session.graphs}
+    WHERE {{
+      ?s a  ?S .
+      ?s ?p ?o .
+      ?o a  ?O .
+      }}
+    GROUP BY ?S ?p ?O
+    """)
+  print('Object properties:', len(results))
+
+  relations = {}
+
+  for result in results:
+      s = urlparse(result["S"]["value"])
+      p = urlparse(result["p"]["value"])
+      o = urlparse(result["O"]["value"])
+      n = result["n"]["value"]
+
+      if not session.has_type(s, CLASS) or not session.has_type(p, OBJECT_PROPERTY) or not session.has_type(o, CLASS):
+        continue
+
+      if p.fragment == "dataInsertedBy":
+          continue
+      
+      relations[s, o, p] = n
+  return relations
+
+def make_dot(session):
+  nodes = count_nodes(session)
+  properties = count_properties(session)
+  relations = count_relations(session)
+
+  dot = Digraph(comment='Imported data shape')
+
+  nodeIds = {}
+
+  for t, n in nodes.items():
+      txt = f"<<table cellborder=\"1\" border=\"0\" cellspacing=\"0\">\
+              <tr><td bgcolor=\"orange\"><b>{t.fragment or 'X'}</b></td>\
+              <td bgcolor=\"orange\">{n}</td></tr>"
+
+      tprops = properties.setdefault(t,[])
+      for p in tprops:
+          if p.fragment == "identifier":
+              continue
+          txt += f"<tr><td bgcolor=\"lightblue\" align=\"left\">{p.fragment}</td>\
+                  <td bgcolor=\"lightblue\">{tprops[p]}</td></tr>"
+      txt += "</table>>"
+
+      nodeId = f"n{len(nodeIds)}"
+      nodeIds[t] = nodeId
+
+      dot.node(nodeId, txt, shape='plaintext')
+
+  for (s, o, p), n in relations.items():
+    dot.edge(nodeIds[s], nodeIds[o], f"{p.fragment} {n}")
+
+  return dot
+
+def main():
+  args = parse_args()
+  session = Session(args.triple_store, args.graphs)
+  session.load_types()
+  dot = make_dot(session)
+
+  if args.output is None:
+    dot.view()
+  else:
+    dot.save(args.output)
+
+if __name__ == "__main__":
+  main()

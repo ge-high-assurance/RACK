@@ -135,3 +135,16 @@ def traverse_commits(
             return
 
     traverse(new_commit)
+
+
+def get_commit_subject(commit_id: str) -> str:
+    return run_git(["log", "--format=%s", "-n", "1", commit_id])
+
+
+def get_merge_commit_subjects(merge_commit_id: str) -> List[str]:
+    """Returns a list of "<HASH> Commit subject for that hash" lines."""
+    subjects = run_git(
+        ["log", "--format=%H %s", f"{merge_commit_id}~1..{merge_commit_id}"]
+    ).splitlines()
+    # Subjects come from most recent to oldest, turning to chronological
+    return list(reversed(subjects))

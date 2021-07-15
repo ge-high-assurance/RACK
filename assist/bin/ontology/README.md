@@ -11,7 +11,7 @@ true.
 ?- rack:load_local_model('./RACK-Ontology/OwlModels').
 ... lots of imports, supposedly ...
 
-?- write_ontology().
+?- write_ontology.
 true.
 ```
 

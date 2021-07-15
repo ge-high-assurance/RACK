@@ -27,3 +27,5 @@ echo "Ingesting System Design Evidence ..."
 rack data import "$BASEDIR"/TurnstileSystemDesign/import.yaml
 echo "Ingesting Counter Application Review ..."
 rack data import "$BASEDIR"/CounterApplicationReviews/import.yaml
+echo "Ingesting Counter Application Testing ..."
+rack data import "$BASEDIR"/CounterApplicationTesting/import.yaml

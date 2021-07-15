@@ -1,0 +1,17 @@
+data-graph: "http://rack001/data"
+ingestion-steps:
+#Phase1: Identifiers Only
+- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}
+- {nodegroup: "ingest_AGENT", csv: "AGENT1.csv"}
+- {nodegroup: "ingest_turnstile_DevelopComponentTests", csv: "turnstile_DevelopComponentTests1.csv"}
+- {nodegroup: "ingest_turnstile_SoftwareComponentTest", csv: "turnstile_SoftwareComponentTest1.csv"}
+- {nodegroup: "ingest_turnstile_SoftwareComponentTestExecution", csv: "turnstile_SoftwareComponentTestExecution1.csv"}
+- {nodegroup: "ingest_turnstile_SoftwareComponentTestResult", csv: "turnstile_SoftwareComponentTestResult1.csv"}
+
+#Phase2: All Evidence
+- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
+- {nodegroup: "ingest_AGENT", csv: "AGENT2.csv"}
+- {nodegroup: "ingest_turnstile_DevelopComponentTests", csv: "turnstile_DevelopComponentTests2.csv"}
+- {nodegroup: "ingest_turnstile_SoftwareComponentTest", csv: "turnstile_SoftwareComponentTest2.csv"}
+- {nodegroup: "ingest_turnstile_SoftwareComponentTestExecution", csv: "turnstile_SoftwareComponentTestExecution2.csv"}
+- {nodegroup: "ingest_turnstile_SoftwareComponentTestResult", csv: "turnstile_SoftwareComponentTestResult2.csv"}

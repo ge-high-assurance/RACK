@@ -11,8 +11,11 @@ find_in_path_remainder() { # $1 = name of executable
 
 find_in_path_excluding() { # $1 = name of executable, $2.. = exclusion paths
     exe="$1"; shift 1
-    # shellcheck disable=SC2046
-    (PATH=$(echo $(IFS=:
+    if [ "${exe:0:2}" == "./" ] ;
+    then echo $(basename "${exe}")
+    else
+        # shellcheck disable=SC2046
+        (PATH=$(echo $(IFS=:
                    for P in $PATH; do
                        for excl; do
                            if [[ "$excl" == "$P" ]] ; then
@@ -22,7 +25,8 @@ find_in_path_excluding() { # $1 = name of executable, $2.. = exclusion paths
                        # shellcheck disable=SC2086
                        echo $P
                    done
-                ) | tr ' ' :) type -p "$exe")
+                    ) | tr ' ' :) type -p "$exe")
+    fi
 }
 
 top_rel_curdir() {

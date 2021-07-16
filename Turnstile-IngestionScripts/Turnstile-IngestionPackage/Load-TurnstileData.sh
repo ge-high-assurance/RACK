@@ -22,12 +22,25 @@ then
 fi
 
 echo "First, clear data-graph http://rack001/turnstiledata"
-rack data clear --data-graph "http://rack001/turnstiledata"
+#rack data clear --data-graph "http://rack001/turnstiledata"
+
 echo "Ingesting Hazard Assesment Evidence ..."
 rack data import "$BASEDIR"/HazardAssessment/import.yaml
+
 echo "Ingesting System Design Evidence ..."
 rack data import "$BASEDIR"/TurnstileSystemDesign/import.yaml
+
+echo "Ingesting Requirements ..."
+rack data import "$BASEDIR"/TurnstileSystemRequirements/import.yaml
+rack data import "$BASEDIR"/TurnstileHighLevelRequirements/import.yaml
+rack data import "$BASEDIR"/TurnstileLowLevelRequirements/import.yaml
+echo "Ingesting Requirement Model..."
+rack data import "$BASEDIR"/TurnstileRequirementModel/import.yaml
+
 echo "Ingesting Counter Application Review ..."
 rack data import "$BASEDIR"/CounterApplicationReviews/import.yaml
+
 echo "Ingesting Counter Application Testing ..."
 rack data import "$BASEDIR"/CounterApplicationTesting/import.yaml
+
+

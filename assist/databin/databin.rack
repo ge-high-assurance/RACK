@@ -219,7 +219,7 @@ output_of(Tool, Dir, F, BuildNonce) :-
 output_of(_, _, _, _) :- false.  % base case for checkout output_of
 
 data_get('FILE#FILE', 'FILE#fileFormat',
-         sw_file_data(Nonce, _, F), 'ElfFile') :-
+         sw_file_data(_, _, F), 'ElfFile') :-
     build_outputs(Nonce, FS),
     member(F, FS),
     build_with(Nonce, compile, _, _, _).

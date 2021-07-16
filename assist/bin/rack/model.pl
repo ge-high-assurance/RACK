@@ -654,6 +654,11 @@ rdf_dataref(RDFClass, Data, Instance) :-
     rdf(RDFClass, rdf:type, owl:'Class'),
     rack_ref(ShortC, RDFClass),
     data_instance(ShortC, Data, InstanceSuffix, InstanceData),
+
+    % If multiple data_instances can be created for this Instance,
+    % choose the most specific sub-class
+    bottom_child_class(ShortC, Data, InstanceSuffix),
+
     rack_namespace(NS),
     ns_ref(NS, InstanceSuffix, Instance),
     add_triple(Instance, rdf:type, RDFClass),
@@ -664,6 +669,20 @@ rdf_dataref(RDFClass, Data, Instance) :-
      add_rdfdata(RDFClass, RDFClass, Instance, InstanceData);
      true  % OK if there are no elements for this instance
     ).
+
+% True if BaseClass is the bottom-most class for which
+% data_instance(C, Data, InstanceSuffix) matches.  This is used to
+% instantiate the most specific class possible for the recognized
+% data.
+bottom_child_class(BaseClass, Data, InstanceSuffix) :-
+    rack_ref(BaseClass, FullBaseClass),
+    rdf_reachable(OtherC, rdfs:subClassOf, FullBaseClass),
+    OtherC \= FullBaseClass,
+    rack_ref(Other, OtherC),
+    data_instance(Other, Data, InstanceSuffix, _),
+    !,
+    fail.
+bottom_child_class(_, _, _).
 
 add_each_rdfdata(RDFClass, Class, DataRef, DataList) :-
     member(Data, DataList),

@@ -309,7 +309,15 @@ data_instance('AGENTS#TOOL', load_data, Name, [toolSpec(Name, ToolPath, UserInst
     userForToolUsage(Nonce, UserInstance),
     toolName(Nonce, ToolName, ToolPath, Name).
 
-data_get('AGENTS#TOOL', 'FILE#definedIn', toolSpec(_Name, ToolPath, _User), ToolPath).
+data_get('AGENTS#TOOL', 'FILE#definedIn',
+         toolSpec(_Name, ToolPath, _User), ToolRef) :-
+    (pre_existing_file(ToolPath), !, ToolRef = ToolPath
+    ;
+    build_outputs(Nonce, OutFiles),
+    member(ToolPath, OutFiles),
+    build_from(Nonce, Dir),
+    file_instance(Nonce, Dir, ToolPath, ToolRef)).
+
 data_get('AGENTS#TOOL', 'PROV-S#actedOnBehalfOf', toolSpec(_Name, _ToolPath, User), User).
 
 userForToolUsage(Nonce, UserInstance) :-

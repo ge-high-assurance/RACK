@@ -5,9 +5,11 @@ ingestion-steps:
 - {nodegroup: "ingest_ANALYSIS", csv: "ANALYSIS1.csv"}
 - {nodegroup: "ingest_ANALYSIS_OUTPUT", csv: "ANALYSIS_OUTPUT1.csv"}
 - {nodegroup: "ingest_MODEL", csv: "MODEL1.csv"}
+- {nodegroup: "ingest_turnstile_HighLevelRequirement", csv: "turnstile_HighLevelRequirement1.csv"}
 
 #Phase2: All Evidence
 - {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
 - {nodegroup: "ingest_ANALYSIS", csv: "ANALYSIS2.csv"}
 - {nodegroup: "ingest_ANALYSIS_OUTPUT", csv: "ANALYSIS_OUTPUT2.csv"}
 - {nodegroup: "ingest_MODEL", csv: "MODEL2.csv"}
+- {nodegroup: "ingest_turnstile_HighLevelRequirement", csv: "turnstile_HighLevelRequirement2.csv"}

@@ -172,13 +172,27 @@ data_instance('FILE#FILE', load_data, Instance, InstanceData) :-
     InstanceData = [uid(Instance, Title, Descr),
                     sw_file_data(Nonce, Dir, Output)].
 
-data_instance('FILE#FILE', load_data, ToolPath,
+data_instance('FILE#FILE', load_data, ToolInst,
               [uid(UID, Title, Descr),
-               sw_file_data(Nonce, '/tmp', ToolPath)]) :-
+               sw_file_data(Nonce, Dir, ToolInst)]) :-
     build_with(Nonce, _ToolType, _ToolName, ToolPath, _ToolArgs),
+
+    % make sure this isn't already declared as the output file of a
+    % previous stage, because then there's already a FILE#FILE
+    % instance that we don't want to duplicate
+    pre_existing_file(ToolPath),
+
     UID = ToolPath,
+    build_from(Nonce, Dir),
     atom_string(ToolPath, Title),
-    string_concat(Title, " file", Descr).
+    string_concat(Title, " file", Descr),
+    file_base_name(ToolPath, ToolFile),
+    (file_directory_name(ToolPath, '.'), !, ToolInst = ToolFile;
+     ToolInst = ToolPath).
+
+pre_existing_file(File) :-
+    build_outputs(_, OutFiles), member(File, OutFiles), !, fail.
+pre_existing_file(_).
 
 data_get('FILE#FILE', 'FILE#fileFormat',
          sw_file_data(Nonce, _, F), 'C') :-

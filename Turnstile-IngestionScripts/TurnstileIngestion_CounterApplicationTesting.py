@@ -28,72 +28,94 @@ def CreateCdrs():
 
     Add.AGENT(identifier="ASSERT")
     
+    #------------ CompTestDevelopment ------------
     Add.turnstile_DevelopComponentTests(identifier="CompTestDevelopment",
+                endedAtTime = "2020-07-26 10:53:38",
                 developedBy_identifier = "ASSERT",
                 used_identifier = "VER-STD")
-
+    #------------ TC-1-1 ------------
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-1",
                 verifies_identifier = "HLR-1:v1",
                 producedBy_identifier = "CompTestDevelopment")
+    Add.turnstile_HighLevelRequirement(identifier="HLR-1:v1")
 
+    #------------ TC-1-2 ------------
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-2",
                 verifies_identifier = "HLR-1:v1",
                 producedBy_identifier = "CompTestDevelopment")
+    Add.turnstile_HighLevelRequirement(identifier="HLR-1:v1")
 
+    #------------ TC-1-3 ------------
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-3",
                 verifies_identifier = "HLR-1:v1",
                 producedBy_identifier = "CompTestDevelopment")
-
+    Add.turnstile_HighLevelRequirement(identifier="HLR-1:v1")
+    
+    #------------ TC-1-4 ------------
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-4",
                 verifies_identifier = "HLR-1:v1",
                 producedBy_identifier = "CompTestDevelopment")
+    Add.turnstile_HighLevelRequirement(identifier="HLR-1:v1")
 
+    #------------ TR-1-1-1 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-1-1",
                 confirms_identifier = "TC-1-1",
                 result_identifier = "Passed",
                 executedBy_identifier = "TestRun1")
 
+    #------------ TR-1-2-1 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-2-1",
                 confirms_identifier = "TC-1-2",
                 result_identifier = "Passed",
                 executedBy_identifier = "TestRun1")
 
+    #------------ TR-1-3-1 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-3-1",
                 confirms_identifier = "TC-1-3",
                 result_identifier = "Passed",
                 executedBy_identifier = "TestRun1")
 
+    #------------ TR-1-4-1 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-4-1",
                 confirms_identifier = "TC-1-4",
                 result_identifier = "Failed",
                 executedBy_identifier = "TestRun1")
-
+    
+    #------------ TargetHardware ------------
     Add.AGENT(identifier="TargetHardware")
     
+    #------------ TestRun1 ------------
     Add.turnstile_SoftwareComponentTestExecution(identifier="TestRun1",
+                endedAtTime = "2020-07-28 11:53:38",
                 executedOn_identifier = "TargetHardware")
 
+    #------------ TR-1-1-2 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-1-2",
                 confirms_identifier = "TC-1-1",
                 result_identifier = "Passed",
                 executedBy_identifier = "TestRun2")
-
+    
+    #------------ TR-1-2-2 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-2-2",
                 confirms_identifier = "TC-1-2",
                 result_identifier = "Passed",
                 executedBy_identifier = "TestRun2")
-
+    
+    #------------ TR-1-3-2 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-3-2",
                 confirms_identifier = "TC-1-3",
                 result_identifier = "Passed",
                 executedBy_identifier = "TestRun2")
-
+    
+    #------------ TR-1-4-2 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-4-2",
                 confirms_identifier = "TC-1-4",
                 result_identifier = "Failed",
                 executedBy_identifier = "TestRun2")
-
+    
+    #------------ TestRun2 ------------
     Add.turnstile_SoftwareComponentTestExecution(identifier="TestRun2",
+                endedAtTime = "2020-07-30 11:02:38",
                 executedOn_identifier = "TargetHardware")
 
     createCDR("http://rack001/turnstiledata")

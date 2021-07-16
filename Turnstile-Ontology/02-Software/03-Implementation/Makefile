@@ -31,7 +31,7 @@ $(TESTEXE): test.c test.h $(EXE)
 
 .PHONY: test
 test: $(TESTEXE)
-	./$(TESTEXE)
+	rack_capture ./$(TESTEXE)
 
 .PHONY: clean
 clean:

@@ -426,6 +426,7 @@ property(Class, Property, shared) :-
 property_target(Class, Property, PropUsage, Target, Restrictions) :-
     property(Class, Property, PropUsage),
     rdf(Property, rdfs:range, Target),
+    \+ rdf_is_bnode(Target),
     property_extra(Class, Property, Target, Restrictions).
 property_target(Class, Property, PropUsage, Target, Restrictions) :-
     rdf(Class, rdfs:subClassOf, Parent),

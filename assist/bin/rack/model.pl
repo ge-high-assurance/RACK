@@ -258,6 +258,16 @@ rack_ref(Name, URI) :- atom_concat('http://arcos.rack/', Name, URI).
 ns_ref(NS, Target, Ref) :- atom_concat(NS, '#', P),
                            atom_concat(P, Target, Ref).
 
+%! rack_ontology_ref(-URI:atom) is semidet.
+%
+% Returns a URI for every class that is either part of the RACK ontology or an overlay thereof.
+
+rack_ontology_ref(URI) :-
+    rdf(URI, rdf:type, owl:'Class'),
+    rdf_reachable(URI, rdfs:subClassOf, BaseURI),
+    rack_ref(_, BaseURI),
+    root_rack_ref(BaseURI).
+
 %! append_fld(+Base:atom, +Fld:atom, -Result:atom) is det.
 %
 % Used to construct an RDF node reference from a base and a suffix
@@ -650,15 +660,26 @@ add_triple(S,P,O) :-
 % imported descriptive Data (or a derivation thereof).  Used by
 % load_data/2.
 
-rdf_dataref(RDFClass, Data, Instance) :-
-    rdf(RDFClass, rdf:type, owl:'Class'),
-    rack_ref(ShortC, RDFClass),
+rdf_dataref(RDFClass, Data, InstanceAndData) :-
     data_instance(ShortC, Data, InstanceSuffix, InstanceData),
+
+    rack_ontology_ref(RDFClass),
+    atom_concat(_, ShortC, RDFClass),
 
     % If multiple data_instances can be created for this Instance,
     % choose the most specific sub-class
-    bottom_child_class(ShortC, Data, InstanceSuffix),
+    bottom_child_URI(RDFClass, Data, InstanceSuffix),
 
+    InstanceAndData = iad(RDFClass, InstanceSuffix, InstanceData).
+
+rdf_datagen(AllInstanceAndData) :-
+    list_to_set(AllInstanceAndData, Uniques),
+    % n.b. use findall to force all backtracking and avoid inadvertent
+    % cut abbreviation
+    findall(Each, (member(Each, Uniques), rdf_datagen_inst(Each)), _).
+
+
+rdf_datagen_inst(iad(RDFClass, InstanceSuffix, InstanceData)) :-
     rack_namespace(NS),
     ns_ref(NS, InstanceSuffix, Instance),
     add_triple(Instance, rdf:type, RDFClass),
@@ -674,15 +695,15 @@ rdf_dataref(RDFClass, Data, Instance) :-
 % data_instance(C, Data, InstanceSuffix) matches.  This is used to
 % instantiate the most specific class possible for the recognized
 % data.
-bottom_child_class(BaseClass, Data, InstanceSuffix) :-
-    rack_ref(BaseClass, FullBaseClass),
-    rdf_reachable(OtherC, rdfs:subClassOf, FullBaseClass),
-    OtherC \= FullBaseClass,
-    rack_ref(Other, OtherC),
+bottom_child_URI(BaseClassURI, Data, InstanceSuffix) :-
+    rdf_reachable(OtherC, rdfs:subClassOf, BaseClassURI),
+    \+ rdf_is_bnode(OtherC),
+    OtherC \= BaseClassURI,
+    atom_concat(_, Other, OtherC),
     data_instance(Other, Data, InstanceSuffix, _),
     !,
     fail.
-bottom_child_class(_, _, _).
+bottom_child_URI(_, _, _).
 
 add_each_rdfdata(RDFClass, Class, DataRef, DataList) :-
     member(Data, DataList),

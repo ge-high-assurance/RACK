@@ -371,6 +371,42 @@ ontology_leaf_class(C) :-
               OtherRefs),
       length(OtherRefs, 0))).
 
+% True if RootURI is the base-est class in the RACK ontology
+root_rack_ref(RootURI) :-
+    \+ rdf_is_bnode(RootURI),
+    rdf(OtherURI, rdf:type, owl:'Class'),
+    OtherURI \= RootURI,
+    rack_ref(_, OtherURI),
+    rdf_reachable(RootURI, rdfs:subClassOf, OtherURI), !, fail.
+root_rack_ref(RootURI) :- \+ rdf_is_bnode(RootURI).
+
+%! rack_inheritance_chain(-TipClass, +ClassInChain)
+%
+% Iterates over all classes between the provided TipClass class and
+% the root_rack_ref of that class, unifying ClassInChain with each
+% possible Class in the inheritance chain, including the TipClass.
+rack_inheritance_chain(TipClass, ClassInChain) :-
+    rdf_reachable(TipClass, rdfs:subClassOf, BaseClass),
+    root_rack_ref(BaseClass),
+    rdf(ClassInChain, rdf:type, owl:'Class'),
+    rdf_reachable(ClassInChain, rdfs:subClassOf, BaseClass),
+    rdf_reachable(TipClass, rdfs:subClassOf, ClassInChain).
+
+
+% True if BaseClass is the bottom-most class for which
+% data_instance(C, Data, InstanceSuffix) matches.  This is used to
+% instantiate the most specific class possible for the recognized
+% data.
+bottom_child_URI(BaseClassURI, Data, InstanceSuffix) :-
+    rdf_reachable(OtherC, rdfs:subClassOf, BaseClassURI),
+    \+ rdf_is_bnode(OtherC),
+    OtherC \= BaseClassURI,
+    atom_concat(_, Other, OtherC),
+    data_instance(Other, Data, InstanceSuffix, _),
+    !,
+    fail.
+bottom_child_URI(_, _, _).
+
 
 % TODO: this is a WIP
 enumerationOf(E, C) :-
@@ -696,20 +732,6 @@ rdf_datagen_inst(iad(RDFClass, InstanceSuffix, InstanceData)) :-
      add_rdfdata(RDFClass, RDFClass, Instance, InstanceData);
      true  % OK if there are no elements for this instance
     ).
-
-% True if BaseClass is the bottom-most class for which
-% data_instance(C, Data, InstanceSuffix) matches.  This is used to
-% instantiate the most specific class possible for the recognized
-% data.
-bottom_child_URI(BaseClassURI, Data, InstanceSuffix) :-
-    rdf_reachable(OtherC, rdfs:subClassOf, BaseClassURI),
-    \+ rdf_is_bnode(OtherC),
-    OtherC \= BaseClassURI,
-    atom_concat(_, Other, OtherC),
-    data_instance(Other, Data, InstanceSuffix, _),
-    !,
-    fail.
-bottom_child_URI(_, _, _).
 
 add_each_rdfdata(RDFClass, Class, DataRef, DataList) :-
     member(Data, DataList),

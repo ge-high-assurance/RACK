@@ -725,29 +725,33 @@ rdf_datagen_inst(iad(RDFClass, InstanceSuffix, InstanceData)) :-
     rack_namespace(NS),
     ns_ref(NS, InstanceSuffix, Instance),
     add_triple(Instance, rdf:type, RDFClass),
+    rack_inheritance_chain(RDFClass, AClass),
+    rdf_datagen_instclass(AClass, Instance, InstanceData).
+
+rdf_datagen_instclass(InstClass, Instance, InstanceData) :-
     % Use InstanceData to drive data_get property relation definitions
     (is_list(InstanceData),
-     add_each_rdfdata(RDFClass, RDFClass, Instance, InstanceData);
+     add_each_rdfdata(InstClass, InstClass, Instance, InstanceData);
      \+ is_list(InstanceData),
-     add_rdfdata(RDFClass, RDFClass, Instance, InstanceData);
+     add_rdfdata(InstClass, InstClass, Instance, InstanceData);
      true  % OK if there are no elements for this instance
     ).
 
-add_each_rdfdata(RDFClass, Class, DataRef, DataList) :-
+add_each_rdfdata(InstClass, Class, DataRef, DataList) :-
     member(Data, DataList),
-    add_rdfdata(RDFClass, Class, DataRef, Data).
+    add_rdfdata(InstClass, Class, DataRef, Data).
 
-add_rdfdata(RDFClass, Class, DataRef, Data) :-
+add_rdfdata(InstClass, Class, DataRef, Data) :-
     rdf(Class, rdfs:subClassOf, Parent),
-    add_rdfdata(RDFClass, Parent, DataRef, Data).
+    add_rdfdata(InstClass, Parent, DataRef, Data).
 
-add_rdfdata(RDFClass, Class, DataRef, Data) :-
+add_rdfdata(InstClass, Class, DataRef, Data) :-
     property(Class, Property, _),
-    rack_ref(ShortC, RDFClass),
+    rack_ref(ShortC, InstClass),
     rack_ref(ShortP, Property),
-    add_rdfproperty(ShortC, ShortP, RDFClass, Property, DataRef, Data).
+    add_rdfproperty(ShortC, ShortP, Property, DataRef, Data).
 
-add_rdfproperty(ShortC, ShortP, _RDFClass, Property, DataRef, Data) :-
+add_rdfproperty(ShortC, ShortP, Property, DataRef, Data) :-
     data_get(ShortC, ShortP, Data, Value),
     (
         % If this is an atom, it might be existing or might need to be created.

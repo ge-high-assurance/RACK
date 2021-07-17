@@ -143,7 +143,7 @@ parent_path(E, [R|RS]) :-
     rdf(E, rdfs:subClassOf, LR),
     % Some nodes have multiple parent classes; the additional classes
     % are blank nodes with (for example) cardinality restrictions.
-    \+ rdf_bnode(LR),
+    \+ rdf_is_bnode(LR),
     prefix_shorten(LR, R),
     parent_path(LR, RS).
 parent_path(E, []) :-
@@ -152,7 +152,7 @@ parent_path(E, []) :-
     % base class to the _::file in which it was defined).
     rdf_subject(E),
     has_no_regular_parent(E).
-has_no_regular_parent(E) :- rdf(E, rdfs:subClassOf, P), \+ rdf_bnode(P), !, fail.
+has_no_regular_parent(E) :- rdf(E, rdfs:subClassOf, P), \+ rdf_is_bnode(P), !, fail.
 has_no_regular_parent(_E).
 
 % ----------------------------------------------------------------------
@@ -207,7 +207,7 @@ instance_prefixes(Prefixes) :-
               rdf_reachable(T, rdfs:subClassOf, owl:'Class'),
               rdf(I, rdf:type, E),
               \+ rack_ontology_node(I, _, _),
-              \+ rdf_bnode(I),
+              \+ rdf_is_bnode(I),
               rdf_split_url(PL, L, I),
               atomic_list_concat([PB|_],'#',PL),
               atom_concat(PB,'#',P)
@@ -223,7 +223,7 @@ report_instance_prefix(Prefix) :-
     findall(I, (rdf(I, rdf:type, E),
                 rdf(E, rdf:type, T),
                 rdf_reachable(T, rdfs:subClassOf, owl:'Class'),
-                \+ rdf_bnode(I),
+                \+ rdf_is_bnode(I),
                 atom_concat(Prefix, _, I)
                ), IS),
     length(IS, N),
@@ -233,7 +233,7 @@ report_instances_in(Pfx) :-
     findall(I, (rdf(I, rdf:type, E),
                 rdf(E, rdf:type, T),
                 rdf_reachable(T, rdfs:subClassOf, owl:'Class'),
-                \+ rdf_bnode(I),
+                \+ rdf_is_bnode(I),
                 atom_concat(Pfx, _, I)
                ), IS),
     length(IS, N),
@@ -300,7 +300,7 @@ instances_in_summary(Pfx, T) :-
     sort(Leaves, SL),
     member(T, SL),
     findall(I, (rdf(I, rdf:type, T),
-                \+ rdf_bnode(I),
+                \+ rdf_is_bnode(I),
                 atom_concat(Pfx, _, I)
                ), IS),
     length(IS, ISLen),

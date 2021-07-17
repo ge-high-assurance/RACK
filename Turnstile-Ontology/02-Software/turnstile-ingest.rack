@@ -22,12 +22,18 @@ data_get('SOFTWARE#CODE_DEVELOPMENT', 'SOFTWARE#referenced', sw_devel(_,_,_),
 % explicit using predicates not normally needed for data recognizers.
 % If the DevelopmentPlan simply specified a SOFTWARE#COMPILE, then
 % this data_get recognizer could be removed.
-data_get('SOFTWARE#COMPILE', 'PROV-S#identifier', uid(Instance,_,_), Identifier) :-
-    rack_namespace(NS),
-    ns_ref(NS, Instance, RDFInstance),
-    atom_string(Instance, Identifier),
-    add_triple(RDFInstance, rdf:type,
-               'http://Turnstile/DevelopmentPlan#SoftwareIntegration').
+
+data_instance('DevelopmentPlan#SoftwareIntegration', load_data, Instance,
+              [ uid(Instance, Title, Descr),
+                activity_data(BW,BS,BF) ]) :-
+    BW = build_with(Nonce, compile, _ToolName, _ToolPath, _ToolArgs),
+    BS = build_start(Nonce, _StartTime),
+    BF = build_finished(Nonce, _FinishTime, _ExitVal),
+    BW, BS, BF,
+    activity_instance(Nonce, compile, Instance),
+    Title = "compilation",
+    Descr = "Execution of the compiler".
+
 
 % Explicit links between software files and documented requirements.
 % These cannot be automatically discovered and are project specific.

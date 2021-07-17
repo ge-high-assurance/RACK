@@ -416,8 +416,6 @@ data_instance('PROV-S#ACTIVITY', load_data, Instance,
     BS = build_start(Nonce, _StartTime),
     BF = build_finished(Nonce, _FinishTime, _ExitVal),
     BW, BS, BF,
-    ToolType \= compile,
-    ToolType \= make,
     activity_instance(Nonce, ToolType, Instance),
     atom_string(ToolType, Title),
     string_concat(Title, " tool invocation", Descr).

@@ -4,7 +4,7 @@
 
 usage_exit() {
     # shellcheck disable=SC2046
-    echo Usage: $(basename "$0") '[-o OwlFile]' '[-a]' '[-r RecognizerFile]' DATA_NAMESPACE DATA_DIR
+    echo Usage: $(basename "$0") '[-o OwlFile]' '[-a]' '[-O overlay-ontology-path]' '[-r RecognizerFile]' DATA_NAMESPACE DATA_DIR
     echo ""
     echo "  Reads RACK ontology and creates instances from DATA_DIR data"
     echo "  under the specified namespace.  The created instances are then"
@@ -29,10 +29,11 @@ loads=(
 
 mode="upload"
 
-while getopts "ao:r:" opt ; do
+while getopts "ao:r:O:" opt ; do
     case $opt in
         a) mode="analyze";;
         o) mode="$OPTARG";;
+        O) loads+=(-g "load_local_model('${OPTARG}')");;
         r) loads+=(-g "load_recognizer('${OPTARG}')");;
         ?) echo "Unrecognized option argument: $opt" >&2
            usage_exit >&2;;

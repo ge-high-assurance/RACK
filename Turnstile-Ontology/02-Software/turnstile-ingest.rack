@@ -4,13 +4,16 @@
 
 :- multifile data_instance/4, data_get/4.
 
+turnstile_ns(Elem, URI) :-
+    atom_concat('http://arcos.turnstile/GE/', Elem, URI).
+
 % The DevelopmentPlan specifies that SOFTWARE#CODE_DEVELOPMENT
 % references the plan-defined SoftwareStandard.  This is an
 % abstract/documentation linkage that is established by this rule.
 
-data_get('SOFTWARE#CODE_DEVELOPMENT', 'SOFTWARE#referenced',
-         sw_devel(_,_,_),
-         'http://Turnstile/DevelopmentPlanData#SoftwareStandard').
+data_get('SOFTWARE#CODE_DEVELOPMENT', 'SOFTWARE#referenced', sw_devel(_,_,_),
+         Value) :-
+    turnstile_ns('DevelopmentPlanData#SoftwareStandard', Value).
 
 
 % The DevelopmentPlan creates a SoftwareIntegration as an instance of
@@ -29,10 +32,10 @@ data_get('SOFTWARE#COMPILE', 'PROV-S#identifier', uid(Instance,_,_), Identifier)
 % Explicit links between software files and documented requirements.
 % These cannot be automatically discovered and are project specific.
 
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'output.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#OUT-LLR-1').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'output.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#OUT-LLR-2').
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'output.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#OUT-LLR-1', Value).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'output.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#OUT-LLR-2', Value).
 
 data_get(_, 'SOFTWARE#definedIn', func_decl(_, FileName), FileRef) :-
     build_inputs(Nonce, InpSources),
@@ -40,25 +43,25 @@ data_get(_, 'SOFTWARE#definedIn', func_decl(_, FileName), FileRef) :-
     member(FileName, InpSources),
     file_instance(Nonce, Dir, FileName, FileRef).
 
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#IN-LLR-1').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#IN-LLR-2').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#IN-LLR-3').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#IN-LLR-4').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#IN-LLR-5').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#IN-LLR-6').
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#IN-LLR-1', Value).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#IN-LLR-2', Value).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#IN-LLR-3', Value).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#IN-LLR-4', Value).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#IN-LLR-5', Value).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#IN-LLR-6', Value).
 
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#EXE-LLR-1').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#EXE-LLR-2').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#EXE-LLR-3').
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'), V) :-
+    turnstile_ns('CounterApplicationDesignDescription#EXE-LLR-1', V).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'), V) :-
+    turnstile_ns('CounterApplicationDesignDescription#EXE-LLR-2', V).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'), V) :-
+    turnstile_ns('CounterApplicationDesignDescription#EXE-LLR-3', V).
 
 % Generate explicit links between the automatically-recognized input
 % files and the corresponding software functions and data declared in

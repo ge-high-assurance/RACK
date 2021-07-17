@@ -574,13 +574,13 @@ realize_loaded_data :-
     % n.b. use findall to force all backtracking here, otherwise
     % =erase(SetNS)= in load_data/2 will run after the first success
     % and no more instances will be instantiated.
-    findall(Instance, rdf_dataref(_RDFClass1, load_data_start, Instance), StInstances),
-    findall(Instance, rdf_dataref(_RDFClass2, load_data, Instance), LdInstances),
-    findall(Instance, rdf_dataref(_RDFClass3, load_data_finish, Instance), FiInstances),
+    findall(Instance, rdf_dataref(load_data_start, Instance), StInstances),
+    findall(Instance, rdf_dataref(load_data, Instance), LdInstances),
+    findall(Instance, rdf_dataref(load_data_finish, Instance), FiInstances),
     append(StInstances, LdInstances, StLdInstances),
     append(StLdInstances, FiInstances, PrimaryInstances),
     findall(Instance, (member(iad(_,PI,_), PrimaryInstances),
-                       rdf_dataref(_RDFClass4, generated_from(PI), Instance)), GenInstances),
+                       rdf_dataref(generated_from(PI), Instance)), GenInstances),
     append(PrimaryInstances, GenInstances, Instances),
     rdf_datagen(Instances),
     length(Instances, Count),
@@ -653,14 +653,13 @@ add_triple(S,P,O) :-
     (\+ rack_namespace(_), rdf_assert(S, P, O)).
 
 
-%! rdf_dataref(-RDFClass, +Data, -Instance) is semidet.
-%! rdf_dataref(+RDFClass, +Data, -Instance) is semidet.
+%! rdf_dataref(+Data, -InstanceAndData) is semidet.
 %
 % Top-level rule to determine instances of an RDFClass given the
 % imported descriptive Data (or a derivation thereof).  Used by
-% load_data/2.
+% load_data/2.  The return should later be processed by rdf_datagen.
 
-rdf_dataref(RDFClass, Data, InstanceAndData) :-
+rdf_dataref(Data, InstanceAndData) :-
     data_instance(ShortC, Data, InstanceSuffix, InstanceData),
 
     rack_ontology_ref(RDFClass),
@@ -672,12 +671,19 @@ rdf_dataref(RDFClass, Data, InstanceAndData) :-
 
     InstanceAndData = iad(RDFClass, InstanceSuffix, InstanceData).
 
+%! rdf_datagen(+InstanceAndData)
+%
+% Uses the InstanceAndData emitted by rdf_dataref/2 to iterate and
+% generate all the relations/data associated with each Instance.  This
+% is done as a separate step so that duplicates can be removed from
+% the set of Instances+Data and so that cross-references will have
+% full knowledge of all defined instances.
+
 rdf_datagen(AllInstanceAndData) :-
     list_to_set(AllInstanceAndData, Uniques),
     % n.b. use findall to force all backtracking and avoid inadvertent
     % cut abbreviation
     findall(Each, (member(Each, Uniques), rdf_datagen_inst(Each)), _).
-
 
 rdf_datagen_inst(iad(RDFClass, InstanceSuffix, InstanceData)) :-
     rack_namespace(NS),

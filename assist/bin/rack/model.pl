@@ -52,7 +52,7 @@ description DSL into instances in the model.
 
               % Importing user data into the model
               load_data/2,
-              rdf_dataref/3,
+              rdf_dataref/2,
               load_recognizer/1
           ]).
 
@@ -777,7 +777,7 @@ add_atom_newref(DataRef, Property, Value) :-
 % Used to load a set of Data recognizers from a file.  This can be
 % used with multiple files to aggregate recognizers.
 %
-% Data recognizers are invoked by the load_data/2 and rdf_dataref/3
+% Data recognizers are invoked by the load_data/2 and rdf_dataref/2
 % process to recognize the relationship between information in the
 % input =.rack= data files and specific ontology elements.
 %

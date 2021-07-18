@@ -144,6 +144,13 @@ data_get('SOFTWARE#BUILD', 'SOFTWARE#step',
     tar_start(N, _, _),
     activity_instance(N, tar, V).
 
+%% -------------------- TEST GENERAL HANDLING
+
+data_get('TESTING#TEST_EXECUTION', 'TESTING#executedOn',
+         activity_data(_, _, build_finished(Nonce, _, _)),
+         Value) :-
+    build_on(Nonce, Name), atom_string(Name, Value).
+
 
 %% -------------------- MISC FILES
 

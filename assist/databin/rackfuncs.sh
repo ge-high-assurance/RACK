@@ -72,11 +72,12 @@ update_make_steps() {  # assumes nonce is set
 rack_info_pre() {
     what=${1}
     shift 1
-    echo ":- multifile build_with/5, build_from/2, build_inputs/2, build_outputs/2, build_start/2, build_finished/3, build_step/2, build_user/2, file_sha1/3."
+    echo ":- multifile build_with/5, build_from/2, build_inputs/2, build_outputs/2, build_start/2, build_finished/3, build_step/2, build_user/2, build_on/2, file_sha1/3."
     # shellcheck disable=SC2086
     echo "build_with(${nonce@Q}, ${what@Q}," ${tool@Q}, ${realtool@Q}, [ "${*@Q}" ] ")."
     # shellcheck disable=SC2027,SC2046
     echo "build_from(${nonce@Q}, '"$(top_rel_curdir)"')."
+    echo "build_on(${nonce@Q}, '"$(hostname --fqdn)"')."
     echo "build_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'))."
     echo "build_user(${nonce@Q}, '$(whoami)')."
     IFS=' ' read sum f < <(sha1sum "$realtool")

@@ -16,7 +16,8 @@ nonce="n$(date +%s)-$$"
 outf=$(pwd)/.${tool}.capture.rack
 
 rack_info_pre "${tool}" > "${outf}"
-echo 'tool_output("' >> "${outf}"
+echo ":- multifile tool_output/3." >> "${outf}"
+echo "tool_output(${nonce@Q}, ${tool@Q}," '"' >> "${outf}"
 
 update_make_steps
 

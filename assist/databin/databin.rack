@@ -18,6 +18,7 @@ databin_name(MyName) :-
                  build_outputs/2,
                  build_from/2,
                  build_start/2,
+                 build_on/2,
                  build_finished/3,
                  build_user/2,
                  file_sha1/3,

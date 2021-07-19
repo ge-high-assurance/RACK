@@ -3,6 +3,12 @@ ingestion-steps:
 #Phase1: Identifiers Only
 - {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}
 - {nodegroup: "ingest_AGENT", csv: "AGENT1.csv"}
+- {nodegroup: "ingest_DOCUMENT", csv: "DOCUMENT1.csv"}
+- {nodegroup: "ingest_ENTITY", csv: "ENTITY1.csv"}
+- {nodegroup: "ingest_FILE", csv: "FILE1.csv"}
+- {nodegroup: "ingest_FORMAT", csv: "FORMAT1.csv"}
+- {nodegroup: "ingest_ORGANIZATION", csv: "ORGANIZATION1.csv"}
+- {nodegroup: "ingest_TOOL", csv: "TOOL1.csv"}
 - {nodegroup: "ingest_turnstile_DevelopComponentTests", csv: "turnstile_DevelopComponentTests1.csv"}
 - {nodegroup: "ingest_turnstile_HighLevelRequirement", csv: "turnstile_HighLevelRequirement1.csv"}
 - {nodegroup: "ingest_turnstile_SoftwareComponentTest", csv: "turnstile_SoftwareComponentTest1.csv"}
@@ -12,6 +18,12 @@ ingestion-steps:
 #Phase2: All Evidence
 - {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
 - {nodegroup: "ingest_AGENT", csv: "AGENT2.csv"}
+- {nodegroup: "ingest_DOCUMENT", csv: "DOCUMENT2.csv"}
+- {nodegroup: "ingest_ENTITY", csv: "ENTITY2.csv"}
+- {nodegroup: "ingest_FILE", csv: "FILE2.csv"}
+- {nodegroup: "ingest_FORMAT", csv: "FORMAT2.csv"}
+- {nodegroup: "ingest_ORGANIZATION", csv: "ORGANIZATION2.csv"}
+- {nodegroup: "ingest_TOOL", csv: "TOOL2.csv"}
 - {nodegroup: "ingest_turnstile_DevelopComponentTests", csv: "turnstile_DevelopComponentTests2.csv"}
 - {nodegroup: "ingest_turnstile_HighLevelRequirement", csv: "turnstile_HighLevelRequirement2.csv"}
 - {nodegroup: "ingest_turnstile_SoftwareComponentTest", csv: "turnstile_SoftwareComponentTest2.csv"}

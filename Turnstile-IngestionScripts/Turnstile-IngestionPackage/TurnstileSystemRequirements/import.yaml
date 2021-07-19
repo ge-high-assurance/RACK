@@ -1,4 +1,4 @@
-data-graph: "http://rack001/data"
+data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
 #Phase1: Identifiers Only
 - {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}

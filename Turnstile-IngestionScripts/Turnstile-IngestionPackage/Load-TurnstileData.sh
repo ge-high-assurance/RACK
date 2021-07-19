@@ -46,4 +46,5 @@ rack data import "$BASEDIR"/CounterApplicationReviews/import.yaml
 echo "Ingesting Counter Application Testing ..."
 rack data import "$BASEDIR"/CounterApplicationTesting/import.yaml
 
-
+echo "Ingesting Counter Application Unit Testing ..."
+rack data import "$BASEDIR"/CounterApplicationUnitTesting/OwlModels/import.yaml

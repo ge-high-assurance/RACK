@@ -12,7 +12,7 @@ find_in_path_remainder() { # $1 = name of executable
 find_in_path_excluding() { # $1 = name of executable, $2.. = exclusion paths
     exe="$1"; shift 1
     if [ "${exe:0:2}" == "./" ] ;
-    then echo $(basename "${exe}")
+    then basename "${exe}"
     else
         # shellcheck disable=SC2046
         (PATH=$(echo $(IFS=:
@@ -73,13 +73,15 @@ rack_info_pre() {
     what=${1}
     shift 1
     echo ":- multifile build_with/5, build_from/2, build_inputs/2, build_outputs/2, build_start/2, build_finished/3, build_step/2, build_user/2, build_on/2, file_sha1/3."
-    # shellcheck disable=SC2086
+    # shellcheck disable=SC2086,SC2154
     echo "build_with(${nonce@Q}, ${what@Q}," ${tool@Q}, ${realtool@Q}, [ "${*@Q}" ] ")."
     # shellcheck disable=SC2027,SC2046
     echo "build_from(${nonce@Q}, '"$(top_rel_curdir)"')."
+    # shellcheck disable=SC2027,SC2046
     echo "build_on(${nonce@Q}, '"$(hostname --fqdn)"')."
     echo "build_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'))."
     echo "build_user(${nonce@Q}, '$(whoami)')."
+    # shellcheck disable=SC2162,SC2034
     IFS=' ' read sum f < <(sha1sum "$realtool")
     echo "file_sha1(${tool@Q}, ${sum@Q}, ${nonce@Q})."
 }

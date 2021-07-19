@@ -33,12 +33,14 @@ def CreateCdrs():
     Add.turnstile_Engineer(identifier="259863025",
                 title = "Public, John",
                 emailAddress = "john.public@ge.com",
-                employedBy_identifier = "GE")
+                employedBy_identifier = "General_Electric")
+    Add.ORGANIZATION(identifier = "General_Electric")
     #-------------------------- 
     Add.turnstile_SoftwareRequirementsReview(identifier="HlrReview",
                 author_identifier = "125569538",
                 reviewer_identifier =  "259863025",
-                governedBy_identifier = "RQ-STD")
+                governedBy_identifier = "RQ-STD:v1")
+    Add.DOCUMENT(identifier = "RQ-STD:v1")
     #--------------------------    
     Add.turnstile_SoftwareRequirementsReview(identifier="HlrReview",
                 reviewed_identifier = "HLR-1:v1")
@@ -95,7 +97,8 @@ def CreateCdrs():
     Add.turnstile_SoftwareRequirementsReview(identifier="HlrReview-2",
                 author_identifier = "125569538",
                 reviewer_identifier =  "259863025",
-                governedBy_identifier = "RQ-STD")
+                governedBy_identifier = "RQ-STD:v1")
+    Add.DOCUMENT(identifier = "RQ-STD:v1")
     #--------------------------                 
     Add.turnstile_SoftwareRequirementsReview(identifier="HlrReview-2",
                 reviewed_identifier = "HLR-1:v2")
@@ -147,7 +150,8 @@ def CreateCdrs():
     Add.turnstile_SoftwareDesignReview(identifier="LlrReview1",
                 author_identifier = "2125895152",
                 reviewer_identifier =  "259863025",
-                governedBy_identifier = "SW-STD")
+                governedBy_identifier = "SW-STD:v1")
+    Add.DOCUMENT(identifier = "SW-STD:v1")
 
     #-------------------------- 
     Add.turnstile_SoftwareDesignReviewArtifacts(identifier="LlrReview1Log-1",
@@ -197,7 +201,8 @@ def CreateCdrs():
     Add.turnstile_SoftwareDesignReview(identifier="LlrReview2",
                 author_identifier = "2125895152",
                 reviewer_identifier =  "259863025",
-                governedBy_identifier = "SW-STD")
+                governedBy_identifier = "SW-STD:v1")
+    Add.DOCUMENT(identifier = "SW-STD:v1")
     #-------------------------- 
     Add.turnstile_SoftwareDesignReviewArtifacts(identifier="LlrReview2Log-1",
                 reviews_identifier = "OUT-LLR-1",
@@ -223,8 +228,8 @@ def CreateCdrs():
     Add.turnstile_SoftwareDesignReview(identifier="LlrReview3",
                 author_identifier = "2125895152",
                 reviewer_identifier =  "259863025",
-                governedBy_identifier = "SW-STD")
-
+                governedBy_identifier = "SW-STD:v1")
+    Add.DOCUMENT(identifier = "SW-STD:v1")
     #-------------------------- 
     Add.turnstile_SoftwareDesignReviewArtifacts(identifier="LlrReview3Log-1",
                 reviews_identifier = "EXE-LLR-1",

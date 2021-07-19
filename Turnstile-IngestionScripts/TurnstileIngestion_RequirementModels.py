@@ -54,7 +54,7 @@ def CreateCdrs():
     Add.ANALYSIS_OUTPUT(identifier="HLR Analysis-Conflict", producedBy_identifier="HLR Analysis", result_identifier="Passed")
     
 
-    createCDR()
+    createCDR("http://rack001/turnstiledata")
 
 
 if __name__=="__main__":

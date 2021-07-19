@@ -11,8 +11,6 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-import XML
-import XML.SysML as SysML
 from Evidence import createEvidenceFile, createCDR
 import Evidence.Add as Add
 import shutil
@@ -26,13 +24,23 @@ def CreateCdrs():
 
     createEvidenceFile(ingestionTitle="TurnstileIngestion-Testing", ingestionDescription="Manual ingestion of Counter Application Testing")
 
-    Add.AGENT(identifier="ASSERT")
+    Add.TOOL(identifier="ASSERT", toolVersion = "V4.2.3", actedOnBehalfOf_identifier="General_Electric")
+    Add.ORGANIZATION(identifier="General_Electric")
     
     #------------ CompTestDevelopment ------------
     Add.turnstile_DevelopComponentTests(identifier="CompTestDevelopment",
                 endedAtTime = "2020-07-26 10:53:38",
                 developedBy_identifier = "ASSERT",
-                used_identifier = "VER-STD")
+                used_identifier = "VER-STD:v1")
+    Add.turnstile_DevelopComponentTests(identifier="CompTestDevelopment",
+    	        used_identifier = "ATCG-Config-File")
+    Add.turnstile_DevelopComponentTests(identifier="CompTestDevelopment",
+    	        used_identifier = "HLR-1-Model")
+    Add.DOCUMENT(identifier = "VER-STD:v1")
+    Add.FILE(identifier = "ATCG-Config-File", fileFormat_identifier = "XML")
+    Add.FORMAT(identifier ="XML")
+    Add.ENTITY(identifier = "IncludeBVA", definedIn_identifier = "ATCG-Config-File", description="Flag Indicating to include Boundary Value Analysis in testcase generation.")
+    Add.ENTITY(identifier = "IncludeLCA", definedIn_identifier = "ATCG-Config-File", description="Flag Indicating to include Logic Condition Analysis in testcase generation.")
     #------------ TC-1-1 ------------
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-1",
                 verifies_identifier = "HLR-1:v1",

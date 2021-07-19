@@ -45,17 +45,16 @@ def CreateCdrs():
                           governs_identifier="Turnstile")
     Add.SYSTEM(identifier="Turnstile")
        
-    createCDR()
+    createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileSystemRequirements"))
 
     ################################################
     #    High-level Requirements Version 1
     ################################################        
     createEvidenceFile(ingestionTitle="TurnstileIngestion-High Level Requirements", ingestionDescription="Manual ingestion of Turnstile High Level Requirements")
-
     #------------ HLR-1 ------------
     Add.turnstile_HighLevelRequirement(identifier="HLR-1:v1",
-                             description="The Computer shall increment the counter when a inflow event is received and the counter is less than max int.",
+                             description="The Computer shall increment the counter when a inflow event is received and the counter is less than 1000.",
                              satisfies_identifier="Sys-1",
                              mitigates_identifier ="H-1.2",
                              governs_identifier="CounterApplication",
@@ -89,12 +88,14 @@ def CreateCdrs():
                  title = "Doe, John",
                  emailAddress = "john.doe@ge.com",
                  employedBy_identifier = "General_Electric")
+    Add.ORGANIZATION(identifier = "General_Electric")
     
-    #------------ HLRDev1 ------------
-    Add.turnstile_SoftwareRequirementsDefinition(identifier = "HLRDev1",
+    #------------ HlrDev1 ------------
+    Add.turnstile_SoftwareRequirementsDefinition(identifier = "HlrDev1",
                                        endedAtTime = "2020-07-15 10:56:38",
                                        author_identifier = "125569538",
-                                       referenced_identifier = "RequirementStandard")
+                                       referenced_identifier = "RQ-STD:v1")
+    Add.DOCUMENT(identifier = "RQ-STD:v1")
     #------------ inflowEvent ------------                                
     Add.turnstile_DataDictionary(identifier = "inflowEvent",
                        description = "Signal indicating that a person has passed through the ingate",
@@ -148,7 +149,7 @@ def CreateCdrs():
     Add.turnstile_SystemRequirement(identifier="Sys-1")
     Add.HAZARD(identifier="H-1.2")
     Add.turnstile_SystemComponent(identifier="CounterApplication")
-	
+    Add.turnstile_HighLevelRequirement(identifier="HLR-1:v1")
 	
 	#------------ HLR-2 ------------ 
     Add.turnstile_HighLevelRequirement(identifier="HLR-2:v2",
@@ -157,17 +158,18 @@ def CreateCdrs():
                              mitigates_identifier = "H-1.1",
                              governs_identifier ="CounterApplication",
                              createdBy_identifier="HlrDev2",
-                             wasRevisionOf_identifier="HLR-1:v1")
+                             wasRevisionOf_identifier="HLR-2:v1")
     Add.turnstile_SystemRequirement(identifier="Sys-2")
     Add.HAZARD(identifier="H-1.1")
     Add.turnstile_SystemComponent(identifier="CounterApplication")
+    Add.turnstile_HighLevelRequirement(identifier="HLR-2:v1")
     
-    #------------ HLRDev2 ------------
-    Add.turnstile_SoftwareRequirementsDefinition(identifier = "HLRDev2",
+    #------------ HlrDev2 ------------
+    Add.turnstile_SoftwareRequirementsDefinition(identifier = "HlrDev2",
                                        endedAtTime = "2020-07-25 10:53:38",
                                        author_identifier = "125569538",
-                                       referenced_identifier = "RequirementStandard")
- 
+                                       referenced_identifier = "RQ-STD:v1")
+    Add.DOCUMENT(identifier = "RQ-STD:v1")
     #------------ inflowEvent ------------
     Add.turnstile_DataDictionary(identifier = "inflowEvent",
                        consumedBy_identifier = "HLR-1:v2")
@@ -182,7 +184,7 @@ def CreateCdrs():
     Add.turnstile_DataDictionary(identifier = "counter",
                        providedBy_identifier = "HLR-2:v2")
                        
-    createCDR()
+    createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileHighLevelRequirements"))
 
     ################################################
@@ -194,19 +196,19 @@ def CreateCdrs():
                            title = "Doe, Jane",
                            emailAddress = "jane.doe@ge.com",
                            employedBy_identifier = "General_Electric")
+    Add.ORGANIZATION(identifier = "General_Electric")
     #------------ LlrDev1 ------------
     Add.turnstile_SoftwareDesign(identifier = "LlrDev1",
                                  endedAtTime = "2020-07-19 11:48:38",
                                  author_identifier = "2125895152",
-                                 referenced_identifier = "SoftwareStandard")
-
+                                 referenced_identifier = "SW-STD:v1")
+    Add.DOCUMENT(identifier = "SW-STD:v1")
     #------------ SwDesign ------------
     Add.turnstile_SoftwareDesign(identifier = "SwDesign",
                                  endedAtTime = "2020-07-23 09:52:38",
                                  author_identifier = "2125895152",
-                                 referenced_identifier = "SoftwareStandard")
-	
-
+                                 referenced_identifier = "SW-STD:v1")
+    Add.DOCUMENT(identifier = "SW-STD:v1")
     #------------ InputThread ------------
     Add.turnstile_SoftwareThread(identifier = "InputThread",
                                  partOf_identifier = "CounterApplication",
@@ -257,7 +259,7 @@ def CreateCdrs():
     #------------ IN-LLR-3 ------------
     Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-3",
                                       description = "Input Thread shall add the delta value received by the UDP to the park_count and send the updated park_count to the Output Thread when a valid UDP message is received and the park_count range is not exceed.",
-                                      governs_identifier = "governs InputThread",
+                                      governs_identifier = "InputThread",
                                       createdBy_identifier = "LlrDev1")
     Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-3",
 			                          satisfies_identifier = "HLR-1:v2")
@@ -281,7 +283,7 @@ def CreateCdrs():
     #------------ IN-LLR-6 ------------	
     Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-6",
                                       description = "Input Thread shall print 'Limit Exceeded'' to the console when a valid UDP message is received and the park_count range is exceed.",
-                                      governs_identifier = "governs InputThread",
+                                      governs_identifier = "InputThread",
                                       createdBy_identifier = "LlrDev1")
     #------------ OUT-LLR-1 ------------
     Add.turnstile_LowLevelRequirement(identifier = "OUT-LLR-1",
@@ -305,15 +307,14 @@ def CreateCdrs():
     Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
                                        consumedBy_identifier = "EXE-LLR-1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
-                                       consumedBy_identifier = "EXE-LLR-2",
+                                       consumedBy_identifier = "EXE-LLR-2")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
-                                       consumedBy_identifier = "IN-LLR-1",
+                                       consumedBy_identifier = "IN-LLR-1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
                                        consumedBy_identifier = "OUT-LLR-1")
 
-	
     #------------ DCC-2 ------------	
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-2", 
                                        description = "incoming UDP message",
                                        createdBy_identifier = "LlrDev1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
@@ -378,7 +379,7 @@ def CreateCdrs():
                                        providedBy_identifier = "IN-LLR-6")
 
     
-    createCDR()
+    createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileLowLevelRequirements"))
 if __name__=="__main__":
     if os.path.exists(os.path.join(".","Turnstile-IngestionPackage/TurnstileSystemRequirements")):

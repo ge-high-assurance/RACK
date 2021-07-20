@@ -33,7 +33,7 @@ while getopts "ao:r:" opt ; do
     case $opt in
         a) mode="analyze";;
         o) mode="$OPTARG";;
-        r) loads+=(-g "load_recognizer(${OPTARG@Q})");;
+        r) loads+=(-g "load_recognizer('${OPTARG}')");;
         ?) echo "Unrecognized option argument: $opt" >&2
            usage_exit >&2;;
     esac
@@ -46,10 +46,13 @@ fi
 
 case $mode in
     upload) target="upload_model_to_rack(${1@Q})";;
-    analyze) target="report(${1@Q}, [])"
+    analyze) target="report('${1}', [])"
              loads+=(-f $(dirname "$0")/rack/analyze.pl)
              ;;
-    *) target="save_model_to_file(${mode@Q},${1@Q})";;
+    *) if [ "X${mode:0:4}" == "Xhttp" ] ;
+       then target="upload_model_to_url('${mode}','${1}')";
+       else target="save_model_to_file('${mode}','${1}')";
+       fi;;
 esac
 
 # add -q to suppress informational messages
@@ -58,7 +61,7 @@ esac
 # shellcheck disable=2086
 swipl -g "load_local_model('$(dirname $0)/../../RACK-Ontology/OwlModels')" \
       -g "load_recognizer('$(dirname $0)/../databin/databin.rack')" \
-      -g "load_data(${1@Q},${2@Q})" \
+      "${loads[@]}" \
+      -g "load_data('${1}','${2}')" \
       -g "$target" \
-      -t halt \
-      "${loads[@]}"
+      -t halt

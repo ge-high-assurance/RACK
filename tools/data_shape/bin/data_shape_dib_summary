@@ -19,6 +19,31 @@ CLASS = urlparse(f"{OWL_URL}Class")
 DATATYPE_PROPERTY = urlparse(f"{OWL_URL}DatatypeProperty")
 OBJECT_PROPERTY = urlparse(f"{OWL_URL}ObjectProperty")
 
+ACTIVITY_COLOR='lightgreen'
+TYPE_COLOR='orange'
+PROPERTY_COLOR='lightblue'
+
+def type_link_href(a1, a2):
+  return f"type link {min(a1, a2).fragment} {max(a1, a2).fragment}.dot.svg"
+
+def type_link_filename(a1, a2):
+  return f"type link {min(a1, a2).fragment} {max(a1, a2).fragment}.dot"
+
+def cross_href(a1, a2):
+  return f"cross {min(a1, a2).fragment} {max(a1, a2).fragment}.dot.svg"
+
+def cross_filename(a1, a2):
+  return f"cross {min(a1, a2).fragment} {max(a1, a2).fragment}.dot"
+
+def activity_href(activity):
+  return f"activity {activity.fragment}.dot.svg"
+
+def activity_filename(activity):
+  return f"activity {activity.fragment}.dot"
+
+def activities_filename():
+  return "activities.dot"
+
 def edgewidth(n):
   return str(math.log(n+1,100))
 
@@ -160,6 +185,7 @@ def count_relations(session):
       ?s PROV-S:dataInsertedBy ?sa.
       ?o PROV-S:dataInsertedBy ?oa.
       FILTER (?sa != ?oa).
+      FILTER (?p != PROV-S:dataInsertedBy).
       }}
     GROUP BY ?sa ?oa
     """)
@@ -208,6 +234,8 @@ def count_cross_relations_precompute(session):
       ?o a ?O.
       ?s PROV-S:dataInsertedBy ?sa.
       ?o PROV-S:dataInsertedBy ?oa.
+      FILTER (?p != PROV-S:dataInsertedBy).
+      FILTER (?s != ?o || ?sa != ?oa)
       }}
     GROUP BY ?S ?sa ?p ?O ?oa
     """)
@@ -226,6 +254,75 @@ def count_cross_relations_precompute(session):
 
   return relations
 
+def count_type_activities(session):
+  results = session.query(f"""
+    {PREFIXES}
+    SELECT ?S ?sa (COUNT(*) as ?n)
+    {session.graphs}
+    WHERE {{
+      ?s a ?S.
+      ?s PROV-S:dataInsertedBy ?sa.
+      }}
+    GROUP BY ?S ?sa ?p ?O ?oa
+    """)
+
+  activities = {}
+
+  for result in results:
+      st = urlparse(result["S"]["value"])
+      sa = urlparse(result["sa"]["value"])
+      if session.has_type(st, CLASS):
+        activities.setdefault(st, {})[sa] = int(result["n"]["value"])
+
+  return activities
+
+def count_type_links(session):
+  results = session.query(f"""
+    {PREFIXES}
+    SELECT ?S ?p ?O (COUNT(*) as ?n)
+    {session.graphs}
+    WHERE {{
+      ?s a ?S.
+      ?o a ?O.
+      ?s ?p ?o.
+      FILTER(?p != PROV-S:dataInsertedBy).
+      }}
+    GROUP BY ?S ?p ?O
+    """)
+
+  edges = {}
+  for result in results:
+      st = urlparse(result["S"]["value"])
+      p = urlparse(result["p"]["value"])
+      ot = urlparse(result["O"]["value"])
+      edges.setdefault((st,ot), {})[p] = int(result["n"]["value"])
+  return edges
+
+def count_type_relations(session):
+  results = session.query(f"""
+    {PREFIXES}
+    SELECT ?S ?O (COUNT(*) as ?n)
+    {session.graphs}
+    WHERE {{
+      ?s a ?S.
+      ?o a ?O.
+      ?s ?p ?o.
+      FILTER(?p != PROV-S:dataInsertedBy).
+      }}
+    GROUP BY ?S ?O
+    """)
+
+  relations = {}
+
+  for result in results:
+      st = urlparse(result["S"]["value"])
+      ot = urlparse(result["O"]["value"])
+      if session.has_type(st, CLASS) and session.has_type(ot, CLASS):
+        relations[st,ot] = int(result["n"]["value"])
+
+  return relations
+
+
 def count_cross_relations(rels, activity1, activity2):
   return { (st, p, ot): n for (st, sa, p, ot, oa), n in rels.items() if sa == activity1 and oa == activity2 }
 
@@ -238,12 +335,12 @@ def make_top_dot(session, activities, relations):
   for node, identifier in activities.items():
 
     txt = f"<<table cellborder=\"1\" border=\"0\" cellspacing=\"0\">\
-            <tr><td colspan=\"2\" bgcolor=\"green\"><b>{identifier}</b></td></tr>"
+            <tr><td colspan=\"2\" bgcolor=\"{ACTIVITY_COLOR}\"><b>{identifier}</b></td></tr>"
 
     tprops = properties.setdefault(node, {})
     for klass, count in tprops.items():
-        txt += f"<tr><td bgcolor=\"orange\" align=\"left\">{klass.fragment}</td>\
-                <td bgcolor=\"orange\">{count}</td></tr>"
+        txt += f"<tr><td bgcolor=\"{TYPE_COLOR}\" align=\"left\">{klass.fragment}</td>\
+                <td bgcolor=\"{TYPE_COLOR}\">{count}</td></tr>"
     txt += "</table>>"
 
     nodeId = f"n{len(nodeIds)}"
@@ -251,7 +348,7 @@ def make_top_dot(session, activities, relations):
 
     dot.node(nodeId, txt,
       shape='plaintext',
-      href=f"activity {node.fragment}.dot.svg")
+      href=activity_href(node))
 
   for (s, o), n in relations.items():
     if o > s and (s,o) in relations:
@@ -260,7 +357,7 @@ def make_top_dot(session, activities, relations):
     n += relations.get((o,s), 0)
     dot.edge(nodeIds[s], nodeIds[o], label=f"{n}",
       decorate="true",
-      href=f"cross {s.fragment} {o.fragment}.dot.svg",
+      href=cross_href(s,o),
       penwidth=edgewidth(n))
 
   return dot
@@ -270,19 +367,22 @@ def make_activity_dot(session, activity, rels):
   relations = count_cross_relations(rels, activity, activity)
   props = count_local_properties(session, activity)
 
+  nodeIds = {}
+
   dot = Digraph(format='svg')
+  dot.attr(compound="true")
+
   with dot.subgraph(name="cluster") as g:
     g.attr(label=session.get_id(activity))
-    nodeIds = {}
     for t, n in types.items():
       nodeId = f"n{len(nodeIds)}"
       nodeIds[t] = nodeId
 
       txt = f"<<table cellborder=\"1\" border=\"0\" cellspacing=\"0\">\
-        <tr><td bgcolor=\"orange\"><b>{t.fragment}</b></td><td bgcolor=\"orange\">{n}</td></tr>"
+        <tr><td bgcolor=\"{TYPE_COLOR}\"><b>{t.fragment}</b></td><td bgcolor=\"{TYPE_COLOR}\">{n}</td></tr>"
 
       for prop_name, prop_count in props.get(t, {}).items():
-        txt += f"<tr><td bgcolor=\"lightblue\">{prop_name.fragment}</td><td bgcolor=\"lightblue\">{prop_count}</td></tr>"
+        txt += f"<tr><td bgcolor=\"{PROPERTY_COLOR}\">{prop_name.fragment}</td><td bgcolor=\"{PROPERTY_COLOR}\">{prop_count}</td></tr>"
       
       txt += "</table>>"
       g.node(nodeId, txt, shape='plaintext')
@@ -293,22 +393,43 @@ def make_activity_dot(session, activity, rels):
         decorate='true',
         penwidth=edgewidth(n))
 
-  dot.render(filename=f"activity {activity.fragment}.dot", format='svg')  
+  peers = {}
+  for (_, a1, _, _, a2), n in rels.items():
+    if a1 == activity and a2 != activity:
+      peers[a2] = peers.get(a2,0) + n
+    elif a1 != activity and a2 == activity:
+      peers[a1] = peers.get(a1,0) + n
+
+  for a,n in peers.items():
+    nodeId = f"n{len(nodeIds)}"
+    nodeIds[a] = nodeId
+    txt = f"<<table cellborder=\"1\" border=\"0\" cellspacing=\"0\">\
+      <tr><td bgcolor=\"{ACTIVITY_COLOR}\"><b>{session.get_id(a)}</b></td></tr></table>>"
+    dot.node(nodeId, txt, shape='plaintext', href=activity_href(a))
+
+    dot.edge("n0", nodeId,
+      label=f"{n}",
+      decorate='true',
+      href=cross_href(activity, a),
+      ltail="cluster",
+      penwidth=edgewidth(n))
+
+  dot.render(filename=activity_filename(activity), format='svg')  
 
 def cross_dot_subgraph(session, dot, name, activity, types, props):
   nodeIds = {}
   with dot.subgraph(name=f"cluster_{name}") as g:
-    g.attr(href=f"activity {activity.fragment}.dot.svg")
+    g.attr(href=activity_href(activity))
     g.attr(label=session.get_id(activity))
     for t, n in types.items():
       nodeId = f"{name}{len(nodeIds)}"
       nodeIds[t] = nodeId
 
       txt = f"<<table cellborder=\"1\" border=\"0\" cellspacing=\"0\">\
-        <tr><td bgcolor=\"orange\"><b>{t.fragment}</b></td><td bgcolor=\"orange\">{n}</td></tr>"
+        <tr><td bgcolor=\"{TYPE_COLOR}\"><b>{t.fragment}</b></td><td bgcolor=\"{TYPE_COLOR}\">{n}</td></tr>"
 
       for prop_name, prop_count in props.get(t, {}).items():
-        txt += f"<tr><td bgcolor=\"lightblue\">{prop_name.fragment}</td><td bgcolor=\"lightblue\">{prop_count}</td></tr>"
+        txt += f"<tr><td bgcolor=\"{PROPERTY_COLOR}\">{prop_name.fragment}</td><td bgcolor=\"{PROPERTY_COLOR}\">{prop_count}</td></tr>"
       
       txt += "</table>>"
       g.node(nodeId, txt, shape='plaintext')
@@ -335,7 +456,69 @@ def make_cross_dot(session, activity1, activity2, rels):
       decorate='true',
       penwidth=edgewidth(n))
 
-  dot.render(filename=f"cross {activity1.fragment} {activity2.fragment}.dot", format='svg')
+  for (s,p,o), n in rel2.items():
+    dot.edge(nodeIds2[s], nodeIds1[o],
+      label=f"{p.fragment} {n}",
+      decorate='true',
+      penwidth=edgewidth(n))
+
+  dot.render(filename=cross_filename(activity1, activity2), format='svg')
+
+def make_activities_dot(session):
+  activities = count_type_activities(session)
+  type_links = count_type_links(session)
+
+  dot = Graph()
+  nodeIds = {}
+  for type, activities in activities.items():
+    nodeId = f"n{len(nodeIds)}"
+    nodeIds[type] = nodeId
+    
+    txt = f"<<table cellborder=\"1\" border=\"0\" cellspacing=\"0\">\
+        <tr><td colspan=\"2\" bgcolor=\"{TYPE_COLOR}\"><b>{type.fragment}</b></td></tr>"
+
+    for activity, n in activities.items():
+      txt += f"<tr><td bgcolor=\"{ACTIVITY_COLOR}\" href=\"{activity_href(activity)}\">{session.get_id(activity)}</td>"
+      txt += f"<td bgcolor=\"{ACTIVITY_COLOR}\">{n}</td></tr>"
+
+    txt += "</table>>"
+    
+    dot.node(nodeId,
+      label=txt,
+      shape='plaintext'
+      )
+
+  edges = {}
+  for (st,ot),n in count_type_relations(session).items():
+    key = min(st,ot),max(st,ot)
+    edges[key] = edges.get(key, 0) + n
+
+  for (n1,n2),count in edges.items():
+    if n1 in nodeIds and n2 in nodeIds:
+
+      edge_dot = Digraph()
+      edge_dot.node("n1", label=n1.fragment)
+      edge_dot.node("n2", label=n2.fragment)
+      for p,n in type_links.get((n1,n2), {}).items():
+        edge_dot.edge("n1", "n2",
+          label=f"{p.fragment} {n}",
+          decorate='true',
+          penwidth=edgewidth(n))
+      for p,n in type_links.get((n2,n1), {}).items():
+        edge_dot.edge("n2", "n1",
+          label=f"{p.fragment} {n}",
+          decorate='true',
+          penwidth=edgewidth(n))
+      edge_dot.render(filename=type_link_filename(n1,n2), format='svg')
+
+      dot.edge(nodeIds[n1], nodeIds[n2],
+        penwidth=edgewidth(count),
+        decorate='true',
+        href=type_link_href(n1,n2),
+        label=f"{count}")
+
+  dot.render(filename=activities_filename(), format='svg')
+
 
 def main():
   args = parse_args()
@@ -348,10 +531,8 @@ def main():
   print('Generating top graph')
   dot = make_top_dot(session, activities, relations)
 
-  if args.output is None:
-    dot.view()
-  else:
-    dot.render(args.output, format='svg')
+  print('Generating activity summary')
+  make_activities_dot(session)
 
   print('Generating activity graphs')
   for activity in activities:
@@ -362,6 +543,11 @@ def main():
     if o > s and (s,o) in relations:
       continue
     make_cross_dot(session, s, o, rels)
+
+  if args.output is None:
+    dot.view()
+  else:
+    dot.render(args.output, format='svg')
 
 if __name__ == "__main__":
   main()

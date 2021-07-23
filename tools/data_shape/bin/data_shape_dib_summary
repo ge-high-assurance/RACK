@@ -45,7 +45,7 @@ def activities_filename():
   return "activities.dot"
 
 def edgewidth(n):
-  return str(math.log(n+1,100))
+  return str(math.log(n+1,50))
 
 def parse_args():
   parser = argparse.ArgumentParser(description='Data shape visualization tool')
@@ -104,12 +104,6 @@ class Session:
   def query(self, query_string):
     self.sparql.setQuery(query_string)
     return self.sparql.queryAndConvert()["results"]["bindings"]
-
-def optional_url(d, k):
-  if k in d:
-    return urlparse(d[k]["value"])
-  else:
-    return None
 
 def get_activities(session):
   results = session.query(f"""
@@ -351,7 +345,7 @@ def make_top_dot(session, activities, relations):
       href=activity_href(node))
 
   for (s, o), n in relations.items():
-    if o > s and (s,o) in relations:
+    if s > o and (o,s) in relations:
       continue
 
     n += relations.get((o,s), 0)
@@ -540,7 +534,7 @@ def main():
 
   print('Generating cross-activity graphs')
   for s, o in relations:
-    if o > s and (s,o) in relations:
+    if s > o and (o,s) in relations:
       continue
     make_cross_dot(session, s, o, rels)
 

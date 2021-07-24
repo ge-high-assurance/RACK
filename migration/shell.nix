@@ -17,7 +17,6 @@ nixpkgs.mkShell {
   postVenvCreation = ''
     export SOURCE_DATE_EPOCH=315532800
     pip install -r ${./requirements.txt}
-    pip install -r ${./requirements-dev.txt}
   '';
 
   venvDir = ".venv";

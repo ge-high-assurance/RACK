@@ -3,7 +3,7 @@
 #
 # Generic wrapper that will collect basic information for RACK about
 # the tool (first argument) which is run with the remaining arguments
-# on the ocmmand line.  The output of the tool is captured as well for
+# on the command line.  The output of the tool is captured as well for
 # RACK analysis.
 #
 # Copyright (c) 2020, General Electric Company and Galois, Inc.

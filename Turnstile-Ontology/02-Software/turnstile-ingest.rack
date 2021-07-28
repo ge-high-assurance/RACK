@@ -109,7 +109,10 @@ data_instance('FILE#FORMAT', load_data, 'JSONFile',
 % The test process runs in an explicit rack_capture.  The output from
 % the countertest.exe tool is lines of the form "UTC-1-1: PASS", where
 % the first part is the name of the test and the second is the test
-% result.  The name of the Test is also unique to
+% result.  The name of the Test is also unique to the current test run
+% to ensure that test results are associated with the instance of the
+% source tested and that source changes get unique test results
+% instead of overwriting previous results.
 
 data_instance('TESTING#TEST_EXECUTION', load_data, Instance,
               [ uid(Instance, Title, Descr), activity_data(BW,BS,BF) ]) :-

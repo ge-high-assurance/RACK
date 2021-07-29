@@ -28,6 +28,9 @@ rack nodegroups import ../../nodegroups/ingestion/arcos.turnstile
 echo "Then, clear data-graph http://rack001/turnstiledata"
 rack data clear --data-graph "http://rack001/turnstiledata"
 
+echo "Then, load applicable standards into data-graph http://rack001/do-178c"
+rack data import --clear ../../RACK-Ontology/OwlModels/DO-178C.yaml
+
 echo "Ingesting Development Plan Data ..."
 rack data import "$BASEDIR"/TurnstileDevelopmentPlanData/import.yaml
 
@@ -55,3 +58,9 @@ rack data import "$BASEDIR"/CounterApplicationTesting/import.yaml
 
 echo "Ingesting Counter Application Unit Testing ..."
 rack data import "$BASEDIR"/CounterApplicationUnitTesting/OwlModels/import.yaml
+
+echo "Ingesting SystemSpec ..."
+rack data import "$BASEDIR"/TurnstileSystemSpec/import.yaml
+
+echo "Ingesting Objectives ..."
+rack data import "$BASEDIR"/Objectives/import.yaml

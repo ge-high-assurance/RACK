@@ -1,0 +1,25 @@
+data-graph: "http://rack001/turnstiledata"
+ingestion-steps:
+#Phase1: Identifiers Only
+- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}
+- {nodegroup: "ingest_COLLECTION", csv: "COLLECTION1.csv"}
+- {nodegroup: "ingest_DESCRIPTION", csv: "DESCRIPTION1.csv"}
+- {nodegroup: "ingest_PLAN", csv: "PLAN1.csv"}
+- {nodegroup: "ingest_REPORT", csv: "REPORT1.csv"}
+- {nodegroup: "ingest_SECTION", csv: "SECTION1.csv"}
+- {nodegroup: "ingest_SPECIFICATION", csv: "SPECIFICATION1.csv"}
+- {nodegroup: "ingest_SYSTEM", csv: "SYSTEM1.csv"}
+- {nodegroup: "ingest_turnstile_SoftwareThread", csv: "turnstile_SoftwareThread1.csv"}
+- {nodegroup: "ingest_turnstile_SystemComponent", csv: "turnstile_SystemComponent1.csv"}
+
+#Phase2: All Evidence
+- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
+- {nodegroup: "ingest_COLLECTION", csv: "COLLECTION2.csv"}
+- {nodegroup: "ingest_DESCRIPTION", csv: "DESCRIPTION2.csv"}
+- {nodegroup: "ingest_PLAN", csv: "PLAN2.csv"}
+- {nodegroup: "ingest_REPORT", csv: "REPORT2.csv"}
+- {nodegroup: "ingest_SECTION", csv: "SECTION2.csv"}
+- {nodegroup: "ingest_SPECIFICATION", csv: "SPECIFICATION2.csv"}
+- {nodegroup: "ingest_SYSTEM", csv: "SYSTEM2.csv"}
+- {nodegroup: "ingest_turnstile_SoftwareThread", csv: "turnstile_SoftwareThread2.csv"}
+- {nodegroup: "ingest_turnstile_SystemComponent", csv: "turnstile_SystemComponent2.csv"}

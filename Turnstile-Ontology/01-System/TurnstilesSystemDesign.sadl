@@ -10,7 +10,7 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
  uri "http://Turnstile/TurnstileDesign" alias trnstsd.
-import "http://Turnstile/DevelopmentPlanData".
+import "http://Turnstile/DevelopmentPlan".
 
 Turnstile is a SYSTEM,
 	has identifier "Turnstile".

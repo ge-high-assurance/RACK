@@ -10,7 +10,7 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
  uri "http://Turnstile/CounterApplicationRequirementSpec" alias cntrapprq.
-import "http://Turnstile/DevelopmentPlanData".
+import "http://Turnstile/DevelopmentPlan".
 import "http://Turnstile/TurnstileDesign".
 import "http://Turnstile/HazardAssessment".
 

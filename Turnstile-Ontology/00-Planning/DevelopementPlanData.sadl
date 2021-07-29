@@ -41,29 +41,31 @@ _DevelopmentPlan is a PLAN,
     _01-SystemOverview is a SECTION,
         has content CounterApplication,
         has content Display,
-        has content InGate,
-        has content OutGate,
+        has content Ingate,
+        has content Outgate,
         has content Turnstile.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.CounterApplication
       CounterApplication is a SystemComponent
+		has identifier "Counter Application",
         has partOf Turnstile.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Display
       Display is a SystemComponent
+ 		has identifier "Display",
         has partOf Turnstile.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.InGate
-      InGate is a SystemComponent
+      Ingate is a SystemComponent
 		has identifier "In Gate"
         has partOf Turnstile.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.OutGate
-      OutGate is a SystemComponent,
+      Outgate is a SystemComponent,
 		has identifier "Out Gate",
         has partOf Turnstile.
 
@@ -73,46 +75,49 @@ _DevelopmentPlan is a PLAN,
 		has identifier "Turnstile".
 
 
-        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Census
-      Census is a SystemInterfaceDefinition
-		has identifier "census".
-
-
-        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Inflow
-      Inflow is a SystemInterfaceDefinition
-		has identifier "inflow".
-
-
-        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Outflow
-      Outflow is a SystemInterfaceDefinition
-		has identifier "outflow".
-
+//        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Census
+//      Census is a SystemInterfaceDefinition
+//		has identifier "census".
+//
+//
+//        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Inflow
+//      Inflow is a SystemInterfaceDefinition
+//		has identifier "inflow".
+//
+//
+//        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.Outflow
+//      Outflow is a SystemInterfaceDefinition
+//		has identifier "outflow".
+//
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview
     _02-SoftwareOverview is a SECTION,
-        has content CounterApplication,
+        has content CounterApplication
         has content ExecutiveThread,
         has content InputThread,
         has content OutputThread.
 
 
-        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.CounterApplication
-      CounterApplication is a SYSTEM.
-
-
+//        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.CounterApplication
+//      CounterApplication is a SYSTEM.
+//
+//
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.ExecutiveThread
-      ExecutiveThread is a SYSTEM
+      ExecutiveThread is a SoftwareThread
+	    has identifier "ExecutiveThread",
         has partOf CounterApplication.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.InputThread
-      InputThread is a SYSTEM
+      InputThread is a SoftwareThread
+	    has identifier "InputThread",
         has partOf CounterApplication.
 
 
         //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.OutputThread
       OutputThread is a SYSTEM
+	    has identifier "OutputThread",
         has partOf CounterApplication.
 
 
@@ -293,9 +298,9 @@ _DevelopmentPlan is a PLAN,
     
 
 
-      Rule SystemRequirement_content:
-        given x is a  SystemRequirement 
-        then SystemSpec has content x.
+//      Rule SystemRequirement_content:
+//        given x is a  SystemRequirement 
+//        then SystemSpec has content x.
 
 
 
@@ -303,18 +308,16 @@ _DevelopmentPlan is a PLAN,
     _02-SystemDesign is a SECTION.
 
 
-      Rule SystemComponent_content:
-        given x is a  SystemComponent 
-        then SystemSpec has content x.
+//      Rule SystemComponent_content:
+//        given x is a  SystemComponent 
+//        then SystemSpec has content x.
+//
+//       Rule SystemInterfaceDefinition_content:
+//        given x is a  SystemInterfaceDefinition 
+//        then SystemSpec has content x.
 
 
-       Rule SystemInterfaceDefinition_content:
-        given x is a  SystemInterfaceDefinition 
-        then SystemSpec has content x.
-
-
-
-        //Model Location: DevelopmentPlan.02-SystemDevelopement.03-HazardAssesment
+        //Model Location:DevelopmentPlan.02-SystemDevelopement.03-HazardAssesment
     _03-HazardAssesment is a SECTION.
 
 
@@ -711,20 +714,19 @@ ASSERT is a AGENT.
 
       //Model Location: DevelopmentPlan.07-SoftwareStandards.SoftwareCodeReviewChecklist
     SoftwareCodeReviewChecklist is a PLAN
-      has used VerificationStandard.
-
+		has references VerificationStandard.
 
       //Model Location: DevelopmentPlan.07-SoftwareStandards.SoftwareDesignReviewChecklist
     SoftwareDesignReviewChecklist is a PLAN
-      has used VerificationStandard.
+		has references VerificationStandard.
 
 
       //Model Location: DevelopmentPlan.07-SoftwareStandards.SoftwareRequirementReviewChecklist
     SoftwareRequirementReviewChecklist is a PLAN
-      has used VerificationStandard.
+		has references VerificationStandard.
 
 
       //Model Location: DevelopmentPlan.07-SoftwareStandards.SoftwareTestGuidance
     SoftwareTestGuidance is a PLAN
-      has used VerificationStandard.
-    
+		has references VerificationStandard.
+

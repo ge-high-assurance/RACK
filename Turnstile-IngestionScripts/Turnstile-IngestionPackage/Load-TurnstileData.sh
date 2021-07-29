@@ -21,8 +21,15 @@ then
 	exit 1
 fi
 
-echo "First, clear data-graph http://rack001/turnstiledata"
-#rack data clear --data-graph "http://rack001/turnstiledata"
+echo "First, load the GE-Ontology and nodegroups"
+rack model import ../../GE-Ontology/OwlModels/import.yaml
+rack nodegroups import ../../nodegroups/ingestion/arcos.turnstile
+
+echo "Then, clear data-graph http://rack001/turnstiledata"
+rack data clear --data-graph "http://rack001/turnstiledata"
+
+echo "Ingesting Development Plan Data ..."
+rack data import "$BASEDIR"/TurnstileDevelopmentPlanData/import.yaml
 
 echo "Ingesting Planning Document Evidence ..."
 rack data import "$BASEDIR"/PlanningDocuments/import.yaml

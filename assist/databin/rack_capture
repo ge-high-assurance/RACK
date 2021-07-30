@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2184,SC2027,SC2046,SC2162,SC1090
+#
+# Generic wrapper that will collect basic information for RACK about
+# the tool (first argument) which is run with the remaining arguments
+# on the command line.  The output of the tool is captured as well for
+# RACK analysis.
+#
+# Copyright (c) 2020, General Electric Company and Galois, Inc.
+
+. $(dirname "$0")/rackfuncs.sh
+
+tool=$(basename "$1")
+realtool=$(find_in_path_excluding "$1")
+nonce="n$(date +%s)-$$"
+outf=$(pwd)/.${tool}.capture.rack
+
+rack_info_pre "${tool}" > "${outf}"
+echo ":- multifile tool_output/3." >> "${outf}"
+echo "tool_output(${nonce@Q}, ${tool@Q}," '"' >> "${outf}"
+
+update_make_steps
+
+when_done() {
+    echo '").' >> "${outf}"
+    rack_info_post >> "${outf}"
+}
+trap when_done EXIT
+
+"${@}" | tee -a "${outf}"

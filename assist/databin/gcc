@@ -70,17 +70,11 @@ nonce="n$(date +%s)-$$"
 
 (
     export IFS=","
-    echo ":- multifile build_with/5, build_from/2, build_inputs/2, build_outputs/2,
-                       build_start/2, build_finished/3, build_user/2, file_sha1/3,
-                       file_committer/2."
-    # shellcheck disable=SC2086
-    echo "build_with(${nonce@Q}, compile," ${tool@Q}, ${realtool@Q}, [ "${opts[*]@Q}" ] ")."
-    # shellcheck disable=SC2086,SC2027,SC2046
-    echo "build_from(${nonce@Q}, '"$(top_rel_curdir)"')."
+    rack_info_pre "compile" "${opts[@]}"
+    echo ":- multifile file_committer/2."
+    echo ":- discontiguous file_committer/2."
     echo "build_inputs(${nonce@Q}, [ ${inf[*]@Q} ])."
     echo "build_outputs(${nonce@Q}, [ ${outf@Q} ])."
-    echo "build_start(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'))."
-    echo "build_user(${nonce@Q}, '$(whoami)')."
     for inp in ${inf[*]} ; do
         git log -n 1 --pretty=format:"file_committer(${inp@Q}, '%al').%n" "$inp" 2>/dev/null
     done
@@ -104,7 +98,7 @@ nonce="n$(date +%s)-$$"
 update_make_steps
 
 when_done() {
-    rval=$?
+    rack_info_post >> "${rackf}"
     if [ ! -z "$inclf" -a -r "$inclf" ] ; then
         read -a fl < <(cat "$inclf")
         if [ ${#fl[*]} -gt 1 ] ; then
@@ -123,7 +117,6 @@ when_done() {
         read sum f < <(sha1sum "$F")
         echo "file_sha1(${f@Q}, ${sum@Q}, ${nonce@Q})." >> "${rackf}"
     done
-    echo "build_finished(${nonce@Q}, $(date +'date_time(%Y,%m,%d,%H,%M,%S,%z)'), $rval)." >> "${rackf}"
 }
 trap when_done EXIT
 

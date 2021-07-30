@@ -52,7 +52,7 @@ description DSL into instances in the model.
 
               % Importing user data into the model
               load_data/2,
-              rdf_dataref/3,
+              rdf_dataref/2,
               load_recognizer/1
           ]).
 
@@ -258,6 +258,16 @@ rack_ref(Name, URI) :- atom_concat('http://arcos.rack/', Name, URI).
 ns_ref(NS, Target, Ref) :- atom_concat(NS, '#', P),
                            atom_concat(P, Target, Ref).
 
+%! rack_ontology_ref(-URI:atom) is semidet.
+%
+% Returns a URI for every class that is either part of the RACK ontology or an overlay thereof.
+
+rack_ontology_ref(URI) :-
+    rdf(URI, rdf:type, owl:'Class'),
+    rdf_reachable(URI, rdfs:subClassOf, BaseURI),
+    rack_ref(_, BaseURI),
+    root_rack_ref(BaseURI).
+
 %! append_fld(+Base:atom, +Fld:atom, -Result:atom) is det.
 %
 % Used to construct an RDF node reference from a base and a suffix
@@ -361,6 +371,42 @@ ontology_leaf_class(C) :-
               OtherRefs),
       length(OtherRefs, 0))).
 
+% True if RootURI is the base-est class in the RACK ontology
+root_rack_ref(RootURI) :-
+    \+ rdf_is_bnode(RootURI),
+    rdf(OtherURI, rdf:type, owl:'Class'),
+    OtherURI \= RootURI,
+    rack_ref(_, OtherURI),
+    rdf_reachable(RootURI, rdfs:subClassOf, OtherURI), !, fail.
+root_rack_ref(RootURI) :- \+ rdf_is_bnode(RootURI).
+
+%! rack_inheritance_chain(-TipClass, +ClassInChain)
+%
+% Iterates over all classes between the provided TipClass class and
+% the root_rack_ref of that class, unifying ClassInChain with each
+% possible Class in the inheritance chain, including the TipClass.
+rack_inheritance_chain(TipClass, ClassInChain) :-
+    rdf_reachable(TipClass, rdfs:subClassOf, BaseClass),
+    root_rack_ref(BaseClass),
+    rdf(ClassInChain, rdf:type, owl:'Class'),
+    rdf_reachable(ClassInChain, rdfs:subClassOf, BaseClass),
+    rdf_reachable(TipClass, rdfs:subClassOf, ClassInChain).
+
+
+% True if BaseClass is the bottom-most class for which
+% data_instance(C, Data, InstanceSuffix) matches.  This is used to
+% instantiate the most specific class possible for the recognized
+% data.
+bottom_child_URI(BaseClassURI, Data, InstanceSuffix) :-
+    rdf_reachable(OtherC, rdfs:subClassOf, BaseClassURI),
+    \+ rdf_is_bnode(OtherC),
+    OtherC \= BaseClassURI,
+    atom_concat(_, Other, OtherC),
+    data_instance(Other, Data, InstanceSuffix, _),
+    !,
+    fail.
+bottom_child_URI(_, _, _).
+
 
 % TODO: this is a WIP
 enumerationOf(E, C) :-
@@ -416,6 +462,7 @@ property(Class, Property, shared) :-
 property_target(Class, Property, PropUsage, Target, Restrictions) :-
     property(Class, Property, PropUsage),
     rdf(Property, rdfs:range, Target),
+    \+ rdf_is_bnode(Target),
     property_extra(Class, Property, Target, Restrictions).
 property_target(Class, Property, PropUsage, Target, Restrictions) :-
     rdf(Class, rdfs:subClassOf, Parent),
@@ -563,16 +610,15 @@ realize_loaded_data :-
     % n.b. use findall to force all backtracking here, otherwise
     % =erase(SetNS)= in load_data/2 will run after the first success
     % and no more instances will be instantiated.
-    findall(Instance, rdf_dataref(_RDFClass1, load_data_start, Instance), StInstances),
-    findall(Instance, rdf_dataref(_RDFClass2, load_data, Instance), LdInstances),
-    findall(Instance, rdf_dataref(_RDFClass3, load_data_finish, Instance), FiInstances),
+    findall(Instance, rdf_dataref(load_data_start, Instance), StInstances),
+    findall(Instance, rdf_dataref(load_data, Instance), LdInstances),
+    findall(Instance, rdf_dataref(load_data_finish, Instance), FiInstances),
     append(StInstances, LdInstances, StLdInstances),
     append(StLdInstances, FiInstances, PrimaryInstances),
-    rack_namespace(NS),
-    findall(Instance, (member(PIRef, PrimaryInstances),
-                       ns_ref(NS, PI, PIRef),
-                       rdf_dataref(_RDFClass4, generated_from(PI), Instance)), GenInstances),
+    findall(Instance, (member(iad(_,PI,_), PrimaryInstances),
+                       rdf_dataref(generated_from(PI), Instance)), GenInstances),
     append(PrimaryInstances, GenInstances, Instances),
+    rdf_datagen(Instances),
     length(Instances, Count),
     rack_namespace(Namespace),
     print_message(informational, loaded_data_instances(Namespace, Count)).
@@ -643,43 +689,69 @@ add_triple(S,P,O) :-
     (\+ rack_namespace(_), rdf_assert(S, P, O)).
 
 
-%! rdf_dataref(-RDFClass, +Data, -Instance) is semidet.
-%! rdf_dataref(+RDFClass, +Data, -Instance) is semidet.
+%! rdf_dataref(+Data, -InstanceAndData) is semidet.
 %
 % Top-level rule to determine instances of an RDFClass given the
 % imported descriptive Data (or a derivation thereof).  Used by
-% load_data/2.
+% load_data/2.  The return should later be processed by rdf_datagen.
 
-rdf_dataref(RDFClass, Data, Instance) :-
-    rdf(RDFClass, rdf:type, owl:'Class'),
-    rack_ref(ShortC, RDFClass),
+rdf_dataref(Data, InstanceAndData) :-
     data_instance(ShortC, Data, InstanceSuffix, InstanceData),
+
+    rack_ontology_ref(RDFClass),
+    atom_concat(_, ShortC, RDFClass),
+
+    % If multiple data_instances can be created for this Instance,
+    % choose the most specific sub-class
+    bottom_child_URI(RDFClass, Data, InstanceSuffix),
+
+    InstanceAndData = iad(RDFClass, InstanceSuffix, InstanceData).
+
+%! rdf_datagen(+InstanceAndData)
+%
+% Uses the InstanceAndData emitted by rdf_dataref/2 to iterate and
+% generate all the relations/data associated with each Instance.  This
+% is done as a separate step so that duplicates can be removed from
+% the set of Instances+Data and so that cross-references will have
+% full knowledge of all defined instances.
+
+rdf_datagen(AllInstanceAndData) :-
+    list_to_set(AllInstanceAndData, Uniques),
+    % n.b. use findall to force all backtracking and avoid inadvertent
+    % cut abbreviation
+    findall(Each, (member(Each, Uniques), rdf_datagen_inst(Each)), _).
+
+rdf_datagen_inst(iad(RDFClass, InstanceSuffix, InstanceData)) :-
     rack_namespace(NS),
     ns_ref(NS, InstanceSuffix, Instance),
     add_triple(Instance, rdf:type, RDFClass),
+    rack_inheritance_chain(RDFClass, AClass),
+    rdf_datagen_instclass(AClass, Instance, InstanceData).
+
+rdf_datagen_instclass(InstClass, Instance, InstanceData) :-
     % Use InstanceData to drive data_get property relation definitions
     (is_list(InstanceData),
-     add_each_rdfdata(RDFClass, RDFClass, Instance, InstanceData);
+     add_each_rdfdata(InstClass, InstClass, Instance, InstanceData);
      \+ is_list(InstanceData),
-     add_rdfdata(RDFClass, RDFClass, Instance, InstanceData);
+     add_rdfdata(InstClass, InstClass, Instance, InstanceData);
      true  % OK if there are no elements for this instance
     ).
 
-add_each_rdfdata(RDFClass, Class, DataRef, DataList) :-
+add_each_rdfdata(InstClass, Class, DataRef, DataList) :-
     member(Data, DataList),
-    add_rdfdata(RDFClass, Class, DataRef, Data).
+    add_rdfdata(InstClass, Class, DataRef, Data).
 
-add_rdfdata(RDFClass, Class, DataRef, Data) :-
+add_rdfdata(InstClass, Class, DataRef, Data) :-
     rdf(Class, rdfs:subClassOf, Parent),
-    add_rdfdata(RDFClass, Parent, DataRef, Data).
+    add_rdfdata(InstClass, Parent, DataRef, Data).
 
-add_rdfdata(RDFClass, Class, DataRef, Data) :-
+add_rdfdata(InstClass, Class, DataRef, Data) :-
     property(Class, Property, _),
-    rack_ref(ShortC, RDFClass),
+    rack_ref(ShortC, InstClass),
     rack_ref(ShortP, Property),
-    add_rdfproperty(ShortC, ShortP, RDFClass, Property, DataRef, Data).
+    add_rdfproperty(ShortC, ShortP, Property, DataRef, Data).
 
-add_rdfproperty(ShortC, ShortP, _RDFClass, Property, DataRef, Data) :-
+add_rdfproperty(ShortC, ShortP, Property, DataRef, Data) :-
     data_get(ShortC, ShortP, Data, Value),
     (
         % If this is an atom, it might be existing or might need to be created.
@@ -731,7 +803,7 @@ add_atom_newref(DataRef, Property, Value) :-
 % Used to load a set of Data recognizers from a file.  This can be
 % used with multiple files to aggregate recognizers.
 %
-% Data recognizers are invoked by the load_data/2 and rdf_dataref/3
+% Data recognizers are invoked by the load_data/2 and rdf_dataref/2
 % process to recognize the relationship between information in the
 % input =.rack= data files and specific ontology elements.
 %

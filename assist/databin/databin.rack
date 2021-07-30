@@ -18,6 +18,7 @@ databin_name(MyName) :-
                  build_outputs/2,
                  build_from/2,
                  build_start/2,
+                 build_on/2,
                  build_finished/3,
                  build_user/2,
                  file_sha1/3,
@@ -144,6 +145,13 @@ data_get('SOFTWARE#BUILD', 'SOFTWARE#step',
     tar_start(N, _, _),
     activity_instance(N, tar, V).
 
+%% -------------------- TEST GENERAL HANDLING
+
+data_get('TESTING#TEST_EXECUTION', 'TESTING#executedOn',
+         activity_data(_, _, build_finished(Nonce, _, _)),
+         Value) :-
+    build_on(Nonce, Name), atom_string(Name, Value).
+
 
 %% -------------------- MISC FILES
 
@@ -172,13 +180,27 @@ data_instance('FILE#FILE', load_data, Instance, InstanceData) :-
     InstanceData = [uid(Instance, Title, Descr),
                     sw_file_data(Nonce, Dir, Output)].
 
-data_instance('FILE#FILE', load_data, ToolPath,
+data_instance('FILE#FILE', load_data, ToolInst,
               [uid(UID, Title, Descr),
-               sw_file_data(Nonce, '/tmp', ToolPath)]) :-
+               sw_file_data(Nonce, Dir, ToolInst)]) :-
     build_with(Nonce, _ToolType, _ToolName, ToolPath, _ToolArgs),
+
+    % make sure this isn't already declared as the output file of a
+    % previous stage, because then there's already a FILE#FILE
+    % instance that we don't want to duplicate
+    pre_existing_file(ToolPath),
+
     UID = ToolPath,
+    build_from(Nonce, Dir),
     atom_string(ToolPath, Title),
-    string_concat(Title, " file", Descr).
+    string_concat(Title, " file", Descr),
+    file_base_name(ToolPath, ToolFile),
+    (file_directory_name(ToolPath, '.'), !, ToolInst = ToolFile;
+     ToolInst = ToolPath).
+
+pre_existing_file(File) :-
+    build_outputs(_, OutFiles), member(File, OutFiles), !, fail.
+pre_existing_file(_).
 
 data_get('FILE#FILE', 'FILE#fileFormat',
          sw_file_data(Nonce, _, F), 'C') :-
@@ -205,7 +227,7 @@ output_of(Tool, Dir, F, BuildNonce) :-
 output_of(_, _, _, _) :- false.  % base case for checkout output_of
 
 data_get('FILE#FILE', 'FILE#fileFormat',
-         sw_file_data(Nonce, _, F), 'ElfFile') :-
+         sw_file_data(_, _, F), 'ElfFile') :-
     build_outputs(Nonce, FS),
     member(F, FS),
     build_with(Nonce, compile, _, _, _).
@@ -295,7 +317,15 @@ data_instance('AGENTS#TOOL', load_data, Name, [toolSpec(Name, ToolPath, UserInst
     userForToolUsage(Nonce, UserInstance),
     toolName(Nonce, ToolName, ToolPath, Name).
 
-data_get('AGENTS#TOOL', 'FILE#definedIn', toolSpec(_Name, ToolPath, _User), ToolPath).
+data_get('AGENTS#TOOL', 'FILE#definedIn',
+         toolSpec(_Name, ToolPath, _User), ToolRef) :-
+    (pre_existing_file(ToolPath), !, ToolRef = ToolPath
+    ;
+    build_outputs(Nonce, OutFiles),
+    member(ToolPath, OutFiles),
+    build_from(Nonce, Dir),
+    file_instance(Nonce, Dir, ToolPath, ToolRef)).
+
 data_get('AGENTS#TOOL', 'PROV-S#actedOnBehalfOf', toolSpec(_Name, _ToolPath, User), User).
 
 userForToolUsage(Nonce, UserInstance) :-
@@ -394,8 +424,6 @@ data_instance('PROV-S#ACTIVITY', load_data, Instance,
     BS = build_start(Nonce, _StartTime),
     BF = build_finished(Nonce, _FinishTime, _ExitVal),
     BW, BS, BF,
-    ToolType \= compile,
-    ToolType \= make,
     activity_instance(Nonce, ToolType, Instance),
     atom_string(ToolType, Title),
     string_concat(Title, " tool invocation", Descr).

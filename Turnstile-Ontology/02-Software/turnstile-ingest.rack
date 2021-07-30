@@ -2,15 +2,23 @@
 % automatically-generated assist databin information to the
 % user-specified abstract/documentation information.
 
-:- multifile data_instance/4, data_get/4.
+:- multifile data_instance/4, data_get/4, data_load/3.
+:- use_module(library(dcg/basics)).
+
+turnstile_ns(Elem, URI) :-
+    atom_concat('http://arcos.turnstile/GE/', Elem, URI).
+turnstile_ns_ref(NS, Elem, URI) :-
+    atom_concat(NS, '#', P),
+    atom_concat(P, Elem, Q),
+    turnstile_ns(Q, URI).
 
 % The DevelopmentPlan specifies that SOFTWARE#CODE_DEVELOPMENT
 % references the plan-defined SoftwareStandard.  This is an
 % abstract/documentation linkage that is established by this rule.
 
-data_get('SOFTWARE#CODE_DEVELOPMENT', 'SOFTWARE#referenced',
-         sw_devel(_,_,_),
-         'http://Turnstile/DevelopmentPlanData#SoftwareStandard').
+data_get('SOFTWARE#CODE_DEVELOPMENT', 'SOFTWARE#referenced', sw_devel(_,_,_),
+         Value) :-
+    turnstile_ns('DevelopmentPlanData#SoftwareStandard', Value).
 
 
 % The DevelopmentPlan creates a SoftwareIntegration as an instance of
@@ -19,20 +27,26 @@ data_get('SOFTWARE#CODE_DEVELOPMENT', 'SOFTWARE#referenced',
 % explicit using predicates not normally needed for data recognizers.
 % If the DevelopmentPlan simply specified a SOFTWARE#COMPILE, then
 % this data_get recognizer could be removed.
-data_get('SOFTWARE#COMPILE', 'PROV-S#identifier', uid(Instance,_,_), Identifier) :-
-    rack_namespace(NS),
-    ns_ref(NS, Instance, RDFInstance),
-    atom_string(Instance, Identifier),
-    add_triple(RDFInstance, rdf:type,
-               'http://Turnstile/DevelopmentPlan#SoftwareIntegration').
+
+data_instance('DevelopmentPlan#SoftwareIntegration', load_data, Instance,
+              [ uid(Instance, Title, Descr),
+                activity_data(BW,BS,BF) ]) :-
+    BW = build_with(Nonce, compile, _ToolName, _ToolPath, _ToolArgs),
+    BS = build_start(Nonce, _StartTime),
+    BF = build_finished(Nonce, _FinishTime, _ExitVal),
+    BW, BS, BF,
+    activity_instance(Nonce, compile, Instance),
+    Title = "compilation",
+    Descr = "Execution of the compiler".
+
 
 % Explicit links between software files and documented requirements.
 % These cannot be automatically discovered and are project specific.
 
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'output.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#OUT-LLR-1').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'output.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#OUT-LLR-2').
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'output.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#OUT-LLR-1', Value).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'output.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#OUT-LLR-2', Value).
 
 data_get(_, 'SOFTWARE#definedIn', func_decl(_, FileName), FileRef) :-
     build_inputs(Nonce, InpSources),
@@ -40,25 +54,25 @@ data_get(_, 'SOFTWARE#definedIn', func_decl(_, FileName), FileRef) :-
     member(FileName, InpSources),
     file_instance(Nonce, Dir, FileName, FileRef).
 
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#IN-LLR-1').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#IN-LLR-2').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#IN-LLR-3').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#IN-LLR-4').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#IN-LLR-5').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#IN-LLR-6').
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#IN-LLR-1', Value).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#IN-LLR-2', Value).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#IN-LLR-3', Value).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#IN-LLR-4', Value).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#IN-LLR-5', Value).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'hw.h'), Value) :-
+    turnstile_ns('CounterApplicationDesignDescription#IN-LLR-6', Value).
 
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#EXE-LLR-1').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#EXE-LLR-2').
-data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'),
-         'http://Turnstile/CounterApplicationDesignDescription#EXE-LLR-3').
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'), V) :-
+    turnstile_ns('CounterApplicationDesignDescription#EXE-LLR-1', V).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'), V) :-
+    turnstile_ns('CounterApplicationDesignDescription#EXE-LLR-2', V).
+data_get('FILE#FILE', 'FILE#satisfies', sw_file_data(_,_,'counter.h'), V) :-
+    turnstile_ns('CounterApplicationDesignDescription#EXE-LLR-3', V).
 
 % Generate explicit links between the automatically-recognized input
 % files and the corresponding software functions and data declared in
@@ -91,3 +105,47 @@ data_get('FILE#FILE', 'FILE#fileFormat', sw_file_data(_,_,'conf.json'),
 data_instance('FILE#FORMAT', load_data, 'JSONFile',
               [ uid('JSONFile', 'JSONFile', 'JSONFileFormat'),
                 fmt('JSONFile')]).
+
+% The test process runs in an explicit rack_capture.  The output from
+% the countertest.exe tool is lines of the form "UTC-1-1: PASS", where
+% the first part is the name of the test and the second is the test
+% result.  The name of the Test is also unique to the current test run
+% to ensure that test results are associated with the instance of the
+% source tested and that source changes get unique test results
+% instead of overwriting previous results.
+
+data_instance('TESTING#TEST_EXECUTION', load_data, Instance,
+              [ uid(Instance, Title, Descr), activity_data(BW,BS,BF) ]) :-
+    BW = build_with(Nonce, ToolType, 'countertest.exe', _ToolPath, _ToolArgs),
+    BS = build_start(Nonce, _StartTime),
+    BF = build_finished(Nonce, _FinishTime, _ExitVal),
+    BW, BS, BF,
+    activity_instance(Nonce, ToolType, Instance),
+    atom_string(ToolType, Title),
+    string_concat(Title, " testing", Descr).
+
+data_instance('TESTING#TEST_RESULT', load_data, Instance,
+              test_res(TestGenInstance, TestName, TestRes)) :-
+    build_with(Nonce, ToolType, 'countertest.exe', _ToolPath, _ToolArgs),
+    tool_output(Nonce, 'countertest.exe', Output),
+    string_lines(Output, OutLines),
+    member(OutLine, OutLines),
+    string_codes(OutLine, OutLineCodes),
+    phrase(test_result(TestNameCodes, TestRes), OutLineCodes, _Rem),
+    atom_codes(TestName, TestNameCodes),
+    append_fld(Nonce, 'Result', NR),
+    append_fld(NR, TestName, Instance),
+    activity_instance(Nonce, ToolType, TestGenInstance).
+
+test_result(TestName, 'Passed') -->
+    string(TestName), ":", blanks, "PASS", !, remainder(_) .
+test_result(TestName, 'Failed') -->
+    string(TestName), ":", blanks, "FAIL", !, remainder(_) .
+
+data_get('TESTING#TEST_RESULT', 'TESTING#result', test_res(_,_,R), V) :-
+    atom_concat('TESTING#', R, Result),
+    rack_ref(Result, V).
+
+data_get('TESTING#TEST_RESULT', 'TESTING#executedBy', test_res(V,_,_), V).
+data_get('TESTING#TEST_RESULT', 'TESTING#confirms', test_res(_,N,_), V) :-
+    turnstile_ns_ref('CounterApplicationSoftwareUnitTesting', N, V).

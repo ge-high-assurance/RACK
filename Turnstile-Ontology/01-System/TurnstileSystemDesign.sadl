@@ -9,7 +9,7 @@
  * material are those of the author(s) and do not necessarily reflect the views
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
- uri "http://Turnstile/TurnstileDesign" alias trnstsd.
+ uri "http://Turnstile/TurnstileSystemDesign" alias trnstsd.
 import "http://Turnstile/DevelopmentPlan".
 
 Turnstile is a SYSTEM,

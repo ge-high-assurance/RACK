@@ -9,7 +9,7 @@
  * material are those of the author(s) and do not necessarily reflect the views
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
- uri "http://Turnstile/CounterApplicationSoftwareUnitTesting" alias cntrapputst.
+ uri "http://Turnstile/CounterApplicationUnitTesting" alias cntrapputst.
 import "http://Turnstile/CounterApplicationDesignDescription".
 
 UnitTestDevelopment is a DevelopUnitTests,

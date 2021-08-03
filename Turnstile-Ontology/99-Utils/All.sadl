@@ -10,12 +10,12 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
  uri "http://Turnstile/All" alias all.
-import "http://Turnstile/TurnstileDesign".
+import "http://Turnstile/TurnstileSystemDesign".
 import "http://Turnstile/HazardAssessment".
 import "http://Turnstile/DevelopmentPlanData".
 import "http://Turnstile/DevelopmentPlan".
 import "http://Turnstile/CounterApplicationTesting".
-import "http://Turnstile/CounterApplicationSoftwareUnitTesting".
+import "http://Turnstile/CounterApplicationUnitTesting".
 import "http://Turnstile/CounterApplication".
 import "http://Turnstile/CounterApplicationDesignDescription".
 import "http://Turnstile/CounterApplicationReviews".

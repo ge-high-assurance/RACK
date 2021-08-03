@@ -11,7 +11,7 @@
  */
  uri "http://Turnstile/CounterApplicationRequirementSpec" alias cntrapprq.
 import "http://Turnstile/DevelopmentPlan".
-import "http://Turnstile/TurnstileDesign".
+import "http://Turnstile/TurnstileSystemDesign".
 import "http://Turnstile/HazardAssessment".
 
 JohnDoe is a Engineer

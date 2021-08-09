@@ -80,7 +80,7 @@ class SNodeProp(BaseModel):
     relationship: str
     UriRelationship: str
     Constraints: str
-    fullURIName: str
+    fullURIName: Optional[str]
     SparqlID: str
     isReturned: bool
     optMinus: int
@@ -139,7 +139,7 @@ class SNodeGroup(BaseModel):
 
 
 class Mapping(BaseModel):
-    colId: str
+    colId: Optional[str]
     colName: Optional[str]
     transformList: Optional[List[str]]
 

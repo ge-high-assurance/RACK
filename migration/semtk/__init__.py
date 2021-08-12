@@ -153,7 +153,7 @@ class ImportSpecProp(BaseModel):
 class ImportSpecNode(BaseModel):
     sparqlID: str
     type: str
-    URILookupMode: str
+    URILookupMode: Optional[str]
     mapping: List[Mapping]
     props: List[ImportSpecProp]
 

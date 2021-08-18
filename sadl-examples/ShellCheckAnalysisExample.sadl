@@ -17,7 +17,8 @@ LINE_RESULT is a type of ANALYSIS_RESULT
 SHELLCHECK_SEVERITY is a class
   must be one of {WARNING, ERROR, INFO, STYLE}.
 
-SHELLCHECK_ANNOTATION is a type of ANALYSIS_FINDING
+SHELLCHECK_FINDING is a type of ANALYSIS_FINDING
+  described by referenceUrl with a single value of type string
   described by severity with a single value of type SHELLCHECK_SEVERITY.
 
 /* This goes in the data */
@@ -28,79 +29,73 @@ MachO_Executable_x86_64 is a FORMAT.
 EricMertens is a PERSON
   title "Eric Mertens".
 
-ShellCheckExecutableHash is a FILE_HASH
-  hashType SHA1
-  hashValue "1d5bb912481c4510e3e0a3896a4896d64b55d983".
-
 ShellCheckExecutable is a FILE
   fileFormat MachO_Executable_x86_64
-  fileHash ShellCheckExecutableHash
-  filename "~/.cabal/bin/shellcheck".
+  filename "~/.cabal/bin/shellcheck"
+  fileHash (a FILE_HASH
+  	hashType SHA1
+  	hashValue "1d5bb912481c4510e3e0a3896a4896d64b55d983").
 
 ShellCheck is a TOOL
   toolVersion "0.7.2"
   definedIn ShellCheckExecutable.
 
-/* Shell check defines many checks, these are a few */
-SC2193 (note "https://github.com/koalaman/shellcheck/wiki/SC2193")
-  is a SHELLCHECK_ANNOTATION
-  severity WARNING
-  title "The arguments to this comparison can never be equal. Make sure your syntax is correct.".
+/* Shell check defines many checks, these are a few
+ * https://gist.github.com/eggplants/9fbe03453c3f3fd03295e88def6a1324#file-_shellcheck-csv
+ */
+SC2193
+  is a SHELLCHECK_FINDING
+  title "SC2193"
+  description "The arguments to this comparison can never be equal. Make sure your syntax is correct."
+  referenceUrl "https://github.com/koalaman/shellcheck/wiki/SC2193"
+  severity WARNING.
 
-SC2213 (note "https://github.com/koalaman/shellcheck/wiki/SC2213")
-  is a SHELLCHECK_ANNOTATION
-  severity ERROR
-  title "getopts specified -n, but it's not handled by this 'case'.".
+SC2213
+  is a SHELLCHECK_FINDING
+  title "SC2213"
+  description "getopts specified -n, but it's not handled by this 'case'."
+  referenceUrl "https://github.com/koalaman/shellcheck/wiki/SC2213"
+  severity ERROR.
 
-SC2214 (note "https://github.com/koalaman/shellcheck/wiki/SC2214")
-  is a SHELLCHECK_ANNOTATION
-  severity ERROR
-  title "This case is not specified by getopts.".
+SC2214
+  is a SHELLCHECK_FINDING
+  title "SC2214"
+  description "This case is not specified by getopts."
+  referenceUrl "https://github.com/koalaman/shellcheck/wiki/SC2214"
+  severity ERROR.
 
-SC2220 (note "https://github.com/koalaman/shellcheck/wiki/SC2220")
-  is a SHELLCHECK_ANNOTATION
-  severity WARNING
-  title "Invalid flags are not handled. Add a *) case.".
+SC2220
+  is a SHELLCHECK_FINDING
+  title "SC2220"
+  description "Invalid flags are not handled. Add a *) case."
+  referenceUrl "https://github.com/koalaman/shellcheck/wiki/SC2220"
+  severity WARNING.
 
-SC2221 (note "https://github.com/koalaman/shellcheck/wiki/SC2221")
-  is a SHELLCHECK_ANNOTATION
-  severity WARNING
-  title "This pattern always overrides a later one.".
+SC2221
+  is a SHELLCHECK_FINDING
+  title "SC2221"
+  description "This pattern always overrides a later one."
+  referenceUrl "https://github.com/koalaman/shellcheck/wiki/SC2221"
+  severity WARNING.
 
-SC2222 (note "https://github.com/koalaman/shellcheck/wiki/SC2222")
-  is a SHELLCHECK_ANNOTATION
-  severity WARNING
-  title "This pattern never matches because of a previous pattern.".
+SC2222
+  is a SHELLCHECK_FINDING
+  title "SC2222"
+  description "This pattern never matches because of a previous pattern."
+  referenceUrl "https://github.com/koalaman/shellcheck/wiki/SC2222" 
+  severity WARNING.
 
-/*
-
-#!/bin/bash
-## Example: ShellCheck can detect some higher level semantic problems
-
-while getopts "nf:" param
-do
-  case "$param" in
-    f) file="$OPTARG" ;;
-    v) set -x ;;
-  esac
-done
-
-case "$file" in
-  *.gz) gzip -d "$file" ;;
-  *.zip) unzip "$file" ;;
-  *.tar.gz) tar xzf "$file" ;;
-  *) echo "Unknown filetype" ;;
-esac
-
-if [[ "$$(uname)" == "Linux" ]]
-then
-  echo "Using Linux"
-fi
-
-*/
-ExampleSh is a FILE
+ExampleSh (note "A shell script available at https://github.com/koalaman/shellcheck.net/blob/ab5e5a86c05fbc6983661f79fda844abab334c39/index.php#L62-L83")
+  is a FILE
   fileFormat ShellScript
-  filename   "example.sh".
+  filename "example.sh"
+  generatedAtTime "2020-01-13T21:34:28Z"
+  fileHash (a FILE_HASH
+  	hashType SHA1
+  	hashValue "5235afa8d16818b33f2c302dad9f04c252bf20ca")
+  fileHash (a FILE_HASH
+  	hashType SHA2_256
+  	hashValue "1bd91469cac8d65228ab28b393d2f3b35de6f8ed40ee9364ba2a00d430479b80").
 
 RunShellCheckOnExampleSh is an ANALYSIS
   analyzedWith  ShellCheck
@@ -108,7 +103,7 @@ RunShellCheckOnExampleSh is an ANALYSIS
   startedAtTime "2021-08-17T23:00:00Z"
   endedAtTime   "2021-08-17T23:00:01Z".
 
-/*
+/* shellcheck generated output
 
 Line 6:
   case "$param" in

@@ -1,0 +1,174 @@
+uri "http://glguy.net/sadl/examples/analysis/shellcheck".
+
+import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/FILE".
+import "http://arcos.rack/AGENTS".
+
+/* This goes in an overlay */
+
+SHELLCHECK_OUTPUT is a type of ANALYSIS_OUTPUT
+  described by shellCheckExitCode with a single value of type integer.
+
+LINE_RESULT is a type of ANALYSIS_RESULT
+  described by resultTargetFile with a single value of type FILE
+  described by resultTargetLine with a single value of type integer.
+
+SHELLCHECK_SEVERITY is a class
+  must be one of {WARNING, ERROR, INFO, STYLE}.
+
+SHELLCHECK_ANNOTATION is a type of ANALYSIS_FINDING
+  described by severity with a single value of type SHELLCHECK_SEVERITY.
+
+/* This goes in the data */
+
+ShellScript is a FORMAT.
+MachO_Executable_x86_64 is a FORMAT.
+
+EricMertens is a PERSON
+  title "Eric Mertens".
+
+ShellCheckExecutableHash is a FILE_HASH
+  hashType SHA1
+  hashValue "1d5bb912481c4510e3e0a3896a4896d64b55d983".
+
+ShellCheckExecutable is a FILE
+  fileFormat MachO_Executable_x86_64
+  fileHash ShellCheckExecutableHash
+  filename "~/.cabal/bin/shellcheck".
+
+ShellCheck is a TOOL
+  toolVersion "0.7.2"
+  definedIn ShellCheckExecutable.
+
+/* Shell check defines many checks, these are a few */
+SC2193 (note "https://github.com/koalaman/shellcheck/wiki/SC2193")
+  is a SHELLCHECK_ANNOTATION
+  severity WARNING
+  title "The arguments to this comparison can never be equal. Make sure your syntax is correct.".
+
+SC2213 (note "https://github.com/koalaman/shellcheck/wiki/SC2213")
+  is a SHELLCHECK_ANNOTATION
+  severity ERROR
+  title "getopts specified -n, but it's not handled by this 'case'.".
+
+SC2214 (note "https://github.com/koalaman/shellcheck/wiki/SC2214")
+  is a SHELLCHECK_ANNOTATION
+  severity ERROR
+  title "This case is not specified by getopts.".
+
+SC2220 (note "https://github.com/koalaman/shellcheck/wiki/SC2220")
+  is a SHELLCHECK_ANNOTATION
+  severity WARNING
+  title "Invalid flags are not handled. Add a *) case.".
+
+SC2221 (note "https://github.com/koalaman/shellcheck/wiki/SC2221")
+  is a SHELLCHECK_ANNOTATION
+  severity WARNING
+  title "This pattern always overrides a later one.".
+
+SC2222 (note "https://github.com/koalaman/shellcheck/wiki/SC2222")
+  is a SHELLCHECK_ANNOTATION
+  severity WARNING
+  title "This pattern never matches because of a previous pattern.".
+
+/*
+
+#!/bin/bash
+## Example: ShellCheck can detect some higher level semantic problems
+
+while getopts "nf:" param
+do
+  case "$param" in
+    f) file="$OPTARG" ;;
+    v) set -x ;;
+  esac
+done
+
+case "$file" in
+  *.gz) gzip -d "$file" ;;
+  *.zip) unzip "$file" ;;
+  *.tar.gz) tar xzf "$file" ;;
+  *) echo "Unknown filetype" ;;
+esac
+
+if [[ "$$(uname)" == "Linux" ]]
+then
+  echo "Using Linux"
+fi
+
+*/
+ExampleSh is a FILE
+  fileFormat ShellScript
+  filename   "example.sh".
+
+RunShellCheckOnExampleSh is an ANALYSIS
+  analyzedWith  ShellCheck
+  runBy         EricMertens
+  startedAtTime "2021-08-17T23:00:00Z"
+  endedAtTime   "2021-08-17T23:00:01Z".
+
+/*
+
+Line 6:
+  case "$param" in
+  ^-- SC2213: getopts specified -n, but it's not handled by this 'case'.
+  ^-- SC2220: Invalid flags are not handled. Add a *) case.
+ 
+Line 8:
+    v) set -x ;;
+    ^-- SC2214: This case is not specified by getopts.
+ 
+Line 13:
+  *.gz) gzip -d "$file" ;;
+  ^-- SC2221: This pattern always overrides a later one on line 15.
+ 
+Line 15:
+  *.tar.gz) tar xzf "$file" ;;
+  ^-- SC2222: This pattern never matches because of a previous pattern on line 13.
+ 
+Line 19:
+if [[ "$$(uname)" == "Linux" ]]
+                  ^-- SC2193: The arguments to this comparison can never be equal. Make sure your syntax is correct.
+
+ */
+ExampleShShellCheckReport is an SHELLCHECK_OUTPUT
+  analyzes ExampleSh
+  wasGeneratedBy RunShellCheckOnExampleSh
+  shellCheckExitCode 1.
+
+a LINE_RESULT
+  fromOutput ExampleShShellCheckReport
+  resultTargetFile ExampleSh
+  resultTargetLine 6
+  finding SC2213.
+
+a LINE_RESULT
+  fromOutput ExampleShShellCheckReport
+  resultTargetFile ExampleSh
+  resultTargetLine 6
+  finding SC2220.
+
+a LINE_RESULT
+  fromOutput ExampleShShellCheckReport
+  resultTargetFile ExampleSh
+  resultTargetLine 8
+  finding SC2214.
+
+a LINE_RESULT
+  fromOutput ExampleShShellCheckReport
+  resultTargetFile ExampleSh
+  resultTargetLine 13
+  finding SC2221.
+
+a LINE_RESULT
+  fromOutput ExampleShShellCheckReport
+  resultTargetFile ExampleSh
+  resultTargetLine 15
+  finding SC2222.
+
+a LINE_RESULT
+  fromOutput ExampleShShellCheckReport
+  resultTargetFile ExampleSh
+  resultTargetLine 19
+  finding SC2193.

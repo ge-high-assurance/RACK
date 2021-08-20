@@ -48,7 +48,13 @@
   <j.1:SoftwareUnitTestResult rdf:ID="UTR-1-2-2">
     <j.2:executedBy rdf:resource="#SoftwareUnitTestRun2"/>
     <j.2:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
-    <j.2:confirms rdf:resource="#UTC-1-2"/>
+    <j.2:confirms>
+      <j.1:SoftwareUnitTest rdf:ID="UTC-1-2">
+        <j.2:producedBy rdf:resource="#UnitTestDevelopment"/>
+        <j.2:verifies rdf:resource="CounterApplicationDesignDescription#IN-LLR-1"/>
+        <j.0:identifier>UTC-1-2</j.0:identifier>
+      </j.1:SoftwareUnitTest>
+    </j.2:confirms>
     <j.0:identifier>UTR-1-2-2</j.0:identifier>
   </j.1:SoftwareUnitTestResult>
   <j.1:SoftwareUnitTestResult rdf:ID="UTR-1-1-2">
@@ -66,7 +72,13 @@
   <j.1:SoftwareUnitTestResult rdf:ID="UTR-1-3-2">
     <j.2:executedBy rdf:resource="#SoftwareUnitTestRun2"/>
     <j.2:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
-    <j.2:confirms rdf:resource="#UTC-1-3"/>
+    <j.2:confirms>
+      <j.1:SoftwareUnitTest rdf:ID="UTC-1-3">
+        <j.2:producedBy rdf:resource="#UnitTestDevelopment"/>
+        <j.2:verifies rdf:resource="CounterApplicationDesignDescription#IN-LLR-1"/>
+        <j.0:identifier>UTC-1-3</j.0:identifier>
+      </j.1:SoftwareUnitTest>
+    </j.2:confirms>
     <j.0:identifier>UTR-1-3-2</j.0:identifier>
   </j.1:SoftwareUnitTestResult>
 </rdf:RDF>

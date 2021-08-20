@@ -463,6 +463,7 @@ def make_activities_dot(session):
   type_links = count_type_links(session)
 
   dot = Graph()
+  dot.attr(title='Relationships between Types')
   nodeIds = {}
   for type, activities in activities.items():
     nodeId = f"n{len(nodeIds)}"
@@ -491,18 +492,28 @@ def make_activities_dot(session):
     if n1 in nodeIds and n2 in nodeIds:
 
       edge_dot = Digraph()
-      edge_dot.node("n1", label=n1.fragment)
-      edge_dot.node("n2", label=n2.fragment)
+
+      txt = f"<<table cellborder=\"1\" border=\"0\" cellspacing=\"0\">\
+          <tr><td bgcolor=\"{TYPE_COLOR}\"><b>{n1.fragment}</b></td></tr></table>>"
+      edge_dot.node("n1", label=txt, shape='plaintext')
+
+      txt = f"<<table cellborder=\"1\" border=\"0\" cellspacing=\"0\">\
+          <tr><td bgcolor=\"{TYPE_COLOR}\"><b>{n2.fragment}</b></td></tr></table>>"
+      edge_dot.node("n2", label=txt, shape='plaintext')
+
       for p,n in type_links.get((n1,n2), {}).items():
         edge_dot.edge("n1", "n2",
           label=f"{p.fragment} {n}",
           decorate='true',
           penwidth=edgewidth(n))
-      for p,n in type_links.get((n2,n1), {}).items():
-        edge_dot.edge("n2", "n1",
-          label=f"{p.fragment} {n}",
-          decorate='true',
-          penwidth=edgewidth(n))
+
+      if n1 != n2:
+        for p,n in type_links.get((n2,n1), {}).items():
+          edge_dot.edge("n2", "n1",
+            label=f"{p.fragment} {n}",
+            decorate='true',
+            penwidth=edgewidth(n))
+
       edge_dot.render(filename=type_link_filename(n1,n2), format='svg')
 
       dot.edge(nodeIds[n1], nodeIds[n2],

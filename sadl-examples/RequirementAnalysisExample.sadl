@@ -1,0 +1,163 @@
+uri "http://arcos.rack/examples/RequirementAnalysis".
+
+import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/AGENTS".
+import "http://arcos.rack/MODEL".
+
+/* This goes in an overlay */
+
+SADL_REQUIREMENT is a type of REQUIREMENT.
+SADL_ONTOLOGY is a type of DATA_DICTIONARY_TERM.
+
+RAE_MODEL is a type of MODEL.
+
+RAE is a type of ANALYSIS.
+
+RAE_OUTPUT is a type of ANALYSIS_OUTPUT
+  described by shellCheckExitCode with a single value of type integer.
+
+CONTROLLED_VARIABLE_RESULT is a type of ANALYSIS_RESULT
+  described by result with a single value of type RAE_RESULT.
+
+RAE_RESULT is a class must be one of {Passed, Failed, Indeterminate}.
+
+RAE_CHECK is a type of ANALYSIS_FINDING.
+
+
+
+/* This goes in the data */
+ASSERT-RAE is a TOOL.
+russell-d-e is a PERSON.
+/***********************************************
+ * REQUIREMENTS and DATA_DICTIONARY 
+ ***********************************************/
+
+REQ-1 is a REQUIREMENT
+	description "SYSTEM shall set output_1 to true
+when
+input_1 > input_2.".
+
+REQ-2 is a REQUIREMENT
+	description "SYSTEM shall set output_1 to true
+when
+input_1 < input_2.".
+
+
+REQ-3 is a REQUIREMENT
+	description "SYSTEM shall set output_2 to true
+when
+input_1 > input_2.".
+
+REQ-4 is a REQUIREMENT
+	description "SYSTEM shall set output_2 to true
+when
+input_1 <= input_2.".
+
+input_1 is a SADL_ONTOLOGY.
+input_2 is a SADL_ONTOLOGY.
+output_1 is a SADL_ONTOLOGY.
+output_2 is a SADL_ONTOLOGY.
+SYSTEM is a SADL_ONTOLOGY.
+
+/***********************************************
+ * RAE Model
+ ***********************************************/
+output_1_SYSTEM is a RAE_MODEL
+	models REQ-1
+	models REQ-2
+	models input_1
+	models input_2
+	models output_1.
+
+output_2_SYSTEM is a RAE_MODEL
+	models REQ-3
+	models REQ-4
+	models input_1
+	models input_2
+	models output_2.
+/***********************************************
+ * RAE Analysis
+ ***********************************************/	
+SYSTEM_analysis is a RAE
+ analyzedWith ASSERT-RAE
+ runBy russell-d-e
+ used output_1_SYSTEM
+ used output_2_SYSTEM.
+/***********************************************
+ * RAE Output
+ ***********************************************/	
+output_1_SYSTEM_output is a RAE_OUTPUT
+	analyzes output_1_SYSTEM
+	An:producedBy SYSTEM_analysis.
+a CONTROLLED_VARIABLE_RESULT
+	with fromOutput output_1_SYSTEM_output
+	with result Passed
+	with finding InnerContingency.
+a CONTROLLED_VARIABLE_RESULT
+	with fromOutput output_1_SYSTEM_output
+	with result Passed
+	with finding Contingency.
+a CONTROLLED_VARIABLE_RESULT
+	with fromOutput output_1_SYSTEM_output
+	with result Passed
+	with finding GlobalContingency.
+a CONTROLLED_VARIABLE_RESULT
+	with fromOutput output_1_SYSTEM_output
+	with result Passed
+	with finding PairConflict.
+a CONTROLLED_VARIABLE_RESULT
+	with fromOutput output_1_SYSTEM_output
+	with result Failed
+	with finding Completeness.
+
+output_2_SYSTEM_output is a RAE_OUTPUT
+	analyzes output_2_SYSTEM
+	An:producedBy SYSTEM_analysis.
+a CONTROLLED_VARIABLE_RESULT
+	with fromOutput output_2_SYSTEM_output
+	with result Passed
+	with finding InnerContingency.
+a CONTROLLED_VARIABLE_RESULT
+	with fromOutput output_2_SYSTEM_output
+	with result Passed
+	with finding Contingency.
+a CONTROLLED_VARIABLE_RESULT
+	with fromOutput output_2_SYSTEM_output
+	with result Passed
+	with finding GlobalContingency.
+a CONTROLLED_VARIABLE_RESULT
+	with fromOutput output_2_SYSTEM_output
+	with result Passed
+	with finding PairConflict.
+a CONTROLLED_VARIABLE_RESULT
+	with fromOutput output_2_SYSTEM_output
+	with result Passed
+	with finding Completeness.
+a CONTROLLED_VARIABLE_RESULT
+	with fromOutput output_2_SYSTEM_output
+	with result Passed
+	with finding Surjectivity.
+			
+/***********************************************
+ * RAE Check Definitions 
+ ***********************************************/
+
+InnerContingency is a RAE_CHECK 
+	with title "Inner Contingency".
+	
+Contingency is a RAE_CHECK 
+	with title "Contingency".
+	
+GlobalContingency is a RAE_CHECK 
+	with title "Global Contingency".
+	
+PairConflict is a RAE_CHECK 
+	with title "Pair-Conflict".
+
+Completeness is a RAE_CHECK 
+	with title "Completeness".
+
+Surjectivity is a RAE_CHECK 
+	with title "Surjectivity".	

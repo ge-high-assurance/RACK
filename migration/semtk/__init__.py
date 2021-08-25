@@ -54,7 +54,8 @@ class DefaultSemTKVisitor(SemTKVisitor):
         pass
 
     def visit_SemTKJSON(self, json: SemTKJSON) -> None:
-        self.visit_ImportSpec(json, "importSpec", json.importSpec)
+        if json.importSpec is not None:
+            self.visit_ImportSpec(json, "importSpec", json.importSpec)
         self.visit_SNodeGroup(json, "sNodeGroup", json.sNodeGroup)
         self.visit_SparqlConn(json, "sparqlConn", json.sparqlConn)
 
@@ -199,7 +200,7 @@ class SemTKJSON(BaseModel):
     version: Optional[int]
     sparqlConn: SparqlConn
     sNodeGroup: SNodeGroup
-    importSpec: ImportSpec
+    importSpec: Optional[ImportSpec]
 
     def accept(self, visitor: SemTKVisitor) -> None:
         visitor.visit_SemTKJSON(self)

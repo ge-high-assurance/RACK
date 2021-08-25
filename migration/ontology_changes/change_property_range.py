@@ -104,6 +104,7 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
 
             # cleanup
             for sparqlID in node.SnodeSparqlIDs:
+                if json.importSpec is None: continue
                 for index, importSpecNode in enumerate(json.importSpec.nodes):
                     if importSpecNode.sparqlID == sparqlID:
                         importSpecNode.type = self.rename(

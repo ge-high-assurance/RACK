@@ -1,5 +1,5 @@
 # Turnstile-IngestionScripts Directory Explained
-The purpose of the files in this directory are to demonstrate the following using our [Turnstile example](https://github.com/ge-high-assurance/RACK/wiki/Turnstile-Example):
+The purpose this directory is to demonstrate the following using our [Turnstile example](https://github.com/ge-high-assurance/RACK/wiki/Turnstile-Example):
 * ontology overlay 
 * CDR usage and instance data
 * data ingestion package along with a Load-TurnstileData.sh script
@@ -7,7 +7,7 @@ The purpose of the files in this directory are to demonstrate the following usin
 
 ## Ontology Overlay
 The Turnstile overlay is created in a file called [GE.sadl](https://github.com/ge-high-assurance/RACK/blob/TurnstileUpdate/GE-Ontology/ontology/GE.sadl). For the ARCOS program, overlays are created by individual performers and are named after the prime. For example, the turnstile ontology is created by the GE-Galois team. The overlay file is located in a directory called [GE-Ontology](https://github.com/ge-high-assurance/RACK/blob/TurnstileUpdate/GE-Ontology/) (where GE is the prime). The structure and content of this directory is as follows:
-
+```text
 GE-Ontology/
 |-- ImplicitModel/
 |   |-- SadlBuiltinFunctions.sadl
@@ -18,7 +18,7 @@ GE-Ontology/
 |   |-- GE.owl
 |   |-- import.yaml
 |-- setup-GE.sh
-	
+```
 This structure is suited for using the [SADL IDE](https://github.com/SemanticApplicationDesignLanguage/sadl) to create the ontology. There are 3 subdirectories:
 1) ImplicitModel - contains defintion of built-in functions and classes used in SADL
 2) ontology - contains the .sadl file which is the overlay
@@ -43,7 +43,7 @@ Let's take a look at the [GE.sadl](https://github.com/ge-high-assurance/RACK/blo
 15 SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
 16  turnstile:wasInformedBy of SystemRequirementsDefinition has values of type DevelopSystemArchitecture.
 ```
-In line 1, the convension for the file uri is "http://arcos.<project name>/<prime name>". The alias can be any abbrevated name you want. Lines 2 to 11 imports RACK's core ontology. Line 12 imports the objectives from the DO-178C standard, which we use in our Turnstile example.
+In line 1, the convension for the file uri is "http://arcos.projectName>/primeName". The alias can be any abbrevated name you want. Lines 2 to 11 imports RACK's core ontology. Line 12 imports the objectives from the DO-178C standard, which we use in our Turnstile example.
 
 Lines 15 to 16 are examples of the overlay. Notice how `SystemRequirementsDefinition` is the name of the lass we chose to use in our Turnstile overlay, which is a type of `REQUIREMENT_DEVELOPMENT` from the core ontology. The property `wasInformedBy` (qualified with `turnstile:`) describes `SystemRequirementsDefinition` with values of type `DevelopSystemArchitecture`, which is defined further down in the GE.sadl file. Note: not all properties need to be qualified. The SADL IDE can help identify these.
 

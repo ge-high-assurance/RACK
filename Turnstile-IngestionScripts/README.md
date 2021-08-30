@@ -67,7 +67,21 @@ RACK ships with a set of nodegroups and CSV templates, which we call Common Data
 
 Note that in the CDR directory, templates based on the core ontology are named ingest_CLASS.csv; templates from ontology overlays are named ingest_projectName_Class.csv. Note also the ingestion nodegroup directory has subdirectories for each performer overlay named as arcos.performerProjName.
 
-Back in the HazardAssessment directory, notice there are CSV file names *1.csv, and *2.csv. The files named *1.csv are ingested first and defines the object in RACK with just the identifier. The files named *2.csv are ingested second and defines the rest of the data. Ingesting it this order prevents circularity and ensures that the ingested objects are properly referred to. See also the import.yaml file for an example of the ordering.
+Back in the HazardAssessment directory, notice there are CSV file names *1.csv, and *2.csv. The files named *1.csv are ingested first and defines the object in RACK with just the identifier. The files named *2.csv are ingested second and defines the rest of the data. Ingesting it this order prevents circularity and ensures that the ingested objects are properly referred to. Below is the [import.yaml](Turnstile-IngestionPackage/HazardAssessment/import.yaml) file for HazardAssessment.
+```sh
+ 1 data-graph: "http://rack001/turnstiledata"
+ 2 ingestion-steps:
+ 3 #Phase1: Identifiers Only
+ 4 - {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}
+ 5 - {nodegroup: "ingest_HAZARD", csv: "HAZARD1.csv"}
+ 6 - {nodegroup: "ingest_SYSTEM", csv: "SYSTEM1.csv"}
+ 7
+ 8 #Phase2: All Evidence
+ 9 - {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
+10 - {nodegroup: "ingest_HAZARD", csv: "HAZARD2.csv"}
+11 - {nodegroup: "ingest_SYSTEM", csv: "SYSTEM2.csv"}
+```
+Notice the ordering of the ingestion steps. Notice also in line 1 that the Turnstile data is being imported into the data graph http://rack001/turnstiledata.
 
 ## data ingestion package
 It is convenient to create an [ingestion package](https://github.com/ge-high-assurance/RACK/wiki#preparing-your-own-data) that can be shared for others to load into RACK. [The Scraping Tool Kit](https://github.com/ge-high-assurance/RACK/tree/master/ScrapingToolKit) conveniently generates such ingestion packages. The Turnstile-IngestionScripts are generated using the Scraping Tool Kit. For example, the script TurnstileIngestion_HazardAssessment.py generates data in the HazardAssessment directory. The shell script, Load-TurnstileData.sh, collectively loads all the data provided in Turnstile-IngestionPackage.

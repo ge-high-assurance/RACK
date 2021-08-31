@@ -14,6 +14,7 @@
   *
   * dwa - 11 Nov 2020 - removed incorrect usages of relationships
   * dwa - 11 Nov 2020 - added that developedBy is a type of wasAssociatedWith
+  * am - 27 July 2021 - removed 2 inverse relationships
   *
   *********************************************/
 
@@ -46,11 +47,9 @@ INTERFACE
 	commodity describes INTERFACE with at most 1 value.
 
 	source (note "SYSTEM that provides what the INTERFACE offers") describes INTERFACE with values of type SYSTEM.
-	source is the inverse of provides.
 	source is a type of wasImpactedBy.
 
 	destination (note "SYSTEM that requires what the INTERFACE offers") describes INTERFACE with values of type SYSTEM.
-	destination is the inverse of requires.
 	destination is a type of wasImpactedBy.
 
 	identifiedBy (note "ACTIVITY out of which this INTERFACE was identified") describes INTERFACE with values of type ACTIVITY.

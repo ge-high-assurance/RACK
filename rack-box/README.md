@@ -85,6 +85,9 @@ these commands to build the RACK CLI:
 
     pip3 wheel --wheel-dir=wheels -r requirements.txt
     pip3 wheel --wheel-dir=wheels .
+    
+If you encounter a `Double requirement given` error, make sure to
+clear your wheels directory from obsolete files.
 
 ## Package RACK documentation
 

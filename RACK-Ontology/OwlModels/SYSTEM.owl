@@ -87,7 +87,6 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="source">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
-    <owl:inverseOf rdf:resource="#provides"/>
     <rdfs:comment xml:lang="en">SYSTEM that provides what the INTERFACE offers</rdfs:comment>
     <rdfs:range rdf:resource="#SYSTEM"/>
     <rdfs:domain rdf:resource="#INTERFACE"/>
@@ -121,7 +120,6 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="destination">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
-    <owl:inverseOf rdf:resource="#requires"/>
     <rdfs:comment xml:lang="en">SYSTEM that requires what the INTERFACE offers</rdfs:comment>
     <rdfs:range rdf:resource="#SYSTEM"/>
     <rdfs:domain rdf:resource="#INTERFACE"/>

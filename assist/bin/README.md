@@ -56,14 +56,14 @@ Prolog modules in this directory:
 
   ```shell
   ingest_data -h
-  ingest_data http://TurnstileSystem/CounterApplication models/TurnstileSystem/src
+  ingest_data -O Turnstile-Ontology/OwlModels http://rack001/turnstiledata Turnstile-Ontology/02-Software
   ```
 
   The above would ingest all build/test datafiles generated during
   the build process in the `Turnstile-Ontology/02-Software/03-Implementation` directory.
   The results would be loaded into the RACK database being served at
   `http://localhost:3030` as instance data in the
-  `http://TurnstileSystem/CounterApplication` namespace.
+  `http://rack001/turnstiledata` namespace.
 
   The typical usage is to:
 

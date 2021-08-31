@@ -129,35 +129,60 @@ def count_relations(session):
       relations[s, o, p] = n
   return relations
 
-def make_dot(session):
+def group_null(session, nodes):
+  return { None: nodes }
+
+def group_dataInsertedBy(session, nodes):
+  session.query(f"""
+    {PREFIXES}
+    SELECT ?S ?i
+    {session.graphs}
+    WHERE {{
+      ?s a  ?S .
+      ?s ?p ?o .
+      ?o a  ?O .
+      }}
+    GROUP BY ?S ?p ?O
+    """)
+  return { None: nodes }
+
+def make_dot(session, make_clusters):
   nodes = count_nodes(session)
   properties = count_properties(session)
   relations = count_relations(session)
+  clusters = make_clusters(session, nodes)
 
   dot = Digraph(comment='Imported data shape')
 
   nodeIds = {}
 
-  for t, n in nodes.items():
-      txt = f"<<table cellborder=\"1\" border=\"0\" cellspacing=\"0\">\
-              <tr><td bgcolor=\"orange\"><b>{t.fragment or 'X'}</b></td>\
-              <td bgcolor=\"orange\">{n}</td></tr>"
+  for cluster_name, cluster_nodes in clusters.items():
+    if cluster_name is None:
+      g = dot
+    else:
+      g = dot.subgraph(name=cluster_name)
 
-      tprops = properties.setdefault(t,[])
-      for p in tprops:
-          if p.fragment == "identifier":
-              continue
-          txt += f"<tr><td bgcolor=\"lightblue\" align=\"left\">{p.fragment}</td>\
-                  <td bgcolor=\"lightblue\">{tprops[p]}</td></tr>"
-      txt += "</table>>"
+    for node in cluster_nodes:
+        n = nodes[node]
+        txt = f"<<table cellborder=\"1\" border=\"0\" cellspacing=\"0\">\
+                <tr><td bgcolor=\"orange\"><b>{node.fragment or 'X'}</b></td>\
+                <td bgcolor=\"orange\">{n}</td></tr>"
 
-      nodeId = f"n{len(nodeIds)}"
-      nodeIds[t] = nodeId
+        tprops = properties.setdefault(node, [])
+        for p in tprops:
+            if p.fragment == "identifier":
+                continue
+            txt += f"<tr><td bgcolor=\"lightblue\" align=\"left\">{p.fragment}</td>\
+                    <td bgcolor=\"lightblue\">{tprops[p]}</td></tr>"
+        txt += "</table>>"
 
-      dot.node(nodeId, txt, shape='plaintext')
+        nodeId = f"n{len(nodeIds)}"
+        nodeIds[node] = nodeId
 
-  for (s, o, p), n in relations.items():
-    dot.edge(nodeIds[s], nodeIds[o], f"{p.fragment} {n}")
+        g.node(nodeId, txt, shape='plaintext')
+
+    for (s, o, p), n in relations.items():
+      dot.edge(nodeIds[s], nodeIds[o], f"{p.fragment} {n}")
 
   return dot
 
@@ -165,7 +190,7 @@ def main():
   args = parse_args()
   session = Session(args.triple_store, args.graphs)
   session.load_types()
-  dot = make_dot(session)
+  dot = make_dot(session, group_null)
 
   if args.output is None:
     dot.view()

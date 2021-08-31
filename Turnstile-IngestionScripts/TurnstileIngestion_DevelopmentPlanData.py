@@ -164,7 +164,7 @@ def CreateCdrs():
     #        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData.SystemVerificationReport
     ################################################
     
-    Add.SPECIFICATION(identifier="Sys-Ver-Rep",
+    Add.REPORT(identifier="Sys-Ver-Rep",
                     wasGeneratedBy_identifier="System_Development_Process")
 
     ################################################

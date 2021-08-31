@@ -5,4 +5,4 @@ BASEDIR=$(dirname "$0")
 echo "$BASEDIR"
 
 rack nodegroups import . 
-rack data export --data-graph http://rack001/turnstiledata "query_forSystemSpec_turnstiledata" --file systemspec.csv --format csv 
+rack data export --data-graph http://rack001/turnstiledata "query_forSysVerReport_turnstiledata" --file sysverreport.csv --format csv 

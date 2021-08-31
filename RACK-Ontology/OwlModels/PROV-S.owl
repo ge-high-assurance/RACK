@@ -63,9 +63,11 @@
   <owl:Class rdf:about="#THING">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:someValuesFrom>
+        <owl:onClass>
           <owl:Class rdf:ID="ACTIVITY"/>
-        </owl:someValuesFrom>
+        </owl:onClass>
+        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
+        >1</owl:maxQualifiedCardinality>
         <owl:onProperty>
           <owl:ObjectProperty rdf:ID="dataInsertedBy"/>
         </owl:onProperty>

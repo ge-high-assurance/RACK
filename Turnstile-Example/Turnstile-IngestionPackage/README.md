@@ -13,9 +13,8 @@ $ . venv/Scripts/activate
 ```
 
 ## Run the setup scripts:
-The dataset uses the GE ontology overlay. 
+Note that the dataset uses the GE ontology overlay. 
 ```sh
-(venv) $ ./setup-clear.sh
 (venv) $ ./setup-rack.sh
 (venv) $ cd ../GE-Ontology
 (venv) $ ./setup-GE.sh

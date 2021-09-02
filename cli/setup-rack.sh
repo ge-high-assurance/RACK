@@ -20,6 +20,8 @@ then
 	exit 1
 fi
 
+./setup-clear.sh
+
 # RACK core ontology
 rack model import ../RACK-Ontology/OwlModels/import.yaml
 

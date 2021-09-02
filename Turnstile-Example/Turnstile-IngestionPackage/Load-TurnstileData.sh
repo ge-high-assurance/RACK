@@ -21,15 +21,8 @@ then
 	exit 1
 fi
 
-echo "First, load the GE-Ontology and nodegroups"
-rack model import ../../GE-Ontology/OwlModels/import.yaml
-rack nodegroups import ../../nodegroups/ingestion/arcos.turnstile
-
-echo "Then, clear data-graph http://rack001/turnstiledata"
+echo "Clear data-graph http://rack001/turnstiledata"
 rack data clear --data-graph "http://rack001/turnstiledata"
-
-echo "Then, load applicable standards into data-graph http://rack001/do-178c"
-rack data import --clear ../../RACK-Ontology/OwlModels/DO-178C.yaml
 
 echo "Ingesting Development Plan Data ..."
 rack data import "$BASEDIR"/TurnstileDevelopmentPlanData/import.yaml
@@ -64,6 +57,9 @@ rack data import "$BASEDIR"/TurnstileSystemSpec/import.yaml
 
 echo "Ingesting Counter Application Requirement Spec ..."
 rack data import "$BASEDIR"/CounterApplicationRequirementSpec/import.yaml
+
+echo "Ingesting Counter Application Software Design ..."
+rack data import "$BASEDIR"/CounterAppSWDes/import.yaml
 
 echo "Ingesting System Verification Report ..."
 rack data import "$BASEDIR"/SystemVerificationReport/import.yaml

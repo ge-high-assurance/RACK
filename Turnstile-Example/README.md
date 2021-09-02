@@ -1,4 +1,4 @@
-# Turnstile-IngestionScripts Directory Explained
+# Turnstile-Example Directory Explained
 The purpose this directory is to demonstrate the following using our [Turnstile example](https://github.com/ge-high-assurance/RACK/wiki/Turnstile-Example):
 * ontology overlay 
 * CDR usage and instance data
@@ -84,7 +84,7 @@ Back in the HazardAssessment directory, notice there are CSV file names *1.csv, 
 Notice the ordering of the ingestion steps. Notice also in line 1 that the Turnstile data is being imported into the data graph http://rack001/turnstiledata.
 
 ## data ingestion package
-It is convenient to create an [ingestion package](https://github.com/ge-high-assurance/RACK/wiki#preparing-your-own-data) that can be shared for others to load into RACK. [The Scraping Tool Kit](https://github.com/ge-high-assurance/RACK/tree/master/ScrapingToolKit) conveniently generates such ingestion packages. The Turnstile-IngestionScripts are generated using the Scraping Tool Kit. For example, the script TurnstileIngestion_HazardAssessment.py generates data in the HazardAssessment directory. The shell script, Load-TurnstileData.sh, collectively loads all the data provided in Turnstile-IngestionPackage.
+It is convenient to create an [ingestion package](https://github.com/ge-high-assurance/RACK/wiki#preparing-your-own-data) that can be shared for others to load into RACK. [The Scraping Tool Kit](https://github.com/ge-high-assurance/RACK/tree/master/ScrapingToolKit) conveniently generates such ingestion packages. The subdirectories in Turnstile-IngestionPackage are generated using the Scraping Tool Kit. For example, the script TurnstileIngestion_HazardAssessment.py generates data in the HazardAssessment subdirectory. The shell script, Load-TurnstileData.sh, collectively loads all the data provided in Turnstile-IngestionPackage.
 
 ## ingestion via owl 
 It is possible to ingest raw triples into RACK (although it is not recommended because this will bypass many of the verification checks that happen when ingesting via nodegroups). We provide a small example as part of Turnstile to demonstrate the capability. The directory CounterApplicationUnitTesting contains a structure suited for using the [SADL IDE](https://github.com/SemanticApplicationDesignLanguage/sadl) to create the instance data via owl. The instance data is in ontology/CounterApplicationUnitTesting.sadl.

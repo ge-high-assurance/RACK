@@ -24,6 +24,10 @@ fi
 echo "Clear data-graph http://rack001/turnstiledata"
 rack data clear --data-graph "http://rack001/turnstiledata"
 
+echo "Ingesting Counter Application Unit Testing ..."
+echo "(Have to do this one first because it ingests triples, as a demonstration. The rest is ingested via nodegroups.)"
+rack data import "$BASEDIR"/CounterApplicationUnitTesting/OwlModels/import.yaml
+
 echo "Ingesting Development Plan Data ..."
 rack data import "$BASEDIR"/TurnstileDevelopmentPlanData/import.yaml
 
@@ -49,9 +53,6 @@ rack data import "$BASEDIR"/CounterApplicationReviews/import.yaml
 echo "Ingesting Counter Application Testing ..."
 rack data import "$BASEDIR"/CounterApplicationTesting/import.yaml
 
-echo "Ingesting Counter Application Unit Testing ..."
-rack data import "$BASEDIR"/CounterApplicationUnitTesting/OwlModels/import.yaml
-
 echo "Ingesting System Spec ..."
 rack data import "$BASEDIR"/TurnstileSystemSpec/import.yaml
 
@@ -59,7 +60,7 @@ echo "Ingesting Counter Application Requirement Spec ..."
 rack data import "$BASEDIR"/CounterApplicationRequirementSpec/import.yaml
 
 echo "Ingesting Counter Application Software Design ..."
-rack data import "$BASEDIR"/CounterAppSWDes/import.yaml
+rack data import "$BASEDIR"/CounterApplicationSoftwareDes/import.yaml
 
 echo "Ingesting System Verification Report ..."
 rack data import "$BASEDIR"/SystemVerificationReport/import.yaml

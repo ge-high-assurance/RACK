@@ -36,14 +36,14 @@
         <j.3:producedBy>
           <j.2:DevelopUnitTests rdf:ID="UnitTestDevelopment">
             <j.3:developedBy>
-              <j.2:Engineer rdf:ID="JackDan">
+              <j.2:Engineer rdf:ID="EricDan">
                 <j.1:employedBy>
-                  <j.1:ORGANIZATION rdf:ID="Galois">
-                    <j.0:identifier>Galois</j.0:identifier>
+                  <j.1:ORGANIZATION rdf:ID="GElois">
+                    <j.0:identifier>GElois</j.0:identifier>
                   </j.1:ORGANIZATION>
                 </j.1:employedBy>
-                <j.1:emailAddress>jack.dan@ge.com</j.1:emailAddress>
-                <j.0:title>Dan, Jack</j.0:title>
+                <j.1:emailAddress>eric.dan@GElois.com</j.1:emailAddress>
+                <j.0:title>Dan, Eric</j.0:title>
                 <j.0:identifier>421SW6300</j.0:identifier>
               </j.2:Engineer>
             </j.3:developedBy>

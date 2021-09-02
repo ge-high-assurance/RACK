@@ -142,7 +142,7 @@ import "http://common/DO-178C".
 
       //Model Location: DevelopmentPlan.04-SoftwareVerification.StructuralCoverageReport
     StructuralCoverageReport is a type of ANALYSIS_OUTPUT.
-      wasGeneratedBy of StructuralCoverageReport only has values of type StructualCoverageAnalysis.
+      wasGeneratedBy of StructuralCoverageReport only has values of type StructuralCoverageAnalysis.
 
         //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess.SoftwareCodeReview
       SoftwareCodeReview is a type of REVIEW.
@@ -175,11 +175,11 @@ import "http://common/DO-178C".
       DataCouplingAnalysis is a type of ANALYSIS.
         turnstile:wasInformedBy of DataCouplingAnalysis has values of type SoftwareComponentTestExecution.
 
-        //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis.StructualCoverageAnalysis
-      StructualCoverageAnalysis is a type of ANALYSIS.
-        CoveredNodes describes StructualCoverageAnalysis with values of type int.
-        UncoveredNodes describes StructualCoverageAnalysis with values of type int.
-        turnstile:wasInformedBy of StructualCoverageAnalysis has values of type SoftwareComponentTestExecution.
+        //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis.StructuralCoverageAnalysis
+      StructuralCoverageAnalysis is a type of ANALYSIS.
+        coveredNodes describes StructuralCoverageAnalysis with values of type int.
+        uncoveredNodes describes StructuralCoverageAnalysis with values of type int.
+        turnstile:wasInformedBy of StructuralCoverageAnalysis has values of type SoftwareComponentTestExecution.
 
         //Model Location: DevelopmentPlan.04-SoftwareVerification.03-SoftwareTestExecutionProcess.SoftwareComponentTestExecution
       SoftwareComponentTestExecution is a type of TEST_EXECUTION.

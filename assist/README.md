@@ -50,7 +50,8 @@ The ASSIST toolkit contains several tools that can be used with RACK.
 
   The intent of the ASSIST-DC set of tools is to model how a
   development process might be captured for RACK in a deployed
-  program.
+  program.  The ASSIST-DC portion of the tools is currently only
+  compatible with a Linux/Unix environment.
 
 
 ## ASSIST-DI -- Data Ingestion

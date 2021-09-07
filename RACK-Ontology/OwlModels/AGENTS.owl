@@ -36,7 +36,9 @@
   <owl:Class rdf:ID="PERSON">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:someValuesFrom rdf:resource="PROV-S#AGENT"/>
+        <owl:onClass rdf:resource="PROV-S#AGENT"/>
+        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
+        >1</owl:maxQualifiedCardinality>
         <owl:onProperty>
           <owl:ObjectProperty rdf:ID="employedBy"/>
         </owl:onProperty>
@@ -48,6 +50,8 @@
   <owl:ObjectProperty rdf:about="#employedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#actedOnBehalfOf"/>
     <rdfs:comment xml:lang="en">Relates people to the company they were acting on behalf of.</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#AGENT"/>
+    <rdfs:domain rdf:resource="#PERSON"/>
   </owl:ObjectProperty>
   <owl:DatatypeProperty rdf:ID="emailAddress">
     <rdfs:comment xml:lang="en">Email address of person</rdfs:comment>

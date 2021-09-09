@@ -9,14 +9,18 @@ The purpose this directory is to demonstrate the following using our [Turnstile 
 The Turnstile overlay is created in a file called [GE.sadl](https://github.com/ge-high-assurance/RACK/blob/TurnstileUpdate/GE-Ontology/ontology/GE.sadl). For the ARCOS program, overlays are created by individual performers and are named after the prime. For example, the turnstile ontology is created by the GE-Galois team. The overlay file is located in a directory called [GE-Ontology](https://github.com/ge-high-assurance/RACK/blob/TurnstileUpdate/GE-Ontology/) (where GE is the prime). The structure and content of this directory is as follows:
 ```text
 GE-Ontology/
+|
 |-- ImplicitModel/
 |   |-- SadlBuiltinFunctions.sadl
 |   |-- SadlImplicitModel.sadl
+|
 |-- ontology/
 |   |-- GE.sadl
+|
 |-- OwlModels/
 |   |-- GE.owl
 |   |-- import.yaml
+|
 |-- setup-GE.sh
 ```
 This structure is suited for using the [SADL IDE](https://github.com/SemanticApplicationDesignLanguage/sadl) to create the ontology. There are 3 subdirectories:

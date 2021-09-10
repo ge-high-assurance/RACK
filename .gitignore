@@ -1,5 +1,3 @@
-RACK-Ontology/scripts/.project
-.pydevproject
 *.py[cod]
 
 # act
@@ -39,7 +37,6 @@ nosetests.xml
 
 # Mr Developer
 .mr.developer.cfg
-.project
 .pydevproject
 
 _darcs
@@ -58,3 +55,4 @@ TODO.org
 debug.log
 *.swp
 cli/env/
+.settings/

@@ -1,0 +1,56 @@
+uri "http://arcos.rack/examples/BaselinesSrcRq".
+
+import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/FILE".
+import "http://arcos.rack/BASELINE".
+import "http://arcos.rack/SOFTWARE".
+
+inBaseline describes BASELINE with values of type ENTITY.
+inBaseline is transitive.
+
+RQ-1v1 is a REQUIREMENT.
+RQ-2v1 is a REQUIREMENT.
+RQ-3v1 is a REQUIREMENT.
+
+SourceCode-1v1 is a FILE file:satisfies RQ-1v1.
+SourceCode-2v1 is a FILE file:satisfies RQ-2v1.
+SourceCode-3v1 is a FILE file:satisfies RQ-3v1.
+SourceCode-4v1 is a FILE file:satisfies RQ-3v1.
+SourceCode-5v1 is a FILE file:satisfies RQ-1v1.
+
+ReqBaseline-1 is a BASELINE
+  content RQ-1v1
+  content RQ-2v1
+  content RQ-3v1.
+
+SwBaseline-1 is a BASELINE
+  content SourceCode-1v1
+  content SourceCode-2v1
+  content SourceCode-3v1
+  content SourceCode-4v1.
+
+Release-1 is a BASELINE
+  content SwBaseline-1
+  content ReqBaseline-1.
+
+// New version:
+// * SourceCode-1 replaced with SourceCode-5
+// * SourceCode-2 was modified
+
+SourceCode-2v2 is a FILE file:satisfies RQ-3v1 wasRevisionOf SourceCode-2v1.
+SourceCode-5v1 is a FILE file:satisfies RQ-1v1.
+
+SwBaseline-2 is a BASELINE
+  content SourceCode-2v2
+  content SourceCode-3v1
+  content SourceCode-4v1
+  content SourceCode-5v1.
+
+Release-1.1 is a BASELINE
+  wasRevisionOf Release-1
+  content SwBaseline-2
+  content ReqBaseline-1.
+
+MyComponent is a SWCOMPONENT
+  definedIn SourceCode-2v1.

@@ -128,7 +128,7 @@ data_instance('TESTING#TEST_RESULT', load_data, Instance,
               test_res(TestGenInstance, TestName, TestRes)) :-
     build_with(Nonce, ToolType, 'countertest.exe', _ToolPath, _ToolArgs),
     tool_output(Nonce, 'countertest.exe', Output),
-    string_lines(Output, OutLines),
+    split_string(Output, "\n", "", OutLines),
     member(OutLine, OutLines),
     string_codes(OutLine, OutLineCodes),
     phrase(test_result(TestNameCodes, TestRes), OutLineCodes, _Rem),

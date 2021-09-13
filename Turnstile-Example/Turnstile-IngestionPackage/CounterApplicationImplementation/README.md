@@ -25,6 +25,8 @@ $ sudo apt install dos2unix
 Use the `dos2unix` utility to convert the following ASSIST utilities to prevent error such as ```'\r': command not found```.
 
 ```
+$ dos2unix ..<path-to>../assist/databin/make
+$ dos2unix ..<path-to>../assist/databin/gcc
 $ dos2unix ..<path-to>../assist/databin/rack_capture
 $ dos2unix ..<path-to>../assist/databin/rackfuncs.sh
 $ dos2unix ..<path-to>../assist/bin/ingest_data

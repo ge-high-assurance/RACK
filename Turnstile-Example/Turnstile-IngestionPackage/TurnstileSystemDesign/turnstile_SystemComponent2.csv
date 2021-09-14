@@ -1,5 +1,5 @@
 identifier,dataInsertedBy_identifier,partOf_identifier
-In Gate,TurnstileIngestion-SystemDesign,Turnstile
-Out Gate,TurnstileIngestion-SystemDesign,Turnstile
+InGate,TurnstileIngestion-SystemDesign,Turnstile
+OutGate,TurnstileIngestion-SystemDesign,Turnstile
 CounterApplication,TurnstileIngestion-SystemDesign,Turnstile
 Display,TurnstileIngestion-SystemDesign,Turnstile

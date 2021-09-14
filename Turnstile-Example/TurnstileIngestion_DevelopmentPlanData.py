@@ -32,7 +32,7 @@ def CreateCdrs():
     ################################################
     #       Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.CounterApplication
     ################################################
-    Add.turnstile_SystemComponent(identifier="Counter Application",
+    Add.turnstile_SystemComponent(identifier="CounterApplication",
                         partOf_identifier="Turnstile")
 
     ################################################
@@ -44,13 +44,13 @@ def CreateCdrs():
     ################################################
     #       Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.InGate
     ################################################
-    Add.turnstile_SystemComponent(identifier="In Gate",
+    Add.turnstile_SystemComponent(identifier="InGate",
                         partOf_identifier="Turnstile")
 
     ################################################
     #       Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.01-SystemOverview.OutGate
     ################################################
-    Add.turnstile_SystemComponent(identifier="Out Gate",
+    Add.turnstile_SystemComponent(identifier="OutGate",
                         partOf_identifier="Turnstile")
 
 
@@ -59,13 +59,13 @@ def CreateCdrs():
     ################################################
 
     Add.SECTION(identifier="_01-SystemOverview",
-            content_identifier = "Counter Application")
+            content_identifier = "CounterApplication")
     Add.SECTION(identifier="_01-SystemOverview",
             content_identifier = "Display")
     Add.SECTION(identifier="_01-SystemOverview",
-            content_identifier = "In Gate")
+            content_identifier = "InGate")
     Add.SECTION(identifier="_01-SystemOverview",
-            content_identifier = "Out Gate")
+            content_identifier = "OutGate")
     Add.SECTION(identifier="_01-SystemOverview",
             content_identifier = "Turnstile")
 
@@ -74,21 +74,21 @@ def CreateCdrs():
     #       Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.ExecutiveThread
     ################################################
     Add.turnstile_SoftwareThread(identifier="ExecutiveThread",
-                       partOf_identifier="Counter Application")
+                       partOf_identifier="CounterApplication")
 
 
     ################################################
     #       Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.InputThread
     ################################################
     Add.turnstile_SoftwareThread(identifier="InputThread",                       
-                       partOf_identifier="Counter Application")
+                       partOf_identifier="CounterApplication")
 
 
     ################################################
     #       Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.02-SoftwareOverview.OutputThread
     ################################################
     Add.turnstile_SoftwareThread(identifier="OutputThread",                       
-                       partOf_identifier="Counter Application")
+                       partOf_identifier="CounterApplication")
 
 
     ################################################
@@ -96,7 +96,7 @@ def CreateCdrs():
     ################################################
 
     Add.SECTION(identifier="_02-SoftwareOverview",
-            content_identifier = "Counter Application")
+            content_identifier = "CounterApplication")
     Add.SECTION(identifier="_02-SoftwareOverview",
             content_identifier = "ExecutiveThread")
     Add.SECTION(identifier="_02-SoftwareOverview",

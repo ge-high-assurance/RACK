@@ -29,10 +29,10 @@ def CreateCdrs():
     Add.SYSTEM(identifier="Turnstile")
 
     
-    Add.turnstile_SystemComponent(identifier="In Gate",
+    Add.turnstile_SystemComponent(identifier="InGate",
                 partOf_identifier = "Turnstile")
 
-    Add.turnstile_SystemComponent(identifier="Out Gate",
+    Add.turnstile_SystemComponent(identifier="OutGate",
                 partOf_identifier = "Turnstile")
 
     Add.turnstile_SystemComponent(identifier="CounterApplication",
@@ -42,11 +42,11 @@ def CreateCdrs():
                 partOf_identifier = "Turnstile")
 
     Add.turnstile_SystemInterfaceDefinition (identifier="inflow",
-                source_identifier = "In Gate",
+                source_identifier = "InGate",
                 destination_identifier = "CounterApplication")
 
     Add.turnstile_SystemInterfaceDefinition (identifier="outflow",
-                source_identifier = "Out Gate",
+                source_identifier = "OutGate",
                 destination_identifier = "CounterApplication")
 
     Add.turnstile_SystemInterfaceDefinition (identifier="census",
@@ -54,7 +54,7 @@ def CreateCdrs():
                 destination_identifier = "Display")
 
     Add.turnstile_SystemInterfaceDefinition (identifier="census",
-                destination_identifier = "In Gate")
+                destination_identifier = "InGate")
 
     createCDR("http://rack001/turnstiledata")
 

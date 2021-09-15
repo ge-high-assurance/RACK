@@ -16,19 +16,20 @@ RAE_MODEL is a type of MODEL.
 RAE is a type of ANALYSIS.
 
 RAE_OUTPUT is a type of ANALYSIS_OUTPUT
-  described by shellCheckExitCode with a single value of type integer.
+  described by cvr with values of type CONTROLLED_VARIABLE_RESULT.
 
-CONTROLLED_VARIABLE_RESULT is a type of ANALYSIS_RESULT
-  described by result with a single value of type RAE_RESULT.
+CONTROLLED_VARIABLE_RESULT is a class
+  described by cvrCheck  with a single value of type RAE_CHECK
+  described by cvrResult with a single value of type RAE_RESULT.
 
 RAE_RESULT is a class must be one of {Passed, Failed, Indeterminate}.
 
-RAE_CHECK is a type of ANALYSIS_FINDING.
+RAE_CHECK is a type of THING.
 
 
 
 /* This goes in the data */
-ASSERT-RAE is a TOOL.
+ASSERT-RAE is a ENTITY.
 russell-d-e is a PERSON.
 /***********************************************
  * REQUIREMENTS and DATA_DICTIONARY 
@@ -90,55 +91,44 @@ SYSTEM_analysis is a RAE
  ***********************************************/	
 output_1_SYSTEM_output is a RAE_OUTPUT
 	analyzes output_1_SYSTEM
-	An:producedBy SYSTEM_analysis.
-a CONTROLLED_VARIABLE_RESULT
-	with fromOutput output_1_SYSTEM_output
-	with result Passed
-	with finding InnerContingency.
-a CONTROLLED_VARIABLE_RESULT
-	with fromOutput output_1_SYSTEM_output
-	with result Passed
-	with finding Contingency.
-a CONTROLLED_VARIABLE_RESULT
-	with fromOutput output_1_SYSTEM_output
-	with result Passed
-	with finding GlobalContingency.
-a CONTROLLED_VARIABLE_RESULT
-	with fromOutput output_1_SYSTEM_output
-	with result Passed
-	with finding PairConflict.
-a CONTROLLED_VARIABLE_RESULT
-	with fromOutput output_1_SYSTEM_output
-	with result Failed
-	with finding Completeness.
+    wasGeneratedBy SYSTEM_analysis
+	cvr (a CONTROLLED_VARIABLE_RESULT
+	    cvrResult Passed
+	    cvrCheck InnerContingency)
+    cvr (a CONTROLLED_VARIABLE_RESULT
+	    cvrResult Passed
+	    cvrCheck Contingency)
+    cvr (a CONTROLLED_VARIABLE_RESULT
+	    cvrResult Passed
+	    cvrCheck GlobalContingency)
+    cvr (a CONTROLLED_VARIABLE_RESULT
+	    cvrResult Passed
+	    cvrCheck PairConflict)
+    cvr (a CONTROLLED_VARIABLE_RESULT
+	    cvrResult Failed
+	    cvrCheck Completeness).
 
 output_2_SYSTEM_output is a RAE_OUTPUT
 	analyzes output_2_SYSTEM
-	An:producedBy SYSTEM_analysis.
-a CONTROLLED_VARIABLE_RESULT
-	with fromOutput output_2_SYSTEM_output
-	with result Passed
-	with finding InnerContingency.
-a CONTROLLED_VARIABLE_RESULT
-	with fromOutput output_2_SYSTEM_output
-	with result Passed
-	with finding Contingency.
-a CONTROLLED_VARIABLE_RESULT
-	with fromOutput output_2_SYSTEM_output
-	with result Passed
-	with finding GlobalContingency.
-a CONTROLLED_VARIABLE_RESULT
-	with fromOutput output_2_SYSTEM_output
-	with result Passed
-	with finding PairConflict.
-a CONTROLLED_VARIABLE_RESULT
-	with fromOutput output_2_SYSTEM_output
-	with result Passed
-	with finding Completeness.
-a CONTROLLED_VARIABLE_RESULT
-	with fromOutput output_2_SYSTEM_output
-	with result Passed
-	with finding Surjectivity.
+	wasGeneratedBy SYSTEM_analysis
+    cvr (a CONTROLLED_VARIABLE_RESULT
+	    cvrResult Passed
+	    cvrCheck InnerContingency)
+    cvr (a CONTROLLED_VARIABLE_RESULT
+	    cvrResult Passed
+	    cvrCheck Contingency)
+    cvr (a CONTROLLED_VARIABLE_RESULT
+	    cvrResult Passed
+	    cvrCheck GlobalContingency)
+    cvr (a CONTROLLED_VARIABLE_RESULT
+	    cvrResult Passed
+	    cvrCheck PairConflict)
+    cvr (a CONTROLLED_VARIABLE_RESULT
+	    cvrResult Passed
+	    cvrCheck Completeness)
+    cvr (a CONTROLLED_VARIABLE_RESULT
+	    cvrResult Passed
+	    cvrCheck Surjectivity).
 			
 /***********************************************
  * RAE Check Definitions 

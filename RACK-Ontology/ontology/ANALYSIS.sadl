@@ -30,8 +30,11 @@ ANALYSIS
     runBy (note "Agent responsible for running the analysis.") describes ANALYSIS with values of type AGENT.
     runBy is a type of wasAssociatedWith.
 
-    analyzedWith (note "Agent responsible for producing the output.") describes ANALYSIS with values of type AGENT.
-    analyzedWith is a type of wasAssociatedWith.
+    analyzedWith (note "Tool responsible for producing the output.") describes ANALYSIS with values of type ENTITY.
+    analyzedWith is a type of used.
+    
+    analysisInput (note "Entities targetted by the analysis.") describes ANALYSIS with values of type ENTITY.
+    analysisInput is a type of used.
 
 ANALYSIS_OUTPUT
     (note "Output of an ANALYSIS")
@@ -40,17 +43,3 @@ ANALYSIS_OUTPUT
     analyzes (note "ENTITY(s) under analysis") describes ANALYSIS_OUTPUT with values of type ENTITY.
     analyzes is a type of wasImpactedBy.
 
-    producedBy (note "ACTIVITY(s) (e.g. ANALYSIS) producing this output") describes ANALYSIS_OUTPUT with values of type ACTIVITY.
-    producedBy is a type of wasGeneratedBy.
-
-    // results (note "Which analysis report this annotation comes from.") describes ANALYSIS_RESULT with a single value of type ANALYSIS_OUTPUT.
-
-ANALYSIS_RESULT
-    (note "A result of the analysis that is linked to some specific part of the system.")
-    is a type of ENTITY.
-    fromOutput (note "Which analysis report this annotation comes from.") describes ANALYSIS_RESULT with a single value of type ANALYSIS_OUTPUT.
-    finding (note "Individual elements of the result.") describes ANALYSIS_RESULT with values of type ANALYSIS_FINDING.
-
-ANALYSIS_FINDING
-    (note "An open/extensible set of analysis findings.")
-    is a type of THING.

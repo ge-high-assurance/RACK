@@ -1,9 +1,0 @@
-"identifier_SourceSystemComponent","identifier_DestinationSystemComponent","identifier_SystemInterfaceDefinition"
-"Counter Application","In Gate","census"
-"Counter Application","Display","census"
-"Out Gate","Counter Application","outflow"
-"In Gate","Counter Application","inflow"
-null,null,"outflow"
-null,null,"inflow"
-null,null,"census"
-

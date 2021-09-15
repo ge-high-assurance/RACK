@@ -1,0 +1,11 @@
+data-graph: "http://rack001/turnstiledata"
+ingestion-steps:
+#Phase1: Identifiers Only
+- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}
+- {nodegroup: "ingest_HAZARD", csv: "HAZARD1.csv"}
+- {nodegroup: "ingest_SYSTEM", csv: "SYSTEM1.csv"}
+
+#Phase2: All Evidence
+- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
+- {nodegroup: "ingest_HAZARD", csv: "HAZARD2.csv"}
+- {nodegroup: "ingest_SYSTEM", csv: "SYSTEM2.csv"}

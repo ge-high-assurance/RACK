@@ -1,0 +1,112 @@
+{
+	"version": 3,
+	"sparqlConn": {
+		"name": "RACK local fuseki copy",
+		"domain": "",
+		"enableOwlImports": false,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/turnstiledata"
+			},
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/do-178c"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 13,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?satisfiedBy_identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"fullURIName": "http://arcos.turnstile/GE#SoftwareRequirementsReview",
+				"SparqlID": "?SoftwareRequirementsReview",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "FILTER regex(%id, \"A-3-\")",
+						"SparqlID": "?identifier",
+						"isReturned": true,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"fullURIName": "http://arcos.rack/PROCESS#OBJECTIVE",
+				"SparqlID": "?OBJECTIVE",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE",
+				"binding": "?OBJECTIVE_A_3_1_to_7",
+				"isBindingReturned": false
+			}
+		],
+		"orderBy": [],
+		"unionHash": {
+			"1": [
+				"?OBJECTIVE|http://arcos.rack/PROV-S#identifier"
+			]
+		}
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [],
+		"nodes": [
+			{
+				"sparqlID": "?OBJECTIVE",
+				"type": "http://arcos.rack/PROCESS#OBJECTIVE",
+				"mapping": [],
+				"props": []
+			},
+			{
+				"sparqlID": "?SoftwareRequirementsReview",
+				"type": "http://arcos.turnstile/GE#SoftwareRequirementsReview",
+				"mapping": [],
+				"props": []
+			}
+		]
+	},
+	"plotSpecs": []
+}

@@ -1,7 +1,0 @@
-"identifier_ProducingSystemInterfaceDefinition","identifier_ProvidingHighLevelRequirement","identifier_SoftwareRequirementsDefinition","identifier_ConsumingSystemInterfaceDefinition","identifier_ConsumingHighLevelRequirement","identifier_DataDictionary","text_DataDictionary"
-null,"HLR-3","HLR Dev 1","census",null,"counter",null
-null,"HLR-2","HLR Dev 1",null,"HLR-3","counter",null
-null,"HLR-1","HLR Dev 1",null,"HLR-3","counter",null
-"outflow",null,"HLR Dev 1",null,"HLR-2","outflowEvent",null
-"inflow",null,"HLR Dev 1",null,"HLR-1","inflowEvent","Signal indicating that a person has passed through the ingate"
-

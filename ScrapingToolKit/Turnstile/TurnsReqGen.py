@@ -17,7 +17,6 @@ import shutil
 import os.path
 import os
 local_dir=(os.getcwd()).split('ScrapingToolKit')[0]
-#out_path = "/Users/212439518/Desktop/Rack/Rack1/RACK"+"/Turnstile-IngestionScripts/Turnstile-IngestionPackage"
 out_path = local_dir+"/Turnstile-Example/Turnstile-IngestionPackage"
 def CreateCdrs():
     

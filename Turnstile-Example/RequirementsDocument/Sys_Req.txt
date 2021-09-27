@@ -1,0 +1,15 @@
+Requirement title: SystemRequirement
+Requirement identification : Sys-1
+Description: Turnstile system shall track the number of people that travel through the in gate.
+Governs: Turnstile
+
+Requirement title: SystemRequirement
+Requirement identification : Sys-2 
+Description: Turnstile system shall track the number of people that travel through the out gate.
+Governs: Turnstile
+
+
+Requirement title: SystemRequirement
+Requirement identification : Sys-3
+Description: Turnstile system shall track the number of people are currently in the park
+Governs: Turnstile

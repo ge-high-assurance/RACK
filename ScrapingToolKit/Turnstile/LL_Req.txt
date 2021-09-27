@@ -1,0 +1,113 @@
+#----------------------------------turnstile_Engineer
+Engineer identification: 2125895152 
+Engineer title: turnstile_Engineer
+Engineer name : Doe, Jane  
+Email address : jane.doe@ge.com
+Company name: General_Electric 
+
+#-----------------------------------turnstile_SoftwareDesign
+Design title:  SoftwareDesign
+Design identification: LlrDev1
+Ended at time: 2020-07-19 11:48:38
+Author: 2125895152HHH
+Referenced:  SW-STD:v1
+    
+Design title:  SoftwareDesign
+Design identification: SwDesign
+Ended at time : 2020-07-23 09:52:38 
+Author:  2125895152HHH
+Referenced: SW-STD:v1
+
+Design title:  SoftwareDesignDesign identification : SwDesignHHHGG
+Ended at time : 2020-07-23 09:52:38
+Author: 2125895152HHH
+Referenced: SW-STD:v1
+#----------------------------------turnstile_SoftwareThread
+Thread title: SoftwareThread
+Thread identification: InputThread 
+Part of: CounterApplication
+Produced by: SwDesign
+
+Thread title: SoftwareThread
+Thread identification: OutputThread
+Part of: CounterApplication
+Produced by:SwDesign
+
+Thread title :SoftwareThread
+Thread identification:  ExecutiveThread
+Part of: CounterApplication
+Produced by: SwDesign
+
+#-----------------------------------LowLevelRequirement
+##----------------------------------EXE-----------------------
+Requirement title: Low Level Requirement
+Requirement identification: EXE-LLR-1 
+Description: Executive shall spawn Input Thread on powerup.
+Governs: ExecutiveThread
+Created by: LlrDev1
+
+Requirement title: Low Level Requirement
+Requirement identification: EXE-LLR-2
+Description : Executive shall spawn Output Thread on powerup.
+Governs: ExecutiveThread
+Created by : LlrDev1
+	
+Requirement title: Low Level Requirement
+Requirement identification: EXE-LLR-3
+Description :Executive shall print a single '.' character to the console every second when running.
+Governs : ExecutiveThread
+Created by : LlrDev1
+##-------------------------------IN--------------------------------------
+Requirement title: Low Level Requirement
+Requirement identification: IN-LLR-1
+Description : Input Thread shall initialize the park_count to 0 on powerup.
+Governs: InputThread
+Created by: LlrDev1
+
+Requirement title: Low Level Requirement
+Requirement identification: IN-LLR-2
+Description : Input Thread shall check for a incoming UDP message on port 62000.
+Satisfies: HLR-1:v2,HLR-2:v2
+Governs: InputThread
+Created by: LlrDev1
+
+Requirement title: Low Level Requirement
+Requirement identification: IN-LLR-3
+Description: Input Thread shall add the delta value received by the UDP to the park_count and send the updated park_count to the Output Thread when a valid UDP message is received and the park_count range is not exceed.
+Governs: InputThread
+Satisfies: HLR-1:v2,HLR-2:v2
+Created by: LlrDev1
+
+
+Requirement title: Low Level Requirement
+Requirement identification: IN-LLR-4
+Description : Input Thread shall limit park_count to between 0 and 1500.
+Governs: InputThread
+Created by: LlrDev1
+
+Requirement title: Low Level Requirement
+Requirement identification: IN-LLR-5
+Description : Input Thread shall print 'Invalid Message' to the console when a invalid UDP message is received.
+Governs: InputThread
+Created by: LlrDev1
+
+
+Requirement title: Low Level Requirement
+Requirement identification: IN-LLR-6
+Description :Input Thread shall print 'Limit Exceeded'' to the console when a valid UDP message is received and the park_count range is exceed.
+Governs: InputThread
+Created by: LlrDev1
+
+##-------------------------------OUT----------------------------------
+Requirement title: Low Level Requirement
+Requirement identification: OUT-LLR-1
+Description: Output Thread shall initialize the park_count to 0 on powerup.
+Governs: OutputThread
+Created by: LlrDev1
+
+Requirement title: Low Level Requirement
+Requirement identification: OUT-LLR-2
+Description: Output Thread shall broadcast a UDP message on port 62001 with the park_count every second.
+Satisfies : HLR-3:v1
+Governs : OutputThread
+Created by: LlrDev1

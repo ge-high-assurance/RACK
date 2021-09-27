@@ -1,0 +1,17 @@
+data-graph: "http://rack001/turnstiledata"
+ingestion-steps:
+- {nodegroup: "ingest_OBJECTIVE", csv: "softwarereqdevobj.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "softwarecodingobj.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "softwaredesignobj.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "softwareintegrationobj.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "softwarecodereviewobj.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "softwaredesignreviewobj.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "softwarereqreviewobj.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "developtestsobj.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "couplinganalysisobj.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "structuralcoverageobj.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "swcomptestexeobj_A6.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "swcomptestexeobj_A7.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "swunittestexeobj_A6.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "swunittestexeobj_A7.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "problemreportingobj.csv"}

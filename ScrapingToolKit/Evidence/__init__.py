@@ -41,7 +41,7 @@ def getXsd():
             rackData[d.attrib['name']]=headers
     return rackData
 
-def createCDR():
+def createCDR(dataGraph="http://rack001/data"):
     '''
     Creating the CDR is done in two phases the first CDR only has the identifiers so that it will create all the objects
     the second phase has all the data, by splitting this into two phase ths allows the lookups to succeed regardless of load order
@@ -108,16 +108,15 @@ def createCDR():
                     outwriter.writerow(rowData)
           
     with open(os.path.join(outputDir,"import.yaml"), 'w', encoding="utf-8") as outFile:
-        outFile.write('''data-graph: "http://rack001/data"
+        outFile.write('''data-graph: "{{DataGraph}}"
 ingestion-steps:
 #Phase1: Identifiers Only
-''')
-        import Evidence.CONSTANTS as CONSTANTS
+'''.replace("{{DataGraph}}",dataGraph))
         for cdr in cdrFiles:
-            outFile.write('- {nodegroup: "{{NODEGROUP}}", csv: "{{THING}}1.csv"}\n'.replace("{{THING}}",cdr).replace("{{NODEGROUP}}",CONSTANTS.nodegroupMapping[cdr]))
+            outFile.write('- {nodegroup: "ingest_{{THING}}", csv: "{{THING}}1.csv"}\n'.replace("{{THING}}",cdr))
         outFile.write("\n#Phase2: All Evidence\n")
         for cdr in cdrFiles:
-            outFile.write('- {nodegroup: "{{NODEGROUP}}", csv: "{{THING}}2.csv"}\n'.replace("{{THING}}",cdr).replace("{{NODEGROUP}}",CONSTANTS.nodegroupMapping[cdr]))
+            outFile.write('- {nodegroup: "ingest_{{THING}}", csv: "{{THING}}2.csv"}\n'.replace("{{THING}}",cdr))
     return os.path.join(outputDir,"import.yaml")
 
 def createEvidenceFile(ingestionTitle="ScrapingToolKitIngestion", ingestionDescription="Data that was ingested using the ARCOS Scraping Tool Kit.", filePath="RACK-DATA.xml"):   

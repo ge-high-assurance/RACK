@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<RACK-DATA>
+  <ACTIVITY>
+    <description>Manual ingestion of Turnstile Low Level Requirements</description>
+    <identifier>TurnstileIngestion-Low Level Requirements</identifier>
+    <startedAtTime>2021-09-26 16:23:50</startedAtTime>
+    <title>TurnstileIngestion-Low Level Requirements</title>
+  </ACTIVITY>
+  <turnstile_Engineer>
+    <description> Doe, Jane  </description>
+    <emailAddress> jane.doe@ge</emailAddress>
+    <employedBy_identifier> General_Electric </employedBy_identifier>
+    <identifier> 2125895152 </identifier>
+    <title> turnstile_Engineer</title>
+  </turnstile_Engineer>
+  <ORGANIZATION>
+    <identifier> General_Electric </identifier>
+  </ORGANIZATION>
+  <turnstile_SoftwareDesign>
+    <author_identifier> 2125895152HHH</author_identifier>
+    <endedAtTime> 2020-07-19 11:48:38</endedAtTime>
+    <identifier> LlrDev1</identifier>
+    <referenced_identifier>  SW-STD:v1</referenced_identifier>
+    <title>  SoftwareDesign</title>
+  </turnstile_SoftwareDesign>
+  <DOCUMENT>
+    <identifier>  SW-STD:v1</identifier>
+  </DOCUMENT>
+  <turnstile_SoftwareDesign>
+    <author_identifier>  2125895152HHH</author_identifier>
+    <endedAtTime> 2020-07-23 09:52:38 </endedAtTime>
+    <identifier> SwDesign</identifier>
+    <referenced_identifier> SW-STD:v1</referenced_identifier>
+    <title>  SoftwareDesign</title>
+  </turnstile_SoftwareDesign>
+  <DOCUMENT>
+    <identifier> SW-STD:v1</identifier>
+  </DOCUMENT>
+  <turnstile_SoftwareDesign>
+    <author_identifier> 2125895152HHH</author_identifier>
+    <endedAtTime> 2020-07-23 09:52:38</endedAtTime>
+    <identifier> SwDesignHHHGG</identifier>
+    <referenced_identifier> SW-STD:v1</referenced_identifier>
+    <title>  SoftwareDesign</title>
+  </turnstile_SoftwareDesign>
+  <DOCUMENT>
+    <identifier> SW-STD:v1</identifier>
+  </DOCUMENT>
+  <turnstile_SoftwareThread>
+    <identifier> InputThread </identifier>
+    <partOf_identifier> CounterApplication</partOf_identifier>
+    <producedBy_identifier> SwDesign</producedBy_identifier>
+    <title> SoftwareThread</title>
+  </turnstile_SoftwareThread>
+  <turnstile_SoftwareThread>
+    <identifier> OutputThread</identifier>
+    <partOf_identifier> CounterApplication</partOf_identifier>
+    <producedBy_identifier>SwDesign</producedBy_identifier>
+    <title> SoftwareThread</title>
+  </turnstile_SoftwareThread>
+  <turnstile_SoftwareThread>
+    <identifier>  ExecutiveThread</identifier>
+    <partOf_identifier> CounterApplication</partOf_identifier>
+    <producedBy_identifier> SwDesign</producedBy_identifier>
+    <title>SoftwareThread</title>
+  </turnstile_SoftwareThread>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description> Executive shall spawn Input Thread on powerup</description>
+    <governs_identifier> ExecutiveThread</governs_identifier>
+    <identifier> EXE-LLR-1 </identifier>
+    <satisfies_identifier/>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description> Executive shall spawn Output Thread on powerup</description>
+    <governs_identifier> ExecutiveThread</governs_identifier>
+    <identifier> EXE-LLR-2</identifier>
+    <satisfies_identifier/>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description>Executive shall print a single '.' character to the console every second when running</description>
+    <governs_identifier> ExecutiveThread</governs_identifier>
+    <identifier> EXE-LLR-3</identifier>
+    <satisfies_identifier/>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description> Input Thread shall initialize the park_count to 0 on powerup</description>
+    <governs_identifier> InputThread</governs_identifier>
+    <identifier> IN-LLR-1</identifier>
+    <satisfies_identifier/>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description> Input Thread shall check for a incoming UDP message on port 62000</description>
+    <governs_identifier> InputThread</governs_identifier>
+    <identifier> IN-LLR-2</identifier>
+    <satisfies_identifier> HLR-1:v2</satisfies_identifier>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_HighLevelRequirement>
+    <identifier> HLR-1:v2</identifier>
+  </turnstile_HighLevelRequirement>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description> Input Thread shall check for a incoming UDP message on port 62000</description>
+    <governs_identifier> InputThread</governs_identifier>
+    <identifier> IN-LLR-2</identifier>
+    <satisfies_identifier>HLR-2:v2</satisfies_identifier>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_HighLevelRequirement>
+    <identifier>HLR-2:v2</identifier>
+  </turnstile_HighLevelRequirement>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description> Input Thread shall add the delta value received by the UDP to the park_count and send the updated park_count to the Output Thread when a valid UDP message is received and the park_count range is not exceed</description>
+    <governs_identifier> InputThread</governs_identifier>
+    <identifier> IN-LLR-3</identifier>
+    <satisfies_identifier> HLR-1:v2</satisfies_identifier>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_HighLevelRequirement>
+    <identifier> HLR-1:v2</identifier>
+  </turnstile_HighLevelRequirement>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description> Input Thread shall add the delta value received by the UDP to the park_count and send the updated park_count to the Output Thread when a valid UDP message is received and the park_count range is not exceed</description>
+    <governs_identifier> InputThread</governs_identifier>
+    <identifier> IN-LLR-3</identifier>
+    <satisfies_identifier>HLR-2:v2</satisfies_identifier>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_HighLevelRequirement>
+    <identifier>HLR-2:v2</identifier>
+  </turnstile_HighLevelRequirement>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description> Input Thread shall limit park_count to between 0 and 1500</description>
+    <governs_identifier> InputThread</governs_identifier>
+    <identifier> IN-LLR-4</identifier>
+    <satisfies_identifier/>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description> Input Thread shall print 'Invalid Message' to the console when a invalid UDP message is received</description>
+    <governs_identifier> InputThread</governs_identifier>
+    <identifier> IN-LLR-5</identifier>
+    <satisfies_identifier/>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description>Input Thread shall print 'Limit Exceeded'' to the console when a valid UDP message is received and the park_count range is exceed</description>
+    <governs_identifier> InputThread</governs_identifier>
+    <identifier> IN-LLR-6</identifier>
+    <satisfies_identifier/>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description> Output Thread shall initialize the park_count to 0 on powerup</description>
+    <governs_identifier> OutputThread</governs_identifier>
+    <identifier> OUT-LLR-1</identifier>
+    <satisfies_identifier/>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_LowLevelRequirement>
+    <createdBy_identifier> LlrDev1</createdBy_identifier>
+    <description> Output Thread shall broadcast a UDP message on port 62001 with the park_count every second</description>
+    <governs_identifier> OutputThread</governs_identifier>
+    <identifier> OUT-LLR-2</identifier>
+    <satisfies_identifier> HLR-3:v1</satisfies_identifier>
+    <title> Low Level Requirement</title>
+  </turnstile_LowLevelRequirement>
+  <turnstile_HighLevelRequirement>
+    <identifier> HLR-3:v1</identifier>
+  </turnstile_HighLevelRequirement>
+  <ACTIVITY>
+    <endedAtTime>2021-09-26 16:23:50</endedAtTime>
+    <identifier>TurnstileIngestion-Low Level Requirements</identifier>
+  </ACTIVITY>
+</RACK-DATA>

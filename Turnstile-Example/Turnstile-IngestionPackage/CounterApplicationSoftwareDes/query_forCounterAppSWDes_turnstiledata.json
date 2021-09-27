@@ -1,0 +1,412 @@
+{
+	"version": 3,
+	"sparqlConn": {
+		"name": "RACK local fuseki copy",
+		"domain": "",
+		"enableOwlImports": false,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/turnstiledata"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 13,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?content_identifier_2",
+						"isReturned": false,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false,
+						"binding": "?content_identifier",
+						"isBindingReturned": true
+					}
+				],
+				"nodeList": [],
+				"fullURIName": "http://arcos.turnstile/GE#SoftwareThread",
+				"SparqlID": "?SoftwareThread",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?content_identifier_0",
+						"isReturned": false,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false,
+						"binding": "?content_identifier",
+						"isBindingReturned": true
+					}
+				],
+				"nodeList": [],
+				"fullURIName": "http://arcos.turnstile/GE#DataAndControlCouple",
+				"SparqlID": "?DataAndControlCouple",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?identifier_0",
+						"isReturned": false,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false,
+						"binding": "?content_identifier",
+						"isBindingReturned": true
+					}
+				],
+				"nodeList": [],
+				"fullURIName": "http://arcos.turnstile/GE#LowLevelRequirement",
+				"SparqlID": "?LowLevelRequirement_0",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE",
+				"binding": "?LowLevelRequirement",
+				"isBindingReturned": false
+			},
+			{
+				"propList": [
+					{
+						"ValueType": "date",
+						"relationship": "http://www.w3.org/2001/XMLSchema#date",
+						"UriRelationship": "http://arcos.rack/DOCUMENT#dateOfIssue",
+						"Constraints": "",
+						"SparqlID": "?dateOfIssue",
+						"isReturned": false,
+						"optMinus": 1,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					},
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/DOCUMENT#versionNumber",
+						"Constraints": "",
+						"SparqlID": "?versionNumber",
+						"isReturned": false,
+						"optMinus": 1,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					},
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#description",
+						"Constraints": "",
+						"SparqlID": "?description",
+						"isReturned": false,
+						"optMinus": 1,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					},
+					{
+						"ValueType": "dateTime",
+						"relationship": "http://www.w3.org/2001/XMLSchema#dateTime",
+						"UriRelationship": "http://arcos.rack/PROV-S#generatedAtTime",
+						"Constraints": "",
+						"SparqlID": "?generatedAtTime",
+						"isReturned": false,
+						"optMinus": 1,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					},
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "FILTER regex(%id, \"Counter-SW-Des\")",
+						"SparqlID": "?identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					},
+					{
+						"ValueType": "dateTime",
+						"relationship": "http://www.w3.org/2001/XMLSchema#dateTime",
+						"UriRelationship": "http://arcos.rack/PROV-S#invalidatedAtTime",
+						"Constraints": "",
+						"SparqlID": "?invalidatedAtTime",
+						"isReturned": false,
+						"optMinus": 1,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					},
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#title",
+						"Constraints": "",
+						"SparqlID": "?title",
+						"isReturned": false,
+						"optMinus": 1,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"fullURIName": "http://arcos.rack/DOCUMENT#DESCRIPTION",
+				"SparqlID": "?DESCRIPTION",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			}
+		],
+		"orderBy": [],
+		"unionHash": {
+			"1": [
+				"?LowLevelRequirement_0|http://arcos.rack/PROV-S#identifier",
+				"?DataAndControlCouple|http://arcos.rack/PROV-S#identifier",
+				"?SoftwareThread|http://arcos.rack/PROV-S#identifier"
+			]
+		}
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [
+			{
+				"colId": "col_0",
+				"colName": "dateOfIssue"
+			},
+			{
+				"colId": "col_1",
+				"colName": "versionNumber"
+			},
+			{
+				"colId": "col_2",
+				"colName": "description"
+			},
+			{
+				"colId": "col_3",
+				"colName": "generatedAtTime"
+			},
+			{
+				"colId": "col_4",
+				"colName": "identifier"
+			},
+			{
+				"colId": "col_5",
+				"colName": "invalidatedAtTime"
+			},
+			{
+				"colId": "col_6",
+				"colName": "title"
+			},
+			{
+				"colId": "col_7",
+				"colName": "approvalAuthority_identifier"
+			},
+			{
+				"colId": "col_8",
+				"colName": "issuingOrganization_identifier"
+			},
+			{
+				"colId": "col_9",
+				"colName": "references_identifier"
+			},
+			{
+				"colId": "col_10",
+				"colName": "status_identifier"
+			},
+			{
+				"colId": "col_11",
+				"colName": "definedIn_identifier"
+			},
+			{
+				"colId": "col_12",
+				"colName": "content_identifier"
+			},
+			{
+				"colId": "col_13",
+				"colName": "dataInsertedBy_identifier"
+			},
+			{
+				"colId": "col_14",
+				"colName": "wasAttributedTo_identifier"
+			},
+			{
+				"colId": "col_15",
+				"colName": "wasDerivedFrom_identifier"
+			},
+			{
+				"colId": "col_16",
+				"colName": "wasGeneratedBy_identifier"
+			},
+			{
+				"colId": "col_17",
+				"colName": "wasImpactedBy_identifier"
+			},
+			{
+				"colId": "col_18",
+				"colName": "wasRevisionOf_identifier"
+			}
+		],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [
+			{
+				"transId": "trans_0",
+				"name": "rm_null",
+				"transType": "replaceAll",
+				"arg1": "^(null|Null|NULL)$",
+				"arg2": ""
+			}
+		],
+		"nodes": [
+			{
+				"sparqlID": "?DESCRIPTION",
+				"type": "http://arcos.rack/DOCUMENT#DESCRIPTION",
+				"URILookupMode": "createIfMissing",
+				"mapping": [],
+				"props": [
+					{
+						"URIRelation": "http://arcos.rack/DOCUMENT#dateOfIssue",
+						"mapping": [
+							{
+								"colId": "col_0",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					},
+					{
+						"URIRelation": "http://arcos.rack/DOCUMENT#versionNumber",
+						"mapping": [
+							{
+								"colId": "col_1",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					},
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#description",
+						"mapping": [
+							{
+								"colId": "col_2",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					},
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#generatedAtTime",
+						"mapping": [
+							{
+								"colId": "col_3",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					},
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#identifier",
+						"URILookup": [
+							"?DESCRIPTION"
+						],
+						"mapping": [
+							{
+								"colId": "col_4",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					},
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#invalidatedAtTime",
+						"mapping": [
+							{
+								"colId": "col_5",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					},
+					{
+						"URIRelation": "http://arcos.rack/PROV-S#title",
+						"mapping": [
+							{
+								"colId": "col_6",
+								"transformList": [
+									"trans_0"
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"sparqlID": "?LowLevelRequirement_0",
+				"type": "http://arcos.turnstile/GE#LowLevelRequirement",
+				"mapping": [],
+				"props": []
+			},
+			{
+				"sparqlID": "?DataAndControlCouple",
+				"type": "http://arcos.turnstile/GE#DataAndControlCouple",
+				"mapping": [],
+				"props": []
+			},
+			{
+				"sparqlID": "?SoftwareThread",
+				"type": "http://arcos.turnstile/GE#SoftwareThread",
+				"mapping": [],
+				"props": []
+			}
+		]
+	},
+	"plotSpecs": []
+}

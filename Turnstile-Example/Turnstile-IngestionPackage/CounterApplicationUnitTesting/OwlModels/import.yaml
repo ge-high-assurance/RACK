@@ -1,0 +1,3 @@
+data-graph: "http://rack001/turnstiledata"
+ingestion-steps:
+- { owl: "CounterApplicationUnitTesting.owl"}

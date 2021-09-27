@@ -26,6 +26,5 @@ fi
 rack model import ../RACK-Ontology/OwlModels/import.yaml
 
 # ingestion nodegroups auto-generated from RACK core ontology, and a set of sample query nodegroups 
-rack nodegroups delete --yes --regexp --ignore-nonexistent "^ingest" "^query"
 rack nodegroups import ../nodegroups/ingestion/arcos.rack
 rack nodegroups import ../nodegroups/queries

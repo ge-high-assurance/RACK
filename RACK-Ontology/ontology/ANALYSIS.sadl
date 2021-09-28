@@ -30,8 +30,8 @@ ANALYSIS
     runBy (note "Agent responsible for running the analysis.") describes ANALYSIS with values of type AGENT.
     runBy is a type of wasAssociatedWith.
 
-    analyzedWith (note "Tool responsible for producing the output.") describes ANALYSIS with values of type ENTITY.
-    analyzedWith is a type of used.
+    analyzedWith (note "Tool responsible for producing the output.") describes ANALYSIS with values of type AGENT. //AM 9/27/2021 was ENTITY earlier
+    analyzedWith is a type of wasAssociatedWith. //AM 9/27/2021 altered this as the previous line was altered
     
     analysisInput (note "Entities targetted by the analysis.") describes ANALYSIS with values of type ENTITY.
     analysisInput is a type of used.

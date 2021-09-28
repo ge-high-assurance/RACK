@@ -18,6 +18,36 @@ import "http://arcos.rack/AGENTS".
 import "http://arcos.rack/MODEL".
 // import "http://common/DO-178C".
 
+
+//AM 9/27/2021 Types of changes done
+//		Moved properties of ToolInvocationInstance to the various ACTIVITYs and so commented out ToolInvocationInstance.
+//			SallyTransitionSystemModelGeneration
+//			DaikonInvariantDetection
+//		Commented wasQualifiedBy as that is being added to core ontology.
+//		Made GenericProperty be a type of OBJECTIVE (not ENTITY). Do we want to change verficationObjective?
+//		For subClasses of ANALYSIS, commented out toolInvocation and replaced used by analysisInput
+//			RadlerArchitectureAnalysis
+//			SallyModelChecking
+//			RequirementAnalysis
+//		For subClasses of TEST_DEVELOPMENT, commented out toolInvocation and added in property ^An:runBy
+//			ClearTestAndOracleGeneration
+//			RandoopJUnitTestGeneration
+//		Propose moving a number of classes and their properties to BoeingOverlay. And re-using SRS, SubDD etc. 
+//			DevelopSystemArchitecture
+//			SystemArchitecture
+//			SystemRequirementsDefinition
+//			SystemRequirementSet
+//			SystemRequirement  // is this not just PIDS?
+//			SoftwareHighLevelRequirementsDefinition
+//			SoftwareHighLevelRequirementSet
+//			SoftwareHighLevelRequirement // is this not just SRS?
+//			SoftwareDesign
+//			SoftwareLowLevelRequirementSet
+//			SoftwareLowLevelRequirement // is this not just SubDD?
+//			SoftwareCoding
+//			SoftwareIntegration
+//		Have a question on ClearNotation
+
      /////////////////////////////////////////////
      // ConOps
      
@@ -52,14 +82,15 @@ import "http://arcos.rack/MODEL".
        userGuide describes TOOL with values of type DOCUMENT. // userGuide may be in multiple documents
        toolQualificationData describes TOOL with values of type ToolQualificationData.
        toolQualificationData describes TOOL with at most 1 value.
-       
-      ToolInvocationInstance (note "the instance of tool execution") is a type of ENTITY.
-        toolParamaters (note "all parameters/options used to run the tool") describes ToolInvocationInstance with values of type string.
-        // new relationships:
-        toolUsed (note "the tool that is invoked") describes ToolInvocationInstance with a single value of type TOOL.
-        toolUsed is a type of wasAttributedTo.
-        invokedBy (note "person or DevOps invoking the tool") describes ToolInvocationInstance with values of type AGENT.
-        invokedBy is a type of wasAttributedTo.
+
+// AM 9/27/2021: added the properties directly to tool invocation      
+//      ToolInvocationInstance (note "the instance of tool execution") is a type of ENTITY.
+//        toolParamaters (note "all parameters/options used to run the tool") describes ToolInvocationInstance with values of type string.
+//        // new relationships:
+//        toolUsed (note "the tool that is invoked") describes ToolInvocationInstance with a single value of type TOOL.
+//        toolUsed is a type of wasAttributedTo.
+//        invokedBy (note "person or DevOps invoking the tool") describes ToolInvocationInstance with values of type AGENT.
+//        invokedBy is a type of wasAttributedTo.
       
       ToolQualificationData
         (note "tool qualification evidence including tool qualification plan, tool operational requirements, and tool verfication procedures")
@@ -68,8 +99,9 @@ import "http://arcos.rack/MODEL".
        //   identifier
        //   generatedAtTime
        // relationships inherited from ENTITY that are subtyped:
-       wasQualifiedBy (note "organization qualifying this tool") describes ToolQualificationData with values of type ORGANIZATION.
-       wasQualifiedBy is a type of wasAttributedTo.
+//AM 9/27/2021 commented the following 2 lines as wasQualifiedBy property added to TOOL (in Core Ontology)       
+//       wasQualifiedBy (note "organization qualifying this tool") describes ToolQualificationData with values of type ORGANIZATION.
+//       wasQualifiedBy is a type of wasAttributedTo.
        toolQualificationSummary (note "summary of tool qualification argument and roadmap of artifacts") describes ToolQualificationData with values of type string.
        toolQualificationSummary describes ToolQualificationData with at most 1 value.
        toolQualificationArtifacts (note "consist of multiple documents") describes ToolQualificationData with values of type DOCUMENT.
@@ -89,13 +121,15 @@ import "http://arcos.rack/MODEL".
       
       // Note: base RACK ontology class ANALYSIS_ANNOTATION is not used since we capture the property independently and not as part of ANALYSIS_OUTPUT
       
-      GenericProperty is a type of ENTITY.
+      GenericProperty is a type of OBJECTIVE. //ENTITY. //AM 9/27/2021: altered
         propertyScope (note "entity(ies) over which this property must hold; e.g., a model, a requirement set, code, etc.") describes GenericProperty with values of type ENTITY.
         propertyScope is a type of wasImpactedBy.
         DesCert:mitigates (note "a hazard (if any) the property mitigates; GenericProperty typically doesn't mitigate any specific hazard") describes GenericProperty with values of type HAZARD.
         DesCert:mitigates is a type of wasImpactedBy.
-        propertyDescription (note "property objective: e.g., 'architecture is conformant', 'requirements are consistent', 'code is free of runtime errors, etc.") describes GenericProperty with a single value of type string.
-        verficationObjective (note "") describes GenericProperty with values of type ENTITY.
+//AM 9/27/2021 commented the following as we already  have property description
+//        propertyDescription (note "property objective: e.g., 'architecture is conformant', 'requirements are consistent', 'code is free of runtime errors, etc.") describes GenericProperty with a single value of type string.
+        verficationObjective (note "") describes GenericProperty with values of type ENTITY //AM 9/27/2021: do we need to alter this?
+        .
      
       SpecificProperty is a type of GenericProperty.
          propertyBasis (note "entity impacting the property definition - e.g. SystemconOps") describes SpecificProperty with values of type ENTITY.
@@ -105,7 +139,7 @@ import "http://arcos.rack/MODEL".
      ////////////////////////////////////////////////
      // System architecture and analysis
      
-     DevelopSystemArchitecture is a type of ACTIVITY.
+     DevelopSystemArchitecture is a type of ACTIVITY.  //AM 9/27/2021: move to BoeingOverlay
         wasInformedBy of DevelopSystemArchitecture only has values of type DevelopSystemConOps.
         // note: DesCert qualifier is used (rather than Rq) since this doesn't directly relate to requirements in RACK base ontology
         DesCert:author (note "author(s) of system architecture") describes DevelopSystemArchitecture with values of type Engineer.
@@ -116,7 +150,7 @@ import "http://arcos.rack/MODEL".
         //    startedAtTime
         //    endedAtTime
      
-     SystemArchitecture (note "specification of system architecture") is a type of ENTITY.
+     SystemArchitecture (note "specification of system architecture") is a type of ENTITY. //AM 9/27/2021: move to BoeingOverlay
        DesCert:createdBy describes SystemArchitecture with values of type DevelopSystemArchitecture.
        DesCert:createdBy describes SystemArchitecture with at most 1 value.
        DesCert:createdBy is a type of wasGeneratedBy.
@@ -139,12 +173,12 @@ import "http://arcos.rack/MODEL".
       RadlerArchitectureAnalysis (note "Analysis done by Radler tool on Radl architecture specificaton (SystemArchitecture)") is a type of ANALYSIS.
         // Inherited properties from ANALYSIS
         //   performedBy - refers to Radler tool
-        toolInvocation describes RadlerArchitectureAnalysis with values of type ToolInvocationInstance.
-        toolInvocation describes RadlerArchitectureAnalysis with at most 1 value.
+//        toolInvocation describes RadlerArchitectureAnalysis with values of type ToolInvocationInstance.
+//        toolInvocation describes RadlerArchitectureAnalysis with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
-		used describes RadlerArchitectureAnalysis with values of type ENTITY.
-        used of RadlerArchitectureAnalysis must be one of {RadlArchitectureModel, RadlGenericProperty}.
+		analysisInput describes RadlerArchitectureAnalysis with values of type ENTITY. //AM 9/27/2021 replaced used by analysisInput
+        analysisInput of RadlerArchitectureAnalysis must be one of {RadlArchitectureModel, RadlGenericProperty}.
       
       ///////////////////////////////////////////////////
       // System, Software requirements, design, code
@@ -152,7 +186,7 @@ import "http://arcos.rack/MODEL".
       // SWCOMPONENT in RACK base ontology is used as is
       //    denotes a system component allocated to software; corresponds to node in Radl
       
-      SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
+      SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. //AM 9/27/2021: move to BoeingOverlay
         wasInformedBy of SystemRequirementsDefinition only has values of type DevelopSystemConOps. // type of used
 		DesCert:governedBy describes SystemRequirementsDefinition with values of type ENTITY.
         DesCert:governedBy of SystemRequirementsDefinition must be one of {SystemConOps, SystemArchitecture}.
@@ -163,7 +197,7 @@ import "http://arcos.rack/MODEL".
         //    Rq:referenced (e.g. requirement standard)
         // use DOCUMENT for req standard, not CLEAR yet
 
-      SystemRequirementSet is a type of COLLECTION.
+      SystemRequirementSet is a type of COLLECTION. //AM 9/27/2021: move to BoeingOverlay
        content of SystemRequirementSet only has values of type SystemRequirement.
        DesCert:createdBy describes SystemRequirementSet with values of type SystemRequirementsDefinition. 
        // note: createdBy is type of wasGeneratedBy - as defined earlier under system architecture
@@ -172,7 +206,7 @@ import "http://arcos.rack/MODEL".
        // inherited properties:
        //   title: name given to this requirement set
        
-      ClearNotation (note "CLEAR notation for writing requirements") is a type of ENTITY.
+      ClearNotation (note "CLEAR notation for writing requirements") is a type of ENTITY. //AM 9/27/2021: are they using it as an instance?
         userGuide describes ClearNotation with values of type DOCUMENT.
         semantics describes ClearNotation with values of type DOCUMENT.
           
@@ -183,14 +217,14 @@ import "http://arcos.rack/MODEL".
 		models describes DesCertRequirementModel with values of type THING.
         models of DesCertRequirementModel must be one of {SoftwareHighLevelRequirement, SoftwareLowLevelRequirement}.
 
-      SystemRequirement is a type of REQUIREMENT.
+      SystemRequirement is a type of REQUIREMENT. //AM 9/27/2021: move to BoeingOverlay, is this not PIDS?
         wasGeneratedBy of SystemRequirement only has values of type SystemRequirementsDefinition.
         // inherited properties:
         //    Rq:mitigates
         // NOTE: need to add Model construct here
         //  Question: should we put a link to the SystemRequirementSet in which this requirement is contained?
         
-      SoftwareHighLevelRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
+      SoftwareHighLevelRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. //AM 9/27/2021: move to BoeingOverlay
         wasInformedBy describes SoftwareHighLevelRequirementsDefinition with values of type ACTIVITY.
 		wasInformedBy of SoftwareHighLevelRequirementsDefinition must be one of {SystemRequirementsDefinition, DevelopSystemArchitecture}.
 		DesCert:governedBy describes SoftwareHighLevelRequirementsDefinition with values of type ENTITY.
@@ -200,7 +234,7 @@ import "http://arcos.rack/MODEL".
         //    Rq:author
         //    Rq:referenced (e.g. requirement standard)
        
-      SoftwareHighLevelRequirementSet is a type of COLLECTION.
+      SoftwareHighLevelRequirementSet is a type of COLLECTION. //AM 9/27/2021: move to BoeingOverlay
        content of SoftwareHighLevelRequirementSet only has values of type SoftwareHighLevelRequirement.
        DesCert:createdBy describes SoftwareHighLevelRequirementSet with values of type SoftwareHighLevelRequirementsDefinition.
        // inheirted properties:
@@ -208,11 +242,11 @@ import "http://arcos.rack/MODEL".
        DesCert:governs describes SoftwareHighLevelRequirementSet with values of type SWCOMPONENT. 
          // note: defined earlier - governs is a type of wasImpactedBy.
         
-      SoftwareHighLevelRequirement is a type of REQUIREMENT.
+      SoftwareHighLevelRequirement is a type of REQUIREMENT. //AM 9/27/2021:is this not just SRS that is in BoeingOverlay
         wasGeneratedBy of SoftwareHighLevelRequirement only has values of type SoftwareHighLevelRequirementsDefinition.
         // note: automatic bidirectional traversing to the SoftwareHighLevelRequirementSet in which this requirement is a content
       
-      SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
+      SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT. //AM 9/27/2021: move to BoeingOverlay
         // inherited properties:
         //    Rq:author
         //    Rq:referenced (e.g. requirement/design standard)
@@ -222,7 +256,7 @@ import "http://arcos.rack/MODEL".
 		DesCert:governedBy describes SoftwareDesign with values of type ENTITY.
         DesCert:governedBy of SoftwareDesign must be one of {SoftwareHighLevelRequirementSet, SystemArchitecture}.
         
-      SoftwareLowLevelRequirementSet is a type of COLLECTION.
+      SoftwareLowLevelRequirementSet is a type of COLLECTION. //AM 9/27/2021: move to BoeingOverlay
        content of SoftwareLowLevelRequirementSet only has values of type SoftwareLowLevelRequirement.
        // Note: DesCert qualifier is used since this doesn't diretly relate to rq qualifier in RACK base ontology
        DesCert:createdBy describes SoftwareLowLevelRequirementSet with values of type SoftwareDesign. 
@@ -232,15 +266,15 @@ import "http://arcos.rack/MODEL".
        // inherited properties:
        //   title: name given to this requirement set
        
-      SoftwareLowLevelRequirement is a type of REQUIREMENT.
+      SoftwareLowLevelRequirement is a type of REQUIREMENT. //AM 9/27/2021: is this not SubDD in BoeingOverlay?
         wasGeneratedBy of SoftwareLowLevelRequirement only has values of type SoftwareDesign.
         //  Question: should we put a link to the SoftwareHighLevelRequirementSet oin which this requirement is contained?
        
-      SoftwareCoding is a type of CODE_DEVELOPMENT.
+      SoftwareCoding is a type of CODE_DEVELOPMENT. //AM 9/27/2021: move to BoeingOverlay
         // wasInformedBy of SoftwareCoding has values of type Change_Authorization. (not sure of this yet)
         wasInformedBy of SoftwareCoding only has values of type SoftwareDesign.        
 
-      SoftwareIntegration is a type of COMPILE.
+      SoftwareIntegration is a type of COMPILE.//AM 9/27/2021: move to BoeingOverlay
         wasInformedBy of SoftwareIntegration only has values of type SoftwareCoding.
         
         compileWithOptimizations describes  SoftwareIntegration with values of type boolean.     
@@ -276,21 +310,35 @@ import "http://arcos.rack/MODEL".
         sallyModelNotation is a type of wasImpactedBy.
       
       SallyTransitionSystemModelGeneration is a type of ACTIVITY.
-        toolInvocation (note "using Text2Test tool on a requirement set that generates Sally input model") describes SallyTransitionSystemModelGeneration with values of type ToolInvocationInstance.
-        toolInvocation describes SallyTransitionSystemModelGeneration with at most 1 value.
+//        toolInvocation (note "using Text2Test tool on a requirement set that generates Sally input model") describes SallyTransitionSystemModelGeneration with values of type ToolInvocationInstance.
+//        toolInvocation describes SallyTransitionSystemModelGeneration with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
         used of SallyTransitionSystemModelGeneration only has values of type SoftwareHighLevelRequirementSet.
+        
+        toolParamaters (note "all parameters/options used to run the tool") describes SallyTransitionSystemModelGeneration with values of type string.
+        // new relationships:
+        toolUsed (note "the tool that is invoked") describes SallyTransitionSystemModelGeneration with a single value of type TOOL.
+        toolUsed is a type of wasAttributedTo. //AM alter maybe wasPerformedBy
+        invokedBy (note "person or DevOps invoking the tool") describes SallyTransitionSystemModelGeneration with values of type AGENT.
+        invokedBy is a type of wasAttributedTo.
       
-      SallyModelChecking is a type of ANALYSIS.
+      SallyModelChecking is a type of ANALYSIS.  //AM 9/27/2021 should this be an ACTIVITY instead?
         // Inherited properties from ANALYSIS
         //   performedBy - refers to SALLY tool
-        toolInvocation describes SallyModelChecking with values of type ToolInvocationInstance.
-        toolInvocation describes SallyModelChecking with at most 1 value.
+//        toolInvocation describes SallyModelChecking with values of type ToolInvocationInstance.
+//        toolInvocation describes SallyModelChecking with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
-		used describes SallyModelChecking with values of type ENTITY.
-        used of SallyModelChecking must be one of {SallyTransitionSystemModel, SpecificProperty}.
+		analysisInput describes SallyModelChecking with values of type ENTITY. //AM 9/27/2021 alter ENTITY?
+        analysisInput of SallyModelChecking must be one of {SallyTransitionSystemModel, SpecificProperty}.
+        
+                toolParamaters (note "all parameters/options used to run the tool") describes SallyTransitionSystemModelGeneration with values of type string.
+        // new relationships:
+//        toolUsed (note "the tool that is invoked") describes SallyModelChecking with a single value of type TOOL.
+//        toolUsed is a type of wasAttributedTo. //AM alter maybe wasAssocitWith
+//        invokedBy (note "person or DevOps invoking the tool") describes SallyModelChecking with values of type AGENT.
+//        invokedBy is a type of wasAttributedTo.
       
       SallyNotation (note "Sally notation for creating models and property queries") is a type of ENTITY.
         userGuide describes SallyNotation with values of type DOCUMENT.
@@ -309,8 +357,10 @@ import "http://arcos.rack/MODEL".
        
        ClearTestAndOracleGeneration is a type of TEST_DEVELOPMENT.
          // Test oracles and test generation by Text2Test tool from CLEAR requirements
-        toolInvocation (note "Text2Test tool usage instance") describes ClearTestAndOracleGeneration with values of type ToolInvocationInstance.
-        toolInvocation describes ClearTestAndOracleGeneration with at most 1 value.
+//        toolInvocation (note "Text2Test tool usage instance") describes ClearTestAndOracleGeneration with values of type ToolInvocationInstance.
+//        toolInvocation describes ClearTestAndOracleGeneration with at most 1 value.
+        ^An:runBy describes ClearTestAndOracleGeneration with values of type AGENT. //AM 9/27/2021 
+//        ^An:runBy is a type of wasAssociatedWith.
         // Inherited properties
         //   developedBy: refers to Text2Test tool
         //   wasInformedBy: activity that was a precursor to this
@@ -353,19 +403,20 @@ import "http://arcos.rack/MODEL".
        RequirementAnalysis is a type of ANALYSIS.
         // Inherited properties from ANALYSIS
         //   performedBy - refers to Text2Test tool
-        toolInvocation describes RequirementAnalysis with values of type ToolInvocationInstance.
-        toolInvocation describes RequirementAnalysis with at most 1 value.
+//        toolInvocation describes RequirementAnalysis with values of type ToolInvocationInstance.
+//        toolInvocation describes RequirementAnalysis with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
-        used describes RequirementAnalysis with values of type ENTITY.
-        used of RequirementAnalysis must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary, ClearGenericProperty}.
+        analysisInput describes RequirementAnalysis with values of type ENTITY. //AM 9/27/2021 replaced used by analysisInput
+        analysisInput of RequirementAnalysis must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary, ClearGenericProperty}.
        
        ////////////////////////////////
        // Test generation by Randoop tool
        
        RandoopJUnitTestGeneration is a type of TEST_DEVELOPMENT.
-        toolInvocation (note "Randoop tool") describes RandoopJUnitTestGeneration with values of type ToolInvocationInstance.
-        toolInvocation describes RandoopJUnitTestGeneration with at most 1 value.
+//        toolInvocation (note "Randoop tool") describes RandoopJUnitTestGeneration with values of type ToolInvocationInstance.
+//        toolInvocation describes RandoopJUnitTestGeneration with at most 1 value.
+                ^An:runBy describes RandoopJUnitTestGeneration with values of type AGENT.
         // Inherited properties
         //   developedBy: refers to Randoop tool
         //   wasInformedBy: activity that was a precursor to this
@@ -393,8 +444,16 @@ import "http://arcos.rack/MODEL".
         /////////////////////////////////////////////
         // Invariant detection by Daikon
         DaikonInvariantDetection is a type of ACTIVITY.
-          toolInvocation (note "Daikon tool invocation") describes DaikonInvariantDetection with values of type ToolInvocationInstance.
-          toolInvocation describes DaikonInvariantDetection with at most 1 value.
+//          toolInvocation (note "Daikon tool invocation") describes DaikonInvariantDetection with values of type ToolInvocationInstance.
+//          toolInvocation describes DaikonInvariantDetection with at most 1 value.
+        toolParamaters (note "all parameters/options used to run the tool") describes DaikonInvariantDetection with values of type string.
+        // new relationships:
+        toolUsed (note "the tool that is invoked") describes DaikonInvariantDetection with a single value of type TOOL.
+        toolUsed is a type of wasAttributedTo. //AM 9/27/2021: alter maybe wasPerformedBy
+        invokedBy (note "person or DevOps invoking the tool") describes DaikonInvariantDetection with values of type AGENT.
+        invokedBy is a type of wasAttributedTo.
+
+          
           // Inherited porperties
           //   developedBy: refers to Randoop tool
           //   wasInformedBy: activity that was a precursor to this

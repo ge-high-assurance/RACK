@@ -16,9 +16,18 @@ import Evidence.Add as Add
 import shutil
 import os.path
 
-
+input_path = "RequirementsDocuments"
 def CreateCdrs():
     
+    ####################################
+    def read_store (l):
+           start = l.find(":")
+           end = l.rfind(".")
+           return l[start+1:end].split(",")
+    
+    
+    #####################################
+  
     #Logging.TRACE = True
     #Logging.DEBUG = True
 
@@ -27,24 +36,30 @@ def CreateCdrs():
     ################################################
     createEvidenceFile(ingestionTitle="TurnstileIngestion-System Requirements", ingestionDescription="Manual ingestion of Turnstile System Requirements")
     Add.SYSTEM(identifier="Turnstile")
-    #------------ Sys-1 ------------
-    Add.turnstile_SystemRequirement(identifier="Sys-1",
-                          description="Turnstile system shall track the number of people that travel through the in gate.",
-                          governs_identifier="Turnstile")
-    Add.SYSTEM(identifier="Turnstile")
     
-    #------------ Sys-2 ------------
-    Add.turnstile_SystemRequirement(identifier="Sys-2",
-                          description="Turnstile system shall track the number of people that travel through the out gate.",
-                          governs_identifier="Turnstile")
-    Add.SYSTEM(identifier="Turnstile")
-    
-    #------------ Sys-3 ------------
-    Add.turnstile_SystemRequirement(identifier="Sys-3",
-                          description="Turnstile system shall track the number of people are currently in the park.",
-                          governs_identifier="Turnstile")
-    Add.SYSTEM(identifier="Turnstile")
-       
+    def SystemRequirement(txt):
+      for l in txt.readlines():
+       if l.startswith("Requirement title"):
+        titles = read_store(l)
+       elif l.startswith("Requirement identification"):
+        ids = read_store(l)
+       elif l.startswith("Description"):
+        descIds = read_store(l)
+       elif l.startswith("Governs"): 
+        governsIds = read_store(l)
+        for descId in descIds: 
+         for title1 in titles:
+           for sysId in ids:
+             for gov in governsIds:
+              Add.turnstile_SystemRequirement(identifier = sysId, title = title1, governs_identifier = gov,description = descId)   
+              Add.SYSTEM(identifier = gov)
+              
+    def ingest_SystemRequirement(filePath):
+       with open(filePath, "r") as txtFile:
+         lastSysReqId = None
+         SystemRequirement(txtFile)
+          
+    ingest_SystemRequirement(input_path+"/Sys_Req.txt")   
     createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileSystemRequirements"))
 

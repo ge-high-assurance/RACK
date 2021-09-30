@@ -16,7 +16,7 @@ import Evidence.Add as Add
 import shutil
 import os.path
 
-input_path = "RequirementsDocuments"
+input_path = "RequirementsDocument"
 def CreateCdrs():
     
     ####################################

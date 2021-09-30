@@ -1,0 +1,37 @@
+// see https://www.typescriptlang.org/docs/handbook/project-references.html
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "baseUrl": ".",
+        "downlevelIteration": true,
+        "esModuleInterop": true,
+        "jsx": "react",
+        "module": "CommonJS",
+        "resolveJsonModule": true,
+        "rootDirs": [
+            ".",
+        ],
+        "target": "ES2021"
+    },
+    "files": [
+        "./colors.ts",
+        "./data-view.ts",
+        "./flavor.ts",
+        "./graph-provider.ts",
+        "./index.ts",
+        "./mil-std-881d.ts",
+        "./namespace-selection.ts",
+        "./ontology-view.ts",
+        "./owl.ts",
+        "./rack.ts",
+        "./rdf-schema.ts",
+        "./svg-view.tsx",
+        "./turnstile.ts",
+        "./uri.ts",
+        "./use-d3.ts",
+        "./view-type.ts",
+        "./visualizer.tsx",
+        "./webpack.config.ts",
+        "./xml-schema.ts",
+    ],
+}

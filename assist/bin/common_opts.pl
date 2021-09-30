@@ -73,7 +73,15 @@ parse_args(ExtraArgs, Opts, PosArgs, HelpBanner) :-
     get_ontology_dir(Opts, ODir),
     print_message(informational, loading_ontology_dir(ODir)),
 
-    ((catch(exists_directory(ODir),
+    load_model(ODir),
+    load_recognizers(Opts),
+    load_data_from_dir(Opts).
+
+% Tries to load a model either from a local directory or a URL.
+load_model(ODir) :-
+    (
+        (
+            catch(exists_directory(ODir),
             % If the above throws the following error, run the
             % following step instead.  This looks wrong... one would
             % expect the iri_scheme error to be thrown by an attempt
@@ -83,12 +91,11 @@ parse_args(ExtraArgs, Opts, PosArgs, HelpBanner) :-
             % *not* throw this error.
             error(existence_error(iri_scheme,http),_),
             fail),
-      !, % The directory exists, so commit to loading from it
-      load_local_model(ODir)) ;
-     load_model_from_url(ODir)
-    ),
-    load_recognizers(Opts),
-    load_data_from_dir(Opts).
+            !, % The directory exists, so commit to loading from it
+            load_local_model(ODir)
+        );
+        load_model_from_url(ODir)
+    ).
 
 display_help(Opts, OptSpec, HelpBanner) :-
     member(help(true), Opts),

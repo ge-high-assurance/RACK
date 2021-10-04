@@ -36,7 +36,6 @@ def CreateCdrs():
     ################################################
     createEvidenceFile(ingestionTitle="TurnstileIngestion-System Requirements", ingestionDescription="Ingestion of Turnstile System Requirements using Scraping Tool Kit")
     
-    
     def SystemRequirement(txt):
       for l in txt.readlines():
        if l.startswith("Requirement title"):

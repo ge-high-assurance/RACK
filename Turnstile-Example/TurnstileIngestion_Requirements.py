@@ -34,8 +34,8 @@ def CreateCdrs():
     ################################################
     #    System Requirements
     ################################################
-    createEvidenceFile(ingestionTitle="TurnstileIngestion-System Requirements", ingestionDescription="Manual ingestion of Turnstile System Requirements")
-    Add.SYSTEM(identifier="Turnstile")
+    createEvidenceFile(ingestionTitle="TurnstileIngestion-System Requirements", ingestionDescription="Ingestion of Turnstile System Requirements using Scraping Tool Kit")
+    
     
     def SystemRequirement(txt):
       for l in txt.readlines():

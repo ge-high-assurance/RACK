@@ -1,6 +1,18 @@
 uri "http://arcos.AH-64D/Boeing" alias BoeingModel.
+import "http://arcos.rack/AGENTS".
+import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/CONFIDENCE".
+import "http://arcos.rack/DOCUMENT".
+import "http://arcos.rack/FILE".
+import "http://arcos.rack/HAZARD".
+import "http://arcos.rack/MODEL".
+import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/REVIEW".
+import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/TESTING".
+// import "http://common/DO-178C".
 
 PIDS_Req (note "A Requirement identified in the Prime Item Development Specification")is a type of REQUIREMENT.
 
@@ -10,7 +22,7 @@ SRS_Req (note "A Requirement identified in the Software Requirements Specificati
 //satisfies of SRS_Req only has values of type {PIDS_Req or CSID_Req}.
 
 SubDD_Req (note "A Requirement identified in the Subsystem Design Document")is a type of REQUIREMENT.
-satisfies of SubDD_Req only has values of type SRS_Req.
+Rq:satisfies of SubDD_Req only has values of type SRS_Req.
 
 SBVT_Test (note "A test identified in the Software Baseline Verification Tests") is a type of TEST.
 //verifies of SBVT_Test only has values of type {SRS_Req or SubDD_Req}.
@@ -18,3 +30,72 @@ verifies of SBVT_Test has at least 1 value.
 
 SBVT_Result (note "A result identified for a SBVT_Test (Software Baseline Verification Tests)") is a type of TEST_RESULT.
 confirms of SBVT_Result only has values of type SBVT_Test.
+
+////////////////////////////////////// Moved from SRI ontology
+     DevelopSystemConOps is a type of ACTIVITY.
+       //AM Rv:author is not correct as it was defined on REVIEW which is of type ACTIVITY
+       Rv:author of DevelopSystemConOps only has values of type AGENT.
+       
+     SystemConOps is a type of ENTITY.
+       wasGeneratedBy of SystemConOps only has values of type DevelopSystemConOps.
+       conOpsDocs describes SystemConOps with values of type DOCUMENT.  
+     
+     Engineer is a type of PERSON. //AM do we need to be this specific for Rv:author below
+     DevelopSystemArchitecture is a type of ACTIVITY.  
+        wasInformedBy of DevelopSystemArchitecture only has values of type DevelopSystemConOps.
+        Rv:author of DevelopSystemArchitecture only has values of type Engineer.
+        used of DevelopSystemArchitecture only has values of type SystemConOps. 
+
+     SystemArchitecture (note "specification of system architecture") is a type of ENTITY. 
+      //AM what is the difference between wasGeneratedBy and original DesCert:createdBy? so using wasGeneratedBy
+       wasGeneratedBy of SystemArchitecture only has values of type DevelopSystemArchitecture. 
+       isArchitectureOf describes SystemArchitecture with values of type SYSTEM.
+       isArchitectureOf is a type of wasImpactedBy.
+
+      SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
+        wasInformedBy of SystemRequirementsDefinition only has values of type DevelopSystemConOps. 
+
+	 RequirementSet is a type of COLLECTION. //AM introduced this and made various "sets" be sub class of these and so can inherit properties
+	   content of RequirementSet only has values of type REQUIREMENT.
+       governs of RequirementSet only has values of type SYSTEM. 
+     
+      SystemRequirementSet is a type of RequirementSet. 
+       content of SystemRequirementSet only has values of type SystemRequirement.
+       wasGeneratedBy of SystemRequirementSet only has values of type SystemRequirementsDefinition. 
+       
+      SystemRequirement is a type of REQUIREMENT. //AM   is this not just PIDS?
+        wasGeneratedBy of SystemRequirement only has values of type SystemRequirementsDefinition.
+        
+      SoftwareHighLevelRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
+		wasInformedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementsDefinition or DevelopSystemArchitecture}.
+        Rq:governedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementSet or SystemArchitecture}.
+
+      SoftwareHighLevelRequirement is a type of REQUIREMENT. //AM: is this not just SRS 
+        wasGeneratedBy of SoftwareHighLevelRequirement only has values of type SoftwareHighLevelRequirementsDefinition.
+       
+      SoftwareHighLevelRequirementSet is a type of RequirementSet. 
+       content of SoftwareHighLevelRequirementSet only has values of type SoftwareHighLevelRequirement.
+       createdBy of SoftwareHighLevelRequirementSet only has values of type SoftwareHighLevelRequirementsDefinition.
+       governs of SoftwareHighLevelRequirementSet only has values of type SWCOMPONENT. 
+       
+       SoftwareLowLevelRequirementSet is a type of RequirementSet. 
+       content of SoftwareLowLevelRequirementSet only has values of type SoftwareLowLevelRequirement.
+       createdBy of SoftwareLowLevelRequirementSet only has values of type SoftwareDesign. 
+       governs of SoftwareLowLevelRequirementSet only has values of type SWCOMPONENT.
+       governs describes SoftwareLowLevelRequirementSet with at most 1 value.
+
+       SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
+		wasInformedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementsDefinition or DevelopSystemArchitecture}.
+        Rq:governedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementSet or SystemArchitecture}.
+       
+      SoftwareLowLevelRequirement is a type of REQUIREMENT. //AM: is this not SubDD
+        wasGeneratedBy of SoftwareLowLevelRequirement only has values of type SoftwareDesign.
+       
+      SoftwareCoding is a type of CODE_DEVELOPMENT. 
+        wasInformedBy of SoftwareCoding only has values of type SoftwareDesign.        
+
+      SoftwareIntegration is a type of COMPILE.
+        wasInformedBy of SoftwareIntegration only has values of type SoftwareCoding.        
+        compileWithOptimizations describes  SoftwareIntegration with values of type boolean.     
+        linkerPath describes  SoftwareIntegration with values of type string.       
+       

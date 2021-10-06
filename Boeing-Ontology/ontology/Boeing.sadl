@@ -32,18 +32,23 @@ SBVT_Result (note "A result identified for a SBVT_Test (Software Baseline Verifi
 confirms of SBVT_Result only has values of type SBVT_Test.
 
 ////////////////////////////////////// Moved from SRI ontology
+//AM: replaced author by wasAssociatedWith in DevelopSystemConOps
+//AM: dropped author in DevelopSystemArchitecture as we inherit wasAssociatedWith
+//AM: do we more granularity than just wasAssociatedWith
+//AM: relate to PIDS, SRS, SubDD
+//AM: see comment on line 55
+//AM: can RequirementSet "governs" more than just SYSTEM? (line 65): maybe we need a hierarchy for SYSTEM; maybe the restriction should be on REQUIREMENT
+//AM: should Requirement Sets be named collection?
+
      DevelopSystemConOps is a type of ACTIVITY.
-       //AM Rv:author is not correct as it was defined on REVIEW which is of type ACTIVITY
-       Rv:author of DevelopSystemConOps only has values of type AGENT.
+       wasAssociatedWith of DevelopSystemConOps only has values of type AGENT.
        
      SystemConOps is a type of ENTITY.
        wasGeneratedBy of SystemConOps only has values of type DevelopSystemConOps.
        conOpsDocs describes SystemConOps with values of type DOCUMENT.  
      
-     Engineer is a type of PERSON. //AM do we need to be this specific for Rv:author below
      DevelopSystemArchitecture is a type of ACTIVITY.  
         wasInformedBy of DevelopSystemArchitecture only has values of type DevelopSystemConOps.
-        Rv:author of DevelopSystemArchitecture only has values of type Engineer.
         used of DevelopSystemArchitecture only has values of type SystemConOps. 
 
      SystemArchitecture (note "specification of system architecture") is a type of ENTITY. 

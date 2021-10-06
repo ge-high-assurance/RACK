@@ -1,5 +1,5 @@
 # Turnstile-Example Explained
-The purpose this directory is to demonstrate the following using our [Turnstile example](https://github.com/ge-high-assurance/RACK/wiki/Turnstile-Example):
+The purpose of this directory is to demonstrate the following using our [Turnstile example](https://github.com/ge-high-assurance/RACK/wiki/Turnstile-Example):
 * ontology overlay 
 * CDR usage and instance data
 * data ingestion package along with a Load-TurnstileData.sh script

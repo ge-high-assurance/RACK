@@ -36,6 +36,9 @@ ANALYSIS
     analysisInput (note "Entities targetted by the analysis.") describes ANALYSIS with values of type ENTITY.
     analysisInput is a type of used.
 
+    analysisConfiguration (note "Parameters/options etc. for the tool used.") describes ANALYSIS with values of type ENTITY.
+    analysisConfiguration is a type of used.
+
 ANALYSIS_OUTPUT
     (note "Output of an ANALYSIS")
     is a type of ENTITY.

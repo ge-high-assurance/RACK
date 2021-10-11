@@ -1,0 +1,40 @@
+#!/usr/bin/env swipl
+% Copyright (c) 2021, General Electric Company and Galois, Inc.
+%
+% All Rights Reserved
+%
+% This material is based upon work supported by the Defense Advanced Research
+% Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+%
+% Any opinions, findings and conclusions or recommendations expressed in this
+% material are those of the author(s) and do not necessarily reflect the views
+% of the Defense Advanced Research Projects Agency (DARPA).
+
+:- initialization(main, main).
+
+:- ensure_loaded('./paths').
+
+:- use_module(library(http/json)).
+:- use_module(library(optparse)).
+:- consult(common_opts).
+:- consult(rack(analyze)).
+:- consult(rack(dump_json)).
+:- use_module(rack(write_ontology)).
+
+main :-
+    paths_dir(Dir),
+    file_directory_name(Dir, AssistDir),
+    file_directory_name(AssistDir, RACKRootDir),
+    atom_concat(RACKRootDir, '/RACK-Ontology/OwlModels', RACKOWLDir),
+    load_model(RACKOWLDir),
+    atom_concat(RACKRootDir, '/Turnstile-Ontology/OwlModels', TurnstileOWLDir),
+    load_model(TurnstileOWLDir),
+    setof(
+        triple{source: SA, property: SB, target: SC},
+        A^B^C^(rdf(A, B, C), as_atom(A, SA), as_atom(B, SB), as_atom(C, SC)),
+        Triples
+    ),
+    open('dump.json', write, Fd),
+    json_write(Fd, Triples).
+
+as_atom(In, Out) :- with_output_to(atom(Out), write(In)).

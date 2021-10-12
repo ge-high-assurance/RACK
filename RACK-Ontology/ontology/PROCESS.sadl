@@ -13,6 +13,13 @@
 uri "http://arcos.rack/PROCESS" alias Pr.
 import "http://arcos.rack/PROV-S".
 
+OBJECTIVE 
+	(note "An OBJECTIVE identifies tasks from a process for which evidence must be provided to show that the task has been completed. ") 
+	is a type of ENTITY.
 
-OBJECTIVE (note "An OBJECTIVE identifies tasks from a process for which evidence must be provided to show that the task has been completed. ") is a type of ENTITY.
-	satisfiedBy (note "An ACTIVITY that demonstrates that the OBJECTIVE has been satisfied.")describes OBJECTIVE with values of type ACTIVITY.
+	satisfiedBy (note "An ACTIVITY that demonstrates that the OBJECTIVE has been satisfied.") describes OBJECTIVE with values of type THING.
+
+PROPERTY 
+	(note "A general property that holds on the basis of some ANALYSIS") 
+	is a type of OBJECTIVE. 
+

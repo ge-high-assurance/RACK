@@ -24,8 +24,6 @@ import "http://arcos.AH-64D/Boeing".
 // In SRI_Tool, dropped 2 lines on toolQualificationData as we already have 
 //		wasQualifiedBy: TOOL -> ENTITY
 //		dropped toolSummaryDescription as existing "description" property can be used
-// rename xx to be something like PropertyBasedAnalysisOutput? 
-//		do we need analysisDiagnostics?
 // goalProperty: move to core ontology?
 // verificationOjective: looks like an Objective? then move verificationObjective to core as parentObjective
 // replaced "used" by "analysisInput" when it is used on an ANALYSIS
@@ -92,15 +90,15 @@ ToolQualificationData
       //   result of type ANALYSIS_RESULT defined in the base RACK ontology is used as is
       // new properties for ANALYSIS_OUTPUT
 
-//AM introducing a subClass of ANALYSIS_OUTPUT and moving properties to the new subClass; rename the subClass
-xx is a type of ANALYSIS_OUTPUT.      
-      analysisDiagnostics (note "counter examples, other diagnostics") describes xx with values of type string.  
-      goalProperty (note "SpecificProperty or GenericProperty that is the objective of analysis") describes xx with values of type GenericProperty.
+//AM introducing a subClass of ANALYSIS and moving properties to the new subClass
+SRI_ANALYSIS is a type of ANALYSIS.     
+      analysisDiagnostics (note "counter examples, other diagnostics") describes SRI_ANALYSIS with values of type string.  
+      goal of SRI_ANALYSIS only has values of type GenericProperty. //AM 10/13
       
       // Note: base RACK ontology class ANALYSIS_ANNOTATION is not used since we capture the property independently and not as part of ANALYSIS_OUTPUT
 
 //AM changed range of GenericProperty from ENTITY to OBJECTIVE      
-      GenericProperty is a type of OBJECTIVE. //ENTITY.
+      GenericProperty is a type of PROPERTY. //ENTITY.
         propertyScope (note "entity(ies) over which this property must hold; e.g., a model, a requirement set, code, etc.") describes GenericProperty with values of type ENTITY.
         propertyScope is a type of wasImpactedBy.
         DesCert:mitigates (note "a hazard (if any) the property mitigates; GenericProperty typically doesn't mitigate any specific hazard") describes GenericProperty with values of type HAZARD.
@@ -202,7 +200,7 @@ ConfigurationString is a type of ENTITY.
 //        analyzedWith  describes SallyTransitionSystemModelGeneration with a single value of type TOOL.
 //        runBy describes SallyTransitionSystemModelGeneration with values of type AGENT.
 //AM changed "used" to analysisInput
-	    analysisInput of SallyTransitionSystemModelGeneration only has values of type SoftwareHighLevelRequirementSet.       
+	    analysisInput of SallyTransitionSystemModelGeneration only has values of type SRS_Doc.       
 
       
       SallyModelChecking is a type of ANALYSIS.  //AM 9/27/2021 should this be an ACTIVITY instead?
@@ -243,7 +241,7 @@ ConfigurationString is a type of ENTITY.
 //AM redid "used"
 //		used describes ClearTestAndOracleGeneration with values of type ENTITY.
 //        used of ClearTestAndOracleGeneration must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary}.
-		used of ClearTestAndOracleGeneration only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary}.
+		used of ClearTestAndOracleGeneration only has values of type {SRS_Doc or SubDD_Doc or DataDictionary}.
          
        ClearTestingTheory is a type of ENTITY. 
           testingTheoryDoc describes ClearTestingTheory with values of type DOCUMENT. 
@@ -280,7 +278,7 @@ ConfigurationString is a type of ENTITY.
 //AM corrected propertyScope
 //	   propertyScope describes ClearGenericProperty with values of type ENTITY.
 //        propertyScope of ClearGenericProperty must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary}.
-	   propertyScope of ClearGenericProperty only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary}. 
+	   propertyScope of ClearGenericProperty only has values of type {SRS_Doc or SubDD_Doc or DataDictionary}. 
 
        RequirementAnalysis is a type of ANALYSIS.
         // Inherited properties from ANALYSIS
@@ -292,7 +290,7 @@ ConfigurationString is a type of ENTITY.
 //AM replaced "used" with analysisInput and corrected constraint
 //        used describes RequirementAnalysis with values of type ENTITY.
 //        used of RequirementAnalysis must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary, ClearGenericProperty}.
- analysisInput of RequirementAnalysis must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary, ClearGenericProperty}.
+ analysisInput of RequirementAnalysis must be one of {SRS_Doc, SubDD_Doc, DataDictionary, ClearGenericProperty}.
        
        ////////////////////////////////
        // Test generation by Randoop tool

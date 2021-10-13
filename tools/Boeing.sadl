@@ -14,15 +14,15 @@ import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/TESTING".
 // import "http://common/DO-178C".
 
-PIDS_Req (note "A Requirement identified in the Prime Item Development Specification")is a type of REQUIREMENT.
+PIDS_Req (note "A Requirement identified in the Prime Item Development Specification") is a type of REQUIREMENT.
 
 CSID_Req (note "A Requirement identified in the Crew Systems Interface Document") is a type of REQUIREMENT.
 
-SRS_Req (note "A Requirement identified in the Software Requirements Specification")is a type of REQUIREMENT.
+SRS_Req (note "A Requirement identified in the Software Requirements Specification") is a type of REQUIREMENT.
 //satisfies of SRS_Req only has values of type {PIDS_Req or CSID_Req}.
 
-SubDD_Req (note "A Requirement identified in the Subsystem Design Document")is a type of REQUIREMENT.
-Rq:satisfies of SubDD_Req only has values of type SRS_Req.
+SubDD_Req (note "A Requirement identified in the Subsystem Design Document") is a type of REQUIREMENT. 
+Rq:satisfies of SubDD_Req only has values of type SRS_Req. //AM move this and why warning marker
 
 SBVT_Test (note "A test identified in the Software Baseline Verification Tests") is a type of TEST.
 //verifies of SBVT_Test only has values of type {SRS_Req or SubDD_Req}.
@@ -34,11 +34,7 @@ confirms of SBVT_Result only has values of type SBVT_Test.
 ////////////////////////////////////// Moved from SRI ontology
 //AM: replaced author by wasAssociatedWith in DevelopSystemConOps
 //AM: dropped author in DevelopSystemArchitecture as we inherit wasAssociatedWith
-//AM: do we more granularity than just wasAssociatedWith
-//AM: relate to PIDS, SRS, SubDD
-//AM: see comment on line 55
-//AM: can RequirementSet "governs" more than just SYSTEM? (line 65): maybe we need a hierarchy for SYSTEM; maybe the restriction should be on REQUIREMENT
-//AM: should Requirement Sets be named collection?
+//AM: do we want more granularity than just wasAssociatedWith
 
      DevelopSystemConOps is a type of ACTIVITY.
        wasAssociatedWith of DevelopSystemConOps only has values of type AGENT.
@@ -57,46 +53,38 @@ confirms of SBVT_Result only has values of type SBVT_Test.
        isArchitectureOf describes SystemArchitecture with values of type SYSTEM.
        isArchitectureOf is a type of wasImpactedBy.
 
-      SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
-        wasInformedBy of SystemRequirementsDefinition only has values of type DevelopSystemConOps. 
-
-	 RequirementSet is a type of COLLECTION. //AM introduced this and made various "sets" be sub class of these and so can inherit properties
-	   content of RequirementSet only has values of type REQUIREMENT.
-       governs of RequirementSet only has values of type SYSTEM. 
+     SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
+       wasInformedBy of SystemRequirementsDefinition only has values of type DevelopSystemConOps. 
      
-      SystemRequirementSet is a type of RequirementSet. 
-       content of SystemRequirementSet only has values of type SystemRequirement.
-       wasGeneratedBy of SystemRequirementSet only has values of type SystemRequirementsDefinition. 
-       
-      SystemRequirement is a type of REQUIREMENT. //AM   is this not just PIDS?
-        wasGeneratedBy of SystemRequirement only has values of type SystemRequirementsDefinition.
+      PIDS_Doc is a type of DOCUMENT. 
+       content of PIDS_Doc only has values of type PIDS_Req. //AM only?
+       wasGeneratedBy of PIDS_Doc only has values of type SystemRequirementsDefinition. 
         
       SoftwareHighLevelRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
 		wasInformedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementsDefinition or DevelopSystemArchitecture}.
-        Rq:governedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementSet or SystemArchitecture}.
+        Rq:governedBy of SoftwareHighLevelRequirementsDefinition only has values of type {PIDS_Doc or SystemArchitecture}.
 
-      SoftwareHighLevelRequirement is a type of REQUIREMENT. //AM: is this not just SRS 
+      SoftwareHighLevelRequirement is a type of REQUIREMENT. 
         wasGeneratedBy of SoftwareHighLevelRequirement only has values of type SoftwareHighLevelRequirementsDefinition.
        
-      SoftwareHighLevelRequirementSet is a type of RequirementSet. 
-       content of SoftwareHighLevelRequirementSet only has values of type SoftwareHighLevelRequirement.
-       createdBy of SoftwareHighLevelRequirementSet only has values of type SoftwareHighLevelRequirementsDefinition.
-       governs of SoftwareHighLevelRequirementSet only has values of type SWCOMPONENT. 
+     SRS_Doc is a type of DOCUMENT. 
+       content of SRS_Doc only has values of type SRS_Req. //AM only?
+       createdBy of SRS_Doc only has values of type SoftwareHighLevelRequirementsDefinition.
        
-       SoftwareLowLevelRequirementSet is a type of RequirementSet. 
-       content of SoftwareLowLevelRequirementSet only has values of type SoftwareLowLevelRequirement.
-       createdBy of SoftwareLowLevelRequirementSet only has values of type SoftwareDesign. 
-       governs of SoftwareLowLevelRequirementSet only has values of type SWCOMPONENT.
-       governs describes SoftwareLowLevelRequirementSet with at most 1 value.
+     SubDD_Doc is a type of DOCUMENT. 
+       content of SubDD_Doc only has values of type SoftwareLowLevelRequirement. //AM only?
+       createdBy of SubDD_Doc only has values of type SoftwareDesign. 
+       governs of SubDD_Doc only has values of type SWCOMPONENT.
+       governs describes SubDD_Doc with at most 1 value.
 
-       SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
+     SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
 		wasInformedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementsDefinition or DevelopSystemArchitecture}.
-        Rq:governedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementSet or SystemArchitecture}.
+        Rq:governedBy of SoftwareDesign only has values of type {SRS_Doc or SystemArchitecture}.
        
-      SoftwareLowLevelRequirement is a type of REQUIREMENT. //AM: is this not SubDD
+     SoftwareLowLevelRequirement is a type of REQUIREMENT.
         wasGeneratedBy of SoftwareLowLevelRequirement only has values of type SoftwareDesign.
        
-      SoftwareCoding is a type of CODE_DEVELOPMENT. 
+     SoftwareCoding is a type of CODE_DEVELOPMENT. 
         wasInformedBy of SoftwareCoding only has values of type SoftwareDesign.        
 
       SoftwareIntegration is a type of COMPILE.

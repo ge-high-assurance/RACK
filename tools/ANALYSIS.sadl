@@ -22,6 +22,7 @@
   
 uri "http://arcos.rack/ANALYSIS" alias ^An.
 import "http://arcos.rack/PROV-S".
+//import "http://arcos.rack/PROCESS".
 
 ANALYSIS
 	(note "ACTIVITY of running some analysis, and as a result creating some ANALYSIS_OUTPUT")
@@ -38,6 +39,7 @@ ANALYSIS
 
     analysisConfiguration (note "Parameters/options etc. for the tool used.") describes ANALYSIS with values of type ENTITY.
     analysisConfiguration is a type of used.
+
 
 ANALYSIS_OUTPUT
     (note "Output of an ANALYSIS")

@@ -62,4 +62,5 @@ ACTIVITY (note "An activity is something that occurs over a period of time and a
 	startedAtTime describes ACTIVITY with at most 1 value.
 	endedAtTime (note "The time an activity was ended") describes ACTIVITY with values of type dateTime.
 	endedAtTime describes ACTIVITY with at most 1 value.
+    goal (note "Purpose of the ACTIVITY") describes ACTIVITY with values of type ENTITY.
     used (note "Usage is the beginning of utilizing an entity by an activity. Before usage, the activity had not begun to utilize this entity and could not have been affected by the entity. (Note: This definition is formulated for a given usage; it is permitted for an activity to have used a same entity multiple times.)") describes ACTIVITY with values of type ENTITY.

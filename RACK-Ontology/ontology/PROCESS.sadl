@@ -17,9 +17,10 @@ OBJECTIVE
 	(note "An OBJECTIVE identifies tasks from a process for which evidence must be provided to show that the task has been completed. ") 
 	is a type of ENTITY.
 
-	satisfiedBy (note "An ACTIVITY that demonstrates that the OBJECTIVE has been satisfied.") describes OBJECTIVE with values of type THING.
+	satisfiedBy (note "An ACTIVITY that demonstrates that the OBJECTIVE has been satisfied.") describes OBJECTIVE with values of type ACTIVITY.
 
 PROPERTY 
 	(note "A general property that holds on the basis of some ANALYSIS") 
 	is a type of OBJECTIVE. 
 
+	partiallySupports (note "One or more PROPERTY may be needed to address an OBJECTIVE.") describes PROPERTY with values of type OBJECTIVE.

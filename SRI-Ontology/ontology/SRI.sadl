@@ -24,8 +24,6 @@ import "http://arcos.AH-64D/Boeing".
 // In SRI_Tool, dropped 2 lines on toolQualificationData as we already have 
 //		wasQualifiedBy: TOOL -> ENTITY
 //		dropped toolSummaryDescription as existing "description" property can be used
-// rename xx to be something like PropertyBasedAnalysisOutput? 
-//		do we need analysisDiagnostics?
 // goalProperty: move to core ontology?
 // verificationOjective: looks like an Objective? then move verificationObjective to core as parentObjective
 // replaced "used" by "analysisInput" when it is used on an ANALYSIS
@@ -92,10 +90,10 @@ ToolQualificationData
       //   result of type ANALYSIS_RESULT defined in the base RACK ontology is used as is
       // new properties for ANALYSIS_OUTPUT
 
-//AM introducing a subClass of ANALYSIS_OUTPUT and moving properties to the new subClass; rename the subClass
-xx is a type of ANALYSIS_OUTPUT.      
-      analysisDiagnostics (note "counter examples, other diagnostics") describes xx with values of type string.  
-      goal of xx only has values of type GenericProperty. //AM 10/12
+//AM introducing a subClass of ANALYSIS and moving properties to the new subClass
+SRI_ANALYSIS is a type of ANALYSIS.     
+      analysisDiagnostics (note "counter examples, other diagnostics") describes SRI_ANALYSIS with values of type string.  
+      goal of SRI_ANALYSIS only has values of type GenericProperty. //AM 10/13
       
       // Note: base RACK ontology class ANALYSIS_ANNOTATION is not used since we capture the property independently and not as part of ANALYSIS_OUTPUT
 

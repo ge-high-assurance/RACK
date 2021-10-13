@@ -34,12 +34,7 @@ confirms of SBVT_Result only has values of type SBVT_Test.
 ////////////////////////////////////// Moved from SRI ontology
 //AM: replaced author by wasAssociatedWith in DevelopSystemConOps
 //AM: dropped author in DevelopSystemArchitecture as we inherit wasAssociatedWith
-//AM: do we more granularity than just wasAssociatedWith
-//AM: relate to PIDS, SRS, SubDD
-//AM: see comment on line 55
-//AM: can RequirementSet "governs" more than just SYSTEM? (line 65): maybe we need a hierarchy for SYSTEM; maybe the restriction should be on REQUIREMENT
-//AM: should Requirement Sets be named collection?
-//AM reorder this file so PIDS etc. are moved lower; what is CSID related to?
+//AM: do we want more granularity than just wasAssociatedWith
 
      DevelopSystemConOps is a type of ACTIVITY.
        wasAssociatedWith of DevelopSystemConOps only has values of type AGENT.

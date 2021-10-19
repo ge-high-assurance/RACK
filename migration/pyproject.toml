@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "RACK migration tool suite"
+version = "0.1"
+description = "Helps capturing changes to the RACK ontology"
+dependencies = ["colorama", "pydantic", "typing-extensions"]
+requires-python = ">=3.7"
+authors = [{ email = "val@galois.com" }, { name = "Valentin Robert" }]
+
+[project.scripts]
+rack_crawl = "rack_crawl:rack_crawl"
+rack_migrate = "rack_migrate:rack_migrate"
+
+[tool.pyright]
+ignore = ["typings"]

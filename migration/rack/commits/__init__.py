@@ -14,6 +14,10 @@ from typing import List
 from ontology_changes.ontology_change import Commit
 from rack.commits import (
     # <CHANGE_CRAWLER_IMPORTS> DO NOT EDIT OR MOVE THIS LINE
+    commit42ceaff2d4c837e766d5481599a4ab94556255a2,
+    commitdf67562c4e5305fc9082fc369570de0a49089ccf,
+    commitc41222325db52df0eb5c1e7cb3a091f8c62f5b57,
+    commit698bd1306d2e6efdc7b53bf0b6792ab2054d5389,
     commit05a03cd687e3bdce425794763e0957d3ccaf8ff0,
     commit09b79d6c0e7f72b533a3ad21e776b200a973698a,
     commit0a89f70ff929380269a79fe2fc82f5dde346ed8c,
@@ -118,6 +122,11 @@ commits_in_chronological_order: List[Commit] = [
     commitb6796936abe054edc9c4f9657c34bb0eadf0757a.commit, # 2021 May 26
 
     commitcafce30763b5332106340cc8cbeb8fdac3b8132d.commit, # v7.0
+
+    commit42ceaff2d4c837e766d5481599a4ab94556255a2.commit, # 2021 Aug 10
+    commitdf67562c4e5305fc9082fc369570de0a49089ccf.commit, # 2021 Sep 2
+    commitc41222325db52df0eb5c1e7cb3a091f8c62f5b57.commit, # 2021 Sep 7
+    commit698bd1306d2e6efdc7b53bf0b6792ab2054d5389.commit, # 2021 Sep 27
 
     # most recent (in history)
 ]

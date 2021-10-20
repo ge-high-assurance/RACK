@@ -1,4 +1,26 @@
+<!-- markdownlint-disable line-length -->
+
 # RACK Change Log
+
+## [v8.0] - 2021-10-25
+
+This release has the following changes:
+
+- Improved SemTK ingestion and querying:
+  - added data range checking to ingestion
+  - added more ontology-checking nodegroups
+  - added new post-ingestion cardinality checker tool
+  - added class and predicate counts
+  - overhauled construct queries UI
+  - added instance-based path-finding UI
+  - added explore UI with click through graph
+  - reduced ingestion time
+- Updated Turnstile example:
+  - added ontology overlay
+  - added CDR usage
+  - added instance data from sample development plan
+  - added data ingestion package with a Load-TurnStileData.sh script
+- Added BASELINE to the ontology ([changelog](https://github.com/ge-high-assurance/RACK/wiki/RACK-ontology-detailed-changelogs))
 
 ## [v7.0] - 2021-06-07
 

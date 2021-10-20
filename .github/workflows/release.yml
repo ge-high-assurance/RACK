@@ -86,7 +86,7 @@ jobs:
 #          shell: msys2 {0}
 # virtualbox works only on macos (VT-x is not available: VERR_VMK_NO_VMX)
         - builder: virtualbox
-          os: macos-latest
+          os: macos-10.15
           shell: bash
 
     runs-on: ${{ matrix.os }}

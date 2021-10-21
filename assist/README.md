@@ -129,6 +129,15 @@ The ASSIST toolkit contains several tools that can be used with RACK.
  used in ASSIST-DI; there is a companion `bin/analyze` tool that
  generates a human-readable report of the full set of data.
 
+ The ASSIST-DV tool is also installed on the distributed RACK Docker
+ or VM image in the `home/ubuntu/RACK/assist/bin/` directory.  As an
+ example, the `check` tool in the Docker image can be run on the
+ Docker image's contents via:
+
+ ```
+ $ docker exec CONTAINER-NAME home/ubuntu/RACK/assist/bin/check -v -m http://localhost:3030/
+ ```
+
 ## ASSIST-SADL -- SADL translation
 
  > Tools: `assist/bin/sadl2owl`

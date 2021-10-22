@@ -1,9 +1,11 @@
 # Turnstile-Example Explained
-The purpose of this directory is to demonstrate the following using our [Turnstile example](https://github.com/ge-high-assurance/RACK/wiki/Turnstile-Example):
+The purpose of [Turnstile-Example](https://github.com/ge-high-assurance/RACK/wiki/Turnstile-Example) is to demonstrate the following:
 * ontology overlay 
 * CDR usage and instance data
 * data ingestion package along with a Load-TurnstileData.sh script
 * ingestion via owl (i.e., sadl instance file)
+
+The subdirectory [Turnstile-IngestionPackage](Turnstile-IngestionPackage) contains all the Turnstile data and is ready to be loaded into RACK. Step by step instructions are in the [README](Turnstile-IngestionPackage/README.md). 
 
 ## Ontology Overlay
 The Turnstile overlay is created in a file called [GE.sadl](../GE-Ontology/ontology/GE.sadl). For the ARCOS program, overlays are created by individual performers and are named after the prime. For example, the turnstile ontology is created by the GE-Galois team. The overlay file is located in a directory called [GE-Ontology](../GE-Ontology/) (where GE is the prime). The structure and content of the directory is as follows:
@@ -88,7 +90,7 @@ Back in the HazardAssessment directory, notice there are CSV file names *1.csv, 
 Notice the ordering of the ingestion steps. Notice also in line 1 that the Turnstile data is being imported into the data graph http://rack001/turnstiledata.
 
 ## Data Ingestion Package
-It is convenient to create an [ingestion package](https://github.com/ge-high-assurance/RACK/wiki#preparing-your-own-data) that can be shared for others to load into RACK. [The Scraping Tool Kit](../ScrapingToolKit) conveniently generates such ingestion packages. The subdirectories in [Turnstile-IngestionPackage](Turnstile-IngestionPackage) are generated using the Scraping Tool Kit. For example, the script TurnstileIngestion_HazardAssessment.py generates data in the HazardAssessment subdirectory. The shell script, Load-TurnstileData.sh, collectively loads all the data provided in Turnstile-IngestionPackage.
+It is convenient to create an [ingestion package](https://github.com/ge-high-assurance/RACK/wiki#preparing-your-own-data) that can be shared for others to load into RACK. [The Scraping Tool Kit](../ScrapingToolKit) conveniently generates such ingestion packages. The subdirectories in [Turnstile-IngestionPackage](Turnstile-IngestionPackage) are generated using the Scraping Tool Kit via the TurnstileDataCreation*.py scripts. For example, the script TurnstileIngestion_HazardAssessment.py generates data in the HazardAssessment subdirectory. The shell script, Load-TurnstileData.sh, collectively loads all the data provided in Turnstile-IngestionPackage.
 
 The [Turnstile-IngestionPackage](Turnstile-IngestionPackage) contains all the Turnstile data and is ready to be loaded into RACK. Step by step instructions are in the [README](Turnstile-IngestionPackage/README.md).
 

@@ -21,6 +21,12 @@ OBJECTIVE
 
 PROPERTY 
 	(note "A general property that holds on the basis of some ANALYSIS") 
-	is a type of OBJECTIVE. 
+	is a type of ENTITY. 
 
 	partiallySupports (note "One or more PROPERTY may be needed to address an OBJECTIVE.") describes PROPERTY with values of type OBJECTIVE.
+
+    scopeOf (note "ENTITY(s) over which the PROPERTY holds") describes PROPERTY with values of type ENTITY.
+    scopeOf is a type of wasImpactedBy.
+
+    mitigates (note "ENTITY(s) that is being mitigated by this PROPERTY") describes PROPERTY with values of type ENTITY.
+    mitigates is a type of wasImpactedBy.

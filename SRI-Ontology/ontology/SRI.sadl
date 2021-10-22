@@ -21,6 +21,8 @@ import "http://arcos.rack/MODEL".
 import "http://arcos.AH-64D/Boeing".
 
 //AM 
+// 10/22/2021 I commented out all of GenericProperty; you may want to add verificationObjective to SpecificProperty?
+// 10/22/2021 You may want to rename RadlGenericProperty and ClearGenericProperty?
 // In SRI_Tool, dropped 2 lines on toolQualificationData as we already have 
 //		wasQualifiedBy: TOOL -> ENTITY
 //		dropped toolSummaryDescription as existing "description" property can be used
@@ -46,8 +48,6 @@ import "http://arcos.AH-64D/Boeing".
        // We are adding more properties to TOOL here
 //AM introduced new class SRI_TOOL and moved the properties to it; commented toolSummaryDescription as property description is available.	   
 SRI_Tool is a type of TOOL.
-       toolInstallationConfiguration describes SRI_Tool with values of type string.
-       toolInstallationConfiguration describes SRI_Tool with at most 1 value.
 //     toolSummaryDescription (note "concise description of tool function, inputs, outputs") describes SRI_Tool with a single value of type string.
          // note: we don't want to subtype description from THING since it is intended for a different purpose and cardinality of description is "at most 1"
        userGuide describes SRI_Tool with values of type DOCUMENT. 
@@ -91,23 +91,23 @@ ToolQualificationData
       // new properties for ANALYSIS_OUTPUT
 
 //AM introducing a subClass of ANALYSIS and moving properties to the new subClass
-SRI_ANALYSIS is a type of ANALYSIS.     
-      analysisDiagnostics (note "counter examples, other diagnostics") describes SRI_ANALYSIS with values of type string.  
-      goal of SRI_ANALYSIS only has values of type GenericProperty. //AM 10/13
+SRI_Analysis is a type of ANALYSIS.     
+      analysisDiagnostics (note "counter examples, other diagnostics") describes SRI_Analysis with values of type string.  
+      goal of SRI_Analysis only has values of type PROPERTY. //AM 10/13
       
       // Note: base RACK ontology class ANALYSIS_ANNOTATION is not used since we capture the property independently and not as part of ANALYSIS_OUTPUT
 
-//AM changed range of GenericProperty from ENTITY to OBJECTIVE      
-      GenericProperty is a type of PROPERTY. //ENTITY.
-        propertyScope (note "entity(ies) over which this property must hold; e.g., a model, a requirement set, code, etc.") describes GenericProperty with values of type ENTITY.
-        propertyScope is a type of wasImpactedBy.
-        DesCert:mitigates (note "a hazard (if any) the property mitigates; GenericProperty typically doesn't mitigate any specific hazard") describes GenericProperty with values of type HAZARD.
-        DesCert:mitigates is a type of wasImpactedBy.
-//AM commented propertyDescription as description property available; do we need to alter verificationObjective? corrected spelling of verificationObjective
-//      propertyDescription (note "property objective: e.g., 'architecture is conformant', 'requirements are consistent', 'code is free of runtime errors, etc.") describes GenericProperty with a single value of type string.
-        verificationObjective (note "") describes GenericProperty with values of type ENTITY.
+////AM changed range of GenericProperty from ENTITY to OBJECTIVE      
+//      GenericProperty is a type of PROPERTY. //ENTITY.
+//        propertyScope (note "entity(ies) over which this property must hold; e.g., a model, a requirement set, code, etc.") describes GenericProperty with values of type ENTITY.
+//        propertyScope is a type of wasImpactedBy.
+//        DesCert:mitigates (note "a hazard (if any) the property mitigates; GenericProperty typically doesn't mitigate any specific hazard") describes GenericProperty with values of type HAZARD.
+//        DesCert:mitigates is a type of wasImpactedBy.
+////AM commented propertyDescription as description property available; do we need to alter verificationObjective? corrected spelling of verificationObjective
+////      propertyDescription (note "property objective: e.g., 'architecture is conformant', 'requirements are consistent', 'code is free of runtime errors, etc.") describes GenericProperty with a single value of type string.
+//        verificationObjective (note "") describes GenericProperty with values of type ENTITY.
      
-      SpecificProperty is a type of GenericProperty.
+      SpecificProperty is a type of PROPERTY.
          propertyBasis (note "entity impacting the property definition - e.g. SystemconOps") describes SpecificProperty with values of type ENTITY.
          propertyBasis is a type of wasImpactedBy.
          // NOTE: a SpecificProperty is modeled by entities such as SallyPropertyModel; that's where the property text is contained
@@ -125,7 +125,7 @@ SRI_ANALYSIS is a type of ANALYSIS.
         radlSpecification (note "the Radl specification text") describes RadlArchitectureModel with a single value of type string.
         models of RadlArchitectureModel only has values of type SystemArchitecture.
 
-      RadlGenericProperty is a type of GenericProperty.
+      RadlGenericProperty is a type of PROPERTY.
         propertyScope of RadlGenericProperty only has values of type RadlArchitectureModel.
 
 //AM adding the following if we want to use a string for analysisConfiguration
@@ -274,7 +274,7 @@ ConfigurationString is a type of ENTITY.
        ///////////////////////////////////////////////////////////////////////
        // Requirement analysis by Text2Test tool from CLEAR requirements
        
-       ClearGenericProperty is a type of GenericProperty.
+       ClearGenericProperty is a type of PROPERTY.
 //AM corrected propertyScope
 //	   propertyScope describes ClearGenericProperty with values of type ENTITY.
 //        propertyScope of ClearGenericProperty must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary}.

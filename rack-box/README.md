@@ -61,7 +61,7 @@ although we will mention each file here as well:
 
 - `files/rack-cli.tar.gz`: Package the RACK CLI (`tar cfz
   RACK/rack-box/files/rack-cli.tar.gz
-  RACK/cli/{setup-rack.sh,wheels}`), see [Build the RACK
+  RACK/cli/{*.sh,wheels}`), see [Build the RACK
   CLI](#Build-the-RACK-CLI) for build instructions first
 
 - `files/{documentation.html,index.html}`: Package the RACK

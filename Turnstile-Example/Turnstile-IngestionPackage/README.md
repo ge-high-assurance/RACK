@@ -1,7 +1,7 @@
 # Instructions
 
 ## Run CLI in a virtual environment:
-Refer to the cli [README](RACK/cli/README.md) for installation instructions.
+Refer to the cli [README](../../cli/README.md) for installation instructions.
 ```sh
 $ cd RACK/cli
 $ . venv/bin/activate
@@ -12,12 +12,10 @@ $ cd RACK/cli
 $ . venv/Scripts/activate
 ```
 
-## Run the setup scripts:
-Note that the dataset uses the GE ontology overlay. 
+## Run the setup script:
+The script [setup-turnstile.sh](../../cli/setup-turnstile.sh) loads the [GE ontology overlay](../../GE-Ontology/ontology/GE.sadl). 
 ```sh
-(venv) $ ./setup-rack.sh
-(venv) $ cd ../GE-Ontology
-(venv) $ ./setup-GE.sh
+(venv) $ ./setup-turnstile.sh
 ```
 
 ## Ingest the turnstile data into RACK:

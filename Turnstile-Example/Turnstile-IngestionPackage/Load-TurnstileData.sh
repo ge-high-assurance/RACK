@@ -34,7 +34,7 @@ rack data import "$BASEDIR"/TurnstileDevelopmentPlanData/import.yaml
 echo "Ingesting Planning Document Evidence ..."
 rack data import "$BASEDIR"/PlanningDocuments/import.yaml
 
-echo "Ingesting Hazard Assesment Evidence ..."
+echo "Ingesting Hazard Assessment Evidence ..."
 rack data import "$BASEDIR"/HazardAssessment/import.yaml
 
 echo "Ingesting System Design Evidence ..."

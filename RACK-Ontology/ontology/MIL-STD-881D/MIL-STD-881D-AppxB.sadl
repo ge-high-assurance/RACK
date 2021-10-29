@@ -29,12 +29,12 @@ B.2 is a SECTION
 	has title "APPLICABLE DOCUMENTS".
 
 B.3 is a SECTION
-	has title "WORK BREAKDOWN STRUCTURE LEVELS".	
+	has title "WORK BREAKDOWN STRUCTURE LEVELS".
 
 B.4 is a SECTION
 	has title "DEFINITIONS".
-	
-// SADL constructs 			
+
+// SADL constructs
 ElectronicSystemGenericSystem-1 is a SYSTEM,
 	has identifier "ElectronicSystemGenericSystem-1",
 		has wbs "1".

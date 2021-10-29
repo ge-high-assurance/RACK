@@ -36,9 +36,9 @@ SYSTEM
 
 	requires (note "List of entities that this SYSTEM requires from others") describes SYSTEM with values of type FUNCTION.
 
-	function (note "functionality / capability of a SYSTEM") describes SYSTEM with values of type FUNCTION. 
-	function is a type of wasImpactedBy. 
-	
+	function (note "functionality / capability of a SYSTEM") describes SYSTEM with values of type FUNCTION.
+	function is a type of wasImpactedBy.
+
 INTERFACE
 	(note "INTERFACEs describe directed connections between a SYSTEM providing what another SYSTEM requires")
 	is a type of ENTITY.
@@ -61,18 +61,17 @@ SYSTEM_DEVELOPMENT
 	developedBy (note "Organization that is responsible for producing a system") describes SYSTEM_DEVELOPMENT with values of type AGENT.
 	developedBy is a type of wasAssociatedWith.
 
-FUNCTION  
+FUNCTION
 	(note "defines functionality / capability")
 	is a type of ENTITY.
 
     parentFunction (note "allows for decomposition of functionality") describes FUNCTION with values of type FUNCTION.
     parentFunction describes FUNCTION with at most 1 value.
-    
+
 OP_ENV
 	(note "defines the operating environment assumptions and constraints")
 	is a type of THING. // should this be an ENTITY?
-		
-OP_PROCEDURE  
+
+OP_PROCEDURE
 	(note "system operational procedures employed, e.g. going through a checklist, limiting people near runways, etc.")
-	is a type of PROCEDURE.		
-	
+	is a type of PROCEDURE.

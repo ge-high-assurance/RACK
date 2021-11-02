@@ -1,0 +1,3 @@
+*.owl -diff -merge
+nodegroups/ingestion/*/ingest_*.json -diff -merge
+nodegroups/queries/*/query*.json -diff -merge

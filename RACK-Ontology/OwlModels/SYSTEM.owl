@@ -40,15 +40,6 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="SYSTEM">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:maxCardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="producedBy"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">SYSTEMs classify logical parts of the whole system being developed</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
@@ -90,12 +81,6 @@
     <rdfs:comment xml:lang="en">SYSTEM that provides what the INTERFACE offers</rdfs:comment>
     <rdfs:range rdf:resource="#SYSTEM"/>
     <rdfs:domain rdf:resource="#INTERFACE"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#producedBy">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:comment xml:lang="en">ACTIVITY(s) participating in developing this SYSTEM</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
-    <rdfs:domain rdf:resource="#SYSTEM"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#parentFunction">
     <rdfs:comment xml:lang="en">allows for decomposition of functionality</rdfs:comment>

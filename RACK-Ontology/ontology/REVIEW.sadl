@@ -31,9 +31,6 @@ REVIEW_LOG
 
 	reviewResult (note "Review status descriptor") describes REVIEW_LOG with values of type REVIEW_STATE.
 
-	createBy (note "ACTIVITY(s) (e.g. REVIEW) that created this log") describes REVIEW_LOG with values of type ACTIVITY.
-	createBy is a type of wasGeneratedBy.
-
 REVIEW_STATE (note "Life-cycle status of a review log")
     is a type of THING,
     must be one of {Passed, ReviseWithoutReview, ReviseWithReview}.

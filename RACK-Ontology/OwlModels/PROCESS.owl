@@ -16,6 +16,10 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'PROCESS.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
+  <owl:Class rdf:ID="PROPERTY">
+    <rdfs:comment xml:lang="en">A general property that holds on the basis of some ANALYSIS</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
   <owl:Class rdf:ID="OBJECTIVE">
     <rdfs:comment xml:lang="en">An OBJECTIVE identifies tasks from a process for which evidence must be provided to show that the task has been completed. </rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
@@ -24,5 +28,22 @@
     <rdfs:comment xml:lang="en">An ACTIVITY that demonstrates that the OBJECTIVE has been satisfied.</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#OBJECTIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="scopeOf">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
+    <rdfs:comment xml:lang="en">ENTITY(s) over which the PROPERTY holds</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#PROPERTY"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="mitigates">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
+    <rdfs:comment xml:lang="en">ENTITY(s) that is being mitigated by this PROPERTY</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#PROPERTY"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="partiallySupports">
+    <rdfs:comment xml:lang="en">One or more PROPERTY may be needed to address an OBJECTIVE.</rdfs:comment>
+    <rdfs:range rdf:resource="#OBJECTIVE"/>
+    <rdfs:domain rdf:resource="#PROPERTY"/>
   </owl:ObjectProperty>
 </rdf:RDF>

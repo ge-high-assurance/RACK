@@ -26,9 +26,6 @@ TEST
 	verifies (note "ENTITY(s) (e.g. REQUIREMENT) that this test verifies") describes TEST with values of type ENTITY.
 	verifies is a type of wasImpactedBy.
 
-//	producedBy (note "TEST_DEVELOPMENT activity(s) this test belongs to") describes TEST with values of type ACTIVITY.
-//	producedBy is a type of wasGeneratedBy.
-
 TEST_STATUS (note "The high-level outcome of a TEST_RESULT")
     is a type of THING,
     must be one of {Passed, Failed, Indeterminate}.
@@ -44,9 +41,6 @@ TEST_RESULT
 
 	confirms (note "Parent test(s) of this test result") describes TEST_RESULT with values of type TEST.
 	confirms is a type of wasImpactedBy.
-
-	executedBy (note "ACTIVITY(s) that created this test result") describes TEST_RESULT with values of type ACTIVITY.
-	executedBy is a type of wasGeneratedBy.
 
 TEST_DEVELOPMENT
 	(note "ACTIVITY of creating a TEST to participate in the evaluation of a requirement")

@@ -168,6 +168,11 @@
     <rdfs:range rdf:resource="#AGENT"/>
     <rdfs:domain rdf:resource="#ACTIVITY"/>
   </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="goal">
+    <rdfs:comment xml:lang="en">Purpose of the ACTIVITY</rdfs:comment>
+    <rdfs:range rdf:resource="#ENTITY"/>
+    <rdfs:domain rdf:resource="#ACTIVITY"/>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="content">
     <rdfs:comment xml:lang="en">An entity in a collection.</rdfs:comment>
     <rdfs:range rdf:resource="#ENTITY"/>

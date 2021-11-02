@@ -28,10 +28,6 @@ SYSTEM
 
 	partOf (note "Used to define a relationship to a higher level system") describes SYSTEM with values of type SYSTEM.
 
-	producedBy (note "ACTIVITY(s) participating in developing this SYSTEM") describes SYSTEM with values of type ACTIVITY.
-	producedBy describes SYSTEM with at most 1 value.
-	producedBy is a type of wasGeneratedBy.
-
 	provides (note "List of entities that this SYSTEM provides to others") describes SYSTEM with values of type FUNCTION.
 
 	requires (note "List of entities that this SYSTEM requires from others") describes SYSTEM with values of type FUNCTION.

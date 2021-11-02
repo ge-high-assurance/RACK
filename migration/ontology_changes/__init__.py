@@ -25,3 +25,4 @@ from ontology_changes.ontology_change import Commit
 from ontology_changes.rename_class import RenameClass
 from ontology_changes.rename_property import RenameProperty
 from ontology_changes.remove_is_a_type_of import RemoveIsATypeOf
+from ontology_changes.remove_property_restriction import RemovePropertyRestriction

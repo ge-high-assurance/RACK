@@ -1010,9 +1010,9 @@
             "instanceValues": [],
             "isRuntimeConstrained": false,
             "isMarkedForDeletion": false,
-            "SparqlID": "?CoveredNodes",
+            "SparqlID": "?coveredNodes",
             "relationship": "http://www.w3.org/2001/XMLSchema#int",
-            "UriRelationship": "http://arcos.turnstile/GE#CoveredNodes"
+            "UriRelationship": "http://arcos.turnstile/GE#coveredNodes"
           },
           {
             "optMinus": 1,
@@ -1022,15 +1022,15 @@
             "instanceValues": [],
             "isRuntimeConstrained": false,
             "isMarkedForDeletion": false,
-            "SparqlID": "?UncoveredNodes",
+            "SparqlID": "?uncoveredNodes",
             "relationship": "http://www.w3.org/2001/XMLSchema#int",
-            "UriRelationship": "http://arcos.turnstile/GE#UncoveredNodes"
+            "UriRelationship": "http://arcos.turnstile/GE#uncoveredNodes"
           }
         ],
         "Constraints": "",
         "isRuntimeConstrained": false,
         "valueConstraint": "",
-        "SparqlID": "?StructualCoverageAnalysis",
+        "SparqlID": "?StructuralCoverageAnalysis",
         "deletionMode": "NO_DELETE",
         "nodeList": [
           {
@@ -1167,12 +1167,12 @@
             "UriValueType": "http://arcos.rack/PROV-S#ACTIVITY"
           }
         ],
-        "fullURIName": "http://arcos.turnstile/GE#StructualCoverageAnalysis"
+        "fullURIName": "http://arcos.turnstile/GE#StructuralCoverageAnalysis"
       }
     ],
     "limit": 0,
     "orderBy": [],
-    "version": 13,
+    "version": 15,
     "unionHash": {}
   },
   "importSpec": {
@@ -1180,8 +1180,8 @@
       {
         "mapping": [],
         "URILookupMode": "createIfMissing",
-        "sparqlID": "?StructualCoverageAnalysis",
-        "type": "http://arcos.turnstile/GE#StructualCoverageAnalysis",
+        "sparqlID": "?StructuralCoverageAnalysis",
+        "type": "http://arcos.turnstile/GE#StructuralCoverageAnalysis",
         "props": [
           {
             "mapping": [
@@ -1215,7 +1215,7 @@
               }
             ],
             "URILookup": [
-              "?StructualCoverageAnalysis"
+              "?StructuralCoverageAnalysis"
             ],
             "URIRelation": "http://arcos.rack/PROV-S#identifier"
           },
@@ -1250,7 +1250,7 @@
                 ]
               }
             ],
-            "URIRelation": "http://arcos.turnstile/GE#CoveredNodes"
+            "URIRelation": "http://arcos.turnstile/GE#coveredNodes"
           },
           {
             "mapping": [
@@ -1261,7 +1261,7 @@
                 ]
               }
             ],
-            "URIRelation": "http://arcos.turnstile/GE#UncoveredNodes"
+            "URIRelation": "http://arcos.turnstile/GE#uncoveredNodes"
           }
         ]
       },
@@ -1443,11 +1443,11 @@
         "colId": "col_4"
       },
       {
-        "colName": "CoveredNodes",
+        "colName": "coveredNodes",
         "colId": "col_5"
       },
       {
-        "colName": "UncoveredNodes",
+        "colName": "uncoveredNodes",
         "colId": "col_6"
       },
       {

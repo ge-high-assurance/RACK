@@ -40,7 +40,7 @@ HAZARD
 
 	effect (note "consequence(s) of the HAZARD") describes HAZARD with values of type string.
    	effect describes HAZARD with at most 1 value.
-   	
+
 	severity (note "the severity of the HAZARD") describes HAZARD with values of type float. // [0,1].
 	severity describes HAZARD with at most 1 value.
 

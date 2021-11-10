@@ -43,4 +43,3 @@ TOOL
   is a type of AGENT.
   toolVersion (note "The release version of the tool") describes TOOL with values of type string.
   toolVersion describes TOOL with at most 1 value.
- 

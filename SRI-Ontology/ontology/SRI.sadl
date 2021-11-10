@@ -46,13 +46,16 @@ import "http://arcos.AH-64D/Boeing".
        //   toolVersion
        // NOTE: actedOnBehalfOf property of AGENT is not used 
        // We are adding more properties to TOOL here
-//AM introduced new class SRI_TOOL and moved the properties to it; commented toolSummaryDescription as property description is available.	   
-SRI_Tool is a type of TOOL.
+//AM introduced new class SRI_TOOL and moved the properties to it; commented toolSummaryDescription as property description is available.
+// DB: renamed SRI_Tool to DesCert_Tool	   
+DesCert_Tool is a type of TOOL. // DB: renamed to DesCert_Tool
 //     toolSummaryDescription (note "concise description of tool function, inputs, outputs") describes SRI_Tool with a single value of type string.
          // note: we don't want to subtype description from THING since it is intended for a different purpose and cardinality of description is "at most 1"
-       userGuide describes SRI_Tool with values of type DOCUMENT. 
-       toolQualificationData describes SRI_Tool with values of type ToolQualificationData.
-       toolQualificationData describes SRI_Tool with at most 1 value.
+       userGuide describes DesCert_Tool with values of type DOCUMENT. 
+       toolQualificationData describes DesCert_Tool with values of type ToolQualificationData.
+       toolQualificationData describes DesCert_Tool with at most 1 value.
+       // DB: wasQualifiedBy is now in ToolQualificationData
+       //  wasQualifiedBy of DesCert_Tool only has values of type ORGANIZATION.
 
 //AM dropped ToolInvocationInstance and reusing properties from ANALYSIS: (corrected spelling of toolParameters)
 //AM toolParameters -> analysisConfiguration (new in core), toolUsed -> analyzedWith, invokedBy -> runBy
@@ -75,7 +78,11 @@ ToolQualificationData
 //AM wasQualifiedBy is now in core and it goes from TOOL to ENTITY; so commented 2 lines and added restriction here
 //       wasQualifiedBy (note "organization qualifying this tool") describes ToolQualificationData with values of type ORGANIZATION.
 //       wasQualifiedBy is a type of wasAttributedTo.
-       wasQualifiedBy of ToolQualificationData only has values of type ORGANIZATION.
+      // DB: added wasQualifiedBy that should be here and not in TOOL since it is completely related to tool qualification
+      //     Also, the range is an AGENT
+//AM 11/10      wasQualifiedBy (note "organization qualifying this tool") describes ToolQualificationData with values of type ORGANIZATION.
+//AM 11/10      wasQualifiedBy describes ToolQualificationData with at most 1 value.
+//AM 11/10      wasQualifiedBy is a type of wasAttributedTo.
 	   toolQualificationSummary (note "summary of tool qualification argument and roadmap of artifacts") describes ToolQualificationData with values of type string.
        toolQualificationSummary describes ToolQualificationData with at most 1 value.
        toolQualificationArtifacts (note "consist of multiple documents") describes ToolQualificationData with values of type DOCUMENT.
@@ -91,13 +98,14 @@ ToolQualificationData
       // new properties for ANALYSIS_OUTPUT
 
 //AM introducing a subClass of ANALYSIS and moving properties to the new subClass
-SRI_Analysis is a type of ANALYSIS.     
-      analysisDiagnostics (note "counter examples, other diagnostics") describes SRI_Analysis with values of type string.  
-      goal of SRI_Analysis only has values of type PROPERTY. //AM 10/13
+// DB: Deleted the class SRI_Analysis since I have now captured analysisDiagnostics and goal in PROPERTY_RESULT in core (PROCESS); that is the best place for it
+// SRI_Analysis is a type of ANALYSIS.     
+//      analysisDiagnostics (note "counter examples, other diagnostics") describes SRI_Analysis with values of type ENTITY.
+//      goal of SRI_Analysis only has values of type PROPERTY. //AM 10/13
       
       // Note: base RACK ontology class ANALYSIS_ANNOTATION is not used since we capture the property independently and not as part of ANALYSIS_OUTPUT
 
-////AM changed range of GenericProperty from ENTITY to OBJECTIVE      
+////AM changed range of GenericProperty from ENTITY to OBJECTIVE  // DB:you chnaged it to PROPERTY which is right      
 //      GenericProperty is a type of PROPERTY. //ENTITY.
 //        propertyScope (note "entity(ies) over which this property must hold; e.g., a model, a requirement set, code, etc.") describes GenericProperty with values of type ENTITY.
 //        propertyScope is a type of wasImpactedBy.
@@ -107,6 +115,7 @@ SRI_Analysis is a type of ANALYSIS.
 ////      propertyDescription (note "property objective: e.g., 'architecture is conformant', 'requirements are consistent', 'code is free of runtime errors, etc.") describes GenericProperty with a single value of type string.
 //        verificationObjective (note "") describes GenericProperty with values of type ENTITY.
      
+     // DB: suggest moving this in core ontology since SpecificProperty is quite generic for everyone
       SpecificProperty is a type of PROPERTY.
          propertyBasis (note "entity impacting the property definition - e.g. SystemconOps") describes SpecificProperty with values of type ENTITY.
          propertyBasis is a type of wasImpactedBy.
@@ -126,10 +135,12 @@ SRI_Analysis is a type of ANALYSIS.
         models of RadlArchitectureModel only has values of type SystemArchitecture.
 
       RadlGenericProperty is a type of PROPERTY.
-        propertyScope of RadlGenericProperty only has values of type RadlArchitectureModel.
+      // DB: changed to new name "scopeOf"
+        scopeOf of RadlGenericProperty only has values of type RadlArchitectureModel.
 
 //AM adding the following if we want to use a string for analysisConfiguration
-ConfigurationString is a type of ENTITY.      
+ConfigurationString is a type of ENTITY.
+      
       RadlerArchitectureAnalysis (note "Analysis done by Radler tool on Radl architecture specificaton (SystemArchitecture)") is a type of ANALYSIS.
         // Inherited properties from ANALYSIS
         //   performedBy - refers to Radler tool
@@ -150,6 +161,40 @@ ConfigurationString is a type of ENTITY.
       // System, Software requirements, design, code   
 
 //AM moved SystemRequirementsDefinition etc. to Boeing overlay
+
+// DB: Added back the definitions of requirement sets that was not moved to Boeing.sadl
+//   DB NOTE: This should be moved to Boeing.sadl since most TA3s have said they will benefit from the concept of requirement set 
+    SystemRequirementSet is a type of COLLECTION.
+//AM 11/10       content of SystemRequirementSet only has values of type SystemRequirement.
+       wasGeneratedBy of SystemRequirementSet only has values of type SystemRequirementsDefinition. 
+       // DB: changed to rq:governs
+       rq:governs describes SystemRequirementSet with values of type SYSTEM.
+       // DesCert:governs is a type of wasImpactedBy.
+       // inherited properties:
+       //   title: name given to this requirement set
+       
+ // DB: Added back the definitions of requirement sets that was not moved to Boeing.sadl
+ //   DB NOTE: This should be moved to Boeing.sadl since most TA3s have said they will benefit from the concept of requirement set 
+    SoftwareHighLevelRequirementSet is a type of COLLECTION.
+//AM 11/10       content of SoftwareHighLevelRequirementSet only has values of type SoftwareHighLevelRequirement.
+       wasGeneratedBy of SoftwareHighLevelRequirementSet only has values of type SoftwareHighLevelRequirementsDefinition.
+       // inheirted properties:
+       //   title: name given to this requirement set
+       // DB: changed to rq:governs
+       Rq:governs describes SoftwareHighLevelRequirementSet with values of type SWCOMPONENT. 
+         // note: defined earlier - governs is a type of wasImpactedBy.
+
+ // DB: Added back the definitions of requirement sets that was not moved to Boeing.sadl
+ //   DB NOTE: This should be moved to Boeing.sadl since most TA3s have said they will benefit from the concept of requirement set        
+    SoftwareLowLevelRequirementSet is a type of COLLECTION.
+//AM 11/10       content of SoftwareLowLevelRequirementSet only has values of type SoftwareLowLevelRequirement.
+//AM 11/10       wasGeneratedBy of  describes SoftwareLowLevelRequirementSet with values of type SoftwareDesign. 
+       Rq:governs describes SoftwareLowLevelRequirementSet with values of type SWCOMPONENT.
+       // DB: changed to rq:governs
+       Rq:governs describes SoftwareLowLevelRequirementSet with at most 1 value.
+         // note: defined earlier - governs is a type of wasImpactedBy.
+       // inherited properties:
+       //   title: name given to this requirement set
        
       ClearNotation (note "CLEAR notation for writing requirements") is a type of ENTITY.
         userGuide describes ClearNotation with values of type DOCUMENT.
@@ -158,27 +203,32 @@ ConfigurationString is a type of ENTITY.
       DesCertRequirementModel (note "The model of requirement in DesCert in CLEAR notation") is a type of MODEL.
         requirementNotation describes DesCertRequirementModel with a single value of type ClearNotation. 
         requirementNotation is a type of wasImpactedBy.
-        requirementText describes DesCertRequirementModel with a single value of type string. //AM is this needed???
+        requirementText describes DesCertRequirementModel with a single value of type string. //AM is this needed??? DB: yes so far. We need to ask TA3s
 //AM commented following as that already holds
 		//		models describes DesCertRequirementModel with values of type THING.
-        models of DesCertRequirementModel only has values of type {SoftwareHighLevelRequirement or SoftwareLowLevelRequirement}.
+//AM 11/10        models of DesCertRequirementModel only has values of type {SoftwareHighLevelRequirement or SoftwareLowLevelRequirement}.
 
 //AM SystemRequirement etc. moved to Boeing overlay
+//DB: see comment above
 
+      // DB: this should be moved to Boeing or core; everyone needs these
       SourceCode is a type of FILE.
         wasGeneratedBy of SourceCode only has values of type SoftwareCoding.
         
+      // DB: this should be moved to Boeing or core  
       ObjectFile is a type of FILE.
-        wasGeneratedBy of ObjectFile only has values of type SoftwareIntegration.
+//AM 11/10        wasGeneratedBy of ObjectFile only has values of type SoftwareIntegration.
   
-      DataDictionary is a type of DATA_DICTIONARY_TERM.
-        // NOTE: we will not be tracing each individual data dictionary terms to/from requirements
-        //  the whole dictionary will be traced to the SoftwareCompnent
-        // Question: Can the class DATA_DICTIONARY contain all terms?
+      // DB: this should be moved to Boeing or core since a data dictionary is generic
+      // DB: changed it to inherit from collection of terms which is what it actually is.
+      DataDictionary is a type of COLLECTION.
+        //  allow a whole dictionary of terms to be traced as a unit rather than each term individually
         wasGeneratedBy of DataDictionary only has values of type SoftwareHighLevelRequirementsDefinition.
+        content of DataDictionary only has values of type DATA_DICTIONARY_TERM.
 
+      // DB: this should be moved to Boeing or core
       ExecutableObject is a type of FILE.
-        wasGeneratedBy of ExecutableObject only has values of type SoftwareIntegration.
+//AM 11/10        wasGeneratedBy of ExecutableObject only has values of type SoftwareIntegration.
       
       ///////////////////////////////////////////
       // Analysis done by Sally tool
@@ -189,6 +239,9 @@ ConfigurationString is a type of ENTITY.
         //   wasDerivedFrom refers to a requirement set that this model was generated from
         //   wasImpactedBy refers to dictionary entities used
         //   wasGeneratedBy refers to ACTIVITY that generated this
+        
+        // DB: added range constraint on wasDerivedfrom
+        wasDerivedFrom of SallyTransitionSystemModel has a single value of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet}.
         // new relationships:
         sallyModelContents describes SallyTransitionSystemModel with values of type FILE.
         sallyModelNotation describes SallyTransitionSystemModel with a single value of type SallyNotation. 
@@ -200,8 +253,8 @@ ConfigurationString is a type of ENTITY.
 //        analyzedWith  describes SallyTransitionSystemModelGeneration with a single value of type TOOL.
 //        runBy describes SallyTransitionSystemModelGeneration with values of type AGENT.
 //AM changed "used" to analysisInput
-	    analysisInput of SallyTransitionSystemModelGeneration only has values of type SRS_Doc.       
-
+       // DB: changed range of analysisInput
+	    analysisInput of SallyTransitionSystemModelGeneration only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet}. 
       
       SallyModelChecking is a type of ANALYSIS.  //AM 9/27/2021 should this be an ACTIVITY instead?
         // Inherited properties from ANALYSIS
@@ -233,6 +286,7 @@ ConfigurationString is a type of ENTITY.
        ClearTestAndOracleGeneration is a type of TEST_DEVELOPMENT.
          // Test oracles and test generation by Text2Test tool from CLEAR requirements
 //AM commented toolInvocation (2 lines)
+// DB: with the addition of properties in TEST_DEVELOPMENT, toolInvocation is not needed
 //		 toolInvocation (note "Text2Test tool usage instance") describes ClearTestAndOracleGeneration with values of type ToolInvocationInstance.
 //        toolInvocation describes ClearTestAndOracleGeneration with at most 1 value.
         // Inherited properties
@@ -241,14 +295,15 @@ ConfigurationString is a type of ENTITY.
 //AM redid "used"
 //		used describes ClearTestAndOracleGeneration with values of type ENTITY.
 //        used of ClearTestAndOracleGeneration must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary}.
-		used of ClearTestAndOracleGeneration only has values of type {SRS_Doc or SubDD_Doc or DataDictionary}.
+      // DB: changed the range of used to what we support
+		used of ClearTestAndOracleGeneration only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary}.
          
        ClearTestingTheory is a type of ENTITY. 
           testingTheoryDoc describes ClearTestingTheory with values of type DOCUMENT. 
-         
-       TestOracle is a type of ENTITY.
-         verifiesRequirement describes TestOracle with a single value of type REQUIREMENT.
-         verifiesRequirement is a type of wasDerivedFrom.
+       
+       TestOracle (note "a test obligation") is a type of ENTITY. // DB: added note
+         // DB: renamed verifiesRequirement to verifies which is a standard property in TEST; avoid creating new property names
+         verifies describes TestOracle with a single value of type REQUIREMENT.
          requirementSubclause (note "part (subclause) of the requirement this test oracle tests") describes TestOracle with values of type string.
          testOracleCriteria (note "e.g., equiv class, boundary value") describes TestOracle with a single value of type string.
          testOracleTheory describes TestOracle with a single value of type ClearTestingTheory.
@@ -263,11 +318,13 @@ ConfigurationString is a type of ENTITY.
 
 //AM dropped testVectorFile as definedIn from the core ontology can be used.         
 //       definedIn (note "file containing tests in format of test vectors") describes TEST with a single value of type FILE.
+//  DB: definedIn wasn't in TEST in core, I have put it there
 
        // TEST_EXECUTION class in RACK base ontology is extended with further attributes
        // New attributes
-//AM We could introduce a subClass and then define testEnvironment on it OR maybe we could move testEnvironment to core??????       
-       testEnvironment (note "test environment description, configuration parameters") describes TEST_EXECUTION with values of type string.
+//AM We could introduce a subClass and then define testEnvironment on it OR maybe we could move testEnvironment to core??????   
+     // DB: suggest moving testEnvironment to core; this is a fundamental aspect of test execution; also making range an entity rather than string to allow general usage
+       testEnvironment (note "test environment description, configuration parameters") describes TEST_EXECUTION with values of type ENTITY.
        testEnvironment describes TEST_EXECUTION with at most 1 value.                    
        // TEST_RESULT class in RACK base ontology is used as is
        
@@ -278,9 +335,11 @@ ConfigurationString is a type of ENTITY.
 //AM corrected propertyScope
 //	   propertyScope describes ClearGenericProperty with values of type ENTITY.
 //        propertyScope of ClearGenericProperty must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary}.
-	   propertyScope of ClearGenericProperty only has values of type {SRS_Doc or SubDD_Doc or DataDictionary}. 
+      // DB: changed the range of scopeOf to what we need
+	   scopeOf of ClearGenericProperty only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet}. 
 
-       RequirementAnalysis is a type of ANALYSIS.
+       // DB: renamed to ClearRequirementAnalysis
+       ClearRequirementAnalysis is a type of ANALYSIS.
         // Inherited properties from ANALYSIS
         //   performedBy - refers to Text2Test tool
         //toolInvocation describes RequirementAnalysis with values of type ToolInvocationInstance.
@@ -290,7 +349,8 @@ ConfigurationString is a type of ENTITY.
 //AM replaced "used" with analysisInput and corrected constraint
 //        used describes RequirementAnalysis with values of type ENTITY.
 //        used of RequirementAnalysis must be one of {SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet, DataDictionary, ClearGenericProperty}.
- analysisInput of RequirementAnalysis must be one of {SRS_Doc, SubDD_Doc, DataDictionary, ClearGenericProperty}.
+// DB: added requirement sets in the range, removed SRS_Doc, SubDD_Doc
+//AM 11/10 analysisInput of RequirementAnalysis must be one of {DataDictionary, ClearGenericProperty, SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet}.
        
        ////////////////////////////////
        // Test generation by Randoop tool
@@ -304,9 +364,10 @@ ConfigurationString is a type of ENTITY.
         //   wasInformedBy: activity that was a precursor to this
 	   used of RandoopJUnitTestGeneration only has values of type SourceCode.
        
+       // DB: changed to inherit from TEST rather than ENTITY
        RandoopTestsAndMetrics
           (note "the set of JUNIT tests/results generated and executed by Randoop with corresponding test clasification metrics")
-       is a type of ENTITY.
+       is a type of TEST.
         // inherited properties:
         //   identifier
         //   generatedAtTime
@@ -316,16 +377,19 @@ ConfigurationString is a type of ENTITY.
         numberOfViolationInducingTestCases (note "tests that indicate a method contract violation") describes RandoopTestsAndMetrics with a single value of type int.
         numberOfReducedViolationInducingTestCases (note "numberOfViolationInducingTestCases reduced by filtering out redundant test cases in the same equivalance class") describes RandoopTestsAndMetrics with a single value of type int.
         numberOfErrorRevealingTestCases (note "tests that were determined to reveal actual errors in code") describes RandoopTestsAndMetrics with a single value of type int.
-        // new relationships:
-        jUnitTestFile describes RandoopTestsAndMetrics with values of type FILE.
-        DesCert:producedBy describes RandoopTestsAndMetrics with values of type RandoopJUnitTestGeneration.
-        DesCert:producedBy is a type of wasGeneratedBy.
-        DesCert:verifies describes RandoopTestsAndMetrics with values of type SourceCode.
-        DesCert:verifies is a type of wasImpactedBy.
+        // DB: constraining range of properties, also renamed property jUnitTestFile to definedIn of TEST
+        // jUnitTestFile describes RandoopTestsAndMetrics with values of type FILE.
+        // DB: removing producedBy since wasGeneratedBy is sufficient
+        // DesCert:producedBy describes RandoopTestsAndMetrics with values of type RandoopJUnitTestGeneration.
+        // DesCert:producedBy is a type of wasGeneratedBy.
+        // DB: use verifies of TEST
+        verifies of RandoopTestsAndMetrics only has values of type SourceCode.
         
         /////////////////////////////////////////////
         // Invariant detection by Daikon
-        DaikonInvariantDetection is a type of ACTIVITY.
+        
+        // DB: inherit from ANALYSIS rather than ACTIVITY
+        DaikonInvariantDetection is a type of ANALYSIS.
 //AM commented toolInvocation (2 lines)
 //		toolInvocation (note "Daikon tool invocation") describes DaikonInvariantDetection with values of type ToolInvocationInstance.
 //      toolInvocation describes DaikonInvariantDetection with at most 1 value.
@@ -334,8 +398,9 @@ ConfigurationString is a type of ENTITY.
           //   wasInformedBy: activity that was a precursor to this
 //AM copied 3 properties from ToolInvocationInstance to here
         analysisConfiguration of DaikonInvariantDetection only has values of type ConfigurationString.
-//        analyzedWith describes DaikonInvariantDetection with a single value of type TOOL.
-//        runBy describes DaikonInvariantDetection with values of type AGENT.
+        // DB: constrained range of analyzedWith
+        analyzedWith describes DaikonInvariantDetection with a single value of type TOOL.
+//        runBy describes DaikonInvariantDetection with values of type AGENT. // DB: already in ANALYSIS, remove this from here
 //AM replaced "used" by analysisInput and corrected constraint
 //		used describes DaikonInvariantDetection with values of type ENTITY.
 //      used of DaikonInvariantDetection must be one of {SourceCode, RandoopTestsAndMetrics}. 
@@ -348,8 +413,10 @@ ConfigurationString is a type of ENTITY.
           //   wasImpactedBy of DaikonInvariantOutput has values of type RandoopTestsAndMetrics.
           // new properties:
           DesCert:verifies describes DaikonInvariantOutput with values of type SourceCode.
-          DesCert:producedBy describes DaikonInvariantOutput with values of type DaikonInvariantDetection.
-          DesCert:producedBy describes DaikonInvariantOutput with at most 1 value.
+          // DB: removed producedBy since wasGeneratedBy is sufficient
+          // DesCert:producedBy describes DaikonInvariantOutput with values of type DaikonInvariantDetection.
+          // DesCert:producedBy describes DaikonInvariantOutput with at most 1 value.
+          wasGeneratedBy of DaikonInvariantOutput only has values of type DaikonInvariantDetection.
           invariantCount describes DaikonInvariantOutput with a single value of type int.
           classesCount describes DaikonInvariantOutput with a single value of type int.
           testsCount describes DaikonInvariantOutput with a single value of type int.

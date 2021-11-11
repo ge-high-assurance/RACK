@@ -46,13 +46,6 @@ TEST_DEVELOPMENT
 	(note "ACTIVITY of creating a TEST to participate in the evaluation of a requirement")
 	is a type of ACTIVITY.
 
-	developedBy (note "Entity that is responsible for producing a test, could be a person or a tool. ") describes TEST_DEVELOPMENT with values of type AGENT.
-	developedBy is a type of wasAssociatedWith.
-
 TEST_EXECUTION
 	(note "ACTIVITY of performing a TEST and record its corresponding TEST_RESULT")
 	is a type of ACTIVITY.
-
-	executedOn describes TEST_EXECUTION with values of type AGENT.
-	executedOn (note "AGENT(s) (e.g. some testing software/machine) running those tests").
-	executedOn is a type of wasAssociatedWith.

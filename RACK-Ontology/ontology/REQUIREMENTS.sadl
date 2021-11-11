@@ -51,9 +51,6 @@ REQUIREMENT_DEVELOPMENT
 	(note "ACTIVITY that produces REQUIREMENTs")
 	is a type of ACTIVITY.
 
-	Rq:author (note "AGENT(s) responsible for producing a REQUIREMENT") describes REQUIREMENT_DEVELOPMENT with values of type AGENT.
-	Rq:author is a type of wasAssociatedWith.
-
 	Rq:referenced (note "Source materials (requirement and design docs) used during development") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
 	Rq:referenced is a type of used.
 

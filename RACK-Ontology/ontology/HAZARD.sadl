@@ -51,6 +51,3 @@ HAZARD
 HAZARD_IDENTIFICATION
 	(note "ACTIVITY that identifies potential sources of HAZARD whose risk must be evaluated")
 	is a type of ACTIVITY.
-
-	H:author (note "AGENT(s) who work on this ACTIVITY") describes HAZARD_IDENTIFICATION with values of type AGENT.
-	H:author is a type of wasAssociatedWith.

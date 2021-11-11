@@ -164,7 +164,7 @@
     <rdfs:domain rdf:resource="#ENTITY"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="wasAssociatedWith">
-    <rdfs:comment xml:lang="en">An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity. It further allows for a plan to be specified, which is the plan intended by the agent to achieve some goals in the context of this activity.</rdfs:comment>
+    <rdfs:comment xml:lang="en">An activity association is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity.</rdfs:comment>
     <rdfs:range rdf:resource="#AGENT"/>
     <rdfs:domain rdf:resource="#ACTIVITY"/>
   </owl:ObjectProperty>

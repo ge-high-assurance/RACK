@@ -96,21 +96,16 @@
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#CODE_DEVELOPMENT"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="instantiates">
-    <rdfs:comment xml:lang="en">What logical component (system) does this physical component (code) instantiate or implement?</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
-    <rdfs:domain rdf:resource="#SWCOMPONENT"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#componentType">
-    <rdfs:comment xml:lang="en">Type of component</rdfs:comment>
-    <rdfs:range rdf:resource="#COMPONENT_TYPE"/>
-    <rdfs:domain rdf:resource="#SWCOMPONENT"/>
-  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="compiledBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
     <rdfs:comment xml:lang="en">The tool that performed the compilation</rdfs:comment>
     <rdfs:range rdf:resource="AGENTS#TOOL"/>
     <rdfs:domain rdf:resource="#COMPILE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="instantiates">
+    <rdfs:comment xml:lang="en">What logical component (system) does this physical component (code) instantiate or implement?</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#SWCOMPONENT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="step">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasInformedBy"/>
@@ -129,19 +124,22 @@
     <rdfs:range rdf:resource="AGENTS#TOOL"/>
     <rdfs:domain rdf:resource="#PACKAGE"/>
   </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#componentType">
+    <rdfs:comment xml:lang="en">Type of component</rdfs:comment>
+    <rdfs:range rdf:resource="#COMPONENT_TYPE"/>
+    <rdfs:domain rdf:resource="#SWCOMPONENT"/>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#performedBy">
     <rdfs:comment xml:lang="en">AGENT(s) (e.g. PACKAGER) performing the packaging</rdfs:comment>
-    <rdfs:comment xml:lang="en">AGENT(s) (e.g. COMPILER) performing the compilation</rdfs:comment>
     <rdfs:domain>
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#CODE_GEN"/>
           <owl:Class rdf:about="#COMPILE"/>
           <owl:Class rdf:about="#PACKAGE"/>
         </owl:unionOf>
       </owl:Class>
     </rdfs:domain>
-    <rdfs:comment xml:lang="en">AGENT(s) (e.g. CODE_GENERATOR) generating the code</rdfs:comment>
+    <rdfs:comment xml:lang="en">AGENT(s) (e.g. COMPILER) performing the compilation</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
   </owl:ObjectProperty>
@@ -150,12 +148,6 @@
     <rdfs:comment xml:lang="en">Source files that contributed to the compilation</rdfs:comment>
     <rdfs:range rdf:resource="FILE#FILE"/>
     <rdfs:domain rdf:resource="#COMPILE"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="author">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
-    <rdfs:comment xml:lang="en">AGENT(s) who participated in this ACTIVITY</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#AGENT"/>
-    <rdfs:domain rdf:resource="#CODE_DEVELOPMENT"/>
   </owl:ObjectProperty>
   <owl:DatatypeProperty rdf:ID="valueType">
     <rdfs:comment xml:lang="en">The type of this value, if applicable (e.g. for functions or variables).</rdfs:comment>

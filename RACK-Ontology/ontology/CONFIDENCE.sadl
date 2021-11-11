@@ -34,6 +34,3 @@ BDU_CONFIDENCE_ASSESSMENT (note "A belief-disbelief-uncertainty confidence asses
     uncertainty (note "uncommitted belief") describes CONFIDENCE_ASSESSMENT with a single value of type float. // [0,1].
 
 ASSESSING_CONFIDENCE (note "ACTIVITY that establishes a CONFIDENCE_ASSESSMENT") is a type of ACTIVITY.
-
-    performedBy (note "ENTITY responsible for producing the assessment, could be a person or a tool") describes ASSESSING_CONFIDENCE with values of type AGENT.
-    performedBy is a type of wasAssociatedWith.

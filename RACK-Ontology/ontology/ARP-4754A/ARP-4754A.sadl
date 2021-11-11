@@ -17,179 +17,179 @@ import "http://arcos.rack/DOCUMENT".
 ARP-4754A-AppendixA is a SECTION,
 	has title "PROCESS OBJECTIVES DATA",
      has content ARP-4754-1.1,
-     has content ARP-4755-1.2,
-     has content ARP-4756-2.1,
-     has content ARP-4757-2.2,
-     has content ARP-4758-2.3,
-     has content ARP-4759-2.4,
-     has content ARP-4760-2.5,
-     has content ARP-4761-2.6,
-     has content ARP-4762-2.7,
-     has content ARP-4763-3.1,
-     has content ARP-4764-3.2,
-     has content ARP-4765-3.3,
-     has content ARP-4766-3.4,
-     has content ARP-4767-3.5,
-     has content ARP-4768-3.6,
-     has content ARP-4769-3.7,
-     has content ARP-4770-4.1,
-     has content ARP-4771-4.2,
-     has content ARP-4772-4.3,
-     has content ARP-4773-4.4,
-     has content ARP-4774-4.5,
-     has content ARP-4775-4.6,
-     has content ARP-4776-5.1,
-     has content ARP-4777-5.2,
-     has content ARP-4778-5.3,
-     has content ARP-4779-5.4,
-     has content ARP-4780-5.5,
-     has content ARP-4781-5.6,
-     has content ARP-4782-6.1,
-     has content ARP-4783-6.2,
-     has content ARP-4784-6.3,
-     has content ARP-4785-6.4,
-     has content ARP-4786-7.1,
-     has content ARP-4787-7.2,
-     has content ARP-4788-8.1.
+     has content ARP-4754-1.2,
+     has content ARP-4754-2.1,
+     has content ARP-4754-2.2,
+     has content ARP-4754-2.3,
+     has content ARP-4754-2.4,
+     has content ARP-4754-2.5,
+     has content ARP-4754-2.6,
+     has content ARP-4754-2.7,
+     has content ARP-4754-3.1,
+     has content ARP-4754-3.2,
+     has content ARP-4754-3.3,
+     has content ARP-4754-3.4,
+     has content ARP-4754-3.5,
+     has content ARP-4754-3.6,
+     has content ARP-4754-3.7,
+     has content ARP-4754-4.1,
+     has content ARP-4754-4.2,
+     has content ARP-4754-4.3,
+     has content ARP-4754-4.4,
+     has content ARP-4754-4.5,
+     has content ARP-4754-4.6,
+     has content ARP-4754-5.1,
+     has content ARP-4754-5.2,
+     has content ARP-4754-5.3,
+     has content ARP-4754-5.4,
+     has content ARP-4754-5.5,
+     has content ARP-4754-5.6,
+     has content ARP-4754-6.1,
+     has content ARP-4754-6.2,
+     has content ARP-4754-6.3,
+     has content ARP-4754-6.4,
+     has content ARP-4754-7.1,
+     has content ARP-4754-7.2,
+     has content ARP-4754-8.1.
 
 ARP-4754-1.1 is a OBJECTIVE,
     has identifier "ARP-4754-1.1"
     has description "System development and integral process activities are defined".
 
-ARP-4755-1.2 is a OBJECTIVE,
-    has identifier "ARP-4755-1.2"
+ARP-4754-1.2 is a OBJECTIVE,
+    has identifier "ARP-4754-1.2"
     has description "Transition criteria and inter-relationship among processes are defined".
 
-ARP-4756-2.1 is a OBJECTIVE,
-    has identifier "ARP-4756-2.1"
+ARP-4754-2.1 is a OBJECTIVE,
+    has identifier "ARP-4754-2.1"
     has description "Aircraft-level functions, functional requirements, functional interfaces and assumptions are defined".
 
-ARP-4757-2.2 is a OBJECTIVE,
-    has identifier "ARP-4757-2.2"
+ARP-4754-2.2 is a OBJECTIVE,
+    has identifier "ARP-4754-2.2"
     has description "Aircraft functions are allocated to systems".
 
-ARP-4758-2.3 is a OBJECTIVE,
-    has identifier "ARP-4758-2.3"
+ARP-4754-2.3 is a OBJECTIVE,
+    has identifier "ARP-4754-2.3"
     has description "System requirements including assumptions and system interfaces are defined.".
 
-ARP-4759-2.4 is a OBJECTIVE,
-    has identifier "ARP-4759-2.4"
+ARP-4754-2.4 is a OBJECTIVE,
+    has identifier "ARP-4754-2.4"
     has description "System derived requirements (including derived safety-related requirements) are defined and rationale explained".
 
-ARP-4760-2.5 is a OBJECTIVE,
-    has identifier "ARP-4760-2.5"
+ARP-4754-2.5 is a OBJECTIVE,
+    has identifier "ARP-4754-2.5"
     has description "System architecture is defined.".
 
-ARP-4761-2.6 is a OBJECTIVE,
-    has identifier "ARP-4761-2.6"
+ARP-4754-2.6 is a OBJECTIVE,
+    has identifier "ARP-4754-2.6"
     has description "System requirements are allocated to items.".
 
-ARP-4762-2.7 is a OBJECTIVE,
-    has identifier "ARP-4762-2.7"
+ARP-4754-2.7 is a OBJECTIVE,
+    has identifier "ARP-4754-2.7"
     has description "Appropriate item, system and aircraft integrations are performed.".
 
-ARP-4763-3.1 is a OBJECTIVE,
-    has identifier "ARP-4763-3.1"
+ARP-4754-3.1 is a OBJECTIVE,
+    has identifier "ARP-4754-3.1"
     has description "The aircraft/system functional hazard assessment is performed.".
 
-ARP-4764-3.2 is a OBJECTIVE,
-    has identifier "ARP-4764-3.2"
+ARP-4754-3.2 is a OBJECTIVE,
+    has identifier "ARP-4754-3.2"
     has description "The preliminary aircraft safety assessment is performed.".
 
-ARP-4765-3.3 is a OBJECTIVE,
-    has identifier "ARP-4765-3.3"
+ARP-4754-3.3 is a OBJECTIVE,
+    has identifier "ARP-4754-3.3"
     has description "The preliminary system safety assessment is performed.".
 
-ARP-4766-3.4 is a OBJECTIVE,
-    has identifier "ARP-4766-3.4"
+ARP-4754-3.4 is a OBJECTIVE,
+    has identifier "ARP-4754-3.4"
     has description "The common cause analyses are performed.".
 
-ARP-4767-3.5 is a OBJECTIVE,
-    has identifier "ARP-4767-3.5"
+ARP-4754-3.5 is a OBJECTIVE,
+    has identifier "ARP-4754-3.5"
     has description "The aircraft safety assessment is performed.".
 
-ARP-4768-3.6 is a OBJECTIVE,
-    has identifier "ARP-4768-3.6"
+ARP-4754-3.6 is a OBJECTIVE,
+    has identifier "ARP-4754-3.6"
     has description "The system safety assessment is performed.".
 
-ARP-4769-3.7 is a OBJECTIVE,
-    has identifier "ARP-4769-3.7"
+ARP-4754-3.7 is a OBJECTIVE,
+    has identifier "ARP-4754-3.7"
     has description "Independence requirements in functions, systems and items are captured.".
 
-ARP-4770-4.1 is a OBJECTIVE,
-    has identifier "ARP-4770-4.1"
+ARP-4754-4.1 is a OBJECTIVE,
+    has identifier "ARP-4754-4.1"
     has description "Aircraft, system, items requirements are complete and correct.".
 
-ARP-4771-4.2 is a OBJECTIVE,
-    has identifier "ARP-4771-4.2"
+ARP-4754-4.2 is a OBJECTIVE,
+    has identifier "ARP-4754-4.2"
     has description "Assumptions are justified and validated.".
 
-ARP-4772-4.3 is a OBJECTIVE,
-    has identifier "ARP-4772-4.3"
+ARP-4754-4.3 is a OBJECTIVE,
+    has identifier "ARP-4754-4.3"
     has description "Derived requirements are justified and validated.".
 
-ARP-4773-4.4 is a OBJECTIVE,
-    has identifier "ARP-4773-4.4"
+ARP-4754-4.4 is a OBJECTIVE,
+    has identifier "ARP-4754-4.4"
     has description "Requirements are traceable.".
 
-ARP-4774-4.5 is a OBJECTIVE,
-    has identifier "ARP-4774-4.5"
+ARP-4754-4.5 is a OBJECTIVE,
+    has identifier "ARP-4754-4.5"
     has description "".
 
-ARP-4775-4.6 is a OBJECTIVE,
-    has identifier "ARP-4775-4.6"
+ARP-4754-4.6 is a OBJECTIVE,
+    has identifier "ARP-4754-4.6"
     has description "Validation compliance substantiation is provided.".
 
-ARP-4776-5.1 is a OBJECTIVE,
-    has identifier "ARP-4776-5.1"
+ARP-4754-5.1 is a OBJECTIVE,
+    has identifier "ARP-4754-5.1"
     has description "Test or demonstration procedures are correct.".
 
-ARP-4777-5.2 is a OBJECTIVE,
-    has identifier "ARP-4777-5.2"
+ARP-4754-5.2 is a OBJECTIVE,
+    has identifier "ARP-4754-5.2"
     has description "Verification demonstrates intended function and confidence of no unintended function impacts to safety.".
 
-ARP-4778-5.3 is a OBJECTIVE,
-    has identifier "ARP-4778-5.3"
+ARP-4754-5.3 is a OBJECTIVE,
+    has identifier "ARP-4754-5.3"
     has description "Product implementation complies with aircraft, and system requirements.".
 
-ARP-4779-5.4 is a OBJECTIVE,
-    has identifier "ARP-4779-5.4"
+ARP-4754-5.4 is a OBJECTIVE,
+    has identifier "ARP-4754-5.4"
     has description "Safety requirements are verified.".
 
-ARP-4780-5.5 is a OBJECTIVE,
-    has identifier "ARP-4780-5.5"
+ARP-4754-5.5 is a OBJECTIVE,
+    has identifier "ARP-4754-5.5"
     has description "Verification compliance substantiation is included.".
 
-ARP-4781-5.6 is a OBJECTIVE,
-    has identifier "ARP-4781-5.6"
+ARP-4754-5.6 is a OBJECTIVE,
+    has identifier "ARP-4754-5.6"
     has description "Assessment of deficiencies and their related impact on safety is identified.".
 
-ARP-4782-6.1 is a OBJECTIVE,
-    has identifier "ARP-4782-6.1"
+ARP-4754-6.1 is a OBJECTIVE,
+    has identifier "ARP-4754-6.1"
     has description "Configuration items are identified".
 
-ARP-4783-6.2 is a OBJECTIVE,
-    has identifier "ARP-4783-6.2"
+ARP-4754-6.2 is a OBJECTIVE,
+    has identifier "ARP-4754-6.2"
     has description "Configuration baseline and derivatives are established.".
 
-ARP-4784-6.3 is a OBJECTIVE,
-    has identifier "ARP-4784-6.3"
+ARP-4754-6.3 is a OBJECTIVE,
+    has identifier "ARP-4754-6.3"
     has description "Problem reporting , change control, change review, and configuration status accounting are established.".
 
-ARP-4785-6.4 is a OBJECTIVE,
-    has identifier "ARP-4785-6.4"
+ARP-4754-6.4 is a OBJECTIVE,
+    has identifier "ARP-4754-6.4"
     has description "Archive and retrieval are established.".
 
-ARP-4786-7.1 is a OBJECTIVE,
-    has identifier "ARP-4786-7.1"
+ARP-4754-7.1 is a OBJECTIVE,
+    has identifier "ARP-4754-7.1"
     has description "Assurance is obtained that necessary plans are developed and maintained for all aspects of system certification.".
 
-ARP-4787-7.2 is a OBJECTIVE,
-    has identifier "ARP-4787-7.2"
+ARP-4754-7.2 is a OBJECTIVE,
+    has identifier "ARP-4754-7.2"
     has description "Development activities and processes are conducted in accordance with those plans.".
 
-ARP-4788-8.1 is a OBJECTIVE,
-    has identifier "ARP-4788-8.1"
+ARP-4754-8.1 is a OBJECTIVE,
+    has identifier "ARP-4754-8.1"
     has description "Compliance substantiation is provided.".
 
 

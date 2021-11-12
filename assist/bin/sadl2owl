@@ -52,7 +52,7 @@ skip=(
 )
 
 for SFile in $(find ${INPDIR} -name '*.sadl') ; do
-    for S in ${skip[*]} ; do
+    for S in "${skip[@]}" ; do
         if [ "$(basename ${SFile})" = "$S" ] ; then
             continue 2
         fi

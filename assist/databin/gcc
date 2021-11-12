@@ -75,11 +75,11 @@ nonce="n$(date +%s)-$$"
     echo ":- discontiguous file_committer/2."
     echo "build_inputs(${nonce@Q}, [ ${inf[*]@Q} ])."
     echo "build_outputs(${nonce@Q}, [ ${outf@Q} ])."
-    for inp in ${inf[*]} ; do
+    for inp in "${inf[*]}" ; do
         git log -n 1 --pretty=format:"file_committer(${inp@Q}, '%al').%n" "$inp" 2>/dev/null
     done
-    for lf in ${libs[*]} ; do
-        for ld in ${libdirs[*]} ; do
+    for lf in "${libs[*]}" ; do
+        for ld in "${libdirs[*]}" ; do
             for ext in .so .a ; do
                 # shellcheck disable=SC2005,SC2164
                 ldr=$(cd "${ld}"; echo $(top_rel_curdir))

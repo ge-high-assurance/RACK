@@ -45,6 +45,7 @@ ENTITY (note "An entity is a physical, digital, conceptual, or other kind of thi
 	generatedAtTime describes ENTITY with at most 1 value.
 	invalidatedAtTime (note "The time at which this entity was no longer usable") describes ENTITY with values of type dateTime.
 	invalidatedAtTime describes ENTITY with at most 1 value.
+	entityURL (note "Location where entity can be found outside of RACK") describes ENTITY with values of type anyURI.
 
 COLLECTION (note "A collection is an entity that provides a structure to some constituents, which are themselves entities. These constituents are said to be member of the collections.")
 	is a type of ENTITY.

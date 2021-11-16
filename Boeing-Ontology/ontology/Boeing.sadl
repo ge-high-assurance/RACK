@@ -1,4 +1,5 @@
 uri "http://arcos.AH-64D/Boeing" alias BoeingModel.
+import "http://arcos.rack/FILE".
 import "http://arcos.rack/REQUIREMENTS".
 import "http://arcos.rack/TESTING".
 
@@ -18,3 +19,41 @@ verifies of SBVT_Test has at least 1 value.
 
 SBVT_Result (note "A result identified for a SBVT_Test (Software Baseline Verification Tests)") is a type of TEST_RESULT.
 confirms of SBVT_Result only has values of type SBVT_Test.
+
+// COMMON FILE FORMATS
+
+XmlFormat       (note "Extensible Markup Language file format") is a FORMAT.
+SysmlFormat     (note "Systems Modeling Language file format") is a FORMAT.
+PdfFormat       (note "PDF file format") is a FORMAT.
+EmlFormat       (note "Email file format") is a FORMAT.
+YamlFormat      (note "Yet Another Markup Language file format") is a FORMAT.
+JsonFormat      (note "JavaScript Object Notation file format") is a FORMAT.
+TomlFormat      (note "Tom's Obvious Minimal Language file format") is a FORMAT.
+IniFormat       (note "Initialization configuration file format") is a FORMAT.
+
+// Image formats
+SvgFormat       (note "Scalable Vector Graphics image file format") is a FORMAT.
+JpgFormat       (note "Joint Photographic Exports Group image file format") is a FORMAT.
+GifFormat       (note "Graphics Interchange Format image file format") is a FORMAT.
+PngFormat       (note "Portable Network Graphics image file format") is a FORMAT.
+BmpFormat       (note "Bitmap image file format") is a FORMAT.
+TiffFormat      (note "Tag Image File Format image file format") is a FORMAT.
+
+// Programming language source files
+AdaFormat       (note "Ada source file format") is a FORMAT.
+CFormat         (note "C source file format") is a FORMAT.
+CxxFormat       (note "C++ source file format") is a FORMAT.
+PythonFormat    (note "Python source file format") is a FORMAT.
+ShellFormat     (note "Shell script file format") is a FORMAT.
+
+// Plain text formats
+TextFormat      (note "Plain text file format") is a FORMAT.
+CsvFormat       (note "Comma separated values file format") is a FORMAT.
+
+// Microsoft office
+XlsFormat       (note "Microsoft Excel spreadsheet file format") is a FORMAT.
+DocFormat       (note "Microsoft Word document file format") is a FORMAT.
+PptFormat       (note "Microsoft PowerPoint file format") is a FORMAT.
+
+// Various object code types
+MachineCodeFormat (note "Executable files, object files, static/dynamic libaries, etc file format") is a FORMAT.

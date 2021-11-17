@@ -31,7 +31,7 @@ FILE
 
 	filename (note "A logical file path relative to the container of the file.") describes FILE with a single value of type string.
 
-	fileFormat (note "The byte-level encoding of a file") describes FILE with values of type FORMAT.
+	fileFormat (note "The high-level format of a file. ") describes FILE with values of type FORMAT.
 
     satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes FILE with values of type ENTITY.
     satisfies is a type of wasImpactedBy.
@@ -43,7 +43,7 @@ FILE
     fileHash (note "Hash of the file contents") describes FILE with values of type FILE_HASH.
 
 FORMAT
-    (note "The data format of a FILE")
+    (note "High-level file formats")
     is a type of THING.
 
 FILE_CREATION

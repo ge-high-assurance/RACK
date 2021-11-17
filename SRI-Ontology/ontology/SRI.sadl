@@ -219,8 +219,8 @@ ToolQualificationData
 
        // TEST_EXECUTION class in RACK base ontology is extended with further attributes
        // New attributes
-	   testEnvironment (note "test environment description, configuration parameters") describes TEST_EXECUTION with values of type ENTITY.
-       testEnvironment describes TEST_EXECUTION with at most 1 value.                   
+//	   testEnvironment (note "test environment description, configuration parameters") describes TEST_EXECUTION with values of type ENTITY.
+//     testEnvironment describes TEST_EXECUTION with at most 1 value.                   
        // TEST_RESULT class in RACK base ontology is used as is
        
        ///////////////////////////////////////////////////////////////////////
@@ -249,7 +249,7 @@ ToolQualificationData
        
        // DB: changed to inherit from TEST rather than ENTITY
        RandoopTestsAndMetrics
-          (note "the set of JUNIT tests/results generated and executed by Randoop with corresponding test clasification metrics")
+          (note "the set of JUNIT tests/results generated and executed by Randoop with corresponding test classification metrics")
        is a type of TEST.
         // inherited properties:
         //   identifier

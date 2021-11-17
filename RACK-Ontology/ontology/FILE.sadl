@@ -36,9 +36,9 @@ FILE
     satisfies (note "ENTITY(s) (e.g. REQUIREMENT) that this code file participates in satisfying") describes FILE with values of type ENTITY.
     satisfies is a type of wasImpactedBy.
 
-    createBy (note "FILE_CREATION ACTIVITY that created this file") describes FILE with values of type FILE_CREATION.
-    createBy describes FILE with at most 1 value.
-    createBy is a type of wasGeneratedBy.
+    createdBy (note "FILE_CREATION ACTIVITY that created this file") describes FILE with values of type FILE_CREATION.
+    createdBy describes FILE with at most 1 value.
+    createdBy is a type of wasGeneratedBy.
     
     fileHash (note "Hash of the file contents") describes FILE with values of type FILE_HASH.
 

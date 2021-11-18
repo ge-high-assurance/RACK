@@ -8,7 +8,7 @@ NOTE: For the following commands to work, you will want to have
 generated some data for them to use.  For instance, to get the
 "TurnstileSystem" data generated, you can prepend
 `assist/databin` to your `PATH` and then run `make` on the
-`Makefile` in the `Turnstile-Ontology/02-Software/03-Implementation`
+`Makefile` in the `Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation`
 directory.  The `databin` provides instrumented tools like `gcc` that
 record build-related data during the build.
 
@@ -56,11 +56,11 @@ Prolog modules in this directory:
 
   ```shell
   ingest_data -h
-  ingest_data -O Turnstile-Ontology/OwlModels http://rack001/turnstiledata Turnstile-Ontology/02-Software
+  ingest_data -O GE-Ontology/OwlModels http://rack001/turnstiledata Turnstile-Example/Turnstile-IngestionPackage
   ```
 
   The above would ingest all build/test datafiles generated during
-  the build process in the `Turnstile-Ontology/02-Software/03-Implementation` directory.
+  the build process in the `Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation` directory.
   The results would be loaded into the RACK database being served at
   `http://localhost:3030` as instance data in the
   `http://rack001/turnstiledata` namespace.
@@ -121,7 +121,7 @@ Prolog modules in this directory:
   2. Generate data for the build process of the Turnstile
 
     ```shell
-    $ cd ../Turnstile-Ontology/02-Software/03-Implementation
+    $ cd ../Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation
     $ make clean
     $ make test
     # ... note that the test results include a failure; this is expected.
@@ -135,8 +135,9 @@ Prolog modules in this directory:
 
      ```shell
      $ ingest_data -r ../turnstile-ingest.rack -o BUILD_DESC.OWL \
+         -O ../../../GE-Ontology \
          http://Turnstile/CounterApplication \
-         ../../../Turnstile-Ontology
+         ../../../Turnstile-Example
      $ ls BUILD_DESC.OWL
      ```
 
@@ -145,7 +146,7 @@ Prolog modules in this directory:
      RACK ontology:
 
      ```shell
-     $ check -v -d ../../../Turnstile-Ontology
+     $ check -v -d ../../../Turnstile-Example
      ```
 
      Additionally, a summary of the information generated can be seen
@@ -165,8 +166,9 @@ Prolog modules in this directory:
 
      ```shell
      $ ingest_data -r ../turnstile-ingest.rack \
+         -O ../../../GE-Ontology \
          http://Turnstile/CounterApplication \
-         ../../../Turnstile-Ontology
+         ../../../Turnstile-Example
      $ ls BUILD_DESC.OWL
      ```
 
@@ -244,7 +246,7 @@ swipl -s ./assist/bin/rack/model.pl
 You may load a model in memory using one of the three following forms:
 
 ```prolog
-load_local_model('./Turnstile-Ontology/OwlModels').
+load_local_model('./GE-Ontology/OwlModels').
 ```
 
 The local form takes as argument a path to a directory containing OWL files

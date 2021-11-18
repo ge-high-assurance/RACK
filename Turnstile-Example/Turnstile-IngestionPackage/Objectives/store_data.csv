@@ -1,0 +1,16 @@
+ID,comments,creator,jsonFile
+query_forSoftwareReqDev_Objectives,for creating Turnstile Obj data - Software Req Dev,GE-Galois,query_forSoftwareReqDev_Objectives.json
+query_forSoftwareCoding_Objectives,for creating Turnstile Obj data - Software Coding,GE-Galois,query_forSoftwareCoding_Objectives.json
+query_forSoftwareDesign_Objectives,for creating Turnstile Obj data - Software Design,GE-Galois,query_forSoftwareDesign_Objectives.json
+query_forSoftwareIntegration_Objectives,for creating Turnstile Obj data - Software Integration,GE-Galois,query_forSoftwareIntegration_Objectives.json
+query_forSoftwareCodeReview_Objectives,for creating Turnstile Obj data - Software Code Review,GE-Galois,query_forSoftwareCodeReview_Objectives.json
+query_forSoftwareDesignReview_Objectives,for creating Turnstile Obj data - Software Design Review,GE-Galois,query_forSoftwareDesignReview_Objectives.json
+query_forSoftwareReqReview_Objectives,for creating Turnstile Obj data - Software Requirements Review,GE-Galois,query_forSoftwareReqReview_Objectives.json
+query_forDevelopTests_Objectives,for creating Turnstile Obj data - Develop Comp & Unit Tests,GE-Galois,query_forDevelopTests_Objectives.json
+query_forCouplingAnalysis_Objectives,for creating Turnstile Obj data - Coupling Analysis,GE-Galois,query_forCouplingAnalysis_Objectives.json
+query_forStructuralCoverageAnalysis_Objectives,for creating Turnstile Obj data - Structural Coverage,GE-Galois,query_forStructuralCoverageAnalysis_Objectives.json
+query_forSWCompTestExe_Objectives_A6,for creating Turnstile Obj data - SW Comp Test Execution A-6, GE-Galois,query_forSWCompTestExe_Objectives_A6.json
+query_forSWCompTestExe_Objectives_A7,for creating Turnstile Obj data - SW Comp Test Execution A-7, GE-Galois,query_forSWCompTestExe_Objectives_A7.json
+query_forSWUnitTestExe_Objectives_A6,for creating Turnstile Obj data - SW Unit Test Execution A-6, GE-Galois,query_forSWUnitTestExe_Objectives_A6.json
+query_forSWUnitTestExe_Objectives_A7,for creating Turnstile Obj data - SW Unit Test Execution A-7, GE-Galois,query_forSWUnitTestExe_Objectives_A7.json
+query_forProblemReporting_Objectives,for creating Turnstile Obj data - Problem Reporting, GE-Galois,query_forProblemReporting_Objectives.json

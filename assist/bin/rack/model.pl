@@ -596,12 +596,12 @@ load_data(Namespace, Dir) :-
     % Globally asserts current namespace so that this doesn't need to
     % be threaded as an argument through all the rules.
     assert(rack_namespace(Namespace), SetNS),
-    catch(
-        ( % Find all files admitted by 'rack_datafile' recursively starting at 'Dir'
+    %% catch(
+    %%     ( % Find all files admitted by 'rack_datafile' recursively starting at 'Dir'
             load_data_dir(Dir),
             % Instantiate all the loaded data
-            realize_loaded_data
-        ), _, writeln('Warning: data directory not accessible.')),
+            realize_loaded_data,
+        %% ), _, writeln('Warning: data directory not accessible.')),
     % Remove the global namespace assertion
     erase(SetNS).
 

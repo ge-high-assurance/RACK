@@ -35,8 +35,8 @@ data_instance('PROV-S#ACTIVITY', % create an instance of this
                ingesting_data(StartTime)]   % output attributes ot match data_get operations
              ) :-
     databin_name(MyName),
-    get_time(TS), stamp_date_time(TS, date(_Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
-    StartTime = date_time(1999,Mo,D,H,Min,S,UTCOff).
+    get_time(TS), stamp_date_time(TS, date(Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),
+    StartTime = date_time(Y,Mo,D,H,Min,S,UTCOff).
 data_instance('PROV-S#ACTIVITY', load_data_finish, MyName, ingested_data(EndTime)) :-
     databin_name(MyName),
     get_time(TS), stamp_date_time(TS, date(Y,Mo,D,H,Min,S,UTCOff,_TZName,_DST), local),

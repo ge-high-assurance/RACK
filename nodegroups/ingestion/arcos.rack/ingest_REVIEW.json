@@ -1444,7 +1444,7 @@
     ],
     "limit": 0,
     "orderBy": [],
-    "version": 13,
+    "version": 15,
     "unionHash": {}
   },
   "importSpec": {
@@ -1517,7 +1517,7 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?FILE",
         "type": "http://arcos.rack/FILE#FILE",
         "props": [
@@ -1539,7 +1539,7 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?ACTIVITY",
         "type": "http://arcos.rack/PROV-S#ACTIVITY",
         "props": [
@@ -1561,7 +1561,7 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?ENTITY",
         "type": "http://arcos.rack/PROV-S#ENTITY",
         "props": [
@@ -1583,7 +1583,7 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?AGENT",
         "type": "http://arcos.rack/PROV-S#AGENT",
         "props": [
@@ -1605,7 +1605,7 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?ACTIVITY_0",
         "type": "http://arcos.rack/PROV-S#ACTIVITY",
         "props": [
@@ -1627,7 +1627,7 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?AGENT_0",
         "type": "http://arcos.rack/PROV-S#AGENT",
         "props": [
@@ -1649,7 +1649,7 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?ENTITY_0",
         "type": "http://arcos.rack/PROV-S#ENTITY",
         "props": [
@@ -1671,7 +1671,7 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?ENTITY_1",
         "type": "http://arcos.rack/PROV-S#ENTITY",
         "props": [
@@ -1693,7 +1693,7 @@
       },
       {
         "mapping": [],
-        "URILookupMode": "createIfMissing",
+        "URILookupMode": "noCreate",
         "sparqlID": "?AGENT_1",
         "type": "http://arcos.rack/PROV-S#AGENT",
         "props": [

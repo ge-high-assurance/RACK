@@ -1,0 +1,18 @@
+identifier,dataInsertedBy_identifier,createdBy_identifier,description,providedBy_identifier,consumedBy_identifier
+inflowEvent,TurnstileIngestion-High Level Requirements,HlrDev1,Signal indicating that a person has passed through the ingate,,
+inflowEvent,TurnstileIngestion-High Level Requirements,,,inflow,
+inflowEvent,TurnstileIngestion-High Level Requirements,,,,HLR-1:v1
+outflowEvent,TurnstileIngestion-High Level Requirements,HlrDev1,Signal indicating that a person has passed through the outgate,,
+outflowEvent,TurnstileIngestion-High Level Requirements,,,outflow,
+outflowEvent,TurnstileIngestion-High Level Requirements,,,,HLR-2:v1
+counter,TurnstileIngestion-High Level Requirements,HlrDev1,running total people in the park.,,
+counter,TurnstileIngestion-High Level Requirements,,,HLR-1:v1,
+counter,TurnstileIngestion-High Level Requirements,,,HLR-2:v1,
+counter,TurnstileIngestion-High Level Requirements,,,,HLR-3:v1
+display,TurnstileIngestion-High Level Requirements,HlrDev1,,,
+display,TurnstileIngestion-High Level Requirements,,,HLR-3:v1,
+display,TurnstileIngestion-High Level Requirements,,,,census
+inflowEvent,TurnstileIngestion-High Level Requirements,,,,HLR-1:v2
+outflowEvent,TurnstileIngestion-High Level Requirements,,,,HLR-2:v2
+counter,TurnstileIngestion-High Level Requirements,,,HLR-1:v2,
+counter,TurnstileIngestion-High Level Requirements,,,HLR-2:v2,

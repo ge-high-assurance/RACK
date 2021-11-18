@@ -239,17 +239,15 @@ def ANALYSIS_ANNOTATION_TYPE(dataInsertedBy_identifier=None, definedIn_identifie
     objStr += "</ANALYSIS_ANNOTATION_TYPE>"
     addEvidenceObject(etree.fromstring(objStr))
 
-def ANALYSIS_OUTPUT(analysisDiagnostics=None, analyzes_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, goalProperty_identifier=None, identifier=None, invalidatedAtTime=None, metric=None, producedBy_identifier=None, result_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+def ANALYSIS_OUTPUT(analyzes_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, metric=None, producedBy_identifier=None, result_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
     trace()
     log("Adding Evidence:",str_good("ANALYSIS_OUTPUT"))
     objStr = "<ANALYSIS_OUTPUT>"
-    objStr += objectDataString("analysisDiagnostics", analysisDiagnostics)
     objStr += objectDataString("analyzes_identifier", analyzes_identifier)
     objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
     objStr += objectDataString("definedIn_identifier", definedIn_identifier)
     objStr += objectDataString("description", description)
     objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("goalProperty_identifier", goalProperty_identifier)
     objStr += objectDataString("identifier", identifier)
     objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
     objStr += objectDataString("metric", metric)
@@ -436,90 +434,6 @@ def CONFIDENCE_ASSESSMENT(assesses_identifier=None, belief=None, createBy_identi
     objStr += "</CONFIDENCE_ASSESSMENT>"
     addEvidenceObject(etree.fromstring(objStr))
 
-def ChangeRequest(approvalAuthority_identifier=None, content_identifier=None, dataInsertedBy_identifier=None, dateOfIssue=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, issuingOrganization_identifier=None, references_identifier=None, status_identifier=None, title=None, versionNumber=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("ChangeRequest"))
-    objStr = "<ChangeRequest>"
-    objStr += objectDataString("approvalAuthority_identifier", approvalAuthority_identifier)
-    objStr += objectDataString("content_identifier", content_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("dateOfIssue", dateOfIssue)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("issuingOrganization_identifier", issuingOrganization_identifier)
-    objStr += objectDataString("references_identifier", references_identifier)
-    objStr += objectDataString("status_identifier", status_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("versionNumber", versionNumber)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</ChangeRequest>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def Change_Authorization(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("Change_Authorization"))
-    objStr = "<Change_Authorization>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</Change_Authorization>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def ControlCoupleCoverageReport(analyzes_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, metric=None, producedBy_identifier=None, result_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("ControlCoupleCoverageReport"))
-    objStr = "<ControlCoupleCoverageReport>"
-    objStr += objectDataString("analyzes_identifier", analyzes_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("metric", metric)
-    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
-    objStr += objectDataString("result_identifier", result_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</ControlCoupleCoverageReport>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def ControlCouplingAnalysis(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, performedBy_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("ControlCouplingAnalysis"))
-    objStr = "<ControlCouplingAnalysis>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("performedBy_identifier", performedBy_identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</ControlCouplingAnalysis>"
-    addEvidenceObject(etree.fromstring(objStr))
-
 def DATA_DICTIONARY_TERM(consumedBy_identifier=None, createdBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, providedBy_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
     trace()
     log("Adding Evidence:",str_good("DATA_DICTIONARY_TERM"))
@@ -606,161 +520,6 @@ def DOC_STATUS(dataInsertedBy_identifier=None, definedIn_identifier=None, descri
     objStr += "</DOC_STATUS>"
     addEvidenceObject(etree.fromstring(objStr))
 
-def DataAndControlCouple(consumedBy_identifier=None, createdBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, providedBy_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("DataAndControlCouple"))
-    objStr = "<DataAndControlCouple>"
-    objStr += objectDataString("consumedBy_identifier", consumedBy_identifier)
-    objStr += objectDataString("createdBy_identifier", createdBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("providedBy_identifier", providedBy_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</DataAndControlCouple>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def DataCoupleCoverageReport(analyzes_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, metric=None, producedBy_identifier=None, result_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("DataCoupleCoverageReport"))
-    objStr = "<DataCoupleCoverageReport>"
-    objStr += objectDataString("analyzes_identifier", analyzes_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("metric", metric)
-    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
-    objStr += objectDataString("result_identifier", result_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</DataCoupleCoverageReport>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def DataCouplingAnalysis(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, performedBy_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("DataCouplingAnalysis"))
-    objStr = "<DataCouplingAnalysis>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("performedBy_identifier", performedBy_identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</DataCouplingAnalysis>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def DataDictionary(consumedBy_identifier=None, createdBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, providedBy_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("DataDictionary"))
-    objStr = "<DataDictionary>"
-    objStr += objectDataString("consumedBy_identifier", consumedBy_identifier)
-    objStr += objectDataString("createdBy_identifier", createdBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("providedBy_identifier", providedBy_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</DataDictionary>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def DefineSystemInterfaces(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("DefineSystemInterfaces"))
-    objStr = "<DefineSystemInterfaces>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</DefineSystemInterfaces>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def DevelopComponentTests(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, developedBy_identifier=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("DevelopComponentTests"))
-    objStr = "<DevelopComponentTests>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("developedBy_identifier", developedBy_identifier)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</DevelopComponentTests>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def DevelopSystemArchitecture(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("DevelopSystemArchitecture"))
-    objStr = "<DevelopSystemArchitecture>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</DevelopSystemArchitecture>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def DevelopUnitTests(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, developedBy_identifier=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("DevelopUnitTests"))
-    objStr = "<DevelopUnitTests>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("developedBy_identifier", developedBy_identifier)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</DevelopUnitTests>"
-    addEvidenceObject(etree.fromstring(objStr))
-
 def ENTITY(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
     trace()
     log("Adding Evidence:",str_good("ENTITY"))
@@ -778,45 +537,6 @@ def ENTITY(dataInsertedBy_identifier=None, definedIn_identifier=None, descriptio
     objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
     objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
     objStr += "</ENTITY>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def Engineer(actedOnBehalfOf_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, emailAddress=None, employedBy_identifier=None, identifier=None, title=None):
-    trace()
-    log("Adding Evidence:",str_good("Engineer"))
-    objStr = "<Engineer>"
-    objStr += objectDataString("actedOnBehalfOf_identifier", actedOnBehalfOf_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("emailAddress", emailAddress)
-    objStr += objectDataString("employedBy_identifier", employedBy_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("title", title)
-    objStr += "</Engineer>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def ExecutableObject(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, fileFormat_identifier=None, fileHash_identifier=None, filename=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("ExecutableObject"))
-    objStr = "<ExecutableObject>"
-    objStr += objectDataString("createBy_identifier", createBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("fileFormat_identifier", fileFormat_identifier)
-    objStr += objectDataString("fileHash_identifier", fileHash_identifier)
-    objStr += objectDataString("filename", filename)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</ExecutableObject>"
     addEvidenceObject(etree.fromstring(objStr))
 
 def FILE(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, fileFormat_identifier=None, fileHash_identifier=None, filename=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
@@ -906,23 +626,6 @@ def FUNCTION(dataInsertedBy_identifier=None, definedIn_identifier=None, descript
     objStr += "</FUNCTION>"
     addEvidenceObject(etree.fromstring(objStr))
 
-def GenerateSoftwareReleaseDocumentation(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("GenerateSoftwareReleaseDocumentation"))
-    objStr = "<GenerateSoftwareReleaseDocumentation>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</GenerateSoftwareReleaseDocumentation>"
-    addEvidenceObject(etree.fromstring(objStr))
-
 def HASH_TYPE(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, identifier=None, title=None):
     trace()
     log("Adding Evidence:",str_good("HASH_TYPE"))
@@ -978,29 +681,6 @@ def HAZARD_IDENTIFICATION(author_identifier=None, dataInsertedBy_identifier=None
     objStr += "</HAZARD_IDENTIFICATION>"
     addEvidenceObject(etree.fromstring(objStr))
 
-def HighLevelRequirement(createdBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, governs_identifier=None, identifier=None, invalidatedAtTime=None, mitigates_identifier=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("HighLevelRequirement"))
-    objStr = "<HighLevelRequirement>"
-    objStr += objectDataString("createdBy_identifier", createdBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("governs_identifier", governs_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("mitigates_identifier", mitigates_identifier)
-    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</HighLevelRequirement>"
-    addEvidenceObject(etree.fromstring(objStr))
-
 def INTERFACE(commodity=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, destination_identifier=None, generatedAtTime=None, identifiedBy_identifier=None, identifier=None, invalidatedAtTime=None, source_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
     trace()
     log("Adding Evidence:",str_good("INTERFACE"))
@@ -1022,29 +702,6 @@ def INTERFACE(commodity=None, dataInsertedBy_identifier=None, definedIn_identifi
     objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
     objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
     objStr += "</INTERFACE>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def LowLevelRequirement(createdBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, governs_identifier=None, identifier=None, invalidatedAtTime=None, mitigates_identifier=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("LowLevelRequirement"))
-    objStr = "<LowLevelRequirement>"
-    objStr += objectDataString("createdBy_identifier", createdBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("governs_identifier", governs_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("mitigates_identifier", mitigates_identifier)
-    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</LowLevelRequirement>"
     addEvidenceObject(etree.fromstring(objStr))
 
 def MODEL(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, models_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
@@ -1139,30 +796,6 @@ def ORGANIZATION(actedOnBehalfOf_identifier=None, dataInsertedBy_identifier=None
     objStr += "</ORGANIZATION>"
     addEvidenceObject(etree.fromstring(objStr))
 
-def ObjectFile(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, fileFormat_identifier=None, fileHash_identifier=None, filename=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("ObjectFile"))
-    objStr = "<ObjectFile>"
-    objStr += objectDataString("createBy_identifier", createBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("fileFormat_identifier", fileFormat_identifier)
-    objStr += objectDataString("fileHash_identifier", fileHash_identifier)
-    objStr += objectDataString("filename", filename)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</ObjectFile>"
-    addEvidenceObject(etree.fromstring(objStr))
-
 def PACKAGE(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, packageInput_identifier=None, packagedBy_identifier=None, performedBy_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
     trace()
     log("Adding Evidence:",str_good("PACKAGE"))
@@ -1248,49 +881,6 @@ def PROCEDURE(approvalAuthority_identifier=None, content_identifier=None, dataIn
     objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
     objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
     objStr += "</PROCEDURE>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def ProblemReport(approvalAuthority_identifier=None, content_identifier=None, dataInsertedBy_identifier=None, dateOfIssue=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, issuingOrganization_identifier=None, references_identifier=None, status_identifier=None, title=None, versionNumber=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("ProblemReport"))
-    objStr = "<ProblemReport>"
-    objStr += objectDataString("approvalAuthority_identifier", approvalAuthority_identifier)
-    objStr += objectDataString("content_identifier", content_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("dateOfIssue", dateOfIssue)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("issuingOrganization_identifier", issuingOrganization_identifier)
-    objStr += objectDataString("references_identifier", references_identifier)
-    objStr += objectDataString("status_identifier", status_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("versionNumber", versionNumber)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</ProblemReport>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def Problem_Reporting(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("Problem_Reporting"))
-    objStr = "<Problem_Reporting>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</Problem_Reporting>"
     addEvidenceObject(etree.fromstring(objStr))
 
 def REPORT(approvalAuthority_identifier=None, content_identifier=None, dataInsertedBy_identifier=None, dateOfIssue=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, issuingOrganization_identifier=None, references_identifier=None, status_identifier=None, title=None, versionNumber=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
@@ -1443,64 +1033,6 @@ def REVIEW_STATE(dataInsertedBy_identifier=None, definedIn_identifier=None, desc
     objStr += "</REVIEW_STATE>"
     addEvidenceObject(etree.fromstring(objStr))
 
-def RequirementConfigurationManagement(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("RequirementConfigurationManagement"))
-    objStr = "<RequirementConfigurationManagement>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</RequirementConfigurationManagement>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def ReviewConfigurationManagement(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("ReviewConfigurationManagement"))
-    objStr = "<ReviewConfigurationManagement>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</ReviewConfigurationManagement>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def RpmFile(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, fileFormat_identifier=None, fileHash_identifier=None, filename=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("RpmFile"))
-    objStr = "<RpmFile>"
-    objStr += objectDataString("createBy_identifier", createBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("fileFormat_identifier", fileFormat_identifier)
-    objStr += objectDataString("fileHash_identifier", fileHash_identifier)
-    objStr += objectDataString("filename", filename)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</RpmFile>"
-    addEvidenceObject(etree.fromstring(objStr))
-
 def SECTION(content_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
     trace()
     log("Adding Evidence:",str_good("SECTION"))
@@ -1613,592 +1145,7 @@ def SYSTEM_DEVELOPMENT(dataInsertedBy_identifier=None, definedIn_identifier=None
     objStr += "</SYSTEM_DEVELOPMENT>"
     addEvidenceObject(etree.fromstring(objStr))
 
-def SoftwareAccomplishmentSummary(approvalAuthority_identifier=None, content_identifier=None, dataInsertedBy_identifier=None, dateOfIssue=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, issuingOrganization_identifier=None, references_identifier=None, status_identifier=None, title=None, versionNumber=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareAccomplishmentSummary"))
-    objStr = "<SoftwareAccomplishmentSummary>"
-    objStr += objectDataString("approvalAuthority_identifier", approvalAuthority_identifier)
-    objStr += objectDataString("content_identifier", content_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("dateOfIssue", dateOfIssue)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("issuingOrganization_identifier", issuingOrganization_identifier)
-    objStr += objectDataString("references_identifier", references_identifier)
-    objStr += objectDataString("status_identifier", status_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("versionNumber", versionNumber)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SoftwareAccomplishmentSummary>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareCodeReview(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, reviewed_identifier=None, reviewer_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareCodeReview"))
-    objStr = "<SoftwareCodeReview>"
-    objStr += objectDataString("author_identifier", author_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("reviewed_identifier", reviewed_identifier)
-    objStr += objectDataString("reviewer_identifier", reviewer_identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</SoftwareCodeReview>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareCodeReviewArtifacts(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, reviewResult_identifier=None, reviews_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareCodeReviewArtifacts"))
-    objStr = "<SoftwareCodeReviewArtifacts>"
-    objStr += objectDataString("createBy_identifier", createBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("reviewResult_identifier", reviewResult_identifier)
-    objStr += objectDataString("reviews_identifier", reviews_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SoftwareCodeReviewArtifacts>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareCoding(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, referenced_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareCoding"))
-    objStr = "<SoftwareCoding>"
-    objStr += objectDataString("author_identifier", author_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("referenced_identifier", referenced_identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</SoftwareCoding>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareComponentTest(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, producedBy_identifier=None, title=None, verifies_identifier=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareComponentTest"))
-    objStr = "<SoftwareComponentTest>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("verifies_identifier", verifies_identifier)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SoftwareComponentTest>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareComponentTestExecution(cpuTime=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, executedOn_identifier=None, identifier=None, memory=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareComponentTestExecution"))
-    objStr = "<SoftwareComponentTestExecution>"
-    objStr += objectDataString("cpuTime", cpuTime)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("executedOn_identifier", executedOn_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("memory", memory)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</SoftwareComponentTestExecution>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareComponentTestResult(confirms_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, executedBy_identifier=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, result_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareComponentTestResult"))
-    objStr = "<SoftwareComponentTestResult>"
-    objStr += objectDataString("confirms_identifier", confirms_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("executedBy_identifier", executedBy_identifier)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("result_identifier", result_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SoftwareComponentTestResult>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareDesign(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, referenced_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareDesign"))
-    objStr = "<SoftwareDesign>"
-    objStr += objectDataString("author_identifier", author_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("referenced_identifier", referenced_identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</SoftwareDesign>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareDesignReview(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, reviewed_identifier=None, reviewer_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareDesignReview"))
-    objStr = "<SoftwareDesignReview>"
-    objStr += objectDataString("author_identifier", author_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("reviewed_identifier", reviewed_identifier)
-    objStr += objectDataString("reviewer_identifier", reviewer_identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</SoftwareDesignReview>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareDesignReviewArtifacts(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, reviewResult_identifier=None, reviews_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareDesignReviewArtifacts"))
-    objStr = "<SoftwareDesignReviewArtifacts>"
-    objStr += objectDataString("createBy_identifier", createBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("reviewResult_identifier", reviewResult_identifier)
-    objStr += objectDataString("reviews_identifier", reviews_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SoftwareDesignReviewArtifacts>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareIntegration(compileInput_identifier=None, compileWithOptimizations=None, compiledBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, linkerPath=None, performedBy_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareIntegration"))
-    objStr = "<SoftwareIntegration>"
-    objStr += objectDataString("compileInput_identifier", compileInput_identifier)
-    objStr += objectDataString("compileWithOptimizations", compileWithOptimizations)
-    objStr += objectDataString("compiledBy_identifier", compiledBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("linkerPath", linkerPath)
-    objStr += objectDataString("performedBy_identifier", performedBy_identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</SoftwareIntegration>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareModule(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, function_identifier=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, partOf_identifier=None, producedBy_identifier=None, provides_identifier=None, requires_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareModule"))
-    objStr = "<SoftwareModule>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("function_identifier", function_identifier)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("partOf_identifier", partOf_identifier)
-    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
-    objStr += objectDataString("provides_identifier", provides_identifier)
-    objStr += objectDataString("requires_identifier", requires_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SoftwareModule>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareRequirementReviewArtifacts(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, reviewResult_identifier=None, reviews_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareRequirementReviewArtifacts"))
-    objStr = "<SoftwareRequirementReviewArtifacts>"
-    objStr += objectDataString("createBy_identifier", createBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("reviewResult_identifier", reviewResult_identifier)
-    objStr += objectDataString("reviews_identifier", reviews_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SoftwareRequirementReviewArtifacts>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareRequirementsDefinition(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, referenced_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareRequirementsDefinition"))
-    objStr = "<SoftwareRequirementsDefinition>"
-    objStr += objectDataString("author_identifier", author_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("referenced_identifier", referenced_identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</SoftwareRequirementsDefinition>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareRequirementsReview(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, reviewed_identifier=None, reviewer_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareRequirementsReview"))
-    objStr = "<SoftwareRequirementsReview>"
-    objStr += objectDataString("author_identifier", author_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("reviewed_identifier", reviewed_identifier)
-    objStr += objectDataString("reviewer_identifier", reviewer_identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</SoftwareRequirementsReview>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareThread(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, function_identifier=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, partOf_identifier=None, producedBy_identifier=None, provides_identifier=None, requires_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareThread"))
-    objStr = "<SoftwareThread>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("function_identifier", function_identifier)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("partOf_identifier", partOf_identifier)
-    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
-    objStr += objectDataString("provides_identifier", provides_identifier)
-    objStr += objectDataString("requires_identifier", requires_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SoftwareThread>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareUnitTest(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, producedBy_identifier=None, title=None, verifies_identifier=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareUnitTest"))
-    objStr = "<SoftwareUnitTest>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("verifies_identifier", verifies_identifier)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SoftwareUnitTest>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareUnitTestExecution(cpuTime=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, executedOn_identifier=None, identifier=None, memory=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareUnitTestExecution"))
-    objStr = "<SoftwareUnitTestExecution>"
-    objStr += objectDataString("cpuTime", cpuTime)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("executedOn_identifier", executedOn_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("memory", memory)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</SoftwareUnitTestExecution>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SoftwareUnitTestResult(confirms_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, executedBy_identifier=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, result_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SoftwareUnitTestResult"))
-    objStr = "<SoftwareUnitTestResult>"
-    objStr += objectDataString("confirms_identifier", confirms_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("executedBy_identifier", executedBy_identifier)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("result_identifier", result_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SoftwareUnitTestResult>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SourceCode(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, fileFormat_identifier=None, fileHash_identifier=None, filename=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SourceCode"))
-    objStr = "<SourceCode>"
-    objStr += objectDataString("createBy_identifier", createBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("fileFormat_identifier", fileFormat_identifier)
-    objStr += objectDataString("fileHash_identifier", fileHash_identifier)
-    objStr += objectDataString("filename", filename)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SourceCode>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SourceConfigurationManagement(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SourceConfigurationManagement"))
-    objStr = "<SourceConfigurationManagement>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</SourceConfigurationManagement>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def StructualCoverageAnalysis(CoveredNodes=None, UncoveredNodes=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, performedBy_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("StructualCoverageAnalysis"))
-    objStr = "<StructualCoverageAnalysis>"
-    objStr += objectDataString("CoveredNodes", CoveredNodes)
-    objStr += objectDataString("UncoveredNodes", UncoveredNodes)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("performedBy_identifier", performedBy_identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</StructualCoverageAnalysis>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def StructuralCoverageReport(analyzes_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, metric=None, producedBy_identifier=None, result_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("StructuralCoverageReport"))
-    objStr = "<StructuralCoverageReport>"
-    objStr += objectDataString("analyzes_identifier", analyzes_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("metric", metric)
-    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
-    objStr += objectDataString("result_identifier", result_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</StructuralCoverageReport>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SystemComponent(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, function_identifier=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, partOf_identifier=None, producedBy_identifier=None, provides_identifier=None, requires_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SystemComponent"))
-    objStr = "<SystemComponent>"
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("function_identifier", function_identifier)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("partOf_identifier", partOf_identifier)
-    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
-    objStr += objectDataString("provides_identifier", provides_identifier)
-    objStr += objectDataString("requires_identifier", requires_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SystemComponent>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SystemInterfaceDefinition(commodity=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, destination_identifier=None, generatedAtTime=None, identifiedBy_identifier=None, identifier=None, invalidatedAtTime=None, source_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SystemInterfaceDefinition"))
-    objStr = "<SystemInterfaceDefinition>"
-    objStr += objectDataString("commodity", commodity)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("destination_identifier", destination_identifier)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("identifiedBy_identifier", identifiedBy_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("source_identifier", source_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SystemInterfaceDefinition>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SystemRequirement(createdBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, governs_identifier=None, identifier=None, invalidatedAtTime=None, mitigates_identifier=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SystemRequirement"))
-    objStr = "<SystemRequirement>"
-    objStr += objectDataString("createdBy_identifier", createdBy_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("generatedAtTime", generatedAtTime)
-    objStr += objectDataString("governs_identifier", governs_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
-    objStr += objectDataString("mitigates_identifier", mitigates_identifier)
-    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
-    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
-    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
-    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
-    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
-    objStr += "</SystemRequirement>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def SystemRequirementsDefinition(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, referenced_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
-    trace()
-    log("Adding Evidence:",str_good("SystemRequirementsDefinition"))
-    objStr = "<SystemRequirementsDefinition>"
-    objStr += objectDataString("author_identifier", author_identifier)
-    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
-    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
-    objStr += objectDataString("description", description)
-    objStr += objectDataString("endedAtTime", endedAtTime)
-    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
-    objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("referenced_identifier", referenced_identifier)
-    objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("title", title)
-    objStr += objectDataString("used_identifier", used_identifier)
-    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
-    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
-    objStr += "</SystemRequirementsDefinition>"
-    addEvidenceObject(etree.fromstring(objStr))
-
-def TEST(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, producedBy_identifier=None, testVectorFile_identifier=None, title=None, verifies_identifier=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+def TEST(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, producedBy_identifier=None, title=None, verifies_identifier=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
     trace()
     log("Adding Evidence:",str_good("TEST"))
     objStr = "<TEST>"
@@ -2209,7 +1156,6 @@ def TEST(dataInsertedBy_identifier=None, definedIn_identifier=None, description=
     objStr += objectDataString("identifier", identifier)
     objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
     objStr += objectDataString("producedBy_identifier", producedBy_identifier)
-    objStr += objectDataString("testVectorFile_identifier", testVectorFile_identifier)
     objStr += objectDataString("title", title)
     objStr += objectDataString("verifies_identifier", verifies_identifier)
     objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
@@ -2238,20 +1184,17 @@ def TEST_DEVELOPMENT(dataInsertedBy_identifier=None, definedIn_identifier=None, 
     objStr += "</TEST_DEVELOPMENT>"
     addEvidenceObject(etree.fromstring(objStr))
 
-def TEST_EXECUTION(cpuTime=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, executedOn_identifier=None, identifier=None, memory=None, startedAtTime=None, testEnvironment=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
+def TEST_EXECUTION(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, executedOn_identifier=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
     trace()
     log("Adding Evidence:",str_good("TEST_EXECUTION"))
     objStr = "<TEST_EXECUTION>"
-    objStr += objectDataString("cpuTime", cpuTime)
     objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
     objStr += objectDataString("definedIn_identifier", definedIn_identifier)
     objStr += objectDataString("description", description)
     objStr += objectDataString("endedAtTime", endedAtTime)
     objStr += objectDataString("executedOn_identifier", executedOn_identifier)
     objStr += objectDataString("identifier", identifier)
-    objStr += objectDataString("memory", memory)
     objStr += objectDataString("startedAtTime", startedAtTime)
-    objStr += objectDataString("testEnvironment", testEnvironment)
     objStr += objectDataString("title", title)
     objStr += objectDataString("used_identifier", used_identifier)
     objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
@@ -2305,7 +1248,7 @@ def THING(dataInsertedBy_identifier=None, definedIn_identifier=None, description
     objStr += "</THING>"
     addEvidenceObject(etree.fromstring(objStr))
 
-def TOOL(actedOnBehalfOf_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, identifier=None, title=None, toolInstallationConfiguration=None, toolQualificationData_identifier=None, toolSummaryDescription=None, toolVersion=None, userGuide_identifier=None):
+def TOOL(actedOnBehalfOf_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, identifier=None, title=None, toolVersion=None):
     trace()
     log("Adding Evidence:",str_good("TOOL"))
     objStr = "<TOOL>"
@@ -2315,11 +1258,7 @@ def TOOL(actedOnBehalfOf_identifier=None, dataInsertedBy_identifier=None, define
     objStr += objectDataString("description", description)
     objStr += objectDataString("identifier", identifier)
     objStr += objectDataString("title", title)
-    objStr += objectDataString("toolInstallationConfiguration", toolInstallationConfiguration)
-    objStr += objectDataString("toolQualificationData_identifier", toolQualificationData_identifier)
-    objStr += objectDataString("toolSummaryDescription", toolSummaryDescription)
     objStr += objectDataString("toolVersion", toolVersion)
-    objStr += objectDataString("userGuide_identifier", userGuide_identifier)
     objStr += "</TOOL>"
     addEvidenceObject(etree.fromstring(objStr))
 
@@ -4702,5 +3641,1074 @@ def descert_ToolQualificationData(dataInsertedBy_identifier=None, definedIn_iden
     objStr += objectDataString("wasQualifiedBy_identifier", wasQualifiedBy_identifier)
     objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
     objStr += "</descert_ToolQualificationData>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_ChangeRequest(approvalAuthority_identifier=None, content_identifier=None, dataInsertedBy_identifier=None, dateOfIssue=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, issuingOrganization_identifier=None, references_identifier=None, status_identifier=None, title=None, versionNumber=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_ChangeRequest"))
+    objStr = "<turnstile_ChangeRequest>"
+    objStr += objectDataString("approvalAuthority_identifier", approvalAuthority_identifier)
+    objStr += objectDataString("content_identifier", content_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("dateOfIssue", dateOfIssue)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("issuingOrganization_identifier", issuingOrganization_identifier)
+    objStr += objectDataString("references_identifier", references_identifier)
+    objStr += objectDataString("status_identifier", status_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("versionNumber", versionNumber)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_ChangeRequest>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_Change_Authorization(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_Change_Authorization"))
+    objStr = "<turnstile_Change_Authorization>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_Change_Authorization>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_ControlCoupleCoverageReport(analyzes_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, metric=None, producedBy_identifier=None, result_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_ControlCoupleCoverageReport"))
+    objStr = "<turnstile_ControlCoupleCoverageReport>"
+    objStr += objectDataString("analyzes_identifier", analyzes_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("metric", metric)
+    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
+    objStr += objectDataString("result_identifier", result_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_ControlCoupleCoverageReport>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_ControlCouplingAnalysis(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, performedBy_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_ControlCouplingAnalysis"))
+    objStr = "<turnstile_ControlCouplingAnalysis>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("performedBy_identifier", performedBy_identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_ControlCouplingAnalysis>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_DataAndControlCouple(consumedBy_identifier=None, createdBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, providedBy_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_DataAndControlCouple"))
+    objStr = "<turnstile_DataAndControlCouple>"
+    objStr += objectDataString("consumedBy_identifier", consumedBy_identifier)
+    objStr += objectDataString("createdBy_identifier", createdBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("providedBy_identifier", providedBy_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_DataAndControlCouple>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_DataCoupleCoverageReport(analyzes_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, metric=None, producedBy_identifier=None, result_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_DataCoupleCoverageReport"))
+    objStr = "<turnstile_DataCoupleCoverageReport>"
+    objStr += objectDataString("analyzes_identifier", analyzes_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("metric", metric)
+    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
+    objStr += objectDataString("result_identifier", result_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_DataCoupleCoverageReport>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_DataCouplingAnalysis(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, performedBy_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_DataCouplingAnalysis"))
+    objStr = "<turnstile_DataCouplingAnalysis>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("performedBy_identifier", performedBy_identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_DataCouplingAnalysis>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_DataDictionary(consumedBy_identifier=None, createdBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, providedBy_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_DataDictionary"))
+    objStr = "<turnstile_DataDictionary>"
+    objStr += objectDataString("consumedBy_identifier", consumedBy_identifier)
+    objStr += objectDataString("createdBy_identifier", createdBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("providedBy_identifier", providedBy_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_DataDictionary>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_DefineSystemInterfaces(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_DefineSystemInterfaces"))
+    objStr = "<turnstile_DefineSystemInterfaces>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_DefineSystemInterfaces>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_DevelopComponentTests(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, developedBy_identifier=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_DevelopComponentTests"))
+    objStr = "<turnstile_DevelopComponentTests>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("developedBy_identifier", developedBy_identifier)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_DevelopComponentTests>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_DevelopSystemArchitecture(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_DevelopSystemArchitecture"))
+    objStr = "<turnstile_DevelopSystemArchitecture>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += "</turnstile_DevelopSystemArchitecture>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_DevelopUnitTests(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, developedBy_identifier=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_DevelopUnitTests"))
+    objStr = "<turnstile_DevelopUnitTests>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("developedBy_identifier", developedBy_identifier)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_DevelopUnitTests>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_Engineer(actedOnBehalfOf_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, emailAddress=None, employedBy_identifier=None, identifier=None, title=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_Engineer"))
+    objStr = "<turnstile_Engineer>"
+    objStr += objectDataString("actedOnBehalfOf_identifier", actedOnBehalfOf_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("emailAddress", emailAddress)
+    objStr += objectDataString("employedBy_identifier", employedBy_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("title", title)
+    objStr += "</turnstile_Engineer>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_ExecutableObject(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, fileFormat_identifier=None, fileHash_identifier=None, filename=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_ExecutableObject"))
+    objStr = "<turnstile_ExecutableObject>"
+    objStr += objectDataString("createBy_identifier", createBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("fileFormat_identifier", fileFormat_identifier)
+    objStr += objectDataString("fileHash_identifier", fileHash_identifier)
+    objStr += objectDataString("filename", filename)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_ExecutableObject>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_GenerateSoftwareReleaseDocumentation(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_GenerateSoftwareReleaseDocumentation"))
+    objStr = "<turnstile_GenerateSoftwareReleaseDocumentation>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_GenerateSoftwareReleaseDocumentation>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_HighLevelRequirement(createdBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, governs_identifier=None, identifier=None, invalidatedAtTime=None, mitigates_identifier=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_HighLevelRequirement"))
+    objStr = "<turnstile_HighLevelRequirement>"
+    objStr += objectDataString("createdBy_identifier", createdBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("governs_identifier", governs_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("mitigates_identifier", mitigates_identifier)
+    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_HighLevelRequirement>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_LowLevelRequirement(createdBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, governs_identifier=None, identifier=None, invalidatedAtTime=None, mitigates_identifier=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_LowLevelRequirement"))
+    objStr = "<turnstile_LowLevelRequirement>"
+    objStr += objectDataString("createdBy_identifier", createdBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("governs_identifier", governs_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("mitigates_identifier", mitigates_identifier)
+    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_LowLevelRequirement>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_ObjectFile(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, fileFormat_identifier=None, fileHash_identifier=None, filename=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_ObjectFile"))
+    objStr = "<turnstile_ObjectFile>"
+    objStr += objectDataString("createBy_identifier", createBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("fileFormat_identifier", fileFormat_identifier)
+    objStr += objectDataString("fileHash_identifier", fileHash_identifier)
+    objStr += objectDataString("filename", filename)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_ObjectFile>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_ProblemReport(approvalAuthority_identifier=None, content_identifier=None, dataInsertedBy_identifier=None, dateOfIssue=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, issuingOrganization_identifier=None, references_identifier=None, status_identifier=None, title=None, versionNumber=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_ProblemReport"))
+    objStr = "<turnstile_ProblemReport>"
+    objStr += objectDataString("approvalAuthority_identifier", approvalAuthority_identifier)
+    objStr += objectDataString("content_identifier", content_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("dateOfIssue", dateOfIssue)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("issuingOrganization_identifier", issuingOrganization_identifier)
+    objStr += objectDataString("references_identifier", references_identifier)
+    objStr += objectDataString("status_identifier", status_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("versionNumber", versionNumber)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_ProblemReport>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_Problem_Reporting(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_Problem_Reporting"))
+    objStr = "<turnstile_Problem_Reporting>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_Problem_Reporting>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_RequirementConfigurationManagement(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_RequirementConfigurationManagement"))
+    objStr = "<turnstile_RequirementConfigurationManagement>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_RequirementConfigurationManagement>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_ReviewConfigurationManagement(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_ReviewConfigurationManagement"))
+    objStr = "<turnstile_ReviewConfigurationManagement>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_ReviewConfigurationManagement>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_RpmFile(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, fileFormat_identifier=None, fileHash_identifier=None, filename=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_RpmFile"))
+    objStr = "<turnstile_RpmFile>"
+    objStr += objectDataString("createBy_identifier", createBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("fileFormat_identifier", fileFormat_identifier)
+    objStr += objectDataString("fileHash_identifier", fileHash_identifier)
+    objStr += objectDataString("filename", filename)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_RpmFile>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareAccomplishmentSummary(approvalAuthority_identifier=None, content_identifier=None, dataInsertedBy_identifier=None, dateOfIssue=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, issuingOrganization_identifier=None, references_identifier=None, status_identifier=None, title=None, versionNumber=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareAccomplishmentSummary"))
+    objStr = "<turnstile_SoftwareAccomplishmentSummary>"
+    objStr += objectDataString("approvalAuthority_identifier", approvalAuthority_identifier)
+    objStr += objectDataString("content_identifier", content_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("dateOfIssue", dateOfIssue)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("issuingOrganization_identifier", issuingOrganization_identifier)
+    objStr += objectDataString("references_identifier", references_identifier)
+    objStr += objectDataString("status_identifier", status_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("versionNumber", versionNumber)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SoftwareAccomplishmentSummary>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareCodeReview(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, reviewed_identifier=None, reviewer_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareCodeReview"))
+    objStr = "<turnstile_SoftwareCodeReview>"
+    objStr += objectDataString("author_identifier", author_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("reviewed_identifier", reviewed_identifier)
+    objStr += objectDataString("reviewer_identifier", reviewer_identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_SoftwareCodeReview>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareCodeReviewArtifacts(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, reviewResult_identifier=None, reviews_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareCodeReviewArtifacts"))
+    objStr = "<turnstile_SoftwareCodeReviewArtifacts>"
+    objStr += objectDataString("createBy_identifier", createBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("reviewResult_identifier", reviewResult_identifier)
+    objStr += objectDataString("reviews_identifier", reviews_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SoftwareCodeReviewArtifacts>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareCoding(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, referenced_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareCoding"))
+    objStr = "<turnstile_SoftwareCoding>"
+    objStr += objectDataString("author_identifier", author_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("referenced_identifier", referenced_identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_SoftwareCoding>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareComponentTest(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, producedBy_identifier=None, title=None, verifies_identifier=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareComponentTest"))
+    objStr = "<turnstile_SoftwareComponentTest>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("verifies_identifier", verifies_identifier)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SoftwareComponentTest>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareComponentTestExecution(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, executedOn_identifier=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareComponentTestExecution"))
+    objStr = "<turnstile_SoftwareComponentTestExecution>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("executedOn_identifier", executedOn_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_SoftwareComponentTestExecution>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareComponentTestResult(confirms_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, executedBy_identifier=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, result_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareComponentTestResult"))
+    objStr = "<turnstile_SoftwareComponentTestResult>"
+    objStr += objectDataString("confirms_identifier", confirms_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("executedBy_identifier", executedBy_identifier)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("result_identifier", result_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SoftwareComponentTestResult>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareDesign(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, referenced_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareDesign"))
+    objStr = "<turnstile_SoftwareDesign>"
+    objStr += objectDataString("author_identifier", author_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("referenced_identifier", referenced_identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_SoftwareDesign>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareDesignReview(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, reviewed_identifier=None, reviewer_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareDesignReview"))
+    objStr = "<turnstile_SoftwareDesignReview>"
+    objStr += objectDataString("author_identifier", author_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("reviewed_identifier", reviewed_identifier)
+    objStr += objectDataString("reviewer_identifier", reviewer_identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_SoftwareDesignReview>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareDesignReviewArtifacts(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, reviewResult_identifier=None, reviews_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareDesignReviewArtifacts"))
+    objStr = "<turnstile_SoftwareDesignReviewArtifacts>"
+    objStr += objectDataString("createBy_identifier", createBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("reviewResult_identifier", reviewResult_identifier)
+    objStr += objectDataString("reviews_identifier", reviews_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SoftwareDesignReviewArtifacts>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareIntegration(compileInput_identifier=None, compileWithOptimizations=None, compiledBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, linkerPath=None, performedBy_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareIntegration"))
+    objStr = "<turnstile_SoftwareIntegration>"
+    objStr += objectDataString("compileInput_identifier", compileInput_identifier)
+    objStr += objectDataString("compileWithOptimizations", compileWithOptimizations)
+    objStr += objectDataString("compiledBy_identifier", compiledBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("linkerPath", linkerPath)
+    objStr += objectDataString("performedBy_identifier", performedBy_identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_SoftwareIntegration>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareModule(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, function_identifier=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, partOf_identifier=None, producedBy_identifier=None, provides_identifier=None, requires_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareModule"))
+    objStr = "<turnstile_SoftwareModule>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("function_identifier", function_identifier)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("partOf_identifier", partOf_identifier)
+    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
+    objStr += objectDataString("provides_identifier", provides_identifier)
+    objStr += objectDataString("requires_identifier", requires_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SoftwareModule>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareRequirementReviewArtifacts(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, reviewResult_identifier=None, reviews_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareRequirementReviewArtifacts"))
+    objStr = "<turnstile_SoftwareRequirementReviewArtifacts>"
+    objStr += objectDataString("createBy_identifier", createBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("reviewResult_identifier", reviewResult_identifier)
+    objStr += objectDataString("reviews_identifier", reviews_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SoftwareRequirementReviewArtifacts>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareRequirementsDefinition(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, referenced_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareRequirementsDefinition"))
+    objStr = "<turnstile_SoftwareRequirementsDefinition>"
+    objStr += objectDataString("author_identifier", author_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("referenced_identifier", referenced_identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_SoftwareRequirementsDefinition>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareRequirementsReview(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, reviewed_identifier=None, reviewer_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareRequirementsReview"))
+    objStr = "<turnstile_SoftwareRequirementsReview>"
+    objStr += objectDataString("author_identifier", author_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("reviewed_identifier", reviewed_identifier)
+    objStr += objectDataString("reviewer_identifier", reviewer_identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_SoftwareRequirementsReview>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareThread(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, function_identifier=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, partOf_identifier=None, producedBy_identifier=None, provides_identifier=None, requires_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareThread"))
+    objStr = "<turnstile_SoftwareThread>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("function_identifier", function_identifier)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("partOf_identifier", partOf_identifier)
+    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
+    objStr += objectDataString("provides_identifier", provides_identifier)
+    objStr += objectDataString("requires_identifier", requires_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SoftwareThread>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareUnitTest(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, producedBy_identifier=None, title=None, verifies_identifier=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareUnitTest"))
+    objStr = "<turnstile_SoftwareUnitTest>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("verifies_identifier", verifies_identifier)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SoftwareUnitTest>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareUnitTestExecution(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, executedOn_identifier=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareUnitTestExecution"))
+    objStr = "<turnstile_SoftwareUnitTestExecution>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("executedOn_identifier", executedOn_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_SoftwareUnitTestExecution>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SoftwareUnitTestResult(confirms_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, executedBy_identifier=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, result_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SoftwareUnitTestResult"))
+    objStr = "<turnstile_SoftwareUnitTestResult>"
+    objStr += objectDataString("confirms_identifier", confirms_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("executedBy_identifier", executedBy_identifier)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("result_identifier", result_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SoftwareUnitTestResult>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SourceCode(createBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, fileFormat_identifier=None, fileHash_identifier=None, filename=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SourceCode"))
+    objStr = "<turnstile_SourceCode>"
+    objStr += objectDataString("createBy_identifier", createBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("fileFormat_identifier", fileFormat_identifier)
+    objStr += objectDataString("fileHash_identifier", fileHash_identifier)
+    objStr += objectDataString("filename", filename)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SourceCode>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SourceConfigurationManagement(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SourceConfigurationManagement"))
+    objStr = "<turnstile_SourceConfigurationManagement>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_SourceConfigurationManagement>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_StructualCoverageAnalysis(CoveredNodes=None, UncoveredNodes=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, identifier=None, performedBy_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_StructualCoverageAnalysis"))
+    objStr = "<turnstile_StructualCoverageAnalysis>"
+    objStr += objectDataString("CoveredNodes", CoveredNodes)
+    objStr += objectDataString("UncoveredNodes", UncoveredNodes)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("performedBy_identifier", performedBy_identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_StructualCoverageAnalysis>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_StructuralCoverageReport(analyzes_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, metric=None, producedBy_identifier=None, result_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_StructuralCoverageReport"))
+    objStr = "<turnstile_StructuralCoverageReport>"
+    objStr += objectDataString("analyzes_identifier", analyzes_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("metric", metric)
+    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
+    objStr += objectDataString("result_identifier", result_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_StructuralCoverageReport>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SystemComponent(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, function_identifier=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, partOf_identifier=None, producedBy_identifier=None, provides_identifier=None, requires_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SystemComponent"))
+    objStr = "<turnstile_SystemComponent>"
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("function_identifier", function_identifier)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("partOf_identifier", partOf_identifier)
+    objStr += objectDataString("producedBy_identifier", producedBy_identifier)
+    objStr += objectDataString("provides_identifier", provides_identifier)
+    objStr += objectDataString("requires_identifier", requires_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SystemComponent>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SystemInterfaceDefinition(commodity=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, destination_identifier=None, generatedAtTime=None, identifiedBy_identifier=None, identifier=None, invalidatedAtTime=None, source_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SystemInterfaceDefinition"))
+    objStr = "<turnstile_SystemInterfaceDefinition>"
+    objStr += objectDataString("commodity", commodity)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("destination_identifier", destination_identifier)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("identifiedBy_identifier", identifiedBy_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("source_identifier", source_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SystemInterfaceDefinition>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SystemRequirement(createdBy_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, generatedAtTime=None, governs_identifier=None, identifier=None, invalidatedAtTime=None, mitigates_identifier=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SystemRequirement"))
+    objStr = "<turnstile_SystemRequirement>"
+    objStr += objectDataString("createdBy_identifier", createdBy_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("generatedAtTime", generatedAtTime)
+    objStr += objectDataString("governs_identifier", governs_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("invalidatedAtTime", invalidatedAtTime)
+    objStr += objectDataString("mitigates_identifier", mitigates_identifier)
+    objStr += objectDataString("satisfies_identifier", satisfies_identifier)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("wasAttributedTo_identifier", wasAttributedTo_identifier)
+    objStr += objectDataString("wasDerivedFrom_identifier", wasDerivedFrom_identifier)
+    objStr += objectDataString("wasGeneratedBy_identifier", wasGeneratedBy_identifier)
+    objStr += objectDataString("wasImpactedBy_identifier", wasImpactedBy_identifier)
+    objStr += objectDataString("wasRevisionOf_identifier", wasRevisionOf_identifier)
+    objStr += "</turnstile_SystemRequirement>"
+    addEvidenceObject(etree.fromstring(objStr))
+
+def turnstile_SystemRequirementsDefinition(author_identifier=None, dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, endedAtTime=None, governedBy_identifier=None, identifier=None, referenced_identifier=None, startedAtTime=None, title=None, used_identifier=None, wasAssociatedWith_identifier=None, wasInformedBy_identifier=None, wasInformedBy_identifier_0=None):
+    trace()
+    log("Adding Evidence:",str_good("turnstile_SystemRequirementsDefinition"))
+    objStr = "<turnstile_SystemRequirementsDefinition>"
+    objStr += objectDataString("author_identifier", author_identifier)
+    objStr += objectDataString("dataInsertedBy_identifier", dataInsertedBy_identifier)
+    objStr += objectDataString("definedIn_identifier", definedIn_identifier)
+    objStr += objectDataString("description", description)
+    objStr += objectDataString("endedAtTime", endedAtTime)
+    objStr += objectDataString("governedBy_identifier", governedBy_identifier)
+    objStr += objectDataString("identifier", identifier)
+    objStr += objectDataString("referenced_identifier", referenced_identifier)
+    objStr += objectDataString("startedAtTime", startedAtTime)
+    objStr += objectDataString("title", title)
+    objStr += objectDataString("used_identifier", used_identifier)
+    objStr += objectDataString("wasAssociatedWith_identifier", wasAssociatedWith_identifier)
+    objStr += objectDataString("wasInformedBy_identifier", wasInformedBy_identifier)
+    objStr += objectDataString("wasInformedBy_identifier_0", wasInformedBy_identifier_0)
+    objStr += "</turnstile_SystemRequirementsDefinition>"
     addEvidenceObject(etree.fromstring(objStr))
 

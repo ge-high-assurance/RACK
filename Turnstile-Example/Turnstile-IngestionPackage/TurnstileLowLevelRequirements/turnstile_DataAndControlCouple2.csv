@@ -1,0 +1,29 @@
+identifier,dataInsertedBy_identifier,createdBy_identifier,description,consumedBy_identifier,providedBy_identifier
+DCC-1,TurnstileIngestion-Low Level Requirements,LlrDev1,PowerUp,,
+DCC-1,TurnstileIngestion-Low Level Requirements,,,EXE-LLR-1,
+DCC-1,TurnstileIngestion-Low Level Requirements,,,EXE-LLR-2,
+DCC-1,TurnstileIngestion-Low Level Requirements,,,IN-LLR-1,
+DCC-1,TurnstileIngestion-Low Level Requirements,,,OUT-LLR-1,
+DCC-2,TurnstileIngestion-Low Level Requirements,LlrDev1,incoming UDP message,,
+DCC-2,TurnstileIngestion-Low Level Requirements,,,IN-LLR-2,
+DCC-2,TurnstileIngestion-Low Level Requirements,,,IN-LLR-3,
+DCC-2,TurnstileIngestion-Low Level Requirements,,,IN-LLR-5,
+DCC-2,TurnstileIngestion-Low Level Requirements,,,IN-LLR-6,
+DCC-3,TurnstileIngestion-Low Level Requirements,LlrDev1,input_park_count,,
+DCC-3,TurnstileIngestion-Low Level Requirements,,,IN-LLR-2,
+DCC-3,TurnstileIngestion-Low Level Requirements,,,IN-LLR-3,
+DCC-3,TurnstileIngestion-Low Level Requirements,,,IN-LLR-4,
+DCC-3,TurnstileIngestion-Low Level Requirements,,,IN-LLR-5,
+DCC-3,TurnstileIngestion-Low Level Requirements,,,IN-LLR-6,
+DCC-3,TurnstileIngestion-Low Level Requirements,,,,IN-LLR-1
+DCC-3,TurnstileIngestion-Low Level Requirements,,,,IN-LLR-4
+DCC-4,TurnstileIngestion-Low Level Requirements,LlrDev1,output_park_count,,
+DCC-3,TurnstileIngestion-Low Level Requirements,,,OUT-LLR-2,
+DCC-3,TurnstileIngestion-Low Level Requirements,,,,OUT-LLR-1
+DCC-3,TurnstileIngestion-Low Level Requirements,,,,IN-LLR-3
+DCC-5,TurnstileIngestion-Low Level Requirements,LlrDev1,outgoing UDP message,,
+DCC-5,TurnstileIngestion-Low Level Requirements,,,,OUT-LLR-2
+DCC-6,TurnstileIngestion-Low Level Requirements,LlrDev1,console,,
+DCC-6,TurnstileIngestion-Low Level Requirements,,,,EXE-LLR-3
+DCC-6,TurnstileIngestion-Low Level Requirements,,,,IN-LLR-5
+DCC-6,TurnstileIngestion-Low Level Requirements,,,,IN-LLR-6

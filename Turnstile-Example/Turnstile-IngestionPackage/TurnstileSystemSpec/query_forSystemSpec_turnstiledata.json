@@ -1,0 +1,171 @@
+{
+	"version": 3,
+	"sparqlConn": {
+		"name": "RACK local fuseki copy",
+		"domain": "",
+		"enableOwlImports": false,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/turnstiledata"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 13,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "FILTER regex(%id, \"Sys-Spec\")",
+						"SparqlID": "?identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"fullURIName": "http://arcos.rack/DOCUMENT#SPECIFICATION",
+				"SparqlID": "?SPECIFICATION",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?identifier_SystemInterfaceDefinition",
+						"isReturned": false,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false,
+						"binding": "?identifier_content",
+						"isBindingReturned": true
+					}
+				],
+				"nodeList": [],
+				"fullURIName": "http://arcos.turnstile/GE#SystemInterfaceDefinition",
+				"SparqlID": "?SystemInterfaceDefinition",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?identifier_SystemComponent",
+						"isReturned": false,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false,
+						"binding": "?identifier_content",
+						"isBindingReturned": true
+					}
+				],
+				"nodeList": [],
+				"fullURIName": "http://arcos.turnstile/GE#SystemComponent",
+				"SparqlID": "?SystemComponent",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"ValueType": "string",
+						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?identifier_SystemRequirement",
+						"isReturned": false,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false,
+						"binding": "?identifier_content",
+						"isBindingReturned": true
+					}
+				],
+				"nodeList": [],
+				"fullURIName": "http://arcos.turnstile/GE#SystemRequirement",
+				"SparqlID": "?SystemRequirement",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			}
+		],
+		"orderBy": [],
+		"unionHash": {
+			"1": [
+				"?SystemRequirement|http://arcos.rack/PROV-S#identifier",
+				"?SystemComponent|http://arcos.rack/PROV-S#identifier",
+				"?SystemInterfaceDefinition|http://arcos.rack/PROV-S#identifier"
+			]
+		}
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [],
+		"nodes": [
+			{
+				"sparqlID": "?SystemRequirement",
+				"type": "http://arcos.turnstile/GE#SystemRequirement",
+				"mapping": [],
+				"props": []
+			},
+			{
+				"sparqlID": "?SystemComponent",
+				"type": "http://arcos.turnstile/GE#SystemComponent",
+				"mapping": [],
+				"props": []
+			},
+			{
+				"sparqlID": "?SystemInterfaceDefinition",
+				"type": "http://arcos.turnstile/GE#SystemInterfaceDefinition",
+				"mapping": [],
+				"props": []
+			},
+			{
+				"sparqlID": "?SPECIFICATION",
+				"type": "http://arcos.rack/DOCUMENT#SPECIFICATION",
+				"mapping": [],
+				"props": []
+			}
+		]
+	},
+	"plotSpecs": null
+}

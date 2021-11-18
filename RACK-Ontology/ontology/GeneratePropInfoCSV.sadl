@@ -30,14 +30,14 @@ import "http://arcos.rack/TESTING".
 // Need to import all sadl files in ontology folder (except Prov-S.sadl as that is imported by other sadl files).
 
 // The following query writes out relevant info for properties defined.
-Write: data 
+Write: data
 {
-  Ask: "select distinct (?prop as ?property) ?subPropertyOf ?propertyDomain ?propertyRange ?propertyNote where 
-  {?prop <rdfs:domain> ?propertyDomain 
+  Ask: "select distinct (?prop as ?property) ?subPropertyOf ?propertyDomain ?propertyRange ?propertyNote where
+  {?prop <rdfs:domain> ?propertyDomain
   . FILTER(!regex(str(?propertyDomain), 'DataDescriptor')) # in SADL ImplicitModels
   . FILTER(!regex(str(?propertyDomain), 'FunctionPattern')) # in SADL ImplicitModels
   . ?prop <rdfs:comment> ?propertyNote
-  . ?prop <rdfs:range> ?propertyRange 
+  . ?prop <rdfs:range> ?propertyRange
   . OPTIONAL {?prop <rdfs:subPropertyOf> ?subPropertyOf . FILTER (?prop != ?subPropertyOf)}
   . LET(?localname := strafter(str(?prop), '#'))
   } order by ?localname".
@@ -46,8 +46,8 @@ Write: data
 // The following query writes out properties that are missing notes.
 Write: data
 {
-Ask: "select distinct (?prop as ?property) ?propertyDomain where 
-  {?prop <rdfs:domain> ?propertyDomain 
+Ask: "select distinct (?prop as ?property) ?propertyDomain where
+  {?prop <rdfs:domain> ?propertyDomain
   . FILTER(regex(str(?prop), 'arcos'))
   . OPTIONAL {?prop <rdfs:comment> ?propertyNote} . FILTER (!bound(?propertyNote))
   . LET(?localname := strafter(str(?prop), '#'))

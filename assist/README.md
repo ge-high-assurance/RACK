@@ -50,7 +50,8 @@ The ASSIST toolkit contains several tools that can be used with RACK.
 
   The intent of the ASSIST-DC set of tools is to model how a
   development process might be captured for RACK in a deployed
-  program.
+  program.  The ASSIST-DC portion of the tools is currently only
+  compatible with a Linux/Unix environment.
 
 
 ## ASSIST-DI -- Data Ingestion
@@ -127,6 +128,15 @@ The ASSIST toolkit contains several tools that can be used with RACK.
  `bin/check` tool, which utilizes the same core Prolog code that is
  used in ASSIST-DI; there is a companion `bin/analyze` tool that
  generates a human-readable report of the full set of data.
+
+ The ASSIST-DV tool is also installed on the distributed RACK Docker
+ or VM image in the `home/ubuntu/RACK/assist/bin/` directory.  As an
+ example, the `check` tool in the Docker image can be run on the
+ Docker image's contents via:
+
+ ```
+ $ docker exec CONTAINER-NAME home/ubuntu/RACK/assist/bin/check -v -m http://localhost:3030/
+ ```
 
 ## ASSIST-SADL -- SADL translation
 

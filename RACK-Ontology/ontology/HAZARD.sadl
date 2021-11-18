@@ -40,11 +40,11 @@ HAZARD
 
 	effect (note "consequence(s) of the HAZARD") describes HAZARD with values of type string.
    	effect describes HAZARD with at most 1 value.
-   	
-	severity (note "the severity of the HAZARD") describes HAZARD with values of type float [0,1].
+
+	severity (note "the severity of the HAZARD") describes HAZARD with values of type float. // [0,1].
 	severity describes HAZARD with at most 1 value.
 
-	likelihood (note "probability value between 0 and 1") describes HAZARD with values of type float [0,1].
+	likelihood (note "probability value between 0 and 1") describes HAZARD with values of type float. // [0,1].
 	likelihood describes HAZARD with at most 1 value.
 
 	// A Hazard can be mitigated by a requirement, operating procedure etc., mitigation by REQUIREMENT is defined in REQUIREMENTS.sadl.

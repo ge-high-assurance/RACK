@@ -19,7 +19,7 @@
   * dwa - 11 Nov 2020 - reduced cardinality of ANALYSIS_REPORT in ANALYSIS_ANNOTATION to 1, since an annotation will naturally come from a single report
   * dwa - 13 Nov 2020 - added import for DOCUMENT to allow ANALYSIS_REPORT to be a kind of REPORT
   */
-  
+
 uri "http://arcos.rack/ANALYSIS" alias ^An.
 import "http://arcos.rack/PROV-S".
 //import "http://arcos.rack/PROCESS".

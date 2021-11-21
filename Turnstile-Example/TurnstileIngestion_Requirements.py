@@ -489,6 +489,115 @@ def CreateCdrs():
     list(map(lambda x: llReqToIngestAux(x,":v2"),llReqsModified))
     ##New Req version 2
     list(map(lambda x: llReqToIngestAux(x,""), newLLReq))
+
+    ###
+    #------------ 2125895152 ------------
+    Add.turnstile_Engineer(identifier = "2125895152",
+                           title = "Doe, Jane",
+                           emailAddress = "jane.doe@ge.com",
+                           employedBy_identifier = "General_Electric")
+    Add.ORGANIZATION(identifier = "General_Electric")
+    #------------ LlrDev1 ------------
+    Add.turnstile_SoftwareDesign(identifier = "LlrDev1",
+                                 endedAtTime = "2020-07-19 11:48:38",
+                                 author_identifier = "2125895152",
+                                 referenced_identifier = "SW-STD:v1")
+    Add.DOCUMENT(identifier = "SW-STD:v1")
+    #------------ SwDesign ------------
+    Add.turnstile_SoftwareDesign(identifier = "SwDesign",
+                                 endedAtTime = "2020-07-23 09:52:38",
+                                 author_identifier = "2125895152",
+                                 referenced_identifier = "SW-STD:v1")
+    Add.DOCUMENT(identifier = "SW-STD:v1")
+    #------------ InputThread ------------
+    Add.turnstile_SoftwareThread(identifier = "InputThread",
+                                 partOf_identifier = "CounterApplication",
+		                         producedBy_identifier = "SwDesign")
+    #------------ OutputThread ------------
+    Add.turnstile_SoftwareThread(identifier = "OutputThread",
+                                 partOf_identifier = "CounterApplication",
+		                         producedBy_identifier = "SwDesign")
+    #------------ ExecutiveThread ------------
+    Add.turnstile_SoftwareThread(identifier = "ExecutiveThread",
+                                 partOf_identifier = "CounterApplication",
+		                         producedBy_identifier = "SwDesign")
+    #------------ DCC-1 ------------	
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
+                                       description = "PowerUp",
+                                       createdBy_identifier = "LlrDev1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
+                                       consumedBy_identifier = "EXE-LLR-1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
+                                       consumedBy_identifier = "EXE-LLR-2")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
+                                       consumedBy_identifier = "IN-LLR-1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
+                                       consumedBy_identifier = "OUT-LLR-1")
+
+    #------------ DCC-2 ------------	
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-2", 
+                                       description = "incoming UDP message",
+                                       createdBy_identifier = "LlrDev1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+                                       consumedBy_identifier = "IN-LLR-2")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+                                       consumedBy_identifier = "IN-LLR-3")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+                                       consumedBy_identifier = "IN-LLR-5")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+                                       consumedBy_identifier = "IN-LLR-6")
+
+		
+    #------------ DCC-3 ------------	
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       description = "input_park_count",
+                                       createdBy_identifier = "LlrDev1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       consumedBy_identifier = "IN-LLR-2")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       consumedBy_identifier = "IN-LLR-3")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       consumedBy_identifier = "IN-LLR-4")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       consumedBy_identifier = "IN-LLR-5")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       consumedBy_identifier = "IN-LLR-6")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       providedBy_identifier = "IN-LLR-1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       providedBy_identifier = "IN-LLR-4")
+
+		
+    #------------ DCC-4 ------------	
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-4",
+                                       description = "output_park_count",
+                                       createdBy_identifier = "LlrDev1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       consumedBy_identifier = "OUT-LLR-2")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       providedBy_identifier = "OUT-LLR-1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       providedBy_identifier = "IN-LLR-3")
+
+	
+    #------------ DCC-5 ------------	
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-5",
+                                       description = "outgoing UDP message",
+                                       createdBy_identifier = "LlrDev1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-5",
+                                       providedBy_identifier = "OUT-LLR-2")
+
+		
+    #------------ DCC-6 ------------	
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-6",  
+                                       description = "console",
+                                       createdBy_identifier = "LlrDev1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-6",
+                                       providedBy_identifier = "EXE-LLR-3")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-6",
+                                       providedBy_identifier = "IN-LLR-5")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-6",
+                                       providedBy_identifier = "IN-LLR-6")
     createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileLowLevelRequirements")) 
 ########################################################

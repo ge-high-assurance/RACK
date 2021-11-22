@@ -22,10 +22,10 @@ steps:
    the RACK and RACK.wiki repositories:
 
 ```shell
-cd RACK
+cd RACK.wiki
 git commit -a -m "Update versions for next release"
 git push
-cd ../RACK.wiki
+cd ../RACK
 git commit -a -m "Update versions for next release"
 git push
 ```
@@ -39,7 +39,7 @@ git push
 
 ```shell
 cd RACK.wiki
-git tag v7.0
+git tag v8.0
 git push --tag
 ```
 

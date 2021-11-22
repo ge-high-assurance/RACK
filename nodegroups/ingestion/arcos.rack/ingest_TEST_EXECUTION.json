@@ -816,6 +816,42 @@
             "optMinus": 1,
             "isReturned": true,
             "Constraints": "",
+            "ValueType": "double",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?cpuTime",
+            "relationship": "http://www.w3.org/2001/XMLSchema#double",
+            "UriRelationship": "http://arcos.acert/GrammaTech#cpuTime"
+          },
+          {
+            "optMinus": 1,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "double",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?memory",
+            "relationship": "http://www.w3.org/2001/XMLSchema#double",
+            "UriRelationship": "http://arcos.acert/GrammaTech#memory"
+          },
+          {
+            "optMinus": 1,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?testEnvironment",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "UriRelationship": "http://arcos.descert/SRI#testEnvironment"
+          },
+          {
+            "optMinus": 1,
+            "isReturned": true,
+            "Constraints": "",
             "ValueType": "string",
             "instanceValues": [],
             "isRuntimeConstrained": false,
@@ -999,7 +1035,7 @@
     ],
     "limit": 0,
     "orderBy": [],
-    "version": 13,
+    "version": 15,
     "unionHash": {}
   },
   "importSpec": {
@@ -1019,7 +1055,7 @@
                 ]
               }
             ],
-            "URIRelation": "http://arcos.rack/PROV-S#description"
+            "URIRelation": "http://arcos.acert/GrammaTech#cpuTime"
           },
           {
             "mapping": [
@@ -1030,12 +1066,45 @@
                 ]
               }
             ],
-            "URIRelation": "http://arcos.rack/PROV-S#endedAtTime"
+            "URIRelation": "http://arcos.acert/GrammaTech#memory"
           },
           {
             "mapping": [
               {
                 "colId": "col_2",
+                "transformList": [
+                  "trans_0"
+                ]
+              }
+            ],
+            "URIRelation": "http://arcos.descert/SRI#testEnvironment"
+          },
+          {
+            "mapping": [
+              {
+                "colId": "col_3",
+                "transformList": [
+                  "trans_0"
+                ]
+              }
+            ],
+            "URIRelation": "http://arcos.rack/PROV-S#description"
+          },
+          {
+            "mapping": [
+              {
+                "colId": "col_4",
+                "transformList": [
+                  "trans_0"
+                ]
+              }
+            ],
+            "URIRelation": "http://arcos.rack/PROV-S#endedAtTime"
+          },
+          {
+            "mapping": [
+              {
+                "colId": "col_5",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1049,7 +1118,7 @@
           {
             "mapping": [
               {
-                "colId": "col_3",
+                "colId": "col_6",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1060,7 +1129,7 @@
           {
             "mapping": [
               {
-                "colId": "col_4",
+                "colId": "col_7",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1079,7 +1148,7 @@
           {
             "mapping": [
               {
-                "colId": "col_5",
+                "colId": "col_8",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1101,7 +1170,7 @@
           {
             "mapping": [
               {
-                "colId": "col_6",
+                "colId": "col_9",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1123,7 +1192,7 @@
           {
             "mapping": [
               {
-                "colId": "col_7",
+                "colId": "col_10",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1145,7 +1214,7 @@
           {
             "mapping": [
               {
-                "colId": "col_8",
+                "colId": "col_11",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1167,7 +1236,7 @@
           {
             "mapping": [
               {
-                "colId": "col_9",
+                "colId": "col_12",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1189,7 +1258,7 @@
           {
             "mapping": [
               {
-                "colId": "col_10",
+                "colId": "col_13",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1206,48 +1275,60 @@
     "texts": [],
     "columns": [
       {
-        "colName": "description",
+        "colName": "cpuTime",
         "colId": "col_0"
       },
       {
-        "colName": "endedAtTime",
+        "colName": "memory",
         "colId": "col_1"
       },
       {
-        "colName": "identifier",
+        "colName": "testEnvironment",
         "colId": "col_2"
       },
       {
-        "colName": "startedAtTime",
+        "colName": "description",
         "colId": "col_3"
       },
       {
-        "colName": "title",
+        "colName": "endedAtTime",
         "colId": "col_4"
       },
       {
-        "colName": "definedIn_identifier",
+        "colName": "identifier",
         "colId": "col_5"
       },
       {
-        "colName": "dataInsertedBy_identifier",
+        "colName": "startedAtTime",
         "colId": "col_6"
       },
       {
-        "colName": "used_identifier",
+        "colName": "title",
         "colId": "col_7"
       },
       {
-        "colName": "wasAssociatedWith_identifier",
+        "colName": "definedIn_identifier",
         "colId": "col_8"
       },
       {
-        "colName": "wasInformedBy_identifier",
+        "colName": "dataInsertedBy_identifier",
         "colId": "col_9"
       },
       {
-        "colName": "executedOn_identifier",
+        "colName": "used_identifier",
         "colId": "col_10"
+      },
+      {
+        "colName": "wasAssociatedWith_identifier",
+        "colId": "col_11"
+      },
+      {
+        "colName": "wasInformedBy_identifier",
+        "colId": "col_12"
+      },
+      {
+        "colName": "executedOn_identifier",
+        "colId": "col_13"
       }
     ],
     "baseURI": "",

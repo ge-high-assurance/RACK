@@ -29,12 +29,12 @@ D.2 is a SECTION
 	has title "APPLICABLE DOCUMENTS".
 
 D.3 is a SECTION
-	has title "WORK BREAKDOWN STRUCTURE LEVELS".	
+	has title "WORK BREAKDOWN STRUCTURE LEVELS".
 
 D.4 is a SECTION
 	has title "DEFINITIONS".
-	
-// SADL constructs 			
+
+// SADL constructs
 StrategicMissileSystems-1 is a SYSTEM,
 	has identifier "StrategicMissileSystems-1",
 		has wbs "1".

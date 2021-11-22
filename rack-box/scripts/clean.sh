@@ -12,14 +12,14 @@ export DEBCONF_NONINTERACTIVE_SEEN=true
 # Avoid https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1766857
 # if we're building a Hyper-V VM.  Also, we needed to install
 # linux-cloud-tools-virtual to let Packer communicate with the Hyper-V
-# VM, but we don't need its packages in any other kind of VM.
+# VM, but we don't want it installed in the VirtualBox VM.
 
 if [ "${PACKER_BUILDER_TYPE}" == "hyperv-iso" ]; then
     mkdir /usr/libexec/hypervkvpd
     cd /usr/libexec/hypervkvpd
     ln -s /usr/sbin/hv_get_dhcp_info .
     ln -s /usr/sbin/hv_get_dns_info .
-elif dpkg -l | grep -q linux-cloud-tools-virtual; then
+elif [ "${PACKER_BUILDER_TYPE}" == "virtualbox-iso" ]; then
     apt-get remove -yqq linux-cloud-tools-virtual
     apt-get autoremove -yqq # remaining linux-cloud-tools packages
 fi

@@ -29,12 +29,12 @@ A.2 is a SECTION
 	has title "APPLICABLE DOCUMENTS".
 
 A.3 is a SECTION
-	has title "WORK BREAKDOWN STRUCTURE LEVELS".	
+	has title "WORK BREAKDOWN STRUCTURE LEVELS".
 
 A.4 is a SECTION
 	has title "DEFINITIONS".
-	 		
-// SADL constructs 			
+
+// SADL constructs
 AircraftSystem-1 is a SYSTEM,
 	has identifier "AircraftSystem-1",
 	has wbs "1".

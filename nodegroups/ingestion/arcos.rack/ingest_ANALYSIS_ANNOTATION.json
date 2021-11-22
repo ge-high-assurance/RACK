@@ -1036,6 +1036,18 @@
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "UriRelationship": "http://arcos.descert/SRI#analysisDiagnostics"
+          },
+          {
+            "optMinus": 0,
+            "isReturned": false,
+            "Constraints": "",
             "ValueType": "float",
             "instanceValues": [],
             "isRuntimeConstrained": false,
@@ -1113,6 +1125,17 @@
         "binding": "?fromReport_ANALYSIS_OUTPUT",
         "deletionMode": "NO_DELETE",
         "nodeList": [
+          {
+            "SnodeSparqlIDs": [],
+            "ValueType": "ENTITY",
+            "Connected": false,
+            "DeletionMarkers": [],
+            "OptionalMinus": [],
+            "Qualifiers": [],
+            "UriConnectBy": "http://arcos.descert/SRI#goalProperty",
+            "ConnectBy": "",
+            "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
+          },
           {
             "SnodeSparqlIDs": [],
             "ValueType": "ENTITY",
@@ -1546,7 +1569,7 @@
     ],
     "limit": 0,
     "orderBy": [],
-    "version": 13,
+    "version": 15,
     "unionHash": {}
   },
   "importSpec": {

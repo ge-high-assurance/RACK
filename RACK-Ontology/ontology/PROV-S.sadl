@@ -17,7 +17,7 @@
   * am - 31 Aug 2021 - altered dataInsertedBy to use "1" instead of "one"
   */
 
-uri "http://arcos.rack/PROV-S" alias provs 
+uri "http://arcos.rack/PROV-S" alias provs
 (note "a basic Implementation of PROV Data Model standard in SADL based on table https://www.w3.org/TR/prov-dm/#relations-at-a-glance").
 
 THING (note "A piece of data stored in RACK") is a class.

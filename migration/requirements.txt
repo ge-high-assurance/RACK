@@ -1,3 +1,2 @@
-colorama
-pydantic
-typing-extensions
+-e .
+-e .[dev]

@@ -8,21 +8,21 @@ import "http://arcos.rack/PROV-S".
  * and should correspond to collections of data identified
  * by the project being modeled. They are not arbitrary
  * groupings or intended to be the results of analysis.
- * 
+ *
  * The the use of baselines a single RACK instance can contain
  * multiple versions of the same project concurrently. This
  * serves a role in enabling RACK to distingusish the entities
  * contained in one version or the other, and allows us to compute
  * how those versions are related.
- * 
+ *
  * Baselines are expected to be potentially built compositionally.
  * Nodegroups should use generally use transitive membership.
- * 
+ *
  * Baselines can be the subject of REVIEW activities to capture the
  * formal review processes that are often related to baselines.
- * 
+ *
  * Baselines can use wasRevisionOf to capture version evolution.
- * 
+ *
  * Baselines are meant to directly include the top-most elements.
  * For example, they will contain a document but not decomposed
  * sections and requirements contained in that document.

@@ -194,7 +194,7 @@ T-4 is a SECTION,
 	has content T-4-9,
 	has content T-4-10,
 	has content T-4-11.
-	
+
 T-4-1 is a OBJECTIVE,
     has identifier "T-4-1"
     has description "Low-Level Tool requirements comply with Tool Requirements. ".
@@ -441,7 +441,7 @@ DO-330-AnnexA is a SECTION,
     has content T-8,
     has content T-9,
     has content T-10.
-    
+
 DO-330 is a SPECIFICATION,
 	has dateOfIssue "12/13/2011",
 	has status Released,
@@ -453,4 +453,4 @@ DO-330 is a SPECIFICATION,
 //
 SC-205 is an AGENT.
 RTCA is an AGENT.
-	
+

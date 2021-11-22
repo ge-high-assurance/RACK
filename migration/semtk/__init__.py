@@ -54,7 +54,8 @@ class DefaultSemTKVisitor(SemTKVisitor):
         pass
 
     def visit_SemTKJSON(self, json: SemTKJSON) -> None:
-        self.visit_ImportSpec(json, "importSpec", json.importSpec)
+        if json.importSpec is not None:
+            self.visit_ImportSpec(json, "importSpec", json.importSpec)
         self.visit_SNodeGroup(json, "sNodeGroup", json.sNodeGroup)
         self.visit_SparqlConn(json, "sparqlConn", json.sparqlConn)
 
@@ -80,7 +81,7 @@ class SNodeProp(BaseModel):
     relationship: str
     UriRelationship: str
     Constraints: str
-    fullURIName: str
+    fullURIName: Optional[str]
     SparqlID: str
     isReturned: bool
     optMinus: int
@@ -139,7 +140,7 @@ class SNodeGroup(BaseModel):
 
 
 class Mapping(BaseModel):
-    colId: str
+    colId: Optional[str]
     colName: Optional[str]
     transformList: Optional[List[str]]
 
@@ -153,7 +154,7 @@ class ImportSpecProp(BaseModel):
 class ImportSpecNode(BaseModel):
     sparqlID: str
     type: str
-    URILookupMode: str
+    URILookupMode: Optional[str]
     mapping: List[Mapping]
     props: List[ImportSpecProp]
 
@@ -199,7 +200,7 @@ class SemTKJSON(BaseModel):
     version: Optional[int]
     sparqlConn: SparqlConn
     sNodeGroup: SNodeGroup
-    importSpec: ImportSpec
+    importSpec: Optional[ImportSpec]
 
     def accept(self, visitor: SemTKVisitor) -> None:
         visitor.visit_SemTKJSON(self)

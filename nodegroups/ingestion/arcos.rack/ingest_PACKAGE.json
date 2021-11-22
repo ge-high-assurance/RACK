@@ -118,6 +118,30 @@
             "isMarkedForDeletion": false,
             "SparqlID": "",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "UriRelationship": "http://arcos.descert/SRI#toolInstallationConfiguration"
+          },
+          {
+            "optMinus": 0,
+            "isReturned": false,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "UriRelationship": "http://arcos.descert/SRI#toolSummaryDescription"
+          },
+          {
+            "optMinus": 0,
+            "isReturned": false,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "UriRelationship": "http://arcos.rack/AGENTS#toolVersion"
           },
           {
@@ -165,6 +189,28 @@
         "binding": "?packagedBy_TOOL",
         "deletionMode": "NO_DELETE",
         "nodeList": [
+          {
+            "SnodeSparqlIDs": [],
+            "ValueType": "ToolQualificationData",
+            "Connected": false,
+            "DeletionMarkers": [],
+            "OptionalMinus": [],
+            "Qualifiers": [],
+            "UriConnectBy": "http://arcos.descert/SRI#toolQualificationData",
+            "ConnectBy": "",
+            "UriValueType": "http://arcos.descert/SRI#ToolQualificationData"
+          },
+          {
+            "SnodeSparqlIDs": [],
+            "ValueType": "DOCUMENT",
+            "Connected": false,
+            "DeletionMarkers": [],
+            "OptionalMinus": [],
+            "Qualifiers": [],
+            "UriConnectBy": "http://arcos.descert/SRI#userGuide",
+            "ConnectBy": "",
+            "UriValueType": "http://arcos.rack/DOCUMENT#DOCUMENT"
+          },
           {
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
@@ -1341,7 +1387,7 @@
     ],
     "limit": 0,
     "orderBy": [],
-    "version": 13,
+    "version": 15,
     "unionHash": {}
   },
   "importSpec": {

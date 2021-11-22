@@ -26,15 +26,15 @@ The rest of the procedure uses `pip`, which is added to your `PATH` by the
 virtual environment activation command.  If you open a new shell, make sure to
 run `source` again to reopen the virtual environment!
 
-In a shell where the environment is activated, you ought to be able to:
+In a shell where the environment is activated, you can install the development
+environment tools via:
 
 ```
+# still from the migration directory
 pip install -r requirements.txt
-# or, if you intend to work on the tool:
-pip install -e -r requirements.txt -r requirements-dev.txt
 ```
 
-And finally build and set up the tool with:
+In order to build the migration tools, you can run:
 
 ```
 # still from the migration directory

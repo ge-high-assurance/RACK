@@ -1,0 +1,172 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.rack/NISTControl" alias NISTControl.
+import "http://arcos.rack/CONTROL".
+	
+NISTControl is a type of CONTROL.
+
+AU-12 is a NISTControl
+   with identifier "AU-12"
+   with description "Audit Generation - The information system:
+	a. Provides audit record generation capability for the auditable events defined in AU-2 a. at [Assignment: organization-defined information system components];
+	b. Allows [Assignment: organization-defined personnel or roles] to select which auditable events are to be audited by specific components of the information system; and
+	c. Generates audit records for the events defined in AU-2 d. with the content defined in AU-3.".
+AU-12-1 is a NISTControl
+   with identifier "AU-12-1"
+   with description "System-wide / Time-correlated Audit Trail - The information system compiles audit records from [Assignment: organization-defined information system 
+	components] into a system-wide (logical or physical) audit trail that is time-correlated to within [Assignment: organization-defined level of tolerance for the 
+	relationship between time stamps of individual records in the audit trail].".
+AU-12-3 is a NISTControl
+   with identifier "AU-12-3"
+   with description "Changes By Authorized Individuals - The information system provides the capability for [Assignment: organization-defined individuals or roles] 
+	to change the auditing to be performed on [Assignment: organization-defined information system components] based on [Assignment: organization-defined selectable 
+	event criteria] within [Assignment: organization-defined time thresholds].".
+AU-9 is a NISTControl
+   with identifier "AU-9"
+   with description "Protection Of Audit Information - a. Protect audit information and audit logging tools from unauthorized access, modification, and deletion; and
+	b. Alert [Assignment: organization-defined personnel or roles] upon detection of unauthorized access, modification, or deletion of audit information.".
+AU-9-3 is a NISTControl
+   with identifier "AU-9-3"
+   with description "Cryptographic Protection- Implement cryptographic mechanisms to protect the integrity of audit information and audit tools.".
+IA-2 is a NISTControl
+   with identifier "IA-2"
+   with description "Identification and Authentication (Organizational Users) - Uniquely identify and authenticate organizational users and associate that unique 
+	identification with processes acting on behalf of those users.".
+IA-2-1 is a NISTControl
+   with identifier "IA-2-1"
+   with description "Network Access to Privileged Accounts - Implement multi-factor authentication for access to privileged accounts.".
+IA-2-2 is a NISTControl
+   with identifier "IA-2-2"
+   with description "Network Access to Non-Privileged Accounts - Implement multi-factor authentication for access to non-privileged accounts.".
+IA-2-3 is a NISTControl
+   with identifier "IA-2-3"
+   with description "Local Access to Privileged Accounts - The information system implements multifactor authentication for local access to privileged accounts.".
+IA-2-4 is a NISTControl
+   with identifier "IA-2-4"
+   with description "Local Access to Non-Privileged Accounts - The information system implements multifactor authentication for local access to non-privileged accounts".
+IA-2-8 is a NISTControl
+   with identifier "IA-2-8"
+   with description "Network Access to Privileged Accounts - Replay Resistant - The information system implements replay-resistant authentication mechanisms for network access to privileged accounts.".
+IA-2-9 is a NISTControl
+   with identifier "IA-2-9"
+   with description "Network Access to Non-Privileged Accounts - Replay Resistant - The information system implements replay-resistant authentication mechanisms for network access to non-privileged accounts.".
+IA-2-11 is a NISTControl
+   with identifier "IA-2-11"
+   with description "Remote Access - Separate Device - The information system implements multifactor authentication for remote access to privileged and
+	non-privileged accounts such that one of the factors is provided by a device separate from the system gaining access and the device meets [Assignment: organization-defined strength of mechanism requirements].".
+IA-2-12 is a NISTControl
+   with identifier "IA-2-12"
+   with description "Acceptance of PIV Credentials - The information system accepts and electronically verifies Personal Identity Verification (PIV) credentials.".
+IA-3 is a NISTControl
+   with identifier "IA-3"
+   with description "Device Identification And Authentication".
+IA-3-1 is a NISTControl
+   with identifier "IA-3-1"
+   with description "Cryptographic Bidirectional Authentication".
+IA-3-4 is a NISTControl
+   with identifier "IA-3-4"
+   with description "Remote Attestation".
+MP-6-8 is a NISTControl
+   with identifier "MP-6-8"
+   with description "Wiping of Information".
+PE-3 is a NISTControl
+   with identifier "PE-3"
+   with description "Physical Access Control".
+PE-3-1 is a NISTControl
+   with identifier "PE-3-1"
+   with description "Information System Access Control".
+PE-3-5 is a NISTControl
+   with identifier "PE-3-5"
+   with description "Tamper Protection".
+SA-11-1 is a NISTControl
+   with identifier "SA-11-1"
+   with description "Static Code Analysis".
+SA-12 is a NISTControl
+   with identifier "SA-12"
+   with description "Supply Chain Protection".
+SA-18-1 is a NISTControl
+   with identifier "SA-18-1"
+   with description "Tamper Resistance and Detection".
+SC-13 is a NISTControl
+   with identifier "SC-13"
+   with description "Cryptographic Protection".
+SC-23 is a NISTControl
+   with identifier "SC-23"
+   with description "Session Authenticity".
+SC-28 is a NISTControl
+   with identifier "SC-28"
+   with description "Protection Of Information At Rest".
+SC-29 is a NISTControl
+   with identifier "SC-29"
+   with description "Heterogeneity".
+SC-4 is a NISTControl
+   with identifier "SC-4"
+   with description "Information in Shared Resources".
+SC-4-2 is a NISTControl
+   with identifier "SC-4-2"
+   with description "Periods Processing".
+SC-40 is a NISTControl
+   with identifier "SC-40"
+   with description "Wireless Link Protection".
+SC-40-1 is a NISTControl
+   with identifier "SC-40-1"
+   with description "Electromagnetic Interference".
+SC-5 is a NISTControl
+   with identifier "SC-5"
+   with description "Denial of Service Protection".
+SC-5-2 is a NISTControl
+   with identifier "SC-5-2"
+   with description "Excess Capacity/Bandwidth/Redundancy".
+SC-6 is a NISTControl
+   with identifier "SC-6"
+   with description "Resource Availability".
+SC-7-16 is a NISTControl
+   with identifier "SC-7-16"
+   with description "Prevent Discovery of Components/Devices".
+SC-8 is a NISTControl
+   with identifier "SC-8"
+   with description "Transmission Integrity".
+SI-10 is a NISTControl
+   with identifier "SI-10"
+   with description "Information Input Validation".
+SI-10-5 is a NISTControl
+   with identifier "SI-10-5"
+   with description "Restrict Inputs to Trusted Sources and Approved Formats".
+SI-11 is a NISTControl
+   with identifier "SI-11"
+   with description "Error Handling".
+SI-15 is a NISTControl
+   with identifier "SI-15"
+   with description "Information Output Handling".
+SI-16 is a NISTControl
+   with identifier "SI-16"
+   with description "Memory Protection".
+SI-7-1 is a NISTControl
+   with identifier "SI-7-1"
+   with description "Integrity Checks".
+SI-7-15 is a NISTControl
+   with identifier "SI-7-15"
+   with description "Code Authentication".
+SI-7-5 is a NISTControl
+   with identifier "SI-7-5"
+   with description "Automated Response To Integrity Violations".
+SI-7-6 is a NISTControl
+   with identifier "SI-7-6"
+   with description "Cryptographic Protection".
+SI-7-9 is a NISTControl
+   with identifier "SI-7-9"
+   with description "Verify Boot Process".
+SI-17 is a NISTControl
+   with identifier "SI-17"
+   with description "Fail-Safe Procedures".
+

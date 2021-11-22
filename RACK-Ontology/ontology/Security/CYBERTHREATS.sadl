@@ -1,0 +1,59 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.rack/THREAT" alias Threat.
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/CONTROL".
+import "http://arcos.rack/HAZARD".
+
+/* SOURCE: https://niccs.cisa.gov/about-niccs/cybersecurity-glossary
+
+THREAT: A circumstance or event that has or indicates the potential to exploit vulnerabilities and to adversely impact (create adverse consequences for) organizational operations, organizational assets (including information and information systems), individuals, other organizations, or society.
+Extended Definition: Includes an individual or group of individuals, entity such as an organization or a nation), action, or occurrence.
+Adapted from: DHS Risk Lexicon, NIPP, CNSSI 4009, NIST SP 800-53 Rev 4
+ 
+
+ATTACK: An attempt to gain unauthorized access to system services, resources, or information, or an attempt to compromise system integrity.
+Extended Definition: The intentional act of attempting to bypass one or more security services or controls of an information system.
+From: NCSD Glossary. NTSSI 4009 (2000), CNSSI 4009
+* */
+
+THREAT
+	is a type of HAZARD.
+	
+	threatAgent describes THREAT with values of type AGENT.
+	threatAgent is a type of wasAttributedTo.
+	
+	// A THREAT can be mitigated by a CONTROL etc., mitigation by CONTROL is defined in CYBERCONTROLS.sadl.
+	H:mitigates of THREAT only has values of type MITIGATION.
+
+THREAT_IDENTIFICATION
+	(note "ACTIVITY that identifies potential sources of THREAT whose risk must be evaluated")
+	is a type of ACTIVITY.
+
+	Threat:author (note "AGENT(s) who work on this ACTIVITY") describes THREAT_IDENTIFICATION with values of type AGENT.
+	Threat:author is a type of wasAssociatedWith.
+	
+ATTACK
+	is a type of ACTIVITY
+	described by capec with a single value of type int.
+
+	attacker describes ATTACK with values of type AGENT.
+	attacker is a type of wasAssociatedWith.
+	
+	// An ATTACK can be mitigated by a CONTROL etc., mitigation by CONTROL is defined in CYBERCONTROLS.sadl.
+	A:mitigates (note "an ATTACK may be mitigated by a COLLECTION OF CONTROL") describes ATTACK with values of type MITIGATION.
+	
+	
+// Usually the focus is on confidentiality, integrity and availability
+// but we can also add Authorization, Non-repudiation, Privacy.
+SecurityIssueLabel is a class, must be one of {Confidentiality, Integrity, Availability}.

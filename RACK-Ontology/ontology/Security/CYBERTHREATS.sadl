@@ -34,7 +34,8 @@ THREAT
 	threatAgent is a type of wasAttributedTo.
 	
 	// A THREAT can be mitigated by a CONTROL etc., mitigation by CONTROL is defined in CYBERCONTROLS.sadl.
-	H:mitigates of THREAT only has values of type MITIGATION.
+	//mitigatedBy: THREAT -> CONTROLSET
+	mitigatedBy describes THREAT with values of type CONTROLSET.
 
 THREAT_IDENTIFICATION
 	(note "ACTIVITY that identifies potential sources of THREAT whose risk must be evaluated")
@@ -42,18 +43,7 @@ THREAT_IDENTIFICATION
 
 	Threat:author (note "AGENT(s) who work on this ACTIVITY") describes THREAT_IDENTIFICATION with values of type AGENT.
 	Threat:author is a type of wasAssociatedWith.
-	
-ATTACK
-	is a type of ACTIVITY
-	described by capec with a single value of type int.
 
-	attacker describes ATTACK with values of type AGENT.
-	attacker is a type of wasAssociatedWith.
-	
-	// An ATTACK can be mitigated by a CONTROL etc., mitigation by CONTROL is defined in CYBERCONTROLS.sadl.
-	A:mitigates (note "an ATTACK may be mitigated by a COLLECTION OF CONTROL") describes ATTACK with values of type MITIGATION.
-	
-	
 // Usually the focus is on confidentiality, integrity and availability
 // but we can also add Authorization, Non-repudiation, Privacy.
 SecurityIssueLabel is a class, must be one of {Confidentiality, Integrity, Availability}.

@@ -13,7 +13,7 @@
 uri "http://arcos.rack/CONTROL" alias Ctrl.
 import "http://arcos.rack/SYSTEM".
 
-CONTROL
+CONTROL //should we distinguish between control and control-implementation (if yes will have to associate the strength to the control-implementation)
 	is a type of ENTITY.
 
 	definition (note "Description of the CONTROL") describes CONTROL with values of type string.
@@ -22,8 +22,8 @@ CONTROL
 	strength (note "strength of the CONTROL") describes CONTROL with values of type int [1,5].
    	strength describes CONTROL with at most 1 value.
    	
-   	Ctrl:mitigates (note "ENTITY(s) (e.g. ATTACK OR THREAT) that is being mitigated by this CONTROL") describes CONTROL with values of type ENTITY.
+   	Ctrl:mitigates (note "e.g. ATTACK OR THREAT that is being mitigated by this CONTROL") describes CONTROL with values of type ENTITY.
 	Ctrl:mitigates is a type of wasImpactedBy.
 
-MITIGATION is a type of COLLECTION.
-    content of MITIGATION only has values of type CONTROL.
+CONTROLSET is a type of COLLECTION.
+    content of CONTROLSET only has values of type CONTROL.

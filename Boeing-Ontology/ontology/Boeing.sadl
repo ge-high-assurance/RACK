@@ -11,7 +11,7 @@ SRS_Req (note "A Requirement identified in the Software Requirements Specificati
 //satisfies of SRS_Req only has values of type {PIDS_Req or CSID_Req}.
 
 SubDD_Req (note "A Requirement identified in the Subsystem Design Document")is a type of REQUIREMENT.
-satisfies of SubDD_Req only has values of type SRS_Req.
+Rq:satisfies of SubDD_Req only has values of type SRS_Req.
 
 SBVT_Test (note "A test identified in the Software Baseline Verification Tests") is a type of TEST.
 //verifies of SBVT_Test only has values of type {SRS_Req or SubDD_Req}.
@@ -22,38 +22,44 @@ confirms of SBVT_Result only has values of type SBVT_Test.
 
 // COMMON FILE FORMATS
 
-XmlFormat       (note "Extensible Markup Language file format") is a FORMAT.
-SysmlFormat     (note "Systems Modeling Language file format") is a FORMAT.
-PdfFormat       (note "PDF file format") is a FORMAT.
-EmlFormat       (note "Email file format") is a FORMAT.
-YamlFormat      (note "Yet Another Markup Language file format") is a FORMAT.
-JsonFormat      (note "JavaScript Object Notation file format") is a FORMAT.
-TomlFormat      (note "Tom's Obvious Minimal Language file format") is a FORMAT.
-IniFormat       (note "Initialization configuration file format") is a FORMAT.
+XmlFormat       (note "Extensible Markup Language file format") is a FORMAT identifier "xml".
+SysmlFormat     (note "Systems Modeling Language file format") is a FORMAT identifier "sysml".
+PdfFormat       (note "PDF file format") is a FORMAT identifier "pdf".
+EmlFormat       (note "Email file format") is a FORMAT identifier "eml".
+YamlFormat      (note "Yet Another Markup Language file format") is a FORMAT identifier "yaml".
+JsonFormat      (note "JavaScript Object Notation file format") is a FORMAT identifier "json".
+TomlFormat      (note "Tom's Obvious Minimal Language file format") is a FORMAT identifier "toml".
+IniFormat       (note "Initialization configuration file format") is a FORMAT identifier "ini".
 
 // Image formats
-SvgFormat       (note "Scalable Vector Graphics image file format") is a FORMAT.
-JpgFormat       (note "Joint Photographic Exports Group image file format") is a FORMAT.
-GifFormat       (note "Graphics Interchange Format image file format") is a FORMAT.
-PngFormat       (note "Portable Network Graphics image file format") is a FORMAT.
-BmpFormat       (note "Bitmap image file format") is a FORMAT.
-TiffFormat      (note "Tag Image File Format image file format") is a FORMAT.
+SvgFormat       (note "Scalable Vector Graphics image file format") is a FORMAT identifier "svg".
+JpegFormat      (note "Joint Photographic Exports Group image file format") is a FORMAT identifier "jpeg".
+GifFormat       (note "Graphics Interchange Format image file format") is a FORMAT identifier "gif".
+PngFormat       (note "Portable Network Graphics image file format") is a FORMAT identifier "png".
+BmpFormat       (note "Bitmap image file format") is a FORMAT identifier "bmp".
+TiffFormat      (note "Tag Image File Format image file format") is a FORMAT identifier "tiff".
 
 // Programming language source files
-AdaFormat       (note "Ada source file format") is a FORMAT.
-CFormat         (note "C source file format") is a FORMAT.
-CxxFormat       (note "C++ source file format") is a FORMAT.
-PythonFormat    (note "Python source file format") is a FORMAT.
-ShellFormat     (note "Shell script file format") is a FORMAT.
+AdaFormat       (note "Ada source file format") is a FORMAT identifier "ada".
+CFormat         (note "C source file format") is a FORMAT identifier "c".
+CxxFormat       (note "C++ source file format") is a FORMAT identifier "cpp".
+PythonFormat    (note "Python source file format") is a FORMAT identifier "py".
+ShellFormat     (note "Shell script file format") is a FORMAT identifier "sh".
 
 // Plain text formats
-TextFormat      (note "Plain text file format") is a FORMAT.
-CsvFormat       (note "Comma separated values file format") is a FORMAT.
+TextFormat      (note "Plain text file format") is a FORMAT identifier "txt".
+CsvFormat       (note "Comma separated values file format") is a FORMAT identifier "csv".
+TsvFormat       (note "Tab separated values file format") is a FORMAT identifier "tsv".
 
 // Microsoft office
-XlsFormat       (note "Microsoft Excel spreadsheet file format") is a FORMAT.
-DocFormat       (note "Microsoft Word document file format") is a FORMAT.
-PptFormat       (note "Microsoft PowerPoint file format") is a FORMAT.
+XlsFormat       (note "Microsoft Excel spreadsheet file format") is a FORMAT identifier "xls".
+DocFormat       (note "Microsoft Word document file format") is a FORMAT identifier "doc".
+PptFormat       (note "Microsoft PowerPoint file format") is a FORMAT identifier "ppt".
+
+// Archives
+ArchiveFormat   (note "File archive file format: e.g. zip, tar, rar") is a FORMAT identifier "archive".
 
 // Various object code types
-MachineCodeFormat (note "Executable files, object files, static/dynamic libaries, etc file format") is a FORMAT.
+ExecutableFormat (note "Executable file format: e.g. exe, com, elf, macho") is a FORMAT identifier "exe".
+LibraryFormat    (note "Library file format: e.g. dylib, lib, a, dll") is a FORMAT identifier "lib".
+ObjectFormat     (note "Intermediate compiler outputs: e.g. o, coff") is a FORMAT identifier "obj".

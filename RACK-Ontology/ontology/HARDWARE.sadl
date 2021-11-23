@@ -1,0 +1,40 @@
+/* Copyright (c) 2021, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.rack/HARDWARE" alias hw.
+import "http://arcos.rack/PROV-S".
+
+HWCOMPONENT is a type of ENTITY.
+    instantiates (note "What logical component (system) does this physical component instantiate or implement?")
+        describes HWCOMPONENT with values of type ENTITY.
+    componentType (note "Type of component")
+        describes HWCOMPONENT with a single value of type COMPONENT_TYPE.
+	partitions describes HWCOMPONENT with values of type PARTITION.
+
+PARTITION (note "a PARTIION divides a HWCOMPOENTS resources into protected, isolated execution space for software components.") is a type of ENTITY.
+
+COMPONENT_TYPE
+    (note "An open/extensible set of types of hardware components")
+    is a type of THING.
+Sensor
+    (note "a hardware component that interacts with the physical world outside the system of interest")
+    is a COMPONENT_TYPE
+    has identifier "Sensor".
+Bus
+    (note "a bus is a connection between hardware components that communicates data between the components")
+    is a COMPONENT_TYPE
+    has identifier "Bus".    
+    
+ComputePlatform
+    (note "a compute platform is a piece of hardware that executes software")
+    is a COMPONENT_TYPE
+    has identifier "ComputePlatform".    

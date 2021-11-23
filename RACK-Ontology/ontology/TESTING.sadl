@@ -51,16 +51,16 @@ TEST_RESULT
 TEST_PROCEDURE (note "A TEST_PROCEDURE is the TEST_STEPs that perform TESTs. ") is a type of COLLECTION.
 	content of TEST_PROCEDURE only has values of type TEST_STEP.
 	
-	TEST_STEP is a type of ENTITY.
-		performs (note "The TEST that are being performed with this TEST_STEP") describes TEST_STEP with values of type TEST.
+	TEST_STEP (note "A TEST_STEP is a collection of TESTs that are performed in a single execution")is a type of COLLECTION.
+		content of TEST_STEP only has values of type TEST.
 		nextStep (note "The next TEST_STEP in a sequence" ) describes TEST_STEP with a single value of type TEST_STEP.
 
 TEST_LOG (note "A TEST_LOG is the TEST_RESULTs from executing a TEST_PROCEDURE") is a type of COLLECTION.
 	content of TEST_LOG only has values of type TEST_RECORD.
 
 	
-	TEST_RECORD is a type of ENTITY.
-		results (note "The TEST_RESULTS that are being captured with this TEST_STEP") describes TEST_STEP with values of type TEST_RESULT.
+	TEST_RECORD (note "a TEST_RECORD is a collection of TEST_RESULTs assoicated with a TEST_STEP") is a type of COLLECTION.
+		content of TEST_RECORD only has values of type TEST_RESULT.
 		nextRecord (note "The next TEST_RECORD that is the next in a sequence " ) describes TEST_STEP with a single value of type TEST_RECORD.
 		logs (note "The next TEST_STEP from which the TEST_RECORD is captured" ) describes TEST_STEP with a single value of type TEST_STEP.
 		logs is a type of wasImpactedBy.

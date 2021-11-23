@@ -83,7 +83,14 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#TEST"/>
+        <owl:onProperty rdf:resource="PROV-S#content"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A TEST_STEP is a collection of TESTs that are performed in a single execution</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST_RESULT">
     <rdfs:subClassOf>
@@ -99,7 +106,14 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST_RECORD">
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#TEST_RESULT"/>
+        <owl:onProperty rdf:resource="PROV-S#content"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">a TEST_RECORD is a collection of TEST_RESULTs assoicated with a TEST_STEP</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST_EXECUTION">
     <rdfs:comment xml:lang="en">ACTIVITY of performing a TEST and record its corresponding TEST_RESULT</rdfs:comment>
@@ -115,11 +129,22 @@
     <rdfs:comment xml:lang="en">A TEST_LOG is the TEST_RESULTs from executing a TEST_PROCEDURE</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
+  <owl:ObjectProperty rdf:ID="executedOn">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
+    <rdfs:range rdf:resource="PROV-S#AGENT"/>
+    <rdfs:domain rdf:resource="#TEST_EXECUTION"/>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="developedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
     <rdfs:comment xml:lang="en">Entity that is responsible for producing a test, could be a person or a tool. </rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
     <rdfs:domain rdf:resource="#TEST_DEVELOPMENT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="verifies">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
+    <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT) that this test verifies</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#TEST"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="producedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
@@ -127,25 +152,32 @@
     <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
     <rdfs:domain rdf:resource="#TEST"/>
   </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#logs">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
+    <rdfs:comment xml:lang="en">The next TEST_STEP from which the TEST_RECORD is captured</rdfs:comment>
+    <rdfs:range rdf:resource="#TEST_STEP"/>
+    <rdfs:domain rdf:resource="#TEST_STEP"/>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="confirms">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
     <rdfs:comment xml:lang="en">Parent test(s) of this test result</rdfs:comment>
     <rdfs:range rdf:resource="#TEST"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="results">
-    <rdfs:comment xml:lang="en">The TEST_RESULTS that are being captured with this TEST_STEP</rdfs:comment>
-    <rdfs:range rdf:resource="#TEST_RESULT"/>
+  <owl:ObjectProperty rdf:ID="executedBy">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
+    <rdfs:comment xml:lang="en">ACTIVITY(s) that created this test result</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
+    <rdfs:domain rdf:resource="#TEST_RESULT"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#nextStep">
+    <rdfs:comment xml:lang="en">The next TEST_STEP in a sequence</rdfs:comment>
+    <rdfs:range rdf:resource="#TEST_STEP"/>
     <rdfs:domain rdf:resource="#TEST_STEP"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#nextRecord">
     <rdfs:comment xml:lang="en">The next TEST_RECORD that is the next in a sequence </rdfs:comment>
     <rdfs:range rdf:resource="#TEST_RECORD"/>
-    <rdfs:domain rdf:resource="#TEST_STEP"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="performs">
-    <rdfs:comment xml:lang="en">The TEST that are being performed with this TEST_STEP</rdfs:comment>
-    <rdfs:range rdf:resource="#TEST"/>
     <rdfs:domain rdf:resource="#TEST_STEP"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="testProcedure">
@@ -158,33 +190,5 @@
     <rdfs:comment xml:lang="en">Pass/Failed/Indeterminate status resulting from a TEST_EXECUTION</rdfs:comment>
     <rdfs:range rdf:resource="#TEST_STATUS"/>
     <rdfs:domain rdf:resource="#TEST_RESULT"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="executedOn">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
-    <rdfs:range rdf:resource="PROV-S#AGENT"/>
-    <rdfs:domain rdf:resource="#TEST_EXECUTION"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="verifies">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
-    <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENT) that this test verifies</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
-    <rdfs:domain rdf:resource="#TEST"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#logs">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
-    <rdfs:comment xml:lang="en">The next TEST_STEP from which the TEST_RECORD is captured</rdfs:comment>
-    <rdfs:range rdf:resource="#TEST_STEP"/>
-    <rdfs:domain rdf:resource="#TEST_STEP"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="executedBy">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:comment xml:lang="en">ACTIVITY(s) that created this test result</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
-    <rdfs:domain rdf:resource="#TEST_RESULT"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#nextStep">
-    <rdfs:comment xml:lang="en">The next TEST_STEP in a sequence</rdfs:comment>
-    <rdfs:range rdf:resource="#TEST_STEP"/>
-    <rdfs:domain rdf:resource="#TEST_STEP"/>
   </owl:ObjectProperty>
 </rdf:RDF>

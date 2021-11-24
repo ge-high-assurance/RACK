@@ -1,0 +1,171 @@
+uri "http://glguy.net/sadl/examples/analysis/shellcheck".
+
+import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/FILE".
+import "http://arcos.rack/AGENTS".
+
+/* This goes in an overlay */
+
+SHELLCHECK_OUTPUT
+  is a type of ANALYSIS_OUTPUT
+  described by shellCheckExitCode with a single value of type integer
+  described by scResult with values of type LINE_RESULT.
+
+LINE_RESULT
+  is a class
+  described by resultTargetFile with a single value of type FILE
+  described by resultTargetLine with a single value of type integer
+  described by finding          with a single value of type SHELLCHECK_FINDING.
+  
+SHELLCHECK_SEVERITY
+  is a class
+  must be one of {WARNING, ERROR, INFO, STYLE}.
+
+SHELLCHECK_FINDING
+  is a type of THING
+  described by referenceUrl with a single value of type string
+  described by severity with a single value of type SHELLCHECK_SEVERITY.
+
+SHELLCHECK_INVOCATION
+  is a type of ANALYSIS
+  described by scCheckSourced with a single value of type boolean
+  described by scInclude with values of type string
+  described by scExclude with values of type string
+  described by scFormat with values of type string.
+
+/* This goes in the data */
+
+ShellScript is a FORMAT.
+MachO_Executable_x86_64 is a FORMAT.
+
+EricMertens
+  is a PERSON
+  title "Eric Mertens".
+
+ShellCheckExecutable
+  is a FILE
+  fileFormat MachO_Executable_x86_64
+  filename "~/.cabal/bin/shellcheck"
+  fileHash (a FILE_HASH
+  	hashType SHA1
+  	hashValue "1d5bb912481c4510e3e0a3896a4896d64b55d983").
+
+/* Shell check defines many checks, these are a few
+ * https://gist.github.com/eggplants/9fbe03453c3f3fd03295e88def6a1324#file-_shellcheck-csv
+ */
+SC2193
+  is a SHELLCHECK_FINDING
+  title "SC2193"
+  description "The arguments to this comparison can never be equal. Make sure your syntax is correct."
+  referenceUrl "https://github.com/koalaman/shellcheck/wiki/SC2193"
+  severity WARNING.
+
+SC2213
+  is a SHELLCHECK_FINDING
+  title "SC2213"
+  description "getopts specified -n, but it's not handled by this 'case'."
+  referenceUrl "https://github.com/koalaman/shellcheck/wiki/SC2213"
+  severity ERROR.
+
+SC2214
+  is a SHELLCHECK_FINDING
+  title "SC2214"
+  description "This case is not specified by getopts."
+  referenceUrl "https://github.com/koalaman/shellcheck/wiki/SC2214"
+  severity ERROR.
+
+SC2220
+  is a SHELLCHECK_FINDING
+  title "SC2220"
+  description "Invalid flags are not handled. Add a *) case."
+  referenceUrl "https://github.com/koalaman/shellcheck/wiki/SC2220"
+  severity WARNING.
+
+SC2221
+  is a SHELLCHECK_FINDING
+  title "SC2221"
+  description "This pattern always overrides a later one."
+  referenceUrl "https://github.com/koalaman/shellcheck/wiki/SC2221"
+  severity WARNING.
+
+SC2222
+  is a SHELLCHECK_FINDING
+  title "SC2222"
+  description "This pattern never matches because of a previous pattern."
+  referenceUrl "https://github.com/koalaman/shellcheck/wiki/SC2222" 
+  severity WARNING.
+
+ExampleSh (note "A shell script available at https://github.com/koalaman/shellcheck.net/blob/ab5e5a86c05fbc6983661f79fda844abab334c39/index.php#L62-L83")
+  is a FILE
+  fileFormat ShellScript
+  filename "example.sh"
+  generatedAtTime "2020-01-13T21:34:28Z"
+  fileHash (a FILE_HASH
+  	hashType SHA1
+  	hashValue "5235afa8d16818b33f2c302dad9f04c252bf20ca")
+  fileHash (a FILE_HASH
+  	hashType SHA2_256
+  	hashValue "1bd91469cac8d65228ab28b393d2f3b35de6f8ed40ee9364ba2a00d430479b80").
+
+RunShellCheckOnExampleSh
+  is an SHELLCHECK_INVOCATION
+  scCheckSourced true
+  analyzedWith  ShellCheckExecutable
+  analysisInput ExampleSh
+  wasAssociatedWith EricMertens
+  startedAtTime "2021-08-17T23:00:00Z"
+  endedAtTime   "2021-08-17T23:00:01Z".
+
+/* shellcheck generated output
+
+Line 6:
+  case "$param" in
+  ^-- SC2213: getopts specified -n, but it's not handled by this 'case'.
+  ^-- SC2220: Invalid flags are not handled. Add a *) case.
+ 
+Line 8:
+    v) set -x ;;
+    ^-- SC2214: This case is not specified by getopts.
+ 
+Line 13:
+  *.gz) gzip -d "$file" ;;
+  ^-- SC2221: This pattern always overrides a later one on line 15.
+ 
+Line 15:
+  *.tar.gz) tar xzf "$file" ;;
+  ^-- SC2222: This pattern never matches because of a previous pattern on line 13.
+ 
+Line 19:
+if [[ "$$(uname)" == "Linux" ]]
+                  ^-- SC2193: The arguments to this comparison can never be equal. Make sure your syntax is correct.
+
+ */
+ExampleShShellCheckReport is an SHELLCHECK_OUTPUT
+  analyzes ExampleSh
+  wasGeneratedBy RunShellCheckOnExampleSh
+  shellCheckExitCode 1
+  scResult (a LINE_RESULT
+    resultTargetFile ExampleSh
+    resultTargetLine 6
+    finding SC2213)
+  scResult (a LINE_RESULT
+    resultTargetFile ExampleSh
+    resultTargetLine 6
+    finding SC2220)
+  scResult (a LINE_RESULT
+    resultTargetFile ExampleSh
+    resultTargetLine 8
+    finding SC2214)
+  scResult (a LINE_RESULT
+    resultTargetFile ExampleSh
+    resultTargetLine 13
+    finding SC2221)
+  scResult (a LINE_RESULT
+    resultTargetFile ExampleSh
+    resultTargetLine 15
+    finding SC2222)
+  scResult (a LINE_RESULT
+    resultTargetFile ExampleSh
+    resultTargetLine 19
+    finding SC2193).

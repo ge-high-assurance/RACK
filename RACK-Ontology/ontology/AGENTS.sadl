@@ -41,5 +41,8 @@ PERSON (note "Person agents are people - alias for User")
 TOOL
   (note "An aid (software, hardware, etc) that automates the performance of an activity.")
   is a type of AGENT.
+  toolInstallationConfiguration describes TOOL with values of type ENTITY.
+  toolInstallationConfiguration describes TOOL with at most 1 value.
   toolVersion (note "The release version of the tool") describes TOOL with values of type string.
   toolVersion describes TOOL with at most 1 value.
+  wasQualifiedBy describes TOOL with values of type ENTITY. //AM 9/27/2021: added, do not expect more than 1 as cardinality but no need to add in about it

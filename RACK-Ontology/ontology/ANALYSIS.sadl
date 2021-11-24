@@ -22,57 +22,29 @@
 
 uri "http://arcos.rack/ANALYSIS" alias ^An.
 import "http://arcos.rack/PROV-S".
-import "http://arcos.rack/DOCUMENT".
+//import "http://arcos.rack/PROCESS".
+
+ANALYSIS
+	(note "ACTIVITY of running some analysis, and as a result creating some ANALYSIS_OUTPUT")
+	is a type of ACTIVITY.
+
+    runBy (note "Agent responsible for running the analysis.") describes ANALYSIS with values of type AGENT.
+    runBy is a type of wasAssociatedWith.
+
+    analyzedWith (note "Tool responsible for producing the output.") describes ANALYSIS with values of type AGENT. //AM 9/27/2021 was ENTITY earlier
+    analyzedWith is a type of wasAssociatedWith. //AM 9/27/2021 altered this as the previous line was altered
+    
+    analysisInput (note "Entities targetted by the analysis.") describes ANALYSIS with values of type ENTITY.
+    analysisInput is a type of used.
+
+    analysisConfiguration (note "Parameters/options etc. for the tool used.") describes ANALYSIS with values of type ENTITY.
+    analysisConfiguration is a type of used.
+
 
 ANALYSIS_OUTPUT
     (note "Output of an ANALYSIS")
     is a type of ENTITY.
 
-    result (note "Passed/Failed/Indeterminate status of this report") describes ANALYSIS_OUTPUT with values of type ANALYSIS_RESULT.
-    result describes ANALYSIS_OUTPUT with at most 1 value.
-
-    metric (note "provides a numerical result value from the analysis that was performed") describes ANALYSIS_OUTPUT with values of type float.
-
     analyzes (note "ENTITY(s) under analysis") describes ANALYSIS_OUTPUT with values of type ENTITY.
     analyzes is a type of wasImpactedBy.
 
-    producedBy (note "ACTIVITY(s) (e.g. ANALYSIS) producing this report") describes ANALYSIS_OUTPUT with values of type ACTIVITY.
-    producedBy is a type of wasGeneratedBy.
-
-ANALYSIS_RESULT (note "Outcome of an analysis")
-    is a type of THING,
-    must be one of {Passed, Failed, Indeterminate}.
-Passed        is an ANALYSIS_RESULT with identifier "Passed".
-Failed        is an ANALYSIS_RESULT with identifier "Failed".
-Indeterminate is an ANALYSIS_RESULT with identifier "Indeterminate".
-
-ANALYSIS
-	(note "ACTIVITY of running some analysis, and as a result creating some ANALYSIS_REPORT")
-	is a type of ACTIVITY.
-
-    performedBy (note "Entity that is responsible for producing an analysis, could be a person or a tool. ") describes ANALYSIS with values of type AGENT.
-    performedBy is a type of wasAssociatedWith.
-
-ANALYSIS_ANNOTATION_TYPE
-    (note "An open/extensible set of types of analysis annotations")
-    is a type of THING.
-
-// A few common instances:
-PRECONDITION
-    (note "A constraint that should hold in advance of successful operation of this unit of code.")
-    is an ANALYSIS_ANNOTATION_TYPE,
-    with identifier "Precondition".
-POSTCONDITION
-    (note "A constraint that should hold after of successful operation of this unit of code.")
-    is an ANALYSIS_ANNOTATION_TYPE,
-    with identifier "Postcondition".
-INVARIANT
-    (note "A constraint on this unit of code or data that is true at any point in the program's execution.")
-    is an ANALYSIS_ANNOTATION_TYPE,
-    with identifier "Invariant".
-
-ANALYSIS_ANNOTATION
-    (note "A result of the analysis that is linked to some specific part of the system.")
-    is a type of ENTITY.
-    fromReport (note "Which analysis report this annotation comes from.") describes ANALYSIS_ANNOTATION with a single value of type ANALYSIS_OUTPUT.
-    annotationType (note "The type of the annotation.") describes ANALYSIS_ANNOTATION with a single value of type ANALYSIS_ANNOTATION_TYPE.

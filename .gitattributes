@@ -1,3 +1,4 @@
-*.owl -diff -merge
+**/OwlModels/SadlImplicitModel.owl -diff -merge
+**/OwlModels/*.rdf -diff -merge
 nodegroups/ingestion/*/ingest_*.json -diff -merge
 nodegroups/queries/*/query*.json -diff -merge

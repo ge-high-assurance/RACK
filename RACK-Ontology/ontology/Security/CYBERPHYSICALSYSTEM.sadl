@@ -21,7 +21,7 @@ DAL (note "Design Assurance Level") is a type of int [0,9]. // default value is 
 CyberPhysicalSystem is a type of SYSTEM
 	described by componentType with a single value of type ComponentType
 	described by implProperty with values of type ImplProperty
-	described by component with values of type Subsystem
+	//described by component with values of type Subsystem -->SYSTEM has partOf
 	described by inputPort with values of type Port 
 	described by outputPort with values of type Port  
 	// properties that allow for inferring threats
@@ -37,16 +37,14 @@ ImplProperty is a class
 
 ComponentType is a class, must be one of {Software, Hardware, Hybrid, Human, SwHwHybrid, SwHumanHybrid, HwHumanHybrid}.
 
-Subsystem is a type of CyberPhysicalSystem.
+//Subsystem is a type of CyberPhysicalSystem.//TODO- remove if SYSTEM has the concept of partOf
 Pedigree is a class, must be one of {InternallyDeveloped, COTS, Sourced}.  
 	
 Port is a type of ENTITY.
-Connection is a type of Subsystem 
-	described by connectionName with a single value of type string
-	described by connectionSource with a single value of type Subsystem 
+
+Connection is a type of INTERFACE
 	described by outPort with a single value of type Port 
-	described by srcPortType with a single value of type PortType 
-	described by connectionDestination with a single value of type Subsystem
+	described by srcPortType with a single value of type PortType
 	described by inPort with a single value of type Port 
 	described by destPortType with a single value of type PortType 
 	// properties that allow for inferring threats	
@@ -54,6 +52,7 @@ Connection is a type of Subsystem
 	described by dataSentIsUntrusted with a single value of type boolean 
 	described by dataReceivedIsUntrusted with a single value of type boolean 	
     described by infoFlowSeverity with a single value of type int. 
+
 
 PortType is a class, must be one of {inport, outport}.
 ConnectionType is a class, must be one of {Trusted, Untrusted}.	

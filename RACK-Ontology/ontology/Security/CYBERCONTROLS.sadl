@@ -22,7 +22,7 @@ CONTROL //should we distinguish between control and control-implementation (if y
 	strength (note "strength of the CONTROL") describes CONTROL with values of type int [1,5].
    	strength describes CONTROL with at most 1 value.
    	
-   	Ctrl:mitigates (note "e.g. ATTACK OR THREAT that is being mitigated by this CONTROL") describes CONTROL with values of type ENTITY.
+   	Ctrl:mitigates (note "e.g. THREAT that is being mitigated by this CONTROL") describes CONTROL with values of type ENTITY.
 	Ctrl:mitigates is a type of wasImpactedBy.
 
 CONTROLSET is a type of COLLECTION.

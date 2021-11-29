@@ -35,7 +35,7 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="FORMAT">
-    <rdfs:comment xml:lang="en">The data format of a FILE</rdfs:comment>
+    <rdfs:comment xml:lang="en">High-level file formats</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
   </owl:Class>
   <owl:Class rdf:ID="HASH_TYPE">
@@ -95,7 +95,7 @@
     <rdfs:domain rdf:resource="PROV-S#THING"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="fileFormat">
-    <rdfs:comment xml:lang="en">The byte-level encoding of a file</rdfs:comment>
+    <rdfs:comment xml:lang="en">The high-level format of a file. </rdfs:comment>
     <rdfs:range rdf:resource="#FORMAT"/>
     <rdfs:domain rdf:resource="#FILE"/>
   </owl:ObjectProperty>

@@ -1,17 +1,28 @@
 uri "http://arcos.AH-64D/Boeing" alias BoeingModel.
+import "http://arcos.rack/AGENTS".
+import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/CONFIDENCE".
+import "http://arcos.rack/DOCUMENT".
 import "http://arcos.rack/FILE".
+import "http://arcos.rack/HAZARD".
+import "http://arcos.rack/MODEL".
+import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/REVIEW".
+import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/TESTING".
+// import "http://common/DO-178C".
 
-PIDS_Req (note "A Requirement identified in the Prime Item Development Specification")is a type of REQUIREMENT.
+PIDS_Req (note "A Requirement identified in the Prime Item Development Specification") is a type of REQUIREMENT.
 
 CSID_Req (note "A Requirement identified in the Crew Systems Interface Document") is a type of REQUIREMENT.
 
-SRS_Req (note "A Requirement identified in the Software Requirements Specification")is a type of REQUIREMENT.
+SRS_Req (note "A Requirement identified in the Software Requirements Specification") is a type of REQUIREMENT.
 //satisfies of SRS_Req only has values of type {PIDS_Req or CSID_Req}.
 
-SubDD_Req (note "A Requirement identified in the Subsystem Design Document")is a type of REQUIREMENT.
-Rq:satisfies of SubDD_Req only has values of type SRS_Req.
+SubDD_Req (note "A Requirement identified in the Subsystem Design Document") is a type of REQUIREMENT. 
+Rq:satisfies of SubDD_Req only has values of type SRS_Req. //AM move this and why warning marker
 
 SBVT_Test (note "A test identified in the Software Baseline Verification Tests") is a type of TEST.
 //verifies of SBVT_Test only has values of type {SRS_Req or SubDD_Req}.
@@ -19,6 +30,69 @@ verifies of SBVT_Test has at least 1 value.
 
 SBVT_Result (note "A result identified for a SBVT_Test (Software Baseline Verification Tests)") is a type of TEST_RESULT.
 confirms of SBVT_Result only has values of type SBVT_Test.
+
+////////////////////////////////////// Moved from SRI ontology
+//AM: replaced author by wasAssociatedWith in DevelopSystemConOps
+//AM: dropped author in DevelopSystemArchitecture as we inherit wasAssociatedWith
+//AM: do we want more granularity than just wasAssociatedWith
+
+     DevelopSystemConOps is a type of ACTIVITY.
+       wasAssociatedWith of DevelopSystemConOps only has values of type PERSON.
+       
+     SystemConOps is a type of ENTITY.
+       wasGeneratedBy of SystemConOps only has values of type DevelopSystemConOps.
+       conOpsDocs describes SystemConOps with values of type DOCUMENT.  
+     
+     DevelopSystemArchitecture is a type of ACTIVITY.  
+        wasInformedBy of DevelopSystemArchitecture only has values of type DevelopSystemConOps.
+        used of DevelopSystemArchitecture only has values of type SystemConOps. 
+
+     SystemArchitecture (note "specification of system architecture") is a type of ENTITY. 
+      //AM what is the difference between wasGeneratedBy and original DesCert:createdBy? so using wasGeneratedBy
+       wasGeneratedBy of SystemArchitecture only has values of type DevelopSystemArchitecture. 
+       isArchitectureOf describes SystemArchitecture with values of type SYSTEM.
+       isArchitectureOf is a type of wasImpactedBy.
+
+     SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
+       wasInformedBy of SystemRequirementsDefinition only has values of type DevelopSystemConOps. 
+     
+      PIDS_Doc is a type of DOCUMENT. 
+       content of PIDS_Doc only has values of type PIDS_Req. 
+       wasGeneratedBy of PIDS_Doc only has values of type SystemRequirementsDefinition. 
+        
+      SoftwareHighLevelRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
+		wasInformedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementsDefinition or DevelopSystemArchitecture}.
+        Rq:governedBy of SoftwareHighLevelRequirementsDefinition only has values of type {PIDS_Doc or SystemArchitecture}.
+
+//      SoftwareHighLevelRequirement is a type of REQUIREMENT. 
+//        wasGeneratedBy of SoftwareHighLevelRequirement only has values of type SoftwareHighLevelRequirementsDefinition.
+       
+     SRS_Doc is a type of DOCUMENT. 
+       content of SRS_Doc only has values of type SRS_Req. //AM only?
+       createdBy of SRS_Doc only has values of type SoftwareHighLevelRequirementsDefinition.
+       
+     SubDD_Doc is a type of DOCUMENT. 
+//       content of SubDD_Doc only has values of type SoftwareLowLevelRequirement. 
+       content of SubDD_Doc only has values of type SubDD_Req. 
+       createdBy of SubDD_Doc only has values of type SoftwareDesign. 
+       governs of SubDD_Doc only has values of type SWCOMPONENT.
+       governs describes SubDD_Doc with at most 1 value.
+
+     SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
+		wasInformedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementsDefinition or DevelopSystemArchitecture}.
+        Rq:governedBy of SoftwareDesign only has values of type {SRS_Doc or SystemArchitecture}.
+       
+//     SoftwareLowLevelRequirement is a type of REQUIREMENT.
+//        wasGeneratedBy of SoftwareLowLevelRequirement only has values of type SoftwareDesign.
+       
+     SoftwareCoding is a type of CODE_DEVELOPMENT. 
+        wasInformedBy of SoftwareCoding only has values of type SoftwareDesign.        
+
+//      SoftwareIntegration is a type of COMPILE.
+//        wasInformedBy of SoftwareIntegration only has values of type SoftwareCoding.        
+//        compileWithOptimizations describes  SoftwareIntegration with values of type boolean.     
+//        linkerPath describes  SoftwareIntegration with values of type string.       
+
 
 // COMMON FILE FORMATS
 

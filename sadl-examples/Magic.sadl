@@ -1,0 +1,13 @@
+uri "http://glguy.net/magic".
+
+
+C is a class
+  described by rel with values of type C.
+X is a type of C.
+Y is a type of C.
+
+rel of C only has values of type {X or Y}.
+
+abool describes C with values of type boolean.
+
+I is a C abool false.

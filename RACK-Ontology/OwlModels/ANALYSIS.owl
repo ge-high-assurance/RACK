@@ -16,19 +16,6 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'ANALYSIS.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:Class rdf:ID="ANALYSIS_RESULT">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="fromOutput"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:comment xml:lang="en">A result of the analysis that is linked to some specific part of the system.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
-  </owl:Class>
   <owl:Class rdf:ID="ANALYSIS_OUTPUT">
     <rdfs:comment xml:lang="en">Output of an ANALYSIS</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
@@ -37,31 +24,22 @@
     <rdfs:comment xml:lang="en">ACTIVITY of running some analysis, and as a result creating some ANALYSIS_OUTPUT</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
-  <owl:Class rdf:ID="ANALYSIS_FINDING">
-    <rdfs:comment xml:lang="en">An open/extensible set of analysis findings.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
-  </owl:Class>
   <owl:ObjectProperty rdf:ID="analyzedWith">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
-    <rdfs:comment xml:lang="en">Agent responsible for producing the output.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Tool responsible for producing the output.</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
     <rdfs:domain rdf:resource="#ANALYSIS"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="producedBy">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:comment xml:lang="en">ACTIVITY(s) (e.g. ANALYSIS) producing this output</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
-    <rdfs:domain rdf:resource="#ANALYSIS_OUTPUT"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#fromOutput">
-    <rdfs:comment xml:lang="en">Which analysis report this annotation comes from.</rdfs:comment>
-    <rdfs:range rdf:resource="#ANALYSIS_OUTPUT"/>
-    <rdfs:domain rdf:resource="#ANALYSIS_RESULT"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="runBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
     <rdfs:comment xml:lang="en">Agent responsible for running the analysis.</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
+    <rdfs:domain rdf:resource="#ANALYSIS"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="analysisInput">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">Entities targetted by the analysis.</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#ANALYSIS"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="analyzes">
@@ -70,9 +48,10 @@
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#ANALYSIS_OUTPUT"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="finding">
-    <rdfs:comment xml:lang="en">Individual elements of the result.</rdfs:comment>
-    <rdfs:range rdf:resource="#ANALYSIS_FINDING"/>
-    <rdfs:domain rdf:resource="#ANALYSIS_RESULT"/>
+  <owl:ObjectProperty rdf:ID="analysisConfiguration">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">Parameters/options etc. for the tool used.</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#ANALYSIS"/>
   </owl:ObjectProperty>
 </rdf:RDF>

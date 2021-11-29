@@ -93,7 +93,7 @@ DefineRequirements
          importing them into RACK. The requirement
          existed before the SADL writing started.")
   is a REQUIREMENT_DEVELOPMENT,
-  author Dave,
+  wasAssociatedWith Dave,
   startedAtTime "2020-11-06 12:34Z",
   dataInsertedBy WriteSomeSadl.
 
@@ -102,7 +102,7 @@ DefineRequirements
 ExplanatoryRequirement
   (note "The requirement to produce a tutorial.")
   is a REQUIREMENT
-  createdBy DefineRequirements
+  wasGeneratedBy DefineRequirements
   dataInsertedBy WriteSomeSadl
   description
         "Help RACK users understand the difference between

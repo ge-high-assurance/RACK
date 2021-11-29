@@ -16,13 +16,13 @@
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'REQUIREMENTS.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:Class rdf:ID="REQUIREMENT">
-    <rdfs:comment xml:lang="en">Captures (both high- and low-level) properties of a process or artifact that are to be assessed</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
-  </owl:Class>
   <owl:Class rdf:ID="REQUIREMENT_DEVELOPMENT">
     <rdfs:comment xml:lang="en">ACTIVITY that produces REQUIREMENTs</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="REQUIREMENT">
+    <rdfs:comment xml:lang="en">Captures (both high- and low-level) properties of a process or artifact that are to be assessed</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="DATA_DICTIONARY_TERM">
     <rdfs:comment xml:lang="en">Defines some conceptual data that may be collected somewhere and used somewhere else</rdfs:comment>
@@ -40,31 +40,11 @@
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#REQUIREMENT"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="author">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
-    <rdfs:comment xml:lang="en">AGENT(s) responsible for producing a REQUIREMENT</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#AGENT"/>
-    <rdfs:domain rdf:resource="#REQUIREMENT_DEVELOPMENT"/>
-  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="governedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
     <rdfs:comment xml:lang="en">ENTITY(s) (e.g. REQUIREMENTS, any sort of document) used during this ACTIVITY</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#REQUIREMENT_DEVELOPMENT"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="createdBy">
-    <rdfs:comment xml:lang="en">ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term</rdfs:comment>
-    <rdfs:domain>
-      <owl:Class>
-        <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#REQUIREMENT"/>
-          <owl:Class rdf:about="#DATA_DICTIONARY_TERM"/>
-        </owl:unionOf>
-      </owl:Class>
-    </rdfs:domain>
-    <rdfs:comment xml:lang="en">ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="referenced">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>

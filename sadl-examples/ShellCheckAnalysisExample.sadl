@@ -51,6 +51,9 @@ ShellCheckExecutable
   	hashType SHA1
   	hashValue "1d5bb912481c4510e3e0a3896a4896d64b55d983").
 
+ShellCheck is a TOOL
+  definedIn ShellCheckExecutable.
+
 /* Shell check defines many checks, these are a few
  * https://gist.github.com/eggplants/9fbe03453c3f3fd03295e88def6a1324#file-_shellcheck-csv
  */
@@ -111,7 +114,7 @@ ExampleSh (note "A shell script available at https://github.com/koalaman/shellch
 RunShellCheckOnExampleSh
   is an SHELLCHECK_INVOCATION
   scCheckSourced true
-  analyzedWith  ShellCheckExecutable
+  analyzedWith  ShellCheck
   analysisInput ExampleSh
   wasAssociatedWith EricMertens
   startedAtTime "2021-08-17T23:00:00Z"

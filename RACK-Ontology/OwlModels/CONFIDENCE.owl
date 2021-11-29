@@ -19,8 +19,9 @@
   <owl:Class rdf:ID="CONFIDENCE_ASSESSMENT">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
+        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
+        >1</owl:qualifiedCardinality>
         <owl:onProperty>
           <owl:DatatypeProperty rdf:ID="uncertainty"/>
         </owl:onProperty>
@@ -28,8 +29,9 @@
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
+        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
+        >1</owl:qualifiedCardinality>
         <owl:onProperty>
           <owl:DatatypeProperty rdf:ID="disbelief"/>
         </owl:onProperty>
@@ -37,8 +39,9 @@
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
+        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
+        >1</owl:qualifiedCardinality>
         <owl:onProperty>
           <owl:DatatypeProperty rdf:ID="belief"/>
         </owl:onProperty>
@@ -69,18 +72,6 @@
     <rdfs:comment xml:lang="en">ENTITY(s) whose confidence is assessed</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#CONFIDENCE_ASSESSMENT"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="createBy">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:comment xml:lang="en">ACTIVITY(s) (e.g. ASSESSING_CONFIDENCE) that created this assessment.</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
-    <rdfs:domain rdf:resource="#CONFIDENCE_ASSESSMENT"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="performedBy">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
-    <rdfs:comment xml:lang="en">ENTITY responsible for producing the assessment, could be a person or a tool</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#AGENT"/>
-    <rdfs:domain rdf:resource="#ASSESSING_CONFIDENCE"/>
   </owl:ObjectProperty>
   <owl:DatatypeProperty rdf:about="#belief">
     <rdfs:comment xml:lang="en">belief that an assessment is true</rdfs:comment>

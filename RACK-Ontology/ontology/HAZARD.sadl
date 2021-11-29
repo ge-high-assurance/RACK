@@ -36,8 +36,6 @@ HAZARD
 	H:source (note "ENTITY(s) that participate in causing this HAZARD") describes HAZARD with values of type ENTITY.
 	H:source is a type of wasImpactedBy.
 
-	identified (note "how this HAZARD was identified") describes HAZARD with values of type HAZARD_IDENTIFICATION.
-
 	effect (note "consequence(s) of the HAZARD") describes HAZARD with values of type string.
    	effect describes HAZARD with at most 1 value.
 
@@ -53,6 +51,3 @@ HAZARD
 HAZARD_IDENTIFICATION
 	(note "ACTIVITY that identifies potential sources of HAZARD whose risk must be evaluated")
 	is a type of ACTIVITY.
-
-	H:author (note "AGENT(s) who work on this ACTIVITY") describes HAZARD_IDENTIFICATION with values of type AGENT.
-	H:author is a type of wasAssociatedWith.

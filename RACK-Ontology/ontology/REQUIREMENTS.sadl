@@ -36,9 +36,6 @@ REQUIREMENT
 	Rq:mitigates (note "ENTITY(s) (e.g. HAZARD) that is being mitigated by this REQUIREMENT") describes REQUIREMENT with values of type ENTITY.
 	Rq:mitigates is a type of wasImpactedBy.
 
-	Rq:createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this REQUIREMENT") describes REQUIREMENT with values of type ACTIVITY.
-	Rq:createdBy is a type of wasGeneratedBy.
-
 DATA_DICTIONARY_TERM
 	(note "Defines some conceptual data that may be collected somewhere and used somewhere else")
 	is a type of ENTITY.
@@ -49,16 +46,10 @@ DATA_DICTIONARY_TERM
 	consumedBy (note "ENTITY(s) (e.g. REQUIREMENT) that consumes this information") describes DATA_DICTIONARY_TERM with values of type ENTITY.
 	consumedBy is a type of wasImpactedBy.
 
-	Rq:createdBy (note "ACTIVITY(s) (e.g. REQUIREMENT_DEVELOPMENT) that created this data dictionary term") describes DATA_DICTIONARY_TERM with values of type ACTIVITY.
-	Rq:createdBy is a type of wasGeneratedBy.
-
 
 REQUIREMENT_DEVELOPMENT
 	(note "ACTIVITY that produces REQUIREMENTs")
 	is a type of ACTIVITY.
-
-	Rq:author (note "AGENT(s) responsible for producing a REQUIREMENT") describes REQUIREMENT_DEVELOPMENT with values of type AGENT.
-	Rq:author is a type of wasAssociatedWith.
 
 	Rq:referenced (note "Source materials (requirement and design docs) used during development") describes REQUIREMENT_DEVELOPMENT with values of type ENTITY.
 	Rq:referenced is a type of used.

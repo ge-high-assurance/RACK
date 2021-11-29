@@ -55,6 +55,7 @@ def instantiate_template(commit_id: str) -> None:
     # calling sed here is slightly different based on what OS you're on... so
     # let's just replace in Python
     for line in fileinput.input(file, inplace=True):
+        line = str(line)
         if "<COMMIT_ID>" in line:
             sys.stdout.write(f'    number="{commit_id}",\n')
         elif "<COMMAND>" in line:
@@ -82,6 +83,7 @@ def add_commit_to_list_of_all_commits(commits_file: str, commit_id: str) -> None
     and that's left to the user at the moment.
     """
     for line in fileinput.input(commits_file, inplace=True):
+        line = str(line)
         sys.stdout.write(line)
         if "<CHANGE_CRAWLER_IMPORTS>" in line:
             sys.stdout.write(f"    commit{commit_id},\n")

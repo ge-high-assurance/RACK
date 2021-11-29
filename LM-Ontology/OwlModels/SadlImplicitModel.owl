@@ -167,6 +167,21 @@
       </owl:Restriction>
     </rdfs:subClassOf>
   </owl:Class>
+  <owl:Class rdf:nodeID="A1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:nodeID="A1"/>
+        <owl:onProperty rdf:resource="sadllistmodel#rest"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DataDescriptor"/>
+        <owl:onProperty rdf:resource="sadllistmodel#first"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="sadllistmodel#List"/>
+  </owl:Class>
   <owl:Class rdf:ID="ExternalEquation">
     <rdfs:subClassOf>
       <owl:Restriction>
@@ -182,16 +197,16 @@
   </owl:Class>
   <owl:Class rdf:ID="GPAtom"/>
   <owl:Class rdf:ID="Language"/>
-  <owl:Class rdf:nodeID="A4">
+  <owl:Class rdf:nodeID="A3">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:nodeID="A4"/>
+        <owl:allValuesFrom rdf:nodeID="A3"/>
         <owl:onProperty rdf:resource="sadllistmodel#rest"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="#anyDataType"/>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <owl:onProperty rdf:resource="sadllistmodel#first"/>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -200,7 +215,9 @@
   <owl:Class rdf:ID="DataTableRow">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onClass rdf:nodeID="A4"/>
+        <owl:onClass>
+          <owl:Class rdf:nodeID="A4"/>
+        </owl:onClass>
         <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
         >1</owl:qualifiedCardinality>
         <owl:onProperty>
@@ -208,6 +225,21 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:nodeID="A2">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:nodeID="A2"/>
+        <owl:onProperty rdf:resource="sadllistmodel#rest"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#GPAtom"/>
+        <owl:onProperty rdf:resource="sadllistmodel#first"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="sadllistmodel#List"/>
   </owl:Class>
   <owl:Class rdf:ID="ScientificConcept"/>
   <owl:Class rdf:ID="SemanticType">
@@ -224,36 +256,6 @@
     <rdfs:subClassOf>
       <owl:Class rdf:ID="AugmentedType"/>
     </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:nodeID="A1">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:nodeID="A1"/>
-        <owl:onProperty rdf:resource="sadllistmodel#rest"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="#DataDescriptor"/>
-        <owl:onProperty rdf:resource="sadllistmodel#first"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="sadllistmodel#List"/>
-  </owl:Class>
-  <owl:Class rdf:nodeID="A2">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:nodeID="A2"/>
-        <owl:onProperty rdf:resource="sadllistmodel#rest"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="#GPAtom"/>
-        <owl:onProperty rdf:resource="sadllistmodel#first"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="sadllistmodel#List"/>
   </owl:Class>
   <owl:Class rdf:ID="Script">
     <rdfs:subClassOf>
@@ -280,23 +282,23 @@
   <owl:Class rdf:ID="UnittedQuantity">
     <rdfs:subClassOf rdf:resource="#ScientificConcept"/>
   </owl:Class>
-  <owl:Class rdf:ID="GPLiteralValue">
-    <rdfs:subClassOf rdf:resource="#GPAtom"/>
-  </owl:Class>
-  <owl:Class rdf:nodeID="A3">
+  <owl:Class rdf:nodeID="A0">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:nodeID="A3"/>
+        <owl:allValuesFrom rdf:nodeID="A0"/>
         <owl:onProperty rdf:resource="sadllistmodel#rest"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <owl:allValuesFrom rdf:resource="#DataTableRow"/>
         <owl:onProperty rdf:resource="sadllistmodel#first"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf rdf:resource="sadllistmodel#List"/>
+  </owl:Class>
+  <owl:Class rdf:ID="GPLiteralValue">
+    <rdfs:subClassOf rdf:resource="#GPAtom"/>
   </owl:Class>
   <owl:Class rdf:ID="GPVariable">
     <rdfs:subClassOf>
@@ -330,26 +332,10 @@
     <rdfs:comment xml:lang="en">used to identify necessary patterns in semantic domain terms</rdfs:comment>
     <rdfs:subClassOf rdf:resource="#AugmentedType"/>
   </owl:Class>
-  <owl:Class rdf:nodeID="A0">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:nodeID="A0"/>
-        <owl:onProperty rdf:resource="sadllistmodel#rest"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="#DataTableRow"/>
-        <owl:onProperty rdf:resource="sadllistmodel#first"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="sadllistmodel#List"/>
-  </owl:Class>
   <owl:Class rdf:ID="TriplePattern">
     <rdfs:subClassOf rdf:resource="#GraphPattern"/>
   </owl:Class>
   <owl:Class rdf:ID="Rule"/>
-  <owl:Class rdf:ID="NamedQuery"/>
   <owl:Class rdf:nodeID="A5">
     <rdfs:subClassOf>
       <owl:Restriction>
@@ -360,6 +346,22 @@
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="#GraphPattern"/>
+        <owl:onProperty rdf:resource="sadllistmodel#first"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="sadllistmodel#List"/>
+  </owl:Class>
+  <owl:Class rdf:ID="NamedQuery"/>
+  <owl:Class rdf:nodeID="A4">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:nodeID="A4"/>
+        <owl:onProperty rdf:resource="sadllistmodel#rest"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#anyDataType"/>
         <owl:onProperty rdf:resource="sadllistmodel#first"/>
       </owl:Restriction>
     </rdfs:subClassOf>

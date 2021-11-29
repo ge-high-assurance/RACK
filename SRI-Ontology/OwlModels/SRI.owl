@@ -57,7 +57,11 @@
       <owl:Restriction>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
         >1</owl:maxCardinality>
-        <owl:onProperty rdf:resource="http://arcos.rack/REQUIREMENTS#governs"/>
+        <owl:onProperty>
+          <rdf:Description rdf:about="http://arcos.rack/REQUIREMENTS#governs">
+            <rdfs:domain rdf:resource="#SoftwareLowLevelRequirementSet"/>
+          </rdf:Description>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
@@ -327,7 +331,11 @@
       <owl:Restriction>
         <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
         >1</owl:cardinality>
-        <owl:onProperty rdf:resource="http://arcos.rack/TESTING#verifies"/>
+        <owl:onProperty>
+          <rdf:Description rdf:about="http://arcos.rack/TESTING#verifies">
+            <rdfs:domain rdf:resource="#TestOracle"/>
+          </rdf:Description>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>

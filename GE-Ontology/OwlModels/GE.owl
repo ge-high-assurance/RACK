@@ -1,12 +1,23 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:Ag="http://arcos.rack/AGENTS#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:turnstile="http://arcos.turnstile/GE#"
+    xmlns:Pr="http://arcos.rack/PROCESS#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:Rv="http://arcos.rack/REVIEW#"
+    xmlns:D="http://arcos.rack/DOCUMENT#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
+    xmlns:Rq="http://arcos.rack/REQUIREMENTS#"
+    xmlns:H="http://arcos.rack/HAZARD#"
+    xmlns:sw="http://arcos.rack/SOFTWARE#"
+    xmlns:sys="http://arcos.rack/SYSTEM#"
+    xmlns:An="http://arcos.rack/ANALYSIS#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:DO-178C="http://common/DO-178C#"
+    xmlns:turnstile="http://arcos.turnstile/GE#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:tst="http://arcos.rack/TESTING#"
   xml:base="http://arcos.turnstile/GE">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="http://arcos.rack/SOFTWARE"/>
@@ -70,7 +81,7 @@
         <owl:allValuesFrom>
           <owl:Class rdf:ID="SoftwareDesign"/>
         </owl:allValuesFrom>
-        <owl:onProperty rdf:resource="http://arcos.rack/REQUIREMENTS#createdBy"/>
+        <owl:onProperty rdf:resource="#createdBy"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf rdf:resource="http://arcos.rack/REQUIREMENTS#DATA_DICTIONARY_TERM"/>

@@ -14,6 +14,7 @@
     xmlns:sw="http://arcos.rack/SOFTWARE#"
     xmlns:M="http://arcos.rack/MODEL#"
     xmlns:BoeingModel="http://arcos.AH-64D/Boeing#"
+    xmlns:j.0="http://arcos.rack/PROV-S#"
     xmlns:sys="http://arcos.rack/SYSTEM#"
     xmlns:An="http://arcos.rack/ANALYSIS#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
@@ -171,7 +172,11 @@
       <owl:Restriction>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
         >1</owl:maxCardinality>
-        <owl:onProperty rdf:resource="http://arcos.rack/REQUIREMENTS#governs"/>
+        <owl:onProperty>
+          <rdf:Description rdf:about="http://arcos.rack/REQUIREMENTS#governs">
+            <rdfs:domain rdf:resource="#SubDD_Doc"/>
+          </rdf:Description>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
@@ -295,4 +300,120 @@
     <rdfs:range rdf:resource="http://arcos.rack/SYSTEM#SYSTEM"/>
     <rdfs:domain rdf:resource="#SystemArchitecture"/>
   </owl:ObjectProperty>
+  <file:FORMAT rdf:ID="JsonFormat">
+    <j.0:identifier>json</j.0:identifier>
+    <rdfs:comment xml:lang="en">JavaScript Object Notation file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="EmlFormat">
+    <j.0:identifier>eml</j.0:identifier>
+    <rdfs:comment xml:lang="en">Email file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="ExecutableFormat">
+    <j.0:identifier>exe</j.0:identifier>
+    <rdfs:comment xml:lang="en">Executable file format: e.g. exe, com, elf, macho</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="XlsFormat">
+    <j.0:identifier>xls</j.0:identifier>
+    <rdfs:comment xml:lang="en">Microsoft Excel spreadsheet file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="TextFormat">
+    <j.0:identifier>txt</j.0:identifier>
+    <rdfs:comment xml:lang="en">Plain text file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="YamlFormat">
+    <j.0:identifier>yaml</j.0:identifier>
+    <rdfs:comment xml:lang="en">Yet Another Markup Language file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="AdaFormat">
+    <j.0:identifier>ada</j.0:identifier>
+    <rdfs:comment xml:lang="en">Ada source file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="IniFormat">
+    <j.0:identifier>ini</j.0:identifier>
+    <rdfs:comment xml:lang="en">Initialization configuration file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="ShellFormat">
+    <j.0:identifier>sh</j.0:identifier>
+    <rdfs:comment xml:lang="en">Shell script file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="ObjectFormat">
+    <j.0:identifier>obj</j.0:identifier>
+    <rdfs:comment xml:lang="en">Intermediate compiler outputs: e.g. o, coff</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="LibraryFormat">
+    <j.0:identifier>lib</j.0:identifier>
+    <rdfs:comment xml:lang="en">Library file format: e.g. dylib, lib, a, dll</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="PngFormat">
+    <j.0:identifier>png</j.0:identifier>
+    <rdfs:comment xml:lang="en">Portable Network Graphics image file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="PdfFormat">
+    <j.0:identifier>pdf</j.0:identifier>
+    <rdfs:comment xml:lang="en">PDF file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="SysmlFormat">
+    <j.0:identifier>sysml</j.0:identifier>
+    <rdfs:comment xml:lang="en">Systems Modeling Language file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="PythonFormat">
+    <j.0:identifier>py</j.0:identifier>
+    <rdfs:comment xml:lang="en">Python source file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="GifFormat">
+    <j.0:identifier>gif</j.0:identifier>
+    <rdfs:comment xml:lang="en">Graphics Interchange Format image file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="TiffFormat">
+    <j.0:identifier>tiff</j.0:identifier>
+    <rdfs:comment xml:lang="en">Tag Image File Format image file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="CxxFormat">
+    <j.0:identifier>cpp</j.0:identifier>
+    <rdfs:comment xml:lang="en">C++ source file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="DocFormat">
+    <j.0:identifier>doc</j.0:identifier>
+    <rdfs:comment xml:lang="en">Microsoft Word document file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="JpegFormat">
+    <j.0:identifier>jpeg</j.0:identifier>
+    <rdfs:comment xml:lang="en">Joint Photographic Exports Group image file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="SvgFormat">
+    <j.0:identifier>svg</j.0:identifier>
+    <rdfs:comment xml:lang="en">Scalable Vector Graphics image file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="TomlFormat">
+    <j.0:identifier>toml</j.0:identifier>
+    <rdfs:comment xml:lang="en">Tom's Obvious Minimal Language file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="ArchiveFormat">
+    <j.0:identifier>archive</j.0:identifier>
+    <rdfs:comment xml:lang="en">File archive file format: e.g. zip, tar, rar</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="CsvFormat">
+    <j.0:identifier>csv</j.0:identifier>
+    <rdfs:comment xml:lang="en">Comma separated values file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="CFormat">
+    <j.0:identifier>c</j.0:identifier>
+    <rdfs:comment xml:lang="en">C source file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="XmlFormat">
+    <j.0:identifier>xml</j.0:identifier>
+    <rdfs:comment xml:lang="en">Extensible Markup Language file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="TsvFormat">
+    <j.0:identifier>tsv</j.0:identifier>
+    <rdfs:comment xml:lang="en">Tab separated values file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="PptFormat">
+    <j.0:identifier>ppt</j.0:identifier>
+    <rdfs:comment xml:lang="en">Microsoft PowerPoint file format</rdfs:comment>
+  </file:FORMAT>
+  <file:FORMAT rdf:ID="BmpFormat">
+    <j.0:identifier>bmp</j.0:identifier>
+    <rdfs:comment xml:lang="en">Bitmap image file format</rdfs:comment>
+  </file:FORMAT>
 </rdf:RDF>

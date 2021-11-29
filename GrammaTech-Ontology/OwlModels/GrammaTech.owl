@@ -1,18 +1,13 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
-    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:D="http://arcos.rack/DOCUMENT#"
-    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
-    xmlns:Rq="http://arcos.rack/REQUIREMENTS#"
-    xmlns:sw="http://arcos.rack/SOFTWARE#"
-    xmlns:M="http://arcos.rack/MODEL#"
     xmlns:j.0="http://arcos.rack/PROV-S#"
+    xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:Acert="http://arcos.acert/GrammaTech#"
+    xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:tst="http://arcos.rack/TESTING#"
   xml:base="http://arcos.acert/GrammaTech">
   <owl:Ontology rdf:about="">
     <owl:imports rdf:resource="http://arcos.rack/MODEL"/>

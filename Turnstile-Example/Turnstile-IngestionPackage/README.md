@@ -1,27 +1,36 @@
 # Instructions
 
+The following instructions assume that the user is operating from a
+checked-out (from github) version of RACK or one of the
+RACK-in-the-Box Docker or VM environments.  For either of these
+configurations, the following assumes that the `RACK` environment
+variable is set to the top of the RACK tree (`/home/ubuntu/RACK` for
+the Docker or VM environments).
+
 ## Run CLI in a virtual environment:
+Note: this step is not required when running in the RACK Docker image: the python environment is already setup and available in that image.
 Refer to the cli [README](../../cli/README.md) for installation instructions.
 ```sh
-$ cd RACK/cli
+$ cd ${RACK}/cli
 $ . venv/bin/activate
 ```
 If running on Windows, GitBash can be used with the following commands.
 ```sh
-$ cd RACK/cli
+$ cd ${RACK}/cli
 $ . venv/Scripts/activate
 ```
 
 ## Run the setup script:
 The script [setup-turnstile.sh](../../cli/setup-turnstile.sh) loads the [GE ontology overlay](../../GE-Ontology/ontology/GE.sadl). 
 ```sh
+(venv) $ cd ${RACK}/cli
 (venv) $ ./setup-turnstile.sh
 ```
 
 ## Ingest the turnstile data into RACK:
 Browse to the dataset location and load the data via the provided shell script.
 ```sh
-(venv) $ cd ../Turnstile-Example/Turnstile-IngestionPackage
+(venv) $ cd ${RACK}/Turnstile-Example/Turnstile-IngestionPackage
 (venv) $ ./Load-TurnstileData.sh
 ```
 

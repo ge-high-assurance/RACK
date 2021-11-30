@@ -192,50 +192,13 @@ These examples uses the virtual environment as defined in the
 
 ### Import data
 
-This example populates the *Turnstile* example into a RACK-in-a-Box
-instance running in a Docker container on `localhost`:
+See the `setup-turnstile.sh` as an example for populating the model
+and nodegroups for the *Turnstile* example into RACK-in-a-Box.
 
-```shell
-$ source venv/bin/activate
-(venv) $ rack model import ../Turnstile-Ontology/99-Utils/import.yaml
-Ingesting ../Turnstile-Ontology/99-Utils/../OwlModels/DevelopmentPlan.owl...   OK
-
-(venv) $ rack nodegroups import ../Turnstile-Ontology/99-Utils/NodeGroups
-Storing nodegroups...
-
-(venv) $ rack data import --clear ../RACK-Ontology/OwlModels/DO-178C.yaml
-Clearing graph
-Success Update succeeded
-Ingesting DO-178C.owl                     OK
-
-(venv) $ rack data import --clear ../Turnstile-Ontology/99-Utils/Data/Model.yaml
-Clearing graph
-Success Update succeeded
-Loading Ingest-DataAndControlCouple...             OK Records: 24
-Loading Ingest-DataDictionary...                   OK Records: 5
-Loading Ingest-Engineer...                         OK Records: 3
-Loading Ingest-HAZARD...                           OK Records: 4
-Loading Ingest-HighLevelRequirements...            OK Records: 3
-Loading Ingest-LowLevelRequirements...             OK Records: 13
-Loading Ingest-Objective...                        OK Records: 99
-Loading Ingest-SoftwareComponentTest...            OK Records: 4
-Loading Ingest-SoftwareComponentTestExecution...   OK Records: 2
-Loading Ingest-SoftwareComponentTestResult...      OK Records: 8
-Loading Ingest-SoftwareDesign...                   OK Records: 2
-Loading Ingest-SoftwareDesignReview...             OK Records: 11
-Loading Ingest-SoftwareDesignReviewArtifacts...    OK Records: 11
-Loading Ingest-SoftwareRequirementsDefinition...   OK Records: 1
-Loading Ingest-SoftwareRequirementsReview...       OK Records: 9
-Loading Ingest-SoftwareRequirementsReviewArtifacts...OK Records: 3
-Loading Ingest-SoftwareThread...                   OK Records: 6
-Loading Ingest-SoftwareUnitTest...                 OK Records: 4
-Loading Ingest-SoftwareUnitTestExecution...        OK Records: 2
-Loading Ingest-SoftwareUnitTestResult...           OK Records: 8
-Loading Ingest-SystemComponent...                  OK Records: 4
-Loading Ingest-SystemInterfaceDefinition...        OK Records: 7
-Loading Ingest-SystemRequirement...                OK Records: 3
-Loading Ingest-SoftwareComponent...                OK Records: 3
-```
+See the
+`../Turnstile-Example/Turnstile-IngestionPackage/Load-TurnstileData.sh`
+as an example for populating data for the *Turnstile* example into
+Rack-in-a-Box.
 
 ### Export data
 
@@ -245,7 +208,7 @@ container on `localhost`:
 
 ```shell
 $ source venv/bin/activate
-(venv) $ rack data export --data-graph http://rack001/data "Ingest-SystemComponent"
+(venv) $ rack data export --data-graph http://rack001/turnstiledata ingest_turnstile_SystemComponent
 identifier_SystemComponent    identifier_SYSTEM
 ----------------------------  -------------------
 Counter Application           Turnstile
@@ -282,13 +245,13 @@ Examples:
 ```shell
 # Example using exact matches
 rack data export "query Requirements decomposition" \
-  --data-graph http://rack001/data \
+  --data-graph http://rack001/turnstiledata \
   --constraint req=HLR-1 \
   --constraint decomposition=IN-LLR-2
 
 # Example using regular expressions
 rack data export "query Requirements decomposition" \
-  --data-graph http://rack001/data \
+  --data-graph http://rack001/turnstiledata \
   --constraint "req~^HLR-.$" \
   --constraint "decomposition~^IN-"
 ```

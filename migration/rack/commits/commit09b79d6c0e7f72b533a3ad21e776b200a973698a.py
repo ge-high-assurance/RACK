@@ -9,16 +9,12 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from migration_helpers.name_space import rack
 from ontology_changes import AtMost, ChangeCardinality, Commit
-
-HAZARD = rack("HAZARD")
-SYSTEM = rack("SYSTEM")
+from rack.namespaces.rack_ontology import HAZARD, SYSTEM
 
 commit = Commit(
     number="09b79d6c0e7f72b533a3ad21e776b200a973698a",
     changes=[
-
         # HAZARD.sadl
         ChangeCardinality(
             name_space=HAZARD,
@@ -38,7 +34,6 @@ commit = Commit(
             property_id="likelihood",
             to_cardinality=AtMost(1),
         ),
-
         # SYSTEM.sadl
         ChangeCardinality(
             name_space=SYSTEM,
@@ -46,6 +41,5 @@ commit = Commit(
             property_id="parentFunction",
             to_cardinality=AtMost(1),
         ),
-
     ],
 )

@@ -9,13 +9,11 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from ontology_changes import Commit, FreeformNotes
+from ontology_changes import Commit
 
 commit = Commit(
-    number="0a89f70ff929380269a79fe2fc82f5dde346ed8c",
+    number="278481ce335c98723597eadf89052a4b28f2eeec",
     changes=[
-        FreeformNotes(
-            text="SACM-S.sadl was removed from the RACK-Ontology and moved to LM-Ontology",
-        )
+        # Nothing
     ],
 )

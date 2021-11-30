@@ -9,10 +9,8 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from migration_helpers.name_space import rack
 from ontology_changes import Commit, RemovePropertyRestriction
-
-CONFIDENCE = rack("CONFIDENCE")
+from rack.namespaces.rack_ontology import CONFIDENCE
 
 commit = Commit(
     number="3908d68df1143537a49e1df9556dae8066b0e25f",

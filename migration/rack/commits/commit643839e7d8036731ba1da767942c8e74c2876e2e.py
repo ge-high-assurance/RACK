@@ -9,7 +9,6 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from migration_helpers.name_space import rack
 from ontology_changes import (
     AtMost,
     ChangeCardinality,
@@ -19,10 +18,7 @@ from ontology_changes import (
     RenameProperty,
     SingleValue,
 )
-
-FILE = rack("FILE")
-PROV_S = rack("PROV-S")
-SOFTWARE = rack("SOFTWARE")
+from rack.namespaces.rack_ontology import FILE, PROV_S, SOFTWARE
 
 commit = Commit(
     number="643839e7d8036731ba1da767942c8e74c2876e2e",

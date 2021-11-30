@@ -9,10 +9,8 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from migration_helpers.name_space import rack
 from ontology_changes import Commit, RenameClass
-
-SOFTWARE = rack("SOFTWARE")
+from rack.namespaces.rack_ontology import SOFTWARE
 
 commit = Commit(
     number="78eaae3db5ed184c90f4f14d34a4fc000f04bdac",

@@ -2,11 +2,19 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://jena.hpl.hp.com/schemas/2003/03/ont-manager#">
   <j.0:OntologySpec>
-    <j.0:publicURI rdf:resource="http://sadl.org/sadllistmodel"/>
-    <j.0:altURL rdf:resource="file:/RACK/Provenance-Example/OwlModels/SadlListModel.owl"/>
+    <j.0:sadlSourceURL>platform:/resource/Provenance-Example/ImplicitModel/SadlImplicitModel.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/RACK/Provenance-Example/OwlModels/SadlImplicitModel.owl"/>
     <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
     <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:prefix>sadllistmodel</j.0:prefix>
+    <j.0:prefix>sadlimplicitmodel</j.0:prefix>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlbasemodel"/>
+    <j.0:altURL rdf:resource="file:/RACK/Provenance-Example/OwlModels/SadlBaseModel.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>sadlbasemodel</j.0:prefix>
   </j.0:OntologySpec>
   <j.0:OntologySpec>
     <j.0:sadlSourceURL>platform:/resource/Provenance-Example/ImplicitModel/SadlBuiltinFunctions.sadl</j.0:sadlSourceURL>
@@ -17,18 +25,10 @@
     <j.0:publicURI rdf:resource="http://sadl.org/builtinfunctions"/>
   </j.0:OntologySpec>
   <j.0:OntologySpec>
-    <j.0:publicURI rdf:resource="http://sadl.org/sadlbasemodel"/>
-    <j.0:altURL rdf:resource="file:/RACK/Provenance-Example/OwlModels/SadlBaseModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadllistmodel"/>
+    <j.0:altURL rdf:resource="file:/RACK/Provenance-Example/OwlModels/SadlListModel.owl"/>
     <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
     <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:prefix>sadlbasemodel</j.0:prefix>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/Provenance-Example/ImplicitModel/SadlImplicitModel.sadl</j.0:sadlSourceURL>
-    <j.0:altURL rdf:resource="file:/RACK/Provenance-Example/OwlModels/SadlImplicitModel.owl"/>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:prefix>sadlimplicitmodel</j.0:prefix>
-    <j.0:publicURI rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <j.0:prefix>sadllistmodel</j.0:prefix>
   </j.0:OntologySpec>
 </rdf:RDF>

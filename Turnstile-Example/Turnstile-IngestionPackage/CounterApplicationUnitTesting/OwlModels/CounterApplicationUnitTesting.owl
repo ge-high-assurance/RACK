@@ -20,22 +20,22 @@
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'CounterApplicationUnitTesting.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
   <j.2:SoftwareUnitTestResult rdf:ID="UTR-1-4-2">
-    <j.3:executedBy>
+    <j.0:wasGeneratedBy>
       <j.2:SoftwareUnitTestExecution rdf:ID="SoftwareUnitTestRun2">
-        <j.3:executedOn>
+        <j.0:wasAssociatedWith>
           <j.0:AGENT rdf:ID="TestStation2">
             <j.0:identifier>TestStation2</j.0:identifier>
           </j.0:AGENT>
-        </j.3:executedOn>
+        </j.0:wasAssociatedWith>
         <j.0:identifier>SoftwareUnitTestRun2</j.0:identifier>
       </j.2:SoftwareUnitTestExecution>
-    </j.3:executedBy>
+    </j.0:wasGeneratedBy>
     <j.3:result rdf:resource="http://arcos.rack/TESTING#Failed"/>
     <j.3:confirms>
       <j.2:SoftwareUnitTest rdf:ID="UTC-1-4">
-        <j.3:producedBy>
+        <j.0:wasGeneratedBy>
           <j.2:DevelopUnitTests rdf:ID="UnitTestDevelopment">
-            <j.3:developedBy>
+            <j.0:wasAssociatedWith>
               <j.2:Engineer rdf:ID="EricDan">
                 <j.1:employedBy>
                   <j.1:ORGANIZATION rdf:ID="GElois">
@@ -46,10 +46,10 @@
                 <j.0:title>Dan, Eric</j.0:title>
                 <j.0:identifier>421SW6300</j.0:identifier>
               </j.2:Engineer>
-            </j.3:developedBy>
+            </j.0:wasAssociatedWith>
             <j.0:identifier>UnitTestDevelopment</j.0:identifier>
           </j.2:DevelopUnitTests>
-        </j.3:producedBy>
+        </j.0:wasGeneratedBy>
         <j.3:verifies>
           <j.2:LowLevelRequirement rdf:ID="IN-LLR-1">
             <j.0:identifier>IN-LLR-1</j.0:identifier>
@@ -61,26 +61,26 @@
     <j.0:identifier>UTR-1-4-2</j.0:identifier>
   </j.2:SoftwareUnitTestResult>
   <j.2:SoftwareUnitTestResult rdf:ID="UTR-1-4-1">
-    <j.3:executedBy>
+    <j.0:wasGeneratedBy>
       <j.2:SoftwareUnitTestExecution rdf:ID="SoftwareUnitTestRun1">
-        <j.3:executedOn>
+        <j.0:wasAssociatedWith>
           <j.0:AGENT rdf:ID="TestStation1">
             <j.0:identifier>TestStation1</j.0:identifier>
           </j.0:AGENT>
-        </j.3:executedOn>
+        </j.0:wasAssociatedWith>
         <j.0:identifier>SoftwareUnitTestRun1</j.0:identifier>
       </j.2:SoftwareUnitTestExecution>
-    </j.3:executedBy>
+    </j.0:wasGeneratedBy>
     <j.3:result rdf:resource="http://arcos.rack/TESTING#Failed"/>
     <j.3:confirms rdf:resource="#UTC-1-4"/>
     <j.0:identifier>UTR-1-4-1</j.0:identifier>
   </j.2:SoftwareUnitTestResult>
   <j.2:SoftwareUnitTestResult rdf:ID="UTR-1-2-1">
-    <j.3:executedBy rdf:resource="#SoftwareUnitTestRun1"/>
+    <j.0:wasGeneratedBy rdf:resource="#SoftwareUnitTestRun1"/>
     <j.3:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.3:confirms>
       <j.2:SoftwareUnitTest rdf:ID="UTC-1-2">
-        <j.3:producedBy rdf:resource="#UnitTestDevelopment"/>
+        <j.0:wasGeneratedBy rdf:resource="#UnitTestDevelopment"/>
         <j.3:verifies rdf:resource="#IN-LLR-1"/>
         <j.0:identifier>UTC-1-2</j.0:identifier>
       </j.2:SoftwareUnitTest>
@@ -88,17 +88,17 @@
     <j.0:identifier>UTR-1-2-1</j.0:identifier>
   </j.2:SoftwareUnitTestResult>
   <j.2:SoftwareUnitTestResult rdf:ID="UTR-1-2-2">
-    <j.3:executedBy rdf:resource="#SoftwareUnitTestRun2"/>
+    <j.0:wasGeneratedBy rdf:resource="#SoftwareUnitTestRun2"/>
     <j.3:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.3:confirms rdf:resource="#UTC-1-2"/>
     <j.0:identifier>UTR-1-2-2</j.0:identifier>
   </j.2:SoftwareUnitTestResult>
   <j.2:SoftwareUnitTestResult rdf:ID="UTR-1-3-1">
-    <j.3:executedBy rdf:resource="#SoftwareUnitTestRun1"/>
+    <j.0:wasGeneratedBy rdf:resource="#SoftwareUnitTestRun1"/>
     <j.3:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.3:confirms>
       <j.2:SoftwareUnitTest rdf:ID="UTC-1-3">
-        <j.3:producedBy rdf:resource="#UnitTestDevelopment"/>
+        <j.0:wasGeneratedBy rdf:resource="#UnitTestDevelopment"/>
         <j.3:verifies rdf:resource="#IN-LLR-1"/>
         <j.0:identifier>UTC-1-3</j.0:identifier>
       </j.2:SoftwareUnitTest>
@@ -106,11 +106,11 @@
     <j.0:identifier>UTR-1-3-1</j.0:identifier>
   </j.2:SoftwareUnitTestResult>
   <j.2:SoftwareUnitTestResult rdf:ID="UTR-1-1-2">
-    <j.3:executedBy rdf:resource="#SoftwareUnitTestRun2"/>
+    <j.0:wasGeneratedBy rdf:resource="#SoftwareUnitTestRun2"/>
     <j.3:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.3:confirms>
       <j.2:SoftwareUnitTest rdf:ID="UTC-1-1">
-        <j.3:producedBy rdf:resource="#UnitTestDevelopment"/>
+        <j.0:wasGeneratedBy rdf:resource="#UnitTestDevelopment"/>
         <j.3:verifies rdf:resource="#IN-LLR-1"/>
         <j.0:identifier>UTC-1-1</j.0:identifier>
       </j.2:SoftwareUnitTest>
@@ -118,16 +118,16 @@
     <j.0:identifier>UTR-1-1-2</j.0:identifier>
   </j.2:SoftwareUnitTestResult>
   <j.2:SoftwareUnitTestResult rdf:ID="UTR-1-3-2">
-    <j.3:executedBy rdf:resource="#SoftwareUnitTestRun2"/>
+    <j.0:wasGeneratedBy rdf:resource="#SoftwareUnitTestRun2"/>
     <j.3:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.3:confirms rdf:resource="#UTC-1-3"/>
     <j.0:identifier>UTR-1-3-2</j.0:identifier>
   </j.2:SoftwareUnitTestResult>
   <j.2:SoftwareUnitTestResult rdf:ID="UTR-1-1-1">
-    <j.3:executedBy rdf:resource="#SoftwareUnitTestRun1"/>
+    <j.0:wasGeneratedBy rdf:resource="#SoftwareUnitTestRun1"/>
     <j.3:result rdf:resource="http://arcos.rack/TESTING#Passed"/>
     <j.0:generatedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2017-03-23T06:03:16-04:00</j.0:generatedAtTime>
+    >2017-03-23T10:03:16+00:00</j.0:generatedAtTime>
     <j.3:confirms rdf:resource="#UTC-1-1"/>
     <j.0:identifier>UTR-1-1-1</j.0:identifier>
   </j.2:SoftwareUnitTestResult>

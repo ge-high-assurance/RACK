@@ -9,6 +9,22 @@
     <j.0:prefix>sadllistmodel</j.0:prefix>
   </j.0:OntologySpec>
   <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/GE-Ontology/ImplicitModel/SadlImplicitModel.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/RACK/GE-Ontology/OwlModels/SadlImplicitModel.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>sadlimplicitmodel</j.0:prefix>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/GE-Ontology/ontology/GE.sadl</j.0:sadlSourceURL>
+    <j.0:altURL rdf:resource="file:/RACK/GE-Ontology/OwlModels/GE.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>turnstile</j.0:prefix>
+    <j.0:publicURI rdf:resource="http://arcos.turnstile/GE"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
     <j.0:publicURI rdf:resource="http://sadl.org/sadlbasemodel"/>
     <j.0:altURL rdf:resource="file:/RACK/GE-Ontology/OwlModels/SadlBaseModel.owl"/>
     <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
@@ -22,21 +38,5 @@
     <j.0:createdBy>SADL</j.0:createdBy>
     <j.0:prefix>builtinfunctions</j.0:prefix>
     <j.0:publicURI rdf:resource="http://sadl.org/builtinfunctions"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/GE-Ontology/ontology/GE.sadl</j.0:sadlSourceURL>
-    <j.0:altURL rdf:resource="file:/RACK/GE-Ontology/OwlModels/GE.owl"/>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:prefix>turnstile</j.0:prefix>
-    <j.0:publicURI rdf:resource="http://arcos.turnstile/GE"/>
-  </j.0:OntologySpec>
-  <j.0:OntologySpec>
-    <j.0:sadlSourceURL>platform:/resource/GE-Ontology/ImplicitModel/SadlImplicitModel.sadl</j.0:sadlSourceURL>
-    <j.0:altURL rdf:resource="file:/RACK/GE-Ontology/OwlModels/SadlImplicitModel.owl"/>
-    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
-    <j.0:createdBy>SADL</j.0:createdBy>
-    <j.0:prefix>sadlimplicitmodel</j.0:prefix>
-    <j.0:publicURI rdf:resource="http://sadl.org/sadlimplicitmodel"/>
   </j.0:OntologySpec>
 </rdf:RDF>

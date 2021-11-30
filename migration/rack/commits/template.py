@@ -9,7 +9,6 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-# from migration_helpers.name_space import rack
 from ontology_changes import Commit
 
 raise Exception(

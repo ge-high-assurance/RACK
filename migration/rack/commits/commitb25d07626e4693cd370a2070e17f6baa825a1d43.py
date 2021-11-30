@@ -9,11 +9,8 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from migration_helpers.name_space import rack
 from ontology_changes import AddClass, Commit, DeleteProperty
-
-MODEL = rack("MODEL")
-REQUIREMENTS = rack("REQUIREMENTS")
+from rack.namespaces.rack_ontology import MODEL, REQUIREMENTS
 
 commit = Commit(
     number="b25d07626e4693cd370a2070e17f6baa825a1d43",

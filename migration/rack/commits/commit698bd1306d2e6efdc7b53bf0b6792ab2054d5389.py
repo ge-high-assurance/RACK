@@ -9,10 +9,8 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from migration_helpers.name_space import rack
 from ontology_changes import AddClass, Commit
-
-BASELINE = rack("BASELINE")
+from rack.namespaces.rack_ontology import BASELINE
 
 commit = Commit(
     number="698bd1306d2e6efdc7b53bf0b6792ab2054d5389",

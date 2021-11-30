@@ -9,11 +9,14 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from migration_helpers.name_space import rack
-from ontology_changes import AtMost, ChangeCardinality, Commit, ChangePropertyIsATypeOf, SingleValue
-
-PROV_S = rack("PROV-S")
-REQUIREMENTS = rack("REQUIREMENTS")
+from ontology_changes import (
+    AtMost,
+    ChangeCardinality,
+    Commit,
+    ChangePropertyIsATypeOf,
+    SingleValue,
+)
+from rack.namespaces.rack_ontology import PROV_S, REQUIREMENTS
 
 commit = Commit(
     number="d8271d216704351cf0007a04abac47f4abc993ad",

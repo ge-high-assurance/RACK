@@ -1,7 +1,7 @@
 #!/bin/sh
 # Copyright (c) 2020, General Electric Company and Galois, Inc.
 set -eu
-BASEDIR=$(cd $(dirname "$0"); pwd)
+BASEDIR=$(cd "$(dirname "$0")"; pwd)
 echo "$BASEDIR"
 if ! command -v rack > /dev/null
 then

@@ -34,6 +34,12 @@ runs:
       shell: bash
       run: curl -LSfs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4505/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
 
+    - name: Generate OWL files
+      shell: bash
+      run: |
+        docker pull sadl/sadl-eclipse:dev
+        docker run --rm -v $GITHUB_WORKSPACE/RACK:/RACK sadl/sadl-eclipse:dev -importAll /RACK -cleanBuild
+
     - name: Package RACK ontology and data
       shell: bash
       run: |

@@ -10,6 +10,7 @@
 # of the Defense Advanced Research Projects Agency (DARPA).
 
 from ontology_changes import AtMost, ChangeCardinality, Commit, RenameProperty
+from rack.namespaces.rack_ontology import PROV_S
 
 commit = Commit(
     number="833ef18f5024fee255f77887de2c8e9bc136e56d",

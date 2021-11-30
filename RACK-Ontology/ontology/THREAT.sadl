@@ -1,0 +1,47 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.rack/THREAT" alias Threat.
+
+import "http://arcos.rack/HAZARD".
+
+//AM do we need to say Confidentiality is a SECURITY_LABEL with identifier "Confidentiality".
+//AM bring up why TEST_STATUS is the way it is
+
+/* SOURCE: https://niccs.cisa.gov/about-niccs/cybersecurity-glossary
+
+THREAT: A circumstance or event that has or indicates the potential to exploit vulnerabilities and to adversely impact (create adverse consequences for) organizational operations, organizational assets (including information and information systems), individuals, other organizations, or society.
+Extended Definition: Includes an individual or group of individuals, entity such as an organization or a nation), action, or occurrence.
+Adapted from: DHS Risk Lexicon, NIPP, CNSSI 4009, NIST SP 800-53 Rev 4
+ 
+ATTACK: An attempt to gain unauthorized access to system services, resources, or information, or an attempt to compromise system integrity.
+Extended Definition: The intentional act of attempting to bypass one or more security services or controls of an information system.
+From: NCSD Glossary. NTSSI 4009 (2000), CNSSI 4009
+* */
+
+// We model THREAT only as an ATTACK is an activity on say a fielded system.
+THREAT (note "A threat / vulnerability to be assessed for certification") is a type of HAZARD.
+
+THREAT_IDENTIFICATION
+	(note "ACTIVITY that identifies potential sources of THREAT whose risk must be evaluated")
+	is a type of ACTIVITY.
+
+	Threat:author (note "AGENT(s) who work on this ACTIVITY") describes THREAT_IDENTIFICATION with values of type AGENT.
+	Threat:author is a type of wasAssociatedWith.
+
+SECURITY_LABEL is a type of THING.
+
+// A few common instances: additional ones could be Authorization, Non-repudiation, Privacy, etc.
+Confidentiality is a SECURITY_LABEL, has identifier "Confidentiality".
+Integrity is a SECURITY_LABEL, has identifier "Integrity".
+Availability is a SECURITY_LABEL, has identifier "Availability". 
+

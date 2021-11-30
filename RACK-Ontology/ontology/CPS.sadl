@@ -1,0 +1,78 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.rack/CPS" alias CPS.
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/CONTROL".
+
+//AM for some of the properties, do I need to add "is a type of"?
+//AM note we have following SADL files: SYSTEM, CPS, SOFTWARE, HARDWARE
+//AM why "HWCOMPONENT is a type of ENTITY." similarly SWCOMPONENT.
+//AM should HWCOMPONENT etc. be related to SYSTEM?
+//AM instead of introducing CPS, extend SYSTEM with appropriate properties
+//AM	in fact, some of these properties could move to SYSTEM?
+
+// DAL value 0 indicates that the implementation property is false;
+// otherwise the values are 1,3,5,7,9. GIVE REF.
+DAL (note "Design Assurance Level") is a type of int [0,9]. 
+
+CPS (note "A cyber physical system") is a type of SYSTEM
+	described by cpsType with a single value of type CPS_TYPE 
+	described by inputPort with values of type PORT 
+	described by outputPort with values of type PORT
+	  
+	// properties that allow for inferring threats
+	described by canReceiveSWUpdate with a single value of type boolean
+	described by canReceiveConfigUpdate with a single value of type boolean
+	described by hasSensitiveInfo with a single value of type boolean	
+	described by insideTrustedBoundary with a single value of type boolean
+	described by pedigree with a single value of type PEDIGREE
+
+	// properties that allow for mitigating of threats
+	described by implControl with values of type IMPL_CONTROL.
+	
+IMPL_CONTROL (note "CONTROL implemented in a SYSTEM") is a type of THING
+	described by control with a single value of type CONTROL
+	described by dal with a single value of type DAL.
+
+//AM in HARDWARE.sadl there will be COMPONENT_TYPE; cannot really use that.
+CPS_TYPE (note "An open/extensible set of CPS types") is a type of THING.
+
+// A few common instances:
+Software   is a CPS_TYPE, has identifier "Software".
+Hardware   is a CPS_TYPE, has identifier "Hardware".
+SwHwHybrid is a CPS_TYPE, has identifier "SwHwHybrid".
+
+PEDIGREE (note "Describes source of say a CPS") is a type of THING.
+
+// A few common instances:
+InternallyDeveloped is a PEDIGREE, has identifier "InternallyDeveloped".
+COTS                is a PEDIGREE, has identifier "COTS".
+Sourced             is a PEDIGREE, has identifier "Sourced". 
+	
+PORT (note "Ports specify points of connections between CPSs") is a type of ENTITY.
+
+CONNECTION (note "An INTERFACE with specific input and output ports") is a type of INTERFACE
+    // for named connections, use "title" property
+	described by outPort with a single value of type PORT 
+	described by inPort with a single value of type PORT 
+
+	// properties that allow for inferring threats	
+	described by connectionType with values of type CONNECTION_TYPE  
+	described by dataSentIsUntrusted with a single value of type boolean 
+	described by dataReceivedIsUntrusted with a single value of type boolean 	
+    described by infoFlowSeverity with a single value of type int. 
+
+CONNECTION_TYPE is a type of THING.
+
+Trusted   is a CONNECTION_TYPE, has identifier "Trusted".	
+Untrusted is a CONNECTION_TYPE, has identifier "Untrusted".

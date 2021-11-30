@@ -97,7 +97,7 @@ INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
                     },
                     {
                         'type': 'object',
-                        'addtionalProperties': False,
+                        'additionalProperties': False,
                         'required': ['owl'],
                         'properties': {'owl': {'type': 'string'}}
                     }

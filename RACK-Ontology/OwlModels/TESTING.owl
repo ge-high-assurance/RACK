@@ -58,26 +58,8 @@
   <owl:Class rdf:about="#TEST_STEP">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="logs"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="nextRecord"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
         <owl:onProperty>
           <owl:ObjectProperty rdf:ID="nextStep"/>
         </owl:onProperty>
@@ -108,11 +90,29 @@
   <owl:Class rdf:ID="TEST_RECORD">
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="logs"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="nextRecord"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
         <owl:allValuesFrom rdf:resource="#TEST_RESULT"/>
         <owl:onProperty rdf:resource="PROV-S#content"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:comment xml:lang="en">a TEST_RECORD is a collection of TEST_RESULTs assoicated with a TEST_STEP</rdfs:comment>
+    <rdfs:comment xml:lang="en">a TEST_RECORD is a collection of TEST_RESULTs associated with a TEST_STEP</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#COLLECTION"/>
   </owl:Class>
   <owl:Class rdf:ID="TEST_EXECUTION">
@@ -154,9 +154,9 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#logs">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
-    <rdfs:comment xml:lang="en">The next TEST_STEP from which the TEST_RECORD is captured</rdfs:comment>
+    <rdfs:comment xml:lang="en">TEST_STEP for which the TEST_RECORD is captured</rdfs:comment>
     <rdfs:range rdf:resource="#TEST_STEP"/>
-    <rdfs:domain rdf:resource="#TEST_STEP"/>
+    <rdfs:domain rdf:resource="#TEST_RECORD"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="confirms">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>
@@ -178,7 +178,7 @@
   <owl:ObjectProperty rdf:about="#nextRecord">
     <rdfs:comment xml:lang="en">The next TEST_RECORD that is the next in a sequence </rdfs:comment>
     <rdfs:range rdf:resource="#TEST_RECORD"/>
-    <rdfs:domain rdf:resource="#TEST_STEP"/>
+    <rdfs:domain rdf:resource="#TEST_RECORD"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="testProcedure">
     <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>

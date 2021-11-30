@@ -9,7 +9,12 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from migration_helpers.name_space import rack
+from migration_helpers.name_space import NameSpace
+
+
+def rack(name_space: str) -> NameSpace:
+    return NameSpace(uri_prefix="http://arcos.rack/", name_space=name_space)
+
 
 AGENTS = rack("AGENTS")
 ANALYSIS = rack("ANALYSIS")

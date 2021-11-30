@@ -27,6 +27,15 @@ The rack program requires the
 [semtk-python3](https://github.com/ge-semtk/semtk-python3) package and
 other requirements listed in `requirements.txt`.
 
+> **_NOTE_** these programs and dependencies are already installed in
+> the Rack-in-a-Box docker and VM images; no further installation is
+> necessary for those environments, which can be used directly
+> (e.g. `docker exec -it CONTAINER-ID-OR-NAME /bin/bash`).
+>
+> In general, RACK is accessed via network-based operations, so
+> running the tools from within a RACK-in-a-Box environment or the
+> user's local environment should be equivalent.
+
 We recommend installing these dependencies in an isolated virtual
 environment to ensure reproducibility of results.
 

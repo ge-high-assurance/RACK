@@ -40,6 +40,18 @@
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "UriRelationship": "http://arcos.rack/PROV-S#entityURL"
+          },
+          {
+            "optMinus": 0,
+            "isReturned": false,
+            "Constraints": "",
             "ValueType": "dateTime",
             "instanceValues": [],
             "isRuntimeConstrained": false,
@@ -187,6 +199,18 @@
             "SparqlID": "",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "UriRelationship": "http://arcos.rack/PROV-S#description"
+          },
+          {
+            "optMinus": 0,
+            "isReturned": false,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "UriRelationship": "http://arcos.rack/PROV-S#entityURL"
           },
           {
             "optMinus": 0,
@@ -426,6 +450,17 @@
             "DeletionMarkers": [],
             "OptionalMinus": [],
             "Qualifiers": [],
+            "UriConnectBy": "http://arcos.rack/PROV-S#goal",
+            "ConnectBy": "",
+            "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
+          },
+          {
+            "SnodeSparqlIDs": [],
+            "ValueType": "ENTITY",
+            "Connected": false,
+            "DeletionMarkers": [],
+            "OptionalMinus": [],
+            "Qualifiers": [],
             "UriConnectBy": "http://arcos.rack/PROV-S#used",
             "ConnectBy": "",
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
@@ -469,6 +504,18 @@
             "SparqlID": "",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "UriRelationship": "http://arcos.rack/PROV-S#description"
+          },
+          {
+            "optMinus": 0,
+            "isReturned": false,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "UriRelationship": "http://arcos.rack/PROV-S#entityURL"
           },
           {
             "optMinus": 0,
@@ -792,6 +839,17 @@
             "DeletionMarkers": [],
             "OptionalMinus": [],
             "Qualifiers": [],
+            "UriConnectBy": "http://arcos.rack/PROV-S#goal",
+            "ConnectBy": "",
+            "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
+          },
+          {
+            "SnodeSparqlIDs": [],
+            "ValueType": "ENTITY",
+            "Connected": false,
+            "DeletionMarkers": [],
+            "OptionalMinus": [],
+            "Qualifiers": [],
             "UriConnectBy": "http://arcos.rack/PROV-S#used",
             "ConnectBy": "",
             "UriValueType": "http://arcos.rack/PROV-S#ENTITY"
@@ -925,6 +983,18 @@
             "optMinus": 0,
             "isReturned": false,
             "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "UriRelationship": "http://arcos.rack/PROV-S#entityURL"
+          },
+          {
+            "optMinus": 0,
+            "isReturned": false,
+            "Constraints": "",
             "ValueType": "dateTime",
             "instanceValues": [],
             "isRuntimeConstrained": false,
@@ -978,17 +1048,6 @@
         "binding": "?definedIn_FILE",
         "deletionMode": "NO_DELETE",
         "nodeList": [
-          {
-            "SnodeSparqlIDs": [],
-            "ValueType": "FILE_CREATION",
-            "Connected": false,
-            "DeletionMarkers": [],
-            "OptionalMinus": [],
-            "Qualifiers": [],
-            "UriConnectBy": "http://arcos.rack/FILE#createBy",
-            "ConnectBy": "",
-            "UriValueType": "http://arcos.rack/FILE#FILE_CREATION"
-          },
           {
             "SnodeSparqlIDs": [],
             "ValueType": "FILE",
@@ -1116,6 +1175,18 @@
             "SparqlID": "?description",
             "relationship": "http://www.w3.org/2001/XMLSchema#string",
             "UriRelationship": "http://arcos.rack/PROV-S#description"
+          },
+          {
+            "optMinus": 1,
+            "isReturned": true,
+            "Constraints": "",
+            "ValueType": "string",
+            "instanceValues": [],
+            "isRuntimeConstrained": false,
+            "isMarkedForDeletion": false,
+            "SparqlID": "?entityURL",
+            "relationship": "http://www.w3.org/2001/XMLSchema#string",
+            "UriRelationship": "http://arcos.rack/PROV-S#entityURL"
           },
           {
             "optMinus": 1,
@@ -1361,12 +1432,23 @@
                 ]
               }
             ],
-            "URIRelation": "http://arcos.rack/PROV-S#generatedAtTime"
+            "URIRelation": "http://arcos.rack/PROV-S#entityURL"
           },
           {
             "mapping": [
               {
                 "colId": "col_2",
+                "transformList": [
+                  "trans_0"
+                ]
+              }
+            ],
+            "URIRelation": "http://arcos.rack/PROV-S#generatedAtTime"
+          },
+          {
+            "mapping": [
+              {
+                "colId": "col_3",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1380,7 +1462,7 @@
           {
             "mapping": [
               {
-                "colId": "col_3",
+                "colId": "col_4",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1391,7 +1473,7 @@
           {
             "mapping": [
               {
-                "colId": "col_4",
+                "colId": "col_5",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1410,7 +1492,7 @@
           {
             "mapping": [
               {
-                "colId": "col_5",
+                "colId": "col_6",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1432,7 +1514,7 @@
           {
             "mapping": [
               {
-                "colId": "col_6",
+                "colId": "col_7",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1454,7 +1536,7 @@
           {
             "mapping": [
               {
-                "colId": "col_7",
+                "colId": "col_8",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1476,7 +1558,7 @@
           {
             "mapping": [
               {
-                "colId": "col_8",
+                "colId": "col_9",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1498,7 +1580,7 @@
           {
             "mapping": [
               {
-                "colId": "col_9",
+                "colId": "col_10",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1520,7 +1602,7 @@
           {
             "mapping": [
               {
-                "colId": "col_10",
+                "colId": "col_11",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1542,7 +1624,7 @@
           {
             "mapping": [
               {
-                "colId": "col_11",
+                "colId": "col_12",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1564,7 +1646,7 @@
           {
             "mapping": [
               {
-                "colId": "col_12",
+                "colId": "col_13",
                 "transformList": [
                   "trans_0"
                 ]
@@ -1585,52 +1667,56 @@
         "colId": "col_0"
       },
       {
-        "colName": "generatedAtTime",
+        "colName": "entityURL",
         "colId": "col_1"
       },
       {
-        "colName": "identifier",
+        "colName": "generatedAtTime",
         "colId": "col_2"
       },
       {
-        "colName": "invalidatedAtTime",
+        "colName": "identifier",
         "colId": "col_3"
       },
       {
-        "colName": "title",
+        "colName": "invalidatedAtTime",
         "colId": "col_4"
       },
       {
-        "colName": "definedIn_identifier",
+        "colName": "title",
         "colId": "col_5"
       },
       {
-        "colName": "models_identifier",
+        "colName": "definedIn_identifier",
         "colId": "col_6"
       },
       {
-        "colName": "dataInsertedBy_identifier",
+        "colName": "models_identifier",
         "colId": "col_7"
       },
       {
-        "colName": "wasAttributedTo_identifier",
+        "colName": "dataInsertedBy_identifier",
         "colId": "col_8"
       },
       {
-        "colName": "wasDerivedFrom_identifier",
+        "colName": "wasAttributedTo_identifier",
         "colId": "col_9"
       },
       {
-        "colName": "wasGeneratedBy_identifier",
+        "colName": "wasDerivedFrom_identifier",
         "colId": "col_10"
       },
       {
-        "colName": "wasImpactedBy_identifier",
+        "colName": "wasGeneratedBy_identifier",
         "colId": "col_11"
       },
       {
-        "colName": "wasRevisionOf_identifier",
+        "colName": "wasImpactedBy_identifier",
         "colId": "col_12"
+      },
+      {
+        "colName": "wasRevisionOf_identifier",
+        "colId": "col_13"
       }
     ],
     "baseURI": "",

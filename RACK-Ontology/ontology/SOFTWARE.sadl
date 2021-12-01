@@ -53,7 +53,11 @@ PACKAGE
 	is a type of FILE_CREATION.
 
     sw:performedBy (note "AGENT(s) (e.g. PACKAGER) performing the packaging") describes PACKAGE with values of type AGENT.
-    sw:performedBy of PACKAGE must be one of {Ag:PERSON, Ag:ORGANIZATION}.
+    /* Per discussion 2021.11.30 regarding https://github.com/ge-high-assurance/RACK/issues/607,
+     * the range constraint on performedBy has been removed to prevent it from
+     * applying also to the COMPILE domain.
+     */
+    // sw:performedBy of PACKAGE must be one of {Ag:PERSON, Ag:ORGANIZATION}.
     sw:performedBy is a type of wasAssociatedWith.
 
 	packagedBy (note "The tool used to generate the package output") describes PACKAGE with values of type TOOL.

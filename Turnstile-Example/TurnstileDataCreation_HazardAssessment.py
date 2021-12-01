@@ -30,19 +30,19 @@ def CreateCdrs():
 
     
     Add.HAZARD(identifier="H-1",
-                definition="System Crash",
+                description="System Crash",
                 source_identifier = "Turnstile")
 
     Add.HAZARD(identifier="H-1.1",
-                definition="Integer Under Flow",
+                description="Integer Under Flow",
                 wasDerivedFrom_identifier = "H-1")
 
     Add.HAZARD(identifier="H-1.2",
-                definition="Integer Over Flow",
+                description="Integer Over Flow",
                 wasDerivedFrom_identifier = "H-1")
 
     Add.HAZARD(identifier="H-2",
-                definition="Park Exceeds Capacity",
+                description="Park Exceeds Capacity",
                 source_identifier = "Turnstile")
 
     createCDR("http://rack001/turnstiledata")

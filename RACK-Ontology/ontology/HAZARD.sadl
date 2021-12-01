@@ -30,9 +30,6 @@ HAZARD
 	(note "HAZARD as identified by some HAZARD_IDENTIFICATION ACTIVITY, to be assessed for certification")
 	is a type of ENTITY.
 
-	definition (note "Description of the HAZARD") describes HAZARD with values of type string.
-	definition describes HAZARD with at most 1 value.
-
 	H:source (note "ENTITY(s) that participate in causing this HAZARD") describes HAZARD with values of type ENTITY.
 	H:source is a type of wasImpactedBy.
 

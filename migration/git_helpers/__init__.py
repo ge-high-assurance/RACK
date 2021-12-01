@@ -12,7 +12,7 @@ logger.addHandler(stream_handler)
 logger.propagate = False
 
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 
 def abort(reason: str) -> NoReturn:
@@ -110,7 +110,10 @@ def traverse_commits(
 
     def traverse(current_commit: str) -> None:
 
+        logger.debug(f"Traversing {current_commit}")
+
         if current_commit in visited:
+            logger.debug(f"Already visited, abandoning path")
             return
 
         visited.add(current_commit)

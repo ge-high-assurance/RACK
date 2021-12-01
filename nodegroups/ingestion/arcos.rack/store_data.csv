@@ -9,6 +9,7 @@ ingest_ASSESSING_CONFIDENCE,Auto-generated ingestion for ASSESSING_CONFIDENCE,au
 ingest_REVIEW,Auto-generated ingestion for REVIEW,auto,ingest_REVIEW.json
 ingest_PACKAGE,Auto-generated ingestion for PACKAGE,auto,ingest_PACKAGE.json
 ingest_REQUEST,Auto-generated ingestion for REQUEST,auto,ingest_REQUEST.json
+ingest_PROPERTY,Auto-generated ingestion for PROPERTY,auto,ingest_PROPERTY.json
 ingest_FILE,Auto-generated ingestion for FILE,auto,ingest_FILE.json
 ingest_PROCEDURE,Auto-generated ingestion for PROCEDURE,auto,ingest_PROCEDURE.json
 ingest_FUNCTION,Auto-generated ingestion for FUNCTION,auto,ingest_FUNCTION.json
@@ -18,9 +19,7 @@ ingest_SYSTEM,Auto-generated ingestion for SYSTEM,auto,ingest_SYSTEM.json
 ingest_TEST_STATUS,Auto-generated ingestion for TEST_STATUS,auto,ingest_TEST_STATUS.json
 ingest_DOCUMENT,Auto-generated ingestion for DOCUMENT,auto,ingest_DOCUMENT.json
 ingest_TEST_EXECUTION,Auto-generated ingestion for TEST_EXECUTION,auto,ingest_TEST_EXECUTION.json
-ingest_ANALYSIS_ANNOTATION_TYPE,Auto-generated ingestion for ANALYSIS_ANNOTATION_TYPE,auto,ingest_ANALYSIS_ANNOTATION_TYPE.json
 ingest_REVIEW_STATE,Auto-generated ingestion for REVIEW_STATE,auto,ingest_REVIEW_STATE.json
-ingest_ANALYSIS_RESULT,Auto-generated ingestion for ANALYSIS_RESULT,auto,ingest_ANALYSIS_RESULT.json
 ingest_ORGANIZATION,Auto-generated ingestion for ORGANIZATION,auto,ingest_ORGANIZATION.json
 ingest_COLLECTION,Auto-generated ingestion for COLLECTION,auto,ingest_COLLECTION.json
 ingest_FORMAT,Auto-generated ingestion for FORMAT,auto,ingest_FORMAT.json
@@ -32,7 +31,6 @@ ingest_MODEL,Auto-generated ingestion for MODEL,auto,ingest_MODEL.json
 ingest_TEST_DEVELOPMENT,Auto-generated ingestion for TEST_DEVELOPMENT,auto,ingest_TEST_DEVELOPMENT.json
 ingest_THING,Auto-generated ingestion for THING,auto,ingest_THING.json
 ingest_ANALYSIS,Auto-generated ingestion for ANALYSIS,auto,ingest_ANALYSIS.json
-ingest_ANALYSIS_ANNOTATION,Auto-generated ingestion for ANALYSIS_ANNOTATION,auto,ingest_ANALYSIS_ANNOTATION.json
 ingest_DATA_DICTIONARY_TERM,Auto-generated ingestion for DATA_DICTIONARY_TERM,auto,ingest_DATA_DICTIONARY_TERM.json
 ingest_HAZARD,Auto-generated ingestion for HAZARD,auto,ingest_HAZARD.json
 ingest_FILE_CREATION,Auto-generated ingestion for FILE_CREATION,auto,ingest_FILE_CREATION.json

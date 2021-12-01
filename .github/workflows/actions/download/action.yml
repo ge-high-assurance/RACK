@@ -40,6 +40,12 @@ runs:
         docker pull sadl/sadl-eclipse:dev
         docker run --rm -v $GITHUB_WORKSPACE/RACK:/RACK sadl/sadl-eclipse:dev -importAll /RACK -cleanBuild
 
+    - name: Generate CDR files
+      shell: bash
+      run: |
+        tar xfz RACK/rack-box/files/semtk.tar.gz semtk-opensource/standaloneExecutables/target/standaloneExecutables-jar-with-dependencies.jar
+        RACK/nodegroups/generate-cdrs.sh semtk-opensource/standaloneExecutables/target/standaloneExecutables-jar-with-dependencies.jar
+
     - name: Package RACK ontology and data
       shell: bash
       run: |

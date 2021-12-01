@@ -11,7 +11,7 @@
  */
 
 uri "http://arcos.rack/CAPEC" alias CAPEC.
-import "http://arcos.rack/THREAT".
+import "http://arcos.rack/SECURITY".
 	
 //Descriptions from https://capec.mitre.org/data/definitions/
 

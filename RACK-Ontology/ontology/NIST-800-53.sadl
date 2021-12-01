@@ -11,7 +11,7 @@
  */
 
 uri "http://arcos.rack/NISTControl" alias NISTControl.
-import "http://arcos.rack/CONTROL".
+import "http://arcos.rack/SECURITY".
 	
 NISTControl is a type of CONTROL.
 

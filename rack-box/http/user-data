@@ -23,6 +23,7 @@ autoinstall:
     - nginx-light
     - python3
     - python3-pip
+    - strace
     - swi-prolog
     - unzip
   late-commands:

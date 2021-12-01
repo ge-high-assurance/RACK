@@ -1,7 +1,7 @@
 #!/bin/sh
 # Copyright (c) 2020, General Electric Company and Galois, Inc.
 set -eu
-BASEDIR=$(dirname "$0")
+BASEDIR=$(cd "$(dirname "$0")"; pwd)
 echo "$BASEDIR"
 if ! command -v rack > /dev/null
 then
@@ -67,3 +67,28 @@ rack data import "$BASEDIR"/SystemVerificationReport/import.yaml
 
 echo "Ingesting Objectives ..."
 rack data import "$BASEDIR"/Objectives/import.yaml
+
+echo "----------------------------------------------------------------------"
+echo "Static data ingestion completed.  Will now attempt to build the"
+echo "Turnstile source code while using ASSIST to capture the dynamic"
+echo "build information and upload the result to RACK.  This may fail"
+echo "if the current environment does not support the software build"
+echo "process (it will succeed if run via the RACK-in-a-Box process)."
+echo
+echo "Example:"
+echo "  $ docker exec -w /home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage CONTAINER  ./Load-TurnstileData.sh"
+echo
+echo "Errors after this point will result in partial (but still useable)"
+echo "Turnstile sample data"
+echo
+
+(
+    set -e
+    cd "$BASEDIR"/CounterApplicationImplementation
+    export PATH="${BASEDIR}/../../assist/bin:${BASEDIR}/../../assist/databin:${PATH}"
+    make clean
+    make
+    make test
+    make dist
+    ingest_data -r "${BASEDIR}/turnstile-ingest.rack" -O "${BASEDIR}"/../../GE-Ontology http://rack001/turnstiledata .
+)

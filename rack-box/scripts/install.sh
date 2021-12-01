@@ -29,6 +29,7 @@ if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
             nginx-light \
             python3 \
             python3-pip \
+            strace \
             swi-prolog \
             unzip
 

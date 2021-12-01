@@ -40,17 +40,6 @@ runs:
         docker pull sadl/sadl-eclipse:dev
         docker run --rm -v $GITHUB_WORKSPACE/RACK:/RACK sadl/sadl-eclipse:dev -importAll /RACK -cleanBuild
 
-    - name: Generate CDR files
-      shell: bash
-      run: |
-        tar xfz RACK/rack-box/files/semtk.tar.gz semtk-opensource/standaloneExecutables/target/standaloneExecutables-jar-with-dependencies.jar
-        RACK/nodegroups/generate-cdrs.sh semtk-opensource/standaloneExecutables/target/standaloneExecutables-jar-with-dependencies.jar
-
-    - name: Package RACK ontology and data
-      shell: bash
-      run: |
-        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests --exclude=tools RACK
-
     - name: Package RACK ASSIST
       shell: bash
       run: |
@@ -75,3 +64,18 @@ runs:
         markdown -t RACK-in-a-box -s style.css RACK.wiki/_Welcome.md > index.html
         sed -i -e 's/>NodeGroupService/ onclick="javascript:event.target.port=12058">NodeGroupService/' index.html
         mv documentation.html index.html RACK/rack-box/files
+
+    - name: Generate CDR files
+      shell: bash
+      run: |
+        docker pull gehighassurance/rack-box:dev
+        ID=$(docker run --rm --detach -p 80:80 -p 12050-12092:12050-12092 -p 3030:3030 gehighassurance/rack-box:dev)
+        tar xfz RACK/rack-box/files/semtk.tar.gz semtk-opensource/standaloneExecutables/target/standaloneExecutables-jar-with-dependencies.jar
+        pip3 install RACK/cli
+        RACK/nodegroups/generate-cdrs.sh semtk-opensource/standaloneExecutables/target/standaloneExecutables-jar-with-dependencies.jar
+        docker container stop $ID
+
+    - name: Package RACK ontology and data
+      shell: bash
+      run: |
+        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests --exclude=tools RACK

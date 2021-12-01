@@ -91,12 +91,14 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
 
         # additional nearby changes
         def on_change() -> None:
-            if node.ConnectBy != self.data.to_name:
+            # ConnectBy is sometimes filled, and sometimes not in our
+            # nodegroups.  For now, we just follow what it was.
+            if node.ConnectBy is not "" and node.ConnectBy != self.data.to_name:
                 log_additional_change(
                     f"{path}.ConnectBy", node.ConnectBy, self.data.to_name
                 )
                 node.ConnectBy = self.data.to_name
-            if node.KeyName != self.data.to_name:
+            if node.KeyName is not None and node.KeyName != self.data.to_name:
                 log_additional_change(
                     f"{path}.KeyName", node.KeyName, self.data.to_name
                 )
@@ -112,8 +114,9 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
         super().visit_SNodeProp(json, path, prop)
 
         def on_change() -> None:
-            log_additional_change(f"{path}.KeyName", prop.KeyName, self.data.to_name)
-            prop.KeyName = self.data.to_name
+            if prop.KeyName is not None:
+                log_additional_change(f"{path}.KeyName", prop.KeyName, self.data.to_name)
+                prop.KeyName = self.data.to_name
 
         prop.UriRelationship = self.rename(
             prop.UriRelationship, f"{path}.UriRelationship", on_change

@@ -76,7 +76,7 @@ class ModelOrData(BaseModel):
 
 
 class SNodeProp(BaseModel):
-    KeyName: str
+    KeyName: Optional[str]
     ValueType: str
     relationship: str
     UriRelationship: str
@@ -95,7 +95,7 @@ class SNodeNode(BaseModel):
     OptionalMinus: List[int]
     Qualifiers: List[str]
     DeletionMarkers: List[bool]
-    KeyName: str
+    KeyName: Optional[str]
     ValueType: str
     UriValueType: str
     ConnectBy: str
@@ -110,7 +110,7 @@ class SNode(BaseModel):
     isReturned: bool
     isRuntimeConstrained: bool
     nodeList: List[SNodeNode]
-    NodeName: str
+    NodeName: Optional[str]
     propList: List[SNodeProp]
     SparqlID: str
     subClassNames: Optional[List[str]]

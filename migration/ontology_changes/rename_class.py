@@ -82,8 +82,9 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
 
         # additional nearby changes
         def on_change() -> None:
-            log_additional_change(f"{path}.NodeName", node.NodeName, self.data.to_name)
-            node.NodeName = self.data.to_name
+            if node.NodeName is not None:
+                log_additional_change(f"{path}.NodeName", node.NodeName, self.data.to_name)
+                node.NodeName = self.data.to_name
 
         node.fullURIName = self.rename(
             node.fullURIName, f"{path}.fullURIName", on_change

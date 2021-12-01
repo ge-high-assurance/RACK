@@ -12,7 +12,7 @@ logger.addHandler(stream_handler)
 logger.propagate = False
 
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 def abort(reason: str) -> NoReturn:

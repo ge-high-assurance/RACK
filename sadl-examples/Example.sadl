@@ -1,0 +1,110 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+/*
+
+In RACK, we can allow data providers to model both the process of developing a
+system and the process of recording information about that system in a RACK
+database. Because it would be easy to conflate or confuse these two very
+different things, we provide a discussion here.
+
+The process of developing the system under certification produces entities.  An
+entity is developed by an activity, and agents are responsible for conducting
+activities.  Specific roles can be attributed to each agent, but we omit that
+for now. The activity of developing an entity may be informed by other
+activities, such as requirements gathering. We aim to keep the description of
+these relationships as simple as possible -- supporting only the minimal
+connectivity that TA3 performers will need -- but are happy to model whatever
+makes sense. An activity that develops an entity may use other entities such as
+data or tools (roles can be distinguished here as well, when needed).
+Activities are concrete events, and so each has a start time, and optionally
+and end time.
+
+It may be important for a RACK database to record not only the process of
+developing a system, but also the process of entering information about that
+development process in a RACK database. For example, it may be important to
+know who entered the data in the database and when, so that an analysis can
+assess the trustworthiness of the information stored in the RACK database. The
+important thing to note here is that recording that information is also an
+activity, and one or more agents may be associated with that activity.
+Similarly, the activity of recording data about a system in RACK may be
+informed by other activities, such as the activity of collecting information to
+be entered. The activity of recording data about a system in RACK may also use
+entities (primarily tools and data files). And, like design activities, these
+recording activities are concrete, with well-defined start times and optional
+end times.
+
+It may be that the process of recording information in the RACK database is not
+documented in RACK - it's very much optional. However, if you do aim to provide
+this "meta-information", please remember to keep the design activity and the
+recording activity separate.
+
+To illustrate how you might record the process of recording information in
+RACK, we provide the following example in our data model format below.
+
+
+*/
+
+uri "http://arcos.rack/ProvenanceExample".
+
+import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/AGENTS".
+import "http://arcos.rack/REQUIREMENTS".
+
+/* AGENTS */
+
+Dave
+  (note "the person who defined the example requirements")
+  is a PERSON.
+
+Eric
+  (note "the person who processed the requirements into RACK") 
+  is a PERSON.
+  
+Eclipse
+  (note "Eclipse 2020-06 using SADL 3.4.1")
+  is a TOOL.
+
+/* ACTIVITIES */
+
+WriteSomeSadl
+  (note "This SADL was hand-written, but this activity
+         could have been automated. This activity
+         is responsible for encoding both the requirement
+         as well as authorship information about the
+         requirement.")
+  is an ACTIVITY
+  wasAssociatedWith Eric
+  wasAssociatedWith Eclipse
+  startedAtTime "2020-11-09 01:23Z".
+
+DefineRequirements
+  (note "The actual tutorial requirements were defined
+         first. This happened before the process of
+         importing them into RACK. The requirement
+         existed before the SADL writing started.")
+  is a REQUIREMENT_DEVELOPMENT,
+  wasAssociatedWith Dave,
+  startedAtTime "2020-11-06 12:34Z",
+  dataInsertedBy WriteSomeSadl.
+
+/* ENTITIES */
+
+ExplanatoryRequirement
+  (note "The requirement to produce a tutorial.")
+  is a REQUIREMENT
+  wasGeneratedBy DefineRequirements
+  dataInsertedBy WriteSomeSadl
+  description
+        "Help RACK users understand the difference between
+        authorship of a requirement and the process of ingesting
+        that requirement into RACK itself".

@@ -1,0 +1,9 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://com.ge.research.sadl.configuration#">
+  <Category rdf:about="http://com.ge.research.sadl.configuration#ProjectDependencies">
+    <pDependsOn>file:/RACK/RACK-Ontology</pDependsOn>
+  </Category>
+  <Category rdf:about="http://com.ge.research.sadl.configuration#ReasonerSpec"/>
+  <Category rdf:about="http://com.ge.research.sadl.configuration#Builtin"/>
+</rdf:RDF>

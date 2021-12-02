@@ -56,3 +56,8 @@ debug.log
 *.swp
 cli/env/
 .settings/
+/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.d
+/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.rack
+/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.exe
+/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.gz
+/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.o

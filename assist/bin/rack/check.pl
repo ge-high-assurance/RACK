@@ -128,8 +128,17 @@ check_values_from(Property, I, T) :-
     \+ rdf_is_literal(Val),  % TODO check these as well?
     rdf(Val, rdf:type, DefTy),
     DefTy \= Cls,
-    \+ rdf_reachable(DefTy, rdfs:subClassOf, Cls),
-    print_message(error, property_value_wrong_type(I, Property, DefTy, Val, Cls)).
+    % Cls might be a direct type or a oneOf restriction to a list of types
+    ( rdf_bnode(Cls), rdf(Cls, owl:oneOf, ClsLst), !,
+      rdf_list(ClsLst, CList),
+      ( member(CL, CList),
+        rdf_reachable(DefTy, rdfs:subClassOf, CL), !  % matches, stop processing
+      ; print_message(error,
+                      property_value_wrong_type_in(I, Property, DefTy, Val, CList))
+      )
+    ; \+ rdf_reachable(DefTy, rdfs:subClassOf, Cls),
+      print_message(error, property_value_wrong_type(I, Property, DefTy, Val, Cls))
+    ).
 
 check_invalid_value(Property, I, T) :-
     property_target(T, Property, _PUsage, _Target, _Restr),
@@ -254,4 +263,13 @@ prolog:message(property_value_wrong_type(Instance, Property, DefType, Val, ValTy
       prefix_shorten(Val, SV)
     },
     [ 'Instance property ~w . ~w of ~w should be a ~w but is a ~w'-[
-          SI, SP, SV, SVTy, SDTy] ].
+          SI, SP, SV, SVTy, SDTy ] ].
+prolog:message(property_value_wrong_type_in(Instance, Property, DefType, Val, ValTypes)) -->
+    { prefix_shorten(Instance, SI),
+      prefix_shorten(Property, SP),
+      prefix_shorten(DefType, SDTy),
+      findall(VT, (member(VT, ValTypes), prefix_shorten(VT, SVT)), SVTys),
+      prefix_shorten(Val, SV)
+    },
+    [ 'Instance property ~w . ~w of ~w should be one of ~w but is a ~w'-[
+          SI, SP, SV, SVTys, SDTy ] ].

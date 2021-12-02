@@ -9,7 +9,6 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from migration_helpers.name_space import rack
 from ontology_changes import (
     Commit,
     ChangeCardinality,
@@ -17,9 +16,7 @@ from ontology_changes import (
     ChangePropertyRange,
     SingleValue,
 )
-
-PROV_S = rack("PROV-S")
-TESTING = rack("TESTING")
+from rack.namespaces.rack_ontology import PROV_S, TESTING
 
 commit = Commit(
     number="2e079bb2a32b3cc1b3153d44ad0c21e27507937f",

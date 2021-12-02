@@ -26,6 +26,15 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="toolInstallationConfiguration"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">An aid (software, hardware, etc) that automates the performance of an activity.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#AGENT"/>
   </owl:Class>
@@ -47,6 +56,14 @@
     <rdfs:comment xml:lang="en">Person agents are people - alias for User</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#AGENT"/>
   </owl:Class>
+  <owl:ObjectProperty rdf:about="#toolInstallationConfiguration">
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#TOOL"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="wasQualifiedBy">
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#TOOL"/>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#employedBy">
     <rdfs:subPropertyOf rdf:resource="PROV-S#actedOnBehalfOf"/>
     <rdfs:comment xml:lang="en">Relates people to the company they were acting on behalf of.</rdfs:comment>

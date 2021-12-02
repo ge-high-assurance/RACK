@@ -6,90 +6,40 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sadlimplicitmodel="http://sadl.org/sadlimplicitmodel#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:D="http://arcos.rack/DOCUMENT#"
     xmlns:sadlbasemodel="http://sadl.org/sadlbasemodel#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
   xml:base="http://arcos.rack/ANALYSIS">
   <owl:Ontology rdf:about="">
-    <owl:imports rdf:resource="DOCUMENT"/>
     <owl:imports rdf:resource="PROV-S"/>
     <owl:imports rdf:resource="http://sadl.org/builtinfunctions"/>
     <owl:imports rdf:resource="http://sadl.org/sadlimplicitmodel"/>
     <owl:imports rdf:resource="http://sadl.org/sadlbasemodel"/>
     <rdfs:comment xml:lang="en">This ontology was created from a SADL file 'ANALYSIS.sadl' and should not be directly edited.</rdfs:comment>
   </owl:Ontology>
-  <owl:Class rdf:ID="ANALYSIS_ANNOTATION">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="annotationType"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="fromReport"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:comment xml:lang="en">A result of the analysis that is linked to some specific part of the system.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
-  </owl:Class>
-  <owl:Class rdf:ID="ANALYSIS_RESULT">
-    <owl:equivalentClass>
-      <owl:Class>
-        <owl:oneOf rdf:parseType="Collection">
-          <An:ANALYSIS_RESULT rdf:ID="Passed">
-            <provs:identifier>Passed</provs:identifier>
-          </An:ANALYSIS_RESULT>
-          <An:ANALYSIS_RESULT rdf:ID="Failed">
-            <provs:identifier>Failed</provs:identifier>
-          </An:ANALYSIS_RESULT>
-          <An:ANALYSIS_RESULT rdf:ID="Indeterminate">
-            <provs:identifier>Indeterminate</provs:identifier>
-          </An:ANALYSIS_RESULT>
-        </owl:oneOf>
-      </owl:Class>
-    </owl:equivalentClass>
-    <rdfs:comment xml:lang="en">Outcome of an analysis</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
-  </owl:Class>
-  <owl:Class rdf:ID="ANALYSIS_ANNOTATION_TYPE">
-    <rdfs:comment xml:lang="en">An open/extensible set of types of analysis annotations</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="PROV-S#THING"/>
-  </owl:Class>
   <owl:Class rdf:ID="ANALYSIS_OUTPUT">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:maxCardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="result"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">Output of an ANALYSIS</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="ANALYSIS">
-    <rdfs:comment xml:lang="en">ACTIVITY of running some analysis, and as a result creating some ANALYSIS_REPORT</rdfs:comment>
+    <rdfs:comment xml:lang="en">ACTIVITY of running some analysis, and as a result creating some ANALYSIS_OUTPUT</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
-  <owl:ObjectProperty rdf:ID="producedBy">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:comment xml:lang="en">ACTIVITY(s) (e.g. ANALYSIS) producing this report</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
-    <rdfs:domain rdf:resource="#ANALYSIS_OUTPUT"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="performedBy">
+  <owl:ObjectProperty rdf:ID="analyzedWith">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
-    <rdfs:comment xml:lang="en">Entity that is responsible for producing an analysis, could be a person or a tool. </rdfs:comment>
+    <rdfs:comment xml:lang="en">Tool responsible for producing the output.</rdfs:comment>
     <rdfs:range rdf:resource="PROV-S#AGENT"/>
+    <rdfs:domain rdf:resource="#ANALYSIS"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="runBy">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
+    <rdfs:comment xml:lang="en">Agent responsible for running the analysis.</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#AGENT"/>
+    <rdfs:domain rdf:resource="#ANALYSIS"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="analysisInput">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">Entities targetted by the analysis.</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#ANALYSIS"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="analyzes">
@@ -98,36 +48,10 @@
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#ANALYSIS_OUTPUT"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#annotationType">
-    <rdfs:comment xml:lang="en">The type of the annotation.</rdfs:comment>
-    <rdfs:range rdf:resource="#ANALYSIS_ANNOTATION_TYPE"/>
-    <rdfs:domain rdf:resource="#ANALYSIS_ANNOTATION"/>
+  <owl:ObjectProperty rdf:ID="analysisConfiguration">
+    <rdfs:subPropertyOf rdf:resource="PROV-S#used"/>
+    <rdfs:comment xml:lang="en">Parameters/options etc. for the tool used.</rdfs:comment>
+    <rdfs:range rdf:resource="PROV-S#ENTITY"/>
+    <rdfs:domain rdf:resource="#ANALYSIS"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#fromReport">
-    <rdfs:comment xml:lang="en">Which analysis report this annotation comes from.</rdfs:comment>
-    <rdfs:range rdf:resource="#ANALYSIS_OUTPUT"/>
-    <rdfs:domain rdf:resource="#ANALYSIS_ANNOTATION"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#result">
-    <rdfs:comment xml:lang="en">Passed/Failed/Indeterminate status of this report</rdfs:comment>
-    <rdfs:range rdf:resource="#ANALYSIS_RESULT"/>
-    <rdfs:domain rdf:resource="#ANALYSIS_OUTPUT"/>
-  </owl:ObjectProperty>
-  <owl:DatatypeProperty rdf:ID="metric">
-    <rdfs:comment xml:lang="en">provides a numerical result value from the analysis that was performed</rdfs:comment>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-    <rdfs:domain rdf:resource="#ANALYSIS_OUTPUT"/>
-  </owl:DatatypeProperty>
-  <An:ANALYSIS_ANNOTATION_TYPE rdf:ID="POSTCONDITION">
-    <provs:identifier>Postcondition</provs:identifier>
-    <rdfs:comment xml:lang="en">A constraint that should hold after of successful operation of this unit of code.</rdfs:comment>
-  </An:ANALYSIS_ANNOTATION_TYPE>
-  <An:ANALYSIS_ANNOTATION_TYPE rdf:ID="INVARIANT">
-    <provs:identifier>Invariant</provs:identifier>
-    <rdfs:comment xml:lang="en">A constraint on this unit of code or data that is true at any point in the program's execution.</rdfs:comment>
-  </An:ANALYSIS_ANNOTATION_TYPE>
-  <An:ANALYSIS_ANNOTATION_TYPE rdf:ID="PRECONDITION">
-    <provs:identifier>Precondition</provs:identifier>
-    <rdfs:comment xml:lang="en">A constraint that should hold in advance of successful operation of this unit of code.</rdfs:comment>
-  </An:ANALYSIS_ANNOTATION_TYPE>
 </rdf:RDF>

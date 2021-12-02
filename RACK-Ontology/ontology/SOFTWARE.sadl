@@ -19,9 +19,6 @@ CODE_DEVELOPMENT
 	(note "An ACTIVITY that produces source code FILEs")
 	is a type of FILE_CREATION.
 
-    author (note "AGENT(s) who participated in this ACTIVITY") describes CODE_DEVELOPMENT with values of type AGENT.
-    author is a type of wasAssociatedWith.
-
     referenced (note "ENTITY(s) (e.g. REQUIREMENT) that were referenced during this ACTIVITY") describes CODE_DEVELOPMENT with values of type ENTITY.
     referenced is a type of used.
 
@@ -37,15 +34,13 @@ BUILD
 CODE_GEN
 	(note "ACTIVITY of running a CODE_GENERATOR to create source code FILEs")
 	is a type of FILE_CREATION.
-    sw:performedBy (note "AGENT(s) (e.g. CODE_GENERATOR) generating the code") describes CODE_GEN with values of type AGENT.
-    sw:performedBy is a type of wasAssociatedWith.
 
 COMPILE
 	(note "ACTIVITY of running a a COMPILER to produce executable and object FILEs")
 	is a type of FILE_CREATION.
+
     sw:performedBy (note "AGENT(s) (e.g. COMPILER) performing the compilation") describes COMPILE with values of type AGENT.
     sw:performedBy is a type of wasAssociatedWith.
-
 
     compiledBy (note "The tool that performed the compilation") describes COMPILE with values of type TOOL.
     compiledBy is a type of wasAssociatedWith.
@@ -58,7 +53,11 @@ PACKAGE
 	is a type of FILE_CREATION.
 
     sw:performedBy (note "AGENT(s) (e.g. PACKAGER) performing the packaging") describes PACKAGE with values of type AGENT.
-    sw:performedBy of PACKAGE must be one of {Ag:PERSON, Ag:ORGANIZATION}.
+    /* Per discussion 2021.11.30 regarding https://github.com/ge-high-assurance/RACK/issues/607,
+     * the range constraint on performedBy has been removed to prevent it from
+     * applying also to the COMPILE domain.
+     */
+    // sw:performedBy of PACKAGE must be one of {Ag:PERSON, Ag:ORGANIZATION}.
     sw:performedBy is a type of wasAssociatedWith.
 
 	packagedBy (note "The tool used to generate the package output") describes PACKAGE with values of type TOOL.

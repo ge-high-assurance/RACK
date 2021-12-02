@@ -63,12 +63,6 @@
     <rdfs:range rdf:resource="PROV-S#ENTITY"/>
     <rdfs:domain rdf:resource="#REVIEW"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="createBy">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:comment xml:lang="en">ACTIVITY(s) (e.g. REVIEW) that created this log</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
-    <rdfs:domain rdf:resource="#REVIEW_LOG"/>
-  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="reviewResult">
     <rdfs:comment xml:lang="en">Review status descriptor</rdfs:comment>
     <rdfs:range rdf:resource="#REVIEW_STATE"/>

@@ -40,17 +40,12 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ACTIVITY"/>
   </owl:Class>
   <owl:Class rdf:ID="SYSTEM">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:maxCardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="producedBy"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">SYSTEMs classify logical parts of the whole system being developed</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
+  </owl:Class>
+  <owl:Class rdf:ID="OP_PROCEDURE">
+    <rdfs:comment xml:lang="en">system operational procedures employed, e.g. going through a checklist, limiting people near runways, etc.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="DOCUMENT#PROCEDURE"/>
   </owl:Class>
   <owl:Class rdf:ID="INTERFACE">
     <rdfs:subClassOf>
@@ -64,10 +59,6 @@
     </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">INTERFACEs describe directed connections between a SYSTEM providing what another SYSTEM requires</rdfs:comment>
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
-  </owl:Class>
-  <owl:Class rdf:ID="OP_PROCEDURE">
-    <rdfs:comment xml:lang="en">system operational procedures employed, e.g. going through a checklist, limiting people near runways, etc.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="DOCUMENT#PROCEDURE"/>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="provides">
     <rdfs:comment xml:lang="en">List of entities that this SYSTEM provides to others</rdfs:comment>
@@ -91,12 +82,6 @@
     <rdfs:range rdf:resource="#SYSTEM"/>
     <rdfs:domain rdf:resource="#INTERFACE"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#producedBy">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasGeneratedBy"/>
-    <rdfs:comment xml:lang="en">ACTIVITY(s) participating in developing this SYSTEM</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
-    <rdfs:domain rdf:resource="#SYSTEM"/>
-  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#parentFunction">
     <rdfs:comment xml:lang="en">allows for decomposition of functionality</rdfs:comment>
     <rdfs:range rdf:resource="#FUNCTION"/>
@@ -106,17 +91,6 @@
     <rdfs:comment xml:lang="en">List of entities that this SYSTEM requires from others</rdfs:comment>
     <rdfs:range rdf:resource="#FUNCTION"/>
     <rdfs:domain rdf:resource="#SYSTEM"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="developedBy">
-    <rdfs:subPropertyOf rdf:resource="PROV-S#wasAssociatedWith"/>
-    <rdfs:comment xml:lang="en">Organization that is responsible for producing a system</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#AGENT"/>
-    <rdfs:domain rdf:resource="#SYSTEM_DEVELOPMENT"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="identifiedBy">
-    <rdfs:comment xml:lang="en">ACTIVITY out of which this INTERFACE was identified</rdfs:comment>
-    <rdfs:range rdf:resource="PROV-S#ACTIVITY"/>
-    <rdfs:domain rdf:resource="#INTERFACE"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="destination">
     <rdfs:subPropertyOf rdf:resource="PROV-S#wasImpactedBy"/>

@@ -1,5 +1,6 @@
-<rdf:RDF 
+<rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:provs="http://arcos.rack/PROV-S#"
     xmlns:builtinfunctions="http://sadl.org/builtinfunctions#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:sacm="http://arcos.certgate/LM#"
@@ -166,8 +167,9 @@
   <owl:Class rdf:about="#Element">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:cardinality>
+        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
+        >1</owl:qualifiedCardinality>
         <owl:onProperty>
           <owl:DatatypeProperty rdf:ID="uuid"/>
         </owl:onProperty>

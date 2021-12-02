@@ -9,10 +9,8 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from migration_helpers.name_space import rack
 from ontology_changes import ChangeCardinality, Commit, Unconstrained
-
-REVIEW = rack("REVIEW")
+from rack.namespaces.rack_ontology import REVIEW
 
 commit = Commit(
     number="b721c16f0f7420a8ccd92bda0d98a96c16dc62b8",

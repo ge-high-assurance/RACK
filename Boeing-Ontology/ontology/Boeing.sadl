@@ -1,16 +1,28 @@
 uri "http://arcos.AH-64D/Boeing" alias BoeingModel.
+import "http://arcos.rack/AGENTS".
+import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/CONFIDENCE".
+import "http://arcos.rack/DOCUMENT".
+import "http://arcos.rack/FILE".
+import "http://arcos.rack/HAZARD".
+import "http://arcos.rack/MODEL".
+import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/REVIEW".
+import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/TESTING".
+// import "http://common/DO-178C".
 
-PIDS_Req (note "A Requirement identified in the Prime Item Development Specification")is a type of REQUIREMENT.
+PIDS_Req (note "A Requirement identified in the Prime Item Development Specification") is a type of REQUIREMENT.
 
 CSID_Req (note "A Requirement identified in the Crew Systems Interface Document") is a type of REQUIREMENT.
 
-SRS_Req (note "A Requirement identified in the Software Requirements Specification")is a type of REQUIREMENT.
+SRS_Req (note "A Requirement identified in the Software Requirements Specification") is a type of REQUIREMENT.
 //satisfies of SRS_Req only has values of type {PIDS_Req or CSID_Req}.
 
-SubDD_Req (note "A Requirement identified in the Subsystem Design Document")is a type of REQUIREMENT.
-satisfies of SubDD_Req only has values of type SRS_Req.
+SubDD_Req (note "A Requirement identified in the Subsystem Design Document") is a type of REQUIREMENT. 
+Rq:satisfies of SubDD_Req only has values of type SRS_Req. //AM move this and why warning marker
 
 SBVT_Test (note "A test identified in the Software Baseline Verification Tests") is a type of TEST.
 //verifies of SBVT_Test only has values of type {SRS_Req or SubDD_Req}.
@@ -18,3 +30,110 @@ verifies of SBVT_Test has at least 1 value.
 
 SBVT_Result (note "A result identified for a SBVT_Test (Software Baseline Verification Tests)") is a type of TEST_RESULT.
 confirms of SBVT_Result only has values of type SBVT_Test.
+
+////////////////////////////////////// Moved from SRI ontology
+//AM: replaced author by wasAssociatedWith in DevelopSystemConOps
+//AM: dropped author in DevelopSystemArchitecture as we inherit wasAssociatedWith
+//AM: do we want more granularity than just wasAssociatedWith
+
+     DevelopSystemConOps is a type of ACTIVITY.
+       wasAssociatedWith of DevelopSystemConOps only has values of type PERSON.
+       
+     SystemConOps is a type of ENTITY.
+       wasGeneratedBy of SystemConOps only has values of type DevelopSystemConOps.
+       conOpsDocs describes SystemConOps with values of type DOCUMENT.  
+     
+     DevelopSystemArchitecture is a type of ACTIVITY.  
+        wasInformedBy of DevelopSystemArchitecture only has values of type DevelopSystemConOps.
+        used of DevelopSystemArchitecture only has values of type SystemConOps. 
+
+     SystemArchitecture (note "specification of system architecture") is a type of ENTITY. 
+      //AM what is the difference between wasGeneratedBy and original DesCert:createdBy? so using wasGeneratedBy
+       wasGeneratedBy of SystemArchitecture only has values of type DevelopSystemArchitecture. 
+       isArchitectureOf describes SystemArchitecture with values of type SYSTEM.
+       isArchitectureOf is a type of wasImpactedBy.
+
+     SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
+       wasInformedBy of SystemRequirementsDefinition only has values of type DevelopSystemConOps. 
+     
+      PIDS_Doc is a type of DOCUMENT. 
+       content of PIDS_Doc only has values of type PIDS_Req. 
+       wasGeneratedBy of PIDS_Doc only has values of type SystemRequirementsDefinition. 
+        
+      SoftwareHighLevelRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
+		wasInformedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementsDefinition or DevelopSystemArchitecture}.
+        Rq:governedBy of SoftwareHighLevelRequirementsDefinition only has values of type {PIDS_Doc or SystemArchitecture}.
+
+//      SoftwareHighLevelRequirement is a type of REQUIREMENT. 
+//        wasGeneratedBy of SoftwareHighLevelRequirement only has values of type SoftwareHighLevelRequirementsDefinition.
+       
+     SRS_Doc is a type of DOCUMENT. 
+       content of SRS_Doc only has values of type SRS_Req. //AM only?
+       createdBy of SRS_Doc only has values of type SoftwareHighLevelRequirementsDefinition.
+       
+     SubDD_Doc is a type of DOCUMENT. 
+//       content of SubDD_Doc only has values of type SoftwareLowLevelRequirement. 
+       content of SubDD_Doc only has values of type SubDD_Req. 
+       createdBy of SubDD_Doc only has values of type SoftwareDesign. 
+       governs of SubDD_Doc only has values of type SWCOMPONENT.
+       governs describes SubDD_Doc with at most 1 value.
+
+     SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
+		wasInformedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementsDefinition or DevelopSystemArchitecture}.
+        Rq:governedBy of SoftwareDesign only has values of type {SRS_Doc or SystemArchitecture}.
+       
+//     SoftwareLowLevelRequirement is a type of REQUIREMENT.
+//        wasGeneratedBy of SoftwareLowLevelRequirement only has values of type SoftwareDesign.
+       
+     SoftwareCoding is a type of CODE_DEVELOPMENT. 
+        wasInformedBy of SoftwareCoding only has values of type SoftwareDesign.        
+
+//      SoftwareIntegration is a type of COMPILE.
+//        wasInformedBy of SoftwareIntegration only has values of type SoftwareCoding.        
+//        compileWithOptimizations describes  SoftwareIntegration with values of type boolean.     
+//        linkerPath describes  SoftwareIntegration with values of type string.       
+
+
+// COMMON FILE FORMATS
+
+XmlFormat       (note "Extensible Markup Language file format") is a FORMAT identifier "xml".
+SysmlFormat     (note "Systems Modeling Language file format") is a FORMAT identifier "sysml".
+PdfFormat       (note "PDF file format") is a FORMAT identifier "pdf".
+EmlFormat       (note "Email file format") is a FORMAT identifier "eml".
+YamlFormat      (note "Yet Another Markup Language file format") is a FORMAT identifier "yaml".
+JsonFormat      (note "JavaScript Object Notation file format") is a FORMAT identifier "json".
+TomlFormat      (note "Tom's Obvious Minimal Language file format") is a FORMAT identifier "toml".
+IniFormat       (note "Initialization configuration file format") is a FORMAT identifier "ini".
+
+// Image formats
+SvgFormat       (note "Scalable Vector Graphics image file format") is a FORMAT identifier "svg".
+JpegFormat      (note "Joint Photographic Exports Group image file format") is a FORMAT identifier "jpeg".
+GifFormat       (note "Graphics Interchange Format image file format") is a FORMAT identifier "gif".
+PngFormat       (note "Portable Network Graphics image file format") is a FORMAT identifier "png".
+BmpFormat       (note "Bitmap image file format") is a FORMAT identifier "bmp".
+TiffFormat      (note "Tag Image File Format image file format") is a FORMAT identifier "tiff".
+
+// Programming language source files
+AdaFormat       (note "Ada source file format") is a FORMAT identifier "ada".
+CFormat         (note "C source file format") is a FORMAT identifier "c".
+CxxFormat       (note "C++ source file format") is a FORMAT identifier "cpp".
+PythonFormat    (note "Python source file format") is a FORMAT identifier "py".
+ShellFormat     (note "Shell script file format") is a FORMAT identifier "sh".
+
+// Plain text formats
+TextFormat      (note "Plain text file format") is a FORMAT identifier "txt".
+CsvFormat       (note "Comma separated values file format") is a FORMAT identifier "csv".
+TsvFormat       (note "Tab separated values file format") is a FORMAT identifier "tsv".
+
+// Microsoft office
+XlsFormat       (note "Microsoft Excel spreadsheet file format") is a FORMAT identifier "xls".
+DocFormat       (note "Microsoft Word document file format") is a FORMAT identifier "doc".
+PptFormat       (note "Microsoft PowerPoint file format") is a FORMAT identifier "ppt".
+
+// Archives
+ArchiveFormat   (note "File archive file format: e.g. zip, tar, rar") is a FORMAT identifier "archive".
+
+// Various object code types
+ExecutableFormat (note "Executable file format: e.g. exe, com, elf, macho") is a FORMAT identifier "exe".
+LibraryFormat    (note "Library file format: e.g. dylib, lib, a, dll") is a FORMAT identifier "lib".
+ObjectFormat     (note "Intermediate compiler outputs: e.g. o, coff") is a FORMAT identifier "obj".

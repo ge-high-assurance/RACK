@@ -19,9 +19,8 @@
   <owl:Class rdf:ID="MODEL">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onClass rdf:resource="PROV-S#THING"/>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
-        >1</owl:qualifiedCardinality>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
         <owl:onProperty>
           <owl:ObjectProperty rdf:ID="models"/>
         </owl:onProperty>

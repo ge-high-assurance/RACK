@@ -39,9 +39,8 @@
   <owl:Class rdf:ID="SWCOMPONENT">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onClass rdf:resource="#COMPONENT_TYPE"/>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
-        >1</owl:qualifiedCardinality>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
         <owl:onProperty>
           <owl:ObjectProperty rdf:ID="componentType"/>
         </owl:onProperty>
@@ -51,21 +50,6 @@
     <rdfs:subClassOf rdf:resource="PROV-S#ENTITY"/>
   </owl:Class>
   <owl:Class rdf:ID="PACKAGE">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:someValuesFrom>
-          <owl:Class>
-            <owl:oneOf rdf:parseType="Collection">
-              <rdf:Description rdf:about="AGENTS#PERSON"/>
-              <rdf:Description rdf:about="AGENTS#ORGANIZATION"/>
-            </owl:oneOf>
-          </owl:Class>
-        </owl:someValuesFrom>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="performedBy"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">ACTIVITY of running a PACKAGER to produce a package FILE</rdfs:comment>
     <rdfs:subClassOf rdf:resource="FILE#FILE_CREATION"/>
   </owl:Class>
@@ -129,7 +113,7 @@
     <rdfs:range rdf:resource="#COMPONENT_TYPE"/>
     <rdfs:domain rdf:resource="#SWCOMPONENT"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#performedBy">
+  <owl:ObjectProperty rdf:ID="performedBy">
     <rdfs:comment xml:lang="en">AGENT(s) (e.g. PACKAGER) performing the packaging</rdfs:comment>
     <rdfs:domain>
       <owl:Class>

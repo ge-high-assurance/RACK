@@ -1,4 +1,4 @@
-/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+/* Copyright (c) 2020-2021, General Electric Company, Galois, Inc.
  *
  * All Rights Reserved
  *
@@ -42,10 +42,34 @@ TEST_RESULT
 	confirms (note "Parent test(s) of this test result") describes TEST_RESULT with values of type TEST.
 	confirms is a type of wasImpactedBy.
 
+
+TEST_PROCEDURE (note "A TEST_PROCEDURE is the TEST_STEPs that perform TESTs. ") is a type of COLLECTION.
+	content of TEST_PROCEDURE only has values of type TEST_STEP.
+	
+	TEST_STEP (note "A TEST_STEP is a collection of TESTs that are performed in a single execution")is a type of COLLECTION.
+		content of TEST_STEP only has values of type TEST.
+		nextStep (note "The next TEST_STEP in a sequence" ) describes TEST_STEP with values of type TEST_STEP.
+		nextStep of TEST_STEP has at most 1 value.
+
+TEST_LOG (note "A TEST_LOG is the TEST_RESULTs from executing a TEST_PROCEDURE") is a type of COLLECTION.
+	content of TEST_LOG only has values of type TEST_RECORD.
+
+	
+	TEST_RECORD (note "a TEST_RECORD is a collection of TEST_RESULTs associated with a TEST_STEP") is a type of COLLECTION.
+		content of TEST_RECORD only has values of type TEST_RESULT.
+		nextRecord (note "The next TEST_RECORD that is the next in a sequence " ) describes TEST_RECORD with values of type TEST_RECORD.
+		nextRecord of TEST_RECORD has at most 1 value.
+		logs (note "TEST_STEP for which the TEST_RECORD is captured" ) describes TEST_RECORD with a single value of type TEST_STEP.
+		logs is a type of wasImpactedBy.
+
+
 TEST_DEVELOPMENT
 	(note "ACTIVITY of creating a TEST to participate in the evaluation of a requirement")
 	is a type of ACTIVITY.
-
+	
 TEST_EXECUTION
 	(note "ACTIVITY of performing a TEST and record its corresponding TEST_RESULT")
 	is a type of ACTIVITY.
+
+	testProcedure (note "TEST_PROCEDURE that was executed.")describes TEST_EXECUTION with values of type TEST_PROCEDURE.
+	testProcedure is a type of used.

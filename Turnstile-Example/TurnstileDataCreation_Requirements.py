@@ -285,10 +285,16 @@ def updateVerReq_aux(req,key,reqModiId):
    else :req 
 def updateVerReq (reqs,reqModified):
     return list(map(lambda x: updateVerReq_aux(x,"Requirementidentification",reqModified),reqs)) 
+def updateVersionValue_aux(req,key,reqModified):
+    if checkKeyExist(req,key) in reqModified: return req.update({key:req[key]+":v1"})
+    else :req
+def updateVersionValue(Oldreqs,key,reqModified):
+    return list(map(lambda x: updateVersionValue_aux(x,key,reqModified),Oldreqs))           
 updateVerReq(hl,hlReqsModified_Ids)
 updateVerReq(ll,llReqsModified_Ids)
 updateVerReq(sys,sysReqsModified_Ids) 
- ### new requirements added in version 2
+updateVersionValue(ll,"Satisfies",hlReqsModified_Ids)
+### new requirements added in version 2
 def newReqs_aux(reqType,newList,oldList):
     return list(set(reqsIds(reqType,newList))-set(reqsIds(reqType,oldList)))
 def newReqs(reqType,newList,oldList):

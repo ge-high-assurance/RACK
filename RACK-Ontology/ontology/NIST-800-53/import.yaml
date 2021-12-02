@@ -1,0 +1,7 @@
+data-graph: "http://rack001/nist-800-53"
+ingestion-steps:
+#Phase1: Identifiers Only
+- {nodegroup: "ingest_CONTROL", csv: "NIST-800-53_1.csv"}
+
+#Phase2: The rest of the data
+- {nodegroup: "ingest_CONTROL", csv: "NIST-800-53_2.csv"}

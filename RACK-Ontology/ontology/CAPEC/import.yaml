@@ -1,0 +1,7 @@
+data-graph: "http://rack001/capec"
+ingestion-steps:
+#Phase1: Identifiers Only
+- {nodegroup: "ingest_THREAT", csv: "CAPEC1.csv"}
+
+#Phase2: The rest of the data
+- {nodegroup: "ingest_THREAT", csv: "CAPEC2.csv"}

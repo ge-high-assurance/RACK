@@ -1,0 +1,92 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.rack/CPS" alias CPS.
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/SECURITY".
+
+// In https://www.faa.gov/documentLibrary/media/Advisory_Circular/AC%2023.1309-1E.pdf
+// the DALs (Catastrophic, Hazardous, Major,Minor, No Safety Effect) are mapped to
+// allowable quantitative failure probabilities for classes of aircraft.
+// So, for Class IV aircraft and Catastrophic DAL the allowable failure probability is 1E-9.
+
+DAL (note "Design Assurance Level: a value 9 represents allowable failure probability of 1E-9, etc.") 
+	is a type of int [0,9]. 
+ResidualRisk (note "The risk that remains after controls have been applied to mitigate threats.") 
+	is a type of int [0,1].
+	
+Cps (note "A cyber physical system") is a type of SYSTEM
+	described by cpsType with a single value of type CpsType 
+	described by inputPort with values of type Port 
+	described by outputPort with values of type Port
+	  
+	// properties that allow for inferring threats
+	described by canReceiveSWUpdate with a single value of type boolean
+	described by canReceiveConfigUpdate with a single value of type boolean
+	described by hasSensitiveInfo with a single value of type boolean	
+	described by insideTrustedBoundary with a single value of type boolean
+	described by pedigree with a single value of type Pedigree
+
+	// properties that allow for mitigating of threats
+	described by implControl with values of type ImplControl.
+	
+ImplControl (note "CONTROL implemented in a SYSTEM") is a type of THING
+	described by control with a single value of type CONTROL
+	described by dal with a single value of type DAL.
+
+CpsType (note "An open/extensible set of CPS types") is a type of THING.
+
+// A few common instances:
+Software is a CpsType 
+	has identifier "Software"
+	has description "The code that runs on a device.".
+Hardware is a CpsType 
+	has identifier "Hardware"
+	has description "The physical device in a system.".
+SwHwHybrid is a CpsType 
+	has identifier "SwHwHybrid"
+	has description "A hardware component that also includes software".
+
+Pedigree (note "Describes source of say a CPS") is a type of THING.
+
+// A few common instances:
+InternallyDeveloped is a Pedigree 
+	has identifier "InternallyDeveloped"
+	has description "Development is done in house.".
+COTS is a Pedigree 
+	has identifier "COTS"
+	has description "Commercial Of The Shelf products that are bought as is".
+Sourced is a Pedigree 
+	has identifier "Sourced"
+	has description "The system is provides by an outside organization.". 
+	
+Port (note "Ports specify points of connections between CPSs") is a type of ENTITY.
+
+Connection (note "An INTERFACE with specific input and output ports") is a type of INTERFACE
+    // for named connections, use "title" property
+	described by outPort with a single value of type Port 
+	described by inPort with a single value of type Port 
+
+	// properties that allow for inferring threats	
+	described by connectionType with values of type ConnectionType  
+	described by dataSentIsUntrusted with a single value of type boolean 
+	described by dataReceivedIsUntrusted with a single value of type boolean 	
+    described by infoFlowSeverity with a single value of type int. 
+
+ConnectionType is a type of THING.
+
+Trusted is a ConnectionType 
+	has identifier "Trusted"
+	has description "Developed and tested to be secure.".	
+Untrusted is a ConnectionType 
+	has identifier "Untrusted"
+	has description "May be susceptible to security attacks.".

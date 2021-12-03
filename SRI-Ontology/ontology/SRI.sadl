@@ -236,7 +236,7 @@ ToolQualificationData
         //toolInvocation describes RequirementAnalysis with at most 1 value.
         // Inherited from ACTIVITY:
         //   wasInformedBy: activity that was a precursor to this
-       analysisInput of ClearRequirementAnalysis must be one of  {DataDictionary, ClearGenericProperty, SoftwareHighLevelRequirementSet, SoftwareLowLevelRequirementSet}.
+       analysisInput of ClearRequirementAnalysis only has values of type {DataDictionary or ClearGenericProperty or SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet}.
       
        ////////////////////////////////
        // Test generation by Randoop tool

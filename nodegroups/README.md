@@ -1,7 +1,5 @@
 # Nodegroups folder
 
-Each sub-folder has nodegroups for a particular purpose / application.
-
 A **nodegroup** is a SemTK construct that represents a sub-graph.
 SemTK generates SPARQL queries from nodegroups.  They also may contain
 ingestion templates which allow SemTK to map CSV files to the subgraph
@@ -9,11 +7,17 @@ and generate INSERT queries.
 
 ## Sub-folders
 
-- **ingestion** - For populating RACK via CSV files
-- **CDR** - Common Data Representation CSV files
+Each sub-folder has nodegroups for particular purposes or applications.
+
 - **queries** - Sample derived RACK queries
 
-NOTE: these nodegroups may already be available in the SPARQLgraph
+These sub-folders will be in RACK-in-a-Box images but not in the git
+repository because these sub-folders are automatically generated:
+
+- **CDR** - Common Data Representation CSV files
+- **ingestion** - For populating RACK via CSV files
+
+NOTE: Some nodegroups may already be available in the SPARQLgraph
 application under the menu `Nodegroup->Load from store...`.
 
 ## Using with SPARQLgraph

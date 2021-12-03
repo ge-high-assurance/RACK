@@ -34,7 +34,7 @@ ANALYSIS
     analyzedWith (note "Tool responsible for producing the output.") describes ANALYSIS with values of type AGENT. //AM 9/27/2021 was ENTITY earlier
     analyzedWith is a type of wasAssociatedWith. //AM 9/27/2021 altered this as the previous line was altered
     
-    analysisInput (note "Entities targetted by the analysis.") describes ANALYSIS with values of type ENTITY.
+    analysisInput (note "Entities targeted by the analysis.") describes ANALYSIS with values of type ENTITY.
     analysisInput is a type of used.
 
     analysisConfiguration (note "Parameters/options etc. for the tool used.") describes ANALYSIS with values of type ENTITY.

@@ -35,7 +35,3 @@ def make_namespaced_renamer(
             return current_value
 
     return namespaced_renamer
-
-
-def rack(name_space: str) -> NameSpace:
-    return NameSpace(uri_prefix="http://arcos.rack/", name_space=name_space)

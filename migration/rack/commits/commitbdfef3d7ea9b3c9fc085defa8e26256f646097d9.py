@@ -19,7 +19,7 @@ from ontology_changes import (
     CreateProperty,
     DeleteProperty,
     RenameClass,
-    RenameProperty,
+    SubsumeProperty,
     RemoveIsATypeOf,
 )
 from rack.namespaces.rack_ontology import PROV_S, SOFTWARE, SYSTEM
@@ -62,7 +62,7 @@ commit = Commit(
             to_name_space=SOFTWARE,
             to_range="COMPONENT",
         ),
-        RenameProperty(
+        SubsumeProperty(
             from_name_space=SOFTWARE,
             from_class="COMPONENT",
             from_name="name",

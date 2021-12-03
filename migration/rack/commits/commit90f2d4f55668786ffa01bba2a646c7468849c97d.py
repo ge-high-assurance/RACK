@@ -17,6 +17,7 @@ from ontology_changes import (
     RenameClass,
     SingleValue,
 )
+from rack.namespaces.rack_ontology import ANALYSIS, PROV_S
 
 commit = Commit(
     number="90f2d4f55668786ffa01bba2a646c7468849c97d",

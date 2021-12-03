@@ -128,12 +128,12 @@ def CreateCdrs():
     Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-1")
     #--------------------------                 
     Add.turnstile_SoftwareDesignReview(identifier="LlrReview1",
-                reviewed_identifier = "IN-LLR-2")
-    Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-2")
+                reviewed_identifier = "IN-LLR-2:v2")
+    Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-2:v2")
     #--------------------------                 
     Add.turnstile_SoftwareDesignReview(identifier="LlrReview1",
-                reviewed_identifier = "IN-LLR-3")
-    Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-3")
+                reviewed_identifier = "IN-LLR-3:v2")
+    Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-3:v2")
     #--------------------------                 
     Add.turnstile_SoftwareDesignReview(identifier="LlrReview1",
                 reviewed_identifier = "IN-LLR-4")
@@ -161,16 +161,16 @@ def CreateCdrs():
     Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-1")
     #-------------------------- 
     Add.turnstile_SoftwareDesignReviewArtifacts(identifier="LlrReview1Log-2",
-                reviews_identifier = "IN-LLR-2",
+                reviews_identifier = "IN-LLR-2:v2",
                 reviewResult_identifier = "Passed",
                 createBy_identifier = "LlrReview1")
-    Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-2")
+    Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-2:v2")
     #-------------------------- 
     Add.turnstile_SoftwareDesignReviewArtifacts(identifier="LlrReview1Log-3",
-                reviews_identifier = "IN-LLR-3",
+                reviews_identifier = "IN-LLR-3:v2",
                 reviewResult_identifier = "Passed",
                 createBy_identifier = "LlrReview1")
-    Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-3")  
+    Add.turnstile_LowLevelRequirement(identifier = "IN-LLR-3:v2")  
     #-------------------------- 
     Add.turnstile_SoftwareDesignReviewArtifacts(identifier="LlrReview1Log-4",
                 reviews_identifier = "IN-LLR-4",
@@ -195,8 +195,8 @@ def CreateCdrs():
     Add.turnstile_LowLevelRequirement(identifier = "OUT-LLR-1")
     #-------------------------- 
     Add.turnstile_SoftwareDesignReview(identifier="LlrReview2",
-                reviewed_identifier = "OUT-LLR-2")
-    Add.turnstile_LowLevelRequirement(identifier = "OUT-LLR-2")
+                reviewed_identifier = "OUT-LLR-2:v2")
+    Add.turnstile_LowLevelRequirement(identifier = "OUT-LLR-2:v2")
     #-------------------------- 
     Add.turnstile_SoftwareDesignReview(identifier="LlrReview2",
                 author_identifier = "2125895152",
@@ -211,10 +211,10 @@ def CreateCdrs():
     Add.turnstile_LowLevelRequirement(identifier = "OUT-LLR-1")
     #-------------------------- 
     Add.turnstile_SoftwareDesignReviewArtifacts(identifier="LlrReview2Log-2",
-                reviews_identifier = "OUT-LLR-2",
+                reviews_identifier = "OUT-LLR-2:v2",
                 reviewResult_identifier = "Passed",
                 createBy_identifier = "LlrReview2")
-    Add.turnstile_LowLevelRequirement(identifier = "OUT-LLR-2")
+    Add.turnstile_LowLevelRequirement(identifier = "OUT-LLR-2:v2")
     #-------------------------- 
     Add.turnstile_SoftwareDesignReview(identifier="LlrReview3",
                 reviewed_identifier = "EXE-LLR-1")

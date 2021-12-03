@@ -231,7 +231,10 @@ if not Path.exists(to_folder):
     logger.error("to_folder does not exist, quitting.")
     sys.exit(1)
 
-for json_file_path in from_folder.glob("*.json"):
+json_files = list(from_folder.glob("*.json"))
+logger.info(f"Processing {len(json_files)} JSON file(s)")
+for json_file_path in json_files:
+    logger.debug(f"Migrating JSON file {json_file_path}")
     input_file = f"{from_folder}/{json_file_path.name}"
     output_file = f"{to_folder}/{json_file_path.name}"
     logger.info(

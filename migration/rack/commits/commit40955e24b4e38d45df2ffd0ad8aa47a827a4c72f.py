@@ -15,6 +15,7 @@ from ontology_changes import (
     DeleteClass,
     DeleteProperty,
     RenameProperty,
+    SubsumeProperty,
 )
 from ontology_changes.create_class import CreateClass
 from rack.namespaces.rack_ontology import (
@@ -91,7 +92,7 @@ commit = Commit(
         # PROV-S.sadl
         CreateProperty(name_space=PROV_S, class_id="ACTIVITY", property_id="goal"),
         # TESTING.sadl
-        RenameProperty(
+        SubsumeProperty(
             from_name_space=TESTING,
             from_class="TEST",
             from_name="producedBy",

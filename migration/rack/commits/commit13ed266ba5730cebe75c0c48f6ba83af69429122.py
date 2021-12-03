@@ -9,14 +9,14 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from ontology_changes import Commit, RenameProperty
+from ontology_changes import Commit, SubsumeProperty
 from rack.namespaces.rack_ontology import PROV_S, REQUIREMENTS
 
 commit = Commit(
     number="13ed266ba5730cebe75c0c48f6ba83af69429122",
     changes=[
         # REQUIREMENTS.sadl
-        RenameProperty(
+        SubsumeProperty(
             from_name_space=REQUIREMENTS,
             from_class="REQUIREMENT",
             from_name="text",
@@ -24,7 +24,7 @@ commit = Commit(
             to_class="THING",
             to_name="description",
         ),
-        RenameProperty(
+        SubsumeProperty(
             from_name_space=REQUIREMENTS,
             from_class="DATA_DICTIONARY",
             from_name="text",

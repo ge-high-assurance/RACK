@@ -37,4 +37,4 @@ Bus
 ComputePlatform
     (note "a compute platform is a piece of hardware that executes software")
     is a COMPONENT_TYPE
-    has identifier "ComputePlatform".    
+    has identifier "ComputePlatform".

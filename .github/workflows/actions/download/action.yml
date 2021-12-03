@@ -43,8 +43,7 @@ runs:
     - name: Generate OWL files
       shell: bash
       run: |
-        docker pull sadl/sadl-eclipse:v3.5.0-20211130
-        docker run --rm -v $GITHUB_WORKSPACE/RACK:/RACK sadl/sadl-eclipse:v3.5.0-20211130 -importAll /RACK -cleanBuild
+        RACK/cli/setup-build-owl.sh
 
     - name: Package RACK ASSIST
       shell: bash

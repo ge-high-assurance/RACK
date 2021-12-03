@@ -104,7 +104,8 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
 
             # cleanup
             for sparqlID in node.SnodeSparqlIDs:
-                if json.importSpec is None: continue
+                if json.importSpec is None:
+                    continue
                 for index, importSpecNode in enumerate(json.importSpec.nodes):
                     if importSpecNode.sparqlID == sparqlID:
                         importSpecNode.type = self.rename(
@@ -114,13 +115,14 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
                     if sNode.SparqlID == sparqlID:
 
                         def on_fullURIName_change() -> None:
-                            log_additional_change(
-                                f"sNodeGroup.sNodeList[{index}].NodeName",
-                                sNode.NodeName,
-                                self.data.to_range,
-                            )
-                            sNode.NodeName = self.data.to_range
-                            # TODO: clean subClassNames
+                            if sNode.NodeName is not None:
+                                log_additional_change(
+                                    f"sNodeGroup.sNodeList[{index}].NodeName",
+                                    sNode.NodeName,
+                                    self.data.to_range,
+                                )
+                                sNode.NodeName = self.data.to_range
+                                # TODO: clean subClassNames
 
                         sNode.fullURIName = self.rename(
                             sNode.fullURIName,

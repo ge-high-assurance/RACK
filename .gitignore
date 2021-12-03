@@ -1,3 +1,8 @@
+# RACK automatically generated files
+*.owl
+nodegroups/CDR/
+nodegroups/ingestion/
+
 *.py[cod]
 
 # act
@@ -33,7 +38,6 @@ nosetests.xml
 
 # Translations
 *.mo
-*.sadl.metrics.owl
 
 # Mr Developer
 .mr.developer.cfg

@@ -15,7 +15,7 @@ from ontology_changes import (
     Commit,
     CreateProperty,
     DeleteClass,
-    RenameProperty,
+    SubsumeProperty,
 )
 from rack.namespaces.rack_ontology import AGENTS, PROV_S
 
@@ -29,7 +29,7 @@ commit = Commit(
             property_id="employedBy",
             to_cardinality=AtMost(1),
         ),
-        RenameProperty(
+        SubsumeProperty(
             from_name_space=AGENTS,
             from_class="ORGANIZATION",
             from_name="name",
@@ -37,7 +37,7 @@ commit = Commit(
             to_class="AGENT",
             to_name="agentName",
         ),
-        RenameProperty(
+        SubsumeProperty(
             from_name_space=AGENTS,
             from_class="PERSON",
             from_name="name",

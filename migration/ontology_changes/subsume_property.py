@@ -27,11 +27,11 @@ from ontology_changes.ontology_change import (
 
 
 @dataclass
-class RenameProperty(OntologyChange):
+class SubsumeProperty(OntologyChange):
     """
-    Represents an ontology change where a property has been renamed.  This also
-    encompasses cases where a property has effectively been moved across
-    classes.
+    Represents an ontology change where a property has been removed with the
+    intent that another existing property is more general and should be used
+    instead.
     """
 
     from_name_space: NameSpace
@@ -47,7 +47,7 @@ class RenameProperty(OntologyChange):
         to_prop = stylize_property(get_uri(self.to_name_space, self.to_name))
         from_class = stylize_class(get_uri(self.from_name_space, self.from_class))
         to_class = stylize_class(get_uri(self.to_name_space, self.to_class))
-        return f"Property {from_prop} (ranging over {from_class}) was renamed to {to_prop} (ranging over {to_class})."
+        return f"Property {from_prop} (ranging over {from_class}) has been subsumed by {to_prop} (ranging over {to_class})."
 
     def migrate_json(self, json: semtk.SemTKJSON) -> None:
         log_apply_change(self.text_description())
@@ -55,23 +55,23 @@ class RenameProperty(OntologyChange):
 
 
 class MigrationVisitor(semtk.DefaultSemTKVisitor):
-    def __init__(self, data: RenameProperty):
+    def __init__(self, data: SubsumeProperty):
         self.data = data
         self.from_uri = get_uri(self.data.from_name_space, self.data.from_name)
         self.to_uri = get_uri(self.data.to_name_space, self.data.to_name)
         self.from_str = stylize_property(self.from_uri)
         self.to_str = stylize_property(self.to_uri)
 
-    def rename(
+    def subsume(
         self, value: str, path: str, cbk: Callable[[], None] = lambda: None
     ) -> str:
         """
-        Checks whether the given value needs to be renamed, and returns the
+        Checks whether the given value needs to be subsumed, and returns the
         old or new value it should be set to.  Logs the change if it happens.
         """
         if value == self.from_uri:
             log_change(
-                f"Renaming property {self.from_str} to {self.to_str} in {stylize_json(path)}"
+                f"Subsuming property {self.from_str} with {self.to_str} in {stylize_json(path)}"
             )
             cbk()
             return self.to_uri
@@ -82,7 +82,7 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
     ) -> None:
         super().visit_ImportSpecProp(json, path, prop)
 
-        prop.URIRelation = self.rename(prop.URIRelation, f"{path}.URIRelation")
+        prop.URIRelation = self.subsume(prop.URIRelation, f"{path}.URIRelation")
 
     def visit_SNodeNode(
         self, json: semtk.SemTKJSON, path: str, node: semtk.SNodeNode
@@ -104,7 +104,7 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
                 )
                 node.KeyName = self.data.to_name
 
-        node.UriConnectBy = self.rename(
+        node.UriConnectBy = self.subsume(
             node.UriConnectBy, f"{path}.UriConnectBy", on_change
         )
 
@@ -118,6 +118,6 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
                 log_additional_change(f"{path}.KeyName", prop.KeyName, self.data.to_name)
                 prop.KeyName = self.data.to_name
 
-        prop.UriRelationship = self.rename(
+        prop.UriRelationship = self.subsume(
             prop.UriRelationship, f"{path}.UriRelationship", on_change
         )

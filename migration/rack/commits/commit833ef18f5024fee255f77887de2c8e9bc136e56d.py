@@ -9,7 +9,8 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from ontology_changes import AtMost, ChangeCardinality, Commit, RenameProperty
+from ontology_changes import AtMost, ChangeCardinality, Commit, SubsumeProperty
+from rack.namespaces.rack_ontology import PROV_S
 
 commit = Commit(
     number="833ef18f5024fee255f77887de2c8e9bc136e56d",
@@ -69,7 +70,7 @@ commit = Commit(
             property_id="endedAtTime",
             to_cardinality=AtMost(1),
         ),
-        RenameProperty(
+        SubsumeProperty(
             from_name_space=PROV_S,
             from_class="AGENT",
             from_name="agentName",

@@ -60,7 +60,7 @@ def instantiate_template(commit_id: str) -> None:
             sys.stdout.write(f'    number="{commit_id}",\n')
         elif "<COMMAND>" in line:
             sys.stdout.write(
-                f"# git --no-pager diff {commit_id}^ {commit_id} -- ../RACK-Ontology/ontology\n"
+                f"# git -c color.ui=always --no-pager diff {commit_id}^ {commit_id} -- ../RACK-Ontology/ontology | less -R\n"
             )
         elif "pylint: disable=unreachable" in line:
             # the warning is disabled for the template, but should not be in the

@@ -38,7 +38,7 @@ class RemovePropertyRestriction(OntologyChange):
 
     def text_description(self) -> str:
         prop = stylize_property(get_uri(self.prop_name_space, self.prop_name))
-        return f"Restriction {self.prop_restriction} of property {prop} was removed."
+        return f"Restriction `{self.prop_restriction}` of property {prop} was removed."
 
     def migrate_json(self, json: semtk.SemTKJSON) -> None:
         pass

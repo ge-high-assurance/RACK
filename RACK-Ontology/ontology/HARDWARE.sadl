@@ -20,7 +20,7 @@ HWCOMPONENT is a type of ENTITY.
         describes HWCOMPONENT with a single value of type COMPONENT_TYPE.
 	partitions describes HWCOMPONENT with values of type PARTITION.
 
-PARTITION (note "a PARTIION divides a HWCOMPOENTS resources into protected, isolated execution space for software components.") is a type of ENTITY.
+PARTITION (note "a PARTITION divides a HWCOMPONENT's resources into protected, isolated execution space for software components.") is a type of ENTITY.
 
 COMPONENT_TYPE
     (note "An open/extensible set of types of hardware components")
@@ -37,4 +37,4 @@ Bus
 ComputePlatform
     (note "a compute platform is a piece of hardware that executes software")
     is a COMPONENT_TYPE
-    has identifier "ComputePlatform".    
+    has identifier "ComputePlatform".

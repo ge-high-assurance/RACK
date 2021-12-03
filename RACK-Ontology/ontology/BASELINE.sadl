@@ -11,7 +11,7 @@ import "http://arcos.rack/PROV-S".
  *
  * The the use of baselines a single RACK instance can contain
  * multiple versions of the same project concurrently. This
- * serves a role in enabling RACK to distingusish the entities
+ * serves a role in enabling RACK to distinguish the entities
  * contained in one version or the other, and allows us to compute
  * how those versions are related.
  *
@@ -29,5 +29,5 @@ import "http://arcos.rack/PROV-S".
  */
 
 BASELINE
-  (note "A collection of entities contituting a named release")
+  (note "A collection of entities constituting a named release")
   is a type of COLLECTION.

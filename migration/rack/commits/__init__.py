@@ -15,18 +15,22 @@ from ontology_changes.ontology_change import Commit
 from rack.commits import (
     # <CHANGE_CRAWLER_IMPORTS> DO NOT EDIT OR MOVE THIS LINE
     commit05a03cd687e3bdce425794763e0957d3ccaf8ff0,
+    commit09962dd9ab9d252639d9e4324288fd6b47cbd91f,
     commit09b79d6c0e7f72b533a3ad21e776b200a973698a,
     commit0a89f70ff929380269a79fe2fc82f5dde346ed8c,
     commit10da69db606ebdc721fd3f8e003ef2099a5fdc43,
     commit13ed266ba5730cebe75c0c48f6ba83af69429122,
     commit1834d0201254907fa50a32945716a3e0de985cad,
     commit183dbba72623c2585a0451a19ac1ddb30f8a0ea6,
+    commit2439da7fb602f020e9a711511f84cd75e1522cdf,
     commit278481ce335c98723597eadf89052a4b28f2eeec,
     commit27fa0d8fe813d341918465a7102bd2a8a859fa5a,
     commit2e079bb2a32b3cc1b3153d44ad0c21e27507937f,
     commit389424cb974164f552b6b6bf8aab504d23bf079b,
     commit38d1e00f36dacfccf9cff8d7793cd39f55a83682,
+    commit38f6e7fe0fc0337e46a75c8fa1f49d1f4a689858,
     commit3908d68df1143537a49e1df9556dae8066b0e25f,
+    commit3f5eb7d36ac11d31a45dc95523646e7aff554860,
     commit40955e24b4e38d45df2ffd0ad8aa47a827a4c72f,
     commit42ceaff2d4c837e766d5481599a4ab94556255a2,
     commit44393cc30bb0ba7482acd21b2e68576b577179f9,
@@ -44,6 +48,7 @@ from rack.commits import (
     commit76de25ee930683871febc1b4cc1e4386aca16d42,
     commit78eaae3db5ed184c90f4f14d34a4fc000f04bdac,
     commit833ef18f5024fee255f77887de2c8e9bc136e56d,
+    commit84bad08fee850046ef1b328b2b393322b48d5e09,
     commit90f2d4f55668786ffa01bba2a646c7468849c97d,
     commit9af9030fe191d564875c067f6e0319ca6b52b798,
     commita9210534a2ceb9ea5595df9eb5cd02df3abe3cb3,
@@ -149,6 +154,11 @@ commits_in_chronological_order: List[Commit] = [
     commitee148bca649a1b451085832a7e2a488ce4127de7.commit, # 2021 Nov 29
     commit27fa0d8fe813d341918465a7102bd2a8a859fa5a.commit, # 2021 Nov 29
     commit1834d0201254907fa50a32945716a3e0de985cad.commit, # 2021 Nov 30
+    commit3f5eb7d36ac11d31a45dc95523646e7aff554860.commit, # 2021 Dec 01
+    commit84bad08fee850046ef1b328b2b393322b48d5e09.commit, # 2021 Dec 01
+    commit2439da7fb602f020e9a711511f84cd75e1522cdf.commit, # 2021 Dec 02
+    commit38f6e7fe0fc0337e46a75c8fa1f49d1f4a689858.commit, # 2021 Dec 02
+    commit09962dd9ab9d252639d9e4324288fd6b47cbd91f.commit, # 2021 Dec 02
 
     # most recent (in history)
 ]

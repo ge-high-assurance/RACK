@@ -10,6 +10,7 @@
 # of the Defense Advanced Research Projects Agency (DARPA).
 
 from dataclasses import dataclass
+from ontology_changes.utils import delete_property_from_node_list
 
 import semtk
 from migration_helpers.name_space import NameSpace, get_uri
@@ -51,39 +52,12 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
     def visit_SNode(self, json: semtk.SemTKJSON, path: str, sNode: semtk.SNode) -> None:
         super().visit_SNode(json, path, sNode)
 
-        for index, node in enumerate(sNode.nodeList):
-            if node.UriConnectBy == self.uri:
-                this_path = f"{path}.nodeList[{index}].UriConnectBy"
-                log_change(
-                    f"Deleting property {stylize_property(self.uri)} in {stylize_json(this_path)}"
-                )
-                sNode.nodeList.pop(index)
+        delete_property_from_node_list(json, path, self.uri, sNode.nodeList)
 
-                # cleanup
-                for sparqlID in node.SnodeSparqlIDs:
-                    if json.importSpec is None: continue
-                    for index, importSpecNode in enumerate(json.importSpec.nodes):
-                        if importSpecNode.sparqlID == sparqlID:
-                            field = stylize_json("sparqlID")
-                            log_additional_deletion(
-                                f"importSpec.nodes[{index}]",
-                                f"it has {field} = {sparqlID}",
-                            )
-                            json.importSpec.nodes.pop(index)
-                    for index, sNode in enumerate(json.sNodeGroup.sNodeList):
-                        if sNode.SparqlID == sparqlID:
-                            log_additional_deletion(
-                                f"sNodeGroup.sNodeList[{index}]",
-                                f"it has {field} = {sparqlID}",
-                            )
-                            json.sNodeGroup.sNodeList.pop(index)
-
-            # unconditional cleanup
-            for index, prop in enumerate(sNode.propList):
-                if prop.UriRelationship == self.uri:
-                    this_path = stylize_json(f"{path}.propList[{index}]")
-                    field = stylize_json("UriRelationship")
-                    log_change(
-                        f"Deleting {this_path} because it has {field} = {self.uri}"
-                    )
-                    sNode.propList.pop(index)
+        # unconditional cleanup
+        for index, prop in enumerate(sNode.propList):
+            if prop.UriRelationship == self.uri:
+                this_path = stylize_json(f"{path}.propList[{index}]")
+                field = stylize_json("UriRelationship")
+                log_change(f"Deleting {this_path} because it has {field} = {self.uri}")
+                sNode.propList.pop(index)

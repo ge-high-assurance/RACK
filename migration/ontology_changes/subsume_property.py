@@ -14,6 +14,7 @@ from typing import Callable
 
 import semtk
 from migration_helpers.name_space import NameSpace, get_uri
+from ontology_changes.utils import delete_property_from_node_list
 
 from ontology_changes.ontology_change import (
     OntologyChange,
@@ -57,6 +58,8 @@ class SubsumeProperty(OntologyChange):
 class MigrationVisitor(semtk.DefaultSemTKVisitor):
     def __init__(self, data: SubsumeProperty):
         self.data = data
+        self.from_class_uri = get_uri(self.data.from_name_space, self.data.from_class)
+        self.to_class_uri = get_uri(self.data.to_name_space, self.data.to_class)
         self.from_uri = get_uri(self.data.from_name_space, self.data.from_name)
         self.to_uri = get_uri(self.data.to_name_space, self.data.to_name)
         self.from_str = stylize_property(self.from_uri)
@@ -84,30 +87,6 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
 
         prop.URIRelation = self.subsume(prop.URIRelation, f"{path}.URIRelation")
 
-    def visit_SNodeNode(
-        self, json: semtk.SemTKJSON, path: str, node: semtk.SNodeNode
-    ) -> None:
-        super().visit_SNodeNode(json, path, node)
-
-        # additional nearby changes
-        def on_change() -> None:
-            # ConnectBy is sometimes filled, and sometimes not in our
-            # nodegroups.  For now, we just follow what it was.
-            if node.ConnectBy is not "" and node.ConnectBy != self.data.to_name:
-                log_additional_change(
-                    f"{path}.ConnectBy", node.ConnectBy, self.data.to_name
-                )
-                node.ConnectBy = self.data.to_name
-            if node.KeyName is not None and node.KeyName != self.data.to_name:
-                log_additional_change(
-                    f"{path}.KeyName", node.KeyName, self.data.to_name
-                )
-                node.KeyName = self.data.to_name
-
-        node.UriConnectBy = self.subsume(
-            node.UriConnectBy, f"{path}.UriConnectBy", on_change
-        )
-
     def visit_SNodeProp(
         self, json: semtk.SemTKJSON, path: str, prop: semtk.SNodeProp
     ) -> None:
@@ -121,3 +100,8 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
         prop.UriRelationship = self.subsume(
             prop.UriRelationship, f"{path}.UriRelationship", on_change
         )
+
+    def visit_SNode(self, json: semtk.SemTKJSON, path: str, sNode: semtk.SNode) -> None:
+        # We can delete references to this property in the node list because it
+        # no longer exists.
+        delete_property_from_node_list(json, path, self.from_uri, sNode.nodeList)

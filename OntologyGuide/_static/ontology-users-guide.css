@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+div.sphinxsidebar {
+    height: 100vh;
+    margin: 0;
+    width: 20%;
+}
+
+div.sphinxsidebarwrapper {
+    height: 100%;
+}
+
+div.sphinxsidebar ul {
+    height: 80%;
+    overflow-y: scroll;
+}
+
+div.bodywrapper {
+    margin: 0;
+}
+
+div.document {
+    height: 100vh;
+    margin-left: 0;
+    margin-top: 0;
+    overflow-y: scroll;
+    width: 80%;
+}

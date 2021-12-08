@@ -10,7 +10,7 @@ MODE=copy
 usage() {
         echo "Usage: setup-owl.sh [-h] [-b] [-t TAG]"
         echo "   -h    print help"
-        echo "   -b    build OWL files using Web SADL"
+        echo "   -b    build OWL files using sadl-eclipse"
         echo "   -t    specify rack-box tag when copying OWL files from running image"
         exit 1
 }

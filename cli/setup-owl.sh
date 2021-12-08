@@ -38,15 +38,20 @@ in
                 exit 1
         fi
 
-        echo "Found container $CONTAINER; copying OwlModels"
+        echo "Found container $CONTAINER"
 
-        docker cp "$CONTAINER:home/ubuntu/RACK/RACK-Ontology/OwlModels/" "$RACK_DIR/RACK-Ontology/OwlModels/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/GE-Ontology/OwlModels/" "$RACK_DIR/GE-Ontology/OwlModels/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/GrammaTech-Ontology/OwlModels/" "$RACK_DIR/GrammaTech-Ontology/OwlModels/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/STR-Ontology/OwlModels/" "$RACK_DIR/STR-Ontology/OwlModels/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/Boeing-Ontology/OwlModels/" "$RACK_DIR/Boeing-Ontology/OwlModels/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/LM-Ontology/OwlModels/" "$RACK_DIR/LM-Ontology/OwlModels/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/SRI-Ontology/OwlModels/" "$RACK_DIR/SRI-Ontology/OwlModels/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/" "$RACK_DIR/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/"
+        echo "Copying OwlModels"
+        docker cp "$CONTAINER:home/ubuntu/RACK/RACK-Ontology/OwlModels/" "$RACK_DIR/RACK-Ontology/"
+        docker cp "$CONTAINER:home/ubuntu/RACK/GE-Ontology/OwlModels/" "$RACK_DIR/GE-Ontology/"
+        docker cp "$CONTAINER:home/ubuntu/RACK/GrammaTech-Ontology/OwlModels/" "$RACK_DIR/GrammaTech-Ontology/"
+        docker cp "$CONTAINER:home/ubuntu/RACK/STR-Ontology/OwlModels/" "$RACK_DIR/STR-Ontology/"
+        docker cp "$CONTAINER:home/ubuntu/RACK/Boeing-Ontology/OwlModels/" "$RACK_DIR/Boeing-Ontology/"
+        docker cp "$CONTAINER:home/ubuntu/RACK/LM-Ontology/OwlModels/" "$RACK_DIR/LM-Ontology/"
+        docker cp "$CONTAINER:home/ubuntu/RACK/SRI-Ontology/OwlModels/" "$RACK_DIR/SRI-Ontology/"
+        docker cp "$CONTAINER:home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/" "$RACK_DIR/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
+
+        echo "Copying nodegroups"
+        docker cp "$CONTAINER:home/ubuntu/RACK/nodegroups/CDR/" "$RACK_DIR/nodegroups/"
+        docker cp "$CONTAINER:home/ubuntu/RACK/nodegroups/ingestion/" "$RACK_DIR/nodegroups/"
         ;;
 esac

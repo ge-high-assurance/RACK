@@ -47,7 +47,7 @@ runs:
     - name: Generate OWL files
       shell: bash
       run: |
-        RACK/cli/setup-build-owl.sh
+        RACK/cli/setup-owl.sh -b
 
     - name: Package RACK ASSIST
       shell: bash

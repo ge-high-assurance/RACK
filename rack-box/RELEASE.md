@@ -21,14 +21,14 @@ steps:
    After you save these files, commit and push those changes to both
    the RACK and RACK.wiki repositories:
 
-```shell
-cd RACK.wiki
-git commit -a -m "Update versions for next release"
-git push
-cd ../RACK
-git commit -a -m "Update versions for next release"
-git push
-```
+   ```shell
+   cd RACK.wiki
+   git commit -a -m "Update versions for next release"
+   git push
+   cd ../RACK
+   git commit -a -m "Update versions for next release"
+   git push
+   ```
 
 2. Manually tag the RACK.wiki repository with the new version number
    as a tag name since our GitHub Actions release workflow will check
@@ -37,11 +37,11 @@ git push
    RACK repository automatically, but we need to manually tag the
    RACK.wiki repository with the same tag in advance:
 
-```shell
-cd RACK.wiki
-git tag v8.0
-git push --tag
-```
+   ```shell
+   cd RACK.wiki
+   git tag v9.0
+   git push --tag
+   ```
 
 3. Click the `Draft a new release` button in the GitHub Releases page,
    enter the release name, version tag name, and description, and

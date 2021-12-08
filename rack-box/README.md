@@ -9,10 +9,10 @@ Hub](https://hub.docker.com/repository/docker/gehighassurance/rack-box)
 or [GitHub
 Releases](https://github.com/ge-high-assurance/RACK/releases) pages.
 Note that our RACK repository's continuous integration and release
-workflows built these rak-box images automatically.  Please see these
-[workflows](../.github/workflows) for the most up to date way to build
-rack-box images since the instructions in this README may be out of
-date.
+workflows build development/v\<NUMBER\> release rack-box images
+automatically.  Please see these [workflows](../.github/workflows) for
+the most up to date way to build rack-box images since the
+instructions in this README may be out of date.
 
 ## Environment variables needed before building
 
@@ -85,7 +85,7 @@ these commands to build the RACK CLI:
 
     pip3 wheel --wheel-dir=wheels -r requirements.txt
     pip3 wheel --wheel-dir=wheels .
-    
+
 If you encounter a `Double requirement given` error, make sure to
 clear your wheels directory from obsolete files.
 

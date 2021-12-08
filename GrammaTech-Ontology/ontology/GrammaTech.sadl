@@ -34,12 +34,13 @@ AcertTestResult is a type of TEST_RESULT.
 	failureDetails (note "Additional detail describing the failure reason")
 	    describes AcertTestResult with values of type string.
 
+AcertTestExecution is a type of TEST_EXECUTION.
     /* Metrics */
     cpuTime (note "seconds of CPU time used when executing the test execution")
-        describes TEST_EXECUTION with values of type double.
+        describes AcertTestExecution with values of type double.
 
     memory (note "maximum bytes of resident memory used by test execution")
-        describes TEST_EXECUTION with values of type double.
+        describes AcertTestExecution with values of type double.
 
 FailureReason (note "High-level reasons for ACERT test result failure")
     is a type of THING,

@@ -87,7 +87,7 @@ these commands to build the RACK CLI:
     pip3 wheel --wheel-dir=wheels .
 
 If you encounter a `Double requirement given` error, make sure to
-clear your wheels directory from obsolete files.
+clear obsolete files from your wheels directory.
 
 ## Package RACK documentation
 
@@ -141,15 +141,11 @@ approximation of) the Github Actions workflows locally:
 - Create a `.secrets` file containing
   `GITHUB_TOKEN=<your-github-PAT-here>`
 - Run `act --secret-file .secrets -P
-  ubuntu-latest=nektos/act-environments-ubuntu:18.04`
+  ghcr.io/ubuntu-20.04=catthehacker/ubuntu:act-20.04`
 
-The Docker image `nektos/act-environments-ubuntu:18.04` is quite large
-(approximately 18GB), so (1) you'll need enough free disk space to
-store it and (2) the first execution of `act` takes a while because it
-downloads this image.
-
-Unfortunately, `act` [does not yet support Ubuntu
-20.04](https://github.com/nektos/act-environments/issues/4).
+The first execution of `act` takes a while because it downloads the
+Docker image `ghcr.io/catthehacker/ubuntu:act-20.04` and you'll need
+enough free disk space to store the image.
 
 #### "volume is in use"
 
@@ -159,8 +155,8 @@ If you see a message like this:
 
 You can forcibly stop and remove the `act` Docker containers and their volumes:
 
-    docker stop $(docker ps -a | grep "nektos/act-environments-ubuntu:18.04" | awk '{print $1}')
-    docker rm $(docker ps -a | grep "nektos/act-environments-ubuntu:18.04" | awk '{print $1}')
+    docker stop $(docker ps -a | grep "ubuntu-act" | awk '{print $1}')
+    docker rm $(docker ps -a | grep "ubuntu-act" | awk '{print $1}')
     docker volume rm $(docker volume ls --filter dangling=true | grep -o -E "act-.+$")
 
 There may also be a more precise solution to this issue, but the above works.

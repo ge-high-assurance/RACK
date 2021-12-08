@@ -15,18 +15,11 @@ usage() {
         exit 1
 }
 
-args=`getopt hbt: $*` ; errcode=$?; set -- $args
-if [ $? != 0 ]; then
-        usage
-fi
-
-for i
-do
-        case "$i"
+while getopts "bt:" o; do
+        case "$o"
         in
-                -b) MODE="build"; shift; break;;
-                -t) DOCKER_TAG="$2"; shift; shift; break;;
-                --) shift; break;;
+                b) MODE="build"; break;;
+                t) DOCKER_TAG="$OPTARG"; break;;
                 *) usage;;
         esac
 done
@@ -35,7 +28,7 @@ case "$MODE"
 in
     build)
         docker run --rm -u 0 -e RUN_AS="$(id -u) $(id -g)" -v "$RACK_DIR:/RACK" sadl/sadl-eclipse:v3.5.0-20211204 -importAll /RACK -cleanBuild
-        break;;
+        ;;
 
     copy)
         CONTAINER=$(docker container ls -qf ancestor=gehighassurance/rack-box:"$DOCKER_TAG")
@@ -55,5 +48,5 @@ in
         docker cp "$CONTAINER:home/ubuntu/RACK/LM-Ontology/OwlModels/" "$RACK_DIR/LM-Ontology/OwlModels/"
         docker cp "$CONTAINER:home/ubuntu/RACK/SRI-Ontology/OwlModels/" "$RACK_DIR/SRI-Ontology/OwlModels/"
         docker cp "$CONTAINER:home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/" "$RACK_DIR/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/"
-        break;;
+        ;;
 esac

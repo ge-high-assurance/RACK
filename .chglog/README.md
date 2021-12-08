@@ -9,7 +9,7 @@ need to be repeated unless you want to overwrite
 `.chglog/CHANGELOG.tpl.md` and `.chglog/config.yml` with new
 versions).
 
-Run `git-chglog --next-tag v8.0 -o .chglog/CHANGELOG-new.md`, edit
+Run `git-chglog --next-tag v9.0 -o .chglog/CHANGELOG-new.md`, edit
 `.chglog/CHANGELOG.tpl.md` to tweak the output if necessary, and
 repeat if needed.
 

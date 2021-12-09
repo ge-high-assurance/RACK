@@ -211,7 +211,7 @@ from most recent to oldest.  Changes prior to version 4.0 have not been tracked.
             print(f"# Changes for {this_tag}\n")
 
     if args.format_for_wiki:
-        print("- Changes prior to version 4.0 are not tracked.")
+        print("- Changes prior to version 4.0 are not tracked.\n")
 
     print()
     sys.exit(0)

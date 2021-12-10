@@ -268,7 +268,7 @@ prolog:message(property_value_wrong_type_in(Instance, Property, DefType, Val, Va
     { prefix_shorten(Instance, SI),
       prefix_shorten(Property, SP),
       prefix_shorten(DefType, SDTy),
-      findall(VT, (member(VT, ValTypes), prefix_shorten(VT, SVT)), SVTys),
+      findall(SVT, (member(VT, ValTypes), prefix_shorten(VT, SVT)), SVTys),
       prefix_shorten(Val, SV)
     },
     [ 'Instance property ~w . ~w of ~w should be one of ~w but is a ~w'-[

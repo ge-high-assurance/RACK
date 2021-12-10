@@ -20,8 +20,8 @@ if [ "${PACKER_BUILDER_TYPE}" == "hyperv-iso" ]; then
     ln -s /usr/sbin/hv_get_dhcp_info .
     ln -s /usr/sbin/hv_get_dns_info .
 elif [ "${PACKER_BUILDER_TYPE}" == "virtualbox-iso" ]; then
-    apt-get remove -yqq linux-cloud-tools-virtual
-    apt-get autoremove -yqq # remaining linux-cloud-tools packages
+    apt-get remove -yqq linux-cloud-tools-common linux-cloud-tools-virtual
+    apt-get autoremove -yqq # currently not needed, but just in case
 fi
 
 # Upgrade all packages

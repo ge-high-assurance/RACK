@@ -105,7 +105,7 @@ ToolQualificationData
     SystemRequirementSet is a type of COLLECTION.
        content of SystemRequirementSet only has values of type PIDS_Req.
        wasGeneratedBy of SystemRequirementSet only has values of type SystemRequirementsDefinition. 
-       rq:governs describes SystemRequirementSet with values of type SYSTEM.
+       Rq:governs describes SystemRequirementSet with values of type SYSTEM.
        
     SoftwareHighLevelRequirementSet is a type of COLLECTION.
        content of SoftwareHighLevelRequirementSet only has values of type SRS_Req.

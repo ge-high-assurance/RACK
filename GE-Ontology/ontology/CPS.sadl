@@ -20,9 +20,9 @@ import "http://arcos.rack/SECURITY".
 // So, for Class IV aircraft and Catastrophic DAL the allowable failure probability is 1E-9.
 
 DAL (note "Design Assurance Level: a value 9 represents allowable failure probability of 1E-9, etc.") 
-	is a type of int [0,9]. 
+	is a type of int. // [0,9]. 
 ResidualRisk (note "The risk that remains after controls have been applied to mitigate threats.") 
-	is a type of int [0,1].
+	is a type of int. // [0,1].
 	
 Cps (note "A cyber physical system") is a type of SYSTEM
 	described by cpsType with a single value of type CpsType 

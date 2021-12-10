@@ -62,6 +62,19 @@ python setup.py install
 
 ## Initialize RACK-in-a-Box
 
+RACK-in-a-Box comes setup with the core ontology. From time to time, you may
+want to revert to the initial RACK state. You will need to setup your local drive with the 
+necessary files. We have written a shell script called `setup-owl.sh` which will 
+copy the OWL files, ingestion nodegroups, and CDR (common data representation .csv templates) 
+to your local drive. It is assumed that you already have a docker container running.  Here is what 
+the output may look like:
+
+```shell
+$ ./setup-owl.sh
+Found container d8140c00ce3
+Copying OwlModels
+Copying nodegroups
+```
 We have written a shell script called `setup-rack.sh` which will call
 the `rack` program to initialize a RACK-in-a-Box instance with the
 RACK core ontology model.  It is assumed that you are

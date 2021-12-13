@@ -17,24 +17,24 @@ HWCOMPONENT is a type of ENTITY.
     instantiates (note "What logical component (system) does this physical component instantiate or implement?")
         describes HWCOMPONENT with values of type ENTITY.
     componentType (note "Type of component")
-        describes HWCOMPONENT with a single value of type COMPONENT_TYPE.
+        describes HWCOMPONENT with a single value of type HWCOMPONENT_TYPE.
 	partitions describes HWCOMPONENT with values of type PARTITION.
 
 PARTITION (note "a PARTITION divides a HWCOMPONENT's resources into protected, isolated execution space for software components.") is a type of ENTITY.
 
-COMPONENT_TYPE
+HWCOMPONENT_TYPE
     (note "An open/extensible set of types of hardware components")
     is a type of THING.
 Sensor
     (note "a hardware component that interacts with the physical world outside the system of interest")
-    is a COMPONENT_TYPE
+    is a HWCOMPONENT_TYPE
     has identifier "Sensor".
 Bus
     (note "a bus is a connection between hardware components that communicates data between the components")
-    is a COMPONENT_TYPE
+    is a HWCOMPONENT_TYPE
     has identifier "Bus".
 
 ComputePlatform
     (note "a compute platform is a piece of hardware that executes software")
-    is a COMPONENT_TYPE
+    is a HWCOMPONENT_TYPE
     has identifier "ComputePlatform".

@@ -1,5 +1,9 @@
 In a hurry? Skip this introduction and just [learn how to install and use RACK](https://github.com/ge-high-assurance/RACK/wiki).
 
+## Latest **Log4j security information** 
+
+can be found [here](https://github.com/ge-high-assurance/RACK/wiki/Home/_edit#log4j-security-update)
+
 # Introducing RACK
 
 RACK (Rapid Assurance Curation Kit) is a research-grade database that uses a structured semantic data model tuned to the domain of the DARPA ARCOS (Automated Rapid Certification Of Software) program.

@@ -2,7 +2,7 @@ In a hurry? Skip this introduction and just [learn how to install and use RACK](
 
 ## Latest **Log4j security information** 
 
-can be found [here](https://github.com/ge-high-assurance/RACK/wiki/Home/_edit#log4j-security-update)
+can be found [here](https://github.com/ge-high-assurance/RACK/wiki#log4j-security-update)
 
 # Introducing RACK
 

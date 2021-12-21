@@ -137,7 +137,6 @@ done
 
 # Wait for the nodeGroupService to become ready
 
-tail -f /var/log/journal/nodeGroupService.service.log
 echo "Waiting for nodeGroupService at http://localhost:12059..."
 MAX_SECS=600
 while ! curl -X POST http://localhost:12059/serviceInfo/ping 2>/dev/null | grep -q yes; do

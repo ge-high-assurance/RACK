@@ -42,7 +42,8 @@ in
         container=$(docker container ls -qf "ancestor=${rack_image}:${rack_tag}")
 
         if [ -z "${container}" ]; then
-                echo "Unable to find docker container ${rack_image}:${rack_tag}. Specify image tag with -t flag"
+                echo "Unable to find docker container ${rack_image}:${rack_tag}."
+                echo "Note: image name and image tag can be specified with -n and -t, respectively."
                 exit 1
         fi
 

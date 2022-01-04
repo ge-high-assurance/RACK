@@ -3,55 +3,64 @@
 
 set -e
 
-RACK_DIR=$(realpath "$(dirname "$0")"/..)
-DOCKER_TAG="v9.0"
-MODE=copy
+rack_dir=$(realpath "$(dirname "$0")"/..)
+
+rack_image="gehighassurance/rack-box"
+rack_tag="v9.0"
+
+sadl_image="sadl/sadl-eclipse"
+sadl_tag="v3.5.0-20211204"
+
+mode="copy"
 
 usage() {
-        echo "Usage: setup-owl.sh [-h] [-b] [-t TAG]"
+        echo "Usage: setup-owl.sh [-h] [-b] [-n NAME] [-t TAG]"
         echo "   -h    print help"
         echo "   -b    build OWL files using sadl-eclipse"
+        echo "   -n    specify rack-box docker image name"
         echo "   -t    specify rack-box tag when copying OWL files from running image"
         exit 1
 }
 
-while getopts "bt:" o; do
+while getopts "bn:t:" o; do
         case "$o"
         in
-                b) MODE="build"; break;;
-                t) DOCKER_TAG="$OPTARG"; break;;
+                b) mode="build";;
+                n) rack_image="${OPTARG}";;
+                t) rack_tag="${OPTARG}";;
                 *) usage;;
         esac
 done
 
-case "$MODE"
+case "${mode}"
 in
     build)
-        docker run --rm -u 0 -e RUN_AS="$(id -u) $(id -g)" -v "$RACK_DIR:/RACK" sadl/sadl-eclipse:v3.5.0-20211204 -importAll /RACK -cleanBuild
+        docker run --rm -u 0 -e RUN_AS="$(id -u) $(id -g)" -v "${rack_dir}:/RACK" ${sadl_image}:${sadl_tag} -importAll /RACK -cleanBuild
         ;;
 
     copy)
-        CONTAINER=$(docker container ls -qf ancestor=gehighassurance/rack-box:"$DOCKER_TAG")
+        container=$(docker container ls -qf "ancestor=${rack_image}:${rack_tag}")
 
-        if [ -z "$CONTAINER" ]; then
-                echo "Unable to find docker container rack-box:$DOCKER_TAG. Specify image tag with -t flag"
+        if [ -z "${container}" ]; then
+                echo "Unable to find docker container ${rack_image}:${rack_tag}."
+                echo "Note: image name and image tag can be specified with -n and -t, respectively."
                 exit 1
         fi
 
-        echo "Found container $CONTAINER"
+        echo "Found container ${container}"
 
         echo "Copying OwlModels"
-        docker cp "$CONTAINER:home/ubuntu/RACK/RACK-Ontology/OwlModels/" "$RACK_DIR/RACK-Ontology/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/GE-Ontology/OwlModels/" "$RACK_DIR/GE-Ontology/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/GrammaTech-Ontology/OwlModels/" "$RACK_DIR/GrammaTech-Ontology/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/STR-Ontology/OwlModels/" "$RACK_DIR/STR-Ontology/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/Boeing-Ontology/OwlModels/" "$RACK_DIR/Boeing-Ontology/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/LM-Ontology/OwlModels/" "$RACK_DIR/LM-Ontology/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/SRI-Ontology/OwlModels/" "$RACK_DIR/SRI-Ontology/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/" "$RACK_DIR/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
+        docker cp "${container}:home/ubuntu/RACK/RACK-Ontology/OwlModels/" "${rack_dir}/RACK-Ontology/"
+        docker cp "${container}:home/ubuntu/RACK/GE-Ontology/OwlModels/" "${rack_dir}/GE-Ontology/"
+        docker cp "${container}:home/ubuntu/RACK/GrammaTech-Ontology/OwlModels/" "${rack_dir}/GrammaTech-Ontology/"
+        docker cp "${container}:home/ubuntu/RACK/STR-Ontology/OwlModels/" "${rack_dir}/STR-Ontology/"
+        docker cp "${container}:home/ubuntu/RACK/Boeing-Ontology/OwlModels/" "${rack_dir}/Boeing-Ontology/"
+        docker cp "${container}:home/ubuntu/RACK/LM-Ontology/OwlModels/" "${rack_dir}/LM-Ontology/"
+        docker cp "${container}:home/ubuntu/RACK/SRI-Ontology/OwlModels/" "${rack_dir}/SRI-Ontology/"
+        docker cp "${container}:home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/" "${rack_dir}/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
 
         echo "Copying nodegroups"
-        docker cp "$CONTAINER:home/ubuntu/RACK/nodegroups/CDR/" "$RACK_DIR/nodegroups/"
-        docker cp "$CONTAINER:home/ubuntu/RACK/nodegroups/ingestion/" "$RACK_DIR/nodegroups/"
+        docker cp "${container}:home/ubuntu/RACK/nodegroups/CDR/" "${rack_dir}/nodegroups/"
+        docker cp "${container}:home/ubuntu/RACK/nodegroups/ingestion/" "${rack_dir}/nodegroups/"
         ;;
 esac

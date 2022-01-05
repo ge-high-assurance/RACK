@@ -44,25 +44,25 @@ def CreateCdrs():
     #------------ TC-1-1 ------------
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-1",
                 verifies_identifier = "HLR-1:v1",
-                producedBy_identifier = "CompTestDevelopment")
+                wasGeneratedBy_identifier = "CompTestDevelopment")
     Add.turnstile_HighLevelRequirement(identifier="HLR-1:v1")
 
     #------------ TC-1-2 ------------
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-2",
                 verifies_identifier = "HLR-1:v1",
-                producedBy_identifier = "CompTestDevelopment")
+                wasGeneratedBy_identifier = "CompTestDevelopment")
     Add.turnstile_HighLevelRequirement(identifier="HLR-1:v1")
 
     #------------ TC-1-3 ------------
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-3",
                 verifies_identifier = "HLR-1:v1",
-                producedBy_identifier = "CompTestDevelopment")
+                wasGeneratedBy_identifier = "CompTestDevelopment")
     Add.turnstile_HighLevelRequirement(identifier="HLR-1:v1")
     
     #------------ TC-1-4 ------------
     Add.turnstile_SoftwareComponentTest(identifier="TC-1-4",
                 verifies_identifier = "HLR-1:v1",
-                producedBy_identifier = "CompTestDevelopment")
+                wasGeneratedBy_identifier = "CompTestDevelopment")
     Add.turnstile_HighLevelRequirement(identifier="HLR-1:v1")
 
     #------------ TR-1-1-1 ------------

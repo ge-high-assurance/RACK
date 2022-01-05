@@ -365,13 +365,13 @@ def CreateCdrs():
         l3="Governs"
         l4="Satisfies"
         l5="Mitigates"
-        l6="Createdby"
+        l6="wasGeneratedBy"
         return [Add.turnstile_HighLevelRequirement(identifier = req[l1]+reqVersion, 
                                                   governs_identifier = checkKeyExist(req,l3),
                                                   description = req[l2],
                                                   satisfies_identifier = checkKeyExist(req,l4),
                                                   mitigates_identifier = checkKeyExist(req,l5),
-                                                  createdBy_identifier= checkKeyExist(req,l6),
+                                                  wasGeneratedBy_identifier= checkKeyExist(req,l6),
                                                   wasRevisionOf_identifier=revision+version),
                Add.turnstile_SystemRequirement(identifier=checkKeyExist(req,l4)),
                Add.HAZARD(identifier=checkKeyExist(req,l5)),
@@ -394,13 +394,13 @@ def CreateCdrs():
     #------------ HlrDev1 ------------
     Add.turnstile_SoftwareRequirementsDefinition(identifier = "HlrDev1",
                                        endedAtTime = "2020-07-15 10:56:38",
-                                       author_identifier = "125569538",
+                                       wasAssociatedWith_identifier = "125569538",
                                        referenced_identifier = "RQ-STD:v1")
     Add.DOCUMENT(identifier = "RQ-STD:v1")
     #------------ inflowEvent ------------                                
     Add.turnstile_DataDictionary(identifier = "inflowEvent",
                        description = "Signal indicating that a person has passed through the ingate",
-                       createdBy_identifier = "HlrDev1")                       
+                       wasGeneratedBy_identifier = "HlrDev1")                       
     Add.turnstile_DataDictionary(identifier = "inflowEvent",
                        providedBy_identifier = "inflow")
     Add.turnstile_SystemInterfaceDefinition (identifier="inflow")
@@ -410,7 +410,7 @@ def CreateCdrs():
     #------------ outflowEvent ------------  
     Add.turnstile_DataDictionary(identifier = "outflowEvent",
                        description = "Signal indicating that a person has passed through the outgate",
-                       createdBy_identifier = "HlrDev1")
+                       wasGeneratedBy_identifier = "HlrDev1")
     Add.turnstile_DataDictionary(identifier = "outflowEvent",
                        providedBy_identifier = "outflow")
     Add.turnstile_SystemInterfaceDefinition (identifier="outflow")
@@ -420,7 +420,7 @@ def CreateCdrs():
 	#------------ counter ------------ 
     Add.turnstile_DataDictionary(identifier = "counter",
                        description = "running total people in the park.",
-                       createdBy_identifier = "HlrDev1")
+                       wasGeneratedBy_identifier = "HlrDev1")
     Add.turnstile_DataDictionary(identifier = "counter",
                        providedBy_identifier = "HLR-1:v1")
     Add.turnstile_DataDictionary(identifier = "counter",
@@ -430,7 +430,7 @@ def CreateCdrs():
 
     #------------ display ------------ 
     Add.turnstile_DataDictionary(identifier = "display",
-                       createdBy_identifier = "HlrDev1")
+                       wasGeneratedBy_identifier = "HlrDev1")
     Add.turnstile_DataDictionary(identifier = "display",
                        providedBy_identifier = "HLR-3:v1")
     Add.turnstile_DataDictionary(identifier = "display",
@@ -441,7 +441,7 @@ def CreateCdrs():
      #------------ HlrDev2 ------------
     Add.turnstile_SoftwareRequirementsDefinition(identifier = "HlrDev2",
                                        endedAtTime = "2020-07-25 10:53:38",
-                                       author_identifier = "125569538",
+                                       wasAssociatedWith_identifier = "125569538",
                                        referenced_identifier = "RQ-STD:v1")
     Add.DOCUMENT(identifier = "RQ-STD:v1")
     #------------ inflowEvent ------------
@@ -470,12 +470,12 @@ def CreateCdrs():
         #l1_1=")Requirementidentification"
         l2="Description"
         l3="Governs"
-        l4= "Createdby"
+        l4= "wasGeneratedBy"
         l5="Satisfies"
         return [Add.turnstile_LowLevelRequirement(#identifier = req[keybiggerThan10(l1_1,l1,req)], 
                                                  identifier = req[l1]+version,
                                                  governs_identifier = checkKeyExist(req,l3),
-                                                 createdBy_identifier= checkKeyExist(req,l4),
+                                                 wasGeneratedBy_identifier= checkKeyExist(req,l4),
                                                  description = req[l2],
                                                  satisfies_identifier =checkKeyExist(req,l5)
                                                  ),
@@ -506,13 +506,13 @@ def CreateCdrs():
     #------------ LlrDev1 ------------
     Add.turnstile_SoftwareDesign(identifier = "LlrDev1",
                                  endedAtTime = "2020-07-19 11:48:38",
-                                 author_identifier = "2125895152",
+                                 wasAssociatedWith_identifier = "2125895152",
                                  referenced_identifier = "SW-STD:v1")
     Add.DOCUMENT(identifier = "SW-STD:v1")
     #------------ SwDesign ------------
     Add.turnstile_SoftwareDesign(identifier = "SwDesign",
                                  endedAtTime = "2020-07-23 09:52:38",
-                                 author_identifier = "2125895152",
+                                 wasAssociatedWith_identifier = "2125895152",
                                  referenced_identifier = "SW-STD:v1")
     Add.DOCUMENT(identifier = "SW-STD:v1")
     #------------ InputThread ------------
@@ -530,7 +530,7 @@ def CreateCdrs():
     #------------ DCC-1 ------------	
     Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
                                        description = "PowerUp",
-                                       createdBy_identifier = "LlrDev1")
+                                       wasGeneratedBy_identifier = "LlrDev1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
                                        consumedBy_identifier = "EXE-LLR-1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
@@ -543,7 +543,7 @@ def CreateCdrs():
     #------------ DCC-2 ------------	
     Add.turnstile_DataAndControlCouple(identifier = "DCC-2", 
                                        description = "incoming UDP message",
-                                       createdBy_identifier = "LlrDev1")
+                                       wasGeneratedBy_identifier = "LlrDev1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
                                        consumedBy_identifier = "IN-LLR-2")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
@@ -557,7 +557,7 @@ def CreateCdrs():
     #------------ DCC-3 ------------	
     Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
                                        description = "input_park_count",
-                                       createdBy_identifier = "LlrDev1")
+                                       wasGeneratedBy_identifier = "LlrDev1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
                                        consumedBy_identifier = "IN-LLR-2")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
@@ -577,7 +577,7 @@ def CreateCdrs():
     #------------ DCC-4 ------------	
     Add.turnstile_DataAndControlCouple(identifier = "DCC-4",
                                        description = "output_park_count",
-                                       createdBy_identifier = "LlrDev1")
+                                       wasGeneratedBy_identifier = "LlrDev1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
                                        consumedBy_identifier = "OUT-LLR-2")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
@@ -589,7 +589,7 @@ def CreateCdrs():
     #------------ DCC-5 ------------	
     Add.turnstile_DataAndControlCouple(identifier = "DCC-5",
                                        description = "outgoing UDP message",
-                                       createdBy_identifier = "LlrDev1")
+                                       wasGeneratedBy_identifier = "LlrDev1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-5",
                                        providedBy_identifier = "OUT-LLR-2")
 
@@ -597,7 +597,7 @@ def CreateCdrs():
     #------------ DCC-6 ------------	
     Add.turnstile_DataAndControlCouple(identifier = "DCC-6",  
                                        description = "console",
-                                       createdBy_identifier = "LlrDev1")
+                                       wasGeneratedBy_identifier = "LlrDev1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-6",
                                        providedBy_identifier = "EXE-LLR-3")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-6",

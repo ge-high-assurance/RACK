@@ -68,6 +68,9 @@ rack data import "$BASEDIR"/SystemVerificationReport/import.yaml
 echo "Ingesting Objectives ..."
 rack data import "$BASEDIR"/Objectives/import.yaml
 
+echo "Ingesting Baselines ..."
+rack data import "$BASEDIR"/TurnstileBaselines/import.yaml
+
 echo "----------------------------------------------------------------------"
 echo "Static data ingestion completed.  Will now attempt to build the"
 echo "Turnstile source code while using ASSIST to capture the dynamic"

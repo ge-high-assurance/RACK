@@ -606,6 +606,28 @@ def CreateCdrs():
                                        providedBy_identifier = "IN-LLR-6")
     createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileLowLevelRequirements")) 
+
+################################################
+#    Baselines
+################################################
+    createEvidenceFile(ingestionTitle="TurnstileIngestion-Baselines", ingestionDescription="Ingestion of Turnstile Requirements Baselines using Scraping Tool Kit")
+    
+    for req in hlReqsModified_Ids:
+        Add.BASELINE(identifier = "RequirementsPackage:v1", content_identifier=req+":v1")
+        Add.BASELINE(identifier = "RequirementsPackage:v2", content_identifier=req+":v2")
+
+    for req in llReqsModified_Ids:
+        Add.BASELINE(identifier = "RequirementsPackage:v1", content_identifier=req+":v1")
+        Add.BASELINE(identifier = "RequirementsPackage:v2", content_identifier=req+":v2")
+    
+    for req in sys:
+        Add.BASELINE(identifier = "RequirementsPackage:v1", content_identifier=req[l])
+        Add.BASELINE(identifier = "RequirementsPackage:v2", content_identifier=req[l])
+
+    createCDR("http://rack001/turnstiledata")
+    os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileBaselines"))
+
+
 ########################################################
 if __name__=="__main__":
     if os.path.exists(os.path.join(".","Turnstile-IngestionPackage/TurnstileSystemRequirements")):

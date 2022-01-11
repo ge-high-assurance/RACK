@@ -612,17 +612,37 @@ def CreateCdrs():
 ################################################
     createEvidenceFile(ingestionTitle="TurnstileIngestion-Baselines", ingestionDescription="Ingestion of Turnstile Requirements Baselines using Scraping Tool Kit")
     
-    for req in hlReqsModified_Ids:
-        Add.BASELINE(identifier = "RequirementsPackage:v1", content_identifier=req+":v1")
-        Add.BASELINE(identifier = "RequirementsPackage:v2", content_identifier=req+":v2")
+    reqBase1 = "RequirementsPackage:v1"
+    reqBase2 = "RequirementsPackage:v2"
+    swBase1 = "SoftwareDesignAndCode:v1"
+    turnstile1 = "Turnstile:v1"
+    turnstile1_1 = "Turnstile:v1.1"
 
+    # Requirements packages
+    for req in hlReqsModified_Ids:
+        Add.BASELINE(identifier=reqBase1, content_identifier=req+":v1")
+        Add.BASELINE(identifier=reqBase2, content_identifier=req+":v2")
     for req in llReqsModified_Ids:
-        Add.BASELINE(identifier = "RequirementsPackage:v1", content_identifier=req+":v1")
-        Add.BASELINE(identifier = "RequirementsPackage:v2", content_identifier=req+":v2")
-    
+        Add.BASELINE(identifier=reqBase1, content_identifier=req+":v1")
+        Add.BASELINE(identifier=reqBase2, content_identifier=req+":v2")
     for req in sys:
-        Add.BASELINE(identifier = "RequirementsPackage:v1", content_identifier=req[l])
-        Add.BASELINE(identifier = "RequirementsPackage:v2", content_identifier=req[l])
+        Add.BASELINE(identifier=reqBase1, content_identifier=req[l])
+        Add.BASELINE(identifier=reqBase2, content_identifier=req[l])
+    Add.BASELINE(identifier=reqBase2, wasRevisionOf_identifier=reqBase1)
+
+    # Software baseline
+    Add.BASELINE(identifier=swBase1, content_identifier="OutputThread")
+    Add.BASELINE(identifier=swBase1, content_identifier="InputThread")
+    Add.BASELINE(identifier=swBase1, content_identifier="ExecutiveThread")
+    Add.BASELINE(identifier=swBase1, content_identifier="SwDesign")
+
+    # Complete release baselines
+    Add.BASELINE(identifier=turnstile1, content_identifier=reqBase1)
+    Add.BASELINE(identifier=turnstile1, content_identifier=swBase1)
+
+    Add.BASELINE(identifier=turnstile1_1, wasRevisionOf_identifier=turnstile1)
+    Add.BASELINE(identifier=turnstile1_1, content_identifier=reqBase2)
+    Add.BASELINE(identifier=turnstile1_1, content_identifier=swBase1)
 
     createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileBaselines"))

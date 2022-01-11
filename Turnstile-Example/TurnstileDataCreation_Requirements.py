@@ -615,6 +615,7 @@ def CreateCdrs():
     reqBase1 = "RequirementsPackage:v1"
     reqBase2 = "RequirementsPackage:v2"
     swBase1 = "SoftwareDesignAndCode:v1"
+    testBase1 = "TestSuite:v1"
     turnstile1 = "Turnstile:v1"
     turnstile1_1 = "Turnstile:v1.1"
 
@@ -636,13 +637,21 @@ def CreateCdrs():
     Add.BASELINE(identifier=swBase1, content_identifier="ExecutiveThread")
     Add.BASELINE(identifier=swBase1, content_identifier="SwDesign")
 
+    # Testsuite release
+    Add.BASELINE(identifier=testBase1, content_identifier="TC-1-1")
+    Add.BASELINE(identifier=testBase1, content_identifier="TC-1-2")
+    Add.BASELINE(identifier=testBase1, content_identifier="TC-1-3")
+    Add.BASELINE(identifier=testBase1, content_identifier="TC-1-4")
+
     # Complete release baselines
     Add.BASELINE(identifier=turnstile1, content_identifier=reqBase1)
     Add.BASELINE(identifier=turnstile1, content_identifier=swBase1)
+    Add.BASELINE(identifier=turnstile1, content_identifier=testBase1)
 
     Add.BASELINE(identifier=turnstile1_1, wasRevisionOf_identifier=turnstile1)
     Add.BASELINE(identifier=turnstile1_1, content_identifier=reqBase2)
     Add.BASELINE(identifier=turnstile1_1, content_identifier=swBase1)
+    # A lack of a test suite targetting v2 requirements is a known omission
 
     createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileBaselines"))

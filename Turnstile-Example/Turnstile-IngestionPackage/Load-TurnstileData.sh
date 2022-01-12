@@ -21,6 +21,9 @@ then
 	exit 1
 fi
 
+echo "Updating File references..."
+find "$BASEDIR" -name "*.csv" -exec sed -i -e "s|{{BASEDIR}}|$BASEDIR|g" {} +
+
 echo "Clear data-graph http://rack001/turnstiledata"
 rack data clear --data-graph "http://rack001/turnstiledata"
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Copyright (c) 2020, General Electric Company and Galois, Inc.
 set -eu
 BASEDIR=$(cd "$(dirname "$0")"; pwd)
@@ -21,8 +21,14 @@ then
 	exit 1
 fi
 
+if test "$OSTYPE" == "cygwin" -o "$OSTYPE" == "msys"; then
+URLBASE=$(cygpath -m "$BASEDIR")
+else
+URLBASE="$BASEDIR"
+fi
+
 echo "Updating File references..."
-find "$BASEDIR" -name "*.csv" -exec sed -i -e "s|{{BASEDIR}}|$BASEDIR|g" {} +
+find "$BASEDIR" -name "*.csv" -exec sed -i -e "s|{{BASEDIR}}|$URLBASE|g" {} +
 
 echo "Clear data-graph http://rack001/turnstiledata"
 rack data clear --data-graph "http://rack001/turnstiledata"

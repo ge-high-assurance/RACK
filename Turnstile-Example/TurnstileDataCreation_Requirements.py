@@ -606,6 +606,57 @@ def CreateCdrs():
                                        providedBy_identifier = "IN-LLR-6")
     createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileLowLevelRequirements")) 
+
+################################################
+#    Baselines
+################################################
+    createEvidenceFile(ingestionTitle="TurnstileIngestion-Baselines", ingestionDescription="Ingestion of Turnstile Requirements Baselines using Scraping Tool Kit")
+    
+    reqBase1 = "RequirementsPackage:v1"
+    reqBase2 = "RequirementsPackage:v2"
+    swBase1 = "SoftwareDesignAndCode:v1"
+    testBase1 = "TestSuite:v1"
+    turnstile1 = "Turnstile:v1"
+    turnstile1_1 = "Turnstile:v1.1"
+
+    # Requirements packages
+    for req in hlReqsModified_Ids:
+        Add.BASELINE(identifier=reqBase1, content_identifier=req+":v1")
+        Add.BASELINE(identifier=reqBase2, content_identifier=req+":v2")
+    for req in llReqsModified_Ids:
+        Add.BASELINE(identifier=reqBase1, content_identifier=req+":v1")
+        Add.BASELINE(identifier=reqBase2, content_identifier=req+":v2")
+    for req in sys:
+        Add.BASELINE(identifier=reqBase1, content_identifier=req[l])
+        Add.BASELINE(identifier=reqBase2, content_identifier=req[l])
+    Add.BASELINE(identifier=reqBase2, wasRevisionOf_identifier=reqBase1)
+
+    # Software baseline
+    Add.BASELINE(identifier=swBase1, content_identifier="OutputThread")
+    Add.BASELINE(identifier=swBase1, content_identifier="InputThread")
+    Add.BASELINE(identifier=swBase1, content_identifier="ExecutiveThread")
+    Add.BASELINE(identifier=swBase1, content_identifier="SwDesign")
+
+    # Testsuite release
+    Add.BASELINE(identifier=testBase1, content_identifier="TC-1-1")
+    Add.BASELINE(identifier=testBase1, content_identifier="TC-1-2")
+    Add.BASELINE(identifier=testBase1, content_identifier="TC-1-3")
+    Add.BASELINE(identifier=testBase1, content_identifier="TC-1-4")
+
+    # Complete release baselines
+    Add.BASELINE(identifier=turnstile1, content_identifier=reqBase1)
+    Add.BASELINE(identifier=turnstile1, content_identifier=swBase1)
+    Add.BASELINE(identifier=turnstile1, content_identifier=testBase1)
+
+    Add.BASELINE(identifier=turnstile1_1, wasRevisionOf_identifier=turnstile1)
+    Add.BASELINE(identifier=turnstile1_1, content_identifier=reqBase2)
+    Add.BASELINE(identifier=turnstile1_1, content_identifier=swBase1)
+    # A lack of a test suite targetting v2 requirements is a known omission
+
+    createCDR("http://rack001/turnstiledata")
+    os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileBaselines"))
+
+
 ########################################################
 if __name__=="__main__":
     if os.path.exists(os.path.join(".","Turnstile-IngestionPackage/TurnstileSystemRequirements")):

@@ -95,7 +95,7 @@ def CreateCdrs():
     #------------ TestRun1 ------------
     Add.turnstile_SoftwareComponentTestExecution(identifier="TestRun1",
                 endedAtTime = "2020-07-28 11:53:38",
-                executedOn_identifier = "TargetHardware")
+                wasAssociatedWith_identifier = "TargetHardware")
 
     #------------ TR-1-1-2 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-1-2",
@@ -124,7 +124,7 @@ def CreateCdrs():
     #------------ TestRun2 ------------
     Add.turnstile_SoftwareComponentTestExecution(identifier="TestRun2",
                 endedAtTime = "2020-07-30 11:02:38",
-                executedOn_identifier = "TargetHardware")
+                wasAssociatedWith_identifier = "TargetHardware")
 
     createCDR("http://rack001/turnstiledata")
 

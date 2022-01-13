@@ -30,7 +30,7 @@ def CreateCdrs():
     #------------ CompTestDevelopment ------------
     Add.turnstile_DevelopComponentTests(identifier="CompTestDevelopment",
                 endedAtTime = "2020-07-26 10:53:38",
-                developedBy_identifier = "ASSERT",
+                wasAssociatedWith_identifier = "ASSERT",
                 used_identifier = "VER-STD:v1")
     Add.turnstile_DevelopComponentTests(identifier="CompTestDevelopment",
     	        used_identifier = "ATCG-Config-File")
@@ -69,25 +69,25 @@ def CreateCdrs():
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-1-1",
                 confirms_identifier = "TC-1-1",
                 result_identifier = "Passed",
-                executedBy_identifier = "TestRun1")
+                wasGeneratedBy_identifier = "TestRun1")
 
     #------------ TR-1-2-1 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-2-1",
                 confirms_identifier = "TC-1-2",
                 result_identifier = "Passed",
-                executedBy_identifier = "TestRun1")
+                wasGeneratedBy_identifier = "TestRun1")
 
     #------------ TR-1-3-1 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-3-1",
                 confirms_identifier = "TC-1-3",
                 result_identifier = "Passed",
-                executedBy_identifier = "TestRun1")
+                wasGeneratedBy_identifier = "TestRun1")
 
     #------------ TR-1-4-1 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-4-1",
                 confirms_identifier = "TC-1-4",
                 result_identifier = "Failed",
-                executedBy_identifier = "TestRun1")
+                wasGeneratedBy_identifier = "TestRun1")
     
     #------------ TargetHardware ------------
     Add.AGENT(identifier="TargetHardware")
@@ -101,25 +101,25 @@ def CreateCdrs():
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-1-2",
                 confirms_identifier = "TC-1-1",
                 result_identifier = "Passed",
-                executedBy_identifier = "TestRun2")
+                wasGeneratedBy_identifier = "TestRun2")
     
     #------------ TR-1-2-2 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-2-2",
                 confirms_identifier = "TC-1-2",
                 result_identifier = "Passed",
-                executedBy_identifier = "TestRun2")
+                wasGeneratedBy_identifier = "TestRun2")
     
     #------------ TR-1-3-2 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-3-2",
                 confirms_identifier = "TC-1-3",
                 result_identifier = "Passed",
-                executedBy_identifier = "TestRun2")
+                wasGeneratedBy_identifier = "TestRun2")
     
     #------------ TR-1-4-2 ------------
     Add.turnstile_SoftwareComponentTestResult(identifier="TR-1-4-2",
                 confirms_identifier = "TC-1-4",
                 result_identifier = "Failed",
-                executedBy_identifier = "TestRun2")
+                wasGeneratedBy_identifier = "TestRun2")
     
     #------------ TestRun2 ------------
     Add.turnstile_SoftwareComponentTestExecution(identifier="TestRun2",

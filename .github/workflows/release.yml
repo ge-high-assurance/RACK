@@ -160,6 +160,17 @@ jobs:
         split -b 1500m rack-box-$b-$v.zip rack-box-$b-$v.zip
         ls -l rack-box-$b-$v.zip??
 
+    - name: Upload README.md to GitHub release assets
+      if: matrix.builder != 'docker'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: RACK/rack-box/GitHub-Release-README.md
+        asset_name: README.md
+        asset_content_type: text/markdown; charset=UTF-8
+
     - name: Upload rack-box split image (1/3) to GitHub release assets
       if: matrix.builder != 'docker'
       uses: actions/upload-release-asset@v1
@@ -184,6 +195,7 @@ jobs:
 
     - name: Upload rack-box split image (3/3) to GitHub release assets
       if: matrix.builder != 'docker'
+      continue-on-error: true
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -192,14 +204,3 @@ jobs:
         asset_path: RACK/rack-box/rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zipac
         asset_name: rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zip02
         asset_content_type: application/zip
-
-    - name: Upload README.md to GitHub release assets
-      if: matrix.builder != 'docker'
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: RACK/rack-box/GitHub-Release-README.md
-        asset_name: README.md
-        asset_content_type: text/markdown; charset=UTF-8

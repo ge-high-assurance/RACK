@@ -55,7 +55,7 @@ in
                         ssh-keygen -q -N "" -f rack_ssh_key
                 fi
 
-                echo "[setup-owl] Please confirm the SSH host key if prompted.
+                echo "[setup-owl] Please confirm the SSH host key if prompted."
                 echo "[setup-owl] Please enter the default password if prompted: $(tput bold)ubuntu$(tput sgr0)"
                 ssh "ubuntu@${virtualbox_ip}" "mkdir -p ~/.ssh/; cat >> ~/.ssh/authorized_keys" < rack_ssh_key.pub
         fi

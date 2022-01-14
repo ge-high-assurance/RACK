@@ -57,7 +57,9 @@ in
 
                 echo "[setup-owl] Please confirm the SSH host key if prompted."
                 echo "[setup-owl] Please enter the default password if prompted: $(tput bold)ubuntu$(tput sgr0)"
-                ssh-copy-id -i rack_ssh_key "ubuntu@${virtualbox_ip}"
+
+                # We're using this awkward command instead of ssh-copy-id because some old system don't have ssh-copy-id
+                ssh "ubuntu@${virtualbox_ip}" "mkdir -p ~/.ssh/; cat >> ~/.ssh/authorized_keys" < rack_ssh_key.pub
         fi
 
         echo "[setup-owl] Copying OwlModels"

@@ -10,12 +10,14 @@ steps:
 
    - [ ] [Docker-Hub-README.md](Docker-Hub-README.md)
    - [ ] [GitHub-Release-README.md](GitHub-Release-README.md)
-   - [ ] [README.md](README.md)
+   - [ ] [RELEASE.md](RELEASE.md)
 
    RACK.wiki/
 
+   - [ ] [Home](https://github.com/ge-high-assurance/RACK/wiki/Home)
    - [ ] [Install-a-Docker-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Docker-RACK-Box)
    - [ ] [Install-a-Virtual-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Virtual-RACK-Box)
+   - [ ] [Release-Schedule](https://github.com/ge-high-assurance/RACK/wiki/Release-Schedule)
    - [ ] [Welcome](https://github.com/ge-high-assurance/RACK/wiki/_Welcome)
 
    After you save these files, commit and push those changes to both
@@ -39,7 +41,7 @@ steps:
 
    ```shell
    cd RACK.wiki
-   git tag v9.0
+   git tag v9.1
    git push --tag
    ```
 

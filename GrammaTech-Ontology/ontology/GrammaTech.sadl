@@ -49,3 +49,19 @@ Timeout         is a FailureReason with identifier "Timeout".
 Crash           is a FailureReason with identifier "Crash".
 DifferentOutput is a FailureReason with identifier "DifferentOutput".
 Assert          is a FailureReason with identifier "Assert".
+
+MITRE_CWE is a type of ENTITY.
+  detectById describes MITRE_CWE with values of type MITRE_CWE_DETECTION.
+
+MITRE_CWE_DETECTION is a type of ENTITY.
+  effectiveness describes MITRE_CWE_DETECTION with values of type CWE_EFFECTIVENESS.
+
+CWE_EFFECTIVENESS is a type of THING.
+CweDefenseInDepth            is a CWE_EFFECTIVENESS identifier "Defense in Depth".
+CweDiscouragedCommonPractice is a CWE_EFFECTIVENESS identifier "Discouraged Common Practice".
+CweHigh                      is a CWE_EFFECTIVENESS identifier "High".
+CweLimited                   is a CWE_EFFECTIVENESS identifier "Limited".
+CweModerate                  is a CWE_EFFECTIVENESS identifier "Moderate".
+CweNone                      is a CWE_EFFECTIVENESS identifier "None".
+CweOpportunistic             is a CWE_EFFECTIVENESS identifier "Opportunistic".
+CweSOAR_Partial              is a CWE_EFFECTIVENESS identifier "SOAR Partial".

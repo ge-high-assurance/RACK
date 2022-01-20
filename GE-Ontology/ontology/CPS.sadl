@@ -77,10 +77,11 @@ Connection (note "An INTERFACE with specific input and output ports") is a type 
 	described by inPort with a single value of type Port 
 
 	// properties that allow for inferring threats	
-	described by connectionType with values of type ConnectionType  
-	described by dataSentIsUntrusted with a single value of type boolean 
-	described by dataReceivedIsUntrusted with a single value of type boolean 	
-    described by infoFlowSeverity with a single value of type int. 
+	described by connectionType with values of type ConnectionType  	
+    described by infoFlowSeverity with a single value of type int
+
+	// properties that allow for mitigating of threats
+	described by implControl with values of type ImplControl.     
 
 ConnectionType is a type of THING.
 

@@ -27,6 +27,11 @@ check_rack :-
     length(MIS, MISLen),
     length(IFCS, IFCSLen),
     format('~`.t Summary ~`.t~78|~n'),
+    core_ontology_size(CoreSize),
+    overlay_ontology_size(OverlaySize),
+    num_instances(InstanceCount),
+    format('Checked ~w core ontology classes, ~w overlay ontology classes, and ~w data instances~n',
+           [CoreSize, OverlaySize, InstanceCount]),
     warn_if_nonzero("missing a Note/Description", CSLen),
     warn_if_nonzero("not a subclass of PROV-S#THING", NPCSLen),
     warn_if_nonzero("with instance issues", BISLen),
@@ -39,6 +44,31 @@ check_rack :-
     ;
     format('ISSUES FOUND IN CHECK~n'), halt(1)),
     true.
+
+core_ontology_size(Size) :-
+    findall(Class,
+            (rdf(Class, rdf:type, owl:'Class'),
+             rack_ontology_node(Class, _, _)),
+            Classes),
+    length(Classes, Size).
+
+overlay_ontology_size(Size) :-
+    findall(Class,
+            (rdf(Class, rdf:type, owl:'Class'),
+             \+ rack_ontology_node(Class, _, _),
+             \+ rdf_bnode(Class)),
+            Classes),
+    length(Classes, Size).
+
+rack_data_instance(I) :-
+    rdf(Class, rdf:type, owl:'Class'),
+    rack_ref('PROV-S#THING', Thing),
+    rdf_reachable(Class, rdfs:subClassOf, Thing),
+    rdf(I, rdf:type, Class).
+
+num_instances(Count) :-
+    findall(I, rack_data_instance(I), IS),
+    length(IS, Count).
 
 check_missing_notes(Class) :-
     rdf(Class, rdf:type, owl:'Class'),
@@ -55,22 +85,17 @@ check_not_prov_s(Class) :-
 
 check_instance_types(I) :-
     % Get an instance
-    rdf(I, rdf:type, T),
-    rdf(T, rdf:type, C),
-    rdf_reachable(C, rdfs:subClassOf, owl:'Class'),
+    rack_data_instance(I),
     % Exclude namespaces we aren't interested in
     has_interesting_prefix(I),
     findall(IT, rdf(I, rdf:type, IT), ITs),
     length(ITs, N),
     N > 1,
-    ITs = [T|_],
     print_message(error, multiple_types_for_instance(I, ITs)).
 
 check_instance_property_violations(Property) :-
     % Get an instance
-    rdf(I, rdf:type, T),
-    rdf(T, rdf:type, C),
-    rdf_reachable(C, rdfs:subClassOf, owl:'Class'),
+    rack_data_instance(I),
     % Exclude namespaces we aren't interested in
     has_interesting_prefix(I),
     % Find a required property defined on that instance type (or parent type)

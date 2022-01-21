@@ -364,6 +364,16 @@ def store_nodegroups_driver(directory: Path, base_url: Url) -> None:
     sparql_connection(base_url, None, [], None)
     semtk3.store_nodegroups(directory)
 
+@with_status('Storing nodegroup')
+def store_nodegroup_driver(name: str, creator: str, filename: str, comment: Optional[str], base_url: Url) -> None:
+    sparql_connection(base_url, None, [], None)
+
+    with open(filename) as f:
+        nodegroup_json_str = f.read()
+
+    semtk3.delete_nodegroup_from_store(name) # succeeds even if not found
+    semtk3.store_nodegroup(name, comment or '', creator, nodegroup_json_str)
+
 @with_status('Retrieving nodegroups')
 def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url) -> None:
     sparql_connection(base_url, None, [], None)
@@ -466,6 +476,9 @@ def dispatch_model_clear(args: SimpleNamespace) -> None:
 def dispatch_nodegroups_import(args: SimpleNamespace) -> None:
     store_nodegroups_driver(args.directory, args.base_url)
 
+def dispatch_nodegroups_store(args: SimpleNamespace) -> None:
+    store_nodegroup_driver(args.name, args.creator, args.filename, args.comment, args.base_url)
+
 def dispatch_nodegroups_export(args: SimpleNamespace) -> None:
     retrieve_nodegroups_driver(args.regexp, args.directory, args.base_url)
 
@@ -501,8 +514,9 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     nodegroups_parser = subparsers.add_parser('nodegroups', help='Interact with SemTK nodegroups')
     nodegroups_subparsers = nodegroups_parser.add_subparsers(dest='command')
-    nodegroups_import_parser = nodegroups_subparsers.add_parser('import', help='Store nodegroups into RACK')
+    nodegroups_import_parser = nodegroups_subparsers.add_parser('import', help='Store nodegroups directory into RACK')
     nodegroups_export_parser = nodegroups_subparsers.add_parser('export', help='Retrieve nodegroups from RACK')
+    nodegroups_store_parser = nodegroups_subparsers.add_parser('store', help='Store single nodegroup into RACK')
     nodegroups_list_parser = nodegroups_subparsers.add_parser('list', help='List nodegroups from RACK')
     nodegroups_delete_parser = nodegroups_subparsers.add_parser('delete', help='Delete some nodegroups from RACK')
     nodegroups_deleteall_parser = nodegroups_subparsers.add_parser('delete-all', help='Delete all nodegroups from RACK')
@@ -536,6 +550,12 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     nodegroups_import_parser.add_argument('directory', type=str, help='Nodegroup directory')
     nodegroups_import_parser.set_defaults(func=dispatch_nodegroups_import)
+
+    nodegroups_store_parser.add_argument('--comment', type=str, help="Nodegroup description")
+    nodegroups_store_parser.add_argument('name', type=str, help="Nodegroup identifier")
+    nodegroups_store_parser.add_argument('creator', type=str, help="Nodegroup author name")
+    nodegroups_store_parser.add_argument('filename', type=str, help='Nodegroup JSON filename')
+    nodegroups_store_parser.set_defaults(func=dispatch_nodegroups_store)
 
     nodegroups_export_parser.add_argument('regexp', type=str, help='Nodegroup selection regular expression')
     nodegroups_export_parser.add_argument('directory', type=str, help='Nodegroup directory')

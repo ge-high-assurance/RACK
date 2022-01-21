@@ -13,6 +13,7 @@
 
 :- ensure_loaded('../paths').
 :- use_module(checks(interfaceChecks)).
+:- use_module(checks(sbvt_checks)).
 
 
 run_checks :-
@@ -51,5 +52,5 @@ runnable_check("with instance type issues", Num) :-
     check_each_with(check_instance_types, Num).
 runnable_check("with instance property issues", Num) :-
     check_each_with(check_instance_property_violations, Num).
-runnable_check("INTERFACE issues", Num) :-
-    check_each_with(check_INTERFACE, Num).
+runnable_check("INTERFACE issues", Num) :- check_each_with(check_INTERFACE, Num).
+runnable_check("SBVT issues",      Num) :- check_each_with(check_SBVT,      Num).

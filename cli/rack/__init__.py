@@ -371,6 +371,7 @@ def store_nodegroup_driver(name: str, creator: str, filename: str, comment: Opti
     with open(filename) as f:
         nodegroup_json_str = f.read()
 
+    semtk3.delete_nodegroup_from_store(name) # succeeds even if not found
     semtk3.store_nodegroup(name, comment or '', creator, nodegroup_json_str)
 
 @with_status('Retrieving nodegroups')

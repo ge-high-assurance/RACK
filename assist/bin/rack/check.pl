@@ -37,12 +37,12 @@ check_rack :-
     warn_if_nonzero("with instance issues", BISLen),
     warn_if_nonzero("with instance property issues", MISLen),
     warn_if_nonzero("with INTERFACE instance issues", IFCSLen),
-    TotalIssues = CSLen + NPCSLen + BISLen + MISLen + IFCSLen,
+    TotalIssues is CSLen + NPCSLen + BISLen + MISLen + IFCSLen,
     (TotalIssues == 0,
      !,
      format('No issues found~n')
     ;
-    format('ISSUES FOUND IN CHECK~n'), halt(1)),
+    format('~w ISSUES FOUND IN CHECK~n', [TotalIssues]), halt(1)),
     true.
 
 core_ontology_size(Size) :-

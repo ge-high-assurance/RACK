@@ -34,15 +34,15 @@ check_rack :-
 
 check_missing_notes(Class) :-
     rdf(Class, rdf:type, owl:'Class'),
-    rack_ontology_node(Class, _, _),
     \+ rdf(Class, rdfs:comment, _),
+    \+ rdf_bnode(Class),
     print_message(warning, class_missing_note(Class)).
 
 check_not_prov_s(Class) :-
     rdf(Class, rdf:type, owl:'Class'),
-    rack_ontology_node(Class, _, _),
     rack_ref('PROV-S#THING', Thing),
     \+ rdf_reachable(Class, rdfs:subClassOf, Thing),
+    \+ rdf_bnode(Class),
     print_message(warning, not_prov_s_thing_class(Class)).
 
 check_instance_types(I) :-

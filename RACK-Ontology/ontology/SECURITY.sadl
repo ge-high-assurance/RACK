@@ -48,7 +48,7 @@ THREAT_IDENTIFICATION
 	Sec:author (note "AGENT(s) who work on this ACTIVITY") describes THREAT_IDENTIFICATION with values of type AGENT.
 	Sec:author is a type of wasAssociatedWith.
 
-SECURITY_LABEL is a type of THING.
+SECURITY_LABEL (note "A label to help categorize the associated SECURITY concern") is a type of THING.
 
 // A few common instances: additional ones could be Authorization, Non-repudiation, Privacy, etc.
 Confidentiality is a SECURITY_LABEL 
@@ -63,7 +63,7 @@ Availability is a SECURITY_LABEL
 
 CONTROL (note "CONTROLs mitigate THREATs") is a type of ENTITY.
 
-CONTROLSET is a type of COLLECTION.
+CONTROLSET (note "A set of CONTROLs that combine to mitigate a THREAT") is a type of COLLECTION.
     content of CONTROLSET only has values of type CONTROL.
 
     // A THREAT can be mitigated by a set of CONTROLs etc., mitigation by CONTROL is defined in CONTROL.sadl.

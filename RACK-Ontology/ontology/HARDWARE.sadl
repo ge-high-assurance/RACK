@@ -13,7 +13,7 @@
 uri "http://arcos.rack/HARDWARE" alias hw.
 import "http://arcos.rack/PROV-S".
 
-HWCOMPONENT is a type of ENTITY.
+HWCOMPONENT (note "A generic physical hardware component") is a type of ENTITY.
     instantiates (note "What logical component (system) does this physical component instantiate or implement?")
         describes HWCOMPONENT with values of type ENTITY.
     componentType (note "Type of component")

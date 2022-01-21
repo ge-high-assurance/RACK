@@ -9,9 +9,10 @@
  * material are those of the author(s) and do not necessarily reflect the views
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
-uri "http://arcos/TurnstileSecurity" alias TSec.
+uri "http://arcos.sadl-examples/TurnstileSecurity" alias TSec.
 
 import "http://arcos.rack/CPS".
+import "http://arcos.turnstile/GE".
 import "http://arcos.rack/REQUIREMENTS".
 
 // This example is to simply illustrate a security scenario for Turnstile.
@@ -31,12 +32,8 @@ import "http://arcos.rack/REQUIREMENTS".
 //			Content Spoofing threat
 //			While we do this via a rule, it would be identified by ARCOS performers using
 //			their tools and that determination would be data that is then ingested in RACK.
-//		added additional requirements that when satisfied mitigate this Content Spoofing threat 
-//Q. We used to have SystemRequirement - correct?; now I made it REQUIREMENT; is that ok?
-//Q. We should have traceability between requirements.
-//Q. how do we show / prove that these controls have been implemented correctly. trace to req etc.
-//Q. Can I check in this file to master, we will simply not have it loaded in RACK (via yaml file)!!!
-//		Maybe it should be part of the Turnstile example as python file
+//		added additional requirements that when satisfied mitigate this Content Spoofing threat
+//		This file is to be added to sadl-examples folder 
  
 Turnstile is a Cps
 	has identifier "Turnstile".
@@ -64,32 +61,46 @@ inflow is a Connection
 	has sys:destination CounterApplication
 	has connectionType Untrusted.
 
-Sys-1 is a REQUIREMENT
+InputThread is a SoftwareThread
+	has identifier "InputThread"
+	has partOf CounterApplication
+//		has sys:producedBy SwDesign
+.
+		
+Sys-1 is a SystemRequirement
 	has identifier "Sys-1"
 	has description "Turnstile system shall track the number of people that travel through the in gate."
 	has governs Turnstile.
 
-Sys-2 is a REQUIREMENT
+Sys-2 is a SystemRequirement
 	has identifier "Sys-2"
-	has description "Turnstile system shall track the number of people that travel through the out gate.	"
+	has description "Turnstile system shall track the number of people that travel through the out gate."
 	has governs Turnstile.
  
-Sys-3 is a REQUIREMENT
+Sys-3 is a SystemRequirement
 	has identifier "Sys-3"
 	has description "Turnstile system shall track the number of people are currently in the park."
 	has governs Turnstile.
 
-HLR-1 is a REQUIREMENT
-	has identifier "LLR-1"
-	has description "CounterApplication shall verify that the data received on inflow is from InGate and is uncorrupted."
+HLR-4 is a HighLevelRequirement
+	has identifier "HLR-4"
+	has description "The Computer shall verify that the data received on inflow is from InGate and is uncorrupted."
 	has governs CounterApplication
-	satisfies IA-3
-	satisfies IA-3-1.
+	Rq:satisfies IA-3
+	Rq:satisfies IA-3-1.
 
-LLR-1 is a REQUIREMENT
-	has description "32 cry" // and something for authen
-	has satisfies HLR-1.
-	
+IN-LLR-4 is a LowLevelRequirement
+	has identifier "IN-LLR-4"
+	has description "Input Thread shall authenticate inflow interface." 
+	has governs InputThread
+	has Rq:satisfies HLR-4.
+
+IN-LLR-5 is a LowLevelRequirement
+	has identifier "IN-LLR-5"
+	has description "Input Thread shall use 32 bit decryption for data sent over inflow interface."
+	has governs InputThread 
+	has Rq:satisfies HLR-4.
+		
 // declare just the relevant CAPEC and NIST controls
 CAPEC-148 is a THREAT
 	with identifier "CAPEC-148"
@@ -110,8 +121,9 @@ DeviceAuthentication is a CONTROLSET
 
 // Now, if appropriate NIST controls have been implemented then 
 // ARCOS performers will determine that and there will be 
-// ingested data for that. Here I simply declare them in SADL.
-//Q. how do we show / prove that these controls have been implemented correctly. trace to req etc.
+// ingested data for that. 
+// These will also be tested and related to the requirements.
+// Here I simply declare them in SADL.
 ic1 is a ImplControl
 	with control IA-3
 	with dal 7.

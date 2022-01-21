@@ -34,6 +34,8 @@ description DSL into instances in the model.
               rack_ref/2,
               ns_ref/3,
               append_fld/3,
+              none/2,
+              none_of/2,
               prefix_shorten/2,
               is_owl_class/1,
               owl_list/2,
@@ -47,6 +49,11 @@ description DSL into instances in the model.
               rack_property_assert/3,
               rack_entity_instance/1,
               rack_entity_instance/3,
+              rack_data_instance/1,
+              rack_data_instance/2,
+              rack_instance_relationship/3,
+              rack_instance_relationship/4,
+              rack_instance_ident/2,
               rack_ontology_node/3,
               rdf_literal_val_type/3,
 
@@ -93,6 +100,11 @@ file_to_fpath(File, DirPath, FilePath) :-
     atom_concat(X, File, Y),
     prolog_to_os_filename(Y, FilePath).
 
+
+none(CandidateQuery, Pred) :- call(CandidateQuery, C), none_of(C, Pred).
+
+none_of(Candidate, Pred) :- call(Pred, Candidate), !, fail.
+none_of(_, _).
 
 %% ----------------------------------------------------------------------
 %% OWL data load/store
@@ -579,6 +591,62 @@ rack_entity_instance(Namespace, ClassName, InstanceURL) :-
     rack_ref(ClassName, E).
 
 % TODO: rack_activity_instance, rack_agent_instance
+
+%! rack_data_instance(-InstanceURL:atom) is nondet
+%
+% Used to return an instance of any ontology object (i.e. a THING, not
+% just an ENTITY as returned by rack_entity_instance.
+
+rack_data_instance(I) :-
+    is_owl_class(Class),
+    rack_ref('PROV-S#THING', Thing),
+    rdf_reachable(Class, rdfs:subClassOf, Thing),
+    rdf(I, rdf:type, Class).
+
+
+%! rack_data_instance(+Class:atom, -InstanceURL:atom) is nondet
+%
+% Used to return an instance of the specified class.
+
+rack_data_instance(Class, I) :-
+    rdf_reachable(C, rdfs:subClassOf, Class),
+    rdf(I, rdf:type, C).
+
+
+%! rack_instance_relationship(+SourceClass:atom, +property:atom, +TargetClass, -SourceInstance)
+%
+% For a specified relationship between a source class and target
+% class, return all instances of the source that have relationships to
+% a target (the target instance(s) is not returned and can be queried
+% separately via rdf(SourceInstance, property, TargetInstance) calls).
+
+rack_instance_relationship(SrcCls, Rel, TgtCls, SrcInst) :-
+    rdf_reachable(C, rdf:subClass, SrcCls),
+    rdf(SrcInst, rdf:type, C),
+    rdf(SrcInst, Rel, TgtInst),
+    rdf(TgtInst, rdf:type, TC),
+    rdf_reachable(TC, rdf:subClass, TgtCls).
+
+%! rack_instance_relationship(+SourceClass:atom, +property:atom, -SourceInstance)
+%
+% For a specified relationship between a source class and ANY target
+% class, return all instances of the source that have relationships to
+% a target (the target instance(s) is not returned and can be queried
+% separately via rdf(SourceInstance, property, TargetInstance) calls).
+
+rack_instance_relationship(SrcCls, Rel, SrcInst) :-
+    rdf_reachable(C, rdf:subClass, SrcCls),
+    rdf(SrcInst, rdf:type, C),
+    rdf(SrcInst, Rel, _).
+
+%! rack_instance_ident(+Instance:atom, -Identity:atom)
+%
+% Returns the PROV-S#identifier value for the specified instance
+
+rack_instance_ident(I,N) :-
+    rdf(I, 'http://arcos.rack/PROV-S#identifier', N), !.
+rack_instance_ident(_, "<no-identifier>").
+
 
 %% ----------------------------------------------------------------------
 %% Loading generated data from .rack files

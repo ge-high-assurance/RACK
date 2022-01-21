@@ -1,4 +1,4 @@
-% Copyright (c) 2020, Galois, Inc.
+% Copyright (c) 2020-2022, Galois, Inc.
 %
 % All Rights Reserved
 %
@@ -13,37 +13,6 @@
 
 :- use_module(library(semweb/rdf11)).
 :- use_module(rack(model)).
-:- use_module(checks(interfaceChecks)).
-
-check_rack :-
-    findall(IFC, check_INTERFACE(IFC), IFCS),
-    findall(C, check_missing_notes(C), CS),
-    findall(NPC, check_not_prov_s(NPC), NPCS),
-    findall(BI, check_instance_types(BI), BIS),
-    findall(MI, check_instance_property_violations(MI), MIS),
-    length(CS, CSLen),
-    length(NPCS, NPCSLen),
-    length(BIS, BISLen),
-    length(MIS, MISLen),
-    length(IFCS, IFCSLen),
-    format('~`.t Summary ~`.t~78|~n'),
-    core_ontology_size(CoreSize),
-    overlay_ontology_size(OverlaySize),
-    num_instances(InstanceCount),
-    format('Checked ~w core ontology classes, ~w overlay ontology classes, and ~w data instances~n',
-           [CoreSize, OverlaySize, InstanceCount]),
-    warn_if_nonzero("missing a Note/Description", CSLen),
-    warn_if_nonzero("not a subclass of PROV-S#THING", NPCSLen),
-    warn_if_nonzero("with instance issues", BISLen),
-    warn_if_nonzero("with instance property issues", MISLen),
-    warn_if_nonzero("with INTERFACE instance issues", IFCSLen),
-    TotalIssues is CSLen + NPCSLen + BISLen + MISLen + IFCSLen,
-    (TotalIssues == 0,
-     !,
-     format('No issues found~n')
-    ;
-    format('~w ISSUES FOUND IN CHECK~n', [TotalIssues]), halt(1)),
-    true.
 
 core_ontology_size(Size) :-
     findall(Class,
@@ -59,12 +28,6 @@ overlay_ontology_size(Size) :-
              \+ rdf_bnode(Class)),
             Classes),
     length(Classes, Size).
-
-rack_data_instance(I) :-
-    rdf(Class, rdf:type, owl:'Class'),
-    rack_ref('PROV-S#THING', Thing),
-    rdf_reachable(Class, rdfs:subClassOf, Thing),
-    rdf(I, rdf:type, Class).
 
 num_instances(Count) :-
     findall(I, rack_data_instance(I), IS),
@@ -205,6 +168,32 @@ check_invalid_value(Property, I, T) :-
     (rdf_compare(<,Val,MinVal) ; rdf_compare(>,Val,MaxVal)),
     print_message(error, value_outside_range(I, Property, RT, Val, MinVal, MaxVal)).
 
+% True for any SrcClass that has no Prop relationship to any target
+% instance.  Returns the SrcInst that this occurs for as well as
+% generating a warning.
+check_has_no_rel(SrcClass, Prop, SrcInst) :-
+    rack_data_instance(SrcClass, SrcInst),
+    none_of(SrcInst, rack_instance_relationship(SrcClass, Prop)),
+    rack_instance_ident(SrcInst, SrcName),
+    print_message(warning, missing_any_tgt(SrcClass, SrcInst, SrcName, Prop)).
+
+% True for any SrcClass that has no Prop relationship to an instance
+% of the specific target class.  Returns the SrcInst that this occurs
+% for as well as generating a warning.
+check_has_no_rel(SrcClass, Prop, TgtClass, SrcInst) :-
+    rack_data_instance(SrcClass, SrcInst),
+    none_of(SrcInst, rack_instance_relationship(SrcClass, Prop, TgtClass)),
+    rack_instance_ident(SrcInst, SrcName),
+    print_message(warning, missing_tgt(SrcClass, SrcInst, SrcName, Prop, TgtClass)),
+    % -- if the above fails, it's probably useful to see if there are
+    % *any* targets of Src--[Rel]-->
+    check_also_has_no_rel(SrcClass, Prop).
+
+check_also_has_no_rel(SrcClass, SrcInst, Rel) :-
+    check_has_no_rel(SrcClass, Rel, SrcInst), !.
+check_also_has_no_rel(_, _).
+
+
 actual_val((V^^VT),VT,(V^^VT)).  % normal
 actual_val(V,VT,Val) :-
     rdf_equal(V, VS^^(xsd:string)),
@@ -235,6 +224,15 @@ warn_if_nonzero(What, Count) :-
     Count > 0, !,
     print_message(warning, num_classes(What, Count)).
 warn_if_nonzero(_, _).
+
+warn_all_nonzero([]).
+warn_all_nonzero([(C,N)|CNS]) :- warn_if_nonzero(C,N), warn_all_nonzero(CNS).
+
+sum_all_nonzero([], 0).
+sum_all_nonzero([(_,N)|CNS], Sum) :-
+    sum_all_nonzero(CNS, SubSum),
+    Sum is N + SubSum.
+
 
 prolog:message(class_missing_note(Class)) -->
     [ 'No Note/Description for class ~w'-[Class] ].
@@ -307,3 +305,9 @@ prolog:message(property_value_wrong_type_in(Instance, Property, DefType, Val, Va
     },
     [ 'Instance property ~w . ~w of ~w should be one of ~w but is a ~w'-[
           SI, SP, SV, SVTys, SDTy ] ].
+prolog:message(missing_any_tgt(SrcClass, SrcInst, SrcIdent, Rel)) -->
+    [ '~w ~w (~w) has no ~w target relationships'-[
+          SrcClass, SrcInst, SrcIdent, Rel] ].
+prolog:message(missing_tgt(SrcClass, SrcInst, SrcIdent, Rel, TgtClass)) -->
+    [ '~w ~w (~w) missing the ~w target of type ~w'-[
+          SrcClass, SrcInst, SrcIdent, Rel, TgtClass] ].

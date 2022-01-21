@@ -35,12 +35,14 @@ num_instances(Count) :-
 
 check_missing_notes(Class) :-
     rdf(Class, rdf:type, owl:'Class'),
+    has_interesting_prefix(Class),
     \+ rdf(Class, rdfs:comment, _),
     \+ rdf_bnode(Class),
     print_message(warning, class_missing_note(Class)).
 
 check_not_prov_s(Class) :-
     rdf(Class, rdf:type, owl:'Class'),
+    has_interesting_prefix(Class),
     rack_ref('PROV-S#THING', Thing),
     \+ rdf_reachable(Class, rdfs:subClassOf, Thing),
     \+ rdf_bnode(Class),

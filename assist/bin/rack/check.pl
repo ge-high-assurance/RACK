@@ -99,6 +99,7 @@ check_instance_property_violations(Property) :-
     % Exclude namespaces we aren't interested in
     has_interesting_prefix(I),
     % Find a required property defined on that instance type (or parent type)
+    rdf(I, rdf:type, T),
     (check_cardinality_exact(Property, I, T);
      check_cardinality_min(Property, I, T);
      check_cardinality_max(Property, I, T);

@@ -224,8 +224,7 @@ has_interesting_prefix(I) :-
     member(Pfx, [ 'http://sadl.org/',
                   'http://com.ge.research/',
                   'http://demo/',
-                  'http://research.ge.com/',
-                  'http://semtk.research.ge.com/'
+                  'http://research.ge.com/'
                 ]),
     atom_concat(Pfx, _Local, I), !, fail.
 has_interesting_prefix(_).

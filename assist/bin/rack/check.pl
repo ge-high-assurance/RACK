@@ -13,8 +13,10 @@
 
 :- use_module(library(semweb/rdf11)).
 :- use_module(rack(model)).
+:- use_module(checks(interfaceChecks)).
 
 check_rack :-
+    findall(IFC, check_INTERFACE(IFC), IFCS),
     findall(C, check_missing_notes(C), CS),
     findall(NPC, check_not_prov_s(NPC), NPCS),
     findall(BI, check_instance_types(BI), BIS),
@@ -23,13 +25,19 @@ check_rack :-
     length(NPCS, NPCSLen),
     length(BIS, BISLen),
     length(MIS, MISLen),
+    length(IFCS, IFCSLen),
     format('~`.t Summary ~`.t~78|~n'),
     warn_if_nonzero("missing a Note/Description", CSLen),
     warn_if_nonzero("not a subclass of PROV-S#THING", NPCSLen),
     warn_if_nonzero("with instance issues", BISLen),
     warn_if_nonzero("with instance property issues", MISLen),
-    (CSLen == 0, NPCSLen == 0, BISLen == 0, MISLen == 0, !,
-     format('No issues found~n') ; format('ISSUES FOUND IN CHECK~n'), halt(1)),
+    warn_if_nonzero("with INTERFACE instance issues", IFCSLen),
+    TotalIssues = CSLen + NPCSLen + BISLen + MISLen + IFCSLen,
+    (TotalIssues == 0,
+     !,
+     format('No issues found~n')
+    ;
+    format('ISSUES FOUND IN CHECK~n'), halt(1)),
     true.
 
 check_missing_notes(Class) :-

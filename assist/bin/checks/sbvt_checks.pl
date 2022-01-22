@@ -40,5 +40,5 @@ check_no_Test_requirement(I) :-
 %
 %    Performs all checks for SBVT classes.  Always succeeds, emits warnings.
 check_SBVT(SBVT) :-
-    check_Result_not_confirmed(SBVT).
-    %% check_no_Test_requirement(SBVT).
+    check_Result_not_confirmed(SBVT);
+    check_no_Test_requirement(SBVT).

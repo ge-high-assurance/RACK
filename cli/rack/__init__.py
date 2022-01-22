@@ -100,6 +100,17 @@ INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
                         'additionalProperties': False,
                         'required': ['owl'],
                         'properties': {'owl': {'type': 'string'}}
+                    },
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        'required': ['name', 'creator', 'nodegroup_json'],
+                        'properties': {
+                            'name': {'type': 'string'},
+                            'creator': {'type': 'string'},
+                            'comment': {'type': 'string'},
+                            'nodegroup_json': {'type': 'string'}
+                        }
                     }
                 ]
             }
@@ -330,6 +341,20 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
             print(str_good(' OK'))
         elif 'csv' in step:
             ingest_csv(conn, step['nodegroup'], base_path / step['csv'])
+        elif 'nodegroup_json' in step:
+            with open(base_path / step['nodegroup_json']) as f:
+                nodegroup_json_str = f.read()
+            name = step['name']
+            comment = step.get('comment', '')
+            creator = step['creator']
+            print(f'Adding nodegroup {str_highlight(name): <40}', end="")
+            try:
+                semtk3.delete_nodegroup_from_store(name) # succeeds even if not found
+                semtk3.store_nodegroup(name, comment, creator, nodegroup_json_str)
+            except Exception as e:
+                print(str_bad(' FAIL'))
+                raise e
+            print(str_good(' OK'))
 
 def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple OWL files into the model graph."""

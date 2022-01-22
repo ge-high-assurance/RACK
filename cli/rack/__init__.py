@@ -111,6 +111,16 @@ INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
                             'comment': {'type': 'string'},
                             'nodegroup_json': {'type': 'string'}
                         }
+                    },
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        'required': ['count', 'nodegroup'],
+                        'properties': {
+                            'count': {'type': 'number'},
+                            'nodegroup': {'type': 'string'},
+                            'constraints': {'type': 'array', 'items': { 'type': 'string'} }
+                        }
                     }
                 ]
             }
@@ -330,6 +340,7 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
         clear_graph(conn)
 
     for step in steps:
+
         if 'owl' in step:
             owl_file = step['owl']
             print(f'Ingesting {str_highlight(str(owl_file)): <40}', end="")
@@ -339,8 +350,10 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
                 print(str_bad(' FAIL'))
                 raise e
             print(str_good(' OK'))
+
         elif 'csv' in step:
             ingest_csv(conn, step['nodegroup'], base_path / step['csv'])
+
         elif 'nodegroup_json' in step:
             with open(base_path / step['nodegroup_json']) as f:
                 nodegroup_json_str = f.read()
@@ -355,6 +368,21 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
                 print(str_bad(' FAIL'))
                 raise e
             print(str_good(' OK'))
+        
+        elif 'count' in step:
+            expected = step['count']
+            name = step['nodegroup']
+            runtime_constraints = generate_constraints(step.get('constraints', []))
+            
+            print(f'Counting nodegroup {str_highlight(name): <40}', end="")
+
+            semtk_table = semtk3.count_by_id(name, runtime_constraints=runtime_constraints)
+            got = int(semtk_table.get_rows()[0][0])
+            if got == expected:
+                print(str_good(' OK'))
+            else:
+                print(str_bad(f' FAIL got:{got} expected:{expected}'))
+
 
 def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple OWL files into the model graph."""

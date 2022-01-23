@@ -65,13 +65,15 @@ check_instance_property_violations(Property) :-
     has_interesting_prefix(I),
     % Find a required property defined on that instance type (or parent type)
     rdf(I, rdf:type, T),
-    (check_cardinality_exact(Property, I, T);
-     check_cardinality_min(Property, I, T);
-     check_cardinality_max(Property, I, T);
-     check_maybe_prop(Property, I, T);
-     check_target_type(Property, I, T);
-     check_values_from(Property, I, T);
-     check_invalid_value(Property, I, T)).
+    ( check_cardinality_exact(Property, I, T)
+    ; check_cardinality_min(Property, I, T)
+    ; check_cardinality_max(Property, I, T)
+    ; check_maybe_prop(Property, I, T)
+    ; check_target_type(Property, I, T),
+    ; check_target_type_restrictions(Property, I, T)
+    ; check_values_from(Property, I, T)
+    ; check_invalid_value(Property, I, T)
+    ).
 
 check_cardinality_exact(Property, I, T) :-
     property_target(T, Property, _PUsage, cardinality(N)),
@@ -126,6 +128,25 @@ check_target_type(Property, I, T) :-
     \+ rdf_reachable(DefTy, rdfs:subClassOf, Target),
     rack_instance_ident(I, IName),
     print_message(error, property_value_wrong_type(I, IName, Property, DefTy, Val, Target)).
+
+check_target_type_restrictions(Property, I, T) :-
+    rdf(T, rdfs:subClassOf, R),
+    rdf_is_bnode(R),
+    rdf(R, rdf:type, owl:'Restriction'),
+    rdf(R, owl:'onProperty', Property),
+    has_interesting_prefix(Property),
+    rdf(R, owl:'allValuesFrom', RTgtTy),
+    rdf(I, Property, Val),
+    rack_instance_ident(I, IName),
+    \+ rdf_is_literal(Val),
+    rdf(Val, rdf:type, ValTy),
+    ( owl_list(RTgtTy, TyLst),
+      \+ member(ValTy, TyLst),
+      print_message(error, property_value_wrong_type(I, IName, Property, ValTy, Val, 'TyLst'))
+    ; \+ owl_list(RTgtTy, _),
+      ValTy \= RTgtTy,
+        print_message(error, property_value_wrong_type(I, IName, Property, ValTy, Val, RTgtTy))
+    ).
 
 check_values_from(Property, I, T) :-
     property_target(T, Property, _PUsage, value_from(Cls)),

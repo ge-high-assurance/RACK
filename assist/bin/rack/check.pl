@@ -69,7 +69,7 @@ check_instance_property_violations(Property) :-
     ; check_cardinality_min(Property, I, T)
     ; check_cardinality_max(Property, I, T)
     ; check_maybe_prop(Property, I, T)
-    ; check_target_type(Property, I, T),
+    ; check_target_type(Property, I, T)
     ; check_target_type_restrictions(Property, I, T)
     ; check_values_from(Property, I, T)
     ; check_invalid_value(Property, I, T)

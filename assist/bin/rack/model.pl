@@ -485,7 +485,7 @@ property_target(Class, Property, PropUsage, Restrictions) :-
 % For Cardinality information, see: https://w3.org/2001/sw/BestPratices/OEP/QCR
 
 property_extra(Class, Property, cardinality(N)) :-
-    rdf(Class, rdfs:subClassOf, B),
+    rdf_reachable(Class, rdfs:subClassOf, B),
     rdf_bnode(B),
     rdf(B, owl:onProperty, Property),
     rdf(B, rdf:type, owl:'Restriction'), !,
@@ -495,14 +495,14 @@ property_extra(Class, Property, cardinality(N)) :-
 property_extra(_Class, Property, maybe) :-
     rdf(Property, rdf:type, owl:'FunctionalProperty'), !.
 property_extra(Class, Property, min_cardinality(N)) :-
-    rdf(Class, rdfs:subClassOf, B),
+    rdf_reachable(Class, rdfs:subClassOf, B),
     rdf_bnode(B),
     rdf(B, owl:onProperty, Property),
     rdf(B, rdf:type, owl:'Restriction'), !,
     (rdf(B, owl:minCardinality, I), rdf_literal(I), rdf_numeric(I, N) ;
      rdf(B, owl:someValuesFrom, _T), N == 1).
 property_extra(Class, Property, max_cardinality(N)) :-
-    rdf(Class, rdfs:subClassOf, B),
+    rdf_reachable(Class, rdfs:subClassOf, B),
     rdf_bnode(B),
     rdf(B, owl:onProperty, Property),
     rdf(B, rdf:type, owl:'Restriction'), !,
@@ -619,11 +619,11 @@ rack_data_instance(Class, I) :-
 % separately via rdf(SourceInstance, property, TargetInstance) calls).
 
 rack_instance_relationship(SrcCls, Rel, TgtCls, SrcInst) :-
-    rdf_reachable(C, rdf:subClass, SrcCls),
+    rdf_reachable(C, rdfs:subClassOf, SrcCls),
     rdf(SrcInst, rdf:type, C),
     rdf(SrcInst, Rel, TgtInst),
     rdf(TgtInst, rdf:type, TC),
-    rdf_reachable(TC, rdf:subClass, TgtCls).
+    rdf_reachable(TC, rdfs:subClassOf, TgtCls).
 
 %! rack_instance_relationship(+SourceClass:atom, +property:atom, -SourceInstance)
 %
@@ -633,7 +633,7 @@ rack_instance_relationship(SrcCls, Rel, TgtCls, SrcInst) :-
 % separately via rdf(SourceInstance, property, TargetInstance) calls).
 
 rack_instance_relationship(SrcCls, Rel, SrcInst) :-
-    rdf_reachable(C, rdf:subClass, SrcCls),
+    rdf_reachable(C, rdfs:subClassOf, SrcCls),
     rdf(SrcInst, rdf:type, C),
     rdf(SrcInst, Rel, _).
 

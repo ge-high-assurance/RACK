@@ -22,6 +22,9 @@
 %
 %    Checks that no INTERFACE is lacking a destination SYSTEM.
 %    Always succeeds, emits warnings.
+%
+% Similar to "nodegroups/query/query dataVer INTERFACE without destination SYSTEM.json"
+%
 check_INTERFACE_no_dest_SYSTEM(IFACE) :-
     check_has_no_rel('http://arcos.rack/SYSTEM#INTERFACE',
                      'http://arcos.rack/SYSTEM#destination',
@@ -32,6 +35,9 @@ check_INTERFACE_no_dest_SYSTEM(IFACE) :-
 %
 %    Checks that no INTERFACE is lacking a source SYSTEM.
 %    Always succeeds, emits warnings.
+%
+% Similar to "nodegroups/query/query dataVer INTERFACE without source SYSTEM.json"
+%
 check_INTERFACE_no_src_SYSTEM(IFACE) :-
     check_has_no_rel('http://arcos.rack/SYSTEM#INTERFACE',
                      'http://arcos.rack/SYSTEM#source',

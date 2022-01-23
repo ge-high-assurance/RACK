@@ -479,6 +479,17 @@ property_target(Class, Property, PropUsage, Restrictions) :-
     property(SrcCls, Property, PropUsage),
     property_extra(Class, Property, Restrictions).
 
+% If there is a restriction for this property, this will be true and
+% return the restriction node.
+
+property_restriction(Class, Property, RestrictionNode) :-
+    rdf_reachable(Class, rdfs:subClassOf, B),
+    rdf_is_bnode(B),
+    rdf(B, owl:onProperty, Property),
+    rdf(B, rdf:type, owl:'Restriction'),
+    RestrictionNode = B.
+
+
 % Various recognizers used by property_target to translate RDF
 % relation restrictions into an identified local restriction type like
 % "cardinality(N)", "maybe", "normal", etc.
@@ -486,35 +497,23 @@ property_target(Class, Property, PropUsage, Restrictions) :-
 % For Cardinality information, see: https://w3.org/2001/sw/BestPratices/OEP/QCR
 
 property_extra(Class, Property, cardinality(N)) :-
-    rdf_reachable(Class, rdfs:subClassOf, B),
-    rdf_is_bnode(B),
-    rdf(B, owl:onProperty, Property),
-    rdf(B, rdf:type, owl:'Restriction'),
+    property_restriction(Class, Property, B),
     rdf(B, owl:cardinality, I),
     rdf_literal(I),
     rdf_numeric(I, N).
 property_extra(_Class, Property, maybe) :-
     rdf(Property, rdf:type, owl:'FunctionalProperty'), !.
 property_extra(Class, Property, min_cardinality(N)) :-
-    rdf_reachable(Class, rdfs:subClassOf, B),
-    rdf_is_bnode(B),
-    rdf(B, owl:onProperty, Property),
-    rdf(B, rdf:type, owl:'Restriction'),
+    property_restriction(Class, Property, B),
     (rdf(B, owl:minCardinality, I), rdf_literal(I), rdf_numeric(I, N) ;
      rdf(B, owl:someValuesFrom, _T), N == 1).
 property_extra(Class, Property, max_cardinality(N)) :-
-    rdf_reachable(Class, rdfs:subClassOf, B),
-    rdf_is_bnode(B),
-    rdf(B, owl:onProperty, Property),
-    rdf(B, rdf:type, owl:'Restriction'),
+    property_restriction(Class, Property, B),
     rdf(B, owl:maxCardinality, I),
     rdf_literal(I),
     rdf_numeric(I, N).
 property_extra(Class, Property, value_from(Cls)) :-
-    rdf(Class, rdfs:subClassOf, B),
-    rdf_is_bnode(B),
-    rdf(B, owl:onProperty, Property),
-    rdf(B, rdf:type, owl:'Restriction'),
+    property_restriction(Class, Property, B),
     rdf(B, owl:someValuesFrom, Cls).
 property_extra(_Class, _Property, normal).
 

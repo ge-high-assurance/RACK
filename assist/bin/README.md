@@ -337,21 +337,23 @@ build tools can use a similar technique.
 The following data is collected for processing a moderately large code
 base (turnstile + ffmpeg) and a very large codebase.
 
- | Codebase         | Tool    | Runtime | Notes                                                |
- |------------------|---------|---------|------------------------------------------------------|
- | moderately large | ingest  | 9m30s   | Saved 38,880 triples about 6,649 subjects            |
- |                  | -       |         |                                                      |
- |                  | analyze | 12.2s   | 1,878 `http://arcos.rack/SOFTWARE#COMPILE` instances |
- |                  |         |         | 4,756 `http://arcos.rack/SOFTWARE#FILE` instances    |
- |                  |         |         | 9     `http://arcos.rack/PROV-S#ACTIVITY` instances  |
- |------------------|---------|---------|------------------------------------------------------|
- | huge             | ingest  | 14m7s   | Saved 455,231 triples about 89,945 subjects          |
- |                  | -       |         |                                                      |
- |                  | analyze | 15m36s  | 1,880 `http://arcos.rack/SOFTWARE#COMPILE` instances |
- |                  |         |         | 88,049 `http://arcos.rack/SOFTWARE#FILE` instances   |
+ | Codebase         | Tool    | Runtime | Notes                                                               |
+ |------------------|---------|---------|---------------------------------------------------------------------|
+ | moderately large | ingest  | 9m30s   | Saved 38,880 triples about 6,649 subjects                           |
+ |                  | -       |         |                                                                     |
+ |                  | analyze | 12.2s   | 1,878 `http://arcos.rack/SOFTWARE#COMPILE` instances                |
+ |                  |         |         | 4,756 `http://arcos.rack/SOFTWARE#FILE` instances                   |
+ |                  |         |         | 9     `http://arcos.rack/PROV-S#ACTIVITY` instances                 |
+ |------------------|---------|---------|---------------------------------------------------------------------|
+ | large            | check   | 33.6s   | 69 core ontology classes, 120 overlay classes, 75583 data instances |
+ |------------------|---------|---------|---------------------------------------------------------------------|
+ | huge             | ingest  | 14m7s   | Saved 455,231 triples about 89,945 subjects                         |
+ |                  | -       |         |                                                                     |
+ |                  | analyze | 15m36s  | 1,880 `http://arcos.rack/SOFTWARE#COMPILE` instances                |
+ |                  |         |         | 88,049 `http://arcos.rack/SOFTWARE#FILE` instances                  |
 
 ---
-Copyright (c) 2020, Galois, Inc.
+Copyright (c) 2020-2022, Galois, Inc.
 
 All Rights Reserved
 

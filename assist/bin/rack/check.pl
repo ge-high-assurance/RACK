@@ -271,7 +271,7 @@ prolog:message(class_missing_note(Class)) -->
 prolog:message(not_prov_s_thing_class(Class)) -->
     [ 'Not a subclass of PROV-S#THING: ~w'-[Class] ].
 prolog:message(num_classes(What, Count)) -->
-    [ 'There are ~:d RACK definitions ~w.'-[Count, What] ].
+    [ 'There are ~:d RACK ~w.'-[Count, What] ].
 prolog:message(cardinality_violation(InstType, Instance, InstanceIdent, Property, Specified, Actual)) -->
     { prefix_shorten(Instance, SI),
       prefix_shorten(InstType, ST),

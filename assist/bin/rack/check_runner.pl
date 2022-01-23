@@ -47,13 +47,13 @@ check_each_with(CheckFun, NFail) :-
 % Oh this will be fun.
 % Run fun, run.
 % Oh when will we be done.
-runnable_check("missing a Note/Description", Num) :-
+runnable_check("definitions missing a Note/Description", Num) :-
     check_each_with(check_missing_notes, Num).
-runnable_check("not a subclass of PROV-S#THING", Num) :-
+runnable_check("definitions not a subclass of PROV-S#THING", Num) :-
     check_each_with(check_not_prov_s, Num).
-runnable_check("with instance type issues", Num) :-
+runnable_check("instance type issues", Num) :-
     check_each_with(check_instance_types, Num).
-runnable_check("with instance property issues", Num) :-
+runnable_check("instance property issues", Num) :-
     check_each_with(check_instance_property_violations, Num).
 runnable_check("INTERFACE issues", Num) :- check_each_with(check_INTERFACE, Num).
 runnable_check("SBVT issues",      Num) :- check_each_with(check_SBVT,      Num).

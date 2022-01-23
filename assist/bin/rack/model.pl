@@ -486,7 +486,7 @@ property_target(Class, Property, PropUsage, Restrictions) :-
 
 property_extra(Class, Property, cardinality(N)) :-
     rdf_reachable(Class, rdfs:subClassOf, B),
-    rdf_bnode(B),
+    rdf_is_bnode(B),
     rdf(B, owl:onProperty, Property),
     rdf(B, rdf:type, owl:'Restriction'),
     rdf(B, owl:cardinality, I),
@@ -496,14 +496,14 @@ property_extra(_Class, Property, maybe) :-
     rdf(Property, rdf:type, owl:'FunctionalProperty'), !.
 property_extra(Class, Property, min_cardinality(N)) :-
     rdf_reachable(Class, rdfs:subClassOf, B),
-    rdf_bnode(B),
+    rdf_is_bnode(B),
     rdf(B, owl:onProperty, Property),
     rdf(B, rdf:type, owl:'Restriction'),
     (rdf(B, owl:minCardinality, I), rdf_literal(I), rdf_numeric(I, N) ;
      rdf(B, owl:someValuesFrom, _T), N == 1).
 property_extra(Class, Property, max_cardinality(N)) :-
     rdf_reachable(Class, rdfs:subClassOf, B),
-    rdf_bnode(B),
+    rdf_is_bnode(B),
     rdf(B, owl:onProperty, Property),
     rdf(B, rdf:type, owl:'Restriction'),
     rdf(B, owl:maxCardinality, I),

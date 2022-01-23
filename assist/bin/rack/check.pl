@@ -25,7 +25,7 @@ overlay_ontology_size(Size) :-
     findall(Class,
             (rdf(Class, rdf:type, owl:'Class'),
              \+ rack_ontology_node(Class, _, _),
-             \+ rdf_bnode(Class)),
+             \+ rdf_is_bnode(Class)),
             Classes),
     length(Classes, Size).
 
@@ -37,7 +37,7 @@ check_missing_notes(Class) :-
     rdf(Class, rdf:type, owl:'Class'),
     has_interesting_prefix(Class),
     \+ rdf(Class, rdfs:comment, _),
-    \+ rdf_bnode(Class),
+    \+ rdf_is_bnode(Class),
     print_message(warning, class_missing_note(Class)).
 
 check_not_prov_s(Class) :-
@@ -45,7 +45,7 @@ check_not_prov_s(Class) :-
     has_interesting_prefix(Class),
     rack_ref('PROV-S#THING', Thing),
     \+ rdf_reachable(Class, rdfs:subClassOf, Thing),
-    \+ rdf_bnode(Class),
+    \+ rdf_is_bnode(Class),
     print_message(warning, not_prov_s_thing_class(Class)).
 
 check_instance_types(I) :-
@@ -134,7 +134,7 @@ check_values_from(Property, I, T) :-
     DefTy \= Cls,
     rack_instance_ident(I, IName),
     % Cls might be a direct type or a oneOf restriction to a list of types
-    ( rdf_bnode(Cls), rdf(Cls, owl:oneOf, ClsLst), !,
+    ( rdf_is_bnode(Cls), rdf(Cls, owl:oneOf, ClsLst), !,
       rdf_list(ClsLst, CList),
       ( member(CL, CList),
         rdf_reachable(DefTy, rdfs:subClassOf, CL), !  % matches, stop processing

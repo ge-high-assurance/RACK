@@ -312,7 +312,7 @@ is_owl_class(E) :-
 
 owl_list(B, PL) :-
     is_owl_class(B),
-    rdf_bnode(B),
+    rdf_is_bnode(B),
     rdf_literal(B),
     rdf(B,owl:unionOf,L),
     rdf_list(L),
@@ -344,7 +344,7 @@ rack_ontology_node(Node, Area, Item) :-
 entity(E) :-
     is_owl_class(E),
     rdf(E, rdfs:subClassOf, rack:'PROV-S#ENTITY'),
-    \+ rdf_bnode(E).
+    \+ rdf_is_bnode(E).
 
 %! entity(?Entity:atom, -Comment:atom)
 %
@@ -514,7 +514,7 @@ property_extra(Class, Property, _Target, max_cardinality(N)) :-
     rdf_numeric(I, N).
 property_extra(Class, Property, _Target, value_from(Cls)) :-
     rdf(Class, rdfs:subClassOf, B),
-    rdf_bnode(B),
+    rdf_is_bnode(B),
     rdf(B, owl:onProperty, Property),
     rdf(B, rdf:type, owl:'Restriction'), !,
     rdf(B, owl:someValuesFrom, Cls).

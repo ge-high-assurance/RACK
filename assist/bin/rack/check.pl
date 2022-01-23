@@ -74,7 +74,7 @@ check_instance_property_violations(Property) :-
      check_invalid_value(Property, I, T)).
 
 check_cardinality_exact(Property, I, T) :-
-    property_target(T, Property, _PUsage, _Target, cardinality(N)),
+    property_target(T, Property, _PUsage, cardinality(N)),
     has_interesting_prefix(Property),
     % How many actual values for that property on this instance
     findall(V, rdf(I, Property, V), VS),
@@ -84,7 +84,7 @@ check_cardinality_exact(Property, I, T) :-
     print_message(error, cardinality_violation(I, IName, Property, N, VSLen)).
 
 check_cardinality_min(Property, I, T) :-
-    property_target(T, Property, _PUsage, _Target, min_cardinality(N)),
+    property_target(T, Property, _PUsage, min_cardinality(N)),
     has_interesting_prefix(Property),
     % How many actual values for that property on this instance
     findall(V, rdf(I, Property, V), VS),
@@ -94,7 +94,7 @@ check_cardinality_min(Property, I, T) :-
     print_message(error, min_cardinality_violation(I, IName, Property, N, VSLen)).
 
 check_cardinality_max(Property, I, T) :-
-    property_target(T, Property, _PUsage, _Target, max_cardinality(N)),
+    property_target(T, Property, _PUsage, max_cardinality(N)),
     has_interesting_prefix(Property),
     % How many actual values for that property on this instance
     findall(V, rdf(I, Property, V), VS),
@@ -104,7 +104,7 @@ check_cardinality_max(Property, I, T) :-
     print_message(error, max_cardinality_violation(I, IName, Property, N, VSLen)).
 
 check_maybe_prop(Property, I, T) :-
-    property_target(T, Property, _PUsage, _Target, maybe),
+    property_target(T, Property, _PUsage, maybe),
     has_interesting_prefix(Property),
     % How many actual values for that property on this instance
     findall(V, rdf(I, Property, V), VS),
@@ -126,7 +126,7 @@ check_target_type(Property, I, T) :-
     print_message(error, property_value_wrong_type(I, IName, Property, DefTy, Val, Target)).
 
 check_values_from(Property, I, T) :-
-    property_target(T, Property, _PUsage, _Target, value_from(Cls)),
+    property_target(T, Property, _PUsage, value_from(Cls)),
     has_interesting_prefix(Property),
     rdf(I, Property, Val),
     \+ rdf_is_literal(Val),  % TODO check these as well?
@@ -146,7 +146,7 @@ check_values_from(Property, I, T) :-
     ).
 
 check_invalid_value(Property, I, T) :-
-    property_target(T, Property, _PUsage, _Target, _Restr),
+    property_target(T, Property, _PUsage, _Restr),
     has_interesting_prefix(Property),
     rdf(I, Property, V),
     \+ rdf_is_literal(V),  % literals checked elsewhere
@@ -159,7 +159,7 @@ check_invalid_value(Property, I, T) :-
     print_message(error, invalid_value_in_enum(I, IName, Property, V, L)).
 
 check_invalid_value(Property, I, T) :-
-    property_target(T, Property, _PUsage, _Target, _Restr),
+    property_target(T, Property, _PUsage, _Restr),
     has_interesting_prefix(Property),
     rdf(I, Property, V),
     rdf_is_literal(V),  % non-literals handled elsewhere

@@ -43,7 +43,7 @@ description DSL into instances in the model.
               entity/2,
               ontology_leaf_class/1,
               property/3,
-              property_target/5,
+              property_target/4,
               rack_instance/2,
               rack_instance_assert/2,
               rack_property_assert/3,
@@ -460,9 +460,11 @@ property(Class, Property, shared) :-
     rdf_list(DomainList, Classes),
     member(Class, Classes).
 
-%! property_target(+Class, ?Property, -PropUsage, -Target, -Restrictions) is multi.
+%! property_target(+Class, ?Property, -PropUsage, -Restrictions) is multi.
 %
-%   Used to retrieve a Property and Target object for a Class.
+%   Used to retrieve a primary Property and Target object for a Class.
+%   This will _not_ return any bnode properties that specify
+%   restrictions or other internal information.
 %
 %   The PropUsage will be either =unique= or =shared= to indicate if
 %   this Property is shared with another Class.
@@ -471,14 +473,10 @@ property(Class, Property, shared) :-
 %   =canonical(-Value:Int)= to specify a canonical constraint on the
 %   property instances.
 
-property_target(Class, Property, PropUsage, Target, Restrictions) :-
-    property(Class, Property, PropUsage),
-    rdf(Property, rdfs:range, Target),
-    \+ rdf_is_bnode(Target),
-    property_extra(Class, Property, Target, Restrictions).
-property_target(Class, Property, PropUsage, Target, Restrictions) :-
-    rdf(Class, rdfs:subClassOf, Parent),
-    property_target(Parent, Property, PropUsage, Target, Restrictions).
+property_target(Class, Property, PropUsage, Restrictions) :-
+    rdf_reachable(Class, rdfs:subClassOf, SrcCls),
+    property(SrcCls, Property, PropUsage),
+    property_extra(Class, Property, Restrictions).
 
 % Various recognizers used by property_target to translate RDF
 % relation restrictions into an identified local restriction type like
@@ -486,7 +484,7 @@ property_target(Class, Property, PropUsage, Target, Restrictions) :-
 %
 % For Cardinality information, see: https://w3.org/2001/sw/BestPratices/OEP/QCR
 
-property_extra(Class, Property, _Target, cardinality(N)) :-
+property_extra(Class, Property, cardinality(N)) :-
     rdf(Class, rdfs:subClassOf, B),
     rdf_bnode(B),
     rdf(B, owl:onProperty, Property),
@@ -494,17 +492,16 @@ property_extra(Class, Property, _Target, cardinality(N)) :-
     rdf(B, owl:cardinality, I),
     rdf_literal(I),
     rdf_numeric(I, N).
-property_extra(_Class, Property, _Target, maybe) :-
+property_extra(_Class, Property, maybe) :-
     rdf(Property, rdf:type, owl:'FunctionalProperty'), !.
-property_extra(_Class, _Property, _Target, normal).
-property_extra(Class, Property, _Target, min_cardinality(N)) :-
+property_extra(Class, Property, min_cardinality(N)) :-
     rdf(Class, rdfs:subClassOf, B),
     rdf_bnode(B),
     rdf(B, owl:onProperty, Property),
     rdf(B, rdf:type, owl:'Restriction'), !,
     (rdf(B, owl:minCardinality, I), rdf_literal(I), rdf_numeric(I, N) ;
      rdf(B, owl:someValuesFrom, _T), N == 1).
-property_extra(Class, Property, _Target, max_cardinality(N)) :-
+property_extra(Class, Property, max_cardinality(N)) :-
     rdf(Class, rdfs:subClassOf, B),
     rdf_bnode(B),
     rdf(B, owl:onProperty, Property),
@@ -512,12 +509,13 @@ property_extra(Class, Property, _Target, max_cardinality(N)) :-
     rdf(B, owl:maxCardinality, I),
     rdf_literal(I),
     rdf_numeric(I, N).
-property_extra(Class, Property, _Target, value_from(Cls)) :-
+property_extra(Class, Property, value_from(Cls)) :-
     rdf(Class, rdfs:subClassOf, B),
     rdf_is_bnode(B),
     rdf(B, owl:onProperty, Property),
     rdf(B, rdf:type, owl:'Restriction'), !,
     rdf(B, owl:someValuesFrom, Cls).
+property_extra(_Class, _Property, normal).
 
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:int).
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:integer).

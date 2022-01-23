@@ -1,4 +1,4 @@
-% Copyright (c) 2020, Galois, Inc.
+% Copyright (c) 2022, Galois, Inc.
 %
 % All Rights Reserved
 %
@@ -45,13 +45,15 @@ check_Result_not_confirmed(I) :-
 % ENTITY.  Here, there is a higher-level semantic assertion that an
 % SBVT_Test must "verifies" a REQUIREMENT.
 %
-% Similar to "nodegroups/query/query dataVer SBVT_Test without
-% REQUIREMENT.json"
+% Similar to "nodegroups/query/query dataVer SBVT_Test without REQUIREMENT.json"
+% and "nodegroups/query/query dataVer SRS_Req without verifies SBVT_Test.json"
+% where the latter additionally qualifies the target of the former.
 %
 check_no_Test_requirement(I) :-
     check_has_no_rel('http://arcos.AH-64D/Boeing#SBVT_Test',
                      'http://arcos.rack/TESTING#verifies',
-                     'http://arcos.rack/REQUIREMENTS#REQUIREMENT',
+                     'http://arcos.AH-64D/Boeing#SRS_Req',
+                     %% 'http://arcos.rack/REQUIREMENTS#REQUIREMENT',
                      I).
 
 %! check_SBVT is det.

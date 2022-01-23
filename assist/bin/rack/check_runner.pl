@@ -15,6 +15,8 @@
 :- use_module(checks(interfaceChecks)).
 :- use_module(checks(sbvt_checks)).
 :- use_module(checks(srs_checks)).
+:- use_module(checks(system_checks)).
+:- use_module(checks(software_checks)).
 
 
 run_checks :-
@@ -56,3 +58,5 @@ runnable_check("with instance property issues", Num) :-
 runnable_check("INTERFACE issues", Num) :- check_each_with(check_INTERFACE, Num).
 runnable_check("SBVT issues",      Num) :- check_each_with(check_SBVT,      Num).
 runnable_check("SRS issues",       Num) :- check_each_with(check_SRS,       Num).
+runnable_check("SYSTEM issues",    Num) :- check_each_with(check_SYSTEM,    Num).
+runnable_check("SOFTWARE issues",  Num) :- check_each_with(check_SOFTWARE,  Num).

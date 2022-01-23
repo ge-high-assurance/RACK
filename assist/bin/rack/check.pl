@@ -117,6 +117,8 @@ check_maybe_prop(Property, I, T) :-
 check_target_type(Property, I, T) :-
     property_target(T, Property, _PUsage, Target, _Restr),
     has_interesting_prefix(Property),
+    rdf(Property, rdfs:range, TTy),
+    rdf_reachable(Target, rdfs:subClassOf, TTy),
     rdf(I, Property, Val),
     \+ rdf_is_literal(Val),  % TODO check these as well?
     rdf(Val, rdf:type, DefTy),

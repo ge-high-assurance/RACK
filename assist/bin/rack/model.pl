@@ -34,6 +34,8 @@ description DSL into instances in the model.
               rack_ref/2,
               ns_ref/3,
               append_fld/3,
+              none/2,
+              none_of/2,
               prefix_shorten/2,
               is_owl_class/1,
               owl_list/2,
@@ -41,12 +43,18 @@ description DSL into instances in the model.
               entity/2,
               ontology_leaf_class/1,
               property/3,
-              property_target/5,
+              property_target/4,
+              property_extra/3,
               rack_instance/2,
               rack_instance_assert/2,
               rack_property_assert/3,
               rack_entity_instance/1,
               rack_entity_instance/3,
+              rack_data_instance/1,
+              rack_data_instance/2,
+              rack_instance_relationship/3,
+              rack_instance_relationship/4,
+              rack_instance_ident/2,
               rack_ontology_node/3,
               rdf_literal_val_type/3,
 
@@ -93,6 +101,9 @@ file_to_fpath(File, DirPath, FilePath) :-
     atom_concat(X, File, Y),
     prolog_to_os_filename(Y, FilePath).
 
+
+none_of(Candidate, Pred) :- call(Pred, Candidate), !, fail.
+none_of(_, _).
 
 %% ----------------------------------------------------------------------
 %% OWL data load/store
@@ -300,7 +311,7 @@ is_owl_class(E) :-
 
 owl_list(B, PL) :-
     is_owl_class(B),
-    rdf_bnode(B),
+    rdf_is_bnode(B),
     rdf_literal(B),
     rdf(B,owl:unionOf,L),
     rdf_list(L),
@@ -332,7 +343,7 @@ rack_ontology_node(Node, Area, Item) :-
 entity(E) :-
     is_owl_class(E),
     rdf(E, rdfs:subClassOf, rack:'PROV-S#ENTITY'),
-    \+ rdf_bnode(E).
+    \+ rdf_is_bnode(E).
 
 %! entity(?Entity:atom, -Comment:atom)
 %
@@ -448,9 +459,11 @@ property(Class, Property, shared) :-
     rdf_list(DomainList, Classes),
     member(Class, Classes).
 
-%! property_target(+Class, ?Property, -PropUsage, -Target, -Restrictions) is multi.
+%! property_target(+Class, ?Property, -PropUsage, -Restrictions) is multi.
 %
-%   Used to retrieve a Property and Target object for a Class.
+%   Used to retrieve a primary Property and Target object for a Class.
+%   This will _not_ return any bnode properties that specify
+%   restrictions or other internal information.
 %
 %   The PropUsage will be either =unique= or =shared= to indicate if
 %   this Property is shared with another Class.
@@ -459,14 +472,21 @@ property(Class, Property, shared) :-
 %   =canonical(-Value:Int)= to specify a canonical constraint on the
 %   property instances.
 
-property_target(Class, Property, PropUsage, Target, Restrictions) :-
-    property(Class, Property, PropUsage),
-    rdf(Property, rdfs:range, Target),
-    \+ rdf_is_bnode(Target),
-    property_extra(Class, Property, Target, Restrictions).
-property_target(Class, Property, PropUsage, Target, Restrictions) :-
-    rdf(Class, rdfs:subClassOf, Parent),
-    property_target(Parent, Property, PropUsage, Target, Restrictions).
+property_target(Class, Property, PropUsage, Restrictions) :-
+    rdf_reachable(Class, rdfs:subClassOf, SrcCls),
+    property(SrcCls, Property, PropUsage),
+    property_extra(Class, Property, Restrictions).
+
+% If there is a restriction for this property, this will be true and
+% return the restriction node.
+
+property_restriction(Class, Property, RestrictionNode) :-
+    rdf_reachable(Class, rdfs:subClassOf, B),
+    rdf_is_bnode(B),
+    rdf(B, owl:onProperty, Property),
+    rdf(B, rdf:type, owl:'Restriction'),
+    RestrictionNode = B.
+
 
 % Various recognizers used by property_target to translate RDF
 % relation restrictions into an identified local restriction type like
@@ -474,38 +494,26 @@ property_target(Class, Property, PropUsage, Target, Restrictions) :-
 %
 % For Cardinality information, see: https://w3.org/2001/sw/BestPratices/OEP/QCR
 
-property_extra(Class, Property, _Target, cardinality(N)) :-
-    rdf(Class, rdfs:subClassOf, B),
-    rdf_bnode(B),
-    rdf(B, owl:onProperty, Property),
-    rdf(B, rdf:type, owl:'Restriction'), !,
+property_extra(Class, Property, cardinality(N)) :-
+    property_restriction(Class, Property, B),
     rdf(B, owl:cardinality, I),
     rdf_literal(I),
     rdf_numeric(I, N).
-property_extra(_Class, Property, _Target, maybe) :-
+property_extra(_Class, Property, maybe) :-
     rdf(Property, rdf:type, owl:'FunctionalProperty'), !.
-property_extra(_Class, _Property, _Target, normal).
-property_extra(Class, Property, _Target, min_cardinality(N)) :-
-    rdf(Class, rdfs:subClassOf, B),
-    rdf_bnode(B),
-    rdf(B, owl:onProperty, Property),
-    rdf(B, rdf:type, owl:'Restriction'), !,
+property_extra(Class, Property, min_cardinality(N)) :-
+    property_restriction(Class, Property, B),
     (rdf(B, owl:minCardinality, I), rdf_literal(I), rdf_numeric(I, N) ;
      rdf(B, owl:someValuesFrom, _T), N == 1).
-property_extra(Class, Property, _Target, max_cardinality(N)) :-
-    rdf(Class, rdfs:subClassOf, B),
-    rdf_bnode(B),
-    rdf(B, owl:onProperty, Property),
-    rdf(B, rdf:type, owl:'Restriction'), !,
+property_extra(Class, Property, max_cardinality(N)) :-
+    property_restriction(Class, Property, B),
     rdf(B, owl:maxCardinality, I),
     rdf_literal(I),
     rdf_numeric(I, N).
-property_extra(Class, Property, _Target, value_from(Cls)) :-
-    rdf(Class, rdfs:subClassOf, B),
-    rdf_bnode(B),
-    rdf(B, owl:onProperty, Property),
-    rdf(B, rdf:type, owl:'Restriction'), !,
+property_extra(Class, Property, value_from(Cls)) :-
+    property_restriction(Class, Property, B),
     rdf(B, owl:someValuesFrom, Cls).
+property_extra(_Class, _Property, normal).
 
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:int).
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:integer).
@@ -579,6 +587,62 @@ rack_entity_instance(Namespace, ClassName, InstanceURL) :-
     rack_ref(ClassName, E).
 
 % TODO: rack_activity_instance, rack_agent_instance
+
+%! rack_data_instance(-InstanceURL:atom) is nondet
+%
+% Used to return an instance of any ontology object (i.e. a THING, not
+% just an ENTITY as returned by rack_entity_instance.
+
+rack_data_instance(I) :-
+    is_owl_class(Class),
+    rack_ref('PROV-S#THING', Thing),
+    rdf_reachable(Class, rdfs:subClassOf, Thing),
+    rdf(I, rdf:type, Class).
+
+
+%! rack_data_instance(+Class:atom, -InstanceURL:atom) is nondet
+%
+% Used to return an instance of the specified class.
+
+rack_data_instance(Class, I) :-
+    rdf_reachable(C, rdfs:subClassOf, Class),
+    rdf(I, rdf:type, C).
+
+
+%! rack_instance_relationship(+SourceClass:atom, +property:atom, +TargetClass, -SourceInstance)
+%
+% For a specified relationship between a source class and target
+% class, return all instances of the source that have relationships to
+% a target (the target instance(s) is not returned and can be queried
+% separately via rdf(SourceInstance, property, TargetInstance) calls).
+
+rack_instance_relationship(SrcCls, Rel, TgtCls, SrcInst) :-
+    rdf_reachable(C, rdfs:subClassOf, SrcCls),
+    rdf(SrcInst, rdf:type, C),
+    rdf(SrcInst, Rel, TgtInst),
+    rdf(TgtInst, rdf:type, TC),
+    rdf_reachable(TC, rdfs:subClassOf, TgtCls).
+
+%! rack_instance_relationship(+SourceClass:atom, +property:atom, -SourceInstance)
+%
+% For a specified relationship between a source class and ANY target
+% class, return all instances of the source that have relationships to
+% a target (the target instance(s) is not returned and can be queried
+% separately via rdf(SourceInstance, property, TargetInstance) calls).
+
+rack_instance_relationship(SrcCls, Rel, SrcInst) :-
+    rdf_reachable(C, rdfs:subClassOf, SrcCls),
+    rdf(SrcInst, rdf:type, C),
+    rdf(SrcInst, Rel, _).
+
+%! rack_instance_ident(+Instance:atom, -Identity:atom)
+%
+% Returns the PROV-S#identifier value for the specified instance
+
+rack_instance_ident(I,N) :-
+    rdf(I, 'http://arcos.rack/PROV-S#identifier', N), !.
+rack_instance_ident(_, "<no-identifier>").
+
 
 %% ----------------------------------------------------------------------
 %% Loading generated data from .rack files

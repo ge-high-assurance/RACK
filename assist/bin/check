@@ -17,13 +17,14 @@
 :- use_module(library(optparse)).
 :- consult(common_opts).
 :- consult(rack(check)).
+:- consult(rack(check_runner)).
 
 main :-
     help_banner(B),
     (
         (
             parse_args([], _Opts, _PosArgs, B),
-            check_rack
+            run_checks
         ) ;
         print_message(error, bad_arguments),
         help_abort(none, B)

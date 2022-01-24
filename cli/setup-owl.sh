@@ -79,7 +79,7 @@ in
         ;;
 
     docker)
-        echo "[setup-owl] Coping CDR and OWL files from Docker"
+        echo "[setup-owl] Copying CDR and OWL files from Docker"
 
         container=$(docker container ls -qf "ancestor=${rack_image}:${rack_tag}")
 

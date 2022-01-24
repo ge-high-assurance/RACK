@@ -102,8 +102,6 @@ file_to_fpath(File, DirPath, FilePath) :-
     prolog_to_os_filename(Y, FilePath).
 
 
-none(CandidateQuery, Pred) :- call(CandidateQuery, C), none_of(C, Pred).
-
 none_of(Candidate, Pred) :- call(Pred, Candidate), !, fail.
 none_of(_, _).
 

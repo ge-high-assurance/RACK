@@ -34,7 +34,6 @@ description DSL into instances in the model.
               rack_ref/2,
               ns_ref/3,
               append_fld/3,
-              none/2,
               none_of/2,
               prefix_shorten/2,
               is_owl_class/1,

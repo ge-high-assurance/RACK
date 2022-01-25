@@ -335,22 +335,25 @@ def CreateCdrs():
 ################################################
     createEvidenceFile(ingestionTitle="TurnstileIngestion-System Requirements", ingestionDescription="Ingestion of Turnstile System Requirements using Scraping Tool Kit")
     
-    def sysReqToIngestAux (req,version):
+    def sysReqToIngestAux (req,version,fileSource):
         l1="Requirementidentification"
         l2="Description"
         l3="Governs"
         return [Add.turnstile_SystemRequirement(identifier = req[l1]+version, 
                                                governs_identifier = checkKeyExist(req,l3),
-                                               description = req[l2]),
+                                               description = req[l2],
+                                               definedIn_identifier=fileSource),
                 Add.SYSTEM(identifier = checkKeyExist(req,l3))]                                
     #sys has an update using the version 2
-    list(map(lambda x: sysReqToIngestAux(x,""),sys))
+    list(map(lambda x: sysReqToIngestAux(x,"","SYS Doc:v1"),sys))
     #list(map(lambda x: sysReqToIngestAux(x),reqsDict(sys_Req(mainList1))))
     #list(map(lambda x: hlReqToIngestAux(x,":v2"),sysReqsModified))
     ##system  level Req version update
-    list(map(lambda x: sysReqToIngestAux(x,":v2"),sysReqsModified))
+    list(map(lambda x: sysReqToIngestAux(x,":v2","SYS Doc:v1"),sysReqsModified))
     ##New Req version 2
-    list(map(lambda x: sysReqToIngestAux(x,""), newSysReq))
+    list(map(lambda x: sysReqToIngestAux(x,"","SYS Doc:v1"), newSysReq))
+    #------------ Document Files ------------    
+    Add.FILE(identifier="SYS Doc:v1",entityURL="https://github.com/ge-high-assurance/RACK/blob/master/Turnstile-Example/RequirementsDocument/Sys_Req.txt")
     createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileSystemRequirements"))
  
@@ -359,7 +362,7 @@ def CreateCdrs():
 ################################################        
     createEvidenceFile(ingestionTitle="TurnstileIngestion-High Level Requirements", ingestionDescription="Manual ingestion of Turnstile High Level Requirements")
     
-    def hlReqToIngestAux (req,reqVersion,revision,version):
+    def hlReqToIngestAux (req,reqVersion,revision,version,fileSource):
         l1="Requirementidentification"
         l2="Description"
         l3="Governs"
@@ -372,18 +375,22 @@ def CreateCdrs():
                                                   satisfies_identifier = checkKeyExist(req,l4),
                                                   mitigates_identifier = checkKeyExist(req,l5),
                                                   wasGeneratedBy_identifier= checkKeyExist(req,l6),
-                                                  wasRevisionOf_identifier=revision+version),
+                                                  wasRevisionOf_identifier=revision+version,
+                                                  definedIn_identifier=fileSource),
                Add.turnstile_SystemRequirement(identifier=checkKeyExist(req,l4)),
                Add.HAZARD(identifier=checkKeyExist(req,l5)),
                Add.turnstile_SystemComponent(identifier=checkKeyExist(req,l3))]                                  
  
     
-    list(map(lambda x: hlReqToIngestAux(x,"","",""),hl))
+    list(map(lambda x: hlReqToIngestAux(x,"","","","HLR Doc:v1"),hl))
     #list(map(lambda x: hlReqToIngestAux(x,":v1","",""),reqsDict(hl_Req(mainList1))))
     ##High level Req version update
-    list(map(lambda x: hlReqToIngestAux(x,":v2",x[keybiggerThan10(l1,l,x)],":v1"),hlReqsModified))
+    list(map(lambda x: hlReqToIngestAux(x,":v2",x[keybiggerThan10(l1,l,x)],":v1","HLR Doc:v2"),hlReqsModified))
     ##New Req version 2
-    list(map(lambda x: hlReqToIngestAux(x,"","",""), newHLReq))
+    list(map(lambda x: hlReqToIngestAux(x,"","","","HLR Doc:v2"), newHLReq))
+    #------------ Document Files ------------    
+    Add.FILE(identifier="HLR Doc:v1",entityURL="file://{{BASEDIR}}/RequirementsDocument/Version1.pdf")
+    Add.FILE(identifier="HLR Doc:v2",entityURL="file://{{BASEDIR}}/RequirementsDocument/Version2.pdf")
     #------------ 125569538 ------------
     Add.turnstile_Engineer(identifier = "125569538",
                  title = "Doe, John",
@@ -611,7 +618,7 @@ def CreateCdrs():
 #    Baselines
 ################################################
     createEvidenceFile(ingestionTitle="TurnstileIngestion-Baselines", ingestionDescription="Ingestion of Turnstile Requirements Baselines using Scraping Tool Kit")
-    
+
     reqBase1 = "RequirementsPackage:v1"
     reqBase2 = "RequirementsPackage:v2"
     swBase1 = "SoftwareDesignAndCode:v1"
@@ -656,15 +663,17 @@ def CreateCdrs():
     createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileBaselines"))
 
-
-########################################################
+########################################################RequirementsDocument
 if __name__=="__main__":
+    if os.path.exists(os.path.join(".","Turnstile-IngestionPackage/RequirementsDocument")):
+        shutil.rmtree(os.path.join(".","Turnstile-IngestionPackage/RequirementsDocument"))
+    shutil.copytree(os.path.join(".","RequirementsDocument"), os.path.join(".","Turnstile-IngestionPackage/RequirementsDocument"))
     if os.path.exists(os.path.join(".","Turnstile-IngestionPackage/TurnstileSystemRequirements")):
         shutil.rmtree(os.path.join(".","Turnstile-IngestionPackage/TurnstileSystemRequirements"))
     if os.path.exists(os.path.join(".","Turnstile-IngestionPackage/TurnstileHighLevelRequirements")):
         shutil.rmtree(os.path.join(".","Turnstile-IngestionPackage/TurnstileHighLevelRequirements"))
     if os.path.exists(os.path.join(".","Turnstile-IngestionPackage/TurnstileLowLevelRequirements")):
         shutil.rmtree(os.path.join(".","Turnstile-IngestionPackage/TurnstileLowLevelRequirements"))
+    if os.path.exists(os.path.join(".","Turnstile-IngestionPackage/TurnstileBaselines")):
+        shutil.rmtree(os.path.join(".","Turnstile-IngestionPackage/TurnstileBaselines"))
     CreateCdrs()
- 
- 

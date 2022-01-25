@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<RACK-DATA>
+  <ACTIVITY>
+    <description>Manual ingestion of Turnstile System Design</description>
+    <identifier>TurnstileIngestion-SystemDesign</identifier>
+    <startedAtTime>2022-01-12 17:04:48</startedAtTime>
+    <title>TurnstileIngestion-SystemDesign</title>
+  </ACTIVITY>
+  <SYSTEM>
+    <identifier>Turnstile</identifier>
+  </SYSTEM>
+  <turnstile_SystemComponent>
+    <identifier>InGate</identifier>
+    <partOf_identifier>Turnstile</partOf_identifier>
+  </turnstile_SystemComponent>
+  <turnstile_SystemComponent>
+    <identifier>OutGate</identifier>
+    <partOf_identifier>Turnstile</partOf_identifier>
+  </turnstile_SystemComponent>
+  <turnstile_SystemComponent>
+    <identifier>CounterApplication</identifier>
+    <partOf_identifier>Turnstile</partOf_identifier>
+  </turnstile_SystemComponent>
+  <turnstile_SystemComponent>
+    <identifier>Display</identifier>
+    <partOf_identifier>Turnstile</partOf_identifier>
+  </turnstile_SystemComponent>
+  <turnstile_SystemInterfaceDefinition>
+    <destination_identifier>CounterApplication</destination_identifier>
+    <identifier>inflow</identifier>
+    <source_identifier>InGate</source_identifier>
+  </turnstile_SystemInterfaceDefinition>
+  <turnstile_SystemInterfaceDefinition>
+    <destination_identifier>CounterApplication</destination_identifier>
+    <identifier>outflow</identifier>
+    <source_identifier>OutGate</source_identifier>
+  </turnstile_SystemInterfaceDefinition>
+  <turnstile_SystemInterfaceDefinition>
+    <destination_identifier>Display</destination_identifier>
+    <identifier>census</identifier>
+    <source_identifier>CounterApplication</source_identifier>
+  </turnstile_SystemInterfaceDefinition>
+  <turnstile_SystemInterfaceDefinition>
+    <destination_identifier>InGate</destination_identifier>
+    <identifier>census</identifier>
+  </turnstile_SystemInterfaceDefinition>
+  <ACTIVITY>
+    <endedAtTime>2022-01-12 17:04:48</endedAtTime>
+    <identifier>TurnstileIngestion-SystemDesign</identifier>
+  </ACTIVITY>
+</RACK-DATA>

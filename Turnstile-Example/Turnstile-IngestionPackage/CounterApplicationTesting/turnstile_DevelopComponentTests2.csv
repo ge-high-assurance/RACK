@@ -1,4 +1,4 @@
-identifier,dataInsertedBy_identifier,developedBy_identifier,endedAtTime,used_identifier
-CompTestDevelopment,TurnstileIngestion-Testing,ASSERT,2020-07-26 10:53:38,VER-STD:v1
-CompTestDevelopment,TurnstileIngestion-Testing,,,ATCG-Config-File
-CompTestDevelopment,TurnstileIngestion-Testing,,,HLR-1-Model
+identifier,dataInsertedBy_identifier,endedAtTime,used_identifier,wasAssociatedWith_identifier
+CompTestDevelopment,TurnstileIngestion-Testing,2020-07-26 10:53:38,VER-STD:v1,ASSERT
+CompTestDevelopment,TurnstileIngestion-Testing,,ATCG-Config-File,
+CompTestDevelopment,TurnstileIngestion-Testing,,HLR-1-Model,

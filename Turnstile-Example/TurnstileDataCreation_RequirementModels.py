@@ -48,10 +48,10 @@ def CreateCdrs():
     Add.ANALYSIS(identifier="HLR Analysis", used_identifier="HLR-3-Model")
     
     #------------ HLR Analysis-Completeness ------------ 
-    Add.ANALYSIS_OUTPUT(identifier="HLR Analysis-Completeness", producedBy_identifier="HLR Analysis", result_identifier="Passed")
+    Add.ANALYSIS_OUTPUT(identifier="HLR Analysis-Completeness", wasGeneratedBy_identifier="HLR Analysis")
     
     #------------ HLR Analysis-Conflict ------------ 
-    Add.ANALYSIS_OUTPUT(identifier="HLR Analysis-Conflict", producedBy_identifier="HLR Analysis", result_identifier="Passed")
+    Add.ANALYSIS_OUTPUT(identifier="HLR Analysis-Conflict", wasGeneratedBy_identifier="HLR Analysis")
     
 
     createCDR("http://rack001/turnstiledata")

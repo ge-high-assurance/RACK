@@ -7,6 +7,9 @@ STK is installed by downloading the files to your local machine.  This can eithe
 
 Dependencies:
 `pip install lxml`
+'pip install colorama'
+'pip install graphviz'
+'pip install ftfy'
 
 Note: Sometimes for linux machines that have multiple versions of Python installed the command will be `pip3 install .`
 

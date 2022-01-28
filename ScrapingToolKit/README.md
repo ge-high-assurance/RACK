@@ -7,9 +7,9 @@ STK is installed by downloading the files to your local machine.  This can eithe
 
 Dependencies:
 `pip install lxml`
-'pip install colorama'
-'pip install graphviz'
-'pip install ftfy'
+`pip install colorama`
+`pip install graphviz`
+`pip install ftfy`
 
 Note: Sometimes for linux machines that have multiple versions of Python installed the command will be `pip3 install .`
 
@@ -209,5 +209,5 @@ Resulting data can be ingested into RACK by using the CLI command:
 
 STK has the ability to be updated to use the latest CDR files. This can be done by downloading the entire RACK repo.  From the RACK repo run the python script `Autogeneration\ReadNodegroups.py`.
 
-This will generate updated `\Evidence\Add.py`, '\Evidence\CONSTANTS.py' and `\Evidence\RACK-DATA.xsd`. These files will be tailored to the CDR nodegroups (json files that start with "ingest_", i.e. "ingest_ACTIVITY.json") found in the `nodegroups` folder of the repo.  To use these updated file simply re-install the STK using `pip install .` as described in the installation section.
+This will generate updated `\Evidence\Add.py`, `\Evidence\CONSTANTS.py` and `\Evidence\RACK-DATA.xsd`. These files will be tailored to the CDR nodegroups (json files that start with "ingest_", i.e. "ingest_ACTIVITY.json") found in the `nodegroups` folder of the repo.  To use these updated file simply re-install the STK using `pip install .` as described in the installation section.
 

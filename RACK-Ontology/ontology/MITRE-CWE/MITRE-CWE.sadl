@@ -1,0 +1,34 @@
+/* Copyright (c) 2020, General Electric Company
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.rack/MITRE/CWE" alias cwe.
+
+import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/SECURITY".
+
+MITRE_CWE is a type of THREAT.
+  detectById describes MITRE_CWE with values of type MITRE_CWE_DETECTION.
+
+MITRE_CWE_DETECTION is a type of THING.
+  effectiveness describes MITRE_CWE_DETECTION with values of type DETECTION_EFFECTIVENESS.
+
+
+DETECTION_EFFECTIVENESS
+  (note "See https://cwe.mitre.org/cwss/cwss_v1.0.1.html#2.3.4")
+  is a type of THING.
+
+CweZero          is a DETECTION_EFFECTIVENESS identifier "Zero".
+CweLimited       is a DETECTION_EFFECTIVENESS identifier "Limited".
+CweModerate      is a DETECTION_EFFECTIVENESS identifier "Moderate".
+CweHigh          is a DETECTION_EFFECTIVENESS identifier "High".
+CwePartial       is a DETECTION_EFFECTIVENESS identifier "Partial".
+CweOpportunistic is a DETECTION_EFFECTIVENESS identifier "Opportunistic".

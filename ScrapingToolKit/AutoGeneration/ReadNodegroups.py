@@ -20,7 +20,7 @@ def createConstants(jsons):
     with open(pythonFilePath,"w") as pyFile:
         pyString = 'nodegroupMapping = {\n'
         for j in jsons:
-            pyString += '    "'+j+'":"'+jsons[j].split("\\")[-1].replace(".json","")+'",\n'
+            pyString += '    "'+j+'":"'+os.path.basename(jsons[j]).replace(".json","")+'",\n'
         pyString = pyString.rstrip(",\n") + '}'  
         pyFile.write(pyString)
             

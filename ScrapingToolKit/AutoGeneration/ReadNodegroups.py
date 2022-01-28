@@ -19,7 +19,7 @@ def createConstants(jsons):
     pythonFilePath = os.path.realpath(os.path.join(directoryPath, "..","Evidence","CONSTANTS.py"))
     with open(pythonFilePath,"w") as pyFile:
         pyString = 'nodegroupMapping = {\n'
-        for j in jsons:
+        for j in sorted(jsons.keys()):
             pyString += '    "'+j+'":"'+os.path.basename(jsons[j]).replace(".json","")+'",\n'
         pyString = pyString.rstrip(",\n") + '}'  
         pyFile.write(pyString)
@@ -124,7 +124,6 @@ def createDataNameFromIngestFileName(name):
                .replace(".","_")\
                .replace("+","_")\
                .replace("=","_")
-    print(dataName)
     return dataName
 
 def findIngestionJsons(jsonDir):
@@ -145,7 +144,8 @@ if __name__ == "__main__":
     nodgroupPath = os.path.realpath(os.path.join(directoryPath, "..","..","nodegroups"))
     jsons = findIngestionJsons(nodgroupPath)
     createConstants(jsons)
-    for j in jsons:
+    for j in sorted(jsons.keys()):
+        print("Processing Nodegroup :",j)
         nodegroups[j] = processNodegroup(jsons[j])
     createXsd(nodegroups)
     createPython(nodegroups)

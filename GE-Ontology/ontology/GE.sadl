@@ -20,7 +20,6 @@ import "http://arcos.rack/HAZARD".
 import "http://arcos.rack/ANALYSIS".
 import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/AGENTS".
-import "http://common/DO-178C".
 
         //Model Location: DevelopmentPlan.02-SystemDevelopement.01-SystemRequirements.SystemRequirementsDefinition
       SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.

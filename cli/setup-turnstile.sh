@@ -26,4 +26,3 @@ rack nodegroups import ../nodegroups/ingestion/arcos.turnstile
 # rack data import --clear ../RACK-Ontology/ontology/ARP-4754A/import.yaml  # from datagraph http://rack001/arp-4754a
 # rack data import --clear ../RACK-Ontology/ontology/DO-330/import.yaml     # from datagraph http://rack001/do-330
 rack data import --clear ../RACK-Ontology/ontology/DO-178C/import.yaml    # from datagraph http://rack001/do-178c
-# rack data import --clear ../RACK-Ontology/OwlModels/MIL-STD-881D.yaml  # from datagraph http://rack001/mil-std-881d

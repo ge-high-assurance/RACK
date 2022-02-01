@@ -1,0 +1,12 @@
+data-graph: "http://rack001/do-330"
+ingestion-steps:
+#Phase1: Identifiers Only
+- {nodegroup: "ingest_AGENT", csv: "AGENT_1.csv"}
+- {nodegroup: "ingest_SPECIFICATION", csv: "SPECIFICATION_1.csv"}
+- {nodegroup: "ingest_SECTION", csv: "SECTION_1.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "OBJECTIVE_1.csv"}
+
+#Phase2: The rest of the data
+- {nodegroup: "ingest_SPECIFICATION", csv: "SPECIFICATION_2.csv"}
+- {nodegroup: "ingest_SECTION", csv: "SECTION_2.csv"}
+- {nodegroup: "ingest_OBJECTIVE", csv: "OBJECTIVE_2.csv"}

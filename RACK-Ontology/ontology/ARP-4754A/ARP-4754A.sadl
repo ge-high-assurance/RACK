@@ -36,7 +36,6 @@ ARP-4754A-AppendixA is a SECTION,
      has content ARP-4754-4.2,
      has content ARP-4754-4.3,
      has content ARP-4754-4.4,
-     has content ARP-4754-4.5,
      has content ARP-4754-4.6,
      has content ARP-4754-5.1,
      has content ARP-4754-5.2,
@@ -131,10 +130,6 @@ ARP-4754-4.3 is a OBJECTIVE,
 ARP-4754-4.4 is a OBJECTIVE,
     has identifier "ARP-4754-4.4"
     has description "Requirements are traceable.".
-
-ARP-4754-4.5 is a OBJECTIVE,
-    has identifier "ARP-4754-4.5"
-    has description "".
 
 ARP-4754-4.6 is a OBJECTIVE,
     has identifier "ARP-4754-4.6"

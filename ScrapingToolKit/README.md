@@ -4,6 +4,7 @@ The Scraping Tool Kit (STK) is a series of python packages that provide utilitie
 # Installation
 
 STK is installed by downloading the files to your local machine.  This can either be from a git clone of the whole RACK repo, or it can be just the ScrapingToolKit folder. Once the source files are downloaded installation is as simple entering `pip install .` from a command window in your `ScrapingToolKit` folder.
+dependencies can be installed by `pip install -r requirements.txt` to install all dependencies at once or they can be installed individualy.
 
 Dependencies:
 `pip install lxml`

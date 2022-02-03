@@ -45,6 +45,8 @@ HAZARD
 	// A Hazard can be mitigated by a requirement, operating procedure etc., mitigation by REQUIREMENT is defined in REQUIREMENTS.sadl.
 	H:mitigates (note "a HAZARD may be mitigated by a OP_PROCEDURE") describes OP_PROCEDURE with values of type HAZARD.
 
+	wasGeneratedBy of HAZARD only has values of type HAZARD_IDENTIFICATION.
+
 HAZARD_IDENTIFICATION
 	(note "ACTIVITY that identifies potential sources of HAZARD whose risk must be evaluated")
 	is a type of ACTIVITY.

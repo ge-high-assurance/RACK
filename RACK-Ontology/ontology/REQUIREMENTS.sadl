@@ -35,6 +35,8 @@ REQUIREMENT
 
 	Rq:mitigates (note "ENTITY(s) (e.g. HAZARD) that is being mitigated by this REQUIREMENT") describes REQUIREMENT with values of type ENTITY.
 	Rq:mitigates is a type of wasImpactedBy.
+	
+	wasGeneratedBy of REQUIREMENT only has values of type REQUIREMENT_DEVELOPMENT.
 
 DATA_DICTIONARY_TERM
 	(note "Defines some conceptual data that may be collected somewhere and used somewhere else")

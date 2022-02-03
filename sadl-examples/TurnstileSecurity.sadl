@@ -32,7 +32,7 @@ import "http://arcos.turnstile/GE".
 //			While we do this via a rule, it would be identified by ARCOS performers using
 //			their tools and that determination would be data that is then ingested in RACK.
 //		added additional requirements that when satisfied mitigate this Content Spoofing threat
-//		This file is in sadl-examples folder 
+//		This file is in sadl-examples folder in GIT. 
  
 Turnstile is a Cps
 	has identifier "Turnstile".

@@ -17,7 +17,6 @@ import "http://arcos.rack/ANALYSIS".
 import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/AGENTS".
 import "http://arcos.rack/MODEL".
-// import "http://common/DO-178C".
 import "http://arcos.AH-64D/Boeing".
 
        // TOOL is defined in the main RACK ontology as an AGENT

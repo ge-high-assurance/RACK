@@ -12,7 +12,6 @@ import "http://arcos.rack/REVIEW".
 import "http://arcos.rack/SOFTWARE".
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/TESTING".
-// import "http://common/DO-178C".
 
 PIDS_Req (note "A Requirement identified in the Prime Item Development Specification") is a type of REQUIREMENT.
 

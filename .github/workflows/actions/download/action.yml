@@ -32,7 +32,7 @@ runs:
     - name: Download SemTK release
       shell: bash
       run: |
-        curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.4.0-20220119/semtk-opensource-v2.4.0-20220119-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+        curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.4.0-20220206/semtk-opensource-v2.4.0-20220206-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
 
     - name: Download CSS stylesheet
       shell: bash

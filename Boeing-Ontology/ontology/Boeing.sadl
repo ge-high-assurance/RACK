@@ -68,12 +68,12 @@ confirms of SBVT_Result only has values of type SBVT_Test.
        
      SRS_Doc is a type of DOCUMENT. 
        content of SRS_Doc only has values of type SRS_Req. //AM only?
-       createdBy of SRS_Doc only has values of type SoftwareHighLevelRequirementsDefinition.
+       wasGeneratedBy of SRS_Doc only has values of type SoftwareHighLevelRequirementsDefinition.
        
      SubDD_Doc is a type of DOCUMENT. 
 //       content of SubDD_Doc only has values of type SoftwareLowLevelRequirement. 
        content of SubDD_Doc only has values of type SubDD_Req. 
-       createdBy of SubDD_Doc only has values of type SoftwareDesign. 
+       wasGeneratedBy of SubDD_Doc only has values of type SoftwareDesign. 
        governs of SubDD_Doc only has values of type SWCOMPONENT.
        governs describes SubDD_Doc with at most 1 value.
 

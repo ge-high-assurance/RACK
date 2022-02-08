@@ -1,0 +1,152 @@
+/* Copyright (c) 2020, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+uri "http://arcos.sadl-examples/TurnstileSecurity" alias TSec.
+
+import "http://arcos.rack/CPS".
+import "http://arcos.turnstile/GE".
+
+// This example is to simply illustrate a security scenario for Turnstile.
+// This is not the only way to incorporate security, and ARCOS performers
+//		may choose to incorporate security differently.
+// To simplify everything we have  
+// 		repeated portions of the Turnstile including requirements in SADL
+//		added some properties from CPS.sadl to Turnstile components
+//		the security scenario consists of communication from InGate to CounterApplication 
+//			being vulnerable to Content Spoofing 
+//		added relevant CAPECs to capture this threat (CAPEC-148)
+//		added NIST controls that mitigate Content Spoofing threat on the connection
+//			and these are IA-3 (Device Identification And Authentication) 
+//			and IA-3-1 (Cryptographic Bidirectional Authentication)
+//			so, added a CONTROLSET with these 2 controls
+//		added a rule that shows how the Turnstile component properties lead identifying
+//			Content Spoofing threat
+//			While we do this via a rule, it would be identified by ARCOS performers using
+//			their tools and that determination would be data that is then ingested in RACK.
+//		added additional requirements that when satisfied mitigate this Content Spoofing threat
+//		This file is in sadl-examples folder in GIT. 
+ 
+Turnstile is a Cps
+	has identifier "Turnstile".
+InGate is a Cps
+	has identifier "In Gate"
+	has partOf Turnstile
+	has insideTrustedBoundary true.
+OutGate is a Cps
+	has identifier "Out Gate"
+	has partOf Turnstile
+	has insideTrustedBoundary true.
+CounterApplication is a Cps
+	has identifier "Counter Application"
+	has partOf Turnstile
+	has insideTrustedBoundary true.
+Display is a Cps
+	has identifier "Display"
+	has partOf Turnstile
+	has insideTrustedBoundary true.
+
+// only showing 1 INTERFACE / Connection
+inflow is a Connection
+	has identifier "inflow"
+	has sys:source InGate
+	has sys:destination CounterApplication
+	has connectionType Untrusted.
+
+InputThread is a SoftwareThread
+	has identifier "InputThread"
+	has partOf CounterApplication
+//		has sys:producedBy SwDesign
+.
+		
+Sys-1 is a SystemRequirement
+	has identifier "Sys-1"
+	has description "Turnstile system shall track the number of people that travel through the in gate."
+	has governs Turnstile.
+
+Sys-2 is a SystemRequirement
+	has identifier "Sys-2"
+	has description "Turnstile system shall track the number of people that travel through the out gate."
+	has governs Turnstile.
+ 
+Sys-3 is a SystemRequirement
+	has identifier "Sys-3"
+	has description "Turnstile system shall track the number of people are currently in the park."
+	has governs Turnstile.
+
+HLR-4 is a HighLevelRequirement
+	has identifier "HLR-4"
+	has description "The Computer shall verify that the data received on inflow is from InGate and is uncorrupted."
+	has governs CounterApplication
+	Rq:satisfies IA-3
+	Rq:satisfies IA-3-1.
+
+IN-LLR-4 is a LowLevelRequirement
+	has identifier "IN-LLR-4"
+	has description "Input Thread shall authenticate inflow interface." 
+	has governs InputThread
+	has Rq:satisfies HLR-4.
+
+IN-LLR-5 is a LowLevelRequirement
+	has identifier "IN-LLR-5"
+	has description "Input Thread shall use 32 bit decryption for data sent over inflow interface."
+	has governs InputThread 
+	has Rq:satisfies HLR-4.
+		
+// declare just the relevant CAPEC and NIST controls
+CAPEC-148 is a THREAT
+	with identifier "CAPEC-148"
+	with description "Content Spoofing - An adversary modifies content...".
+
+IA-3 is a CONTROL
+	with identifier "IA-3"
+	with description "Device Identification And Authentication - The information system uniquely identifies and authenticates [Assignment: organization-defined specific and/or types of devices] before establishing a [Selection (one or more): local; remote; network] connection..".
+
+IA-3-1 is a CONTROL
+	with identifier "IA-3-1"
+	with description "Cryptographic Bidirectional Authentication - The information system authenticates [Assignment: organization-defined specific devices and/or types of devices] before establishing [Selection (one or more): local; remote; network] connection using bidirectional authentication that is crypto-graphically based..".
+
+DeviceAuthentication is a CONTROLSET
+	with content IA-3
+	with content IA-3-1
+	with Sec:mitigates CAPEC-148.
+
+// Now, if appropriate NIST controls have been implemented then 
+// ARCOS performers will determine that and there will be 
+// ingested data for that. 
+// These will also be tested and related to the requirements.
+// Here I simply declare them in SADL.
+ic1 is a ImplControl
+	with control IA-3
+	with dal 7.
+ic2 is a ImplControl
+	with control IA-3-1
+	with dal 6.
+inflow has implControl ic1.
+inflow has implControl ic2.
+
+// Rule to identify threats
+Rule Vul-CAPEC-148
+if comp is a Cps
+	and insideTrustedBoundary of comp is true
+	and conn is a Connection
+	and conn destination comp
+	and connectionType of conn is Untrusted
+then Sec:source of CAPEC-148 is conn.
+
+// Rule for check if threat is mitigated
+Rule Mitigated-CAPEC-148
+if conn is a Connection
+	and Sec:source of CAPEC-148 is conn
+	and implControl of conn is ic1
+	and implControl of conn is ic2
+then print("CAPEC-148 (Content Spoofing) is mitigated for connection = ",conn). 
+
+Ask: "select * where {?x <Sec:source> ?z}".

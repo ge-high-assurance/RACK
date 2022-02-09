@@ -47,3 +47,5 @@ ANALYSIS_OUTPUT
 
     analyzes (note "ENTITY(s) under analysis") describes ANALYSIS_OUTPUT with values of type ENTITY.
     analyzes is a type of wasImpactedBy.
+    
+    wasGeneratedBy of ANALYSIS_OUTPUT only has values of type ANALYSIS.

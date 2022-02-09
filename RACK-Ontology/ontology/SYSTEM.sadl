@@ -34,6 +34,8 @@ SYSTEM
 
 	function (note "functionality / capability of a SYSTEM") describes SYSTEM with values of type FUNCTION.
 	function is a type of wasImpactedBy.
+	
+	wasGeneratedBy of SYSTEM only has values of type SYSTEM_DEVELOPMENT.
 
 INTERFACE
 	(note "INTERFACEs describe directed connections between a SYSTEM providing what another SYSTEM requires")

@@ -25,6 +25,8 @@ TEST
 
 	verifies (note "ENTITY(s) (e.g. REQUIREMENT) that this test verifies") describes TEST with values of type ENTITY.
 	verifies is a type of wasImpactedBy.
+	
+	wasGeneratedBy of TEST only has values of type TEST_DEVELOPMENT. 
 
 TEST_STATUS (note "The high-level outcome of a TEST_RESULT")
     is a type of THING,
@@ -41,6 +43,8 @@ TEST_RESULT
 
 	confirms (note "Parent test(s) of this test result") describes TEST_RESULT with values of type TEST.
 	confirms is a type of wasImpactedBy.
+	
+	wasGeneratedBy of TEST_RESULT only has values of type TEST_EXECUTION.
 
 
 TEST_PROCEDURE (note "A TEST_PROCEDURE is the TEST_STEPs that perform TESTs. ") is a type of COLLECTION.
@@ -71,5 +75,5 @@ TEST_EXECUTION
 	(note "ACTIVITY of performing a TEST and record its corresponding TEST_RESULT")
 	is a type of ACTIVITY.
 
-	testProcedure (note "TEST_PROCEDURE that was executed.")describes TEST_EXECUTION with values of type TEST_PROCEDURE.
+	testProcedure (note "TEST_PROCEDURE that was executed.") describes TEST_EXECUTION with values of type TEST_PROCEDURE.
 	testProcedure is a type of used.

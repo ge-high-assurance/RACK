@@ -30,6 +30,8 @@ REVIEW_LOG
 	reviews is a type of wasImpactedBy.
 
 	reviewResult (note "Review status descriptor") describes REVIEW_LOG with values of type REVIEW_STATE.
+	
+	wasGeneratedBy of REVIEW_LOG only has values of type REVIEW.
 
 REVIEW_STATE (note "Life-cycle status of a review log")
     is a type of THING,

@@ -14,6 +14,7 @@
 :- ensure_loaded('./paths').
 
 :- use_module(rack(model)).
+:- use_module(library(url)).
 
 opts_spec(Spec) :-
     paths_dir(Dir),
@@ -109,8 +110,27 @@ help_abort(OptSpec, HelpBanner) :-
 display_banner([]).
 display_banner([L|Ls]) :- writeln(L), display_banner(Ls).
 
-get_ontology_dir(Opts, Path) :- member(ontology_dir(Path), Opts), !.
+get_ontology_dir(Opts, Path) :-
+    member(ontology_dir(Spec), Opts), !,
+    fix_ontology_path(Spec, Path).
 get_ontology_dir(_, '.').
+
+% A common mistake is to specify "-m http://localhost:3030" and omit
+% the trailing slash, which will fail.  The following attempts to
+% auto-correct for this mistake.
+fix_ontology_path(Spec, Path) :-
+    is_absolute_url(Spec),
+    parse_url(Spec, Parts),
+    member(path('/'), Parts),  % true for http://localhost:3030 and http://localhost:3030/, but not http://localhost:3030/something
+    \+ member(fragment(_), Parts),
+    \+ member(search(_), Parts),
+    % OK, this is a plain URL that should have a / as a path
+    !,
+    member(host(Host), Parts),
+    member(protocol(Proto), Parts),
+    member(port(Port), Parts),
+    parse_url(Path, [protocol(Proto), host(Host), port(Port), path('/')]).
+fix_ontology_path(Spec, Spec).
 
 load_recognizers(Opts) :-
     member(recognizers(R), Opts),

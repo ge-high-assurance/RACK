@@ -1,6 +1,0 @@
-# This file is intended to be used with the rack CLI script found in RACK/cli/
-#
-# Script documentation is available in RACK/cli/README.md
-data-graph: "http://rack001/do-330"
-ingestion-steps:
-- { owl: "DO-330.owl"}

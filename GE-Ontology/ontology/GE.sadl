@@ -20,7 +20,6 @@ import "http://arcos.rack/HAZARD".
 import "http://arcos.rack/ANALYSIS".
 import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/AGENTS".
-import "http://common/DO-178C".
 
         //Model Location: DevelopmentPlan.02-SystemDevelopement.01-SystemRequirements.SystemRequirementsDefinition
       SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
@@ -81,7 +80,7 @@ import "http://common/DO-178C".
         
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.DataAndControlCouple
       DataAndControlCouple is a type of DATA_DICTIONARY_TERM.
-        createdBy of DataAndControlCouple only has values of type SoftwareDesign.
+        wasGeneratedBy of DataAndControlCouple only has values of type SoftwareDesign.
         
                         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.DataDictionary
       DataDictionary is a type of DATA_DICTIONARY_TERM.

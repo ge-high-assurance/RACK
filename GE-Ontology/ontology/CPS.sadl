@@ -26,8 +26,6 @@ import "http://arcos.rack/SECURITY".
 	
 Cps (note "A cyber physical system") is a type of SYSTEM
 	described by cpsType with a single value of type CpsType 
-	described by inputPort with values of type Port 
-	described by outputPort with values of type Port
 	  
 	// properties that allow for inferring threats
 	described by canReceiveSWUpdate with a single value of type boolean
@@ -67,20 +65,17 @@ COTS is a Pedigree
 	has description "Commercial Of The Shelf products that are bought as is".
 Sourced is a Pedigree 
 	has identifier "Sourced"
-	has description "The system is provides by an outside organization.". 
-	
-Port (note "Ports specify points of connections between CPSs") is a type of ENTITY.
+	has description "The system is provides by an outside organization.". 	
 
 Connection (note "An INTERFACE with specific input and output ports") is a type of INTERFACE
     // for named connections, use "title" property
-	described by outPort with a single value of type Port 
-	described by inPort with a single value of type Port 
 
 	// properties that allow for inferring threats	
-	described by connectionType with values of type ConnectionType  
-	described by dataSentIsUntrusted with a single value of type boolean 
-	described by dataReceivedIsUntrusted with a single value of type boolean 	
-    described by infoFlowSeverity with a single value of type int. 
+	described by connectionType with values of type ConnectionType  	
+    described by infoFlowSeverity with a single value of type int
+
+	// properties that allow for mitigating of threats
+	described by implControl with values of type ImplControl.     
 
 ConnectionType is a type of THING.
 

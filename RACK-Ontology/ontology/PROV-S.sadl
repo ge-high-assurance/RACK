@@ -28,7 +28,6 @@ THING (note "A piece of data stored in RACK") is a class.
 	description (note "A free-form, multi-line, human-readable explanation of this data element.") describes THING with values of type string.
 	description describes THING with at most 1 value.
 	dataInsertedBy (note "The activity that caused this data to be added to RACK") describes THING with values of type ACTIVITY.
-	dataInsertedBy describes THING with at most 1 value of type ACTIVITY.
 
 ENTITY (note "An entity is a physical, digital, conceptual, or other kind of thing with some fixed aspects; entities may be real or imaginary.")
 	is a type of THING.

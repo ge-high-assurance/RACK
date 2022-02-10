@@ -498,7 +498,8 @@ property_extra(Class, Property, cardinality(N)) :-
     rdf(B, owl:cardinality, I),
     rdf_literal(I),
     rdf_numeric(I, N).
-property_extra(_Class, Property, maybe) :-
+property_extra(Class, Property, maybe) :-
+    property(Class, Property, _),
     rdf(Property, rdf:type, owl:'FunctionalProperty'), !.
 property_extra(Class, Property, min_cardinality(N)) :-
     property_restriction(Class, Property, B),
@@ -512,7 +513,7 @@ property_extra(Class, Property, max_cardinality(N)) :-
 property_extra(Class, Property, value_from(Cls)) :-
     property_restriction(Class, Property, B),
     rdf(B, owl:someValuesFrom, Cls).
-property_extra(_Class, _Property, normal).
+property_extra(Class, Property, normal) :- property(Class, Property, _).
 
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:int).
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:integer).

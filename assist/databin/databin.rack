@@ -107,11 +107,6 @@ data_get('SOFTWARE#PACKAGE', 'PROV-S#wasAssociatedWith',
          UserInstance) :-
     build_user(N, UserName),
     user_instance_name(UserName, UserInstance).
-data_get('SOFTWARE#PACKAGE', 'SOFTWARE#performedBy',
-         package_tar(N),
-         UserInstance) :-
-    build_user(N, UserName),
-    user_instance_name(UserName, UserInstance).
 
 
 data_get('FILE#FILE', 'FILE#definedIn', sw_file_data(Nonce, Dir, File), ParentInstance) :-
@@ -378,15 +373,10 @@ data_get(_, 'SOFTWARE#compileInput',
     build_from(Nonce, Dir),
     file_instance(Nonce, Dir, Input, InputInstance).
 
-data_get(_, 'SOFTWARE#compiledBy',
+data_get(_, 'PROV-S#wasAssociatedWith',
          activity_data(build_with(Nonce, compile, ToolName, ToolPath, _ToolArgs),_,_), Name) :-
     toolName(Nonce, ToolName, ToolPath, Name).
 data_get('SOFTWARE#COMPILE', 'PROV-S#wasAssociatedWith',
-         activity_data(_,build_start(N,_),_),
-         UserInstance) :-
-    build_user(N, UserName),
-    user_instance_name(UserName, UserInstance).
-data_get('SOFTWARE#COMPILE', 'SOFTWARE#performedBy',
          activity_data(_,build_start(N,_),_),
          UserInstance) :-
     build_user(N, UserName),

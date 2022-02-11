@@ -118,9 +118,9 @@ check_maybe_prop(Property, I, T) :-
 
 check_target_type(Property, I, T) :-
     property_extra(T, Property, _Restr),
-    has_interesting_prefix(Property),
     rdf(Property, rdfs:range, TTy),
     rdf_reachable(Target, rdfs:subClassOf, TTy),
+    has_interesting_prefix(Property),
     rdf(I, Property, Val),
     \+ rdf_is_literal(Val),  % TODO check these as well?
     rdf(Val, rdf:type, DefTy),
@@ -170,13 +170,14 @@ check_values_from(Property, I, T) :-
 
 check_invalid_value(Property, I, T) :-
     property_extra(T, Property, _Restr),
-    has_interesting_prefix(Property),
+    rdf(Property, rdfs:range, PTy),
+    rdf(PTy, owl:equivalentClass, PTyEquiv),
+    rdf(PTyEquiv, owl:oneOf, Enums),
     rdf(I, Property, V),
     \+ rdf_is_literal(V),  % literals checked elsewhere
     \+ rdf(V, rdf:type, _),
-    rdf(Property, rdfs:range, PTy),
-    rdf(PTy, owl:equivalentClass, PTyEquiv),
-    rdf(PTyEquiv, owl:oneOf, Enums), !,
+    has_interesting_prefix(Property),
+    !,
     rdf_list(Enums,L),
     rack_instance_ident(I, IName),
     print_message(error, invalid_value_in_enum(T, I, IName, Property, V, L)).

@@ -1,0 +1,420 @@
+identifier,description
+CWE-1007,"The software displays information or identifiers to a user, but the display mechanism does not make it easy for the user to distinguish between visually similar or identical glyphs (homoglyphs), which may cause the user to misinterpret a glyph and perform an unintended, insecure action."
+CWE-1021,"The web application does not restrict or incorrectly restricts frame objects or UI layers that belong to another application or domain, which can lead to user confusion about which interface the user is interacting with."
+CWE-1024,"The software performs a comparison between two entities, but the entities are of different, incompatible types that cannot be guaranteed to provide correct results when they are directly compared."
+CWE-1025,"The code performs a comparison between two entities, but the comparison examines the wrong factors or characteristics of the entities, which can lead to incorrect results and resultant weaknesses."
+CWE-1037,"The developer builds a security-critical protection mechanism into the software, but the processor optimizes the execution of the program such that the mechanism is removed or modified."
+CWE-1041,"The software has multiple functions, methods, procedures, macros, etc. that contain the same code."
+CWE-1043,The software uses a data element that has an excessively large number of sub-elements with non-primitive data types such as structures or aggregated objects.
+CWE-1044,The software's architecture contains too many - or too few - horizontal layers.
+CWE-1045,"A parent class has a virtual destructor method, but the parent has a child class that does not have a virtual destructor."
+CWE-1046,The software creates an immutable text string using string concatenation operations.
+CWE-1047,"The software contains modules in which one module has references that cycle back to itself, i.e., there are circular dependencies."
+CWE-1048,"The code contains callable control elements that contain an excessively large number of references to other application objects external to the context of the callable, i.e. a Fan-Out value that is excessively large."
+CWE-1049,The software performs a data query with a large number of joins and sub-queries on a large data table.
+CWE-1050,"The software has a loop body or loop condition that contains a control element that directly or indirectly consumes platform resources, e.g. messaging, sessions, locks, or file descriptors."
+CWE-1051,The software initializes data using hard-coded values that act as network resource identifiers.
+CWE-1052,The software initializes a data element using a hard-coded literal that is not a simple integer or static constant element.
+CWE-1053,The product does not have documentation that represents how it is designed.
+CWE-1054,"The code at one architectural layer invokes code that resides at a deeper layer than the adjacent layer, i.e., the invocation skips at least one layer, and the invoked code is not part of a vertical utility layer that can be referenced from any horizontal layer."
+CWE-1055,The software contains a class with inheritance from more than one concrete class.
+CWE-1056,A named-callable or method control element has a signature that supports a variable (variadic) number of parameters or arguments.
+CWE-1057,"The software uses a dedicated, central data manager component as required by design, but it contains code that performs data-access operations that do not use this data manager."
+CWE-1058,The code contains a function or method that operates in a multi-threaded environment but owns an unsafe non-final static storable or member data element.
+CWE-1060,The software performs too many data queries without using efficient data processing functionality such as stored procedures.
+CWE-1062,"The code has a parent class that contains references to a child class, its methods, or its members."
+CWE-1063,A static code block creates an instance of a class.
+CWE-1064,"The software contains a function, subroutine, or method whose signature has an unnecessarily large number of parameters/arguments."
+CWE-1065,"The application uses deployed components from application servers, but it also uses low-level functions/methods for management of resources, instead of the API provided by the application server."
+CWE-1066,The software contains a serializable data element that does not have an associated serialization method.
+CWE-1067,The software contains a data query against an SQL table or view that is configured in a way that does not utilize an index and may cause sequential searches to be performed.
+CWE-1068,The implementation of the product is not consistent with the design as described within the relevant documentation.
+CWE-1069,"An invokable code block contains an exception handling block that does not contain any code, i.e. is empty."
+CWE-1070,"The software contains a serializable, storable data element such as a field or member, but the data element contains member elements that are not serializable."
+CWE-1071,"The source code contains a block that does not contain any code, i.e., the block is empty."
+CWE-1072,The software accesses a data resource through a database without using a connection pooling capability.
+CWE-1073,"The software contains a client with a function or method that contains a large number of data accesses/queries that are sent through a data manager, i.e., does not use efficient database capabilities."
+CWE-1074,"A class has an inheritance level that is too high, i.e., it has a large number of parent classes."
+CWE-1075,The software performs unconditional control transfer (such as a goto) in code outside of a branching structure such as a switch block.
+CWE-1077,"The code performs a comparison such as an equality test between two float (floating point) values, but it uses comparison operators that do not account for the possibility of loss of precision."
+CWE-1079,"A parent class contains one or more child classes, but the parent class does not have a virtual destructor method."
+CWE-1080,A source code file has too many lines of code.
+CWE-1082,The code contains a class instance that calls the method or function to delete or destroy itself.
+CWE-1083,"The software is intended to manage data access through a particular data manager component such as a relational or non-SQL database, but it contains code that performs data access operations without using that component."
+CWE-1084,A function or method contains too many operations that utilize a data manager or file resource.
+CWE-1085,"A function, method, procedure, etc. contains an excessive amount of code that has been commented out within its body."
+CWE-1086,A class contains an unnecessarily large number of children.
+CWE-1087,"A class contains a virtual method, but the method does not have an associated virtual destructor."
+CWE-1088,"The code has a synchronous call to a remote resource, but there is no timeout for the call, or the timeout is set to infinite."
+CWE-1089,The software uses a large data table that contains an excessively large number of indices.
+CWE-1090,A method for a class performs an operation that directly accesses a member element from another class.
+CWE-1091,The software contains a method that accesses an object but does not later invoke the element's associated finalize/destructor method.
+CWE-1092,The software uses the same control element across multiple architectural layers.
+CWE-1094,"The software contains an index range scan for a large data table, but the scan can cover a large number of rows."
+CWE-1095,The software uses a loop with a control flow condition based on a value that is updated within the body of the loop.
+CWE-1097,The software uses a storable data element that does not have all of the associated functions or methods that are necessary to support comparison.
+CWE-1098,The code contains a data element with a pointer that does not have an associated copy or constructor method.
+CWE-1099,"The product's code, documentation, or other artifacts do not consistently use the same naming conventions for variables, callables, groups of related callables, I/O capabilities, data types, file names, or similar types of elements."
+CWE-1100,The product or code does not isolate system-dependent functionality into separate standalone modules.
+CWE-1101,The product uses automatically-generated code that cannot be executed without a specific runtime support component.
+CWE-1102,"The code uses a data representation that relies on low-level data representation or constructs that may vary across different processors, physical machines, OSes, or other physical components."
+CWE-1103,The product relies on third-party software components that do not provide equivalent functionality across all desirable platforms.
+CWE-1104,The product relies on third-party components that are not actively supported or maintained by the original developer or a trusted proxy for the original developer.
+CWE-1105,"The product or code uses machine-dependent functionality, but it does not sufficiently encapsulate or isolate this functionality from the rest of the code."
+CWE-1106,"The source code uses literal constants that may need to change or evolve over time, instead of using symbolic constants."
+CWE-1107,"The source code uses symbolic constants, but it does not sufficiently place the definitions of these constants into a more centralized or isolated location."
+CWE-1108,"The code is structured in a way that relies too much on using or setting global variables throughout various points in the code, instead of preserving the associated information in a narrower, more local context."
+CWE-1109,"The code contains a callable, block, or other code element in which the same variable is used to control more than one unique task or store more than one instance of data."
+CWE-1110,"The product's design documentation does not adequately describe control flow, data flow, system initialization, relationships between tasks, components, rationales, or other important aspects of the design."
+CWE-1111,"The product's documentation does not adequately define inputs, outputs, or system/software interfaces."
+CWE-1112,The document does not fully define all mechanisms that are used to control or influence how product-specific programs are executed.
+CWE-1113,The source code uses comment styles or formats that are inconsistent or do not follow expected standards for the product.
+CWE-1114,The source code contains whitespace that is inconsistent across the code or does not follow expected standards for the product.
+CWE-1115,The source code contains elements such as source files that do not consistently provide a prologue or header that has been standardized for the project.
+CWE-1116,The source code contains comments that do not accurately describe or explain aspects of the portion of the code with which the comment is associated.
+CWE-1117,"The code contains a function or method whose signature and/or associated inline documentation does not sufficiently describe the callable's inputs, outputs, side effects, assumptions, or return codes."
+CWE-1118,"The documentation does not sufficiently describe the techniques that are used for error handling, exception processing, or similar mechanisms."
+CWE-1119,The code uses too many unconditional branches (such as goto).
+CWE-112,The software accepts XML from an untrusted source but does not validate the XML against the proper schema.
+CWE-1121,The code contains McCabe cyclomatic complexity that exceeds a desirable maximum.
+CWE-1122,The code is structured in a way that a Halstead complexity measure exceeds a desirable maximum.
+CWE-1123,The product uses too much self-modifying code.
+CWE-1124,The code contains a callable or other code grouping in which the nesting / branching is too deep.
+CWE-1125,The product has an attack surface whose quantitative measurement exceeds a desirable maximum.
+CWE-1126,"The source code declares a variable in one scope, but the variable is only used within a narrower scope."
+CWE-1127,"The code is compiled without sufficient warnings enabled, which may prevent the detection of subtle bugs or quality issues."
+CWE-115,"The software misinterprets an input, whether from an attacker or another product, in a security-relevant fashion."
+CWE-117,The software does not neutralize or incorrectly neutralizes output that is written to logs.
+CWE-1173,"The application does not use, or incorrectly uses, an input validation framework that is provided by the source language or an independent library."
+CWE-1188,"The software initializes or sets a resource with a default that is intended to be changed by the administrator, but the default is not secure."
+CWE-120,"The program copies an input buffer to an output buffer without verifying that the size of the input buffer is less than the size of the output buffer, leading to a buffer overflow."
+CWE-1220,"The product implements access controls via a policy or other feature with the intention to disable or restrict accesses (reads and/or writes) to assets in a system from untrusted agents. However, implemented access controls lack required granularity, which renders the control policy too broad because it allows accesses from unauthorized agents to the security-sensitive assets."
+CWE-123,"Any condition where the attacker has the ability to write an arbitrary value to an arbitrary location, often as the result of a buffer overflow."
+CWE-1230,"The product prevents direct access to a resource containing sensitive information, but it does not sufficiently limit access to metadata that is derived from the original, sensitive information."
+CWE-1235,"The code uses boxed primitives, which may introduce inefficiencies into performance-critical operations."
+CWE-1236,"The software saves user-provided information into a Comma-Separated Value (CSV) file, but it does not neutralize or incorrectly neutralizes special elements that could be interpreted as a command when the file is opened by spreadsheet software."
+CWE-124,The software writes to a buffer using an index or pointer that references a memory location prior to the beginning of the buffer.
+CWE-1240,"To fulfill the need for a cryptographic primitive, the product implements a cryptographic algorithm using a non-standard, unproven, or disallowed/non-compliant cryptographic implementation."
+CWE-1241,The device uses an algorithm that is predictable and generates a pseudo-random number.
+CWE-125,"The software reads data past the end, or before the beginning, of the intended buffer."
+CWE-1265,"During execution of non-reentrant code, the software performs a call that unintentionally produces a nested invocation of the non-reentrant code."
+CWE-128,"Wrap around errors occur whenever a value is incremented past the maximum value for its type and therefore wraps around to a very small, negative, or undefined value."
+CWE-129,"The product uses untrusted input when calculating or using an array index, but the product does not validate or incorrectly validates the index to ensure the index references a valid position within the array."
+CWE-130,"The software parses a formatted message or structure, but it does not handle or incorrectly handles a length field that is inconsistent with the actual length of the associated data."
+CWE-131,"The software does not correctly calculate the size to be used when allocating a buffer, which could lead to a buffer overflow."
+CWE-1339,"The program processes a real number with an implementation in which the number's representation does not preserve required accuracy and precision in its fractional part, causing an incorrect result."
+CWE-134,"The software uses a function that accepts a format string as an argument, but the format string originates from an external source."
+CWE-135,The software does not correctly calculate the length of strings that can contain wide or multi-byte characters.
+CWE-140,The software does not neutralize or incorrectly neutralizes delimiters.
+CWE-15,One or more system settings or configuration elements can be externally controlled by a user.
+CWE-166,"The software receives input from an upstream component, but it does not handle or incorrectly handles when an expected special element is missing."
+CWE-167,"The software receives input from an upstream component, but it does not handle or incorrectly handles when an additional unexpected special element is provided."
+CWE-168,The software does not properly handle input in which an inconsistency exists between two or more special characters or reserved words.
+CWE-170,The software does not terminate or incorrectly terminates a string or array with a null character or equivalent terminator.
+CWE-178,"The software does not properly account for differences in case sensitivity when accessing or determining the properties of a resource, leading to inconsistent results."
+CWE-179,"The software validates input before applying protection mechanisms that modify the input, which could allow an attacker to bypass the validation via dangerous inputs that only arise after the modification."
+CWE-182,The software filters data in a way that causes it to be reduced or collapsed into an unsafe value that violates an expected security property.
+CWE-183,"The product implements a protection mechanism that relies on a list of inputs (or properties of inputs) that are explicitly allowed by policy because the inputs are assumed to be safe, but the list is too permissive - that is, it allows an input that is unsafe, leading to resultant weaknesses."
+CWE-184,"The product implements a protection mechanism that relies on a list of inputs (or properties of inputs) that are not allowed by policy or otherwise require other action to neutralize before additional processing takes place, but the list is incomplete, leading to resultant weaknesses."
+CWE-186,"A regular expression is overly restrictive, which prevents dangerous values from being detected."
+CWE-188,"The software makes invalid assumptions about how protocol data or memory is organized at a lower level, resulting in unintended program behavior."
+CWE-190,"The software performs a calculation that can produce an integer overflow or wraparound, when the logic assumes that the resulting value will always be larger than the original value. This can introduce other weaknesses when the calculation is used for resource management or execution control."
+CWE-191,"The product subtracts one value from another, such that the result is less than the minimum allowable integer value, which produces a value that is not equal to the correct result."
+CWE-192,"Integer coercion refers to a set of flaws pertaining to the type casting, extension, or truncation of primitive data types."
+CWE-193,"A product calculates or uses an incorrect maximum or minimum value that is 1 more, or 1 less, than the correct value."
+CWE-197,Truncation errors occur when a primitive is cast to a primitive of a smaller size and data is lost in the conversion.
+CWE-198,"The software receives input from an upstream component, but it does not account for byte ordering (e.g. big-endian and little-endian) when processing the input, causing an incorrect number or value to be used."
+CWE-201,"The code transmits data to another actor, but a portion of the data includes sensitive information that should not be accessible to that actor."
+CWE-204,The product provides different responses to incoming requests in a way that reveals internal state information to an unauthorized actor outside of the intended control sphere.
+CWE-205,"The product's behaviors indicate important differences that may be observed by unauthorized actors in a way that reveals (1) its internal state or decision process, or (2) differences from other products with equivalent functionality."
+CWE-208,"Two separate operations in a product require different amounts of time to complete, in a way that is observable to an actor and reveals security-relevant information about the state of the product, such as whether a particular operation was successful or not."
+CWE-209,"The software generates an error message that includes sensitive information about its environment, users, or associated data."
+CWE-212,"The product stores, transfers, or shares a resource that contains sensitive information, but it does not properly remove that information before the product makes the resource available to unauthorized actors."
+CWE-213,"The product's intended functionality exposes information to certain actors in accordance with the developer's security policy, but this information is regarded as sensitive according to the intended security policies of other stakeholders such as the product's administrator, users, or others whose information is being processed."
+CWE-214,"A process is invoked with sensitive command-line arguments, environment variables, or other elements that can be seen by other processes on the operating system."
+CWE-215,"The application inserts sensitive information into debugging code, which could expose this information if the debugging code is not disabled in production."
+CWE-222,"The application truncates the display, recording, or processing of security-relevant information in a way that can obscure the source or nature of an attack."
+CWE-223,"The application does not record or display information that would be important for identifying the source or nature of an attack, or determining if an action is safe."
+CWE-224,"The software records security-relevant information according to an alternate name of the affected entity, instead of the canonical name."
+CWE-226,"The product releases a resource such as memory or a file so that it can be made available for reuse, but it does not clear or zeroize the information contained in the resource before the product performs a critical state transition or makes the resource available for reuse by other entities."
+CWE-229,"The software does not properly handle when the expected number of values for parameters, fields, or arguments is not provided in input, or if those values are undefined."
+CWE-23,"The software uses external input to construct a pathname that should be within a restricted directory, but it does not properly neutralize sequences such as .. that can resolve to a location that is outside of that directory."
+CWE-233,"The software does not properly handle when the expected number of parameters, fields, or arguments is not provided in input, or if those parameters are undefined."
+CWE-237,The software does not handle or incorrectly handles inputs that are related to complex structures.
+CWE-241,"The software does not handle or incorrectly handles when a particular element is not the expected type, e.g. it expects a digit (0-9) but is provided with a letter (A-Z)."
+CWE-242,The program calls a function that can never be guaranteed to work safely.
+CWE-243,"The program uses the chroot() system call to create a jail, but does not change the working directory afterward. This does not prevent access to files outside of the jail."
+CWE-248,"An exception is thrown from a function, but it is not caught."
+CWE-250,"The software performs an operation at a privilege level that is higher than the minimum level required, which creates new weaknesses or amplifies the consequences of other weaknesses."
+CWE-252,"The software does not check the return value from a method or function, which can prevent it from detecting unexpected states and conditions."
+CWE-253,"The software incorrectly checks a return value from a function, which prevents the software from detecting errors or exceptional conditions."
+CWE-256,Storing a password in plaintext may result in a system compromise.
+CWE-257,"The storage of passwords in a recoverable format makes them subject to password reuse attacks by malicious users. In fact, it should be noted that recoverable encrypted passwords provide no significant benefit over plaintext passwords since they are subject not only to reuse by malicious attackers but also by malicious insiders. If a system administrator can recover a password directly, or use a brute force search on the available information, the administrator can use the password on other accounts."
+CWE-260,The software stores a password in a configuration file that might be accessible to actors who do not know the password.
+CWE-261,Obscuring a password with a trivial encoding does not protect the password.
+CWE-262,"If no mechanism is in place for managing password aging, users will have no incentive to update passwords in a timely manner."
+CWE-263,Allowing password aging to occur unchecked can result in the possibility of diminished password integrity.
+CWE-266,"A product incorrectly assigns a privilege to a particular actor, creating an unintended sphere of control for that actor."
+CWE-267,"A particular privilege, role, capability, or right can be used to perform unsafe actions that were not intended, even when it is assigned to the correct entity."
+CWE-268,"Two distinct privileges, roles, capabilities, or rights can be combined in a way that allows an entity to perform unsafe actions that would not be allowed without that combination."
+CWE-270,The software does not properly manage privileges while it is switching between different contexts that have different privileges or spheres of control.
+CWE-272,The elevated privilege level required to perform operations such as chroot() should be dropped immediately after the operation is performed.
+CWE-273,The software attempts to drop privileges but does not check or incorrectly checks to see if the drop succeeded.
+CWE-274,"The software does not handle or incorrectly handles when it has insufficient privileges to perform an operation, leading to resultant weaknesses."
+CWE-276,"During installation, installed file permissions are set to allow anyone to modify those files."
+CWE-277,A product defines a set of insecure permissions that are inherited by objects that are created by the program.
+CWE-278,"A product inherits a set of insecure permissions for an object, e.g. when copying from an archive file, without user awareness or involvement."
+CWE-279,"While it is executing, the software sets the permissions of an object in a way that violates the intended permissions that have been specified by the user."
+CWE-280,The application does not handle or incorrectly handles when it has insufficient privileges to access resources or functionality as specified by their permissions. This may cause it to follow unexpected code paths that may leave the application in an invalid state.
+CWE-281,"The software does not preserve permissions or incorrectly preserves permissions when copying, restoring, or sharing objects, which can cause them to have less restrictive permissions than intended."
+CWE-283,The software does not properly verify that a critical resource is owned by the proper entity.
+CWE-288,"A product requires authentication, but the product has an alternate path or channel that does not require authentication."
+CWE-290,This attack-focused weakness is caused by improperly implemented authentication schemes that are subject to spoofing attacks.
+CWE-294,A capture-replay flaw exists when the design of the software makes it possible for a malicious user to sniff network traffic and bypass authentication by replaying it to the server in question to the same effect as the original message (or with minor changes).
+CWE-295,"The software does not validate, or incorrectly validates, a certificate."
+CWE-296,"The software does not follow, or incorrectly follows, the chain of trust for a certificate back to a trusted root certificate, resulting in incorrect trust of any resource that is associated with that certificate."
+CWE-299,"The software does not check or incorrectly checks the revocation status of a certificate, which may cause it to use a certificate that has been compromised."
+CWE-303,"The requirements for the software dictate the use of an established authentication algorithm, but the implementation of the algorithm is incorrect."
+CWE-304,"The software implements an authentication technique, but it skips a step that weakens the technique."
+CWE-305,"The authentication algorithm is sound, but the implemented mechanism can be bypassed as the result of a separate weakness that is primary to the authentication error."
+CWE-306,The software does not perform any authentication for functionality that requires a provable user identity or consumes a significant amount of resources.
+CWE-307,"The software does not implement sufficient measures to prevent multiple failed authentication attempts within in a short time frame, making it more susceptible to brute force attacks."
+CWE-308,The use of single-factor authentication can lead to unnecessary risk of compromise when compared with the benefits of a dual-factor authentication scheme.
+CWE-309,"The use of password systems as the primary means of authentication may be subject to several flaws or shortcomings, each reducing the effectiveness of the mechanism."
+CWE-312,The application stores sensitive information in cleartext within a resource that might be accessible to another control sphere.
+CWE-317,The application stores sensitive information in cleartext within the GUI.
+CWE-319,The software transmits sensitive or security-critical data in cleartext in a communication channel that can be sniffed by unauthorized actors.
+CWE-321,The use of a hard-coded cryptographic key significantly increases the possibility that encrypted data may be recovered.
+CWE-322,The software performs a key exchange with an actor without verifying the identity of that actor.
+CWE-323,Nonces should be used for the present occasion and only once.
+CWE-324,"The product uses a cryptographic key or password past its expiration date, which diminishes its safety significantly by increasing the timing window for cracking attacks against that key."
+CWE-325,"The product does not implement a required step in a cryptographic algorithm, resulting in weaker encryption than advertised by the algorithm."
+CWE-328,"The product uses an algorithm that produces a digest (output value) that does not meet security expectations for a hash function that allows an adversary to reasonably determine the original input (preimage attack), find another input that can produce the same hash (2nd preimage attack), or find multiple inputs that evaluate to the same hash (birthday attack)."
+CWE-331,"The software uses an algorithm or scheme that produces insufficient entropy, leaving patterns or clusters of values that are more likely to occur than others."
+CWE-334,"The number of possible random values is smaller than needed by the product, making it more susceptible to brute force attacks."
+CWE-335,The software uses a Pseudo-Random Number Generator (PRNG) but does not correctly manage seeds.
+CWE-338,"The product uses a Pseudo-Random Number Generator (PRNG) in a security context, but the PRNG's algorithm is not cryptographically strong."
+CWE-341,"A number or object is predictable based on observations that the attacker can make about the state of the system or network, such as time, process ID, etc."
+CWE-342,An exact value or random number can be precisely predicted by observing previous values.
+CWE-343,"The software's random number generator produces a series of values which, when observed, can be used to infer a relatively small range of possibilities for the next value that could be generated."
+CWE-346,The software does not properly verify that the source of data or communication is valid.
+CWE-347,"The software does not verify, or incorrectly verifies, the cryptographic signature for data."
+CWE-348,"The software has two different sources of the same data or information, but it uses the source that has less support for verification, is less trusted, or is less resistant to attack."
+CWE-349,"The software, when processing trusted data, accepts any untrusted data that is also included with the trusted data, treating the untrusted data as if it were trusted."
+CWE-351,The software does not properly distinguish between different types of elements in a way that leads to insecure behavior.
+CWE-353,"The software uses a transmission protocol that does not include a mechanism for verifying the integrity of the data during transmission, such as a checksum."
+CWE-354,The software does not validate or incorrectly validates the integrity check values or checksums of a message. This may prevent it from detecting if the data has been modified or corrupted in transmission.
+CWE-356,The software's user interface does not warn the user before undertaking an unsafe action on behalf of that user. This makes it easier for attackers to trick users into inflicting damage to their system.
+CWE-357,"The user interface provides a warning to a user regarding dangerous or sensitive operations, but the warning is not noticeable enough to warrant attention."
+CWE-359,"The product does not properly prevent a person's private, personal information from being accessed by actors who either (1) are not explicitly authorized to access the information or (2) do not have the implicit consent of the person about whom the information is collected."
+CWE-36,"The software uses external input to construct a pathname that should be within a restricted directory, but it does not properly neutralize absolute path sequences such as /abs/path that can resolve to a location that is outside of that directory."
+CWE-363,"The software checks the status of a file or directory before accessing it, which produces a race condition in which the file can be replaced with a link before the access is performed, causing the software to access the wrong file."
+CWE-364,The software uses a signal handler that introduces a race condition.
+CWE-365,"The code contains a switch statement in which the switched variable can be modified while the switch is still executing, resulting in unexpected behavior."
+CWE-366,"If two threads of execution use a resource simultaneously, there exists the possibility that resources may be used while invalid, in turn making the state of execution undefined."
+CWE-367,"The software checks the state of a resource before using that resource, but the resource's state can change between the check and the use in a way that invalidates the results of the check. This can cause the software to perform invalid actions when the resource is in an unexpected state."
+CWE-368,"A product performs a series of non-atomic actions to switch between contexts that cross privilege or other security boundaries, but a race condition allows an attacker to modify or misrepresent the product's behavior during the switch."
+CWE-369,The product divides a value by zero.
+CWE-372,"The software does not properly determine which state it is in, causing it to assume it is in state X when in fact it is in state Y, causing it to perform incorrect operations in a security-relevant manner."
+CWE-374,The program sends non-cloned mutable data as an argument to a method or function.
+CWE-375,Sending non-cloned mutable data as a return value may result in that data being altered or deleted by the calling function.
+CWE-378,"Opening temporary files without appropriate measures or controls can leave the file, its contents and any function that it impacts vulnerable to attack."
+CWE-379,The software creates a temporary file in a directory whose permissions allow unintended actors to determine the file's existence or otherwise access that file.
+CWE-385,"Covert timing channels convey information by modulating some aspect of system behavior over time, so that the program receiving the information can observe system behavior and infer protected information."
+CWE-386,"A constant symbolic reference to an object is used, even though the reference can resolve to a different object over time."
+CWE-390,"The software detects a specific error, but takes no actions to handle the error."
+CWE-391,"[PLANNED FOR DEPRECATION. SEE MAINTENANCE NOTES AND CONSIDER CWE-252, CWE-248, OR CWE-1069.] Ignoring exceptions and other error conditions may allow an attacker to induce unexpected behavior unnoticed."
+CWE-392,The software encounters an error but does not provide a status code or return value to indicate that an error has occurred.
+CWE-393,"A function or operation returns an incorrect return value or status code that does not indicate an error, but causes the product to modify its behavior based on the incorrect result."
+CWE-394,"The software does not properly check when a function or operation returns a value that is legitimate for the function, but is not expected by the software."
+CWE-395,Catching NullPointerException should not be used as an alternative to programmatic checks to prevent dereferencing a null pointer.
+CWE-396,Catching overly broad exceptions promotes complex error handling code that is more likely to contain security vulnerabilities.
+CWE-397,Throwing overly broad exceptions promotes complex error handling code that is more likely to contain security vulnerabilities.
+CWE-403,"A process does not close sensitive file descriptors before invoking a child process, which allows the child to perform unauthorized I/O operations using those descriptors."
+CWE-408,The software allows an entity to perform a legitimate but expensive operation before authentication or authorization has taken place.
+CWE-409,The software does not handle or incorrectly handles a compressed input with a very high compression ratio that produces a large output.
+CWE-41,The system or application is vulnerable to file system contents disclosure through path equivalence. Path equivalence involves the use of special characters in file and directory names. The associated manipulations are intended to generate multiple names for the same object.
+CWE-410,"The software's resource pool is not large enough to handle peak demand, which allows an attacker to prevent others from accessing the resource by using a (relatively) large number of requests for resources."
+CWE-412,"The software properly checks for the existence of a lock, but the lock can be externally controlled or influenced by an actor that is outside of the intended sphere of control."
+CWE-413,The software does not lock or does not correctly lock a resource when the software must have exclusive access to the resource.
+CWE-414,A product does not check to see if a lock is present before performing sensitive operations on a resource.
+CWE-419,"The software uses a primary channel for administration or restricted functionality, but it does not properly protect the channel."
+CWE-420,"The software protects a primary channel, but it does not use the same level of protection for an alternate channel."
+CWE-421,"The product opens an alternate channel to communicate with an authorized user, but the channel is accessible to other actors."
+CWE-425,"The web application does not adequately enforce appropriate authorization on all restricted URLs, scripts, or files."
+CWE-426,The application searches for critical resources using an externally-supplied search path that can point to resources that are not under the application's direct control.
+CWE-427,"The product uses a fixed or controlled search path to find resources, but one or more locations in that path can be under the control of unintended actors."
+CWE-428,"The product uses a search path that contains an unquoted element, in which the element contains whitespace or other separators. This can cause the product to access resources in a parent path."
+CWE-430,The wrong handler is assigned to process an object.
+CWE-431,A handler is not available or implemented.
+CWE-432,"The application uses a signal handler that shares state with other signal handlers, but it does not properly mask or prevent those signal handlers from being invoked while the original signal handler is still running."
+CWE-433,The software stores raw content or supporting code under the web document root with an extension that is not specifically handled by the server.
+CWE-434,The software allows the attacker to upload or transfer files of dangerous types that can be automatically processed within the product's environment.
+CWE-437,"A product acts as an intermediary or monitor between two or more endpoints, but it does not have a complete model of an endpoint's features, behaviors, or state, potentially causing the product to perform incorrect actions based on this incomplete model."
+CWE-439,"A's behavior or functionality changes with a new version of A, or a new environment, which is not known (or manageable) by B."
+CWE-440,"A feature, API, or function does not perform according to its specification."
+CWE-444,"When malformed or abnormal HTTP requests are interpreted by one or more entities in the data flow between the user and the web server, such as a proxy or firewall, they can be interpreted inconsistently, allowing the attacker to smuggle a request to one device without the other device being aware of it."
+CWE-447,"A UI function for a security feature appears to be supported and gives feedback to the user that suggests that it is supported, but the underlying functionality is not implemented."
+CWE-448,A UI function is obsolete and the product does not warn the user.
+CWE-449,The UI performs the wrong action with respect to the user's request.
+CWE-450,The UI has multiple interpretations of user input but does not prompt the user when it selects the less secure interpretation.
+CWE-454,The software initializes critical internal variables or data stores using inputs that can be modified by untrusted actors.
+CWE-455,"The software does not exit or otherwise modify its operation when security-relevant errors occur during initialization, such as when a configuration file has a format error, which can cause the software to execute in a less secure fashion than intended by the administrator."
+CWE-459,The software does not properly clean up and remove temporary or supporting resources after they have been used.
+CWE-460,"The product does not clean up its state or incorrectly cleans up its state when an exception is thrown, leading to unexpected state or control flow."
+CWE-462,Duplicate keys in associative lists can lead to non-unique keys being mistaken for an error.
+CWE-463,The accidental deletion of a data-structure sentinel can cause serious programming logic problems.
+CWE-464,The accidental addition of a data-structure sentinel can cause serious programming logic problems.
+CWE-466,A function can return a pointer to memory that is outside of the buffer that the pointer is expected to reference.
+CWE-467,"The code calls sizeof() on a malloced pointer type, which always returns the wordsize/8. This can produce an unexpected result if the programmer intended to determine how much memory has been allocated."
+CWE-468,"In C and C++, one may often accidentally refer to the wrong memory due to the semantics of when math operations are implicitly scaled."
+CWE-469,"The application subtracts one pointer from another in order to determine size, but this calculation can be incorrect if the pointers do not exist in the same memory chunk."
+CWE-470,"The application uses external input with reflection to select which classes or code to use, but it does not sufficiently prevent the input from selecting improper classes or code."
+CWE-471,The software does not properly protect an assumed-immutable element from being modified by an attacker.
+CWE-472,"The web application does not sufficiently verify inputs that are assumed to be immutable but are actually externally controllable, such as hidden form fields."
+CWE-474,The code uses a function that has inconsistent implementations across operating systems and versions.
+CWE-475,The behavior of this function is undefined unless its control parameter is set to a specific value.
+CWE-476,"A NULL pointer dereference occurs when the application dereferences a pointer that it expects to be valid, but is NULL, typically causing a crash or exit."
+CWE-477,"The code uses deprecated or obsolete functions, which suggests that the code has not been actively reviewed or maintained."
+CWE-478,"The code does not have a default case in a switch statement, which might lead to complex logical errors and resultant weaknesses."
+CWE-479,The program defines a signal handler that calls a non-reentrant function.
+CWE-480,"The programmer accidentally uses the wrong operator, which changes the application logic in security-relevant ways."
+CWE-483,"The code does not explicitly delimit a block that is intended to contain 2 or more statements, creating a logic error."
+CWE-484,"The program omits a break statement within a switch or similar construct, causing code associated with multiple conditions to execute. This can cause problems when the programmer only intended to execute code associated with one condition."
+CWE-487,"Java packages are not inherently closed; therefore, relying on them for code security is not a good practice."
+CWE-488,"The product does not sufficiently enforce boundaries between the states of different sessions, causing data to be provided to, or used by, the wrong session."
+CWE-489,"The application is deployed to unauthorized actors with debugging code still enabled or active, which can create unintended entry points or expose sensitive information."
+CWE-494,The product downloads source code or an executable from a remote location and executes the code without sufficiently verifying the origin and integrity of the code.
+CWE-497,The application does not properly prevent sensitive system-level information from being accessed by unauthorized actors who do not have the same level of access to the underlying system as the application does.
+CWE-501,The product mixes trusted and untrusted data in the same data structure or structured message.
+CWE-502,The application deserializes untrusted data without sufficiently verifying that the resulting data will be valid.
+CWE-515,A covert storage channel transfers information through the setting of bits by one program and the reading of those bits by another. What distinguishes this case from that of ordinary operation is that the bits are used to convey encoded information.
+CWE-521,"The product does not require that users should have strong passwords, which makes it easier for attackers to compromise user accounts."
+CWE-523,Login pages do not use adequate measures to protect the user name and password while they are in transit from the client to the server.
+CWE-524,"The code uses a cache that contains sensitive information, but the cache can be read by an actor outside of the intended control sphere."
+CWE-532,Information written to log files can be of a sensitive nature and give valuable guidance to an attacker or expose sensitive user information.
+CWE-540,Source code on a web server or repository often contains sensitive information and should generally not be accessible to users.
+CWE-544,"The software does not use a standardized method for handling errors throughout the code, which might introduce inconsistent error handling and resultant weaknesses."
+CWE-546,"The code contains comments that suggest the presence of bugs, incomplete functionality, or weaknesses."
+CWE-547,"The program uses hard-coded constants instead of symbolic names for security-critical values, which increases the likelihood of mistakes during code maintenance or security policy change."
+CWE-549,"The software does not mask passwords during entry, increasing the potential for attackers to observe and capture passwords."
+CWE-551,"If a web server does not fully parse requested URLs before it examines them for authorization, it may be possible for an attacker to bypass authorization protection."
+CWE-561,"The software contains dead code, which can never be executed."
+CWE-562,"A function returns the address of a stack variable, which will cause unintended program behavior, typically in the form of a crash."
+CWE-563,"The variable's value is assigned but never used, making it a dead store."
+CWE-565,"The application relies on the existence or values of cookies when performing security-critical operations, but it does not properly ensure that the setting is valid for the associated user."
+CWE-567,"The product does not properly synchronize shared data, such as static variables across threads, which can lead to undefined behavior and unpredictable data changes."
+CWE-570,The software contains an expression that will always evaluate to false.
+CWE-571,The software contains an expression that will always evaluate to true.
+CWE-580,The software contains a clone() method that does not call super.clone() to obtain the new object.
+CWE-581,The software does not maintain equal hashcodes for equal objects.
+CWE-584,"The code has a return statement inside a finally block, which will cause any thrown exception in the try block to be discarded."
+CWE-585,The software contains an empty synchronized block.
+CWE-586,The software makes an explicit call to the finalize() method from outside the finalizer.
+CWE-587,The software sets a pointer to a specific address other than NULL or 0.
+CWE-588,Casting a non-structure type to a structure type and accessing a field can lead to memory access errors or data corruption.
+CWE-59,"The software attempts to access a file based on the filename, but it does not properly prevent that filename from identifying a link or shortcut that resolves to an unintended resource."
+CWE-595,"The program compares object references instead of the contents of the objects themselves, preventing it from detecting equivalent objects."
+CWE-597,"The product uses the wrong operator when comparing a string, such as using == when the .equals() method should be used instead."
+CWE-600,"The Servlet does not catch all exceptions, which may reveal sensitive debugging information."
+CWE-601,"A web application accepts a user-controlled input that specifies a link to an external site, and uses that link in a Redirect. This simplifies phishing attacks."
+CWE-603,"A client/server product performs authentication within client code but not in server code, allowing server-side authentication to be bypassed via a modified client that omits the authentication check."
+CWE-605,"When multiple sockets are allowed to bind to the same port, other services on that port may be stolen or spoofed."
+CWE-606,"The product does not properly check inputs that are used for loop conditions, potentially leading to a denial of service or other consequences because of excessive looping."
+CWE-609,"The program uses double-checked locking to access a resource without the overhead of explicit synchronization, but the locking is insufficient."
+CWE-611,"The software processes an XML document that can contain XML entities with URIs that resolve to documents outside of the intended sphere of control, causing the product to embed incorrect documents into its output."
+CWE-612,"The product creates a search index of private or sensitive documents, but it does not properly limit index access to actors who are authorized to see the original information."
+CWE-613,"According to WASC, Insufficient Session Expiration is when a web site permits an attacker to reuse old session credentials or session IDs for authorization."
+CWE-617,"The product contains an assert() or similar statement that can be triggered by an attacker, which leads to an application exit or other behavior that is more severe than necessary."
+CWE-618,"An ActiveX control is intended for use in a web browser, but it exposes dangerous methods that perform actions that are outside of the browser's security model (e.g. the zone or domain)."
+CWE-619,"If a database cursor is not closed properly, then it could become accessible to other users while retaining the same privileges that were originally assigned, leaving the cursor dangling."
+CWE-620,"When setting a new password for a user, the product does not require knowledge of the original password, or using another form of authentication."
+CWE-621,"The product uses external input to determine the names of variables into which information is extracted, without verifying that the names of the specified variables are valid. This could cause the program to overwrite unintended variables."
+CWE-624,"The product uses a regular expression that either (1) contains an executable component with user-controlled inputs, or (2) allows a user to enable execution by inserting pattern modifiers."
+CWE-625,The product uses a regular expression that does not sufficiently restrict the set of allowed values.
+CWE-627,"In a language where the user can influence the name of a variable at runtime, if the variable names are not controlled, an attacker can read or write to arbitrary variables, or access arbitrary functions."
+CWE-628,"The product calls a function, procedure, or routine with arguments that are not correctly specified, leading to always-incorrect behavior and resultant weaknesses."
+CWE-639,The system's authorization functionality does not prevent one user from gaining access to another user's data or record by modifying the key value identifying the data.
+CWE-640,"The software contains a mechanism for users to recover or change their passwords without knowing the original password, but the mechanism is weak."
+CWE-641,"The application constructs the name of a file or other resource using input from an upstream component, but it does not restrict or incorrectly restricts the resulting name."
+CWE-643,"The software uses external input to dynamically construct an XPath expression used to retrieve data from an XML database, but it does not neutralize or incorrectly neutralizes that input. This allows an attacker to control the structure of the query."
+CWE-645,"The software contains an account lockout protection mechanism, but the mechanism is too restrictive and can be triggered too easily, which allows attackers to deny service to legitimate users by causing their accounts to be locked out."
+CWE-648,The application does not conform to the API requirements for a function call that requires extra privileges. This could allow attackers to gain privileges by causing the function to be called incorrectly.
+CWE-649,"The software uses obfuscation or encryption of inputs that should not be mutable by an external actor, but the software does not use integrity checks to detect if those inputs have been modified."
+CWE-652,"The software uses external input to dynamically construct an XQuery expression used to retrieve data from an XML database, but it does not neutralize or incorrectly neutralizes that input. This allows an attacker to control the structure of the query."
+CWE-66,"The product does not handle or incorrectly handles a file name that identifies a virtual resource that is not directly specified within the directory that is associated with the file name, causing the product to perform file-based operations on a resource that is not a file."
+CWE-663,The software calls a non-reentrant function in a concurrent context in which a competing code sequence (e.g. thread or signal handler) may have an opportunity to call the same function or otherwise influence its state.
+CWE-676,"The program invokes a potentially dangerous function that could introduce a vulnerability if it is used incorrectly, but the function can also be used safely."
+CWE-681,"When converting from one data type to another, such as long to integer, data can be omitted or translated in a way that produces unexpected values. If the resulting values are used in a sensitive context, then dangerous behaviors may occur."
+CWE-694,"The software uses multiple resources that can have the same identifier, in a context in which unique identifiers are required."
+CWE-695,The software uses low-level functionality that is explicitly prohibited by the framework or specification under which the software is supposed to operate.
+CWE-698,"The web application sends a redirect to another location, but instead of exiting, it executes additional code."
+CWE-708,"The software assigns an owner to a resource, but the owner is outside of the intended control sphere."
+CWE-73,The software allows user input to control or influence paths or file names that are used in filesystem operations.
+CWE-733,"The developer builds a security-critical protection mechanism into the software, but the compiler optimizes the program such that the mechanism is removed or modified."
+CWE-749,"The software provides an Applications Programming Interface (API) or similar interface for interaction with external actors, but the interface includes a dangerous method or function that is not properly restricted."
+CWE-756,"The software does not return custom error pages to the user, possibly exposing sensitive information."
+CWE-76,"The software properly neutralizes certain special elements, but it improperly neutralizes equivalent special elements."
+CWE-763,"The application attempts to return a memory resource to the system, but calls the wrong release function or calls the appropriate release function incorrectly."
+CWE-764,"The software locks a critical resource more times than intended, leading to an unexpected state in the system."
+CWE-765,"The software unlocks a critical resource more times than intended, leading to an unexpected state in the system."
+CWE-766,"The software declares a critical variable, field, or member to be public when intended security policy requires it to be private."
+CWE-767,The software defines a public method that reads or modifies a private variable.
+CWE-770,"The software allocates a reusable resource or group of resources on behalf of an actor without imposing any restrictions on the size or number of resources that can be allocated, in violation of the intended security policy for that actor."
+CWE-771,"The software does not properly maintain a reference to a resource that has been allocated, which prevents the resource from being reclaimed."
+CWE-772,"The software does not release a resource after its effective lifetime has ended, i.e., after the resource is no longer needed."
+CWE-776,"The software uses XML documents and allows their structure to be defined with a Document Type Definition (DTD), but it does not properly control the number of recursive definitions of entities."
+CWE-778,"When a security-critical event occurs, the software either does not record the event or omits important details about the event when logging it."
+CWE-779,"The software logs too much information, making log files hard to process and possibly hindering recovery efforts or forensic analysis after an attack."
+CWE-78,"The software constructs all or part of an OS command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended OS command when it is sent to a downstream component."
+CWE-783,The program uses an expression in which operator precedence causes incorrect logic to be used.
+CWE-786,The software reads or writes to a buffer using an index or pointer that references a memory location prior to the beginning of the buffer.
+CWE-787,"The software writes data past the end, or before the beginning, of the intended buffer."
+CWE-788,The software reads or writes to a buffer using an index or pointer that references a memory location after the end of the buffer.
+CWE-79,The software does not neutralize or incorrectly neutralizes user-controllable input before it is placed in output that is used as a web page that is served to other users.
+CWE-791,"The software receives data from an upstream component, but does not completely filter special elements before sending it to a downstream component."
+CWE-795,"The software receives data from an upstream component, but only accounts for special elements at a specified location, thereby missing remaining special elements that may exist before sending it to a downstream component."
+CWE-798,"The software contains hard-coded credentials, such as a password or cryptographic key, which it uses for its own inbound authentication, outbound communication to external components, or encryption of internal data."
+CWE-804,"The software uses a CAPTCHA challenge, but the challenge can be guessed or automatically recognized by a non-human actor."
+CWE-805,"The software uses a sequential operation to read or write a buffer, but it uses an incorrect length value that causes it to access memory that is outside of the bounds of the buffer."
+CWE-820,The software utilizes a shared resource in a concurrent manner but does not attempt to synchronize access to the resource.
+CWE-821,"The software utilizes a shared resource in a concurrent manner, but it does not correctly synchronize access to the resource."
+CWE-822,"The program obtains a value from an untrusted source, converts this value to a pointer, and dereferences the resulting pointer."
+CWE-823,"The program performs pointer arithmetic on a valid pointer, but it uses an offset that can point outside of the intended range of valid memory locations for the resulting pointer."
+CWE-824,The program accesses or uses a pointer that has not been initialized.
+CWE-825,"The program dereferences a pointer that contains a location for memory that was previously valid, but is no longer valid."
+CWE-826,The program releases a resource that is still intended to be used by the program itself or another actor.
+CWE-828,"The software defines a signal handler that contains code sequences that are not asynchronous-safe, i.e., the functionality is not reentrant, or it can be interrupted."
+CWE-829,"The software imports, requires, or includes executable functionality (such as a library) from a source that is outside of the intended control sphere."
+CWE-831,The software defines a function that is used as a handler for more than one signal.
+CWE-832,The software attempts to unlock a resource that is not locked.
+CWE-833,"The software contains multiple threads or executable segments that are waiting for each other to release a necessary lock, resulting in deadlock."
+CWE-835,"The program contains an iteration or loop with an exit condition that cannot be reached, i.e., an infinite loop."
+CWE-836,"The software records password hashes in a data store, receives a hash of a password from a client, and compares the supplied hash to the hash obtained from the data store."
+CWE-837,"The software requires that an actor should only be able to perform an action once, or to have only one unique action, but the software does not enforce or improperly enforces this restriction."
+CWE-838,"The software uses or specifies an encoding when generating output to a downstream component, but the specified encoding is not the same as the encoding that is expected by the downstream component."
+CWE-839,"The program checks a value to ensure that it is less than or equal to a maximum, but it does not also verify that the value is greater than or equal to the minimum."
+CWE-841,"The software supports a session in which more than one behavior must be performed by an actor, but it does not properly ensure that the actor performs the behaviors in the required sequence."
+CWE-842,The software or the administrator places a user into an incorrect group.
+CWE-843,"The program allocates or initializes a resource such as a pointer, object, or variable using one type, but it later accesses that resource using a type that is incompatible with the original type."
+CWE-88,"The software constructs a string for a command to executed by a separate component in another control sphere, but it does not properly delimit the intended arguments, options, or switches within that command string."
+CWE-89,"The software constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component."
+CWE-90,"The software constructs all or part of an LDAP query using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended LDAP query when it is sent to a downstream component."
+CWE-908,The software uses or accesses a resource that has not been initialized.
+CWE-909,The software does not initialize a critical resource.
+CWE-91,"The software does not properly neutralize special elements that are used in XML, allowing attackers to modify the syntax, content, or commands of the XML before it is processed by an end system."
+CWE-910,The software uses or accesses a file descriptor after it has been closed.
+CWE-911,"The software uses a reference count to manage a resource, but it does not update or incorrectly updates the reference count."
+CWE-914,The software does not properly restrict reading from or writing to dynamically-identified variables.
+CWE-915,"The software receives input from an upstream component that specifies multiple attributes, properties, or fields that are to be initialized or updated in an object, but it does not properly control which attributes can be modified."
+CWE-916,"The software generates a hash for a password, but it uses a scheme that does not provide a sufficient level of computational effort that would make password cracking attacks infeasible or expensive."
+CWE-917,"The software constructs all or part of an expression language (EL) statement in a Java Server Page (JSP) using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended EL statement before it is executed."
+CWE-920,"The software operates in an environment in which power is a limited resource that cannot be automatically replenished, but the software does not properly restrict the amount of power that its operation consumes."
+CWE-921,The software stores sensitive information in a file system or device that does not have built-in access control.
+CWE-924,"The software establishes a communication channel with an endpoint and receives a message from that endpoint, but it does not sufficiently ensure that the message was not modified during transmission."
+CWE-93,"The software uses CRLF (carriage return line feeds) as a special element, e.g. to separate lines or records, but it does not neutralize or incorrectly neutralizes CRLF sequences from inputs."
+CWE-939,"The software uses a handler for a custom URL scheme, but it does not properly restrict which actors can invoke the handler using the scheme."
+CWE-94,"The software constructs all or part of a code segment using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the syntax or behavior of the intended code segment."
+CWE-940,"The software establishes a communication channel to handle an incoming request that has been initiated by an actor, but it does not properly verify that the request is coming from the expected origin."
+CWE-941,"The software creates a communication channel to initiate an outgoing request to an actor, but it does not correctly specify the intended destination for that actor."
+CWE-96,"The software receives input from an upstream component, but it does not neutralize or incorrectly neutralizes code syntax before inserting the input into an executable resource, such as a library, configuration file, or template."

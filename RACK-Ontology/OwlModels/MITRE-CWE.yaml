@@ -1,6 +1,5 @@
 # This file is intended to be used with the rack CLI script found in RACK/cli/
 #
 # Script documentation is available in RACK/cli/README.md
-data-graph: "http://rack001/mitre-cwe"
-ingestion-steps:
-- { owl: "MITRE-CWE.owl"}
+files:
+- "MITRE-CWE.owl"

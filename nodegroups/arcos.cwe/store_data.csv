@@ -1,0 +1,5 @@
+ID,comments,creator,jsonFile
+CWE effectivenesses,Ingestion nodegroup for the CWE effectiveness enumeration,eric,CWE effectivenesses.json
+CWE effectiveness association,Ingestion nodegroup for setting the effectiveness of each detection method for a CWE,eric,CWE effectiveness association.json
+CWE methods,Ingestion nodegroup for CWE detection methods,eric,CWE methods.json
+CWE ingestion,Ingestion nodegroup for the CWE list,eric,CWE ingestion.json

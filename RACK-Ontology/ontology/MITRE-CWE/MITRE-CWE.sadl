@@ -28,7 +28,8 @@ CWE_DETECTION_METHOD
 
 CWE_DETECTION_EFFECTIVENESS
   (note "Indicates the effectiveness of using a particular detection method to address a particular weakness.")
-  is a class.
+  is a type of THING.
+  detectionCWE describes CWE_DETECTION_EFFECTIVENESS with a single value of type MITRE_CWE.
   detectionMethod describes CWE_DETECTION_EFFECTIVENESS with a single value of type CWE_DETECTION_METHOD.
   effectiveness describes CWE_DETECTION_EFFECTIVENESS with a single value of type CWE_EFFECTIVENESS.
 

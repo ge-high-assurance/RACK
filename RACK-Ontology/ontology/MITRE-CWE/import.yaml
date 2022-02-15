@@ -1,0 +1,8 @@
+# This file is intended to be used using the Load-CWEData.sh script found
+# in the directory above.
+data-graph: "http://rack001/mitre-cwe"
+ingestion-steps:
+- {nodegroup: "CWE ingestion", csv: "MITRE_CWE.csv" }
+- {nodegroup: "CWE effectivenesses", csv: "CWE_EFFECTIVENESS.csv" }
+- {nodegroup: "CWE methods",csv: "CWE_METHOD.csv" }
+- {nodegroup: "CWE effectiveness association", csv: "CWE_TOOL_EFFECTIVENESS.csv" }

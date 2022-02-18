@@ -11,7 +11,7 @@ python-dateutil==2.8.1
 PyYAML==5.4
 requests==2.25.1
 plotly==4.14.3
-semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@d6d8e749121ec9309b47d17b01bdcd98935f7e70
+semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@166950a9dcb58ae4479690178bd14e808292e61d
 six==1.15.0
 tabulate==0.8.7
 urllib3==1.26.5

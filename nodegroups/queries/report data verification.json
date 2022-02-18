@@ -1,0 +1,112 @@
+{
+    "title": "RACK 9.1 Data Verification",
+    "description": "This sample report demonstrates data verification capability of RACK.  It consists of  some built-in checks and a series of nodegroup queries that check the data.",
+    "sections": [
+        {
+            "header": "Instance Count",
+            "special": {
+                "id": "class_count"
+            },
+            "description": "Counts number of instances of each class.  Provides a quick check of basic volume of data loaded into the system."
+        },
+        {
+            "header": "Cardinality Check",
+            "description": "List any violations of the cardinality constraints which are expressed in the SADL ontology.",
+            "special": {
+                "id": "cardinality"
+            }
+        },
+        {
+            "header": "INTERFACE without destination SYSTEM",
+            "table_test_row_count": {
+                "nodegroup": "query dataVer INTERFACE without destination SYSTEM",
+                "success_rows": 0
+            }
+        },
+        {
+            "header": "INTERFACE without source SYSTEM",
+            "table_test_row_count": {
+                "nodegroup": "query dataVer INTERFACE without source SYSTEM",
+                "success_rows": 0
+            }
+        },
+        {
+            "header": "only REQUIREMENT subclasses",
+            "description": "Search for invalid REQUIREMENTS that are not one of {SRS_Req or SubDD or CSID or PIDS}",
+            "table_test_row_count": {
+                "nodegroup": "query dataVer only REQUIREMENT subclasses",
+                "success_rows": 0
+            }
+        },
+        {
+            "header": "SBVT_Result without confirms_SBVT_Test",
+            "description": "Search for SBVT_Result w/o -confirms->SBVT_Test",
+            "table_test_row_count": {
+                "nodegroup": "query dataVer SBVT_Result without confirms_SBVT_Test",
+                "success_rows": 0
+            }
+        },
+        {
+            "header": "SBVT_Test without REQUIREMENT",
+            "description": "Search for SBVT_Test w/o -verifies->REQUIREMENT",
+            "table_test_row_count": {
+                "nodegroup": "query dataVer SBVT_Test without REQUIREMENT",
+                "success_rows": 0
+            }
+        },
+        {
+            "header": "SRS_Req dataInsertedBy other than SRS Data Ingestion",
+            "description": "Search for SRS_Req w/o -dataInsertedBy-> SRS Data Ingestion",
+            "table_test_row_count": {
+                "nodegroup": "query dataVer SRS_Req dataInsertedBy other than SRS Data Ingestion",
+                "success_rows": 0
+            }
+        },
+        {
+            "header": "SRS_Req without CSID or PIDS",
+            "description": "Search for SRS_Req w/o -satisfies-> {CSID or PIDS}",
+            "table_test_row_count": {
+                "nodegroup": "query dataVer SRS_Req without CSID or PIDS",
+                "success_rows": 0
+            }
+        },
+        {
+            "header": "SRS_Req without description",
+            "table_test_row_count": {
+                "nodegroup": "query dataVer SRS_Req without description",
+                "success_rows": 0
+            }
+        },
+        {
+            "header": "SRS_Req without verifies SBVT_Test",
+            "table_test_row_count": {
+                "nodegroup": "query dataVer SRS_Req without verifies SBVT_Test",
+                "success_rows": 0
+            }
+        },
+        {
+            "header": "SubDD_Req without satisfies SRS_Req",
+            "description": "",
+            "table_test_row_count": {
+                "nodegroup": "query dataVer SubDD_Req without satisfies SRS_Req",
+                "success_rows": 0
+            }
+        },
+        {
+            "header": "SYSTEM without partOf SYSTEM",
+            "description": "",
+            "table_test_row_count": {
+                "nodegroup": "query dataVer SYSTEM without partOf SYSTEM",
+                "success_rows": 0
+            }
+        },
+        {
+            "header": "unlinked SWCOMPONENT",
+            "description": "Search for SWCOMPONENT that has neither subcomponentOf nor wasImpactedBy ",
+            "table_test_row_count": {
+                "nodegroup": "query dataVer unlinked SWCOMPONENT",
+                "success_rows": 0
+            }
+        }
+    ]
+}

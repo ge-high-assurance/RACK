@@ -30,7 +30,7 @@ import "http://arcos.rack/PROV-S".
 DOCUMENT
     (note "A piece of written, printed, or electronic matter that provides information or evidence or that serves as an official record.")
     is a type of COLLECTION.
-    versionNumber describes DOCUMENT with values of type string.
+    versionNumber (note "The release version of the document") describes DOCUMENT with values of type string.
     versionNumber describes DOCUMENT with at most 1 value.
 
     dateOfIssue (note "Release date for the document.") describes DOCUMENT with values of type date.

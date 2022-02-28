@@ -1,0 +1,56 @@
+/* Copyright (c) 2022, GrammaTech, Galois
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.acert/MITRE-CWE" alias CWE.
+
+// AGENTS#TOOL, ANALYSIS#ANALYSIS, ANALYSIS#ANALYSIS_OUTPUT, SOFTWARE#SWCOMPONENT
+import "http://arcos.rack/AGENTS".
+import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/SOFTWARE".
+
+MITRE_CWE (note "MITRE_CWE is an identifier and description derived from MITRE database.")
+  is a type of ENTITY.
+
+CWE_DETECTION_METHOD
+  (note "Detection Methods convey information about the types of assessment activities that can find weaknesses. See https://cwe.mitre.org/community/swa/detection_methods.html")
+  is a type of ENTITY.
+  
+  detectionImplementedBy describes CWE_DETECTION_METHOD with values of type TOOL.
+
+CWE_DETECTION_EFFECTIVENESS
+  (note "Indicates the effectiveness of using a particular detection method to address a particular weakness.")
+  is a type of THING.
+  detectionCWE describes CWE_DETECTION_EFFECTIVENESS with a single value of type MITRE_CWE.
+  detectionMethod describes CWE_DETECTION_EFFECTIVENESS with a single value of type CWE_DETECTION_METHOD.
+  effectiveness describes CWE_DETECTION_EFFECTIVENESS with a single value of type CWE_EFFECTIVENESS.
+
+CWE_EFFECTIVENESS is a type of THING.
+CweHigh                      is a CWE_EFFECTIVENESS identifier "High".
+CweLimited                   is a CWE_EFFECTIVENESS identifier "Limited".
+CweModerate                  is a CWE_EFFECTIVENESS identifier "Moderate".
+CweZero                      is a CWE_EFFECTIVENESS identifier "Zero".
+CweOpportunistic             is a CWE_EFFECTIVENESS identifier "Opportunistic".
+CweSOAR_Partial              is a CWE_EFFECTIVENESS identifier "SOAR Partial".
+
+CWE_ANALYSIS (note "CWE_ANALYSIS is the ANALYSIS activity of trying to detect a CWE with a particular TOOL.")
+  is a type of ANALYSIS.
+  goal of CWE_ANALYSIS only has values of type MITRE_CWE.
+
+  analyzedWith of CWE_ANALYSIS only has values of type TOOL.
+  analyzedWith of CWE_ANALYSIS has at most 1 value.
+
+CWE_FINDING (note "CWE_FINDING is the ANALYSIS_OUTPUT that indicates the likely presence of a CWE in a SWCOMPONENT.")
+  is a type of ANALYSIS_OUTPUT.
+  CWE:finding describes CWE_FINDING with values of type MITRE_CWE.
+  
+  analyzes of CWE_FINDING only has values of type SWCOMPONENT.
+  wasGeneratedBy of CWE_FINDING only has values of type CWE_ANALYSIS.

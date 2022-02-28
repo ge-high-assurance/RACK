@@ -458,13 +458,19 @@ def delete_nodegroup(nodegroup: str) -> None:
         semtk3.delete_nodegroup_from_store(nodegroup)
     delete()
 
+def delete_store_item(id: str, item_type: str) -> None:
+    @with_status(f'Deleting {str_highlight(id)}')
+    def delete() -> None:
+        semtk3.delete_store_item(id, item_type)
+    delete()
+
 def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, yes: bool, use_regexp: bool, base_url: Url) -> None:
     if not nodegroups:
         print('No nodegroups specified for deletion: doing nothing.')
         return
 
     sparql_connection(base_url, None, [], None)
-    allIDs = semtk3.get_nodegroup_store_data().get_column('ID')
+    allIDs = semtk3.get_store_table().get_column('ID')
 
     if use_regexp:
         regexps = [re.compile(regex_str) for regex_str in nodegroups]
@@ -490,14 +496,19 @@ def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, ye
 
 def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
     sparql_connection(base_url, None, [], None)
-    allIDs = semtk3.get_nodegroup_store_data().get_column('ID')
+
+    table = semtk3.get_store_table()
+    id_col = table.get_column_index('ID')
+    type_col = table.get_column_index('itemType')
 
     if not yes:
-        print('The following nodegroups would be removed: {}'.format(' '.join(str_highlight(s) for s in allIDs)))
+        print('The following nodegroups would be removed: {}'.format(' '.join(str_highlight(s) for s in table.get_column(id_col))))
 
     def on_confirmed() -> None:
-        for nodegroup in allIDs:
-            delete_nodegroup(nodegroup)
+
+        for r in table.get_rows():
+            semtk3.delete_item_from_store(r[id_col], r[type_col].split("#")[-1])
+
     confirm(on_confirmed, yes)
 
 def dispatch_data_export(args: SimpleNamespace) -> None:

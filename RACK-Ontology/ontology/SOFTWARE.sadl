@@ -39,29 +39,12 @@ COMPILE
 	(note "ACTIVITY of running a a COMPILER to produce executable and object FILEs")
 	is a type of FILE_CREATION.
 
-    sw:performedBy (note "AGENT(s) (e.g. COMPILER) performing the compilation") describes COMPILE with values of type AGENT.
-    sw:performedBy is a type of wasAssociatedWith.
-
-    compiledBy (note "The tool that performed the compilation") describes COMPILE with values of type TOOL.
-    compiledBy is a type of wasAssociatedWith.
-
     compileInput (note "Source files that contributed to the compilation") describes COMPILE with values of type FILE.
     compileInput is a type of used.
 
 PACKAGE
 	(note "ACTIVITY of running a PACKAGER to produce a package FILE")
 	is a type of FILE_CREATION.
-
-    sw:performedBy (note "AGENT(s) (e.g. PACKAGER) performing the packaging") describes PACKAGE with values of type AGENT.
-    /* Per discussion 2021.11.30 regarding https://github.com/ge-high-assurance/RACK/issues/607,
-     * the range constraint on performedBy has been removed to prevent it from
-     * applying also to the COMPILE domain.
-     */
-    // sw:performedBy of PACKAGE must be one of {Ag:PERSON, Ag:ORGANIZATION}.
-    sw:performedBy is a type of wasAssociatedWith.
-
-	packagedBy (note "The tool used to generate the package output") describes PACKAGE with values of type TOOL.
-	packagedBy is a type of wasAssociatedWith.
 
 	packageInput (note "Source files used when generating the package output") describes PACKAGE with values of type FILE.
 	packageInput is a type of used.

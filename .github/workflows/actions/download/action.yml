@@ -27,7 +27,7 @@ runs:
     - name: Download Fuseki release
       shell: bash
       run: |
-        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-4.3.2.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
+        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-4.4.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
 
     - name: Download SemTK release
       shell: bash

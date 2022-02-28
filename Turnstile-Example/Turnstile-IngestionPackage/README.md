@@ -7,16 +7,19 @@ configurations, the following assumes that the `RACK` environment
 variable is set to the top of the RACK tree (`/home/ubuntu/RACK` for
 the Docker or VM environments).
 
-## Run CLI in a virtual environment:
+## Copy nodegroups and owl files. Setup a virtual environment:
 Note: this step is not required when running in the RACK Docker image: the python environment is already setup and available in that image.
 Refer to the cli [README](../../cli/README.md) for installation instructions.
+The script [setup-owl.sh](../../cli/setup-owl.sh) copies out of the RACK-in-the-Box the nodegroups and owl files onto your local drive. 
 ```sh
 $ cd ${RACK}/cli
+$ ./setup-owl.sh
 $ . venv/bin/activate
 ```
 If running on Windows, GitBash can be used with the following commands.
 ```sh
 $ cd ${RACK}/cli
+$ ./setup-owl.sh
 $ . venv/Scripts/activate
 ```
 
@@ -24,6 +27,7 @@ $ . venv/Scripts/activate
 The script [setup-turnstile.sh](../../cli/setup-turnstile.sh) loads the [GE ontology overlay](../../GE-Ontology/ontology/GE.sadl). 
 ```sh
 (venv) $ cd ${RACK}/cli
+(venv) $ ./setup-owl.sh
 (venv) $ ./setup-turnstile.sh
 ```
 

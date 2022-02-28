@@ -47,7 +47,6 @@ confirms of SBVT_Result only has values of type SBVT_Test.
         used of DevelopSystemArchitecture only has values of type SystemConOps. 
 
      SystemArchitecture (note "specification of system architecture") is a type of ENTITY. 
-      //AM what is the difference between wasGeneratedBy and original DesCert:createdBy? so using wasGeneratedBy
        wasGeneratedBy of SystemArchitecture only has values of type DevelopSystemArchitecture. 
        isArchitectureOf describes SystemArchitecture with values of type SYSTEM.
        isArchitectureOf is a type of wasImpactedBy.
@@ -74,8 +73,6 @@ confirms of SBVT_Result only has values of type SBVT_Test.
 //       content of SubDD_Doc only has values of type SoftwareLowLevelRequirement. 
        content of SubDD_Doc only has values of type SubDD_Req. 
        wasGeneratedBy of SubDD_Doc only has values of type SoftwareDesign. 
-       governs of SubDD_Doc only has values of type SWCOMPONENT.
-       governs describes SubDD_Doc with at most 1 value.
 
      SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
 		wasInformedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementsDefinition or DevelopSystemArchitecture}.

@@ -23,7 +23,7 @@ import "http://arcos.rack/AGENTS".
 
         //Model Location: DevelopmentPlan.02-SystemDevelopement.01-SystemRequirements.SystemRequirementsDefinition
       SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
-        turnstile:wasInformedBy of SystemRequirementsDefinition has values of type DevelopSystemArchitecture.
+        wasInformedBy of SystemRequirementsDefinition only has values of type DevelopSystemArchitecture.
 
 
         //Model Location: DevelopmentPlan.02-SystemDevelopement.01-SystemRequirements.SystemRequirement
@@ -32,7 +32,7 @@ import "http://arcos.rack/AGENTS".
         
         //Model Location: DevelopmentPlan.02-SystemDevelopement.02-SystemDesign.DefineSystemInterfaces
       DefineSystemInterfaces is a type of ACTIVITY.
-        turnstile:wasInformedBy of DefineSystemInterfaces has values of type SystemRequirementsDefinition.
+        wasInformedBy of DefineSystemInterfaces only has values of type SystemRequirementsDefinition.
 
 
         //Model Location: DevelopmentPlan.02-SystemDevelopement.02-SystemDesign.DevelopSystemArchitecture
@@ -49,24 +49,27 @@ import "http://arcos.rack/AGENTS".
         
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareCoding
       SoftwareCoding is a type of CODE_DEVELOPMENT.
-        turnstile:wasInformedBy of SoftwareCoding has values of type Change_Authorization.
-        turnstile:wasInformedBy of SoftwareCoding has values of type SoftwareDesign.        
+        wasInformedBy of SoftwareCoding only has values of type {Change_Authorization or SoftwareDesign}.
+//        turnstile:wasInformedBy of SoftwareCoding has values of type Change_Authorization.        
+//        turnstile:wasInformedBy of SoftwareCoding has values of type SoftwareDesign.        
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareDesign
       SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
-        turnstile:wasInformedBy of SoftwareDesign has values of type SoftwareRequirementsDefinition.
-        turnstile:wasInformedBy of SoftwareDesign has values of type Change_Authorization.        
+        wasInformedBy of SoftwareDesign only has values of type {SoftwareRequirementsDefinition or Change_Authorization}.
+//        turnstile:wasInformedBy of SoftwareDesign has values of type SoftwareRequirementsDefinition.
+//       turnstile:wasInformedBy of SoftwareDesign has values of type Change_Authorization.        
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareIntegration
       SoftwareIntegration is a type of COMPILE.
-        turnstile:wasInformedBy of SoftwareIntegration has values of type SoftwareCoding.
+        wasInformedBy of SoftwareIntegration only has values of type SoftwareCoding.
         compileWithOptimizations describes  SoftwareIntegration with values of type boolean.     
         linkerPath describes  SoftwareIntegration with values of type string.       
 
         //Model Location: DevelopmentPlan.03-SoftwareDevelopment.02-SoftwareDevelopmentLifeCycle.SoftwareRequirementsDefinition
       SoftwareRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT.
-        turnstile:wasInformedBy of SoftwareRequirementsDefinition has values of type Change_Authorization.
-        turnstile:wasInformedBy of SoftwareRequirementsDefinition has values of type DefineSystemInterfaces.
+        wasInformedBy of SoftwareRequirementsDefinition only has values of type {Change_Authorization or DefineSystemInterfaces}.
+//        turnstile:wasInformedBy of SoftwareRequirementsDefinition has values of type Change_Authorization.
+//        turnstile:wasInformedBy of SoftwareRequirementsDefinition has values of type DefineSystemInterfaces.
 
 	SoftwareThread is a type of SYSTEM.
 
@@ -145,50 +148,55 @@ import "http://arcos.rack/AGENTS".
 
         //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess.SoftwareCodeReview
       SoftwareCodeReview is a type of REVIEW.
-        turnstile:wasInformedBy of SoftwareCodeReview has values of type SoftwareDesignReview.
-        turnstile:wasInformedBy of SoftwareCodeReview has values of type SoftwareCoding.
+        wasInformedBy of SoftwareCodeReview only has values of type {SoftwareDesignReview or SoftwareCoding}.
+//        turnstile:wasInformedBy of SoftwareCodeReview has values of type SoftwareDesignReview.
+//        turnstile:wasInformedBy of SoftwareCodeReview has values of type SoftwareCoding.
 
        //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess.SoftwareDesignReview
       SoftwareDesignReview is a type of REVIEW.
-        turnstile:wasInformedBy of SoftwareDesignReview has values of type SoftwareRequirementsReview.
-        turnstile:wasInformedBy of SoftwareDesignReview has values of type SoftwareDesign.
+        wasInformedBy of SoftwareDesignReview only has values of type {SoftwareRequirementsReview or SoftwareDesign}.
+//        turnstile:wasInformedBy of SoftwareDesignReview has values of type SoftwareRequirementsReview.
+//        turnstile:wasInformedBy of SoftwareDesignReview has values of type SoftwareDesign.
 
         //Model Location: DevelopmentPlan.04-SoftwareVerification.01-SoftwareReviewProcess.SoftwareRequirementsReview
       SoftwareRequirementsReview is a type of REVIEW.
-        turnstile:wasInformedBy of SoftwareRequirementsReview has values of type SoftwareRequirementsDefinition.
+        wasInformedBy of SoftwareRequirementsReview only has values of type SoftwareRequirementsDefinition.
 
         //Model Location: DevelopmentPlan.04-SoftwareVerification.02-SoftwareTestGenerationProcess.DevelopComponentTests
       DevelopComponentTests is a type of TEST_DEVELOPMENT.
-        turnstile:wasInformedBy of DevelopComponentTests has values of type DevelopUnitTests.
-        turnstile:wasInformedBy of DevelopComponentTests has values of type SoftwareRequirementsReview.
+        wasInformedBy of DevelopComponentTests only has values of type {DevelopUnitTests or SoftwareRequirementsReview}.
+//        turnstile:wasInformedBy of DevelopComponentTests has values of type DevelopUnitTests.
+//        turnstile:wasInformedBy of DevelopComponentTests has values of type SoftwareRequirementsReview.
 
         //Model Location: DevelopmentPlan.04-SoftwareVerification.02-SoftwareTestGenerationProcess.DevelopUnitTests
       DevelopUnitTests is a type of TEST_DEVELOPMENT.
-        turnstile:wasInformedBy of DevelopUnitTests has values of type SoftwareDesignReview.
+        wasInformedBy of DevelopUnitTests only has values of type SoftwareDesignReview.
 
         //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis.ControlCouplingAnalysis
       ControlCouplingAnalysis is a type of ANALYSIS.
-        turnstile:wasInformedBy of ControlCouplingAnalysis has values of type SoftwareComponentTestExecution.
+        wasInformedBy of ControlCouplingAnalysis only has values of type SoftwareComponentTestExecution.
 
         //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis.DataCouplingAnalysis
       DataCouplingAnalysis is a type of ANALYSIS.
-        turnstile:wasInformedBy of DataCouplingAnalysis has values of type SoftwareComponentTestExecution.
+        wasInformedBy of DataCouplingAnalysis only has values of type SoftwareComponentTestExecution.
 
         //Model Location: DevelopmentPlan.04-SoftwareVerification.04-SoftwareAnalysis.StructuralCoverageAnalysis
       StructuralCoverageAnalysis is a type of ANALYSIS.
         coveredNodes describes StructuralCoverageAnalysis with values of type int.
         uncoveredNodes describes StructuralCoverageAnalysis with values of type int.
-        turnstile:wasInformedBy of StructuralCoverageAnalysis has values of type SoftwareComponentTestExecution.
+        wasInformedBy of StructuralCoverageAnalysis only has values of type SoftwareComponentTestExecution.
 
         //Model Location: DevelopmentPlan.04-SoftwareVerification.03-SoftwareTestExecutionProcess.SoftwareComponentTestExecution
       SoftwareComponentTestExecution is a type of TEST_EXECUTION.
-        turnstile:wasInformedBy of SoftwareComponentTestExecution has values of type SoftwareIntegration.
-        turnstile:wasInformedBy of SoftwareComponentTestExecution has values of type DevelopComponentTests.
+        wasInformedBy of SoftwareComponentTestExecution only has values of type {SoftwareIntegration or DevelopComponentTests}.
+//        turnstile:wasInformedBy of SoftwareComponentTestExecution has values of type SoftwareIntegration.
+//        turnstile:wasInformedBy of SoftwareComponentTestExecution has values of type DevelopComponentTests.
 
         //Model Location: DevelopmentPlan.04-SoftwareVerification.03-SoftwareTestExecutionProcess.SoftwareUnitTestExecution
       SoftwareUnitTestExecution is a type of TEST_EXECUTION.
-        turnstile:wasInformedBy of SoftwareUnitTestExecution has values of type DevelopUnitTests.
-        turnstile:wasInformedBy of SoftwareUnitTestExecution has values of type SoftwareCoding.
+        wasInformedBy of SoftwareUnitTestExecution only has values of type {DevelopUnitTests or SoftwareCoding}.
+//        turnstile:wasInformedBy of SoftwareUnitTestExecution has values of type DevelopUnitTests.
+//        turnstile:wasInformedBy of SoftwareUnitTestExecution has values of type SoftwareCoding.
 
       //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.ChangeRequest
     ChangeRequest is a type of REQUEST.
@@ -200,41 +208,46 @@ import "http://arcos.rack/AGENTS".
 
         //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.01-ChangeManagement.Change Authorization
       Change_Authorization is a type of ACTIVITY.
-        turnstile:wasInformedBy of Change_Authorization has values of type Problem_Reporting.
+        wasInformedBy of Change_Authorization only has values of type Problem_Reporting.
 
         //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.01-ChangeManagement.Problem Reporting
       Problem_Reporting is a type of ACTIVITY.
-        turnstile:wasInformedBy of Problem_Reporting has values of type SoftwareComponentTestExecution.
-        turnstile:wasInformedBy of Problem_Reporting has values of type SoftwareRequirementsReview.
-        turnstile:wasInformedBy of Problem_Reporting has values of type SoftwareDesignReview.
-        turnstile:wasInformedBy of Problem_Reporting has values of type SoftwareCodeReview.
-        turnstile:wasInformedBy of Problem_Reporting has values of type SoftwareUnitTestExecution.
+        wasInformedBy of Problem_Reporting only has values of type {SoftwareComponentTestExecution or SoftwareRequirementsReview or SoftwareDesignReview or SoftwareCodeReview or SoftwareUnitTestExecution}.
+//        turnstile:wasInformedBy of Problem_Reporting has values of type SoftwareComponentTestExecution.
+//        turnstile:wasInformedBy of Problem_Reporting has values of type SoftwareRequirementsReview.
+//        turnstile:wasInformedBy of Problem_Reporting has values of type SoftwareDesignReview.
+//        turnstile:wasInformedBy of Problem_Reporting has values of type SoftwareCodeReview.
+//        turnstile:wasInformedBy of Problem_Reporting has values of type SoftwareUnitTestExecution.
 
         //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.GenerateSoftwareReleaseDocumentation
       GenerateSoftwareReleaseDocumentation is a type of ACTIVITY.
-        turnstile:wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type SourceConfigurationManagement.
-        turnstile:wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type RequirementConfigurationManagement.
-        turnstile:wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type ReviewConfigurationManagement.
+        wasInformedBy of GenerateSoftwareReleaseDocumentation only has values of type {SourceConfigurationManagement or RequirementConfigurationManagement or ReviewConfigurationManagement}.
+//        turnstile:wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type SourceConfigurationManagement.
+//        turnstile:wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type RequirementConfigurationManagement.
+//        turnstile:wasInformedBy of GenerateSoftwareReleaseDocumentation has values of type ReviewConfigurationManagement.
 
 
         //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.RequirementConfigurationManagement
       RequirementConfigurationManagement is a type of ACTIVITY.
-        turnstile:wasInformedBy of RequirementConfigurationManagement has values of type SoftwareRequirementsDefinition.
-        turnstile:wasInformedBy of RequirementConfigurationManagement has values of type SoftwareDesign.
+        wasInformedBy of RequirementConfigurationManagement only has values of type {SoftwareRequirementsDefinition or SoftwareRequirementsDefinition or SoftwareDesign}.
+//        turnstile:wasInformedBy of RequirementConfigurationManagement has values of type SoftwareRequirementsDefinition.
+//        turnstile:wasInformedBy of RequirementConfigurationManagement has values of type SoftwareDesign.
 
         //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.ReviewConfigurationManagement
       ReviewConfigurationManagement is a type of ACTIVITY.
-        turnstile:wasInformedBy of ReviewConfigurationManagement has values of type SoftwareRequirementsReview.
-        turnstile:wasInformedBy of ReviewConfigurationManagement has values of type SoftwareDesignReview.
-        turnstile:wasInformedBy of ReviewConfigurationManagement has values of type SoftwareCodeReview.
+        wasInformedBy of ReviewConfigurationManagement only has values of type {SoftwareRequirementsReview or SoftwareDesignReview or SoftwareCodeReview}.
+//        turnstile:wasInformedBy of ReviewConfigurationManagement has values of type SoftwareRequirementsReview.
+//        turnstile:wasInformedBy of ReviewConfigurationManagement has values of type SoftwareDesignReview.
+//        turnstile:wasInformedBy of ReviewConfigurationManagement has values of type SoftwareCodeReview.
 
         //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.SourceConfigurationManagement
       SourceConfigurationManagement is a type of ACTIVITY.
-        turnstile:wasInformedBy of SourceConfigurationManagement has values of type DevelopComponentTests.
-        turnstile:wasInformedBy of SourceConfigurationManagement has values of type DevelopUnitTests.
-        turnstile:wasInformedBy of SourceConfigurationManagement has values of type SoftwareUnitTestExecution.
-        turnstile:wasInformedBy of SourceConfigurationManagement has values of type SoftwareComponentTestExecution.
-        turnstile:wasInformedBy of SourceConfigurationManagement has values of type SoftwareCoding.
+        wasInformedBy of SourceConfigurationManagement only has values of type {DevelopComponentTests or DevelopUnitTests or SoftwareUnitTestExecution or SoftwareComponentTestExecution or SoftwareCoding}.
+//        turnstile:wasInformedBy of SourceConfigurationManagement has values of type DevelopComponentTests.
+//        turnstile:wasInformedBy of SourceConfigurationManagement has values of type DevelopUnitTests.
+//        turnstile:wasInformedBy of SourceConfigurationManagement has values of type SoftwareUnitTestExecution.
+//        turnstile:wasInformedBy of SourceConfigurationManagement has values of type SoftwareComponentTestExecution.
+//        turnstile:wasInformedBy of SourceConfigurationManagement has values of type SoftwareCoding.
 
         //Model Location: DevelopmentPlan.05-SoftwareConfigurationManagment.02-SoftwareConfigurationManagementEnvironment.SoftwareAccomplishmentSummary
       SoftwareAccomplishmentSummary is a type of REPORT.
@@ -242,8 +255,3 @@ import "http://arcos.rack/AGENTS".
 
       //Model Location: DevelopmentPlan.04-SoftwareVerification.SoftwareUnitTest
     SoftwareUnitTest is a type of TEST.
-
-
-
-
-                

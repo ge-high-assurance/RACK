@@ -3,7 +3,7 @@
 
 ## Run the Docker RACK box
 
-Here are very brief instructions how to run the Docker RACK box.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Docker-RACK-Box) in the RACK Wiki.  You will need to give your Docker Hub username to the RACK team so you can be given access to our Docker Hub repository.
+Here are very brief instructions how to run the Docker RACK box.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/02-Install-a-Docker-RACK-Box) in the RACK Wiki.  You will need to give your Docker Hub username to the RACK team so you can be given access to our Docker Hub repository.
 
 1. Open a terminal window where you can run `docker`.
 2. Type `docker pull gehighassurance/rack-box:v9.1`
@@ -12,7 +12,7 @@ Here are very brief instructions how to run the Docker RACK box.  You will find 
 
 ## Run the Virtual RACK box
 
-Here are very brief instructions how to run the Virtual RACK box.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Virtual-RACK-Box) in the RACK Wiki.
+Here are very brief instructions how to run the Virtual RACK box.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/03-Install-a-Virtual-RACK-Box) in the RACK Wiki.
 
 1. Download the split VirtualBox zip files.
 2. Concatenate the split VirtualBox zip files together.

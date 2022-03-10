@@ -14,10 +14,10 @@ steps:
 
    RACK.wiki/
 
+   - [ ] [01-Release-Schedule](https://github.com/ge-high-assurance/RACK/wiki/01-Release-Schedule)
+   - [ ] [02-Install-a-Docker-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/02-Install-a-Docker-RACK-Box)
+   - [ ] [03-Install-a-Virtual-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/03-Install-a-Virtual-RACK-Box)
    - [ ] [Home](https://github.com/ge-high-assurance/RACK/wiki/Home)
-   - [ ] [Install-a-Docker-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Docker-RACK-Box)
-   - [ ] [Install-a-Virtual-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/Install-a-Virtual-RACK-Box)
-   - [ ] [Release-Schedule](https://github.com/ge-high-assurance/RACK/wiki/Release-Schedule)
    - [ ] [Welcome](https://github.com/ge-high-assurance/RACK/wiki/_Welcome)
 
    After you save these files, commit and push those changes to both

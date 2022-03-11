@@ -525,15 +525,15 @@ def CreateCdrs():
     #------------ InputThread ------------
     Add.turnstile_SoftwareThread(identifier = "InputThread",
                                  partOf_identifier = "CounterApplication",
-		                         wasGeneratedBy_identifier = "SwDesign")
+		                         wasGeneratedBy_identifier = "SysThreadDesign")
     #------------ OutputThread ------------
     Add.turnstile_SoftwareThread(identifier = "OutputThread",
                                  partOf_identifier = "CounterApplication",
-		                         wasGeneratedBy_identifier = "SwDesign")
+		                         wasGeneratedBy_identifier = "SysThreadDesign")
     #------------ ExecutiveThread ------------
     Add.turnstile_SoftwareThread(identifier = "ExecutiveThread",
                                  partOf_identifier = "CounterApplication",
-		                         wasGeneratedBy_identifier = "SwDesign")
+		                         wasGeneratedBy_identifier = "SysThreadDesign")
     #------------ DCC-1 ------------	
     Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
                                        description = "PowerUp",

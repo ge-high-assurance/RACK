@@ -12,8 +12,8 @@
 from ontology_changes import Commit
 
 commit = Commit(
-    number="cafce30763b5332106340cc8cbeb8fdac3b8132d",
-    tag="v7.0",
+    number="5dd1a584e19b8716f0f13dc3a2cb2ba2d409c325",
+    tag="v9.0",
     changes=[
         # no ontology change, just here for the tag
     ],

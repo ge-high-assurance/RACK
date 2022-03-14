@@ -10,11 +10,11 @@
 # of the Defense Advanced Research Projects Agency (DARPA).
 
 from ontology_changes import Commit
+from ontology_changes.freeform_notes import FreeformNotes
 
 commit = Commit(
-    number="cafce30763b5332106340cc8cbeb8fdac3b8132d",
-    tag="v7.0",
+    number="f801242e4a8a763620571481fd83cc2af5aac2ac",
     changes=[
-        # no ontology change, just here for the tag
+        FreeformNotes("Removed non-core-RACK SADL files."),
     ],
 )

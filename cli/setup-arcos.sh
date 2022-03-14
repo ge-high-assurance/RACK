@@ -31,4 +31,4 @@ rack nodegroups import ../nodegroups/ingestion/arcos.arbiter
 
 rack model import ../RACK-Ontology/OwlModels/MITRE-CWE.yaml
 rack nodegroups import ../nodegroups/arcos.cwe
-rack data import ../RACK-Ontology/ontology/MITRE-CWE/import.yaml # datagraph http://rack001/mitre-cwe
+rack data import --clear ../RACK-Ontology/ontology/MITRE-CWE/import.yaml # datagraph http://rack001/mitre-cwe

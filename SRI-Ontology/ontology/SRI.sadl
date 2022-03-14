@@ -63,21 +63,21 @@ import "http://arcos.AH-64D/Boeing".
          propertyBasis is a type of wasImpactedBy.
          // NOTE: a SpecificProperty is modeled by entities such as SallyPropertyModel; that's where the property text is contained
          
-      // DB 1/6/22: added PROPERTY_RESULT and PROPERTY_PROOF_STATUS, these are fundamental to using properties, analoguous to TEST_RESULT
+      // DB 1/6/22: added PropertyResult and PropertyProofStatus, these are fundamental to using properties, analoguous to TEST_RESULT
       //   (I had earlier (Nov 21) had added them to core ontology in PROCESS.sadl, but that change was not accpted, so adding in the overlay)
-      // DB 2/7/22: made PROPERTY_RESULT a subclass of ANALYSIS_OUTPUT so that it jives better with core ontology
-      PROPERTY_RESULT (note "Result corresponding to one analysis attempt to prove one PROPERTY") is a type of ANALYSIS_OUTPUT.
-         propertyResult (note "Valid/Invalid/Indeterminate status of this PROPERTY_RESULT") describes PROPERTY_RESULT with a single value of type PROPERTY_PROOF_STATUS.
+      // DB 2/7/22: made PropertyResult a subclass of ANALYSIS_OUTPUT so that it jives better with core ontology
+      PropertyResult (note "Result corresponding to one analysis attempt to prove one PROPERTY") is a type of ANALYSIS_OUTPUT.
+         propertyResult (note "Valid/Invalid/Indeterminate status of this PropertyResult") describes PropertyResult with a single value of type PropertyProofStatus.
          // The property being proven by this property result; the property has all relevant information about scope and basis
-         analyzes of PROPERTY_RESULT only has values of type PROPERTY. // DB 2/7/22: may need to put range constraint of a single value
-         resultDiagnostics (note "counter examples, other diagnostics") describes PROPERTY_RESULT with values of type ENTITY.
-         wasGeneratedBy of PROPERTY_RESULT only has values of type ANALYSIS.
+         analyzes of PropertyResult only has values of type PROPERTY. // DB 2/7/22: may need to put range constraint of a single value
+         resultDiagnostics (note "counter examples, other diagnostics") describes PropertyResult with values of type ENTITY.
+         wasGeneratedBy of PropertyResult only has values of type ANALYSIS.
 
-      PROPERTY_PROOF_STATUS (note "Outcome of the attempt to prove a property") is a type of THING,
+      PropertyProofStatus (note "Outcome of the attempt to prove a property") is a type of THING,
          must be one of {Valid, Invalid, Unknown}.
-         Valid (note "property is valid (proven to hold)") is a PROPERTY_PROOF_STATUS with identifier "Valid".
-         Invalid (note "property is invalid (proven to not hold)") is a PROPERTY_PROOF_STATUS with identifier "Invalid".
-         Unknown (note "property cannot be proven to hold or to not hold") is a PROPERTY_PROOF_STATUS with identifier "Unknown".
+         Valid (note "property is valid (proven to hold)") is a PropertyProofStatus with identifier "Valid".
+         Invalid (note "property is invalid (proven to not hold)") is a PropertyProofStatus with identifier "Invalid".
+         Unknown (note "property cannot be proven to hold or to not hold") is a PropertyProofStatus with identifier "Unknown".
          
      ////////////////////////////////////////////////
      // System architecture and analysis

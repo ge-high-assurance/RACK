@@ -418,19 +418,30 @@ def store_nodegroups_driver(directory: Path, base_url: Url) -> None:
     semtk3.store_nodegroups(directory)
 
 @with_status('Storing nodegroup')
-def store_nodegroup_driver(name: str, creator: str, filename: str, comment: Optional[str], base_url: Url) -> None:
+def store_nodegroup_driver(name: str, creator: str, filename: str, comment: Optional[str], base_url: Url, kind: str) -> None:
     sparql_connection(base_url, None, [], None)
 
     with open(filename) as f:
         nodegroup_json_str = f.read()
 
-    semtk3.delete_nodegroup_from_store(name) # succeeds even if not found
-    semtk3.store_nodegroup(name, comment or '', creator, nodegroup_json_str)
+    if kind == 'nodegroup':
+        item_type = semtk3.STORE_ITEM_TYPE_NODEGROUP
+    elif kind == 'report':
+        item_type = semtk3.STORE_ITEM_TYPE_REPORT
+
+    semtk3.delete_item_from_store(name, item_type) # succeeds even if not found
+    semtk3.store_item(name, comment or '', creator, nodegroup_json_str, item_type)
 
 @with_status('Retrieving nodegroups')
-def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url) -> None:
+def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url, kind: str) -> None:
     sparql_connection(base_url, None, [], None)
-    semtk3.retrieve_from_store(regexp, directory)
+    if kind == 'nodegroup':
+        item_type = semtk3.STORE_ITEM_TYPE_NODEGROUP
+    elif kind == 'report':
+        item_type = semtk3.STORE_ITEM_TYPE_REPORT
+    else:
+        item_type = semtk3.STORE_ITEM_TYPE_ALL
+    semtk3.retrieve_items_from_store(regexp, directory, item_type)
 
 def list_nodegroups_driver(base_url: Url) -> None:
 
@@ -541,10 +552,10 @@ def dispatch_nodegroups_import(args: SimpleNamespace) -> None:
     store_nodegroups_driver(args.directory, args.base_url)
 
 def dispatch_nodegroups_store(args: SimpleNamespace) -> None:
-    store_nodegroup_driver(args.name, args.creator, args.filename, args.comment, args.base_url)
+    store_nodegroup_driver(args.name, args.creator, args.filename, args.comment, args.base_url, args.kind)
 
 def dispatch_nodegroups_export(args: SimpleNamespace) -> None:
-    retrieve_nodegroups_driver(args.regexp, args.directory, args.base_url)
+    retrieve_nodegroups_driver(args.regexp, args.directory, args.base_url, args.kind)
 
 def dispatch_nodegroups_list(args: SimpleNamespace) -> None:
     list_nodegroups_driver(args.base_url)
@@ -619,10 +630,12 @@ def get_argument_parser() -> argparse.ArgumentParser:
     nodegroups_store_parser.add_argument('name', type=str, help="Nodegroup identifier")
     nodegroups_store_parser.add_argument('creator', type=str, help="Nodegroup author name")
     nodegroups_store_parser.add_argument('filename', type=str, help='Nodegroup JSON filename')
+    nodegroups_store_parser.add_argument('--kind', type=str, default='nodegroup', choices=['nodegroup', 'report'], help='Specify kind of object to store')
     nodegroups_store_parser.set_defaults(func=dispatch_nodegroups_store)
 
     nodegroups_export_parser.add_argument('regexp', type=str, help='Nodegroup selection regular expression')
     nodegroups_export_parser.add_argument('directory', type=str, help='Nodegroup directory')
+    nodegroups_export_parser.add_argument('--kind', type=str, default='all', choices=['all', 'nodegroup', 'report'], help='Specify kind of object to export')
     nodegroups_export_parser.set_defaults(func=dispatch_nodegroups_export)
 
     nodegroups_list_parser.set_defaults(func=dispatch_nodegroups_list)

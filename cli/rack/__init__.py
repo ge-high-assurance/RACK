@@ -561,7 +561,7 @@ def dispatch_nodegroups_list(args: SimpleNamespace) -> None:
     list_nodegroups_driver(args.base_url)
 
 def dispatch_nodegroups_delete(args: SimpleNamespace) -> None:
-    delete_nodegroups_driver(args.nodegroups, args.ignore_nonexistent, args.yes, args.regexp, args.base_url, args.kind)
+    delete_nodegroups_driver(args.nodegroups, args.ignore_nonexistent, args.yes, args.regexp, args.base_url)
 
 def dispatch_nodegroups_deleteall(args: SimpleNamespace) -> None:
     delete_all_nodegroups_driver(args.yes, args.base_url)

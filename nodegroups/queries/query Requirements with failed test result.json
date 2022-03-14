@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"sparqlConn": {
-		"name": "RACK1",
+		"name": "RACK",
 		"domain": "",
 		"enableOwlImports": false,
 		"model": [
@@ -20,16 +20,18 @@
 		]
 	},
 	"sNodeGroup": {
-		"version": 15,
+		"version": 18,
 		"limit": 0,
 		"offset": 0,
 		"sNodeList": [
 			{
 				"propList": [
 					{
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
+						"domainURI": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"SparqlID": "?req",
 						"isReturned": false,
@@ -64,9 +66,11 @@
 			{
 				"propList": [
 					{
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
+						"domainURI": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"SparqlID": "?test",
 						"isReturned": false,
@@ -92,8 +96,9 @@
 						"DeletionMarkers": [
 							false
 						],
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"range": [
+							"http://arcos.rack/PROV-S#ENTITY"
+						],
 						"ConnectBy": "verifies",
 						"Connected": true,
 						"UriConnectBy": "http://arcos.rack/TESTING#verifies"
@@ -110,9 +115,11 @@
 			{
 				"propList": [
 					{
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
+						"domainURI": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"SparqlID": "?test_execution",
 						"isReturned": false,
@@ -136,9 +143,11 @@
 			{
 				"propList": [
 					{
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
+						"domainURI": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"SparqlID": "?test_result",
 						"isReturned": false,
@@ -164,8 +173,9 @@
 						"DeletionMarkers": [
 							false
 						],
-						"ValueType": "ACTIVITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ACTIVITY",
+						"range": [
+							"http://arcos.rack/TESTING#TEST_EXECUTION"
+						],
 						"ConnectBy": "",
 						"Connected": true,
 						"UriConnectBy": "http://arcos.rack/PROV-S#wasGeneratedBy"
@@ -183,8 +193,9 @@
 						"DeletionMarkers": [
 							false
 						],
-						"ValueType": "TEST",
-						"UriValueType": "http://arcos.rack/TESTING#TEST",
+						"range": [
+							"http://arcos.rack/TESTING#TEST"
+						],
 						"ConnectBy": "confirms",
 						"Connected": true,
 						"UriConnectBy": "http://arcos.rack/TESTING#confirms"
@@ -202,8 +213,9 @@
 						"DeletionMarkers": [
 							false
 						],
-						"ValueType": "TEST_STATUS",
-						"UriValueType": "http://arcos.rack/TESTING#TEST_STATUS",
+						"range": [
+							"http://arcos.rack/TESTING#TEST_STATUS"
+						],
 						"ConnectBy": "result",
 						"Connected": true,
 						"UriConnectBy": "http://arcos.rack/TESTING#result"
@@ -220,7 +232,8 @@
 		],
 		"orderBy": [],
 		"groupBy": [],
-		"unionHash": {}
+		"unionHash": {},
+		"columnOrder": []
 	},
 	"importSpec": {
 		"version": "1",

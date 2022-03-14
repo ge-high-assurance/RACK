@@ -20,16 +20,15 @@
 		]
 	},
 	"sNodeGroup": {
-		"version": 12,
+		"version": 18,
 		"limit": 0,
 		"offset": 0,
 		"sNodeList": [
 			{
 				"propList": [],
 				"nodeList": [],
-				"NodeName": "REQUIREMENT",
-				"fullURIName": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
-				"SparqlID": "?REQUIREMENT",
+				"fullURIName": "http://arcos.AH-64D/Boeing#SBVT_Test",
+				"SparqlID": "?SBVT_Test",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
 				"valueConstraint": "",
@@ -39,10 +38,11 @@
 			{
 				"propList": [
 					{
-						"KeyName": "identifier",
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
+						"domainURI": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"SparqlID": "?identifier",
 						"isReturned": true,
@@ -55,7 +55,7 @@
 				"nodeList": [
 					{
 						"SnodeSparqlIDs": [
-							"?REQUIREMENT"
+							"?SBVT_Test"
 						],
 						"OptionalMinus": [
 							2
@@ -66,17 +66,16 @@
 						"DeletionMarkers": [
 							false
 						],
-						"KeyName": "verifies",
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
-						"ConnectBy": "verifies",
+						"range": [
+							"http://arcos.AH-64D/Boeing#SBVT_Test"
+						],
+						"ConnectBy": "confirms",
 						"Connected": true,
-						"UriConnectBy": "http://arcos.rack/TESTING#verifies"
+						"UriConnectBy": "http://arcos.rack/TESTING#confirms"
 					}
 				],
-				"NodeName": "SBVT_Test",
-				"fullURIName": "http://arcos.AH-64D/Boeing#SBVT_Test",
-				"SparqlID": "?SBVT_Test",
+				"fullURIName": "http://arcos.AH-64D/Boeing#SBVT_Result",
+				"SparqlID": "?SBVT_Result",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
 				"valueConstraint": "",
@@ -85,7 +84,9 @@
 			}
 		],
 		"orderBy": [],
-		"unionHash": {}
+		"groupBy": [],
+		"unionHash": {},
+		"columnOrder": []
 	},
 	"importSpec": {
 		"version": "1",
@@ -96,18 +97,18 @@
 		"transforms": [],
 		"nodes": [
 			{
-				"sparqlID": "?SBVT_Test",
-				"type": "http://arcos.AH-64D/Boeing#SBVT_Test",
+				"sparqlID": "?SBVT_Result",
+				"type": "http://arcos.AH-64D/Boeing#SBVT_Result",
 				"mapping": [],
 				"props": []
 			},
 			{
-				"sparqlID": "?REQUIREMENT",
-				"type": "http://arcos.rack/REQUIREMENTS#REQUIREMENT",
+				"sparqlID": "?SBVT_Test",
+				"type": "http://arcos.AH-64D/Boeing#SBVT_Test",
 				"mapping": [],
 				"props": []
 			}
 		]
 	},
-	"plotSpecs": null
+	"plotSpecs": []
 }

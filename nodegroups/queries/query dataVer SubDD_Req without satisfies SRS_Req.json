@@ -20,14 +20,13 @@
 		]
 	},
 	"sNodeGroup": {
-		"version": 12,
+		"version": 18,
 		"limit": 0,
 		"offset": 0,
 		"sNodeList": [
 			{
 				"propList": [],
 				"nodeList": [],
-				"NodeName": "SRS_Req",
 				"fullURIName": "http://arcos.AH-64D/Boeing#SRS_Req",
 				"SparqlID": "?SRS_Req",
 				"isReturned": false,
@@ -39,10 +38,11 @@
 			{
 				"propList": [
 					{
-						"KeyName": "identifier",
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
-						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
+						"domainURI": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"SparqlID": "?identifier",
 						"isReturned": true,
@@ -66,15 +66,14 @@
 						"DeletionMarkers": [
 							false
 						],
-						"KeyName": "satisfies",
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"range": [
+							"http://arcos.AH-64D/Boeing#SRS_Req"
+						],
 						"ConnectBy": "satisfies",
 						"Connected": true,
 						"UriConnectBy": "http://arcos.rack/REQUIREMENTS#satisfies"
 					}
 				],
-				"NodeName": "SubDD_Req",
 				"fullURIName": "http://arcos.AH-64D/Boeing#SubDD_Req",
 				"SparqlID": "?SubDD_Req",
 				"isReturned": false,
@@ -85,7 +84,9 @@
 			}
 		],
 		"orderBy": [],
-		"unionHash": {}
+		"groupBy": [],
+		"unionHash": {},
+		"columnOrder": []
 	},
 	"importSpec": {
 		"version": "1",
@@ -109,5 +110,5 @@
 			}
 		]
 	},
-	"plotSpecs": null
+	"plotSpecs": []
 }

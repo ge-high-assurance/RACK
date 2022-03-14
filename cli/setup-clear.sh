@@ -10,6 +10,7 @@ rack data clear                               \
     --data-graph http://rack001/data          \
     --data-graph http://rack001/arp-4754a     \
     --data-graph http://rack001/do-330        \
-    --data-graph http://rack001/do-178c
+    --data-graph http://rack001/do-178c       \
+    --data-graph http://rack001/mitre-cwe
 
 rack nodegroups delete-all --yes

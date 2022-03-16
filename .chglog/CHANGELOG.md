@@ -2,6 +2,24 @@
 
 # RACK Change Log
 
+## [v10.0] - 2022-03-21
+
+This release has the following changes:
+
+- Add flags to specify reports in nodegroup interface [#678](https://github.com/ge-high-assurance/RACK/issues/678)
+- Update SRI.sadl [#676](https://github.com/ge-high-assurance/RACK/issues/676)
+- Turnstile: created a new ACTIVITY instance for SoftwareThread [#675](https://github.com/ge-high-assurance/RACK/issues/675)
+- Checking in SRI-SS.sadl [#673](https://github.com/ge-high-assurance/RACK/issues/673)
+- Correcting Turnstile overlay [#672](https://github.com/ge-high-assurance/RACK/issues/672)
+- Updated SRI overlay ontology [#668](https://github.com/ge-high-assurance/RACK/issues/668)
+- Cleaned up ontology [#665](https://github.com/ge-high-assurance/RACK/issues/665)
+- Put a dataVer report into RACK [#663](https://github.com/ge-high-assurance/RACK/issues/663)
+- Remove SOFTWARE#performedBy and SOFTWARE#compiledBy [#662](https://github.com/ge-high-assurance/RACK/issues/662)
+- Incorporate MITRE CWE into the core ontology [#660](https://github.com/ge-high-assurance/RACK/issues/660)
+- Add range restrictions on wasGeneratedBy for well-known generation activities [#653](https://github.com/ge-high-assurance/RACK/issues/653)
+- Add nodegroup store and count to import.yaml [#642](https://github.com/ge-high-assurance/RACK/issues/642)
+- Updates to ASSIST-DV checks [#641](https://github.com/ge-high-assurance/RACK/issues/641)
+
 ## [v9.0] - 2021-12-13
 
 This release has the following changes:

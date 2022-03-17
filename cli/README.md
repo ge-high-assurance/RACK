@@ -45,7 +45,7 @@ the RACK-Box README.
 -->
 
 ```shell
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install --force -r requirements.txt
 python3 setup.py install

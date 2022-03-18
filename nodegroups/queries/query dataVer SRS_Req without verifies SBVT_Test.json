@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"sparqlConn": {
-		"name": "RACK",
+		"name": "RACK local fuseki copy",
 		"domain": "",
 		"enableOwlImports": false,
 		"model": [
@@ -20,28 +20,30 @@
 		]
 	},
 	"sNodeGroup": {
-		"version": 12,
+		"version": 19,
 		"limit": 0,
 		"offset": 0,
 		"sNodeList": [
 			{
 				"propList": [
 					{
-						"KeyName": "identifier",
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"SparqlID": "?identifier",
-						"isReturned": true,
+						"isReturned": false,
 						"optMinus": 0,
 						"isRuntimeConstrained": false,
 						"instanceValues": [],
-						"isMarkedForDeletion": false
+						"isMarkedForDeletion": false,
+						"binding": "?SRS_Req_identifier",
+						"isBindingReturned": true
 					}
 				],
 				"nodeList": [],
-				"NodeName": "SRS_Req",
 				"fullURIName": "http://arcos.AH-64D/Boeing#SRS_Req",
 				"SparqlID": "?SRS_Req",
 				"isReturned": false,
@@ -58,7 +60,7 @@
 							"?SRS_Req"
 						],
 						"OptionalMinus": [
-							2
+							-2
 						],
 						"Qualifiers": [
 							""
@@ -66,15 +68,14 @@
 						"DeletionMarkers": [
 							false
 						],
-						"KeyName": "verifies",
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"range": [
+							"http://arcos.rack/PROV-S#ENTITY"
+						],
 						"ConnectBy": "verifies",
 						"Connected": true,
 						"UriConnectBy": "http://arcos.rack/TESTING#verifies"
 					}
 				],
-				"NodeName": "SBVT_Test",
 				"fullURIName": "http://arcos.AH-64D/Boeing#SBVT_Test",
 				"SparqlID": "?SBVT_Test",
 				"isReturned": false,
@@ -85,7 +86,9 @@
 			}
 		],
 		"orderBy": [],
-		"unionHash": {}
+		"groupBy": [],
+		"unionHash": {},
+		"columnOrder": []
 	},
 	"importSpec": {
 		"version": "1",
@@ -109,5 +112,5 @@
 			}
 		]
 	},
-	"plotSpecs": null
+	"plotSpecs": []
 }

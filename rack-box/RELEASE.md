@@ -11,6 +11,7 @@ steps:
    - [ ] [Docker-Hub-README.md](Docker-Hub-README.md)
    - [ ] [GitHub-Release-README.md](GitHub-Release-README.md)
    - [ ] [RELEASE.md](RELEASE.md)
+   - [ ] [setup-owl.sh](../cli/setup-owl.sh)
 
    RACK.wiki/
 

@@ -16,8 +16,8 @@ steps:
    RACK.wiki/
 
    - [ ] [01-Release-Schedule](https://github.com/ge-high-assurance/RACK/wiki/01-Release-Schedule)
-   - [ ] [02-Install-a-Docker-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/02-Install-a-Docker-RACK-Box)
-   - [ ] [03-Install-a-Virtual-RACK-Box](https://github.com/ge-high-assurance/RACK/wiki/03-Install-a-Virtual-RACK-Box)
+   - [ ] [02-Run-a-RACK-Box-container](https://github.com/ge-high-assurance/RACK/wiki/02-Run-a-RACK-Box-container)
+   - [ ] [03-Run-a-RACK-Box-VM](https://github.com/ge-high-assurance/RACK/wiki/03-Run-a-RACK-Box-VM)
    - [ ] [Home](https://github.com/ge-high-assurance/RACK/wiki/Home)
    - [ ] [Welcome](https://github.com/ge-high-assurance/RACK/wiki/_Welcome)
 

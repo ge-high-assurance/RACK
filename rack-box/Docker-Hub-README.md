@@ -1,8 +1,12 @@
 <!-- markdownlint-disable line-length -->
 
-# Install a Docker RACK Box
+# Pick Docker or Podman
 
-You may need to increase the resources given to Docker in order to run a RACK box.  Click the right mouse button on Docker's whale icon in the system tray and select "Settings".  When the Settings window appears, click on Resources and see whether the following resource settings appear.  If you don't see these resource settings, it means you don't need to change anything; Docker can use all of your computer's CPUs and 80% of your computer's RAM if it needs to.
+Both Docker and Podman [allow](https://xebia.com/podman-the-free-container-engine-alternative-to-docker/) you to run Linux containers on a Linux, MacOS, or Windows computer.  Docker is an all-in-one solution (only one program to install and you are done), but its graphical user interface, Docker Desktop, is no longer free for large enterprises.  Podman costs nothing since it is open source, but you have to perform more steps to install and set it up on a MacOS or Windows computer.  Once you have set up Podman, it has the same command line functionality as Docker so you can simply replace `docker` with `podman` in all the docker commands below.
+
+# Run a RACK Box
+
+You may need to increase the resources given to Docker in order to run a RACK box.  Click the right mouse button on Docker's whale icon in the system tray and select "Settings".  When the Settings window appears, click on Resources and see whether the following resource settings appear.  If you don't see these resource settings, it means you don't need to change anything; Docker will use all of your computer's CPUs and 80% of your computer's RAM if it needs to.
 
 If you do see these resource settings, make the following changes:
 
@@ -10,14 +14,13 @@ If you do see these resource settings, make the following changes:
 2. Increase the amount of Memory to 4.00 GB (or more if you have plenty of RAM).
 3. Click the Apply & Restart button to restart Docker with the new resource settings.
 
-Now you are ready to start your RACK box.  Type the following commands to download the Docker RACK box and run it on your computer:
+Now you are ready to start your RACK box.  Type the following command to run your RACK box on your computer:
 
 ```shell
-docker pull gehighassurance/rack-box:v10.0
-docker run --detach -p 80:80 -p 12050-12092:12050-12092 -p 3030:3030 gehighassurance/rack-box:v10.0
+docker run --detach -p 8080:80 -p 12050-12092:12050-12092 -p 3030:3030 gehighassurance/rack-box:v10.0
 ```
 
-Type "localhost" in your web browser's address bar, hit Enter, and you should see your RACK box's welcome page appear in your browser.  The welcome page will tell you some things you can do with your RACK box.
+Type "localhost:8080" in your web browser's address bar, hit Enter, and you should see your RACK box's welcome page appear in your browser.  The welcome page will tell you some things you can do with your RACK box.
 
 ---
 Copyright (c) 2021, General Electric Company, Galois, Inc.

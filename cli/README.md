@@ -81,7 +81,7 @@ We have written a shell script called `setup-rack.sh` which will call
 the `rack` program to initialize a RACK-in-a-Box instance with the
 RACK core ontology model.  It is assumed that you are
 still in the isolated Python virtual environment and running a
-RACK-in-a-Box instance in a Docker container on `localhost`.  Here is
+RACK-in-a-Box instance in a Linux container on `localhost`.  Here is
 how to run `setup-rack.sh` and what its output may look like:
 
 ```shell
@@ -228,7 +228,7 @@ Rack-in-a-Box.
 ### Export data
 
 This example exports instances of the `SYSTEM` class from the
-*Turnstile* example from a Rack-in-a-Box instance running in a Docker
+*Turnstile* example from a Rack-in-a-Box instance running in a Linux
 container on `localhost`:
 
 ```shell

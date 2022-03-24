@@ -1,18 +1,18 @@
 <!-- markdownlint-disable first-line-heading -->
 <!-- markdownlint-disable line-length -->
 
-## Run the Docker RACK box
+## Run a RACK box container
 
-Here are very brief instructions how to run the Docker RACK box.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/02-Install-a-Docker-RACK-Box) in the RACK Wiki.  You will need to give your Docker Hub username to the RACK team so you can be given access to our Docker Hub repository.
+Here are very brief instructions how to run a RACK box container.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/02-Install-a-Docker-RACK-Box) in the RACK Wiki.  You will need to give your Docker Hub username to the RACK team so you can be given access to our Docker Hub repository.
 
 1. Open a terminal window where you can run `docker`.
 2. Type `docker pull gehighassurance/rack-box:v10.0`
-3. Type `docker run --detach -p 80:80 -p 12050-12092:12050-12092 -p 3030:3030 gehighassurance/rack-box:v10.0`
-4. Visit <http://localhost/> in your browser to view the RACK box's welcome page.
+3. Type `docker run --detach -p 8080:80 -p 12050-12092:12050-12092 -p 3030:3030 gehighassurance/rack-box:v10.0`
+4. Visit <http://localhost:8080> in your browser to view the RACK box's welcome page.
 
-## Run the Virtual RACK box
+## Run a RACK box virtual machine
 
-Here are very brief instructions how to run the Virtual RACK box.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/03-Install-a-Virtual-RACK-Box) in the RACK Wiki.
+Here are very brief instructions how to run a RACK box virtual machine.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/03-Install-a-Virtual-RACK-Box) in the RACK Wiki.
 
 1. Download the split VirtualBox zip files.
 2. Concatenate the split VirtualBox zip files together.

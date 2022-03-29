@@ -4,9 +4,13 @@ The Scraping Tool Kit (STK) is a series of python packages that provide utilitie
 # Installation
 
 STK is installed by downloading the files to your local machine.  This can either be from a git clone of the whole RACK repo, or it can be just the ScrapingToolKit folder. Once the source files are downloaded installation is as simple entering `pip install .` from a command window in your `ScrapingToolKit` folder.
+dependencies can be installed by `pip install -r requirements.txt` to install all dependencies at once or they can be installed individually.
 
 Dependencies:
 `pip install lxml`
+`pip install colorama`
+`pip install graphviz`
+`pip install ftfy`
 
 Note: Sometimes for linux machines that have multiple versions of Python installed the command will be `pip3 install .`
 
@@ -206,5 +210,5 @@ Resulting data can be ingested into RACK by using the CLI command:
 
 STK has the ability to be updated to use the latest CDR files. This can be done by downloading the entire RACK repo.  From the RACK repo run the python script `Autogeneration\ReadNodegroups.py`.
 
-This will generate updated `\Evidence\Add.py`, '\Evidence\CONSTANTS.py' and `\Evidence\RACK-DATA.xsd`. These files will be tailored to the CDR nodegroups (json files that start with "ingest_", i.e. "ingest_ACTIVITY.json") found in the `nodegroups` folder of the repo.  To use these updated file simply re-install the STK using `pip install .` as described in the installation section.
+This will generate updated `\Evidence\Add.py`, `\Evidence\CONSTANTS.py` and `\Evidence\RACK-DATA.xsd`. These files will be tailored to the CDR nodegroups (json files that start with "ingest_", i.e. "ingest_ACTIVITY.json") found in the `nodegroups` folder of the repo.  To use these updated file simply re-install the STK using `pip install .` as described in the installation section.
 

@@ -18,7 +18,7 @@ import csv
 from datetime import datetime
 from Logging import *
 from lxml import etree
-
+from Evidence.CONSTANTS import nodegroupMapping
 __EvidenceDir__ = None
 __Evidence__ = None
 
@@ -108,15 +108,15 @@ def createCDR(dataGraph="http://rack001/data"):
                     outwriter.writerow(rowData)
           
     with open(os.path.join(outputDir,"import.yaml"), 'w', encoding="utf-8") as outFile:
-        outFile.write('''data-graph: "{{DataGraph}}"
+        outFile.write('''data-graph: "{}"
 ingestion-steps:
 #Phase1: Identifiers Only
-'''.replace("{{DataGraph}}",dataGraph))
+'''.format(dataGraph))
         for cdr in cdrFiles:
-            outFile.write('- {nodegroup: "ingest_{{THING}}", csv: "{{THING}}1.csv"}\n'.replace("{{THING}}",cdr))
+            outFile.write('- {nodegroup: "'+nodegroupMapping[cdr]+'", csv: "'+cdr+'1.csv"}\n')
         outFile.write("\n#Phase2: All Evidence\n")
         for cdr in cdrFiles:
-            outFile.write('- {nodegroup: "ingest_{{THING}}", csv: "{{THING}}2.csv"}\n'.replace("{{THING}}",cdr))
+            outFile.write('- {nodegroup: "'+nodegroupMapping[cdr]+'", csv: "'+cdr+'2.csv"}\n')
     return os.path.join(outputDir,"import.yaml")
 
 def createEvidenceFile(ingestionTitle="ScrapingToolKitIngestion", ingestionDescription="Data that was ingested using the ARCOS Scraping Tool Kit.", filePath="RACK-DATA.xml"):   

@@ -22,10 +22,11 @@ rack model import GrammaTech-Ontology/OwlModels/import.yaml
 rack model import LM-Ontology/OwlModels/import.yaml
 rack model import SRI-Ontology/OwlModels/import.yaml
 rack model import STR-Ontology/OwlModels/import.yaml
+rack model import RTX-Ontology/OwlModels/import.yaml
 
 # Remove old CDR files
 
-rm -rf nodegroups/CDR 
+rm -rf nodegroups/CDR
 rm -rf nodegroups/ingestion
 
 # Generate new CDR files

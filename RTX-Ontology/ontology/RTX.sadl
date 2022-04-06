@@ -10,11 +10,23 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
-uri "http://arcos.todo/RTX" alias TODO.
+uri "http://arcos.rack/RTX" alias RTX.
 
-import "http://arcos.rack/PROV-S".
 import "http://arcos.rack/ANALYSIS".	
 
-SyntheticAnalysisOutput is a type of ANALYSIS_OUTPUT
-    described by metric with values of type float
-    described by result with values of type string.
+RtxAnalysisOutput
+    (note "Synthetic analysis outputs annotated with metrics and results")
+    is a type of ANALYSIS_OUTPUT.
+    metric describes RtxAnalysisOutput with values of type float.
+    metric of        RtxAnalysisOutput has at most 1 value.
+    result describes RtxAnalysisOutput with values of type RtxAnalysisResult.
+    result of        RtxAnalysisOutput has at most 1 value.
+
+RtxAnalysisResult
+    (note "The overall outcome of running a synthetic analysis")
+    is a type of THING
+    must be one of {RtxPassed, RtxFailed, RtxIndeterminate}.
+
+RtxPassed        is a RtxAnalysisResult identifier "Passed".
+RtxFailed        is a RtxAnalysisResult identifier "Failed".
+RtxIndeterminate is a RtxAnalysisResult identifier "Indeterminate".

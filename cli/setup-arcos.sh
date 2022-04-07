@@ -26,7 +26,7 @@ rack nodegroups import ../nodegroups/ingestion/arcos.arbiter
 
 # RTX model & auto-generated nodegroups
 rack model import ../RTX-Ontology/OwlModels/import.yaml
-rack nodegroups import ../nodegroups/ingestion/arcos.rtx
+rack nodegroups import ../nodegroups/ingestion/arcos.aace
 
 ### Applicable Standards ### copy any of these to the instance data load script and use when applicable
 # rack data import --clear ../RACK-Ontology/OwlModels/ARP-4754A.yaml     # from datagraph http://rack001/arp-4754a

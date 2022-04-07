@@ -10,7 +10,7 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
-uri "http://arcos.rtx/RTX" alias RTX.
+uri "http://arcos.aace/RTX" alias aace.
 
 import "http://arcos.rack/ANALYSIS".	
 

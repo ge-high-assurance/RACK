@@ -99,6 +99,7 @@ in
         docker cp "${container}:home/ubuntu/RACK/Boeing-Ontology/OwlModels/" "${rack_dir}/Boeing-Ontology/"
         docker cp "${container}:home/ubuntu/RACK/LM-Ontology/OwlModels/" "${rack_dir}/LM-Ontology/"
         docker cp "${container}:home/ubuntu/RACK/SRI-Ontology/OwlModels/" "${rack_dir}/SRI-Ontology/"
+        docker cp "${container}:home/ubuntu/RACK/RTX-Ontology/OwlModels/" "${rack_dir}/RTX-Ontology/"
         docker cp "${container}:home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/" "${rack_dir}/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
 
         echo "[setup-owl] Copying nodegroups"

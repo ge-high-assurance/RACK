@@ -1,0 +1,32 @@
+/* Copyright (c) 2022, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.aace/RTX" alias aace.
+
+import "http://arcos.rack/ANALYSIS".	
+
+RtxAnalysisOutput
+    (note "Synthetic analysis outputs annotated with metrics and results")
+    is a type of ANALYSIS_OUTPUT.
+    metric describes RtxAnalysisOutput with values of type float.
+    metric of        RtxAnalysisOutput has at most 1 value.
+    result describes RtxAnalysisOutput with values of type RtxAnalysisResult.
+    result of        RtxAnalysisOutput has at most 1 value.
+
+RtxAnalysisResult
+    (note "The overall outcome of running a synthetic analysis")
+    is a type of THING
+    must be one of {RtxPassed, RtxFailed, RtxIndeterminate}.
+
+RtxPassed        is a RtxAnalysisResult identifier "Passed".
+RtxFailed        is a RtxAnalysisResult identifier "Failed".
+RtxIndeterminate is a RtxAnalysisResult identifier "Indeterminate".

@@ -2,6 +2,15 @@
 
 # RACK Change Log
 
+## [v10.1] - 2022-04-11
+
+This release has the following changes:
+
+- Fix issue in Scraping Tool Kit [#646](https://github.com/ge-high-assurance/RACK/pull/646)
+- Add missing SRI-SS.owl to import.yaml [e9d313b](https://github.com/ge-high-assurance/RACK/commit/e9d313bc026e89bb2fb30c0d8b72f251290318d5)
+- Add missing CWE entries [#687](https://github.com/ge-high-assurance/RACK/pull/687)
+- Add RTX overlay to support synthetic analysis outputs [#689](https://github.com/ge-high-assurance/RACK/pull/689)
+
 ## [v10.0] - 2022-03-21
 
 This release has the following changes:

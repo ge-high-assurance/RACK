@@ -42,7 +42,7 @@ steps:
 
    ```shell
    cd RACK.wiki
-   git tag v10.0
+   git tag v10.1
    git push --tag
    ```
 

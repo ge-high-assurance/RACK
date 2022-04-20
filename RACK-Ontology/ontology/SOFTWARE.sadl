@@ -49,62 +49,62 @@ PACKAGE
 	packageInput (note "Source files used when generating the package output") describes PACKAGE with values of type FILE.
 	packageInput is a type of used.
 
-COMPONENT_TYPE
+SWCOMPONENT_TYPE
     (note "An open/extensible set of types of software components")
     is a type of THING.
 
 // A few common instances:
 SourceFunction
     (note "A function or procedure declared or defined in source code.")
-    is a COMPONENT_TYPE
+    is a SWCOMPONENT_TYPE
     has identifier "SourceFunction".
 BinaryFunction
     (note "A function in a binary, as defined by the appropriate ABI.")
-    is a COMPONENT_TYPE
+    is a SWCOMPONENT_TYPE
     has identifier "BinaryFunction".
 SourceGlobalVariable
     (note "A global variable declared or defined in source code.")
-    is a COMPONENT_TYPE
+    is a SWCOMPONENT_TYPE
     has identifier "SourceGlobalVariable".
 BinaryGlobalVariable
     (note "A global variable (generally in the .data or .bss sections).")
-    is a COMPONENT_TYPE
+    is a SWCOMPONENT_TYPE
     has identifier "BinaryGlobalVariable".
 BinaryBasicBlock
     (note "A basic block at the binary level.")
-    is a COMPONENT_TYPE
+    is a SWCOMPONENT_TYPE
     has identifier "BinaryBasicBlock".
 ClassDefinition
     (note "A class in an object-oriented language.")
-    is a COMPONENT_TYPE
+    is a SWCOMPONENT_TYPE
     has identifier "ClassDefinition".
 ClassMethod
     (note "A method attached to a class in an object-oriented language.")
-    is a COMPONENT_TYPE
+    is a SWCOMPONENT_TYPE
     has identifier "ClassMethod".
 ClassMemberVariable
     (note "A variable attached to the instances of a class in an object-oriented language.")
-    is a COMPONENT_TYPE
+    is a SWCOMPONENT_TYPE
     has identifier "ClassMemberVariable".
 ClassConstructor
     (note "A constructor in an object-oriented language.")
-    is a COMPONENT_TYPE
+    is a SWCOMPONENT_TYPE
     has identifier "ClassConstructor".
 Module
     (note "A collection of related code, usually grouped in a lexical scope.")
-    is a COMPONENT_TYPE
+    is a SWCOMPONENT_TYPE
     has identifier "Module".
 Namespace
     (note "A collection of related code, usually grouped in a lexical scope.")
-    is a COMPONENT_TYPE
+    is a SWCOMPONENT_TYPE
     has identifier "Namespace".
 
 SWCOMPONENT
     (note "A concrete software component")
     is a type of ENTITY.
 
-    componentType (note "Type of component")
-        describes SWCOMPONENT with a single value of type COMPONENT_TYPE.
+    componentType (note "Type of software component")
+        describes SWCOMPONENT with a single value of type SWCOMPONENT_TYPE.
 
     valueType (note "The type of this value, if applicable (e.g. for functions or variables).")
         describes SWCOMPONENT with values of type string.
@@ -114,7 +114,7 @@ SWCOMPONENT
     mentions (note "A component referenced by this one, e.g., a callee or variable being used.")
         describes SWCOMPONENT with values of type SWCOMPONENT.
 
-    subcomponentOf (note "A structural sub-component, e.g., a function might be a subcomponent of module.")
+    partOf (note "A structural sub-component, e.g., a function might be a subcomponent / part of a module.")
         describes SWCOMPONENT with values of type SWCOMPONENT.
 
     /* How components relate to the system as a whole */

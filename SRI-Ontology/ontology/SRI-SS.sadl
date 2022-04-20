@@ -132,11 +132,11 @@ SoftwareComponent is a type of SWCOMPONENT.
    
 KernelAPI
    (note "API call to kernel (RTOS), used by other software components.")
-   is a COMPONENT_TYPE
+   is a SWCOMPONENT_TYPE
    has identifier "KernelAPI".
 DeviceDriver
    (note "software device driver managed by the kernel (RTOS)")
-   is a COMPONENT_TYPE
+   is a SWCOMPONENT_TYPE
    has identifier "DeviceDriver".
 
 PhysicalInterface is a type of ENTITY.  

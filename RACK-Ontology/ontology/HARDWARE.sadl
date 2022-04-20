@@ -14,9 +14,11 @@ uri "http://arcos.rack/HARDWARE" alias hw.
 import "http://arcos.rack/PROV-S".
 
 HWCOMPONENT (note "A generic physical hardware component") is a type of ENTITY.
+    partOf (note "A structural subcomponent / part of a component.")
+        describes HWCOMPONENT with values of type HWCOMPONENT.
     instantiates (note "What logical component (system) does this physical component instantiate or implement?")
         describes HWCOMPONENT with values of type ENTITY.
-    componentType (note "Type of component")
+    componentType (note "Type of hardware component")
         describes HWCOMPONENT with a single value of type HWCOMPONENT_TYPE.
 	partitions describes HWCOMPONENT with values of type PARTITION.
 

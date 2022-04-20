@@ -27,15 +27,15 @@ From: NCSD Glossary. NTSSI 4009 (2000), CNSSI 4009
 
 // We model THREAT only as an ATTACK is an activity on say a fielded system.
 THREAT (note "A threat / vulnerability to be assessed for certification") is a type of ENTITY.
-	Sec:source (note "ENTITY(s) that participate in causing this HAZARD") describes THREAT with values of type ENTITY.
+	Sec:source (note "ENTITY(s) that participate in causing this THREAT") describes THREAT with values of type ENTITY.
 	Sec:source is a type of wasImpactedBy.
 
-	identified (note "how this HAZARD was identified") describes THREAT with values of type THREAT_IDENTIFICATION.
+	identified (note "how this THREAT was identified") describes THREAT with values of type THREAT_IDENTIFICATION.
 
-	effect (note "consequence(s) of the HAZARD") describes THREAT with values of type string.
+	effect (note "consequence(s) of the THREAT") describes THREAT with values of type string.
    	effect describes THREAT with at most 1 value.
 
-	severity (note "the severity of the HAZARD") describes THREAT with values of type float. // [0,1].
+	severity (note "the severity of the THREAT") describes THREAT with values of type float. // [0,1].
 	severity describes THREAT with at most 1 value.
 
 	likelihood (note "probability value between 0 and 1") describes THREAT with values of type float. // [0,1].

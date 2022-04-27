@@ -4,7 +4,7 @@
 // Copyright 2021-2022. Honeywell International and SRI International
 
 // namespace and imports
-uri "http://arcos.descert/SRI/SafetySecurity" alias SS.
+uri "http://arcos.descert/SRI-SS" alias SS.
 import "http://arcos.rack/PROV-S".
 import "http://arcos.rack/DOCUMENT".
 import "http://arcos.rack/SYSTEM".
@@ -27,7 +27,7 @@ import "http://arcos.descert/SRI".
 Port is a type of ENTITY.
    direction describes Port with a single value of type PortDirection.
    
-PortDirection (note "intput is Rx, output is Tx") is a type of THING.
+PortDirection (note "input is Rx, output is Tx") is a type of THING.
 InputPort is a PortDirection has identifier "Input".
 OutputPort is a PortDirection has identifier "Output".
 BidirectionalPort is a PortDirection has identifier "Bidirectional".
@@ -100,7 +100,9 @@ HardwareComponent is a type of HWCOMPONENT.
    // inherited
    //   instantiates values of type ENTITY which we will map to SYSTEM
    port (note "set of ports of this component") describes HardwareComponent with values of type Port.
-   part (note "set of components this component contains") describes HardwareComponent with values of type HardwareComponent. // partOf in core ontology is used for something else
+   // DB 4/20/22: use inherited attribute partOf in core ontology to point to container object
+   partOf of HardwareComponent only has values of type HardwareComponent.
+   //    old: part (note "set of hw components this component contains") describes HardwareComponent with values of type HardwareComponent. 
 //  guarantee describes HardwareComponent with values of type ComponentGuarantee.
    hosts describes HardwareComponent with values of type SoftwareComponent.
    pedigree describes HardwareComponent with values of type Pedigree.
@@ -125,6 +127,9 @@ SoftwareComponent is a type of SWCOMPONENT.
    //   componentType
    sw:instantiates of SoftwareComponent only has values of type FUNCTION.
 //   guarantee describes SoftwareComponent with values of type ComponentGuarantee.
+   // DB 4/22/22: use inherited attribute partOf in core ontology to point to container object
+   //   old: part (note "set of sw components this component contains") describes SoftwareComponent with values of type SoftwareComponent. 
+   partOf of SoftwareComponent only has values of type SoftwareComponent.
    pedigree describes SoftwareComponent with values of type Pedigree.
    pedigree describes SoftwareComponent with at most 1 value.
    trustworthiness describes SoftwareComponent with values of type Trustworthiness.
@@ -140,10 +145,14 @@ DeviceDriver
    has identifier "DeviceDriver".
 
 PhysicalInterface is a type of ENTITY.  
-   srcPort (note "the source port of this interface") describes PhysicalInterface with a single value of type Port.
+   srcPort (note "the source port of this interface") describes PhysicalInterface with values of type Port.
    destPort (note "the destination port of this interface") describes PhysicalInterface with values of type Port.
    protocol describes PhysicalInterface with values of type ENTITY.
    interfaceType describes PhysicalInterface with a single value of type InterfaceType.
+   pedigree describes PhysicalInterface with values of type Pedigree.
+   pedigree describes PhysicalInterface with at most 1 value.
+   trustworthiness describes PhysicalInterface with values of type Trustworthiness.
+   trustworthiness describes PhysicalInterface with at most 1 value.
   
 VirtualChannel is a type of INTERFACE.
    utlilizes describes VirtualChannel with values of type PhysicalInterface.
@@ -175,7 +184,7 @@ SAL_3 (note "NIST/ISA99 - protetction against intentional violation using sohist
 SAL_4 (note "NIST/ISA99 - protetction against intentional violation using sohisticated means with extended resources") is a SecurityAssuranceLevel has identifier "SAL_4".
 
 SecurityEnclave (note "a time, space, network partition; used synomymously here with SecurityEnclave") is a type of COLLECTION.
-   content of SecurityEnclave only has values of type {HardwareComponent or PhysicalInterface or SoftwareComponent}. 
+   content of SecurityEnclave only has values of type {HardwareComponent or PhysicalInterface or SoftwareComponent or Port}. 
    dal describes SecurityEnclave with values of type SafetyDesignAssuranceLevel.
    dal describes SecurityEnclave with at most 1 value.
    sal describes SecurityEnclave with values of type SecurityAssuranceLevel.
@@ -187,12 +196,12 @@ SecurityPerimeter is a type of COLLECTION.
 Vulnerability is a type of ENTITY.
    mitgatedBy describes Vulnerability with values of type {Control or PROPERTY}.
    mitgatedBy is a type of wasImpactedBy.
-   enhancedBy describes Vulnerability with values of type Control.
+   enhancedBy describes Vulnerability with values of type {Control or PROPERTY}.
    enhancedBy is a type of wasImpactedBy.
-   recoveredBy describes Vulnerability with values of type Control.
+   recoveredBy describes Vulnerability with values of type {Control or PROPERTY}.
    recoveredBy is a type of wasImpactedBy.
    vulnerabilityTouchPoints describes Vulnerability with values of type ArchitectureTouchPoints.
-   cweReference describes AttackAccessVectors with values of type ENTITY. // DB: added a refrence that may not always be populated.
+   cweReference describes Vulnerability with values of type ENTITY. // DB: added a refrence that may not always be populated. DB 4/18/22: fixed copy-paste error
    cweReference is a type of wasImpactedBy.
    
 Attacker is a type of AGENT.
@@ -214,12 +223,11 @@ ArchitectureTouchPoints (note "touch points to architural elements like hardware
   
 // Subclass of CONTROL in core ontology, using title case
 Control is a type of CONTROL.
-   provedBy describes Control with values of type PROPERTY.
-   provedBy is a type of wasImpactedBy.
+   // DB 4/19/22: removed provedBy since a PropertyResult is proved by a Control rather than a Control proved by a PropertyResult
    mitigatesHazard describes Control with values of type HazardCondition.
    enhancesHazard describes Control with values of type HazardCondition.
    location describes Control with values of type ArchitectureTouchPoints.
-   nist_800_53Reference describes AttackAccessVectors with values of type ENTITY. // DB: added a refrence that may not always be populated.
+   nist_800_53Reference describes Control with values of type ENTITY. // DB: added a refrence that may not always be populated. DB 4/18/22: fixed copy-paste error
    nist_800_53Reference is a type of wasImpactedBy.
 
 // DB: Assuming for now that we can use SECURITY_LABEL identifier such as Integrity for a LossCategory,
@@ -227,7 +235,12 @@ Control is a type of CONTROL.
 //          Not sure of the SADL semantics here: can parent type's object identifers be used for an object of a subtype?
 //    Future: It will be good to define a base type for both LossCategory and SECURITY_LABEL and hen subtype it for these two
 LossCategory (note "category of a safety related loss") is a type of SECURITY_LABEL.
-   // future: constrain values to exclude confidentiality
+   // future: constrain values to exclude confidentiality for safety
+
+// DB 4/25/22: add non-repudiation
+NonRepudiation is a SECURITY_LABEL 
+   has identifier "NonRepudiation"
+   has description "Non-deniability of authenticated information such as digital signature.".
 
 HazardCondition is a type of HAZARD. // replaced Hazard by HazardCondition so as to be like ThreatCondition below. DB Agreed.
    mitigatesControl describes HazardCondition with values of type Control.
@@ -276,4 +289,3 @@ SecurityViolation is a type of RiskEvent.
 
 SafetyAccident is a type of RiskEvent.
    // future: add more properties
-   

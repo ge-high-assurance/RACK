@@ -29,11 +29,9 @@ import "http://arcos.AH-64D/Boeing".
        // DB 1/6/22: constrain the range of wasQualifiedBy 
        wasQualifiedBy of DesCert_Tool only has values of type ORGANIZATION.
 
-    // DB 2/7/22: renamed ConfigurationString to ToolConfigurationInstance
     ToolConfigurationInstance (note "Specific tool command, options, and configuration settings for an activity instance") 
           is a type of ENTITY.
 
-    // DB 2/25/22: added GenerationInformation to hold common properties about different types of generation
     GenerationInformation (note "Information about tool usage in a generation activity.") is a type of ENTITY.
        generatedBy (note "Agent responsible for running the generation using a tool.") describes GenerationInformation with values of type AGENT.
        generatedBy is a type of wasAttributedTo.
@@ -62,16 +60,16 @@ import "http://arcos.AH-64D/Boeing".
          propertyBasis (note "entities impacting the property definition - e.g. SystemconOps") describes SpecificProperty with values of type ENTITY.
          propertyBasis is a type of wasImpactedBy.
          // NOTE: a SpecificProperty is modeled by entities such as SallyPropertyModel; that's where the property text is contained
-         
-      // DB 1/6/22: added PropertyResult and PropertyProofStatus, these are fundamental to using properties, analoguous to TEST_RESULT
-      //   (I had earlier (Nov 21) had added them to core ontology in PROCESS.sadl, but that change was not accpted, so adding in the overlay)
-      // DB 2/7/22: made PropertyResult a subclass of ANALYSIS_OUTPUT so that it jives better with core ontology
-      PropertyResult (note "Result corresponding to one analysis attempt to prove one PROPERTY") is a type of ANALYSIS_OUTPUT.
-         propertyResult (note "Valid/Invalid/Indeterminate status of this PropertyResult") describes PropertyResult with a single value of type PropertyProofStatus.
+      
+      // DB 4/18/22: changed to inherit from ENTITY rather than ANALYSIS_OUTPUT, since PropertyResult can exist without an anlaysis or another activity
+      //             Added new attributes goalProperty and establishedBy
+      PropertyResult (note "Result corresponding to one method/attempt to prove a PROPERTY") is a type of ENTITY.
+         propertyResult (note "Valid/Invalid/Unknown status of this PropertyResult") describes PropertyResult with a single value of type PropertyProofStatus.
          // The property being proven by this property result; the property has all relevant information about scope and basis
-         analyzes of PropertyResult only has values of type PROPERTY. // DB 2/7/22: may need to put range constraint of a single value
+         goalProperty (note "the PROPERTY this result is for") describes PropertyResult with a single value of type PROPERTY. // single value is mandatory, otherwise PropertyResult is meaningless
          resultDiagnostics (note "counter examples, other diagnostics") describes PropertyResult with values of type ENTITY.
-         wasGeneratedBy of PropertyResult only has values of type ANALYSIS.
+         establishedBy (note "the ACTIVITY, ENTITY that establishes (proves) the propertyResult to be Valid/Invalid/Unknown") describes PropertyResult with values of type THING.
+         // inherited attribute wasGeneratedBy can also be used when PropertyResult is created by an ACTIVITY, but establishedBy is the main one still needed
 
       PropertyProofStatus (note "Outcome of the attempt to prove a property") is a type of THING,
          must be one of {Valid, Invalid, Unknown}.
@@ -105,15 +103,13 @@ import "http://arcos.AH-64D/Boeing".
       ///////////////////////////////////////////////////
       // System, Software requirements, design, code   
       
-    // DB 2/27/22: Added new class RequirementSet with common properties for requirement sets
+    // DB 2/27/22: Added new class RequirementSet with common properties for all types of requirement sets
     RequirementSet (note "a set of requirements that together defines the required behavior of a SYSTEM (or part thereof)")
       is a type of COLLECTION.
       content of RequirementSet only has values of type REQUIREMENT.
       // note: 'speficies' is not a subtype of 'wasImpactedBy, which has the reverse meaning. RequiremenSet occurs before the SYSTEM is constructed.
       specifies (note "the system or component this RequirementSet governs/specifies") describes RequirementSet with values of type ENTITY.
 
-    // DB 1/6/22: we need to keep it separate from PIDS_Req in Beoing.sadl, since the level/abstraction of information in a
-    //     typical system requirmeent may be different than PIDS_Req 
     SystemRequirement is a type of REQUIREMENT.
         wasGeneratedBy of SystemRequirement only has values of type SystemRequirementsDefinition.
     
@@ -121,8 +117,6 @@ import "http://arcos.AH-64D/Boeing".
        content of SystemRequirementSet only has values of type SystemRequirement. 
        wasGeneratedBy of SystemRequirementSet only has values of type SystemRequirementsDefinition.
        
-    // DB 1/6/22: we need to keep it separate from SRS_Req in Boeing.sadl, since the level of information in a
-    //     typical SW HLR (e.g., CLEAR) is much more detailed than SRS_Req. The satisfies relation
     SoftwareHighLevelRequirement is a type of REQUIREMENT.
       wasGeneratedBy of SoftwareHighLevelRequirement only has values of type SoftwareHighLevelRequirementsDefinition.
 
@@ -131,7 +125,6 @@ import "http://arcos.AH-64D/Boeing".
        wasGeneratedBy of SoftwareHighLevelRequirementSet only has values of type SoftwareHighLevelRequirementsDefinition.
        specifies of SoftwareHighLevelRequirementSet only has values of type SWCOMPONENT.
 
-    // DB 1/6/22: we need to keep it separate from SubDD_Req in Beoing.sadl
     SoftwareLowLevelRequirement is a type of REQUIREMENT.
         wasGeneratedBy of SoftwareLowLevelRequirement only has values of type SoftwareDesign.
     
@@ -186,13 +179,13 @@ import "http://arcos.AH-64D/Boeing".
         sallyModelGenInfo describes SallyTransitionSystemModelGeneration with values of type GenerationInformation.
         sallyModelGenInfo is a type of used.
         sallyModelGenInfo describes SallyTransitionSystemModelGeneration with at most 1 value.
-        // DB 2/25/22: additionally use the 'used' property of ACTIVITY rather than create a new property 'generationInput' 
+        // additionally use the 'used' property of ACTIVITY rather than create a new property 'generationInput' 
       
       SallyModelChecking is a type of ANALYSIS.
         // Inherited properties from ANALYSIS
         //    runBy, analyzedWith
         analysisInput of SallyModelChecking only has values of type {SallyTransitionSystemModel or SpecificProperty}.        
-        analysisConfiguration of SallyModelChecking only has values of type ToolConfigurationInstance.
+        analysisConfiguration of SallyTransitionSystemModelGeneration only has values of type ToolConfigurationInstance.
       
       SallyNotation (note "Sally notation for creating models and property queries") is a type of ENTITY.
         userGuide describes SallyNotation with values of type DOCUMENT.
@@ -293,7 +286,7 @@ import "http://arcos.AH-64D/Boeing".
         /////////////////////////////////////////////
         // Invariant detection by Daikon
         
-        // DB: inherit from ANALYSIS rather than ACTIVITY
+        // DB 2/7/22: inherit from ANALYSIS rather than ACTIVITY
         DaikonInvariantDetection is a type of ANALYSIS.
           // Inherited porperties
           //   wasInformedBy: activity that was a precursor to this

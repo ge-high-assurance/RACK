@@ -173,6 +173,10 @@ to a `rack data import` command.
 `data-graph` is a graph identifier URL. This URL allows multiple
 datasets to be stored in the same triple store.
 
+`extra-data-graphs` is a list of additional graph identifier URLs.
+While the previous data graph will be used to store the ingested
+data, these data graphs are only used for looking up data.
+
 `ingestion-steps` takes an ordered list of CSV and OWL file imports
 used to populate the graph.
 
@@ -183,8 +187,11 @@ RACK. CSV paths are resolved relative to the configuration file.
 OWL files can be ingested by adding list elements containing an `owl`
 path to the OWL file.
 
-```text
-data-model: "http://rack001/data"
+```yaml
+data-graph: "http://rack001/data"
+extra-data-graphs:
+- "http://rack001/otherdata"
+- "http://rack001/somedata"
 ingestion-steps:
 - {nodegroup: "ingest_SYSTEM",    csv: "SYSTEM.csv"}
 - {nodegroup: "ingest_INTERFACE", csv: "INTERFACE.csv"}

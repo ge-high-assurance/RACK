@@ -14,27 +14,26 @@ The RACK command-line interface (the `rack` program) can
 - [import data](#import-data) into RACK-in-a-Box from CSV files
 - [export data](#export-data) from RACK-in-a-Box to CSV files
 
-To do its work, the rack program uses the Node Execution Group REST
+To do its work, the `rack` program uses the Node Execution Group REST
 API which is documented in the [REST API Swagger
 Demo](https://github.com/ge-high-assurance/RACK/wiki/REST-API-Swagger-Demo)
-and [REST
-cookbook](https://github.com/ge-semtk/semtk/wiki/REST-API) wiki
-pages.
+and [REST cookbook](https://github.com/ge-semtk/semtk/wiki/REST-API)
+wiki pages.
 
 ## Install dependencies
 
-The rack program requires the
+The `rack` program requires the
 [semtk-python3](https://github.com/ge-semtk/semtk-python3) package and
 other requirements listed in `requirements.txt`.
 
 > **_NOTE_** these programs and dependencies are already installed in
-> the Rack-in-a-Box docker and VM images; no further installation is
-> necessary for those environments, which can be used directly
-> (e.g. `docker exec -it CONTAINER-ID-OR-NAME /bin/bash`).
+> the RACK Box container and virtual machine images; no further
+> installation is necessary for those environments, which can be used
+> directly (e.g. `docker exec -it CONTAINER-ID-OR-NAME /bin/bash`).
 >
 > In general, RACK is accessed via network-based operations, so
-> running the tools from within a RACK-in-a-Box environment or the
-> user's local environment should be equivalent.
+> running the tools against a RACK Box or against the user's local
+> environment should be equivalent.
 
 We recommend installing these dependencies in an isolated virtual
 environment to ensure reproducibility of results.
@@ -170,12 +169,13 @@ The import configuration files are YAML files that specify the target
 `data-graph` and `ingestion-steps`. These files will be the argument
 to a `rack data import` command.
 
-`data-graph` is a graph identifier URL. This URL allows multiple
-datasets to be stored in the same triple store.
+`data-graph` is a graph identifier URL. A graph is a distinct namespace
+within the triplestore in order to allow multiple datasets to be stored
+without overwriting each other.  Data will be ingested into this graph.
 
-`extra-data-graphs` is a list of additional graph identifier URLs.
-While the previous data graph will be used to store the ingested
-data, these data graphs are only used for looking up data.
+`extra-data-graphs` is a list of additional graph identifiers that are
+used for URI lookups.  While `data-graph` will be used to store the
+ingested data, `extra-data-graphs` will be used only to look up data.
 
 `ingestion-steps` takes an ordered list of CSV and OWL file imports
 used to populate the graph.

@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"sparqlConn": {
-		"name": "RACK",
+		"name": "RACK local fuseki1",
 		"domain": "",
 		"enableOwlImports": false,
 		"model": [
@@ -16,19 +16,26 @@
 				"type": "fuseki",
 				"url": "http://localhost:3030/RACK",
 				"graph": "http://rack001/data"
+			},
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/nist-800-53"
 			}
 		]
 	},
 	"sNodeGroup": {
-		"version": 13,
+		"version": 19,
 		"limit": 0,
 		"offset": 0,
 		"sNodeList": [
 			{
 				"propList": [
 					{
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"SparqlID": "?identifier_1",
@@ -51,8 +58,10 @@
 			{
 				"propList": [
 					{
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"SparqlID": "?identifier_0",
@@ -75,8 +84,10 @@
 			{
 				"propList": [
 					{
-						"ValueType": "string",
-						"relationship": "http://www.w3.org/2001/XMLSchema#string",
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
 						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
 						"Constraints": "",
 						"SparqlID": "?identifier",
@@ -101,8 +112,9 @@
 						"DeletionMarkers": [
 							false
 						],
-						"ValueType": "ENTITY",
-						"UriValueType": "http://arcos.rack/PROV-S#ENTITY",
+						"range": [
+							"http://arcos.rack/PROV-S#ENTITY"
+						],
 						"ConnectBy": "wasImpactedBy",
 						"Connected": true,
 						"UriConnectBy": "http://arcos.rack/PROV-S#wasImpactedBy"
@@ -120,11 +132,12 @@
 						"DeletionMarkers": [
 							false
 						],
-						"ValueType": "SWCOMPONENT",
-						"UriValueType": "http://arcos.rack/SOFTWARE#SWCOMPONENT",
-						"ConnectBy": "subcomponentOf",
+						"range": [
+							"http://arcos.rack/SOFTWARE#SWCOMPONENT"
+						],
+						"ConnectBy": "",
 						"Connected": true,
-						"UriConnectBy": "http://arcos.rack/SOFTWARE#subcomponentOf"
+						"UriConnectBy": "http://arcos.rack/SOFTWARE#partOf"
 					}
 				],
 				"fullURIName": "http://arcos.rack/SOFTWARE#SWCOMPONENT",
@@ -137,7 +150,9 @@
 			}
 		],
 		"orderBy": [],
-		"unionHash": {}
+		"groupBy": [],
+		"unionHash": {},
+		"columnOrder": []
 	},
 	"importSpec": {
 		"version": "1",

@@ -156,7 +156,7 @@ def objectDataString(typeStr, value):
     trace()
     rtnStr = ""
     if value != None:
-        rtnStr+='<{type}>{value}</{type}>'\
+        rtnStr+='<{type}><![CDATA[{value}]]></{type}>'\
             .replace("{type}",typeStr)\
             .replace("{value}", value)
     return rtnStr

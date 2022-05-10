@@ -70,6 +70,7 @@ in
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/Boeing-Ontology/OwlModels" "${rack_dir}/Boeing-Ontology/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/LM-Ontology/OwlModels" "${rack_dir}/LM-Ontology/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/SRI-Ontology/OwlModels" "${rack_dir}/SRI-Ontology/"
+        scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/RTX-Ontology/OwlModels" "${rack_dir}/RTX-Ontology/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels" "${rack_dir}/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
 
         echo "[setup-owl] Copying nodegroups"

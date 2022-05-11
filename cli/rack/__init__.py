@@ -432,6 +432,20 @@ def store_nodegroup_driver(name: str, creator: str, filename: str, comment: Opti
     semtk3.delete_item_from_store(name, item_type) # succeeds even if not found
     semtk3.store_item(name, comment or '', creator, nodegroup_json_str, item_type)
 
+@with_status('Converting nodegroup to SPARQL')
+def sparql_nodegroup_driver(base_url: Url, filename: str) -> None:
+    with open(filename) as f:
+        nodegroup_json_str = f.read()
+    from urllib.parse import urljoin, urlparse
+    urlorig = urlparse(base_url)
+    urlbase = urlorig._replace(netloc=':'.join(
+                                    urlorig.netloc.split(':')[:1] + ['12059'])
+                               ).geturl()
+    rsp = requests.post(urljoin(urlbase, 'nodeGroup/generateSelect'),
+                        json={'jsonRenderedNodeGroup': nodegroup_json_str})
+    rsp.raise_for_status()
+    print(rsp.json()['simpleresults']['SparqlQuery'])
+
 @with_status('Retrieving nodegroups')
 def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url, kind: str) -> None:
     sparql_connection(base_url, None, [], None)
@@ -566,6 +580,9 @@ def dispatch_nodegroups_delete(args: SimpleNamespace) -> None:
 def dispatch_nodegroups_deleteall(args: SimpleNamespace) -> None:
     delete_all_nodegroups_driver(args.yes, args.base_url)
 
+def dispatch_nodegroups_sparql(args: SimpleNamespace) -> None:
+    sparql_nodegroup_driver(args.base_url, args.filename)
+
 def get_argument_parser() -> argparse.ArgumentParser:
 
     parser = argparse.ArgumentParser(description='RACK in a Box toolkit')
@@ -595,6 +612,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     nodegroups_list_parser = nodegroups_subparsers.add_parser('list', help='List nodegroups from RACK')
     nodegroups_delete_parser = nodegroups_subparsers.add_parser('delete', help='Delete some nodegroups from RACK')
     nodegroups_deleteall_parser = nodegroups_subparsers.add_parser('delete-all', help='Delete all nodegroups from RACK')
+    nodegroups_sparql_parser = nodegroups_subparsers.add_parser('sparql', help='Show SPARQL query for nodegroup')
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     data_import_parser.add_argument('--data-graph', type=str, action='append', help='Data graph URL')
@@ -632,6 +650,9 @@ def get_argument_parser() -> argparse.ArgumentParser:
     nodegroups_store_parser.add_argument('filename', type=str, help='Nodegroup JSON filename')
     nodegroups_store_parser.add_argument('--kind', type=str, default='nodegroup', choices=['nodegroup', 'report'], help='Specify kind of object to store')
     nodegroups_store_parser.set_defaults(func=dispatch_nodegroups_store)
+
+    nodegroups_sparql_parser.add_argument('filename', type=str, help='Nodegroup (JSON) filename')
+    nodegroups_sparql_parser.set_defaults(func=dispatch_nodegroups_sparql)
 
     nodegroups_export_parser.add_argument('regexp', type=str, help='Nodegroup selection regular expression')
     nodegroups_export_parser.add_argument('directory', type=str, help='Nodegroup directory')

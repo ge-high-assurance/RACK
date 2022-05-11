@@ -6,7 +6,7 @@ set -e
 rack_dir=$(realpath "$(dirname "$0")"/..)
 
 rack_image="gehighassurance/rack-box"
-rack_tag="v10.1"
+rack_tag="v10.2"
 
 sadl_image="sadl/sadl-eclipse"
 sadl_tag="v3.5.0-20211204"
@@ -70,6 +70,7 @@ in
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/Boeing-Ontology/OwlModels" "${rack_dir}/Boeing-Ontology/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/LM-Ontology/OwlModels" "${rack_dir}/LM-Ontology/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/SRI-Ontology/OwlModels" "${rack_dir}/SRI-Ontology/"
+        scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/RTX-Ontology/OwlModels" "${rack_dir}/RTX-Ontology/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels" "${rack_dir}/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
 
         echo "[setup-owl] Copying nodegroups"

@@ -2,6 +2,16 @@
 
 # RACK Change Log
 
+## [v10.2] - 2022-05-09
+
+This release has the following changes:
+
+- Distinguish HW/SW components, correct notes to use THREAT not HAZARD [#693](https://github.com/ge-high-assurance/RACK/pull/693)
+- Let RACK CLI display nodegroup sparql query [#695](https://github.com/ge-high-assurance/RACK/pull/695)
+- Update SRI ontology overlay [#697](https://github.com/ge-high-assurance/RACK/pull/697)
+- Update Boeing ontology overlay [#699](https://github.com/ge-high-assurance/RACK/pull/699)
+- Load the NIST-800-53 control instances [cf4a7f1](https://github.com/ge-high-assurance/RACK/commit/cf4a7f1e43afcf2cbfb39f37adcf66d83b640ec1)
+
 ## [v10.1] - 2022-04-11
 
 This release has the following changes:

@@ -75,7 +75,7 @@ InternallyDeveloped is a Pedigree
    has description "Development is done in house.".
 COTS is a Pedigree 
    has identifier "COTS"
-   has description "Commercial Of The Shelf products that are bought as is".
+   has description "Commercial Off-The-Shelf products that are bought as is".
 Sourced is a Pedigree 
    has identifier "Sourced"
    has description "The system is provides by an outside organization.".   

@@ -18,79 +18,52 @@ PIDS_Req (note "A Requirement identified in the Prime Item Development Specifica
 CSID_Req (note "A Requirement identified in the Crew Systems Interface Document") is a type of REQUIREMENT.
 
 SRS_Req (note "A Requirement identified in the Software Requirements Specification") is a type of REQUIREMENT.
-//satisfies of SRS_Req only has values of type {PIDS_Req or CSID_Req}.
 
 SubDD_Req (note "A Requirement identified in the Subsystem Design Document") is a type of REQUIREMENT. 
-Rq:satisfies of SubDD_Req only has values of type SRS_Req. //AM move this and why warning marker
+	Rq:satisfies of SubDD_Req only has values of type SRS_Req.
 
 SBVT_Test (note "A test identified in the Software Baseline Verification Tests") is a type of TEST.
-//verifies of SBVT_Test only has values of type {SRS_Req or SubDD_Req}.
-verifies of SBVT_Test has at least 1 value.
+	verifies of SBVT_Test has at least 1 value.
 
 SBVT_Result (note "A result identified for a SBVT_Test (Software Baseline Verification Tests)") is a type of TEST_RESULT.
-confirms of SBVT_Result only has values of type SBVT_Test.
+	confirms of SBVT_Result only has values of type SBVT_Test.
 
-////////////////////////////////////// Moved from SRI ontology
-//AM: replaced author by wasAssociatedWith in DevelopSystemConOps
-//AM: dropped author in DevelopSystemArchitecture as we inherit wasAssociatedWith
-//AM: do we want more granularity than just wasAssociatedWith
-
-     DevelopSystemConOps is a type of ACTIVITY.
-       wasAssociatedWith of DevelopSystemConOps only has values of type PERSON.
+DevelopSystemConOps is a type of ACTIVITY.
+	wasAssociatedWith of DevelopSystemConOps only has values of type PERSON.
        
-     SystemConOps is a type of ENTITY.
-       wasGeneratedBy of SystemConOps only has values of type DevelopSystemConOps.
-       conOpsDocs describes SystemConOps with values of type DOCUMENT.  
+SystemConOps is a type of ENTITY.
+    wasGeneratedBy of SystemConOps only has values of type DevelopSystemConOps.
+    conOpsDocs describes SystemConOps with values of type DOCUMENT.  
      
-     DevelopSystemArchitecture is a type of ACTIVITY.  
-        wasInformedBy of DevelopSystemArchitecture only has values of type DevelopSystemConOps.
-        used of DevelopSystemArchitecture only has values of type SystemConOps. 
+DevelopSystemArchitecture is a type of ACTIVITY.  
+	wasInformedBy of DevelopSystemArchitecture only has values of type DevelopSystemConOps.
+    used of DevelopSystemArchitecture only has values of type SystemConOps. 
 
-     SystemArchitecture (note "specification of system architecture") is a type of ENTITY. 
-       wasGeneratedBy of SystemArchitecture only has values of type DevelopSystemArchitecture. 
-       isArchitectureOf describes SystemArchitecture with values of type SYSTEM.
-       isArchitectureOf is a type of wasImpactedBy.
+SystemArchitecture (note "specification of system architecture") is a type of ENTITY. 
+    wasGeneratedBy of SystemArchitecture only has values of type DevelopSystemArchitecture. 
+    isArchitectureOf describes SystemArchitecture with values of type SYSTEM.
+    isArchitectureOf is a type of wasImpactedBy.
 
-     SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
-       wasInformedBy of SystemRequirementsDefinition only has values of type DevelopSystemConOps. 
+SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
+    wasInformedBy of SystemRequirementsDefinition only has values of type DevelopSystemConOps. 
      
-      PIDS_Doc is a type of DOCUMENT. 
-       content of PIDS_Doc only has values of type PIDS_Req. 
-       wasGeneratedBy of PIDS_Doc only has values of type SystemRequirementsDefinition. 
+PIDS_Doc is a type of DOCUMENT. 
+    content of PIDS_Doc only has values of type PIDS_Req. 
         
-      SoftwareHighLevelRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
-		wasInformedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementsDefinition or DevelopSystemArchitecture}.
-// The following line is commented out as SRI is not working with legacy system so does not have PIDS_Doc etc.
-//        Rq:governedBy of SoftwareHighLevelRequirementsDefinition only has values of type {PIDS_Doc or SystemArchitecture}.
-
-//      SoftwareHighLevelRequirement is a type of REQUIREMENT. 
-//        wasGeneratedBy of SoftwareHighLevelRequirement only has values of type SoftwareHighLevelRequirementsDefinition.
+SoftwareHighLevelRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
+	wasInformedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementsDefinition or DevelopSystemArchitecture}.
        
-     SRS_Doc is a type of DOCUMENT. 
-       content of SRS_Doc only has values of type SRS_Req.
-       wasGeneratedBy of SRS_Doc only has values of type SoftwareHighLevelRequirementsDefinition.
+SRS_Doc is a type of DOCUMENT. 
+    content of SRS_Doc only has values of type SRS_Req.
        
-     SubDD_Doc is a type of DOCUMENT. 
-//       content of SubDD_Doc only has values of type SoftwareLowLevelRequirement. 
-       content of SubDD_Doc only has values of type SubDD_Req. 
-       wasGeneratedBy of SubDD_Doc only has values of type SoftwareDesign. 
+SubDD_Doc is a type of DOCUMENT. 
+    content of SubDD_Doc only has values of type SubDD_Req. 
 
-     SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
-		wasInformedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementsDefinition or DevelopSystemArchitecture}.
-// The following line is commented out as SRI is not working with legacy system so does not have SRS_Doc etc.	
-//        Rq:governedBy of SoftwareDesign only has values of type {SRS_Doc or SystemArchitecture}.
+SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
+	wasInformedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementsDefinition or DevelopSystemArchitecture}.
        
-//     SoftwareLowLevelRequirement is a type of REQUIREMENT.
-//        wasGeneratedBy of SoftwareLowLevelRequirement only has values of type SoftwareDesign.
-       
-     SoftwareCoding is a type of CODE_DEVELOPMENT. 
-        wasInformedBy of SoftwareCoding only has values of type SoftwareDesign.        
-
-//      SoftwareIntegration is a type of COMPILE.
-//        wasInformedBy of SoftwareIntegration only has values of type SoftwareCoding.        
-//        compileWithOptimizations describes  SoftwareIntegration with values of type boolean.     
-//        linkerPath describes  SoftwareIntegration with values of type string.       
-
+SoftwareCoding is a type of CODE_DEVELOPMENT. 
+    wasInformedBy of SoftwareCoding only has values of type SoftwareDesign.        
 
 // COMMON FILE FORMATS
 

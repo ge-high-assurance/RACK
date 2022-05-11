@@ -10,7 +10,7 @@
  * of the Defense Advanced Research Projects Agency (DARPA).
  */
 
-uri "http://arcos.rack/CPS" alias CPS.
+uri "http://arcos.turnstile/CPS" alias CPS.
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/SECURITY".
 

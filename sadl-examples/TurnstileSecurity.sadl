@@ -11,7 +11,7 @@
  */
 uri "http://arcos.sadl-examples/TurnstileSecurity" alias TSec.
 
-import "http://arcos.rack/CPS".
+import "http://arcos.turnstile/CPS".
 import "http://arcos.turnstile/GE".
 
 // This example is to simply illustrate a security scenario for Turnstile.

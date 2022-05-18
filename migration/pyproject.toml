@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "RACK migration tool suite"
+name = "rack-migration"
 version = "0.1"
 description = "Helps capturing changes to the RACK ontology"
 dependencies = ["colorama", "pydantic", "typing-extensions"]

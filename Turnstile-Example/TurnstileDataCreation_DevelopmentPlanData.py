@@ -274,11 +274,7 @@ def CreateCdrs():
     Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="SW-Code")
     Add.SECTION(identifier="_05-SoftwareLifeCycleData",
-                content_identifier="Counter-Ver-Rep")
-    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="RQ-STD")
-    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
-                content_identifier="SCI")
     Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="SECI")
     Add.SECTION(identifier="_05-SoftwareLifeCycleData",
@@ -290,7 +286,7 @@ def CreateCdrs():
     Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="Sys-Ver-Rep")
     Add.SECTION(identifier="_05-SoftwareLifeCycleData",
-                content_identifier="VerSTD")
+                content_identifier="VER-STD")
 
     ################################################
     #        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.06-Schedule

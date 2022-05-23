@@ -104,6 +104,15 @@ INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
                     {
                         'type': 'object',
                         'additionalProperties': False,
+                        'required': ['class', 'csv'],
+                        'properties': {
+                            'class': {'type': 'string'},
+                            'csv': {'type': 'string'}
+                        }
+                    },
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
                         'required': ['name', 'creator', 'nodegroup_json'],
                         'properties': {
                             'name': {'type': 'string'},
@@ -302,6 +311,21 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
 
     go()
 
+def ingest_csv_by_class(conn: Connection, classuri: str, csv_name: Path) -> None:
+    """Ingest a CSV file using the automatic class ingestion."""
+
+    def suffix(result: dict) -> str:
+        return f' Records: {result}'
+
+    @with_status(f'Loading {str_highlight(classuri)}', suffix)
+    def go() -> dict:
+        with open(csv_name, mode='r', encoding='utf-8-sig') as csv_file:
+            csv = csv_file.read()
+
+        return semtk3.ingest_using_class_template(classuri, csv, conn)
+
+    go()
+
 def ingest_owl(conn: Connection, owl_file: Path) -> None:
     """Upload an OWL file into the model graph."""
     @with_status(f'Ingesting {str_highlight(str(owl_file))}')
@@ -351,7 +375,10 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
                 raise e
             print(str_good(' OK'))
 
-        elif 'csv' in step:
+        elif 'class' in step:
+            ingest_csv_by_class(conn, step['class'], base_path / step['csv'])
+
+        elif 'nodegroup' in step:
             ingest_csv(conn, step['nodegroup'], base_path / step['csv'])
 
         elif 'nodegroup_json' in step:
@@ -411,6 +438,15 @@ def clear_driver(base_url: Url, data_graphs: Optional[List[Url]], triple_store: 
         for data_graph in data_graphs:
             conn = sparql_connection(base_url, data_graph, [], triple_store)
             clear_graph(conn, which_graph=graph)
+
+def template_driver(base_url: Url, triple_store: Optional[Url], class_uri: Url, filename: Optional[Path]) -> None:
+    conn = sparql_connection(base_url, DEFAULT_DATA_GRAPH, [], triple_store)
+    csv = semtk3.get_class_template_csv(class_uri, conn, "identifier")
+    if filename is None:
+        print(csv, end="")
+    else:
+        with open(filename, 'w') as f:
+            f.write(csv)
 
 @with_status('Storing nodegroups')
 def store_nodegroups_driver(directory: Path, base_url: Url) -> None:
@@ -558,6 +594,10 @@ def dispatch_data_clear(args: SimpleNamespace) -> None:
     """Implementation of the data clear subcommand"""
     clear_driver(args.base_url, args.data_graph, args.triple_store, Graph.DATA)
 
+def dispatch_data_template(args: SimpleNamespace) -> None:
+    """Implementation of the data template subcommand"""
+    template_driver(args.base_url, args.triple_store, args.class_uri, args.file)
+
 def dispatch_model_clear(args: SimpleNamespace) -> None:
     """Implementation of the model clear subcommand"""
     clear_driver(args.base_url, None, args.triple_store, Graph.MODEL)
@@ -598,6 +638,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_export_parser = data_subparsers.add_parser('export', help='Export query results')
     data_count_parser = data_subparsers.add_parser('count', help='Count matched query rows')
     data_clear_parser = data_subparsers.add_parser('clear', help='Clear data graph')
+    data_template_parser = data_subparsers.add_parser('template', help='Generate CSV template for class-based data ingestion')
 
     model_parser = subparsers.add_parser('model', help='Interact with SemTK model')
     model_subparsers = model_parser.add_subparsers(dest='command')
@@ -634,6 +675,10 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     data_clear_parser.add_argument('--data-graph', type=str, action='append', help='Data graph URL')
     data_clear_parser.set_defaults(func=dispatch_data_clear)
+
+    data_template_parser.add_argument('class_uri', type=str, help='Class URI used to generate ingestion rules')
+    data_template_parser.add_argument('--file', type=Path, help='Output to file')
+    data_template_parser.set_defaults(func=dispatch_data_template)
 
     model_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     model_import_parser.set_defaults(func=dispatch_model_import)

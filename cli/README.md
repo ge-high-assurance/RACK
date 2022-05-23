@@ -193,8 +193,9 @@ extra-data-graphs:
 - "http://rack001/otherdata"
 - "http://rack001/somedata"
 ingestion-steps:
-- {nodegroup: "ingest_SYSTEM",    csv: "SYSTEM.csv"}
+- {nodegroup: "ingest_SYSTEM", csv: "SYSTEM.csv"}
 - {nodegroup: "ingest_INTERFACE", csv: "INTERFACE.csv"}
+- {class: "http://arcos.rack/HAZARD#HAZARD", "HAZARD.csv"}
 - {owl: "example.owl"}
 ```
 

@@ -658,7 +658,6 @@ def CreateCdrs():
     Add.BASELINE(identifier=swBase1, content_identifier="OutputThread")
     Add.BASELINE(identifier=swBase1, content_identifier="InputThread")
     Add.BASELINE(identifier=swBase1, content_identifier="ExecutiveThread")
-    Add.BASELINE(identifier=swBase1, content_identifier="SwDesign")
 
     # Testsuite release
     Add.BASELINE(identifier=testBase1, content_identifier="TC-1-1")

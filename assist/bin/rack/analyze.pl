@@ -95,13 +95,14 @@ class_comment(Class, Comment) :- rdf(Class, rdfs:comment, Comment), !.
 class_comment(_, "?").
 
 report_rack_properties(E) :-
-    findall(P, property_target(E, P, _, _, _), AllP),
+    findall(P, property_target(E, P, _, _), AllP),
     sort(AllP, SortP),
     findall(P, (member(P, SortP),
                 report_rack_properties(E, P)), _PS).
 
 report_rack_properties(E, P) :-
-    property_target(E, P, PType, T, Extra),
+    property_target(E, P, PType, Extra),
+    rdf(P, rdfs:range, T),
     show_property(E, P, PType, T, Extra).
 
 show_property(_E, P, unique, T, Extra) :-
@@ -286,8 +287,9 @@ report_instance_propval_(_I, PR, PV) :-
 
 
 report_instance_missingprop(T, I, Property) :-
-    property_target(T, Property, _Usage, Target, _Restr),
+    property_target(T, Property, _Usage, _Restr),
     \+ rdf(I, Property, _Val),
+    rdf(Property, rdfs:range, Target),
     prefix_shorten(Target, ST),
     format('  ?. ~w = ? :: ~w~n', [Property, ST]).
 

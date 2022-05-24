@@ -195,7 +195,7 @@ extra-data-graphs:
 ingestion-steps:
 - {nodegroup: "ingest_SYSTEM", csv: "SYSTEM.csv"}
 - {nodegroup: "ingest_INTERFACE", csv: "INTERFACE.csv"}
-- {class: "http://arcos.rack/HAZARD#HAZARD", "HAZARD.csv"}
+- {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD.csv"}
 - {owl: "example.owl"}
 ```
 

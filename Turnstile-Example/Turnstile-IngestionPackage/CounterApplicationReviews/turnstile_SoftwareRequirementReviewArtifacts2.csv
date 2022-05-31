@@ -1,6 +1,6 @@
 identifier,dataInsertedBy_identifier,reviewResult_identifier,reviews_identifier,wasGeneratedBy_identifier
-HlrReviewLog-1,TurnstileIngestion-SystemReview,ReviseWithReview,HLR-1:v1,HlrReview
-HlrReviewLog-2,TurnstileIngestion-SystemReview,ReviseWithReview,HLR-2:v1,HlrReview
+HlrReviewLog-1,TurnstileIngestion-SystemReview,"Revise With Review",HLR-1:v1,HlrReview
+HlrReviewLog-2,TurnstileIngestion-SystemReview,"Revise With Review",HLR-2:v1,HlrReview
 HlrReviewLog-3,TurnstileIngestion-SystemReview,Passed,HLR-3:v1,HlrReview
 HlrReviewLog-4,TurnstileIngestion-SystemReview,Passed,HLR-1:v2,HlrReview-2
 HlrReviewLog-5,TurnstileIngestion-SystemReview,Passed,HLR-2:v2,HlrReview-2

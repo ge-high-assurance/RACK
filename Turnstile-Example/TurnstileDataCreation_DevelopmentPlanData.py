@@ -265,32 +265,28 @@ def CreateCdrs():
     ################################################
     #        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.05-SoftwareLifeCycleData
     ################################################
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
+    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="Counter-Req-Spec")
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
+    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="CounterApplicationSoftware")
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
+    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="Counter-SW-Des")
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
+    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="SW-Code")
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
-                content_identifier="Counter-Ver-Rep")
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
+    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="RQ-STD")
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
-                content_identifier="SCI")
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
+    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="SECI")
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
+    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="SW-STD")
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
+    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="SW-Ver-Des")
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
+    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="Sys-Spec")
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
+    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
                 content_identifier="Sys-Ver-Rep")
-    Add.SECTION(identifier="05-SoftwareLifeCycleData",
-                content_identifier="VerSTD")
+    Add.SECTION(identifier="_05-SoftwareLifeCycleData",
+                content_identifier="VER-STD")
 
     ################################################
     #        //Model Location: DevelopmentPlan.01-PlanForSoftwareAspectsOfCertification.06-Schedule
@@ -445,7 +441,7 @@ def CreateCdrs():
     Add.PLAN(identifier="_05-SoftwareConfigurationManagment",
             content_identifier="_01-ChangeManagement")
     Add.PLAN(identifier="_05-SoftwareConfigurationManagment",
-            content_identifier="02-SoftwareConfigurationManagementEnvironment")
+            content_identifier="_02-SoftwareConfigurationManagementEnvironment")
 
 
     ################################################

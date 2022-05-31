@@ -21,7 +21,6 @@ RequirementsPackage:v2,TurnstileIngestion-Baselines,,RequirementsPackage:v1
 SoftwareDesignAndCode:v1,TurnstileIngestion-Baselines,OutputThread,
 SoftwareDesignAndCode:v1,TurnstileIngestion-Baselines,InputThread,
 SoftwareDesignAndCode:v1,TurnstileIngestion-Baselines,ExecutiveThread,
-SoftwareDesignAndCode:v1,TurnstileIngestion-Baselines,SwDesign,
 TestSuite:v1,TurnstileIngestion-Baselines,TC-1-1,
 TestSuite:v1,TurnstileIngestion-Baselines,TC-1-2,
 TestSuite:v1,TurnstileIngestion-Baselines,TC-1-3,

@@ -305,9 +305,15 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
     @with_status(f'Loading {str_highlight(nodegroup)}', suffix)
     def go() -> dict:
         with open(csv_name, mode='r', encoding='utf-8-sig') as csv_file:
-            csv = csv_file.read()
+     JSONArray warnings = nodeGroupExecutor.getWarningsJson();
+				if (warnings != null) {
+					retval.addResult(SimpleResultSet.WARNINGS_RESULT_KEY, warnings);
+				}       csv = csv_file.read()
 
-        return semtk3.ingest_by_id(nodegroup, csv, conn)
+        msg = semtk3.ingest_by_id(nodegroup, csv, conn)
+        if semtk3.message_contains_warnings(msg):
+            print(msg)
+        return msg
 
     go()
 
@@ -322,7 +328,10 @@ def ingest_csv_by_class(conn: Connection, classuri: str, csv_name: Path) -> None
         with open(csv_name, mode='r', encoding='utf-8-sig') as csv_file:
             csv = csv_file.read()
 
-        return semtk3.ingest_using_class_template(classuri, csv, conn)
+        msg = semtk3.ingest_using_class_template(classuri, csv, conn)
+        if semtk3.message_contains_warnings(msg):
+            print(msg)
+        return msg
 
     go()
 

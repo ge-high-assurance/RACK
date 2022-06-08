@@ -1,0 +1,121 @@
+uri "http://arcos.rack/OverlayChecks" alias chk.
+
+// Set SADL "Translate multiple-class domain or range as union" property to be false 
+// for the overlay ontology being checked - this is really only needed for SRI ontology
+// as they have instances where a property has multiple domains / ranges.
+// Have not tested it on Turnstile ontology as that is currently being restructured
+//	and after restructuring we may be able to just import one file.
+
+// Currently, there are no violations in any of the overlays,
+// but to test these overlay checks use the SRI ontology that
+// was in RACK v 6.
+import "http://arcos.descert/SRI".
+//import "http://arcos.descert/SRI-SS".
+//import "http://arcos.certgate/LM".
+//import "http://arcos.acert/GrammaTech".
+//import "http://arcos.AH-64D/Boeing".
+//import "http://arcos.arbiter/STR".
+//import "http://arcos.aace/RTX".
+
+// Note that these do not find all issues; for details see https://github.com/SemanticApplicationDesignLanguage/sadl/discussions/897
+// and the project that I posted on Git for Andy to take a look at is OverlayCheckIssue in this workspace.
+
+// This does the overlay checks on the DesCert overlay ontology.
+// Enable appropriate SADL properties to get fully qualified names as that will help
+// in facilitating manual checking of the results of the two queries.
+// To do checks on a different overlay ontology import it instead of DesCert overlay ontology.
+
+//////////////////////////////////////////// ONTOLOGY OVERLAY CHECK QUERIES //////////////////////////////////
+Print: "".
+Print: "****** Three queries for checking ontology overlays, the first one checks domain and the second one checks range".
+Print: "".
+Print: "****** Check domain info for the following properties:".
+Print: "******      the domain in overlay ontology should be a subclass of the domain in core ontology.".
+Print: "".
+
+Ask: "select distinct ?property ?coreOntologyDomain ?overlayOntologyDomain  where
+{?property ?y ?z 
+. FILTER(regex(str(?y),'domain'))
+. FILTER(regex(str(?property),'arcos.rack'))
+. ?property ?y ?z1 . FILTER(?z1 != ?z) # get another domain
+ 
+. OPTIONAL{?z1 ?y2 ?z2 . FILTER(regex(str(?y2),'unionOf'))
+           . ?z2 ?y3 ?z3 . FILTER(regex(str(?y3),'first'))
+           . ?z2 ?y4 ?z4 . FILTER(regex(str(?y4),'rest'))
+           . ?z4 ?y5 ?z5 . FILTER(regex(str(?y5),'first'))
+           . LET(?t1 := concat('{',str(?z3))) 
+           . LET(?t2 := concat(str(?z5),'}')) 
+           . LET(?t3 := concat(?t1, concat(', ',?t2))) 
+          }
+. LET(?overlayOntologyDomain := coalesce(?t3, ?z1))
+. FILTER(!regex(str(?overlayOntologyDomain),'arcos.rack'))
+. OPTIONAL{?z ?y6 ?z6 . FILTER(regex(str(?y6),'unionOf'))
+           . ?z6 ?y7 ?z7 . FILTER(regex(str(?y7),'first'))
+           . ?z6 ?y8 ?z8 . FILTER(regex(str(?y8),'rest'))
+           . ?z8 ?y9 ?z9 . FILTER(regex(str(?y9),'first'))
+           . LET(?t4 := concat('{',str(?z7))) 
+           . LET(?t5 := concat(str(?z9),'}')) 
+           . LET(?t6 := concat(?t4, concat(', ',?t5))) 
+          }
+. LET(?coreOntologyDomain := coalesce(?t6, ?z))
+. FILTER(regex(str(?coreOntologyDomain),'arcos.rack'))
+} order by ?property ?coreOntologyDomain".
+
+Print: "".
+Print: "****** Check range info for the following properties:".
+Print: "******      the range in overlay ontology should be a subclass of the range in core ontology.".
+Print: "".
+
+Ask: "select distinct ?property ?coreOntologyRange ?overlayOntologyRange  where
+{?property ?y ?z 
+. FILTER(regex(str(?y),'range'))
+. FILTER(regex(str(?property),'arcos.rack'))
+. ?property ?y ?z1 . FILTER(?z1 != ?z) # get another range
+. OPTIONAL{?z1 ?y2 ?z2 . FILTER(regex(str(?y2),'unionOf'))
+           . ?z2 ?y3 ?z3 . FILTER(regex(str(?y3),'first'))
+           . ?z2 ?y4 ?z4 . FILTER(regex(str(?y4),'rest'))
+           . ?z4 ?y5 ?z5 . FILTER(regex(str(?y5),'first'))
+           . LET(?t1 := concat('{',str(?z3))) 
+           . LET(?t2 := concat(str(?z5),'}')) 
+           . LET(?t3 := concat(?t1, concat(', ',?t2))) 
+          }
+. LET(?coreOntologyRange := coalesce(?t3, ?z1))
+. FILTER(regex(str(?coreOntologyRange),'arcos.rack'))
+. OPTIONAL{?z ?y6 ?z6 . FILTER(regex(str(?y6),'unionOf'))
+           . ?z6 ?y7 ?z7 . FILTER(regex(str(?y7),'first'))
+           . ?z6 ?y8 ?z8 . FILTER(regex(str(?y8),'rest'))
+           . ?z8 ?y9 ?z9 . FILTER(regex(str(?y9),'first'))
+           . LET(?t4 := concat('{',str(?z7))) 
+           . LET(?t5 := concat(str(?z9),'}')) 
+           . LET(?t6 := concat(?t4, concat(', ',?t5))) 
+          }
+. LET(?overlayOntologyRange := coalesce(?t6, ?z)) 
+} order by ?property ?coreOntologyRange".
+
+Print: "".
+////////////////////////////////////////// DONE: ONTOLOGY OVERLAY CHECK QUERIES //////////////////////////////////
+
+// Other checks - want overlays to not extend core ontology class with a property, rather they
+// should define a subclass and extend that. This will avoid issues in automated nodegroup generation.
+
+Print: "".
+Print: "****** Check that the overlay does not extend core ontology class with a property".
+Print: "******      this avoids issues in the automated nodegroup generation.".
+Print: "".
+
+Ask: "select ?property ?domain ?range where {
+?property ?y ?domain
+. FILTER(regex(str(?y),'domain'))
+. FILTER(!regex(str(?property),'arcos.rack')) # property in overlay
+. FILTER(regex(str(?domain),'arcos.rack')) # domain in core
+. ?property ?y2 ?range
+. FILTER(regex(str(?y2),'range'))
+. FILTER(regex(str(?range),'arcos.rack'))
+} order by ?property".
+
+//Ask:"select * where {
+//?x <rdfs:subClassOf> <ENTITY>
+//. FILTER NOT EXISTS {?x <rdfs:subClassOf> ?y . ?y <rdfs:subClassOf> <ENTITY>}
+//} order by ?x".
+
+

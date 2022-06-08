@@ -3,8 +3,14 @@
 	<name>sadl-examples</name>
 	<comment></comment>
 	<projects>
+		<project>Boeing-Ontology</project>
 		<project>GE-Ontology</project>
+		<project>GrammaTech-Ontology</project>
+		<project>LM-Ontology</project>
 		<project>RACK-Ontology</project>
+		<project>RTX-Ontology</project>
+		<project>SRI-Ontology</project>
+		<project>STR-Ontology</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

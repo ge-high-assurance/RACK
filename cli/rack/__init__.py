@@ -308,8 +308,11 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
         with open(csv_name, mode='r', encoding='utf-8-sig') as csv_file:
             csv = csv_file.read()
 
-        return semtk3.ingest_by_id(nodegroup, csv, conn)
-
+        (statusMsg, warningMsg) = semtk3.ingest_by_id(nodegroup, csv, conn)
+        if (warningMsg):
+            for m in ["Ingestion Warnings:"] + warningMsg.rstrip().split("\n"):
+                logger.warning(m)
+        return statusMsg
     go()
 
 def ingest_csv_by_class(conn: Connection, classuri: str, csv_name: Path) -> None:
@@ -323,8 +326,11 @@ def ingest_csv_by_class(conn: Connection, classuri: str, csv_name: Path) -> None
         with open(csv_name, mode='r', encoding='utf-8-sig') as csv_file:
             csv = csv_file.read()
 
-        return semtk3.ingest_using_class_template(classuri, csv, conn)
-
+        (statusMsg, warningMsg) = semtk3.ingest_using_class_template(classuri, csv, conn)
+        if (warningMsg):
+            for m in ["Ingestion Warnings:"] + warningMsg.rstrip().split("\n"):
+                logger.warning(m)
+        return statusMsg
     go()
 
 def ingest_owl(conn: Connection, owl_file: Path) -> None:
@@ -630,7 +636,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument('--base-url', type=str, default=environ.get('BASE_URL') or DEFAULT_BASE_URL, help='Base SemTK instance URL')
     parser.add_argument('--triple-store', type=str, default=environ.get('TRIPLE_STORE'), help='Override Fuseki URL')
     parser.add_argument('--triple-store-type', type=str, default=environ.get('TRIPLE_STORE_TYPE'), help='Override Triplestore Type (default: fuseki)')
-    parser.add_argument('--log-level', type=str, default='WARNING', help='Assign logger severity level')
+    parser.add_argument('--log-level', type=str, default=environ.get('LOG_LEVEL', 'WARNING'), help='Assign logger severity level')
 
     subparsers = parser.add_subparsers(dest='command')
 

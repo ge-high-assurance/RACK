@@ -1,17 +1,17 @@
 data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
-- {nodegroup: "ingest_OBJECTIVE", csv: "softwarereqdevobj.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "softwarecodingobj.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "softwaredesignobj.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "softwareintegrationobj.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "softwarecodereviewobj.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "softwaredesignreviewobj.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "softwarereqreviewobj.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "developtestsobj.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "couplinganalysisobj.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "structuralcoverageobj.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "swcomptestexeobj_A6.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "swcomptestexeobj_A7.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "swunittestexeobj_A6.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "swunittestexeobj_A7.csv"}
-- {nodegroup: "ingest_OBJECTIVE", csv: "problemreportingobj.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "softwarereqdevobj.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "softwarecodingobj.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "softwaredesignobj.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "softwareintegrationobj.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "softwarecodereviewobj.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "softwaredesignreviewobj.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "softwarereqreviewobj.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "developtestsobj.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "couplinganalysisobj.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "structuralcoverageobj.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "swcomptestexeobj_A6.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "swcomptestexeobj_A7.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "swunittestexeobj_A6.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "swunittestexeobj_A7.csv"}
+- {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "problemreportingobj.csv"}

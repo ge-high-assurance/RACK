@@ -1,25 +1,25 @@
 data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
 #Phase1: Identifiers Only
-- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}
-- {nodegroup: "ingest_COLLECTION", csv: "COLLECTION1.csv"}
-- {nodegroup: "ingest_DESCRIPTION", csv: "DESCRIPTION1.csv"}
-- {nodegroup: "ingest_PLAN", csv: "PLAN1.csv"}
-- {nodegroup: "ingest_REPORT", csv: "REPORT1.csv"}
-- {nodegroup: "ingest_SECTION", csv: "SECTION1.csv"}
-- {nodegroup: "ingest_SPECIFICATION", csv: "SPECIFICATION1.csv"}
-- {nodegroup: "ingest_SYSTEM", csv: "SYSTEM1.csv"}
-- {nodegroup: "ingest_turnstile_SoftwareThread", csv: "turnstile_SoftwareThread1.csv"}
-- {nodegroup: "ingest_turnstile_SystemComponent", csv: "turnstile_SystemComponent1.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY1.csv"}
+- {class: "http://arcos.rack/PROV-S#COLLECTION", csv: "COLLECTION1.csv"}
+- {class: "http://arcos.rack/DOCUMENT#DESCRIPTION", csv: "DESCRIPTION1.csv"}
+- {class: "http://arcos.rack/DOCUMENT#PLAN", csv: "PLAN1.csv"}
+- {class: "http://arcos.rack/DOCUMENT#REPORT", csv: "REPORT1.csv"}
+- {class: "http://arcos.rack/DOCUMENT#SECTION", csv: "SECTION1.csv"}
+- {class: "http://arcos.rack/DOCUMENT#SPECIFICATION", csv: "SPECIFICATION1.csv"}
+- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM1.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareThread", csv: "turnstile_SoftwareThread1.csv"}
+- {class: "http://arcos.turnstile/GE#SystemComponent", csv: "turnstile_SystemComponent1.csv"}
 
 #Phase2: All Evidence
-- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
-- {nodegroup: "ingest_COLLECTION", csv: "COLLECTION2.csv"}
-- {nodegroup: "ingest_DESCRIPTION", csv: "DESCRIPTION2.csv"}
-- {nodegroup: "ingest_PLAN", csv: "PLAN2.csv"}
-- {nodegroup: "ingest_REPORT", csv: "REPORT2.csv"}
-- {nodegroup: "ingest_SECTION", csv: "SECTION2.csv"}
-- {nodegroup: "ingest_SPECIFICATION", csv: "SPECIFICATION2.csv"}
-- {nodegroup: "ingest_SYSTEM", csv: "SYSTEM2.csv"}
-- {nodegroup: "ingest_turnstile_SoftwareThread", csv: "turnstile_SoftwareThread2.csv"}
-- {nodegroup: "ingest_turnstile_SystemComponent", csv: "turnstile_SystemComponent2.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY2.csv"}
+- {class: "http://arcos.rack/PROV-S#COLLECTION", csv: "COLLECTION2.csv"}
+- {class: "http://arcos.rack/DOCUMENT#DESCRIPTION", csv: "DESCRIPTION2.csv"}
+- {class: "http://arcos.rack/DOCUMENT#PLAN", csv: "PLAN2.csv"}
+- {class: "http://arcos.rack/DOCUMENT#REPORT", csv: "REPORT2.csv"}
+- {class: "http://arcos.rack/DOCUMENT#SECTION", csv: "SECTION2.csv"}
+- {class: "http://arcos.rack/DOCUMENT#SPECIFICATION", csv: "SPECIFICATION2.csv"}
+- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM2.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareThread", csv: "turnstile_SoftwareThread2.csv"}
+- {class: "http://arcos.turnstile/GE#SystemComponent", csv: "turnstile_SystemComponent2.csv"}

@@ -78,14 +78,14 @@ Back in the HazardAssessment directory, notice there are CSV file names *1.csv, 
  1 data-graph: "http://rack001/turnstiledata"
  2 ingestion-steps:
  3 #Phase1: Identifiers Only
- 4 - {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}
- 5 - {nodegroup: "ingest_HAZARD", csv: "HAZARD1.csv"}
- 6 - {nodegroup: "ingest_SYSTEM", csv: "SYSTEM1.csv"}
+ 4 - {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY1.csv"}
+ 5 - {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD1.csv"}
+ 6 - {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM1.csv"}
  7
  8 #Phase2: All Evidence
- 9 - {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
-10 - {nodegroup: "ingest_HAZARD", csv: "HAZARD2.csv"}
-11 - {nodegroup: "ingest_SYSTEM", csv: "SYSTEM2.csv"}
+ 9 - {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY2.csv"}
+10 - {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD2.csv"}
+11 - {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM2.csv"}
 ```
 Notice the ordering of the ingestion steps. Notice also in line 1 that the Turnstile data is being imported into the data graph http://rack001/turnstiledata.
 

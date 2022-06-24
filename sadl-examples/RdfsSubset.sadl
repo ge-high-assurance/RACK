@@ -1,0 +1,15 @@
+ uri "http://www.w3.org/2000/01/rdf-schema" alias rdfs.
+
+^type is a property.
+
+ rdfs:domain is a property.
+ rdfs:range is a property.
+ rdfs:subClassOf is a property.
+ rdfs:subPropertyOf is a property.
+ rdfs:subTypeOf is a property.
+ rdfs:onProperty is a property.
+ rdfs:allValuesFrom is a property.
+ rdfs:onClass is a property.
+ 
+ rdfs:equivalentClass is a property.
+ 

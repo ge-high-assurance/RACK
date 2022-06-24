@@ -1,9 +1,9 @@
 data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
 #Phase1: Identifiers Only
-- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}
-- {nodegroup: "ingest_BASELINE", csv: "BASELINE1.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY1.csv"}
+- {class: "http://arcos.rack/BASELINE#BASELINE", csv: "BASELINE1.csv"}
 
 #Phase2: All Evidence
-- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
-- {nodegroup: "ingest_BASELINE", csv: "BASELINE2.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY2.csv"}
+- {class: "http://arcos.rack/BASELINE#BASELINE", csv: "BASELINE2.csv"}

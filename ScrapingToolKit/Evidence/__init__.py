@@ -113,10 +113,10 @@ ingestion-steps:
 #Phase1: Identifiers Only
 '''.format(dataGraph))
         for cdr in cdrFiles:
-            outFile.write('- {nodegroup: "'+nodegroupMapping[cdr]+'", csv: "'+cdr+'1.csv"}\n')
+            outFile.write('- {class: "'+nodegroupMapping[cdr]+'", csv: "'+cdr+'1.csv"}\n')
         outFile.write("\n#Phase2: All Evidence\n")
         for cdr in cdrFiles:
-            outFile.write('- {nodegroup: "'+nodegroupMapping[cdr]+'", csv: "'+cdr+'2.csv"}\n')
+            outFile.write('- {class: "'+nodegroupMapping[cdr]+'", csv: "'+cdr+'2.csv"}\n')
     return os.path.join(outputDir,"import.yaml")
 
 def createEvidenceFile(ingestionTitle="ScrapingToolKitIngestion", ingestionDescription="Data that was ingested using the ARCOS Scraping Tool Kit.", filePath="RACK-DATA.xml"):   

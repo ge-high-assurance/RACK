@@ -30,11 +30,11 @@ SBVT_Result (note "A result identified for a SBVT_Test (Software Baseline Verifi
 
 DevelopSystemConOps is a type of ACTIVITY.
 	wasAssociatedWith of DevelopSystemConOps only has values of type PERSON.
-       
+
 SystemConOps is a type of ENTITY.
     wasGeneratedBy of SystemConOps only has values of type DevelopSystemConOps.
     conOpsDocs describes SystemConOps with values of type DOCUMENT.  
-     
+
 DevelopSystemArchitecture is a type of ACTIVITY.  
 	wasInformedBy of DevelopSystemArchitecture only has values of type DevelopSystemConOps.
     used of DevelopSystemArchitecture only has values of type SystemConOps. 
@@ -46,24 +46,42 @@ SystemArchitecture (note "specification of system architecture") is a type of EN
 
 SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
     wasInformedBy of SystemRequirementsDefinition only has values of type DevelopSystemConOps. 
-     
+
 PIDS_Doc is a type of DOCUMENT. 
     content of PIDS_Doc only has values of type PIDS_Req. 
         
 SoftwareHighLevelRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
 	wasInformedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementsDefinition or DevelopSystemArchitecture}.
-       
+
 SRS_Doc is a type of DOCUMENT. 
     content of SRS_Doc only has values of type SRS_Req.
-       
+
 SubDD_Doc is a type of DOCUMENT. 
     content of SubDD_Doc only has values of type SubDD_Req. 
 
 SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
 	wasInformedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementsDefinition or DevelopSystemArchitecture}.
-       
+
 SoftwareCoding is a type of CODE_DEVELOPMENT. 
     wasInformedBy of SoftwareCoding only has values of type SoftwareDesign.        
+
+// Support for characterizing message types, valid signals, and tests
+// that verify these correspondences
+
+Message is a type of DATA_DICTIONARY_TERM.
+
+Signal is a type of DATA_DICTIONARY_TERM.
+    enumValue describes Signal with values of type string.
+
+MessageSignal is a type of DATA_DICTIONARY_TERM.
+    message describes MessageSignal with a single value of type Message.
+    signal describes MessageSignal with a single value of type Signal.
+
+IDD is a type of INTERFACE.
+    messageSignal describes IDD with values of type MessageSignal.
+
+IDD_Test is a type of TEST.
+    verifies of IDD_Test only has values of type MessageSignal.
 
 // COMMON FILE FORMATS
 

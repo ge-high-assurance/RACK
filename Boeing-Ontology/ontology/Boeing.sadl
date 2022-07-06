@@ -72,7 +72,8 @@ Message is a type of DATA_DICTIONARY_TERM.
 
 Signal is a type of DATA_DICTIONARY_TERM.
     enumValue describes Signal with values of type string.
-
+    intValue describes Signal with values of type integer.
+    
 MessageSignal is a type of DATA_DICTIONARY_TERM.
     message describes MessageSignal with a single value of type Message.
     signal describes MessageSignal with a single value of type Signal.

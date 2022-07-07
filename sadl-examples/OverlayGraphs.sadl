@@ -1,0 +1,226 @@
+uri "http://arcos.rack/OverlayGraphs" alias graph.
+
+// Set SADL "Translate multiple-class domain or range as union" property to be false 
+// for the overlay ontology being graphed.
+import "http://arcos.descert/SRI-SS". // the overlay ontology to check
+
+// Still need to check that we are not missing anything.
+// This does graphing for SRI ontology; to do graphing for other ontologies
+// need to replace instances of DesCert and descert appropriately.
+// Have not really checked it out though.
+
+// CAN I simplify by adding a property say linearize of range string where ever we have a union.
+// I would have a rule that sets up the value for this property.
+// Then I can more easily do graphing and querying etc.
+// This is going to be complicated as for each property we would need to define linearized domain and range
+// and then how exactly will the rule iterate and set up the string????
+
+// How to read the generated visualization (added this much later - so double check; 
+// 	also note lot of issues that were present have been addressed so currently no "aqua" color property generated
+//		nodes with black font are from the overlay ontology being checked
+//		red color property: are not defined in this overlay and the overlay is "refining" that property for a subclass (allowed)
+//		fuschia color property: check if overlay domain class is a subclass of core domain class for that property
+//		aqua color property: check if overlay range class is a subclass of appropriate core class range for that property; aqua color
+// Note that there can be disconnected compomonents when say the range is a union of 2 or more things
+// (we only show upto 4 things in the union).
+
+///////////////////////////////////GRAPHING start////////////////////////////////////////
+// Can choose to not show properties with range string, int etc. by uncommenting the line which has "XMLSchema".
+// If the domain or range is union of more than 4 classes then we show up to 4 of these only.
+Graph: "select ?N1 ?link ?N2 ?N1_fontcolor ?link_fontcolor ?N2_fontcolor ?link_style
+where 
+{
+{
+  ?unstrippedprop <rdfs:domain> ?unstrippeddomain . ?unstrippedprop <rdfs:range> ?unstrippedrange
+. FILTER(!regex(str(?unstrippedprop),'sadlimplicitmodel'))
+. FILTER(!regex(str(?unstrippedprop),'sadllistmodel'))
+. FILTER(regex(str(?unstrippeddomain), 'http'))
+. FILTER(regex(str(?unstrippeddomain),'arcos.descert') || regex(str(?unstrippedprop),'arcos.descert') || regex(str(?unstrippedrange),'arcos.descert'))
+. LET(?domain := replace(str(?unstrippeddomain),'http.*#','')) 
+. LET(?prop := replace(str(?unstrippedprop),'http.*#',''))
+. LET(?range := replace(str(?unstrippedrange),'http.*#',''))    
+}
+
+union # union of exactly 2 in range  
+{?unstrippeddomain <rdfs:subClassOf> ?z  
+. ?z ?y2 ?z2 . FILTER(regex(str(?z2),'Restriction')) 
+. ?z ?y3 ?unstrippedprop . FILTER(regex(str(?y3),'onProperty')) 
+. ?z ?y4 ?z4 . FILTER(regex(str(?y4),'allValuesFrom'))
+. ?z4 ?y5 ?z5 . FILTER(regex(str(?y5), 'unionOf'))
+. ?z5 ?y6 ?z6 . FILTER(regex(str(?y6),'first'))
+. ?z5 ?y7 ?z7 . FILTER(regex(str(?y7),'rest'))
+. ?z7 ?y8 ?z8 . FILTER(regex(str(?y8),'first')) 
+. ?z7 ?y9 ?z9 . FILTER(regex(str(?y9),'rest')) . FILTER(regex(str(?z9),'#nil')) #nothing more
+
+. LET(?strippedz6 := replace(str(?z6),'http.*#',''))
+. LET(?strippedz8 := replace(str(?z8),'http.*#',''))
+. LET(?unstrippedrange := concat(str(?z6),concat(' or ',str(?z8))))
+. LET(?range := concat(str(?strippedz6),concat(' or ',str(?strippedz8))))
+. LET(?domain := replace(str(?unstrippeddomain),'http.*#','')) 
+. LET(?prop := replace(str(?unstrippedprop),'http.*#','')) 
+}
+
+union # union of exactly 3 in range 
+{?unstrippeddomain <rdfs:subClassOf> ?z  
+. ?z ?y2 ?z2 . FILTER(regex(str(?z2),'Restriction')) 
+. ?z ?y3 ?unstrippedprop . FILTER(regex(str(?y3),'onProperty')) 
+. ?z ?y4 ?z4 . FILTER(regex(str(?y4),'allValuesFrom'))
+. ?z4 ?y5 ?z5 . FILTER(regex(str(?y5), 'unionOf'))
+. ?z5 ?y6 ?z6 . FILTER(regex(str(?y6),'first'))
+. ?z5 ?y7 ?z7 . FILTER(regex(str(?y7),'rest'))
+. ?z7 ?y8 ?z8 . FILTER(regex(str(?y8),'first')) 
+. ?z7 ?y9 ?z9 . FILTER(regex(str(?y9),'rest')) 
+. ?z9 ?y10 ?z10 . FILTER(regex(str(?y10),'first'))
+. ?z9 ?y11 ?z11 . FILTER(regex(str(?y11),'rest')) . FILTER(regex(str(?z11),'#nil')) #nothing more
+
+. LET(?strippedz6 := replace(str(?z6),'http.*#',''))
+. LET(?strippedz8 := replace(str(?z8),'http.*#',''))
+. LET(?strippedz10 := replace(str(?z10),'http.*#',''))
+. LET(?t1 := concat(str(?z6),concat(' or ',str(?z8))))
+. LET(?unstrippedrange := concat(str(?t1),concat(' or ',str(?z10))))
+. LET(?u1 := concat(str(?strippedz6),concat(' or ',str(?strippedz8))))
+. LET(?range := concat(str(?u1),concat(' or ',str(?strippedz10))))
+. LET(?domain := replace(str(?unstrippeddomain),'http.*#','')) 
+. LET(?prop := replace(str(?unstrippedprop),'http.*#','')) 
+}
+
+union # union of ATLEAST 4 in range 
+{?unstrippeddomain <rdfs:subClassOf> ?z  
+. ?z ?y2 ?z2 . FILTER(regex(str(?z2),'Restriction')) 
+. ?z ?y3 ?unstrippedprop . FILTER(regex(str(?y3),'onProperty')) 
+. ?z ?y4 ?z4 . FILTER(regex(str(?y4),'allValuesFrom'))
+. ?z4 ?y5 ?z5 . FILTER(regex(str(?y5), 'unionOf'))
+. ?z5 ?y6 ?z6 . FILTER(regex(str(?y6),'first'))
+. ?z5  ?y7  ?z7  . FILTER(regex(str(?y7), 'rest'))
+. ?z7  ?y8  ?z8  . FILTER(regex(str(?y8), 'first')) 
+. ?z7  ?y9  ?z9  . FILTER(regex(str(?y9), 'rest')) 
+. ?z9  ?y10 ?z10 . FILTER(regex(str(?y10),'first'))
+. ?z9  ?y11 ?z11 . FILTER(regex(str(?y11),'rest')) 
+. ?z11 ?y12 ?z12 . FILTER(regex(str(?y12),'first'))
+. ?z11 ?y13 ?z13 . FILTER(regex(str(?y13),'rest')) #. FILTER(regex(str(?z13),'#nil')) #nothing more
+
+. LET(?strippedz6  := replace(str(?z6), 'http.*#',''))
+. LET(?strippedz8  := replace(str(?z8), 'http.*#',''))
+. LET(?strippedz10 := replace(str(?z10),'http.*#',''))
+. LET(?strippedz12 := replace(str(?z12),'http.*#',''))
+. LET(?t1 := concat(str(?z6),concat(' or ',str(?z8))))
+. LET(?t2 := concat(str(?t1),concat(' or ',str(?z10))))
+. LET(?unstrippedrange := concat(str(?t2),concat(' or ',str(?z12))))
+. LET(?u1 := concat(str(?strippedz6),concat(' or ',str(?strippedz8))))
+. LET(?u2 := concat(str(?u1),concat(' or ',str(?strippedz10))))
+. LET(?range := concat(str(?u2),concat(' or ',str(?strippedz12))))
+. LET(?domain := replace(str(?unstrippeddomain),'http.*#','')) 
+. LET(?prop := replace(str(?unstrippedprop),'http.*#','')) 
+}
+
+union # union of exactly 2 in domain  
+{?unstrippedprop <rdfs:domain> ?z 
+. ?unstrippedprop <rdfs:range> ?unstrippedrange
+. ?z ?y2 ?z2 . FILTER(regex(str(?y2),'unionOf'))
+. ?z2 ?y3 ?z3 . FILTER(regex(str(?y3),'first'))
+. ?z2 ?y4 ?z4 . FILTER(regex(str(?y4),'rest'))
+. ?z4 ?y5 ?z5 . FILTER(regex(str(?y5),'first')) 
+. ?z4 ?y6 ?z6 . FILTER(regex(str(?y4),'rest')) . FILTER(regex(str(?z6),'#nil')) #nothing more
+
+. LET(?strippedz3 := replace(str(?z3),'http.*#',''))
+. LET(?strippedz5 := replace(str(?z5),'http.*#','')) 
+. LET(?unstrippeddomain := concat(str(?z3),concat(' or ',str(?z5))))
+. LET(?domain := concat(str(?strippedz3),concat(' or ',str(?strippedz5))))
+. LET(?range := replace(str(?unstrippedrange),'http.*#','')) 
+. LET(?prop := replace(str(?unstrippedprop),'http.*#',''))  
+}
+
+union # union of exactly 3 in domain 
+{?unstrippedprop <rdfs:domain> ?z 
+. ?unstrippedprop <rdfs:range> ?unstrippedrange
+. ?z ?y2 ?z2 . FILTER(regex(str(?y2),'unionOf'))
+. ?z2 ?y3 ?z3 . FILTER(regex(str(?y3),'first'))
+. ?z2 ?y4 ?z4 . FILTER(regex(str(?y4),'rest'))
+. ?z4 ?y5 ?z5 . FILTER(regex(str(?y5),'first')) 
+. ?z4 ?y6 ?z6 . FILTER(regex(str(?y6),'rest')) 
+. ?z6 ?y7 ?z7 . FILTER(regex(str(?y7),'first')) 
+. ?z6 ?y8 ?z8 . FILTER(regex(str(?y8),'rest')) . FILTER(regex(str(?z8),'#nil')) #nothing more
+
+. LET(?strippedz3 := replace(str(?z3),'http.*#',''))
+. LET(?strippedz5 := replace(str(?z5),'http.*#','')) 
+. LET(?strippedz7 := replace(str(?z7),'http.*#',''))
+. LET(?t1 := concat(str(?z3),concat(' or ',str(?z5))))
+. LET(?unstrippeddomain := concat(str(?t1), concat(' or ',str(?z7))))
+. LET(?u1 := concat(str(?strippedz3),concat(' or ',str(?strippedz5))))
+. LET(?domain := concat(str(?u1), concat(' or ',str(?strippedz7))))
+. LET(?range := replace(str(?unstrippedrange),'http.*#','')) 
+. LET(?prop := replace(str(?unstrippedprop),'http.*#',''))  
+}
+
+union # union of ATLEAST 4 in domain 
+{?unstrippedprop <rdfs:domain> ?z 
+. ?unstrippedprop <rdfs:range> ?unstrippedrange
+. ?z ?y2 ?z2 . FILTER(regex(str(?y2),'unionOf'))
+. ?z2 ?y3 ?z3 . FILTER(regex(str(?y3),'first'))
+. ?z2 ?y4 ?z4 . FILTER(regex(str(?y4),'rest'))
+. ?z4 ?y5 ?z5 . FILTER(regex(str(?y5),'first')) 
+. ?z4 ?y6 ?z6 . FILTER(regex(str(?y6),'rest')) 
+. ?z6 ?y7 ?z7 . FILTER(regex(str(?y7),'first')) 
+. ?z6 ?y8 ?z8 . FILTER(regex(str(?y8),'rest'))
+. ?z8 ?y9 ?z9 . FILTER(regex(str(?y9),'first')) 
+. ?z8 ?y10 ?z10 . FILTER(regex(str(?y10),'rest'))  #. FILTER(regex(str(?z10),'#nil')) #nothing more
+
+. LET(?strippedz3 := replace(str(?z3),'http.*#',''))
+. LET(?strippedz5 := replace(str(?z5),'http.*#','')) 
+. LET(?strippedz7 := replace(str(?z7),'http.*#',''))
+. LET(?strippedz9 := replace(str(?z9),'http.*#',''))
+. LET(?t1 := concat(str(?z3),concat(' or ',str(?z5))))
+. LET(?t2 := concat(str(?t1),concat(' or ',str(?z7))))
+. LET(?unstrippeddomain := concat(str(?t2), concat(' or ',str(?z9))))
+. LET(?u1 := concat(str(?strippedz3),concat(' or ',str(?strippedz5))))
+. LET(?u2 := concat(str(?u1),concat(' or ',str(?strippedz7))))
+. LET(?domain := concat(str(?u2), concat(' or ',str(?strippedz9))))
+. LET(?range := replace(str(?unstrippedrange),'http.*#','')) 
+. LET(?prop := replace(str(?unstrippedprop),'http.*#',''))  
+}
+
+union # get class - subclass relationships; note we want to use subClass and layout to have core class at top so domain and range opposite of what we might first think of
+{ ?unstrippedrange <rdfs:subClassOf> ?unstrippeddomain
+. FILTER(!regex(str(?unstrippeddomain),'blank node'))
+. FILTER NOT EXISTS {?unstrippedrange <rdfs:subClassOf> ?a1 . ?a1 <rdfs:subClassOf> ?unstrippeddomain }
+. FILTER(regex(str(?unstrippedrange),'arcos.descert') || regex(str(?unstrippeddomain),'arcos.descert')) 
+
+. LET(?range := replace(str(?unstrippedrange),'http.*#',''))
+. LET(?domain := replace(str(?unstrippeddomain),'http.*#',''))
+. LET(?prop := 'subClass') . LET(?link_fontcolor := 'blue') . LET(?link_style := 'dashed')
+}  
+
+# this is where core ontology is being changed, want a color that pops but using fuschia and aqua at the moment
+# twp cases: 
+# [overlay,core,core] : check if overlay domain class is a subclass of core domain class for that property; fuschia color
+# [core,core,overlay] : check if overlay range class is a subclass of appropriate core class range for that property; aqua color
+# [core,overlay,core] : this is ok as the property is an overlay property 
+. OPTIONAL{FILTER(regex(str(?unstrippedprop),'arcos.rack'))
+           . FILTER(regex(str(?unstrippeddomain),'SRI')) #????? was DesCert
+           . FILTER(regex(str(?unstrippedrange),'arcos.rack')) 
+           . LET(?link_fontcolor := 'fuchsia') 
+           }
+. OPTIONAL{FILTER(regex(str(?unstrippedprop),'arcos.rack'))
+           . FILTER(regex(str(?unstrippeddomain),'arcos.rack'))
+           . FILTER(regex(str(?unstrippedrange),'SRI')) #????? was DesCert
+           . LET(?link_fontcolor := 'aqua') 
+           }
+#. OPTIONAL{FILTER(regex(str(?unstrippedprop),'SRI')) # overlay property #????? was DesCert
+#           . FILTER(regex(str(?unstrippeddomain),'arcos.rack')) # core 
+#           . FILTER(regex(str(?unstrippedrange),'arcos.rack')) # core
+#           . LET(?link_fontcolor := 'fuchsia') 
+#           }
+
+# can turn on or off showing when range is string / int etc. by commenting / uncommenting next line 
+#. FILTER(!regex(str(?unstrippedrange),'http://www.w3.org/2001/XMLSchema'))
+ 
+. OPTIONAL{FILTER(!regex(str(?unstrippedprop),'SRI')) . LET(?link_fontcolor := 'red')} #????? was DesCert
+. OPTIONAL{FILTER(!regex(str(?unstrippeddomain),'SRI')) . LET(?N1_fontcolor := 'red')} #????? was DesCert
+. OPTIONAL{FILTER(!regex(str(?unstrippedrange),'SRI')) . LET(?N2_fontcolor := 'red')} #????? was DesCert
+. LET(?link := ?prop)
+. LET(?N2 := ?range)
+. LET(?N1 := ?domain)
+}".
+
+////////////////////////////GRAPHING over////////////////////////////////
+

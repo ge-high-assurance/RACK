@@ -74,13 +74,13 @@ def CreateCdrs():
     #-------------------------- 
     Add.turnstile_SoftwareRequirementReviewArtifacts(identifier="HlrReviewLog-1",
                 reviews_identifier = "HLR-1:v1",
-                reviewResult_identifier = "ReviseWithReview",
+                reviewResult_identifier = "Revise With Review",
                 wasGeneratedBy_identifier = "HlrReview")
     Add.turnstile_HighLevelRequirement(identifier = "HLR-1:v1")
     #-------------------------- 
     Add.turnstile_SoftwareRequirementReviewArtifacts(identifier="HlrReviewLog-2",
                 reviews_identifier = "HLR-2:v1",
-                reviewResult_identifier = "ReviseWithReview",
+                reviewResult_identifier = "Revise With Review",
                 wasGeneratedBy_identifier = "HlrReview")
     Add.turnstile_HighLevelRequirement(identifier = "HLR-2:v1")
     #-------------------------- 

@@ -82,7 +82,7 @@ rack data export \
 rack data export \
 	--data-graph http://rack001/turnstiledata \
 	--data-graph http://rack001/do-178c \
-	"query_forSWCompUnitExe_Objectives_A6" --file swunittestexeobj_A6.csv --format csv
+	"query_forSWUnitTestExe_Objectives_A6" --file swunittestexeobj_A6.csv --format csv
 
 # Develop Software Unit Test Execuation Objectives (A-7-2, A-7-4)
 rack data export \

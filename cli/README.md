@@ -128,7 +128,7 @@ Storing nodegroups...                                            OK
 The rack program accepts the following command line arguments:
 
 ```text
-usage: rack [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE] [--log-level LOG_LEVEL] {data,model,nodegroups} ...
+usage: rack [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE] [--triple-store-type TRIPLE_STORE_TYPE] [--log-level LOG_LEVEL] {data,model,nodegroups} ...
 
 RACK in a Box toolkit
 
@@ -143,6 +143,8 @@ optional arguments:
   --base-url BASE_URL   Base SemTK instance URL
   --triple-store TRIPLE_STORE
                         Override Fuseki URL
+  --triple-store-type TRIPLE_STORE_TYPE
+                        Override triplestore type (default: fuseki)
   --log-level LOG_LEVEL
                         Assign logger severity level
 ```
@@ -212,11 +214,17 @@ command-line flags or environment variables.
 - Override flag: `--base-url`
 - Override environment variable: `BASE_URL`
 
-### Fuseki URL
+### Triplestore URL
 
 - Default value: *Base URL* + `:3030/RACK`
 - Override flags: `--triple-store`
 - Override environment variable: `TRIPLE_STORE`
+
+### Triplestore Type
+
+- Default value: `fuseki`
+- Override flags: `--triple-store-type`
+- Override environment variable: `TRIPLE_STORE_TYPE`
 
 ## Example invocations
 

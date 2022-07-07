@@ -204,21 +204,22 @@ def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Ca
     return decorator
 # pylint: enable=unused-argument
 
-def sparql_connection(base_url: Url, data_graph: Optional[Url], extra_data_graphs: List[Url], triple_store: Optional[Url]) -> Connection:
+def sparql_connection(base_url: Url, data_graph: Optional[Url], extra_data_graphs: List[Url], triple_store: Optional[Url], triple_store_type: Optional[str]) -> Connection:
     """Generate a SPARQL connection value."""
 
     semtk3.set_host(base_url)
     # Default to RACK in a Box triple-store location
     triple_store = triple_store or Url("http://localhost:3030/RACK")
+    triple_store_type = triple_store_type or "fuseki"
     conn: Dict[str, Any] = {
         "name": "%NODEGROUP%",
-        "model": [{"type": "fuseki", "url": triple_store, "graph": MODEL_GRAPH}],
+        "model": [{"type": triple_store_type, "url": triple_store, "graph": MODEL_GRAPH}],
         "data": []
         }
     if data_graph is not None:
-        conn["data"].append({"type": "fuseki", "url": triple_store, "graph": data_graph})
+        conn["data"].append({"type": triple_store_type, "url": triple_store, "graph": data_graph})
     for graph in extra_data_graphs:
-        conn["data"].append({"type": "fuseki", "url": triple_store, "graph": graph})
+        conn["data"].append({"type": triple_store_type, "url": triple_store, "graph": graph})
     return Connection(json.dumps(conn))
 
 def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
@@ -307,8 +308,11 @@ def ingest_csv(conn: Connection, nodegroup: str, csv_name: Path) -> None:
         with open(csv_name, mode='r', encoding='utf-8-sig') as csv_file:
             csv = csv_file.read()
 
-        return semtk3.ingest_by_id(nodegroup, csv, conn)
-
+        (statusMsg, warningMsg) = semtk3.ingest_by_id(nodegroup, csv, conn)
+        if (warningMsg):
+            for m in ["Ingestion Warnings:"] + warningMsg.rstrip().split("\n"):
+                logger.warning(m)
+        return statusMsg
     go()
 
 def ingest_csv_by_class(conn: Connection, classuri: str, csv_name: Path) -> None:
@@ -322,8 +326,11 @@ def ingest_csv_by_class(conn: Connection, classuri: str, csv_name: Path) -> None
         with open(csv_name, mode='r', encoding='utf-8-sig') as csv_file:
             csv = csv_file.read()
 
-        return semtk3.ingest_using_class_template(classuri, csv, conn)
-
+        (statusMsg, warningMsg) = semtk3.ingest_using_class_template(classuri, csv, conn)
+        if (warningMsg):
+            for m in ["Ingestion Warnings:"] + warningMsg.rstrip().split("\n"):
+                logger.warning(m)
+        return statusMsg
     go()
 
 def ingest_owl(conn: Connection, owl_file: Path) -> None:
@@ -333,7 +340,7 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
     go()
 
-def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], clear: bool) -> None:
+def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
     with open(config_path, mode='r', encoding='utf-8-sig') as config_file:
         config = yaml.safe_load(config_file)
@@ -358,7 +365,7 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
     else:
         extra_data_graphs = []
 
-    conn = sparql_connection(base_url, data_graph, extra_data_graphs, triple_store)
+    conn = sparql_connection(base_url, data_graph, extra_data_graphs, triple_store, triple_store_type)
 
     if clear:
         clear_graph(conn)
@@ -411,7 +418,7 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
                 print(str_bad(f' FAIL got:{got} expected:{expected}'))
 
 
-def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url], clear: bool) -> None:
+def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple OWL files into the model graph."""
     with open(config_path, mode='r', encoding='utf-8-sig') as config_file:
         config = yaml.safe_load(config_file)
@@ -420,7 +427,7 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
     files = config['files']
     base_path = config_path.parent
 
-    conn = sparql_connection(base_url, None, [], triple_store)
+    conn = sparql_connection(base_url, None, [], triple_store, triple_store_type)
 
     if clear:
         clear_graph(conn, which_graph=Graph.MODEL)
@@ -429,18 +436,18 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
         ingest_owl(conn, base_path / file)
 
 @with_status('Clearing')
-def clear_driver(base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], graph: Graph) -> None:
+def clear_driver(base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], graph: Graph) -> None:
     """Clear the given data graphs"""
     if data_graphs is None:
-        conn = sparql_connection(base_url, DEFAULT_DATA_GRAPH, [], triple_store)
+        conn = sparql_connection(base_url, DEFAULT_DATA_GRAPH, [], triple_store, triple_store_type)
         clear_graph(conn, which_graph=graph)
     else:
         for data_graph in data_graphs:
-            conn = sparql_connection(base_url, data_graph, [], triple_store)
+            conn = sparql_connection(base_url, data_graph, [], triple_store, triple_store_type)
             clear_graph(conn, which_graph=graph)
 
-def template_driver(base_url: Url, triple_store: Optional[Url], class_uri: Url, filename: Optional[Path]) -> None:
-    conn = sparql_connection(base_url, DEFAULT_DATA_GRAPH, [], triple_store)
+def template_driver(base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], class_uri: Url, filename: Optional[Path]) -> None:
+    conn = sparql_connection(base_url, DEFAULT_DATA_GRAPH, [], triple_store, triple_store_type)
     csv = semtk3.get_class_template_csv(class_uri, conn, "identifier")
     if filename is None:
         print(csv, end="")
@@ -450,12 +457,12 @@ def template_driver(base_url: Url, triple_store: Optional[Url], class_uri: Url, 
 
 @with_status('Storing nodegroups')
 def store_nodegroups_driver(directory: Path, base_url: Url) -> None:
-    sparql_connection(base_url, None, [], None)
+    sparql_connection(base_url, None, [], None, None)
     semtk3.store_nodegroups(directory)
 
 @with_status('Storing nodegroup')
 def store_nodegroup_driver(name: str, creator: str, filename: str, comment: Optional[str], base_url: Url, kind: str) -> None:
-    sparql_connection(base_url, None, [], None)
+    sparql_connection(base_url, None, [], None, None)
 
     with open(filename) as f:
         nodegroup_json_str = f.read()
@@ -484,7 +491,7 @@ def sparql_nodegroup_driver(base_url: Url, filename: str) -> None:
 
 @with_status('Retrieving nodegroups')
 def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url, kind: str) -> None:
-    sparql_connection(base_url, None, [], None)
+    sparql_connection(base_url, None, [], None, None)
     if kind == 'nodegroup':
         item_type = semtk3.STORE_ITEM_TYPE_NODEGROUP
     elif kind == 'report':
@@ -497,7 +504,7 @@ def list_nodegroups_driver(base_url: Url) -> None:
 
     @with_status('Listing nodegroups')
     def list_nodegroups() -> SemtkTable:
-        sparql_connection(base_url, None, [], None)
+        sparql_connection(base_url, None, [], None, None)
         return semtk3.get_nodegroup_store_data()
 
     print(format_semtk_table(list_nodegroups()))
@@ -530,7 +537,7 @@ def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, ye
         print('No nodegroups specified for deletion: doing nothing.')
         return
 
-    sparql_connection(base_url, None, [], None)
+    sparql_connection(base_url, None, [], None, None)
     allIDs = semtk3.get_store_table().get_column('ID')
 
     if use_regexp:
@@ -556,7 +563,7 @@ def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, ye
     confirm(on_confirmed, yes)
 
 def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
-    sparql_connection(base_url, None, [], None)
+    sparql_connection(base_url, None, [], None, None)
 
     table = semtk3.get_store_table()
     id_col = table.get_column_index('ID')
@@ -573,34 +580,34 @@ def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
     confirm(on_confirmed, yes)
 
 def dispatch_data_export(args: SimpleNamespace) -> None:
-    conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store)
+    conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store, args.triple_store_type)
     run_query(conn, args.nodegroup, export_format=args.format, headers=not args.no_headers, path=args.file, constraints=args.constraint)
 
 def dispatch_data_count(args: SimpleNamespace) -> None:
-    conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store)
+    conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store, args.triple_store_type)
     run_count_query(conn, args.nodegroup, constraints=args.constraint)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
     cliMethod = CLIMethod.DATA_IMPORT
-    ingest_data_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store, args.clear)
+    ingest_data_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store, args.triple_store_type, args.clear)
 
 def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
     cliMethod = CLIMethod.MODEL_IMPORT
-    ingest_owl_driver(Path(args.config), args.base_url, args.triple_store, args.clear)
+    ingest_owl_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear)
 
 def dispatch_data_clear(args: SimpleNamespace) -> None:
     """Implementation of the data clear subcommand"""
-    clear_driver(args.base_url, args.data_graph, args.triple_store, Graph.DATA)
+    clear_driver(args.base_url, args.data_graph, args.triple_store, args.triple_store_type, Graph.DATA)
 
 def dispatch_data_template(args: SimpleNamespace) -> None:
     """Implementation of the data template subcommand"""
-    template_driver(args.base_url, args.triple_store, args.class_uri, args.file)
+    template_driver(args.base_url, args.triple_store, args.triple_store_type, args.class_uri, args.file)
 
 def dispatch_model_clear(args: SimpleNamespace) -> None:
     """Implementation of the model clear subcommand"""
-    clear_driver(args.base_url, None, args.triple_store, Graph.MODEL)
+    clear_driver(args.base_url, None, args.triple_store, args.triple_store_type, Graph.MODEL)
 
 def dispatch_nodegroups_import(args: SimpleNamespace) -> None:
     store_nodegroups_driver(args.directory, args.base_url)
@@ -628,7 +635,8 @@ def get_argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description='RACK in a Box toolkit')
     parser.add_argument('--base-url', type=str, default=environ.get('BASE_URL') or DEFAULT_BASE_URL, help='Base SemTK instance URL')
     parser.add_argument('--triple-store', type=str, default=environ.get('TRIPLE_STORE'), help='Override Fuseki URL')
-    parser.add_argument('--log-level', type=str, default='WARNING', help='Assign logger severity level')
+    parser.add_argument('--triple-store-type', type=str, default=environ.get('TRIPLE_STORE_TYPE'), help='Override Triplestore Type (default: fuseki)')
+    parser.add_argument('--log-level', type=str, default=environ.get('LOG_LEVEL', 'WARNING'), help='Assign logger severity level')
 
     subparsers = parser.add_subparsers(dest='command')
 

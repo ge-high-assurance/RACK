@@ -1,27 +1,27 @@
 data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
 #Phase1: Identifiers Only
-- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY1.csv"}
-- {nodegroup: "ingest_DOCUMENT", csv: "DOCUMENT1.csv"}
-- {nodegroup: "ingest_ORGANIZATION", csv: "ORGANIZATION1.csv"}
-- {nodegroup: "ingest_turnstile_DataDictionary", csv: "turnstile_DataDictionary1.csv"}
-- {nodegroup: "ingest_turnstile_Engineer", csv: "turnstile_Engineer1.csv"}
-- {nodegroup: "ingest_turnstile_HighLevelRequirement", csv: "turnstile_HighLevelRequirement1.csv"}
-- {nodegroup: "ingest_turnstile_LowLevelRequirement", csv: "turnstile_LowLevelRequirement1.csv"}
-- {nodegroup: "ingest_turnstile_SoftwareDesignReview", csv: "turnstile_SoftwareDesignReview1.csv"}
-- {nodegroup: "ingest_turnstile_SoftwareDesignReviewArtifacts", csv: "turnstile_SoftwareDesignReviewArtifacts1.csv"}
-- {nodegroup: "ingest_turnstile_SoftwareRequirementReviewArtifacts", csv: "turnstile_SoftwareRequirementReviewArtifacts1.csv"}
-- {nodegroup: "ingest_turnstile_SoftwareRequirementsReview", csv: "turnstile_SoftwareRequirementsReview1.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY1.csv"}
+- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "DOCUMENT1.csv"}
+- {class: "http://arcos.rack/AGENTS#ORGANIZATION", csv: "ORGANIZATION1.csv"}
+- {class: "http://arcos.turnstile/GE#DataDictionary", csv: "turnstile_DataDictionary1.csv"}
+- {class: "http://arcos.turnstile/GE#Engineer", csv: "turnstile_Engineer1.csv"}
+- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "turnstile_HighLevelRequirement1.csv"}
+- {class: "http://arcos.turnstile/GE#LowLevelRequirement", csv: "turnstile_LowLevelRequirement1.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareDesignReview", csv: "turnstile_SoftwareDesignReview1.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareDesignReviewArtifacts", csv: "turnstile_SoftwareDesignReviewArtifacts1.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareRequirementReviewArtifacts", csv: "turnstile_SoftwareRequirementReviewArtifacts1.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareRequirementsReview", csv: "turnstile_SoftwareRequirementsReview1.csv"}
 
 #Phase2: All Evidence
-- {nodegroup: "ingest_ACTIVITY", csv: "ACTIVITY2.csv"}
-- {nodegroup: "ingest_DOCUMENT", csv: "DOCUMENT2.csv"}
-- {nodegroup: "ingest_ORGANIZATION", csv: "ORGANIZATION2.csv"}
-- {nodegroup: "ingest_turnstile_DataDictionary", csv: "turnstile_DataDictionary2.csv"}
-- {nodegroup: "ingest_turnstile_Engineer", csv: "turnstile_Engineer2.csv"}
-- {nodegroup: "ingest_turnstile_HighLevelRequirement", csv: "turnstile_HighLevelRequirement2.csv"}
-- {nodegroup: "ingest_turnstile_LowLevelRequirement", csv: "turnstile_LowLevelRequirement2.csv"}
-- {nodegroup: "ingest_turnstile_SoftwareDesignReview", csv: "turnstile_SoftwareDesignReview2.csv"}
-- {nodegroup: "ingest_turnstile_SoftwareDesignReviewArtifacts", csv: "turnstile_SoftwareDesignReviewArtifacts2.csv"}
-- {nodegroup: "ingest_turnstile_SoftwareRequirementReviewArtifacts", csv: "turnstile_SoftwareRequirementReviewArtifacts2.csv"}
-- {nodegroup: "ingest_turnstile_SoftwareRequirementsReview", csv: "turnstile_SoftwareRequirementsReview2.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY2.csv"}
+- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "DOCUMENT2.csv"}
+- {class: "http://arcos.rack/AGENTS#ORGANIZATION", csv: "ORGANIZATION2.csv"}
+- {class: "http://arcos.turnstile/GE#DataDictionary", csv: "turnstile_DataDictionary2.csv"}
+- {class: "http://arcos.turnstile/GE#Engineer", csv: "turnstile_Engineer2.csv"}
+- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "turnstile_HighLevelRequirement2.csv"}
+- {class: "http://arcos.turnstile/GE#LowLevelRequirement", csv: "turnstile_LowLevelRequirement2.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareDesignReview", csv: "turnstile_SoftwareDesignReview2.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareDesignReviewArtifacts", csv: "turnstile_SoftwareDesignReviewArtifacts2.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareRequirementReviewArtifacts", csv: "turnstile_SoftwareRequirementReviewArtifacts2.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareRequirementsReview", csv: "turnstile_SoftwareRequirementsReview2.csv"}

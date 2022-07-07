@@ -1,0 +1,266 @@
+uri "http://arcos.rack/AllOntology" alias All.
+
+import "http://www.w3.org/2000/01/rdf-schema".
+import "http://arcos.rack/AGENTS".
+import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/BASELINE".
+import "http://arcos.rack/CONFIDENCE".
+import "http://arcos.rack/DOCUMENT".
+import "http://arcos.rack/FILE".
+import "http://arcos.rack/HARDWARE".
+import "http://arcos.rack/HAZARD".
+import "http://arcos.rack/MODEL".
+import "http://arcos.rack/PROCESS".
+import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/REVIEW".
+import "http://arcos.rack/SECURITY".
+import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/TESTING".
+
+import "http://arcos.AH-64D/Boeing".
+import "http://arcos.acert/GrammaTech".
+import "http://arcos.certgate/LM".
+import "http://arcos.aace/RTX".
+import "http://arcos.descert/SRI".
+import "http://arcos.descert/SRI-SS".
+import "http://arcos.arbiter/STR".
+
+//import "http://arcos.turnstile/GE".
+//import "http://arcos.rack/CPS".
+//import "http://arcos.sadl-examples/TurnstileSecurity".
+
+// This file is in sadl-examples folder; so have this project references all the other 
+// relevant RACK projects. 
+// In this file, importing all these SADL files.
+// To get a visualization that shows all inherited properties, I need the "transitive" rule;
+// however that rule gives errors in this setup.
+// So, have commented out the "transitive" rule.
+// Based on the following experiment, the root cause of the issue is the fact that projects reference other projects.
+//		In the same Eclipse + SADL env, I made a project where all the SADL files were placed;
+//		so no need to reference any other project. Then I could keep the transitive rule and
+//		I got all the inherited properties.
+
+// The "transitive" rule does work in another setup where I use
+// * eclipse: Version 2021-09 (4.21.0)
+// * SADL features version 3.5.0.202203142132
+
+// The Ask query and Graph have similar structure but the Ask query results can be pasted into an excel
+// and massaged so that all the properties are present. Then you can identify properties that are
+// not adding anything "new".
+
+// Note that the out of the box visualization is messy with restrictions etc.;
+// so doing my own visualization (note that this vis will not have straight line arrows).
+// Each overlay is shown in a different color.
+
+// SADL settings
+// 1.	Using OWL_MEM reasoner
+// 2.	Uncheck "Translate multiple domain or range as union"
+// 3.	Uncheck "Property range specification required"
+// 4.	Check "Type checking issues as warning only"
+
+// TBD
+// 1. rename variables, add more comments. 
+
+// Limitations / Functionality of the graphing
+// 1. Not showing properties for the root node (THING). This is because I am getting the tooltip info
+// 		for "child". I could duplicate the code and get it for "parent" but have not done that.
+// 2. Inherited properties are shown first and below that are the "direct" properties (separated by "----")
+// 3. Below that we show max, min and exact cardinality and "all values" info.
+// 4. Am I handling correctly where the range is a union? 
+//		Yes, if it is union of 2 things then 2 rows of data is presented.
+// 5. The amount of info that a tooltip shows is limited, so at place where it is truncated there will be "..."
+// 6. When "all values" restriction present, both that restriction and the original range of property are shown.
+// 7. When the range is a union, a blank node is shown.
+// 8. Have not tried it where there are List, the range is say [1,..10], enumerations etc.
+// 9. Have observed some issues in underlying Jena reasoner related to OPTIONAL, concat etc.
+// 10. ARCOS specific: In graphing have dropped restrictions related to THING, ENTITY and ACTIVITY
+
+//Rule Transitive
+//if cls is a type of cls2
+//   and cls2 is a type of cls3
+//then cls is a type of cls3.
+
+Graph: "select ?parent ?subclass ?child ?parent_style ?child_style ?child_fillcolor ?parent_fillcolor 
+    (?propChild as ?child_tooltip) 
+where 
+{
+# get child and parent
+ ?child <rdfs:subClassOf> ?parent 
+ . FILTER(regex(str(?parent),'arcos')) 
+ . FILTER NOT EXISTS {?child <rdfs:subClassOf> ?p1 . ?p1 <rdfs:subClassOf> ?parent}
+ . LET(?subclass := '')
+
+ # set up coloring 
+ . LET(?child_style := 'filled') . LET(?parent_style := 'filled')
+ . OPTIONAL{FILTER(regex(str(?child), 'rack'))     . LET(?child_fillcolor :=  'white')}
+ . OPTIONAL{FILTER(regex(str(?parent),'rack'))     . LET(?parent_fillcolor := 'white')}
+ . OPTIONAL{FILTER(regex(str(?child), 'AH-64D'))   . LET(?child_fillcolor :=  'bisque')}
+ . OPTIONAL{FILTER(regex(str(?parent),'AH-64D'))   . LET(?parent_fillcolor := 'bisque')}
+ . OPTIONAL{FILTER(regex(str(?child), 'acert'))    . LET(?child_fillcolor :=  'aqua')}
+ . OPTIONAL{FILTER(regex(str(?parent),'acert'))    . LET(?parent_fillcolor := 'aqua')}
+ . OPTIONAL{FILTER(regex(str(?child), 'certgate')) . LET(?child_fillcolor :=  'red')}
+ . OPTIONAL{FILTER(regex(str(?parent),'certgate')) . LET(?parent_fillcolor := 'red')}
+ . OPTIONAL{FILTER(regex(str(?child), 'descert'))  . LET(?child_fillcolor :=  'darkseagreen1')}
+ . OPTIONAL{FILTER(regex(str(?parent),'descert'))  . LET(?parent_fillcolor := 'darkseagreen1')}
+ . OPTIONAL{FILTER(regex(str(?child), 'arbiter'))  . LET(?child_fillcolor :=  'darkgoldenrod')}
+ . OPTIONAL{FILTER(regex(str(?parent),'arbiter'))  . LET(?parent_fillcolor := 'darkgoldenrod')}
+ . OPTIONAL{FILTER(regex(str(?child), 'aace'))     . LET(?child_fillcolor :=  'fuchsia')}
+ . OPTIONAL{FILTER(regex(str(?parent),'aace'))     . LET(?parent_fillcolor := 'fuchsia')}
+
+# get all the max, min, exact cardinality restrictions
+. OPTIONAL{{select distinct ?child (group_concat(distinct ?propInfo3;separator='&#10;') as ?propChildxxx) where
+       {   ?child <rdfs:subClassOf> ?z 
+         . ?z ?y1 ?z1 . FILTER(regex(str(?z1),'Restriction')) 
+         . ?z ?restrictionType ?z2 
+         . FILTER(regex(str(?restrictionType),'maxCardinality') || regex(str(?restrictionType),'maxQualifiedCardinality') 
+                  || regex(str(?restrictionType),'cardinality') || regex(str(?restrictionType),'minCardinality'))
+         . ?z ?onProp ?onPropVal . FILTER(regex(str(?onProp),'onProperty'))
+         . LET(?strippedRestrictionType :=replace(str(?restrictionType),'http.*#',''))
+         . LET(?strippedOnPropVal :=replace(str(?onPropVal),'http.*#',''))
+         . LET(?propInfo3 := concat(?strippedOnPropVal, concat(concat(' : ',str(?strippedRestrictionType)), concat(' is ',str(?z2)))))
+      } group by ?child
+}}
+
+# specific to PROV-S: we will strip out all restrictions on properties of THING, ENTITY, AGENT, ACTIVITY
+# the final value is to be in ?propChild; so rename / comment appropriately
+# But first add line return at end
+. LET(?pChild1 := concat(?propChildxxx,'&#10;'))
+# from THING
+. LET(?pChild2 := replace(?pChild1,'identifier : maxCardinality is 1&#10;',''))
+. LET(?pChild3 := replace(?pChild2,'title : maxCardinality is 1&#10;',''))
+. LET(?pChild4 := replace(?pChild3,'description : maxCardinality is 1&#10;',''))
+
+
+# from ENTITY
+. LET(?pChild5 := replace(?pChild4,'wasGeneratedBy : maxCardinality is 1&#10;',''))
+. LET(?pChild6 := replace(?pChild5,'generatedAtTime : maxCardinality is 1&#10;',''))
+. LET(?pChild7 := replace(?pChild6,'invalidatedAtTime : maxCardinality is 1&#10;',''))
+
+# from ACTIVITY
+. LET(?pChild8 := replace(?pChild7,'startedAtTime : maxCardinality is 1&#10;',''))
+. LET(?pChild9 := replace(?pChild8,'endedAtTime : maxCardinality is 1&#10;',''))
+
+. LET(?propCardinalityRestrictions := ?pChild9)
+
+# get all the 'only has values of type' NOTE that if any found then the 'original' property range is also displayed
+. OPTIONAL{{select distinct ?child (group_concat(distinct ?propInfo3;separator='&#10;') as ?propOnlyValuesOfType) where
+       {   ?child <rdfs:subClassOf> ?z 
+         . ?z ?y1 ?z1 . FILTER(regex(str(?z1),'Restriction')) 
+         . ?z ?restrictionType ?z2 
+         . FILTER(regex(str(?restrictionType),'allValuesFrom')) 
+         . LET(?strippedz2 :=replace(str(?z2),'http.*#','')) 
+         . ?z ?onProp ?onPropVal . FILTER(regex(str(?onProp),'onProperty'))
+         . LET(?strippedOnPropVal :=replace(str(?onPropVal),'http.*#','')) 
+         . LET(?propInfo3 := concat(str(?strippedOnPropVal),concat(' : only has values of type ',?strippedz2)))
+      } group by ?child
+}}
+
+# get all the parent properties
+. OPTIONAL{{select distinct ?child (group_concat(distinct ?propInfo;separator='&#10;') as ?propFromParent) where
+       {  ?prop ?y2 ?z2 . FILTER(regex(str(?y2), 'domain')) . ?child <rdfs:subClassOf> ?z2  
+         . ?prop ?range ?r1 . FILTER(regex(str(?range),'range'))
+         . LET(?strippedProp := replace(str(?prop),'http.*#',''))
+         . LET(?strippedRange := replace(str(?r1),'http.*#',''))
+         . LET(?propInfo := concat(str(?strippedProp), concat(' -> ',str(?strippedRange)))	)	
+      } group by ?child
+}}
+
+# get all the direct properties
+. OPTIONAL{{select distinct ?child (group_concat(distinct ?propInfo;separator='&#10;') as ?propDirect) where
+       {  ?prop ?y2 ?child . FILTER(regex(str(?y2), 'domain'))   
+         . ?prop ?range ?r1 . FILTER(regex(str(?range),'range'))
+         . LET(?strippedProp := replace(str(?prop),'http.*#',''))
+         . LET(?strippedRange := replace(str(?r1),'http.*#',''))
+         . LET(?propInfo := concat(str(?strippedProp), concat(' -> ',str(?strippedRange)))	)	
+      } group by ?child
+}}
+
+# now concatenate everything from ?propFromParent, ?propCardinalityRestrictions, ?propOnlyValuesOfType
+. LET(?null := '')
+. LET(?ttt := concat(?propCardinalityRestrictions, concat('&#10;',?propOnlyValuesOfType)))
+. LET(?ttt1 := coalesce(?ttt,?propCardinalityRestrictions,?propOnlyValuesOfType,?null)) 
+. LET(?ttt1A := concat('---------&#10;',?ttt1)) 
+. LET(?ttt3 := concat(?propFromParent,concat('&#10;---------&#10;',?propChild4)))
+. LET(?ttt4 := coalesce(?ttt3, ?propFromParent, ?propChild4,?null))
+
+. LET(?propChild := concat(?ttt4,concat('&#10;', ?ttt1A)))
+}".
+
+// The following query is similar to the Graph query above but the output from it is meant for analysis in Excel.
+Ask: "select distinct ?parent ?child ?propFromParent ?propDirect ?propCardinalityRestrictions ?propOnlyValuesOfType 
+where 
+{
+# get child and parent
+ ?child <rdfs:subClassOf> ?parent 
+ . FILTER(regex(str(?parent),'arcos')) 
+ . FILTER NOT EXISTS {?child <rdfs:subClassOf> ?p1 . ?p1 <rdfs:subClassOf> ?parent}
+
+# get all the max, min, exact cardinality restrictions
+. OPTIONAL{{select distinct ?child (group_concat(distinct ?propInfo3;separator='&#10;') as ?propChildxxx) where
+       {   ?child <rdfs:subClassOf> ?z 
+         . ?z ?y1 ?z1 . FILTER(regex(str(?z1),'Restriction')) 
+         . ?z ?restrictionType ?z2 
+         . FILTER(regex(str(?restrictionType),'maxCardinality') || regex(str(?restrictionType),'maxQualifiedCardinality') 
+                  || regex(str(?restrictionType),'cardinality') || regex(str(?restrictionType),'minCardinality'))
+         . ?z ?onProp ?onPropVal . FILTER(regex(str(?onProp),'onProperty'))
+         . LET(?strippedRestrictionType :=replace(str(?restrictionType),'http.*#',''))
+         . LET(?strippedOnPropVal :=replace(str(?onPropVal),'http.*#',''))
+         . LET(?propInfo3 := concat(?strippedOnPropVal, concat(concat(' : ',str(?strippedRestrictionType)), concat(' is ',str(?z2)))))
+      } group by ?child
+}}
+
+# specific to PROV-S: we will strip out all restrictions on properties of THING, ENTITY, AGENT, ACTIVITY
+# the final value is to be in ?propChild; so rename / comment appropriately
+# But first add line return at end
+. LET(?pChild1 := concat(?propChildxxx,'&#10;'))
+# from THING
+. LET(?pChild2 := replace(?pChild1,'identifier : maxCardinality is 1&#10;',''))
+. LET(?pChild3 := replace(?pChild2,'title : maxCardinality is 1&#10;',''))
+. LET(?pChild4 := replace(?pChild3,'description : maxCardinality is 1&#10;',''))
+
+# from ENTITY
+. LET(?pChild5 := replace(?pChild4,'wasGeneratedBy : maxCardinality is 1&#10;',''))
+. LET(?pChild6 := replace(?pChild5,'generatedAtTime : maxCardinality is 1&#10;',''))
+. LET(?pChild7 := replace(?pChild6,'invalidatedAtTime : maxCardinality is 1&#10;',''))
+
+# from ACTIVITY
+. LET(?pChild8 := replace(?pChild7,'startedAtTime : maxCardinality is 1&#10;',''))
+. LET(?pChild9 := replace(?pChild8,'endedAtTime : maxCardinality is 1&#10;',''))
+
+. LET(?propCardinalityRestrictions := ?pChild9)
+
+# get all the 'only has values of type' NOTE that if any found then the 'original' property range is also displayed
+. OPTIONAL{{select distinct ?child (group_concat(distinct ?propInfo3;separator=';') as ?propOnlyValuesOfType) where
+       {   ?child <rdfs:subClassOf> ?z 
+         . ?z ?y1 ?z1 . FILTER(regex(str(?z1),'Restriction')) 
+         . ?z ?restrictionType ?z2 
+         . FILTER(regex(str(?restrictionType),'allValuesFrom')) 
+         . LET(?strippedz2 :=replace(str(?z2),'http.*#','')) 
+         . ?z ?onProp ?onPropVal . FILTER(regex(str(?onProp),'onProperty'))
+         . LET(?strippedOnPropVal :=replace(str(?onPropVal),'http.*#','')) 
+         . LET(?propInfo3 := concat(str(?strippedOnPropVal),concat(' : only has values of type ',?strippedz2)))
+      } group by ?child
+}}
+
+# get all the parent properties
+. OPTIONAL{{select distinct ?child (group_concat(distinct ?propInfo;separator='; &#10;') as ?propFromParent) where
+       {  ?prop ?y2 ?z2 . FILTER(regex(str(?y2), 'domain')) . ?child <rdfs:subClassOf> ?z2  
+         . ?prop ?range ?r1 . FILTER(regex(str(?range),'range'))
+         . LET(?strippedProp := replace(str(?prop),'http.*#',''))
+         . LET(?strippedRange := replace(str(?r1),'http.*#',''))
+         . LET(?propInfo := concat(str(?strippedProp), concat(' -> ',str(?strippedRange)))	)	
+      } group by ?child
+}}
+
+# get all the direct properties
+. OPTIONAL{{select distinct ?child (group_concat(distinct ?propInfo;separator='; &#10;') as ?propDirect) where
+       {  ?prop ?y2 ?child . FILTER(regex(str(?y2), 'domain'))   
+         . ?prop ?range ?r1 . FILTER(regex(str(?range),'range'))
+         . LET(?strippedProp := replace(str(?prop),'http.*#',''))
+         . LET(?strippedRange := replace(str(?r1),'http.*#',''))
+         . LET(?propInfo := concat(str(?strippedProp), concat(' -> ',str(?strippedRange)))	)	
+      } group by ?child
+}}
+
+} order by ?child".

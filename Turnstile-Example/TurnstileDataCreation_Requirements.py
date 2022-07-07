@@ -523,6 +523,8 @@ def CreateCdrs():
                                  referenced_identifier = "SW-STD:v1")
     Add.DOCUMENT(identifier = "SW-STD:v1")
     #------------ InputThread ------------
+    Add.SYSTEM_DEVELOPMENT(identifier="SysThreadDesign")
+    
     Add.turnstile_SoftwareThread(identifier = "InputThread",
                                  partOf_identifier = "CounterApplication",
 		                         wasGeneratedBy_identifier = "SysThreadDesign")
@@ -552,9 +554,13 @@ def CreateCdrs():
                                        description = "incoming UDP message",
                                        wasGeneratedBy_identifier = "LlrDev1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
-                                       consumedBy_identifier = "IN-LLR-2")
+                                       consumedBy_identifier = "IN-LLR-2:v1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
-                                       consumedBy_identifier = "IN-LLR-3")
+                                       consumedBy_identifier = "IN-LLR-2:v2")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+                                       consumedBy_identifier = "IN-LLR-3:v1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+                                       consumedBy_identifier = "IN-LLR-3:v2")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
                                        consumedBy_identifier = "IN-LLR-5")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
@@ -566,9 +572,13 @@ def CreateCdrs():
                                        description = "input_park_count",
                                        wasGeneratedBy_identifier = "LlrDev1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
-                                       consumedBy_identifier = "IN-LLR-2")
+                                       consumedBy_identifier = "IN-LLR-2:v1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
-                                       consumedBy_identifier = "IN-LLR-3")
+                                       consumedBy_identifier = "IN-LLR-2:v2")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       consumedBy_identifier = "IN-LLR-3:v1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       consumedBy_identifier = "IN-LLR-3:v2")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
                                        consumedBy_identifier = "IN-LLR-4")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
@@ -586,11 +596,15 @@ def CreateCdrs():
                                        description = "output_park_count",
                                        wasGeneratedBy_identifier = "LlrDev1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
-                                       consumedBy_identifier = "OUT-LLR-2")
+                                       consumedBy_identifier = "OUT-LLR-2:v1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       consumedBy_identifier = "OUT-LLR-2:v2")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
                                        providedBy_identifier = "OUT-LLR-1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
-                                       providedBy_identifier = "IN-LLR-3")
+                                       providedBy_identifier = "IN-LLR-3:v1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+                                       providedBy_identifier = "IN-LLR-3:v2")
 
 	
     #------------ DCC-5 ------------	
@@ -598,7 +612,9 @@ def CreateCdrs():
                                        description = "outgoing UDP message",
                                        wasGeneratedBy_identifier = "LlrDev1")
     Add.turnstile_DataAndControlCouple(identifier = "DCC-5",
-                                       providedBy_identifier = "OUT-LLR-2")
+                                       providedBy_identifier = "OUT-LLR-2:v1")
+    Add.turnstile_DataAndControlCouple(identifier = "DCC-5",
+                                       providedBy_identifier = "OUT-LLR-2:v2")
 
 		
     #------------ DCC-6 ------------	
@@ -642,7 +658,6 @@ def CreateCdrs():
     Add.BASELINE(identifier=swBase1, content_identifier="OutputThread")
     Add.BASELINE(identifier=swBase1, content_identifier="InputThread")
     Add.BASELINE(identifier=swBase1, content_identifier="ExecutiveThread")
-    Add.BASELINE(identifier=swBase1, content_identifier="SwDesign")
 
     # Testsuite release
     Add.BASELINE(identifier=testBase1, content_identifier="TC-1-1")

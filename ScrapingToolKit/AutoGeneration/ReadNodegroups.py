@@ -13,16 +13,34 @@
 
 import os
 import json
+import semtk3
 
-def createConstants(jsons):
+
+connString = """
+{   "name":"RACK local fuseki Apache Phase 2 Resolved",
+    "domain":"",
+    "enableOwlImports":false,
+    "model":[
+        {"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}
+        ],
+    "data":[
+        {"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/ResolvedData"}
+        ]
+}"""
+
+def createConstants(classList):
     directoryPath = os.path.dirname(os.path.realpath(__file__))
     pythonFilePath = os.path.realpath(os.path.join(directoryPath, "..","Evidence","CONSTANTS.py"))
+    classDict = {}
+    for c in classList:
+        classDict[createDataNameFromClassName(c)] = c
     with open(pythonFilePath,"w") as pyFile:
         pyString = 'nodegroupMapping = {\n'
-        for j in sorted(jsons.keys()):
-            pyString += '    "'+j+'":"'+os.path.basename(jsons[j]).replace(".json","")+'",\n'
+        for j in sorted(classDict):
+            pyString += '    "'+j+'":"'+classDict[j]+'",\n'
         pyString = pyString.rstrip(",\n") + '}'  
         pyFile.write(pyString)
+    return classDict
             
         
 def createPython(nodegroups):
@@ -103,49 +121,51 @@ def createXsd(nodegroups):
         </xs:complexType>
     </xs:element>
 </xs:schema>''')
-def processNodegroup(jsonPath):
-    nodeProperties = {}
-    with open(jsonPath) as jsonFile:
-        data = json.load(jsonFile)
-        for sNode in data["sNodeGroup"]["sNodeList"]:
-            for prop in sNode["propList"]:
-                if prop["SparqlID"] != "":
-                    nodeProperties[prop["SparqlID"]] = {}
-                    nodeProperties[prop["SparqlID"]]["SparqlID"] = prop["SparqlID"]
-                    nodeProperties[prop["SparqlID"]]["columnName"] = prop["SparqlID"][1:]
-                    nodeProperties[prop["SparqlID"]]["UriRelationship"] = prop["UriRelationship"]
+def processNodegroup(classUri):
+    nodeProperties = {}    
+    data = json.loads(semtk3.get_class_template(classUri, connString, "identifier"))
+    for sNode in data["sNodeGroup"]["sNodeList"]:
+        for prop in sNode["propList"]:
+            if prop["SparqlID"] != "":
+                nodeProperties[prop["SparqlID"]] = {}
+                nodeProperties[prop["SparqlID"]]["SparqlID"] = prop["SparqlID"]
+                nodeProperties[prop["SparqlID"]]["columnName"] = prop["SparqlID"][1:]
+                #nodeProperties[prop["SparqlID"]]["UriRelationship"] = prop["UriRelationship"]
+                if "rangeURI" in prop:
+                    nodeProperties[prop["SparqlID"]]["relationship"] = prop["rangeURI"]
+                elif "relationship" in prop:
                     nodeProperties[prop["SparqlID"]]["relationship"] = prop["relationship"]
-    return nodeProperties
-                
-def createDataNameFromIngestFileName(name):
-    dataName = name.replace("ingest_","")\
-               .replace(".json","")\
-               .replace("-","_")\
-               .replace(".","_")\
-               .replace("+","_")\
-               .replace("=","_")
-    return dataName
-
-def findIngestionJsons(jsonDir):
-    ingestNodegroups = {}
-    for root, dirs, files in os.walk(jsonDir):
-        for name in files:
-            if name.startswith("ingest_") and name.endswith(".json"):
-                dataName = createDataNameFromIngestFileName(name)
-                if dataName not in ingestNodegroups:
-                    ingestNodegroups[dataName] = os.path.join(root, name)
                 else:
-                    print("**** ERROR - multiple class names", dataName,":",name,":",ingestNodegroups[dataName])
-    return ingestNodegroups
+                    nodeProperties[prop["SparqlID"]]["relationship"] = "http://www.w3.org/2001/XMLSchema#string"
+    return nodeProperties
+    
+def createDataNameFromClassName(name):
+    className = name.split("#")[-1]
+    prefix = ""
+    if not name.startswith("http://arcos.rack"):        
+        prefix = name.split("#")[0]\
+                   .replace("http://arcos.","").split("/")[0]\
+                   .replace("rack","")\
+                   .replace("-","_")\
+                   .replace(".","_")\
+                   .replace("+","_")\
+                   .replace("=","_") + "_"
+    return prefix + className        
 
 if __name__ == "__main__":
+    
     nodegroups = {}
-    directoryPath = os.path.dirname(os.path.realpath(__file__))
-    nodgroupPath = os.path.realpath(os.path.join(directoryPath, "..","..","nodegroups"))
-    jsons = findIngestionJsons(nodgroupPath)
-    createConstants(jsons)
-    for j in sorted(jsons.keys()):
+    semtk3.set_connection_override(connString)
+    all_ok = semtk3.check_services();
+    if not all_ok: 
+        raise Exception("Semtk services are not properly running on localhost")
+    
+    ClassList = semtk3.get_class_names()
+    
+    
+    classDict = createConstants(ClassList)
+    for j in sorted(classDict.keys()):
         print("Processing Nodegroup :",j)
-        nodegroups[j] = processNodegroup(jsons[j])
+        nodegroups[j] = processNodegroup(classDict[j])
     createXsd(nodegroups)
     createPython(nodegroups)

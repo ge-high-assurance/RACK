@@ -13,6 +13,7 @@ query Terms consumedBy Requirement,Find data dictionary terms consumed by requir
 query Compilation Inputs,Find inputs used in compilation of executables,langston,query Compilation Inputs.json,PrefabNodeGroup
 query System Structure,Extract system subcomponent structure contained under a given top-level anchor system,eric,query System Structure.json,PrefabNodeGroup
 query Requirements without passed test,"No Test, or no test result, or failure",200001934,query Requirements without passed test.json,PrefabNodeGroup
+query Requirements without passed test v2,"No Test, or no test result, or failure: Reworked",200001934,query Requirements without passed test v2.json,PrefabNodeGroup
 query Models for Thing,Query that finds all the models and their types given a target THING identifier,em,query Models for Thing.json,PrefabNodeGroup
 query Get DataInsertedBy From Guid,Query that finds all all dataInsertedBy infromation for a THING selected by guid,dr,GetDataInsertedByFromGuid.json,PrefabNodeGroup
 query dataVer INTERFACE without destination SYSTEM,number of INTERFACE w/o -destination-> SYSTEM should be 0,rack,query dataVer INTERFACE without destination SYSTEM.json,PrefabNodeGroup

@@ -202,13 +202,23 @@ jobs:
         path: RACK/rack-box/files
         key: files-${{ github.sha }}
 
-    - name: Build rack-box Docker image
+    - name: Build rack-box dev image
+      if: github.ref == 'refs/heads/master'
       run: |
         cd RACK/rack-box
-        # Short name for current branch. For PRs, use target branch (base ref)
-        GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
-        echo "Building rack-box image with tag $GIT_BRANCH"
-        packer build -var version="$GIT_BRANCH" rack-box-docker.json
+        packer build -var version=dev rack-box-docker.json
+
+    - name: Build rack-box dev-test image
+      if: github.ref == 'refs/heads/dev-test'
+      run: |
+        cd RACK/rack-box
+        packer build -var version=dev-test rack-box-docker.json
+
+    - name: Build rack-box other image
+      if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/dev-test'
+      run: |
+        cd RACK/rack-box
+        packer build -var version=other rack-box-docker.json
 
     - name: Login to Docker Hub
       if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev-test'
@@ -217,6 +227,10 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Push rack-box image to Docker Hub
-      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev-test'
+    - name: Push rack-box dev image to Docker Hub
+      if: github.ref == 'refs/heads/master'
       run: docker push gehighassurance/rack-box:dev
+
+    - name: Push rack-box dev-test image to Docker Hub
+      if: github.ref == 'refs/heads/dev-test'
+      run: docker push gehighassurance/rack-box:dev-test

@@ -11,10 +11,9 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-import XML
-import XML.SysML as SysML
-from Evidence import createEvidenceFile, createCDR
-import Evidence.Add as Add
+from Logging import *
+from Evidence import *
+import Evidence.Add as Add 
 import shutil
 import os.path
 
@@ -26,34 +25,34 @@ def CreateCdrs():
 
     createEvidenceFile(ingestionTitle="TurnstileIngestion-SystemDesign", ingestionDescription="Manual ingestion of Turnstile System Design")
 
-    Add.SYSTEM(identifier="Turnstile")
+    Add.SYSTEM.SYSTEM(identifier="Turnstile")
 
     
-    Add.turnstile_SystemComponent(identifier="InGate",
+    Add.GE.SystemComponent(identifier="InGate",
                 partOf_identifier = "Turnstile")
 
-    Add.turnstile_SystemComponent(identifier="OutGate",
+    Add.GE.SystemComponent(identifier="OutGate",
                 partOf_identifier = "Turnstile")
 
-    Add.turnstile_SystemComponent(identifier="CounterApplication",
+    Add.GE.SystemComponent(identifier="CounterApplication",
                 partOf_identifier = "Turnstile")
 
-    Add.turnstile_SystemComponent(identifier="Display",
+    Add.GE.SystemComponent(identifier="Display",
                 partOf_identifier = "Turnstile")
 
-    Add.turnstile_SystemInterfaceDefinition (identifier="inflow",
+    Add.GE.SystemInterfaceDefinition (identifier="inflow",
                 source_identifier = "InGate",
                 destination_identifier = "CounterApplication")
 
-    Add.turnstile_SystemInterfaceDefinition (identifier="outflow",
+    Add.GE.SystemInterfaceDefinition (identifier="outflow",
                 source_identifier = "OutGate",
                 destination_identifier = "CounterApplication")
 
-    Add.turnstile_SystemInterfaceDefinition (identifier="census",
+    Add.GE.SystemInterfaceDefinition (identifier="census",
                 source_identifier = "CounterApplication",
                 destination_identifier = "Display")
 
-    Add.turnstile_SystemInterfaceDefinition (identifier="census",
+    Add.GE.SystemInterfaceDefinition (identifier="census",
                 destination_identifier = "InGate")
 
     createCDR("http://rack001/turnstiledata")

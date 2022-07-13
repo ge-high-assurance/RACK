@@ -1,9 +1,0 @@
-identifier,dataInsertedBy_identifier,confirms_identifier,result_identifier,wasGeneratedBy_identifier
-TR-1-1-1,TurnstileIngestion-Testing,TC-1-1,Passed,TestRun1
-TR-1-2-1,TurnstileIngestion-Testing,TC-1-2,Passed,TestRun1
-TR-1-3-1,TurnstileIngestion-Testing,TC-1-3,Passed,TestRun1
-TR-1-4-1,TurnstileIngestion-Testing,TC-1-4,Failed,TestRun1
-TR-1-1-2,TurnstileIngestion-Testing,TC-1-1,Passed,TestRun2
-TR-1-2-2,TurnstileIngestion-Testing,TC-1-2,Passed,TestRun2
-TR-1-3-2,TurnstileIngestion-Testing,TC-1-3,Passed,TestRun2
-TR-1-4-2,TurnstileIngestion-Testing,TC-1-4,Failed,TestRun2

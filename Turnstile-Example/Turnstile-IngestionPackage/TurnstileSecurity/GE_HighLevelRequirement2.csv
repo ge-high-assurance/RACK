@@ -1,0 +1,4 @@
+identifier,dataInsertedBy_identifier,description,governs_identifier,satisfies_identifier
+HLR-4:v1,TurnstileIngestion-Security,CounterApplication shall verify that the data received on inflow is from InGate and is uncorrupted.,CounterApplication,
+HLR-4:v1,TurnstileIngestion-Security,,,IA-3
+HLR-4:v1,TurnstileIngestion-Security,,,IA-3-1

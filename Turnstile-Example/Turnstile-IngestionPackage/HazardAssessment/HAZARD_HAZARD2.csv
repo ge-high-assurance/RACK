@@ -1,0 +1,5 @@
+identifier,dataInsertedBy_identifier,description,source_identifier,wasDerivedFrom_identifier
+H-1,TurnstileIngestion-HazardAssessment,System Crash,Turnstile,
+H-1.1,TurnstileIngestion-HazardAssessment,Integer Under Flow,,H-1
+H-1.2,TurnstileIngestion-HazardAssessment,Integer Over Flow,,H-1
+H-2,TurnstileIngestion-HazardAssessment,Park Exceeds Capacity,Turnstile,

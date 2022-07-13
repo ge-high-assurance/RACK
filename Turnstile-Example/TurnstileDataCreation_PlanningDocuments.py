@@ -11,10 +11,9 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-import XML
-import XML.SysML as SysML
-from Evidence import createEvidenceFile, createCDR
-import Evidence.Add as Add
+from Logging import *
+from Evidence import *
+import Evidence.Add as Add 
 import shutil
 import os.path
 
@@ -30,13 +29,13 @@ def CreateCdrs():
     #  Planning Documents
     #######################################################################
     #-------------------------- 
-    Add.DOCUMENT(identifier="SW-STD:v1",
+    Add.DOCUMENT.DOCUMENT(identifier="SW-STD:v1",
                 title = "Turnstile Software Development Standards")
     #-------------------------- 
-    Add.DOCUMENT(identifier="SQ-STD:v1",
+    Add.DOCUMENT.DOCUMENT(identifier="SQ-STD:v1",
                 title = "Turnstile Requirement Standards")
     #-------------------------- 
-    Add.DOCUMENT(identifier="VER-STD:v1",
+    Add.DOCUMENT.DOCUMENT(identifier="VER-STD:v1",
                 title = "Turnstile Verification Standards")
 
     createCDR("http://rack001/turnstiledata")

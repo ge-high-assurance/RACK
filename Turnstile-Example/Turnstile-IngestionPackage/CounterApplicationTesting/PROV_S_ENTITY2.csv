@@ -1,0 +1,3 @@
+identifier,dataInsertedBy_identifier,definedIn_identifier,description
+IncludeBVA,TurnstileIngestion-Testing,ATCG-Config-File,Flag Indicating to include Boundary Value Analysis in testcase generation.
+IncludeLCA,TurnstileIngestion-Testing,ATCG-Config-File,Flag Indicating to include Logic Condition Analysis in testcase generation.

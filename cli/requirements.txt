@@ -10,8 +10,9 @@ pyrsistent==0.16.0
 python-dateutil==2.8.1
 PyYAML==5.4
 requests==2.25.1
+Pillow==9.0.1
 plotly==4.14.3
-semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@64b1ab020a5670816229fcdd678a91b942ff36f8
+semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@a3a56cf33de5d0e45462c76900629c3590cafd50
 six==1.15.0
 tabulate==0.8.7
 urllib3==1.26.5

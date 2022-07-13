@@ -8,6 +8,7 @@ WorkingDirectory=/home/ubuntu/RACK/cli/rackui
 ExecStart=/usr/bin/python3 __init__.py
 TimeoutStopSec=20
 KillMode=process
+User=rackui
 Restart=on-failure
 
 [Install]

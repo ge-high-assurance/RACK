@@ -31,9 +31,7 @@ if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
             python3-pip \
             strace \
             swi-prolog \
-            unzip \
-            dash \
-            python3-pandas
+            unzip
 
     # Install docker-systemctl-replaement
 
@@ -72,8 +70,11 @@ cp /opt/fuseki/fuseki.service /etc/systemd/system/fuseki.service
 systemctl enable fuseki
 systemctl start fuseki
 
-# Set up and start RACK UI service
+# Set up and start RACK UI service (TODO improve dependency handling)
 
+pip install dash
+pip install dash-bootstrap-components
+pip install python3-pandas
 adduser --system --group --no-create-home --disabled-password rackui
 mkdir /etc/rackui
 chown rackui.rackui /etc/rackui

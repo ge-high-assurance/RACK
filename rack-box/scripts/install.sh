@@ -32,9 +32,7 @@ if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
             strace \
             swi-prolog \
             unzip \
-            dash \
-            dash-bootstrap-components \
-            pandas
+            dash
 
     # Install docker-systemctl-replaement
 

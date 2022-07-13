@@ -26,5 +26,8 @@ autoinstall:
     - strace
     - swi-prolog
     - unzip
+    - dash
+    - dash_bootstrap_components
+    - pandas
   late-commands:
     - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu

@@ -31,7 +31,10 @@ if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
             python3-pip \
             strace \
             swi-prolog \
-            unzip
+            unzip \
+            dash \
+            dash_bootstrap_components \
+            pandas
 
     # Install docker-systemctl-replaement
 

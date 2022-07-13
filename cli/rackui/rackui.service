@@ -1,0 +1,14 @@
+[Unit]
+Description=RACK UI
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/RACK/cli/rackui
+ExecStart=/usr/bin/python3 __init__.py
+TimeoutStopSec=20
+KillMode=process
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

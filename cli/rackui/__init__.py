@@ -101,4 +101,4 @@ def page_main() -> html.Div:
         return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
         
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(host=0.0.0.0, debug=True)

@@ -56,7 +56,7 @@ content = html.Div(id="page-content", style=CONTENT_STYLE)
 app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
-def render_page_content(pathname):
+def render_page_content(pathname: str) -> dbc.Container:
     if pathname == "/":
         return page_main()
     elif pathname == "/page-1":
@@ -74,7 +74,7 @@ def render_page_content(pathname):
 
 CONFIG_CONN = '{"name":"RACK","domain":"","enableOwlImports":false,"model":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}],"data":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/data"}]}'
   
-def page_main():
+def page_main() -> html.Div:
     semtk3.set_connection_override(CONFIG_CONN)
     try:
         table = semtk3.get_oinfo_predicate_stats().get_class_count_table()

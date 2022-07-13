@@ -77,9 +77,9 @@ systemctl start fuseki
 adduser --system --group --no-create-home --disabled-password rackui
 mkdir /etc/rackui
 chown rackui.rackui /etc/rackui
-cp /home/${USER}/RACK/cli/rackui/rackui.service /etc/systemd/system/rackui.service
-systemctl enable rackui
-systemctl start rackui
+cp /home/"${USER}"/RACK/cli/rackui/rackui.service /etc/systemd/system/rackui.service
+#systemctl enable rackui
+#systemctl start rackui
 
 # Initialize SemTK environment variables
 

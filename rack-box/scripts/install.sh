@@ -72,11 +72,12 @@ systemctl start fuseki
 
 # Set up and start RACK UI service
 
-python3 -m pip install -r /home/"${USER}"/RACK/cli/rackui/requirements.txt
+cd /home/"${USER}"/RACK/cli/rackui
+python3 -m pip install -r ./requirements.txt
 adduser --system --group --no-create-home --disabled-password rackui
 mkdir /etc/rackui
 chown rackui.rackui /etc/rackui
-cp /home/"${USER}"/RACK/cli/rackui/rackui.service /etc/systemd/system/rackui.service
+cp rackui.service /etc/systemd/system/rackui.service
 systemctl enable rackui
 #systemctl start rackui
 

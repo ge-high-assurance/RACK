@@ -70,16 +70,14 @@ cp /opt/fuseki/fuseki.service /etc/systemd/system/fuseki.service
 systemctl enable fuseki
 systemctl start fuseki
 
-# Set up and start RACK UI service (TODO improve dependency handling)
+# Set up and start RACK UI service
 
-pip install dash
-pip install dash-bootstrap-components
-pip install pandas
+python3 -m pip install -r /home/"${USER}"/RACK/cli/rackui/requirements.txt
 adduser --system --group --no-create-home --disabled-password rackui
 mkdir /etc/rackui
 chown rackui.rackui /etc/rackui
 cp /home/"${USER}"/RACK/cli/rackui/rackui.service /etc/systemd/system/rackui.service
-#systemctl enable rackui
+systemctl enable rackui
 #systemctl start rackui
 
 # Initialize SemTK environment variables

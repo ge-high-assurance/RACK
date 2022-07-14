@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/ubuntu/RACK/cli/rackui
-ExecStart=/usr/bin/python3 __init__.py
+WorkingDirectory=/home/ubuntu/RACK/rack-ui
+ExecStart=/usr/bin/python3 app.py
 TimeoutStopSec=20
 KillMode=process
 User=rackui

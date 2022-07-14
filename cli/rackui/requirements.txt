@@ -1,4 +1,4 @@
 dash
 dash-bootstrap-components
 pandas
-plotly
+plotly>=5.0.0

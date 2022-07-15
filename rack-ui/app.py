@@ -5,6 +5,7 @@ import semtk3
 import pandas as pd
 import sys
 import traceback
+import rack
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -60,7 +61,7 @@ def render_page_content(pathname: str) -> dbc.Container:
     if pathname == "/":
         return page_main()
     elif pathname == "/page-1":
-        return dcc.Markdown("Do some stuff\n* which overlays are loaded\n* load / unload")
+        return test_call_rack()
     elif pathname == "/page-2":
         return dcc.Markdown("Do some stuff\n* which ingestion packages are available\n* load ingestion package(s)\n* clear data")
     # If the user tries to reach a different page, return a 404 message
@@ -100,5 +101,21 @@ def page_main() -> html.Div:
         tb = traceback.format_exception(None, e, e.__traceback__)
         return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
         
+def test_call_rack() -> html.Div:
+    try:
+        # sample rack call
+        conn = rack.sparql_connection("http://localhost", "http://rack001/data", [], "http://localhost:3030/RACK", "fuseki")
+        nodegroup_id = "query Requirements with Tests"
+        rack.run_query(conn, nodegroup_id)
+
+        return html.Div([
+            dcc.Markdown("Do some stuff\n* indicate which overlays are loaded\n* load / unload\n\n\nCalling RACK cli run_query()..."),
+            ])
+
+    except Exception as e:
+        tb = traceback.format_exception(None, e, e.__traceback__)
+        return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
+
+
 if __name__ == '__main__':
     app.run_server(host="0.0.0.0", debug=True)

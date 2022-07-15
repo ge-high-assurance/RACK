@@ -6,6 +6,7 @@ import pandas as pd
 import sys
 import traceback
 import rack
+from pathlib import Path
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -42,7 +43,7 @@ sidebar = html.Div(
         dbc.Nav(
             [
                 dbc.NavLink("Home", href="/", active="exact"),
-                dbc.NavLink("Overlays", href="/page-1", active="exact"),
+                dbc.NavLink("Overlays", href="/overlays", active="exact"),
                 dbc.NavLink("Load Data", href="/page-2", active="exact"),
             ],
             vertical=True,
@@ -60,8 +61,8 @@ app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 def render_page_content(pathname: str) -> dbc.Container:
     if pathname == "/":
         return page_main()
-    elif pathname == "/page-1":
-        return test_call_rack()
+    elif pathname == "/overlays":
+        return page_overlays()
     elif pathname == "/page-2":
         return dcc.Markdown("Do some stuff\n* which ingestion packages are available\n* load ingestion package(s)\n* clear data")
     # If the user tries to reach a different page, return a 404 message
@@ -101,21 +102,27 @@ def page_main() -> html.Div:
         tb = traceback.format_exception(None, e, e.__traceback__)
         return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
         
-def test_call_rack() -> html.Div:
+def page_overlays() -> html.Div:
     try:
-        # sample rack call
-        conn = rack.sparql_connection("http://localhost", "http://rack001/data", [], "http://localhost:3030/RACK", "fuseki")
-        nodegroup_id = "query Requirements with Tests"
-        rack.run_query(conn, nodegroup_id)
+        # sample rack run_query() call
+        #conn = rack.sparql_connection("http://localhost", "http://rack001/data", [], "http://localhost:3030/RACK", "fuseki")
+        #nodegroup_id = "query Requirements with Tests"
+        #rack.run_query(conn, nodegroup_id)
 
         return html.Div([
-            dcc.Markdown("Do some stuff\n* indicate which overlays are loaded\n* load / unload\n\n\nCalling RACK cli run_query()..."),
+            dcc.Markdown("Loaded overlays: \n*one\n*two\n\n"),
+            html.Button('Load Boeing overlay', id='load-boeing-overlay')
             ])
 
     except Exception as e:
         tb = traceback.format_exception(None, e, e.__traceback__)
         return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
 
+@app.callback(
+    Input('load-boeing-overlay')
+)
+def load_boeing_overlay():
+    rack.ingest_owl_driver(Path("/home/ubuntu/RACK/Boeing-Ontology/OwlModels/import.yaml"),http://localhost, http://localhost:3030/RACK, "fuseki", False)
 
 if __name__ == '__main__':
     app.run_server(host="0.0.0.0", debug=True)

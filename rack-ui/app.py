@@ -6,6 +6,7 @@ import pandas as pd
 import sys
 import traceback
 import rack
+from pathlib import Path
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -38,7 +39,7 @@ sidebar = html.Div(
                 ])
             ])
         ]),
-       
+
         dbc.Nav(
             [
                 dbc.NavLink("Home", href="/", active="exact"),
@@ -54,7 +55,7 @@ sidebar = html.Div(
 
 content = html.Div(id="page-content", style=CONTENT_STYLE)
 
-app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
+app.layout = html.Div([dcc.Location(id="url"), sidebar, content, html.Div(id='div-dummy')])
 
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
 def render_page_content(pathname: str) -> dbc.Container:
@@ -73,13 +74,18 @@ def render_page_content(pathname: str) -> dbc.Container:
         ]
     )
 
+@app.callback(Output("div-dummy", "children"), [Input("button-load-boeing-overlay", "n_clicks")])
+def load_boeing_overlay(n_clicks) -> dbc.Container:
+     rack.ingest_owl_driver(Path("/home/ubuntu/RACK/Boeing-Ontology/OwlModels/import.yaml"), "http://localhost", "http://localhost:3030/RACK", "fuseki", False)
+     return dbc.Container()
+
 CONFIG_CONN = '{"name":"RACK","domain":"","enableOwlImports":false,"model":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}],"data":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/data"}]}'
-  
+
 def page_main() -> html.Div:
     semtk3.set_connection_override(CONFIG_CONN)
     try:
         table = semtk3.get_oinfo_predicate_stats().get_class_count_table()
-        
+
         # split the class into namespace and class
         col_names = table.get_column_names()
         col_types = table.get_column_types()
@@ -88,34 +94,29 @@ def page_main() -> html.Div:
         col_types.insert(0, "string")
         new_rows = [r[0].split("#") + [r[1]] for r in rows]
         table3 = semtk3.semtktable.SemtkTable(semtk3.semtktable.SemtkTable.create_table_dict(col_names, col_types, new_rows))
-        
+
         df = pd.DataFrame(table3.get_pandas_data())
         data_table = dash_table.DataTable(data=df.to_dict('records'), sort_action='native')
-       
+
         return html.Div([
             dcc.Markdown("I called semtk_python3 and found\n\nthese are loaded in **http://rack001/data** "),
-            data_table 
+            data_table
             ])
 
     except Exception as e:
         tb = traceback.format_exception(None, e, e.__traceback__)
         return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
-        
+
 def test_call_rack() -> html.Div:
     try:
-        # sample rack call
-        conn = rack.sparql_connection("http://localhost", "http://rack001/data", [], "http://localhost:3030/RACK", "fuseki")
-        nodegroup_id = "query Requirements with Tests"
-        rack.run_query(conn, nodegroup_id)
-
         return html.Div([
-            dcc.Markdown("Do some stuff\n* indicate which overlays are loaded\n* load / unload\n\n\nCalling RACK cli run_query()..."),
+            dcc.Markdown("Do some stuff\n* indicate which overlays are loaded\n* load / unload\n\n\nCalling RACK cli ingest_owl_driver()..."),
+            html.Button('Load Boeing overlay', id='button-load-boeing-overlay'),
             ])
 
     except Exception as e:
         tb = traceback.format_exception(None, e, e.__traceback__)
         return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
-
 
 if __name__ == '__main__':
     app.run_server(host="0.0.0.0", debug=True)

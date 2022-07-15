@@ -1,4 +1,8 @@
-mypy==0.790
-pylint==2.6.0
-pytest==6.1.2
-pytest-docker==0.10.1
+mypy==0.961
+pylint==2.14.4
+pytest-docker==0.12.0
+pytest==7.1.2
+typed-ast==1.4.3
+types-PyYAML==6.0.10
+types-requests==2.28.1
+types-tabulate==0.8.5

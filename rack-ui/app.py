@@ -65,7 +65,7 @@ def render_page_content(pathname: str) -> dbc.Container:
     elif pathname == "/overlay":
         return page_overlay()
     elif pathname == "/data":
-        return dcc.Markdown("This page allow user to load and clear ingestion package data")
+        return dcc.Markdown("This page will allow users to load and clear ingestion package data")
     # If the user tries to reach a different page, return a 404 message
     return dbc.Container(
         [
@@ -80,6 +80,7 @@ def load_boeing_overlay(n_clicks) -> dbc.Container:
     if n_clicks is not None:
         if n_clicks > 0:
             rack.ingest_owl_driver(Path("/home/ubuntu/RACK/Boeing-Ontology/OwlModels/import.yaml"), "http://localhost", "http://localhost:3030/RACK", "fuseki", False)
+            rack.store_nodegroups_driver(Path("/home/ubuntu/RACK/nodegroups/ingestion/arcos.AH-64D"),"http://localhost")
     return dbc.Container()
 
 CONFIG_CONN = '{"name":"RACK","domain":"","enableOwlImports":false,"model":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}],"data":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/data"}]}'

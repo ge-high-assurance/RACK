@@ -8,7 +8,8 @@ import traceback
 import rack
 from pathlib import Path
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+# setting suppress_callback_exceptions=True to avoid errors when defining callbacks on components not contained in initial layout
+app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
 
 # the style arguments for the sidebar. We use position:fixed and a fixed width
 SIDEBAR_STYLE = {
@@ -43,8 +44,8 @@ sidebar = html.Div(
         dbc.Nav(
             [
                 dbc.NavLink("Home", href="/", active="exact"),
-                dbc.NavLink("Overlays", href="/page-1", active="exact"),
-                dbc.NavLink("Load Data", href="/page-2", active="exact"),
+                dbc.NavLink("Overlays", href="/overlay", active="exact"),
+                dbc.NavLink("Load Data", href="/data", active="exact"),
             ],
             vertical=True,
             pills=True,
@@ -61,10 +62,10 @@ app.layout = html.Div([dcc.Location(id="url"), sidebar, content, html.Div(id='di
 def render_page_content(pathname: str) -> dbc.Container:
     if pathname == "/":
         return page_main()
-    elif pathname == "/page-1":
-        return test_call_rack()
-    elif pathname == "/page-2":
-        return dcc.Markdown("Do some stuff\n* which ingestion packages are available\n* load ingestion package(s)\n* clear data")
+    elif pathname == "/overlay":
+        return page_overlay()
+    elif pathname == "/data":
+        return dcc.Markdown("This page allow user to load and clear ingestion package data")
     # If the user tries to reach a different page, return a 404 message
     return dbc.Container(
         [
@@ -76,8 +77,10 @@ def render_page_content(pathname: str) -> dbc.Container:
 
 @app.callback(Output("div-dummy", "children"), [Input("button-load-boeing-overlay", "n_clicks")])
 def load_boeing_overlay(n_clicks) -> dbc.Container:
-     rack.ingest_owl_driver(Path("/home/ubuntu/RACK/Boeing-Ontology/OwlModels/import.yaml"), "http://localhost", "http://localhost:3030/RACK", "fuseki", False)
-     return dbc.Container()
+    if n_clicks is not None:
+        if n_clicks > 0:
+            rack.ingest_owl_driver(Path("/home/ubuntu/RACK/Boeing-Ontology/OwlModels/import.yaml"), "http://localhost", "http://localhost:3030/RACK", "fuseki", False)
+    return dbc.Container()
 
 CONFIG_CONN = '{"name":"RACK","domain":"","enableOwlImports":false,"model":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}],"data":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/data"}]}'
 
@@ -107,10 +110,10 @@ def page_main() -> html.Div:
         tb = traceback.format_exception(None, e, e.__traceback__)
         return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
 
-def test_call_rack() -> html.Div:
+def page_overlay() -> html.Div:
     try:
         return html.Div([
-            dcc.Markdown("Do some stuff\n* indicate which overlays are loaded\n* load / unload\n\n\nCalling RACK cli ingest_owl_driver()..."),
+            dcc.Markdown("This page will show which overlays are loaded, and allow user to load/unload specific overlays"),
             html.Button('Load Boeing overlay', id='button-load-boeing-overlay'),
             ])
 

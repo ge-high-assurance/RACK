@@ -7,6 +7,7 @@ import sys
 import traceback
 import rack
 import glob
+import zipfile
 from pathlib import Path
 
 # setting suppress_callback_exceptions=True to avoid errors when defining callbacks on components not contained in initial layout
@@ -88,8 +89,10 @@ def load_boeing_overlay(n_clicks) -> dbc.Container:
 def load_ingestion_package(n_clicks, selected_package) -> html.Div:
     if n_clicks is not None:
         if n_clicks > 0:
+            with zipfile.ZipFile(selected_package, 'r') as zip_ref:
+                zip_ref.extractall(selected_package[0:-4])  # unzip to folder with same name as the zip file, to avoid unintentional overwrites
             return html.Div([
-                dcc.Markdown("Clicked load ingestion package " + selected_package)
+                dcc.Markdown("Unzipped ingestion package " + selected_package)
                 ])
 
 CONFIG_CONN = '{"name":"RACK","domain":"","enableOwlImports":false,"model":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}],"data":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/data"}]}'

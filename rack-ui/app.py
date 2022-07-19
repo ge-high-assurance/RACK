@@ -1,11 +1,12 @@
 import dash
 import dash_bootstrap_components as dbc
-from dash import Input, Output, dcc, html, dash_table
+from dash import Input, Output, State, dcc, html, dash_table
 import semtk3
 import pandas as pd
 import sys
 import traceback
 import rack
+import glob
 from pathlib import Path
 
 # setting suppress_callback_exceptions=True to avoid errors when defining callbacks on components not contained in initial layout
@@ -65,7 +66,7 @@ def render_page_content(pathname: str) -> dbc.Container:
     elif pathname == "/overlay":
         return page_overlay()
     elif pathname == "/data":
-        return dcc.Markdown("This page will allow users to load and clear ingestion package data")
+        return page_data()
     # If the user tries to reach a different page, return a 404 message
     return dbc.Container(
         [
@@ -82,6 +83,14 @@ def load_boeing_overlay(n_clicks) -> dbc.Container:
             rack.ingest_owl_driver(Path("/home/ubuntu/RACK/Boeing-Ontology/OwlModels/import.yaml"), "http://localhost", "http://localhost:3030/RACK", "fuseki", False)
             rack.store_nodegroups_driver(Path("/home/ubuntu/RACK/nodegroups/ingestion/arcos.AH-64D"),"http://localhost")
     return dbc.Container()
+
+@app.callback(Output("div-data", "children"), Input("button-load-ingestion-packages", "n_clicks"), State("radio-ingestion-packages", "value"))
+def load_ingestion_package(n_clicks, selected_package) -> html.Div:
+    if n_clicks is not None:
+        if n_clicks > 0:
+            return html.Div([
+                dcc.Markdown("Clicked load ingestion package " + selected_package)
+                ])
 
 CONFIG_CONN = '{"name":"RACK","domain":"","enableOwlImports":false,"model":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}],"data":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/data"}]}'
 
@@ -118,6 +127,20 @@ def page_overlay() -> html.Div:
             html.Button('Load Boeing overlay', id='button-load-boeing-overlay'),
             ])
 
+    except Exception as e:
+        tb = traceback.format_exception(None, e, e.__traceback__)
+        return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
+
+def page_data() -> html.Div:
+    try:
+        files_arr = glob.glob("/mnt/*.zip")
+
+        return html.Div([
+            dcc.Markdown("Available ingestion packages (found in C:\\rack-tmp on your host machine):"),
+            dcc.RadioItems(files_arr, id="radio-ingestion-packages", labelStyle=dict(display='block')),
+            html.Button("Load", id="button-load-ingestion-packages"),
+            html.Div(id="div-data"),
+            ])
     except Exception as e:
         tb = traceback.format_exception(None, e, e.__traceback__)
         return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])

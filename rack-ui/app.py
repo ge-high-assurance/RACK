@@ -6,9 +6,10 @@ import pandas as pd
 import sys
 import traceback
 import rack
-import glob
-import zipfile
-from pathlib import Path
+import io
+import base64
+from zipfile import ZipFile
+from datetime import datetime
 
 # setting suppress_callback_exceptions=True to avoid errors when defining callbacks on components not contained in initial layout
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
@@ -67,13 +68,13 @@ def render_page_content(pathname: str) -> dbc.Container:
     elif pathname == "/overlay":
         return page_overlay()
     elif pathname == "/data":
-        return page_data()
+        return page_load_data()
     # If the user tries to reach a different page, return a 404 message
     return dbc.Container(
         [
             html.H1("404: Not found", className="text-danger"),
             html.Hr(),
-            html.P(f"The pathname {pathname} was not recognised..."),
+            html.P(f"The pathname {pathname} was not recognized..."),
         ]
     )
 
@@ -85,15 +86,20 @@ def load_boeing_overlay(n_clicks) -> dbc.Container:
             rack.store_nodegroups_driver(Path("/home/ubuntu/RACK/nodegroups/ingestion/arcos.AH-64D"),"http://localhost")
     return dbc.Container()
 
-@app.callback(Output("div-data", "children"), Input("button-load-ingestion-packages", "n_clicks"), State("radio-ingestion-packages", "value"))
-def load_ingestion_package(n_clicks, selected_package) -> html.Div:
-    if n_clicks is not None:
-        if n_clicks > 0:
-            with zipfile.ZipFile(selected_package, 'r') as zip_ref:
-                zip_ref.extractall(selected_package[0:-4])  # unzip to folder with same name as the zip file, to avoid unintentional overwrites
-            return html.Div([
-                dcc.Markdown("Unzipped ingestion package " + selected_package)
-                ])
+@app.callback(Output('output-data-upload', 'children'),
+              Input('upload-data', 'contents'),
+              State('upload-data', 'filename'),
+              State('upload-data', 'last_modified'),
+              prevent_initial_call=True)
+def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates):
+    for content, name, date in zip(list_of_contents, list_of_names, list_of_dates):
+        new_dir = "ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")
+        content_type, content_string = content.split(',')
+        content_decoded = base64.b64decode(content_string)
+        zip_str = io.BytesIO(content_decoded)
+        zip_obj = ZipFile(zip_str, 'r')
+        zip_obj.extractall(path="/tmp/" + new_dir)
+    return list_of_names
 
 CONFIG_CONN = '{"name":"RACK","domain":"","enableOwlImports":false,"model":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}],"data":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/data"}]}'
 
@@ -134,15 +140,30 @@ def page_overlay() -> html.Div:
         tb = traceback.format_exception(None, e, e.__traceback__)
         return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
 
-def page_data() -> html.Div:
+def page_load_data() -> html.Div:
     try:
-        files_arr = glob.glob("/mnt/*.zip")
-
         return html.Div([
-            dcc.Markdown("Available ingestion packages (found in C:\\rack-tmp on your host machine):"),
-            dcc.RadioItems(files_arr, id="radio-ingestion-packages", labelStyle=dict(display='block')),
-            html.Button("Load", id="button-load-ingestion-packages"),
-            html.Div(id="div-data"),
+            dcc.Markdown("Select an ingestion package to load:"),
+            dcc.Upload(
+                id='upload-data',
+                children=html.Div([
+                    'Drag and Drop or ',
+                    html.A('Select Files')
+                ]),
+                style={
+                    'width': '100%',
+                    'height': '60px',
+                    'lineHeight': '60px',
+                    'borderWidth': '1px',
+                    'borderStyle': 'dashed',
+                    'borderRadius': '5px',
+                    'textAlign': 'center',
+                    'margin': '10px'
+                },
+                accept=".zip",
+                multiple=True
+            ),
+            html.Div(id='output-data-upload'),
             ])
     except Exception as e:
         tb = traceback.format_exception(None, e, e.__traceback__)

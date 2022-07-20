@@ -10,6 +10,7 @@ import io
 import base64
 from zipfile import ZipFile
 from datetime import datetime
+from pathlib import Path
 
 # setting suppress_callback_exceptions=True to avoid errors when defining callbacks on components not contained in initial layout
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
@@ -88,8 +89,8 @@ def load_boeing_overlay(n_clicks) -> dbc.Container:
 
 @app.callback(Output('output-data-upload', 'children'),
               Input('upload-data', 'contents'),
-              State('upload-data', 'filename'),
-              State('upload-data', 'last_modified'),
+              Input('upload-data', 'filename'),
+              Input('upload-data', 'last_modified'),
               prevent_initial_call=True)
 def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates):
     for content, name, date in zip(list_of_contents, list_of_names, list_of_dates):

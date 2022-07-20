@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/ubuntu/RACK/rack-ui
+WorkingDirectory=/home/${USER}/RACK/rack-ui
 ExecStart=/usr/bin/python3 app.py
 TimeoutStopSec=20
 KillMode=process

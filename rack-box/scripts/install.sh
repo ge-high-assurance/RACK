@@ -79,10 +79,8 @@ python3 -m pip install -r ./requirements.txt
 adduser --system --group --no-create-home --disabled-password rackui
 mkdir /etc/rackui
 chown rackui.rackui /etc/rackui
-envsubst < rackui.service
-cp rackui.service /etc/systemd/system/rackui.service
+envsubst < rackui.service > /etc/systemd/system/rackui.service
 systemctl enable rackui
-#systemctl start rackui
 
 # Initialize SemTK environment variables
 

@@ -12,10 +12,14 @@ from zipfile import ZipFile
 from datetime import datetime
 from pathlib import Path
 
-# setting suppress_callback_exceptions=True to avoid errors when defining callbacks on components not contained in initial layout
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
 
-# the style arguments for the sidebar. We use position:fixed and a fixed width
+BASE_URL = "http://localhost"
+TRIPLE_STORE = "http://localhost:3030/RACK"
+TRIPLE_STORE_TYPE = "fuseki"
+CONFIG_CONN = '{"name":"RACK","domain":"","enableOwlImports":false,"model":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}],"data":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/data"}]}'
+
+# style for sidebar
 SIDEBAR_STYLE = {
     "position": "fixed",
     "top": 0,
@@ -26,8 +30,7 @@ SIDEBAR_STYLE = {
     "background-color": "#f8f9fa",
 }
 
-# the styles for the main content position it to the right of the sidebar and
-# add some padding.
+# style for the main content
 CONTENT_STYLE = {
     "margin-left": "18rem",
     "margin-right": "2rem",
@@ -62,15 +65,16 @@ content = html.Div(id="page-content", style=CONTENT_STYLE)
 
 app.layout = html.Div([dcc.Location(id="url"), sidebar, content, html.Div(id='div-dummy')])
 
-@app.callback(Output("page-content", "children"), [Input("url", "pathname")])
+@app.callback(Output("page-content", "children"), 
+              Input("url", "pathname"))
 def render_page_content(pathname: str) -> dbc.Container:
+    """ Callback triggered when user selects a page """
     if pathname == "/":
         return page_main()
     elif pathname == "/overlay":
         return page_overlay()
     elif pathname == "/data":
         return page_load_data()
-    # If the user tries to reach a different page, return a 404 message
     return dbc.Container(
         [
             html.H1("404: Not found", className="text-danger"),
@@ -79,12 +83,14 @@ def render_page_content(pathname: str) -> dbc.Container:
         ]
     )
 
-@app.callback(Output("div-dummy", "children"), [Input("button-load-boeing-overlay", "n_clicks")])
-def load_boeing_overlay(n_clicks) -> dbc.Container:
+@app.callback(Output("div-dummy", "children"), 
+              Input("button-load-overlay", "n_clicks"))
+def load_overlay(n_clicks) -> dbc.Container:
+    """ Callback triggered when user selects an overlay to load """
     if n_clicks is not None:
         if n_clicks > 0:
-            rack.ingest_owl_driver(Path("/home/ubuntu/RACK/Boeing-Ontology/OwlModels/import.yaml"), "http://localhost", "http://localhost:3030/RACK", "fuseki", False)
-            rack.store_nodegroups_driver(Path("/home/ubuntu/RACK/nodegroups/ingestion/arcos.AH-64D"),"http://localhost")
+            rack.ingest_owl_driver(Path("../Boeing-Ontology/OwlModels/import.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, False)
+            rack.store_nodegroups_driver(Path("../nodegroups/ingestion/arcos.AH-64D"), BASE_URL)
     return dbc.Container()
 
 @app.callback(Output('output-data-upload', 'children'),
@@ -93,6 +99,7 @@ def load_boeing_overlay(n_clicks) -> dbc.Container:
               Input('upload-data', 'last_modified'),
               prevent_initial_call=True)
 def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates):
+    """ Callback triggered when user selects an ingestion package to load """
     for content, name, date in zip(list_of_contents, list_of_names, list_of_dates):
         new_dir = "ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")
         content_type, content_string = content.split(',')
@@ -102,9 +109,8 @@ def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates):
         zip_obj.extractall(path="/tmp/" + new_dir)
     return list_of_names
 
-CONFIG_CONN = '{"name":"RACK","domain":"","enableOwlImports":false,"model":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}],"data":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/data"}]}'
-
 def page_main() -> html.Div:
+    """ Components for main page """
     semtk3.set_connection_override(CONFIG_CONN)
     try:
         table = semtk3.get_oinfo_predicate_stats().get_class_count_table()
@@ -125,50 +131,39 @@ def page_main() -> html.Div:
             dcc.Markdown("I called semtk_python3 and found\n\nthese are loaded in **http://rack001/data** "),
             data_table
             ])
-
     except Exception as e:
-        tb = traceback.format_exception(None, e, e.__traceback__)
-        return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
+        return display_error(e)
 
 def page_overlay() -> html.Div:
+    """ Components for overlay page """
     try:
         return html.Div([
             dcc.Markdown("This page will show which overlays are loaded, and allow user to load/unload specific overlays"),
-            html.Button('Load Boeing overlay', id='button-load-boeing-overlay'),
+            html.Button('Load Boeing overlay', id='button-load-overlay'),
             ])
-
     except Exception as e:
-        tb = traceback.format_exception(None, e, e.__traceback__)
-        return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
+        return display_error(e)
 
 def page_load_data() -> html.Div:
+    """ Components for data page """
     try:
         return html.Div([
             dcc.Markdown("Select an ingestion package to load:"),
             dcc.Upload(
+                html.Button('Select Ingestion Package'),
                 id='upload-data',
-                children=html.Div([
-                    'Drag and Drop or ',
-                    html.A('Select Files')
-                ]),
-                style={
-                    'width': '100%',
-                    'height': '60px',
-                    'lineHeight': '60px',
-                    'borderWidth': '1px',
-                    'borderStyle': 'dashed',
-                    'borderRadius': '5px',
-                    'textAlign': 'center',
-                    'margin': '10px'
-                },
                 accept=".zip",
                 multiple=True
             ),
             html.Div(id='output-data-upload'),
             ])
     except Exception as e:
-        tb = traceback.format_exception(None, e, e.__traceback__)
-        return dcc.Markdown("### RACK is not running properly.  Error: \n" + tb[-1])
+        return display_error(e)
+
+def display_error(e) -> dcc.Markdown:
+    """ Get an error traceback message """
+    traceback = traceback.format_exception(None, e, e.__traceback__)
+    return dcc.Markdown("### RACK is not running properly.  Error: \n" + traceback[-1])
 
 if __name__ == '__main__':
     app.run_server(host="0.0.0.0", debug=True)

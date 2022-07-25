@@ -388,9 +388,9 @@ def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Opt
         if 'data' in step:
             ingest_data_driver(Path(step['data']), base_url, None, triple_store, triple_store_type, False)
         elif 'model' in step:
-            ingest_owl_driver(Path(step['model']), base_url, None, triple_store, triple_store_type, False)
+            ingest_owl_driver(Path(step['model']), base_url, triple_store, triple_store_type, False)
         elif 'nodegroups' in step:
-            store_nodegroups_driver(Path(step['nodegroups']), base_url, False)
+            store_nodegroups_driver(Path(step['nodegroups']), base_url)
 
 def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""

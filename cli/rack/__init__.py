@@ -152,6 +152,45 @@ INGEST_OWL_CONFIG_SCHEMA: Dict[str, Any] = {
     }
 }
 
+MANIFEST_SCHEMA: Dict[str, Any] = {
+    'type': 'object',
+    'additionalProperties': False,
+    'required': ['steps'],
+    'properties': {
+        'steps': {
+            'type': 'array',
+            'items': {
+                'oneOf': [
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        'required': ['data'],
+                        'properties': {
+                            'data': {'type': 'string'}
+                        }
+                    },
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        'required': ['model'],
+                        'properties': {
+                            'model': {'type': 'string'}
+                        }
+                    },
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        'required': ['nodegroups'],
+                        'properties': {
+                            'nodegroups': {'type': 'string'}
+                        }
+                    },
+                ]
+            }
+        }
+    }
+}
+
 def str_good(s: str) -> str:
     return Fore.GREEN + s + Style.RESET_ALL
 
@@ -339,6 +378,19 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
     def go() -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
     go()
+
+def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str]) -> None:
+    with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
+        manifest = yaml.safe_load(manifest_file)
+        validate(manifest, MANIFEST_SCHEMA)
+    
+    for step in manifest['steps']:
+        if 'data' in step:
+            ingest_data_driver(Path(step['data']), base_url, None, triple_store, triple_store_type, False)
+        elif 'model' in step:
+            ingest_owl_driver(Path(step['model']), base_url, None, triple_store, triple_store_type, False)
+        elif 'nodegroups' in step:
+            store_nodegroups_driver(Path(step['nodegroups']), base_url, False)
 
 def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
@@ -587,6 +639,10 @@ def dispatch_data_count(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store, args.triple_store_type)
     run_count_query(conn, args.nodegroup, constraints=args.constraint)
 
+def dispatch_manifest_import(args: SimpleNamespace) -> None:
+    """Implementation of manifest import subcommand"""
+    ingest_manifest_driver(Path(args.manifest), args.base_url, args.triple_store, args.triple_store_type)
+
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
     cliMethod = CLIMethod.DATA_IMPORT
@@ -640,6 +696,10 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     subparsers = parser.add_subparsers(dest='command')
 
+    manifest_parser = subparsers.add_parser('manifest', help='Ingestion package automation')
+    manifest_subparsers = manifest_parser.add_subparsers(dest='command')
+    manifest_import_parser = manifest_subparsers.add_parser('import', help='Import ingestion manifest')
+
     data_parser = subparsers.add_parser('data', help='Import or export CSV data')
     data_subparsers = data_parser.add_subparsers(dest='command')
     data_import_parser = data_subparsers.add_parser('import', help='Import CSV data')
@@ -662,6 +722,9 @@ def get_argument_parser() -> argparse.ArgumentParser:
     nodegroups_delete_parser = nodegroups_subparsers.add_parser('delete', help='Delete some nodegroups from RACK')
     nodegroups_deleteall_parser = nodegroups_subparsers.add_parser('delete-all', help='Delete all nodegroups from RACK')
     nodegroups_sparql_parser = nodegroups_subparsers.add_parser('sparql', help='Show SPARQL query for nodegroup')
+
+    manifest_import_parser.add_argument('manifest', type=str, help='Manifest YAML file')
+    manifest_import_parser.set_defaults(func=dispatch_manifest_import)
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     data_import_parser.add_argument('--data-graph', type=str, action='append', help='Data graph URL')

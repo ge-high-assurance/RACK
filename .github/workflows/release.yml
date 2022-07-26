@@ -80,13 +80,13 @@ jobs:
         - builder: docker
           os: ubuntu-20.04
           shell: bash
-# hyperv isn't supported yet (https://github.com/actions/virtual-environments/issues/183#issuecomment-706244929)
+# no support for hyperv (https://github.com/actions/virtual-environments/issues/183#issuecomment-706244929)
 #        - builder: hyperv
 #          os: windows-latest
 #          shell: msys2 {0}
 # virtualbox works only on macos (VT-x is not available: VERR_VMK_NO_VMX)
         - builder: virtualbox
-          os: macos-10.15
+          os: macos-12
           shell: bash
 
     runs-on: ${{ matrix.os }}
@@ -109,18 +109,13 @@ jobs:
         path: RACK/rack-box/files
         key: files-${{ github.sha }}
 
-    # Skip since windows-latest doesn't support nested virtualization yet
+    # Won't work since windows-latest doesn't support nested virtualization
     - name: Enable Hyper-V
       if: matrix.builder == 'hyperv' && matrix.os == 'windows-latest'
       shell: powershell
       run: |
         Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
         Add-WindowsFeature RSAT-Hyper-V-Tools -IncludeAllSubFeature
-
-    # Skip since ubuntu-20.04 doesn't support nested virtualization yet
-    - name: Install VirtualBox
-      if: matrix.builder == 'virtualbox' && matrix.os == 'ubuntu-20.04'
-      run: sudo apt-get install -y virtualbox
 
     - name: Build rack-box ${{ matrix.builder }} image
       run: |

@@ -11,13 +11,14 @@ import base64
 from zipfile import ZipFile
 from datetime import datetime
 from pathlib import Path
+from rack import Graph
+import os
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
 
 BASE_URL = "http://localhost"
 TRIPLE_STORE = "http://localhost:3030/RACK"
 TRIPLE_STORE_TYPE = "fuseki"
-CONFIG_CONN = '{"name":"RACK","domain":"","enableOwlImports":false,"model":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}],"data":[{"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/data"}]}'
 
 # style for sidebar
 SIDEBAR_STYLE = {
@@ -37,6 +38,15 @@ CONTENT_STYLE = {
     "padding": "2rem 1rem",
 }
 
+# style for buttons
+BUTTON_STYLE = {
+    "font-size": "14px", 
+    "width": "200px",
+    "display": "inline-block",
+    "margin-bottom": "10px",
+    "margin-right": "5px",
+    "height":"25px"}
+
 sidebar = html.Div(
     [
         html.Table([
@@ -51,8 +61,7 @@ sidebar = html.Div(
         dbc.Nav(
             [
                 dbc.NavLink("Home", href="/", active="exact"),
-                dbc.NavLink("Overlays", href="/overlay", active="exact"),
-                dbc.NavLink("Load Data", href="/data", active="exact"),
+                dbc.NavLink("More", href="/page2", active="exact"),
             ],
             vertical=True,
             pills=True,
@@ -63,7 +72,7 @@ sidebar = html.Div(
 
 content = html.Div(id="page-content", style=CONTENT_STYLE)
 
-app.layout = html.Div([dcc.Location(id="url"), sidebar, content, html.Div(id='div-dummy')])
+app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 
 @app.callback(Output("page-content", "children"), 
               Input("url", "pathname"))
@@ -71,10 +80,8 @@ def render_page_content(pathname: str) -> dbc.Container:
     """ Callback triggered when user selects a page """
     if pathname == "/":
         return page_main()
-    elif pathname == "/overlay":
-        return page_overlay()
-    elif pathname == "/data":
-        return page_load_data()
+    elif pathname == "/page2":
+        return page2()
     return dbc.Container(
         [
             html.H1("404: Not found", className="text-danger"),
@@ -83,79 +90,71 @@ def render_page_content(pathname: str) -> dbc.Container:
         ]
     )
 
-@app.callback(Output("div-dummy", "children"), 
-              Input("button-load-overlay", "n_clicks"))
-def load_overlay(n_clicks) -> dbc.Container:
-    """ Callback triggered when user selects an overlay to load """
+@app.callback(Output('div-load-arcos', 'children'),
+              Input('button-load-arcos', 'n_clicks'),
+              prevent_initial_call=True)
+def load_arcos(n_clicks):
+    """ Callback triggered when user selects Load ARCOS """
     if n_clicks is not None:
         if n_clicks > 0:
-            rack.ingest_owl_driver(Path("../Boeing-Ontology/OwlModels/import.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, False)
-            rack.store_nodegroups_driver(Path("../nodegroups/ingestion/arcos.AH-64D"), BASE_URL)
-    return dbc.Container()
+            rack.ingest_manifest_driver("/home/ubuntu/RACK/cli/manifest-arcos.yaml", BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
+            return "Loaded ARCOS"
+    return ""
 
-@app.callback(Output('output-data-upload', 'children'),
-              Input('upload-data', 'contents'),
-              Input('upload-data', 'filename'),
-              Input('upload-data', 'last_modified'),
+@app.callback(Output('div-upload', 'children'),
+              Input('button-upload', 'contents'),
+              Input('button-upload', 'filename'),
+              Input('button-upload', 'last_modified'),
               prevent_initial_call=True)
 def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates):
     """ Callback triggered when user selects an ingestion package to load """
     for content, name, date in zip(list_of_contents, list_of_names, list_of_dates):
-        new_dir = "ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")
+        tmp_dir = "/tmp/ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")
         content_type, content_string = content.split(',')
         content_decoded = base64.b64decode(content_string)
         zip_str = io.BytesIO(content_decoded)
         zip_obj = ZipFile(zip_str, 'r')
-        zip_obj.extractall(path="/tmp/" + new_dir)
-    return list_of_names
+        zip_obj.extractall(path=tmp_dir)
+        manifest = tmp_dir + "/Apache-IngestionPackage-wSW-RACKv10.2-20220531/manifest.yaml"
+        rack.ingest_manifest_driver(manifest, BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
+    return "Tried to load " + manifest
+
+@app.callback(Output('div-clear', 'children'),
+              Input('button-clear', 'n_clicks'),
+              prevent_initial_call=True)
+def clear(n_clicks):
+    """ Callback triggered when user selects clear """
+    if n_clicks is not None:
+        if n_clicks > 0:
+            #rack.clear_driver(BASE_URL, ["http://rack001/nist-800-53"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
+            return "Reset not implemented yet"
+    return ""
+
 
 def page_main() -> html.Div:
     """ Components for main page """
-    semtk3.set_connection_override(CONFIG_CONN)
-    try:
-        table = semtk3.get_oinfo_predicate_stats().get_class_count_table()
-
-        # split the class into namespace and class
-        col_names = table.get_column_names()
-        col_types = table.get_column_types()
-        rows = table.get_rows()
-        col_names.insert(0, "namespace")
-        col_types.insert(0, "string")
-        new_rows = [r[0].split("#") + [r[1]] for r in rows]
-        table3 = semtk3.semtktable.SemtkTable(semtk3.semtktable.SemtkTable.create_table_dict(col_names, col_types, new_rows))
-
-        df = pd.DataFrame(table3.get_pandas_data())
-        data_table = dash_table.DataTable(data=df.to_dict('records'), sort_action='native')
-
-        return html.Div([
-            dcc.Markdown("I called semtk_python3 and found\n\nthese are loaded in **http://rack001/data** "),
-            data_table
-            ])
-    except Exception as e:
-        return display_error(e)
-
-def page_overlay() -> html.Div:
-    """ Components for overlay page """
     try:
         return html.Div([
-            dcc.Markdown("This page will show which overlays are loaded, and allow user to load/unload specific overlays"),
-            html.Button('Load Boeing overlay', id='button-load-overlay'),
-            ])
-    except Exception as e:
-        return display_error(e)
-
-def page_load_data() -> html.Div:
-    """ Components for data page """
-    try:
-        return html.Div([
-            dcc.Markdown("Select an ingestion package to load:"),
+            dcc.Markdown("Welcome to RACK."),
+            html.Button('Load ARCOS', id='button-load-arcos', style=BUTTON_STYLE),
             dcc.Upload(
-                html.Button('Select Ingestion Package'),
-                id='upload-data',
+                html.Button('Load ingestion package', style=BUTTON_STYLE),
+                id='button-upload',
                 accept=".zip",
                 multiple=True
             ),
-            html.Div(id='output-data-upload'),
+            html.Button('Reset', id='button-clear', style=BUTTON_STYLE),
+            html.Div(id='div-load-arcos'),
+            html.Div(id='div-upload'),
+            html.Div(id='div-clear'),
+            ])
+    except Exception as e:
+        return display_error(e)
+
+def page2() -> html.Div:
+    """ Components for another page (empty for now) """
+    try:
+        return html.Div([
             ])
     except Exception as e:
         return display_error(e)

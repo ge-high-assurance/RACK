@@ -1,0 +1,35 @@
+steps:
+
+# TODO early rev only - does not yet fully mirror setup-arcos.sh
+
+# Boeing model & auto-generated nodegroups
+  - model: ../Boeing-Ontology/OwlModels/import.yaml
+  - nodegroups: ../nodegroups/ingestion/arcos.AH-64D
+
+# GrammaTech model & auto-generated nodegroups
+  - model: ../GrammaTech-Ontology/OwlModels/import.yaml
+  - nodegroups: ../nodegroups/ingestion/arcos.acert
+
+# LM model & auto-generated nodegroups
+  - model: ../LM-Ontology/OwlModels/import.yaml
+  - nodegroups: ../nodegroups/ingestion/arcos.certgate
+
+# SRI model & auto-generated nodegroups
+  - model: ../SRI-Ontology/OwlModels/import.yaml
+  - nodegroups: ../nodegroups/ingestion/arcos.descert
+
+# STR model & auto-generated nodegroups
+  - model: ../STR-Ontology/OwlModels/import.yaml
+  - nodegroups: ../nodegroups/ingestion/arcos.arbiter
+
+# RTX model & auto-generated nodegroups
+  - model: ../RTX-Ontology/OwlModels/import.yaml
+  - nodegroups: ../nodegroups/ingestion/arcos.aace
+
+# === NIST 800-53 ===
+  - data: ../RACK-Ontology/ontology/NIST-800-53/import.yaml
+  
+# === MITRE CWEs ===
+  - model: ../RACK-Ontology/OwlModels/MITRE-CWE.yaml
+  - nodegroups: ../nodegroups/arcos.cwe
+  - data: ../RACK-Ontology/ontology/MITRE-CWE/import.yaml

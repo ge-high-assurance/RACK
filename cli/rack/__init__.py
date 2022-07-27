@@ -166,7 +166,9 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
                         'additionalProperties': False,
                         'required': ['data'],
                         'properties': {
-                            'data': {'type': 'string'}
+                            'data': {'type': 'string'},
+                            'clear': {'type': 'boolean'},
+                            'data-graph': {'type': 'array', 'items': {'type': 'string'}}
                         }
                     },
                     {
@@ -174,7 +176,8 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
                         'additionalProperties': False,
                         'required': ['model'],
                         'properties': {
-                            'model': {'type': 'string'}
+                            'model': {'type': 'string'},
+                            'clear': {'type': 'boolean'}
                         }
                     },
                     {
@@ -386,9 +389,12 @@ def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Opt
     
     for step in manifest['steps']:
         if 'data' in step:
-            ingest_data_driver(Path(step['data']), base_url, None, triple_store, triple_store_type, False)
+            clear = step.get('clear', False)
+            data_graphs = step.get('data-graphs')
+            ingest_data_driver(Path(step['data']), base_url, data_graphs, triple_store, triple_store_type, clear)
         elif 'model' in step:
-            ingest_owl_driver(Path(step['model']), base_url, triple_store, triple_store_type, False)
+            clear = step.get('clear', False)
+            ingest_owl_driver(Path(step['model']), base_url, triple_store, triple_store_type, clear)
         elif 'nodegroups' in step:
             store_nodegroups_driver(Path(step['nodegroups']), base_url)
 

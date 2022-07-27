@@ -387,16 +387,18 @@ def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Opt
         manifest = yaml.safe_load(manifest_file)
         validate(manifest, MANIFEST_SCHEMA)
     
+    base_path = manifest_path.parent
+
     for step in manifest['steps']:
         if 'data' in step:
             clear = step.get('clear', False)
             data_graphs = step.get('data-graphs')
-            ingest_data_driver(Path(step['data']), base_url, data_graphs, triple_store, triple_store_type, clear)
+            ingest_data_driver(base_path / step['data'], base_url, data_graphs, triple_store, triple_store_type, clear)
         elif 'model' in step:
             clear = step.get('clear', False)
-            ingest_owl_driver(Path(step['model']), base_url, triple_store, triple_store_type, clear)
+            ingest_owl_driver(base_path / step['model'], base_url, triple_store, triple_store_type, clear)
         elif 'nodegroups' in step:
-            store_nodegroups_driver(Path(step['nodegroups']), base_url)
+            store_nodegroups_driver(base_path / step['nodegroups'], base_url)
 
 def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""

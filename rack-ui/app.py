@@ -97,7 +97,7 @@ def load_arcos(n_clicks):
     """ Callback triggered when user selects Load ARCOS """
     if n_clicks is not None:
         if n_clicks > 0:
-            rack.ingest_manifest_driver("/home/ubuntu/RACK/cli/manifest-arcos.yaml", BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
+            rack.ingest_manifest_driver(Path("/home/ubuntu/RACK/cli/manifest-arcos.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
             return "Loaded ARCOS"
     return ""
 
@@ -116,7 +116,7 @@ def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates):
         zip_obj = ZipFile(zip_str, 'r')
         zip_obj.extractall(path=tmp_dir)
         manifest = tmp_dir + "/Apache-IngestionPackage-wSW-RACKv10.2-20220531/manifest.yaml"
-        rack.ingest_manifest_driver(manifest, BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
+        rack.ingest_manifest_driver(Path(manifest), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
     return "Tried to load " + manifest
 
 @app.callback(Output('div-clear', 'children'),

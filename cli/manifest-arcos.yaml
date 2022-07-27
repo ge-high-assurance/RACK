@@ -1,7 +1,5 @@
 steps:
 
-# TODO early rev only - does not yet fully mirror setup-arcos.sh
-
 # Boeing model & auto-generated nodegroups
   - model: ../Boeing-Ontology/OwlModels/import.yaml
   - nodegroups: ../nodegroups/ingestion/arcos.AH-64D
@@ -26,10 +24,16 @@ steps:
   - model: ../RTX-Ontology/OwlModels/import.yaml
   - nodegroups: ../nodegroups/ingestion/arcos.aace
 
+### Applicable Standards ### copy any of these to the instance data load script and use when applicable
+## (copied from setup-arcos.sh, untested)
+#  - {data: ../RACK-Ontology/OwlModels/ARP-4754A.yaml, clear: true}
+#  - {data: ../RACK-Ontology/OwlModels/DO-330.yaml, clear: true}
+#  - {data: ../RACK-Ontology/OwlModels/DO-178C.yaml, clear: true}
+
 # === NIST 800-53 ===
-  - data: ../RACK-Ontology/ontology/NIST-800-53/import.yaml
+  - data: ../RACK-Ontology/ontology/NIST-800-53/import.yaml, clear: true
   
 # === MITRE CWEs ===
   - model: ../RACK-Ontology/OwlModels/MITRE-CWE.yaml
   - nodegroups: ../nodegroups/arcos.cwe
-  - data: ../RACK-Ontology/ontology/MITRE-CWE/import.yaml
+  - {data: ../RACK-Ontology/ontology/MITRE-CWE/import.yaml, clear: true}

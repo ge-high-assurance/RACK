@@ -31,7 +31,7 @@ steps:
 #  - {data: ../RACK-Ontology/OwlModels/DO-178C.yaml, clear: true}
 
 # === NIST 800-53 ===
-  - data: ../RACK-Ontology/ontology/NIST-800-53/import.yaml, clear: true
+  - data: ../RACK-Ontology/ontology/NIST-800-53/import.yaml
   
 # === MITRE CWEs ===
   - model: ../RACK-Ontology/OwlModels/MITRE-CWE.yaml

@@ -70,9 +70,30 @@ sidebar = html.Div(
     style=SIDEBAR_STYLE,
 )
 
+modals = html.Div(
+    [
+        dbc.Modal(
+            [
+                dbc.ModalBody("Reset is not implemented yet"),
+                dbc.ModalFooter(dbc.Button("Close", id="button-modal-reset-close", className="ms-auto", n_clicks=0)),
+            ],
+            id="modal-reset",
+            is_open=False,
+        ),
+        dbc.Modal(
+            [
+                dbc.ModalBody("Loaded ARCOS"),
+                dbc.ModalFooter(dbc.Button("Close", id="button-modal-arcos-close", className="ms-auto", n_clicks=0)),
+            ],
+            id="modal-arcos",
+            is_open=False,
+        ),
+    ]
+)
+
 content = html.Div(id="page-content", style=CONTENT_STYLE)
 
-app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
+app.layout = html.Div([dcc.Location(id="url"), sidebar, content, modals])
 
 @app.callback(Output("page-content", "children"), 
               Input("url", "pathname"))
@@ -90,16 +111,17 @@ def render_page_content(pathname: str) -> dbc.Container:
         ]
     )
 
-@app.callback(Output('div-load-arcos', 'children'),
+@app.callback(Output('modal-arcos', 'is_open'),
               Input('button-load-arcos', 'n_clicks'),
+              Input('button-modal-arcos-close', 'n_clicks'),
+              State("modal-arcos", "is_open"),
               prevent_initial_call=True)
-def load_arcos(n_clicks):
+def load_arcos(n_clicks_arcos, n_clicks_close, is_open):
     """ Callback triggered when user selects Load ARCOS """
-    if n_clicks is not None:
-        if n_clicks > 0:
-            rack.ingest_manifest_driver(Path("/home/ubuntu/RACK/cli/manifest-arcos.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
-            return "Loaded ARCOS"
-    return ""
+    if n_clicks_arcos is not None and n_clicks_arcos > 0 and not is_open:
+            rack.ingest_manifest_driver(Path("/home/ubuntu/RACK/cli/manifest-arcos.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)  # TODO unhardcode
+            return True  # show modal
+    return False  # hide modal
 
 @app.callback(Output('div-upload', 'children'),
               Input('button-upload', 'contents'),
@@ -115,20 +137,21 @@ def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates):
         zip_str = io.BytesIO(content_decoded)
         zip_obj = ZipFile(zip_str, 'r')
         zip_obj.extractall(path=tmp_dir)
+        # TODO unhardcode
         manifest = tmp_dir + "/Apache-IngestionPackage-wSW-RACKv10.2-20220531/manifest.yaml"
         rack.ingest_manifest_driver(Path(manifest), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
     return "Tried to load " + manifest
 
-@app.callback(Output('div-clear', 'children'),
-              Input('button-clear', 'n_clicks'),
+@app.callback(Output('modal-reset', 'is_open'),
+              Input('button-reset', 'n_clicks'),
+              Input('button-modal-reset-close', 'n_clicks'),
+              State("modal-reset", "is_open"),
               prevent_initial_call=True)
-def clear(n_clicks):
-    """ Callback triggered when user selects clear """
-    if n_clicks is not None:
-        if n_clicks > 0:
-            #rack.clear_driver(BASE_URL, ["http://rack001/nist-800-53"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
-            return "Reset not implemented yet"
-    return ""
+def reset(n_clicks_reset, n_clicks_close, is_open):
+    """ Callback triggered when user selects reset """
+    if n_clicks_reset is not None and n_clicks_reset > 0 and not is_open:
+            return True  # show modal
+    return False  # hide modal
 
 
 def page_main() -> html.Div:
@@ -143,10 +166,8 @@ def page_main() -> html.Div:
                 accept=".zip",
                 multiple=True
             ),
-            html.Button('Reset', id='button-clear', style=BUTTON_STYLE),
-            html.Div(id='div-load-arcos'),
+            html.Button('Reset', id='button-reset', style=BUTTON_STYLE),
             html.Div(id='div-upload'),
-            html.Div(id='div-clear'),
             ])
     except Exception as e:
         return display_error(e)

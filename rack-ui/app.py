@@ -74,19 +74,30 @@ modals = html.Div(
     [
         dbc.Modal(
             [
-                dbc.ModalBody("Reset is not implemented yet"),
-                dbc.ModalFooter(dbc.Button("Close", id="button-modal-reset-close", className="ms-auto", n_clicks=0)),
-            ],
-            id="modal-reset",
-            is_open=False,
-        ),
-        dbc.Modal(
-            [
-                dbc.ModalBody("Loaded ARCOS"),
+                dbc.ModalBody("MESSAGE", id="div-modal-arcos"),
                 dbc.ModalFooter(dbc.Button("Close", id="button-modal-arcos-close", className="ms-auto", n_clicks=0)),
             ],
             id="modal-arcos",
             is_open=False,
+            backdrop=False,
+        ),
+        dbc.Modal(
+            [
+                dbc.ModalBody("MESSAGE", id="div-modal-upload"),
+                dbc.ModalFooter(dbc.Button("Close", id="button-modal-upload-close", className="ms-auto", n_clicks=0)),
+            ],
+            id="modal-upload",
+            is_open=False,
+            backdrop=False,
+        ),
+        dbc.Modal(
+            [
+                dbc.ModalBody("MESSAGE", id="div-modal-reset"),
+                dbc.ModalFooter(dbc.Button("Close", id="button-modal-reset-close", className="ms-auto", n_clicks=0)),
+            ],
+            id="modal-reset",
+            is_open=False,
+            backdrop=False,
         ),
     ]
 )
@@ -111,47 +122,56 @@ def render_page_content(pathname: str) -> dbc.Container:
         ]
     )
 
-@app.callback(Output('modal-arcos', 'is_open'),
+@app.callback([Output('modal-arcos', 'is_open'), Output('div-modal-arcos', 'children')],
               Input('button-load-arcos', 'n_clicks'),
               Input('button-modal-arcos-close', 'n_clicks'),
-              State("modal-arcos", "is_open"),
+              State('modal-arcos', 'is_open'),
               prevent_initial_call=True)
-def load_arcos(n_clicks_arcos, n_clicks_close, is_open):
+def load_arcos(n_clicks_arcos, n_clicks_close, modal_is_open):
     """ Callback triggered when user selects Load ARCOS """
-    if n_clicks_arcos is not None and n_clicks_arcos > 0 and not is_open:
+    if not modal_is_open and n_clicks_arcos is not None and n_clicks_arcos > 0:
+        try:
             rack.ingest_manifest_driver(Path("/home/ubuntu/RACK/cli/manifest-arcos.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)  # TODO unhardcode
-            return True  # show modal
-    return False  # hide modal
+            return True, "Loaded ARCOS"  # show modal
+        except Exception as e:
+            return True, get_error_trace(e)
+    return False, ""  # either hide or don't show modal
 
-@app.callback(Output('div-upload', 'children'),
+@app.callback([Output('modal-upload', 'is_open'), Output('div-modal-upload', 'children')],
               Input('button-upload', 'contents'),
               Input('button-upload', 'filename'),
               Input('button-upload', 'last_modified'),
+              Input('button-modal-upload-close', 'n_clicks'),
+              State('modal-upload', 'is_open'),
               prevent_initial_call=True)
-def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates):
+def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates, n_clicks_close, modal_is_open):
     """ Callback triggered when user selects an ingestion package to load """
-    for content, name, date in zip(list_of_contents, list_of_names, list_of_dates):
-        tmp_dir = "/tmp/ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")
-        content_type, content_string = content.split(',')
-        content_decoded = base64.b64decode(content_string)
-        zip_str = io.BytesIO(content_decoded)
-        zip_obj = ZipFile(zip_str, 'r')
-        zip_obj.extractall(path=tmp_dir)
-        # TODO unhardcode
-        manifest = tmp_dir + "/Apache-IngestionPackage-wSW-RACKv10.2-20220531/manifest.yaml"
-        rack.ingest_manifest_driver(Path(manifest), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
-    return "Tried to load " + manifest
+    if not modal_is_open and list_of_contents is not None:
+        try:
+            for content, name, date in zip(list_of_contents, list_of_names, list_of_dates):
+                tmp_dir = "/tmp/ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")
+                content_type, content_string = content.split(',')
+                content_decoded = base64.b64decode(content_string)
+                zip_str = io.BytesIO(content_decoded)
+                zip_obj = ZipFile(zip_str, 'r')
+                zip_obj.extractall(path=tmp_dir)
+                manifest = tmp_dir + "/Apache-IngestionPackage-wSW-RACKv10.2-20220531/manifest.yaml"  # TODO unhardcode
+                rack.ingest_manifest_driver(Path(manifest), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
+                return True, "Loaded ingestion package using " + manifest
+        except Exception as e:
+            return True, get_error_trace(e)
+    return False, ""  # either hide or don't show modal
 
-@app.callback(Output('modal-reset', 'is_open'),
+@app.callback([Output('modal-reset', 'is_open'), Output('div-modal-reset', 'children')],
               Input('button-reset', 'n_clicks'),
               Input('button-modal-reset-close', 'n_clicks'),
-              State("modal-reset", "is_open"),
+              State('modal-reset', 'is_open'),
               prevent_initial_call=True)
-def reset(n_clicks_reset, n_clicks_close, is_open):
+def reset(n_clicks_reset, n_clicks_close, modal_is_open):
     """ Callback triggered when user selects reset """
-    if n_clicks_reset is not None and n_clicks_reset > 0 and not is_open:
-            return True  # show modal
-    return False  # hide modal
+    if n_clicks_reset is not None and n_clicks_reset > 0 and not modal_is_open:
+        return True, "Reset is not yet implemented"  # show modal
+    return False, ""  # either hide or don't show modal
 
 
 def page_main() -> html.Div:
@@ -181,9 +201,13 @@ def page2() -> html.Div:
         return display_error(e)
 
 def display_error(e) -> dcc.Markdown:
-    """ Get an error traceback message """
-    traceback = traceback.format_exception(None, e, e.__traceback__)
-    return dcc.Markdown("### RACK is not running properly.  Error: \n" + traceback[-1])
+    """ Get a displayable error message """
+    return dcc.Markdown("### RACK is not running properly.  Error: \n" + get_error_trace(e))
+
+def get_error_trace(e) -> str:
+    """ Get error trace string """
+    trace = traceback.format_exception(None, e, e.__traceback__)
+    return trace[-1]
 
 if __name__ == '__main__':
     app.run_server(host="0.0.0.0", debug=True)

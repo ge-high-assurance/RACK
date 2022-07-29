@@ -188,6 +188,14 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
                             'nodegroups': {'type': 'string'}
                         }
                     },
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        'required': ['manifest'],
+                        'properties': {
+                            'manifest': {'type': 'string'}
+                        }
+                    },
                 ]
             }
         }
@@ -399,6 +407,8 @@ def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Opt
             ingest_owl_driver(base_path / step['model'], base_url, triple_store, triple_store_type, clear)
         elif 'nodegroups' in step:
             store_nodegroups_driver(base_path / step['nodegroups'], base_url)
+        elif 'manifest' in step:
+            ingest_manifest_driver(base_path / step['manifest'], base_url, triple_store, triple_store_type)
 
 def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""

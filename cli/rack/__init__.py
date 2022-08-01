@@ -155,8 +155,18 @@ INGEST_OWL_CONFIG_SCHEMA: Dict[str, Any] = {
 MANIFEST_SCHEMA: Dict[str, Any] = {
     'type': 'object',
     'additionalProperties': False,
-    'required': ['steps'],
+    'required': [],
     'properties': {
+        'footprint': {
+            'type': 'object',
+                        'additionalProperties': False,
+                        'required': [],
+                        'properties': {
+                            'model': {'type': 'boolean'},
+                            'data-graphs': {'type': 'array', 'items': {'type': 'string'}},
+                            'nodegroups': {'type': 'array', 'items': {'type': 'string'}},
+                        }
+        },
         'steps': {
             'type': 'array',
             'items': {
@@ -194,6 +204,22 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
                         'required': ['manifest'],
                         'properties': {
                             'manifest': {'type': 'string'}
+                        }
+                    },
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        'required': ['clear'],
+                        'properties': {
+                            'clear': {
+                                'type': 'array',
+                                'items': {
+                                    'oneOf': [
+                                        {'const': 'model'},
+                                        {''}
+                                    ]
+                                }
+                            }
                         }
                     },
                 ]
@@ -390,25 +416,35 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
     go()
 
-def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str]) -> None:
+def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
         manifest = yaml.safe_load(manifest_file)
         validate(manifest, MANIFEST_SCHEMA)
     
     base_path = manifest_path.parent
 
-    for step in manifest['steps']:
-        if 'data' in step:
-            clear = step.get('clear', False)
-            data_graphs = step.get('data-graphs')
-            ingest_data_driver(base_path / step['data'], base_url, data_graphs, triple_store, triple_store_type, clear)
-        elif 'model' in step:
-            clear = step.get('clear', False)
-            ingest_owl_driver(base_path / step['model'], base_url, triple_store, triple_store_type, clear)
-        elif 'nodegroups' in step:
-            store_nodegroups_driver(base_path / step['nodegroups'], base_url)
-        elif 'manifest' in step:
-            ingest_manifest_driver(base_path / step['manifest'], base_url, triple_store, triple_store_type)
+    if clear and 'footprint' in manifest:
+        footprint = manifest['footprint']
+        if footprint.get('model', False):
+            clear_driver(base_url, None, triple_store, triple_store_type, Graph.MODEL)
+        if 'data-graphs' in footprint:
+            clear_driver(base_url, footprint['data-graphs'], triple_store, triple_store_type, Graph.DATA)
+        if 'nodegroups' in footprint:
+            delete_nodegroups_driver(footprint['nodegroups'], True, True, True, base_url)
+
+    if 'steps' in manifest:
+        for step in manifest['steps']:
+            if 'data' in step:
+                clear = step.get('clear', False)
+                data_graphs = step.get('data-graphs')
+                ingest_data_driver(base_path / step['data'], base_url, data_graphs, triple_store, triple_store_type, clear)
+            elif 'model' in step:
+                clear = step.get('clear', False)
+                ingest_owl_driver(base_path / step['model'], base_url, triple_store, triple_store_type, clear)
+            elif 'nodegroups' in step:
+                store_nodegroups_driver(base_path / step['nodegroups'], base_url)
+            elif 'manifest' in step:
+                ingest_manifest_driver(base_path / step['manifest'], base_url, triple_store, triple_store_type, clear)
 
 def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
@@ -659,7 +695,7 @@ def dispatch_data_count(args: SimpleNamespace) -> None:
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.manifest), args.base_url, args.triple_store, args.triple_store_type)
+    ingest_manifest_driver(Path(args.manifest), args.base_url, args.triple_store, args.triple_store_type, args.clear)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
@@ -742,6 +778,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     nodegroups_sparql_parser = nodegroups_subparsers.add_parser('sparql', help='Show SPARQL query for nodegroup')
 
     manifest_import_parser.add_argument('manifest', type=str, help='Manifest YAML file')
+    manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')

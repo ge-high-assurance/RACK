@@ -1,0 +1,71 @@
+{
+	"version": 3,
+	"sparqlConn": {
+		"name": "RACK local fuseki Apache Phase 2",
+		"domain": "",
+		"enableOwlImports": false,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/data"
+			},
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/mitre-cwe"
+			},
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/nist-800-53"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 19,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [],
+				"nodeList": [],
+				"fullURIName": "http://arcos.rack/PROV-S#THING",
+				"SparqlID": "?THING",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			}
+		],
+		"orderBy": [],
+		"groupBy": [],
+		"unionHash": {},
+		"columnOrder": []
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [],
+		"nodes": [
+			{
+				"sparqlID": "?THING",
+				"type": "http://arcos.rack/PROV-S#THING",
+				"mapping": [],
+				"props": []
+			}
+		]
+	},
+	"plotSpecs": []
+}

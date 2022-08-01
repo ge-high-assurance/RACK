@@ -181,10 +181,7 @@ def reset(n_clicks_reset, n_clicks_close, modal_is_open):
             rack.clear_driver(BASE_URL, ["http://rack001/do-330"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
             rack.clear_driver(BASE_URL, ["http://rack001/do-178c"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
             rack.clear_driver(BASE_URL, ["http://rack001/mitre-cwe"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
-            # TODO consolidate the 3 calls below if possible
-            rack.delete_nodegroups_driver(nodegroups=["query*"], ignore_nonexistent=True, yes=True, use_regexp=True, base_url=BASE_URL)
-            rack.delete_nodegroups_driver(nodegroups=["ingest*"], ignore_nonexistent=True, yes=True, use_regexp=True, base_url=BASE_URL)
-            rack.delete_nodegroups_driver(nodegroups=["setup*"], ignore_nonexistent=True, yes=True, use_regexp=True, base_url=BASE_URL)
+            rack.delete_all_nodegroups_driver(yes=True, base_url=BASE_URL)
 
             # load RACK
             rack.ingest_manifest_driver(Path("../cli/manifest-rack.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)

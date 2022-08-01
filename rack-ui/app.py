@@ -1,9 +1,6 @@
 import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, State, dcc, html, dash_table
-import semtk3
-import pandas as pd
-import sys
 import traceback
 import rack
 import io
@@ -11,8 +8,7 @@ import base64
 from zipfile import ZipFile
 from datetime import datetime
 from pathlib import Path
-from rack import Graph
-import os
+import glob
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
 
@@ -131,11 +127,11 @@ def load_arcos(n_clicks_arcos, n_clicks_close, modal_is_open):
     """ Callback triggered when user selects Load ARCOS """
     if not modal_is_open and n_clicks_arcos is not None and n_clicks_arcos > 0:
         try:
-            rack.ingest_manifest_driver(Path("/home/ubuntu/RACK/cli/manifest-arcos.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)  # TODO unhardcode
-            return True, "Loaded ARCOS"  # show modal
+            rack.ingest_manifest_driver(Path("../cli/manifest-arcos.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
+            return True, "Loaded ARCOS"  # show modal dialog
         except Exception as e:
-            return True, get_error_trace(e)
-    return False, ""  # either hide or don't show modal
+            return True, get_error_trace(e)  # show modal dialog with error
+    return False, ""  # hide (or don't show) modal dialog
 
 @app.callback([Output('modal-upload', 'is_open'), Output('div-modal-upload', 'children')],
               Input('button-upload', 'contents'),
@@ -151,16 +147,20 @@ def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates, n_c
             for content, name, date in zip(list_of_contents, list_of_names, list_of_dates):
                 tmp_dir = "/tmp/ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")
                 content_type, content_string = content.split(',')
-                content_decoded = base64.b64decode(content_string)
-                zip_str = io.BytesIO(content_decoded)
+                zip_str = io.BytesIO(base64.b64decode(content_string))
                 zip_obj = ZipFile(zip_str, 'r')
                 zip_obj.extractall(path=tmp_dir)
-                manifest = tmp_dir + "/Apache-IngestionPackage-wSW-RACKv10.2-20220531/manifest.yaml"  # TODO unhardcode
+                manifests = glob.glob(tmp_dir + '/**/*manifest*.yaml', recursive=True)
+                if len(manifests) == 0:
+                    raise Exception("Cannot load ingestion package: contains no manifest file")
+                if len(manifests) > 1:
+                    raise Exception("Cannot load ingestion package: contains multiple manifest files: " + str(manifests))
+                manifest = manifests[0]
                 rack.ingest_manifest_driver(Path(manifest), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
-                return True, "Loaded ingestion package using " + manifest
+                return True, "Loaded ingestion package using manifest file " + manifest[(len(tmp_dir) + 1):]
         except Exception as e:
-            return True, get_error_trace(e)
-    return False, ""  # either hide or don't show modal
+            return True, get_error_trace(e)  # show modal dialog with error
+    return False, ""  # hide (or don't show) modal dialog
 
 @app.callback([Output('modal-reset', 'is_open'), Output('div-modal-reset', 'children')],
               Input('button-reset', 'n_clicks'),
@@ -169,9 +169,13 @@ def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates, n_c
               prevent_initial_call=True)
 def reset(n_clicks_reset, n_clicks_close, modal_is_open):
     """ Callback triggered when user selects reset """
-    if n_clicks_reset is not None and n_clicks_reset > 0 and not modal_is_open:
-        return True, "Reset is not yet implemented"  # show modal
-    return False, ""  # either hide or don't show modal
+    if not modal_is_open and n_clicks_reset is not None and n_clicks_reset > 0:
+        try:
+            rack.ingest_manifest_driver(Path("../cli/manifest-rack.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
+            return True, "RACK has been reset"  # show modal dialog
+        except Exception as e:
+            return True, get_error_trace(e)  # show modal dialog with error
+    return False, ""  # hide (or don't show) modal dialog
 
 
 def page_main() -> html.Div:
@@ -187,7 +191,6 @@ def page_main() -> html.Div:
                 multiple=True
             ),
             html.Button('Reset', id='button-reset', style=BUTTON_STYLE),
-            html.Div(id='div-upload'),
             ])
     except Exception as e:
         return display_error(e)

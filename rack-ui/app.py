@@ -42,7 +42,8 @@ BUTTON_STYLE = {
     "display": "inline-block",
     "margin-bottom": "10px",
     "margin-right": "5px",
-    "height":"25px"}
+    "height":"25px"
+}
 
 sidebar = html.Div(
     [
@@ -164,7 +165,7 @@ def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates, n_c
     return False, ""  # hide (or don't show) modal dialog
 
 @app.callback([Output('modal-reset', 'is_open'), Output('div-modal-reset', 'children')],
-              Input('button-reset', 'n_clicks'),
+              Input('button-reset-provider', 'submit_n_clicks'),  # user clicked "OK" on confirmation dialog
               Input('button-modal-reset-close', 'n_clicks'),
               State('modal-reset', 'is_open'),
               prevent_initial_call=True)
@@ -199,7 +200,7 @@ def page_main() -> html.Div:
                 html.Tr(dcc.Markdown("Welcome to RACK.")),
                 html.Tr(html.Button('Load ARCOS', id='button-load-arcos', style=BUTTON_STYLE)),
                 html.Tr(dcc.Upload( html.Button('Load ingestion package', style=BUTTON_STYLE), id='button-upload', accept=".zip", multiple=True)),
-                html.Tr(html.Button('Reset', id='button-reset', style=BUTTON_STYLE)),
+                html.Tr(dcc.ConfirmDialogProvider(children=html.Button('Reset', style=BUTTON_STYLE), id='button-reset-provider', message='Are you sure you want to reset RACK?')),
             ])
         )
     except Exception as e:

@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 from dash import Input, Output, State, dcc, html, dash_table
 import traceback
 import rack
+from rack import Graph
 import io
 import base64
 from zipfile import ZipFile
@@ -54,14 +55,14 @@ sidebar = html.Div(
             ])
         ]),
 
-        dbc.Nav(
-            [
-                dbc.NavLink("Home", href="/", active="exact"),
-                dbc.NavLink("More", href="/page2", active="exact"),
-            ],
-            vertical=True,
-            pills=True,
-        ),
+        # dbc.Nav(
+        #     [
+        #         dbc.NavLink("Home", href="/", active="exact"),
+        #         dbc.NavLink("More", href="/page2", active="exact"),
+        #     ],
+        #     vertical=True,
+        #     pills=True,
+        # ),
     ],
     style=SIDEBAR_STYLE,
 )
@@ -108,8 +109,8 @@ def render_page_content(pathname: str) -> dbc.Container:
     """ Callback triggered when user selects a page """
     if pathname == "/":
         return page_main()
-    elif pathname == "/page2":
-        return page2()
+    # elif pathname == "/page2":
+    #     return page2()
     return dbc.Container(
         [
             html.H1("404: Not found", className="text-danger"),
@@ -171,6 +172,21 @@ def reset(n_clicks_reset, n_clicks_close, modal_is_open):
     """ Callback triggered when user selects reset """
     if not modal_is_open and n_clicks_reset is not None and n_clicks_reset > 0:
         try:
+
+            # clear all model/data/nodegroups
+            # TODO remove when manifest supports "clear-first"
+            rack.clear_driver(BASE_URL, ["http://rack001/model"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.MODEL)
+            rack.clear_driver(BASE_URL, ["http://rack001/data"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
+            rack.clear_driver(BASE_URL, ["http://rack001/arp-4754a"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
+            rack.clear_driver(BASE_URL, ["http://rack001/do-330"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
+            rack.clear_driver(BASE_URL, ["http://rack001/do-178c"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
+            rack.clear_driver(BASE_URL, ["http://rack001/mitre-cwe"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
+            # TODO consolidate the 3 calls below if possible
+            rack.delete_nodegroups_driver(nodegroups=["query*"], ignore_nonexistent=True, yes=True, use_regexp=True, base_url=BASE_URL)
+            rack.delete_nodegroups_driver(nodegroups=["ingest*"], ignore_nonexistent=True, yes=True, use_regexp=True, base_url=BASE_URL)
+            rack.delete_nodegroups_driver(nodegroups=["setup*"], ignore_nonexistent=True, yes=True, use_regexp=True, base_url=BASE_URL)
+
+            # load RACK
             rack.ingest_manifest_driver(Path("../cli/manifest-rack.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
             return True, "RACK has been reset"  # show modal dialog
         except Exception as e:
@@ -181,25 +197,14 @@ def reset(n_clicks_reset, n_clicks_close, modal_is_open):
 def page_main() -> html.Div:
     """ Components for main page """
     try:
-        return html.Div([
-            dcc.Markdown("Welcome to RACK."),
-            html.Button('Load ARCOS', id='button-load-arcos', style=BUTTON_STYLE),
-            dcc.Upload(
-                html.Button('Load ingestion package', style=BUTTON_STYLE),
-                id='button-upload',
-                accept=".zip",
-                multiple=True
-            ),
-            html.Button('Reset', id='button-reset', style=BUTTON_STYLE),
+        return html.Div(
+            html.Table([
+                html.Tr(dcc.Markdown("Welcome to RACK.")),
+                html.Tr(html.Button('Load ARCOS', id='button-load-arcos', style=BUTTON_STYLE)),
+                html.Tr(dcc.Upload( html.Button('Load ingestion package', style=BUTTON_STYLE), id='button-upload', accept=".zip", multiple=True)),
+                html.Tr(html.Button('Reset', id='button-reset', style=BUTTON_STYLE)),
             ])
-    except Exception as e:
-        return display_error(e)
-
-def page2() -> html.Div:
-    """ Components for another page (empty for now) """
-    try:
-        return html.Div([
-            ])
+        )
     except Exception as e:
         return display_error(e)
 

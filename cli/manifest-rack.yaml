@@ -1,7 +1,6 @@
 steps:
 
-# TODO add when implemented
-#  - manifest: manifest-clear.yaml
+# TODO need to clear first
 
 # RACK core ontology
   - model: ../RACK-Ontology/OwlModels/import.yaml

@@ -103,7 +103,7 @@ IDDCoverageAnalysisResult is a type of TEST_RESULT.
 Test_Station is a type of AGENT.
 
 SBVT_Test_Execution is a type of TEST_EXECUTION.
-       testProcedure of SBVT_Test_Execution only has values of type SBVT_Test. 
+       testProcedure of SBVT_Test_Execution only has values of type SBVT_Test_Procedure. 
        systemUnderTest describes SBVT_Test_Execution with values of type SYSTEM.
        systemUnderTestBuildVersion describes SBVT_Test_Execution with values of type BuildVersion. //added
        databaseVersion describes SBVT_Test_Execution with values of type Database.

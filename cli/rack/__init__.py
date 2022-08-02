@@ -206,22 +206,6 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
                             'manifest': {'type': 'string'}
                         }
                     },
-                    {
-                        'type': 'object',
-                        'additionalProperties': False,
-                        'required': ['clear'],
-                        'properties': {
-                            'clear': {
-                                'type': 'array',
-                                'items': {
-                                    'oneOf': [
-                                        {'const': 'model'},
-                                        {''}
-                                    ]
-                                }
-                            }
-                        }
-                    },
                 ]
             }
         }

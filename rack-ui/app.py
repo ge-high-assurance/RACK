@@ -129,7 +129,7 @@ def load_arcos(n_clicks_arcos, n_clicks_close, modal_is_open):
     """ Callback triggered when user selects Load ARCOS """
     if not modal_is_open and n_clicks_arcos is not None and n_clicks_arcos > 0:
         try:
-            rack.ingest_manifest_driver(Path("../cli/manifest-arcos.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
+            rack.ingest_manifest_driver(Path("../cli/manifest-arcos.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)
             return True, "Loaded ARCOS"  # show modal dialog
         except Exception as e:
             return True, get_error_trace(e)  # show modal dialog with error
@@ -158,7 +158,7 @@ def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates, n_c
                 if len(manifests) > 1:
                     raise Exception("Cannot load ingestion package: contains multiple manifest files: " + str(manifests))
                 manifest = manifests[0]
-                rack.ingest_manifest_driver(Path(manifest), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
+                rack.ingest_manifest_driver(Path(manifest), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)
                 return True, "Loaded ingestion package using manifest file " + manifest[(len(tmp_dir) + 1):]
         except Exception as e:
             return True, get_error_trace(e)  # show modal dialog with error
@@ -173,7 +173,6 @@ def reset(n_clicks_reset, n_clicks_close, modal_is_open):
     """ Callback triggered when user selects reset """
     if not modal_is_open and n_clicks_reset is not None and n_clicks_reset > 0:
         try:
-
             # clear all model/data/nodegroups
             # TODO remove when manifest supports "clear-first"
             rack.clear_driver(BASE_URL, ["http://rack001/model"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.MODEL)
@@ -185,7 +184,7 @@ def reset(n_clicks_reset, n_clicks_close, modal_is_open):
             rack.delete_all_nodegroups_driver(yes=True, base_url=BASE_URL)
 
             # load RACK
-            rack.ingest_manifest_driver(Path("../cli/manifest-rack.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE)
+            rack.ingest_manifest_driver(Path("../cli/manifest-rack.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)
             return True, "RACK has been reset"  # show modal dialog
         except Exception as e:
             return True, get_error_trace(e)  # show modal dialog with error

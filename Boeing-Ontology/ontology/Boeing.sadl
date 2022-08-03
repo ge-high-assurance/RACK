@@ -79,13 +79,15 @@ IDD_Doc is a type of DOCUMENT.
 // subclass from core ontology related to SBVT and IDD
 SBVT_Test_Procedure is a type of TEST_PROCEDURE. 
     content of SBVT_Test only has values of type SBVT_Test_Step.
+    verifies of SBVT_Test_Procedure only has values of type REQUIREMENT.
+
 SBVT_Test_Step is a type of TEST_STEP.
     stimulates of SBVT_Test_Step has values of type Signal.  //<--how come "only has values" doesn't work here?
-	observes of SBVT_Test_Step has values of type Signal.    //<--how come "only has values" doesn't work here?
     nextStep of SBVT_Test_Step only has values of type SBVT_Test_Step.
 
 IDD_Test is a type of TEST. // note "verifies" corresponds to "observes"
 //    verifies of IDD_Test only has values of type Signal.
+	observes of IDD_Test has values of type Signal.    //<--how come "only has values" doesn't work here?
 
 //SBVT_Test_Step can contain HMI test etc.
 SBVT_Test_Log is a type of TEST_LOG.

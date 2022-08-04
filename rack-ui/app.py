@@ -188,7 +188,7 @@ def page_main() -> html.Div:
                 html.Tr(dcc.Upload( html.Button('Load ingestion package', style=BUTTON_STYLE), id='button-upload', accept=".zip", multiple=True)),
                 # html.Tr(dcc.ConfirmDialogProvider(children=html.Button('Reset', style=BUTTON_STYLE), id='button-reset-provider', message='Are you sure you want to reset RACK?')),
             ]),
-            html.Div(id="div-status"),
+            html.Div(id="div-status", style={"margin-top": "100px", "white-space": "pre-wrap", "border-style": "none", "height": 500, "width": 1200, "overflow-y": "auto", "display": "flex", "flex-direction": "column-reverse"}),
             dcc.Interval(id='interval-component', interval=1*1000, n_intervals=0)
             ]
         )

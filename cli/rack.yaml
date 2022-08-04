@@ -1,0 +1,7 @@
+footprint:
+  model: yes
+
+steps:
+  - model:      ../RACK-Ontology/OwlModels/import.yaml
+  - nodegroups: ../nodegroups/ingestion/arcos.rack
+  - nodegroups: ../nodegroups/queries

@@ -74,15 +74,6 @@ modals = html.Div(
     [
         dbc.Modal(
             [
-                dbc.ModalBody("MESSAGE", id="div-modal-arcos"),
-                dbc.ModalFooter(dbc.Button("Close", id="button-modal-arcos-close", className="ms-auto", n_clicks=0)),
-            ],
-            id="modal-arcos",
-            is_open=False,
-            backdrop=False,
-        ),
-        dbc.Modal(
-            [
                 dbc.ModalBody("MESSAGE", id="div-modal-upload"),
                 dbc.ModalFooter(dbc.Button("Close", id="button-modal-upload-close", className="ms-auto", n_clicks=0)),
             ],
@@ -96,7 +87,6 @@ modals = html.Div(
                 dbc.ModalFooter(dbc.Button("Close", id="button-modal-reset-close", className="ms-auto", n_clicks=0)),
             ],
             id="modal-reset",
-            size="lg",
             is_open=False,
             backdrop=False,
         ),
@@ -130,21 +120,6 @@ def render_page_content(pathname: str) -> dbc.Container:
         ]
     )
 
-@app.callback([Output('modal-arcos', 'is_open'), Output('div-modal-arcos', 'children')],
-              Input('button-load-arcos', 'n_clicks'),
-              Input('button-modal-arcos-close', 'n_clicks'),
-              State('modal-arcos', 'is_open'),
-              prevent_initial_call=True)
-def load_arcos(n_clicks_arcos, n_clicks_close, modal_is_open):
-    """ Callback triggered when user selects Load ARCOS """
-    if not modal_is_open and n_clicks_arcos is not None and n_clicks_arcos > 0:
-        try:
-            rack.ingest_manifest_driver(Path("../cli/manifest-arcos.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)
-            return True, "Loaded ARCOS"  # show modal dialog
-        except Exception as e:
-            return True, get_error_trace(e)  # show modal dialog with error
-    return False, ""  # hide (or don't show) modal dialog
-
 @app.callback([Output('modal-upload', 'is_open'), Output('div-modal-upload', 'children')],
               Input('button-upload', 'contents'),
               Input('button-upload', 'filename'),
@@ -156,22 +131,26 @@ def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates, n_c
     """ Callback triggered when user selects an ingestion package to load """
     if not modal_is_open and list_of_contents is not None:
         try:
-            for content, name, date in zip(list_of_contents, list_of_names, list_of_dates):
-                tmp_dir = "/tmp/ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")
-                content_type, content_string = content.split(',')
-                zip_str = io.BytesIO(base64.b64decode(content_string))
-                zip_obj = ZipFile(zip_str, 'r')
-                zip_obj.extractall(path=tmp_dir)
-                manifests = glob.glob(tmp_dir + '/**/*manifest*.yaml', recursive=True)
-                if len(manifests) == 0:
-                    raise Exception("Cannot load ingestion package: contains no manifest file")
-                if len(manifests) > 1:
-                    raise Exception("Cannot load ingestion package: contains multiple manifest files: " + str(manifests))
-                manifest = manifests[0]
-                rack.ingest_manifest_driver(Path(manifest), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)
-                return True, "Loaded ingestion package using manifest file " + manifest[(len(tmp_dir) + 1):]
+            with redirect_stdout(f):
+                for content, name, date in zip(list_of_contents, list_of_names, list_of_dates):
+                    tmp_dir = "/tmp/ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")
+                    content_type, content_string = content.split(',')
+                    zip_str = io.BytesIO(base64.b64decode(content_string))
+                    zip_obj = ZipFile(zip_str, 'r')
+                    zip_obj.extractall(path=tmp_dir)
+                    manifests = glob.glob(tmp_dir + '/**/*manifest*.yaml', recursive=True)
+                    if len(manifests) == 0:
+                        raise Exception("Cannot load ingestion package: contains no manifest file")
+                    if len(manifests) > 1:
+                        raise Exception("Cannot load ingestion package: contains multiple manifest files: " + str(manifests))
+                    manifest = manifests[0]
+                    rack.ingest_manifest_driver(Path(manifest), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)
+            return True, "Loaded ingestion package using manifest file " + manifest[(len(tmp_dir) + 1):]
         except Exception as e:
             return True, get_error_trace(e)  # show modal dialog with error
+    elif modal_is_open and n_clicks_close is not None and n_clicks_close > 0:  # user clicked close on modal dialog
+        f.truncate(0)  # clear status
+        f.seek(0)  # clear status
     return False, ""  # hide (or don't show) modal dialog
 
 @app.callback([Output('modal-reset', 'is_open'), Output('div-modal-reset', 'children')],
@@ -196,7 +175,7 @@ def reset(n_clicks_reset, n_clicks_close, modal_is_open):
                 rack.delete_all_nodegroups_driver(yes=True, base_url=BASE_URL)
 
                 # load RACK
-                rack.ingest_manifest_driver(Path("../cli/manifest-rack.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)
+                rack.ingest_manifest_driver(Path("../cli/rack.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)
 
             return True, "RACK has been reset"  # show modal dialog
         except Exception as e:
@@ -213,7 +192,6 @@ def page_main() -> html.Div:
         return html.Div([
             html.Table([
                 html.Tr(dcc.Markdown("Welcome to RACK.")),
-                html.Tr(html.Button('Load ARCOS', id='button-load-arcos', style=BUTTON_STYLE)),
                 html.Tr(dcc.Upload( html.Button('Load ingestion package', style=BUTTON_STYLE), id='button-upload', accept=".zip", multiple=True)),
                 html.Tr(dcc.ConfirmDialogProvider(children=html.Button('Reset', style=BUTTON_STYLE), id='button-reset-provider', message='Are you sure you want to reset RACK?')),
             ]),

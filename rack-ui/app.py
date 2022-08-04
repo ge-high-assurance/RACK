@@ -163,20 +163,8 @@ def reset(n_clicks_reset, n_clicks_close, modal_is_open):
     if not modal_is_open and n_clicks_reset is not None and n_clicks_reset > 0:
         try:
             with redirect_stdout(f):
-
-                # clear all model/data/nodegroups
-                # TODO remove when manifest supports "clear-first"
-                rack.clear_driver(BASE_URL, ["http://rack001/model"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.MODEL)
-                rack.clear_driver(BASE_URL, ["http://rack001/data"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
-                rack.clear_driver(BASE_URL, ["http://rack001/arp-4754a"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
-                rack.clear_driver(BASE_URL, ["http://rack001/do-330"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
-                rack.clear_driver(BASE_URL, ["http://rack001/do-178c"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
-                rack.clear_driver(BASE_URL, ["http://rack001/mitre-cwe"], TRIPLE_STORE, TRIPLE_STORE_TYPE, Graph.DATA)
-                rack.delete_all_nodegroups_driver(yes=True, base_url=BASE_URL)
-
                 # load RACK
                 rack.ingest_manifest_driver(Path("../cli/rack.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)
-
             return True, "RACK has been reset"  # show modal dialog
         except Exception as e:
             return True, get_error_trace(e)  # show modal dialog with error

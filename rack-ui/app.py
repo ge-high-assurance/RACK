@@ -1,19 +1,20 @@
 import dash
 import dash_bootstrap_components as dbc
-from dash import Input, Output, State, dcc, html, dash_table
+import glob
 import traceback
-import rack
-from rack import Graph
 import io
 import base64
+from dash import Input, Output, State, dcc, html, dash_table
 from zipfile import ZipFile
 from datetime import datetime
 from pathlib import Path
-import glob
 from contextlib import redirect_stdout
 
+import rack
+from rack import Graph
+
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
-f = io.StringIO()
+in_mem_file = io.StringIO()
 
 BASE_URL = "http://localhost"
 TRIPLE_STORE = "http://localhost:3030/RACK"
@@ -101,13 +102,6 @@ content = html.Div(id="page-content", style=CONTENT_STYLE)
 
 app.layout = html.Div([dcc.Location(id="url"), sidebar, content, modals])
 
-@app.callback(Output("div-status", "children"),
-              Input("interval-component", "n_intervals"))
-def update_status(n):
-    """ Callback triggered at regular interval to update status """
-    return f.getvalue()
-
-
 @app.callback(Output("page-content", "children"), 
               Input("url", "pathname"))
 def render_page_content(pathname: str) -> dbc.Container:
@@ -124,6 +118,12 @@ def render_page_content(pathname: str) -> dbc.Container:
         ]
     )
 
+@app.callback(Output("div-status", "children"),
+              Input("interval-component", "n_intervals"))
+def update_status(n):
+    """ Callback triggered at regular interval to update loading status """
+    return in_mem_file.getvalue()
+
 @app.callback([Output('modal-upload', 'is_open'), Output('div-modal-upload', 'children')],
               Input('button-upload', 'contents'),
               Input('button-upload', 'filename'),
@@ -135,7 +135,7 @@ def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates, n_c
     """ Callback triggered when user selects an ingestion package to load """
     if not modal_is_open and list_of_contents is not None:
         try:
-            with redirect_stdout(f):
+            with redirect_stdout(in_mem_file):
                 for content, name, date in zip(list_of_contents, list_of_names, list_of_dates):
                     tmp_dir = "/tmp/ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")
                     content_type, content_string = content.split(',')
@@ -154,8 +154,8 @@ def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates, n_c
         except Exception as e:
             return True, get_error_trace(e)  # show modal dialog with error
     elif modal_is_open and n_clicks_close is not None and n_clicks_close > 0:  # user clicked close on modal dialog
-        f.truncate(0)  # clear status
-        f.seek(0)  # clear status
+        in_mem_file.truncate(0)  # clear status
+        in_mem_file.seek(0)  # clear status
     return False, ""  # hide (or don't show) modal dialog
 
 # @app.callback([Output('modal-reset', 'is_open'), Output('div-modal-reset', 'children')],
@@ -167,17 +167,16 @@ def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates, n_c
 #     """ Callback triggered when user selects reset """
 #     if not modal_is_open and n_clicks_reset is not None and n_clicks_reset > 0:
 #         try:
-#             with redirect_stdout(f):
+#             with redirect_stdout(in_mem_file):
 #                 # load RACK
 #                 rack.ingest_manifest_driver(Path("../cli/rack.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)
 #             return True, "RACK has been reset"  # show modal dialog
 #         except Exception as e:
 #             return True, get_error_trace(e)  # show modal dialog with error
 #     elif modal_is_open and n_clicks_close is not None and n_clicks_close > 0:  # user clicked close on modal dialog
-#         f.truncate(0)  # clear status
-#         f.seek(0)  # clear status
+#         in_mem_file.truncate(0)  # clear status
+#         in_mem_file.seek(0)  # clear status
 #     return False, ""  # hide (or don't show) modal dialog
-
 
 def page_main() -> html.Div:
     """ Components for main page """

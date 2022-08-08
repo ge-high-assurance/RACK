@@ -14,7 +14,7 @@ import rack
 from rack import Graph
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
-in_mem_file = io.StringIO()
+in_mem_file = io.StringIO()   # stores loading status
 
 BASE_URL = "http://localhost"
 TRIPLE_STORE = "http://localhost:3030/RACK"
@@ -52,6 +52,7 @@ BUTTON_STYLE = {
     "border": "none",
 }
 
+# menu
 sidebar = html.Div(
     [
         html.Table([
@@ -75,6 +76,7 @@ sidebar = html.Div(
     style=SIDEBAR_STYLE,
 )
 
+# modal dialogs
 modals = html.Div(
     [
         dbc.Modal(
@@ -105,7 +107,7 @@ app.layout = html.Div([dcc.Location(id="url"), sidebar, content, modals])
 @app.callback(Output("page-content", "children"), 
               Input("url", "pathname"))
 def render_page_content(pathname: str) -> dbc.Container:
-    """ Callback triggered when user selects a page """
+    """ Callback triggered when user selects a page from the sidebar menu """
     if pathname == "/":
         return page_main()
     # elif pathname == "/page2":
@@ -133,24 +135,24 @@ def update_status(n):
               prevent_initial_call=True)
 def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates, n_clicks_close, modal_is_open):
     """ Callback triggered when user selects an ingestion package to load """
-    if not modal_is_open and list_of_contents is not None:
+    if not modal_is_open and list_of_contents is not None:  # user clicked the load button
         try:
-            with redirect_stdout(in_mem_file):
+            with redirect_stdout(in_mem_file):  # capture the load status for display
                 for content, name, date in zip(list_of_contents, list_of_names, list_of_dates):
-                    tmp_dir = "/tmp/ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")
+                    tmp_dir = "/tmp/ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")  # temp directory to store the unzipped package
                     content_type, content_string = content.split(',')
                     zip_str = io.BytesIO(base64.b64decode(content_string))
                     zip_obj = ZipFile(zip_str, 'r')
-                    zip_obj.extractall(path=tmp_dir)
-                    default_manifest_file_name = "manifest.yaml"
+                    zip_obj.extractall(path=tmp_dir)  # unzip the package
+                    default_manifest_file_name = "manifest.yaml"  # look for this manifest file
                     manifests = glob.glob(tmp_dir + '/**/' + default_manifest_file_name, recursive=True)
                     if len(manifests) == 0:
                         raise Exception("Cannot load ingestion package: does not contain a default manifest file (" + default_manifest_file_name + ")")
                     if len(manifests) > 1:
                         raise Exception("Cannot load ingestion package: contains multiple default manifest files: " + str(manifests))
                     manifest = manifests[0]
-                    rack.ingest_manifest_driver(Path(manifest), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)
-            return True, "Loaded ingestion package using manifest file " + manifest[(len(tmp_dir) + 1):]
+                    rack.ingest_manifest_driver(Path(manifest), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)  # process the manifest
+            return True, "Loaded ingestion package using manifest file " + manifest[(len(tmp_dir) + 1):]  # show modal dialog with success message
         except Exception as e:
             return True, get_error_trace(e)  # show modal dialog with error
     elif modal_is_open and n_clicks_close is not None and n_clicks_close > 0:  # user clicked close on modal dialog

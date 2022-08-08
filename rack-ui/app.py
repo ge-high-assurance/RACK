@@ -63,15 +63,6 @@ sidebar = html.Div(
                 ])
             ])
         ]),
-
-        # dbc.Nav(
-        #     [
-        #         dbc.NavLink("Home", href="/", active="exact"),
-        #         dbc.NavLink("More", href="/page2", active="exact"),
-        #     ],
-        #     vertical=True,
-        #     pills=True,
-        # ),
     ],
     style=SIDEBAR_STYLE,
 )
@@ -88,15 +79,6 @@ modals = html.Div(
             is_open=False,
             backdrop=False,
         ),
-        # dbc.Modal(
-        #     [
-        #         dbc.ModalBody("MESSAGE", id="div-modal-reset"),
-        #         dbc.ModalFooter(dbc.Button("Close", id="button-modal-reset-close", className="ms-auto", n_clicks=0)),
-        #     ],
-        #     id="modal-reset",
-        #     is_open=False,
-        #     backdrop=False,
-        # ),
     ]
 )
 
@@ -110,8 +92,6 @@ def render_page_content(pathname: str) -> dbc.Container:
     """ Callback triggered when user selects a page from the sidebar menu """
     if pathname == "/":
         return page_main()
-    # elif pathname == "/page2":
-    #     return page2()
     return dbc.Container(
         [
             html.H1("404: Not found", className="text-danger"),
@@ -160,26 +140,6 @@ def upload_ingestion_package(list_of_contents, list_of_names, list_of_dates, n_c
         in_mem_file.seek(0)  # clear status
     return False, ""  # hide (or don't show) modal dialog
 
-# @app.callback([Output('modal-reset', 'is_open'), Output('div-modal-reset', 'children')],
-#               Input('button-reset-provider', 'submit_n_clicks'),  # user clicked "OK" on confirmation dialog
-#               Input('button-modal-reset-close', 'n_clicks'),
-#               State('modal-reset', 'is_open'),
-#               prevent_initial_call=True)
-# def reset(n_clicks_reset, n_clicks_close, modal_is_open):
-#     """ Callback triggered when user selects reset """
-#     if not modal_is_open and n_clicks_reset is not None and n_clicks_reset > 0:
-#         try:
-#             with redirect_stdout(in_mem_file):
-#                 # load RACK
-#                 rack.ingest_manifest_driver(Path("../cli/rack.yaml"), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)
-#             return True, "RACK has been reset"  # show modal dialog
-#         except Exception as e:
-#             return True, get_error_trace(e)  # show modal dialog with error
-#     elif modal_is_open and n_clicks_close is not None and n_clicks_close > 0:  # user clicked close on modal dialog
-#         in_mem_file.truncate(0)  # clear status
-#         in_mem_file.seek(0)  # clear status
-#     return False, ""  # hide (or don't show) modal dialog
-
 def page_main() -> html.Div:
     """ Components for main page """
     try:
@@ -187,7 +147,6 @@ def page_main() -> html.Div:
             html.Table([
                 html.Tr(dcc.Markdown("Welcome to RACK.")),
                 html.Tr(dcc.Upload( html.Button('Load ingestion package', style=BUTTON_STYLE), id='button-upload', accept=".zip", multiple=True)),
-                # html.Tr(dcc.ConfirmDialogProvider(children=html.Button('Reset', style=BUTTON_STYLE), id='button-reset-provider', message='Are you sure you want to reset RACK?')),
             ]),
             html.Div(id="div-status", style={"margin-top": "100px", "white-space": "pre-wrap", "border-style": "none", "height": 500, "width": 1200, "overflow-y": "auto", "display": "flex", "flex-direction": "column-reverse"}),
             dcc.Interval(id='interval-component', interval=1*1000, n_intervals=0)

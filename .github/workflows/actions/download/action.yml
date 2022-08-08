@@ -67,7 +67,6 @@ runs:
     - name: Package RACK UI
       shell: bash
       run: |
-        cd RACK/rack-ui
         cd ${{ github.workspace }}
         tar cfz RACK/rack-box/files/rack-ui.tar.gz RACK/rack-ui
 

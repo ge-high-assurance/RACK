@@ -39,6 +39,9 @@ import semtk3
 from semtk3.semtktable import SemtkTable
 import yaml
 
+from rack.manifest import Manifest, StepType
+from rack.url import Url
+
 __author__ = "Eric Mertens"
 __email__ = "emertens@galois.com"
 
@@ -46,7 +49,6 @@ __email__ = "emertens@galois.com"
 logger = logging.getLogger(__name__)
 
 Connection = NewType('Connection', str)
-Url = NewType('Url', str)
 
 class Graph(Enum):
     """Enumeration of SemTK graph types"""
@@ -152,66 +154,6 @@ INGEST_OWL_CONFIG_SCHEMA: Dict[str, Any] = {
     }
 }
 
-MANIFEST_SCHEMA: Dict[str, Any] = {
-    'type': 'object',
-    'additionalProperties': False,
-    'required': [],
-    'properties': {
-        'footprint': {
-            'type': 'object',
-                        'additionalProperties': False,
-                        'required': [],
-                        'properties': {
-                            'model': {'type': 'boolean'},
-                            'data-graphs': {'type': 'array', 'items': {'type': 'string'}},
-                            'nodegroups': {'type': 'array', 'items': {'type': 'string'}},
-                        }
-        },
-        'steps': {
-            'type': 'array',
-            'items': {
-                'oneOf': [
-                    {
-                        'type': 'object',
-                        'additionalProperties': False,
-                        'required': ['data'],
-                        'properties': {
-                            'data': {'type': 'string'},
-                            'clear': {'type': 'boolean'},
-                            'data-graph': {'type': 'array', 'items': {'type': 'string'}}
-                        }
-                    },
-                    {
-                        'type': 'object',
-                        'additionalProperties': False,
-                        'required': ['model'],
-                        'properties': {
-                            'model': {'type': 'string'},
-                            'clear': {'type': 'boolean'}
-                        }
-                    },
-                    {
-                        'type': 'object',
-                        'additionalProperties': False,
-                        'required': ['nodegroups'],
-                        'properties': {
-                            'nodegroups': {'type': 'string'}
-                        }
-                    },
-                    {
-                        'type': 'object',
-                        'additionalProperties': False,
-                        'required': ['manifest'],
-                        'properties': {
-                            'manifest': {'type': 'string'}
-                        }
-                    },
-                ]
-            }
-        }
-    }
-}
-
 def str_good(s: str) -> str:
     return Fore.GREEN + s + Style.RESET_ALL
 
@@ -284,9 +226,7 @@ def sparql_connection(base_url: Url, data_graph: Optional[Url], extra_data_graph
 
 def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
     """Clear all the existing data in the data or model graph"""
-    print('Clearing graph')
-    result = semtk3.clear_graph(conn, which_graph.value, 0)
-    print(result.lstrip())
+    semtk3.clear_graph(conn, which_graph.value, 0)
 
 def format_semtk_table(semtk_table: SemtkTable, export_format: ExportFormat = ExportFormat.TEXT, headers: bool = True) -> str:
 
@@ -327,7 +267,7 @@ def generate_constraints(constraint_texts: List[str]) -> List[Any]:
         if match is None:
             print(str_bad('Unsupported constraint: ' + constraint_text))
             sys.exit(1)
-        
+
         if match['op'] is not None:
             c = semtk3.build_constraint(match['var'], operators[match['op']], [match['val']])
         else:
@@ -402,33 +342,28 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
 
 def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
-        manifest = yaml.safe_load(manifest_file)
-        validate(manifest, MANIFEST_SCHEMA)
-    
+        manifest = Manifest.fromYAML(manifest_file)
+
     base_path = manifest_path.parent
 
-    if clear and 'footprint' in manifest:
-        footprint = manifest['footprint']
-        if footprint.get('model', False):
+    if clear:
+        if manifest.modelFootprint:
             clear_driver(base_url, None, triple_store, triple_store_type, Graph.MODEL)
-        if 'data-graphs' in footprint:
-            clear_driver(base_url, footprint['data-graphs'], triple_store, triple_store_type, Graph.DATA)
-        if 'nodegroups' in footprint:
-            delete_nodegroups_driver(footprint['nodegroups'], True, True, True, base_url)
+        if not manifest.datagraphsFootprint == []:
+            clear_driver(base_url, manifest.datagraphsFootprint, triple_store, triple_store_type, Graph.DATA)
+        if not manifest.nodegroupsFootprint == []:
+            delete_nodegroups_driver(manifest.nodegroupsFootprint, True, True, True, base_url)
 
-    if 'steps' in manifest:
-        for step in manifest['steps']:
-            if 'data' in step:
-                clear = step.get('clear', False)
-                data_graphs = step.get('data-graphs')
-                ingest_data_driver(base_path / step['data'], base_url, data_graphs, triple_store, triple_store_type, clear)
-            elif 'model' in step:
-                clear = step.get('clear', False)
-                ingest_owl_driver(base_path / step['model'], base_url, triple_store, triple_store_type, clear)
-            elif 'nodegroups' in step:
-                store_nodegroups_driver(base_path / step['nodegroups'], base_url)
-            elif 'manifest' in step:
-                ingest_manifest_driver(base_path / step['manifest'], base_url, triple_store, triple_store_type, clear)
+    for (step_type, step_file) in manifest.steps:
+        stepFile = base_path / step_file
+        if StepType.DATA == step_type:
+            ingest_data_driver(stepFile, base_url, None, triple_store, triple_store_type, False)
+        elif StepType.MODEL == step_type:
+            ingest_owl_driver(stepFile, base_url, triple_store, triple_store_type, False)
+        elif StepType.NODEGROUPS == step_type:
+            store_nodegroups_driver(stepFile, base_url)
+        elif StepType.MANIFEST == step_type:
+            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False)
 
 def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
@@ -437,7 +372,7 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
         validate(config, INGEST_CSV_CONFIG_SCHEMA)
 
     steps = config['ingestion-steps']
-    
+
     if data_graphs is not None:
         data_graph = data_graphs[0]
     elif 'data-graph' in config:
@@ -492,12 +427,12 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
                 print(str_bad(' FAIL'))
                 raise e
             print(str_good(' OK'))
-        
+
         elif 'count' in step:
             expected = step['count']
             name = step['nodegroup']
             runtime_constraints = generate_constraints(step.get('constraints', []))
-            
+
             print(f'Counting nodegroup {str_highlight(name): <40}', end="")
 
             semtk_table = semtk3.count_by_id(name, runtime_constraints=runtime_constraints)
@@ -528,11 +463,14 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
 @with_status('Clearing')
 def clear_driver(base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], graph: Graph) -> None:
     """Clear the given data graphs"""
+
     if data_graphs is None:
+        print('model ', end='')
         conn = sparql_connection(base_url, DEFAULT_DATA_GRAPH, [], triple_store, triple_store_type)
         clear_graph(conn, which_graph=graph)
     else:
         for data_graph in data_graphs:
+            print(f"{data_graph} ", end='')
             conn = sparql_connection(base_url, data_graph, [], triple_store, triple_store_type)
             clear_graph(conn, which_graph=graph)
 

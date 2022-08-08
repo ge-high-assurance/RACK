@@ -57,6 +57,8 @@ tar xfzC rack-assist.tar.gz "/home/${USER}"
 rm rack-assist.tar.gz
 tar xfzC rack-cli.tar.gz "/home/${USER}"
 rm rack-cli.tar.gz
+tar xfzC rack-ui.tar.gz "/home/${USER}"
+rm rack-ui.tar.gz
 tar xfzC semtk.tar.gz "/home/${USER}"
 rm semtk.tar.gz
 mv ENV_OVERRIDE "/home/${USER}/semtk-opensource"
@@ -69,6 +71,16 @@ chown fuseki.fuseki /etc/fuseki
 cp /opt/fuseki/fuseki.service /etc/systemd/system/fuseki.service
 systemctl enable fuseki
 systemctl start fuseki
+
+# Set up and start RACK UI service
+
+cd /home/"${USER}"/RACK/rack-ui
+python3 -m pip install -r ./requirements.txt
+adduser --system --group --no-create-home --disabled-password rackui
+mkdir /etc/rackui
+chown rackui.rackui /etc/rackui
+envsubst < rackui.service > /etc/systemd/system/rackui.service
+systemctl enable rackui
 
 # Initialize SemTK environment variables
 

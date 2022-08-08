@@ -64,6 +64,12 @@ runs:
         cd ${{ github.workspace }}
         tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{*.sh,wheels}
 
+    - name: Package RACK UI
+      shell: bash
+      run: |
+        cd ${{ github.workspace }}
+        tar cfz RACK/rack-box/files/rack-ui.tar.gz RACK/rack-ui
+
     - name: Package RACK documentation
       shell: bash
       run: |

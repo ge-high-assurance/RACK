@@ -40,15 +40,13 @@ from semtk3.semtktable import SemtkTable
 import yaml
 
 from rack.manifest import Manifest, StepType
-from rack.url import Url
+from rack.types import Connection, Url
 
 __author__ = "Eric Mertens"
 __email__ = "emertens@galois.com"
 
 # NOTE: Do **not** use the root logger via `logging.command(...)`, instead use `logger.command(...)`
 logger = logging.getLogger(__name__)
-
-Connection = NewType('Connection', str)
 
 class Graph(Enum):
     """Enumeration of SemTK graph types"""
@@ -211,18 +209,10 @@ def sparql_connection(base_url: Url, data_graph: Optional[Url], extra_data_graph
 
     semtk3.set_host(base_url)
     # Default to RACK in a Box triple-store location
+    data_graph = data_graph or DEFAULT_DATA_GRAPH
     triple_store = triple_store or Url("http://localhost:3030/RACK")
     triple_store_type = triple_store_type or "fuseki"
-    conn: Dict[str, Any] = {
-        "name": "%NODEGROUP%",
-        "model": [{"type": triple_store_type, "url": triple_store, "graph": MODEL_GRAPH}],
-        "data": []
-        }
-    if data_graph is not None:
-        conn["data"].append({"type": triple_store_type, "url": triple_store, "graph": data_graph})
-    for graph in extra_data_graphs:
-        conn["data"].append({"type": triple_store_type, "url": triple_store, "graph": graph})
-    return Connection(json.dumps(conn))
+    return Connection(semtk3.build_connection_str("%NODEGROUP%", triple_store_type, triple_store, [MODEL_GRAPH], data_graph, extra_data_graphs))
 
 def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
     """Clear all the existing data in the data or model graph"""

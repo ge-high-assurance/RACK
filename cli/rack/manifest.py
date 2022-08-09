@@ -1,8 +1,9 @@
 from enum import Enum
-from jsonschema import ValidationError, validate
-from rack.url import Url
-from typing import Any, Callable, Dict, List, Optional, NewType, TypeVar, cast, Tuple
+from jsonschema import validate
+from rack.types import Connection, Url
+from typing import Any, Dict, List, Tuple
 import yaml
+import semtk3
 
 MANIFEST_SCHEMA: Dict[str, Any] = {
     'type': 'object',
@@ -11,13 +12,13 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
     'properties': {
         'footprint': {
             'type': 'object',
-                        'additionalProperties': False,
-                        'required': [],
-                        'properties': {
-                            'model': {'type': 'boolean'},
-                            'data-graphs': {'type': 'array', 'items': {'type': 'string'}},
-                            'nodegroups': {'type': 'array', 'items': {'type': 'string'}},
-                        }
+            'additionalProperties': False,
+            'required': [],
+            'properties': {
+                'model': {'type': 'boolean'},
+                'data-graphs': {'type': 'array', 'items': {'type': 'string'}},
+                'nodegroups': {'type': 'array', 'items': {'type': 'string'}},
+            }
         },
         'steps': {
             'type': 'array',
@@ -61,11 +62,13 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
     }
 }
 
+
 class StepType(Enum):
     MODEL = 1
     DATA = 2
     NODEGROUPS = 3
     MANIFEST = 4
+
 
 class Manifest:
     def __init__(self) -> None:
@@ -81,10 +84,13 @@ class Manifest:
         self.modelFootprint = True
 
     def addNodegroupsFootprint(self, nodegroupRegexp: str) -> None:
-            self.nodegroupsFootprint.append(nodegroupRegexp)
+        self.nodegroupsFootprint.append(nodegroupRegexp)
 
     def addStep(self, stepType: StepType, stepFile: str) -> None:
         self.steps.append((stepType, stepFile))
+
+    def getConnection(self, triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:
+        return Connection(semtk3.build_connection_str("%NODEGROUP%", triple_store_type, triple_store, ["http://rack001/model"], self.datagraphsFootprint[0], self.datagraphsFootprint[1:]))
 
     @staticmethod
     def fromYAML(src: Any) -> 'Manifest':
@@ -95,9 +101,9 @@ class Manifest:
         manifest = Manifest()
 
         footprint = obj.get('footprint', {})
-        for datagraph in footprint.get('data-graphs',[]):
+        for datagraph in footprint.get('data-graphs', []):
             manifest.addDatagraphFootprint(Url(datagraph))
-        for nodegroupRegexp in footprint.get('nodegroups',[]):
+        for nodegroupRegexp in footprint.get('nodegroups', []):
             manifest.addNodegroupsFootprint(nodegroupRegexp)
         if footprint.get('model', False):
             manifest.addModelFootprint()

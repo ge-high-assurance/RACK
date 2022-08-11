@@ -5,6 +5,7 @@ import traceback
 import io
 import base64
 import urllib
+import re
 from dash import Input, Output, State, dcc, html, dash_table
 from zipfile import ZipFile
 from datetime import datetime
@@ -56,6 +57,17 @@ BUTTON_STYLE = {
     "border": "none",
 }
 
+# style for scrolling status
+SCROLLING_STATUS_STYLE = {
+    "margin-top": "100px",
+    "white-space": "pre-wrap",
+    "border-style": "none",
+    "height": 500,
+    "width": 1200, "overflow-y": "auto",
+    "display": "flex",
+    "flex-direction": "column-reverse"
+}
+
 # menu
 sidebar = html.Div(
     [
@@ -71,25 +83,25 @@ sidebar = html.Div(
     style=SIDEBAR_STYLE,
 )
 
-# modal dialogs
-dialogs = html.Div(
-    [
-        # dialog confirming load done (or showing error)
-        dbc.Modal(
-            [
-                dbc.ModalBody("MESSAGE", id="load-done-dialog-div"),
-                dbc.ModalFooter(dbc.Button("Close", id="load-done-dialog-button", className="ms-auto", n_clicks=0)),
-            ],
-            id="load-done-dialog",
-            is_open=False,
-            backdrop=False,
-        ),
-    ]
+# dialog confirming action done (or showing error)
+done_dialog = dbc.Spinner(
+    dbc.Modal(
+        [
+            dbc.ModalBody("MESSAGE", id="done-dialog-div"),
+            dbc.ModalFooter(dbc.Button("Close", id="done-dialog-button", className="ms-auto", n_clicks=0)),
+        ],
+        id="done-dialog",
+        is_open=False,
+        backdrop=False,
+    )
 )
+
+# scrolling area showing status
+scrolling_status = html.Div(id="div-status", style=SCROLLING_STATUS_STYLE)
 
 content = html.Div(id="page-content", style=CONTENT_STYLE)
 
-app.layout = html.Div([dcc.Location(id="url"), sidebar, content, dialogs])
+app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 
 @app.callback(Output("page-content", "children"), 
               Input("url", "pathname"))
@@ -107,30 +119,32 @@ def render_page_content(pathname: str) -> dbc.Container:
 
 @app.callback(Output('load-button', 'disabled'),
               Input('load-button', 'contents'),
-              Input('load-done-dialog-button', 'n_clicks'),
-              State('load-done-dialog', 'is_open'),
+              Input('done-dialog-button', 'n_clicks'),
+              State('done-dialog', 'is_open'),
               prevent_initial_call=True)
-def disable_upload_button(zip_file_contents, n_clicks_close, load_done_dialog_is_open):
+def disable_load_button(zip_file_contents, n_clicks_close, done_dialog_is_open):
     """ Callback to disable the load button while a load is in progress """
-    if not load_done_dialog_is_open and zip_file_contents is not None:  # user clicked the load button
-        return True  # disable the upload button
-    return False  # enable the upload button
+    if not done_dialog_is_open and zip_file_contents is not None:  # user clicked the load button
+        return True  # disable the load button
+    return False  # enable the load button
 
 @app.callback(Output("div-status", "children"),
               Input("interval-component", "n_intervals"))
 def update_status(n):
-    """ Callback triggered at regular interval to update loading status """
-    return in_mem_file.getvalue()
+    """ Callback triggered at regular interval to update status """
+    status = in_mem_file.getvalue()
+    ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')  # remove ANSI escape sequences (e.g. ESC[32m, ESC[0m) from command output
+    return ansi_escape.sub('', status)
 
-@app.callback(Output('load-done-dialog', 'is_open'),
-              Output('load-done-dialog-div', 'children'),
+@app.callback(Output('done-dialog', 'is_open'),
+              Output('done-dialog-div', 'children'),
               Input('load-button', 'contents'),
-              Input('load-done-dialog-button', 'n_clicks'),
-              State('load-done-dialog', 'is_open'),
+              Input('done-dialog-button', 'n_clicks'),
+              State('done-dialog', 'is_open'),
               prevent_initial_call=True)
-def upload_ingestion_package(zip_file_contents, n_clicks_close, load_done_dialog_is_open):
+def load_ingestion_package(zip_file_contents, n_clicks_close, done_dialog_is_open):
     """ Callback triggered when user selects an ingestion package to load """
-    if not load_done_dialog_is_open and zip_file_contents is not None:  # user clicked the load button
+    if not done_dialog_is_open and zip_file_contents is not None:  # user clicked the load button
         try:
             with redirect_stdout(in_mem_file):  # capture the load status for display
                 tmp_dir = "/tmp/ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")  # temp directory to store the unzipped package
@@ -156,22 +170,22 @@ def upload_ingestion_package(zip_file_contents, n_clicks_close, load_done_dialog
             return True, html.Div([dcc.Markdown("Loaded ingestion package."), html.A("Open in SPARQLGraph UI", href=sparqlgraph_url_str, target="_blank", style={"margin-top": "100px"}) ]
         )
         except Exception as e:
-            return True, get_error_trace(e)  # show load done dialog with error
-    elif load_done_dialog_is_open and n_clicks_close is not None and n_clicks_close > 0:  # user clicked close on the load done dialog
+            return True, get_error_trace(e)  # show done dialog with error
+    elif done_dialog_is_open and n_clicks_close is not None and n_clicks_close > 0:  # user clicked close on the done dialog
         in_mem_file.truncate(0)  # clear status
         in_mem_file.seek(0)  # clear status
-    return False, ""  # hide (or don't show) load done dialog
+    return False, ""  # hide (or don't show) done dialog
 
 def page_main() -> html.Div:
     """ Components for main page """
     try:
-        return html.Div([
-            html.Table([
-                html.Tr(dcc.Markdown("Welcome to RACK.")),
-                html.Tr(dcc.Upload( html.Button('Load ingestion package', style=BUTTON_STYLE), id='load-button', accept=".zip", multiple=False)),
-            ]),
-            html.Div(id="div-status", style={"margin-top": "100px", "white-space": "pre-wrap", "border-style": "none", "height": 500, "width": 1200, "overflow-y": "auto", "display": "flex", "flex-direction": "column-reverse"}),
-            dcc.Interval(id='interval-component', interval=1*1000, n_intervals=0)
+        return html.Div(
+            [
+                dcc.Markdown("Welcome to RACK."),
+                html.Div([dcc.Upload( html.Button('Load ingestion package', style=BUTTON_STYLE), id='load-button', accept=".zip", multiple=False)]),  # upload button
+                done_dialog,  # dialog with spinner
+                scrolling_status,  # div showing load status
+                dcc.Interval(id='interval-component', interval=1*1000, n_intervals=0)
             ]
         )
     except Exception as e:

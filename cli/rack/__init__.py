@@ -651,7 +651,7 @@ def dispatch_model_import(args: SimpleNamespace) -> None:
 
 def dispatch_data_clear(args: SimpleNamespace) -> None:
     """Implementation of the data clear subcommand"""
-    clear_driver(args.base_url, args.model_graph, args.data_graph, args.triple_store, args.triple_store_type, Graph.DATA)
+    clear_driver(args.base_url, None, args.data_graph, args.triple_store, args.triple_store_type, Graph.DATA)
 
 def dispatch_data_template(args: SimpleNamespace) -> None:
     """Implementation of the data template subcommand"""

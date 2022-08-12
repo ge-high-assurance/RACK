@@ -15,7 +15,7 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
             'additionalProperties': False,
             'required': [],
             'properties': {
-                'model': {'type': 'boolean'},
+                'model-graphs': {'type': 'array', 'items': {'type': 'string'}},
                 'data-graphs': {'type': 'array', 'items': {'type': 'string'}},
                 'nodegroups': {'type': 'array', 'items': {'type': 'string'}},
             }
@@ -72,10 +72,14 @@ class StepType(Enum):
 
 class Manifest:
     def __init__(self) -> None:
+        self.modelgraphsFootprint: List[Url] = []
         self.datagraphsFootprint: List[Url] = []
         self.nodegroupsFootprint: List[str] = []
         self.modelFootprint: bool = False
         self.steps: List[Tuple[StepType, str]] = []
+
+    def addModelgraphFootprint(self, modelgraph: Url) -> None:
+        self.modelgraphsFootprint.append(modelgraph)
 
     def addDatagraphFootprint(self, datagraph: Url) -> None:
         self.datagraphsFootprint.append(datagraph)
@@ -90,7 +94,7 @@ class Manifest:
         self.steps.append((stepType, stepFile))
 
     def getConnection(self, triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:
-        return Connection(semtk3.build_connection_str("%NODEGROUP%", triple_store_type, triple_store, ["http://rack001/model"], self.datagraphsFootprint[0], self.datagraphsFootprint[1:]))
+        return Connection(semtk3.build_connection_str("%NODEGROUP%", triple_store_type, triple_store, self.modelgraphsFootprint, self.datagraphsFootprint[0], self.datagraphsFootprint[1:]))
 
     @staticmethod
     def fromYAML(src: Any) -> 'Manifest':
@@ -105,8 +109,8 @@ class Manifest:
             manifest.addDatagraphFootprint(Url(datagraph))
         for nodegroupRegexp in footprint.get('nodegroups', []):
             manifest.addNodegroupsFootprint(nodegroupRegexp)
-        if footprint.get('model', False):
-            manifest.addModelFootprint()
+        for modelgraph in footprint.get('model-graphs', []):
+            manifest.addModelgraphFootprint(Url(modelgraph))
 
         for step in obj.get('steps', []):
             if 'data' in step:

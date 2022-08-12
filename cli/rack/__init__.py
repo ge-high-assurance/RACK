@@ -647,7 +647,7 @@ def dispatch_data_import(args: SimpleNamespace) -> None:
 def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
     cliMethod = CLIMethod.MODEL_IMPORT
-    ingest_owl_driver(Path(args.config), args.base_url, args.model_graphs, args.triple_store, args.triple_store_type, args.clear)
+    ingest_owl_driver(Path(args.config), args.base_url, args.model_graph, args.triple_store, args.triple_store_type, args.clear)
 
 def dispatch_data_clear(args: SimpleNamespace) -> None:
     """Implementation of the data clear subcommand"""

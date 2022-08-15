@@ -298,12 +298,11 @@ def analyze_structure(unit: lal.AnalysisUnit) -> None:
             identifier=get_node_identifier(package),
             title=escape(package.doc_name),
             componentType_identifier=ontology.MODULE,
-                
         )
         for component in components:
             Evidence.Add.SOFTWARE.SWCOMPONENT(
                 identifier=get_node_identifier(component),
-                subcomponentOf_identifier=get_node_identifier(package),
+                partOf_identifier=get_node_identifier(package),
             )
 
 def analyze_unit(unit: lal.AnalysisUnit) -> None:

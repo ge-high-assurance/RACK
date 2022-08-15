@@ -11,8 +11,6 @@ rack data clear --data-graph http://rack001/turnstiledata
 
 rack model import ../RACK-Ontology/OwlModels/import.yaml
 
-rack nodegroups delete-all --yes
-
 rack nodegroups import ../nodegroups/ingestion/arcos.rack
 
 rack nodegroups import ../nodegroups/queries

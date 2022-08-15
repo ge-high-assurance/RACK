@@ -29,3 +29,4 @@ query dataVer SubDD_Req without satisfies SRS_Req,number of SubDD w/o -satisfies
 query dataVer SYSTEM without partOf SYSTEM,number of SYSTEM w/o -partOf-> SYSTEM should be 1,rack,query dataVer SYSTEM without partOf SYSTEM.json,PrefabNodeGroup
 query dataVer unlinked SWCOMPONENT,Find SWCOMPONENT w/o -wasImpactedBy-> REQUIREMENT  or  w/o -subcomponentOf -> SWCOMPONENT,rack,query dataVer unlinked SWCOMPONENT.json,PrefabNodeGroup
 report data verification,Run the dataVer nodegroups,rack,report data verification.json,Report
+setup ARCOS Apache Phase 2,doesn't return anything; used to setup the connections with Apache datagraphs,rack,setup-arcos-ApachePhase2.json,PrefabNodeGroup

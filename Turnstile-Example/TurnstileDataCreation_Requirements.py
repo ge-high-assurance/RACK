@@ -13,8 +13,7 @@
 ###############################  Read PDF file #####################################
 # exec(open('TurnstileIngestion_Requirements.py').read())
 import PyPDF2
-import PyPDF2.pdf
-from PyPDF2.pdf import PdfFileReader
+from PyPDF2 import PdfFileReader
 #from PIL import Image
 import operator, functools
 from itertools import product 
@@ -339,11 +338,11 @@ def CreateCdrs():
         l1="Requirementidentification"
         l2="Description"
         l3="Governs"
-        return [Add.turnstile_SystemRequirement(identifier = req[l1]+version, 
+        return [Add.GE.SystemRequirement(identifier = req[l1]+version, 
                                                governs_identifier = checkKeyExist(req,l3),
                                                description = req[l2],
                                                definedIn_identifier=fileSource),
-                Add.SYSTEM(identifier = checkKeyExist(req,l3))]                                
+                Add.SYSTEM.SYSTEM(identifier = checkKeyExist(req,l3))]                                
     #sys has an update using the version 2
     list(map(lambda x: sysReqToIngestAux(x,"","SYS Doc:v1"),sys))
     #list(map(lambda x: sysReqToIngestAux(x),reqsDict(sys_Req(mainList1))))
@@ -353,7 +352,7 @@ def CreateCdrs():
     ##New Req version 2
     list(map(lambda x: sysReqToIngestAux(x,"","SYS Doc:v1"), newSysReq))
     #------------ Document Files ------------    
-    Add.FILE(identifier="SYS Doc:v1",entityURL="https://github.com/ge-high-assurance/RACK/blob/master/Turnstile-Example/RequirementsDocument/Sys_Req.txt")
+    Add.FILE.FILE(identifier="SYS Doc:v1",entityURL="https://github.com/ge-high-assurance/RACK/blob/master/Turnstile-Example/RequirementsDocument/Sys_Req.txt")
     createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileSystemRequirements"))
  
@@ -369,7 +368,7 @@ def CreateCdrs():
         l4="Satisfies"
         l5="Mitigates"
         l6="wasGeneratedBy"
-        return [Add.turnstile_HighLevelRequirement(identifier = req[l1]+reqVersion, 
+        return [Add.GE.HighLevelRequirement(identifier = req[l1]+reqVersion, 
                                                   governs_identifier = checkKeyExist(req,l3),
                                                   description = req[l2],
                                                   satisfies_identifier = checkKeyExist(req,l4),
@@ -377,9 +376,9 @@ def CreateCdrs():
                                                   wasGeneratedBy_identifier= checkKeyExist(req,l6),
                                                   wasRevisionOf_identifier=revision+version,
                                                   definedIn_identifier=fileSource),
-               Add.turnstile_SystemRequirement(identifier=checkKeyExist(req,l4)),
-               Add.HAZARD(identifier=checkKeyExist(req,l5)),
-               Add.turnstile_SystemComponent(identifier=checkKeyExist(req,l3))]                                  
+               Add.GE.SystemRequirement(identifier=checkKeyExist(req,l4)),
+               Add.HAZARD.HAZARD(identifier=checkKeyExist(req,l5)),
+               Add.GE.SystemComponent(identifier=checkKeyExist(req,l3))]                                  
  
     
     list(map(lambda x: hlReqToIngestAux(x,"","","","HLR Doc:v1"),hl))
@@ -389,80 +388,80 @@ def CreateCdrs():
     ##New Req version 2
     list(map(lambda x: hlReqToIngestAux(x,"","","","HLR Doc:v2"), newHLReq))
     #------------ Document Files ------------    
-    Add.FILE(identifier="HLR Doc:v1",entityURL="file://{{BASEDIR}}/RequirementsDocument/Version1.pdf")
-    Add.FILE(identifier="HLR Doc:v2",entityURL="file://{{BASEDIR}}/RequirementsDocument/Version2.pdf")
+    Add.FILE.FILE(identifier="HLR Doc:v1",entityURL="file://{{BASEDIR}}/RequirementsDocument/Version1.pdf")
+    Add.FILE.FILE(identifier="HLR Doc:v2",entityURL="file://{{BASEDIR}}/RequirementsDocument/Version2.pdf")
     #------------ 125569538 ------------
-    Add.turnstile_Engineer(identifier = "125569538",
+    Add.GE.Engineer(identifier = "125569538",
                  title = "Doe, John",
                  emailAddress = "john.doe@ge.com",
                  employedBy_identifier = "General_Electric")
-    Add.ORGANIZATION(identifier = "General_Electric")
+    Add.AGENTS.ORGANIZATION(identifier = "General_Electric")
     
     #------------ HlrDev1 ------------
-    Add.turnstile_SoftwareRequirementsDefinition(identifier = "HlrDev1",
+    Add.GE.SoftwareRequirementsDefinition(identifier = "HlrDev1",
                                        endedAtTime = "2020-07-15 10:56:38",
                                        wasAssociatedWith_identifier = "125569538",
                                        referenced_identifier = "RQ-STD:v1")
-    Add.DOCUMENT(identifier = "RQ-STD:v1")
+    Add.DOCUMENT.DOCUMENT(identifier = "RQ-STD:v1")
     #------------ inflowEvent ------------                                
-    Add.turnstile_DataDictionary(identifier = "inflowEvent",
+    Add.GE.DataDictionary(identifier = "inflowEvent",
                        description = "Signal indicating that a person has passed through the ingate",
                        wasGeneratedBy_identifier = "HlrDev1")                       
-    Add.turnstile_DataDictionary(identifier = "inflowEvent",
+    Add.GE.DataDictionary(identifier = "inflowEvent",
                        providedBy_identifier = "inflow")
-    Add.turnstile_SystemInterfaceDefinition (identifier="inflow")
-    Add.turnstile_DataDictionary(identifier = "inflowEvent",
+    Add.GE.SystemInterfaceDefinition (identifier="inflow")
+    Add.GE.DataDictionary(identifier = "inflowEvent",
                        consumedBy_identifier = "HLR-1:v1")
                  
     #------------ outflowEvent ------------  
-    Add.turnstile_DataDictionary(identifier = "outflowEvent",
+    Add.GE.DataDictionary(identifier = "outflowEvent",
                        description = "Signal indicating that a person has passed through the outgate",
                        wasGeneratedBy_identifier = "HlrDev1")
-    Add.turnstile_DataDictionary(identifier = "outflowEvent",
+    Add.GE.DataDictionary(identifier = "outflowEvent",
                        providedBy_identifier = "outflow")
-    Add.turnstile_SystemInterfaceDefinition (identifier="outflow")
-    Add.turnstile_DataDictionary(identifier = "outflowEvent",
+    Add.GE.SystemInterfaceDefinition (identifier="outflow")
+    Add.GE.DataDictionary(identifier = "outflowEvent",
                        consumedBy_identifier = "HLR-2:v1")
 	
 	#------------ counter ------------ 
-    Add.turnstile_DataDictionary(identifier = "counter",
+    Add.GE.DataDictionary(identifier = "counter",
                        description = "running total people in the park.",
                        wasGeneratedBy_identifier = "HlrDev1")
-    Add.turnstile_DataDictionary(identifier = "counter",
+    Add.GE.DataDictionary(identifier = "counter",
                        providedBy_identifier = "HLR-1:v1")
-    Add.turnstile_DataDictionary(identifier = "counter",
+    Add.GE.DataDictionary(identifier = "counter",
                        providedBy_identifier = "HLR-2:v1")
-    Add.turnstile_DataDictionary(identifier = "counter",
+    Add.GE.DataDictionary(identifier = "counter",
                        consumedBy_identifier = "HLR-3:v1")	
 
     #------------ display ------------ 
-    Add.turnstile_DataDictionary(identifier = "display",
+    Add.GE.DataDictionary(identifier = "display",
                        wasGeneratedBy_identifier = "HlrDev1")
-    Add.turnstile_DataDictionary(identifier = "display",
+    Add.GE.DataDictionary(identifier = "display",
                        providedBy_identifier = "HLR-3:v1")
-    Add.turnstile_DataDictionary(identifier = "display",
+    Add.GE.DataDictionary(identifier = "display",
                        consumedBy_identifier = "census")
-    Add.turnstile_SystemInterfaceDefinition (identifier="census")
+    Add.GE.SystemInterfaceDefinition (identifier="census")
 
     #########version2 
      #------------ HlrDev2 ------------
-    Add.turnstile_SoftwareRequirementsDefinition(identifier = "HlrDev2",
+    Add.GE.SoftwareRequirementsDefinition(identifier = "HlrDev2",
                                        endedAtTime = "2020-07-25 10:53:38",
                                        wasAssociatedWith_identifier = "125569538",
                                        referenced_identifier = "RQ-STD:v1")
-    Add.DOCUMENT(identifier = "RQ-STD:v1")
+    Add.DOCUMENT.DOCUMENT(identifier = "RQ-STD:v1")
     #------------ inflowEvent ------------
-    Add.turnstile_DataDictionary(identifier = "inflowEvent",
+    Add.GE.DataDictionary(identifier = "inflowEvent",
                        consumedBy_identifier = "HLR-1:v2")
 
     #------------ outflowEvent ------------
-    Add.turnstile_DataDictionary(identifier = "outflowEvent",
+    Add.GE.DataDictionary(identifier = "outflowEvent",
                        consumedBy_identifier = "HLR-2:v2")
 
     #------------ counter ------------
-    Add.turnstile_DataDictionary(identifier = "counter",
+    Add.GE.DataDictionary(identifier = "counter",
                        providedBy_identifier = "HLR-1:v2")                   
-    Add.turnstile_DataDictionary(identifier = "counter",
+    Add.GE.DataDictionary(identifier = "counter",
                        providedBy_identifier = "HLR-2:v2")
 
     createCDR("http://rack001/turnstiledata")
@@ -479,20 +478,20 @@ def CreateCdrs():
         l3="Governs"
         l4= "wasGeneratedBy"
         l5="Satisfies"
-        return [Add.turnstile_LowLevelRequirement(#identifier = req[keybiggerThan10(l1_1,l1,req)], 
+        return [Add.GE.LowLevelRequirement(#identifier = req[keybiggerThan10(l1_1,l1,req)], 
                                                  identifier = req[l1]+version,
                                                  governs_identifier = checkKeyExist(req,l3),
                                                  wasGeneratedBy_identifier= checkKeyExist(req,l4),
                                                  description = req[l2],
                                                  satisfies_identifier =checkKeyExist(req,l5)
                                                  ),
-                Add.turnstile_HighLevelRequirement(identifier=checkKeyExist(req,l5)) ]
+                Add.GE.HighLevelRequirement(identifier=checkKeyExist(req,l5)) ]
 
     # def llReqToIngestAux1 (req):
     #     l1="Requirementidentification"
     #     l1_1=")Requirementidentification"
     #     l5="Satisfies"
-    #     return Add.turnstile_LowLevelRequirement( identifier = req[keybiggerThan10(l1_1,l1,req)],
+    #     return Add.GE.LowLevelRequirement( identifier = req[keybiggerThan10(l1_1,l1,req)],
     #                                             satisfies_identifier =checkKeyExist(req,l5))
     
     
@@ -505,127 +504,127 @@ def CreateCdrs():
 
     ###
     #------------ 2125895152 ------------
-    Add.turnstile_Engineer(identifier = "2125895152",
+    Add.GE.Engineer(identifier = "2125895152",
                            title = "Doe, Jane",
                            emailAddress = "jane.doe@ge.com",
                            employedBy_identifier = "General_Electric")
-    Add.ORGANIZATION(identifier = "General_Electric")
+    Add.AGENTS.ORGANIZATION(identifier = "General_Electric")
     #------------ LlrDev1 ------------
-    Add.turnstile_SoftwareDesign(identifier = "LlrDev1",
+    Add.GE.SoftwareDesign(identifier = "LlrDev1",
                                  endedAtTime = "2020-07-19 11:48:38",
                                  wasAssociatedWith_identifier = "2125895152",
                                  referenced_identifier = "SW-STD:v1")
-    Add.DOCUMENT(identifier = "SW-STD:v1")
+    Add.DOCUMENT.DOCUMENT(identifier = "SW-STD:v1")
     #------------ SwDesign ------------
-    Add.turnstile_SoftwareDesign(identifier = "SwDesign",
+    Add.GE.SoftwareDesign(identifier = "SwDesign",
                                  endedAtTime = "2020-07-23 09:52:38",
                                  wasAssociatedWith_identifier = "2125895152",
                                  referenced_identifier = "SW-STD:v1")
-    Add.DOCUMENT(identifier = "SW-STD:v1")
+    Add.DOCUMENT.DOCUMENT(identifier = "SW-STD:v1")
     #------------ InputThread ------------
-    Add.SYSTEM_DEVELOPMENT(identifier="SysThreadDesign")
+    Add.SYSTEM.SYSTEM_DEVELOPMENT(identifier="SysThreadDesign")
     
-    Add.turnstile_SoftwareThread(identifier = "InputThread",
+    Add.GE.SoftwareThread(identifier = "InputThread",
                                  partOf_identifier = "CounterApplication",
 		                         wasGeneratedBy_identifier = "SysThreadDesign")
     #------------ OutputThread ------------
-    Add.turnstile_SoftwareThread(identifier = "OutputThread",
+    Add.GE.SoftwareThread(identifier = "OutputThread",
                                  partOf_identifier = "CounterApplication",
 		                         wasGeneratedBy_identifier = "SysThreadDesign")
     #------------ ExecutiveThread ------------
-    Add.turnstile_SoftwareThread(identifier = "ExecutiveThread",
+    Add.GE.SoftwareThread(identifier = "ExecutiveThread",
                                  partOf_identifier = "CounterApplication",
 		                         wasGeneratedBy_identifier = "SysThreadDesign")
     #------------ DCC-1 ------------	
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
+    Add.GE.DataAndControlCouple(identifier = "DCC-1",
                                        description = "PowerUp",
                                        wasGeneratedBy_identifier = "LlrDev1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
+    Add.GE.DataAndControlCouple(identifier = "DCC-1",
                                        consumedBy_identifier = "EXE-LLR-1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
+    Add.GE.DataAndControlCouple(identifier = "DCC-1",
                                        consumedBy_identifier = "EXE-LLR-2")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
+    Add.GE.DataAndControlCouple(identifier = "DCC-1",
                                        consumedBy_identifier = "IN-LLR-1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-1",
+    Add.GE.DataAndControlCouple(identifier = "DCC-1",
                                        consumedBy_identifier = "OUT-LLR-1")
 
     #------------ DCC-2 ------------	
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-2", 
+    Add.GE.DataAndControlCouple(identifier = "DCC-2", 
                                        description = "incoming UDP message",
                                        wasGeneratedBy_identifier = "LlrDev1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+    Add.GE.DataAndControlCouple(identifier = "DCC-2",
                                        consumedBy_identifier = "IN-LLR-2:v1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+    Add.GE.DataAndControlCouple(identifier = "DCC-2",
                                        consumedBy_identifier = "IN-LLR-2:v2")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+    Add.GE.DataAndControlCouple(identifier = "DCC-2",
                                        consumedBy_identifier = "IN-LLR-3:v1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+    Add.GE.DataAndControlCouple(identifier = "DCC-2",
                                        consumedBy_identifier = "IN-LLR-3:v2")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+    Add.GE.DataAndControlCouple(identifier = "DCC-2",
                                        consumedBy_identifier = "IN-LLR-5")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-2",
+    Add.GE.DataAndControlCouple(identifier = "DCC-2",
                                        consumedBy_identifier = "IN-LLR-6")
 
 		
     #------------ DCC-3 ------------	
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        description = "input_park_count",
                                        wasGeneratedBy_identifier = "LlrDev1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        consumedBy_identifier = "IN-LLR-2:v1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        consumedBy_identifier = "IN-LLR-2:v2")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        consumedBy_identifier = "IN-LLR-3:v1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        consumedBy_identifier = "IN-LLR-3:v2")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        consumedBy_identifier = "IN-LLR-4")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        consumedBy_identifier = "IN-LLR-5")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        consumedBy_identifier = "IN-LLR-6")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        providedBy_identifier = "IN-LLR-1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        providedBy_identifier = "IN-LLR-4")
 
 		
     #------------ DCC-4 ------------	
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-4",
+    Add.GE.DataAndControlCouple(identifier = "DCC-4",
                                        description = "output_park_count",
                                        wasGeneratedBy_identifier = "LlrDev1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        consumedBy_identifier = "OUT-LLR-2:v1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        consumedBy_identifier = "OUT-LLR-2:v2")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        providedBy_identifier = "OUT-LLR-1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        providedBy_identifier = "IN-LLR-3:v1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-3",
+    Add.GE.DataAndControlCouple(identifier = "DCC-3",
                                        providedBy_identifier = "IN-LLR-3:v2")
 
 	
     #------------ DCC-5 ------------	
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-5",
+    Add.GE.DataAndControlCouple(identifier = "DCC-5",
                                        description = "outgoing UDP message",
                                        wasGeneratedBy_identifier = "LlrDev1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-5",
+    Add.GE.DataAndControlCouple(identifier = "DCC-5",
                                        providedBy_identifier = "OUT-LLR-2:v1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-5",
+    Add.GE.DataAndControlCouple(identifier = "DCC-5",
                                        providedBy_identifier = "OUT-LLR-2:v2")
 
 		
     #------------ DCC-6 ------------	
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-6",  
+    Add.GE.DataAndControlCouple(identifier = "DCC-6",  
                                        description = "console",
                                        wasGeneratedBy_identifier = "LlrDev1")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-6",
+    Add.GE.DataAndControlCouple(identifier = "DCC-6",
                                        providedBy_identifier = "EXE-LLR-3")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-6",
+    Add.GE.DataAndControlCouple(identifier = "DCC-6",
                                        providedBy_identifier = "IN-LLR-5")
-    Add.turnstile_DataAndControlCouple(identifier = "DCC-6",
+    Add.GE.DataAndControlCouple(identifier = "DCC-6",
                                        providedBy_identifier = "IN-LLR-6")
     createCDR("http://rack001/turnstiledata")
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Turnstile-IngestionPackage/TurnstileLowLevelRequirements")) 
@@ -644,35 +643,35 @@ def CreateCdrs():
 
     # Requirements packages
     for req in hlReqsModified_Ids:
-        Add.BASELINE(identifier=reqBase1, content_identifier=req+":v1")
-        Add.BASELINE(identifier=reqBase2, content_identifier=req+":v2")
+        Add.BASELINE.BASELINE(identifier=reqBase1, content_identifier=req+":v1")
+        Add.BASELINE.BASELINE(identifier=reqBase2, content_identifier=req+":v2")
     for req in llReqsModified_Ids:
-        Add.BASELINE(identifier=reqBase1, content_identifier=req+":v1")
-        Add.BASELINE(identifier=reqBase2, content_identifier=req+":v2")
+        Add.BASELINE.BASELINE(identifier=reqBase1, content_identifier=req+":v1")
+        Add.BASELINE.BASELINE(identifier=reqBase2, content_identifier=req+":v2")
     for req in sys:
-        Add.BASELINE(identifier=reqBase1, content_identifier=req[l])
-        Add.BASELINE(identifier=reqBase2, content_identifier=req[l])
-    Add.BASELINE(identifier=reqBase2, wasRevisionOf_identifier=reqBase1)
+        Add.BASELINE.BASELINE(identifier=reqBase1, content_identifier=req[l])
+        Add.BASELINE.BASELINE(identifier=reqBase2, content_identifier=req[l])
+    Add.BASELINE.BASELINE(identifier=reqBase2, wasRevisionOf_identifier=reqBase1)
 
     # Software baseline
-    Add.BASELINE(identifier=swBase1, content_identifier="OutputThread")
-    Add.BASELINE(identifier=swBase1, content_identifier="InputThread")
-    Add.BASELINE(identifier=swBase1, content_identifier="ExecutiveThread")
+    Add.BASELINE.BASELINE(identifier=swBase1, content_identifier="OutputThread")
+    Add.BASELINE.BASELINE(identifier=swBase1, content_identifier="InputThread")
+    Add.BASELINE.BASELINE(identifier=swBase1, content_identifier="ExecutiveThread")
 
     # Testsuite release
-    Add.BASELINE(identifier=testBase1, content_identifier="TC-1-1")
-    Add.BASELINE(identifier=testBase1, content_identifier="TC-1-2")
-    Add.BASELINE(identifier=testBase1, content_identifier="TC-1-3")
-    Add.BASELINE(identifier=testBase1, content_identifier="TC-1-4")
+    Add.BASELINE.BASELINE(identifier=testBase1, content_identifier="TC-1-1")
+    Add.BASELINE.BASELINE(identifier=testBase1, content_identifier="TC-1-2")
+    Add.BASELINE.BASELINE(identifier=testBase1, content_identifier="TC-1-3")
+    Add.BASELINE.BASELINE(identifier=testBase1, content_identifier="TC-1-4")
 
     # Complete release baselines
-    Add.BASELINE(identifier=turnstile1, content_identifier=reqBase1)
-    Add.BASELINE(identifier=turnstile1, content_identifier=swBase1)
-    Add.BASELINE(identifier=turnstile1, content_identifier=testBase1)
+    Add.BASELINE.BASELINE(identifier=turnstile1, content_identifier=reqBase1)
+    Add.BASELINE.BASELINE(identifier=turnstile1, content_identifier=swBase1)
+    Add.BASELINE.BASELINE(identifier=turnstile1, content_identifier=testBase1)
 
-    Add.BASELINE(identifier=turnstile1_1, wasRevisionOf_identifier=turnstile1)
-    Add.BASELINE(identifier=turnstile1_1, content_identifier=reqBase2)
-    Add.BASELINE(identifier=turnstile1_1, content_identifier=swBase1)
+    Add.BASELINE.BASELINE(identifier=turnstile1_1, wasRevisionOf_identifier=turnstile1)
+    Add.BASELINE.BASELINE(identifier=turnstile1_1, content_identifier=reqBase2)
+    Add.BASELINE.BASELINE(identifier=turnstile1_1, content_identifier=swBase1)
     # A lack of a test suite targetting v2 requirements is a known omission
 
     createCDR("http://rack001/turnstiledata")

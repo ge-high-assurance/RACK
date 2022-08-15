@@ -1,0 +1,3 @@
+identifier,dataInsertedBy_identifier,description,satisfies_identifier
+IN-LLR-7,TurnstileIngestion-Security,Input Thread shall validate udp messages via the use of a 256-bit crytographic key,HLR-4:v1
+EXE-LLR-8,TurnstileIngestion-Security,On initialization Executive shall exchange cryptographic keys with the Ingate and outgate via tcp via port 63432.,HLR-4:v1

@@ -1,7 +1,0 @@
-identifier,dataInsertedBy_identifier,definedIn_identifier,description,governs_identifier,mitigates_identifier,satisfies_identifier,wasGeneratedBy_identifier,wasRevisionOf_identifier
-HLR-1:v1,TurnstileIngestion-High Level Requirements,HLR Doc:v1,The Computer shall increment the counter when a inflow event is received and the counter is less than 1000.,CounterApplication,H-1.2,Sys-1,,
-HLR-2:v1,TurnstileIngestion-High Level Requirements,HLR Doc:v1,The Computer shall decrement the counter when a outflow event is received and the counter is greater than 0.,CounterApplication,H-1.1,Sys-2,,
-HLR-3:v1,TurnstileIngestion-High Level Requirements,HLR Doc:v1,The Computer shall publish the counter at a 1 htz rate.,CounterApplication,,Sys-3,,
-HLR-1:v2,TurnstileIngestion-High Level Requirements,HLR Doc:v2,"The Computer shall increment the counter when aninflow event is received,and the counter is less than max int.",CounterApplication,H-1.2,Sys-1,,HLR-1:v1
-HLR-2:v2,TurnstileIngestion-High Level Requirements,HLR Doc:v2,"The Computer shall decrement the counter when anoutflow event is received,and the counter is greater than0.",CounterApplication,H-1.1,Sys-2,,HLR-2:v1
-HLR-3:v2,TurnstileIngestion-High Level Requirements,HLR Doc:v2,The Computer shall publish the counter at a 1 htz rate.,CounterApplication,,Sys-3,,HLR-3:v1

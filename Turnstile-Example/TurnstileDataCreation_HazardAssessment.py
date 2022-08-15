@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (c) 2021, General Electric Company, Inc.
+# Copyright (c) 2022, General Electric Company, Inc.
 #
 # All Rights Reserved
 #
@@ -11,10 +11,9 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-import XML
-import XML.SysML as SysML
-from Evidence import createEvidenceFile, createCDR
-import Evidence.Add as Add
+from Logging import *
+from Evidence import *
+import Evidence.Add as Add 
 import shutil
 import os.path
 
@@ -26,22 +25,22 @@ def CreateCdrs():
 
     createEvidenceFile(ingestionTitle="TurnstileIngestion-HazardAssessment", ingestionDescription="Manual ingestion of Hazard Assessment")
 
-    Add.SYSTEM(identifier="Turnstile")
+    Add.SYSTEM.SYSTEM(identifier="Turnstile")
 
     
-    Add.HAZARD(identifier="H-1",
+    Add.HAZARD.HAZARD(identifier="H-1",
                 description="System Crash",
                 source_identifier = "Turnstile")
 
-    Add.HAZARD(identifier="H-1.1",
+    Add.HAZARD.HAZARD(identifier="H-1.1",
                 description="Integer Under Flow",
                 wasDerivedFrom_identifier = "H-1")
 
-    Add.HAZARD(identifier="H-1.2",
+    Add.HAZARD.HAZARD(identifier="H-1.2",
                 description="Integer Over Flow",
                 wasDerivedFrom_identifier = "H-1")
 
-    Add.HAZARD(identifier="H-2",
+    Add.HAZARD.HAZARD(identifier="H-2",
                 description="Park Exceeds Capacity",
                 source_identifier = "Turnstile")
 

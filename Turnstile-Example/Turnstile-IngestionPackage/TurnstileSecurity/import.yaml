@@ -1,25 +1,25 @@
 data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
 #Phase1: Identifiers Only
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY1.csv"}
-- {class: "http://arcos.rack/SECURITY#CONTROL", csv: "CONTROL1.csv"}
-- {class: "http://arcos.rack/SECURITY#CONTROLSET", csv: "CONTROLSET1.csv"}
-- {class: "http://arcos.turnstile/CPS#Connection", csv: "Connection1.csv"}
-- {class: "http://arcos.turnstile/CPS#ConnectionType", csv: "ConnectionType1.csv"}
-- {class: "http://arcos.turnstile/CPS#Cps", csv: "Cps1.csv"}
-- {class: "http://arcos.turnstile/CPS#ImplControl", csv: "ImplControl1.csv"}
-- {class: "http://arcos.rack/SECURITY#THREAT", csv: "THREAT1.csv"}
-- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "turnstile_HighLevelRequirement1.csv"}
-- {class: "http://arcos.turnstile/GE#LowLevelRequirement", csv: "turnstile_LowLevelRequirement1.csv"}
+- {class: "http://arcos.turnstile/CPS#Connection", csv: "CPS_Connection1.csv"}
+- {class: "http://arcos.turnstile/CPS#ConnectionType", csv: "CPS_ConnectionType1.csv"}
+- {class: "http://arcos.turnstile/CPS#Cps", csv: "CPS_Cps1.csv"}
+- {class: "http://arcos.turnstile/CPS#ImplControl", csv: "CPS_ImplControl1.csv"}
+- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "GE_HighLevelRequirement1.csv"}
+- {class: "http://arcos.turnstile/GE#LowLevelRequirement", csv: "GE_LowLevelRequirement1.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY1.csv"}
+- {class: "http://arcos.rack/SECURITY#CONTROL", csv: "SECURITY_CONTROL1.csv"}
+- {class: "http://arcos.rack/SECURITY#CONTROLSET", csv: "SECURITY_CONTROLSET1.csv"}
+- {class: "http://arcos.rack/SECURITY#THREAT", csv: "SECURITY_THREAT1.csv"}
 
 #Phase2: All Evidence
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY2.csv"}
-- {class: "http://arcos.rack/SECURITY#CONTROL", csv: "CONTROL2.csv"}
-- {class: "http://arcos.rack/SECURITY#CONTROLSET", csv: "CONTROLSET2.csv"}
-- {class: "http://arcos.turnstile/CPS#Connection", csv: "Connection2.csv"}
-- {class: "http://arcos.turnstile/CPS#ConnectionType", csv: "ConnectionType2.csv"}
-- {class: "http://arcos.turnstile/CPS#Cps", csv: "Cps2.csv"}
-- {class: "http://arcos.turnstile/CPS#ImplControl", csv: "ImplControl2.csv"}
-- {class: "http://arcos.rack/SECURITY#THREAT", csv: "THREAT2.csv"}
-- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "turnstile_HighLevelRequirement2.csv"}
-- {class: "http://arcos.turnstile/GE#LowLevelRequirement", csv: "turnstile_LowLevelRequirement2.csv"}
+- {class: "http://arcos.turnstile/CPS#Connection", csv: "CPS_Connection2.csv"}
+- {class: "http://arcos.turnstile/CPS#ConnectionType", csv: "CPS_ConnectionType2.csv"}
+- {class: "http://arcos.turnstile/CPS#Cps", csv: "CPS_Cps2.csv"}
+- {class: "http://arcos.turnstile/CPS#ImplControl", csv: "CPS_ImplControl2.csv"}
+- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "GE_HighLevelRequirement2.csv"}
+- {class: "http://arcos.turnstile/GE#LowLevelRequirement", csv: "GE_LowLevelRequirement2.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY2.csv"}
+- {class: "http://arcos.rack/SECURITY#CONTROL", csv: "SECURITY_CONTROL2.csv"}
+- {class: "http://arcos.rack/SECURITY#CONTROLSET", csv: "SECURITY_CONTROLSET2.csv"}
+- {class: "http://arcos.rack/SECURITY#THREAT", csv: "SECURITY_THREAT2.csv"}

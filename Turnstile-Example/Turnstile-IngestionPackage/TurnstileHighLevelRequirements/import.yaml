@@ -1,29 +1,29 @@
 data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
 #Phase1: Identifiers Only
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY1.csv"}
-- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "DOCUMENT1.csv"}
-- {class: "http://arcos.rack/FILE#FILE", csv: "FILE1.csv"}
-- {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD1.csv"}
-- {class: "http://arcos.rack/AGENTS#ORGANIZATION", csv: "ORGANIZATION1.csv"}
-- {class: "http://arcos.turnstile/GE#DataDictionary", csv: "turnstile_DataDictionary1.csv"}
-- {class: "http://arcos.turnstile/GE#Engineer", csv: "turnstile_Engineer1.csv"}
-- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "turnstile_HighLevelRequirement1.csv"}
-- {class: "http://arcos.turnstile/GE#SoftwareRequirementsDefinition", csv: "turnstile_SoftwareRequirementsDefinition1.csv"}
-- {class: "http://arcos.turnstile/GE#SystemComponent", csv: "turnstile_SystemComponent1.csv"}
-- {class: "http://arcos.turnstile/GE#SystemInterfaceDefinition", csv: "turnstile_SystemInterfaceDefinition1.csv"}
-- {class: "http://arcos.turnstile/GE#SystemRequirement", csv: "turnstile_SystemRequirement1.csv"}
+- {class: "http://arcos.rack/AGENTS#ORGANIZATION", csv: "AGENTS_ORGANIZATION1.csv"}
+- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "DOCUMENT_DOCUMENT1.csv"}
+- {class: "http://arcos.rack/FILE#FILE", csv: "FILE_FILE1.csv"}
+- {class: "http://arcos.turnstile/GE#DataDictionary", csv: "GE_DataDictionary1.csv"}
+- {class: "http://arcos.turnstile/GE#Engineer", csv: "GE_Engineer1.csv"}
+- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "GE_HighLevelRequirement1.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareRequirementsDefinition", csv: "GE_SoftwareRequirementsDefinition1.csv"}
+- {class: "http://arcos.turnstile/GE#SystemComponent", csv: "GE_SystemComponent1.csv"}
+- {class: "http://arcos.turnstile/GE#SystemInterfaceDefinition", csv: "GE_SystemInterfaceDefinition1.csv"}
+- {class: "http://arcos.turnstile/GE#SystemRequirement", csv: "GE_SystemRequirement1.csv"}
+- {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD_HAZARD1.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY1.csv"}
 
 #Phase2: All Evidence
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY2.csv"}
-- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "DOCUMENT2.csv"}
-- {class: "http://arcos.rack/FILE#FILE", csv: "FILE2.csv"}
-- {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD2.csv"}
-- {class: "http://arcos.rack/AGENTS#ORGANIZATION", csv: "ORGANIZATION2.csv"}
-- {class: "http://arcos.turnstile/GE#DataDictionary", csv: "turnstile_DataDictionary2.csv"}
-- {class: "http://arcos.turnstile/GE#Engineer", csv: "turnstile_Engineer2.csv"}
-- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "turnstile_HighLevelRequirement2.csv"}
-- {class: "http://arcos.turnstile/GE#SoftwareRequirementsDefinition", csv: "turnstile_SoftwareRequirementsDefinition2.csv"}
-- {class: "http://arcos.turnstile/GE#SystemComponent", csv: "turnstile_SystemComponent2.csv"}
-- {class: "http://arcos.turnstile/GE#SystemInterfaceDefinition", csv: "turnstile_SystemInterfaceDefinition2.csv"}
-- {class: "http://arcos.turnstile/GE#SystemRequirement", csv: "turnstile_SystemRequirement2.csv"}
+- {class: "http://arcos.rack/AGENTS#ORGANIZATION", csv: "AGENTS_ORGANIZATION2.csv"}
+- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "DOCUMENT_DOCUMENT2.csv"}
+- {class: "http://arcos.rack/FILE#FILE", csv: "FILE_FILE2.csv"}
+- {class: "http://arcos.turnstile/GE#DataDictionary", csv: "GE_DataDictionary2.csv"}
+- {class: "http://arcos.turnstile/GE#Engineer", csv: "GE_Engineer2.csv"}
+- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "GE_HighLevelRequirement2.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareRequirementsDefinition", csv: "GE_SoftwareRequirementsDefinition2.csv"}
+- {class: "http://arcos.turnstile/GE#SystemComponent", csv: "GE_SystemComponent2.csv"}
+- {class: "http://arcos.turnstile/GE#SystemInterfaceDefinition", csv: "GE_SystemInterfaceDefinition2.csv"}
+- {class: "http://arcos.turnstile/GE#SystemRequirement", csv: "GE_SystemRequirement2.csv"}
+- {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD_HAZARD2.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY2.csv"}

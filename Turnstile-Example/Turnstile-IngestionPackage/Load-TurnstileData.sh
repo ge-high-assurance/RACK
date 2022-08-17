@@ -21,6 +21,9 @@ then
 	exit 1
 fi
 
+# suppress RACK cli warnings about missing columns
+export LOG_LEVEL=ERROR
+
 if test "$OSTYPE" == "cygwin" -o "$OSTYPE" == "msys"; then
 URLBASE=$(cygpath -m "$BASEDIR")
 else

@@ -1,0 +1,2 @@
+identifier,dataInsertedBy_identifier,connectionType_identifier,destination_identifier,source_identifier,wasDerivedFrom_identifier
+inflowConn,TurnstileIngestion-Security,Untrusted,CounterApplicationCps,InGateCps,inflow

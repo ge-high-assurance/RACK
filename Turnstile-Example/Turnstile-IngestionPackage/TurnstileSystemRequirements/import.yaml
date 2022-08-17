@@ -1,13 +1,13 @@
 data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
 #Phase1: Identifiers Only
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY1.csv"}
-- {class: "http://arcos.rack/FILE#FILE", csv: "FILE1.csv"}
-- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM1.csv"}
-- {class: "http://arcos.turnstile/GE#SystemRequirement", csv: "turnstile_SystemRequirement1.csv"}
+- {class: "http://arcos.rack/FILE#FILE", csv: "FILE_FILE1.csv"}
+- {class: "http://arcos.turnstile/GE#SystemRequirement", csv: "GE_SystemRequirement1.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY1.csv"}
+- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM_SYSTEM1.csv"}
 
 #Phase2: All Evidence
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY2.csv"}
-- {class: "http://arcos.rack/FILE#FILE", csv: "FILE2.csv"}
-- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM2.csv"}
-- {class: "http://arcos.turnstile/GE#SystemRequirement", csv: "turnstile_SystemRequirement2.csv"}
+- {class: "http://arcos.rack/FILE#FILE", csv: "FILE_FILE2.csv"}
+- {class: "http://arcos.turnstile/GE#SystemRequirement", csv: "GE_SystemRequirement2.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY2.csv"}
+- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM_SYSTEM2.csv"}

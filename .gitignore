@@ -65,3 +65,5 @@ cli/env/
 /Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.exe
 /Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.gz
 /Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.o
+rack-ui/cache/
+rack-ui/.project

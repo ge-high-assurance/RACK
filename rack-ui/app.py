@@ -1,22 +1,26 @@
-import dash
-import dash_bootstrap_components as dbc
-import glob
-import traceback
 import io
 import base64
-import urllib
+import glob
+import time
+import os
 import re
-from dash import Input, Output, State, dcc, html, dash_table
-from zipfile import ZipFile
-from datetime import datetime
+import uuid
+import diskcache
+import traceback
 from pathlib import Path
+from zipfile import ZipFile
 from contextlib import redirect_stdout
+import urllib
+from urllib.parse import urlparse
+
+import dash
+from dash import DiskcacheManager, Input, Output, html, dcc, State
+import dash_bootstrap_components as dbc
 
 import rack
 from rack import Graph, Manifest
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
-in_mem_file = io.StringIO()   # stores loading status
+TEMP_DIR = "/tmp"   # TODO unhardcode?
 
 BASE_URL = "http://localhost"
 TRIPLE_STORE = "http://localhost:3030/RACK"
@@ -36,7 +40,7 @@ SIDEBAR_STYLE = {
     "background-color": "#f8f9fa",
 }
 
-# style for the main content
+# style for main content
 CONTENT_STYLE = {
     "margin-left": "18rem",
     "margin-right": "2rem",
@@ -68,6 +72,12 @@ SCROLLING_STATUS_STYLE = {
     "flex-direction": "column-reverse"
 }
 
+# diskcache for non-production apps when developing locally (fine for our Docker application).  Needed for @dash.callback with background=True
+cache = diskcache.Cache(TEMP_DIR + "/cache")
+background_callback_manager = DiskcacheManager(cache)
+
+app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], background_callback_manager=background_callback_manager)
+
 # menu
 sidebar = html.Div(
     [
@@ -84,121 +94,136 @@ sidebar = html.Div(
 )
 
 # dialog confirming action done (or showing error)
-done_dialog = dbc.Spinner(
-    dbc.Modal(
-        [
-            dbc.ModalBody("MESSAGE", id="done-dialog-div"),
-            dbc.ModalFooter(dbc.Button("Close", id="done-dialog-button", className="ms-auto", n_clicks=0)),
-        ],
-        id="done-dialog",
-        is_open=False,
-        backdrop=False,
-    )
+done_dialog = dbc.Modal(
+    [
+        dbc.ModalBody("MESSAGE", id="done-dialog-body"),
+        dbc.ModalFooter(dbc.Button("Close", id="done-dialog-button", className="ms-auto", n_clicks=0)),
+    ],
+    id="done-dialog",
+    is_open=False,
+    backdrop=False,
 )
 
-# scrolling area showing status
-scrolling_status = html.Div(id="div-status", style=SCROLLING_STATUS_STYLE)
-
-content = html.Div(id="page-content", style=CONTENT_STYLE)
+content = html.Div(
+    [   
+        dcc.Markdown("Welcome to RACK."),
+        html.Div([dcc.Upload( html.Button(id="run-button", children="Load ingestion package", style=BUTTON_STYLE), id='run-button-upload', accept=".zip", multiple=False)]),  # upload button
+        html.Div(id="div-status", style=SCROLLING_STATUS_STYLE),                                # displays ingestion status
+        done_dialog,
+        dcc.Store("status-store"),                                                              # stores the ingestion status for display
+        dcc.Interval(id='interval-component', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
+    ],
+    style=CONTENT_STYLE,
+)
 
 app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 
-@app.callback(Output("page-content", "children"), 
-              Input("url", "pathname"))
-def render_page_content(pathname: str) -> dbc.Container:
-    """ Callback triggered when user selects a page from the sidebar menu """
-    if pathname == "/":
-        return page_main()
-    return dbc.Container(
-        [
-            html.H1("404: Not found", className="text-danger"),
-            html.Hr(),
-            html.P(f"The pathname {pathname} was not recognized..."),
-        ]
-    )
 
-@app.callback(Output('load-button', 'disabled'),
-              Input('load-button', 'contents'),
-              Input('done-dialog-button', 'n_clicks'),
-              State('done-dialog', 'is_open'),
-              prevent_initial_call=True)
-def disable_load_button(zip_file_contents, n_clicks_close, done_dialog_is_open):
-    """ Callback to disable the load button while a load is in progress """
-    if not done_dialog_is_open and zip_file_contents is not None:  # user clicked the load button
-        return True  # disable the load button
-    return False  # enable the load button
+@app.callback(Output("status-store", "data"),                       # create store, which will trigger the ingest callback
+              Input('run-button-upload', 'contents'),               # triggered by user selecting an upload file
+              prevent_initial_call=True
+              )
+def run_button(zip_file_contents):
+    """
+    When an upload file is selected, generate a status store filename which will trigger run_ingest
+    """
+    status_store_filename = os.path.join(TEMP_DIR, "output_" + str(uuid.uuid4()))
+    return status_store_filename
+
+
+# note:  @dash.callback, not @app.callback.   Requires dash 2.6.1
+@dash.callback(
+    output=Output("done-dialog-body", "children"),
+    inputs=Input("status-store", "data"),                           # triggered by creating the store
+    state=[State("status-store", "data"), State('run-button-upload', 'contents')],
+    background=True,                                                # background callback
+    running=[
+        (Output("run-button", "disabled"), True, False),            # disable the run button while running
+        (Output("interval-component", "disabled"), False, True)     # enable the interval component while running
+    ],
+    prevent_initial_call=True
+)
+def run_ingest(status_store, status_store2, zip_file_contents):
+    """
+    Extract the selected zip file and ingest it
+    """
+    try:
+        f = open(status_store, "a")
+        with redirect_stdout(f):    # send command output to temporary file
+            tmp_dir = TEMP_DIR + "/ingest_" + str(uuid.uuid4())  # temp directory to store the unzipped package
+            zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
+            zip_obj = ZipFile(zip_str, 'r')
+            zip_obj.extractall(path=tmp_dir)  # unzip the package
+            manifest_paths = glob.glob(tmp_dir + '/**/' + MANIFEST_FILE_NAME, recursive=True)
+            if len(manifest_paths) == 0:
+                raise Exception("Cannot load ingestion package: does not contain manifest file " + MANIFEST_FILE_NAME)
+            if len(manifest_paths) > 1:
+                raise Exception("Cannot load ingestion package: contains multiple default manifest files: " + str(manifests))
+            manifest_path = manifest_paths[0]
+
+            rack.ingest_manifest_driver(Path(manifest_path), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)  # process the manifest
+
+            # get connection from manifest, construct SPARQLGraph URL
+            with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
+                manifest = Manifest.fromYAML(manifest_file)
+            conn = manifest.getConnection()
+            sparqlgraph_url_str = "http://localhost:8080/sparqlGraph/main-oss/sparqlGraph.html?conn=" + urllib.parse.quote(conn, safe="")
+
+        # This is a slight hack.  Write "Done." and wait long enough for interval.  TODO replace with better approach
+        with open(status_store, "a") as f:
+            f.write("Done.")
+        time.sleep(1)
+    except Exception as e:
+        return get_error_trace(e)  # show done dialog with error
+
+    return [dcc.Markdown("Loaded ingestion package."), html.A("Open in SPARQLGraph UI", href=sparqlgraph_url_str, target="_blank", style={"margin-top": "100px"})]
+
 
 @app.callback(Output("div-status", "children"),
-              Input("interval-component", "n_intervals"))
-def update_status(n):
-    """ Callback triggered at regular interval to update status """
-    status = in_mem_file.getvalue()
-    ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')  # remove ANSI escape sequences (e.g. ESC[32m, ESC[0m) from command output
-    return ansi_escape.sub('', status)
-
-@app.callback(Output('done-dialog', 'is_open'),
-              Output('done-dialog-div', 'children'),
-              Input('load-button', 'contents'),
-              Input('done-dialog-button', 'n_clicks'),
-              State('done-dialog', 'is_open'),
+              Input("interval-component", "n_intervals"),   # triggered at regular interval
+              State("status-store", "data"),
               prevent_initial_call=True)
-def load_ingestion_package(zip_file_contents, n_clicks_close, done_dialog_is_open):
-    """ Callback triggered when user selects an ingestion package to load """
-    if not done_dialog_is_open and zip_file_contents is not None:  # user clicked the load button
-        try:
-            with redirect_stdout(in_mem_file):  # capture the load status for display
-                tmp_dir = "/tmp/ingestion_package_uploaded_" + datetime.now().strftime("%Y%m%d-%H%M%S")  # temp directory to store the unzipped package
-                zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
-                zip_obj = ZipFile(zip_str, 'r')
-                zip_obj.extractall(path=tmp_dir)  # unzip the package
-                manifest_paths = glob.glob(tmp_dir + '/**/' + MANIFEST_FILE_NAME, recursive=True)
-                if len(manifest_paths) == 0:
-                    raise Exception("Cannot load ingestion package: does not contain manifest file " + MANIFEST_FILE_NAME)
-                if len(manifest_paths) > 1:
-                    raise Exception("Cannot load ingestion package: contains multiple default manifest files: " + str(manifests))
-                manifest_path = manifest_paths[0]
-
-                # ingest the manifest
-                rack.ingest_manifest_driver(Path(manifest_path), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)  # process the manifest
-
-                # get connection from manifest, construct SPARQLGraph URL
-                with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
-                    manifest = Manifest.fromYAML(manifest_file)
-                conn = manifest.getConnection()
-                sparqlgraph_url_str = "http://localhost:8080/sparqlGraph/main-oss/sparqlGraph.html?conn=" + urllib.parse.quote(conn, safe="")
-
-            return True, html.Div([dcc.Markdown("Loaded ingestion package."), html.A("Open in SPARQLGraph UI", href=sparqlgraph_url_str, target="_blank", style={"margin-top": "100px"}) ]
-        )
-        except Exception as e:
-            return True, get_error_trace(e)  # show done dialog with error
-    elif done_dialog_is_open and n_clicks_close is not None and n_clicks_close > 0:  # user clicked close on the done dialog
-        in_mem_file.truncate(0)  # clear status
-        in_mem_file.seek(0)  # clear status
-    return False, ""  # hide (or don't show) done dialog
-
-def page_main() -> html.Div:
-    """ Components for main page """
+def update_status(n, status_store_filename):
+    """
+        Update the displayed status
+    """
+    print("update_status") # show it's running
+    status = ""
     try:
-        return html.Div(
-            [
-                dcc.Markdown("Welcome to RACK."),
-                html.Div([dcc.Upload( html.Button('Load ingestion package', style=BUTTON_STYLE), id='load-button', accept=".zip", multiple=False)]),  # upload button
-                done_dialog,  # dialog with spinner
-                scrolling_status,  # div showing load status
-                dcc.Interval(id='interval-component', interval=1*1000, n_intervals=0)
-            ]
-        )
-    except Exception as e:
-        return display_error(e)
+        with open(status_store_filename, "r") as file:
+            status = file.read()
+        ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')  # remove ANSI escape sequences (e.g. ESC[32m, ESC[0m) from command output
+        
+        if (status.endswith("Done.\n")):    # TODO replace with better approach
+            os.remove(status_store_filename)
+        return ansi_escape.sub('', status)
+    except:
+        return ""
 
-def display_error(e) -> dcc.Markdown:
-    """ Get a displayable error message """
-    return dcc.Markdown("### RACK is not running properly.  Error: \n" + get_error_trace(e))
+
+@app.callback(Output("done-dialog", "is_open"),
+              Input("done-dialog-body", "children"),
+              Input("done-dialog-button", "n_clicks"),
+              prevent_initial_call=True
+              )
+def manage_done_dialog(children, n_clicks):
+    """ 
+    Show or hide the done dialog
+    """
+    if (get_trigger() == "done-dialog-button.n_clicks"):
+        return False    # button pressed, hide the dialog
+    else:
+        return True     # child added, show the dialog
+
+
+def get_trigger():
+    """ Get the input that triggered a callback (for @app.callback only, not @dash.callback) """
+    return dash.callback_context.triggered[0]['prop_id']
 
 def get_error_trace(e) -> str:
     """ Get error trace string """
     trace = traceback.format_exception(None, e, e.__traceback__)
     return trace[-1]
 
-if __name__ == '__main__':
-    app.run_server(host="0.0.0.0", debug=True)
+if __name__ == "__main__":
+    app.run_server(debug=True)

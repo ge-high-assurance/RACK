@@ -1,3 +1,2 @@
-dash==2.6.1
-diskcache
+dash[diskcache]
 dash-bootstrap-components

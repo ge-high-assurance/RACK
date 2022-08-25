@@ -227,4 +227,4 @@ def get_error_trace(e) -> str:
     return trace[-1]
 
 if __name__ == "__main__":
-    app.run_server(host="0.0.0.0", debug=True)
+    app.run_server(host="0.0.0.0", debug=False)

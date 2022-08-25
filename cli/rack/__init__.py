@@ -351,7 +351,7 @@ def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Opt
 
     special_graphs: Optional[List[Url]] = None
     if default_graph:
-        special_graphs = [Url("urn:x-arq:DefaultGraph")]
+        special_graphs = [Url("uri://DefaultGraph")]
 
     if clear:
         if not manifest.modelgraphsFootprint == []:

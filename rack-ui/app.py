@@ -13,11 +13,9 @@ from contextlib import redirect_stdout
 import urllib
 from urllib.parse import urlparse
 import tempfile
-
 import dash
 from dash import DiskcacheManager, Input, Output, html, dcc, State
 import dash_bootstrap_components as dbc
-
 import rack
 from rack import Graph, Manifest
 
@@ -85,10 +83,8 @@ sidebar = html.Div(
     [
         html.Table([
             html.Tr([
-                html.Td( html.Img(src=app.get_asset_url('RACK_cartoon.jpg'), height="90px")),
-                html.Td([
-                    dcc.Markdown("## RACK\n\nin-a-box\n\n_System manager_")
-                ])
+                html.Td(html.Img(src=app.get_asset_url('RACK_cartoon.jpg'), height="90px")),
+                html.Td([dcc.Markdown("## RACK\n\nin-a-box\n\n_System manager_")])
             ])
         ]),
     ],
@@ -107,7 +103,7 @@ done_dialog = dbc.Modal(
 )
 
 content = html.Div(
-    [   
+    [
         dcc.Markdown("Welcome to RACK."),
         html.Div([dcc.Upload( html.Button(id="run-button", children="Load ingestion package", style=BUTTON_STYLE), id='run-button-upload', accept=".zip", multiple=False)]),  # upload button
         html.Div(id="div-status", style=SCROLLING_STATUS_STYLE),                                # displays ingestion status
@@ -132,7 +128,7 @@ def run_button(file_contents):
     status_store_filename = os.path.join(TEMP_DIR, "output_" + str(uuid.uuid4()))
     return status_store_filename
 
-# note:  @dash.callback, not @app.callback.   Requires dash 2.6.1
+
 @dash.callback(
     output=[Output("done-dialog-body", "children"), Output("run-button-upload", "contents")], # 2nd output is to reset uploaded file, otherwise system ignores re-upload of same file
     inputs=Input("status-store", "data"),                           # triggered by creating the store
@@ -169,11 +165,9 @@ def run_ingest(status_store, status_store2, zip_file_contents):
                 manifest = Manifest.fromYAML(manifest_file)
             conn = manifest.getConnection()
             sparqlgraph_url_str = "http://localhost:8080/sparqlGraph/main-oss/sparqlGraph.html?conn=" + urllib.parse.quote(conn, safe="")
-
         time.sleep(1)
     except Exception as e:
         return get_error_trace(e), None  # show done dialog with error
-
     return [dcc.Markdown("Loaded ingestion package."), html.A("Open in SPARQLGraph UI", href=sparqlgraph_url_str, target="_blank", style={"margin-top": "100px"})], None
 
 
@@ -183,7 +177,7 @@ def run_ingest(status_store, status_store2, zip_file_contents):
               prevent_initial_call=True)
 def update_status(n, status_store_filename):
     """
-        Update the displayed status
+    Update the displayed status
     """
     print("update_status") # show it's running
     status = ""
@@ -191,7 +185,6 @@ def update_status(n, status_store_filename):
         with open(status_store_filename, "r") as file:
             status = file.read()
         ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')  # remove ANSI escape sequences (e.g. ESC[32m, ESC[0m) from command output
-
         return ansi_escape.sub('', status)
     except:
         return ""

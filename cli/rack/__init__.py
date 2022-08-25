@@ -343,11 +343,15 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
     go()
 
-def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
+def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool, default_graph: bool) -> None:
     with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
         manifest = Manifest.fromYAML(manifest_file)
 
     base_path = manifest_path.parent
+
+    special_graphs: Optional[List[Url]] = None
+    if default_graph:
+        special_graphs = [Url("urn:x-arq:DefaultGraph")]
 
     if clear:
         if not manifest.modelgraphsFootprint == []:
@@ -360,13 +364,13 @@ def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Opt
     for (step_type, step_file) in manifest.steps:
         stepFile = base_path / step_file
         if StepType.DATA == step_type:
-            ingest_data_driver(stepFile, base_url, None, None, triple_store, triple_store_type, False)
+            ingest_data_driver(stepFile, base_url, special_graphs, special_graphs, triple_store, triple_store_type, False)
         elif StepType.MODEL == step_type:
-            ingest_owl_driver(stepFile, base_url, None, triple_store, triple_store_type, False)
+            ingest_owl_driver(stepFile, base_url, special_graphs, triple_store, triple_store_type, False)
         elif StepType.NODEGROUPS == step_type:
             store_nodegroups_driver(stepFile, base_url)
         elif StepType.MANIFEST == step_type:
-            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False)
+            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, default_graph)
 
 def ingest_data_driver(config_path: Path, base_url: Url, model_graphs: Optional[List[Url]], data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
@@ -637,7 +641,7 @@ def dispatch_data_count(args: SimpleNamespace) -> None:
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.manifest), args.base_url, args.triple_store, args.triple_store_type, args.clear)
+    ingest_manifest_driver(Path(args.manifest), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
@@ -721,6 +725,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     manifest_import_parser.add_argument('manifest', type=str, help='Manifest YAML file')
     manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
+    manifest_import_parser.add_argument('--default-graph', action='store_true', help='Load whole manifest into default graph')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')

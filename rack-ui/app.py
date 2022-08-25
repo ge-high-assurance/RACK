@@ -162,7 +162,7 @@ def run_ingest(status_store, status_store2, zip_file_contents):
                 raise Exception("Cannot load ingestion package: contains multiple default manifest files: " + str(manifests))
             manifest_path = manifest_paths[0]
 
-            rack.ingest_manifest_driver(Path(manifest_path), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True)  # process the manifest
+            rack.ingest_manifest_driver(Path(manifest_path), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True, False)  # process the manifest
 
             # get connection from manifest, construct SPARQLGraph URL
             with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
@@ -170,12 +170,9 @@ def run_ingest(status_store, status_store2, zip_file_contents):
             conn = manifest.getConnection()
             sparqlgraph_url_str = "http://localhost:8080/sparqlGraph/main-oss/sparqlGraph.html?conn=" + urllib.parse.quote(conn, safe="")
 
-        # This is a slight hack.  Write "Done." and wait long enough for interval.  TODO replace with better approach
-        with open(status_store, "a") as f:
-            f.write("Done.")
         time.sleep(1)
     except Exception as e:
-        return get_error_trace(e)  # show done dialog with error
+        return get_error_trace(e), None  # show done dialog with error
 
     return [dcc.Markdown("Loaded ingestion package."), html.A("Open in SPARQLGraph UI", href=sparqlgraph_url_str, target="_blank", style={"margin-top": "100px"})], None
 
@@ -194,9 +191,7 @@ def update_status(n, status_store_filename):
         with open(status_store_filename, "r") as file:
             status = file.read()
         ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')  # remove ANSI escape sequences (e.g. ESC[32m, ESC[0m) from command output
-        
-        if (status.endswith("Done.\n")):    # TODO replace with better approach
-            os.remove(status_store_filename)
+
         return ansi_escape.sub('', status)
     except:
         return ""

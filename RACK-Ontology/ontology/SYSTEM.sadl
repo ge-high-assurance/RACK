@@ -51,7 +51,7 @@ INTERFACE
 	destination is a type of wasImpactedBy.
 
 SYSTEM_DEVELOPMENT
-	(note "ACTIVITY relating to the creation of one or more some SYSTEMs")
+	(note "ACTIVITY related to the creation of one or more SYSTEM(s)")
 	is a type of ACTIVITY.
 
 FUNCTION

@@ -12,6 +12,7 @@ from zipfile import ZipFile
 from contextlib import redirect_stdout
 import urllib
 from urllib.parse import urlparse
+import tempfile
 
 import dash
 from dash import DiskcacheManager, Input, Output, html, dcc, State
@@ -20,7 +21,7 @@ import dash_bootstrap_components as dbc
 import rack
 from rack import Graph, Manifest
 
-TEMP_DIR = "/tmp"   # TODO unhardcode?
+TEMP_DIR = tempfile.gettempdir()
 
 BASE_URL = "http://localhost"
 TRIPLE_STORE = "http://localhost:3030/RACK"
@@ -77,6 +78,7 @@ cache = diskcache.Cache(TEMP_DIR + "/cache")
 background_callback_manager = DiskcacheManager(cache)
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], background_callback_manager=background_callback_manager)
+app.title = 'RACK UI'
 
 # menu
 sidebar = html.Div(
@@ -120,20 +122,19 @@ app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 
 
 @app.callback(Output("status-store", "data"),                       # create store, which will trigger the ingest callback
-              Input('run-button-upload', 'contents'),               # triggered by user selecting an upload file
+              Input("run-button-upload", "contents"),               # triggered by user selecting an upload file
               prevent_initial_call=True
               )
-def run_button(zip_file_contents):
+def run_button(file_contents):
     """
     When an upload file is selected, generate a status store filename which will trigger run_ingest
     """
     status_store_filename = os.path.join(TEMP_DIR, "output_" + str(uuid.uuid4()))
     return status_store_filename
 
-
 # note:  @dash.callback, not @app.callback.   Requires dash 2.6.1
 @dash.callback(
-    output=Output("done-dialog-body", "children"),
+    output=[Output("done-dialog-body", "children"), Output("run-button-upload", "contents")], # 2nd output is to reset uploaded file, otherwise system ignores re-upload of same file
     inputs=Input("status-store", "data"),                           # triggered by creating the store
     state=[State("status-store", "data"), State('run-button-upload', 'contents')],
     background=True,                                                # background callback
@@ -176,7 +177,7 @@ def run_ingest(status_store, status_store2, zip_file_contents):
     except Exception as e:
         return get_error_trace(e)  # show done dialog with error
 
-    return [dcc.Markdown("Loaded ingestion package."), html.A("Open in SPARQLGraph UI", href=sparqlgraph_url_str, target="_blank", style={"margin-top": "100px"})]
+    return [dcc.Markdown("Loaded ingestion package."), html.A("Open in SPARQLGraph UI", href=sparqlgraph_url_str, target="_blank", style={"margin-top": "100px"})], None
 
 
 @app.callback(Output("div-status", "children"),

@@ -17,7 +17,7 @@ import dash
 from dash import DiskcacheManager, Input, Output, html, dcc, State
 import dash_bootstrap_components as dbc
 import rack
-from rack import Graph, Manifest
+from rack import Graph, Manifest, sparql_connection
 
 TEMP_DIR = tempfile.gettempdir()
 
@@ -57,6 +57,7 @@ BUTTON_STYLE = {
     "border-radius": "5px",
     "padding": "0px",
     "background-color": "DeepSkyBlue",
+    "color": "black",
     "border": "none",
 }
 
@@ -94,12 +95,14 @@ sidebar = html.Div(
 # div showing load details/options and load/cancel buttons
 load_div = html.Div(
     [
-        dcc.Markdown("MESSAGE PLACEHOLDER", id="load-div-message"),                                                 # message
+        dcc.Markdown("You have selected ingestion package \"NAME\".", id="load-div-message"),                       # TODO populate from manifest when available
+        dcc.RadioItems([], value="manifest-graphs", id="load-graph-radio", labelStyle={'display': 'block'}, inputStyle={"margin-right": "10px"}),   # choose to load to manifest-specified or default graphs
         dbc.Button("Load", id="load-button", className="ms-auto", n_clicks=0, style=BUTTON_STYLE),                  # load button
         dbc.Button("Cancel", id="cancel-load-button", className="ms-auto", n_clicks=0, style=BUTTON_STYLE)          # cancel button
     ],
     id="load-div",
-    hidden=True
+    hidden=True,
+    style={"margin-top": "50px"},
 )
 
 # dialog indicating unzip error (e.g. no manifest)
@@ -159,7 +162,7 @@ def process_upload_selection(file_contents):
 
 @dash.callback(
     output=[
-            Output("load-div-message", "children"), 
+            Output("load-graph-radio", "options"),
             Output("manifest-filepath", "data"), 
             Output("unzip-error-dialog-body", "children"),
             Output("run-button-upload", "contents")],               # set to None after extracting, else callback ignores re-uploaded file
@@ -186,16 +189,22 @@ def run_unzip(status_filepath, zip_file_contents):
         if len(manifest_paths) > 1:
             raise Exception("Cannot load ingestion package: contains multiple default manifest files: " + str(manifests))
         manifest_path = manifest_paths[0]
+
+        manifest = get_manifest(manifest_path)
+        non_default_graphs_choice = "Load to " + str(manifest.modelgraphsFootprint) + " " + str(manifest.datagraphsFootprint) # TODO Ask Eric for functions to get manifest.modelgraphsFootprint and manifest.datagraphsFootprint
+        radio_choices = [{'label': non_default_graphs_choice, 'value': 'manifest-graphs'}, {'label': 'Load to default graph (for optimized performance)', 'value': 'default-graph'}]
+
     except Exception as e:
-        return None, None, get_error_trace(e), None
-    return "Proceed to load?", manifest_path, None, None
+        return [], None, get_error_trace(e), None
+    return radio_choices, manifest_path, None, None
 
 
 @dash.callback(
     output=Output("done-dialog-body", "children"),
     inputs=Input("load-button", "n_clicks"),                        # triggered by user clicking load button
     state=[
-        State("status-filepath", "data"), 
+        State("load-graph-radio", "value"),                         # load to manifest or default graphs
+        State("status-filepath", "data"),
         State("manifest-filepath", "data")],
     background=True,                                                # background callback
     running=[
@@ -204,19 +213,23 @@ def run_unzip(status_filepath, zip_file_contents):
     ],
     prevent_initial_call=True
 )
-def run_ingest(load_button_clicks, status_filepath, manifest_filepath):
+def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, manifest_filepath):
     """
     Ingest the selected zip file
     """
     try:
+        use_default_graph = (manifest_or_default_graphs == "default-graph")
+
         f = open(status_filepath, "a")
         with redirect_stdout(f):    # send command output to temporary file
-            rack.ingest_manifest_driver(Path(manifest_filepath), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True, False)  # process the manifest
+            rack.ingest_manifest_driver(Path(manifest_filepath), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True, use_default_graph)  # process the manifest
 
         # get connection from manifest, construct SPARQLGraph URL
-        with open(manifest_filepath, mode='r', encoding='utf-8-sig') as manifest_file:
-            manifest = Manifest.fromYAML(manifest_file)
-        conn = manifest.getConnection()
+        if use_default_graph:
+            conn = sparql_connection(BASE_URL, ["uri://DefaultGraph"], "uri://DefaultGraph", [], TRIPLE_STORE, TRIPLE_STORE_TYPE)  # TODO ask for rack.getDefaultGraphConnection(), use it here
+        else:
+            manifest = get_manifest(manifest_filepath)
+            conn = manifest.getConnection()
         sparqlgraph_url_str = "http://localhost:8080/sparqlGraph/main-oss/sparqlGraph.html?conn=" + urllib.parse.quote(conn, safe="")
 
         time.sleep(1)
@@ -247,19 +260,19 @@ def update_status(n, status_filepath):
 ####### simple callbacks to show/hide components #######
 
 @app.callback(Output("load-div", "hidden"),
-              Input("load-div-message", "children"),
+              Input("load-graph-radio", "options"),    # triggered by setting load graph radio options
               Input("load-button", "n_clicks"),
               Input("cancel-load-button", "n_clicks"),
               prevent_initial_call=True
               )
-def manage_load_div(message, load_clicks, cancel_clicks):
+def manage_load_div(radio_options, load_clicks, cancel_clicks):
     """ Show or hide the load div """
     if (get_trigger() in ["load-button.n_clicks", "cancel-load-button.n_clicks"]):
         return True         # load or button pressed, hide div
-    elif message == None:
-        return True         # no message, don't show div
+    elif radio_options == []:
+        return True         # no radio options provided, don't show div
     else:
-        return False        # child added, show div
+        return False        # radio options provided, show div
 
 @app.callback(Output("unzip-error-dialog", "is_open"),
               Input("unzip-error-dialog-body", "children"),
@@ -298,6 +311,12 @@ def get_error_trace(e) -> str:
     """ Get error trace string """
     trace = traceback.format_exception(None, e, e.__traceback__)
     return trace[-1]
+
+def get_manifest(manifest_filepath) -> Manifest:
+    """ Get manifest contents from file """
+    with open(manifest_filepath, mode='r', encoding='utf-8-sig') as manifest_file:
+        manifest = Manifest.fromYAML(manifest_file)
+    return manifest
 
 if __name__ == "__main__":
     app.run_server(host="0.0.0.0", debug=False)

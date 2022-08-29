@@ -146,7 +146,7 @@ app.layout = html.Div([
     ])
 
 
-@app.callback(Output("status-filepath", "data"),                    # create store, which will trigger the ingest callback
+@app.callback(Output("status-filepath", "data"),                    # store a status file path
               Input("run-button-upload", "contents"),               # triggered by user selecting an upload file
               prevent_initial_call=True
               )
@@ -158,7 +158,11 @@ def process_upload_selection(file_contents):
 
 
 @dash.callback(
-    output=[Output("load-div-message", "children"), Output("manifest-filepath", "data"), Output("unzip-error-dialog-body", "children")],
+    output=[
+            Output("load-div-message", "children"), 
+            Output("manifest-filepath", "data"), 
+            Output("unzip-error-dialog-body", "children"),
+            Output("run-button-upload", "contents")],               # set to None after extracting, else callback ignores re-uploaded file
     inputs=Input("status-filepath", "data"),                        # triggered by creating the status file path
     state=State('run-button-upload', 'contents'),
     background=True,                                                # background callback
@@ -183,14 +187,16 @@ def run_unzip(status_filepath, zip_file_contents):
             raise Exception("Cannot load ingestion package: contains multiple default manifest files: " + str(manifests))
         manifest_path = manifest_paths[0]
     except Exception as e:
-        return None, None, get_error_trace(e)
-    return "Proceed to load?", manifest_path, None
+        return None, None, get_error_trace(e), None
+    return "Proceed to load?", manifest_path, None, None
 
 
 @dash.callback(
     output=Output("done-dialog-body", "children"),
     inputs=Input("load-button", "n_clicks"),                        # triggered by user clicking load button
-    state=[State("status-filepath", "data"), State("manifest-filepath", "data")],
+    state=[
+        State("status-filepath", "data"), 
+        State("manifest-filepath", "data")],
     background=True,                                                # background callback
     running=[
         (Output("run-button", "disabled"), True, False),            # disable the run button while running
@@ -220,8 +226,8 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath):
 
 
 @app.callback(Output("status-div", "children"),
-              Input("status-interval", "n_intervals"),   # triggered at regular interval
-              State("status-filepath", "data"),
+              Input("status-interval", "n_intervals"),  # triggered at regular interval
+              Input("status-filepath", "data"),         # or triggered by resetting the file path (to clear out the status when selecting a new file)
               prevent_initial_call=True)
 def update_status(n, status_filepath):
     """
@@ -294,4 +300,4 @@ def get_error_trace(e) -> str:
     return trace[-1]
 
 if __name__ == "__main__":
-    app.run_server(host="0.0.0.0", debug=True)
+    app.run_server(host="0.0.0.0", debug=False)

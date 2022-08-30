@@ -18,6 +18,7 @@ from dash import DiskcacheManager, Input, Output, html, dcc, State
 import dash_bootstrap_components as dbc
 import rack
 from rack import Graph, Manifest, sparql_connection
+import semtk3
 
 TEMP_DIR = tempfile.gettempdir()
 
@@ -57,7 +58,6 @@ BUTTON_STYLE = {
     "border-radius": "5px",
     "padding": "0px",
     "background-color": "DeepSkyBlue",
-    "color": "black",
     "border": "none",
 }
 
@@ -228,10 +228,10 @@ def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, 
         # get connection from manifest, construct SPARQLGraph URL
         manifest = get_manifest(manifest_filepath)
         if use_default_graph:
-            conn = manifest.getDefaultGraphConnection()
+            conn_str = manifest.getDefaultGraphConnection()
         else:
-            conn = manifest.getConnection()
-        sparqlgraph_url_str = "http://localhost:8080/sparqlGraph/main-oss/sparqlGraph.html?conn=" + urllib.parse.quote(conn, safe="")  # TODO use semtk3 getSGURL()  (or rack pass-through)
+            conn_str = manifest.getConnection()
+        sparqlgraph_url_str = semtk3.get_sparqlgraph_url("http://localhost:8080", conn_json_str=conn_str)
 
         time.sleep(1)
     except Exception as e:
@@ -320,4 +320,4 @@ def get_manifest(manifest_filepath) -> Manifest:
     return manifest
 
 if __name__ == "__main__":
-    app.run_server(host="0.0.0.0", debug=True)
+    app.run_server(host="0.0.0.0", debug=False)

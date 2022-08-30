@@ -349,24 +349,35 @@ def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Opt
 
     base_path = manifest_path.parent
 
-    special_graphs: Optional[List[Url]] = None
-    if default_graph:
-        special_graphs = [Url("uri://DefaultGraph")]
-
     if clear:
-        if not manifest.modelgraphsFootprint == []:
-            clear_driver(base_url, manifest.modelgraphsFootprint, manifest.datagraphsFootprint, triple_store, triple_store_type, Graph.MODEL)
-        if not manifest.datagraphsFootprint == []:
-            clear_driver(base_url, manifest.modelgraphsFootprint, manifest.datagraphsFootprint, triple_store, triple_store_type, Graph.DATA)
-        if not manifest.nodegroupsFootprint == []:
-            delete_nodegroups_driver(manifest.nodegroupsFootprint, True, True, True, base_url)
+        if default_graph:
+            # clear only the default graph first
+            clear_driver(base_url, [Url("uri://DefaultGraph")], [], triple_store, triple_store_type, Graph.MODEL)
+        else:
+            # clear the whole footprint
+            modelgraphs = manifest.getModelgraphsFootprint()
+            datagraphs = manifest.getDatagraphsFootprint()
+            if not modelgraphs == []:
+                clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.MODEL)
+            if not datagraphs == []:
+                clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.DATA)
+        
+        if not manifest.getNodegroupsFootprint() == []:
+            delete_nodegroups_driver(manifest.getNodegroupsFootprint(), True, True, True, base_url)
+
+    # We don't override the model and datagraphs from the ingestion components unless it's for default
+    # the step itself gets to pick the target graphs
+    if default_graph:
+        targetgraph = [Url("uri://DefaultGraph")]
+    else:
+        targetgraph = None
 
     for (step_type, step_file) in manifest.steps:
         stepFile = base_path / step_file
         if StepType.DATA == step_type:
-            ingest_data_driver(stepFile, base_url, special_graphs, special_graphs, triple_store, triple_store_type, False)
+            ingest_data_driver(stepFile, base_url, targetgraph, targetgraph, triple_store, triple_store_type, False)
         elif StepType.MODEL == step_type:
-            ingest_owl_driver(stepFile, base_url, special_graphs, triple_store, triple_store_type, False)
+            ingest_owl_driver(stepFile, base_url, targetgraph, triple_store, triple_store_type, False)
         elif StepType.NODEGROUPS == step_type:
             store_nodegroups_driver(stepFile, base_url)
         elif StepType.MANIFEST == step_type:

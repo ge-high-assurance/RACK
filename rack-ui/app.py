@@ -95,7 +95,7 @@ sidebar = html.Div(
 # div showing load details/options and load/cancel buttons
 load_div = html.Div(
     [
-        dcc.Markdown("You have selected ingestion package \"NAME\".", id="load-div-message"),                       # TODO populate from manifest when available
+        dcc.Markdown("", id="load-div-message"),
         dcc.RadioItems([], value="manifest-graphs", id="load-graph-radio", labelStyle={'display': 'block'}, inputStyle={"margin-right": "10px"}),   # choose to load to manifest-specified or default graphs
         dbc.Button("Load", id="load-button", className="ms-auto", n_clicks=0, style=BUTTON_STYLE),                  # load button
         dbc.Button("Cancel", id="cancel-load-button", className="ms-auto", n_clicks=0, style=BUTTON_STYLE)          # cancel button
@@ -131,7 +131,7 @@ content = html.Div(
     [
         sidebar,
         dcc.Markdown("Welcome to RACK."),
-        html.Div([dcc.Upload( html.Button(id="run-button", children="Load ingestion package", style=BUTTON_STYLE), id='run-button-upload', accept=".zip", multiple=False)]),  # upload button
+        html.Div([dcc.Upload( html.Button(id="run-button", children="Select ingestion package", style=BUTTON_STYLE), id='run-button-upload', accept=".zip", multiple=False)]),  # upload button
         load_div,
         html.Div(id="status-div", style=SCROLLING_STATUS_STYLE),                                # displays ingestion status
         unzip_error_dialog,
@@ -162,6 +162,7 @@ def process_upload_selection(file_contents):
 
 @dash.callback(
     output=[
+            Output("load-div-message", "children"),
             Output("load-graph-radio", "options"),
             Output("manifest-filepath", "data"), 
             Output("unzip-error-dialog-body", "children"),
@@ -191,12 +192,12 @@ def run_unzip(status_filepath, zip_file_contents):
         manifest_path = manifest_paths[0]
 
         manifest = get_manifest(manifest_path)
-        non_default_graphs_choice = "Load to " + str(manifest.modelgraphsFootprint) + " " + str(manifest.datagraphsFootprint) # TODO Ask Eric for functions to get manifest.modelgraphsFootprint and manifest.datagraphsFootprint
-        radio_choices = [{'label': non_default_graphs_choice, 'value': 'manifest-graphs'}, {'label': 'Load to default graph (for optimized performance)', 'value': 'default-graph'}]
+        manifest_graphs_option = "Load to " + str(manifest.getModelgraphsFootprint()) + " " + str(manifest.getDatagraphsFootprint())
+        radio_choices = [{'label': manifest_graphs_option, 'value': 'manifest-graphs'}, {'label': 'Load to default graph (for optimized performance)', 'value': 'default-graph'}]
 
     except Exception as e:
-        return [], None, get_error_trace(e), None
-    return radio_choices, manifest_path, None, None
+        return "", [], None, get_error_trace(e), None
+    return "You have selected package '" + manifest.getName() + "'", radio_choices, manifest_path, None, None
 
 
 @dash.callback(
@@ -225,12 +226,12 @@ def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, 
             rack.ingest_manifest_driver(Path(manifest_filepath), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True, use_default_graph)  # process the manifest
 
         # get connection from manifest, construct SPARQLGraph URL
+        manifest = get_manifest(manifest_filepath)
         if use_default_graph:
-            conn = sparql_connection(BASE_URL, ["uri://DefaultGraph"], "uri://DefaultGraph", [], TRIPLE_STORE, TRIPLE_STORE_TYPE)  # TODO ask for rack.getDefaultGraphConnection(), use it here
+            conn = manifest.getDefaultGraphConnection()
         else:
-            manifest = get_manifest(manifest_filepath)
             conn = manifest.getConnection()
-        sparqlgraph_url_str = "http://localhost:8080/sparqlGraph/main-oss/sparqlGraph.html?conn=" + urllib.parse.quote(conn, safe="")
+        sparqlgraph_url_str = "http://localhost:8080/sparqlGraph/main-oss/sparqlGraph.html?conn=" + urllib.parse.quote(conn, safe="")  # TODO use semtk3 getSGURL()  (or rack pass-through)
 
         time.sleep(1)
     except Exception as e:
@@ -319,4 +320,4 @@ def get_manifest(manifest_filepath) -> Manifest:
     return manifest
 
 if __name__ == "__main__":
-    app.run_server(host="0.0.0.0", debug=False)
+    app.run_server(host="0.0.0.0", debug=True)

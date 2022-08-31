@@ -114,7 +114,7 @@ class Manifest:
 
     def getDefaultGraphConnection(self, triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:
         """Build a connection string using the triple store's default graph."""
-        return semtk3.build_default_connection_str(self.name, triple_store_type, triple_store)
+        return semtk3.build_default_connection_str("Default Graph", triple_store_type, triple_store)
 
     @staticmethod
     def fromYAML(src: Any) -> 'Manifest':

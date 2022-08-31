@@ -1,0 +1,10 @@
+name: 'RACK ontology'
+
+footprint:
+  model-graphs:
+    - http://rack001/model
+
+steps:
+  - model:      ../RACK-Ontology/OwlModels/import.yaml
+  - nodegroups: ../nodegroups/queries
+  - nodegroups: ../nodegroups/ingestion/arcos.rack

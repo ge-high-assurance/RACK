@@ -29,49 +29,6 @@ TRIPLE_STORE_TYPE = "fuseki"
 # name of default manifest file within ingestion package
 MANIFEST_FILE_NAME = "manifest.yaml"
 
-# style for sidebar
-SIDEBAR_STYLE = {
-    "position": "fixed",
-    "top": 0,
-    "left": 0,
-    "bottom": 0,
-    "width": "16rem",
-    "padding": "2rem 1rem",
-    "background-color": "#f8f9fa",
-}
-
-# style for main content
-CONTENT_STYLE = {
-    "margin-left": "18rem",
-    "margin-right": "2rem",
-    "padding": "2rem 1rem",
-}
-
-# style for buttons
-BUTTON_STYLE = {
-    "font-size": "16px",
-    "width": "200px",
-    "display": "inline-block",
-    "margin-bottom": "10px",
-    "margin-right": "5px",
-    "height":"25px",
-    "border-radius": "5px",
-    "padding": "0px",
-    "background-color": "DeepSkyBlue",
-    "border": "none",
-}
-
-# style for scrolling status
-SCROLLING_STATUS_STYLE = {
-    "margin-top": "100px",
-    "white-space": "pre-wrap",
-    "border-style": "none",
-    "height": 500,
-    "width": 1200, "overflow-y": "auto",
-    "display": "flex",
-    "flex-direction": "column-reverse"
-}
-
 # diskcache for non-production apps when developing locally (fine for our Docker application).  Needed for @dash.callback with background=True
 cache = diskcache.Cache(TEMP_DIR + "/cache")
 background_callback_manager = DiskcacheManager(cache)
@@ -89,7 +46,7 @@ sidebar = html.Div(
             ])
         ]),
     ],
-    style=SIDEBAR_STYLE,
+    className="sidebar"
 )
 
 # div showing load details/options and load/cancel buttons
@@ -97,8 +54,8 @@ load_div = html.Div(
     [
         dcc.Markdown("", id="load-div-message"),
         dcc.RadioItems([], value="manifest-graphs", id="load-graph-radio", labelStyle={'display': 'block'}, inputStyle={"margin-right": "10px"}),   # choose to load to manifest-specified or default graphs
-        dbc.Button("Load", id="load-button", className="ms-auto", n_clicks=0, style=BUTTON_STYLE),                  # load button
-        dbc.Button("Cancel", id="cancel-load-button", className="ms-auto", n_clicks=0, style=BUTTON_STYLE)          # cancel button
+        html.Button("Load", id="load-button", n_clicks=0),                  # load button
+        html.Button("Cancel", id="cancel-load-button", n_clicks=0)          # cancel button
     ],
     id="load-div",
     hidden=True,
@@ -109,7 +66,7 @@ load_div = html.Div(
 unzip_error_dialog = dbc.Modal(
     [
         dbc.ModalBody("UNZIP ERROR PLACEHOLDER", id="unzip-error-dialog-body"),                                                     # message
-        dbc.ModalFooter(dbc.Button("Close", id="unzip-error-dialog-button", className="ms-auto", n_clicks=0, style=BUTTON_STYLE)),  # close button
+        dbc.ModalFooter(html.Button("Close", id="unzip-error-dialog-button", n_clicks=0)),  # close button
     ],
     id="unzip-error-dialog",
     is_open=False,
@@ -120,7 +77,7 @@ unzip_error_dialog = dbc.Modal(
 done_dialog = dbc.Modal(
     [
         dbc.ModalBody("MESSAGE PLACEHOLDER", id="done-dialog-body"),                                        # message
-        dbc.ModalFooter(dbc.Button("Close", id="done-dialog-button", className="ms-auto", n_clicks=0)),     # close button
+        dbc.ModalFooter(html.Button("Close", id="done-dialog-button", n_clicks=0)),     # close button
     ],
     id="done-dialog",
     is_open=False,
@@ -131,13 +88,13 @@ content = html.Div(
     [
         sidebar,
         dcc.Markdown("Welcome to RACK."),
-        html.Div([dcc.Upload( html.Button(id="run-button", children="Select ingestion package", style=BUTTON_STYLE), id='run-button-upload', accept=".zip", multiple=False)]),  # upload button
+        html.Div([dcc.Upload( html.Button(id="run-button", children="Select ingestion package"), id='run-button-upload', accept=".zip", multiple=False)]),  # upload button
         load_div,
-        html.Div(id="status-div", style=SCROLLING_STATUS_STYLE),                                # displays ingestion status
+        html.Div(id="status-div", className="scrollarea"),      # displays ingestion status
         unzip_error_dialog,
         done_dialog,
     ],
-    style=CONTENT_STYLE,
+    style = { "margin-left": "18rem", "margin-right": "2rem", "padding": "2rem 1rem" }
 )
 
 app.layout = html.Div([
@@ -148,17 +105,7 @@ app.layout = html.Div([
         dcc.Interval(id='status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display    
     ])
 
-
-@app.callback(Output("status-filepath", "data"),                    # store a status file path
-              Input("run-button-upload", "contents"),               # triggered by user selecting an upload file
-              prevent_initial_call=True
-              )
-def process_upload_selection(file_contents):
-    """
-    When an upload file is selected, generate a status file name (which will trigger run_zip)
-    """
-    return os.path.join(TEMP_DIR, "output_" + str(uuid.uuid4()))
-
+####### callbacks #######
 
 @dash.callback(
     output=[
@@ -166,20 +113,21 @@ def process_upload_selection(file_contents):
             Output("load-graph-radio", "options"),
             Output("manifest-filepath", "data"), 
             Output("unzip-error-dialog-body", "children"),
+            Output("status-filepath", "data"),                      # store a status file path
             Output("run-button-upload", "contents")],               # set to None after extracting, else callback ignores re-uploaded file
-    inputs=Input("status-filepath", "data"),                        # triggered by creating the status file path
-    state=State('run-button-upload', 'contents'),
+    inputs=Input("run-button-upload", "contents"),                         # triggered by user selecting an upload file
     background=True,                                                # background callback
     running=[
         (Output("run-button", "disabled"), True, False),            # disable the run button while running
     ],
     prevent_initial_call=True
 )
-def run_unzip(status_filepath, zip_file_contents):
+def run_unzip(zip_file_contents):
     """
     Extract the selected zip file
     """
     try:
+
         tmp_dir = TEMP_DIR + "/ingest_" + str(uuid.uuid4())  # temp directory to store the unzipped package
         zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
         zip_obj = ZipFile(zip_str, 'r')
@@ -195,9 +143,12 @@ def run_unzip(status_filepath, zip_file_contents):
         manifest_graphs_option = "Load to " + str(manifest.getModelgraphsFootprint()) + " " + str(manifest.getDatagraphsFootprint())
         radio_choices = [{'label': manifest_graphs_option, 'value': 'manifest-graphs'}, {'label': 'Load to default graph (for optimized performance)', 'value': 'default-graph'}]
 
+        # generate a file in which to capture the ingestion status
+        status_filepath = os.path.join(TEMP_DIR, "output_" + str(uuid.uuid4()))
+
     except Exception as e:
-        return "", [], None, get_error_trace(e), None
-    return "You have selected package '" + manifest.getName() + "'", radio_choices, manifest_path, None, None
+        return "", [], None, get_error_trace(e), status_filepath, None
+    return "You have selected package '" + manifest.getName() + "'", radio_choices, manifest_path, None, status_filepath, None
 
 
 @dash.callback(

@@ -1,0 +1,55 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://jena.hpl.hp.com/schemas/2003/03/ont-manager#">
+  <j.0:OntologySpec>
+    <j.0:createdBy>ExternalEmfResource</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/home/rack/RACK/EntityResolution/Model.owl"/>
+    <j.0:publicURI rdf:resource="http://GenericDO178C/Plan.sadl"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+    <j.0:altURL rdf:resource="file:/home/rack/RACK/EntityResolution/OwlModels/SadlImplicitModel.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>sadlimplicitmodel</j.0:prefix>
+    <j.0:sadlSourceURL>platform:/resource/EntityResolution/ImplicitModel/SadlImplicitModel.sadl</j.0:sadlSourceURL>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:publicURI rdf:resource="http://sadl.org/builtinfunctions"/>
+    <j.0:altURL rdf:resource="file:/home/rack/RACK/EntityResolution/OwlModels/SadlBuiltinFunctions.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>builtinfunctions</j.0:prefix>
+    <j.0:sadlSourceURL>platform:/resource/EntityResolution/ImplicitModel/SadlBuiltinFunctions.sadl</j.0:sadlSourceURL>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix>sadllistmodel</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/home/rack/RACK/EntityResolution/OwlModels/SadlListModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadllistmodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:publicURI rdf:resource="http://arcos.rack/EntityResolution"/>
+    <j.0:altURL rdf:resource="file:/home/rack/RACK/EntityResolution/OwlModels/EntityResolution.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:prefix>er</j.0:prefix>
+    <j.0:sadlSourceURL>platform:/resource/EntityResolution/EntityResolution.sadl</j.0:sadlSourceURL>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:publicURI rdf:resource="http://EntityResolution/Queries"/>
+    <j.0:altURL rdf:resource="file:/home/rack/RACK/EntityResolution/OwlModels/Queries.owl"/>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:sadlSourceURL>platform:/resource/EntityResolution/Queries.sadl</j.0:sadlSourceURL>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix>sadlbasemodel</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/home/rack/RACK/EntityResolution/OwlModels/SadlBaseModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlbasemodel"/>
+  </j.0:OntologySpec>
+</rdf:RDF>

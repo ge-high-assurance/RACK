@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<RACK-DATA>
+  <PROV_S_ACTIVITY>
+    <description>Data that was ingested using the ARCOS Scraping Tool Kit.</description>
+    <identifier>Resolutions-2</identifier>
+    <startedAtTime>2022-08-19 22:14:43</startedAtTime>
+    <title>Resolutions-2</title>
+  </PROV_S_ACTIVITY>
+  <EntityResolution_AssumedSameAs>
+    <identifier>REQUIREMENTS:REQUIREMENT#L1-REQ-2</identifier>
+    <primaryThing_identifier>L1-REQ-2</primaryThing_identifier>
+    <secondaryThing_identifier>[L1-REQ-2]</secondaryThing_identifier>
+  </EntityResolution_AssumedSameAs>
+  <PROV_S_ACTIVITY>
+    <endedAtTime>2022-08-19 22:14:43</endedAtTime>
+    <identifier>Resolutions-2</identifier>
+  </PROV_S_ACTIVITY>
+</RACK-DATA>

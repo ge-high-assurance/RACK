@@ -17,7 +17,7 @@ import dash
 from dash import DiskcacheManager, Input, Output, html, dcc, State
 import dash_bootstrap_components as dbc
 import rack
-from rack import Graph, Manifest, sparql_connection
+from rack import Manifest
 import semtk3
 
 TEMP_DIR = tempfile.gettempdir()
@@ -88,7 +88,7 @@ content = html.Div(
     [
         sidebar,
         dcc.Markdown("Welcome to RACK."),
-        html.Div([dcc.Upload( html.Button(id="run-button", children="Select ingestion package"), id='run-button-upload', accept=".zip", multiple=False)]),  # upload button
+        html.Div([dcc.Upload( html.Button(id="select-button", children="Select ingestion package"), id='select-button-upload', accept=".zip", multiple=False)]),  # upload button
         load_div,
         html.Div(id="status-div", className="scrollarea"),      # displays ingestion status
         unzip_error_dialog,
@@ -114,11 +114,11 @@ app.layout = html.Div([
             Output("manifest-filepath", "data"), 
             Output("unzip-error-dialog-body", "children"),
             Output("status-filepath", "data"),                      # store a status file path
-            Output("run-button-upload", "contents")],               # set to None after extracting, else callback ignores re-uploaded file
-    inputs=Input("run-button-upload", "contents"),                         # triggered by user selecting an upload file
+            Output("select-button-upload", "contents")],               # set to None after extracting, else callback ignores re-uploaded file
+    inputs=Input("select-button-upload", "contents"),                         # triggered by user selecting an upload file
     background=True,                                                # background callback
     running=[
-        (Output("run-button", "disabled"), True, False),            # disable the run button while running
+        (Output("select-button", "disabled"), True, False),            # disable the run button while running
     ],
     prevent_initial_call=True
 )
@@ -145,9 +145,13 @@ def run_unzip(zip_file_contents):
         # generate a file in which to capture the ingestion status
         status_filepath = os.path.join(TEMP_DIR, "output_" + str(uuid.uuid4()))
 
+        selected_message = "You have selected package '" + manifest.getName() + "'"
+        if manifest.getDescription() != None and manifest.getDescription().strip() != "":
+            selected_message = selected_message + " (" + manifest.getDescription() + ")"
+
     except Exception as e:
         return "", [], None, get_error_trace(e), status_filepath, None
-    return "You have selected package '" + manifest.getName() + "'", radio_choices, manifest_path, None, status_filepath, None
+    return selected_message, radio_choices, manifest_path, None, status_filepath, None
 
 
 @dash.callback(
@@ -159,7 +163,7 @@ def run_unzip(zip_file_contents):
         State("manifest-filepath", "data")],
     background=True,                                                # background callback
     running=[
-        (Output("run-button", "disabled"), True, False),            # disable the run button while running
+        (Output("select-button", "disabled"), True, False),            # disable the run button while running
         (Output("status-interval", "disabled"), False, True)     # enable the interval component while running
     ],
     prevent_initial_call=True

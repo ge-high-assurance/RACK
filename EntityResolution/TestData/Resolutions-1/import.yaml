@@ -1,0 +1,9 @@
+data-graph: "http://rack001/data"
+ingestion-steps:
+#Phase1: Identifiers Only
+- {class: "http://arcos.rack/EntityResolution#AssumedSameAs", csv: "EntityResolution_AssumedSameAs1.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY1.csv"}
+
+#Phase2: All Evidence
+- {class: "http://arcos.rack/EntityResolution#AssumedSameAs", csv: "EntityResolution_AssumedSameAs2.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY2.csv"}

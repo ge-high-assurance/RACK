@@ -127,7 +127,6 @@ def run_unzip(zip_file_contents):
     Extract the selected zip file
     """
     try:
-
         tmp_dir = TEMP_DIR + "/ingest_" + str(uuid.uuid4())  # temp directory to store the unzipped package
         zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
         zip_obj = ZipFile(zip_str, 'r')

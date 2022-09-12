@@ -28,7 +28,7 @@ sidebar = html.Div(
         html.Table([
             html.Tr([
                 html.Td(html.Img(src=app.get_asset_url('RACK_cartoon.jpg'), height="90px")),
-                html.Td([dcc.Markdown("## RACK\n\nin-a-box\n\n_System manager_")]),
+                html.Td([dcc.Markdown("## RACK\n_System manager_")]),
             ]),
             html.Tr([
                 links_div

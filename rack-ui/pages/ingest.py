@@ -20,7 +20,7 @@ import rack
 from rack import Manifest
 import semtk3
 
-dash.register_page(__name__, name='Load Data')
+dash.register_page(__name__, name='Load Data', title="RACK UI")
 
 BASE_URL = "http://localhost"
 TRIPLE_STORE = "http://localhost:3030/RACK"
@@ -69,6 +69,7 @@ done_dialog = dbc.Modal(
 content = html.Div(
     [
         html.H2("Load data"),
+        dcc.Markdown("_Load data into RACK from an ingestion package on your local machine_"),
         html.Div([dcc.Upload( html.Button(id="select-button", children="Select ingestion package"), id='select-button-upload', accept=".zip", multiple=False)]),  # upload button
         load_div,
         html.Div(id="status-div", className="scrollarea"),      # displays ingestion status
@@ -82,7 +83,7 @@ layout = html.Div([
         content,
         dcc.Store("status-filepath"),       # stores the filename of the temp file containing status
         dcc.Store("manifest-filepath"),         # stores the path to the manifest file
-        dcc.Interval(id='status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display    
+        dcc.Interval(id='status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
     ])
 
 ####### callbacks #######
@@ -130,7 +131,7 @@ def run_unzip(zip_file_contents):
             selected_message = selected_message + " (" + manifest.getDescription() + ")"
 
     except Exception as e:
-        return "", [], None, get_error_trace(e), status_filepath, None
+        return "", [], None, get_error_trace(e), None, None
     return selected_message, radio_choices, manifest_path, None, status_filepath, None
 
 
@@ -236,7 +237,7 @@ def manage_done_dialog(children, n_clicks):
         return True     # child added, show the dialog
 
 
-# ####### convenience functions #######
+####### convenience functions #######
 
 def get_trigger():
     """ Get the input that triggered a callback (for @app.callback only, not @dash.callback) """

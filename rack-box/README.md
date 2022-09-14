@@ -37,8 +37,7 @@ our workflows for the most up to date way to download these files,
 although we will mention each file here as well:
 
 - `files/fuseki.tar.gz`: Download latest Fuseki release tarball from
-  <https://jena.apache.org/download/> and rename it (note we still are
-  using version 3.16.0 instead of the latest release, though)
+  <https://jena.apache.org/download/> and rename it
 
 - `files/semtk.tar.gz`: Download latest SemTK release tarball from
   <https://github.com/ge-semtk/semtk/releases> and rename it

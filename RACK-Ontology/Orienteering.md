@@ -262,7 +262,19 @@ Changes:
    TEST_RECORD.testRecordProcedure though.
 
 4. Modify TEST_RECORD, which currently parallels TEST_STEP but doesn't add any
-   new information (and if TEST_RECORD.nextRecord conflicts with
-   TEST_STEP.nextStep that could be problematic.
+   new information.  The original idea was that the output side paralleled the
+   input side, but it's not clear that the parallel to the TEST_STEP can be
+   extracted reliably from the test output.  There's also a concern about if
+   TEST_RECORD.nextRecord conflicts with TEST_STEP.nextStep what that would mean.
+   Taking a step back from this approach, it seems that ultimately the
+   TEST_RESULTS should match up to the TESTS in 1:1, and if there's too many of
+   either, that is a reasonable indication of a mismatch.  Other than that, there
+   doesn't seem to be any useful information imparted by trying to have the
+   TEST_RECORD as a parallel to TEST_STEP (it doesn't fulfill any of the
+   considerations discussed above).  Instead, TEST_RECORD can be used to track
+   the run of a subset of tests (where the TEST_RECORD corresponds to a .out file
+   captured from a TEST_EXECUTION).
 
 5. Add fields to TEST_EXECUTION
+
+6. Adds TEST_ANNOTATION

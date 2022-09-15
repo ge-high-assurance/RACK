@@ -1,24 +1,20 @@
+""" Content for the "load data" page """
+
 import time
-import os
-import re
-import tempfile
-import uuid
 import io
-import traceback
 import base64
 import glob
 from contextlib import redirect_stdout
 from urllib.parse import urlparse
 from pathlib import Path
 from zipfile import ZipFile
-
 import dash
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
-
 import rack
 from rack import Manifest
 import semtk3
+from .helper import *
 
 dash.register_page(__name__, name='Load Data', title="RACK UI", order=2)
 
@@ -28,8 +24,6 @@ TRIPLE_STORE_TYPE = "fuseki"
 
 # name of default manifest file within ingestion package
 MANIFEST_FILE_NAME = "manifest.yaml"
-
-TEMP_DIR = tempfile.gettempdir()
 
 # div showing load details/options and load/cancel buttons
 load_div = html.Div(
@@ -47,7 +41,7 @@ load_div = html.Div(
 # dialog indicating unzip error (e.g. no manifest)
 unzip_error_dialog = dbc.Modal(
     [
-        dbc.ModalBody("UNZIP ERROR PLACEHOLDER", id="unzip-error-dialog-body"),                                                     # message
+        dbc.ModalBody("UNZIP ERROR PLACEHOLDER", id="unzip-error-dialog-body"),             # message
         dbc.ModalFooter(html.Button("Close", id="unzip-error-dialog-button", n_clicks=0)),  # close button
     ],
     id="unzip-error-dialog",
@@ -58,7 +52,7 @@ unzip_error_dialog = dbc.Modal(
 # dialog confirming load done
 done_dialog = dbc.Modal(
     [
-        dbc.ModalBody("MESSAGE PLACEHOLDER", id="done-dialog-body"),                                        # message
+        dbc.ModalBody("MESSAGE PLACEHOLDER", id="done-dialog-body"),                    # message
         dbc.ModalFooter(html.Button("Close", id="done-dialog-button", n_clicks=0)),     # close button
     ],
     id="done-dialog",
@@ -81,7 +75,7 @@ content = html.Div(
 layout = html.Div([
         dcc.Location(id="url"),
         content,
-        dcc.Store("status-filepath"),       # stores the filename of the temp file containing status
+        dcc.Store("status-filepath"),           # stores the filename of the temp file containing status
         dcc.Store("manifest-filepath"),         # stores the path to the manifest file
         dcc.Interval(id='status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
     ])
@@ -95,11 +89,11 @@ layout = html.Div([
             Output("manifest-filepath", "data"), 
             Output("unzip-error-dialog-body", "children"),
             Output("status-filepath", "data"),                      # store a status file path
-            Output("select-button-upload", "contents")],               # set to None after extracting, else callback ignores re-uploaded file
-    inputs=Input("select-button-upload", "contents"),                         # triggered by user selecting an upload file
+            Output("select-button-upload", "contents")],            # set to None after extracting, else callback ignores re-uploaded file
+    inputs=Input("select-button-upload", "contents"),               # triggered by user selecting an upload file
     background=True,                                                # background callback
     running=[
-        (Output("select-button", "disabled"), True, False),            # disable the run button while running
+        (Output("select-button", "disabled"), True, False),         # disable the run button while running
     ],
     prevent_initial_call=True
 )
@@ -108,7 +102,7 @@ def run_unzip(zip_file_contents):
     Extract the selected zip file
     """
     try:
-        tmp_dir = TEMP_DIR + "/ingest_" + str(uuid.uuid4())  # temp directory to store the unzipped package
+        tmp_dir = get_temp_dir_unique("ingest")   # temp directory to store the unzipped package
         zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
         zip_obj = ZipFile(zip_str, 'r')
         zip_obj.extractall(path=tmp_dir)  # unzip the package
@@ -124,7 +118,7 @@ def run_unzip(zip_file_contents):
         radio_choices = [{'label': manifest_graphs_option, 'value': 'manifest-graphs'}, {'label': 'Load to default graph (for optimized performance)', 'value': 'default-graph'}]
 
         # generate a file in which to capture the ingestion status
-        status_filepath = os.path.join(TEMP_DIR, "output_" + str(uuid.uuid4()))
+        status_filepath = get_temp_dir_unique("output")
 
         selected_message = "You have selected package '" + manifest.getName() + "'"
         if manifest.getDescription() != None and manifest.getDescription().strip() != "":
@@ -144,8 +138,8 @@ def run_unzip(zip_file_contents):
         State("manifest-filepath", "data")],
     background=True,                                                # background callback
     running=[
-        (Output("select-button", "disabled"), True, False),            # disable the run button while running
-        (Output("status-interval", "disabled"), False, True)     # enable the interval component while running
+        (Output("select-button", "disabled"), True, False),         # disable the run button while running
+        (Output("status-interval", "disabled"), False, True)        # enable the interval component while running
     ],
     prevent_initial_call=True
 )
@@ -187,8 +181,7 @@ def update_status(n, status_filepath):
     try:
         with open(status_filepath, "r") as file:
             status = file.read()
-        ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')  # remove ANSI escape sequences (e.g. ESC[32m, ESC[0m) from command output
-        return ansi_escape.sub('', status)
+        return clean_for_display(status)
     except:
         return ""
 
@@ -238,15 +231,6 @@ def manage_done_dialog(children, n_clicks):
 
 
 ####### convenience functions #######
-
-def get_trigger():
-    """ Get the input that triggered a callback (for @app.callback only, not @dash.callback) """
-    return dash.callback_context.triggered[0]['prop_id']
-
-def get_error_trace(e) -> str:
-    """ Get error trace string """
-    trace = traceback.format_exception(None, e, e.__traceback__)
-    return trace[-1]
 
 def get_manifest(manifest_filepath) -> Manifest:
     """ Get manifest contents from file """

@@ -1,14 +1,13 @@
-import tempfile
-import diskcache
+""" Main application page """
 
+import diskcache
 import dash
 from dash import Dash, DiskcacheManager, html, dcc
 import dash_bootstrap_components as dbc
-
-TEMP_DIR = tempfile.gettempdir()
+from pages.helper import *
 
 # diskcache for non-production apps when developing locally (fine for our Docker application).  Needed for @dash.callback with background=True
-cache = diskcache.Cache(TEMP_DIR + "/cache")
+cache = diskcache.Cache(get_temp_dir() + "/cache")
 background_callback_manager = DiskcacheManager(cache)
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], background_callback_manager=background_callback_manager, use_pages=True)

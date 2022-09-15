@@ -1,19 +1,14 @@
-import os
-import re
-import tempfile
-import uuid
+""" Content for the "verify data" page """
+
 import time
 import subprocess
-import traceback
 from contextlib import redirect_stdout
-
 import dash
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
+from .helper import *
 
 dash.register_page(__name__, name='Verify Data', title="RACK UI", order=3)
-
-TEMP_DIR = tempfile.gettempdir()  # TODO copied from ingest.py - deduplicate
 
 # dialog confirming verification done
 assist_done_dialog = dbc.Modal(
@@ -39,11 +34,11 @@ layout = html.Div(children=[
 ####### callbacks #######
 
 @dash.callback(
-    output=Output("assist-status-filepath", "data"),              # store a status file path
+    output=Output("assist-status-filepath", "data"),                # store a status file path
     inputs=Input("assist-button", "n_clicks"),                      # triggered by user clicking button
     background=True,                                                # background callback
     running=[
-        (Output("assist-button", "disabled"), True, False),            # disable the run button while running
+        (Output("assist-button", "disabled"), True, False),         # disable the run button while running
     ],
     prevent_initial_call=True
 )
@@ -51,7 +46,7 @@ def create_status_filepath(button_clicks):
     """
     Generate a file in which to capture the status
     """
-    status_filepath = os.path.join(TEMP_DIR, "output_" + str(uuid.uuid4()))
+    status_filepath = get_temp_dir_unique("output")
     return status_filepath
 
 
@@ -90,8 +85,7 @@ def update_status(n, status_filepath):
         with open(status_filepath, "r") as file:
             lines = file.readlines()
             status = "...\n\n" + "\n".join(lines[-1 * min(10, len(lines)):])   # get the last 10 lines (or fewer if there are not 10 in the list)  #TODO is the min() needed here?
-        ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')  # remove ANSI escape sequences (e.g. ESC[32m, ESC[0m) from command output   # TODO deduplicate code
-        return ansi_escape.sub('', status)
+        return clean_for_display(status)
     except Exception as e:
         return ""
 
@@ -109,14 +103,3 @@ def manage_assist_done_dialog(children, n_clicks):
         return False    # button pressed, hide the dialog
     else:
         return True     # child added, show the dialog
-
-# TODO copied from ingest.py - deduplicate
-def get_trigger():
-    """ Get the input that triggered a callback (for @app.callback only, not @dash.callback) """
-    return dash.callback_context.triggered[0]['prop_id']
-
-# TODO copied from ingest.py - deduplicate
-def get_error_trace(e) -> str:
-    """ Get error trace string """
-    trace = traceback.format_exception(None, e, e.__traceback__)
-    return trace[-1]

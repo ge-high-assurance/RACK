@@ -20,7 +20,7 @@ import rack
 from rack import Manifest
 import semtk3
 
-dash.register_page(__name__, name='Load Data', title="RACK UI")
+dash.register_page(__name__, name='Load Data', title="RACK UI", order=2)
 
 BASE_URL = "http://localhost"
 TRIPLE_STORE = "http://localhost:3030/RACK"

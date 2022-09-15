@@ -14,14 +14,6 @@ background_callback_manager = DiskcacheManager(cache)
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], background_callback_manager=background_callback_manager, use_pages=True)
 app.title = 'RACK UI'
 
-links_div =     html.Div(
-        [
-            html.Div(dcc.Link(f"{dash.page_registry['pages.home']['name']}", href=dash.page_registry['pages.home']['relative_path'])),
-            html.Div(dcc.Link(f"{dash.page_registry['pages.ingest']['name']}", href=dash.page_registry['pages.ingest']['relative_path'])),
-            html.Div(dcc.Link(f"{dash.page_registry['pages.assist']['name']}", href=dash.page_registry['pages.assist']['relative_path'])),
-        ]
-    )
-
 # menu
 sidebar = html.Div(
     [
@@ -30,9 +22,17 @@ sidebar = html.Div(
                 html.Td(html.Img(src=app.get_asset_url('RACK_cartoon.jpg'), height="90px")),
                 html.Td([dcc.Markdown("## RACK\n_System manager_")]),
             ]),
-            html.Tr([
-                links_div
-            ])
+            html.Tr(
+                html.Td([
+                    dbc.Nav([
+                        # add a NavLink for each registered page
+                        dbc.NavLink(f"{page['name']}", href=page['relative_path'], active="exact")
+                        for page in dash.page_registry.values()
+                    ],
+                    vertical=True, pills=True,
+                    )
+                ], colSpan=2)
+            )
         ]),
     ],
     className="sidebar"
@@ -40,7 +40,7 @@ sidebar = html.Div(
 
 app.layout = html.Div([
     sidebar,
-    dash.page_container
+    dash.page_container     # display page content
 ],
     style = { "margin-left": "18rem", "margin-right": "2rem", "padding": "2rem 1rem" }
 )

@@ -11,7 +11,7 @@ import dash
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 
-dash.register_page(__name__, name='Verify Data', title="RACK UI")
+dash.register_page(__name__, name='Verify Data', title="RACK UI", order=3)
 
 TEMP_DIR = tempfile.gettempdir()  # TODO copied from ingest.py - deduplicate
 
@@ -70,7 +70,7 @@ def run_assist(status_filepath):
     Run the ASSIST tool
     """
     try:
-        subprocess.call("/home/ubuntu/RACK/assist/bin/check -v -m http://localhost:3030/ > " + status_filepath + " 2>&1", shell=True)
+        subprocess.call("../assist/bin/check -v -m http://localhost:3030/ > " + status_filepath + " 2>&1", shell=True)
         time.sleep(1)
     except Exception as e:
         return get_error_trace(e)  # show done dialog with error

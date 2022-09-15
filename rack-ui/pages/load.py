@@ -63,8 +63,11 @@ done_dialog = dbc.Modal(
 content = html.Div(
     [
         html.H2("Load data"),
-        dcc.Markdown("_Load data into RACK from an ingestion package on your local machine_"),
-        html.Div([dcc.Upload( html.Button(id="select-button", children="Select ingestion package"), id='select-button-upload', accept=".zip", multiple=False)]),  # upload button
+        dcc.Markdown("_Load data into RACK_"),
+        html.Div([html.Button(id="turnstile-button", children="Load Turnstile data")]),  # button to load turnstile
+        dbc.Tooltip("Load the Turnstile sample data provided with RACK", target="turnstile-button"),
+        html.Div([dcc.Upload( html.Button(id="select-button", children="Load ingestion package"), id='select-button-upload', accept=".zip", multiple=False)]),  # button to show upload dialog to pick ingestion package
+        dbc.Tooltip("Load an ingestion package (in .zip format) from your local machine", target="select-button"),
         load_div,
         html.Div(id="status-div", className="scrollarea"),      # displays ingestion status
         unzip_error_dialog,
@@ -90,28 +93,34 @@ layout = html.Div([
             Output("unzip-error-dialog-body", "children"),
             Output("status-filepath", "data"),                      # store a status file path
             Output("select-button-upload", "contents")],            # set to None after extracting, else callback ignores re-uploaded file
-    inputs=Input("select-button-upload", "contents"),               # triggered by user selecting an upload file
+    inputs=[
+            Input("select-button-upload", "contents"),              # triggered by user selecting an upload file
+            Input("turnstile-button", "n_clicks")],                 # triggered by turnstile button
     background=True,                                                # background callback
     running=[
-        (Output("select-button", "disabled"), True, False),         # disable the run button while running
+        (Output("select-button", "disabled"), True, False),         # disable the button while running
+        (Output("turnstile-button", "disabled"), True, False),      # disable the button while running
     ],
     prevent_initial_call=True
 )
-def run_unzip(zip_file_contents):
+def run_unzip(zip_file_contents, turnstile_clicks):
     """
     Extract the selected zip file
     """
     try:
-        tmp_dir = get_temp_dir_unique("ingest")   # temp directory to store the unzipped package
-        zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
-        zip_obj = ZipFile(zip_str, 'r')
-        zip_obj.extractall(path=tmp_dir)  # unzip the package
-        manifest_paths = glob.glob(tmp_dir + '/**/' + MANIFEST_FILE_NAME, recursive=True)
-        if len(manifest_paths) == 0:
-            raise Exception("Cannot load ingestion package: does not contain manifest file " + MANIFEST_FILE_NAME)
-        if len(manifest_paths) > 1:
-            raise Exception("Cannot load ingestion package: contains multiple default manifest files: " + str(manifests))
-        manifest_path = manifest_paths[0]
+        if (get_trigger() in ["select-button-upload.contents"]):
+            tmp_dir = get_temp_dir_unique("ingest")   # temp directory to store the unzipped package
+            zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
+            zip_obj = ZipFile(zip_str, 'r')
+            zip_obj.extractall(path=tmp_dir)  # unzip the package
+            manifest_paths = glob.glob(tmp_dir + '/**/' + MANIFEST_FILE_NAME, recursive=True)
+            if len(manifest_paths) == 0:
+                raise Exception("Cannot load ingestion package: does not contain manifest file " + MANIFEST_FILE_NAME)
+            if len(manifest_paths) > 1:
+                raise Exception("Cannot load ingestion package: contains multiple default manifest files: " + str(manifests))
+            manifest_path = manifest_paths[0]
+        else:
+            manifest_path = "../Turnstile-Example/Turnstile-IngestionPackage/manifest.yaml"
 
         manifest = get_manifest(manifest_path)
         manifest_graphs_option = "Load to " + str(manifest.getModelgraphsFootprint()) + " " + str(manifest.getDatagraphsFootprint())
@@ -138,7 +147,8 @@ def run_unzip(zip_file_contents):
         State("manifest-filepath", "data")],
     background=True,                                                # background callback
     running=[
-        (Output("select-button", "disabled"), True, False),         # disable the run button while running
+        (Output("select-button", "disabled"), True, False),         # disable button while running
+        (Output("turnstile-button", "disabled"), True, False),      # disable button while running
         (Output("status-interval", "disabled"), False, True)        # enable the interval component while running
     ],
     prevent_initial_call=True
@@ -166,6 +176,8 @@ def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, 
     except Exception as e:
         return get_error_trace(e)  # show done dialog with error
     return [dcc.Markdown("Loaded ingestion package."), html.A("Open in SPARQLGraph UI", href=sparqlgraph_url_str, target="_blank", style={"margin-top": "100px"})]
+
+
 
 
 @callback(Output("status-div", "children"),

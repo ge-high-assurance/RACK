@@ -18,6 +18,7 @@
 
 uri "http://arcos.rack/TESTING" alias tst.
 import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/FILE".
 
 TEST
 	(note "Description of a single test")
@@ -50,22 +51,25 @@ TEST_RESULT
 TEST_PROCEDURE (note "A TEST_PROCEDURE is the TEST_STEPs that perform TESTs. ") is a type of COLLECTION.
 	content of TEST_PROCEDURE only has values of type TEST_STEP.
 	
-	TEST_STEP (note "A TEST_STEP is a collection of TESTs that are performed in a single execution")is a type of COLLECTION.
-		content of TEST_STEP only has values of type TEST.
-		nextStep (note "The next TEST_STEP in a sequence" ) describes TEST_STEP with values of type TEST_STEP.
-		nextStep of TEST_STEP has at most 1 value.
+TEST_STEP (note "A TEST_STEP is a collection of TESTs that are performed in a single execution") is a type of ENTITY.
+	thisStep (note "The TEST performed by this TEST_STEP") of TEST_STEP has a single value of type TEST.
+	nextStep (note "The next TEST_STEP in a sequence" ) describes TEST_STEP with values of type TEST_STEP.
 
 TEST_LOG (note "A TEST_LOG is the TEST_RESULTs from executing a TEST_PROCEDURE") is a type of COLLECTION.
 	content of TEST_LOG only has values of type TEST_RECORD.
 
 	
-	TEST_RECORD (note "a TEST_RECORD is a collection of TEST_RESULTs associated with a TEST_STEP") is a type of COLLECTION.
-		content of TEST_RECORD only has values of type TEST_RESULT.
-		nextRecord (note "The next TEST_RECORD that is the next in a sequence " ) describes TEST_RECORD with values of type TEST_RECORD.
-		nextRecord of TEST_RECORD has at most 1 value.
-		logs (note "TEST_STEP for which the TEST_RECORD is captured" ) describes TEST_RECORD with a single value of type TEST_STEP.
-		logs is a type of wasImpactedBy.
-
+TEST_RECORD (note "a TEST_RECORD identifies the configuration under which a set of tests was run") is a type of ENTITY.
+	testRecordProcedure (note "the TEST_PROCEDURE for which this TEST_RECORD was created") describes TEST_RECORD with a single value of type TEST_PROCEDURE.
+	testRecordSteps (note "the initial TEST_STEPs performed") describes TEST_RECORD with values of type TEST_STEP.
+	testRecordScenario (note "the TEST_SCENARIO for which this TEST_RECORD was generated") describes TEST_RECORD with a single value of type TEST_SCENARIO.
+	testConfiguration (note "the configuration information for this TEST_EXECUTION") describes TEST_RECORD with values of type ENTITY.
+   
+TEST_SCENARIO (note "is the target that the TEST_EXECUTION was run against and for which the TEST_RECORD was generated") is a type of ENTITY.
+	targetPackage (note "is the target FILE tested") describes TEST_SCENARIO with values of type FILE.
+	targetVersion (note "is the version of the targetPackage tested") describes TEST_SCENARIO with a single value of type string.
+	testPackage (note "is the test FILE executed") describes TEST_SCENARIO with values of type FILE.
+	testVersion (note "is the version of the testPackage run") describes TEST_SCENARIO with a single value of type string.
 
 TEST_DEVELOPMENT
 	(note "ACTIVITY of creating a TEST to participate in the evaluation of a requirement")
@@ -77,3 +81,9 @@ TEST_EXECUTION
 
 	testProcedure (note "TEST_PROCEDURE that was executed.") describes TEST_EXECUTION with values of type TEST_PROCEDURE.
 	testProcedure is a type of used.
+	testLog (note "TEST_LOG that was generated") describes TEST_EXECUTION with values of type TEST_LOG.
+
+TEST_ANNOTATION (note "provides additional information about a TEST_RESULT") is a type of ENTITY.
+	annotatedResult (note "identifies the TEST_RESULT being annotated") describes TEST_ANNOTATION with values of type TEST_RESULT.
+	testAnnotation (note "specifies the annotation information to add to the TEST_RESULT") describes TEST_ANNOTATION with values of type ENTITY.
+

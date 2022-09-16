@@ -60,8 +60,8 @@ done_dialog = dbc.Modal(
     backdrop=False,
 )
 
-content = html.Div(
-    [
+# page elements
+layout = html.Div([
         html.H2("Load data"),
         dcc.Markdown("_Load data into RACK_"),
         html.Div([html.Button(id="turnstile-button", children="Load Turnstile data")]),  # button to load turnstile
@@ -72,12 +72,7 @@ content = html.Div(
         html.Div(id="status-div", className="scrollarea"),      # displays ingestion status
         unzip_error_dialog,
         done_dialog,
-    ]
-)
-
-layout = html.Div([
         dcc.Location(id="url"),
-        content,
         dcc.Store("status-filepath"),           # stores the filename of the temp file containing status
         dcc.Store("manifest-filepath"),         # stores the path to the manifest file
         dcc.Interval(id='status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
@@ -176,8 +171,6 @@ def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, 
     except Exception as e:
         return get_error_trace(e)  # show done dialog with error
     return [dcc.Markdown("Loaded ingestion package."), html.A("Open in SPARQLGraph UI", href=sparqlgraph_url_str, target="_blank", style={"margin-top": "100px"})]
-
-
 
 
 @callback(Output("status-div", "children"),

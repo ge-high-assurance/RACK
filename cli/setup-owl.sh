@@ -6,7 +6,7 @@ set -e
 rack_dir=$(realpath "$(dirname "$0")"/..)
 
 rack_image="gehighassurance/rack-box"
-rack_tag="v10.2"
+rack_tag="v10.9"
 
 sadl_image="sadl/sadl-eclipse"
 sadl_tag="v3.5.0-20211204"

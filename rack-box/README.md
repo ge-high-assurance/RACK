@@ -50,11 +50,6 @@ although we will mention each file here as well:
   (`files/docker/systemctl3.py`) from
   [docker-systemd-replacement](https://github.com/gdraheim/docker-systemctl-replacement)
 
-- `files/rack.tar.gz`: Package the RACK ontology and data (`tar cfz
-  RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github
-  --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests
-  --exclude=tools RACK`)
-
 - `files/rack-assist.tar.gz`: Package the RACK ASSIST (`tar cfz
   RACK/rack-box/files/rack-assist.tar.gz RACK/assist`)
 
@@ -63,9 +58,17 @@ although we will mention each file here as well:
   RACK/cli/{*.sh,wheels}`), see [Build the RACK
   CLI](#Build-the-RACK-CLI) for build instructions first
 
+- `files/rack-ui.tar.gz`: Package the RACK UI (`tar cfz
+  RACK/rack-box/files/rack-ui.tar.gz RACK/rack-ui`)
+
 - `files/{documentation.html,index.html}`: Package the RACK
   documentation, see [Package RACK
   documentation](#Package-RACK-documentation) for instructions
+
+- `files/rack.tar.gz`: Package the RACK ontology and data (`tar cfz
+  RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github
+  --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests
+  --exclude=tools RACK`)
 
 Once you have put these 9 files into the `files` subdirectory, skip to
 [Build the rack-box images](#Build-the-rack-box-images) for the next

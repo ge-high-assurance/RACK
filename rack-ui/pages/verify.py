@@ -1,13 +1,12 @@
 """ Content for the "verify data" page """
 
 import time
+import platform
 import subprocess
 import dash
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 from .helper import *
-
-dash.register_page(__name__, name='Verify Data', title="RACK UI", order=3)
 
 # dialog confirming verification done
 assist_done_dialog = dbc.Modal(
@@ -55,7 +54,7 @@ def create_status_filepath(button_clicks):
 
 
 @dash.callback(
-    output=Output("assist-done-dialog-body", "children"),
+    output=[Output("assist-done-dialog-body", "children"), Output("btn-download", "disabled")],
     inputs=Input("assist-status-filepath", "data"),                 # triggered by creation of status file path
     background=True,                                                # background callback
     running=[
@@ -69,11 +68,14 @@ def run_assist(status_filepath):
     Run the ASSIST tool
     """
     try:
-        subprocess.call("../assist/bin/check -v -m http://localhost:3030/ > " + status_filepath + " 2>&1", shell=True)
+        if platform.system() == "Windows":
+            raise Exception("Feature not supported on Windows")
+        else:
+            subprocess.call("../assist/bin/check -v -m http://localhost:3030/ > " + status_filepath + " 2>&1", shell=True)
         time.sleep(1)
     except Exception as e:
-        return get_error_trace(e)  # show done dialog with error
-    return [dcc.Markdown("Verification complete.")]
+        return get_error_trace(e), True  # show done dialog with error, disable the download button
+    return [dcc.Markdown("Verification complete.")], False
 
 
 @callback(Output("assist-status-div", "children"),

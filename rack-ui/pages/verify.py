@@ -7,8 +7,6 @@ from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 from .helper import *
 
-dash.register_page(__name__, name='Verify Data', title="RACK UI", order=3)
-
 # dialog confirming verification done
 assist_done_dialog = dbc.Modal(
     [

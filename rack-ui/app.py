@@ -2,15 +2,16 @@
 
 import diskcache
 import dash
-from dash import Dash, DiskcacheManager, html, dcc
+from dash import Dash, DiskcacheManager, html, dcc, callback, Input, Output
 import dash_bootstrap_components as dbc
+from pages import home, load, verify
 from pages.helper import *
 
 # diskcache for non-production apps when developing locally (fine for our Docker application).  Needed for @dash.callback with background=True
 cache = diskcache.Cache(get_temp_dir() + "/cache")
 background_callback_manager = DiskcacheManager(cache)
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], background_callback_manager=background_callback_manager, use_pages=True)
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], background_callback_manager=background_callback_manager)
 app.title = 'RACK UI'
 
 # menu
@@ -24,9 +25,9 @@ sidebar = html.Div(
             html.Tr(
                 html.Td([
                     dbc.Nav([
-                        # add a NavLink for each registered page
-                        dbc.NavLink(f"{page['name']}", href=page['relative_path'], active="exact")
-                        for page in dash.page_registry.values()
+                        dbc.NavLink("Home", href="/", active="exact"),
+                        dbc.NavLink("Load", href="/load", active="exact"),
+                        dbc.NavLink("Verify", href="/verify", active="exact"),
                     ],
                     vertical=True, pills=True,
                     )
@@ -38,11 +39,28 @@ sidebar = html.Div(
 )
 
 app.layout = html.Div([
+    dcc.Location(id='url', refresh=False),
     sidebar,
-    dash.page_container     # display page content
+    html.Div(id='page-content')  # display page content
 ],
     style = { "margin-left": "18rem", "margin-right": "2rem", "padding": "2rem 1rem" }
 )
+
+# validate using this layout (includes components from pages)
+app.validation_layout = html.Div([app.layout, home.layout, load.layout, verify.layout])
+
+
+@callback(Output('page-content', 'children'),
+            Input('url', 'pathname'))
+def display_page(pathname):
+    if pathname == '/':
+        return home.layout
+    elif pathname == '/load':
+        return load.layout
+    elif pathname == '/verify':
+        return verify.layout
+    else:
+        return '404'
 
 if __name__ == '__main__':
     app.run_server(host="0.0.0.0", debug=False)

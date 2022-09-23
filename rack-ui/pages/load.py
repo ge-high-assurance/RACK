@@ -16,8 +16,6 @@ from rack import Manifest
 import semtk3
 from .helper import *
 
-dash.register_page(__name__, name='Load Data', title="RACK UI", order=2)
-
 BASE_URL = "http://localhost"
 TRIPLE_STORE = "http://localhost:3030/RACK"
 TRIPLE_STORE_TYPE = "fuseki"
@@ -72,7 +70,6 @@ layout = html.Div([
         html.Div(id="status-div", className="scrollarea"),      # displays ingestion status
         unzip_error_dialog,
         done_dialog,
-        dcc.Location(id="url"),
         dcc.Store("status-filepath"),           # stores the filename of the temp file containing status
         dcc.Store("manifest-filepath"),         # stores the path to the manifest file
         dcc.Interval(id='status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
@@ -103,7 +100,7 @@ def run_unzip(zip_file_contents, turnstile_clicks):
     Extract the selected zip file
     """
     try:
-        if (get_trigger() in ["select-button-upload.contents"]):
+        if zip_file_contents != None:
             tmp_dir = get_temp_dir_unique("ingest")   # temp directory to store the unzipped package
             zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
             zip_obj = ZipFile(zip_str, 'r')
@@ -181,7 +178,6 @@ def update_status(n, status_filepath):
     """
     Update the displayed status
     """
-    print("update_status") # show it's running
     status = ""
     try:
         with open(status_filepath, "r") as file:

@@ -22,7 +22,10 @@ def get_error_trace(e) -> str:
     return trace[-1]
 
 def get_trigger():
-    """ Get the input that triggered a callback (for @app.callback only, not @dash.callback) """
+    """
+    Get the input that triggered a callback
+    Not for use with @dash.callback (in local Windows environment, gives dash.exceptions.MissingCallbackContextException)
+    """
     return dash.callback_context.triggered[0]['prop_id']
 
 def clean_for_display(s):

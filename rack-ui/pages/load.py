@@ -4,7 +4,7 @@ import time
 import io
 import base64
 import glob
-from contextlib import redirect_stdout
+from contextlib import redirect_stdout, redirect_stderr
 from urllib.parse import urlparse
 from pathlib import Path
 from zipfile import ZipFile
@@ -153,7 +153,7 @@ def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, 
         use_default_graph = (manifest_or_default_graphs == "default-graph")
 
         f = open(status_filepath, "a")
-        with redirect_stdout(f):    # send command output to temporary file
+        with redirect_stdout(f), redirect_stderr(f):    # send command output to temporary file
             rack.ingest_manifest_driver(Path(manifest_filepath), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True, use_default_graph)  # process the manifest
 
         # get connection from manifest, construct SPARQLGraph URL

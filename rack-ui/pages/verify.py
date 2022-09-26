@@ -69,7 +69,7 @@ def run_assist(status_filepath):
     """
     try:
         if platform.system() == "Windows":
-            raise Exception("Feature not supported on Windows")
+            raise Exception("Not yet supported on Windows.  (PROLOG checking is available through LINUX/Docker.)")
         else:
             subprocess.call("../assist/bin/check -v -m http://localhost:3030/ > " + status_filepath + " 2>&1", shell=True)
         time.sleep(1)

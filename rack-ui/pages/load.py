@@ -154,6 +154,7 @@ def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, 
 
         f = open(status_filepath, "a")
         with redirect_stdout(f), redirect_stderr(f):    # send command output to temporary file
+            rack.logger.setLevel("ERROR")
             rack.ingest_manifest_driver(Path(manifest_filepath), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True, use_default_graph)  # process the manifest
 
         # get connection from manifest, construct SPARQLGraph URL

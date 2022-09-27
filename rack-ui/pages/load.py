@@ -150,6 +150,11 @@ def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, 
     Ingest the selected zip file
     """
     try:
+
+        # avoid a ConnectionError if SemTK services are not fully up yet
+        if semtk3.check_services() == False:
+            raise Exception("Cannot reach SemTK Services (wait for startup to complete, or check for failures)")
+
         use_default_graph = (manifest_or_default_graphs == "default-graph")
 
         f = open(status_filepath, "a")

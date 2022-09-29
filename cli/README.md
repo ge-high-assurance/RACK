@@ -354,6 +354,68 @@ Ingest-SoftwareComponentTestResult           Node group to ingest Sof[...]
 [...]
 ```
 
+## Ingestion Packages (manifest)
+
+The bulk ingestion of multiple models, nodegrounds, and data can be
+automated using a manifest file.
+
+```yaml
+name: "short name"
+description: "optional long package description"
+footprint:
+    model-graphs:
+      - "http://rack001/model"
+    data-graphs:
+      - "http://rack001/data"
+steps:
+  - manifest: another.yaml
+  - model: model-manifest.yaml
+  - data: data-manifest.yaml
+```
+
+The `name` and `description` fields are informational and are used to
+provide a nicer UI for users loading an ingestion package.
+
+The `footprint` section is optional. When it is provided it allows
+the ingestion UI to automatically populate a connection string. In
+addition these graph URIs will be cleared if the manifest is loaded
+using the `--clear` flag.
+
+The `steps` section is required. It describes the sequential process
+of loading this ingestion package. This section must be a list of singleton
+maps. Each map should have exactly one key describing which kind of
+data should be imported. These keys will point to the same kind of
+file as you'd use loading this kind of data individually. For example
+a `data` section uses the same configuration file as `rack data import`
+and a `model` section uses the same configuration file as `rack model import`.
+
+All file paths are resolved relative to the location of the manifest
+YAML file.
+
+### CLI support
+
+```
+usage: rack manifest import [-h] [--clear] [--default-graph] manifest
+
+positional arguments:
+  manifest         Manifest YAML file
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --clear          Clear footprint before import
+  --default-graph  Load whole manifest into default graph
+```
+
+Manifests can be loaded using `rack manifest import`.
+
+To clear all graphs mentioned in the `footprint` use `--clear`. For example:
+`rack manifest import --clear my-manifest.yaml`
+
+Fuseki happens to run faster when data is stored in the *default graph*.
+To load a complete ingestion manifest into the default graph use 
+`--default-graph`. For example:
+`rack manifest import --default-graph my-manifest.yaml`
+
 ## Hacking
 
 See [dev/README.md](https://github.com/ge-high-assurance/RACK/tree/master/cli/dev).

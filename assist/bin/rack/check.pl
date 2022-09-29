@@ -117,17 +117,14 @@ check_maybe_prop(Property, I, T) :-
      print_message(error, maybe_restriction(T, I, IName, Property, VSLen))).
 
 check_target_type(Property, I, T) :-
-    property_extra(T, Property, _Restr),
-    rdf(Property, rdfs:range, TTy),
-    rdf_reachable(Target, rdfs:subClassOf, TTy),
+    property(T, Property, _),
     has_interesting_prefix(Property),
     rdf(I, Property, Val),
-    \+ rdf_is_literal(Val),  % TODO check these as well?
-    rdf(Val, rdf:type, DefTy),
-    DefTy \= Target,
-    \+ rdf_reachable(DefTy, rdfs:subClassOf, Target),
+    \+ rack_instance_target(I, Property, Val),
     rack_instance_ident(I, IName),
-    print_message(error, property_value_wrong_type(T, I, IName, Property, DefTy, Val, Target)).
+    rdf(Val, rdf:type, ValTy),
+    property_range_type(T, Property, ModelTy),
+    print_message(error, property_value_wrong_type(T, I, IName, Property, ValTy, Val, ModelTy)).
 
 check_target_type_restrictions(Property, I, T) :-
     rdf(T, rdfs:subClassOf, R),

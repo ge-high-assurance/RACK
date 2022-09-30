@@ -165,6 +165,14 @@ The `data` subcommand is used to import CSV and OWL data files using
 the RACK ontology as well as exporting CSV files using nodegroups
 stored in SemTK.
 
+The following options default to their matching ENVIRONMENT variables if they exist:
+* --base-url : $BASE_URL
+* --triple-store : $TRIPLE_STORE
+* --log-level : $LOG_LEVEL
+
+For example, **ingestion warnings can be suppressed** by either using ```rack --log-level ERROR data import...``` or by executing this command in a bash script before calling 'rack':```export LOG_LEVEL=ERROR```
+
+
 ## Data Ingestion Configuration file format
 
 The import configuration files are YAML files that specify the target
@@ -195,7 +203,7 @@ extra-data-graphs:
 - "http://rack001/otherdata"
 - "http://rack001/somedata"
 ingestion-steps:
-- {nodegroup: "ingest_SYSTEM", csv: "SYSTEM.csv"}
+- {nodegroup: "ingest_SYSTEM",    csv: "SYSTEM.csv"}
 - {nodegroup: "ingest_INTERFACE", csv: "INTERFACE.csv"}
 - {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD.csv"}
 - {owl: "example.owl"}
@@ -425,7 +433,7 @@ Don't copy below to wiki; wiki already has copyright in _Footer.md
 -->
 
 ---
-Copyright (c) 2021, Galois, Inc.
+Copyright (c) 2021-2022, Galois, Inc.
 
 All Rights Reserved
 

@@ -9,7 +9,6 @@ footprint:
     - http://rack001/turnstiledata
 
 steps:
-  - manifest: arcos.yaml
+  - manifest: rack.yaml
   - model: ../GE-Ontology/OwlModels/import.yaml
-  - nodegroups: ../nodegroups/ingestion/arcos.turnstile
   - data: ../RACK-Ontology/ontology/DO-178C/import.yaml

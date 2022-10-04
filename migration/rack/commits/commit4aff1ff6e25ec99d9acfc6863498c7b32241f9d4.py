@@ -11,16 +11,9 @@
 
 from ontology_changes import Commit
 
-raise Exception(
-    f"This is a template, implement me and remove this exception!"
-)
-# You can use the following command to see the relevant changes:
-# <COMMAND>
-
-# pylint: disable=unreachable
 commit = Commit(
-    number="<COMMIT_ID>",
+    number="4aff1ff6e25ec99d9acfc6863498c7b32241f9d4",
     changes=[
-        # <FILE>.sadl
+        # comment update only
     ],
 )

@@ -38,6 +38,7 @@ from rack.commits import (
     commit44393cc30bb0ba7482acd21b2e68576b577179f9,
     commit44da44c6877c881240c418d084ecb17de9443373,
     commit4687eafdd03e7c4ff6888691ed51c8ef388935b2,
+    commit4aff1ff6e25ec99d9acfc6863498c7b32241f9d4,
     commit4f60f85168ff8ef2513fa0e2f144c2ea5c3f87a3,
     commit4f9fce78e36a6dc75f1702ab50da6a4ac801dd5e,
     commit500958dae09d88f0b82c40faf93a634d108d360f,
@@ -69,7 +70,9 @@ from rack.commits import (
     commitb865c663351f39c275f5fb9985b681a6ae432cac,
     commitbdfef3d7ea9b3c9fc085defa8e26256f646097d9,
     commitc41222325db52df0eb5c1e7cb3a091f8c62f5b57,
+    commitc47f4e58c0cb3d0925d7894e301e6a1f83e22580,
     commitc5306ce176984770b93070da829f60769cb19628,
+    commit5c7920fe44a3a60c76fefddd2b88cd27851f37ed,
     commitc6692fed3e150e7df53d4a2a8f8c84f760087420,
     commitcafce30763b5332106340cc8cbeb8fdac3b8132d,
     commitd48e208669c589d070c7c5fb7e3129ababbb9193,
@@ -79,6 +82,7 @@ from rack.commits import (
     commite5e8a35322fab104a42cc0f46d16c27ffc10adbb,
     commite696969a9d85ca8f894eea12305412bdc05521b3,
     commitee148bca649a1b451085832a7e2a488ce4127de7,
+    commitef72564bbc4887c2d6f6654671427ba2780e0f67,
     commitf801242e4a8a763620571481fd83cc2af5aac2ac,
     commitfa603aad886439eb6a94e44e2c6f4851af16c9a3,
     commitff31a28051a5e348fd2474fce5360195999ddb3a,
@@ -186,7 +190,13 @@ commits_in_chronological_order: List[Commit] = [
     commit815f98911956aafea98b81787eec328b2833ec72.commit, # 2022 Feb 18
     commit4687eafdd03e7c4ff6888691ed51c8ef388935b2.commit, # 2022 Feb 28
 
-    # TODO # v10.0
+    commitef72564bbc4887c2d6f6654671427ba2780e0f67.commit, # v10.0
+
+    commit5c7920fe44a3a60c76fefddd2b88cd27851f37ed.commit, # 2022 Apr 20
+    commit4aff1ff6e25ec99d9acfc6863498c7b32241f9d4.commit, # 2022 Aug 03
+    commitc47f4e58c0cb3d0925d7894e301e6a1f83e22580.commit, # 2022 Aug 25
+
+    # TODO: v11
 
     # most recent (in history)
 ]

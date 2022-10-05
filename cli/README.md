@@ -133,7 +133,8 @@ usage: rack [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE] [--triple-s
 RACK in a Box toolkit
 
 positional arguments:
-  {data,model,nodegroups}
+  {manifest,data,model,nodegroups}
+    manifest            Ingestion package automation
     data                Import or export CSV data
     model               Interact with SemTK model
     nodegroups          Interact with SemTK nodegroups
@@ -149,7 +150,7 @@ optional arguments:
                         Assign logger severity level
 ```
 
-The `rack` command is split into three subcommands: `data`, `model`,
+The `rack` command is split into four subcommands: `manifest`, `data`, `model`,
 and `nodegroups`. Each of these subcommands offers its own help
 listing. For example try `rack data --help` for more information about
 the flags available when interacting with the data store.
@@ -164,6 +165,11 @@ persisting your generated nodegroups across RACK instances.
 The `data` subcommand is used to import CSV and OWL data files using
 the RACK ontology as well as exporting CSV files using nodegroups
 stored in SemTK.
+
+The `manifest` subcommand is used to import a complete set of CSV and OWL data
+from multiple files as specified by a single top-level manifest file.  This
+subcommand subsumes the `data` command and is the recommended way to initialize a
+RACK instance for use.
 
 The following options default to their matching ENVIRONMENT variables if they exist:
 * --base-url : $BASE_URL

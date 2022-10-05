@@ -44,6 +44,7 @@ description DSL into instances in the model.
               property/3,
               property_target/4,
               property_extra/3,
+              property_range_type/3,
               rack_instance/2,
               rack_instance_assert/2,
               rack_property_assert/3,
@@ -54,6 +55,7 @@ description DSL into instances in the model.
               rack_instance_relationship/3,
               rack_instance_relationship/4,
               rack_instance_ident/2,
+              rack_instance_target/3,
               rack_ontology_node/3,
               rdf_literal_val_type/3,
 
@@ -513,10 +515,19 @@ property_extra(Class, Property, max_cardinality(N)) :-
 property_extra(Class, Property, value_from(Cls)) :-
     property_restriction(Class, Property, B),
     rdf(B, owl:someValuesFrom, Cls).
+property_extra(Class, Property, value_from(Cls)) :-
+    property_restriction(Class, Property, B),
+    rdf(B, owl:allValuesFrom, Cls).
 property_extra(Class, Property, normal) :- property(Class, Property, _).
 
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:int).
 rdf_numeric(Value, Num) :- rdf_equal(Value, Num^^xsd:integer).
+
+property_range_type(Class, Property, RangeType) :-
+    property_restriction(Class, Property, value_from(RangeType)), !.
+property_range_type(_Class, Property, RangeType) :-
+    rdf(Property, rdfs:domain, RangeType).
+
 
 %! rdf_literal_val_type(+Literal:atom, -Value:atom, -Type:Atom) is semidet.
 %! rdf_literal_val_type(-Literal:atom, +Value:atom, +Type:Atom) is semidet.
@@ -643,6 +654,22 @@ rack_instance_ident(I,N) :-
     rdf(I, 'http://arcos.rack/PROV-S#identifier', N), !.
 rack_instance_ident(_, "<no-identifier>").
 
+%! rack_instance_target(+SrcInst:atom, -Rel:atom, -TgtInst:atom)
+%
+% Returns the target instance for the source instance and a specific relationship
+% or all relationships, subject to any property range constraints.
+
+rack_instance_target(SrcInst, Rel, TgtInst) :-
+    rdf(SrcInst, rdf:type, SrcClass),
+    property_extra(SrcClass, Rel, Restriction),
+    instance_target(SrcInst, Rel, Restriction, TgtInst).
+
+instance_target(SrcInst, Rel, value_from(TgtClass), TgtInst) :-
+    rdf(SrcInst, Rel, TgtInst),
+    rdf(TgtInst, rdfs:isSubClassOf, TgtClass).
+instance_target(SrcInst, Rel, Restr, TgtInst) :-
+    Restr \= value_from(_),
+    rdf(SrcInst, Rel, TgtInst).
 
 %% ----------------------------------------------------------------------
 %% Loading generated data from .rack files

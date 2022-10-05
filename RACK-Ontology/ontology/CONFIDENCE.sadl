@@ -31,8 +31,8 @@ CONFIDENCE_ASSESSMENT (note "Superclass for confidence assessments over some oth
 	wasGeneratedBy of CONFIDENCE_ASSESSMENT only has values of type ASSESSING_CONFIDENCE.
 
 BDU_CONFIDENCE_ASSESSMENT (note "A belief-disbelief-uncertainty confidence assessment, c.f. Subjective Logic. belief, disbelief, and uncertainty should sum to 1") is a type of CONFIDENCE_ASSESSMENT.
-    belief (note "belief that an assessment is true") describes CONFIDENCE_ASSESSMENT with a single value of type float. // [0,1].
-    disbelief (note "belief that an assessment is false") describes CONFIDENCE_ASSESSMENT with a single value of type float. // [0,1].
-    uncertainty (note "uncommitted belief") describes CONFIDENCE_ASSESSMENT with a single value of type float. // [0,1].
+    belief (note "belief that an assessment is true") describes BDU_CONFIDENCE_ASSESSMENT with a single value of type float. // [0,1].
+    disbelief (note "belief that an assessment is false") describes BDU_CONFIDENCE_ASSESSMENT with a single value of type float. // [0,1].
+    uncertainty (note "uncommitted belief") describes BDU_CONFIDENCE_ASSESSMENT with a single value of type float. // [0,1].
 
 ASSESSING_CONFIDENCE (note "ACTIVITY that establishes a CONFIDENCE_ASSESSMENT") is a type of ACTIVITY.

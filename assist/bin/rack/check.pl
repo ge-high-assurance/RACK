@@ -247,6 +247,17 @@ check_invalid_domain_class(SrcClass, Property, DefinedClass) :-
     \+ rdf_reachable(SrcClass, rdfs:subClassOf, DefinedClass),
     print_message(error, invalid_domain(SrcClass, Property, DefinedClass)).
 
+check_invalid_domain_class(SrcClass, Property, DefinedClass) :-
+    property(SrcClass, Property, _Usage),
+    rdf_reachable(Property, rdfs:subPropertyOf, ParentProp),
+    property(DefinedClass, ParentProp, _ParentUsage),
+    \+ rdf_reachable(SrcClass, rdfs:subClassOf, DefinedClass),
+    ( Property = ParentProp,
+      print_message(error, invalid_domain(SrcClass, Property, DefinedClass))
+    ; Property \= ParentProp,
+      print_message(error, invalid_subclass_domain(SrcClass, Property, ParentProp, DefinedClass))
+    ).
+
 
 actual_val((V^^VT),VT,(V^^VT)).  % normal
 actual_val(V,VT,Val) :-
@@ -373,5 +384,8 @@ prolog:message(missing_tgt(SrcClass, SrcInst, SrcIdent, Rel, TgtClass)) -->
     [ '~w ~w (~w) missing the ~w target of type ~w'-[
           SrcClass, SrcInst, SrcIdent, Rel, TgtClass] ].
 prolog:message(invalid_domain(SrcClass, Property, DefinedClass)) -->
-    [ 'Property ~w was referenced on class ~w, but that property is only defined for the unrelated class ~w'-[
+    [ 'Property ~w was referenced on class ~w, but that property is defined for the unrelated class ~w'-[
           Property, SrcClass, DefinedClass] ].
+prolog:message(invalid_subclass_domain(SrcClass, Property, ParentProperty, DefinedClass)) -->
+    [ 'Property ~w was referenced on class ~w, but that property is a sub-type of ~w, which is defined for the unrelated class ~w'-[
+          Property, SrcClass, ParentProperty, DefinedClass] ].

@@ -168,8 +168,8 @@ stored in SemTK.
 
 The `manifest` subcommand is used to import a complete set of CSV and OWL data
 from multiple files as specified by a single top-level manifest file.  This
-subcommand subsumes the `data` command and is the recommended way to initialize a
-RACK instance for use.
+subcommand subsumes the `data`, `nodegroups`, and `model` subcommands and is the
+recommended way to initialize a RACK instance for use.
 
 The following options default to their matching ENVIRONMENT variables if they exist:
 * --base-url : $BASE_URL

@@ -22,7 +22,7 @@ uri "http://arcos.rack/CONFIDENCE" alias CONFIDENCE.
 import "http://arcos.rack/PROV-S".
 
 
-CONFIDENCE_ASSESSMENT (note "Superclass for confidence assessments over some other data in the ontology.") is a type of THING.
+CONFIDENCE_ASSESSMENT (note "Superclass for confidence assessments over some other data in the ontology.") is a type of ENTITY.
 
     assesses (note "ENTITY(s) whose confidence is assessed") describes CONFIDENCE_ASSESSMENT with values of type ENTITY.
     assesses describes CONFIDENCE_ASSESSMENT with at most 1 value.

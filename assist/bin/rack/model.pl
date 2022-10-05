@@ -44,6 +44,7 @@ description DSL into instances in the model.
               property/3,
               property_target/4,
               property_extra/3,
+              property_range_type/3,
               rack_instance/2,
               rack_instance_assert/2,
               rack_property_assert/3,

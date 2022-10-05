@@ -226,6 +226,28 @@ check_also_has_no_rel(SrcClass, SrcInst, Rel) :-
 check_also_has_no_rel(_, _).
 
 
+% Sometimes there will be things in SADL like:
+%
+%   FOO is a type of X.
+%     p of FOO only has values of type Y.
+%
+% and the problem is that p is not defined for X, but for (unrelated) Z instead.
+% SADL will not complain and will generate a property constraint, but that
+% property cannot ever exist.  This checks for that situation.
+check_invalid_domain(Property) :-
+    check_invalid_domain_class(_SrcClass, Property, _DefinedClass).
+
+check_invalid_domain_class(SrcClass, Property, DefinedClass) :-
+    rdf(SrcClass, _, B),
+    rack_ref(_, SrcClass),
+    rdf_is_bnode(B),
+    rdf(B, rdf:type, owl:'Restriction'),
+    rdf(B, owl:onProperty, Property),
+    rdf(Property, rdfs:domain, DefinedClass),
+    \+ rdf_reachable(SrcClass, rdfs:subClassOf, DefinedClass),
+    print_message(error, invalid_domain(SrcClass, Property, DefinedClass)).
+
+
 actual_val((V^^VT),VT,(V^^VT)).  % normal
 actual_val(V,VT,Val) :-
     rdf_equal(V, VS^^(xsd:string)),
@@ -350,3 +372,6 @@ prolog:message(missing_any_tgt(SrcClass, SrcInst, SrcIdent, Rel)) -->
 prolog:message(missing_tgt(SrcClass, SrcInst, SrcIdent, Rel, TgtClass)) -->
     [ '~w ~w (~w) missing the ~w target of type ~w'-[
           SrcClass, SrcInst, SrcIdent, Rel, TgtClass] ].
+prolog:message(invalid_domain(SrcClass, Property, DefinedClass)) -->
+    [ 'Property ~w was referenced on class ~w, but that property is only defined for the unrelated class ~w'-[
+          Property, SrcClass, DefinedClass] ].

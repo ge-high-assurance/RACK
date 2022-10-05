@@ -118,6 +118,7 @@ check_maybe_prop(Property, I, T) :-
 
 check_target_type(Property, I, T) :-
     property(T, Property, _),
+    \+ rdf_is_bnode(T),
     has_interesting_prefix(Property),
     rdf(I, Property, Val),
     \+ rack_instance_target(I, Property, Val),

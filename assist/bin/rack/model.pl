@@ -451,7 +451,8 @@ enumerations(E, ES) :-
 
 property(Class, Property, unique) :-
     % Property is unique to this class and directly associated
-    rdf(Property, rdfs:domain, Class).
+    rdf(Property, rdfs:domain, Class),
+    \+ rdf_is_bnode(Class).
 property(Class, Property, shared) :-
     % Property is shared with multiple classes, specified in a list.
     rdf(Property, rdfs:domain, Intermediary),

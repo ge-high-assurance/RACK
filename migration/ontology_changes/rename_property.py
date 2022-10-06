@@ -29,9 +29,7 @@ from ontology_changes.ontology_change import (
 @dataclass
 class RenameProperty(OntologyChange):
     """
-    Represents an ontology change where a property has been renamed.  This also
-    encompasses cases where a property has effectively been moved across
-    classes.
+    Represents an ontology change where a property has been renamed.
     """
 
     from_name_space: NameSpace

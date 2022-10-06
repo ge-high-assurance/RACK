@@ -17,7 +17,7 @@ If you do see these resource settings, make the following changes:
 Now you are ready to start your RACK box.  Type the following command to run your RACK box on your computer:
 
 ```shell
-docker run --detach -p 8080:80 -p 12050-12092:12050-12092 -p 3030:3030 gehighassurance/rack-box:v10.9
+docker run --detach -p 8080:80 -p 12050-12092:12050-12092 -p 3030:3030 gehighassurance/rack-box:v11
 ```
 
 Type "localhost:8080" in your web browser's address bar, hit Enter, and you should see your RACK box's welcome page appear in your browser.  The welcome page will tell you some things you can do with your RACK box.

@@ -75,7 +75,7 @@ Connection (note "An INTERFACE with specific input and output ports") is a type 
     described by infoFlowSeverity with a single value of type int
 
 	// properties that allow for mitigating of threats
-	described by implControl with values of type ImplControl.     
+	described by implConnControl with values of type ImplControl.     
 
 ConnectionType is a type of THING.
 

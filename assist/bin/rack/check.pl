@@ -121,6 +121,7 @@ check_target_type(Property, I, T) :-
     \+ rdf_is_bnode(T),
     has_interesting_prefix(Property),
     rdf(I, Property, Val),
+    \+ rdf_is_literal(Val),
     \+ rack_instance_target(I, Property, Val),
     rack_instance_ident(I, IName),
     rdf(Val, rdf:type, ValTy),

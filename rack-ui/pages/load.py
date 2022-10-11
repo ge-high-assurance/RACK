@@ -16,10 +16,6 @@ from rack import Manifest
 import semtk3
 from .helper import *
 
-BASE_URL = "http://localhost"
-TRIPLE_STORE = "http://localhost:3030/RACK"
-TRIPLE_STORE_TYPE = "fuseki"
-
 # name of default manifest file within ingestion package
 MANIFEST_FILE_NAME = "manifest.yaml"
 
@@ -131,7 +127,8 @@ def run_unzip(zip_file_contents, turnstile_clicks):
 
 
 @dash.callback(
-    output=Output("done-dialog-body", "children"),
+    output=[Output("done-dialog-body", "children"),
+            Output("last-loaded-graphs", "data")],                  # remember graphs loaded (used in the Verify tab)  NOTE this Store is from app.py layout - using it here disables prevent_initial_call=True
     inputs=Input("load-button", "n_clicks"),                        # triggered by user clicking load button
     state=[
         State("load-graph-radio", "value"),                         # load to manifest or default graphs
@@ -143,14 +140,17 @@ def run_unzip(zip_file_contents, turnstile_clicks):
         (Output("turnstile-button", "disabled"), True, False),      # disable button while running
         (Output("status-interval", "disabled"), False, True)        # enable the interval component while running
     ],
-    prevent_initial_call=True
+    prevent_initial_call=True                                       # NOTE disabled by use of output last-loaded-graphs (see https://dash.plotly.com/advanced-callbacks#prevent-callback-execution-upon-initial-component-render)
 )
 def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, manifest_filepath):
     """
     Ingest the selected zip file
     """
-    try:
+    # this callback gets triggered when the pages is loaded - if so don't proceed
+    if load_button_clicks == 0:
+        raise dash.exceptions.PreventUpdate
 
+    try:
         # avoid a ConnectionError if SemTK services are not fully up yet
         if semtk3.check_services() == False:
             raise Exception("Cannot reach SemTK Services (wait for startup to complete, or check for failures)")
@@ -168,12 +168,15 @@ def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, 
             conn_str = manifest.getDefaultGraphConnection()
         else:
             conn_str = manifest.getConnection()
-        sparqlgraph_url_str = semtk3.get_sparqlgraph_url("http://localhost:8080", conn_json_str=conn_str)
+        sparqlgraph_url_str = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=conn_str)
+
+        # store list of loaded graphs
+        last_loaded_graphs = manifest.getModelgraphsFootprint() + manifest.getDatagraphsFootprint()
 
         time.sleep(1)
     except Exception as e:
-        return get_error_trace(e)  # show done dialog with error
-    return [dcc.Markdown("Loaded ingestion package."), html.A("Open in SPARQLGraph UI", href=sparqlgraph_url_str, target="_blank", style={"margin-top": "100px"})]
+        return get_error_trace(e), []  # show done dialog with error
+    return [dcc.Markdown("Loaded ingestion package."), html.A("Open in SPARQLGraph UI", href=sparqlgraph_url_str, target="_blank", style={"margin-top": "100px"})], last_loaded_graphs
 
 
 @callback(Output("status-div", "children"),
@@ -204,7 +207,7 @@ def update_status(n, status_filepath):
 def manage_load_div(radio_options, load_clicks, cancel_clicks):
     """ Show or hide the load div """
     if (get_trigger() in ["load-button.n_clicks", "cancel-load-button.n_clicks"]):
-        return True         # load or button pressed, hide div
+        return True         # load or cancel button pressed, hide div
     elif radio_options == []:
         return True         # no radio options provided, don't show div
     else:

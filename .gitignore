@@ -59,6 +59,7 @@ TODO.org
 debug.log
 *.swp
 cli/env/
+cli/.project
 .settings/
 /Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.d
 /Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.rack

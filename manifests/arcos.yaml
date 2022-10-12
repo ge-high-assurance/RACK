@@ -10,20 +10,20 @@ footprint:
 steps:
   - manifest: rack.yaml
 
-  - model: Boeing-Ontology/import.yaml
+  - model: ../Boeing-Ontology/OwlModels/import.yaml
 
-  - model: GrammaTech-Ontology/import.yaml
+  - model: ../GrammaTech-Ontology/OwlModels/import.yaml
 
-  - model: LM-Ontology/import.yaml
+  - model: ../LM-Ontology/OwlModels/import.yaml
 
-  - model: SRI-Ontology/import.yaml
+  - model: ../SRI-Ontology/OwlModels/import.yaml
 
-  - model: STR-Ontology/import.yaml
+  - model: ../STR-Ontology/OwlModels/import.yaml
 
-  - model: RTX-Ontology/import.yaml
+  - model: ../RTX-Ontology/OwlModels/import.yaml
 
-  - data: NIST-800-53/import.yaml
+  - data: ../RACK-Ontology/ontology/NIST-800-53/import.yaml
 
-  - model: RACK-Ontology/MITRE-CWE.yaml
-  - nodegroups: arcos.cwe
-  - data: MITRE-CWE/import.yaml
+  - model: ../RACK-Ontology//OwlModels/MITRE-CWE.yaml
+  - nodegroups: ../nodegroups/arcos.cwe
+  - data: ../RACK-Ontology/ontology/MITRE-CWE/import.yaml

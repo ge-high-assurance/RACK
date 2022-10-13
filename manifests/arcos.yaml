@@ -24,6 +24,6 @@ steps:
 
   - data: ../RACK-Ontology/ontology/NIST-800-53/import.yaml
 
-  - model: ../RACK-Ontology//OwlModels/MITRE-CWE.yaml
+  - model: ../RACK-Ontology/OwlModels/MITRE-CWE.yaml
   - nodegroups: ../nodegroups/arcos.cwe
   - data: ../RACK-Ontology/ontology/MITRE-CWE/import.yaml

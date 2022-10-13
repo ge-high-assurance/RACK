@@ -10,6 +10,9 @@ import semtk3
 import rack
 from .helper import *
 
+# these are SemTK internal graphs, don't display to RACK users      TODO create SemTK function to provide these?
+EXCLUDED_GRAPHS = ["http://research.ge.com/semtk/services", "http://semtk/demo", "http://research.ge.com/knowledge/prefab/model", "http://research.ge.com/knowledge/prefab/data"]
+
 # div showing verification details/options and continue/cancel buttons
 verify_div = html.Div(
     [
@@ -73,6 +76,8 @@ def show_verify_options(button_clicks, last_loaded_graphs):
     # get list of graphs populated in the triple store
     conn_str = rack.sparql_connection(BASE_URL, None, None, [], TRIPLE_STORE, TRIPLE_STORE_TYPE)  # TODO do we do this multiple places?  If so make a helper method
     graphs_list = semtk3.get_graph_names(conn_str)
+    graphs_list = list(set(graphs_list) - set(EXCLUDED_GRAPHS))  # exclude internal SemTK graphs
+    graphs_list.sort()
 
     # these are the graphs for which to pre-select checkboxes
     if last_loaded_graphs == None:
@@ -107,7 +112,7 @@ def run_assist_or_sg(assist_button_clicks, sg_button_clicks, graphs_selected, st
         # if user selected the ASSIST tool
         if get_trigger() == "verify-assist-button.n_clicks":
 
-            if False: # if platform.system() == "Windows": # TODO change back
+            if platform.system() == "Windows":
                 raise Exception("Not yet supported on Windows.  (PROLOG checking is available through LINUX/Docker.)")
             else:
                 # TODO can we specify which graphs to use for the ASSIST call?

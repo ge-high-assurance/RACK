@@ -19,9 +19,16 @@ OBJECTIVE
 
 	satisfiedBy (note "An ACTIVITY that demonstrates that the OBJECTIVE has been satisfied.") describes OBJECTIVE with values of type ACTIVITY.
 
+PROPERTY_TYPE
+    (note "The target-independent identifier of the semantics of a PROPERTY.") 
+    is a type of THING.
+
 PROPERTY 
-	(note "A general property that holds on the basis of some ANALYSIS") 
+	(note "A general property that holds on the basis of some ANALYSIS")
 	is a type of ENTITY. 
+
+	propertyType (note "The semantic tag for this property instance.")
+	    describes PROPERTY with a single value of type PROPERTY_TYPE.
 
 	partiallySupports (note "One or more PROPERTY may be needed to address an OBJECTIVE.") describes PROPERTY with values of type OBJECTIVE.
 

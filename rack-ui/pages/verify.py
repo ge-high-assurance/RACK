@@ -10,34 +10,47 @@ import semtk3
 import rack
 from .helper import *
 
-# these are SemTK internal graphs, don't display to RACK users      TODO create SemTK function to provide these?
+# these are SemTK internal graphs, don't display to RACK users      TODO replace with get_graph_names(skip_semtk_graphs) when available
 EXCLUDED_GRAPHS = ["http://research.ge.com/semtk/services", "http://semtk/demo", "http://research.ge.com/knowledge/prefab/model", "http://research.ge.com/knowledge/prefab/data"]
 
-# div showing verification details/options and continue/cancel buttons
-verify_div = html.Div(
+
+# dialog confirming ASSIST verification done
+verify_assist_done_dialog = dbc.Modal(
     [
-        dcc.Markdown("Select graphs to verify:"),
+        dbc.ModalBody("MESSAGE PLACEHOLDER", id="verify-assist-done-dialog-body"),     # message
+        dbc.ModalFooter([
+            html.Button("Download results", id="verify-assist-download-button"),                 # download results button
+            html.Button("Close", id="verify-assist-done-button", n_clicks=0)    # close button
+        ]),
+        dcc.Download(id="download"),
+    ],
+    id="verify-assist-done-dialog",
+    is_open=False,
+    backdrop=False,
+)
+
+# div showing graphs list
+verify_report_options_div = html.Div(
+    [
+        dcc.Markdown("Select graphs to include in report:"),
         dcc.Checklist([], [], id="verify-graph-checklist", labelStyle={'display': 'block'}, inputStyle={"margin-right": "10px"}),   # choose which graphs to verify
-        html.Button("Verify using ASSIST", id="verify-assist-button", n_clicks=0),                  # button to verify using ASSIST
-        html.Button("Verify using report", id="verify-sparqlgraph-button", n_clicks=0),             # button to verify using SPARQLgraph report
-        html.Button("Cancel", id="verify-cancel-button", n_clicks=0)                                # button to cancel
+        html.Button("Continue", id="verify-report-continue-button", n_clicks=0),            # button to continue to SPARQLgraph report
+        html.Button("Cancel", id="verify-report-cancel-button", n_clicks=0)                 # button to cancel
     ],
     id="verify-div",
     hidden=True,
     style={"margin-top": "50px"},
 )
 
-# dialog confirming verification done
-verify_done_dialog = dbc.Modal(
+# dialog with report link
+verify_report_done_dialog = dbc.Modal(
     [
-        dbc.ModalBody("MESSAGE PLACEHOLDER", id="verify-done-dialog-body"),     # message
+        dbc.ModalBody("MESSAGE PLACEHOLDER", id="verify-report-done-dialog-body"),     # message
         dbc.ModalFooter([
-            html.Button("Download results", id="verify-assist-download-button"),                 # download results button
-            html.Button("Close", id="verify-done-button", n_clicks=0)    # close button
+            html.Button("Close", id="verify-report-done-button", n_clicks=0)    # close button
         ]),
-        dcc.Download(id="download"),
     ],
-    id="verify-done-dialog",
+    id="verify-report-done-dialog",
     is_open=False,
     backdrop=False,
 )
@@ -46,104 +59,135 @@ verify_done_dialog = dbc.Modal(
 layout = html.Div(children=[
     html.H2('Verify Data'),
     dcc.Markdown("_Run verification routines on the data loaded into in RACK_"),
-    html.Button("Verify data", id="verify-button"),                 # run button
-    verify_div,
+    html.Button("Verify using ASSIST", id="verify-assist-button", n_clicks=0),  # button to verify using ASSIST
+    html.Button("Verify using report", id="verify-report-button"),              # button to verify using SPARQLgraph report
+    verify_report_options_div,
     html.Div(id="assist-status-div", className="scrollarea"),       # displays status
-    verify_done_dialog,
+    verify_assist_done_dialog,
+    verify_report_done_dialog,
     dcc.Store("assist-status-filepath"),       # stores the filename of the temp file containing status
     dcc.Interval(id='assist-status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
 ])
 
 ####### callbacks #######
 
+
 @dash.callback(
     output=[
         Output("verify-graph-checklist", "options"),            # list of graphs populated in the triple store
-        Output("verify-graph-checklist", "value"),              # list of graphs to pre-select (graphs recently loaded)
-        Output("assist-status-filepath", "data")],              # store a status file path
-    inputs=Input("verify-button", "n_clicks"),                  # triggered by user clicking button
+        Output("verify-graph-checklist", "value")],             # list of graphs to pre-select (graphs recently loaded)
+    inputs=Input("verify-report-button", "n_clicks"),           # triggered by user clicking button
     state=State("last-loaded-graphs", "data"),                  # last loaded graphs
     background=True,                                            # background callback
     running=[
-        (Output("verify-button", "disabled"), True, False),     # disable the run button while running
+        (Output("verify-report-button", "disabled"), True, False),     # disable the run button while running
+        (Output("verify-assist-button", "disabled"), True, False),     # disable the button while running
     ],
     prevent_initial_call=True
 )
 def show_verify_options(button_clicks, last_loaded_graphs):
     """
-    Show verify options, prepare for verification
+    Show list of graphs to use for verification report
     """
-    # get list of graphs populated in the triple store
-    conn_str = rack.sparql_connection(BASE_URL, None, None, [], TRIPLE_STORE, TRIPLE_STORE_TYPE)  # TODO do we do this multiple places?  If so make a helper method
+    # get list of graphs populated in the triple store - create checkboxes for these
+    conn_str = rack.sparql_connection(BASE_URL, None, None, [], TRIPLE_STORE, TRIPLE_STORE_TYPE)
     graphs_list = semtk3.get_graph_names(conn_str)
     graphs_list = list(set(graphs_list) - set(EXCLUDED_GRAPHS))  # exclude internal SemTK graphs
     graphs_list.sort()
 
-    # these are the graphs for which to pre-select checkboxes
+    # these are the graphs last loaded - check the checkboxes for these
     if last_loaded_graphs == None:
         last_loaded_graphs = []
 
-    # generate a file in which to capture the verification status (only used for ASSIST verification)
-    status_filepath = get_temp_dir_unique("output")
+    return graphs_list, last_loaded_graphs
 
-    return graphs_list, last_loaded_graphs, status_filepath
 
 
 @dash.callback(
-    output=[Output("verify-done-dialog-body", "children"),
-            Output("verify-assist-download-button", "hidden")],
-    inputs=[Input("verify-assist-button", "n_clicks"),              # triggered by clicking ASSIST button or SG button
-            Input("verify-sparqlgraph-button", "n_clicks")],
-    state=[State("verify-graph-checklist", "value"),                # the currently selected graphs
-            State("assist-status-filepath", "data")],
+    output=Output("assist-status-filepath", "data"),                # store a status file path
+    inputs=Input("verify-assist-button", "n_clicks"),               # triggered by clicking ASSIST button
     background=True,                                                # background callback
     running=[
-        (Output("verify-button", "disabled"), True, False),         # disable the button while running
+        (Output("verify-report-button", "disabled"), True, False),  # disable the button while running
+        (Output("verify-assist-button", "disabled"), True, False),  # disable the button while running
+    ],
+    prevent_initial_call=True
+)
+def create_assist_status_filepath(n_clicks):
+    """
+    Generate a file in which to capture the ASSIST status
+    """
+    status_filepath = get_temp_dir_unique("output")
+    return status_filepath
+
+
+
+@dash.callback(
+    output=[Output("verify-assist-done-dialog-body", "children"),
+            Output("verify-assist-download-button", "hidden")],
+    inputs=Input("assist-status-filepath", "data"),                 # triggered by creating ASSIST status filepath
+    background=True,                                                # background callback
+    running=[
+        (Output("verify-report-button", "disabled"), True, False),  # disable the button while running
+        (Output("verify-assist-button", "disabled"), True, False),  # disable the button while running
         (Output("assist-status-interval", "disabled"), False, True) # enable the interval component while running
     ],
     prevent_initial_call=True
 )
-def run_assist_or_sg(assist_button_clicks, sg_button_clicks, graphs_selected, status_filepath):
+def run_assist(status_filepath):
     """
-    Run the ASSIST tool or SPARQLgraph report
+    Run the ASSIST tool
     """
     try:
+        if platform.system() == "Windows":
+            raise Exception("Not yet supported on Windows.  (PROLOG checking is available through LINUX/Docker.)")
+        else:
+            # runs on all graphs in the triple store, minus an exclusion list of internal SemTK graphs (e.g. demo data)
+            subprocess.call("../assist/bin/check -v -m " + TRIPLE_STORE_BASE_URL + "/ > " + status_filepath + " 2>&1", shell=True)
+        time.sleep(1)
 
-        # if user selected the ASSIST tool
-        if get_trigger() == "verify-assist-button.n_clicks":
-
-            if platform.system() == "Windows":
-                raise Exception("Not yet supported on Windows.  (PROLOG checking is available through LINUX/Docker.)")
-            else:
-                # TODO can we specify which graphs to use for the ASSIST call?
-                subprocess.call("../assist/bin/check -v -m " + TRIPLE_STORE_BASE_URL + "/ > " + status_filepath + " 2>&1", shell=True)
-            time.sleep(1)
-
-            return [dcc.Markdown("Completed ASSIST verification.")], False
-
-        # if user selected the SPARQLgraph report
-        elif get_trigger() == "verify-sparqlgraph-button.n_clicks":
-
-            # error if no graphs were selected
-            if len(graphs_selected) == 0:
-                raise Exception ("No graphs selected")
-
-            # build a connection using selected graphs (no need to differentiate model vs data)
-            graphs = []
-            for graph in graphs_selected:
-                graphs.append(graph)
-            conn = semtk3.build_connection_str("Graphs To Verify", TRIPLE_STORE_TYPE, TRIPLE_STORE, graphs, graphs[0], graphs[1:])  # use all graphs for both model and data, to avoid either being empty
-
-            # construct SG report URL
-            sparqlgraph_verify_url_str = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=str(conn), report_id="report data verification")
-
-            # provide link to SG
-            #return [dcc.Markdown("Click this link to open the SG report:"), html.A("Report", href=sparqlgraph_verify_url_str, target="_blank", style={"margin-top": "100px"})], True
-            return [html.A("Open the report in the SPARQLgraph UI", href=sparqlgraph_verify_url_str, target="_blank", style={"margin-top": "100px"})], True
-
+        return [dcc.Markdown("Completed ASSIST verification.")], False
     except Exception as e:
         return get_error_trace(e), True  # show done dialog with error, hide the download button
-    return ["Unexpected condition"]
+
+
+
+@dash.callback(
+    output=Output("verify-report-done-dialog-body", "children"),
+    inputs=Input("verify-report-continue-button", "n_clicks"),      # triggered by clicking continue button
+    state=State("verify-graph-checklist", "value"),                 # the currently selected graphs
+    background=True,                                                # background callback
+    running=[
+        (Output("verify-report-button", "disabled"), True, False),  # disable the button while running
+        (Output("verify-assist-button", "disabled"), True, False),  # disable the button while running
+    ],
+    prevent_initial_call=True
+)
+def generate_report_link(sg_button_clicks, graphs_selected):
+    """
+    Generate the SPARQLgraph report link
+    """
+    try:
+        # error if no graphs were selected
+        if len(graphs_selected) == 0:
+            raise Exception ("No graphs selected")
+
+        # build a connection using selected graphs (no need to differentiate model vs data)
+        graphs = []
+        for graph in graphs_selected:
+            graphs.append(graph)
+        conn = semtk3.build_connection_str("Graphs To Verify", TRIPLE_STORE_TYPE, TRIPLE_STORE, graphs, graphs[0], graphs[1:])  # use all graphs for both model and data, to avoid either being empty
+
+        # construct SG report URL
+        sparqlgraph_verify_url_str = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=str(conn), report_id="report data verification")
+
+        # provide link to SG
+        #return [dcc.Markdown("Click this link to open the SG report:"), html.A("Report", href=sparqlgraph_verify_url_str, target="_blank", style={"margin-top": "100px"})], True
+        return html.A("Open the report in the SPARQLgraph UI", href=sparqlgraph_verify_url_str, target="_blank", style={"margin-top": "100px"})
+
+    except Exception as e:
+        return get_error_trace(e)  # show done dialog with error
+
 
 
 @callback(Output("assist-status-div", "children"),
@@ -164,6 +208,7 @@ def update_status(n, status_filepath):
         return ""
 
 
+
 @callback(
     Output("download", "data"),
     Input("verify-assist-download-button", "n_clicks"),     # triggered by user clicking download button
@@ -182,16 +227,28 @@ def download(n_clicks, status_filepath):
 
 ####### simple callbacks to show/hide components #######
 
+@callback(Output("assist-status-div", "hidden"),
+              Input("verify-assist-button", "n_clicks"),
+              Input("verify-report-button", "n_clicks"),
+              prevent_initial_call=True
+              )
+def manage_assist_status_div(assist_clicks, report_clicks):
+    """ Show or hide the ASSIST status div """
+    if (get_trigger() in ["verify-assist-button.n_clicks"]):
+        return False        # user clicked ASSIST, show the div
+    else:
+        return True         # user clicked report, hide the div
+
 
 @callback(Output("verify-div", "hidden"),
               Input("verify-graph-checklist", "options"),
               Input("verify-assist-button", "n_clicks"),
-              Input("verify-cancel-button", "n_clicks"),
+              Input("verify-report-cancel-button", "n_clicks"),
               prevent_initial_call=True
               )
-def manage_verify_div(checklist_options, continue_clicks, cancel_clicks):
-    """ Show or hide the verify div """
-    if (get_trigger() in ["verify-assist-button.n_clicks", "verify-cancel-button.n_clicks"]):
+def manage_verify_report_options_div(checklist_options, continue_clicks, cancel_clicks):
+    """ Show or hide the graph checklist div """
+    if (get_trigger() in ["verify-assist-button.n_clicks", "verify-report-cancel-button.n_clicks"]):
         return True         # continue or cancel button pressed, hide div
     elif checklist_options == []:
         return True         # no checklist options provided, don't show div
@@ -199,14 +256,27 @@ def manage_verify_div(checklist_options, continue_clicks, cancel_clicks):
         return False        # checklist options provided, show div
 
 
-@callback(Output("verify-done-dialog", "is_open"),
-          Input("verify-done-dialog-body", "children"),
-          Input("verify-done-button", "n_clicks"),
+@callback(Output("verify-assist-done-dialog", "is_open"),
+          Input("verify-assist-done-dialog-body", "children"),
+          Input("verify-assist-done-button", "n_clicks"),
           prevent_initial_call=True
           )
-def manage_verify_done_dialog(children, n_clicks):
-    """ Show or hide the done dialog """
-    if (get_trigger() == "verify-done-button.n_clicks"):
+def manage_verify_assist_done_dialog(children, n_clicks):
+    """ Show or hide the done dialog after running ASSIST """
+    if (get_trigger() == "verify-assist-done-button.n_clicks"):
+        return False    # button pressed, hide the dialog
+    else:
+        return True     # child added, show the dialog
+
+
+@callback(Output("verify-report-done-dialog", "is_open"),
+          Input("verify-report-done-dialog-body", "children"),
+          Input("verify-report-done-button", "n_clicks"),
+          prevent_initial_call=True
+          )
+def manage_verify_report_done_dialog(children, n_clicks):
+    """ Show or hide the done dialog after preparing for the SPARQLgraph report"""
+    if (get_trigger() == "verify-report-done-button.n_clicks"):
         return False    # button pressed, hide the dialog
     else:
         return True     # child added, show the dialog

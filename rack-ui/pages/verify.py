@@ -10,10 +10,6 @@ import semtk3
 import rack
 from .helper import *
 
-# these are SemTK internal graphs, don't display to RACK users      TODO replace with get_graph_names(skip_semtk_graphs) when available
-EXCLUDED_GRAPHS = ["http://research.ge.com/semtk/services", "http://semtk/demo", "http://research.ge.com/knowledge/prefab/model", "http://research.ge.com/knowledge/prefab/data"]
-
-
 # dialog confirming ASSIST verification done
 verify_assist_done_dialog = dbc.Modal(
     [
@@ -91,8 +87,7 @@ def show_verify_options(button_clicks, last_loaded_graphs):
     """
     # get list of graphs populated in the triple store - create checkboxes for these
     conn_str = rack.sparql_connection(BASE_URL, None, None, [], TRIPLE_STORE, TRIPLE_STORE_TYPE)
-    graphs_list = semtk3.get_graph_names(conn_str)
-    graphs_list = list(set(graphs_list) - set(EXCLUDED_GRAPHS))  # exclude internal SemTK graphs
+    graphs_list = semtk3.get_graph_names(conn_str, True)  # excludes internal SemTK graphs
     graphs_list.sort()
 
     # these are the graphs last loaded - check the checkboxes for these

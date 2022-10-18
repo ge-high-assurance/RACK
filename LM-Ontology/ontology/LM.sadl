@@ -62,6 +62,9 @@ ModelElement
 
 ArtifactElement
     is a type of ModelElement.
+	hasElement describes ArtifactElement with values of type ArtifactElement.
+	hasElement is a type of wasDerivedFrom.
+	
 
 /* Assurance Case Package Classes. */
 
@@ -78,11 +81,11 @@ TerminologyElement
 
 TerminologyPackage
     is a type of TerminologyElement.
-        hasElement describes TerminologyPackage with values of type TerminologyElement.
+//        hasElement describes TerminologyPackage with values of type TerminologyElement.
 
 TerminologyGroup
     is a type of TerminologyElement.
-        hasElement describes TerminologyGroup with values of type TerminologyElement.
+//        hasElement describes TerminologyGroup with values of type TerminologyElement.
 
 TerminologyAsset
     is a type of TerminologyElement.
@@ -112,12 +115,12 @@ ArgumentationElement
 
 ArgumentPackage
     is a type of ArgumentationElement.
-        hasElement describes ArgumentPackage with values of type ArgumentationElement.
-        hasElement is a type of wasDerivedFrom.
+//        hasElement describes ArgumentPackage with values of type ArgumentationElement.
+//        hasElement is a type of wasDerivedFrom.
 
 ArgumentAsset
     is a type of ArgumentationElement.
-        hasContent describes ArgumentAsset with values of type MultiLangString.
+        argumentContent describes ArgumentAsset with values of type MultiLangString.
 
 ArgumentReasoning
     is a type of ArgumentAsset.
@@ -162,10 +165,10 @@ Property
 
 ArtifactAssetRelationship
     is a type of ArtifactAsset.
-        source describes ArtifactAssetRelationship with values of type ArtifactAsset.
-        source is a type of wasDerivedFrom.
-        target describes ArtifactAssetRelationship with values of type ArtifactAsset.
-        target is a type of wasDerivedFrom.
+        sourceArtifact describes ArtifactAssetRelationship with values of type ArtifactAsset.
+        sourceArtifact is a type of wasDerivedFrom.
+        targetArtifact describes ArtifactAssetRelationship with values of type ArtifactAsset.
+        targetArtifact is a type of wasDerivedFrom.
 
 Artifact
     is a type of ArtifactAsset.

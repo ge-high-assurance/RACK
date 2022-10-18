@@ -38,15 +38,15 @@ verify_report_options_div = html.Div(
     style={"margin-top": "50px"},
 )
 
-# dialog with report link
-verify_report_done_dialog = dbc.Modal(
+# dialog indicating an error generating the SPARQLgraph report (e.g. no graphs selected)
+verify_report_error_dialog = dbc.Modal(
     [
-        dbc.ModalBody("MESSAGE PLACEHOLDER", id="verify-report-done-dialog-body"),     # message
+        dbc.ModalBody("MESSAGE PLACEHOLDER", id="verify-report-error-dialog-body"),     # message
         dbc.ModalFooter([
-            html.Button("Close", id="verify-report-done-button", n_clicks=0)    # close button
+            html.Button("Close", id="verify-report-error-button", n_clicks=0)           # close button
         ]),
     ],
-    id="verify-report-done-dialog",
+    id="verify-report-error-dialog",
     is_open=False,
     backdrop=False,
 )
@@ -60,8 +60,10 @@ layout = html.Div(children=[
     verify_report_options_div,
     html.Div(id="assist-status-div", className="scrollarea"),       # displays status
     verify_assist_done_dialog,
-    verify_report_done_dialog,
-    dcc.Store("assist-status-filepath"),       # stores the filename of the temp file containing status
+    verify_report_error_dialog,
+    dcc.Store("assist-status-filepath"),        # stores the filename of the temp file containing status
+    dcc.Store("sparqlgraph-url"),               # stores the URL of the SPARQLgraph report
+    dcc.Store(id="clientside-dummy-store"),     # dummy store because callback needs an Output
     dcc.Interval(id='assist-status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
 ])
 
@@ -148,7 +150,8 @@ def run_assist(status_filepath):
 
 
 @dash.callback(
-    output=Output("verify-report-done-dialog-body", "children"),
+    output=[Output("sparqlgraph-url", "data"),                      # output SPARQLgraph report URL
+        Output("verify-report-error-dialog-body", "children")],     # output error message
     inputs=Input("verify-report-continue-button", "n_clicks"),      # triggered by clicking continue button
     state=State("verify-graph-checklist", "value"),                 # the currently selected graphs
     background=True,                                                # background callback
@@ -162,27 +165,37 @@ def generate_report_link(sg_button_clicks, graphs_selected):
     """
     Generate the SPARQLgraph report link
     """
-    try:
-        # error if no graphs were selected
-        if len(graphs_selected) == 0:
-            raise Exception ("No graphs selected")
+    # error if no graphs were selected
+    if len(graphs_selected) == 0:
+        return None, "Please select at least one graph"             # return error message and no URL
 
-        # build a connection using selected graphs (no need to differentiate model vs data)
-        graphs = []
-        for graph in graphs_selected:
-            graphs.append(graph)
-        conn = semtk3.build_connection_str("Graphs To Verify", TRIPLE_STORE_TYPE, TRIPLE_STORE, graphs, graphs[0], graphs[1:])  # use all graphs for both model and data, to avoid either being empty
+    # build a connection using selected graphs (no need to differentiate model vs data)
+    graphs = []
+    for graph in graphs_selected:
+        graphs.append(graph)
+    conn = semtk3.build_connection_str("Graphs To Verify", TRIPLE_STORE_TYPE, TRIPLE_STORE, graphs, graphs[0], graphs[1:])  # use all graphs for both model and data, to avoid either being empty
 
-        # construct SG report URL
-        sparqlgraph_verify_url_str = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=str(conn), report_id="report data verification")
+    # construct SG report URL
+    sparqlgraph_verify_url_str = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=str(conn), report_id="report data verification")
 
-        # provide link to SG
-        #return [dcc.Markdown("Click this link to open the SG report:"), html.A("Report", href=sparqlgraph_verify_url_str, target="_blank", style={"margin-top": "100px"})], True
-        return html.A("Open the report in the SPARQLgraph UI", href=sparqlgraph_verify_url_str, target="_blank", style={"margin-top": "100px"})
+    # return SPARQLgraph report URL
+    return sparqlgraph_verify_url_str, None
 
-    except Exception as e:
-        return get_error_trace(e)  # show done dialog with error
 
+# Open a browser tab with SPARQLgraph report  (this is a clientside callback written in JavaScript: https://dash.plotly.com/clientside-callbacks)
+dash.clientside_callback(
+    """
+    function(url) {
+        if(url != null){
+            window.open(url);
+        }
+        return "dummy value"
+    }
+    """,
+    Output("clientside-dummy-store", "data"),  # serves no purpose, but an output is required
+    Input("sparqlgraph-url", "data"),
+    prevent_initial_call=True
+)
 
 
 @callback(Output("assist-status-div", "children"),
@@ -264,14 +277,17 @@ def manage_verify_assist_done_dialog(children, n_clicks):
         return True     # child added, show the dialog
 
 
-@callback(Output("verify-report-done-dialog", "is_open"),
-          Input("verify-report-done-dialog-body", "children"),
-          Input("verify-report-done-button", "n_clicks"),
+@callback(Output("verify-report-error-dialog", "is_open"),
+          Input("verify-report-error-dialog-body", "children"),
+          Input("verify-report-error-button", "n_clicks"),
           prevent_initial_call=True
           )
-def manage_verify_report_done_dialog(children, n_clicks):
-    """ Show or hide the done dialog after preparing for the SPARQLgraph report"""
-    if (get_trigger() == "verify-report-done-button.n_clicks"):
-        return False    # button pressed, hide the dialog
+def manage_verify_report_error_dialog(children, n_clicks):
+    """ Show or hide the SPARQLgraph report error dialog (e.g. if no graphs selected) """
+    if (get_trigger() == "verify-report-error-button.n_clicks"):
+        return False        # button pressed, hide the dialog
     else:
-        return True     # child added, show the dialog
+        if children == None:
+            return False    # child added but it's None, hide the dialog
+        else:
+            return True     # child added, show it

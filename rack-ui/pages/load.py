@@ -140,7 +140,7 @@ def run_unzip(zip_file_contents, turnstile_clicks):
         (Output("turnstile-button", "disabled"), True, False),      # disable button while running
         (Output("status-interval", "disabled"), False, True)        # enable the interval component while running
     ],
-    prevent_initial_call=True                                       # NOTE disabled by use of output last-loaded-graphs (see https://dash.plotly.com/advanced-callbacks#prevent-callback-execution-upon-initial-component-render)
+    prevent_initial_call=True                                       # NOTE won't work because last-loaded-graphs is in the layout before load-button (see https://dash.plotly.com/advanced-callbacks#prevent-callback-execution-upon-initial-component-render)
 )
 def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, manifest_filepath):
     """

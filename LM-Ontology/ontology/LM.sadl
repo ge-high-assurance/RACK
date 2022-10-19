@@ -62,9 +62,6 @@ ModelElement
 
 ArtifactElement
     is a type of ModelElement.
-	hasElement describes ArtifactElement with values of type ArtifactElement.
-	hasElement is a type of wasDerivedFrom.
-	
 
 /* Assurance Case Package Classes. */
 
@@ -81,11 +78,11 @@ TerminologyElement
 
 TerminologyPackage
     is a type of TerminologyElement.
-//        hasElement describes TerminologyPackage with values of type TerminologyElement.
+        terminologyPackageComponent describes TerminologyPackage with values of type TerminologyElement.
 
 TerminologyGroup
     is a type of TerminologyElement.
-//        hasElement describes TerminologyGroup with values of type TerminologyElement.
+        terminologyGroupElement describes TerminologyGroup with values of type TerminologyElement.
 
 TerminologyAsset
     is a type of TerminologyElement.
@@ -115,8 +112,8 @@ ArgumentationElement
 
 ArgumentPackage
     is a type of ArgumentationElement.
-//        hasElement describes ArgumentPackage with values of type ArgumentationElement.
-//        hasElement is a type of wasDerivedFrom.
+        hasElement describes ArgumentPackage with values of type ArgumentationElement.
+        hasElement is a type of wasDerivedFrom.
 
 ArgumentAsset
     is a type of ArgumentationElement.

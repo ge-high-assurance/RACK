@@ -29,7 +29,8 @@ apt-get install -yqq \
         python3-pip \
         strace \
         swi-prolog \
-        unzip
+        unzip \
+        vim
 
 # Execute this part of the script only if we're building a Docker image
 

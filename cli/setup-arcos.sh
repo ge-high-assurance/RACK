@@ -4,4 +4,4 @@ set -eu
 
 ./ensure-cli-in-PATH.sh
 
-rack manifest import --clear ../manifests/arcos.yaml
+rack --log-level ERROR manifest import  --clear ../manifests/arcos.yaml

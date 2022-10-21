@@ -8,7 +8,6 @@ from contextlib import redirect_stdout, redirect_stderr
 from urllib.parse import urlparse
 from pathlib import Path
 from zipfile import ZipFile
-import dash
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 import rack

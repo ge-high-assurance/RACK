@@ -38,6 +38,7 @@ sidebar = html.Div(
     className="sidebar"
 )
 
+# layout
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     sidebar,

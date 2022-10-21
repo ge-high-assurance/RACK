@@ -38,10 +38,12 @@ sidebar = html.Div(
     className="sidebar"
 )
 
+# layout
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     sidebar,
-    html.Div(id='page-content')  # display page content
+    html.Div(id='page-content'),        # display page content
+    dcc.Store("last-loaded-graphs"),    # stores the last-loaded graphs (used by multiple pages)
 ],
     style = { "margin-left": "18rem", "margin-right": "2rem", "padding": "2rem 1rem" }
 )

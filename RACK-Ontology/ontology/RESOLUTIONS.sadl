@@ -18,6 +18,6 @@
 uri "http://arcos.rack/RESOLUTIONS" alias Rs.
 import "http://arcos.rack/PROV-S".
 
-SAME_AS (note "Used to create curation relationships between two nodes. When two THINGs are connected via the SAME_AS relationship it means that the THINGs are actually describing the same.  SAME_AS relationships will be collapsed into a single THING by the resolution process.") is a class.
+SAME_AS (note "Used to create curation relationships between two nodes. When two THINGs are connected via the SAME_AS relationship it means that the THINGs are actually describing the same.  SAME_AS relationships will be collapsed into a single THING by the resolution process.") is a type of NODE.
 	primary (note "The primary THING is the one which will remain after the merge processes any conflicts will be resolved by using the primary's value, for example the resulting identifier will be the identifier from the primary") describes SAME_AS with a single value of type THING.
 	secondary (note "the secondary THINGs are the entity that will be removed during the resolution process, any attributes that do not conflict will be copied to the to the primary,") describes SAME_AS with values of type THING.

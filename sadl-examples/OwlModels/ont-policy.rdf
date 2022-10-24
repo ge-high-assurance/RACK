@@ -1,0 +1,109 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://jena.hpl.hp.com/schemas/2003/03/ont-manager#">
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/sadl-examples/AllOntology.sadl</j.0:sadlSourceURL>
+    <j.0:prefix>All</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/AllOntology.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/AllOntology"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/sadl-examples/OverlayChecks.sadl</j.0:sadlSourceURL>
+    <j.0:prefix>chk</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/OverlayChecks.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/OverlayChecks"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/sadl-examples/Example.sadl</j.0:sadlSourceURL>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/Example.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/ProvenanceExample"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/sadl-examples/RdfsSubset.sadl</j.0:sadlSourceURL>
+    <j.0:prefix>rdfs</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/RdfsSubset.owl"/>
+    <j.0:publicURI rdf:resource="http://www.w3.org/2000/01/rdf-schema"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/sadl-examples/ImplicitModel/SadlBuiltinFunctions.sadl</j.0:sadlSourceURL>
+    <j.0:prefix>builtinfunctions</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/SadlBuiltinFunctions.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/builtinfunctions"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix>sadllistmodel</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/SadlListModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadllistmodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:prefix>sadlbasemodel</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/SadlBaseModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlbasemodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/sadl-examples/ImplicitModel/SadlImplicitModel.sadl</j.0:sadlSourceURL>
+    <j.0:prefix>sadlimplicitmodel</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/SadlImplicitModel.owl"/>
+    <j.0:publicURI rdf:resource="http://sadl.org/sadlimplicitmodel"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/sadl-examples/RequirementAnalysisExample.sadl</j.0:sadlSourceURL>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/RequirementAnalysisExample.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/examples/RequirementAnalysis"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/sadl-examples/ShellCheckAnalysisExample.sadl</j.0:sadlSourceURL>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/ShellCheckAnalysisExample.owl"/>
+    <j.0:publicURI rdf:resource="http://glguy.net/sadl/examples/analysis/shellcheck"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/sadl-examples/BaselinesSrcRq.sadl</j.0:sadlSourceURL>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/BaselinesSrcRq.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/examples/BaselinesSrcRq"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/sadl-examples/Magic.sadl</j.0:sadlSourceURL>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/Magic.owl"/>
+    <j.0:publicURI rdf:resource="http://glguy.net/magic"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/sadl-examples/TurnstileSecurity.sadl</j.0:sadlSourceURL>
+    <j.0:prefix>TSec</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/TurnstileSecurity.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.sadl-examples/TurnstileSecurity"/>
+  </j.0:OntologySpec>
+  <j.0:OntologySpec>
+    <j.0:sadlSourceURL>platform:/resource/sadl-examples/OverlayGraphs.sadl</j.0:sadlSourceURL>
+    <j.0:prefix>graph</j.0:prefix>
+    <j.0:createdBy>SADL</j.0:createdBy>
+    <j.0:language rdf:resource="http://www.w3.org/2002/07/owl"/>
+    <j.0:altURL rdf:resource="file:/RACK/sadl-examples/OwlModels/OverlayGraphs.owl"/>
+    <j.0:publicURI rdf:resource="http://arcos.rack/OverlayGraphs"/>
+  </j.0:OntologySpec>
+</rdf:RDF>

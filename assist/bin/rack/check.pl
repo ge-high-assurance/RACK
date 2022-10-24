@@ -117,17 +117,16 @@ check_maybe_prop(Property, I, T) :-
      print_message(error, maybe_restriction(T, I, IName, Property, VSLen))).
 
 check_target_type(Property, I, T) :-
-    property_extra(T, Property, _Restr),
-    rdf(Property, rdfs:range, TTy),
-    rdf_reachable(Target, rdfs:subClassOf, TTy),
+    property(T, Property, _),
+    \+ rdf_is_bnode(T),
     has_interesting_prefix(Property),
     rdf(I, Property, Val),
-    \+ rdf_is_literal(Val),  % TODO check these as well?
-    rdf(Val, rdf:type, DefTy),
-    DefTy \= Target,
-    \+ rdf_reachable(DefTy, rdfs:subClassOf, Target),
+    \+ rdf_is_literal(Val),
+    \+ rack_instance_target(I, Property, Val),
     rack_instance_ident(I, IName),
-    print_message(error, property_value_wrong_type(T, I, IName, Property, DefTy, Val, Target)).
+    rdf(Val, rdf:type, ValTy),
+    property_range_type(T, Property, ModelTy),
+    print_message(error, property_value_wrong_type(T, I, IName, Property, ValTy, Val, ModelTy)).
 
 check_target_type_restrictions(Property, I, T) :-
     rdf(T, rdfs:subClassOf, R),
@@ -226,6 +225,39 @@ check_has_no_rel(SrcClass, Prop, TgtClass, SrcInst) :-
 check_also_has_no_rel(SrcClass, SrcInst, Rel) :-
     check_has_no_rel(SrcClass, Rel, SrcInst), !.
 check_also_has_no_rel(_, _).
+
+
+% Sometimes there will be things in SADL like:
+%
+%   FOO is a type of X.
+%     p of FOO only has values of type Y.
+%
+% and the problem is that p is not defined for X, but for (unrelated) Z instead.
+% SADL will not complain and will generate a property constraint, but that
+% property cannot ever exist.  This checks for that situation.
+check_invalid_domain(Property) :-
+    check_invalid_domain_class(_SrcClass, Property, _DefinedClass).
+
+check_invalid_domain_class(SrcClass, Property, DefinedClass) :-
+    rdf(SrcClass, _, B),
+    rack_ref(_, SrcClass),
+    rdf_is_bnode(B),
+    rdf(B, rdf:type, owl:'Restriction'),
+    rdf(B, owl:onProperty, Property),
+    rdf(Property, rdfs:domain, DefinedClass),
+    \+ rdf_reachable(SrcClass, rdfs:subClassOf, DefinedClass),
+    print_message(error, invalid_domain(SrcClass, Property, DefinedClass)).
+
+check_invalid_domain_class(SrcClass, Property, DefinedClass) :-
+    property(SrcClass, Property, _Usage),
+    rdf_reachable(Property, rdfs:subPropertyOf, ParentProp),
+    property(DefinedClass, ParentProp, _ParentUsage),
+    \+ rdf_reachable(SrcClass, rdfs:subClassOf, DefinedClass),
+    ( Property = ParentProp,
+      print_message(error, invalid_domain(SrcClass, Property, DefinedClass))
+    ; Property \= ParentProp,
+      print_message(error, invalid_subclass_domain(SrcClass, Property, ParentProp, DefinedClass))
+    ).
 
 
 actual_val((V^^VT),VT,(V^^VT)).  % normal
@@ -352,3 +384,9 @@ prolog:message(missing_any_tgt(SrcClass, SrcInst, SrcIdent, Rel)) -->
 prolog:message(missing_tgt(SrcClass, SrcInst, SrcIdent, Rel, TgtClass)) -->
     [ '~w ~w (~w) missing the ~w target of type ~w'-[
           SrcClass, SrcInst, SrcIdent, Rel, TgtClass] ].
+prolog:message(invalid_domain(SrcClass, Property, DefinedClass)) -->
+    [ 'Property ~w was referenced on class ~w, but that property is defined for the unrelated class ~w'-[
+          Property, SrcClass, DefinedClass] ].
+prolog:message(invalid_subclass_domain(SrcClass, Property, ParentProperty, DefinedClass)) -->
+    [ 'Property ~w was referenced on class ~w, but that property is a sub-type of ~w, which is defined for the unrelated class ~w'-[
+          Property, SrcClass, ParentProperty, DefinedClass] ].

@@ -6,11 +6,13 @@ steps:
 1. Update version numbers or instructions in the following files
    within the RACK and RACK.wiki repositories:
 
-   RACK/
+   RACK/rack-box/
 
    - [ ] [Docker-Hub-README.md](Docker-Hub-README.md)
    - [ ] [GitHub-Release-README.md](GitHub-Release-README.md)
    - [ ] [RELEASE.md](RELEASE.md)
+   
+   RACK/cli/
    - [ ] [setup-owl.sh](../cli/setup-owl.sh)
 
    RACK.wiki/
@@ -42,7 +44,7 @@ steps:
 
    ```shell
    cd RACK.wiki
-   git tag v10.2
+   git tag v11
    git push --tag
    ```
 

@@ -6,7 +6,7 @@ can be found [here](https://github.com/ge-high-assurance/RACK/wiki#log4j-securit
 
 # Introducing RACK
 
-RACK (Rapid Assurance Curation Kit) is a research-grade database that uses a structured semantic data model tuned to the domain of the DARPA ARCOS (Automated Rapid Certification Of Software) program.
+RACK (Rapid Assurance Curation Kit) is a research-grade database that uses a structured semantic data model tuned to the domain of the DARPA ARCOS (Automated Rapid Certification Of Software) program. Additionally, we offer a suite of tools for data curation and assurance interpretation.
 
 <img src="https://github.com/ge-high-assurance/RACK/wiki/images/RACK_cartoon.jpg" alt="RACK Overview Diagram" width="300" align="middle">
 
@@ -21,7 +21,7 @@ To make RACK easy for all ARCOS performers to use, we deploy RACK as a software 
 RACK is available as both a Linux container and a virtual machine, and is supported on Linux, Windows, and MacOS systems. To learn more and get detailed instructions on how to get started, see our [Installation Instructions](https://github.com/ge-high-assurance/RACK/wiki/Home#installation-instructions).
 
 ---
-Copyright (c) 2021, General Electric Company, Galois, Inc.
+Copyright (c) 2021-2022 General Electric Company, Galois, Inc.
 
 All Rights Reserved
 

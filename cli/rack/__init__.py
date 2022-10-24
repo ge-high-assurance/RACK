@@ -746,7 +746,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_import_parser.set_defaults(func=dispatch_data_import)
 
     data_export_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
-    data_export_parser.add_argument('--model-graph', type=str, required=True, action='append', help='Model graph URL')
+    data_export_parser.add_argument('--model-graph', type=str, action='append', help='Model graph URL')
     data_export_parser.add_argument('--data-graph', type=str, required=True, action='append', help='Data graph URL')
     data_export_parser.add_argument('--format', type=ExportFormat, help='Export format', choices=list(ExportFormat), default=ExportFormat.TEXT)
     data_export_parser.add_argument('--no-headers', action='store_true', help='Omit header row')
@@ -755,7 +755,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_export_parser.set_defaults(func=dispatch_data_export)
 
     data_count_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
-    data_count_parser.add_argument('--model-graph', type=str, required=True, action='append', help='Data graph URL')
+    data_count_parser.add_argument('--model-graph', type=str, action='append', help='Data graph URL')
     data_count_parser.add_argument('--data-graph', type=str, required=True, action='append', help='Data graph URL')
     data_count_parser.add_argument('--constraint', type=str, action='append', help='Runtime constraint: key=value')
     data_count_parser.set_defaults(func=dispatch_data_count)

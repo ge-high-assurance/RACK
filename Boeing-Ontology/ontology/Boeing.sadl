@@ -68,20 +68,61 @@ SoftwareCoding is a type of CODE_DEVELOPMENT.
 // Support for characterizing message types, valid signals, and tests
 // that verify these correspondences
 
-Message is a type of DATA_DICTIONARY_TERM.
+Message is a type of INTERFACE.
 
 Signal is a type of DATA_DICTIONARY_TERM.
-    enumValue describes Signal with values of type string.
+    message describes Signal with a single value of type Message.
+    
+// content of IDD_Doc can be Message and other things
+IDD_Doc is a type of DOCUMENT.
 
-MessageSignal is a type of DATA_DICTIONARY_TERM.
-    message describes MessageSignal with a single value of type Message.
-    signal describes MessageSignal with a single value of type Signal.
+// subclass from core ontology related to SBVT and IDD
+SBVT_Test_Procedure is a type of TEST_PROCEDURE. 
+    content of SBVT_Test only has values of type SBVT_Test_Step.
+    verifies of SBVT_Test_Procedure only has values of type {SubDD_Req or SRS_Req}.
+    verifies of SBVT_Test_Procedure has at least 1 value.
 
-IDD is a type of INTERFACE.
-    messageSignal describes IDD with values of type MessageSignal.
+SBVT_Test_Step is a type of TEST_STEP.
+    stimulates of SBVT_Test_Step has values of type Signal.  //<--how come "only has values" doesn't work here?
+    nextStep of SBVT_Test_Step only has values of type SBVT_Test_Step.
 
-IDD_Test is a type of TEST.
-    verifies of IDD_Test only has values of type MessageSignal.
+IDD_Test is a type of TEST. // note "verifies" corresponds to "observes"
+//    verifies of IDD_Test only has values of type Signal.
+	observes of IDD_Test has values of type Signal.    //<--how come "only has values" doesn't work here?
+
+//SBVT_Test_Step can contain HMI test etc.
+SBVT_Test_Log is a type of TEST_LOG.
+    content of SBVT_Test_Log only has values of type SBVT_Test_Record.
+SBVT_Test_Record is a type of TEST_RECORD.
+	logs of SBVT_Test_Record only has values of type SBVT_Test_Step.
+IDD_Test_Result is a type of TEST_RESULT.
+    confirms of IDD_Test_Result only has values of type IDD_Test.
+
+IDDCoverageAnalysis is a type of ANALYSIS. // move it to "ToolOntology"
+    analysisInput of IDDCoverageAnalysis only has values of type IDD_Test.
+IDDCoverageAnalysisResult is a type of TEST_RESULT.
+    confirms of IDDCoverageAnalysisResult only has values of type IDD_Test.
+
+Test_Station is a type of AGENT.
+
+SBVT_Test_Execution is a type of TEST_EXECUTION.
+       testProcedure of SBVT_Test_Execution only has values of type SBVT_Test_Procedure. 
+       systemUnderTest describes SBVT_Test_Execution with values of type SYSTEM.
+       systemUnderTestBuildVersion describes SBVT_Test_Execution with values of type BuildVersion. //added
+       databaseVersion describes SBVT_Test_Execution with values of type Database.
+       databaseVersion is a type of used.
+//     softwareBuild describes SBVT_Test_Execution with values of type Executable.
+//     softwareBuild is a type of used.
+       testStation of SBVT_Test_Execution has a single value of type Test_Station.
+       testStation is a type of wasAssociatedWith.
+BuildVersion is a type of ENTITY.
+       system describes BuildVersion with a single value of type SYSTEM.
+       buildVersion describes BuildVersion with a single value of type Executable.
+testExecution of SBVT_Test_Log has a single value of type SBVT_Test_Execution.
+testExecution is a type of wasGeneratedBy.
+
+Database is a type of SWCOMPONENT.
+Executable is a type of SWCOMPONENT.
 
 // COMMON FILE FORMATS
 
@@ -93,6 +134,7 @@ YamlFormat      (note "Yet Another Markup Language file format") is a FORMAT ide
 JsonFormat      (note "JavaScript Object Notation file format") is a FORMAT identifier "json".
 TomlFormat      (note "Tom's Obvious Minimal Language file format") is a FORMAT identifier "toml".
 IniFormat       (note "Initialization configuration file format") is a FORMAT identifier "ini".
+OutFormat       (note "Text file output, e.g. output of test results") is a FORMAT with identifier "out".
 
 // Image formats
 SvgFormat       (note "Scalable Vector Graphics image file format") is a FORMAT identifier "svg".

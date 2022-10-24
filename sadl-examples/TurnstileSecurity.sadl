@@ -129,8 +129,8 @@ ic1 is a ImplControl
 ic2 is a ImplControl
 	with control IA-3-1
 	with dal 6.
-inflow has implControl ic1.
-inflow has implControl ic2.
+inflow has implConnControl ic1.
+inflow has implConnControl ic2.
 
 // Rule to identify threats
 Rule Vul-CAPEC-148

@@ -10,17 +10,20 @@
 # of the Defense Advanced Research Projects Agency (DARPA).
 
 from ontology_changes import Commit
+from ontology_changes.change_class_is_a_type_of import ChangeClassIsATypeOf
+from rack.namespaces.rack_ontology import CONFIDENCE, PROV_S
 
-raise Exception(
-    f"This is a template, implement me and remove this exception!"
-)
-# You can use the following command to see the relevant changes:
-# <COMMAND>
-
-# pylint: disable=unreachable
 commit = Commit(
-    number="<COMMIT_ID>",
+    number="b85a66b005f4105ac5195cfd2cefec475f9e1f21",
     changes=[
-        # <FILE>.sadl
+        # CONFIDENCE.sadl
+        ChangeClassIsATypeOf(
+            name_space=CONFIDENCE,
+            class_id="CONFIDENCE_ASSESSMENT",
+            from_name_space=PROV_S,
+            from_class_id="THING",
+            to_name_space=PROV_S,
+            to_class_id="ENTITY",
+        )
     ],
 )

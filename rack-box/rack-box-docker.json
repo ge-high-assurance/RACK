@@ -11,12 +11,13 @@
   "builders": [
     {
       "type": "docker",
-      "image": "ubuntu:20.04",
-      "pull": false,
-      "commit": true,
+
       "changes": [
         "ENTRYPOINT [ \"/usr/bin/python3\", \"/usr/bin/systemctl\" ]"
-      ]
+      ],
+      "commit": true,
+      "image": "ubuntu:20.04",
+      "pull": false
     }
   ],
 

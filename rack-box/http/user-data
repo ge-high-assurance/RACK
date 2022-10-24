@@ -20,6 +20,7 @@ autoinstall:
   ssh:
     install-server: true
   packages:
+    # If you change packages here, change them in rack-box/scripts/install.sh too
     - default-jre
     - linux-cloud-tools-virtual
     - nginx-light

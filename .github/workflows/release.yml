@@ -111,11 +111,19 @@ jobs:
 
     # Won't work since windows-latest doesn't support nested virtualization
     - name: Enable Hyper-V
-      if: matrix.builder == 'hyperv' && matrix.os == 'windows-latest'
+      if: matrix.builder == 'hyperv'
       shell: powershell
       run: |
         Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
         Add-WindowsFeature RSAT-Hyper-V-Tools -IncludeAllSubFeature
+
+    # Download vagrant box in order to build virtualbox image
+    - name: Download Vagrant Box
+      if: matrix.builder == 'virtualbox'
+      run: |
+        mkdir -p RACK/rack-box/focal64
+        curl -LOSfs https://app.vagrantup.com/ubuntu/boxes/focal64/versions/20221021.0.0/providers/virtualbox.box
+        tar -xf virtualbox.box -C RACK/rack-box/focal64
 
     - name: Build rack-box ${{ matrix.builder }} image
       run: |
@@ -150,7 +158,7 @@ jobs:
         b=${{ matrix.builder }}
         v=${{ github.event.release.tag_name }}
         cd RACK/rack-box
-        mv output-$b-iso rack-box-$b-$v
+        mv output-$b-* rack-box-$b-$v
         zip -r rack-box-$b-$v.zip rack-box-$b-$v
         split -b 1500m rack-box-$b-$v.zip rack-box-$b-$v.zip
         ls -l rack-box-$b-$v.zip??

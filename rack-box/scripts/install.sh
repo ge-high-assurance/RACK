@@ -6,32 +6,34 @@ set -eo pipefail
 export USER=${1:-ubuntu}
 cd /tmp/files
 
+# Install necessary packages non-interactively
+
+export DEBIAN_FRONTEND=noninteractive
+export DEBCONF_NONINTERACTIVE_SEEN=true
+apt-get update -yqq
+apt-get install -yqq ca-certificates software-properties-common
+cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
+update-ca-certificates
+add-apt-repository -yu ppa:swi-prolog/stable
+apt-get update -yqq
+
+# If you change packages here, change them in rack-box/http/user-data too
+
+apt-get install -yqq \
+        curl \
+        default-jre \
+        gettext-base \
+        nano \
+        nginx-light \
+        python3 \
+        python3-pip \
+        strace \
+        swi-prolog \
+        unzip
+
 # Execute this part of the script only if we're building a Docker image
 
 if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
-
-    # Install necessary packages non-interactively
-
-    export DEBIAN_FRONTEND=noninteractive
-    export DEBCONF_NONINTERACTIVE_SEEN=true
-    apt-get update -yqq
-    apt-get install -yqq software-properties-common
-    add-apt-repository -yu ppa:swi-prolog/stable
-
-    # If you change this, change packages in rack-box/http/user-data too
-    # Note VM image already has curl, gettext-base, nano, etc.
-
-    apt-get install -yqq \
-            curl \
-            default-jre \
-            gettext-base \
-            nano \
-            nginx-light \
-            python3 \
-            python3-pip \
-            strace \
-            swi-prolog \
-            unzip
 
     # Install docker-systemctl-replaement
 

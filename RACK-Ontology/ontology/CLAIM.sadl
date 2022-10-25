@@ -23,9 +23,6 @@ addresses (note "The entity that this claim addresses")
 declares (note "The PROPERTYs that this claim declares to hold")
     describes CLAIM with values of type PROPERTY.
 
-justifiedBy (note "The evidence or architecture that supports this CLAIM")
-    describes CLAIM with values of type PROPERTY_RESULT.
-
 appliesWhen (note "Environmental factor ranges constrainting this CLAIM")
     describes CLAIM with values of type ENVIRONMENT_RANGE.
 

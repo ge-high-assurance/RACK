@@ -29,5 +29,6 @@ autoinstall:
     - strace
     - swi-prolog
     - unzip
+    - vim
   late-commands:
     - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu

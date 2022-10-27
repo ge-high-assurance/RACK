@@ -71,7 +71,9 @@ in
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/LM-Ontology/OwlModels" "${rack_dir}/LM-Ontology/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/SRI-Ontology/OwlModels" "${rack_dir}/SRI-Ontology/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/RTX-Ontology/OwlModels" "${rack_dir}/RTX-Ontology/"
+        scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/Provenance-Example/OwlModels" "${rack_dir}/Provenance-Example/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels" "${rack_dir}/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
+        scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/sadl-examples/OwlModels" "${rack_dir}/sadl-examples/"
 
         echo "[setup-owl] Copying nodegroups"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/nodegroups/CDR" "${rack_dir}/nodegroups/"
@@ -101,7 +103,9 @@ in
         docker cp "${container}:home/ubuntu/RACK/LM-Ontology/OwlModels/" "${rack_dir}/LM-Ontology/"
         docker cp "${container}:home/ubuntu/RACK/SRI-Ontology/OwlModels/" "${rack_dir}/SRI-Ontology/"
         docker cp "${container}:home/ubuntu/RACK/RTX-Ontology/OwlModels/" "${rack_dir}/RTX-Ontology/"
+        docker cp "${container}:home/ubuntu/RACK/Provenance-Example/OwlModels/" "${rack_dir}/Provenance-Example/"
         docker cp "${container}:home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/" "${rack_dir}/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
+        docker cp "${container}:home/ubuntu/RACK/sadl-examples/OwlModels/" "${rack_dir}/sadl-examples/"
 
         echo "[setup-owl] Copying nodegroups"
         docker cp "${container}:home/ubuntu/RACK/nodegroups/CDR/" "${rack_dir}/nodegroups/"

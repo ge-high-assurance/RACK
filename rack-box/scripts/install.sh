@@ -34,7 +34,7 @@ apt-get install -yqq \
 
 # Ensure we can log into the vm like we used to
 
-if [ -f "/etc/ssh/sshd_config" ]; then
+if getent passwd vagrant >/dev/null && [ -f "/etc/ssh/sshd_config" ]; then
     sed -i -e "s/.*PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
     echo "ubuntu:ubuntu" | chpasswd
 fi

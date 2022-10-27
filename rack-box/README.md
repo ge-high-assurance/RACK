@@ -39,6 +39,9 @@ although we will mention each file here as well:
 - `files/fuseki.tar.gz`: Download latest Fuseki release tarball from
   <https://jena.apache.org/download/> and rename it
 
+- `files/jena.tar.gz`: On the same page you downloaded Fuseki, scroll down and
+  get the Apache Jena libraries, renaming it to `jena.tar.gz`
+
 - `files/semtk.tar.gz`: Download latest SemTK release tarball from
   <https://github.com/ge-semtk/semtk/releases> and rename it
 

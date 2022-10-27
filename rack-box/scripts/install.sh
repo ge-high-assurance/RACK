@@ -54,6 +54,9 @@ mkdir -p "/home/${USER}"
 tar xfzC fuseki.tar.gz /opt
 rm fuseki.tar.gz
 mv /opt/apache-jena-fuseki-* /opt/fuseki
+tar xfzC jena.tar.gz /opt
+rm jena.tar.gz
+mv /opt/apache-jena-* /opt/jena
 tar xfzC rack.tar.gz "/home/${USER}"
 rm rack.tar.gz
 tar xfzC rack-assist.tar.gz "/home/${USER}"

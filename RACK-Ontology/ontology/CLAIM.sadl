@@ -115,11 +115,42 @@ decisionOutcome
   describes DECISION_PROPERTY_RESULT with a single value of type DECISION_OUTCOME.
 
 DECISION_OUTCOME (note "Enumeration of decision outcomes")
-    is a type of THING.
+    is a type of THING
+    must be one of {DecisionOutcomeSatisfied, DecisionOutcomeNotSatisfied, DecisionOutcomeUnknown}.
 
-StaticAnalysisOutcomeAbsent is a STATIC_ANALYSIS_OUTCOME
-    identifier "Absent"
-    title "Absent".
+DecisionOutcomeSatisfied is a DECISION_OUTCOME
+    identifier "Satisfied"
+    title "Satisfied".
+
+DecisionOutcomeNotSatisfied is a DECISION_OUTCOME
+    identifier "NotSatisfied"
+    title "Not Satisfied".
+
+DecisionOutcomeUnknown is a DECISION_OUTCOME
+    identifier "Unknown"
+    title "Unknown".
+
+////////////////////////////////////////////////////////////////////////
+
+TEST_EXECUTION_PROPERTY_RESULT
+    (note "A test execution property result")
+    is a type of PROPERTY_RESULT.
+    
+testExecutionOutcome
+  (note "Outcome for a test execution result")
+  describes TEST_EXECUTION_PROPERTY_RESULT with a single value of type TEST_EXECUTION_OUTCOME.
+
+TEST_EXECUTION_OUTCOME (note "Enumeration of test execution outcomes")
+    is a type of THING
+    must be one of {TextExecutionOutcomePass, TextExecutionOutcomeFail}.
+
+TextExecutionOutcomePass is a TEST_EXECUTION_OUTCOME
+    identifier "Pass"
+    title "Pass".
+
+TextExecutionOutcomeFail is a TEST_EXECUTION_OUTCOME
+    identifier "Fail"
+    title "Fail".
 
 ////////////////////////////////////////////////////////////////////////
 

@@ -1,0 +1,20 @@
+﻿source,identifier,title,description
+ACERT,Approximate_Modeling,Approximate Modeling,The analysis is neither sound nor complete
+ACERT,Partial_Scope,Partial Scope,The analysis only targets specific patterns
+DesCert,Inadequate_Enumeration_Test_Oracles,Inadequate Enumeration Test Oracles,All equivalence classes enumeration for a particular behavioral operator may not be adequately created
+DesCert,Inadequate_Requirements_based_Testing_Aspects,Inadequate Requirements based Testing Aspects,The theory of test oracle is missing criteria to cover aggregate behavior of operators - e.g.: some types of implementation level errors might go undetected.
+DesCert,Inadequate_Requirements_based_Test_Coverage_Criteria,Inadequate Requirements based Test Coverage Criteria,"Analysis used to determine Observability is not exact, i.e., incorrectly identifying some variable as observable, when it is not."
+DesCert,Incorrect_Abstraction_in_PVS_Models,Incorrect Abstraction in PVS Models,
+DesCert,Incorrect_UserAnnotation_in_Code,Incorrect UserAnnotation in Code,Incorrect abstraction of the system is used as a model for this analysis
+DesCert,Incorrect_Code_Context_and_Boundaries ,Incorrect Code Context and Boundaries ,User's annotation in code is incorrect
+DesCert,Inadequate_Enumeration_of_Requirements_Properties,Inadequate Enumeration of Requirements Properties,Incorrect Determination of Analyzed code context and boundaries in the system
+DesCert,Inadequate_Enumeration_of_Control_Protections,Inadequate Enumeration of Control Protections,Missing requirements Analysis criteria such as vacuity and clairvoyance properties
+DesCert,Ineffective_Control_Protections,Ineffective Control Protections,
+DesCert,Inadequate_Enumeration_of_Security_Specifications,Inadequate Enumeration of Security Specifications,
+DesCert,Inadequate_Security_Assessment,Inadequate Security Assessment,
+DesCert,Incorrect_Specification_of_Security_Properties,Incorrect Specification of Security Properties,"Vulnerability assessment is not complete, threat models are incorrect "
+DesCert,Incorrect_Specific_Property_Specification,Incorrect Specific Property Specification,
+DesCert,Incorrect_Proof_Due_to_Vacuous_Model_Checking,Incorrect Proof Due to Vacuous Model Checking,
+DesCert,Incorrect_Model_Translation,Incorrect Model Translation,
+DesCert,Incorrectness_in_Tool_Output,Incorrectness in Tool Output,
+DesCert,False_Positive_and_False_Negative_Output,False Positive and False Negative Output,

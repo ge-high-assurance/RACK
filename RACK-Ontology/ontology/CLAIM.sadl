@@ -27,11 +27,14 @@ appliesWhen (note "Environmental factor ranges constrainting this CLAIM")
     describes CLAIM with values of type ENVIRONMENT_RANGE.
 
 usesTheory (note "The theory invoked to justify a claim.")
-    describes CLAIM with values of type THEORY_TYPE.
+    describes CLAIM with values of type THEORY.
+
+partiallySupports (note "The claims are made in the context of pursuing an OBJECTIVE")
+	describes CLAIM with values of type OBJECTIVE.
 
 ////////////////////////////////////////////////////////////////////////
 
-THEORY_TYPE (note "A set of principles used to reason about logical claims.")
+THEORY (note "A set of principles used to reason about logical claims.")
     is a type of THING.
 
 ////////////////////////////////////////////////////////////////////////
@@ -84,6 +87,39 @@ ROBUSTNESS_PROPERTY_RESULT (note "An unconstrained robustness property result")
   
 robustness (note "Unconstrained robustness metric")
     describes ROBUSTNESS_PROPERTY_RESULT with a single value of type double.
+
+////////////////////////////////////////////////////////////////////////
+
+BOOLEAN_PROPERTY_RESULT (note "A boolean property result")
+    is a type of PROPERTY_RESULT.
+  
+booleanResult (note "Boolean outcome")
+    describes BOOLEAN_PROPERTY_RESULT with a single value of type boolean.
+
+////////////////////////////////////////////////////////////////////////
+
+REAL_PROPERTY_RESULT (note "A real-valued property result")
+    is a type of PROPERTY_RESULT.
+  
+realResult (note "Real-value outcome")
+    describes REAL_PROPERTY_RESULT with a single value of type double.
+
+////////////////////////////////////////////////////////////////////////
+
+DECISION_PROPERTY_RESULT
+    (note "A decision property result")
+    is a type of PROPERTY_RESULT.
+    
+decisionOutcome
+  (note "Decision for a property result")
+  describes DECISION_PROPERTY_RESULT with a single value of type DECISION_OUTCOME.
+
+DECISION_OUTCOME (note "Enumeration of decision outcomes")
+    is a type of THING.
+
+StaticAnalysisOutcomeAbsent is a STATIC_ANALYSIS_OUTCOME
+    identifier "Absent"
+    title "Absent".
 
 ////////////////////////////////////////////////////////////////////////
 

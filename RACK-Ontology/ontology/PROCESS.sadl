@@ -26,8 +26,6 @@ PROPERTY
 	propertyType (note "The semantic tag for this property instance.")
 	    describes PROPERTY with a single value of type PROPERTY_TYPE.
 
-	partiallySupports (note "One or more PROPERTY may be needed to address an OBJECTIVE.") describes PROPERTY with values of type OBJECTIVE.
-
     scopeOf (note "ENTITY(s) over which the PROPERTY holds") describes PROPERTY with values of type ENTITY.
     scopeOf is a type of wasImpactedBy.
 
@@ -37,32 +35,3 @@ PROPERTY
 PROPERTY_TYPE
     (note "The target-independent identifier of the semantics of a PROPERTY.") 
     is a type of THING.
-
-RequirementSatisfaction
-    is a PROPERTY_TYPE
-    identifier "RequirementSatisfaction"
-    title "Requirement Satisfaction".
-
-StatementCoverage
-    is a PROPERTY_TYPE
-    identifier "StatementCoverage"
-    title "Statement Coverage".
-
-OracleMonitoredCoverage
-    is a PROPERTY_TYPE
-    identifier "OracleMonitoredCoverage"
-    title "Oracle Monitored Coverage".
-
-InputSpaceCoverage
-    is a PROPERTY_TYPE
-    identifier "InputSpaceCoverage"
-    title "InputSpaceCoverage".
-
-Cwe is a PROPERTY_TYPE
-    identifier "Cwe"
-    title "CWE Property".
-
-Issue
-    is a PROPERTY_TYPE
-    identifier "Issue"
-    title "Issue".

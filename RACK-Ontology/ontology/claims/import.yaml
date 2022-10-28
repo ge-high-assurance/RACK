@@ -1,0 +1,5 @@
+data-graph: "http://rack001/model"
+ingestion-steps:
+- {class: "http://arcos.rack/CLAIM#THEORY", csv: "THEORIES.csv" }
+- {class: "http://arcos.rack/CLAIM#CONCERN_TYPE", csv: "CONCERN_TYPES.csv" }
+- {class: "http://arcos.rack/PROCESS#PROPERTY_TYPE", csv: "PROPERTY_TYPES.csv" }

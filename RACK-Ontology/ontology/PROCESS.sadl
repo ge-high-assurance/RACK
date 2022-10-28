@@ -19,10 +19,6 @@ OBJECTIVE
 
 	satisfiedBy (note "An ACTIVITY that demonstrates that the OBJECTIVE has been satisfied.") describes OBJECTIVE with values of type ACTIVITY.
 
-PROPERTY_TYPE
-    (note "The target-independent identifier of the semantics of a PROPERTY.") 
-    is a type of THING.
-
 PROPERTY 
 	(note "A general property that holds on the basis of some ANALYSIS")
 	is a type of ENTITY. 
@@ -37,3 +33,36 @@ PROPERTY
 
     mitigates (note "ENTITY(s) that is being mitigated by this PROPERTY") describes PROPERTY with values of type ENTITY.
     mitigates is a type of wasImpactedBy.
+
+PROPERTY_TYPE
+    (note "The target-independent identifier of the semantics of a PROPERTY.") 
+    is a type of THING.
+
+RequirementSatisfaction
+    is a PROPERTY_TYPE
+    identifier "RequirementSatisfaction"
+    title "Requirement Satisfaction".
+
+StatementCoverage
+    is a PROPERTY_TYPE
+    identifier "StatementCoverage"
+    title "Statement Coverage".
+
+OracleMonitoredCoverage
+    is a PROPERTY_TYPE
+    identifier "OracleMonitoredCoverage"
+    title "Oracle Monitored Coverage".
+
+InputSpaceCoverage
+    is a PROPERTY_TYPE
+    identifier "InputSpaceCoverage"
+    title "InputSpaceCoverage".
+
+Cwe is a PROPERTY_TYPE
+    identifier "Cwe"
+    title "CWE Property".
+
+Issue
+    is a PROPERTY_TYPE
+    identifier "Issue"
+    title "Issue".

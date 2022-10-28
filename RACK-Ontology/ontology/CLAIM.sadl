@@ -47,6 +47,72 @@ supportedBy (note "The evidence that supports the property result.")
 
 ////////////////////////////////////////////////////////////////////////
 
+COVERAGE_PROPERTY_RESULT (note "A coverage property result")
+  is a type of PROPERTY_RESULT.
+  
+coverageResult (note "Coverage value between 0 and 1 inclusive")
+    describes COVERAGE_PROPERTY_RESULT with a single value of type double.
+
+////////////////////////////////////////////////////////////////////////
+
+SUPPORTED_PROPERTY_RESULT (note "An support-level property result")
+    is a type of PROPERTY_RESULT.
+  
+supportLevel (note "Support level asserted by this result")
+    describes SUPPORTED_PROPERTY_RESULT with a single value of type SUPPORT_LEVEL.
+    
+SUPPORT_LEVEL (note "Enumeration of support levels")
+    is a type of THING
+    must be one of {SupportLevelSupported, SupportLevelUnsupported, SupportLevelCountermanded}.
+
+SupportLevelSupported is a SUPPORT_LEVEL
+    identifier "Supported"
+    title "Supported".
+
+SupportLevelUnsupported is a SUPPORT_LEVEL
+    identifier "Unsupported"
+    title "Unsupported".
+  
+SupportLevelCountermanded is a SUPPORT_LEVEL
+    identifier "Countermanded"
+    title "Countermanded".
+
+////////////////////////////////////////////////////////////////////////
+
+ROBUSTNESS_PROPERTY_RESULT (note "An unconstrained robustness property result")
+    is a type of PROPERTY_RESULT.
+  
+robustness (note "Unconstrained robustness metric")
+    describes ROBUSTNESS_PROPERTY_RESULT with a single value of type double.
+
+////////////////////////////////////////////////////////////////////////
+
+STATIC_ANALYSIS_PROPERTY_RESULT
+    (note "A static analysis property result")
+    is a type of PROPERTY_RESULT.
+    
+staticAnalysisOutcome
+  (note "Result of static analysis")
+  describes STATIC_ANALYSIS_PROPERTY_RESULT with a single value of type STATIC_ANALYSIS_OUTCOME.
+
+STATIC_ANALYSIS_OUTCOME (note "Enumeration of static analysis outcomes")
+    is a type of THING
+    must be one of {StaticAnalysisLevelAbsent, StaticAnalysisLevelMitigated, StaticAnalysisLevelUnmitigated}.
+
+StaticAnalysisOutcomeAbsent is a STATIC_ANALYSIS_OUTCOME
+    identifier "Absent"
+    title "Absent".
+
+StaticAnalysisOutcomeMitigated is a STATIC_ANALYSIS_OUTCOME
+    identifier "Mitigated"
+    title "Mitigated".
+
+StaticAnalysisOutcomeUnmitigated is a STATIC_ANALYSIS_OUTCOME
+    identifier "Unmitigated"
+    title "Unmitigated".
+
+////////////////////////////////////////////////////////////////////////
+
 CONCERN_TYPE (note "An enumeration of concerns arising when making claims")
     is a type of THING.
 

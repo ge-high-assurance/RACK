@@ -6,7 +6,6 @@ import subprocess
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 import semtk3
-import rack
 from .helper import *
 
 # dialog confirming ASSIST verification done
@@ -51,11 +50,13 @@ verify_report_error_dialog = dbc.Modal(
 )
 
 # page elements
-layout = html.Div(children=[
+layout = html.Div([
     html.H2('Verify Data'),
     dcc.Markdown("_Run verification routines on the data loaded in RACK_"),
     html.Button("Verify using ASSIST", id="verify-assist-button", n_clicks=0),  # button to verify using ASSIST
+    dbc.Tooltip("Run the ASSIST tool and download an error report", target="verify-assist-button"),
     html.Button("Verify using report", id="verify-report-button"),              # button to verify using SPARQLgraph report
+    dbc.Tooltip("Open SPARQLgraph and run data verification report on selected graphs", target="verify-report-button"),
     verify_report_options_div,
     html.Div(id="assist-status-div", className="scrollarea"),       # displays status
     verify_assist_done_dialog,
@@ -170,10 +171,8 @@ def show_report_options(button_clicks, last_loaded_graphs):
     """
     Show list of graphs for verification report, with the last loaded graphs pre-selected
     """
-    # get list of graphs populated in the triple store - create checkboxes for these
-    conn_str = rack.sparql_connection(BASE_URL, None, None, [], TRIPLE_STORE, TRIPLE_STORE_TYPE)
-    graphs_list = semtk3.get_graph_names(conn_str, True)  # excludes internal SemTK graphs
-    graphs_list.sort()
+    # get list of graphs populated in the triple store
+    graphs_list = get_graph_names()
 
     # these are the graphs last loaded - check the checkboxes for these
     if last_loaded_graphs == None:

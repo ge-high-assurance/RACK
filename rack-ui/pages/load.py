@@ -57,9 +57,9 @@ done_dialog = dbc.Modal(
 layout = html.Div([
         html.H2("Load data"),
         dcc.Markdown("_Load data into RACK_"),
-        html.Div([html.Button(id="turnstile-button", children="Load Turnstile data")]),  # button to load turnstile
+        html.Button(id="turnstile-button", children="Load Turnstile data"),  # button to load turnstile
         dbc.Tooltip("Load the Turnstile sample data provided with RACK", target="turnstile-button"),
-        html.Div([dcc.Upload( html.Button(id="select-button", children="Load ingestion package"), id='select-button-upload', accept=".zip", multiple=False)]),  # button to show upload dialog to pick ingestion package
+        dcc.Upload(html.Button(id="select-button", children="Load ingestion package"), id='select-button-upload', accept=".zip", multiple=False),  # button to show upload dialog to pick ingestion package
         dbc.Tooltip("Load an ingestion package (in .zip format) from your local machine", target="select-button"),
         load_div,
         html.Div(id="status-div", className="scrollarea"),      # displays ingestion status

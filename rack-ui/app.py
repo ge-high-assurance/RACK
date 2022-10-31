@@ -49,14 +49,14 @@ app.layout = html.Div([
 )
 
 # validate using this layout (includes components from pages)
-app.validation_layout = html.Div([app.layout, home.layout, load.layout, verify.layout])
+app.validation_layout = html.Div([app.layout, load.layout, verify.layout])
 
 
 @callback(Output('page-content', 'children'),
             Input('url', 'pathname'))
 def display_page(pathname):
     if pathname == '/':
-        return home.layout
+        return home.layout()
     elif pathname == '/load':
         return load.layout
     elif pathname == '/verify':

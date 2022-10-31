@@ -32,6 +32,13 @@ apt-get install -yqq \
         unzip \
         vim
 
+# Ensure we can log into the vm like we used to
+
+if getent passwd vagrant >/dev/null && [ -f "/etc/ssh/sshd_config" ]; then
+    sed -i -e "s/.*PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+    echo "ubuntu:ubuntu" | chpasswd
+fi
+
 # Execute this part of the script only if we're building a Docker image
 
 if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
@@ -54,6 +61,9 @@ mkdir -p "/home/${USER}"
 tar xfzC fuseki.tar.gz /opt
 rm fuseki.tar.gz
 mv /opt/apache-jena-fuseki-* /opt/fuseki
+tar xfzC jena.tar.gz /opt
+rm jena.tar.gz
+mv /opt/apache-jena-* /opt/jena
 tar xfzC rack.tar.gz "/home/${USER}"
 rm rack.tar.gz
 tar xfzC rack-assist.tar.gz "/home/${USER}"

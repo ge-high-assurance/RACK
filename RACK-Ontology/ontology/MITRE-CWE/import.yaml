@@ -6,5 +6,5 @@ ingestion-steps:
 - {nodegroup: "CWE effectivenesses", csv: "CWE_EFFECTIVENESS.csv" }
 - {nodegroup: "CWE methods",csv: "CWE_METHOD.csv" }
 - {nodegroup: "CWE effectiveness association", csv: "CWE_TOOL_EFFECTIVENESS.csv" }
-- {nodegroup: "ingest_THREAT", csv: "CAPEC.csv"}
-- {nodegroup: "ingest_THREAT", csv: "CAPEC_CWE.csv"}
+- {class: "http://arcos.rack/SECURITY#THREAT", csv: "CAPEC.csv"}
+- {class: "http://arcos.rack/SECURITY#THREAT", csv: "CAPEC_CWE.csv"}

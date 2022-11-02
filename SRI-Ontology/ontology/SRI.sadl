@@ -281,7 +281,7 @@ import "http://arcos.AH-64D/Boeing".
           analysisConfiguration of DaikonInvariantDetection only has values of type ToolConfigurationInstance. // DB 2/8/22: not using ConfigurationString 
  
           analyzedWith of DaikonInvariantDetection only has values of type TOOL. 
-          analyzedWith of DaikonInvariantDetection has exactly 1 value. 
+          analyzedWith of DaikonInvariantDetection has exactly 1 value.
           analysisInput of DaikonInvariantDetection only has values of type {SourceCode or RandoopTestsAndMetrics}. 
           
         DaikonInvariantOutput is a type of ENTITY.

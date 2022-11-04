@@ -11,19 +11,14 @@ steps:
   - manifest: rack.yaml
 
   - model: ../Boeing-Ontology/OwlModels/import.yaml
-  - nodegroups: ../nodegroups/ingestion/arcos.AH-64D
 
   - model: ../GrammaTech-Ontology/OwlModels/import.yaml
-  - nodegroups: ../nodegroups/ingestion/arcos.acert
 
   - model: ../LM-Ontology/OwlModels/import.yaml
-  - nodegroups: ../nodegroups/ingestion/arcos.certgate
 
   - model: ../SRI-Ontology/OwlModels/import.yaml
-  - nodegroups: ../nodegroups/ingestion/arcos.descert
 
   - model: ../STR-Ontology/OwlModels/import.yaml
-  - nodegroups: ../nodegroups/ingestion/arcos.arbiter
 
   - model: ../RTX-Ontology/OwlModels/import.yaml
 

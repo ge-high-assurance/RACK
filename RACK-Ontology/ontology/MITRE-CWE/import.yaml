@@ -2,9 +2,9 @@
 # in the directory above.
 data-graph: "http://rack001/mitre-cwe"
 ingestion-steps:
-- {nodegroup: "CWE ingestion", csv: "MITRE_CWE.csv" }
-- {nodegroup: "CWE effectivenesses", csv: "CWE_EFFECTIVENESS.csv" }
-- {nodegroup: "CWE methods",csv: "CWE_METHOD.csv" }
+- {class: "http://arcos.acert/MITRE-CWE#MITRE_CWE", csv: "MITRE_CWE.csv" }
+- {class: "http://arcos.acert/MITRE-CWE#CWE_EFFECTIVENESS", csv: "CWE_EFFECTIVENESS.csv" }
+- {class: "http://arcos.acert/MITRE-CWE#CWE_DETECTION_METHOD",csv: "CWE_METHOD.csv" }
 - {nodegroup: "CWE effectiveness association", csv: "CWE_TOOL_EFFECTIVENESS.csv" }
 - {class: "http://arcos.rack/SECURITY#THREAT", csv: "CAPEC.csv"}
 - {class: "http://arcos.rack/SECURITY#THREAT", csv: "CAPEC_CWE.csv"}

@@ -1,11 +1,10 @@
 {
   "variables": {
     "cpus": "4",
-    "disk_size": "40000",
     "headless": "false",
     "http_proxy": "{{env `http_proxy`}}",
     "https_proxy": "{{env `https_proxy`}}",
-    "memory": "4096",
+    "memory": "8192",
     "no_proxy": "{{env `no_proxy`}}",
     "version": "dev",
     "vm_name": "rack-box-{{user `version`}}"
@@ -13,45 +12,26 @@
 
   "builders": [
     {
-      "type": "virtualbox-iso",
-      "iso_checksum": "sha256:5035be37a7e9abbdc09f0d257f3e33416c1a0fb322ba860d42d74aa75c3468d4",
-      "iso_url": "https://releases.ubuntu.com/focal/ubuntu-20.04.5-live-server-amd64.iso",
+      "type": "virtualbox-ovf",
 
-      "cpus": "{{user `cpus`}}",
-      "disk_size": "{{user `disk_size`}}",
-      "guest_additions_mode": "disable",
-      "guest_os_type": "Ubuntu_64",
-      "memory": "{{user `memory`}}",
-      "vboxmanage": [
-         ["modifyvm", "{{.Name}}", "--vram", "20"]
-      ],
-      "vm_name": "{{user `vm_name`}}",
-
-      "http_directory": "http",
-
-      "headless": "{{user `headless`}}",
-      "shutdown_command": "sudo shutdown -P now",
-
+      "boot_wait": "30s",
       "communicator": "ssh",
-      "ssh_username": "ubuntu",
-      "ssh_password": "ubuntu",
-      "ssh_handshake_attempts": "15",
-      "ssh_timeout": "15m",
-
-      "boot_wait": "2s",
-      "boot_command": [
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "autoinstall ds=nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/",
-        "<enter><wait>"
-      ]
+      "guest_additions_mode": "disable",
+      "headless": "{{user `headless`}}",
+      "http_directory": "http",
+      "shutdown_command": "sudo shutdown -P now",
+      "source_path": "focal64/box.ovf",
+      "ssh_private_key_file": "vagrant",
+      "ssh_username": "vagrant",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--audio", "none"],
+        ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"],
+        ["modifyvm", "{{.Name}}", "--graphicscontroller", "vmsvga"],
+        ["modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}"],
+        ["modifyvm", "{{.Name}}", "--vram", "20"],
+        ["modifyvm", "{{.Name}}", "--vrde", "off"]
+      ],
+      "vm_name": "{{user `vm_name`}}"
     }
   ],
 

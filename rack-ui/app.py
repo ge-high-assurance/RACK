@@ -38,23 +38,25 @@ sidebar = html.Div(
     className="sidebar"
 )
 
+# layout
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     sidebar,
-    html.Div(id='page-content')  # display page content
+    html.Div(id='page-content'),        # display page content
+    dcc.Store("last-loaded-graphs"),    # stores the last-loaded graphs (used by multiple pages)
 ],
     style = { "margin-left": "18rem", "margin-right": "2rem", "padding": "2rem 1rem" }
 )
 
 # validate using this layout (includes components from pages)
-app.validation_layout = html.Div([app.layout, home.layout, load.layout, verify.layout])
+app.validation_layout = html.Div([app.layout, load.layout, verify.layout])
 
 
 @callback(Output('page-content', 'children'),
             Input('url', 'pathname'))
 def display_page(pathname):
     if pathname == '/':
-        return home.layout
+        return home.layout()
     elif pathname == '/load':
         return load.layout
     elif pathname == '/verify':

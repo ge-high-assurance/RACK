@@ -20,6 +20,7 @@ autoinstall:
   ssh:
     install-server: true
   packages:
+    # If you change packages here, change them in rack-box/scripts/install.sh too
     - default-jre
     - linux-cloud-tools-virtual
     - nginx-light
@@ -28,5 +29,6 @@ autoinstall:
     - strace
     - swi-prolog
     - unzip
+    - vim
   late-commands:
     - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu

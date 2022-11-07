@@ -29,10 +29,15 @@ runs:
       run: |
         curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-4.6.1.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
 
+    - name: Download Apache Jena libraries
+      shell: bash
+      run: |
+        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-4.6.1.tar.gz -o RACK/rack-box/files/jena.tar.gz
+
     - name: Download SemTK release
       shell: bash
       run: |
-        curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.5.0-20221014/semtk-opensource-v2.5.0-20221014-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+        curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.5.0-20221026/semtk-opensource-v2.5.0-20221026-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
 
     - name: Download CSS stylesheet
       shell: bash
@@ -90,7 +95,7 @@ runs:
     - name: Package RACK ontology and data
       shell: bash
       run: |
-        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests --exclude=tools RACK
+        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=rack-ui --exclude=tests --exclude=tools RACK
 
     - name: Always stop rack-box container
       if: ${{ always() }}

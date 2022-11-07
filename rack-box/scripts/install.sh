@@ -6,32 +6,42 @@ set -eo pipefail
 export USER=${1:-ubuntu}
 cd /tmp/files
 
+# Install necessary packages non-interactively
+
+export DEBIAN_FRONTEND=noninteractive
+export DEBCONF_NONINTERACTIVE_SEEN=true
+apt-get update -yqq
+apt-get install -yqq ca-certificates software-properties-common
+cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
+update-ca-certificates
+add-apt-repository -yu ppa:swi-prolog/stable
+apt-get update -yqq
+
+# If you change packages here, change them in rack-box/http/user-data too
+
+apt-get install -yqq \
+        curl \
+        default-jre \
+        gettext-base \
+        nano \
+        nginx-light \
+        python3 \
+        python3-pip \
+        strace \
+        swi-prolog \
+        unzip \
+        vim
+
+# Ensure we can log into the vm like we used to
+
+if getent passwd vagrant >/dev/null && [ -f "/etc/ssh/sshd_config" ]; then
+    sed -i -e "s/.*PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+    echo "ubuntu:ubuntu" | chpasswd
+fi
+
 # Execute this part of the script only if we're building a Docker image
 
 if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
-
-    # Install necessary packages non-interactively
-
-    export DEBIAN_FRONTEND=noninteractive
-    export DEBCONF_NONINTERACTIVE_SEEN=true
-    apt-get update -yqq
-    apt-get install -yqq software-properties-common
-    add-apt-repository -yu ppa:swi-prolog/stable
-
-    # If you change this, change packages in rack-box/http/user-data too
-    # Note VM image already has curl, gettext-base, nano, etc.
-
-    apt-get install -yqq \
-            curl \
-            default-jre \
-            gettext-base \
-            nano \
-            nginx-light \
-            python3 \
-            python3-pip \
-            strace \
-            swi-prolog \
-            unzip
 
     # Install docker-systemctl-replaement
 
@@ -51,6 +61,9 @@ mkdir -p "/home/${USER}"
 tar xfzC fuseki.tar.gz /opt
 rm fuseki.tar.gz
 mv /opt/apache-jena-fuseki-* /opt/fuseki
+tar xfzC jena.tar.gz /opt
+rm jena.tar.gz
+mv /opt/apache-jena-* /opt/jena
 tar xfzC rack.tar.gz "/home/${USER}"
 rm rack.tar.gz
 tar xfzC rack-assist.tar.gz "/home/${USER}"

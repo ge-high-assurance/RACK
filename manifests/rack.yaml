@@ -8,4 +8,3 @@ footprint:
 steps:
   - model:      ../RACK-Ontology/OwlModels/import.yaml
   - nodegroups: ../nodegroups/queries
-  - nodegroups: ../nodegroups/ingestion/arcos.rack

@@ -20,13 +20,18 @@ OBJECTIVE
 	satisfiedBy (note "An ACTIVITY that demonstrates that the OBJECTIVE has been satisfied.") describes OBJECTIVE with values of type ACTIVITY.
 
 PROPERTY 
-	(note "A general property that holds on the basis of some ANALYSIS") 
+	(note "A general property that holds on the basis of some ANALYSIS")
 	is a type of ENTITY. 
 
-	partiallySupports (note "One or more PROPERTY may be needed to address an OBJECTIVE.") describes PROPERTY with values of type OBJECTIVE.
+	propertyType (note "The semantic tag for this property instance.")
+	    describes PROPERTY with a single value of type PROPERTY_TYPE.
 
     scopeOf (note "ENTITY(s) over which the PROPERTY holds") describes PROPERTY with values of type ENTITY.
     scopeOf is a type of wasImpactedBy.
 
     mitigates (note "ENTITY(s) that is being mitigated by this PROPERTY") describes PROPERTY with values of type ENTITY.
     mitigates is a type of wasImpactedBy.
+
+PROPERTY_TYPE
+    (note "The target-independent identifier of the semantics of a PROPERTY.") 
+    is a type of THING.

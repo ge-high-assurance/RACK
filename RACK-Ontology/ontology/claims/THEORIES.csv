@@ -1,0 +1,8 @@
+﻿source,identifier,title,description
+ACERT,SA_BINARY_CWE_Detection,Static Analysis Binary CWE Detection,Static analysis on binaries: CWE detection
+DesCert,Theory_CLEAR_Requirements_based_Test_Oracles_Creation,Theory CLEAR Requirements based Test Oracles Creation,All required test oracles were generated from the set of CLEAR requirements 
+DesCert,Theory_TestCase_Evaluation_of_TestOracle,Theory TestCase Evaluation of TestOracle,All test cases were evaluated to adequately cover specific test oracles
+DesCert,Theory_RADL_Architectural_Gurantee,Theory RADL Architectural Gurantee,
+DesCert,Theory_Checker_Fmwk_Ontic_Type_Code_Analysis,Theory Checker Fmwk Ontic Type Code Analysis,
+DesCert,Theory_CLEAR_Formal_Requirements_Analysis,Theory CLEAR Formal Requirements Analysis,
+DesCert,Theory_Model_Checking,Theory Model Checking,

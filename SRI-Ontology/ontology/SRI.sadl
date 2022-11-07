@@ -17,6 +17,7 @@ import "http://arcos.rack/ANALYSIS".
 import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/AGENTS".
 import "http://arcos.rack/MODEL".
+import "http://arcos.rack/CLAIM".
 import "http://arcos.AH-64D/Boeing".
    
     DesCert_Tool is a type of TOOL. 
@@ -61,21 +62,7 @@ import "http://arcos.AH-64D/Boeing".
          propertyBasis is a type of wasImpactedBy.
          // NOTE: a SpecificProperty is modeled by entities such as SallyPropertyModel; that's where the property text is contained
       
-      // DB 4/18/22: changed to inherit from ENTITY rather than ANALYSIS_OUTPUT, since PropertyResult can exist without an anlaysis or another activity
-      //             Added new attributes goalProperty and establishedBy
-      PropertyResult (note "Result corresponding to one method/attempt to prove a PROPERTY") is a type of ENTITY.
-         propertyResult (note "Valid/Invalid/Unknown status of this PropertyResult") describes PropertyResult with a single value of type PropertyProofStatus.
-         // The property being proven by this property result; the property has all relevant information about scope and basis
-         goalProperty (note "the PROPERTY this result is for") describes PropertyResult with a single value of type PROPERTY. // single value is mandatory, otherwise PropertyResult is meaningless
-         resultDiagnostics (note "counter examples, other diagnostics") describes PropertyResult with values of type ENTITY.
-         establishedBy (note "the ACTIVITY, ENTITY that establishes (proves) the propertyResult to be Valid/Invalid/Unknown") describes PropertyResult with values of type THING.
-         // inherited attribute wasGeneratedBy can also be used when PropertyResult is created by an ACTIVITY, but establishedBy is the main one still needed
-
-      PropertyProofStatus (note "Outcome of the attempt to prove a property") is a type of THING,
-         must be one of {Valid, Invalid, Unknown}.
-         Valid (note "property is valid (proven to hold)") is a PropertyProofStatus with identifier "Valid".
-         Invalid (note "property is invalid (proven to not hold)") is a PropertyProofStatus with identifier "Invalid".
-         Unknown (note "property cannot be proven to hold or to not hold") is a PropertyProofStatus with identifier "Unknown".
+     // DB 11/1/22: PropertyResult and PropertyProofStatus not needed due to chnages in core ontology
          
      ////////////////////////////////////////////////
      // System architecture and analysis
@@ -220,8 +207,9 @@ import "http://arcos.AH-64D/Boeing".
          // DB 2/25/22: inherit testGenInfo and testGenInput from DesCertTestGeneration
          testGenInput of ClearTestAndOracleGeneration only has values of type {SoftwareHighLevelRequirementSet or SoftwareLowLevelRequirementSet or DataDictionary}.
 
-       ClearTestingTheory is a type of ENTITY. 
-          testingTheoryDoc describes ClearTestingTheory with values of type DOCUMENT. 
+       // DB 11/1/22: not needed due to use of core class THEORY
+       //   ClearTestingTheory is a type of ENTITY. 
+       //   testingTheoryDoc describes ClearTestingTheory with values of type DOCUMENT. 
        
        TestOracle (note "a test obligation on a specific behavior specified in a sub-clause of a requirement") is a type of ENTITY.
          // DB 2/9/22: verifiesRequirement is a new property in TestOracle, not inherited from ENTITY
@@ -230,7 +218,7 @@ import "http://arcos.AH-64D/Boeing".
          verifiesRequirement is a type of wasImpactedBy.    
          requirementSubclause (note "part (subclause) of the requirement this test oracle tests") describes TestOracle with values of type string.
          testOracleCriteria (note "e.g., equiv class, boundary value") describes TestOracle with a single value of type string.
-         testOracleTheory describes TestOracle with a single value of type ClearTestingTheory.
+         testOracleTheory describes TestOracle with a single value of type THEORY.
          // Inherited properties:
          //   title: a name for the TestOracle that is more descriptive than the identifier
          
@@ -293,7 +281,7 @@ import "http://arcos.AH-64D/Boeing".
           analysisConfiguration of DaikonInvariantDetection only has values of type ToolConfigurationInstance. // DB 2/8/22: not using ConfigurationString 
  
           analyzedWith of DaikonInvariantDetection only has values of type TOOL. 
-          analyzedWith describes DaikonInvariantDetection with exactly 1 value. 
+          analyzedWith of DaikonInvariantDetection has exactly 1 value.
           analysisInput of DaikonInvariantDetection only has values of type {SourceCode or RandoopTestsAndMetrics}. 
           
         DaikonInvariantOutput is a type of ENTITY.

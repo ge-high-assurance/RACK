@@ -20,3 +20,4 @@ steps:
   - model: ../RACK-Ontology/OwlModels/MITRE-CWE.yaml
   - nodegroups: ../nodegroups/arcos.cwe
   - data: ../RACK-Ontology/ontology/MITRE-CWE/import.yaml
+  - data: ../RACK-Ontology/ontology/claims/import.yaml

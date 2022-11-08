@@ -42,9 +42,8 @@ def clean_for_display(s):
     ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')  # remove ANSI escape sequences (e.g. ESC[32m, ESC[0m) from command output
     return ansi_escape.sub('', s)
 
-def get_graph_names():
-    """ Gets list of graphs in the triple store """
+def get_graph_info():
+    """ Gets list of graphs in the triple store, with their triple counts """
     conn_str = rack.sparql_connection(BASE_URL, None, None, [], TRIPLE_STORE, TRIPLE_STORE_TYPE)
-    graphs_list = semtk3.get_graph_names(conn_str, True)  # True to exclude internal SemTK graphs
-    graphs_list.sort()
-    return graphs_list
+    graph_info_table = semtk3.get_graph_info(conn_str, True, False)  # True to exclude internal SemTK graphs, False to get counts too
+    return graph_info_table

@@ -172,7 +172,7 @@ def show_report_options(button_clicks, last_loaded_graphs):
     Show list of graphs for verification report, with the last loaded graphs pre-selected
     """
     # get list of graphs populated in the triple store
-    graphs_list = get_graph_names()
+    graphs_list = get_graph_info().get_column(0)
 
     # these are the graphs last loaded - check the checkboxes for these
     if last_loaded_graphs == None:

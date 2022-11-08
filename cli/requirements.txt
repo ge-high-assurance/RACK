@@ -12,7 +12,7 @@ PyYAML==5.4.1
 requests==2.28.1
 Pillow==9.0.1
 plotly==5.9.0
-semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@56da802d279102d83ad951cfea1b3549145525ff
+semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@b07d2219679e46d588884fc0e4427da5a6f28a1e
 six==1.16.0
 tabulate==0.8.10
 urllib3==1.26.10

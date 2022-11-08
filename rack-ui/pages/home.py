@@ -10,6 +10,7 @@ def layout():
 
     # get table with graph names and triple counts
     df = pd.DataFrame(get_graph_info().get_pandas_data())
+    df.rename(columns={'graph': 'Graph', 'triples': '# Triples'}, inplace=True)   # rename columns for display
 
     layout = html.Div(children=[
         html.H2('Welcome to RACK.'),

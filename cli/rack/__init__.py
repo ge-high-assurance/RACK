@@ -76,6 +76,8 @@ DEFAULT_BASE_URL: Url = Url("http://localhost")
 
 MODEL_GRAPH: Url = Url("http://rack001/model")
 DEFAULT_DATA_GRAPH = Url("http://rack001/data")
+DEFAULT_TRIPLE_STORE = Url("http://localhost:3030/RACK")
+DEFAULT_TRIPLE_STORE_TYPE = "fuseki"
 
 INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
     'type': 'object',
@@ -223,8 +225,8 @@ def sparql_connection(base_url: Url, model_graphs: Optional[List[Url]], data_gra
     # Default to RACK in a Box triple-store location
     model_graphs = model_graphs or [MODEL_GRAPH]
     data_graph = data_graph or DEFAULT_DATA_GRAPH
-    triple_store = triple_store or Url("http://localhost:3030/RACK")
-    triple_store_type = triple_store_type or "fuseki"
+    triple_store = triple_store or DEFAULT_TRIPLE_STORE
+    triple_store_type = triple_store_type or DEFAULT_TRIPLE_STORE_TYPE
     return Connection(semtk3.build_connection_str("%NODEGROUP%", triple_store_type, triple_store, model_graphs, data_graph, extra_data_graphs))
 
 def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
@@ -341,6 +343,16 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
     @with_status(f'Ingesting {str_highlight(str(owl_file))}')
     def go() -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
+    go()
+
+def utility_copygraph_driver(base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], from_graph: Url, to_graph: Url) -> None:
+    semtk3.set_host(base_url)
+    triple_store = triple_store or DEFAULT_TRIPLE_STORE
+    triple_store_type = triple_store_type or DEFAULT_TRIPLE_STORE_TYPE
+    
+    @with_status(f'Copying {str_highlight(from_graph)} to {str_highlight(to_graph)}')
+    def go() -> dict:
+        return semtk3.copy_graph(from_graph, to_graph, triple_store, triple_store_type, triple_store, triple_store_type)
     go()
 
 def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool, default_graph: bool) -> None:
@@ -650,6 +662,10 @@ def dispatch_data_count(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.model_graph, args.data_graph[0], args.data_graph[1:], args.triple_store, args.triple_store_type)
     run_count_query(conn, args.nodegroup, constraints=args.constraint)
 
+def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
+    """Implementation of utility copygraph command"""
+    utility_copygraph_driver(args.base_url, args.triple_store, args.triple_store_type, args.from_graph, args.to_graph)
+
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
     ingest_manifest_driver(Path(args.manifest), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph)
@@ -733,6 +749,14 @@ def get_argument_parser() -> argparse.ArgumentParser:
     nodegroups_delete_parser = nodegroups_subparsers.add_parser('delete', help='Delete some nodegroups from RACK')
     nodegroups_deleteall_parser = nodegroups_subparsers.add_parser('delete-all', help='Delete all nodegroups from RACK')
     nodegroups_sparql_parser = nodegroups_subparsers.add_parser('sparql', help='Show SPARQL query for nodegroup')
+
+    utility_parser = subparsers.add_parser('utility', help='Tools for manipulating raw data')
+    utility_subparsers = utility_parser.add_subparsers(dest='command')
+    utility_copygraph_parser = utility_subparsers.add_parser('copygraph', help='merge data from one graph to another')
+
+    utility_copygraph_parser.add_argument('--from-graph', type=str, required=True, help='merge from this graph')
+    utility_copygraph_parser.add_argument('--to-graph', type=str, required=True, help='merge to this graph')
+    utility_copygraph_parser.set_defaults(func=dispatch_utility_copygraph)
 
     manifest_import_parser.add_argument('manifest', type=str, help='Manifest YAML file')
     manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')

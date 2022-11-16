@@ -58,6 +58,22 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
                             'manifest': {'type': 'string'}
                         }
                     },
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        'required': ['copygraph'],
+                        'properties': {
+                            'copygraph': {
+                                'type': 'object',
+                                'additionalProperties': False,
+                                'required': ['from-graph', 'to-graph'],
+                                'properties': {
+                                    'from-graph': {'type': 'string'},
+                                    'to-graph': {'type': 'string'},
+                                }
+                            }
+                        }
+                    },
                 ]
             }
         }
@@ -70,6 +86,7 @@ class StepType(Enum):
     DATA = 2
     NODEGROUPS = 3
     MANIFEST = 4
+    COPYGRAPH = 5
 
 
 class Manifest:
@@ -79,7 +96,7 @@ class Manifest:
         self.modelgraphsFootprint: List[Url] = []
         self.datagraphsFootprint: List[Url] = []
         self.nodegroupsFootprint: List[str] = []
-        self.steps: List[Tuple[StepType, str]] = []
+        self.steps: List[Tuple[StepType, Any]] = []
 
     def getName(self) -> str:
         return self.name
@@ -141,5 +158,8 @@ class Manifest:
                 manifest.addStep(StepType.NODEGROUPS, step['nodegroups'])
             elif 'manifest' in step:
                 manifest.addStep(StepType.MANIFEST, step['manifest'])
+            elif 'copygraph' in step:
+                args = step['copygraph']
+                manifest.addStep(StepType.COPYGRAPH, (args['from-graph'], args['to-graph']))
 
         return manifest

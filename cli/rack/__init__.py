@@ -384,16 +384,21 @@ def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Opt
     else:
         targetgraph = None
 
-    for (step_type, step_file) in manifest.steps:
-        stepFile = base_path / step_file
+    for (step_type, step_data) in manifest.steps:
         if StepType.DATA == step_type:
+            stepFile = base_path / step_data
             ingest_data_driver(stepFile, base_url, targetgraph, targetgraph, triple_store, triple_store_type, False)
         elif StepType.MODEL == step_type:
+            stepFile = base_path / step_data
             ingest_owl_driver(stepFile, base_url, targetgraph, triple_store, triple_store_type, False)
         elif StepType.NODEGROUPS == step_type:
+            stepFile = base_path / step_data
             store_nodegroups_driver(stepFile, base_url)
         elif StepType.MANIFEST == step_type:
+            stepFile = base_path / step_data
             ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, default_graph)
+        elif StepType.COPYGRAPH == step_type:
+            utility_copygraph_driver(base_url, triple_store, triple_store_type, step_data[0], step_data[1])
 
 def ingest_data_driver(config_path: Path, base_url: Url, model_graphs: Optional[List[Url]], data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
@@ -668,7 +673,7 @@ def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.manifest), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph)
+    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
@@ -758,7 +763,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     utility_copygraph_parser.add_argument('--to-graph', type=str, required=True, help='merge to this graph')
     utility_copygraph_parser.set_defaults(func=dispatch_utility_copygraph)
 
-    manifest_import_parser.add_argument('manifest', type=str, help='Manifest YAML file')
+    manifest_import_parser.add_argument('config', type=str, help='Manifest YAML file')
     manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
     manifest_import_parser.add_argument('--default-graph', action='store_true', help='Load whole manifest into default graph')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)

@@ -30,20 +30,22 @@ variables explicitly in your packer build command like this:
 
 ## Files needed before building
 
-You will need to download 9 files into the `files` subdirectory before
-building your rack-box images.  Please see the
+You will need to download some files into the `files` subdirectory
+before building your rack-box images.  Please see the
 [commands](../.github/workflows/actions/download/action.yml) used by
 our workflows for the most up to date way to download these files,
 although we will mention each file here as well:
 
-- `files/fuseki.tar.gz`: Download latest Fuseki release tarball from
-  <https://jena.apache.org/download/> and rename it
+- `files/fuseki.tar.gz`: Download latest Fuseki tarball from
+  <https://jena.apache.org/download/>, renaming it to `fuseki.tar.gz`
 
-- `files/jena.tar.gz`: On the same page you downloaded Fuseki, scroll down and
-  get the Apache Jena libraries, renaming it to `jena.tar.gz`
+- `files/jena.tar.gz`: Download latest Jena tarball from the
+  same page, <https://jena.apache.org/download/>, renaming it to
+  `jena.tar.gz`
 
-- `files/semtk.tar.gz`: Download latest SemTK release tarball from
-  <https://github.com/ge-semtk/semtk/releases> and rename it
+- `files/semtk.tar.gz`: Download latest SemTK tarball from
+  <https://github.com/ge-semtk/semtk/releases>, renaming it to
+  `semtk.tar.gz`
 
 - `files/style.css`: Download latest CSS stylesheet (`style.css`) for
   rendering markdown from
@@ -74,7 +76,7 @@ although we will mention each file here as well:
   --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box
   --exclude=tests --exclude=tools RACK`)
 
-Once you have put these 9 files into the `files` subdirectory, skip to
+Once you have put these files into the `files` subdirectory, skip to
 [Build the rack-box images](#Build-the-rack-box-images) for the next
 step.
 
@@ -141,7 +143,7 @@ Docker, Hyper-V, and VirtualBox rack-box images:
 When Packer finishes these build commands, it will save the Docker
 rack-box image in your local Docker image cache and save the Hyper-V &
 VirtualBox rack-box images to new subdirectories called
-`output-hyperv-iso` and `output-virtualbox-iso`.  Your Hyper-V and
+`output-hyperv-iso` and `output-virtualbox-ovf`.  Your Hyper-V and
 VirtualBox GUI program can import these subdirectories directly into
 newly created virtual machines.
 

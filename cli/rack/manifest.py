@@ -122,7 +122,7 @@ class Manifest:
     def getNodegroupsFootprint(self) -> List[str]:
         return self.nodegroupsFootprint
 
-    def addStep(self, stepType: StepType, stepFile: str) -> None:
+    def addStep(self, stepType: StepType, stepFile: Any) -> None:
         self.steps.append((stepType, stepFile))
 
     def getConnection(self, triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:

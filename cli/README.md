@@ -172,12 +172,16 @@ subcommand subsumes the `data`, `nodegroups`, and `model` subcommands and is the
 recommended way to initialize a RACK instance for use.
 
 The following options default to their matching ENVIRONMENT variables if they exist:
-* --base-url : $BASE_URL
-* --triple-store : $TRIPLE_STORE
-* --log-level : $LOG_LEVEL
 
-For example, **ingestion warnings can be suppressed** by either using ```rack --log-level ERROR data import...``` or by executing this command in a bash script before calling 'rack':```export LOG_LEVEL=ERROR```
+- --base-url : $BASE_URL
+- --triple-store : $TRIPLE_STORE
+- --log-level : $LOG_LEVEL
 
+For example, **ingestion warnings can be suppressed** by either using
+`rack --log-level ERROR data import...` or by executing this command
+in a bash script before calling 'rack':
+
+`export LOG_LEVEL=ERROR`
 
 ## Data Ingestion Configuration file format
 
@@ -408,7 +412,7 @@ YAML file.
 
 ### CLI support
 
-```
+```text
 usage: rack manifest import [-h] [--clear] [--default-graph] manifest
 
 positional arguments:
@@ -426,7 +430,7 @@ To clear all graphs mentioned in the `footprint` use `--clear`. For example:
 `rack manifest import --clear my-manifest.yaml`
 
 Fuseki happens to run faster when data is stored in the *default graph*.
-To load a complete ingestion manifest into the default graph use 
+To load a complete ingestion manifest into the default graph use
 `--default-graph`. For example:
 `rack manifest import --default-graph my-manifest.yaml`
 

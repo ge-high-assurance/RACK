@@ -19,24 +19,26 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+    - name: Cache rack-box files
+      uses: actions/cache@v3
+      id: cache-files
+      with:
+        path: RACK/rack-box/files
+        key: files-${{ github.sha }}
+
     - name: Check out RACK source
+      if: steps.cache-files.outputs.cache-hit != 'true'
       uses: actions/checkout@v3
       with:
         repository: ge-high-assurance/RACK
         path: RACK
 
     - name: Check out RACK wiki
+      if: steps.cache-files.outputs.cache-hit != 'true'
       uses: actions/checkout@v3
       with:
         repository: ge-high-assurance/RACK.wiki
         path: RACK.wiki
-
-    - name: Cache rack-box files
-      uses: actions/cache@v3
-      id: cache-files
-      with:
-        path: RACK/rack-box/files
-        key: files-${{ hashFiles('RACK/**', 'RACK.wiki/**') }}
 
     - name: Set up Python
       if: steps.cache-files.outputs.cache-hit != 'true'
@@ -75,17 +77,11 @@ jobs:
         repository: ge-high-assurance/RACK
         path: RACK
 
-    - name: Check out RACK wiki
-      uses: actions/checkout@v3
-      with:
-        repository: ge-high-assurance/RACK.wiki
-        path: RACK.wiki
-
     - name: Get all files needed by rack-box
       uses: actions/cache@v3
       with:
         path: RACK/rack-box/files
-        key: files-${{ hashFiles('RACK/**', 'RACK.wiki/**') }}
+        key: files-${{ github.sha }}
 
     - name: Download Base Box for VM image
       run: |

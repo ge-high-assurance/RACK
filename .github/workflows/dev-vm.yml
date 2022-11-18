@@ -1,0 +1,102 @@
+# Runs when manually triggered by a user in GitHub UI
+
+name: RACK Dev VM Workflow
+on:
+  workflow_dispatch:
+
+jobs:
+
+# Cache job:
+#  - Downloads rack-box files
+#  - Caches rack-box files
+
+  cache:
+    strategy:
+      matrix:
+        os: [ ubuntu-20.04 ]
+        python-version: [ 3.8 ]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Cache rack-box files
+      uses: actions/cache@v2
+      id: cache-files
+      with:
+        path: RACK/rack-box/files
+        key: files-${{ github.sha }}
+
+    - name: Check out RACK source
+      if: steps.cache-files.outputs.cache-hit != 'true'
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK
+        path: RACK
+
+    - name: Check out RACK wiki
+      if: steps.cache-files.outputs.cache-hit != 'true'
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK.wiki
+        path: RACK.wiki
+
+    - name: Set up Python
+      if: steps.cache-files.outputs.cache-hit != 'true'
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Cache Python dependencies
+      if: steps.cache-files.outputs.cache-hit != 'true'
+      uses: actions/cache@v2
+      with:
+        # This path is specific to Ubuntu
+        path: ~/.cache/pip
+        # Look to see if there is a cache hit for the corresponding requirements file
+        key: ${{ runner.os }}-pip-${{ hashFiles('RACK/cli/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          ${{ runner.os }}-
+
+    - name: Download rack-box files
+      if: steps.cache-files.outputs.cache-hit != 'true'
+      uses: ./RACK/.github/workflows/actions/download
+
+# Build job:
+#  - Builds rack-box VirtualBox image
+#  - Uploads VirtualBox image to job artifacts
+
+  build:
+    runs-on: macos-12
+    needs: cache
+
+    steps:
+    - name: Check out RACK source
+      uses: actions/checkout@v2
+      with:
+        repository: ge-high-assurance/RACK
+        path: RACK
+
+    - name: Get all files needed by rack-box
+      uses: actions/cache@v2
+      with:
+        path: RACK/rack-box/files
+        key: files-${{ github.sha }}
+
+    - name: Download Base Box for VM image
+      run: |
+        mkdir -p RACK/rack-box/focal64
+        curl -LOSfs https://app.vagrantup.com/ubuntu/boxes/focal64/versions/v20221115.1.0/providers/virtualbox.box
+        tar -xf virtualbox.box -C RACK/rack-box/focal64
+        rm -f virtualbox.box
+
+    - name: Build rack-box VM image
+      run: |
+        cd RACK/rack-box
+        packer build -var headless=true -var version=dev rack-box-virtualbox.json
+
+    - name: Upload rack-box VM image to job artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: rack-box-dev
+        path: RACK/rack-box/output-virtualbox-ovf

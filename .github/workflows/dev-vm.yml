@@ -19,36 +19,34 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - name: Cache rack-box files
-      uses: actions/cache@v2
-      id: cache-files
-      with:
-        path: RACK/rack-box/files
-        key: files-${{ github.sha }}
-
     - name: Check out RACK source
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: ge-high-assurance/RACK
         path: RACK
 
     - name: Check out RACK wiki
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: ge-high-assurance/RACK.wiki
         path: RACK.wiki
 
+    - name: Cache rack-box files
+      uses: actions/cache@v3
+      id: cache-files
+      with:
+        path: RACK/rack-box/files
+        key: files-${{ hashFiles('RACK/**', 'RACK.wiki/**') }}
+
     - name: Set up Python
       if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
 
     - name: Cache Python dependencies
       if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         # This path is specific to Ubuntu
         path: ~/.cache/pip
@@ -72,21 +70,27 @@ jobs:
 
     steps:
     - name: Check out RACK source
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: ge-high-assurance/RACK
         path: RACK
 
+    - name: Check out RACK wiki
+      uses: actions/checkout@v3
+      with:
+        repository: ge-high-assurance/RACK.wiki
+        path: RACK.wiki
+
     - name: Get all files needed by rack-box
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: RACK/rack-box/files
-        key: files-${{ github.sha }}
+        key: files-${{ hashFiles('RACK/**', 'RACK.wiki/**') }}
 
     - name: Download Base Box for VM image
       run: |
         mkdir -p RACK/rack-box/focal64
-        curl -LOSfs https://app.vagrantup.com/ubuntu/boxes/focal64/versions/v20221115.1.0/providers/virtualbox.box
+        curl -LOSfs https://app.vagrantup.com/ubuntu/boxes/focal64/versions/20221115.1.0/providers/virtualbox.box
         tar -xf virtualbox.box -C RACK/rack-box/focal64
         rm -f virtualbox.box
 

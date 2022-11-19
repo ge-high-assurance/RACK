@@ -3,8 +3,9 @@
 name: RACK Build Virtual Machine Workflow
 on:
   workflow_dispatch:  
+    inputs:
       version:
-        required: true
+        required: false
         default: 'dev'
         type: string
 

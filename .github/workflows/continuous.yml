@@ -1,37 +1,30 @@
-# Runs after every pull request or push (except tag-only pushes)
+# Runs after every push (except tag-only pushes)
 
 name: RACK Continuous Integration Workflow
 on:
-  pull_request:
   push:
     branches: [ '**' ]
     tags-ignore: [ '**' ]
-  workflow_dispatch:
 
 jobs:
 
-# Lint job:
-#  - Lints the RACK CLI, Ontology, and shell scripts
+# lint job:
+#  - Lints RACK CLI, RACK Ontology, and shell scripts
 
   lint:
-    strategy:
-      matrix:
-        os: [ ubuntu-20.04 ]
-        python-version: [ 3.8 ]
-
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Check out RACK source
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.8
 
     - name: Cache Python dependencies
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         # This path is specific to Ubuntu
         path: ~/.cache/pip
@@ -62,88 +55,39 @@ jobs:
       env:
         SHELLCHECK_OPTS: -x -P assist/databin -e SC1008
 
-# Cache job:
-#  - Downloads rack-box files
-#  - Caches rack-box files
+# assemble-files job:
+#  - Assembles files for rack-box builds
 
-  cache:
-    strategy:
-      matrix:
-        os: [ ubuntu-20.04 ]
-        python-version: [ 3.8 ]
+  assemble-files:
+    uses: ./.github/workflows/assemble-files.yml
 
-    runs-on: ${{ matrix.os }}
+# test job:
+#  - Runs rack-box tests
+
+  test:
+    needs: assemble-files
+    runs-on: ubuntu-20.04
 
     steps:
-    - name: Cache rack-box files
-      uses: actions/cache@v2
-      id: cache-files
+    - name: Check out RACK source
+      uses: actions/checkout@v3
+      with:
+        repository: ge-high-assurance/RACK
+        path: RACK
+
+    - name: Ask cache for rack-box files
+      uses: actions/cache@v3
       with:
         path: RACK/rack-box/files
         key: files-${{ github.sha }}
 
-    - name: Check out RACK source
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK
-        path: RACK
-
-    - name: Check out RACK wiki
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK.wiki
-        path: RACK.wiki
-
     - name: Set up Python
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.8
 
     - name: Cache Python dependencies
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/cache@v2
-      with:
-        # This path is specific to Ubuntu
-        path: ~/.cache/pip
-        # Look to see if there is a cache hit for the corresponding requirements file
-        key: ${{ runner.os }}-pip-${{ hashFiles('RACK/cli/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-          ${{ runner.os }}-
-
-    - name: Download rack-box files
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: ./RACK/.github/workflows/actions/download
-
-# Test job:
-#  - Runs rack-box tests
-
-  test:
-    strategy:
-      matrix:
-        os: [ ubuntu-20.04 ]
-        python-version: [ 3.8 ]
-
-    runs-on: ${{ matrix.os }}
-    needs: cache
-
-    steps:
-    - name: Check out RACK source
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK
-        path: RACK
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-
-    - name: Cache Python dependencies
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         # This path is specific to Ubuntu
         path: ~/.cache/pip
@@ -152,12 +96,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
-
-    - name: Get all files needed by rack-box
-      uses: actions/cache@v2
-      with:
-        path: RACK/rack-box/files
-        key: files-${{ github.sha }}
 
     - name: Install rack-box files on runner
       run: |
@@ -176,60 +114,13 @@ jobs:
         pip3 install -r tests/requirements.txt
         python3 -m pytest tests
 
-# Build job:
-#  - Builds rack-box Docker image
-#  - Pushes Docker image to Docker Hub
+# build-docker-image job:
+#  - Builds rack-box docker image
+#  - Pushes docker image to Docker Hub
 
-  build:
-    strategy:
-      matrix:
-        os: [ ubuntu-20.04 ]
-
-    runs-on: ${{ matrix.os }}
-    needs: cache
-
-    steps:
-    - name: Check out RACK source
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK
-        path: RACK
-
-    - name: Get all files needed by rack-box
-      uses: actions/cache@v2
-      with:
-        path: RACK/rack-box/files
-        key: files-${{ github.sha }}
-
-    - name: Build rack-box dev image
-      if: github.ref == 'refs/heads/master'
-      run: |
-        cd RACK/rack-box
-        packer build -var version=dev rack-box-docker.json
-
-    - name: Build rack-box dev-test image
-      if: github.ref == 'refs/heads/dev-test'
-      run: |
-        cd RACK/rack-box
-        packer build -var version=dev-test rack-box-docker.json
-
-    - name: Build rack-box other image
-      if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/dev-test'
-      run: |
-        cd RACK/rack-box
-        packer build -var version=other rack-box-docker.json
-
-    - name: Login to Docker Hub
-      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev-test'
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    - name: Push rack-box dev image to Docker Hub
-      if: github.ref == 'refs/heads/master'
-      run: docker push gehighassurance/rack-box:dev
-
-    - name: Push rack-box dev-test image to Docker Hub
-      if: github.ref == 'refs/heads/dev-test'
-      run: docker push gehighassurance/rack-box:dev-test
+  build-docker-image:
+    needs: assemble-files
+    uses: ./.github/workflows/build-docker-image.yml
+    with:
+      push: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev-test' }}
+      version: ${{ (github.ref == 'refs/heads/master' && 'dev') || 'dev-test' }}

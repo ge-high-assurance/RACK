@@ -51,7 +51,7 @@ jobs:
         ./assist/bin/check
 
     - name: Lint shell scripts
-      uses: ludeeus/action-shellcheck@1.0.0
+      uses: ludeeus/action-shellcheck@1.1.0
       env:
         SHELLCHECK_OPTS: -x -P assist/databin -e SC1008
 

@@ -4,7 +4,7 @@ name: RACK Build Virtual Machine Workflow
 on:
   workflow_dispatch:  
       version:
-        required: false
+        required: true
         default: 'dev'
         type: string
 
@@ -23,5 +23,6 @@ jobs:
   build-virtual-machine:
     needs: assemble-files
     uses: ./.github/workflows/build-virtual-machine.yml
+    secrets: inherit
     with:
       version: ${{ inputs.version }}

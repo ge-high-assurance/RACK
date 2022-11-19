@@ -1,6 +1,5 @@
 # Builds rack-box virtual machine (reusable workflow)
 
-name: RACK Build Virtual Machine Workflow
 on:
   workflow_call:
     inputs:

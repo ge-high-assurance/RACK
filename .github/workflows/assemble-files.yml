@@ -1,6 +1,5 @@
 # Assembles files for rack-box builds (reusable workflow)
 
-name: RACK Assemble Files Workflow
 on:
   workflow_call:
 

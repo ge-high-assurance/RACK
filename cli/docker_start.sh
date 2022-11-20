@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2086,SC2128,SC2048
 
 default_version=v11
 
-if [ "$1" == "--help" -o "$1" == "-?" -o "$1" == "help" ] ; then
+if [ "$1" == "--help" ] || [ "$1" == "-?" ] || [ "$1" == "help" ] ; then
     echo "This tool can be used to (re-)start a RACK docker image (using"
     echo "either the docker or podman commands, depending on which is"
     echo "installed).  The optional command-line argument specifies which"

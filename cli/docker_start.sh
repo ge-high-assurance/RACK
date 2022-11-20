@@ -15,6 +15,7 @@ set -e -o pipefail
 image="gehighassurance/rack-box:${1:-$default_version}"
 
 cmd_exists () { type -p $1 > /dev/null 2>&1; }
+# shellcheck disable=SC1075
 if cmd_exists podman
 then cmd=podman
 else if cmd_exists docker

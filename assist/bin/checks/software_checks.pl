@@ -34,13 +34,17 @@ check_SOFTWARE_COMPONENT_contained(I) :-
 
 %! check_SOFTWARE_COMPONENT_impact is det.
 %
-%    Checks every SOFTWARE partOf target is a SOFTWARE.
-%    Always succeeds, emits warnings.
+%    Checks every SWCOMPONENT has an associated REQUIREMENT if that
+%    SWCOMPONENT is a MODULE.
 %
-% Similar to "nodegroups/query/query dataVer SOFTWARE without partOf SOFTWARE.json"
+% Similar to "nodegroups/query/query dataVer unlinked SWCOMPONENT.json"
 %
 check_SOFTWARE_COMPONENT_impact(I) :-
-    check_has_no_rel('http://arcos.rack/SOFTWARE#SWCOMPONENT',
+    rack_data_instance('http://arcos.rack/SOFTWARE#SWCOMPONENT', I),
+    rdf(I, 'http://arcos.rack/SOFTWARE#componentType', CT),
+    rack_instance_ident(CT, "Module"),
+    check_has_no_rel('S2',
+                     'http://arcos.rack/SOFTWARE#SWCOMPONENT',
                      'http://arcos.rack/PROV-S#wasImpactedBy',
                      'http://arcos.rack/REQUIREMENTS#REQUIREMENT',
                      I).

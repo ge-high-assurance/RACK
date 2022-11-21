@@ -205,6 +205,7 @@ check_invalid_value(Property, I, T) :-
 % instance.  Returns the SrcInst that this occurs for as well as
 % generating a warning.
 check_has_no_rel(Context, SrcClass, Prop, SrcInst) :-
+    is_valid_property(Context, SrcClass, Prop),
     rack_data_instance(SrcClass, SrcInst),
     none_of(SrcInst, rack_instance_relationship(SrcClass, Prop)),
     rack_instance_ident(SrcInst, SrcName),
@@ -214,6 +215,7 @@ check_has_no_rel(Context, SrcClass, Prop, SrcInst) :-
 % of the specific target class.  Returns the SrcInst that this occurs
 % for as well as generating a warning.
 check_has_no_rel(Context, SrcClass, Prop, TgtClass, SrcInst) :-
+    is_valid_property(Context, SrcClass, Prop),
     rack_data_instance(SrcClass, SrcInst),
     none_of(SrcInst, rack_instance_relationship(SrcClass, Prop, TgtClass)),
     rack_instance_ident(SrcInst, SrcName),
@@ -225,6 +227,13 @@ check_has_no_rel(Context, SrcClass, Prop, TgtClass, SrcInst) :-
 check_also_has_no_rel(SrcClass, SrcInst, Rel) :-
     check_has_no_rel(SrcClass, Rel, SrcInst), !.
 check_also_has_no_rel(_, _).
+
+is_valid_property(_, SrcClass, Property) :-
+    rdf(Property, rdfs:domain, PropClass),
+    rdf_reachable(SrcClass, rdfs:subClassOf, PropClass), !.
+is_valid_property(Context, SrcClass, Property) :-
+    print_message(error, invalid_property_in_check(Context, SrcClass, Property)),
+    fail.
 
 
 % Sometimes there will be things in SADL like:
@@ -399,3 +408,6 @@ prolog:message(invalid_domain(SrcClass, Property, DefinedClass)) -->
 prolog:message(invalid_subclass_domain(SrcClass, Property, ParentProperty, DefinedClass)) -->
     [ 'CE-115: Property ~w was referenced on class ~w, but that property is a sub-type of ~w, which is defined for the unrelated class ~w~n'-[
           Property, SrcClass, ParentProperty, DefinedClass] ].
+prolog:message(invalid_property_in_check(Context, SrcClass, Property)) -->
+    [ 'CE-116-~w: INVALID CHECK for ~w property on ~w class!~n'-[
+          Context, Property, SrcClass] ].

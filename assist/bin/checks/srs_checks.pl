@@ -78,9 +78,9 @@ check_SRS_Req_description(I) :-
 % Similar to "nodegroups/query/query dataVer SubDD_Req without satisfies SRS_Req.json"
 %
 check_SubDD_Req_satisfies_SRS_Req(I) :-
-                     'http://arcos.rack/TESTING#satisifes',
     check_has_no_rel('SRS2',
                      'http://arcos.AH-64D/Boeing#SubDD_Req',
+                     'http://arcos.rack/REQUIREMENTS#satisfies',
                      'http://arcos.AH-64D/Boeing#SRS_Req',
                      I).
 

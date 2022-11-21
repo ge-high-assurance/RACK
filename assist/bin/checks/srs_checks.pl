@@ -20,17 +20,21 @@
 
 %! check_SRS_insertion_source is det.
 %
-%    Checks that no SRS_Req is inserted by any activity other than
-%    "SRS Data Ingestion".  Always succeeds, emits warnings.
+%    Checks that at least one "insertedBy" activity for an SRS_Req is the "SRS
+%    Data Ingestion".  Always succeeds, emits warnings.
 %
 % Similar to "nodegroups/query/query dataVer SRS_Req dataInsertedBy other than SRS Data Ingestion.json"
-%
+
 check_SRS_insertion_source(I) :-
     T = 'http://arcos.AH-64D/Boeing#SRS_Req',
     rack_data_instance(T, I),
     rdf(I, 'http://arcos.rack/PROV-S#dataInsertedBy', A),
+    must_have_srs_data_ingestion(T,I,A).
+
+must_have_srs_data_ingestion(T,I,A) :-
+    rack_instance_ident(A, "SRS Data Ingestion"), !.
+must_be_srs_data_ingestion(T,I,A) :-
     rack_instance_ident(A, AName),
-    \+ AName = 'SRS Data Ingestion',
     rack_instance_ident(I, IN),
     rdf(A, rdf:type, ATy),
     print_message(warning, invalid_srs_req_inserter(T, I, IN, ATy, A, AName)).

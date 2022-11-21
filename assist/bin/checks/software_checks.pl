@@ -26,8 +26,9 @@
 % Similar to "nodegroups/query/query dataVer SOFTWARE without partOf SOFTWARE.json"
 %
 check_SOFTWARE_COMPONENT_contained(I) :-
-    check_has_no_rel('http://arcos.rack/SOFTWARE#SWCOMPONENT',
-                     'http://arcos.rack/SOFTWARE#subcomponentOf',
+    check_has_no_rel('S1',
+                     'http://arcos.rack/SOFTWARE#SWCOMPONENT',
+                     'http://arcos.rack/SOFTWARE#partOf',
                      'http://arcos.rack/SOFTWARE#SWCOMPONENT',
                      I).
 

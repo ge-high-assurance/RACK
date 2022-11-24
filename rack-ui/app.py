@@ -17,21 +17,19 @@ app.title = 'RACK UI'
 # menu
 sidebar = html.Div(
     [
-        html.Table([
-            html.Tr([
-                html.Td(html.Img(src=app.get_asset_url('RACK_cartoon.jpg'), height="90px")),
-                html.Td([dcc.Markdown("## RACK\n_System manager_")]),
+        dbc.Col([
+            dbc.Row([
+                dbc.Col([html.Img(src=app.get_asset_url('RACK_cartoon.jpg'), height="90px")], width=4),
+                dbc.Col([html.H2("RACK"), html.Span("System manager")], width=8),
             ]),
-            html.Tr(
-                html.Td([
-                    dbc.Nav([
-                        dbc.NavLink("Home", href="/", active="exact"),
-                        dbc.NavLink("Load", href="/load", active="exact"),
-                        dbc.NavLink("Verify", href="/verify", active="exact"),
-                    ],
-                    vertical=True, pills=True,
-                    )
-                ], colSpan=2)
+            dbc.Row(
+                dbc.Nav([
+                    dbc.NavLink("Home", href="/", active="exact"),
+                    dbc.NavLink("Load", href="/load", active="exact"),
+                    dbc.NavLink("Verify", href="/verify", active="exact"),
+                ],
+                vertical=True, pills=True,
+                )
             )
         ]),
     ],

@@ -78,7 +78,7 @@ check_SRS_Req_description(I) :-
 %
 check_SubDD_Req_satisfies_SRS_Req(I) :-
     check_has_no_rel('http://arcos.AH-64D/Boeing#SubDD_Req',
-                     'http://arcos.rack/TESTING#satisifes',
+                     'http://arcos.rack/REQUIREMENTS#satisfies',
                      'http://arcos.AH-64D/Boeing#SRS_Req',
                      I).
 

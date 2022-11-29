@@ -23,7 +23,7 @@ def get_temp_dir() -> str:
 
 def get_temp_dir_unique(prefix) -> str:
     """ Get a unique subdirectory within the temp dir, e.g. /tmp/ingest_9d40551e-f31f-4530-8c90-ca3e0acc4257"""
-    return os.path.join(get_temp_dir(), prefix + "_" + str(uuid.uuid4()))
+    return os.path.join(get_temp_dir(), f"{prefix}_{uuid.uuid4()}")
 
 def get_error_trace(e) -> str:
     """ Get error trace string """

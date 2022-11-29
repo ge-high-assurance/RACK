@@ -100,25 +100,25 @@ def run_unzip(zip_file_contents, turnstile_clicks):
             zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
             zip_obj = ZipFile(zip_str, 'r')
             zip_obj.extractall(path=tmp_dir)  # unzip the package
-            manifest_paths = glob.glob(tmp_dir + '/**/' + MANIFEST_FILE_NAME, recursive=True)
+            manifest_paths = glob.glob(f"{tmp_dir}/**/{MANIFEST_FILE_NAME}", recursive=True)
             if len(manifest_paths) == 0:
-                raise Exception("Cannot load ingestion package: does not contain manifest file " + MANIFEST_FILE_NAME)
+                raise Exception(f"Cannot load ingestion package: does not contain manifest file {MANIFEST_FILE_NAME}")
             if len(manifest_paths) > 1:
-                raise Exception("Cannot load ingestion package: contains multiple default manifest files: " + str(manifests))
+                raise Exception(f"Cannot load ingestion package: contains multiple default manifest files: {manifests}")
             manifest_path = manifest_paths[0]
         else:
             manifest_path = "../Turnstile-Example/Turnstile-IngestionPackage/manifest.yaml"
 
         manifest = get_manifest(manifest_path)
-        manifest_graphs_option = "Load to " + str(manifest.getModelgraphsFootprint()) + " " + str(manifest.getDatagraphsFootprint())
+        manifest_graphs_option = f"Load to {manifest.getModelgraphsFootprint()} {manifest.getDatagraphsFootprint()}"
         radio_choices = [{'label': manifest_graphs_option, 'value': 'manifest-graphs'}, {'label': 'Load to default graph (for optimized performance)', 'value': 'default-graph'}]
 
         # generate a file in which to capture the ingestion status
         status_filepath = get_temp_dir_unique("output")
 
-        selected_message = "You have selected package '" + manifest.getName() + "'"
+        selected_message = f"You have selected package '{manifest.getName()}'"
         if manifest.getDescription() != None and manifest.getDescription().strip() != "":
-            selected_message = selected_message + " (" + manifest.getDescription() + ")"
+            selected_message = f"{selected_message} ({manifest.getDescription()})"
 
     except Exception as e:
         return "", [], None, get_error_trace(e), None, None

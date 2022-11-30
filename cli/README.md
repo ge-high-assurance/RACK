@@ -389,6 +389,9 @@ steps:
   - manifest: another.yaml
   - model: model-manifest.yaml
   - data: data-manifest.yaml
+  - copygraph:
+      from-graph: 'http://rack001/data'
+      to-graph:   'uri://DefaultGraph'
 ```
 
 The `name` and `description` fields are informational and are used to
@@ -401,11 +404,19 @@ using the `--clear` flag.
 
 The `steps` section is required. It describes the sequential process
 of loading this ingestion package. This section must be a list of singleton
-maps. Each map should have exactly one key describing which kind of
-data should be imported. These keys will point to the same kind of
-file as you'd use loading this kind of data individually. For example
-a `data` section uses the same configuration file as `rack data import`
-and a `model` section uses the same configuration file as `rack model import`.
+maps. There are currently 4 kinds of step you can use in a manifest:
+
+- `manifest` steps take a relative path argument and recursively
+  import that manifest file.
+- `model` steps take a relative path argument and invoke
+  `rack model import` on that file.
+- `nodegroups` steps take a relative path argument and invoke
+  `rack nodegroups import` on that directory.
+- `data` steps take a relative path argument and invoke
+  `rack data import` on that directory.
+- `copygraph` steps take a dictionary specifying a `from-graph` URI
+  and a `to-graph` URI and perform a merge copying triples from the
+  from graph into the to graph.
 
 All file paths are resolved relative to the location of the manifest
 YAML file.

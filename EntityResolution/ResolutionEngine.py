@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 import os
 import json
-
-import csv
-from colorama import Fore, Back, Style
 import semtk3
+from colorama import Fore,  Style
 
 import multiprocessing
-
-import os
 import os.path
 DEBUG = False
 def Debug(*args):
@@ -67,8 +63,8 @@ class ResolutionEngine:
         all_ok = semtk3.check_services();
         if not all_ok: 
             raise Exception("Semtk services are not properly running on localhost")
-        if copy:
-            self.copyGraph()
+        #if copy:
+        #    self.copyGraph()
       
     def __runRules__(self, eP, eS):
         Score = 1
@@ -91,16 +87,18 @@ class ResolutionEngine:
         self.ruleList.append(["Relative", ruleFunction])
 
     def work(self, eP):
+        print("Running Analysis on {}".format(eP))
         maxScore = 0
         bestMatch = None
         resolutions = {}
         Score = 0.0
         for eS in self.entityList[eP]:
-            Score = self.__runRules__(eP,eS)
-            resolutions[eS] = Score
-            if Score > maxScore:
-                maxScore = Score
-                bestMatch = eS
+            if eS!=eP:
+                Score = self.__runRules__(eP,eS)
+                resolutions[eS] = Score
+                if Score > maxScore:
+                    maxScore = Score
+                    bestMatch = eS
         color = Fore.WHITE
         if Score> 2:
             color = Fore.YELLOW
@@ -149,16 +147,4 @@ class ResolutionEngine:
 
         semtk3.upload_owl("Model.owl", self.resolvedConnection, model_or_data=semtk3.SEMTK3_CONN_DATA, conn_index = 0)
         Debug("  Data Graph Copied.")
-    
-    
-    def updateRACK(self):
-        for r in self.resolutions:
-            if self.resolutions[r] >= 1.0:
-                semtk.combine_entities(r[0],r[1])
-                
-        pass
-                    
-                        
-                        
-                
     

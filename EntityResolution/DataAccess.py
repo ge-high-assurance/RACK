@@ -36,13 +36,13 @@ def getType(e):
     
 def getIdentifier(e):
     guid = e.split("#")[-1]
+    print("Getting identifier for {}".format(guid))
     data = None
     if not os.path.exists("cache/"+guid+".json"):
         cacheData(e)
     with open("cache/"+guid+".json", "r") as dataFile:
         data = json.load(dataFile)
     if "@graph" not in data: # No Graph tag means there is a single element at the root.
-        #baseElement = data
         return data['PROV_S:identifier']
     ## Create a Hash based on the GUID and find the base 
     #baseElement = None

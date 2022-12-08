@@ -38,7 +38,7 @@ if __name__ == "__main__":
     if os.path.exists(os.path.join(".","Resolutions-1")):
         shutil.rmtree(os.path.join(".","Resolutions-1"))
     createEvidenceFile(ingestionTitle="Resolutions-1")
-    Add.EntityResolution.AssumedSameAs(identifier="REQUIREMENTS:REQUIREMENT#L1-REQ-1",  primaryThing_identifier="L1-REQ-1", secondaryThing_identifier="{L1-REQ-1}")
+    Add.RESOLUTIONS.SAME_AS(primary_identifier="L1-REQ-1", secondary_identifier="{L1-REQ-1}")
     createCDR()
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Resolutions-1"))
     
@@ -46,6 +46,6 @@ if __name__ == "__main__":
     if os.path.exists(os.path.join(".","Resolutions-2")):
         shutil.rmtree(os.path.join(".","Resolutions-2"))
     createEvidenceFile(ingestionTitle="Resolutions-2")
-    Add.EntityResolution.AssumedSameAs(identifier="REQUIREMENTS:REQUIREMENT#L1-REQ-2",  primaryThing_identifier="L1-REQ-2", secondaryThing_identifier="[L1-REQ-2]")
+    Add.RESOLUTIONS.SAME_AS(primary_identifier="L1-REQ-2", secondary_identifier="[L1-REQ-2]")
     createCDR()
     os.rename(os.path.join(".","RACK-DATA"), os.path.join(".","Resolutions-2"))

@@ -92,7 +92,7 @@ cd /home/"${USER}"/RACK/rack-ui
 python3 -m pip install -r ./requirements.txt
 adduser --system --group --no-create-home --disabled-password rackui
 usermod -aG sudo rackui
-echo "rackui ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
+echo "rackui ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/rackui
 mkdir /etc/rackui
 chown rackui.rackui /etc/rackui
 envsubst < rackui.service > /etc/systemd/system/rackui.service

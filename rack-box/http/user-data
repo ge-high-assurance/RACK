@@ -33,4 +33,4 @@ autoinstall:
     - vim
   late-commands:
     - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu
-    - echo 'rackui ALL=(ALL) NOPASSWD:ALL' >> /target/etc/sudoers.d/ubuntu
+    - echo 'rackui ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/rackui

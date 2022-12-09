@@ -355,7 +355,15 @@ def utility_copygraph_driver(base_url: Url, triple_store: Optional[Url], triple_
         return semtk3.copy_graph(from_graph, to_graph, triple_store, triple_store_type, triple_store, triple_store_type)
     go()
 
-def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool, default_graph: bool) -> None:
+def ingest_manifest_driver(
+    manifest_path: Path,
+    base_url: Url,
+    triple_store: Optional[Url],
+    triple_store_type: Optional[str],
+    clear: bool,
+    default_graph: bool,
+    top_level: bool = True) -> None:
+
     with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
         manifest = Manifest.fromYAML(manifest_file)
 
@@ -396,9 +404,26 @@ def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Opt
             store_nodegroups_driver(stepFile, base_url)
         elif StepType.MANIFEST == step_type:
             stepFile = base_path / step_data
-            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, default_graph)
+            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, default_graph, False)
         elif StepType.COPYGRAPH == step_type:
             utility_copygraph_driver(base_url, triple_store, triple_store_type, step_data[0], step_data[1])
+    
+    if top_level:
+        if manifest.getCopyToDefaultGraph():
+            defaultGraph = Url("uri://DefaultGraph")
+            for graph in manifest.modelgraphsFootprint:
+                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
+            for graph in manifest.datagraphsFootprint:
+                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
+        
+        if manifest.getPerformEntityResolution():
+            @with_status(f'Executing entity resolution')
+            def go() -> dict:
+                return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [defaultGraph], defaultGraph, [], triple_store, triple_store_type))
+            go()
+        
+        if manifest.getPerformOptimization():
+            logger.warning("Optimization requested but not yet implemented")
 
 def ingest_data_driver(config_path: Path, base_url: Url, model_graphs: Optional[List[Url]], data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""

@@ -2,7 +2,6 @@
 
 import time
 import platform
-import subprocess
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 import semtk3
@@ -108,8 +107,8 @@ def run_assist(status_filepath):
         if platform.system() == "Windows":
             raise Exception("Not yet supported on Windows.  (PROLOG checking is available through LINUX/Docker.)")
         else:
-            # runs on all graphs in the triple store, minus an exclusion list of internal SemTK graphs (e.g. demo data)
-            subprocess.call("../assist/bin/check -v -m " + TRIPLE_STORE_BASE_URL + "/ > " + status_filepath + " 2>&1", shell=True)
+            command = f"../assist/bin/check -v -m {TRIPLE_STORE_BASE_URL}/"     # ASSIST tool.  Runs on all graphs, minus exclusion list of internal SemTK graphs
+            run_subprocess(command, status_filepath)                            # TODO returns error code 1 even though seems successful
         time.sleep(1)
 
         return [dcc.Markdown("Completed ASSIST verification.")], False

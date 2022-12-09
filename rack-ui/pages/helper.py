@@ -9,6 +9,7 @@ import os
 import uuid
 import semtk3
 import rack
+import subprocess
 
 # configuration
 BASE_URL = "http://localhost"
@@ -30,6 +31,10 @@ def get_error_trace(e) -> str:
     trace = traceback.format_exception(None, e, e.__traceback__)
     return trace[-1]
 
+def get_error_message(e) -> str:
+    """ Get error message """
+    return str(e)
+
 def get_trigger():
     """
     Get the input that triggered a callback
@@ -47,3 +52,10 @@ def get_graph_info():
     conn_str = rack.sparql_connection(BASE_URL, None, None, [], TRIPLE_STORE, TRIPLE_STORE_TYPE)
     graph_info_table = semtk3.get_graph_info(conn_str, True, False)  # True to exclude internal SemTK graphs, False to get counts too
     return graph_info_table
+
+def run_subprocess(command, status_filepath):
+    """ Launch a process using a given command, pipe output to a given file """
+    print("Running '" + command + "', sending output to " + status_filepath)
+    completed_process = subprocess.run(command + " > " + status_filepath + " 2>&1", shell=True, capture_output=True)  # make this a helper function, consolidate with verify
+    print(completed_process)    # useful to see exit code
+    return completed_process

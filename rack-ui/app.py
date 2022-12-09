@@ -6,12 +6,16 @@ from dash import Dash, DiskcacheManager, html, dcc, callback, Input, Output
 import dash_bootstrap_components as dbc
 from pages import home, load, verify
 from pages.helper import *
+from flask import Flask
+import json
+import platform
 
 # diskcache for non-production apps when developing locally (fine for our Docker application).  Needed for @dash.callback with background=True
 cache = diskcache.Cache(get_temp_dir() + "/cache")
 background_callback_manager = DiskcacheManager(cache)
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], background_callback_manager=background_callback_manager)
+server = Flask(__name__)
+app = Dash(server=server, external_stylesheets=[dbc.themes.BOOTSTRAP], background_callback_manager=background_callback_manager)
 app.title = 'RACK UI'
 
 # menu
@@ -63,6 +67,24 @@ def display_page(pathname):
         return verify.layout
     else:
         return '404'
+
+
+# endpoint to run triplestore optimization script
+# (runs as part of the Dash app, alongside but separate from the UI)
+@server.route('/optimize')
+def optimize():
+    try:
+        if platform.system() == "Windows":
+            raise Exception("RACK UI triplestore optimization endpoint is not supported on Windows")
+        command = "sudo ../cli/optimize.sh"
+        completed_process = run_subprocess(command, get_temp_dir_unique("optimize"))
+        if completed_process.returncode == 0:
+            return json.dumps({'success': True})
+        else:
+            raise Exception(f"Optimize script returned exit code {completed_process.returncode}")
+    except Exception as e:
+        return json.dumps({'success': False, 'message': get_error_message(e)})
+
 
 if __name__ == '__main__':
     app.run_server(host="0.0.0.0", debug=False)

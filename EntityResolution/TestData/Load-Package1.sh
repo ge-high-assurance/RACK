@@ -24,13 +24,6 @@ fi
 # suppress RACK cli warnings about missing columns
 export LOG_LEVEL=ERROR
 
-if test "$OSTYPE" == "cygwin" -o "$OSTYPE" == "msys"; then
-URLBASE=$(cygpath -m "$BASEDIR")
-else
-URLBASE="$BASEDIR"
-fi
-
-
 echo "Ingesting Package 1 ..."
 rack data import --clear "$BASEDIR"/Package-1/import.yaml
 

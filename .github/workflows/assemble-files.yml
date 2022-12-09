@@ -1,0 +1,152 @@
+# Assembles files for rack-box builds (reusable workflow)
+
+on:
+  workflow_call:
+
+jobs:
+
+# cache-files job:
+#  - Asks cache for rack-box files
+
+  cache-files:
+    runs-on: ubuntu-20.04
+    outputs:
+      cache-hit: ${{ steps.cache.outputs.cache-hit }}
+
+    steps:
+    - name: Ask cache for rack-box files
+      uses: actions/cache@v3
+      id: cache
+      with:
+        path: RACK/rack-box/files
+        key: files-${{ github.sha }}
+
+# download-files job:
+#  - Downloads files for rack-box builds
+#  - Packages files for rack-box builds
+
+  download-files:
+    needs: cache-files
+    runs-on: ubuntu-20.04
+    if: needs.cache-files.outputs.cache-hit == false
+
+    steps:
+    - name: Start rack-box container (needed for CDR files)
+      shell: bash
+      run: |
+        docker pull gehighassurance/rack-box:dev
+        docker run --rm --detach -p 3030:3030 -p 12050-12091:12050-12091 gehighassurance/rack-box:dev
+
+    - name: Check out RACK source
+      uses: actions/checkout@v3
+      with:
+        repository: ge-high-assurance/RACK
+        path: RACK
+
+    - name: Check out RACK wiki
+      uses: actions/checkout@v3
+      with:
+        repository: ge-high-assurance/RACK.wiki
+        path: RACK.wiki
+
+    - name: Prepare to cache rack-box files
+      uses: actions/cache@v3
+      id: cache
+      with:
+        path: RACK/rack-box/files
+        key: files-${{ github.sha }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+
+    - name: Cache Python dependencies
+      uses: actions/cache@v3
+      with:
+        # This path is specific to Ubuntu
+        path: ~/.cache/pip
+        # Look to see if there is a cache hit for the corresponding requirements file
+        key: ${{ runner.os }}-pip-${{ hashFiles('RACK/cli/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          ${{ runner.os }}-
+
+    - name: Download Fuseki
+      shell: bash
+      run: |
+        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-4.6.1.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
+
+    - name: Download Apache Jena
+      shell: bash
+      run: |
+        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-4.6.1.tar.gz -o RACK/rack-box/files/jena.tar.gz
+
+    - name: Download SemTK
+      shell: bash
+      run: |
+        curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.5.0-20221129/semtk-opensource-v2.5.0-20221129-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+
+    - name: Download CSS stylesheet
+      shell: bash
+      run: |
+        curl -LSfs https://github.com/KrauseFx/markdown-to-html-github-style/raw/master/style.css -o RACK/rack-box/files/style.css
+
+    - name: Download systemctl script
+      shell: bash
+      run: |
+        curl -LSfs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4505/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
+
+    - name: Build OWL files using sadl-eclipse
+      shell: bash
+      run: |
+        RACK/cli/setup-owl.sh -b
+
+    - name: Package RACK ASSIST
+      shell: bash
+      run: |
+        tar cfz RACK/rack-box/files/rack-assist.tar.gz RACK/assist
+
+    - name: Package RACK CLI
+      shell: bash
+      run: |
+        cd RACK/cli
+        python3 -m pip install --upgrade pip setuptools wheel
+        pip3 wheel --wheel-dir=wheels -r requirements.txt
+        pip3 wheel --wheel-dir=wheels .
+        cd ${{ github.workspace }}
+        tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{*.sh,wheels}
+
+    - name: Package RACK UI
+      shell: bash
+      run: |
+        cd ${{ github.workspace }}
+        tar cfz RACK/rack-box/files/rack-ui.tar.gz RACK/rack-ui
+
+    - name: Package RACK documentation
+      shell: bash
+      run: |
+        sudo npm install -g github-wikito-converter markdown-to-html
+        cp RACK.wiki/_Footer.md RACK.wiki/Copyright.md
+        gwtc -t RACK-in-a-Box RACK.wiki
+        markdown -t RACK-in-a-box -s style.css RACK.wiki/_Welcome.md > index.html
+        sed -i -e 's/>NodeGroupService/ onclick="javascript:event.target.port=12058">NodeGroupService/' index.html
+        mv documentation.html index.html RACK/rack-box/files
+
+    - name: Generate CDR files
+      shell: bash
+      run: |
+        pip3 install RACK/cli/wheels/*.whl
+        tar xfz RACK/rack-box/files/semtk.tar.gz semtk-opensource/standaloneExecutables/target/standaloneExecutables-jar-with-dependencies.jar
+        RACK/nodegroups/generate-cdrs.sh semtk-opensource/standaloneExecutables/target/standaloneExecutables-jar-with-dependencies.jar
+
+    - name: Package RACK ontology and data
+      shell: bash
+      run: |
+        tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=rack-ui --exclude=tests --exclude=tools RACK
+
+    - name: Stop rack-box container
+      if: ${{ always() }}
+      shell: bash
+      run: |
+        docker container stop $(docker container ls -qf ancestor=gehighassurance/rack-box:dev)

@@ -1,4 +1,4 @@
-# Runs after every push to the nodegroups/queries/store_data.csv on master branch
+# Runs after every change to nodegroups/queries/store_data.csv on master branch
 
 name: RACK Update Wiki Workflow
 on:
@@ -6,37 +6,35 @@ on:
     branches: [ master ]
     paths:
       - 'nodegroups/queries/store_data.csv'
-  workflow_dispatch:
 
 jobs:
-  update:
-    strategy:
-      matrix:
-        os: [ ubuntu-20.04 ]
-        python-version: [ 3.8 ]
 
-    runs-on: ${{ matrix.os }}
+# update-wiki job:
+#  - Updates RACK-Predefined-Queries.md in RACK.wiki
+
+  update-wiki:
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Check out RACK source
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: ge-high-assurance/RACK
         path: RACK
 
     - name: Check out RACK wiki
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: ge-high-assurance/RACK.wiki
         path: RACK.wiki
         
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.8
 
     - name: Cache Python dependencies
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         # This path is specific to Ubuntu
         path: ~/.cache/pip
@@ -47,7 +45,8 @@ jobs:
           ${{ runner.os }}-
 
     - name: Install csvtomd
-      run: pip3 install csvtomd --user
+      run: |
+        pip3 install csvtomd --user
       
     - name: Update query wiki page
       run: |

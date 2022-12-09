@@ -24,7 +24,7 @@ def get_temp_dir() -> str:
 
 def get_temp_dir_unique(prefix) -> str:
     """ Get a unique subdirectory within the temp dir, e.g. /tmp/ingest_9d40551e-f31f-4530-8c90-ca3e0acc4257"""
-    return os.path.join(get_temp_dir(), prefix + "_" + str(uuid.uuid4()))
+    return os.path.join(get_temp_dir(), f"{prefix}_{uuid.uuid4()}")
 
 def get_error_trace(e) -> str:
     """ Get error trace string """
@@ -55,7 +55,7 @@ def get_graph_info():
 
 def run_subprocess(command, status_filepath):
     """ Launch a process using a given command, pipe output to a given file """
-    print("Running '" + command + "', sending output to " + status_filepath)
-    completed_process = subprocess.run(command + " > " + status_filepath + " 2>&1", shell=True, capture_output=True)  # make this a helper function, consolidate with verify
+    print(f"Running '{command}', sending output to {status_filepath}")
+    completed_process = subprocess.run(f"{command} > {status_filepath} 2>&1", shell=True, capture_output=True)  # make this a helper function, consolidate with verify
     print(completed_process)    # useful to see exit code
     return completed_process

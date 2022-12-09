@@ -27,8 +27,10 @@ verify_report_options_div = html.Div(
     [
         dcc.Markdown("Select graphs to include in report:"),
         dcc.Checklist([], [], id="verify-graph-checklist", labelStyle={'display': 'block'}, inputStyle={"margin-right": "10px"}),   # choose which graphs to verify
-        html.Button("Continue", id="verify-report-continue-button", n_clicks=0),            # button to open SPARQLgraph report
-        html.Button("Cancel", id="verify-report-cancel-button", n_clicks=0)                 # button to cancel
+        dbc.Row([
+            dbc.Col(html.Button("Continue", id="verify-report-continue-button", n_clicks=0), width="auto"),  # button to open SPARQLgraph report
+            dbc.Col(html.Button("Cancel", id="verify-report-cancel-button", n_clicks=0), width="auto")       # button to cancel
+        ])
     ],
     id="verify-report-options-div",
     hidden=True,
@@ -52,9 +54,11 @@ verify_report_error_dialog = dbc.Modal(
 layout = html.Div([
     html.H2('Verify Data'),
     dcc.Markdown("_Run verification routines on the data loaded in RACK_"),
-    html.Button("Verify using ASSIST", id="verify-assist-button", n_clicks=0),  # button to verify using ASSIST
+    dbc.Row([
+        dbc.Col(html.Button("Verify using ASSIST", id="verify-assist-button", n_clicks=0), width="auto"),  # button to verify using ASSIST
+        dbc.Col(html.Button("Verify using report", id="verify-report-button"), width="auto")               # button to verify using SPARQLgraph report
+    ]),
     dbc.Tooltip("Run the ASSIST tool and download an error report", target="verify-assist-button"),
-    html.Button("Verify using report", id="verify-report-button"),              # button to verify using SPARQLgraph report
     dbc.Tooltip("Open SPARQLgraph and run data verification report on selected graphs", target="verify-report-button"),
     verify_report_options_div,
     html.Div(id="assist-status-div", className="scrollarea"),       # displays status

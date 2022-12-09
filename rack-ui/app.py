@@ -11,7 +11,7 @@ import json
 import platform
 
 # diskcache for non-production apps when developing locally (fine for our Docker application).  Needed for @dash.callback with background=True
-cache = diskcache.Cache(get_temp_dir() + "/cache")
+cache = diskcache.Cache(f"{get_temp_dir()}/cache")
 background_callback_manager = DiskcacheManager(cache)
 
 server = Flask(__name__)

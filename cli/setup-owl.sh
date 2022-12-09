@@ -84,7 +84,7 @@ in
     docker)
         echo "[setup-owl] Copying CDR and OWL files from Docker"
 
-        container=$(docker container ls -qf "ancestor=${rack_image}:${rack_tag}")
+        container=$(docker container ls -aqf "ancestor=${rack_image}:${rack_tag}")
 
         if [ -z "${container}" ]; then
                 echo "Unable to find docker container ${rack_image}:${rack_tag}."
@@ -95,20 +95,20 @@ in
         echo "[setup-owl] Found container ${container}"
 
         echo "[setup-owl] Copying OwlModels"
-        docker cp "${container}:home/ubuntu/RACK/RACK-Ontology/OwlModels/" "${rack_dir}/RACK-Ontology/"
-        docker cp "${container}:home/ubuntu/RACK/GE-Ontology/OwlModels/" "${rack_dir}/GE-Ontology/"
-        docker cp "${container}:home/ubuntu/RACK/GrammaTech-Ontology/OwlModels/" "${rack_dir}/GrammaTech-Ontology/"
-        docker cp "${container}:home/ubuntu/RACK/STR-Ontology/OwlModels/" "${rack_dir}/STR-Ontology/"
-        docker cp "${container}:home/ubuntu/RACK/Boeing-Ontology/OwlModels/" "${rack_dir}/Boeing-Ontology/"
-        docker cp "${container}:home/ubuntu/RACK/LM-Ontology/OwlModels/" "${rack_dir}/LM-Ontology/"
-        docker cp "${container}:home/ubuntu/RACK/SRI-Ontology/OwlModels/" "${rack_dir}/SRI-Ontology/"
-        docker cp "${container}:home/ubuntu/RACK/RTX-Ontology/OwlModels/" "${rack_dir}/RTX-Ontology/"
-        docker cp "${container}:home/ubuntu/RACK/Provenance-Example/OwlModels/" "${rack_dir}/Provenance-Example/"
-        docker cp "${container}:home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/" "${rack_dir}/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
-        docker cp "${container}:home/ubuntu/RACK/sadl-examples/OwlModels/" "${rack_dir}/sadl-examples/"
+        docker cp "${container}:/home/ubuntu/RACK/RACK-Ontology/OwlModels/" "${rack_dir}/RACK-Ontology/"
+        docker cp "${container}:/home/ubuntu/RACK/GE-Ontology/OwlModels/" "${rack_dir}/GE-Ontology/"
+        docker cp "${container}:/home/ubuntu/RACK/GrammaTech-Ontology/OwlModels/" "${rack_dir}/GrammaTech-Ontology/"
+        docker cp "${container}:/home/ubuntu/RACK/STR-Ontology/OwlModels/" "${rack_dir}/STR-Ontology/"
+        docker cp "${container}:/home/ubuntu/RACK/Boeing-Ontology/OwlModels/" "${rack_dir}/Boeing-Ontology/"
+        docker cp "${container}:/home/ubuntu/RACK/LM-Ontology/OwlModels/" "${rack_dir}/LM-Ontology/"
+        docker cp "${container}:/home/ubuntu/RACK/SRI-Ontology/OwlModels/" "${rack_dir}/SRI-Ontology/"
+        docker cp "${container}:/home/ubuntu/RACK/RTX-Ontology/OwlModels/" "${rack_dir}/RTX-Ontology/"
+        docker cp "${container}:/home/ubuntu/RACK/Provenance-Example/OwlModels/" "${rack_dir}/Provenance-Example/"
+        docker cp "${container}:/home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/" "${rack_dir}/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
+        docker cp "${container}:/home/ubuntu/RACK/sadl-examples/OwlModels/" "${rack_dir}/sadl-examples/"
 
         echo "[setup-owl] Copying nodegroups"
-        docker cp "${container}:home/ubuntu/RACK/nodegroups/CDR/" "${rack_dir}/nodegroups/"
-        docker cp "${container}:home/ubuntu/RACK/nodegroups/ingestion/" "${rack_dir}/nodegroups/"
+        docker cp "${container}:/home/ubuntu/RACK/nodegroups/CDR/" "${rack_dir}/nodegroups/"
+        docker cp "${container}:/home/ubuntu/RACK/nodegroups/ingestion/" "${rack_dir}/nodegroups/"
         ;;
 esac

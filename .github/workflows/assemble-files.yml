@@ -1,43 +1,91 @@
-# Download action:
-#  - Downloads rack-box files
-#  - Packages rack-box files
+# Assembles files for rack-box builds (reusable workflow)
 
-name: 'Download rack-box files'
-description: 'Download files into rack-box/files'
+on:
+  workflow_call:
 
-# Assumes the following actions have already been called:
-# - Check out RACK source
-# - Check out RACK wiki
-# - Set up Python
-# - Cache Python dependencies
+jobs:
 
-# These actions can't be moved here because a composite action can
-# hold only run steps, not calls to other actions.
+# cache-files job:
+#  - Asks cache for rack-box files
 
-runs:
-  using: 'composite'
+  cache-files:
+    runs-on: ubuntu-20.04
+    outputs:
+      cache-hit: ${{ steps.cache.outputs.cache-hit }}
 
-  steps:
-    - name: Start rack-box container asynchronously
+    steps:
+    - name: Ask cache for rack-box files
+      uses: actions/cache@v3
+      id: cache
+      with:
+        path: RACK/rack-box/files
+        key: files-${{ github.sha }}
+
+# download-files job:
+#  - Downloads files for rack-box builds
+#  - Packages files for rack-box builds
+
+  download-files:
+    needs: cache-files
+    runs-on: ubuntu-20.04
+    if: needs.cache-files.outputs.cache-hit == false
+
+    steps:
+    - name: Start rack-box container (needed for CDR files)
       shell: bash
       run: |
         docker pull gehighassurance/rack-box:dev
-        docker run --rm --detach -p 80:80 -p 12050-12092:12050-12092 -p 3030:3030 gehighassurance/rack-box:dev
+        docker run --rm --detach -p 3030:3030 -p 12050-12091:12050-12091 gehighassurance/rack-box:dev
 
-    - name: Download Fuseki release
+    - name: Check out RACK source
+      uses: actions/checkout@v3
+      with:
+        repository: ge-high-assurance/RACK
+        path: RACK
+
+    - name: Check out RACK wiki
+      uses: actions/checkout@v3
+      with:
+        repository: ge-high-assurance/RACK.wiki
+        path: RACK.wiki
+
+    - name: Prepare to cache rack-box files
+      uses: actions/cache@v3
+      id: cache
+      with:
+        path: RACK/rack-box/files
+        key: files-${{ github.sha }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+
+    - name: Cache Python dependencies
+      uses: actions/cache@v3
+      with:
+        # This path is specific to Ubuntu
+        path: ~/.cache/pip
+        # Look to see if there is a cache hit for the corresponding requirements file
+        key: ${{ runner.os }}-pip-${{ hashFiles('RACK/cli/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          ${{ runner.os }}-
+
+    - name: Download Fuseki
       shell: bash
       run: |
         curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-4.6.1.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
 
-    - name: Download Apache Jena libraries
+    - name: Download Apache Jena
       shell: bash
       run: |
         curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-4.6.1.tar.gz -o RACK/rack-box/files/jena.tar.gz
 
-    - name: Download SemTK release
+    - name: Download SemTK
       shell: bash
       run: |
-        curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.5.0-20221117/semtk-opensource-v2.5.0-20221117-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+        curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.5.0-20221129/semtk-opensource-v2.5.0-20221129-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
 
     - name: Download CSS stylesheet
       shell: bash
@@ -49,7 +97,7 @@ runs:
       run: |
         curl -LSfs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4505/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
 
-    - name: Generate OWL files
+    - name: Build OWL files using sadl-eclipse
       shell: bash
       run: |
         RACK/cli/setup-owl.sh -b
@@ -97,8 +145,8 @@ runs:
       run: |
         tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box --exclude=rack-ui --exclude=tests --exclude=tools RACK
 
-    - name: Always stop rack-box container
+    - name: Stop rack-box container
       if: ${{ always() }}
       shell: bash
       run: |
-        docker container stop $(docker container ps --filter ancestor=gehighassurance/rack-box:dev -q)
+        docker container stop $(docker container ls -qf ancestor=gehighassurance/rack-box:dev)

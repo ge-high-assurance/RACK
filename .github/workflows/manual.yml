@@ -1,0 +1,29 @@
+# Manually builds rack-box virtual machine (dispatchable workflow)
+
+name: RACK Build Virtual Machine Workflow
+on:
+  workflow_dispatch:  
+    inputs:
+      version:
+        required: false
+        default: 'dev'
+        type: string
+
+jobs:
+
+# assemble-files job:
+#  - Assembles files for rack-box builds
+
+  assemble-files:
+    uses: ./.github/workflows/assemble-files.yml
+
+# build-virtual-machine job:
+#  - Builds rack-box virtual machine
+#  - Uploads virtual machine to workflow
+
+  build-virtual-machine:
+    needs: assemble-files
+    uses: ./.github/workflows/build-virtual-machine.yml
+    secrets: inherit
+    with:
+      version: ${{ inputs.version }}

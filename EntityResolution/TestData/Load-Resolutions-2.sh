@@ -24,13 +24,6 @@ fi
 # suppress RACK cli warnings about missing columns
 export LOG_LEVEL=ERROR
 
-if test "$OSTYPE" == "cygwin" -o "$OSTYPE" == "msys"; then
-URLBASE=$(cygpath -m "$BASEDIR")
-else
-URLBASE="$BASEDIR"
-fi
-
-
 echo "Ingesting Resolution Data ..."
 rack data import "$BASEDIR"/Resolutions-2/import.yaml
 

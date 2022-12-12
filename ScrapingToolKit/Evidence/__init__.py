@@ -77,11 +77,11 @@ def createCDR(dataGraph="http://rack001/data"):
                         if c.find("identifier").text not in loaded:
                             outwriter.writerow([c.find("identifier").text])
                             loaded.append(c.find("identifier").text)
-                        # Check to see if the header item 
-                        for k in headers:
-                            if c.find(k) is not None:
-                                if k not in usedHeaders:
-                                    usedHeaders.append(k)
+                    # Check to see if the header item 
+                    for k in headers:
+                        if c.find(k) is not None:
+                            if k not in usedHeaders:
+                                usedHeaders.append(k)
 
                     else:
                         log("Identifier not found.")

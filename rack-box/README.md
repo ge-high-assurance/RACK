@@ -76,6 +76,10 @@ although we will mention each file here as well:
   --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box
   --exclude=tests --exclude=tools RACK`)
 
+- `focal64\*`: Unpack a recent Ubuntu vagrant box here (`curl -LOSfs
+  https://app.vagrantup.com/ubuntu/boxes/focal64/versions/20221021.0.0/providers/virtualbox.box
+  && tar -xf virtualbox.box -C RACK/rack-box/focal64`)
+
 Once you have put these files into the `files` subdirectory, skip to
 [Build the rack-box images](#Build-the-rack-box-images) for the next
 step.

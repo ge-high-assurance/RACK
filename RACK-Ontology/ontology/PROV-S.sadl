@@ -19,14 +19,16 @@
 
 uri "http://arcos.rack/PROV-S" alias provs
 (note "a basic Implementation of PROV Data Model standard in SADL based on table https://www.w3.org/TR/prov-dm/#relations-at-a-glance").
+NODE is a class.
+	dataInsertedBy (note "The activity that caused this data to be added to RACK") describes NODE with values of type ACTIVITY.
 
-THING (note "A piece of data stored in RACK") is a class.
-	identifier (note "identifier is any data item that is used to associate items on when loading into the data store.") describes THING with a single value of type string.
+THING (note "A piece of data stored in RACK") is a type of NODE.
+	identifier (note "identifier is any data item that is used to associate items on when loading into the data store.") describes THING with values of type string.
+	identifier describes THING with at most 1 value.
 	title (note "A short, human-readable identifying label.") describes THING with values of type string.
 	title describes THING with at most 1 value.
 	description (note "A free-form, multi-line, human-readable explanation of this data element.") describes THING with values of type string.
 	description describes THING with at most 1 value.
-	dataInsertedBy (note "The activity that caused this data to be added to RACK") describes THING with values of type ACTIVITY.
 
 ENTITY (note "An entity is a physical, digital, conceptual, or other kind of thing with some fixed aspects; entities may be real or imaginary.")
 	is a type of THING.

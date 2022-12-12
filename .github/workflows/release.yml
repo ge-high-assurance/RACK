@@ -1,4 +1,4 @@
-# Runs after a release is published
+# Runs after a RACK release is published
 
 name: RACK Release Workflow
 on:
@@ -7,191 +7,31 @@ on:
 
 jobs:
 
-# Cache job:
-#  - Downloads rack-box files
-#  - Caches rack-box files
+# assemble-files job:
+#  - Assembles files for rack-box builds
 
-  cache:
-    strategy:
-      matrix:
-        os: [ ubuntu-20.04 ]
-        python-version: [ 3.8 ]
+  assemble-files:
+    uses: ./.github/workflows/assemble-files.yml
 
-    runs-on: ${{ matrix.os }}
+# build-docker-image job:
+#  - Builds rack-box docker image
+#  - Pushes docker image to Docker Hub
 
-    steps:
-    - name: Cache rack-box files
-      uses: actions/cache@v2
-      id: cache-files
-      with:
-        path: RACK/rack-box/files
-        # Use different key because we check out source & wiki with tag
-        key: files-${{ github.sha }}-${{ github.event.release.tag_name }}
+  build-docker-image:
+    needs: assemble-files
+    uses: ./.github/workflows/build-docker-image.yml
+    secrets: inherit
+    with:
+      push: true
+      version: ${{ github.event.release.tag_name }}
 
-    - name: Check out RACK source
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK
-        ref: ${{ github.event.release.tag_name }}
-        path: RACK
+# build-virtual-machine job:
+#  - Builds rack-box virtual machine
+#  - Uploads virtual machine to release
 
-    - name: Check out RACK wiki
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK.wiki
-        ref: ${{ github.event.release.tag_name }}
-        path: RACK.wiki
-
-    - name: Set up Python
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-
-    - name: Cache Python dependencies
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: actions/cache@v2
-      with:
-        # This path is specific to Ubuntu
-        path: ~/.cache/pip
-        # Look to see if there is a cache hit for the corresponding requirements file
-        key: ${{ runner.os }}-pip-${{ hashFiles('RACK/cli/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-          ${{ runner.os }}-
-
-    - name: Download rack-box files
-      if: steps.cache-files.outputs.cache-hit != 'true'
-      uses: ./RACK/.github/workflows/actions/download
-
-# Build job:
-#  - Builds rack-box Docker and VirtualBox images
-#  - Pushes Docker image to Docker Hub
-#  - Uploads VirtualBox image to GitHub release page
-
-  build:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-# docker works on all, but ubuntu is cheapest
-        - builder: docker
-          os: ubuntu-20.04
-          shell: bash
-# no support for hyperv (https://github.com/actions/virtual-environments/issues/183#issuecomment-706244929)
-#        - builder: hyperv
-#          os: windows-latest
-#          shell: msys2 {0}
-# virtualbox works only on macos (VT-x is not available: VERR_VMK_NO_VMX)
-        - builder: virtualbox
-          os: macos-12
-          shell: bash
-
-    runs-on: ${{ matrix.os }}
-    needs: cache
-    defaults:
-      run:
-        shell: ${{ matrix.shell }}
-
-    steps:
-    - name: Check out RACK source
-      uses: actions/checkout@v2
-      with:
-        repository: ge-high-assurance/RACK
-        ref: ${{ github.event.release.tag_name }}
-        path: RACK
-
-    - name: Get all files needed by rack-box
-      uses: actions/cache@v2
-      with:
-        path: RACK/rack-box/files
-        key: files-${{ github.sha }}
-
-    # Won't work since windows-latest doesn't support nested virtualization
-    - name: Enable Hyper-V
-      if: matrix.builder == 'hyperv'
-      shell: powershell
-      run: |
-        Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
-        Add-WindowsFeature RSAT-Hyper-V-Tools -IncludeAllSubFeature
-
-    # Download vagrant box in order to build virtualbox image
-    - name: Download Vagrant Box
-      if: matrix.builder == 'virtualbox'
-      run: |
-        mkdir -p RACK/rack-box/focal64
-        curl -LOSfs https://app.vagrantup.com/ubuntu/boxes/focal64/versions/20221021.0.0/providers/virtualbox.box
-        tar -xf virtualbox.box -C RACK/rack-box/focal64
-
-    - name: Build rack-box ${{ matrix.builder }} image
-      run: |
-        b=${{ matrix.builder }}
-        v=${{ github.event.release.tag_name }}
-        cd RACK/rack-box
-        packer build -var headless=true -var version=$v rack-box-$b.json
-
-    - name: Login to Docker Hub
-      if: matrix.builder == 'docker'
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    - name: Push rack-box image to Docker Hub
-      if: matrix.builder == 'docker'
-      run: docker push gehighassurance/rack-box:${{ github.event.release.tag_name }}
-
-    - name: Update Docker Hub Description
-      if: matrix.builder == 'docker'
-      uses: peter-evans/dockerhub-description@v2
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
-        repository: gehighassurance/rack-box
-        readme-filepath: RACK/rack-box/Docker-Hub-README.md
-
-    - name: Split rack-box image
-      if: matrix.builder != 'docker'
-      run: |
-        b=${{ matrix.builder }}
-        v=${{ github.event.release.tag_name }}
-        cd RACK/rack-box
-        mv output-$b-* rack-box-$b-$v
-        zip -r rack-box-$b-$v.zip rack-box-$b-$v
-        split -b 1500m rack-box-$b-$v.zip rack-box-$b-$v.zip
-        ls -l rack-box-$b-$v.zip??
-
-    - name: Upload README.md to GitHub release assets
-      if: matrix.builder != 'docker'
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: RACK/rack-box/GitHub-Release-README.md
-        asset_name: README.md
-        asset_content_type: text/markdown; charset=UTF-8
-
-    - name: Upload rack-box split image (1/2) to GitHub release assets
-      if: matrix.builder != 'docker'
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: RACK/rack-box/rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zipaa
-        asset_name: rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zip00
-        asset_content_type: application/zip
-
-    - name: Upload rack-box split image (2/2) to GitHub release assets
-      if: matrix.builder != 'docker'
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: RACK/rack-box/rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zipab
-        asset_name: rack-box-${{ matrix.builder }}-${{ github.event.release.tag_name }}.zip01
-        asset_content_type: application/zip
+  build-virtual-machine:
+    needs: assemble-files
+    uses: ./.github/workflows/build-virtual-machine.yml
+    secrets: inherit
+    with:
+      version: ${{ github.event.release.tag_name }}

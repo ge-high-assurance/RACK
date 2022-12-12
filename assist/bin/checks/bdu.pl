@@ -36,21 +36,21 @@
 :- use_module(utils(float_equality)).
 
 prolog:message(bad_BDU_sum(Thing, Sum)) -->
-    [ 'BDU sum for ~w is ~:f, expected 1.0'-[Thing, Sum] ].
+    [ 'CE-121: BDU sum for ~w is ~:f, expected 1.0'-[Thing, Sum] ].
 
 prolog:message(multiple_beliefs(A, B1, B2)) -->
-    [ '~w has two (or more) belief values (such as ~w and ~w)'-[A, B1, B2] ].
+    [ 'CE-122: ~w has two (or more) belief values (such as ~w and ~w)'-[A, B1, B2] ].
 prolog:message(multiple_disbeliefs(A, B1, B2)) -->
-    [ '~w has two (or more) disbelief values (such as ~w and ~w)'-[A, B1, B2] ].
+    [ 'CE-123: ~w has two (or more) disbelief values (such as ~w and ~w)'-[A, B1, B2] ].
 prolog:message(multiple_uncertainties(A, B1, B2)) -->
-    [ '~w has two (or more) uncertainties values (such as ~w and ~w)'-[A, B1, B2] ].
+    [ 'CE-124: ~w has two (or more) uncertainties values (such as ~w and ~w)'-[A, B1, B2] ].
 
 prolog:message(no_belief(Thing)) -->
-    [ '~w has a disbelief or uncertainty value, but no belief'-[Thing] ].
+    [ 'CE-125: ~w has a disbelief or uncertainty value, but no belief'-[Thing] ].
 prolog:message(no_disbelief(Thing)) -->
-    [ '~w has a belief or uncertainty value, but no disbelief'-[Thing] ].
+    [ 'CE-126: ~w has a belief or uncertainty value, but no disbelief'-[Thing] ].
 prolog:message(no_uncertainty(Thing)) -->
-    [ '~w has a belief or disbelief value, but no uncertainty'-[Thing] ].
+    [ 'CE-127: ~w has a belief or disbelief value, but no uncertainty'-[Thing] ].
 
 % Belief-Disbelief-Uncertainty metrics should:
 % * have all three values

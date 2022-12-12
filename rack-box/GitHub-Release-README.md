@@ -14,12 +14,12 @@ Here are very brief instructions how to run a RACK box using a Linux container. 
 
 Here are very brief instructions how to run a RACK box using a virtual machine.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/03-Run-a-RACK-Box-VM) in the RACK Wiki.
 
-1. Download the split VirtualBox zip files.
-2. Concatenate the split VirtualBox zip files together.
+1. Download the split zip files.
+2. Concatenate the split zip files together.
 3. Unzip the newly concatenated zip file.
 4. Start VirtualBox.
-5. Import the VirtualBox VM from the rack-box-virtualbox-v11 folder.
-6. Start the VM.
+5. Import the virtual machine from the unpacked .ovf file.
+6. Start the virtual machine.
 7. Visit <http://localhost:8080> in your browser to view the RACK box's welcome page.
 
 ---

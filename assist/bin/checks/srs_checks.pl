@@ -20,17 +20,21 @@
 
 %! check_SRS_insertion_source is det.
 %
-%    Checks that no SRS_Req is inserted by any activity other than
-%    "SRS Data Ingestion".  Always succeeds, emits warnings.
+%    Checks that at least one "insertedBy" activity for an SRS_Req is the "SRS
+%    Data Ingestion".  Always succeeds, emits warnings.
 %
 % Similar to "nodegroups/query/query dataVer SRS_Req dataInsertedBy other than SRS Data Ingestion.json"
-%
+
 check_SRS_insertion_source(I) :-
     T = 'http://arcos.AH-64D/Boeing#SRS_Req',
     rack_data_instance(T, I),
     rdf(I, 'http://arcos.rack/PROV-S#dataInsertedBy', A),
+    must_have_srs_data_ingestion(T,I,A).
+
+must_have_srs_data_ingestion(T,I,A) :-
+    rack_instance_ident(A, "SRS Data Ingestion"), !.
+must_be_srs_data_ingestion(T,I,A) :-
     rack_instance_ident(A, AName),
-    \+ AName = 'SRS Data Ingestion',
     rack_instance_ident(I, IN),
     rdf(A, rdf:type, ATy),
     print_message(warning, invalid_srs_req_inserter(T, I, IN, ATy, A, AName)).
@@ -64,7 +68,8 @@ is_CSID_or_PIDS(Inst) :- rdf(Inst, rdf:type, 'http://arcos.AH-64D/Boeing#CSID_Re
 % Similar to "nodegroups/query/query dataVer SRS_Req without description.json"
 %
 check_SRS_Req_description(I) :-
-    check_has_no_rel('http://arcos.AH-64D/Boeing#SRS_Req',
+    check_has_no_rel('SRS1',
+                     'http://arcos.AH-64D/Boeing#SRS_Req',
                      'http://arcos.rack/PROV-S#description',
                      I).
 
@@ -77,8 +82,9 @@ check_SRS_Req_description(I) :-
 % Similar to "nodegroups/query/query dataVer SubDD_Req without satisfies SRS_Req.json"
 %
 check_SubDD_Req_satisfies_SRS_Req(I) :-
-    check_has_no_rel('http://arcos.AH-64D/Boeing#SubDD_Req',
-                     'http://arcos.rack/TESTING#satisifes',
+    check_has_no_rel('SRS2',
+                     'http://arcos.AH-64D/Boeing#SubDD_Req',
+                     'http://arcos.rack/REQUIREMENTS#satisfies',
                      'http://arcos.AH-64D/Boeing#SRS_Req',
                      I).
 
@@ -87,18 +93,23 @@ prolog:message(invalid_srs_req_inserter(ITy, Inst, InstIdent, InsTy, InsI, InsN)
     { prefix_shorten(ITy, SIT),
       prefix_shorten(Inst, SII),
       prefix_shorten(InsTy, STT),
-      prefix_shorten(InsI, STI)
+      prefix_shorten(InsI, STI),
+      rdf_literal_val_type(InstIdent, IName, _),
+      rdf_literal_val_type(InsN, InsName, _)
     },
-    [ '~w instance ~w (~w) inserted by invalid ACTIVITY: ~w ~w (~w)'-[
-          SIT, SII, InstIdent, STT, STI, InsN ] ].
+    [ 'CE-132: ~w instance ~w inserted by invalid ACTIVITY: ~w ~w~n                Instance Domain: ~w~n                Activity Domain: ~w~n'-[
+          SIT, IName, STT, InsName, SII, STI ] ].
 prolog:message(invalid_srs_req_satisfies(ITy, Inst, InstIdent, TgtTy, Tgt, TgtIdent)) -->
     { prefix_shorten(Inst, SI),
       prefix_shorten(ITy, ST),
       prefix_shorten(Tgt, SR),
-      prefix_shorten(TgtTy, SRT)
+      prefix_shorten(TgtTy, SRT),
+      rdf_literal_val_type(InstIdent, IName, _),
+      rdf_literal_val_type(TgtIdent, TName, _)
+
     },
-    [ '~w instance ~w (~w) satisifes something not a PIDS_Req or CSID_Req: ~w ~w (~w)'-[
-          ST, SI, InstIdent, SRT, SR, TgtIdent ] ].
+    [ 'CE-133: ~w instance ~w satisifes something not a PIDS_Req or CSID_Req: ~w ~w~n                Instance Domain: ~w~n                Satisfies Domain: ~w~n'-[
+          ST, IName, SRT, TName, SI, SR ] ].
 
 
 %! check_SRS is det.

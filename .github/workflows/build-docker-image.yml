@@ -1,0 +1,67 @@
+# Builds rack-box docker image (reusable workflow)
+
+on:
+  workflow_call:
+    inputs:
+      push:
+        required: false
+        default: true
+        type: boolean
+      version:
+        required: false
+        default: 'dev'
+        type: string
+
+jobs:
+
+# build-docker-image job:
+#  - Builds rack-box docker image
+#  - Pushes docker image to Docker Hub
+
+  build-docker-image:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Check out RACK source
+      uses: actions/checkout@v3
+      with:
+        repository: ge-high-assurance/RACK
+        path: RACK
+
+    - name: Ask cache for rack-box files
+      uses: actions/cache@v3
+      id: cache
+      with:
+        path: RACK/rack-box/files
+        key: files-${{ github.sha }}
+
+    - name: We don't have rack-box files?
+      if: steps.cache.outputs.cache-hit == false
+      run: |
+        echo "::error rack-box files are missing"
+        exit 1
+
+    - name: Build rack-box docker image
+      run: |
+        cd RACK/rack-box
+        packer build -var version=${{ inputs.version }} rack-box-docker.json
+
+    - name: Login to Docker Hub
+      if: inputs.push == true
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Push rack-box docker image to Docker Hub
+      if: inputs.push == true
+      run: docker push gehighassurance/rack-box:${{ inputs.version }}
+
+    - name: Update description of rack-box docker image
+      if: inputs.push == true
+      uses: peter-evans/dockerhub-description@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        repository: gehighassurance/rack-box
+        readme-filepath: RACK/rack-box/Docker-Hub-README.md

@@ -12,6 +12,11 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
     'properties': {
         'name': {'type': 'string'},
         'description': {'type': 'string'},
+
+        'copy-to-default-graph':            {'type': 'boolean'},
+        'perform-entity-resolution':        {'type': 'boolean'},
+        'perform-triplestore-optimization': {'type': 'boolean'},
+
         'footprint': {
             'type': 'object',
             'additionalProperties': False,
@@ -97,12 +102,27 @@ class Manifest:
         self.datagraphsFootprint: List[Url] = []
         self.nodegroupsFootprint: List[str] = []
         self.steps: List[Tuple[StepType, Any]] = []
+        self.performOptimization: bool = False
+        self.performEntityResolution: bool = False
+        self.copyToDefaultGraph: bool = False
 
     def getName(self) -> str:
         return self.name
 
     def getDescription(self) -> Optional[str]:
         return self.description
+
+    def getPerformOptimization(self) -> bool:
+        """Return True when this manifest file prescribes running the triplestore optimizer"""
+        return self.performOptimization
+    
+    def getPerformEntityResolution(self) -> bool:
+        """Return True when this manifest prescribes running entity resolution"""
+        return self.performEntityResolution
+    
+    def getCopyToDefaultGraph(self) -> bool:
+        """Return True when this manifest prescribes copying the footprint to the default graph"""
+        return self.copyToDefaultGraph
 
     def addModelgraphFootprint(self, modelgraph: Url) -> None:
         self.modelgraphsFootprint.append(modelgraph)
@@ -140,6 +160,10 @@ class Manifest:
         validate(obj, MANIFEST_SCHEMA)
 
         manifest = Manifest(obj.get('name'), obj.get('description'))
+
+        manifest.copyToDefaultGraph = obj.get('copy-to-default-graph', False)
+        manifest.performEntityResolution = obj.get('perform-entity-resolution', False)
+        manifest.performOptimization = obj.get('perform-triplestore-optimization', False)
 
         footprint = obj.get('footprint', {})
         for datagraph in footprint.get('data-graphs', []):

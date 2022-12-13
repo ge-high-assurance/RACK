@@ -1,10 +1,11 @@
 {
   "variables": {
+    "comment": "Note we used Hyper-V only for 1 week and this template may no longer work",
     "cpus": "4",
     "headless": "false",
     "http_proxy": "{{env `http_proxy`}}",
     "https_proxy": "{{env `https_proxy`}}",
-    "memory": "8192",
+    "memory": "20480",
     "no_proxy": "{{env `no_proxy`}}",
     "version": "dev",
     "vm_name": "rack-box-{{user `version`}}"

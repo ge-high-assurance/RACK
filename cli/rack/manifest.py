@@ -12,6 +12,11 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
     'properties': {
         'name': {'type': 'string'},
         'description': {'type': 'string'},
+
+        'copy-to-default-graph':            {'type': 'boolean'},
+        'perform-entity-resolution':        {'type': 'boolean'},
+        'perform-triplestore-optimization': {'type': 'boolean'},
+
         'footprint': {
             'type': 'object',
             'additionalProperties': False,
@@ -58,6 +63,22 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
                             'manifest': {'type': 'string'}
                         }
                     },
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        'required': ['copygraph'],
+                        'properties': {
+                            'copygraph': {
+                                'type': 'object',
+                                'additionalProperties': False,
+                                'required': ['from-graph', 'to-graph'],
+                                'properties': {
+                                    'from-graph': {'type': 'string'},
+                                    'to-graph': {'type': 'string'},
+                                }
+                            }
+                        }
+                    },
                 ]
             }
         }
@@ -70,6 +91,7 @@ class StepType(Enum):
     DATA = 2
     NODEGROUPS = 3
     MANIFEST = 4
+    COPYGRAPH = 5
 
 
 class Manifest:
@@ -79,13 +101,28 @@ class Manifest:
         self.modelgraphsFootprint: List[Url] = []
         self.datagraphsFootprint: List[Url] = []
         self.nodegroupsFootprint: List[str] = []
-        self.steps: List[Tuple[StepType, str]] = []
+        self.steps: List[Tuple[StepType, Any]] = []
+        self.performOptimization: bool = False
+        self.performEntityResolution: bool = False
+        self.copyToDefaultGraph: bool = False
 
     def getName(self) -> str:
         return self.name
 
     def getDescription(self) -> Optional[str]:
         return self.description
+
+    def getPerformOptimization(self) -> bool:
+        """Return True when this manifest file prescribes running the triplestore optimizer"""
+        return self.performOptimization
+    
+    def getPerformEntityResolution(self) -> bool:
+        """Return True when this manifest prescribes running entity resolution"""
+        return self.performEntityResolution
+    
+    def getCopyToDefaultGraph(self) -> bool:
+        """Return True when this manifest prescribes copying the footprint to the default graph"""
+        return self.copyToDefaultGraph
 
     def addModelgraphFootprint(self, modelgraph: Url) -> None:
         self.modelgraphsFootprint.append(modelgraph)
@@ -105,7 +142,7 @@ class Manifest:
     def getNodegroupsFootprint(self) -> List[str]:
         return self.nodegroupsFootprint
 
-    def addStep(self, stepType: StepType, stepFile: str) -> None:
+    def addStep(self, stepType: StepType, stepFile: Any) -> None:
         self.steps.append((stepType, stepFile))
 
     def getConnection(self, triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:
@@ -124,6 +161,10 @@ class Manifest:
 
         manifest = Manifest(obj.get('name'), obj.get('description'))
 
+        manifest.copyToDefaultGraph = obj.get('copy-to-default-graph', False)
+        manifest.performEntityResolution = obj.get('perform-entity-resolution', False)
+        manifest.performOptimization = obj.get('perform-triplestore-optimization', False)
+
         footprint = obj.get('footprint', {})
         for datagraph in footprint.get('data-graphs', []):
             manifest.addDatagraphFootprint(Url(datagraph))
@@ -141,5 +182,8 @@ class Manifest:
                 manifest.addStep(StepType.NODEGROUPS, step['nodegroups'])
             elif 'manifest' in step:
                 manifest.addStep(StepType.MANIFEST, step['manifest'])
+            elif 'copygraph' in step:
+                args = step['copygraph']
+                manifest.addStep(StepType.COPYGRAPH, (args['from-graph'], args['to-graph']))
 
         return manifest

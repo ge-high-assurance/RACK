@@ -18,13 +18,18 @@ from .helper import *
 # name of default manifest file within ingestion package
 MANIFEST_FILE_NAME = "manifest.yaml"
 
-# div showing load details/options and load/cancel buttons
+# div showing load details and buttons to load data or open SPARQLgraph
 load_div = html.Div(
     [
         dcc.Markdown("", id="load-div-message"),
-        dcc.RadioItems([], value="manifest-graphs", id="load-graph-radio", labelStyle={'display': 'block'}, inputStyle={"margin-right": "10px"}),   # choose to load to manifest-specified or default graphs
-        html.Button("Load", id="load-button", n_clicks=0),                  # load button
-        html.Button("Cancel", id="cancel-load-button", n_clicks=0)          # cancel button
+        dbc.Row([
+            dbc.Col(html.Button("Load data", id="load-button", n_clicks=0), width="auto"),      # load button
+            dbc.Col(dbc.DropdownMenu(
+                [
+                    dbc.DropdownMenuItem("Target graphs", href="", target="_blank", id="sparqlgraph-button"),
+                    dbc.DropdownMenuItem("Optimized graph", href="", target="_blank", id="sparqlgraph-default-button")
+                ], label="View in SPARQLgraph", toggle_class_name="ddm"), width="auto")
+        ])
     ],
     id="load-div",
     hidden=True,
@@ -57,10 +62,13 @@ done_dialog = dbc.Modal(
 layout = html.Div([
         html.H2("Load data"),
         dcc.Markdown("_Load data into RACK_"),
-        html.Button(id="turnstile-button", children="Load Turnstile data"),  # button to load turnstile
-        dbc.Tooltip("Load the Turnstile sample data provided with RACK", target="turnstile-button"),
-        dcc.Upload(html.Button(id="select-button", children="Load ingestion package"), id='select-button-upload', accept=".zip", multiple=False),  # button to show upload dialog to pick ingestion package
-        dbc.Tooltip("Load an ingestion package (in .zip format) from your local machine", target="select-button"),
+        dbc.Row([
+            dbc.Col(html.Button(id="turnstile-button", children="Select Turnstile data"), width="auto"),  # button to load turnstile
+            dbc.Col(dcc.Upload(html.Button(id="select-button", children="Select ingestion package"), id='select-button-upload', accept=".zip", multiple=False), width="auto")  # button to show upload dialog to pick ingestion package
+        ]),
+        dbc.Tooltip("Select the Turnstile sample data provided with RACK", target="turnstile-button"),
+        dbc.Tooltip("Select an ingestion package (in .zip format) from your local machine", target="select-button"),
+        dbc.Tooltip("Load the data into RACK", target="load-button"),
         load_div,
         html.Div(id="status-div", className="scrollarea"),      # displays ingestion status
         unzip_error_dialog,
@@ -74,9 +82,10 @@ layout = html.Div([
 
 @dash.callback(
     output=[
-            Output("load-div-message", "children"),
-            Output("load-graph-radio", "options"),
-            Output("manifest-filepath", "data"), 
+            Output("load-div-message", "children"),                 # package information to display to the user before confirming load
+            Output("sparqlgraph-button", "href"),                   # set the SG button link
+            Output("sparqlgraph-default-button", "href"),           # set the SG button link (default graph)
+            Output("manifest-filepath", "data"),
             Output("unzip-error-dialog-body", "children"),
             Output("status-filepath", "data"),                      # store a status file path
             Output("select-button-upload", "contents")],            # set to None after extracting, else callback ignores re-uploaded file
@@ -87,6 +96,7 @@ layout = html.Div([
     running=[
         (Output("select-button", "disabled"), True, False),         # disable the button while running
         (Output("turnstile-button", "disabled"), True, False),      # disable the button while running
+        (Output("load-button", "disabled"), True, False),           # disable the button while running
     ],
     prevent_initial_call=True
 )
@@ -100,29 +110,35 @@ def run_unzip(zip_file_contents, turnstile_clicks):
             zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
             zip_obj = ZipFile(zip_str, 'r')
             zip_obj.extractall(path=tmp_dir)  # unzip the package
-            manifest_paths = glob.glob(tmp_dir + '/**/' + MANIFEST_FILE_NAME, recursive=True)
+            manifest_paths = glob.glob(f"{tmp_dir}/**/{MANIFEST_FILE_NAME}", recursive=True)
             if len(manifest_paths) == 0:
-                raise Exception("Cannot load ingestion package: does not contain manifest file " + MANIFEST_FILE_NAME)
+                raise Exception(f"Cannot load ingestion package: does not contain manifest file {MANIFEST_FILE_NAME}")
             if len(manifest_paths) > 1:
-                raise Exception("Cannot load ingestion package: contains multiple default manifest files: " + str(manifests))
+                raise Exception(f"Cannot load ingestion package: contains multiple default manifest files: {manifests}")
             manifest_path = manifest_paths[0]
         else:
             manifest_path = "../Turnstile-Example/Turnstile-IngestionPackage/manifest.yaml"
-
         manifest = get_manifest(manifest_path)
-        manifest_graphs_option = "Load to " + str(manifest.getModelgraphsFootprint()) + " " + str(manifest.getDatagraphsFootprint())
-        radio_choices = [{'label': manifest_graphs_option, 'value': 'manifest-graphs'}, {'label': 'Load to default graph (for optimized performance)', 'value': 'default-graph'}]
+
+        # generate SPARQLgraph link
+        sg_link = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getConnection())
+        sg_link_default = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getDefaultGraphConnection())
+
+        # gather displayable information about the package
+        package_description = ""
+        if manifest.getDescription() != None and manifest.getDescription().strip() != '':
+            package_description = f"({manifest.getDescription()})"
+        package_info = f"Data: `{manifest.getName()} {package_description}`  \n" + \
+                       f"Target model graphs: `{', '.join(manifest.getModelgraphsFootprint())}`  \n" + \
+                       f"Target data graphs: `{', '.join(manifest.getDatagraphsFootprint())}`  \n" + \
+                       f"Copy to optimized graph? `{'Yes' if manifest.getCopyToDefaultGraph() else 'No'}`"
 
         # generate a file in which to capture the ingestion status
         status_filepath = get_temp_dir_unique("output")
 
-        selected_message = "You have selected package '" + manifest.getName() + "'"
-        if manifest.getDescription() != None and manifest.getDescription().strip() != "":
-            selected_message = selected_message + " (" + manifest.getDescription() + ")"
-
     except Exception as e:
-        return "", [], None, get_error_trace(e), None, None
-    return selected_message, radio_choices, manifest_path, None, status_filepath, None
+        return "", None, None, None, get_error_trace(e), None, None
+    return package_info, sg_link, sg_link_default, manifest_path, None, status_filepath, None
 
 
 @dash.callback(
@@ -130,18 +146,18 @@ def run_unzip(zip_file_contents, turnstile_clicks):
             Output("last-loaded-graphs", "data")],                  # remember graphs loaded (used in the Verify tab)  NOTE this Store is from app.py layout - using it here disables prevent_initial_call=True
     inputs=Input("load-button", "n_clicks"),                        # triggered by user clicking load button
     state=[
-        State("load-graph-radio", "value"),                         # load to manifest or default graphs
         State("status-filepath", "data"),
         State("manifest-filepath", "data")],
     background=True,                                                # background callback
     running=[
         (Output("select-button", "disabled"), True, False),         # disable button while running
         (Output("turnstile-button", "disabled"), True, False),      # disable button while running
+        (Output("load-button", "disabled"), True, False),           # disable button while running
         (Output("status-interval", "disabled"), False, True)        # enable the interval component while running
     ],
     prevent_initial_call=True                                       # NOTE won't work because last-loaded-graphs is in the layout before load-button (see https://dash.plotly.com/advanced-callbacks#prevent-callback-execution-upon-initial-component-render)
 )
-def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, manifest_filepath):
+def run_ingest(load_button_clicks, status_filepath, manifest_filepath):
     """
     Ingest the selected zip file
     """
@@ -154,28 +170,19 @@ def run_ingest(load_button_clicks, manifest_or_default_graphs, status_filepath, 
         if semtk3.check_services() == False:
             raise Exception("Cannot reach SemTK Services (wait for startup to complete, or check for failures)")
 
-        use_default_graph = (manifest_or_default_graphs == "default-graph")
-
         f = open(status_filepath, "a")
         with redirect_stdout(f), redirect_stderr(f):    # send command output to temporary file
             rack.logger.setLevel("ERROR")
-            rack.ingest_manifest_driver(Path(manifest_filepath), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True, use_default_graph)  # process the manifest
-
-        # get connection from manifest, construct SPARQLGraph URL
-        manifest = get_manifest(manifest_filepath)
-        if use_default_graph:
-            conn_str = manifest.getDefaultGraphConnection()
-        else:
-            conn_str = manifest.getConnection()
-        sparqlgraph_url_str = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=conn_str)
+            rack.ingest_manifest_driver(Path(manifest_filepath), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True, False)  # process the manifest
 
         # store list of loaded graphs
+        manifest = get_manifest(manifest_filepath)
         last_loaded_graphs = manifest.getModelgraphsFootprint() + manifest.getDatagraphsFootprint()
 
         time.sleep(1)
     except Exception as e:
         return get_error_trace(e), []  # show done dialog with error
-    return [dcc.Markdown("Loaded ingestion package."), html.A("Open in SPARQLGraph UI", href=sparqlgraph_url_str, target="_blank", style={"margin-top": "100px"})], last_loaded_graphs
+    return [dcc.Markdown("Data was loaded successfully.")], last_loaded_graphs
 
 
 @callback(Output("status-div", "children"),
@@ -198,19 +205,13 @@ def update_status(n, status_filepath):
 ####### simple callbacks to show/hide components #######
 
 @callback(Output("load-div", "hidden"),
-              Input("load-graph-radio", "options"),    # triggered by setting load graph radio options
+              Input("load-div-message", "children"),
               Input("load-button", "n_clicks"),
-              Input("cancel-load-button", "n_clicks"),
               prevent_initial_call=True
               )
-def manage_load_div(radio_options, load_clicks, cancel_clicks):
-    """ Show or hide the load div """
-    if (get_trigger() in ["load-button.n_clicks", "cancel-load-button.n_clicks"]):
-        return True         # load or cancel button pressed, hide div
-    elif radio_options == []:
-        return True         # no radio options provided, don't show div
-    else:
-        return False        # radio options provided, show div
+def manage_load_div(load_message, load_clicks):
+    """ Show or hide the load div (currently nothing triggers hiding it) """
+    return False        # show if message is set
 
 @callback(Output("unzip-error-dialog", "is_open"),
               Input("unzip-error-dialog-body", "children"),

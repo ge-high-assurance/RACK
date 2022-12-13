@@ -26,11 +26,24 @@ button {
 
 /* style for scrolling status area */
 div.scrollarea {
-    margin-top: 100px;
+    margin-top: 50px;
     white-space: pre-wrap;
     border-style: none;
-    height: 500px;
+    height: 400px;
     width: 1200px; overflow-y: auto;
     display: flex;
     flex-direction: column-reverse;
+}
+
+/* style for dropdown menus */
+.ddm {
+    background-color: powderblue;
+    color: black;
+    border: none;
+    padding: 0px;
+}
+/* avoid color change when hovering */
+.ddm:hover {
+    background-color:powderblue;
+    color: black;
 }

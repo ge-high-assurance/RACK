@@ -76,6 +76,8 @@ DEFAULT_BASE_URL: Url = Url("http://localhost")
 
 MODEL_GRAPH: Url = Url("http://rack001/model")
 DEFAULT_DATA_GRAPH = Url("http://rack001/data")
+DEFAULT_TRIPLE_STORE = Url("http://localhost:3030/RACK")
+DEFAULT_TRIPLE_STORE_TYPE = "fuseki"
 
 INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
     'type': 'object',
@@ -223,8 +225,8 @@ def sparql_connection(base_url: Url, model_graphs: Optional[List[Url]], data_gra
     # Default to RACK in a Box triple-store location
     model_graphs = model_graphs or [MODEL_GRAPH]
     data_graph = data_graph or DEFAULT_DATA_GRAPH
-    triple_store = triple_store or Url("http://localhost:3030/RACK")
-    triple_store_type = triple_store_type or "fuseki"
+    triple_store = triple_store or DEFAULT_TRIPLE_STORE
+    triple_store_type = triple_store_type or DEFAULT_TRIPLE_STORE_TYPE
     return Connection(semtk3.build_connection_str("%NODEGROUP%", triple_store_type, triple_store, model_graphs, data_graph, extra_data_graphs))
 
 def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
@@ -343,7 +345,25 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
     go()
 
-def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool, default_graph: bool) -> None:
+def utility_copygraph_driver(base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], from_graph: Url, to_graph: Url) -> None:
+    semtk3.set_host(base_url)
+    triple_store = triple_store or DEFAULT_TRIPLE_STORE
+    triple_store_type = triple_store_type or DEFAULT_TRIPLE_STORE_TYPE
+    
+    @with_status(f'Copying {str_highlight(from_graph)} to {str_highlight(to_graph)}')
+    def go() -> dict:
+        return semtk3.copy_graph(from_graph, to_graph, triple_store, triple_store_type, triple_store, triple_store_type)
+    go()
+
+def ingest_manifest_driver(
+    manifest_path: Path,
+    base_url: Url,
+    triple_store: Optional[Url],
+    triple_store_type: Optional[str],
+    clear: bool,
+    default_graph: bool,
+    top_level: bool = True) -> None:
+
     with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
         manifest = Manifest.fromYAML(manifest_file)
 
@@ -372,16 +392,38 @@ def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Opt
     else:
         targetgraph = None
 
-    for (step_type, step_file) in manifest.steps:
-        stepFile = base_path / step_file
+    for (step_type, step_data) in manifest.steps:
         if StepType.DATA == step_type:
+            stepFile = base_path / step_data
             ingest_data_driver(stepFile, base_url, targetgraph, targetgraph, triple_store, triple_store_type, False)
         elif StepType.MODEL == step_type:
+            stepFile = base_path / step_data
             ingest_owl_driver(stepFile, base_url, targetgraph, triple_store, triple_store_type, False)
         elif StepType.NODEGROUPS == step_type:
+            stepFile = base_path / step_data
             store_nodegroups_driver(stepFile, base_url)
         elif StepType.MANIFEST == step_type:
-            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, default_graph)
+            stepFile = base_path / step_data
+            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, default_graph, False)
+        elif StepType.COPYGRAPH == step_type:
+            utility_copygraph_driver(base_url, triple_store, triple_store_type, step_data[0], step_data[1])
+    
+    if top_level:
+        if manifest.getCopyToDefaultGraph():
+            defaultGraph = Url("uri://DefaultGraph")
+            for graph in manifest.modelgraphsFootprint:
+                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
+            for graph in manifest.datagraphsFootprint:
+                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
+        
+        if manifest.getPerformEntityResolution():
+            @with_status(f'Executing entity resolution')
+            def go() -> dict:
+                return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [defaultGraph], defaultGraph, [], triple_store, triple_store_type))
+            go()
+        
+        if manifest.getPerformOptimization():
+            logger.warning("Optimization requested but not yet implemented")
 
 def ingest_data_driver(config_path: Path, base_url: Url, model_graphs: Optional[List[Url]], data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
@@ -650,9 +692,13 @@ def dispatch_data_count(args: SimpleNamespace) -> None:
     conn = sparql_connection(args.base_url, args.model_graph, args.data_graph[0], args.data_graph[1:], args.triple_store, args.triple_store_type)
     run_count_query(conn, args.nodegroup, constraints=args.constraint)
 
+def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
+    """Implementation of utility copygraph command"""
+    utility_copygraph_driver(args.base_url, args.triple_store, args.triple_store_type, args.from_graph, args.to_graph)
+
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.manifest), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph)
+    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
@@ -734,7 +780,15 @@ def get_argument_parser() -> argparse.ArgumentParser:
     nodegroups_deleteall_parser = nodegroups_subparsers.add_parser('delete-all', help='Delete all nodegroups from RACK')
     nodegroups_sparql_parser = nodegroups_subparsers.add_parser('sparql', help='Show SPARQL query for nodegroup')
 
-    manifest_import_parser.add_argument('manifest', type=str, help='Manifest YAML file')
+    utility_parser = subparsers.add_parser('utility', help='Tools for manipulating raw data')
+    utility_subparsers = utility_parser.add_subparsers(dest='command')
+    utility_copygraph_parser = utility_subparsers.add_parser('copygraph', help='merge data from one graph to another')
+
+    utility_copygraph_parser.add_argument('--from-graph', type=str, required=True, help='merge from this graph')
+    utility_copygraph_parser.add_argument('--to-graph', type=str, required=True, help='merge to this graph')
+    utility_copygraph_parser.set_defaults(func=dispatch_utility_copygraph)
+
+    manifest_import_parser.add_argument('config', type=str, help='Manifest YAML file')
     manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
     manifest_import_parser.add_argument('--default-graph', action='store_true', help='Load whole manifest into default graph')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)

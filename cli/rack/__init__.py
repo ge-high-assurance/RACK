@@ -73,6 +73,7 @@ class ExportFormat(Enum):
         return self.value
 
 DEFAULT_BASE_URL: Url = Url("http://localhost")
+DEFAULT_OPTIMIZE_URL: Url = Url("http://localhost:8050/optimize")
 
 MODEL_GRAPH: Url = Url("http://rack001/model")
 DEFAULT_DATA_GRAPH = Url("http://rack001/data")
@@ -362,7 +363,8 @@ def ingest_manifest_driver(
     triple_store_type: Optional[str],
     clear: bool,
     default_graph: bool,
-    top_level: bool = True) -> None:
+    top_level: bool = True,
+    optimization_url: Optional[Url] = None) -> None:
 
     with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
         manifest = Manifest.fromYAML(manifest_file)
@@ -423,7 +425,17 @@ def ingest_manifest_driver(
             go()
         
         if manifest.getPerformOptimization():
-            logger.warning("Optimization requested but not yet implemented")
+            invoke_optimization(optimization_url)
+
+def invoke_optimization(url: Optional[Url]) -> None:
+    @with_status(f'Optimizing triplestore')
+    def go() -> None:
+        url = url or DEFAULT_OPTIMIZE_URL
+        response = requests.get(url).json()
+        if not response['success']:
+            raise response['message']
+    go()
+
 
 def ingest_data_driver(config_path: Path, base_url: Url, model_graphs: Optional[List[Url]], data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
@@ -698,7 +710,7 @@ def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph)
+    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph, args.optimize_url)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
@@ -791,6 +803,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     manifest_import_parser.add_argument('config', type=str, help='Manifest YAML file')
     manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
     manifest_import_parser.add_argument('--default-graph', action='store_true', help='Load whole manifest into default graph')
+    manifest_import_parser.add_argument('--optimize-url', type=str, help='RACK UI optimization endpoint (e.g. http://localhost:8050/optimize)')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')

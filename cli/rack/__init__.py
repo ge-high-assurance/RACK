@@ -427,7 +427,7 @@ def ingest_manifest_driver(
         if manifest.getPerformOptimization():
             invoke_optimization(optimization_url)
 
-def invoke_optimization(url: Optional[Url]):
+def invoke_optimization(url: Optional[Url]) -> None:
     @with_status(f'Optimizing triplestore')
     def go() -> None:
         url = url or DEFAULT_OPTIMIZE_URL

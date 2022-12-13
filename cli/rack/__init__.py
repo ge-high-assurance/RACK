@@ -413,9 +413,12 @@ def ingest_manifest_driver(
     if top_level:
         if manifest.getCopyToDefaultGraph():
             defaultGraph = Url("uri://DefaultGraph")
-            for graph in manifest.modelgraphsFootprint:
+
+            if clear:
+                clear_driver(base_url, [defaultGraph], None, triple_store, triple_store_type, Graph.MODEL)
+            for graph in manifest.getModelgraphsFootprint():
                 utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
-            for graph in manifest.datagraphsFootprint:
+            for graph in manifest.getDatagraphsFootprint():
                 utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
         
         if manifest.getPerformEntityResolution():
@@ -710,7 +713,7 @@ def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph, args.optimize_url)
+    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph, True, args.optimize_url)
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""

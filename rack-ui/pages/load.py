@@ -210,8 +210,11 @@ def update_status(n, status_filepath):
               prevent_initial_call=True
               )
 def manage_load_div(load_message, load_clicks):
-    """ Show or hide the load div (currently nothing triggers hiding it) """
-    return False        # show if message is set
+    """ Show or hide the load div """
+    if len(load_message) > 0:
+        return False    # show the div
+    else:
+        return True     # hide the div
 
 @callback(Output("unzip-error-dialog", "is_open"),
               Input("unzip-error-dialog-body", "children"),

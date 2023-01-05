@@ -5,7 +5,11 @@ import platform
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 import semtk3
+import json
 from .helper import *
+
+# name of default graph
+DEFAULT_GRAPH_NAME = "uri://DefaultGraph"
 
 # dialog confirming ASSIST verification done
 verify_assist_done_dialog = dbc.Modal(
@@ -23,7 +27,7 @@ verify_assist_done_dialog = dbc.Modal(
 )
 
 # div showing graphs list
-verify_report_options_div = html.Div(
+verify_report_options_div = dbc.Spinner(html.Div(
     [
         dcc.Markdown("Select graphs to include in report:"),
         dcc.Checklist([], [], id="verify-graph-checklist", labelStyle={'display': 'block'}, inputStyle={"margin-right": "10px"}),   # choose which graphs to verify
@@ -35,7 +39,7 @@ verify_report_options_div = html.Div(
     id="verify-report-options-div",
     hidden=True,
     style={"margin-top": "50px"},
-)
+))
 
 # dialog indicating an error generating the SPARQLgraph report (e.g. no graphs selected)
 verify_report_error_dialog = dbc.Modal(
@@ -175,7 +179,9 @@ def show_report_options(button_clicks, last_loaded_graphs):
     Show list of graphs for verification report, with the last loaded graphs pre-selected
     """
     # get list of graphs populated in the triple store
-    graphs_list = get_graph_info().get_column(0)
+    graphs_list_values = get_graph_info().get_column(0)    # list of graphs, including uri://DefaultGraph
+    graphs_list_labels = list(map(lambda x: x.replace(DEFAULT_GRAPH_NAME, 'Optimized graph'), graphs_list_values.copy()))  # display default graph as "Optimized graph"
+    graphs_list = [{'label': label, 'value': val} for label, val in zip(graphs_list_labels, graphs_list_values)]
 
     # these are the graphs last loaded - check the checkboxes for these
     if last_loaded_graphs == None:

@@ -19,22 +19,25 @@ from .helper import *
 MANIFEST_FILE_NAME = "manifest.yaml"
 
 # div showing load details and buttons to load data or open SPARQLgraph
-load_div = html.Div(
+load_div = dbc.Spinner(html.Div(
     [
-        dcc.Markdown("", id="load-div-message"),
-        dbc.Row([
-            dbc.Col(html.Button("Load data", id="load-button", n_clicks=0), width="auto"),      # load button
-            dbc.Col(dbc.DropdownMenu(
-                [
-                    dbc.DropdownMenuItem("Target graphs", href="", target="_blank", id="sparqlgraph-button"),
-                    dbc.DropdownMenuItem("Optimized graph", href="", target="_blank", id="sparqlgraph-default-button")
-                ], label="View in SPARQLgraph", toggle_class_name="ddm"), width="auto")
-        ])
+        html.Table(
+            html.Tr([
+                html.Td(dcc.Markdown("", id="load-div-message"), style={"padding-right": "20px"}),
+                html.Td([
+                    html.Button("Load data", id="load-button", n_clicks=0),      # load button
+                    dbc.DropdownMenu([
+                            dbc.DropdownMenuItem("Target graphs", href="", target="_blank", id="sparqlgraph-button"),
+                            dbc.DropdownMenuItem("Optimized graph", href="", target="_blank", id="sparqlgraph-default-button")
+                        ], label="View data", toggle_class_name="ddm")
+                ])
+            ])
+        )
     ],
     id="load-div",
     hidden=True,
     style={"margin-top": "50px"},
-)
+))
 
 # dialog indicating unzip error (e.g. no manifest)
 unzip_error_dialog = dbc.Modal(

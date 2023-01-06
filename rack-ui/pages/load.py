@@ -131,10 +131,14 @@ def run_unzip(zip_file_contents, turnstile_clicks):
         package_description = ""
         if manifest.getDescription() != None and manifest.getDescription().strip() != '':
             package_description = f"({manifest.getDescription()})"
+        additional_actions = []
+        if manifest.getCopyToDefaultGraph(): additional_actions.append("copy to optimized graph")
+        if manifest.getPerformEntityResolution(): additional_actions.append("resolve entities")
+        if manifest.getPerformOptimization(): additional_actions.append("optimize triple store")
         package_info = f"Data: `{manifest.getName()} {package_description}`  \n" + \
                        f"Target model graphs: `{', '.join(manifest.getModelgraphsFootprint())}`  \n" + \
                        f"Target data graphs: `{', '.join(manifest.getDatagraphsFootprint())}`  \n" + \
-                       f"Copy to optimized graph? `{'Yes' if manifest.getCopyToDefaultGraph() else 'No'}`"
+                       f"Additional actions: `{', '.join(additional_actions) if len(additional_actions) > 0 else 'None'}`"
 
         # generate a file in which to capture the ingestion status
         status_filepath = get_temp_dir_unique("output")

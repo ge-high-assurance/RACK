@@ -17,7 +17,7 @@
 
 uri "http://arcos.rack/RESOLUTIONS" alias Rs.
 import "http://arcos.rack/PROV-S".
-import "http://research.ge.com/semtk/entityResolution".
+import "http://research.ge.com/semtk/EntityResolution".
 
 
 SAME_AS (note "Used to create curation relationships between two nodes. When two THINGs are connected via the SAME_AS relationship it means that the THINGs are actually describing the same.  SAME_AS relationships will be collapsed into a single THING by the resolution process.") is a type of NODE.
@@ -25,6 +25,6 @@ SAME_AS (note "Used to create curation relationships between two nodes. When two
 	secondary (note "the secondary THINGs are the entity that will be removed during the resolution process, any attributes that do not conflict will be copied to the to the primary,") describes SAME_AS with values of type THING.
 
 // Make SAME_AS compatible with semTK entity resolution functions.
-SAME_AS is a type of entityResolution:SameAs.	
-primary is a type of entityResolution:target.
-secondary is a type of entityResolution:duplicate.
+SAME_AS is a type of EntityResolution:SameAs.	
+primary is a type of EntityResolution:target.
+secondary is a type of EntityResolution:duplicate.

@@ -434,7 +434,7 @@ def invoke_optimization(url: Optional[Url]) -> None:
     url = url or DEFAULT_OPTIMIZE_URL
     @with_status(f'Optimizing triplestore')
     def go() -> None:
-        response = requests.get(url).json()
+        response = requests.get(str(url)).json()
         if not response['success']:
             raise Exception(response['message'])
     go()

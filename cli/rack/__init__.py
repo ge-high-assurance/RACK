@@ -431,12 +431,12 @@ def ingest_manifest_driver(
             invoke_optimization(optimization_url)
 
 def invoke_optimization(url: Optional[Url]) -> None:
+    url = url or DEFAULT_OPTIMIZE_URL
     @with_status(f'Optimizing triplestore')
     def go() -> None:
-        url = url or DEFAULT_OPTIMIZE_URL
-        response = requests.get(url).json()
+        response = requests.get(str(url)).json()
         if not response['success']:
-            raise response['message']
+            raise Exception(response['message'])
     go()
 
 

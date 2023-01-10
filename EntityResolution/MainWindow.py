@@ -296,7 +296,7 @@ class MainWindow(tk.Tk):
                     tags = ("confirmedCombined",)
                 else:
                     for s in self.decisions[p]:
-                        if self.decisions[p][s] == "confirmedSameAs":
+                        if self.decisions[p][s] == CONFIRMED_SAME_AS:
                             tags = ("confirmedRemaining",)
                             break
                     tags = ("assumedRemaining",)
@@ -333,11 +333,12 @@ class MainWindow(tk.Tk):
         
         currItem = self.secondaryTree.focus()
         secondary = self.secondaryTree.item(currItem)['text']
+        print(primary,  secondary)
         
         if primary not in self.decisions:
             self.decisions[primary] = {}
-        self.decisions[primary][secondary] = "confirmedSameAs"
-        self.decisions[secondary] = "confirmedCombined"
+        self.decisions[primary][secondary] = CONFIRMED_SAME_AS
+        self.decisions[secondary] = CONFIRMED_COMBINED
         self.updatePrimary()   
         self.updateSecondary()
         self.updateCompare()
@@ -354,7 +355,7 @@ class MainWindow(tk.Tk):
         
         if primary not in self.decisions:
             self.decisions[primary] = {}
-        self.decisions[primary][secondary] = "confirmedDifferent"
+        self.decisions[primary][secondary] = CONFIRMED_DIFFERENT
         self.updatePrimary()   
         self.updateSecondary()
         self.updateCompare()

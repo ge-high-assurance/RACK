@@ -45,41 +45,28 @@ class Entity(tk.Frame):
             self.properties.delete(item)
         print(e)
         if e !=None:
-            guid = e.split("#")[-1]
-            data = da.getData(e)
-            elements={}
-            baseElement = None
-            if "@graph" in data: # Cache has a graph tag so there is multiple nodes
-                for el in data["@graph"]:
-                    elements[el["@id"]] = el
-                    if el["@id"].split(":")[-1] == guid:
-                        baseElement = el
-            else:
-                baseElement = data
-                
-        
+            properties = da.getDataProperties(e)
+            relationships = da.getRelationships(e)
             ## Update Relationships and Properties
-            for k in baseElement:
-                if type(baseElement[k]) is str:
-                    self.properties.insert("", 'end', values =(k, baseElement[k]))
-                elif type(baseElement[k]) is dict:
-                    if '@id' in baseElement[k]:
-                        self.relationships.insert("", 'end', values =(k, elements[baseElement[k]['@id']]["PROV_S:identifier"],"Outgoing"))
-                elif type(baseElement[k]) is list:
-                    for i in baseElement[k]:
-                        # get id
-                        print(elements[i['@id']])
-                        self.relationships.insert("", 'end', values =(k, elements[i['@id']]["PROV_S:identifier"],"Outgoing"))
-
-            for k in elements:
-               if k != baseElement:
-                   if type(elements[k]) is dict:
-                       for p in elements[k]:
-                           if type(elements[k][p]) is dict:
-                               if elements[k][p]['@id'].split(":")[-1] == guid: 
-                                   self.relationships.insert("", 'end', values =(p, elements[k]["PROV_S:identifier"],"Incoming"))
-                                
-                        
-                    
-
-       
+            for k in properties:
+                self.properties.insert("", 'end',  values=k)
+            for k in relationships:
+                self.relationships.insert("", 'end',  values=k)
+#                if type(properties[k]) is str:
+#                    self.properties.insert("", 'end', values =(k, baseElement[k]))
+#                elif type(baseElement[k]) is dict:
+#                    if '@id' in baseElement[k]:
+#                        self.relationships.insert("", 'end', values =(k, elements[baseElement[k]['@id']]["PROV_S:identifier"],"Outgoing"))
+#                elif type(baseElement[k]) is list:
+#                    for i in baseElement[k]:
+#                        # get id
+#                        print(elements[i['@id']])
+#                        self.relationships.insert("", 'end', values =(k, elements[i['@id']]["PROV_S:identifier"],"Outgoing"))
+#
+#            for k in elements:
+#               if k != baseElement:
+#                   if type(elements[k]) is dict:
+#                       for p in elements[k]:
+#                           if type(elements[k][p]) is dict:
+#                               if elements[k][p]['@id'].split(":")[-1] == guid: 
+#                                   self.relationships.insert("", 'end', values =(p, elements[k]["PROV_S:identifier"],"Incoming"))

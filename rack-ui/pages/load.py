@@ -19,22 +19,25 @@ from .helper import *
 MANIFEST_FILE_NAME = "manifest.yaml"
 
 # div showing load details and buttons to load data or open SPARQLgraph
-load_div = html.Div(
+load_div = dbc.Spinner(html.Div(
     [
-        dcc.Markdown("", id="load-div-message"),
-        dbc.Row([
-            dbc.Col(html.Button("Load data", id="load-button", n_clicks=0), width="auto"),      # load button
-            dbc.Col(dbc.DropdownMenu(
-                [
-                    dbc.DropdownMenuItem("Target graphs", href="", target="_blank", id="sparqlgraph-button"),
-                    dbc.DropdownMenuItem("Optimized graph", href="", target="_blank", id="sparqlgraph-default-button")
-                ], label="View in SPARQLgraph", toggle_class_name="ddm"), width="auto")
-        ])
+        html.Table(
+            html.Tr([
+                html.Td(dcc.Markdown("", id="load-div-message"), style={"padding-right": "20px"}),
+                html.Td([
+                    html.Button("Load data", id="load-button", n_clicks=0),      # load button
+                    dbc.DropdownMenu([
+                            dbc.DropdownMenuItem("Target graphs", href="", target="_blank", id="sparqlgraph-button"),
+                            dbc.DropdownMenuItem("Optimized graph", href="", target="_blank", id="sparqlgraph-default-button")
+                        ], label="View data", toggle_class_name="ddm")
+                ])
+            ])
+        )
     ],
     id="load-div",
     hidden=True,
     style={"margin-top": "50px"},
-)
+))
 
 # dialog indicating unzip error (e.g. no manifest)
 unzip_error_dialog = dbc.Modal(
@@ -128,10 +131,14 @@ def run_unzip(zip_file_contents, turnstile_clicks):
         package_description = ""
         if manifest.getDescription() != None and manifest.getDescription().strip() != '':
             package_description = f"({manifest.getDescription()})"
+        additional_actions = []
+        if manifest.getCopyToDefaultGraph(): additional_actions.append("copy to optimized graph")
+        if manifest.getPerformEntityResolution(): additional_actions.append("resolve entities")
+        if manifest.getPerformOptimization(): additional_actions.append("optimize triple store")
         package_info = f"Data: `{manifest.getName()} {package_description}`  \n" + \
                        f"Target model graphs: `{', '.join(manifest.getModelgraphsFootprint())}`  \n" + \
                        f"Target data graphs: `{', '.join(manifest.getDatagraphsFootprint())}`  \n" + \
-                       f"Copy to optimized graph? `{'Yes' if manifest.getCopyToDefaultGraph() else 'No'}`"
+                       f"Additional actions: `{', '.join(additional_actions) if len(additional_actions) > 0 else 'None'}`"
 
         # generate a file in which to capture the ingestion status
         status_filepath = get_temp_dir_unique("output")
@@ -210,8 +217,11 @@ def update_status(n, status_filepath):
               prevent_initial_call=True
               )
 def manage_load_div(load_message, load_clicks):
-    """ Show or hide the load div (currently nothing triggers hiding it) """
-    return False        # show if message is set
+    """ Show or hide the load div """
+    if len(load_message) > 0:
+        return False    # show the div
+    else:
+        return True     # hide the div
 
 @callback(Output("unzip-error-dialog", "is_open"),
               Input("unzip-error-dialog-body", "children"),

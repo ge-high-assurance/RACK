@@ -33,7 +33,7 @@ fi
 
 if (( creating )) ; then
     outf=${!archive_file_idx}
-    rackf="$(dirname ${outf})/.$(basename ${outf}).rack"
+    rackf="$(dirname "${outf}")/.$(basename "${outf}").rack"
 
     (
         export IFS=","

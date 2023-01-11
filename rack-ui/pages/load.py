@@ -18,21 +18,31 @@ from .helper import *
 # name of default manifest file within ingestion package
 MANIFEST_FILE_NAME = "manifest.yaml"
 
+# display strings
+CLEAR_BEFORE_LOADING_STR = "Clear before loading"
+
 # div showing load details and buttons to load data or open SPARQLgraph
 load_div = dbc.Spinner(html.Div(
     [
-        html.Table(
-            html.Tr([
-                html.Td(dcc.Markdown("", id="load-div-message"), style={"padding-right": "20px"}),
-                html.Td([
-                    html.Button("Load data", id="load-button", n_clicks=0),      # load button
-                    dbc.DropdownMenu([
-                            dbc.DropdownMenuItem("Target graphs", href="", target="_blank", id="sparqlgraph-button"),
-                            dbc.DropdownMenuItem("Optimized graph", href="", target="_blank", id="sparqlgraph-default-button")
-                        ], label="View data", toggle_class_name="ddm")
-                ])
-            ])
-        )
+        # package metadata (from manifest)
+        dcc.Markdown("", id="load-div-message"),
+
+        # load options
+        dbc.Accordion([
+            dbc.AccordionItem(
+                dcc.Checklist([CLEAR_BEFORE_LOADING_STR], [CLEAR_BEFORE_LOADING_STR], id="load-options-checklist"),
+                title="Options")],
+            start_collapsed=True, flush=True, style={"width": "250px"}),
+
+        # load/view buttons
+        dbc.Row([
+            dbc.Col([html.Button("Load data", id="load-button", n_clicks=0)], width="auto"),      # load button
+            dbc.Col(dbc.DropdownMenu([
+                dbc.DropdownMenuItem("Target graphs", href="", target="_blank", id="sparqlgraph-button"),
+                dbc.DropdownMenuItem("Optimized graph", href="", target="_blank", id="sparqlgraph-default-button")
+            ], label="View data", toggle_class_name="ddm"), width="auto")
+        ])
+
     ],
     id="load-div",
     hidden=True,
@@ -154,7 +164,8 @@ def run_unzip(zip_file_contents, turnstile_clicks):
     inputs=Input("load-button", "n_clicks"),                        # triggered by user clicking load button
     state=[
         State("status-filepath", "data"),
-        State("manifest-filepath", "data")],
+        State("manifest-filepath", "data"),
+        State("load-options-checklist", "value")],                  # user-selected load options from the checklist
     background=True,                                                # background callback
     running=[
         (Output("select-button", "disabled"), True, False),         # disable button while running
@@ -164,13 +175,15 @@ def run_unzip(zip_file_contents, turnstile_clicks):
     ],
     prevent_initial_call=True                                       # NOTE won't work because last-loaded-graphs is in the layout before load-button (see https://dash.plotly.com/advanced-callbacks#prevent-callback-execution-upon-initial-component-render)
 )
-def run_ingest(load_button_clicks, status_filepath, manifest_filepath):
+def run_ingest(load_button_clicks, status_filepath, manifest_filepath, load_options):
     """
     Ingest the selected zip file
     """
     # this callback gets triggered when the pages is loaded - if so don't proceed
     if load_button_clicks == 0:
         raise dash.exceptions.PreventUpdate
+
+    clear = (CLEAR_BEFORE_LOADING_STR in load_options)  # clear the graph before loading (or not), depending on UI checkbox selection
 
     try:
         # avoid a ConnectionError if SemTK services are not fully up yet
@@ -180,7 +193,7 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath):
         f = open(status_filepath, "a")
         with redirect_stdout(f), redirect_stderr(f):    # send command output to temporary file
             rack.logger.setLevel("ERROR")
-            rack.ingest_manifest_driver(Path(manifest_filepath), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, True, False)  # process the manifest
+            rack.ingest_manifest_driver(Path(manifest_filepath), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, clear, False)  # process the manifest
 
         # store list of loaded graphs
         manifest = get_manifest(manifest_filepath)

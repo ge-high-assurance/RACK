@@ -30,7 +30,7 @@ verify_assist_done_dialog = dbc.Modal(
 verify_report_options_div = dbc.Spinner(html.Div(
     [
         dcc.Markdown("Select graphs to include in report:"),
-        dcc.Checklist([], [], id="verify-graph-checklist", labelStyle={'display': 'block'}, inputStyle={"margin-right": "10px"}),   # choose which graphs to verify
+        dcc.Checklist([], [], id="verify-graph-checklist", labelStyle={'display': 'block'}),   # choose which graphs to verify
         dbc.Row([
             dbc.Col(html.Button("Continue", id="verify-report-continue-button", n_clicks=0), width="auto"),  # button to open SPARQLgraph report
             dbc.Col(html.Button("Cancel", id="verify-report-cancel-button", n_clicks=0), width="auto")       # button to cancel

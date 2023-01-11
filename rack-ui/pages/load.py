@@ -37,10 +37,12 @@ load_div = dbc.Spinner(html.Div(
         # load/view buttons
         dbc.Row([
             dbc.Col([html.Button("Load data", id="load-button", n_clicks=0)], width="auto"),      # load button
+            dbc.Tooltip("Load the above data into RACK", target="load-button"),
             dbc.Col(dbc.DropdownMenu([
                 dbc.DropdownMenuItem("Target graphs", href="", target="_blank", id="sparqlgraph-button"),
                 dbc.DropdownMenuItem("Optimized graph", href="", target="_blank", id="sparqlgraph-default-button")
-            ], label="View data", toggle_class_name="ddm"), width="auto")
+            ], id="view-dropdown", label="View data", toggle_class_name="ddm"), width="auto"),
+            dbc.Tooltip("After loading, view data in SPARQLgraph", target="view-dropdown")
         ])
 
     ],
@@ -81,7 +83,6 @@ layout = html.Div([
         ]),
         dbc.Tooltip("Select the Turnstile sample data provided with RACK", target="turnstile-button"),
         dbc.Tooltip("Select an ingestion package (in .zip format) from your local machine", target="select-button"),
-        dbc.Tooltip("Load the data into RACK", target="load-button"),
         load_div,
         html.Div(id="status-div", className="scrollarea"),      # displays ingestion status
         unzip_error_dialog,

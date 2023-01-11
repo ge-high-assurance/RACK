@@ -29,27 +29,12 @@ def cleanString(string):
 #####################################
 # Rules Definitions
 #####################################
-def getDescription(e):
-    guid = e.split("#")[-1]
-    data = da.getData(e)
-    if "@graph" not in data: # No Graph tag means there is a single element at the root.
-        baseElement = data
-        if 'PROV_S:description' in data:
-            return data['PROV_S:description']
-        else:
-            return None
-    for el in data["@graph"]:
-        if el["@id"].split(":")[-1] == guid:
-            if 'PROV_S:description' in el:
-                return el['PROV_S:description']
-            else:
-                return None
             
 def fuzzyDescriptionCompare(e1,e2):
     Debug("descriptionCompare")
-    if getDescription(e1) != None and getDescription(e2) != None:
-        t1 = cleanString(getDescription(e1))
-        t2 = cleanString(getDescription(e2))
+    if da.getDescription(e1) != None and da.getDescription(e2) != None:
+        t1 = cleanString(da.getDescription(e1))
+        t2 = cleanString(da.getDescription(e2))
         matcher = SequenceMatcher(None, t1, t2)
         return True, matcher.ratio()*2
     else:
@@ -57,27 +42,16 @@ def fuzzyDescriptionCompare(e1,e2):
 def fuzzyIdentifierCompare(e1,e2):
     Debug("fuzzyIdentifierCompare")
     global data
-    t1 = cleanString(getIdentifier(e1))
-    t2 = cleanString(getIdentifier(e2))
+    t1 = cleanString(da.getIdentifier(e1))
+    t2 = cleanString(da.getIdentifier(e2))
     matcher = SequenceMatcher(None, t1, t2)
     return True, matcher.ratio() * 2
-def getIdentifier(e):
-    guid = e.split("#")[-1]
-    data = da.getData(e)
-    if "@graph" not in data: # No Graph tag means there is a single element at the root.
-        baseElement = data
-        return data['PROV_S:identifier']
-    ## Create a Hash based on the GUID and find the base 
-    baseElement = None
-    for el in data["@graph"]:
-        if el["@id"].split(":")[-1] == guid:
-            return el['PROV_S:identifier']
             
 def identifierCompare(e1,e2):
     Debug("identifierCompare")
     global data
-    t1 = cleanString(getIdentifier(e1))
-    t2 = cleanString(getIdentifier(e2))
+    t1 = cleanString(da.getIdentifier(e1))
+    t2 = cleanString(da.getIdentifier(e2))
 
     if t1 == t2:
         return True, 5.0

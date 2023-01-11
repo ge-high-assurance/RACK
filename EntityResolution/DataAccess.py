@@ -6,49 +6,100 @@ import os.path
 import RACK_CONSTANTS as rc
 def cacheData(e):
     guid = e.split("#")[-1]
-    nodegroup_json_str = ""
-    with open("getData.json", "r") as jsonFile:
-        nodegroup_json_str = jsonFile.read()
-    constraint = semtk3.build_constraint("THING", semtk3.OP_MATCHES, [e] )
-    res = semtk3.query_by_nodegroup(nodegroup_json_str, runtime_constraints= [constraint])
+    graph = "http://rack001/Data"
+    res = semtk3.query_raw_sparql(rc.dataQuery\
+                                                        .replace("{{GUID}}",guid) \
+                                                        .replace("{{GRAPH}}",graph),\
+                                                        result_type=semtk3.RESULT_TYPE_GRAPH_JSONLD)
     with open("cache/"+guid+".json", "w") as dataFile:
         json.dump(res, dataFile, indent = 4)
 
+def getRelationships(e):
+    relationships = []
+    guid = e.split("#")[-1]
+    data = getData(e)["@graph"]
+    if type(data) == list:
+        identData = {}
+        for el in data:
+            identData[el['@id']] = el['PROV_S:identifier']
+        for el in data:
+            if el['@id'][6:] == guid:
+                for p in el:
+                    if type(el[p]) == dict:
+                        relationships.append((p,  identData[el[p]['@id']],  "Outgoing"))
+            else:
+                for p in el:
+                    if type(el[p]) == dict:
+                        relationships.append((p,  el['PROV_S:identifier'],    "Incoming"))
+    return relationships
+    
+def getDataProperties(e):
+    dataProperties = []
+    guid = e.split("#")[-1]
+    data = getData(e)["@graph"]
+    if type(data) == list:
+        for el in data:
+            if el['@id'][6:] == guid:
+                for p in el:
+                    if type(el[p]) != dict:
+                        dataProperties.append((p,  el[p]))
+                break
+    else:
+        for p in data:
+            if type(data[p]) != dict:
+                dataProperties.append((p,  el[p]))  
+    return dataProperties
+
+def getDescription(e):
+    guid = e.split("#")[-1]
+    data = getData(e)["@graph"]
+    if type(data) == list:
+        for el in data:
+            if el['@id'][6:] == guid:
+                if 'PROV_S:description' in el:
+                    return el['PROV_S:description']
+                else:
+                    return None
+    else:
+        if 'PROV_S:description' in data:
+            return data['PROV_S:description']
+        else:
+            return None
 
 def getType(e):
     guid = e.split("#")[-1]
-    data = None
-    typeStr = ""
-    if not os.path.exists("cache/"+guid+".json"):
-        cacheData(e)
-    with open("cache/"+guid+".json", "r") as dataFile:
-        data = json.load(dataFile)
-    if "@graph" not in data: # No Graph tag means there is a single element at the root.
-        typeStr = data['@type']
+    data = getData(e)["@graph"]
+    context = getData(e)["@context"]
+    if type(data) == list:
+        for el in data:
+            if el['@id'][6:] == guid:
+                if '@type' in el:
+                    ns, _type = el['@type'].split(":")
+                    return context[ns]+_type
+                else:
+                    return None
     else:
-        for el in data["@graph"]:
-            if el["@id"].split(":")[-1] == guid:
-                typeStr = el['@type']
-                break
-    context = data["@context"]
-    mod,  t = typeStr.split(":")
-    return context[mod]+t
+        if '@type' in data:
+            ns, _type = data['@type'].split(":")
+            return context[ns]+_type
+        else:
+            return None
     
 def getIdentifier(e):
     guid = e.split("#")[-1]
-    print("Getting identifier for {}".format(guid))
-    data = None
-    if not os.path.exists("cache/"+guid+".json"):
-        cacheData(e)
-    with open("cache/"+guid+".json", "r") as dataFile:
-        data = json.load(dataFile)
-    if "@graph" not in data: # No Graph tag means there is a single element at the root.
-        return data['PROV_S:identifier']
-    ## Create a Hash based on the GUID and find the base 
-    #baseElement = None
-    for el in data["@graph"]:
-        if el["@id"].split(":")[-1] == guid:
-            return el['PROV_S:identifier']
+    data = getData(e)["@graph"]
+    if type(data) == list:
+        for el in data:            
+            if el['@id'][6:] == guid:
+                if 'PROV_S:identifier' in el:
+                    return el['PROV_S:identifier']
+                else:
+                    return None
+    else:
+        if 'PROV_S:identifier' in data:
+            return data['PROV_S:identifier']
+        else:
+            return None
             
 def getData(e):
     guid = e.split("#")[-1]

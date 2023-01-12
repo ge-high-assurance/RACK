@@ -108,6 +108,8 @@ def getData(e):
         cacheData(e)
     with open("cache/"+guid+".json", "r") as dataFile:
         data = json.load(dataFile)
+    if "@graph" not in data:
+        data = {"@graph":data}
     return data
     
 if __name__ == "__main__":

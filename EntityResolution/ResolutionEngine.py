@@ -128,6 +128,7 @@ class ResolutionEngine:
         print("Running Analysis..")
         #for k in self.entityList.keys():
         #    self.work(k)
+        print("  analyzing {} things for commonality.".format(len(self.entityList)))
         with multiprocessing.Pool() as pool:
             pool.map(self.work, self.entityList.keys())
         print("  Analysis Complete.")

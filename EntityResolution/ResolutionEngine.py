@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 import os
 import json
-import semtk3
 from colorama import Fore,  Style
-
 import multiprocessing
 import os.path
 DEBUG = False
@@ -37,34 +35,6 @@ class ResolutionEngine:
     def __init__(self, copy=True):
         self.entityList = list()
         self.ruleList = list()
-        self.sourceConnection = """
-{   "name":"RACK local fuseki Apache Phase 2",
-    "domain":"",
-    "enableOwlImports":false,
-    "model":[
-        {"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}
-        ],
-    "data":[
-        {"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/data"}
-        ]
-}"""
-        self.resolvedConnection = """
-{   "name":"RACK local fuseki Apache Phase 2 Resolved",
-    "domain":"",
-    "enableOwlImports":false,
-    "model":[
-        {"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/model"}
-        ],
-    "data":[
-        {"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/ResolvedData"}
-        ]
-}"""
-        semtk3.set_connection_override(self.resolvedConnection)
-        all_ok = semtk3.check_services();
-        if not all_ok: 
-            raise Exception("Semtk services are not properly running on localhost")
-        #if copy:
-        #    self.copyGraph()
       
     def __runRules__(self, eP, eS):
         Score = 1
@@ -134,18 +104,4 @@ class ResolutionEngine:
         print("  Analysis Complete.")
         ######################################################################
         
-
-    def copyGraph(self):
-        print("Copying Data Graph...")
-        
-        Debug("   downloading data...")
-        semtk3.download_owl("Model.owl", self.sourceConnection, model_or_data=semtk3.SEMTK3_CONN_DATA, conn_index = 0)   
-        
-        Debug("   clearing resolved graph...")
-        semtk3.clear_graph(self.resolvedConnection, model_or_data=semtk3.SEMTK3_CONN_DATA, index=0)
-        
-        Debug("   loading data to resolved graph...")
-
-        semtk3.upload_owl("Model.owl", self.resolvedConnection, model_or_data=semtk3.SEMTK3_CONN_DATA, conn_index = 0)
-        Debug("  Data Graph Copied.")
     

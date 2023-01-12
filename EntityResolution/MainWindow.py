@@ -133,12 +133,11 @@ class MainWindow(tk.Tk):
         self.grid_columnconfigure(0,weight=1)
         self.grid_columnconfigure(1,weight=0)
         self.grid_columnconfigure(2,weight=1)
+        semtk3.set_connection_override(rc.connStringSource)
     def push(self):
         ci.createIngestion(self.decisions)
-            
-        
+
     def pull(self):
-        semtk3.set_connection_override(rc.connString)
         all_ok = semtk3.check_services();
         if not all_ok: 
             print("Semtk services are not properly running on localhost")
@@ -150,7 +149,7 @@ class MainWindow(tk.Tk):
         for c in classes:
             classStr += "<"+c+"> "
             
-        tab = semtk3.query(rc.instanceQuery.replace("<{{Types}}>", classStr),rc.connString)
+        tab = semtk3.query_raw_sparql(rc.instanceQuery.replace("<{{Types}}>", classStr))
         instances = {}
         for r in tab.get_rows():
             if r[1] not in instances:
@@ -159,7 +158,7 @@ class MainWindow(tk.Tk):
         relations = {}
         for i in instances:
             relations[i] = []
-            tab = semtk3.query(rc.subClassQuery.replace("{{Type}}", i),rc.connString)
+            tab = semtk3.query_raw_sparql(rc.subClassQuery.replace("{{Type}}", i))
             for c in tab.get_column("super"):
                 if c not in relations[i]:
                     relations[i].append(c)

@@ -177,9 +177,8 @@ while ! curl -X POST http://localhost:12059/serviceInfo/ping 2>/dev/null | grep 
     sleep 10
 done
 
-# Setup the RACK dataset using the RACK CLI.  Make cli scripts executable by RACK UI.
+# Setup the RACK dataset using the RACK CLI.
 
 cd "/home/${USER}/RACK/cli/"
-chmod 755 ./*.sh
 python3 -m pip install ./wheels/*.whl
 ./setup-rack.sh

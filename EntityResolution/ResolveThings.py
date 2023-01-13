@@ -98,8 +98,8 @@ def dataInsertedByCheck(e1,e2):
     
     return False, 1.0
     
-def run(entities,  reset=True):
-    resEngine = re.ResolutionEngine(copy=reset)
+def run(entities):
+    resEngine = re.ResolutionEngine()
     resEngine.addEntities(entities)
     resEngine.addAbsoluteRule(dataInsertedByCheck) 
     resEngine.addAbsoluteRule(identifierCompare)

@@ -1,5 +1,5 @@
 
-connString2 = """
+connStringSource = """
 {   "name":"RACK local fuseki Apache Phase 2 Resolved",
     "domain":"",
     "enableOwlImports":false,
@@ -10,7 +10,7 @@ connString2 = """
         {"type":"fuseki","url":"http://localhost:3030/RACK","graph":"http://rack001/Data"}
         ]
 }"""
-connString = """
+connStringResolved = """
 {   "name":"RACK local fuseki Apache Phase 2 Resolved",
     "domain":"",
     "enableOwlImports":false,

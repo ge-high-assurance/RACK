@@ -69,7 +69,14 @@ def getDescription(e):
 def getType(e):
     guid = e.split("#")[-1]
     data = getData(e)["@graph"]
-    context = getData(e)["@context"]
+    context = None
+    if "@context" in getData(e):
+        context = getData(e)["@context"]
+    elif "@context" in data:
+        context = data['@context']
+    else:
+        print("ERROR: Could not find context from data graph!!!")
+        print("{}".format())
     if type(data) == list:
         for el in data:
             if el['@id'][6:] == guid:
@@ -113,4 +120,4 @@ def getData(e):
     return data
     
 if __name__ == "__main__":
-    semtk3.upload_owl("Model.owl", rc.connString2, model_or_data=semtk3.SEMTK3_CONN_DATA, conn_index = 0)
+    semtk3.upload_owl("Model.owl", rc.connStringSource2, model_or_data=semtk3.SEMTK3_CONN_DATA, conn_index = 0)

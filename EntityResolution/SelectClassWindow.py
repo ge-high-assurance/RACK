@@ -39,7 +39,6 @@ class ClassWindow(tk.Tk):
         self.destroy()
         
     def update(self):        
-        semtk3.set_connection_override(rc.connString)
         all_ok = semtk3.check_services();
         if not all_ok: 
             print("Semtk services are not properly running on localhost")
@@ -51,27 +50,26 @@ class ClassWindow(tk.Tk):
         s = self.superClassSelections.state()
         if s['Entity']:
             # Get THINGS, Returns a list of all 
-            tab = semtk3.query(rc.entityTypeQuery,rc.connString)
+            tab = semtk3.query_raw_sparql(rc.entityTypeQuery)
             classes = []
             for c in tab.get_column("directSub"):
                 if c not in classes:
                     self.classesTree.insert("",'end', text=c, values=(c, 'Entity' ))
         if s['Activity']:
             # Get THINGS, Returns a list of all 
-            tab = semtk3.query(rc.activityTypeQuery,rc.connString)
+            tab = semtk3.query_raw_sparql(rc.activityTypeQuery)
             classes = []
             for c in tab.get_column("directSub"):
                 if c not in classes:
                     self.classesTree.insert("",'end', text=c, values=(c, 'Activity' ))
         if s['Agent']:
             # Get THINGS, Returns a list of all 
-            tab = semtk3.query(rc.agentTypeQuery,rc.connString)
+            tab = semtk3.query_raw_sparql(rc.agentTypeQuery)
             classes = []
             for c in tab.get_column("directSub"):
                 if c not in classes:
                     self.classesTree.insert("",'end', text=c, values=(c, 'Agent' ))
 def getSubclass(classes):
-    semtk3.set_connection_override(rc.connString)
     all_ok = semtk3.check_services();
     if not all_ok: 
         print("Semtk services are not properly running on localhost")
@@ -79,7 +77,7 @@ def getSubclass(classes):
     subclasses = []
     for s in classes:
         subclasses.append(s)
-        tab = semtk3.query(rc.classQuery.replace("{{Type}}", s),rc.connString)
+        tab = semtk3.query_raw_sparql(rc.classQuery.replace("{{Type}}", s))
         for c in tab.get_column("directSub"):
             if c not in classes:
                 subclasses.append(c)

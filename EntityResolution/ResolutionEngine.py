@@ -32,7 +32,7 @@ class ResolutionEngine:
     resolvedConnection = None
     logString = ""
     
-    def __init__(self, copy=True):
+    def __init__(self):
         self.entityList = list()
         self.ruleList = list()
       

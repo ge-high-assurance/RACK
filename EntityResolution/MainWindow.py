@@ -202,17 +202,8 @@ class MainWindow(tk.Tk):
             for i in instances[k]:
                 primaryDict[i] = secondaryDict[k]
         
-        #for i in tab.get_column("instance"):
-        #   if i not in instances:
-        #        instances.append(i)
-        #c=0
-        #for i in instances:
-        #    c+=1
-        #    print("Caching:{}     {}/{}".format( i,  c,  len(instances)))
-        #    da.cacheData(i)
         import ResolveThings
-        reset = askyesno("Reset Resolutions", "Do you want to reset any existings resolutions?")
-        ResolveThings.run(primaryDict, reset=reset)
+        ResolveThings.run(primaryDict)
         self.loadData()
     '''===================================================
             Callback for selecting close menu button

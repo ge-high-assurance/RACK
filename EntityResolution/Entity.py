@@ -32,8 +32,9 @@ class Entity(tk.Frame):
        ===================================================''' 
     def selectProperty(self,a):
         currItem = self.properties.focus()
-        self.propertyString = self.properties.item(currItem)['values'][1]
-        self.updateCallback()   
+        if self.properties.item(currItem)['values'] != "": #if nothing is selected then we just stop, otherwise update the property string the run the call back to update the text box
+            self.propertyString = self.properties.item(currItem)['values'][1]
+            self.updateCallback()   
 
     def update(self, e): 
         
@@ -52,21 +53,3 @@ class Entity(tk.Frame):
                 self.properties.insert("", 'end',  values=k)
             for k in relationships:
                 self.relationships.insert("", 'end',  values=k)
-#                if type(properties[k]) is str:
-#                    self.properties.insert("", 'end', values =(k, baseElement[k]))
-#                elif type(baseElement[k]) is dict:
-#                    if '@id' in baseElement[k]:
-#                        self.relationships.insert("", 'end', values =(k, elements[baseElement[k]['@id']]["PROV_S:identifier"],"Outgoing"))
-#                elif type(baseElement[k]) is list:
-#                    for i in baseElement[k]:
-#                        # get id
-#                        print(elements[i['@id']])
-#                        self.relationships.insert("", 'end', values =(k, elements[i['@id']]["PROV_S:identifier"],"Outgoing"))
-#
-#            for k in elements:
-#               if k != baseElement:
-#                   if type(elements[k]) is dict:
-#                       for p in elements[k]:
-#                           if type(elements[k][p]) is dict:
-#                               if elements[k][p]['@id'].split(":")[-1] == guid: 
-#                                   self.relationships.insert("", 'end', values =(p, elements[k]["PROV_S:identifier"],"Incoming"))

@@ -331,8 +331,12 @@ class MainWindow(tk.Tk):
             for p in sorted(self.resolution.items(), key=lambda x:x[1],reverse=True):
                 identifier = da.getIdentifier(p[0])
                 tags = ()
-                if self.primary in self.decisions and self.decisions[self.primary]!= None and p[0] in self.decisions[self.primary]:
-                    tags = (self.decisions[self.primary][p[0]],)
+                if self.primary in self.decisions:
+                    if type(self.decisions[self.primary]) == int: 
+                        # this object is either ASSUMED_COMBINED or CONFIRMED_COMBINED so no need to populate the seconary object list
+                        break
+                    elif p[0] in self.decisions[self.primary]: #Get the tag from the decisions
+                        tags = (self.decisions[self.primary][p[0]],)
                 self.secondaryTree.insert("",'end', text=p[0], values=(identifier, "{:.3f}".format(p[1])), tags = tags)
 
             self.primaryEntity.update(self.primary)

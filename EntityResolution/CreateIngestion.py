@@ -31,3 +31,5 @@ def createIngestion(decisions):
                         print("Primary:{}".format(p))
                         print("Secondary:{}".format(s))
                         outfile.write('"{}","{}!","{}","{}!"\n'.format(da.getIdentifier(p), da.getType(p), da.getIdentifier(s), da.getType(s)))
+    shutil.make_archive(tempFolder, 'zip', tempFolder)
+    

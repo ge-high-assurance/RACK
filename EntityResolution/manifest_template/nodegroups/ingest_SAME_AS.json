@@ -15,7 +15,7 @@
 			{
 				"type": "fuseki",
 				"url": "http://localhost:3030/RACK",
-				"graph": "http://rack001/Data"
+				"graph": "http://rack001/data"
 			}
 		]
 	},

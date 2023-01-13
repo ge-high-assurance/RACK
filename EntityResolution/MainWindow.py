@@ -23,6 +23,28 @@ ASSUMED_COMBINED =5
 class MainWindow(tk.Tk):
     def __init__(self):
         super().__init__()
+        #==========================================================================
+        # Work around related to the Treeview Coloring issue with some version of python for windows
+        # https://bugs.python.org/issue36468
+        #==========================================================================
+        def fixed_map(option):
+            # Fix for setting text colour for Tkinter 8.6.9
+            # From: https://core.tcl.tk/tk/info/509cafafae
+            #
+            # Returns the style map for 'option' with any styles starting with
+            # ('!disabled', '!selected', ...) filtered out.
+
+            # style.map() returns an empty list for missing options, so this
+            # should be future-safe.
+            return [elm for elm in style.map('Treeview', query_opt=option) if
+              elm[:2] != ('!disabled', '!selected')]
+
+        style = ttk.Style()
+        style.map('Treeview', foreground=fixed_map('foreground'),
+        background=fixed_map('background'))
+        #==========================================================================
+        
+        
         self.title('RACK Entity Resolution Tool')
         self.primary = ''
         
@@ -270,17 +292,13 @@ class MainWindow(tk.Tk):
         for code in s.get_opcodes():
             if code[0] == "equal": 
                 self.compareText.insert("end", primary[code[1]:code[2]],('equal'))
-
             elif code[0] == "delete":
                 self.compareText.insert("end", primary[code[1]:code[2]],('delete'))
             elif code[0] == "insert":
                 self.compareText.insert("end", secondary[code[3]:code[4]],('insert'))
             elif code[0] == "replace":
-                self.compareText.insert("end", primary[code[1]:code[2]],('delete'))
-                
-                self.compareText.insert("end", secondary[code[3]:code[4]],('insert'))
-
-             
+                self.compareText.insert("end", primary[code[1]:code[2]],('delete'))                
+                self.compareText.insert("end", secondary[code[3]:code[4]],('insert'))             
         self.compareText.tag_config("equal", background="white", foreground="black")
         self.compareText.tag_config("delete", background="white", foreground="red")
         self.compareText.tag_config("insert", background="white", foreground="green")
@@ -375,14 +393,23 @@ class MainWindow(tk.Tk):
             if p not in self.decisions:
                 self.decisions[p] = {}
             for s in temp:                
+                if type(self.decisions[p]) is not dict: # Not a dictionary this was previously combined
+                    if self.decisions[p] == ASSUMED_COMBINED: # Reset if this was done by Assumption
+                        self.decisions[p] = {}
+                    if self.decisions[p] ==CONFIRMED_COMBINED: # ()
+                        continue
+                    else:
+                        print("Unexpected Decisions Setting: Key : {} : Value:{}".format(p, self.decisions[p]))
+                        continue
                 if s in self.decisions[p]:
-                    if self.decisions[p][s] == CONFIRMED_DIFFERENT or self.decisions[p][s] == CONFIRMED_SAME_AS:
+                    if self.decisions[p][s] == CONFIRMED_DIFFERENT or self.decisions[p][s] == CONFIRMED_SAME_AS \
+                        or self.decisions[p][s] == CONFIRMED_COMBINED :
                         continue
                     else:
                         del self.decisions[p][s]
                 if temp[s] < self.differentScale.get():
                     self.decisions[p][s] = ASSUMED_DIFFERENT
-                elif temp[s] > self.sameAsScale.get():
+                elif temp[s] >= self.sameAsScale.get():
                     self.decisions[p][s] = ASSUMED_SAME_AS
         for p in self.decisions:
             if type(self.decisions[p]) is dict:

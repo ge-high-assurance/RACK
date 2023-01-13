@@ -3,6 +3,7 @@ import os
 import json
 import semtk3
 import os.path
+import time
 import RACK_CONSTANTS as rc
 def cacheData(e):
     guid = e.split("#")[-1]
@@ -113,6 +114,9 @@ def getData(e):
     data = None
     if not os.path.exists("cache/"+guid+".json"):
         cacheData(e)
+    #This is to handle the case with multiprocssing where one thread has created the file but not yet populated with data
+    while os.path.getsize("cache/"+guid+".json") ==0:
+        time.sleep(0.1)
     with open("cache/"+guid+".json", "r") as dataFile:
         data = json.load(dataFile)
     if "@graph" not in data:

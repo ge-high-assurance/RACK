@@ -4,7 +4,7 @@ import diskcache
 import dash
 from dash import Dash, DiskcacheManager, html, dcc, callback, Input, Output
 import dash_bootstrap_components as dbc
-from pages import home, load, verify
+from pages import home, load, verify, utility
 from pages.helper import *
 from flask import Flask
 import json
@@ -32,6 +32,7 @@ sidebar = html.Div(
                         dbc.NavLink("Home", href="/", active="exact"),
                         dbc.NavLink("Load", href="/load", active="exact"),
                         dbc.NavLink("Verify", href="/verify", active="exact"),
+                        dbc.NavLink("Utility", href="/utility", active="exact"),
                     ],
                     vertical=True, pills=True,
                     )
@@ -53,7 +54,7 @@ app.layout = html.Div([
 )
 
 # validate using this layout (includes components from pages)
-app.validation_layout = html.Div([app.layout, load.layout, verify.layout])
+app.validation_layout = html.Div([app.layout, load.layout, verify.layout, utility.layout])
 
 
 @callback(Output('page-content', 'children'),
@@ -65,6 +66,8 @@ def display_page(pathname):
         return load.layout
     elif pathname == '/verify':
         return verify.layout
+    elif pathname == '/utility':
+        return utility.layout
     else:
         return '404'
 

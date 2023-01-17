@@ -53,9 +53,10 @@ def get_graph_info():
     graph_info_table = semtk3.get_graph_info(conn_str, True, False)  # True to exclude internal SemTK graphs, False to get counts too
     return graph_info_table
 
-def run_subprocess(command, status_filepath):
-    """ Launch a process using a given command, pipe output to a given file """
-    print(f"Running '{command}', sending output to {status_filepath}")
-    completed_process = subprocess.run(f"{command} > {status_filepath} 2>&1", shell=True, capture_output=True)  # make this a helper function, consolidate with verify
+def run_subprocess(command, status_filepath=None):
+    """ Launch a process using a given command.  Pipe output to file if provided """
+    if status_filepath is not None:
+        command = f"{command} > {status_filepath} 2>&1"
+    completed_process = subprocess.run(command, shell=True, capture_output=True)
     print(completed_process)    # useful to see exit code
     return completed_process

@@ -44,11 +44,12 @@ def run_restart(n_clicks):
     Restart the triple store
     """
     try:
-        if platform.system() == "Windows":
-            raise Exception("Restarting the triple store is not supported on Windows")
-        
-        command = "sudo ../cli/restart-fuseki.sh"
-        completed_process = run_subprocess(command, get_temp_dir_unique("restart-fuseki"))
+        # determine if we can restart fuseki
+        if run_subprocess("systemctl is-enabled fuseki").returncode != 0:
+            raise Exception("Triple store restart not supported in this deployment")
+
+        # restart fuseki
+        completed_process = run_subprocess("sudo systemctl restart fuseki", get_temp_dir_unique("restart-fuseki"))
         if completed_process.returncode == 0:
             return dcc.Markdown("Restarted the triple store.")
         else:

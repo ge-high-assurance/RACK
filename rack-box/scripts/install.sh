@@ -145,6 +145,11 @@ while ! curl http://localhost:3030/$/ping &>/dev/null; do
     sleep 10
 done
 
+# Configure Fuseki to time out queries after 5 minutes
+
+sed -e 's/^   # ja:co/ja:co/' -i /etc/fuseki/config.ttl
+sed -e 's/"30000"/"300000"/' -i /etc/fuseki/config.ttl
+
 # Create the RACK dataset
 
 curl -Ss -d 'dbName=RACK' -d 'dbType=tdb' 'http://localhost:3030/$/datasets'

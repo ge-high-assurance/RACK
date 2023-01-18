@@ -358,7 +358,7 @@ def utility_copygraph_driver(base_url: Url, triple_store: Optional[Url], triple_
     go()
 
 class IngestionBuilder:
-    def __init__(self):
+    def __init__(self) -> None:
         self.fresh: int = 0
         self.model_graphs: set[str] = set()
         self.data_graphs: set[str] = set()

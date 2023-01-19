@@ -380,8 +380,8 @@ class IngestionBuilder:
         tobase = to_path.parent
 
         files = obj['files']
-        for i in range(len(files)):
-            file = Path(files[i])
+        for (i,file) in enumerate(files):
+            file = Path(file)
             shutil.copyfile(frombase.joinpath(file), tobase.joinpath(file.name), follow_symlinks=True)
             files[i] = file.name
 
@@ -453,14 +453,13 @@ class IngestionBuilder:
             obj = yaml.safe_load(f)
 
         base_path = from_path.parent
-        for i in range(len(obj['steps'])):
-            step = obj['steps'][i]
+        for step in obj['steps']:
             if 'manifest' in step:
                 path = step['manifest']
                 dirname = Path(f'{self.next_fresh():02}_manifest')
                 subdir = to_path.parent.joinpath(dirname)
                 topath = subdir.joinpath(Path(path).name)
-                mkdir(subdir)
+                subdir.mkdir(exist_ok=False)
                 self.manifest(base_path.joinpath(path), topath)
                 step['manifest'] = str(dirname.joinpath(Path(path).name))
             elif 'model' in step:
@@ -468,7 +467,7 @@ class IngestionBuilder:
                 dirname = Path(f'{self.next_fresh():02}_model')
                 subdir = to_path.parent.joinpath(dirname)
                 topath = subdir.joinpath(Path(path).name)
-                mkdir(subdir)
+                subdir.mkdir(exist_ok=False)
                 self.model(base_path.joinpath(path), topath)
                 step['model'] = str(dirname.joinpath(Path(path).name))
             elif 'data' in step:
@@ -476,14 +475,14 @@ class IngestionBuilder:
                 dirname = Path(f'{self.next_fresh():02}_data')
                 subdir = to_path.parent.joinpath(dirname)
                 topath = subdir.joinpath(Path(path).name)
-                mkdir(subdir)
+                subdir.mkdir(exist_ok=False)
                 self.data(base_path.joinpath(path), topath)
                 step['data'] = str(dirname.joinpath(Path(path).name))
             elif 'nodegroups' in step:
                 path = step['nodegroups']
                 dirname = Path(f'{self.next_fresh():02}_nodegroups')
                 subdir = to_path.parent.joinpath(dirname)
-                mkdir(subdir)
+                subdir.mkdir(exist_ok=False)
                 self.nodegroups(base_path.joinpath(path), subdir)
                 step['nodegroups'] = str(dirname)
         

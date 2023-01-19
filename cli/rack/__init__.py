@@ -20,9 +20,8 @@ import argparse
 import csv
 from enum import Enum, unique
 from io import StringIO
-import json
 import logging
-from os import environ, mkdir
+from os import environ
 from pathlib import Path
 import re
 import sys
@@ -362,6 +361,7 @@ class IngestionBuilder:
         self.fresh: int = 0
         self.model_graphs: Set[str] = set()
         self.data_graphs: Set[str] = set()
+        self.manifests: Set[Path] = set()
 
     def next_fresh(self) -> int:
         result = self.fresh
@@ -452,39 +452,46 @@ class IngestionBuilder:
         with open(from_path, mode='r', encoding='utf-8-sig') as f:
             obj = yaml.safe_load(f)
 
-        base_path = from_path.parent
-        for step in obj['steps']:
-            if 'manifest' in step:
-                path = step['manifest']
-                dirname = Path(f'{self.next_fresh():02}_manifest')
-                subdir = to_path.parent.joinpath(dirname)
-                topath = subdir.joinpath(Path(path).name)
-                subdir.mkdir(exist_ok=False)
-                self.manifest(base_path.joinpath(path), topath)
-                step['manifest'] = str(dirname.joinpath(Path(path).name))
-            elif 'model' in step:
-                path = step['model']
-                dirname = Path(f'{self.next_fresh():02}_model')
-                subdir = to_path.parent.joinpath(dirname)
-                topath = subdir.joinpath(Path(path).name)
-                subdir.mkdir(exist_ok=False)
-                self.model(base_path.joinpath(path), topath)
-                step['model'] = str(dirname.joinpath(Path(path).name))
-            elif 'data' in step:
-                path = step['data']
-                dirname = Path(f'{self.next_fresh():02}_data')
-                subdir = to_path.parent.joinpath(dirname)
-                topath = subdir.joinpath(Path(path).name)
-                subdir.mkdir(exist_ok=False)
-                self.data(base_path.joinpath(path), topath)
-                step['data'] = str(dirname.joinpath(Path(path).name))
-            elif 'nodegroups' in step:
-                path = step['nodegroups']
-                dirname = Path(f'{self.next_fresh():02}_nodegroups')
-                subdir = to_path.parent.joinpath(dirname)
-                subdir.mkdir(exist_ok=False)
-                self.nodegroups(base_path.joinpath(path), subdir)
-                step['nodegroups'] = str(dirname)
+        # Handle multiple inclusions of the same manifest to simplify
+        full_path = from_path.absolute()
+        if full_path in self.manifests:
+            print(f'Pruning duplicate manifest {from_path}')
+            del obj['steps']
+        else:
+            self.manifests.add(full_path)
+            base_path = from_path.parent
+            for step in obj.get('steps',[]):
+                if 'manifest' in step:
+                    path = step['manifest']
+                    dirname = Path(f'{self.next_fresh():02}_manifest')
+                    subdir = to_path.parent.joinpath(dirname)
+                    topath = subdir.joinpath(Path(path).name)
+                    subdir.mkdir(exist_ok=False)
+                    self.manifest(base_path.joinpath(path), topath)
+                    step['manifest'] = str(dirname.joinpath(Path(path).name))
+                elif 'model' in step:
+                    path = step['model']
+                    dirname = Path(f'{self.next_fresh():02}_model')
+                    subdir = to_path.parent.joinpath(dirname)
+                    topath = subdir.joinpath(Path(path).name)
+                    subdir.mkdir(exist_ok=False)
+                    self.model(base_path.joinpath(path), topath)
+                    step['model'] = str(dirname.joinpath(Path(path).name))
+                elif 'data' in step:
+                    path = step['data']
+                    dirname = Path(f'{self.next_fresh():02}_data')
+                    subdir = to_path.parent.joinpath(dirname)
+                    topath = subdir.joinpath(Path(path).name)
+                    subdir.mkdir(exist_ok=False)
+                    self.data(base_path.joinpath(path), topath)
+                    step['data'] = str(dirname.joinpath(Path(path).name))
+                elif 'nodegroups' in step:
+                    path = step['nodegroups']
+                    dirname = Path(f'{self.next_fresh():02}_nodegroups')
+                    subdir = to_path.parent.joinpath(dirname)
+                    subdir.mkdir(exist_ok=False)
+                    self.nodegroups(base_path.joinpath(path), subdir)
+                    step['nodegroups'] = str(dirname)
         
         with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
             yaml.safe_dump(obj, out)

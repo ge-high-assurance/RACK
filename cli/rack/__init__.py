@@ -26,7 +26,7 @@ from os import environ, mkdir
 from pathlib import Path
 import re
 import sys
-from typing import Any, Callable, Dict, List, Optional, NewType, TypeVar, cast
+from typing import Any, Callable, Dict, List, Optional, NewType, Set, TypeVar, cast
 from types import SimpleNamespace
 import tempfile
 import shutil
@@ -360,8 +360,8 @@ def utility_copygraph_driver(base_url: Url, triple_store: Optional[Url], triple_
 class IngestionBuilder:
     def __init__(self) -> None:
         self.fresh: int = 0
-        self.model_graphs: set[str] = set()
-        self.data_graphs: set[str] = set()
+        self.model_graphs: Set[str] = set()
+        self.data_graphs: Set[str] = set()
 
     def next_fresh(self) -> int:
         result = self.fresh

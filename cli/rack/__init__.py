@@ -388,9 +388,9 @@ class IngestionBuilder:
         c = obj.get('model-graphs')
         if c is None:
             self.model_graphs.add(str(MODEL_GRAPH))
-        elif type(c) == str:
+        elif isinstance(c, str):
             self.model_graphs.add(c)
-        elif type(c) == list:
+        elif isinstance(c, list):
             self.model_graphs.update(c)
 
         with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
@@ -424,9 +424,9 @@ class IngestionBuilder:
 
         c = obj.get('model-graphs')
         if c is not None:
-            if type(c) == str:
+            if isinstance(c, str):
                 self.model_graphs.add(c)
-            elif type(c) == list:
+            elif isinstance(c, list):
                 self.model_graphs.update(c)
 
         with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
@@ -625,9 +625,9 @@ def ingest_data_driver(config_path: Path, base_url: Url, model_graphs: Optional[
     if model_graphs is None:
         c = config.get('model-graphs')
         if c is not None:
-            if type(c) == str:
+            if isinstance(c, str):
                 model_graphs = [Url(c)]
-            elif type(c) == list:
+            elif isinstance(c, list):
                 model_graphs = [Url(x) for x in c]
 
     conn = sparql_connection(base_url, model_graphs, data_graph, extra_data_graphs, triple_store, triple_store_type)
@@ -695,9 +695,9 @@ def ingest_owl_driver(config_path: Path, base_url: Url, model_graphs: Optional[L
     if model_graphs is None:
         c = config.get('model-graphs')
         if c is not None:
-            if type(c) == str:
+            if isinstance(c, str):
                 model_graphs = [Url(c)]
-            elif type(c) == list:
+            elif isinstance(c, list):
                 model_graphs = [Url(x) for x in c]
 
     conn = sparql_connection(base_url, model_graphs, None, [], triple_store, triple_store_type)

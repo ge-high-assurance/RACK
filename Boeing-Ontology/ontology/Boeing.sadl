@@ -23,7 +23,7 @@ SubDD_Req (note "A Requirement identified in the Subsystem Design Document") is 
 	Rq:satisfies of SubDD_Req only has values of type SRS_Req.
 
 SBVT_Test (note "A test identified in the Software Baseline Verification Tests") is a type of TEST.
-   verifies of SBVT_Test_Procedure only has values of type {SubDD_Req or SRS_Req}.
+   verifies of SBVT_Test_Procedure only has values of type {SubDD_Req or SRS_Req or CSID_Req}.
 	verifies of SBVT_Test has at least 1 value.
    // A new property unique to SBVT_Test: stimulates
    stimulates of SBVT_Test has values of type Signal.  //<--how come "only has values" doesn't work here?

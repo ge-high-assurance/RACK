@@ -26,7 +26,8 @@
 % Similar to "nodegroups/query/query dataVer INTERFACE without destination SYSTEM.json"
 %
 check_INTERFACE_no_dest_SYSTEM(IFACE) :-
-    check_has_no_rel('http://arcos.rack/SYSTEM#INTERFACE',
+    check_has_no_rel('I1',
+                     'http://arcos.rack/SYSTEM#INTERFACE',
                      'http://arcos.rack/SYSTEM#destination',
                      'http://arcos.rack/SYSTEM#SYSTEM', IFACE).
 
@@ -39,7 +40,8 @@ check_INTERFACE_no_dest_SYSTEM(IFACE) :-
 % Similar to "nodegroups/query/query dataVer INTERFACE without source SYSTEM.json"
 %
 check_INTERFACE_no_src_SYSTEM(IFACE) :-
-    check_has_no_rel('http://arcos.rack/SYSTEM#INTERFACE',
+    check_has_no_rel('I2',
+                     'http://arcos.rack/SYSTEM#INTERFACE',
                      'http://arcos.rack/SYSTEM#source',
                      'http://arcos.rack/SYSTEM#SYSTEM', IFACE).
 

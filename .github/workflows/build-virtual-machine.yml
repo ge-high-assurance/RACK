@@ -52,7 +52,7 @@ jobs:
     - name: Split rack-box virtual machine
       run: |
         cd RACK/rack-box
-        mv output-output-virtualbox-ovf rack-box-${{ inputs.version }}
+        mv output-virtualbox-ovf rack-box-${{ inputs.version }}
         zip -r rack-box-${{ inputs.version }}.zip rack-box-${{ inputs.version }}
         split -b 1500m rack-box-${{ inputs.version }}.zip rack-box-${{ inputs.version }}.zip
         rm rack-box-${{ inputs.version }}.zip
@@ -65,6 +65,10 @@ jobs:
         path: |
           RACK/rack-box/GitHub-Release-README.md
           RACK/rack-box/rack-box-${{ inputs.version }}.zip*
+
+    # softprops/action-gh-release has many issues and PRs filed
+    # against it; replace it with "gh release upload" if CI fails
+    # run: gh release upload ${{ github.event.release.tag_name }} RACK/rack-box/GitHub-Release-README.md RACK/rack-box/rack-box-${{ inputs.version }}.zip* --clobber
 
     - name: Upload split virtual machine to release
       uses: softprops/action-gh-release@v1

@@ -1,0 +1,30 @@
+/* Copyright (c) 20202, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+/************** edit history *****************
+  *
+  *
+  *********************************************/
+
+uri "http://arcos.rack/RESOLUTIONS" alias Rs.
+import "http://arcos.rack/PROV-S".
+import "http://research.ge.com/semtk/EntityResolution".
+
+
+SAME_AS (note "Used to create curation relationships between two nodes. When two THINGs are connected via the SAME_AS relationship it means that the THINGs are actually describing the same.  SAME_AS relationships will be collapsed into a single THING by the resolution process.") is a type of NODE.
+	primary (note "The primary THING is the one which will remain after the merge processes any conflicts will be resolved by using the primary's value, for example the resulting identifier will be the identifier from the primary") describes SAME_AS with a single value of type THING.
+	secondary (note "the secondary THINGs are the entity that will be removed during the resolution process, any attributes that do not conflict will be copied to the to the primary,") describes SAME_AS with values of type THING.
+
+// Make SAME_AS compatible with semTK entity resolution functions.
+SAME_AS is a type of EntityResolution:SameAs.	
+primary is a type of EntityResolution:target.
+secondary is a type of EntityResolution:duplicate.

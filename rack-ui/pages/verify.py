@@ -2,11 +2,14 @@
 
 import time
 import platform
-import subprocess
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 import semtk3
+import json
 from .helper import *
+
+# name of default graph
+DEFAULT_GRAPH_NAME = "uri://DefaultGraph"
 
 # dialog confirming ASSIST verification done
 verify_assist_done_dialog = dbc.Modal(
@@ -24,17 +27,19 @@ verify_assist_done_dialog = dbc.Modal(
 )
 
 # div showing graphs list
-verify_report_options_div = html.Div(
+verify_report_options_div = dbc.Spinner(html.Div(
     [
         dcc.Markdown("Select graphs to include in report:"),
-        dcc.Checklist([], [], id="verify-graph-checklist", labelStyle={'display': 'block'}, inputStyle={"margin-right": "10px"}),   # choose which graphs to verify
-        html.Button("Continue", id="verify-report-continue-button", n_clicks=0),            # button to open SPARQLgraph report
-        html.Button("Cancel", id="verify-report-cancel-button", n_clicks=0)                 # button to cancel
+        dcc.Checklist([], [], id="verify-graph-checklist", labelStyle={'display': 'block'}),   # choose which graphs to verify
+        dbc.Row([
+            dbc.Col(html.Button("Continue", id="verify-report-continue-button", n_clicks=0), width="auto"),  # button to open SPARQLgraph report
+            dbc.Col(html.Button("Cancel", id="verify-report-cancel-button", n_clicks=0), width="auto")       # button to cancel
+        ])
     ],
     id="verify-report-options-div",
     hidden=True,
     style={"margin-top": "50px"},
-)
+))
 
 # dialog indicating an error generating the SPARQLgraph report (e.g. no graphs selected)
 verify_report_error_dialog = dbc.Modal(
@@ -53,9 +58,11 @@ verify_report_error_dialog = dbc.Modal(
 layout = html.Div([
     html.H2('Verify Data'),
     dcc.Markdown("_Run verification routines on the data loaded in RACK_"),
-    html.Button("Verify using ASSIST", id="verify-assist-button", n_clicks=0),  # button to verify using ASSIST
+    dbc.Row([
+        dbc.Col(html.Button("Verify using ASSIST", id="verify-assist-button", n_clicks=0), width="auto"),  # button to verify using ASSIST
+        dbc.Col(html.Button("Verify using report", id="verify-report-button"), width="auto")               # button to verify using SPARQLgraph report
+    ]),
     dbc.Tooltip("Run the ASSIST tool and download an error report", target="verify-assist-button"),
-    html.Button("Verify using report", id="verify-report-button"),              # button to verify using SPARQLgraph report
     dbc.Tooltip("Open SPARQLgraph and run data verification report on selected graphs", target="verify-report-button"),
     verify_report_options_div,
     html.Div(id="assist-status-div", className="scrollarea"),       # displays status
@@ -108,8 +115,8 @@ def run_assist(status_filepath):
         if platform.system() == "Windows":
             raise Exception("Not yet supported on Windows.  (PROLOG checking is available through LINUX/Docker.)")
         else:
-            # runs on all graphs in the triple store, minus an exclusion list of internal SemTK graphs (e.g. demo data)
-            subprocess.call("../assist/bin/check -v -m " + TRIPLE_STORE_BASE_URL + "/ > " + status_filepath + " 2>&1", shell=True)
+            command = f"../assist/bin/check -v -m {TRIPLE_STORE_BASE_URL}/"     # ASSIST tool.  Runs on all graphs, minus exclusion list of internal SemTK graphs
+            run_subprocess(command, status_filepath)                            # TODO returns error code 1 even though seems successful
         time.sleep(1)
 
         return [dcc.Markdown("Completed ASSIST verification.")], False
@@ -172,7 +179,9 @@ def show_report_options(button_clicks, last_loaded_graphs):
     Show list of graphs for verification report, with the last loaded graphs pre-selected
     """
     # get list of graphs populated in the triple store
-    graphs_list = get_graph_info().get_column(0)
+    graphs_list_values = get_graph_info().get_column(0)    # list of graphs, including uri://DefaultGraph
+    graphs_list_labels = list(map(lambda x: x.replace(DEFAULT_GRAPH_NAME, 'Optimized graph'), graphs_list_values.copy()))  # display default graph as "Optimized graph"
+    graphs_list = [{'label': label, 'value': val} for label, val in zip(graphs_list_labels, graphs_list_values)]
 
     # these are the graphs last loaded - check the checkboxes for these
     if last_loaded_graphs == None:

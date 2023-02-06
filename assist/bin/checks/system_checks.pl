@@ -26,7 +26,8 @@
 % Similar to "nodegroups/query/query dataVer SYSTEM without partOf SYSTEM.json"
 %
 check_SYSTEM_partOf_SYSTEM(I) :-
-    check_has_no_rel('http://arcos.rack/SYSTEM#SYSTEM',
+    check_has_no_rel('SYS1',
+                     'http://arcos.rack/SYSTEM#SYSTEM',
                      'http://arcos.rack/SYSTEM#partOf',
                      'http://arcos.rack/SYSTEM#SYSTEM',
                      I).

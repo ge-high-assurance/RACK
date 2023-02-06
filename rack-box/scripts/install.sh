@@ -28,6 +28,7 @@ apt-get install -yqq \
         python3 \
         python3-pip \
         strace \
+        sudo \
         swi-prolog \
         unzip \
         vim
@@ -90,6 +91,8 @@ systemctl start fuseki
 cd /home/"${USER}"/RACK/rack-ui
 python3 -m pip install -r ./requirements.txt
 adduser --system --group --no-create-home --disabled-password rackui
+usermod -aG sudo rackui
+echo "rackui ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/rackui
 mkdir /etc/rackui
 chown rackui.rackui /etc/rackui
 envsubst < rackui.service > /etc/systemd/system/rackui.service
@@ -98,6 +101,8 @@ systemctl enable rackui
 # Initialize SemTK environment variables
 
 cd "/home/${USER}/semtk-opensource"
+# This lets rackui see and run scripts that live in /home/ubuntu/RACK/cli
+chmod 755 "/home/${USER}"
 chmod 755 ./*.sh
 export SERVER_ADDRESS=localhost
 export SERVICE_HOST=localhost
@@ -139,6 +144,11 @@ while ! curl http://localhost:3030/$/ping &>/dev/null; do
     fi
     sleep 10
 done
+
+# Configure Fuseki to time out queries after 5 minutes
+
+sed -e 's/^   # ja:co/ja:co/' -i /etc/fuseki/config.ttl
+sed -e 's/"30000"/"300000"/' -i /etc/fuseki/config.ttl
 
 # Create the RACK dataset
 

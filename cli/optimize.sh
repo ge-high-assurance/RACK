@@ -30,4 +30,5 @@ echo "Now printing the contents of stats.opt:"
 cat "${STATS}"
 
 echo "Restarting Fuseki"
+chown fuseki "${STATS}"
 systemctl start fuseki

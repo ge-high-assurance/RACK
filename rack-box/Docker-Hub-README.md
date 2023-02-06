@@ -11,10 +11,16 @@ You may need to increase the resources given to Docker in order to run a RACK bo
 If you do see these resource settings, make the following changes:
 
 1. Increase the number of CPUs to 4 if you have enough CPUs (2 may be enough if you don't have many CPUs).
-2. Increase the amount of Memory to 4.00 GB (or more if you have plenty of RAM).
+2. Increase the amount of Memory to 20 GB (16 GB may be enough if you don't have much RAM).
 3. Click the Apply & Restart button to restart Docker with the new resource settings.
 
-Now you are ready to start your RACK box.  Type the following command to run your RACK box on your computer:
+Now you are ready to start your RACK box.  If you are running Unix or Mac, you can use the cli command:
+
+```shell
+./cli/docker_start.sh
+```
+
+Otherwise, type the following command to run your RACK box on your computer:
 
 ```shell
 docker run --detach -p 3030:3030 -p 8050:8050 -p 8080:80 -p 12050-12091:12050-12091 gehighassurance/rack-box:v11

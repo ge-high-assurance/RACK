@@ -30,7 +30,8 @@
 % dataVer SBVT_Result without confirms_SBVT_Test.json"
 %
 check_Result_not_confirmed(I) :-
-    check_has_no_rel('http://arcos.AH-64D/Boeing#SBVT_Result',
+    check_has_no_rel('SBVT1',
+                     'http://arcos.AH-64D/Boeing#SBVT_Result',
                      'http://arcos.rack/TESTING#confirms',
                      'http://arcos.AH-64D/Boeing#SBVT_Test',
                      I).
@@ -50,7 +51,8 @@ check_Result_not_confirmed(I) :-
 % where the latter additionally qualifies the target of the former.
 %
 check_no_Test_requirement(I) :-
-    check_has_no_rel('http://arcos.AH-64D/Boeing#SBVT_Test',
+    check_has_no_rel('SBVT2',
+                     'http://arcos.AH-64D/Boeing#SBVT_Test',
                      'http://arcos.rack/TESTING#verifies',
                      'http://arcos.AH-64D/Boeing#SRS_Req',
                      %% 'http://arcos.rack/REQUIREMENTS#REQUIREMENT',

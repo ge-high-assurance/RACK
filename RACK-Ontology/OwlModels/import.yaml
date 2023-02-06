@@ -8,6 +8,7 @@ files:
 - CLAIM.owl
 - CONFIDENCE.owl
 - DOCUMENT.owl
+- EntityResolution.owl
 - FILE.owl
 - HARDWARE.owl
 - HAZARD.owl
@@ -20,3 +21,4 @@ files:
 - SOFTWARE.owl
 - SYSTEM.owl
 - TESTING.owl
+- RESOLUTIONS.owl

@@ -49,3 +49,11 @@ Timeout         is a FailureReason with identifier "Timeout".
 Crash           is a FailureReason with identifier "Crash".
 DifferentOutput is a FailureReason with identifier "DifferentOutput".
 Assert          is a FailureReason with identifier "Assert".
+
+AcertControlFlow
+  (note "Control flows computed by the ACERT tooling annotated with condition analysis")
+  is a type of CONTROL_FLOW.
+
+unconditionalFlow
+  (note "The ACERT tooling determined that this control flow is guaranteed")
+  describes AcertControlFlow with a single value of type boolean.

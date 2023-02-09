@@ -121,3 +121,9 @@ SWCOMPONENT
 
     instantiates (note "What logical component (system) does this physical component (code) instantiate or implement?")
         describes SWCOMPONENT with values of type ENTITY.
+
+CONTROL_FLOW
+    (note "Control flows between software components. Specific flow conditions are captured in subtypes")
+    is a type of ENTITY
+    described by source with a single value of type SWCOMPONENT
+    described by target with a single value of type SWCOMPONENT.

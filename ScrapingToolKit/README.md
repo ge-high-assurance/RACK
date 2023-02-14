@@ -3,7 +3,7 @@ The Scraping Tool Kit (STK) is a series of python packages that provide utilitie
 
 # Installation
 
-STK is installed by downloading the files to your local machine.  This can either be from a git clone of the whole RACK repo, or it can be just the ScrapingToolKit folder. Once the source files are downloaded installation is as simple entering `pip install .` from a command window in your `ScrapingToolKit` folder.
+STK is installed by downloading the files to your local machine.  This can either be from a git clone of the whole RACK repo, or it can be just the ScrapingToolKit folder. After the repo is downloaded with and with RACK running on you local machine and the desired ontology loaded, execute the script `AutoGeneration/Generate-STK.py`, this will create `Evidence/Add.py`, `Evidence/CONSTANTS.py` and `Evidence/RACK-DATA.xsd`. Once the source files are generated installation is as simple entering `pip install .` from a command window in your `ScrapingToolKit` folder.
 dependencies can be installed by `pip install -r requirements.txt` to install all dependencies at once or they can be installed individually.
 
 Dependencies:
@@ -11,10 +11,15 @@ Dependencies:
 `pip install colorama`
 `pip install graphviz`
 `pip install ftfy`
+`pip install git+https://github.com/ge-semtk/semtk-python3@master`
 
 Note: Sometimes for linux machines that have multiple versions of Python installed the command will be `pip3 install .`
 
 TODO: May need to add more instructions to make sure any missing dependencies are installed as well; possibly set up as a virtualenv
+
+`Install-STK.sh` will perform the build and pip install steps.
+
+Note: If new ontology is loaded `Generate-STK.py` and `pip install .` commands can be run again to update the ScrapingToolKit with new the new ontology.
 
 # Usage
 
@@ -33,8 +38,38 @@ After installing, the STK there are two modules that need to be imported into yo
 `Evidence.Add` - This module is provides all the `Add` functions for adding data in the RACK-DATA.xml.  For each class from the ontology there is a function that allows you to add an evidence record to the RACK-DATA.xml.  
 
 ### <CLASS>
-  `Evidence.Add.<CLASS>` - Each function has a series of option arguments that correspond to the properties of the class. Every property is optional and are defaulted to `None`, for example:
-    `def FILE(createBy_identifier=None, fileFormat_identifier=None, fileHash_identifier=None, fileParent_identifier=None, filename=None, satisfies_identifier=None, dataInsertedBy_identifier=None, description=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None)`
+  `Evidence.Add.<NAMESPACE_ID>.<CLASS>` - Each function has a series of option arguments that correspond to the properties of the class. Every property is optional and are defaulted to `None`, for example:
+```
+class FILE:
+    '''
+    ╔═══════════════════════════════════════════════════════════════╗
+    ║                  http://arcos.rack/FILE#FILE                  ║
+    ╠═══════════════════════════════════════════════════════════════╣
+    ║ Add.FILE.FILE()                                               ║
+    ╟───────────────────────────────────────────────────────────────╢
+    ║    dataInsertedBy_identifier               : string           ║
+    ║    definedIn_identifier                    : string           ║
+    ║    description                             : string           ║
+    ║    entityURL                               : string           ║
+    ║    fileFormat_identifier                   : string           ║
+    ║    fileHash_identifier                     : string           ║
+    ║    filename                                : string           ║
+    ║    generatedAtTime                         : dateTime         ║
+    ║    identifier                              : string           ║
+    ║    invalidatedAtTime                       : dateTime         ║
+    ║    satisfies_identifier                    : string           ║
+    ║    title                                   : string           ║
+    ║    wasAttributedTo_identifier              : string           ║
+    ║    wasDerivedFrom_identifier               : string           ║
+    ║    wasGeneratedBy_identifier               : string           ║
+    ║    wasImpactedBy_identifier                : string           ║
+    ║    wasRevisionOf_identifier                : string           ║
+    ╚═══════════════════════════════════════════════════════════════╝
+
+    '''
+    @staticmethod
+    def FILE(dataInsertedBy_identifier=None, definedIn_identifier=None, description=None, entityURL=None, fileFormat_identifier=None, fileHash_identifier=None, filename=None, generatedAtTime=None, identifier=None, invalidatedAtTime=None, satisfies_identifier=None, title=None, wasAttributedTo_identifier=None, wasDerivedFrom_identifier=None, wasGeneratedBy_identifier=None, wasImpactedBy_identifier=None, wasRevisionOf_identifier=None):
+```
 
 When this function is call the RACK-DATA.xml is populated with a Evidence Record based on the data provided.
 
@@ -47,9 +82,9 @@ import Evidence
 import Evidence.Add
 
 Evidence.createEvidenceFile()
-Evidence.Add.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
-Evidence.Add.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
-Evidence.Add.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
+Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
+Evidence.Add.FILE.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
+Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
 Evidence.createCDR()
 ```
 This will create a `ENTITY` for `PARENT-1`.
@@ -59,10 +94,10 @@ import Evidence
 import Evidence.Add
 
 Evidence.createEvidenceFile()
-Evidence.Add.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
-Evidence.Add.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
-Evidence.Add.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
-Evidence.Add.REQUIREMENT(identifier = "Parent-1")
+Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
+Evidence.Add.FILE.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
+Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
+Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = "Parent-1")
 Evidence.createCDR()
 ```
 This will create `PARENT-1` as a `REQUIREMENT`.
@@ -72,10 +107,10 @@ import Evidence
 import Evidence.Add
 
 Evidence.createEvidenceFile()
-Evidence.Add.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
-Evidence.Add.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
-Evidence.Add.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
-Evidence.Add.SPECIFICATION(identifier = "Parent-1")
+Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
+Evidence.Add.FILE.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
+Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
+Evidence.Add.DOCUMENT.SPECIFICATION(identifier = "Parent-1")
 Evidence.createCDR()
 ```
 This will create `PARENT-1` as a `SPECIFICATION`.
@@ -84,20 +119,20 @@ This will create `PARENT-1` as a `SPECIFICATION`.
 import Evidence
 import Evidence.Add
 
-Evidence.createEvidenceFile()
-Evidence.Add.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
-Evidence.Add.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
-Evidence.Add.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
-Evidence.Add.SPECIFICATION(identifier = "Parent-1")
-Evidence.Add.REQUIREMENT(identifier = "Parent-1")
+Evidence.REQUIREMENTS.createEvidenceFile()
+Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = "R-1", description = "System shall do something.", satisfies_identifier = "Parent-1")
+Evidence.Add.FILE.FILE(identifier = "SourceCodeFile", satisfies_identifier = "R-1")
+Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = "R-2", description = "System shall do something else.", satisfies_identifier = "Parent-1")
+Evidence.Add.DOCUMENT.SPECIFICATION(identifier = "Parent-1")
+Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = "Parent-1")
 Evidence.createCDR()
 ```
 This will result in an ingestion error. `PARENT-1` for the `satisfies_identifier` could be either `SPECIFICATION` or `REQUIREMENT`.
 
 # Examples
-## Example Plain Text
+## NTS.Plain Text
 
-Ingesting of Text Files is entirely up to the user on how the data is formatted and how they are processing it.  This example is created just to show how the STK can be used, it is not the only way. Any processing begins by examining the data to be ingested. For this short tutorial we are going to look at a simple text file "REQs.txt"
+Ingesting of Text Files is entirely up to the user on how the data is formatted and how they are processing it.  This example is created just to show how the STK can be used, it is e only way. Any processing begins by examining the data to be ingested. For this short tutorial we are going to look at a simple text file "REQs.txt"
 
 Example File REQs.txt: 
 ```
@@ -124,7 +159,7 @@ def ingest(filePath):
         reqId, reqDesc = l.split("-")
         reqId = reqId.lstrip().rstrip()
         reqDesc = reqDesc.lstrip().rstrip()
-        Evidence.Add.REQUIREMENT(identifier = reqId, description = reqDesc)
+        Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = reqId, description = reqDesc)
         lastReqId = reqId
       elif l.startswith("ParentRequirement"):
         # Found Parent Requirement List
@@ -132,15 +167,15 @@ def ingest(filePath):
         end = l.rfind("}")
         parIds = l[start+1:end].split(",")
         for pId in parIds:
-          Evidence.Add.REQUIREMENT(identifier = lastReqId, satisfies_identifier = pId)
-          Evidence.Add.REQUIREMENT(identifier = pId)
+          Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = lastReqId, satisfies_identifier = pId)
+          Evidence.Add.REQUIREMENTS.REQUIREMENT(identifier = pId)
       elif l.startswith("SourceCode"):
         # Found Source Code List
         start = l.find("{")
         end = l.rfind("}")
         sourceIds = l[start+1:end].split(",")
         for sId in sourceIds:
-          Evidence.Add.FILE(identifier = sId, satisfies_identifier = lastReqId)        
+          Evidence.Add.FILE.FILE(identifier = sId, satisfies_identifier = lastReqId)        
 
 if __name__=="__main__":
   Evidence.createEvidenceFile()
@@ -184,16 +219,16 @@ def req(e):
     Add.REQUIREMENT(identifier=reqId)
     for p in e.iter("ParentReq"):
       parentId = p.attrib["id"]
-      Add.REQUIREMENT(identifier=parentId)
-      Add.REQUIREMENT(identifier=reqId, satisfies_identifier=parentId)
+      Add.REQUIREMENTS.REQUIREMENT(identifier=parentId)
+      Add.REQUIREMENTS.REQUIREMENT(identifier=reqId, satisfies_identifier=parentId)
     for f in e.iter("Source"):
       fileId = f.attrib["id"]
-      Add.FILE(identifier=fileId)
-      Add.FILE(identifier=fileId, satisfies_identifier=reqId)
+      Add.FILE.FILE(identifier=fileId)
+      Add.FILE.FILE(identifier=fileId, satisfies_identifier=reqId)
 
 def initialize(xmlPath):
     global __xmlroot__, handlers, __xmlpath__
-    Add.FILE(identifier=xmlPath)
+    Add.FILE.FILE(identifier=xmlPath)
     # Initialize the tag handlers.
     handlers = {"Req", req}
 
@@ -205,10 +240,3 @@ STK ultimately produces two sets of CDR files and an import.yaml files when the 
 
 Resulting data can be ingested into RACK by using the CLI command:
 `rack data import <path to generated data>/RACK-DATA/import.yaml`
-
-# Updating STK
-
-STK has the ability to be updated to use the latest CDR files. This can be done by downloading the entire RACK repo.  From the RACK repo run the python script `Autogeneration\ReadNodegroups.py`.
-
-This will generate updated `\Evidence\Add.py`, `\Evidence\CONSTANTS.py` and `\Evidence\RACK-DATA.xsd`. These files will be tailored to the CDR nodegroups (json files that start with "ingest_", i.e. "ingest_ACTIVITY.json") found in the `nodegroups` folder of the repo.  To use these updated file simply re-install the STK using `pip install .` as described in the installation section.
-

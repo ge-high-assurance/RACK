@@ -1,31 +1,31 @@
 data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
 #Phase1: Identifiers Only
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY1.csv"}
-- {class: "http://arcos.rack/PROV-S#AGENT", csv: "AGENT1.csv"}
-- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "DOCUMENT1.csv"}
-- {class: "http://arcos.rack/PROV-S#ENTITY", csv: "ENTITY1.csv"}
-- {class: "http://arcos.rack/FILE#FILE", csv: "FILE1.csv"}
-- {class: "http://arcos.rack/FILE#FORMAT", csv: "FORMAT1.csv"}
-- {class: "http://arcos.rack/AGENTS#ORGANIZATION", csv: "ORGANIZATION1.csv"}
-- {class: "http://arcos.rack/AGENTS#TOOL", csv: "TOOL1.csv"}
-- {class: "http://arcos.turnstile/GE#DevelopComponentTests", csv: "turnstile_DevelopComponentTests1.csv"}
-- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "turnstile_HighLevelRequirement1.csv"}
-- {class: "http://arcos.turnstile/GE#SoftwareComponentTest", csv: "turnstile_SoftwareComponentTest1.csv"}
-- {class: "http://arcos.turnstile/GE#SoftwareComponentTestExecution", csv: "turnstile_SoftwareComponentTestExecution1.csv"}
-- {class: "http://arcos.turnstile/GE#SoftwareComponentTestResult", csv: "turnstile_SoftwareComponentTestResult1.csv"}
+- {class: "http://arcos.rack/AGENTS#ORGANIZATION", csv: "AGENTS_ORGANIZATION1.csv"}
+- {class: "http://arcos.rack/AGENTS#TOOL", csv: "AGENTS_TOOL1.csv"}
+- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "DOCUMENT_DOCUMENT1.csv"}
+- {class: "http://arcos.rack/FILE#FILE", csv: "FILE_FILE1.csv"}
+- {class: "http://arcos.rack/FILE#FORMAT", csv: "FILE_FORMAT1.csv"}
+- {class: "http://arcos.turnstile/GE#DevelopComponentTests", csv: "GE_DevelopComponentTests1.csv"}
+- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "GE_HighLevelRequirement1.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareComponentTest", csv: "GE_SoftwareComponentTest1.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareComponentTestExecution", csv: "GE_SoftwareComponentTestExecution1.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareComponentTestResult", csv: "GE_SoftwareComponentTestResult1.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY1.csv"}
+- {class: "http://arcos.rack/PROV-S#AGENT", csv: "PROV_S_AGENT1.csv"}
+- {class: "http://arcos.rack/PROV-S#ENTITY", csv: "PROV_S_ENTITY1.csv"}
 
 #Phase2: All Evidence
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY2.csv"}
-- {class: "http://arcos.rack/PROV-S#AGENT", csv: "AGENT2.csv"}
-- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "DOCUMENT2.csv"}
-- {class: "http://arcos.rack/PROV-S#ENTITY", csv: "ENTITY2.csv"}
-- {class: "http://arcos.rack/FILE#FILE", csv: "FILE2.csv"}
-- {class: "http://arcos.rack/FILE#FORMAT", csv: "FORMAT2.csv"}
-- {class: "http://arcos.rack/AGENTS#ORGANIZATION", csv: "ORGANIZATION2.csv"}
-- {class: "http://arcos.rack/AGENTS#TOOL", csv: "TOOL2.csv"}
-- {class: "http://arcos.turnstile/GE#DevelopComponentTests", csv: "turnstile_DevelopComponentTests2.csv"}
-- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "turnstile_HighLevelRequirement2.csv"}
-- {class: "http://arcos.turnstile/GE#SoftwareComponentTest", csv: "turnstile_SoftwareComponentTest2.csv"}
-- {class: "http://arcos.turnstile/GE#SoftwareComponentTestExecution", csv: "turnstile_SoftwareComponentTestExecution2.csv"}
-- {class: "http://arcos.turnstile/GE#SoftwareComponentTestResult", csv: "turnstile_SoftwareComponentTestResult2.csv"}
+- {class: "http://arcos.rack/AGENTS#ORGANIZATION", csv: "AGENTS_ORGANIZATION2.csv"}
+- {class: "http://arcos.rack/AGENTS#TOOL", csv: "AGENTS_TOOL2.csv"}
+- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "DOCUMENT_DOCUMENT2.csv"}
+- {class: "http://arcos.rack/FILE#FILE", csv: "FILE_FILE2.csv"}
+- {class: "http://arcos.rack/FILE#FORMAT", csv: "FILE_FORMAT2.csv"}
+- {class: "http://arcos.turnstile/GE#DevelopComponentTests", csv: "GE_DevelopComponentTests2.csv"}
+- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "GE_HighLevelRequirement2.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareComponentTest", csv: "GE_SoftwareComponentTest2.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareComponentTestExecution", csv: "GE_SoftwareComponentTestExecution2.csv"}
+- {class: "http://arcos.turnstile/GE#SoftwareComponentTestResult", csv: "GE_SoftwareComponentTestResult2.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY2.csv"}
+- {class: "http://arcos.rack/PROV-S#AGENT", csv: "PROV_S_AGENT2.csv"}
+- {class: "http://arcos.rack/PROV-S#ENTITY", csv: "PROV_S_ENTITY2.csv"}

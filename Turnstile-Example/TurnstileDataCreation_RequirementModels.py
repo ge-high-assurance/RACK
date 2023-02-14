@@ -11,10 +11,9 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-import XML
-import XML.SysML as SysML
-from Evidence import createEvidenceFile, createCDR
-import Evidence.Add as Add
+from Logging import *
+from Evidence import *
+import Evidence.Add as Add 
 import shutil
 import os.path
 
@@ -30,28 +29,28 @@ def CreateCdrs():
     
     
     #------------ HLR-1-Model ------------ 
-    Add.MODEL(identifier="HLR-1-Model", models_identifier="HLR-1:v1")
-    Add.turnstile_HighLevelRequirement(identifier="HLR-1:v1")
+    Add.MODEL.MODEL(identifier="HLR-1-Model", models_identifier="HLR-1:v1")
+    Add.GE.HighLevelRequirement(identifier="HLR-1:v1")
     
     #------------ HLR-2-Model ------------ 
-    Add.MODEL(identifier="HLR-2-Model", models_identifier="HLR-2:v1")
-    Add.turnstile_HighLevelRequirement(identifier="HLR-2:v1")
+    Add.MODEL.MODEL(identifier="HLR-2-Model", models_identifier="HLR-2:v1")
+    Add.GE.HighLevelRequirement(identifier="HLR-2:v1")
     
     #------------ HLR-3-Model ------------ 
-    Add.MODEL(identifier="HLR-3-Model", models_identifier="HLR-3:v1")
-    Add.turnstile_HighLevelRequirement(identifier="HLR-3:v1")
+    Add.MODEL.MODEL(identifier="HLR-3-Model", models_identifier="HLR-3:v1")
+    Add.GE.HighLevelRequirement(identifier="HLR-3:v1")
 
     #------------ HLR Analysis ------------ 
-    Add.ANALYSIS(identifier="HLR Analysis", description="HLR Analysis performs automated analysis of a modeled requirement in relation to completeness and conflicts.")
-    Add.ANALYSIS(identifier="HLR Analysis", used_identifier="HLR-1-Model")
-    Add.ANALYSIS(identifier="HLR Analysis", used_identifier="HLR-2-Model")
-    Add.ANALYSIS(identifier="HLR Analysis", used_identifier="HLR-3-Model")
+    Add.ANALYSIS.ANALYSIS(identifier="HLR Analysis", description="HLR Analysis performs automated analysis of a modeled requirement in relation to completeness and conflicts.")
+    Add.ANALYSIS.ANALYSIS(identifier="HLR Analysis", used_identifier="HLR-1-Model")
+    Add.ANALYSIS.ANALYSIS(identifier="HLR Analysis", used_identifier="HLR-2-Model")
+    Add.ANALYSIS.ANALYSIS(identifier="HLR Analysis", used_identifier="HLR-3-Model")
     
     #------------ HLR Analysis-Completeness ------------ 
-    Add.ANALYSIS_OUTPUT(identifier="HLR Analysis-Completeness", wasGeneratedBy_identifier="HLR Analysis")
+    Add.ANALYSIS.ANALYSIS_OUTPUT(identifier="HLR Analysis-Completeness", wasGeneratedBy_identifier="HLR Analysis")
     
     #------------ HLR Analysis-Conflict ------------ 
-    Add.ANALYSIS_OUTPUT(identifier="HLR Analysis-Conflict", wasGeneratedBy_identifier="HLR Analysis")
+    Add.ANALYSIS.ANALYSIS_OUTPUT(identifier="HLR Analysis-Conflict", wasGeneratedBy_identifier="HLR Analysis")
     
 
     createCDR("http://rack001/turnstiledata")

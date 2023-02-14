@@ -133,7 +133,8 @@ usage: rack [-h] [--base-url BASE_URL] [--triple-store TRIPLE_STORE] [--triple-s
 RACK in a Box toolkit
 
 positional arguments:
-  {data,model,nodegroups}
+  {manifest,data,model,nodegroups}
+    manifest            Ingestion package automation
     data                Import or export CSV data
     model               Interact with SemTK model
     nodegroups          Interact with SemTK nodegroups
@@ -149,7 +150,7 @@ optional arguments:
                         Assign logger severity level
 ```
 
-The `rack` command is split into three subcommands: `data`, `model`,
+The `rack` command is split into four subcommands: `manifest`, `data`, `model`,
 and `nodegroups`. Each of these subcommands offers its own help
 listing. For example try `rack data --help` for more information about
 the flags available when interacting with the data store.
@@ -164,6 +165,23 @@ persisting your generated nodegroups across RACK instances.
 The `data` subcommand is used to import CSV and OWL data files using
 the RACK ontology as well as exporting CSV files using nodegroups
 stored in SemTK.
+
+The `manifest` subcommand is used to import a complete set of CSV and OWL data
+from multiple files as specified by a single top-level manifest file.  This
+subcommand subsumes the `data`, `nodegroups`, and `model` subcommands and is the
+recommended way to initialize a RACK instance for use.
+
+The following options default to their matching ENVIRONMENT variables if they exist:
+
+- --base-url : $BASE_URL
+- --triple-store : $TRIPLE_STORE
+- --log-level : $LOG_LEVEL
+
+For example, **ingestion warnings can be suppressed** by either using
+`rack --log-level ERROR data import...` or by executing this command
+in a bash script before calling 'rack':
+
+`export LOG_LEVEL=ERROR`
 
 ## Data Ingestion Configuration file format
 
@@ -195,7 +213,7 @@ extra-data-graphs:
 - "http://rack001/otherdata"
 - "http://rack001/somedata"
 ingestion-steps:
-- {nodegroup: "ingest_SYSTEM", csv: "SYSTEM.csv"}
+- {nodegroup: "ingest_SYSTEM",    csv: "SYSTEM.csv"}
 - {nodegroup: "ingest_INTERFACE", csv: "INTERFACE.csv"}
 - {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD.csv"}
 - {owl: "example.owl"}
@@ -354,6 +372,79 @@ Ingest-SoftwareComponentTestResult           Node group to ingest Sof[...]
 [...]
 ```
 
+## Ingestion Packages (manifest)
+
+The bulk ingestion of multiple models, nodegrounds, and data can be
+automated using a manifest file.
+
+```yaml
+name: "short name"
+description: "optional long package description"
+footprint:
+    model-graphs:
+      - "http://rack001/model"
+    data-graphs:
+      - "http://rack001/data"
+steps:
+  - manifest: another.yaml
+  - model: model-manifest.yaml
+  - data: data-manifest.yaml
+  - copygraph:
+      from-graph: 'http://rack001/data'
+      to-graph:   'uri://DefaultGraph'
+```
+
+The `name` and `description` fields are informational and are used to
+provide a nicer UI for users loading an ingestion package.
+
+The `footprint` section is optional. When it is provided it allows
+the ingestion UI to automatically populate a connection string. In
+addition these graph URIs will be cleared if the manifest is loaded
+using the `--clear` flag.
+
+The `steps` section is required. It describes the sequential process
+of loading this ingestion package. This section must be a list of singleton
+maps. There are currently 4 kinds of step you can use in a manifest:
+
+- `manifest` steps take a relative path argument and recursively
+  import that manifest file.
+- `model` steps take a relative path argument and invoke
+  `rack model import` on that file.
+- `nodegroups` steps take a relative path argument and invoke
+  `rack nodegroups import` on that directory.
+- `data` steps take a relative path argument and invoke
+  `rack data import` on that directory.
+- `copygraph` steps take a dictionary specifying a `from-graph` URI
+  and a `to-graph` URI and perform a merge copying triples from the
+  from graph into the to graph.
+
+All file paths are resolved relative to the location of the manifest
+YAML file.
+
+### CLI support
+
+```text
+usage: rack manifest import [-h] [--clear] [--default-graph] manifest
+
+positional arguments:
+  manifest         Manifest YAML file
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --clear          Clear footprint before import
+  --default-graph  Load whole manifest into default graph
+```
+
+Manifests can be loaded using `rack manifest import`.
+
+To clear all graphs mentioned in the `footprint` use `--clear`. For example:
+`rack manifest import --clear my-manifest.yaml`
+
+Fuseki happens to run faster when data is stored in the *default graph*.
+To load a complete ingestion manifest into the default graph use
+`--default-graph`. For example:
+`rack manifest import --default-graph my-manifest.yaml`
+
 ## Hacking
 
 See [dev/README.md](https://github.com/ge-high-assurance/RACK/tree/master/cli/dev).
@@ -363,7 +454,7 @@ Don't copy below to wiki; wiki already has copyright in _Footer.md
 -->
 
 ---
-Copyright (c) 2021, Galois, Inc.
+Copyright (c) 2021-2022, Galois, Inc.
 
 All Rights Reserved
 

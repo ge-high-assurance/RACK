@@ -18,11 +18,13 @@ import Evidence.Add as Add
 
 createEvidenceFile()
 
-Add.ACTIVITY(identifier="TST-ACTIVITY-1")
-Add.REQUIREMENT(identifier="TST-REQUIREMENT-1", description="Thing shall do what it should do.")
-Add.REQUIREMENT(identifier="TST-REQUIREMENT-2", 
+Add.PROV_S.ACTIVITY(identifier="TST-ACTIVITY-1")
+Add.REQUIREMENTS.REQUIREMENT(identifier="TST-REQUIREMENT-1", description="Thing shall do what it should do.")
+Add.REQUIREMENTS.REQUIREMENT(identifier="TST-REQUIREMENT-2", 
                 description="Thing2 shall do what it should do.", 
                 satisfies_identifier="TST-REQUIREMENT-1",
-                createdBy_identifier="TST-ACTIVITY-1")
+                wasAttributedTo_identifier="TST-ACTIVITY-1")
+                
+#Add.REQUIREMENTS.REQUIREMENT(ientifier="TST-REQUIREMENT-2")
 
 createCDR()

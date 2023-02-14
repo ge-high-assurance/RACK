@@ -225,19 +225,19 @@ def output_using_scrapingtoolkit(
     """Outputs the analysis output using ScrapingToolKit."""
 
     for component_type in analysis_output["component_types"]:
-        Evidence.Add.COMPONENT_TYPE(
+        Evidence.Add.SOFTWARE.COMPONENT_TYPE(
             identifier=component_type,
         )
 
     for format_ in analysis_output["formats"]:
-        Evidence.Add.FORMAT(
+        Evidence.Add.FILE.FORMAT(
             identifier=format_.identifier,
         )
 
     files = analysis_output["files"]
     for file_identifier in files:
         file: ontology.File = files[file_identifier]
-        Evidence.Add.FILE(
+        Evidence.Add.FILE.FILE(
             fileFormat_identifier=format_.identifier,
             filename=file.name,
             identifier=file_identifier,
@@ -246,14 +246,14 @@ def output_using_scrapingtoolkit(
     components = analysis_output["components"]
     for component_identifier in components:
         component: ontology.SoftwareComponent = components[component_identifier]
-        Evidence.Add.SWCOMPONENT(
+        Evidence.Add.SOFTWARE.SWCOMPONENT(
             identifier=component_identifier,
             componentType_identifier=component.component_type,
             title=escape(component.title),
             definedIn_identifier=component.defined_in.identifier if component.defined_in else None
         )
         for callee in component.mentions:
-            Evidence.Add.SWCOMPONENT(
+            Evidence.Add.SOFTWARE.SWCOMPONENT(
                 identifier=component_identifier,
                 mentions_identifier=callee.identifier,
             )
@@ -273,10 +273,10 @@ def analyze_traceability(unit: lal.AnalysisUnit) -> None:
 
     for component_id, requirement_ids in analysis_output.items():
         for requirement_id in requirement_ids:
-            Evidence.Add.REQUIREMENT(
+            Evidence.Add.REQUIREMENTS.REQUIREMENT(
                 identifier=requirement_id
             )
-            Evidence.Add.SWCOMPONENT(
+            Evidence.Add.SOFTWARE.SWCOMPONENT(
                 identifier=component_id,
                 wasImpactedBy_identifier=requirement_id,
             )
@@ -294,13 +294,13 @@ def analyze_structure(unit: lal.AnalysisUnit) -> None:
     analysis_output = visitor.packages
 
     for package, components in analysis_output.items():
-        Evidence.Add.SWCOMPONENT(
+        Evidence.Add.SOFTWARE.SWCOMPONENT(
             identifier=get_node_identifier(package),
             title=escape(package.doc_name),
             componentType_identifier=ontology.MODULE,
         )
         for component in components:
-            Evidence.Add.SWCOMPONENT(
+            Evidence.Add.SOFTWARE.SWCOMPONENT(
                 identifier=get_node_identifier(component),
                 partOf_identifier=get_node_identifier(package),
             )

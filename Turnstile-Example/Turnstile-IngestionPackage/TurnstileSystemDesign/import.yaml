@@ -1,13 +1,13 @@
 data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
 #Phase1: Identifiers Only
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY1.csv"}
-- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM1.csv"}
-- {class: "http://arcos.turnstile/GE#SystemComponent", csv: "turnstile_SystemComponent1.csv"}
-- {class: "http://arcos.turnstile/GE#SystemInterfaceDefinition", csv: "turnstile_SystemInterfaceDefinition1.csv"}
+- {class: "http://arcos.turnstile/GE#SystemComponent", csv: "GE_SystemComponent1.csv"}
+- {class: "http://arcos.turnstile/GE#SystemInterfaceDefinition", csv: "GE_SystemInterfaceDefinition1.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY1.csv"}
+- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM_SYSTEM1.csv"}
 
 #Phase2: All Evidence
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY2.csv"}
-- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM2.csv"}
-- {class: "http://arcos.turnstile/GE#SystemComponent", csv: "turnstile_SystemComponent2.csv"}
-- {class: "http://arcos.turnstile/GE#SystemInterfaceDefinition", csv: "turnstile_SystemInterfaceDefinition2.csv"}
+- {class: "http://arcos.turnstile/GE#SystemComponent", csv: "GE_SystemComponent2.csv"}
+- {class: "http://arcos.turnstile/GE#SystemInterfaceDefinition", csv: "GE_SystemInterfaceDefinition2.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY2.csv"}
+- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM_SYSTEM2.csv"}

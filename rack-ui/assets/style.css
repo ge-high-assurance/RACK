@@ -1,0 +1,73 @@
+
+/* style for sidebar */
+div.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 16rem;
+    padding: 2rem 1rem;
+}
+
+/* style for button */
+button {
+    font-size: 16px;
+    width:200px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    height:25px;
+    border-radius: 5px;
+    padding:0px;
+    background-color: powderblue;
+    border: none;
+}
+
+/* style for scrolling status area */
+div.scrollarea {
+    margin-top: 50px;
+    white-space: pre-wrap;
+    border-style: none;
+    height: 400px;
+    width: 1200px; overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+/* put a space between a checkbox and the text next to it */
+input[type=checkbox] {
+  margin-right: 10px;
+}
+
+
+/* dropdown menus */
+.ddm {
+    background-color: powderblue;
+    color: black;
+    border: none;
+    padding: 0px;
+}
+/* avoid color change when hovering */
+.ddm:hover {
+    background-color:powderblue;
+    color: black;
+}
+
+
+/* load options accordion */
+.accordion-button {
+    padding: 0px;
+}
+.accordion-button:not(.collapsed) {
+    background-color: white;
+    color: black;
+    box-shadow: none;
+}
+.accordion-button:is(.collapsed) {
+    box-shadow: none;
+}
+.accordion-body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}

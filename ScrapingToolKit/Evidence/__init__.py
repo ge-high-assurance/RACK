@@ -48,7 +48,7 @@ def createCDR(dataGraph="http://rack001/data"):
     '''
     global __EvidenceDir__, __Evidence__, __ingestionIdentifier__
 
-    Add.ACTIVITY(identifier=__ingestionIdentifier__,endedAtTime=str(datetime.now()).split(".")[0])
+    Add.PROV_S.ACTIVITY(identifier=__ingestionIdentifier__,endedAtTime=str(datetime.now()).split(".")[0])
 
     __Evidence__.write(__EvidenceDir__, 
                pretty_print=True,
@@ -77,11 +77,11 @@ def createCDR(dataGraph="http://rack001/data"):
                         if c.find("identifier").text not in loaded:
                             outwriter.writerow([c.find("identifier").text])
                             loaded.append(c.find("identifier").text)
-                        # Check to see if the header item 
-                        for k in headers:
-                            if c.find(k) is not None:
-                                if k not in usedHeaders:
-                                    usedHeaders.append(k)
+                    # Check to see if the header item 
+                    for k in headers:
+                        if c.find(k) is not None:
+                            if k not in usedHeaders:
+                                usedHeaders.append(k)
 
                     else:
                         log("Identifier not found.")
@@ -132,7 +132,7 @@ def createEvidenceFile(ingestionTitle="ScrapingToolKitIngestion", ingestionDescr
 
     __ingestionIdentifier__ = ingestionTitle
 
-    Add.ACTIVITY(identifier=__ingestionIdentifier__,description = ingestionDescription,
+    Add.PROV_S.ACTIVITY(identifier=__ingestionIdentifier__,description = ingestionDescription,
                  title= ingestionTitle,
                  startedAtTime=str(datetime.now()).split(".")[0])
 

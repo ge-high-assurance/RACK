@@ -6,11 +6,26 @@ can be found [here](https://github.com/ge-high-assurance/RACK/wiki#log4j-securit
 
 # Introducing RACK
 
-RACK (Rapid Assurance Curation Kit) is a research-grade database that uses a structured semantic data model tuned to the domain of the DARPA ARCOS (Automated Rapid Certification Of Software) program.
+RACK (Rapid Assurance Curation Kit) is a research-grade database that uses a structured semantic data model tuned to the domain of the DARPA ARCOS (Automated Rapid Certification Of Software) program. Additionally, we offer a suite of tools for data curation and assurance interpretation.
 
 <img src="https://github.com/ge-high-assurance/RACK/wiki/images/RACK_cartoon.jpg" alt="RACK Overview Diagram" width="300" align="middle">
 
 As shown above, RACK takes in evidence in the form of technical documents, test cases and test results, analysis reports, and other results that aid in documenting certification of complex systems. RACK also takes as input the _provenance_ of that data, as well as its relationship to the _structure_ of the relevant system. Specifically, RACK provides a data ingestion interface primarily for use by ARCOS TA1 performers, whose primary focus in ARCOS is to provide evidence from which assurance arguments can be crafted. RACK also provides a query interface for use by TA3 performers, whose primary focus in ARCOS is the construction of compelling assurance arguments. RACK queries allow users to find evidence related to diverse parts of the target system, understand where that evidence came from, and what the evidence infers about that system. While RACK aims to fully support the needs of the ARCOS program, we emphasize that RACK is not intended to be production-ready software.
+
+
+## Publications
+
+If you are citing RACK project, please use the following BibTex entries:
+```latex
+@inproceedings{moitra2022semantic,
+  title={A Semantic Reference Model for Capturing System Development and Evaluation},
+  author={Moitra, Abha and Cuddihy, Paul and Siu, Kit and Meng, Baoluo and Interrante, John and Archer, David and Mertens, Eric and Quick, Kevin and Robert, Valentin and Russell, Daniel},
+  booktitle={2022 IEEE 16th International Conference on Semantic Computing (ICSC)},
+  pages={173--174},
+  year={2022},
+  organization={IEEE}
+}
+```
 
 ## The RACK Deployment Model
 
@@ -21,7 +36,7 @@ To make RACK easy for all ARCOS performers to use, we deploy RACK as a software 
 RACK is available as both a Linux container and a virtual machine, and is supported on Linux, Windows, and MacOS systems. To learn more and get detailed instructions on how to get started, see our [Installation Instructions](https://github.com/ge-high-assurance/RACK/wiki/Home#installation-instructions).
 
 ---
-Copyright (c) 2021, General Electric Company, Galois, Inc.
+Copyright (c) 2021-2022 General Electric Company, Galois, Inc.
 
 All Rights Reserved
 

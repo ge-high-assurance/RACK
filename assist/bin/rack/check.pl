@@ -117,17 +117,16 @@ check_maybe_prop(Property, I, T) :-
      print_message(error, maybe_restriction(T, I, IName, Property, VSLen))).
 
 check_target_type(Property, I, T) :-
-    property_extra(T, Property, _Restr),
-    rdf(Property, rdfs:range, TTy),
-    rdf_reachable(Target, rdfs:subClassOf, TTy),
+    property(T, Property, _),
+    \+ rdf_is_bnode(T),
     has_interesting_prefix(Property),
     rdf(I, Property, Val),
-    \+ rdf_is_literal(Val),  % TODO check these as well?
-    rdf(Val, rdf:type, DefTy),
-    DefTy \= Target,
-    \+ rdf_reachable(DefTy, rdfs:subClassOf, Target),
+    \+ rdf_is_literal(Val),
+    \+ rack_instance_target(I, Property, Val),
     rack_instance_ident(I, IName),
-    print_message(error, property_value_wrong_type(T, I, IName, Property, DefTy, Val, Target)).
+    rdf(Val, rdf:type, ValTy),
+    property_range_type(T, Property, ModelTy),
+    print_message(error, property_value_wrong_type(T, I, IName, Property, ValTy, Val, ModelTy)).
 
 check_target_type_restrictions(Property, I, T) :-
     rdf(T, rdfs:subClassOf, R),
@@ -205,20 +204,22 @@ check_invalid_value(Property, I, T) :-
 % True for any SrcClass that has no Prop relationship to any target
 % instance.  Returns the SrcInst that this occurs for as well as
 % generating a warning.
-check_has_no_rel(SrcClass, Prop, SrcInst) :-
+check_has_no_rel(Context, SrcClass, Prop, SrcInst) :-
+    is_valid_property(Context, SrcClass, Prop),
     rack_data_instance(SrcClass, SrcInst),
     none_of(SrcInst, rack_instance_relationship(SrcClass, Prop)),
     rack_instance_ident(SrcInst, SrcName),
-    print_message(warning, missing_any_tgt(SrcClass, SrcInst, SrcName, Prop)).
+    print_message(warning, missing_any_tgt(Context, SrcClass, SrcInst, SrcName, Prop)).
 
 % True for any SrcClass that has no Prop relationship to an instance
 % of the specific target class.  Returns the SrcInst that this occurs
 % for as well as generating a warning.
-check_has_no_rel(SrcClass, Prop, TgtClass, SrcInst) :-
+check_has_no_rel(Context, SrcClass, Prop, TgtClass, SrcInst) :-
+    is_valid_property(Context, SrcClass, Prop),
     rack_data_instance(SrcClass, SrcInst),
     none_of(SrcInst, rack_instance_relationship(SrcClass, Prop, TgtClass)),
     rack_instance_ident(SrcInst, SrcName),
-    print_message(warning, missing_tgt(SrcClass, SrcInst, SrcName, Prop, TgtClass)),
+    print_message(warning, missing_tgt(Context, SrcClass, SrcInst, SrcName, Prop, TgtClass)),
     % -- if the above fails, it's probably useful to see if there are
     % *any* targets of Src--[Rel]-->
     check_also_has_no_rel(SrcClass, Prop).
@@ -226,6 +227,46 @@ check_has_no_rel(SrcClass, Prop, TgtClass, SrcInst) :-
 check_also_has_no_rel(SrcClass, SrcInst, Rel) :-
     check_has_no_rel(SrcClass, Rel, SrcInst), !.
 check_also_has_no_rel(_, _).
+
+is_valid_property(_, SrcClass, Property) :-
+    rdf(Property, rdfs:domain, PropClass),
+    rdf_reachable(SrcClass, rdfs:subClassOf, PropClass), !.
+is_valid_property(Context, SrcClass, Property) :-
+    print_message(error, invalid_property_in_check(Context, SrcClass, Property)),
+    fail.
+
+
+% Sometimes there will be things in SADL like:
+%
+%   FOO is a type of X.
+%     p of FOO only has values of type Y.
+%
+% and the problem is that p is not defined for X, but for (unrelated) Z instead.
+% SADL will not complain and will generate a property constraint, but that
+% property cannot ever exist.  This checks for that situation.
+check_invalid_domain(Property) :-
+    check_invalid_domain_class(_SrcClass, Property, _DefinedClass).
+
+check_invalid_domain_class(SrcClass, Property, DefinedClass) :-
+    rdf(SrcClass, _, B),
+    rack_ref(_, SrcClass),
+    rdf_is_bnode(B),
+    rdf(B, rdf:type, owl:'Restriction'),
+    rdf(B, owl:onProperty, Property),
+    rdf(Property, rdfs:domain, DefinedClass),
+    \+ rdf_reachable(SrcClass, rdfs:subClassOf, DefinedClass),
+    print_message(error, invalid_domain(SrcClass, Property, DefinedClass)).
+
+check_invalid_domain_class(SrcClass, Property, DefinedClass) :-
+    property(SrcClass, Property, _Usage),
+    rdf_reachable(Property, rdfs:subPropertyOf, ParentProp),
+    property(DefinedClass, ParentProp, _ParentUsage),
+    \+ rdf_reachable(SrcClass, rdfs:subClassOf, DefinedClass),
+    ( Property = ParentProp,
+      print_message(error, invalid_domain(SrcClass, Property, DefinedClass))
+    ; Property \= ParentProp,
+      print_message(error, invalid_subclass_domain(SrcClass, Property, ParentProp, DefinedClass))
+    ).
 
 
 actual_val((V^^VT),VT,(V^^VT)).  % normal
@@ -268,9 +309,9 @@ sum_all_nonzero([(_,N)|CNS], Sum) :-
 
 
 prolog:message(class_missing_note(Class)) -->
-    [ 'No Note/Description for class ~w'-[Class] ].
+    [ 'CE-100: No Note/Description for class ~w'-[Class] ].
 prolog:message(not_prov_s_thing_class(Class)) -->
-    [ 'Not a subclass of PROV-S#THING: ~w'-[Class] ].
+    [ 'CE-101: Not a subclass of PROV-S#THING: ~w'-[Class] ].
 prolog:message(num_classes(What, Count)) -->
     [ 'There are ~:d RACK ~w.'-[Count, What] ].
 prolog:message(cardinality_violation(InstType, Instance, InstanceIdent, Property, Specified, Actual)) -->
@@ -278,38 +319,42 @@ prolog:message(cardinality_violation(InstType, Instance, InstanceIdent, Property
       prefix_shorten(InstType, ST),
       prefix_shorten(Property, SP)
     },
-    [ '~w ~w (~w) . ~w has ~d values but an allowed cardinality of ~d~n'-[
-          ST, SI, InstanceIdent, SP, Actual, Specified] ].
+    [ 'CE-103: ~w ~w . ~w has ~d values but an allowed cardinality of ~d~n                Domain: ~w~n'-[
+          ST, InstanceIdent, SP, Actual, Specified, SI ] ].
 prolog:message(min_cardinality_violation(InstType, Instance, IName, Property, Specified, Actual)) -->
     { prefix_shorten(Instance, SI),
       prefix_shorten(InstType, ST),
-      prefix_shorten(Property, SP)
+      prefix_shorten(Property, SP),
+      rdf_literal_val_type(IName, InstName, _)
     },
-    [ '~w ~w (~w) . ~w has ~d values but a minimum allowed cardinality of ~d~n'-[
-          ST, SI, IName, SP, Actual, Specified] ].
+    [ 'CE-104: ~w ~w . ~w has ~d values but a minimum allowed cardinality of ~d~n                Domain: ~w~n'-[
+          ST, InstName, SP, Actual, Specified, SI] ].
 prolog:message(max_cardinality_violation(InstType, Instance, IName, Property, Specified, Actual)) -->
     { prefix_shorten(Instance, SI),
       prefix_shorten(InstType, ST),
-      prefix_shorten(Property, SP)
+      prefix_shorten(Property, SP),
+      rdf_literal_val_type(IName, InstName, _)
     },
-    [ '~w ~w (~w) . ~w has ~d values but a maximum allowed cardinality of ~d~n'-[
-          ST, SI, IName, SP, Actual, Specified] ].
+    [ 'CE-105: ~w ~w . ~w has ~d values but a maximum allowed cardinality of ~d~n                Domain: ~w~n'-[
+          ST, InstName, SP, Actual, Specified, SI ] ].
 prolog:message(maybe_restriction(InstType, Instance, IName, Property, Actual)) -->
     { prefix_shorten(Instance, SI),
       prefix_shorten(InstType, ST),
-      prefix_shorten(Property, SP)
+      prefix_shorten(Property, SP),
+      rdf_literal_val_type(IName, InstName, _)
     },
-    [ '~w ~w (~w) . ~w must have only zero or one instance, but has ~d~n'-[
-          ST, SI, IName, SP, Actual] ].
+    [ 'CE-106: ~w ~w . ~w must have only zero or one instance, but has ~d~n                Domain: ~w~n'-[
+          ST, InstName, SP, Actual, SI ] ].
 prolog:message(invalid_value_in_enum(InstType, Instance, IName, Property, Value, Valid)) -->
     { prefix_shorten(Instance, SI),
       prefix_shorten(InstType, ST),
       prefix_shorten(Property, SP),
       prefix_shorten(Value, SV),
-      maplist(prefix_shorten, Valid, SL)
+      maplist(prefix_shorten, Valid, SL),
+      rdf_literal_val_type(IName, InstName, _)
     },
-    [ '~w ~w (~w) . ~w value of ~w is invalid, allowed enumerations: ~w~n'-[
-          ST, SI, IName, SP, SV, SL] ].
+    [ 'CE-107: ~w ~w . ~w value of ~w is invalid, allowed enumerations: ~w~n                Domain: ~w~n'-[
+          ST, InstName, SP, SV, SL, SI ] ].
 prolog:message(value_outside_range(InstType, Instance, IName, Property, Ty, V, MinV, MaxV)) -->
     { prefix_shorten(Instance, SI),
       prefix_shorten(InstType, ST),
@@ -317,38 +362,52 @@ prolog:message(value_outside_range(InstType, Instance, IName, Property, Ty, V, M
       (rdf_equal(xsd:T, Ty) ; T = Ty),
       (rdf_equal(Val^^Ty, V) ; Val = V),
       (rdf_equal(Min^^Ty, MinV) ; Min = MinV),
-      (rdf_equal(Max^^Ty, MaxV) ; Max = MaxV)
+      (rdf_equal(Max^^Ty, MaxV) ; Max = MaxV),
+      rdf_literal_val_type(IName, InstName, _)
     },
-    [ '~w, ~w (~w) . ~w value of ~w is outside ~w range [~w .. ~w]~n'-[
-          ST, SI, IName, SP, Val, T, Min, Max ] ].
+    [ 'CE-108: ~w, ~w . ~w value of ~w is outside ~w range [~w .. ~w]~n                Domain: ~w~n'-[
+          ST, InstName, SP, Val, T, Min, Max, SI ] ].
 prolog:message(multiple_types_for_instance(Instance, Types)) -->
     { prefix_shorten(Instance, SI),
       maplist(prefix_shorten, Types, STys)
     },
-    [ 'Instance ~w has multiple types: ~w~n'-[SI, STys] ].
+    [ 'CE-109: Instance ~w has multiple types: ~w~n'-[SI, STys] ].
 prolog:message(property_value_wrong_type(InstType, Instance, IName, Property, DefType, Val, ValType)) -->
     { prefix_shorten(Instance, SI),
       prefix_shorten(InstType, ST),
       prefix_shorten(Property, SP),
       prefix_shorten(DefType, SDTy),
       prefix_shorten(ValType, SVTy),
-      prefix_shorten(Val, SV)
+      prefix_shorten(Val, SV),
+      rdf_literal_val_type(IName, InstName, _)
     },
-    [ '~w instance property ~w (~w) . ~w of ~w should be a ~w but is a ~w'-[
-          ST, SI, IName, SP, SV, SVTy, SDTy ] ].
+    [ 'CE-110: ~w instance property ~w . ~w of ~w should be a ~w but is a ~w~n                Domain: ~w'-[
+          ST, InstName, SP, SV, SVTy, SDTy, SI ] ].
 prolog:message(property_value_wrong_type_in(InstType, Instance, IName, Property, DefType, Val, ValTypes)) -->
     { prefix_shorten(Instance, SI),
       prefix_shorten(InstType, ST),
       prefix_shorten(Property, SP),
       prefix_shorten(DefType, SDTy),
       findall(SVT, (member(VT, ValTypes), prefix_shorten(VT, SVT)), SVTys),
-      prefix_shorten(Val, SV)
+      prefix_shorten(Val, SV),
+      rdf_literal_val_type(IName, InstName, _)
     },
-    [ '~w instance property ~w (~w) . ~w of ~w should be one of ~w but is a ~w'-[
-          ST, SI, IName, SP, SV, SVTys, SDTy ] ].
-prolog:message(missing_any_tgt(SrcClass, SrcInst, SrcIdent, Rel)) -->
-    [ '~w ~w (~w) has no ~w target relationships'-[
-          SrcClass, SrcInst, SrcIdent, Rel] ].
-prolog:message(missing_tgt(SrcClass, SrcInst, SrcIdent, Rel, TgtClass)) -->
-    [ '~w ~w (~w) missing the ~w target of type ~w'-[
-          SrcClass, SrcInst, SrcIdent, Rel, TgtClass] ].
+    [ 'CE-111: ~w instance property ~w . ~w of ~w should be one of ~w but is a ~w~n                Domain: ~w'-[
+          ST, InstName, SP, SV, SVTys, SDTy, SI ] ].
+prolog:message(missing_any_tgt(Context, SrcClass, SrcInst, SrcIdent, Rel)) -->
+    [ 'CE-112-~w: ~w ~w has no ~w target relationships~n                Domain: ~w'-[
+          Context, SrcClass, SrcIdent, Rel, SrcInst] ].
+prolog:message(missing_tgt(Context, SrcClass, SrcInst, SrcIdent, Rel, TgtClass)) -->
+    { rdf_literal_val_type(SrcIdent, IdentName, _)
+    },
+    [ 'CE-113-~w: ~w ~w missing the ~w target of type ~w~n                Domain: ~w~n'-[
+          Context, SrcClass, IdentName, Rel, TgtClass, SrcInst ] ].
+prolog:message(invalid_domain(SrcClass, Property, DefinedClass)) -->
+    [ 'CE-114: Property ~w was referenced on class ~w, but that property is defined for the unrelated class ~w~n'-[
+          Property, SrcClass, DefinedClass] ].
+prolog:message(invalid_subclass_domain(SrcClass, Property, ParentProperty, DefinedClass)) -->
+    [ 'CE-115: Property ~w was referenced on class ~w, but that property is a sub-type of ~w, which is defined for the unrelated class ~w~n'-[
+          Property, SrcClass, ParentProperty, DefinedClass] ].
+prolog:message(invalid_property_in_check(Context, SrcClass, Property)) -->
+    [ 'CE-116-~w: INVALID CHECK for ~w property on ~w class!~n'-[
+          Context, Property, SrcClass] ].

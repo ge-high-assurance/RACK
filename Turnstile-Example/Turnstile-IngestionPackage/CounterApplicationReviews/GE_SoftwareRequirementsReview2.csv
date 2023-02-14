@@ -1,0 +1,12 @@
+identifier,dataInsertedBy_identifier,author_identifier,governedBy_identifier,reviewer_identifier,reviewed_identifier
+HlrReview,TurnstileIngestion-SystemReview,125569538,RQ-STD:v1,259863025,
+HlrReview,TurnstileIngestion-SystemReview,,,,HLR-1:v1
+HlrReview,TurnstileIngestion-SystemReview,,,,HLR-2:v1
+HlrReview,TurnstileIngestion-SystemReview,,,,HLR-3:v1
+HlrReview,TurnstileIngestion-SystemReview,,,,inflowEvent
+HlrReview,TurnstileIngestion-SystemReview,,,,outflowEvent
+HlrReview,TurnstileIngestion-SystemReview,,,,counter
+HlrReview,TurnstileIngestion-SystemReview,,,,display
+HlrReview-2,TurnstileIngestion-SystemReview,125569538,RQ-STD:v1,259863025,
+HlrReview-2,TurnstileIngestion-SystemReview,,,,HLR-1:v2
+HlrReview-2,TurnstileIngestion-SystemReview,,,,HLR-2:v2

@@ -6,32 +6,43 @@ set -eo pipefail
 export USER=${1:-ubuntu}
 cd /tmp/files
 
+# Install necessary packages non-interactively
+
+export DEBIAN_FRONTEND=noninteractive
+export DEBCONF_NONINTERACTIVE_SEEN=true
+apt-get update -yqq
+apt-get install -yqq ca-certificates software-properties-common
+cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
+update-ca-certificates
+add-apt-repository -yu ppa:swi-prolog/stable
+apt-get update -yqq
+
+# If you change packages here, change them in rack-box/http/user-data too
+
+apt-get install -yqq \
+        curl \
+        default-jre \
+        gettext-base \
+        nano \
+        nginx-light \
+        python3 \
+        python3-pip \
+        strace \
+        sudo \
+        swi-prolog \
+        unzip \
+        vim
+
+# Ensure we can log into the vm like we used to
+
+if getent passwd vagrant >/dev/null && [ -f "/etc/ssh/sshd_config" ]; then
+    sed -i -e "s/.*PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+    echo "ubuntu:ubuntu" | chpasswd
+fi
+
 # Execute this part of the script only if we're building a Docker image
 
 if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
-
-    # Install necessary packages non-interactively
-
-    export DEBIAN_FRONTEND=noninteractive
-    export DEBCONF_NONINTERACTIVE_SEEN=true
-    apt-get update -yqq
-    apt-get install -yqq software-properties-common
-    add-apt-repository -yu ppa:swi-prolog/stable
-
-    # If you change this, change packages in rack-box/http/user-data too
-    # Note VM image already has curl, gettext-base, nano, etc.
-
-    apt-get install -yqq \
-            curl \
-            default-jre \
-            gettext-base \
-            nano \
-            nginx-light \
-            python3 \
-            python3-pip \
-            strace \
-            swi-prolog \
-            unzip
 
     # Install docker-systemctl-replaement
 
@@ -51,12 +62,17 @@ mkdir -p "/home/${USER}"
 tar xfzC fuseki.tar.gz /opt
 rm fuseki.tar.gz
 mv /opt/apache-jena-fuseki-* /opt/fuseki
+tar xfzC jena.tar.gz /opt
+rm jena.tar.gz
+mv /opt/apache-jena-* /opt/jena
 tar xfzC rack.tar.gz "/home/${USER}"
 rm rack.tar.gz
 tar xfzC rack-assist.tar.gz "/home/${USER}"
 rm rack-assist.tar.gz
 tar xfzC rack-cli.tar.gz "/home/${USER}"
 rm rack-cli.tar.gz
+tar xfzC rack-ui.tar.gz "/home/${USER}"
+rm rack-ui.tar.gz
 tar xfzC semtk.tar.gz "/home/${USER}"
 rm semtk.tar.gz
 mv ENV_OVERRIDE "/home/${USER}/semtk-opensource"
@@ -70,9 +86,23 @@ cp /opt/fuseki/fuseki.service /etc/systemd/system/fuseki.service
 systemctl enable fuseki
 systemctl start fuseki
 
+# Set up and start RACK UI service
+
+cd /home/"${USER}"/RACK/rack-ui
+python3 -m pip install -r ./requirements.txt
+adduser --system --group --no-create-home --disabled-password rackui
+usermod -aG sudo rackui
+echo "rackui ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/rackui
+mkdir /etc/rackui
+chown rackui.rackui /etc/rackui
+envsubst < rackui.service > /etc/systemd/system/rackui.service
+systemctl enable rackui
+
 # Initialize SemTK environment variables
 
 cd "/home/${USER}/semtk-opensource"
+# This lets rackui see and run scripts that live in /home/ubuntu/RACK/cli
+chmod 755 "/home/${USER}"
 chmod 755 ./*.sh
 export SERVER_ADDRESS=localhost
 export SERVICE_HOST=localhost
@@ -114,6 +144,11 @@ while ! curl http://localhost:3030/$/ping &>/dev/null; do
     fi
     sleep 10
 done
+
+# Configure Fuseki to time out queries after 5 minutes
+
+sed -e 's/^   # ja:co/ja:co/' -i /etc/fuseki/config.ttl
+sed -e 's/"30000"/"300000"/' -i /etc/fuseki/config.ttl
 
 # Create the RACK dataset
 

@@ -5,8 +5,10 @@ files:
 - AGENTS.owl
 - ANALYSIS.owl
 - BASELINE.owl
+- CLAIM.owl
 - CONFIDENCE.owl
 - DOCUMENT.owl
+- EntityResolution.owl
 - FILE.owl
 - HARDWARE.owl
 - HAZARD.owl
@@ -19,3 +21,4 @@ files:
 - SOFTWARE.owl
 - SYSTEM.owl
 - TESTING.owl
+- RESOLUTIONS.owl

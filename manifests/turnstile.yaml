@@ -1,0 +1,12 @@
+name: 'Turnstile ingestion'
+
+footprint:
+  model-graphs:
+    - http://rack001/model
+  data-graphs:
+    - http://rack001/do-178c
+
+steps:
+  - manifest: rack.yaml
+  - model: ../GE-Ontology/OwlModels/import.yaml
+  - data: ../RACK-Ontology/ontology/DO-178C/import.yaml

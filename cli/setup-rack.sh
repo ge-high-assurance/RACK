@@ -4,11 +4,4 @@ set -eu
 
 ./ensure-cli-in-PATH.sh
 
-./setup-clear.sh
-
-# RACK core ontology
-rack model import ../RACK-Ontology/OwlModels/import.yaml
-
-# ingestion nodegroups auto-generated from RACK core ontology, and a set of sample query nodegroups
-rack nodegroups import ../nodegroups/ingestion/arcos.rack
-rack nodegroups import ../nodegroups/queries
+rack manifest import --clear ../manifests/rack.yaml

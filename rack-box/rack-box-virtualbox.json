@@ -4,7 +4,7 @@
     "headless": "false",
     "http_proxy": "{{env `http_proxy`}}",
     "https_proxy": "{{env `https_proxy`}}",
-    "memory": "4096",
+    "memory": "20480",
     "no_proxy": "{{env `no_proxy`}}",
     "version": "dev",
     "vm_name": "rack-box-{{user `version`}}"
@@ -12,45 +12,45 @@
 
   "builders": [
     {
-      "type": "virtualbox-iso",
-      "iso_checksum": "sha256:28ccdb56450e643bad03bb7bcf7507ce3d8d90e8bf09e38f6bd9ac298a98eaad",
-      "iso_url": "http://releases.ubuntu.com/20.04/ubuntu-20.04.4-live-server-amd64.iso",
+      "type": "virtualbox-ovf",
 
-      "guest_additions_mode": "disable",
-      "guest_os_type": "Ubuntu_64",
-      "vm_name": "{{user `vm_name`}}",
-      "cpus": "{{user `cpus`}}",
-      "memory": "{{user `memory`}}",
-      "vboxmanage": [
-         ["modifyvm", "{{.Name}}", "--vram", "20"]
-      ],
-
-      "http_directory": "http",
-
-      "headless": "{{user `headless`}}",
-      "shutdown_command": "sudo shutdown -P now",
-
+      "boot_wait": "30s",
       "communicator": "ssh",
-      "ssh_username": "ubuntu",
-      "ssh_password": "ubuntu",
-      "ssh_handshake_attempts": "15",
-      "ssh_timeout": "30m",
-
-      "boot_keygroup_interval": "2s",
-      "boot_wait": "2s",
-      "boot_command": [
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "<f6><esc><wait>",
-        "autoinstall ds=nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/",
-        "<enter><wait>"
-      ]
+      "guest_additions_mode": "disable",
+      "headless": "{{user `headless`}}",
+      "http_directory": "http",
+      "shutdown_command": "sudo shutdown -P now",
+      "source_path": "focal64/box.ovf",
+      "ssh_private_key_file": "vagrant",
+      "ssh_username": "vagrant",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--audio", "none"],
+        ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"],
+        ["modifyvm", "{{.Name}}", "--graphicscontroller", "vmsvga"],
+        ["modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "ssh,tcp,,2222,,22"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "http,tcp,,8080,,80"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "sparqlDb,tcp,,3030,,3030"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "rackUi,tcp,,8050,,8050"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "sparqlQueryService,tcp,,12050,,12050"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "sparqlGraphStatusService,tcp,,12051,,12051"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "sparqlGraphResultsService,tcp,,12052,,12052"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "sparqlExtDispatchService,tcp,,12053,,12053"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "edcQueryGenerationService,tcp,,12054,,12054"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "nodeGroupStoreService,tcp,,12056,,12056"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "ontologyInfoService,tcp,,12057,,12057"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "nodeGroupExecutionService,tcp,,12058,,12058"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "nodeGroupService,tcp,,12059,,12059"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "utilityService,tcp,,12060,,12060"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "athenaService,tcp,,12062,,12062"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "fdcSampleService,tcp,,12066,,12066"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "fdcCacheService,tcp,,12068,,12068"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "fileStagingService,tcp,,12069,,12069"],
+        ["modifyvm", "{{.Name}}", "--natpf1", "sparqlGraphIngestionService,tcp,,12091,,12091"],
+        ["modifyvm", "{{.Name}}", "--vram", "128"],
+        ["modifyvm", "{{.Name}}", "--vrde", "off"]
+      ],
+      "vm_name": "{{user `vm_name`}}"
     }
   ],
 

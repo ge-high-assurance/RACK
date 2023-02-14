@@ -1,0 +1,215 @@
+/* Copyright (c) 2022, General Electric Company, Galois, Inc.
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.rack/CLAIM" alias claim.
+import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/PROCESS".
+
+CLAIM (note "An argument that a set of properties hold based on system architecture and evidence")
+    is a type of ENTITY.
+
+addresses (note "The entity that this claim addresses")
+    describes CLAIM with values of type ENTITY.
+
+declares (note "The PROPERTYs that this claim declares to hold")
+    describes CLAIM with values of type PROPERTY.
+
+appliesWhen (note "Environmental factor ranges constrainting this CLAIM")
+    describes CLAIM with values of type ENVIRONMENT_RANGE.
+
+usesTheory (note "The theory invoked to justify a claim.")
+    describes CLAIM with values of type THEORY.
+
+partiallySupports (note "The claims are made in the context of pursuing an OBJECTIVE")
+	describes CLAIM with values of type OBJECTIVE.
+
+////////////////////////////////////////////////////////////////////////
+
+THEORY (note "A set of principles used to reason about logical claims.")
+    is a type of THING.
+
+////////////////////////////////////////////////////////////////////////
+
+PROPERTY_RESULT (note "A particular result for a property.")
+    is a type of ENTITY.
+
+demonstrates (note "The property being demonstrated to have a result.")
+    describes PROPERTY_RESULT with a single value of type PROPERTY.
+
+supportedBy (note "The evidence that supports the property result.")
+    describes PROPERTY_RESULT with values of type ENTITY.
+
+////////////////////////////////////////////////////////////////////////
+
+COVERAGE_PROPERTY_RESULT (note "A coverage property result")
+  is a type of PROPERTY_RESULT.
+  
+coverageResult (note "Coverage value between 0 and 1 inclusive")
+    describes COVERAGE_PROPERTY_RESULT with a single value of type double.
+
+////////////////////////////////////////////////////////////////////////
+
+SUPPORTED_PROPERTY_RESULT (note "An support-level property result")
+    is a type of PROPERTY_RESULT.
+  
+supportLevel (note "Support level asserted by this result")
+    describes SUPPORTED_PROPERTY_RESULT with a single value of type SUPPORT_LEVEL.
+    
+SUPPORT_LEVEL (note "Enumeration of support levels")
+    is a type of THING
+    must be one of {SupportLevelSupported, SupportLevelUnsupported, SupportLevelCountermanded}.
+
+SupportLevelSupported is a SUPPORT_LEVEL
+    identifier "Supported"
+    title "Supported".
+
+SupportLevelUnsupported is a SUPPORT_LEVEL
+    identifier "Unsupported"
+    title "Unsupported".
+  
+SupportLevelCountermanded is a SUPPORT_LEVEL
+    identifier "Countermanded"
+    title "Countermanded".
+
+////////////////////////////////////////////////////////////////////////
+
+ROBUSTNESS_PROPERTY_RESULT (note "An unconstrained robustness property result")
+    is a type of PROPERTY_RESULT.
+  
+robustness (note "Unconstrained robustness metric")
+    describes ROBUSTNESS_PROPERTY_RESULT with a single value of type double.
+
+////////////////////////////////////////////////////////////////////////
+
+BOOLEAN_PROPERTY_RESULT (note "A boolean property result")
+    is a type of PROPERTY_RESULT.
+  
+booleanResult (note "Boolean outcome")
+    describes BOOLEAN_PROPERTY_RESULT with a single value of type boolean.
+
+////////////////////////////////////////////////////////////////////////
+
+REAL_PROPERTY_RESULT (note "A real-valued property result")
+    is a type of PROPERTY_RESULT.
+  
+realResult (note "Real-value outcome")
+    describes REAL_PROPERTY_RESULT with a single value of type double.
+
+////////////////////////////////////////////////////////////////////////
+
+DECISION_PROPERTY_RESULT
+    (note "A decision property result")
+    is a type of PROPERTY_RESULT.
+    
+decisionOutcome
+  (note "Decision for a property result")
+  describes DECISION_PROPERTY_RESULT with a single value of type DECISION_OUTCOME.
+
+DECISION_OUTCOME (note "Enumeration of decision outcomes")
+    is a type of THING
+    must be one of {DecisionOutcomeSatisfied, DecisionOutcomeNotSatisfied, DecisionOutcomeUnknown}.
+
+DecisionOutcomeSatisfied is a DECISION_OUTCOME
+    identifier "Satisfied"
+    title "Satisfied".
+
+DecisionOutcomeNotSatisfied is a DECISION_OUTCOME
+    identifier "NotSatisfied"
+    title "Not Satisfied".
+
+DecisionOutcomeUnknown is a DECISION_OUTCOME
+    identifier "Unknown"
+    title "Unknown".
+
+////////////////////////////////////////////////////////////////////////
+
+TEST_EXECUTION_PROPERTY_RESULT
+    (note "A test execution property result")
+    is a type of PROPERTY_RESULT.
+    
+testExecutionOutcome
+  (note "Outcome for a test execution result")
+  describes TEST_EXECUTION_PROPERTY_RESULT with a single value of type TEST_EXECUTION_OUTCOME.
+
+TEST_EXECUTION_OUTCOME (note "Enumeration of test execution outcomes")
+    is a type of THING
+    must be one of {TextExecutionOutcomePass, TextExecutionOutcomeFail}.
+
+TextExecutionOutcomePass is a TEST_EXECUTION_OUTCOME
+    identifier "Pass"
+    title "Pass".
+
+TextExecutionOutcomeFail is a TEST_EXECUTION_OUTCOME
+    identifier "Fail"
+    title "Fail".
+
+////////////////////////////////////////////////////////////////////////
+
+STATIC_ANALYSIS_PROPERTY_RESULT
+    (note "A static analysis property result")
+    is a type of PROPERTY_RESULT.
+    
+staticAnalysisOutcome
+  (note "Result of static analysis")
+  describes STATIC_ANALYSIS_PROPERTY_RESULT with a single value of type STATIC_ANALYSIS_OUTCOME.
+
+STATIC_ANALYSIS_OUTCOME (note "Enumeration of static analysis outcomes")
+    is a type of THING
+    must be one of {StaticAnalysisLevelAbsent, StaticAnalysisLevelMitigated, StaticAnalysisLevelUnmitigated}.
+
+StaticAnalysisOutcomeAbsent is a STATIC_ANALYSIS_OUTCOME
+    identifier "Absent"
+    title "Absent".
+
+StaticAnalysisOutcomeMitigated is a STATIC_ANALYSIS_OUTCOME
+    identifier "Mitigated"
+    title "Mitigated".
+
+StaticAnalysisOutcomeUnmitigated is a STATIC_ANALYSIS_OUTCOME
+    identifier "Unmitigated"
+    title "Unmitigated".
+
+////////////////////////////////////////////////////////////////////////
+
+CONCERN_TYPE (note "An enumeration of concerns arising when making claims")
+    is a type of THING.
+
+////////////////////////////////////////////////////////////////////////
+
+CONCERN (note "Part of a set of concerns associated with a particular CLAIM")
+    is a type of THING.
+
+questions (note "The CLAIM that is doubted by this concern")
+    describes CONCERN with values of type CLAIM.
+
+concernCategory (note "The category of concern raised by the related evidence")
+    describes CONCERN with a single value of type CONCERN_TYPE.
+
+raisedBy (note "The evidence associated with this raised concern")
+    describes CONCERN with values of type ENTITY.
+
+////////////////////////////////////////////////////////////////////////
+
+ENVIRONMENT_FACTOR (note "An enumeration of the supported enviromental factors")
+    is a type of THING.
+
+ENVIRONMENT_RANGE (note "Part of a set of environmental restrictions applied to a particular claim")
+    is a type of THING.
+
+environmentFactor (note "The environmental factor that is being bounded")
+    describes ENVIRONMENT_RANGE with a single value of type ENVIRONMENT_FACTOR.
+
+lowerBound (note "The lower bound of this environmental range")
+    describes ENVIRONMENT_RANGE with a single value of type double.
+
+upperBound (note "The upper bound of this evironmental range")
+    describes ENVIRONMENT_RANGE with a single value of type double.

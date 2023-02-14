@@ -1,11 +1,11 @@
 data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
 #Phase1: Identifiers Only
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY1.csv"}
-- {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD1.csv"}
-- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM1.csv"}
+- {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD_HAZARD1.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY1.csv"}
+- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM_SYSTEM1.csv"}
 
 #Phase2: All Evidence
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY2.csv"}
-- {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD2.csv"}
-- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM2.csv"}
+- {class: "http://arcos.rack/HAZARD#HAZARD", csv: "HAZARD_HAZARD2.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY2.csv"}
+- {class: "http://arcos.rack/SYSTEM#SYSTEM", csv: "SYSTEM_SYSTEM2.csv"}

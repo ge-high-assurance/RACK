@@ -1,15 +1,15 @@
 data-graph: "http://rack001/turnstiledata"
 ingestion-steps:
 #Phase1: Identifiers Only
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY1.csv"}
-- {class: "http://arcos.rack/ANALYSIS#ANALYSIS", csv: "ANALYSIS1.csv"}
-- {class: "http://arcos.rack/ANALYSIS#ANALYSIS_OUTPUT", csv: "ANALYSIS_OUTPUT1.csv"}
-- {class: "http://arcos.rack/MODEL#MODEL", csv: "MODEL1.csv"}
-- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "turnstile_HighLevelRequirement1.csv"}
+- {class: "http://arcos.rack/ANALYSIS#ANALYSIS", csv: "ANALYSIS_ANALYSIS1.csv"}
+- {class: "http://arcos.rack/ANALYSIS#ANALYSIS_OUTPUT", csv: "ANALYSIS_ANALYSIS_OUTPUT1.csv"}
+- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "GE_HighLevelRequirement1.csv"}
+- {class: "http://arcos.rack/MODEL#MODEL", csv: "MODEL_MODEL1.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY1.csv"}
 
 #Phase2: All Evidence
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "ACTIVITY2.csv"}
-- {class: "http://arcos.rack/ANALYSIS#ANALYSIS", csv: "ANALYSIS2.csv"}
-- {class: "http://arcos.rack/ANALYSIS#ANALYSIS_OUTPUT", csv: "ANALYSIS_OUTPUT2.csv"}
-- {class: "http://arcos.rack/MODEL#MODEL", csv: "MODEL2.csv"}
-- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "turnstile_HighLevelRequirement2.csv"}
+- {class: "http://arcos.rack/ANALYSIS#ANALYSIS", csv: "ANALYSIS_ANALYSIS2.csv"}
+- {class: "http://arcos.rack/ANALYSIS#ANALYSIS_OUTPUT", csv: "ANALYSIS_ANALYSIS_OUTPUT2.csv"}
+- {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "GE_HighLevelRequirement2.csv"}
+- {class: "http://arcos.rack/MODEL#MODEL", csv: "MODEL_MODEL2.csv"}
+- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY2.csv"}

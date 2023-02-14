@@ -30,18 +30,22 @@ variables explicitly in your packer build command like this:
 
 ## Files needed before building
 
-You will need to download 9 files into the `files` subdirectory before
-building your rack-box images.  Please see the
+You will need to download some files into the `files` subdirectory
+before building your rack-box images.  Please see the
 [commands](../.github/workflows/actions/download/action.yml) used by
 our workflows for the most up to date way to download these files,
 although we will mention each file here as well:
 
-- `files/fuseki.tar.gz`: Download latest Fuseki release tarball from
-  <https://jena.apache.org/download/> and rename it (note we still are
-  using version 3.16.0 instead of the latest release, though)
+- `files/fuseki.tar.gz`: Download latest Fuseki tarball from
+  <https://jena.apache.org/download/>, renaming it to `fuseki.tar.gz`
 
-- `files/semtk.tar.gz`: Download latest SemTK release tarball from
-  <https://github.com/ge-semtk/semtk/releases> and rename it
+- `files/jena.tar.gz`: Download latest Jena tarball from the
+  same page, <https://jena.apache.org/download/>, renaming it to
+  `jena.tar.gz`
+
+- `files/semtk.tar.gz`: Download latest SemTK tarball from
+  <https://github.com/ge-semtk/semtk/releases>, renaming it to
+  `semtk.tar.gz`
 
 - `files/style.css`: Download latest CSS stylesheet (`style.css`) for
   rendering markdown from
@@ -51,11 +55,6 @@ although we will mention each file here as well:
   (`files/docker/systemctl3.py`) from
   [docker-systemd-replacement](https://github.com/gdraheim/docker-systemctl-replacement)
 
-- `files/rack.tar.gz`: Package the RACK ontology and data (`tar cfz
-  RACK/rack-box/files/rack.tar.gz --exclude=.git --exclude=.github
-  --exclude=assist --exclude=cli --exclude=rack-box --exclude=tests
-  --exclude=tools RACK`)
-
 - `files/rack-assist.tar.gz`: Package the RACK ASSIST (`tar cfz
   RACK/rack-box/files/rack-assist.tar.gz RACK/assist`)
 
@@ -64,11 +63,24 @@ although we will mention each file here as well:
   RACK/cli/{*.sh,wheels}`), see [Build the RACK
   CLI](#Build-the-RACK-CLI) for build instructions first
 
+- `files/rack-ui.tar.gz`: Package the RACK UI (`tar cfz
+  RACK/rack-box/files/rack-ui.tar.gz RACK/rack-ui`)
+
 - `files/{documentation.html,index.html}`: Package the RACK
   documentation, see [Package RACK
   documentation](#Package-RACK-documentation) for instructions
 
-Once you have put these 9 files into the `files` subdirectory, skip to
+- `files/rack.tar.gz`: Generate OWL/CDR files (see [instructions
+  below](#Generate-OWL-CDR-files)) and package the RACK ontology and
+  data (`tar cfz RACK/rack-box/files/rack.tar.gz --exclude=.git
+  --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box
+  --exclude=tests --exclude=tools RACK`)
+
+- `focal64\*`: Unpack a recent Ubuntu vagrant box here (`curl -LOSfs
+  https://app.vagrantup.com/ubuntu/boxes/focal64/versions/20221021.0.0/providers/virtualbox.box
+  && tar -xf virtualbox.box -C RACK/rack-box/focal64`)
+
+Once you have put these files into the `files` subdirectory, skip to
 [Build the rack-box images](#Build-the-rack-box-images) for the next
 step.
 
@@ -107,6 +119,19 @@ repositories, run these commands:
     sed -i -e 's/>NodeGroupService/ onclick="javascript:event.target.port=12058">NodeGroupService/' index.html
     mv documentation.html index.html RACK/rack-box/files
 
+## Generate OWL/CDR files
+
+You will need a running rack-box dev image in order to generate OWL
+and CDR files.  Start a rack-box running in the background, then run
+these commands, and finally stop the rack-box that was running in the
+background once you're done:
+
+    RACK/cli/setup-owl.sh -b
+    pip3 install RACK/cli/wheels/*.whl
+    tar xfz RACK/rack-box/files/semtk.tar.gz
+    semtk-opensource/standaloneExecutables/target/standaloneExecutables-jar-with-dependencies.jar
+    RACK/nodegroups/generate-cdrs.sh semtk-opensource/standaloneExecutables/target/standaloneExecutables-jar-with-dependencies.jar
+
 ## Build the rack-box images
 
 You will need to install [Packer](https://www.packer.io/) if you don't
@@ -122,49 +147,9 @@ Docker, Hyper-V, and VirtualBox rack-box images:
 When Packer finishes these build commands, it will save the Docker
 rack-box image in your local Docker image cache and save the Hyper-V &
 VirtualBox rack-box images to new subdirectories called
-`output-hyperv-iso` and `output-virtualbox-iso`.  Your Hyper-V and
+`output-hyperv-iso` and `output-virtualbox-ovf`.  Your Hyper-V and
 VirtualBox GUI program can import these subdirectories directly into
 newly created virtual machines.
-
-### Troubleshooting
-
-### Using `act` to run CI locally
-
-The [act](https://github.com/nektos/act) tool can be used to run (an
-approximation of) the Github Actions workflows locally:
-
-- Download a binary release of Packer for Ubuntu, and place the
-  `packer` executable in the `rack-box/` directory
-- Install `act`
-- Generate a Github [personal access
-  token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token)
-- Create a `.secrets` file containing
-  `GITHUB_TOKEN=<your-github-PAT-here>`
-- Run `act --secret-file .secrets -P
-  ghcr.io/ubuntu-20.04=catthehacker/ubuntu:act-20.04`
-
-The first execution of `act` takes a while because it downloads the
-Docker image `ghcr.io/catthehacker/ubuntu:act-20.04` and you'll need
-enough free disk space to store the image.
-
-#### "volume is in use"
-
-If you see a message like this:
-
-    Error: Error response from daemon: remove act-Build-Lint-shell-scripts-and-the-RACK-CLI: volume is in use
-
-You can forcibly stop and remove the `act` Docker containers and their volumes:
-
-    docker stop $(docker ps -a | grep "ubuntu-act" | awk '{print $1}')
-    docker rm $(docker ps -a | grep "ubuntu-act" | awk '{print $1}')
-    docker volume rm $(docker volume ls --filter dangling=true | grep -o -E "act-.+$")
-
-There may also be a more precise solution to this issue, but the above works.
-
-#### "permission denied while trying to connect to the Docker daemon socket"
-
-`act` needs to be run with enough privileges to run Docker containers. Try
-`sudo -g docker act ...` (or an equivalent invocation for your OS/distro).
 
 ---
 Copyright (c) 2021, General Electric Company, Galois, Inc.

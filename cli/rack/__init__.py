@@ -20,33 +20,33 @@ import argparse
 import csv
 from enum import Enum, unique
 from io import StringIO
-import json
 import logging
 from os import environ
 from pathlib import Path
 import re
 import sys
-from typing import Any, Callable, Dict, List, Optional, NewType, TypeVar, cast
+from typing import Any, Callable, Dict, List, Optional, NewType, Set, TypeVar, cast
 from types import SimpleNamespace
+import tempfile
+import shutil
 
 # library imports
-import colorama
 from colorama import Fore, Style
-from jsonschema import ValidationError, validate
+from jsonschema import validate
 from tabulate import tabulate
 import requests
 import semtk3
 from semtk3.semtktable import SemtkTable
 import yaml
 
+from rack.manifest import Manifest, StepType
+from rack.types import Connection, Url
+
 __author__ = "Eric Mertens"
 __email__ = "emertens@galois.com"
 
 # NOTE: Do **not** use the root logger via `logging.command(...)`, instead use `logger.command(...)`
 logger = logging.getLogger(__name__)
-
-Connection = NewType('Connection', str)
-Url = NewType('Url', str)
 
 class Graph(Enum):
     """Enumeration of SemTK graph types"""
@@ -73,9 +73,12 @@ class ExportFormat(Enum):
         return self.value
 
 DEFAULT_BASE_URL: Url = Url("http://localhost")
+DEFAULT_OPTIMIZE_URL: Url = Url("http://localhost:8050/optimize")
 
 MODEL_GRAPH: Url = Url("http://rack001/model")
 DEFAULT_DATA_GRAPH = Url("http://rack001/data")
+DEFAULT_TRIPLE_STORE = Url("http://localhost:3030/RACK")
+DEFAULT_TRIPLE_STORE_TYPE = "fuseki"
 
 INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
     'type': 'object',
@@ -134,6 +137,12 @@ INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
                 ]
             }
         },
+        'model-graphs': {
+            'oneOf': [
+                {'type': 'string'},
+                {'type': 'array', 'items': {'type': 'string'}},
+            ]
+        },
         'data-graph': {'type': 'string'},
         'extra-data-graphs': {
             'type': 'array',
@@ -148,57 +157,13 @@ INGEST_OWL_CONFIG_SCHEMA: Dict[str, Any] = {
     'properties': {
         'files': {
             'type': 'array',
-            'contains': {'type': 'string'}}
-    }
-}
-
-MANIFEST_SCHEMA: Dict[str, Any] = {
-    'type': 'object',
-    'additionalProperties': False,
-    'required': ['steps'],
-    'properties': {
-        'steps': {
-            'type': 'array',
-            'items': {
-                'oneOf': [
-                    {
-                        'type': 'object',
-                        'additionalProperties': False,
-                        'required': ['data'],
-                        'properties': {
-                            'data': {'type': 'string'},
-                            'clear': {'type': 'boolean'},
-                            'data-graph': {'type': 'array', 'items': {'type': 'string'}}
-                        }
-                    },
-                    {
-                        'type': 'object',
-                        'additionalProperties': False,
-                        'required': ['model'],
-                        'properties': {
-                            'model': {'type': 'string'},
-                            'clear': {'type': 'boolean'}
-                        }
-                    },
-                    {
-                        'type': 'object',
-                        'additionalProperties': False,
-                        'required': ['nodegroups'],
-                        'properties': {
-                            'nodegroups': {'type': 'string'}
-                        }
-                    },
-                    {
-                        'type': 'object',
-                        'additionalProperties': False,
-                        'required': ['manifest'],
-                        'properties': {
-                            'manifest': {'type': 'string'}
-                        }
-                    },
-                ]
-            }
-        }
+            'contains': {'type': 'string'}},
+        'model-graphs': {
+            'oneOf': [
+                {'type': 'string'},
+                {'type': 'array', 'items': {'type': 'string'}},
+            ]
+        },
     }
 }
 
@@ -254,29 +219,20 @@ def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Ca
     return decorator
 # pylint: enable=unused-argument
 
-def sparql_connection(base_url: Url, data_graph: Optional[Url], extra_data_graphs: List[Url], triple_store: Optional[Url], triple_store_type: Optional[str]) -> Connection:
+def sparql_connection(base_url: Url, model_graphs: Optional[List[Url]], data_graph: Optional[Url], extra_data_graphs: List[Url], triple_store: Optional[Url], triple_store_type: Optional[str]) -> Connection:
     """Generate a SPARQL connection value."""
 
     semtk3.set_host(base_url)
     # Default to RACK in a Box triple-store location
-    triple_store = triple_store or Url("http://localhost:3030/RACK")
-    triple_store_type = triple_store_type or "fuseki"
-    conn: Dict[str, Any] = {
-        "name": "%NODEGROUP%",
-        "model": [{"type": triple_store_type, "url": triple_store, "graph": MODEL_GRAPH}],
-        "data": []
-        }
-    if data_graph is not None:
-        conn["data"].append({"type": triple_store_type, "url": triple_store, "graph": data_graph})
-    for graph in extra_data_graphs:
-        conn["data"].append({"type": triple_store_type, "url": triple_store, "graph": graph})
-    return Connection(json.dumps(conn))
+    model_graphs = model_graphs or [MODEL_GRAPH]
+    data_graph = data_graph or DEFAULT_DATA_GRAPH
+    triple_store = triple_store or DEFAULT_TRIPLE_STORE
+    triple_store_type = triple_store_type or DEFAULT_TRIPLE_STORE_TYPE
+    return Connection(semtk3.build_connection_str("%NODEGROUP%", triple_store_type, triple_store, model_graphs, data_graph, extra_data_graphs))
 
 def clear_graph(conn: Connection, which_graph: Graph = Graph.DATA) -> None:
     """Clear all the existing data in the data or model graph"""
-    print('Clearing graph')
-    result = semtk3.clear_graph(conn, which_graph.value, 0)
-    print(result.lstrip())
+    semtk3.clear_graph(conn, which_graph.value, 0)
 
 def format_semtk_table(semtk_table: SemtkTable, export_format: ExportFormat = ExportFormat.TEXT, headers: bool = True) -> str:
 
@@ -317,7 +273,7 @@ def generate_constraints(constraint_texts: List[str]) -> List[Any]:
         if match is None:
             print(str_bad('Unsupported constraint: ' + constraint_text))
             sys.exit(1)
-        
+
         if match['op'] is not None:
             c = semtk3.build_constraint(match['var'], operators[match['op']], [match['val']])
         else:
@@ -390,34 +346,265 @@ def ingest_owl(conn: Connection, owl_file: Path) -> None:
         return semtk3.upload_owl(owl_file, conn, "rack", "rack")
     go()
 
-def ingest_manifest_driver(manifest_path: Path, base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str]) -> None:
+def utility_copygraph_driver(base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], from_graph: Url, to_graph: Url) -> None:
+    semtk3.set_host(base_url)
+    triple_store = triple_store or DEFAULT_TRIPLE_STORE
+    triple_store_type = triple_store_type or DEFAULT_TRIPLE_STORE_TYPE
+
+    @with_status(f'Copying {str_highlight(from_graph)} to {str_highlight(to_graph)}')
+    def go() -> dict:
+        return semtk3.copy_graph(from_graph, to_graph, triple_store, triple_store_type, triple_store, triple_store_type)
+    go()
+
+class IngestionBuilder:
+    def __init__(self) -> None:
+        self.fresh: int = 0
+        self.model_graphs: Set[str] = set()
+        self.data_graphs: Set[str] = set()
+        self.manifests: Set[Path] = set()
+
+    def next_fresh(self) -> int:
+        result = self.fresh
+        self.fresh = result + 1
+        return result
+
+    def model(
+        self,
+        from_path: Path,
+        to_path: Path,
+    ) -> None:
+        with open(from_path, mode='r', encoding='utf-8-sig') as f:
+            obj = yaml.safe_load(f)
+
+        frombase = from_path.parent
+        tobase = to_path.parent
+
+        files = obj['files']
+        for (i,file) in enumerate(files):
+            file = Path(file)
+            shutil.copyfile(frombase.joinpath(file), tobase.joinpath(file.name), follow_symlinks=True)
+            files[i] = file.name
+
+        c = obj.get('model-graphs')
+        if c is None:
+            self.model_graphs.add(str(MODEL_GRAPH))
+        elif isinstance(c, str):
+            self.model_graphs.add(c)
+        elif isinstance(c, list):
+            self.model_graphs.update(c)
+
+        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
+            yaml.safe_dump(obj, out)
+
+    def data(
+        self,
+        from_path: Path,
+        to_path: Path,
+    ) -> None:
+        with open(from_path, mode='r', encoding='utf-8-sig') as f:
+            obj = yaml.safe_load(f)
+        frombase = from_path.parent
+        tobase = to_path.parent
+
+        for step in obj['ingestion-steps']:
+            if 'owl' in step:
+                path = Path(step['owl'])
+                shutil.copyfile(frombase.joinpath(path), tobase.joinpath(path.name), follow_symlinks=True)
+                step['owl'] = path.name
+            if 'csv' in step:
+                path = Path(step['csv'])
+                shutil.copyfile(frombase.joinpath(path), tobase.joinpath(path.name), follow_symlinks=True)
+                step['csv'] = path.name
+
+        self.data_graphs.add(obj['data-graph'])
+
+        c = obj.get('extra-data-graphs')
+        if c is not None:
+            self.data_graphs.update(c)
+
+        c = obj.get('model-graphs')
+        if c is not None:
+            if isinstance(c, str):
+                self.model_graphs.add(c)
+            elif isinstance(c, list):
+                self.model_graphs.update(c)
+
+        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
+            yaml.safe_dump(obj, out)
+
+    def nodegroups(
+        self,
+        from_path: Path,
+        to_path: Path,
+    ) -> None:
+        shutil.copyfile(from_path.joinpath('store_data.csv'), to_path.joinpath('store_data.csv'), follow_symlinks=True)
+        with open(from_path.joinpath('store_data.csv'), 'r') as f:
+            for row in csv.DictReader(f):
+                json = row['jsonFile']
+                shutil.copyfile(from_path.joinpath(json), to_path.joinpath(json), follow_symlinks=True)
+
+    def manifest(
+        self,
+        from_path: Path,
+        to_path: Path,
+    ) -> None:
+
+        with open(from_path, mode='r', encoding='utf-8-sig') as f:
+            obj = yaml.safe_load(f)
+
+        # Handle multiple inclusions of the same manifest to simplify
+        full_path = from_path.absolute()
+        if full_path in self.manifests:
+            print(f'Pruning duplicate manifest {from_path}')
+            del obj['steps']
+        else:
+            self.manifests.add(full_path)
+            base_path = from_path.parent
+            for step in obj.get('steps',[]):
+                if 'manifest' in step:
+                    path = step['manifest']
+                    dirname = Path(f'{self.next_fresh():02}_manifest')
+                    subdir = to_path.parent.joinpath(dirname)
+                    topath = subdir.joinpath(Path(path).name)
+                    subdir.mkdir(exist_ok=False)
+                    self.manifest(base_path.joinpath(path), topath)
+                    step['manifest'] = str(dirname.joinpath(Path(path).name))
+                elif 'model' in step:
+                    path = step['model']
+                    dirname = Path(f'{self.next_fresh():02}_model')
+                    subdir = to_path.parent.joinpath(dirname)
+                    topath = subdir.joinpath(Path(path).name)
+                    subdir.mkdir(exist_ok=False)
+                    self.model(base_path.joinpath(path), topath)
+                    step['model'] = str(dirname.joinpath(Path(path).name))
+                elif 'data' in step:
+                    path = step['data']
+                    dirname = Path(f'{self.next_fresh():02}_data')
+                    subdir = to_path.parent.joinpath(dirname)
+                    topath = subdir.joinpath(Path(path).name)
+                    subdir.mkdir(exist_ok=False)
+                    self.data(base_path.joinpath(path), topath)
+                    step['data'] = str(dirname.joinpath(Path(path).name))
+                elif 'nodegroups' in step:
+                    path = step['nodegroups']
+                    dirname = Path(f'{self.next_fresh():02}_nodegroups')
+                    subdir = to_path.parent.joinpath(dirname)
+                    subdir.mkdir(exist_ok=False)
+                    self.nodegroups(base_path.joinpath(path), subdir)
+                    step['nodegroups'] = str(dirname)
+        
+        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
+            yaml.safe_dump(obj, out)
+
+def build_manifest_driver(
+    manifest_path: Path,
+    zipfile_path: Path
+) -> None:
+
+    with tempfile.TemporaryDirectory() as outdir:
+        builder = IngestionBuilder()
+        builder.manifest(manifest_path, Path(outdir).joinpath(f'manifest.yaml'))
+        shutil.make_archive(str(zipfile_path), 'zip', outdir)
+        
+        for x in builder.model_graphs:
+            print(f'Model graph: {x}')
+
+        for x in builder.data_graphs:
+            print(f'Data graph: {x}')
+
+
+def ingest_manifest_driver(
+    manifest_path: Path,
+    base_url: Url,
+    triple_store: Optional[Url],
+    triple_store_type: Optional[str],
+    clear: bool,
+    default_graph: bool,
+    top_level: bool = True,
+    optimization_url: Optional[Url] = None) -> None:
+
     with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
-        manifest = yaml.safe_load(manifest_file)
-        validate(manifest, MANIFEST_SCHEMA)
-    
+        manifest = Manifest.fromYAML(manifest_file)
+
     base_path = manifest_path.parent
 
-    for step in manifest['steps']:
-        if 'data' in step:
-            clear = step.get('clear', False)
-            data_graphs = step.get('data-graphs')
-            ingest_data_driver(base_path / step['data'], base_url, data_graphs, triple_store, triple_store_type, clear)
-        elif 'model' in step:
-            clear = step.get('clear', False)
-            ingest_owl_driver(base_path / step['model'], base_url, triple_store, triple_store_type, clear)
-        elif 'nodegroups' in step:
-            store_nodegroups_driver(base_path / step['nodegroups'], base_url)
-        elif 'manifest' in step:
-            ingest_manifest_driver(base_path / step['manifest'], base_url, triple_store, triple_store_type)
+    if clear:
+        if default_graph:
+            # clear only the default graph first
+            clear_driver(base_url, [Url("uri://DefaultGraph")], [], triple_store, triple_store_type, Graph.MODEL)
+        else:
+            # clear the whole footprint
+            modelgraphs = manifest.getModelgraphsFootprint()
+            datagraphs = manifest.getDatagraphsFootprint()
+            if not modelgraphs == []:
+                clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.MODEL)
+            if not datagraphs == []:
+                clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.DATA)
 
-def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
+        if not manifest.getNodegroupsFootprint() == []:
+            delete_nodegroups_driver(manifest.getNodegroupsFootprint(), True, True, True, base_url)
+
+    # We don't override the model and datagraphs from the ingestion components unless it's for default
+    # the step itself gets to pick the target graphs
+    if default_graph:
+        targetgraph = [Url("uri://DefaultGraph")]
+    else:
+        targetgraph = None
+
+    for (step_type, step_data) in manifest.steps:
+        if StepType.DATA == step_type:
+            stepFile = base_path / step_data
+            ingest_data_driver(stepFile, base_url, targetgraph, targetgraph, triple_store, triple_store_type, False)
+        elif StepType.MODEL == step_type:
+            stepFile = base_path / step_data
+            ingest_owl_driver(stepFile, base_url, targetgraph, triple_store, triple_store_type, False)
+        elif StepType.NODEGROUPS == step_type:
+            stepFile = base_path / step_data
+            store_nodegroups_driver(stepFile, base_url)
+        elif StepType.MANIFEST == step_type:
+            stepFile = base_path / step_data
+            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, default_graph, False)
+        elif StepType.COPYGRAPH == step_type:
+            utility_copygraph_driver(base_url, triple_store, triple_store_type, step_data[0], step_data[1])
+
+    if top_level:
+        if manifest.getCopyToDefaultGraph():
+            defaultGraph = Url("uri://DefaultGraph")
+
+            if clear:
+                clear_driver(base_url, [defaultGraph], None, triple_store, triple_store_type, Graph.MODEL)
+            for graph in manifest.getModelgraphsFootprint():
+                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
+            for graph in manifest.getDatagraphsFootprint():
+                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
+
+        if manifest.getPerformEntityResolution():
+            @with_status(f'Executing entity resolution')
+            def go() -> dict:
+                return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [defaultGraph], defaultGraph, [], triple_store, triple_store_type))
+            go()
+
+        if manifest.getPerformOptimization():
+            invoke_optimization(optimization_url)
+
+def invoke_optimization(url: Optional[Url]) -> None:
+    url = url or DEFAULT_OPTIMIZE_URL
+    @with_status(f'Optimizing triplestore')
+    def go() -> None:
+        response = requests.get(str(url)).json()
+        if not response['success']:
+            raise Exception(response['message'])
+    go()
+
+
+def ingest_data_driver(config_path: Path, base_url: Url, model_graphs: Optional[List[Url]], data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
     with open(config_path, mode='r', encoding='utf-8-sig') as config_file:
         config = yaml.safe_load(config_file)
         validate(config, INGEST_CSV_CONFIG_SCHEMA)
 
     steps = config['ingestion-steps']
-    
+
     if data_graphs is not None:
         data_graph = data_graphs[0]
     elif 'data-graph' in config:
@@ -435,7 +622,15 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
     else:
         extra_data_graphs = []
 
-    conn = sparql_connection(base_url, data_graph, extra_data_graphs, triple_store, triple_store_type)
+    if model_graphs is None:
+        c = config.get('model-graphs')
+        if c is not None:
+            if isinstance(c, str):
+                model_graphs = [Url(c)]
+            elif isinstance(c, list):
+                model_graphs = [Url(x) for x in c]
+
+    conn = sparql_connection(base_url, model_graphs, data_graph, extra_data_graphs, triple_store, triple_store_type)
 
     if clear:
         clear_graph(conn)
@@ -472,12 +667,12 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
                 print(str_bad(' FAIL'))
                 raise e
             print(str_good(' OK'))
-        
+
         elif 'count' in step:
             expected = step['count']
             name = step['nodegroup']
             runtime_constraints = generate_constraints(step.get('constraints', []))
-            
+
             print(f'Counting nodegroup {str_highlight(name): <40}', end="")
 
             semtk_table = semtk3.count_by_id(name, runtime_constraints=runtime_constraints)
@@ -488,7 +683,7 @@ def ingest_data_driver(config_path: Path, base_url: Url, data_graphs: Optional[L
                 print(str_bad(f' FAIL got:{got} expected:{expected}'))
 
 
-def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
+def ingest_owl_driver(config_path: Path, base_url: Url, model_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple OWL files into the model graph."""
     with open(config_path, mode='r', encoding='utf-8-sig') as config_file:
         config = yaml.safe_load(config_file)
@@ -497,7 +692,15 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
     files = config['files']
     base_path = config_path.parent
 
-    conn = sparql_connection(base_url, None, [], triple_store, triple_store_type)
+    if model_graphs is None:
+        c = config.get('model-graphs')
+        if c is not None:
+            if isinstance(c, str):
+                model_graphs = [Url(c)]
+            elif isinstance(c, list):
+                model_graphs = [Url(x) for x in c]
+
+    conn = sparql_connection(base_url, model_graphs, None, [], triple_store, triple_store_type)
 
     if clear:
         clear_graph(conn, which_graph=Graph.MODEL)
@@ -506,18 +709,22 @@ def ingest_owl_driver(config_path: Path, base_url: Url, triple_store: Optional[U
         ingest_owl(conn, base_path / file)
 
 @with_status('Clearing')
-def clear_driver(base_url: Url, data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], graph: Graph) -> None:
+def clear_driver(base_url: Url, model_graphs: Optional[List[Url]], data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], graph: Graph) -> None:
     """Clear the given data graphs"""
-    if data_graphs is None:
-        conn = sparql_connection(base_url, DEFAULT_DATA_GRAPH, [], triple_store, triple_store_type)
-        clear_graph(conn, which_graph=graph)
-    else:
-        for data_graph in data_graphs:
-            conn = sparql_connection(base_url, data_graph, [], triple_store, triple_store_type)
+
+    if graph == Graph.MODEL:
+        for model_graph in model_graphs or [MODEL_GRAPH]:
+            print(f"{model_graph} ", end='')
+            conn = sparql_connection(base_url, [model_graph], None, [], triple_store, triple_store_type)
+            clear_graph(conn, which_graph=graph)
+    elif graph == Graph.DATA:
+        for data_graph in data_graphs or [DEFAULT_DATA_GRAPH]:
+            print(f"{data_graph} ", end='')
+            conn = sparql_connection(base_url, None, data_graph, [], triple_store, triple_store_type)
             clear_graph(conn, which_graph=graph)
 
 def template_driver(base_url: Url, triple_store: Optional[Url], triple_store_type: Optional[str], class_uri: Url, filename: Optional[Path]) -> None:
-    conn = sparql_connection(base_url, DEFAULT_DATA_GRAPH, [], triple_store, triple_store_type)
+    conn = sparql_connection(base_url, None, None, [], triple_store, triple_store_type)
     csv = semtk3.get_class_template_csv(class_uri, conn, "identifier")
     if filename is None:
         print(csv, end="")
@@ -527,12 +734,12 @@ def template_driver(base_url: Url, triple_store: Optional[Url], triple_store_typ
 
 @with_status('Storing nodegroups')
 def store_nodegroups_driver(directory: Path, base_url: Url) -> None:
-    sparql_connection(base_url, None, [], None, None)
+    sparql_connection(base_url, None, None, [], None, None)
     semtk3.store_nodegroups(directory)
 
 @with_status('Storing nodegroup')
 def store_nodegroup_driver(name: str, creator: str, filename: str, comment: Optional[str], base_url: Url, kind: str) -> None:
-    sparql_connection(base_url, None, [], None, None)
+    sparql_connection(base_url, None, None, [], None, None)
 
     with open(filename) as f:
         nodegroup_json_str = f.read()
@@ -561,7 +768,7 @@ def sparql_nodegroup_driver(base_url: Url, filename: str) -> None:
 
 @with_status('Retrieving nodegroups')
 def retrieve_nodegroups_driver(regexp: str, directory: Path, base_url: Url, kind: str) -> None:
-    sparql_connection(base_url, None, [], None, None)
+    sparql_connection(base_url, None, None, [], None, None)
     if kind == 'nodegroup':
         item_type = semtk3.STORE_ITEM_TYPE_NODEGROUP
     elif kind == 'report':
@@ -574,7 +781,7 @@ def list_nodegroups_driver(base_url: Url) -> None:
 
     @with_status('Listing nodegroups')
     def list_nodegroups() -> SemtkTable:
-        sparql_connection(base_url, None, [], None, None)
+        sparql_connection(base_url, None, None, [], None, None)
         return semtk3.get_nodegroup_store_data()
 
     print(format_semtk_table(list_nodegroups()))
@@ -607,7 +814,7 @@ def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, ye
         print('No nodegroups specified for deletion: doing nothing.')
         return
 
-    sparql_connection(base_url, None, [], None, None)
+    sparql_connection(base_url, None, None, [], None, None)
     allIDs = semtk3.get_store_table().get_column('ID')
 
     if use_regexp:
@@ -633,7 +840,7 @@ def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, ye
     confirm(on_confirmed, yes)
 
 def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
-    sparql_connection(base_url, None, [], None, None)
+    sparql_connection(base_url, None, None, [], None, None)
 
     table = semtk3.get_store_table()
     id_col = table.get_column_index('ID')
@@ -650,30 +857,38 @@ def delete_all_nodegroups_driver(yes: bool, base_url: Url) -> None:
     confirm(on_confirmed, yes)
 
 def dispatch_data_export(args: SimpleNamespace) -> None:
-    conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store, args.triple_store_type)
+    conn = sparql_connection(args.base_url, args.model_graph, args.data_graph[0], args.data_graph[1:], args.triple_store, args.triple_store_type)
     run_query(conn, args.nodegroup, export_format=args.format, headers=not args.no_headers, path=args.file, constraints=args.constraint)
 
 def dispatch_data_count(args: SimpleNamespace) -> None:
-    conn = sparql_connection(args.base_url, args.data_graph[0], args.data_graph[1:], args.triple_store, args.triple_store_type)
+    conn = sparql_connection(args.base_url, args.model_graph, args.data_graph[0], args.data_graph[1:], args.triple_store, args.triple_store_type)
     run_count_query(conn, args.nodegroup, constraints=args.constraint)
+
+def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
+    """Implementation of utility copygraph command"""
+    utility_copygraph_driver(args.base_url, args.triple_store, args.triple_store_type, args.from_graph, args.to_graph)
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.manifest), args.base_url, args.triple_store, args.triple_store_type)
+    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph, True, args.optimize_url)
+
+def dispatch_manifest_build(args: SimpleNamespace) -> None:
+    """Implementation of manifest import subcommand"""
+    build_manifest_driver(Path(args.config), Path(args.zipfile))
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
     cliMethod = CLIMethod.DATA_IMPORT
-    ingest_data_driver(Path(args.config), args.base_url, args.data_graph, args.triple_store, args.triple_store_type, args.clear)
+    ingest_data_driver(Path(args.config), args.base_url, args.model_graph, args.data_graph, args.triple_store, args.triple_store_type, args.clear)
 
 def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
     cliMethod = CLIMethod.MODEL_IMPORT
-    ingest_owl_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear)
+    ingest_owl_driver(Path(args.config), args.base_url, args.model_graph, args.triple_store, args.triple_store_type, args.clear)
 
 def dispatch_data_clear(args: SimpleNamespace) -> None:
     """Implementation of the data clear subcommand"""
-    clear_driver(args.base_url, args.data_graph, args.triple_store, args.triple_store_type, Graph.DATA)
+    clear_driver(args.base_url, None, args.data_graph, args.triple_store, args.triple_store_type, Graph.DATA)
 
 def dispatch_data_template(args: SimpleNamespace) -> None:
     """Implementation of the data template subcommand"""
@@ -681,7 +896,7 @@ def dispatch_data_template(args: SimpleNamespace) -> None:
 
 def dispatch_model_clear(args: SimpleNamespace) -> None:
     """Implementation of the model clear subcommand"""
-    clear_driver(args.base_url, None, args.triple_store, args.triple_store_type, Graph.MODEL)
+    clear_driver(args.base_url, args.model_graph, None, args.triple_store, args.triple_store_type, Graph.MODEL)
 
 def dispatch_nodegroups_import(args: SimpleNamespace) -> None:
     store_nodegroups_driver(args.directory, args.base_url)
@@ -717,6 +932,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     manifest_parser = subparsers.add_parser('manifest', help='Ingestion package automation')
     manifest_subparsers = manifest_parser.add_subparsers(dest='command')
     manifest_import_parser = manifest_subparsers.add_parser('import', help='Import ingestion manifest')
+    manifest_build_parser = manifest_subparsers.add_parser('build', help='Build ingestion package zip file')
 
     data_parser = subparsers.add_parser('data', help='Import or export CSV data')
     data_subparsers = data_parser.add_subparsers(dest='command')
@@ -741,15 +957,32 @@ def get_argument_parser() -> argparse.ArgumentParser:
     nodegroups_deleteall_parser = nodegroups_subparsers.add_parser('delete-all', help='Delete all nodegroups from RACK')
     nodegroups_sparql_parser = nodegroups_subparsers.add_parser('sparql', help='Show SPARQL query for nodegroup')
 
-    manifest_import_parser.add_argument('manifest', type=str, help='Manifest YAML file')
+    utility_parser = subparsers.add_parser('utility', help='Tools for manipulating raw data')
+    utility_subparsers = utility_parser.add_subparsers(dest='command')
+    utility_copygraph_parser = utility_subparsers.add_parser('copygraph', help='merge data from one graph to another')
+
+    utility_copygraph_parser.add_argument('--from-graph', type=str, required=True, help='merge from this graph')
+    utility_copygraph_parser.add_argument('--to-graph', type=str, required=True, help='merge to this graph')
+    utility_copygraph_parser.set_defaults(func=dispatch_utility_copygraph)
+
+    manifest_import_parser.add_argument('config', type=str, help='Manifest YAML file')
+    manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
+    manifest_import_parser.add_argument('--default-graph', action='store_true', help='Load whole manifest into default graph')
+    manifest_import_parser.add_argument('--optimize-url', type=str, help='RACK UI optimization endpoint (e.g. http://localhost:8050/optimize)')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)
 
+    manifest_build_parser.add_argument('config', type=str, help='Manifest YAML file')
+    manifest_build_parser.add_argument('zipfile', type=str, help='Ingestion package output file')
+    manifest_build_parser.set_defaults(func=dispatch_manifest_build)
+
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')
+    data_import_parser.add_argument('--model-graph', type=str, action='append', help='Model graph URL')
     data_import_parser.add_argument('--data-graph', type=str, action='append', help='Data graph URL')
     data_import_parser.add_argument('--clear', action='store_true', help='Clear data graph before import')
     data_import_parser.set_defaults(func=dispatch_data_import)
 
     data_export_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
+    data_export_parser.add_argument('--model-graph', type=str, action='append', help='Model graph URL')
     data_export_parser.add_argument('--data-graph', type=str, required=True, action='append', help='Data graph URL')
     data_export_parser.add_argument('--format', type=ExportFormat, help='Export format', choices=list(ExportFormat), default=ExportFormat.TEXT)
     data_export_parser.add_argument('--no-headers', action='store_true', help='Omit header row')
@@ -758,6 +991,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_export_parser.set_defaults(func=dispatch_data_export)
 
     data_count_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
+    data_count_parser.add_argument('--model-graph', type=str, action='append', help='Data graph URL')
     data_count_parser.add_argument('--data-graph', type=str, required=True, action='append', help='Data graph URL')
     data_count_parser.add_argument('--constraint', type=str, action='append', help='Runtime constraint: key=value')
     data_count_parser.set_defaults(func=dispatch_data_count)
@@ -772,8 +1006,10 @@ def get_argument_parser() -> argparse.ArgumentParser:
     model_import_parser.add_argument('config', type=str, help='Configuration YAML file')
     model_import_parser.set_defaults(func=dispatch_model_import)
     model_import_parser.add_argument('--clear', action='store_true', help='Clear model graph before import')
+    model_import_parser.add_argument('--model-graph', type=str, action='append', help='Model graph URL')
 
     model_clear_parser.set_defaults(func=dispatch_model_clear)
+    model_clear_parser.add_argument('--model-graph', type=str, action='append', help='Model graph URL')
 
     nodegroups_import_parser.add_argument('directory', type=str, help='Nodegroup directory')
     nodegroups_import_parser.set_defaults(func=dispatch_nodegroups_import)

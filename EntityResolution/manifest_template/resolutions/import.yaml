@@ -1,0 +1,4 @@
+data-graph: "http://rack001/data"
+ingestion-steps:
+
+- {nodegroup: "ingest_SAME_AS", csv: "SAME_AS.csv"}

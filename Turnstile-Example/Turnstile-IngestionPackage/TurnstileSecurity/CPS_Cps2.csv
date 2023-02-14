@@ -1,0 +1,6 @@
+identifier,dataInsertedBy_identifier,insideTrustedBoundary,wasDerivedFrom_identifier,partOf_identifier
+TurnstileCps,TurnstileIngestion-Security,true,Turnstile,
+InGateCps,TurnstileIngestion-Security,true,InGate,TurnstileCps
+OutGateCps,TurnstileIngestion-Security,true,OutGate,TurnstileCps
+CounterApplicationCps,TurnstileIngestion-Security,true,CounterApplication,TurnstileCps
+DisplayCps,TurnstileIngestion-Security,true,Display,TurnstileCps

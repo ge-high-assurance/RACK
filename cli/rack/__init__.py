@@ -22,7 +22,7 @@ from enum import Enum, unique
 from io import StringIO
 import logging
 from os import environ
-from pathlib import Path
+from pathlib import Path, PosixPath
 import re
 import sys
 from typing import Any, Callable, Dict, List, Optional, NewType, Set, TypeVar, cast
@@ -468,7 +468,7 @@ class IngestionBuilder:
                     topath = subdir.joinpath(Path(path).name)
                     subdir.mkdir(exist_ok=False)
                     self.manifest(base_path.joinpath(path), topath)
-                    step['manifest'] = str(dirname.joinpath(Path(path).name))
+                    step['manifest'] = str(PosixPath(dirname).joinpath(PosixPath(path).name))
                 elif 'model' in step:
                     path = step['model']
                     dirname = Path(f'{self.next_fresh():02}_model')
@@ -476,7 +476,7 @@ class IngestionBuilder:
                     topath = subdir.joinpath(Path(path).name)
                     subdir.mkdir(exist_ok=False)
                     self.model(base_path.joinpath(path), topath)
-                    step['model'] = str(dirname.joinpath(Path(path).name))
+                    step['model'] = str(PosixPath(dirname).joinpath(PosixPath(path).name))
                 elif 'data' in step:
                     path = step['data']
                     dirname = Path(f'{self.next_fresh():02}_data')
@@ -484,7 +484,7 @@ class IngestionBuilder:
                     topath = subdir.joinpath(Path(path).name)
                     subdir.mkdir(exist_ok=False)
                     self.data(base_path.joinpath(path), topath)
-                    step['data'] = str(dirname.joinpath(Path(path).name))
+                    step['data'] = str(PosixPath(dirname).joinpath(PosixPath(path).name))
                 elif 'nodegroups' in step:
                     path = step['nodegroups']
                     dirname = Path(f'{self.next_fresh():02}_nodegroups')

@@ -3,7 +3,7 @@
 
 set -e
 
-FUSEKI_PID=$(systemctl show --property MainPID --help fuseki)
+FUSEKI_PID=$(systemctl show --property MainPID fuseki)
 FUSEKI_PID=${FUSEKI_PID#"MainPID="}
 
 if [ -n "${FUSEKI_PID}" ]; then

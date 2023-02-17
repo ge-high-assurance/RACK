@@ -22,7 +22,7 @@ from enum import Enum, unique
 from io import StringIO
 import logging
 from os import environ
-from pathlib import Path, PosixPath
+from pathlib import Path
 import re
 import sys
 from typing import Any, Callable, Dict, List, Optional, NewType, Set, TypeVar, cast
@@ -462,36 +462,36 @@ class IngestionBuilder:
             base_path = from_path.parent
             for step in obj.get('steps',[]):
                 if 'manifest' in step:
-                    path = step['manifest']
+                    path = Path(step['manifest'])
                     dirname = Path(f'{self.next_fresh():02}_manifest')
                     subdir = to_path.parent.joinpath(dirname)
-                    topath = subdir.joinpath(Path(path).name)
+                    topath = subdir.joinpath(path.name)
                     subdir.mkdir(exist_ok=False)
                     self.manifest(base_path.joinpath(path), topath)
-                    step['manifest'] = str(PosixPath(dirname).joinpath(PosixPath(path).name))
+                    step['manifest'] = dirname.joinpath(path.name).as_posix()
                 elif 'model' in step:
-                    path = step['model']
+                    path = Path(step['model'])
                     dirname = Path(f'{self.next_fresh():02}_model')
                     subdir = to_path.parent.joinpath(dirname)
-                    topath = subdir.joinpath(Path(path).name)
+                    topath = subdir.joinpath(path.name)
                     subdir.mkdir(exist_ok=False)
                     self.model(base_path.joinpath(path), topath)
-                    step['model'] = str(PosixPath(dirname).joinpath(PosixPath(path).name))
+                    step['model'] = dirname.joinpath(path.name).as_posix()
                 elif 'data' in step:
-                    path = step['data']
+                    path = Path(step['data'])
                     dirname = Path(f'{self.next_fresh():02}_data')
                     subdir = to_path.parent.joinpath(dirname)
-                    topath = subdir.joinpath(Path(path).name)
+                    topath = subdir.joinpath(path.name)
                     subdir.mkdir(exist_ok=False)
                     self.data(base_path.joinpath(path), topath)
-                    step['data'] = str(PosixPath(dirname).joinpath(PosixPath(path).name))
+                    step['data'] = dirname.joinpath(path.name).as_posix()
                 elif 'nodegroups' in step:
-                    path = step['nodegroups']
+                    path = Path(step['nodegroups'])
                     dirname = Path(f'{self.next_fresh():02}_nodegroups')
                     subdir = to_path.parent.joinpath(dirname)
                     subdir.mkdir(exist_ok=False)
                     self.nodegroups(base_path.joinpath(path), subdir)
-                    step['nodegroups'] = str(dirname)
+                    step['nodegroups'] = dirname.as_posix()
         
         with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
             yaml.safe_dump(obj, out)

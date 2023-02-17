@@ -38,7 +38,7 @@ jobs:
       with:
         # This path is specific to Ubuntu
         path: ~/.cache/pip
-        # Look to see if there is a cache hit
+        # Look to see if there is a cache hit for cvstomd
         key: ${{ runner.os }}-pip-csvtomd
         restore-keys: |
           ${{ runner.os }}-pip-

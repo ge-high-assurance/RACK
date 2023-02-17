@@ -15,6 +15,7 @@ on:
 jobs:
 
 # build-docker-image job:
+#  - Downloads rack-box files from artifacts
 #  - Builds rack-box docker image
 #  - Pushes docker image to Docker Hub
 
@@ -28,13 +29,11 @@ jobs:
         repository: ge-high-assurance/RACK
         path: RACK
 
-    - name: Restore rack-box files from cache
-      uses: actions/cache/restore@v3
+    - name: Download rack-box files from artifacts
+      uses: actions/download-artifact@v3
       with:
+        name: rack-box-files
         path: RACK/rack-box/files
-        key: files-${{ github.sha }}-${{ github.run_id }}
-        enableCrossOsArchive: true
-        fail-on-cache-miss: true
 
     - name: Build rack-box docker image
       run: |

@@ -20,7 +20,7 @@
       "headless": "{{user `headless`}}",
       "http_directory": "http",
       "shutdown_command": "sudo shutdown -P now",
-      "source_path": "focal64/box.ovf",
+      "source_path": "jammy64/box.ovf",
       "ssh_private_key_file": "vagrant",
       "ssh_username": "vagrant",
       "vboxmanage": [

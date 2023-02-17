@@ -19,7 +19,7 @@ jobs:
 #  - Pushes docker image to Docker Hub
 
   build-docker-image:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Check out RACK source
@@ -28,18 +28,13 @@ jobs:
         repository: ge-high-assurance/RACK
         path: RACK
 
-    - name: Ask cache for rack-box files
-      uses: actions/cache@v3
-      id: cache
+    - name: Restore rack-box files from cache
+      uses: actions/cache/restore@v3
       with:
         path: RACK/rack-box/files
-        key: files-${{ github.sha }}
-
-    - name: We don't have rack-box files?
-      if: steps.cache.outputs.cache-hit == false
-      run: |
-        echo "::error rack-box files are missing"
-        exit 1
+        key: files-${{ github.sha }}-${{ github.run_id }}
+        enableCrossOsArchive: true
+        fail-on-cache-miss: true
 
     - name: Build rack-box docker image
       run: |

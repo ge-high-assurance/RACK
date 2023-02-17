@@ -24,24 +24,19 @@ jobs:
         repository: ge-high-assurance/RACK
         path: RACK
 
-    - name: Ask cache for rack-box files
-      uses: actions/cache@v3
-      id: cache
+    - name: Restore rack-box files from cache
+      uses: actions/cache/restore@v3
       with:
         path: RACK/rack-box/files
-        key: files-${{ github.sha }}
-
-    - name: We don't have rack-box files?
-      if: steps.cache.outputs.cache-hit == false
-      run: |
-        echo "::error rack-box files are missing"
-        exit 1
+        key: files-${{ github.sha }}-${{ github.run_id }}
+        enableCrossOsArchive: true
+        fail-on-cache-miss: true
 
     - name: Download base box for virtual machine
       run: |
-        curl -LOSfs https://app.vagrantup.com/ubuntu/boxes/focal64/versions/20221115.1.0/providers/virtualbox.box
-        mkdir -p RACK/rack-box/focal64
-        tar -xf virtualbox.box -C RACK/rack-box/focal64
+        curl -LOSfs https://app.vagrantup.com/ubuntu/boxes/jammy64/versions/20230215.0.0/providers/virtualbox.box
+        mkdir -p RACK/rack-box/jammy64
+        tar -xf virtualbox.box -C RACK/rack-box/jammy64
         rm -f virtualbox.box
 
     - name: Build rack-box virtual machine

@@ -6,9 +6,9 @@ on:
 jobs:
 
 # assemble-files job:
-#  - Downloads files for rack-box builds
-#  - Packages files for rack-box builds
-#  - Saves files in cache for rack-box builds
+#  - Downloads certain files for rack-box builds
+#  - Packages certain files for rack-box builds
+#  - Uploads rack-box files to artifacts
 
   assemble-files:
     runs-on: ubuntu-22.04
@@ -127,9 +127,9 @@ jobs:
       run: |
         docker container stop $(docker container ls -qf ancestor=gehighassurance/rack-box:dev)
 
-    - name: Save rack-box files to cache
-      uses: actions/cache/save@v3
+    - name: Upload rack-box files to artifacts
+      uses: actions/upload-artifact@v3
       with:
+        name: rack-box-files
         path: RACK/rack-box/files
-        key: files-${{ github.sha }}-${{ github.run_id }}
-        enableCrossOsArchive: true
+        retention-days: 1

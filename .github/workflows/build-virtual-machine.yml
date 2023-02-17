@@ -11,8 +11,9 @@ on:
 jobs:
 
 # build-virtual-machine job:
+#  - Downloads rack-box files from artifacts
 #  - Builds rack-box virtual machine
-#  - Uploads virtual machine to workflow or release
+#  - Uploads virtual machine to artifacts or releases
 
   build-virtual-machine:
     runs-on: macos-12
@@ -24,13 +25,11 @@ jobs:
         repository: ge-high-assurance/RACK
         path: RACK
 
-    - name: Restore rack-box files from cache
-      uses: actions/cache/restore@v3
+    - name: Download rack-box files from artifacts
+      uses: actions/download-artifact@v3
       with:
+        name: rack-box-files
         path: RACK/rack-box/files
-        key: files-${{ github.sha }}-${{ github.run_id }}
-        enableCrossOsArchive: true
-        fail-on-cache-miss: true
 
     - name: Download base box for virtual machine
       run: |
@@ -52,7 +51,7 @@ jobs:
         split -b 1500m rack-box-${{ inputs.version }}.zip rack-box-${{ inputs.version }}.zip
         rm rack-box-${{ inputs.version }}.zip
 
-    - name: Upload split virtual machine to workflow
+    - name: Upload virtual machine to artifacts
       uses: actions/upload-artifact@v3
       if: github.event_name != 'release'
       with:
@@ -65,7 +64,7 @@ jobs:
     # against it; replace it with "gh release upload" if CI fails
     # run: gh release upload ${{ github.event.release.tag_name }} RACK/rack-box/GitHub-Release-README.md RACK/rack-box/rack-box-${{ inputs.version }}.zip* --clobber
 
-    - name: Upload split virtual machine to release
+    - name: Upload virtual machine to releases
       uses: softprops/action-gh-release@v1
       if: github.event_name == 'release'
       with:

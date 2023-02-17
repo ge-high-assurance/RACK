@@ -62,6 +62,8 @@ jobs:
     uses: ./.github/workflows/assemble-files.yml
 
 # test job:
+#  - Downloads rack-box files from artifacts
+#  - Installs rack-box on runner
 #  - Runs rack-box tests
 
   test:
@@ -75,13 +77,11 @@ jobs:
         repository: ge-high-assurance/RACK
         path: RACK
 
-    - name: Restore rack-box files from cache
-      uses: actions/cache/restore@v3
+    - name: Download rack-box files from artifacts
+      uses: actions/download-artifact@v3
       with:
+        name: rack-box-files
         path: RACK/rack-box/files
-        key: files-${{ github.sha }}-${{ github.run_id }}
-        enableCrossOsArchive: true
-        fail-on-cache-miss: true
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -99,7 +99,7 @@ jobs:
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
 
-    - name: Install rack-box files on runner
+    - name: Install rack-box on runner
       run: |
         mkdir -p /tmp/files
         for f in RACK/rack-box/files/*; do

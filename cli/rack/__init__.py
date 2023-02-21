@@ -519,7 +519,6 @@ def ingest_manifest_driver(
     triple_store: Optional[Url],
     triple_store_type: Optional[str],
     clear: bool,
-    default_graph: bool,
     top_level: bool = True,
     optimization_url: Optional[Url] = None) -> None:
 
@@ -529,41 +528,30 @@ def ingest_manifest_driver(
     base_path = manifest_path.parent
 
     if clear:
-        if default_graph:
-            # clear only the default graph first
-            clear_driver(base_url, [Url("uri://DefaultGraph")], [], triple_store, triple_store_type, Graph.MODEL)
-        else:
-            # clear the whole footprint
-            modelgraphs = manifest.getModelgraphsFootprint()
-            datagraphs = manifest.getDatagraphsFootprint()
-            if not modelgraphs == []:
-                clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.MODEL)
-            if not datagraphs == []:
-                clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.DATA)
+        # clear the whole footprint
+        modelgraphs = manifest.getModelgraphsFootprint()
+        datagraphs = manifest.getDatagraphsFootprint()
+        if not modelgraphs == []:
+            clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.MODEL)
+        if not datagraphs == []:
+            clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.DATA)
 
         if not manifest.getNodegroupsFootprint() == []:
             delete_nodegroups_driver(manifest.getNodegroupsFootprint(), True, True, True, base_url)
 
-    # We don't override the model and datagraphs from the ingestion components unless it's for default
-    # the step itself gets to pick the target graphs
-    if default_graph:
-        targetgraph = [Url("uri://DefaultGraph")]
-    else:
-        targetgraph = None
-
     for (step_type, step_data) in manifest.steps:
         if StepType.DATA == step_type:
             stepFile = base_path / step_data
-            ingest_data_driver(stepFile, base_url, targetgraph, targetgraph, triple_store, triple_store_type, False)
+            ingest_data_driver(stepFile, base_url, None, None, triple_store, triple_store_type, False)
         elif StepType.MODEL == step_type:
             stepFile = base_path / step_data
-            ingest_owl_driver(stepFile, base_url, targetgraph, triple_store, triple_store_type, False)
+            ingest_owl_driver(stepFile, base_url, None, triple_store, triple_store_type, False)
         elif StepType.NODEGROUPS == step_type:
             stepFile = base_path / step_data
             store_nodegroups_driver(stepFile, base_url)
         elif StepType.MANIFEST == step_type:
             stepFile = base_path / step_data
-            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, default_graph, False)
+            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, False)
         elif StepType.COPYGRAPH == step_type:
             utility_copygraph_driver(base_url, triple_store, triple_store_type, step_data[0], step_data[1])
 
@@ -870,7 +858,7 @@ def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph, True, args.optimize_url)
+    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, True, args.optimize_url)
 
 def dispatch_manifest_build(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
@@ -967,7 +955,6 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     manifest_import_parser.add_argument('config', type=str, help='Manifest YAML file')
     manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
-    manifest_import_parser.add_argument('--default-graph', action='store_true', help='Load whole manifest into default graph')
     manifest_import_parser.add_argument('--optimize-url', type=str, help='RACK UI optimization endpoint (e.g. http://localhost:8050/optimize)')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)
 

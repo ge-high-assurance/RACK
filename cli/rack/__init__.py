@@ -26,9 +26,9 @@ from os import environ
 from pathlib import Path
 import re
 import sys
-from typing import Any, Callable, Dict, List, Optional, NewType, Set, TypeVar, Union, cast
+from typing import Any, Callable, Dict, List, Optional, Set, TypeVar, cast
 from types import SimpleNamespace
-import tempfile
+from tempfile import TemporaryDirectory
 import shutil
 
 # library imports
@@ -197,8 +197,6 @@ class CustomFormatter(logging.Formatter):
 
 Decoratee = TypeVar('Decoratee', bound=Callable[..., Any])
 
-# Bug https://github.com/PyCQA/pylint/issues/1953
-# pylint: disable=unused-argument
 def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Callable[[Decoratee], Decoratee]:
     """This decorator writes the prefix, followed by three dots, then runs the
     decorated function.  Upon success, it appends OK, upon failure, it appends
@@ -502,7 +500,7 @@ def build_manifest_driver(
     zipfile_path: Path
 ) -> None:
 
-    with tempfile.TemporaryDirectory() as outdir:
+    with TemporaryDirectory() as outdir:
         builder = IngestionBuilder()
         builder.manifest(manifest_path, Path(outdir).joinpath(f'manifest.yaml'))
         shutil.make_archive(str(zipfile_path), 'zip', outdir)
@@ -523,16 +521,18 @@ def ingest_manifest_driver(
     top_level: bool = True,
     optimization_url: Optional[Url] = None) -> None:
 
-    tmp_mngr: Union[tempfile.TemporaryDirectory[str], nullcontext[None]]
-    if top_level and manifest_path.suffix == '.zip':
-        tmp_mngr = tempfile.TemporaryDirectory()
-    else:
-        tmp_mngr = nullcontext(None)
+    is_toplevel_archive = top_level and manifest_path.suffix in [suffix for _, suffixes, _ in shutil.get_unpack_formats() for suffix in suffixes]
+    tmp_mngr = TemporaryDirectory if is_toplevel_archive else nullcontext
 
-    with tmp_mngr as tmp_dir:
+    with tmp_mngr() as tmp_dir:
+
         if tmp_dir is not None:
-            shutil.unpack_archive(manifest_path, tmp_dir)
-            manifest_path = Path(tmp_dir).joinpath('manifest.yaml')
+            @with_status(f'Unpacking archive')
+            def go() -> None:
+                shutil.unpack_archive(manifest_path, tmp_dir)
+            go()
+
+            manifest_path = Path(tmp_dir) / 'manifest.yaml'
 
         with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
             manifest = Manifest.fromYAML(manifest_file)

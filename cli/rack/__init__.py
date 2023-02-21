@@ -26,7 +26,7 @@ from os import environ
 from pathlib import Path
 import re
 import sys
-from typing import Any, Callable, Dict, List, Optional, NewType, Set, TypeVar, cast
+from typing import Any, Callable, Dict, List, Optional, NewType, Set, TypeVar, Union, cast
 from types import SimpleNamespace
 import tempfile
 import shutil
@@ -523,6 +523,7 @@ def ingest_manifest_driver(
     top_level: bool = True,
     optimization_url: Optional[Url] = None) -> None:
 
+    tmp_mngr: Union[tempfile.TemporaryDirectory[str], nullcontext[None]]
     if top_level and manifest_path.suffix == '.zip':
         tmp_mngr = tempfile.TemporaryDirectory()
     else:

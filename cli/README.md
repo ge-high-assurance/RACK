@@ -53,7 +53,7 @@ python3 setup.py install
 If running on Windows, [GitBash](https://gitforwindows.org/) can be used with the following commands.
 
 ```shell
-virtualenv venv
+python -m venv venv
 source venv/Scripts/activate
 pip install --force -r requirements.txt
 python setup.py install

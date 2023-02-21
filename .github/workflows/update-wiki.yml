@@ -13,7 +13,7 @@ jobs:
 #  - Updates RACK-Predefined-Queries.md in RACK.wiki
 
   update-wiki:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Check out RACK source
@@ -31,14 +31,14 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.8
+        python-version: '3.10'
 
     - name: Cache Python dependencies
       uses: actions/cache@v3
       with:
         # This path is specific to Ubuntu
         path: ~/.cache/pip
-        # Look to see if there is a cache hit
+        # Look to see if there is a cache hit for cvstomd
         key: ${{ runner.os }}-pip-csvtomd
         restore-keys: |
           ${{ runner.os }}-pip-

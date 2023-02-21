@@ -5,30 +5,13 @@ on:
 
 jobs:
 
-# cache-files job:
-#  - Asks cache for rack-box files
+# assemble-files job:
+#  - Downloads certain files for rack-box builds
+#  - Packages certain files for rack-box builds
+#  - Uploads rack-box files to artifacts
 
-  cache-files:
-    runs-on: ubuntu-20.04
-    outputs:
-      cache-hit: ${{ steps.cache.outputs.cache-hit }}
-
-    steps:
-    - name: Ask cache for rack-box files
-      uses: actions/cache@v3
-      id: cache
-      with:
-        path: RACK/rack-box/files
-        key: files-${{ github.sha }}
-
-# download-files job:
-#  - Downloads files for rack-box builds
-#  - Packages files for rack-box builds
-
-  download-files:
-    needs: cache-files
-    runs-on: ubuntu-20.04
-    if: needs.cache-files.outputs.cache-hit == false
+  assemble-files:
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Start rack-box container (needed for CDR files)
@@ -49,17 +32,10 @@ jobs:
         repository: ge-high-assurance/RACK.wiki
         path: RACK.wiki
 
-    - name: Prepare to cache rack-box files
-      uses: actions/cache@v3
-      id: cache
-      with:
-        path: RACK/rack-box/files
-        key: files-${{ github.sha }}
-
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.8
+        python-version: '3.10'
 
     - name: Cache Python dependencies
       uses: actions/cache@v3
@@ -150,3 +126,10 @@ jobs:
       shell: bash
       run: |
         docker container stop $(docker container ls -qf ancestor=gehighassurance/rack-box:dev)
+
+    - name: Upload rack-box files to artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: rack-box-files
+        path: RACK/rack-box/files
+        retention-days: 1

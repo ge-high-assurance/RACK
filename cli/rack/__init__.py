@@ -17,6 +17,7 @@ This simple process can be adapted to import other data into RACK for experiment
 """
 # standard imports
 import argparse
+from contextlib import nullcontext
 import csv
 from enum import Enum, unique
 from io import StringIO
@@ -25,9 +26,9 @@ from os import environ
 from pathlib import Path
 import re
 import sys
-from typing import Any, Callable, Dict, List, Optional, NewType, Set, TypeVar, cast
+from typing import Any, Callable, Dict, List, Optional, Set, TypeVar, cast
 from types import SimpleNamespace
-import tempfile
+from tempfile import TemporaryDirectory
 import shutil
 
 # library imports
@@ -196,8 +197,6 @@ class CustomFormatter(logging.Formatter):
 
 Decoratee = TypeVar('Decoratee', bound=Callable[..., Any])
 
-# Bug https://github.com/PyCQA/pylint/issues/1953
-# pylint: disable=unused-argument
 def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Callable[[Decoratee], Decoratee]:
     """This decorator writes the prefix, followed by three dots, then runs the
     decorated function.  Upon success, it appends OK, upon failure, it appends
@@ -501,7 +500,7 @@ def build_manifest_driver(
     zipfile_path: Path
 ) -> None:
 
-    with tempfile.TemporaryDirectory() as outdir:
+    with TemporaryDirectory() as outdir:
         builder = IngestionBuilder()
         builder.manifest(manifest_path, Path(outdir).joinpath(f'manifest.yaml'))
         shutil.make_archive(str(zipfile_path), 'zip', outdir)
@@ -519,20 +518,28 @@ def ingest_manifest_driver(
     triple_store: Optional[Url],
     triple_store_type: Optional[str],
     clear: bool,
-    default_graph: bool,
     top_level: bool = True,
     optimization_url: Optional[Url] = None) -> None:
 
-    with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
-        manifest = Manifest.fromYAML(manifest_file)
+    is_toplevel_archive = top_level and manifest_path.suffix in [suffix for _, suffixes, _ in shutil.get_unpack_formats() for suffix in suffixes]
+    tmp_mngr = TemporaryDirectory if is_toplevel_archive else nullcontext
 
-    base_path = manifest_path.parent
+    with tmp_mngr() as tmp_dir:
 
-    if clear:
-        if default_graph:
-            # clear only the default graph first
-            clear_driver(base_url, [Url("uri://DefaultGraph")], [], triple_store, triple_store_type, Graph.MODEL)
-        else:
+        if tmp_dir is not None:
+            @with_status(f'Unpacking archive')
+            def unpack() -> None:
+                shutil.unpack_archive(manifest_path, tmp_dir)
+            unpack()
+
+            manifest_path = Path(tmp_dir) / 'manifest.yaml'
+
+        with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
+            manifest = Manifest.fromYAML(manifest_file)
+
+        base_path = manifest_path.parent
+
+        if clear:
             # clear the whole footprint
             modelgraphs = manifest.getModelgraphsFootprint()
             datagraphs = manifest.getDatagraphsFootprint()
@@ -541,51 +548,46 @@ def ingest_manifest_driver(
             if not datagraphs == []:
                 clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.DATA)
 
-        if not manifest.getNodegroupsFootprint() == []:
-            delete_nodegroups_driver(manifest.getNodegroupsFootprint(), True, True, True, base_url)
+            if not manifest.getNodegroupsFootprint() == []:
+                delete_nodegroups_driver(manifest.getNodegroupsFootprint(), True, True, True, base_url)
 
-    # We don't override the model and datagraphs from the ingestion components unless it's for default
-    # the step itself gets to pick the target graphs
-    if default_graph:
-        targetgraph = [Url("uri://DefaultGraph")]
-    else:
-        targetgraph = None
+        for (step_type, step_data) in manifest.steps:
+            if StepType.DATA == step_type:
+                stepFile = base_path / step_data
+                ingest_data_driver(stepFile, base_url, None, None, triple_store, triple_store_type, False)
+            elif StepType.MODEL == step_type:
+                stepFile = base_path / step_data
+                ingest_owl_driver(stepFile, base_url, None, triple_store, triple_store_type, False)
+            elif StepType.NODEGROUPS == step_type:
+                stepFile = base_path / step_data
+                store_nodegroups_driver(stepFile, base_url)
+            elif StepType.MANIFEST == step_type:
+                stepFile = base_path / step_data
+                ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, False)
+            elif StepType.COPYGRAPH == step_type:
+                utility_copygraph_driver(base_url, triple_store, triple_store_type, step_data[0], step_data[1])
 
-    for (step_type, step_data) in manifest.steps:
-        if StepType.DATA == step_type:
-            stepFile = base_path / step_data
-            ingest_data_driver(stepFile, base_url, targetgraph, targetgraph, triple_store, triple_store_type, False)
-        elif StepType.MODEL == step_type:
-            stepFile = base_path / step_data
-            ingest_owl_driver(stepFile, base_url, targetgraph, triple_store, triple_store_type, False)
-        elif StepType.NODEGROUPS == step_type:
-            stepFile = base_path / step_data
-            store_nodegroups_driver(stepFile, base_url)
-        elif StepType.MANIFEST == step_type:
-            stepFile = base_path / step_data
-            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, default_graph, False)
-        elif StepType.COPYGRAPH == step_type:
-            utility_copygraph_driver(base_url, triple_store, triple_store_type, step_data[0], step_data[1])
+        if top_level:
+            copyToGraph = manifest.getCopyToGraph()
+            if copyToGraph is not None:
+                if clear:
+                    clear_driver(base_url, [copyToGraph], None, triple_store, triple_store_type, Graph.MODEL)
+                for graph in manifest.getModelgraphsFootprint():
+                    utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, copyToGraph)
+                for graph in manifest.getDatagraphsFootprint():
+                    utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, copyToGraph)
 
-    if top_level:
-        if manifest.getCopyToDefaultGraph():
-            defaultGraph = Url("uri://DefaultGraph")
+            resolutionGraph = manifest.getPerformEntityResolution()
+            if resolutionGraph is not None:
+                r = resolutionGraph # mypy hack: otherwise type error that in [resolutionGraph], resolution graph is still Optional[Url]
+                @with_status(f'Executing entity resolution')
+                def combine() -> dict:
+                    return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [r], r, [], triple_store, triple_store_type))
+                combine()
 
-            if clear:
-                clear_driver(base_url, [defaultGraph], None, triple_store, triple_store_type, Graph.MODEL)
-            for graph in manifest.getModelgraphsFootprint():
-                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
-            for graph in manifest.getDatagraphsFootprint():
-                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
-
-        if manifest.getPerformEntityResolution():
-            @with_status(f'Executing entity resolution')
-            def go() -> dict:
-                return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [defaultGraph], defaultGraph, [], triple_store, triple_store_type))
-            go()
-
-        if manifest.getPerformOptimization():
-            invoke_optimization(optimization_url)
+            defaultGraphUrls = ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]
+            if (triple_store_type or DEFAULT_TRIPLE_STORE_TYPE) == "fuseki" and copyToGraph in defaultGraphUrls:
+                invoke_optimization(optimization_url)
 
 def invoke_optimization(url: Optional[Url]) -> None:
     url = url or DEFAULT_OPTIMIZE_URL
@@ -870,7 +872,7 @@ def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph, True, args.optimize_url)
+    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, True, args.optimize_url)
 
 def dispatch_manifest_build(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
@@ -967,7 +969,6 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     manifest_import_parser.add_argument('config', type=str, help='Manifest YAML file')
     manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
-    manifest_import_parser.add_argument('--default-graph', action='store_true', help='Load whole manifest into default graph')
     manifest_import_parser.add_argument('--optimize-url', type=str, help='RACK UI optimization endpoint (e.g. http://localhost:8050/optimize)')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)
 

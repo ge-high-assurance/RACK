@@ -17,6 +17,7 @@ This simple process can be adapted to import other data into RACK for experiment
 """
 # standard imports
 import argparse
+from contextlib import nullcontext
 import csv
 from enum import Enum, unique
 from io import StringIO
@@ -522,60 +523,70 @@ def ingest_manifest_driver(
     top_level: bool = True,
     optimization_url: Optional[Url] = None) -> None:
 
-    with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
-        manifest = Manifest.fromYAML(manifest_file)
+    if top_level and manifest_path.suffix == '.zip':
+        tmp_mngr = tempfile.TemporaryDirectory()
+    else:
+        tmp_mngr = nullcontext(None)
 
-    base_path = manifest_path.parent
+    with tmp_mngr as tmp_dir:
+        if tmp_dir is not None:
+            shutil.unpack_archive(manifest_path, tmp_dir)
+            manifest_path = Path(tmp_dir).joinpath('manifest.yaml')
 
-    if clear:
-        # clear the whole footprint
-        modelgraphs = manifest.getModelgraphsFootprint()
-        datagraphs = manifest.getDatagraphsFootprint()
-        if not modelgraphs == []:
-            clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.MODEL)
-        if not datagraphs == []:
-            clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.DATA)
+        with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
+            manifest = Manifest.fromYAML(manifest_file)
 
-        if not manifest.getNodegroupsFootprint() == []:
-            delete_nodegroups_driver(manifest.getNodegroupsFootprint(), True, True, True, base_url)
+        base_path = manifest_path.parent
 
-    for (step_type, step_data) in manifest.steps:
-        if StepType.DATA == step_type:
-            stepFile = base_path / step_data
-            ingest_data_driver(stepFile, base_url, None, None, triple_store, triple_store_type, False)
-        elif StepType.MODEL == step_type:
-            stepFile = base_path / step_data
-            ingest_owl_driver(stepFile, base_url, None, triple_store, triple_store_type, False)
-        elif StepType.NODEGROUPS == step_type:
-            stepFile = base_path / step_data
-            store_nodegroups_driver(stepFile, base_url)
-        elif StepType.MANIFEST == step_type:
-            stepFile = base_path / step_data
-            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, False)
-        elif StepType.COPYGRAPH == step_type:
-            utility_copygraph_driver(base_url, triple_store, triple_store_type, step_data[0], step_data[1])
+        if clear:
+            # clear the whole footprint
+            modelgraphs = manifest.getModelgraphsFootprint()
+            datagraphs = manifest.getDatagraphsFootprint()
+            if not modelgraphs == []:
+                clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.MODEL)
+            if not datagraphs == []:
+                clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.DATA)
 
-    if top_level:
-        copyToGraph = manifest.getCopyToGraph()
-        if copyToGraph is not None:
-            if clear:
-                clear_driver(base_url, [copyToGraph], None, triple_store, triple_store_type, Graph.MODEL)
-            for graph in manifest.getModelgraphsFootprint():
-                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, copyToGraph)
-            for graph in manifest.getDatagraphsFootprint():
-                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, copyToGraph)
+            if not manifest.getNodegroupsFootprint() == []:
+                delete_nodegroups_driver(manifest.getNodegroupsFootprint(), True, True, True, base_url)
 
-        resolutionGraph = manifest.getPerformEntityResolution()
-        if resolutionGraph is not None:
-            r = resolutionGraph # mypy hack: otherwise type error that in [resolutionGraph], resolution graph is still Optional[Url]
-            @with_status(f'Executing entity resolution')
-            def go() -> dict:
-                return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [r], r, [], triple_store, triple_store_type))
-            go()
+        for (step_type, step_data) in manifest.steps:
+            if StepType.DATA == step_type:
+                stepFile = base_path / step_data
+                ingest_data_driver(stepFile, base_url, None, None, triple_store, triple_store_type, False)
+            elif StepType.MODEL == step_type:
+                stepFile = base_path / step_data
+                ingest_owl_driver(stepFile, base_url, None, triple_store, triple_store_type, False)
+            elif StepType.NODEGROUPS == step_type:
+                stepFile = base_path / step_data
+                store_nodegroups_driver(stepFile, base_url)
+            elif StepType.MANIFEST == step_type:
+                stepFile = base_path / step_data
+                ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, False)
+            elif StepType.COPYGRAPH == step_type:
+                utility_copygraph_driver(base_url, triple_store, triple_store_type, step_data[0], step_data[1])
 
-        defaultGraphUrls = ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]
-        if (triple_store_type or DEFAULT_TRIPLE_STORE_TYPE) == "fuseki" and copyToGraph in defaultGraphUrls:
-            invoke_optimization(optimization_url)
+        if top_level:
+            copyToGraph = manifest.getCopyToGraph()
+            if copyToGraph is not None:
+                if clear:
+                    clear_driver(base_url, [copyToGraph], None, triple_store, triple_store_type, Graph.MODEL)
+                for graph in manifest.getModelgraphsFootprint():
+                    utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, copyToGraph)
+                for graph in manifest.getDatagraphsFootprint():
+                    utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, copyToGraph)
+
+            resolutionGraph = manifest.getPerformEntityResolution()
+            if resolutionGraph is not None:
+                r = resolutionGraph # mypy hack: otherwise type error that in [resolutionGraph], resolution graph is still Optional[Url]
+                @with_status(f'Executing entity resolution')
+                def go() -> dict:
+                    return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [r], r, [], triple_store, triple_store_type))
+                go()
+
+            defaultGraphUrls = ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]
+            if (triple_store_type or DEFAULT_TRIPLE_STORE_TYPE) == "fuseki" and copyToGraph in defaultGraphUrls:
+                invoke_optimization(optimization_url)
 
 def invoke_optimization(url: Optional[Url]) -> None:
     url = url or DEFAULT_OPTIMIZE_URL

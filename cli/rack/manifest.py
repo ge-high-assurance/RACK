@@ -13,7 +13,7 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
         'name': {'type': 'string'},
         'description': {'type': 'string'},
 
-        'copy-to-default-graph':            {'type': 'boolean'},
+        'copy-to-graph':                    {'type': 'string'},
         'perform-entity-resolution':        {'type': 'boolean'},
         'perform-triplestore-optimization': {'type': 'boolean'},
 
@@ -103,8 +103,8 @@ class Manifest:
         self.nodegroupsFootprint: List[str] = []
         self.steps: List[Tuple[StepType, Any]] = []
         self.performOptimization: bool = False
-        self.performEntityResolution: bool = False
-        self.copyToDefaultGraph: bool = False
+        self.performEntityResolution: Optional[Url] = None
+        self.copyToGraph: Optional[Url] = None
 
     def getName(self) -> str:
         return self.name
@@ -116,13 +116,13 @@ class Manifest:
         """Return True when this manifest file prescribes running the triplestore optimizer"""
         return self.performOptimization
     
-    def getPerformEntityResolution(self) -> bool:
-        """Return True when this manifest prescribes running entity resolution"""
+    def getPerformEntityResolution(self) -> Optional[Url]:
+        """Return target graph URL when this manifest prescribes running entity resolution"""
         return self.performEntityResolution
     
-    def getCopyToDefaultGraph(self) -> bool:
-        """Return True when this manifest prescribes copying the footprint to the default graph"""
-        return self.copyToDefaultGraph
+    def getCopyToGraph(self) -> Optional[Url]:
+        """Return target graph URL when this manifest prescribes copying the footprint to the default graph"""
+        return self.copyToGraph
 
     def addModelgraphFootprint(self, modelgraph: Url) -> None:
         self.modelgraphsFootprint.append(modelgraph)
@@ -161,8 +161,8 @@ class Manifest:
 
         manifest = Manifest(obj.get('name'), obj.get('description'))
 
-        manifest.copyToDefaultGraph = obj.get('copy-to-default-graph', False)
-        manifest.performEntityResolution = obj.get('perform-entity-resolution', False)
+        manifest.copyToGraph = obj.get('copy-to-graph')
+        manifest.performEntityResolution = obj.get('perform-entity-resolution')
         manifest.performOptimization = obj.get('perform-triplestore-optimization', False)
 
         footprint = obj.get('footprint', {})

@@ -556,20 +556,21 @@ def ingest_manifest_driver(
             utility_copygraph_driver(base_url, triple_store, triple_store_type, step_data[0], step_data[1])
 
     if top_level:
-        if manifest.getCopyToDefaultGraph():
-            defaultGraph = Url("uri://DefaultGraph")
-
+        copyToGraph = manifest.getCopyToGraph()
+        if copyToGraph is not None:
             if clear:
-                clear_driver(base_url, [defaultGraph], None, triple_store, triple_store_type, Graph.MODEL)
+                clear_driver(base_url, [copyToGraph], None, triple_store, triple_store_type, Graph.MODEL)
             for graph in manifest.getModelgraphsFootprint():
-                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
+                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, copyToGraph)
             for graph in manifest.getDatagraphsFootprint():
-                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
+                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, copyToGraph)
 
-        if manifest.getPerformEntityResolution():
+        resolutionGraph = manifest.getPerformEntityResolution()
+        if resolutionGraph is not None:
+            r = resolutionGraph # mypy hack: otherwise type error that in [resolutionGraph], resolution graph is still Optional[Url]
             @with_status(f'Executing entity resolution')
             def go() -> dict:
-                return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [defaultGraph], defaultGraph, [], triple_store, triple_store_type))
+                return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [r], r, [], triple_store, triple_store_type))
             go()
 
         if manifest.getPerformOptimization():

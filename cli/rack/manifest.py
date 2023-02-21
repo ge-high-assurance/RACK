@@ -15,7 +15,6 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
 
         'copy-to-graph':                    {'type': 'string'},
         'perform-entity-resolution':        {'type': 'string'},
-        'perform-triplestore-optimization': {'type': 'boolean'},
 
         'footprint': {
             'type': 'object',
@@ -102,7 +101,6 @@ class Manifest:
         self.datagraphsFootprint: List[Url] = []
         self.nodegroupsFootprint: List[str] = []
         self.steps: List[Tuple[StepType, Any]] = []
-        self.performOptimization: bool = False
         self.performEntityResolution: Optional[Url] = None
         self.copyToGraph: Optional[Url] = None
 
@@ -111,10 +109,6 @@ class Manifest:
 
     def getDescription(self) -> Optional[str]:
         return self.description
-
-    def getPerformOptimization(self) -> bool:
-        """Return True when this manifest file prescribes running the triplestore optimizer"""
-        return self.performOptimization
     
     def getPerformEntityResolution(self) -> Optional[Url]:
         """Return target graph URL when this manifest prescribes running entity resolution"""

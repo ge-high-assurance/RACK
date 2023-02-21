@@ -14,7 +14,7 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
         'description': {'type': 'string'},
 
         'copy-to-graph':                    {'type': 'string'},
-        'perform-entity-resolution':        {'type': 'boolean'},
+        'perform-entity-resolution':        {'type': 'string'},
         'perform-triplestore-optimization': {'type': 'boolean'},
 
         'footprint': {

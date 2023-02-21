@@ -574,7 +574,7 @@ def ingest_manifest_driver(
             go()
 
         defaultGraphUrls = ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]
-        if triple_store_type == "fuseki" and copyToGraph in defaultGraphUrls:
+        if (triple_store_type or DEFAULT_TRIPLE_STORE_TYPE) == "fuseki" and copyToGraph in defaultGraphUrls:
             invoke_optimization(optimization_url)
 
 def invoke_optimization(url: Optional[Url]) -> None:

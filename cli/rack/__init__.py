@@ -528,9 +528,9 @@ def ingest_manifest_driver(
 
         if tmp_dir is not None:
             @with_status(f'Unpacking archive')
-            def go() -> None:
+            def unpack() -> None:
                 shutil.unpack_archive(manifest_path, tmp_dir)
-            go()
+            unpack()
 
             manifest_path = Path(tmp_dir) / 'manifest.yaml'
 
@@ -581,9 +581,9 @@ def ingest_manifest_driver(
             if resolutionGraph is not None:
                 r = resolutionGraph # mypy hack: otherwise type error that in [resolutionGraph], resolution graph is still Optional[Url]
                 @with_status(f'Executing entity resolution')
-                def go() -> dict:
+                def combine() -> dict:
                     return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [r], r, [], triple_store, triple_store_type))
-                go()
+                combine()
 
             defaultGraphUrls = ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]
             if (triple_store_type or DEFAULT_TRIPLE_STORE_TYPE) == "fuseki" and copyToGraph in defaultGraphUrls:

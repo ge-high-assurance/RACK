@@ -157,7 +157,6 @@ class Manifest:
 
         manifest.copyToGraph = obj.get('copy-to-graph')
         manifest.performEntityResolution = obj.get('perform-entity-resolution')
-        manifest.performOptimization = obj.get('perform-triplestore-optimization', False)
 
         footprint = obj.get('footprint', {})
         for datagraph in footprint.get('data-graphs', []):

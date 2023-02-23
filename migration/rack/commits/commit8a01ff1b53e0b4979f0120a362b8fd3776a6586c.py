@@ -9,18 +9,12 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from ontology_changes import Commit
+from ontology_changes import Commit, FreeformNotes
 
-raise Exception(
-    f"This is a template, implement me and remove this exception!"
-)
-# You can use the following command to see the relevant changes:
-# <COMMAND>
-
-# pylint: disable=unreachable
 commit = Commit(
-    number="<COMMIT_ID>",
+    number="8a01ff1b53e0b4979f0120a362b8fd3776a6586c",
     changes=[
-        # <FILE>.sadl
+        # RESOLUTIONS.sadl
+        FreeformNotes("Alias entityResolution changed to EntityResolution")
     ],
 )

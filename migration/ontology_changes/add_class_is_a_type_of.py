@@ -1,4 +1,4 @@
-# Copyright (c) 2020, Galois, Inc.
+# Copyright (c) 2023, Galois, Inc.
 #
 # All Rights Reserved
 #
@@ -14,28 +14,33 @@ from dataclasses import dataclass
 import semtk
 
 from migration_helpers.name_space import NameSpace, get_uri
-from ontology_changes.ontology_change import stylize_class, OntologyChange
+from ontology_changes.ontology_change import stylize_property, OntologyChange
 
 
 @dataclass
-class AddClass(OntologyChange):
+class AddClassIsATypeOf(OntologyChange):
     """
-    Represents the addition of a new class.
+    Represents the addition of a line:
+
+    class_id is a type of class_id.
     """
 
     name_space: NameSpace
     class_id: str
+    range_name_space: NameSpace
+    range_id: str
 
     def text_description(self) -> str:
-        class_str = stylize_class(get_uri(self.name_space, self.class_id))
-        return f"Class {class_str} was created."
+        prop = stylize_property(get_uri(self.name_space, self.class_id))
+        range_str = stylize_property(get_uri(self.range_name_space, self.range_id))
+        return f"Class {prop} is now a type of {range_str}."
 
     def migrate_json(self, json: semtk.SemTKJSON) -> None:
         json.accept(MigrationVisitor(self))
 
 
 class MigrationVisitor(semtk.DefaultSemTKVisitor):
-    def __init__(self, data: AddClass):
+    def __init__(self, data: AddClassIsATypeOf):
         self.data = data
 
     # TODO

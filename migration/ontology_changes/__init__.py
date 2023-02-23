@@ -9,8 +9,9 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from ontology_changes.add_class import AddClass
+from ontology_changes.add_class_is_a_type_of import AddClassIsATypeOf
 from ontology_changes.add_property_is_a_type_of import AddPropertyIsATypeOf
+from ontology_changes.add_range_restriction import AddRangeRestriction
 from ontology_changes.cardinality import AtMost, Cardinality, SingleValue, Unconstrained
 from ontology_changes.change_cardinality import ChangeCardinality
 from ontology_changes.change_class_is_a_type_of import ChangeClassIsATypeOf

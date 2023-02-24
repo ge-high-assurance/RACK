@@ -135,7 +135,7 @@ def run_unzip(zip_file_contents, turnstile_clicks):
         manifest = get_manifest(manifest_path)
 
         # generate SPARQLgraph link
-        sg_link = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getConnection())
+        sg_link = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getFootprintConnection())
         sg_link_default = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getDefaultGraphConnection())
 
         # gather displayable information about the package

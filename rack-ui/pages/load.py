@@ -38,10 +38,7 @@ load_div = dbc.Spinner(html.Div(
         dbc.Row([
             dbc.Col([html.Button("Load data", id="load-button", n_clicks=0)], width="auto"),      # load button
             dbc.Tooltip("Load the above data into RACK", target="load-button"),
-            dbc.Col(dbc.DropdownMenu([
-                dbc.DropdownMenuItem("Target graphs", href="", target="_blank", id="sparqlgraph-button"),
-                dbc.DropdownMenuItem("Optimized graph", href="", target="_blank", id="sparqlgraph-default-button")
-            ], id="view-dropdown", label="View data", toggle_class_name="ddm"), width="auto"),
+            dbc.Col(dbc.DropdownMenu(children=[], id="view-dropdown", label="View data", toggle_class_name="ddm"), width="auto"),
             dbc.Tooltip("After loading, view data in SPARQLgraph", target="view-dropdown")
         ])
 
@@ -97,8 +94,7 @@ layout = html.Div([
 @dash.callback(
     output=[
             Output("load-div-message", "children"),                 # package information to display to the user before confirming load
-            Output("sparqlgraph-button", "href"),                   # set the SG button link
-            Output("sparqlgraph-default-button", "href"),           # set the SG button link (default graph)
+            Output("view-dropdown", "children"),                    # options to display for the view data dropdown
             Output("manifest-filepath", "data"),
             Output("unzip-error-dialog-body", "children"),
             Output("status-filepath", "data"),                      # store a status file path
@@ -134,10 +130,6 @@ def run_unzip(zip_file_contents, turnstile_clicks):
             manifest_path = "../Turnstile-Example/Turnstile-IngestionPackage/manifest.yaml"
         manifest = get_manifest(manifest_path)
 
-        # generate SPARQLgraph link
-        sg_link = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getFootprintConnection())
-        sg_link_default = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getDefaultGraphConnection())
-
         # gather displayable information about the package
         package_description = ""
         if manifest.getDescription() != None and manifest.getDescription().strip() != '':
@@ -153,9 +145,17 @@ def run_unzip(zip_file_contents, turnstile_clicks):
         # generate a file in which to capture the ingestion status
         status_filepath = get_temp_dir_unique("output")
 
+        # set options for the view data dropdown menu:  1) footprint graphs and sometimes 2) copy-to graph
+        sg_link_footprint = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getFootprintConnection())
+        view_graph_children=[dbc.DropdownMenuItem("Target graphs", href=sg_link_footprint, target="_blank")]  # option to view footprint graphs
+        if manifest.getCopyToGraph() != None:
+            conn_copyto = manifest.getConnection(model_graphs=[manifest.getCopyToGraph()], data_graph=manifest.getCopyToGraph(), extra_data_graphs=[])
+            sg_link_copyto = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=conn_copyto)
+            view_graph_children.append(dbc.DropdownMenuItem(manifest.getCopyToGraph(), href=sg_link_copyto, target="_blank"))  # option to view copy-to graph
+
     except Exception as e:
-        return "", None, None, None, get_error_trace(e), None, None
-    return package_info, sg_link, sg_link_default, manifest_path, None, status_filepath, None
+        return "", None, None, get_error_trace(e), None, None
+    return package_info, view_graph_children, manifest_path, None, status_filepath, None
 
 
 @dash.callback(

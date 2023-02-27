@@ -148,7 +148,7 @@ def run_unzip(zip_file_contents, turnstile_clicks):
         # set options for the view data dropdown menu:  1) footprint graphs and sometimes 2) copy-to graph
         sg_link_footprint = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getFootprintConnection())
         view_graph_children=[dbc.DropdownMenuItem("Target graphs", href=sg_link_footprint, target="_blank")]  # option to view footprint graphs
-        if manifest.getCopyToGraph() != None:
+        if manifest.getCopyToGraph() is not None:
             conn_copyto = manifest.getConnection(model_graphs=[manifest.getCopyToGraph()], data_graph=manifest.getCopyToGraph(), extra_data_graphs=[])
             sg_link_copyto = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=conn_copyto)
             view_graph_children.append(dbc.DropdownMenuItem(manifest.getCopyToGraph(), href=sg_link_copyto, target="_blank"))  # option to view copy-to graph

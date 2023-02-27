@@ -38,10 +38,7 @@ load_div = dbc.Spinner(html.Div(
         dbc.Row([
             dbc.Col([html.Button("Load data", id="load-button", n_clicks=0)], width="auto"),      # load button
             dbc.Tooltip("Load the above data into RACK", target="load-button"),
-            dbc.Col(dbc.DropdownMenu([
-                dbc.DropdownMenuItem("Target graphs", href="", target="_blank", id="sparqlgraph-button"),
-                dbc.DropdownMenuItem("Optimized graph", href="", target="_blank", id="sparqlgraph-default-button")
-            ], id="view-dropdown", label="View data", toggle_class_name="ddm"), width="auto"),
+            dbc.Col(dbc.DropdownMenu(children=[], id="view-dropdown", label="View data", toggle_class_name="ddm"), width="auto"),
             dbc.Tooltip("After loading, view data in SPARQLgraph", target="view-dropdown")
         ])
 
@@ -97,8 +94,7 @@ layout = html.Div([
 @dash.callback(
     output=[
             Output("load-div-message", "children"),                 # package information to display to the user before confirming load
-            Output("sparqlgraph-button", "href"),                   # set the SG button link
-            Output("sparqlgraph-default-button", "href"),           # set the SG button link (default graph)
+            Output("view-dropdown", "children"),                    # options to display for the view data dropdown
             Output("manifest-filepath", "data"),
             Output("unzip-error-dialog-body", "children"),
             Output("status-filepath", "data"),                      # store a status file path
@@ -119,7 +115,7 @@ def run_unzip(zip_file_contents, turnstile_clicks):
     Extract the selected zip file
     """
     try:
-        if zip_file_contents != None:
+        if zip_file_contents is not None:
             tmp_dir = get_temp_dir_unique("ingest")   # temp directory to store the unzipped package
             zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
             zip_obj = ZipFile(zip_str, 'r')
@@ -134,17 +130,13 @@ def run_unzip(zip_file_contents, turnstile_clicks):
             manifest_path = "../Turnstile-Example/Turnstile-IngestionPackage/manifest.yaml"
         manifest = get_manifest(manifest_path)
 
-        # generate SPARQLgraph link
-        sg_link = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getConnection())
-        sg_link_default = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getDefaultGraphConnection())
-
         # gather displayable information about the package
         package_description = ""
-        if manifest.getDescription() != None and manifest.getDescription().strip() != '':
+        if manifest.getDescription() is not None and manifest.getDescription().strip() != '':
             package_description = f"({manifest.getDescription()})"
         additional_actions = []
-        if manifest.getCopyToGraph() != None: additional_actions.append("copy to " + manifest.getCopyToGraph())
-        if manifest.getPerformEntityResolution() != None: additional_actions.append("resolve entities in " + manifest.getPerformEntityResolution())
+        if manifest.getCopyToGraph() is not None: additional_actions.append("copy to " + manifest.getCopyToGraph())
+        if manifest.getPerformEntityResolution() is not None: additional_actions.append("resolve entities in " + manifest.getPerformEntityResolution())
         package_info = f"Data: `{manifest.getName()} {package_description}`  \n" + \
                        f"Target model graphs: `{', '.join(manifest.getModelgraphsFootprint())}`  \n" + \
                        f"Target data graphs: `{', '.join(manifest.getDatagraphsFootprint())}`  \n" + \
@@ -153,9 +145,17 @@ def run_unzip(zip_file_contents, turnstile_clicks):
         # generate a file in which to capture the ingestion status
         status_filepath = get_temp_dir_unique("output")
 
+        # set options for the view data dropdown menu:  1) footprint graphs and sometimes 2) copy-to graph
+        sg_link_footprint = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getFootprintConnection())
+        view_graph_children=[dbc.DropdownMenuItem("Target graphs", href=sg_link_footprint, target="_blank")]  # option to view footprint graphs
+        if manifest.getCopyToGraph() is not None:
+            conn_copyto = manifest.getConnection(model_graphs=[manifest.getCopyToGraph()], data_graph=manifest.getCopyToGraph(), extra_data_graphs=[])
+            sg_link_copyto = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=conn_copyto)
+            view_graph_children.append(dbc.DropdownMenuItem(manifest.getCopyToGraph(), href=sg_link_copyto, target="_blank"))  # option to view copy-to graph
+
     except Exception as e:
-        return "", None, None, None, get_error_trace(e), None, None
-    return package_info, sg_link, sg_link_default, manifest_path, None, status_filepath, None
+        return "", None, None, get_error_trace(e), None, None
+    return package_info, view_graph_children, manifest_path, None, status_filepath, None
 
 
 @dash.callback(
@@ -187,7 +187,7 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath, load_opti
 
     try:
         # avoid a ConnectionError if SemTK services are not fully up yet
-        if semtk3.check_services() == False:
+        if semtk3.check_services() is False:
             raise Exception("Cannot reach SemTK Services (wait for startup to complete, or check for failures)")
 
         f = open(status_filepath, "a")
@@ -245,7 +245,7 @@ def manage_unzip_error_dialog(message, n_clicks):
     """ Show or hide the unzip error  dialog """
     if (get_trigger() == "unzip-error-dialog-button.n_clicks"):
         return False    # button pressed, hide the dialog
-    elif message == None:
+    elif message is None:
         return False    # no message, don't show the dialog
     else:
         return True     # child added, show the dialog

@@ -139,7 +139,11 @@ class Manifest:
     def addStep(self, stepType: StepType, stepFile: Any) -> None:
         self.steps.append((stepType, stepFile))
 
-    def getConnection(self, triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:
+    def getConnection(self, model_graphs: List[str], data_graph: str, extra_data_graphs: List[str], triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:
+        """Build a connection string."""
+        return Connection(semtk3.build_connection_str(self.name, triple_store_type, triple_store, model_graphs, data_graph, extra_data_graphs))
+
+    def getFootprintConnection(self, triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:
         """Build a connection string using the graphs defined in the footprint."""
         return Connection(semtk3.build_connection_str(self.name, triple_store_type, triple_store, self.modelgraphsFootprint, self.datagraphsFootprint[0], self.datagraphsFootprint[1:]))
 

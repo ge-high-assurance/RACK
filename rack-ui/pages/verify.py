@@ -184,7 +184,7 @@ def show_report_options(button_clicks, last_loaded_graphs):
     graphs_list = [{'label': label, 'value': val} for label, val in zip(graphs_list_labels, graphs_list_values)]
 
     # these are the graphs last loaded - check the checkboxes for these
-    if last_loaded_graphs == None:
+    if last_loaded_graphs is None:
         last_loaded_graphs = []
 
     return graphs_list, last_loaded_graphs
@@ -294,7 +294,7 @@ def manage_verify_report_error_dialog(children, n_clicks):
     if (get_trigger() == "verify-report-error-button.n_clicks"):
         return False        # button pressed, hide the dialog
     else:
-        if children == None:
+        if children is None:
             return False    # child added but it's None, hide the dialog
         else:
             return True     # child added, show it

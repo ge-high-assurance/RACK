@@ -115,7 +115,7 @@ def run_unzip(zip_file_contents, turnstile_clicks):
     Extract the selected zip file
     """
     try:
-        if zip_file_contents != None:
+        if zip_file_contents is not None:
             tmp_dir = get_temp_dir_unique("ingest")   # temp directory to store the unzipped package
             zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
             zip_obj = ZipFile(zip_str, 'r')
@@ -132,11 +132,11 @@ def run_unzip(zip_file_contents, turnstile_clicks):
 
         # gather displayable information about the package
         package_description = ""
-        if manifest.getDescription() != None and manifest.getDescription().strip() != '':
+        if manifest.getDescription() is not None and manifest.getDescription().strip() != '':
             package_description = f"({manifest.getDescription()})"
         additional_actions = []
-        if manifest.getCopyToGraph() != None: additional_actions.append("copy to " + manifest.getCopyToGraph())
-        if manifest.getPerformEntityResolution() != None: additional_actions.append("resolve entities in " + manifest.getPerformEntityResolution())
+        if manifest.getCopyToGraph() is not None: additional_actions.append("copy to " + manifest.getCopyToGraph())
+        if manifest.getPerformEntityResolution() is not None: additional_actions.append("resolve entities in " + manifest.getPerformEntityResolution())
         package_info = f"Data: `{manifest.getName()} {package_description}`  \n" + \
                        f"Target model graphs: `{', '.join(manifest.getModelgraphsFootprint())}`  \n" + \
                        f"Target data graphs: `{', '.join(manifest.getDatagraphsFootprint())}`  \n" + \
@@ -187,7 +187,7 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath, load_opti
 
     try:
         # avoid a ConnectionError if SemTK services are not fully up yet
-        if semtk3.check_services() == False:
+        if semtk3.check_services() is False:
             raise Exception("Cannot reach SemTK Services (wait for startup to complete, or check for failures)")
 
         f = open(status_filepath, "a")
@@ -245,7 +245,7 @@ def manage_unzip_error_dialog(message, n_clicks):
     """ Show or hide the unzip error  dialog """
     if (get_trigger() == "unzip-error-dialog-button.n_clicks"):
         return False    # button pressed, hide the dialog
-    elif message == None:
+    elif message is None:
         return False    # no message, don't show the dialog
     else:
         return True     # child added, show the dialog

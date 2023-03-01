@@ -199,7 +199,7 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath, load_opti
         manifest = get_manifest(manifest_filepath)
         last_loaded_graphs = manifest.getModelgraphsFootprint() + manifest.getDatagraphsFootprint()
 
-        time.sleep(1)
+        time.sleep(3)
     except Exception as e:
         return get_error_trace(e), []  # show done dialog with error
     return [dcc.Markdown("Data was loaded successfully.")], last_loaded_graphs

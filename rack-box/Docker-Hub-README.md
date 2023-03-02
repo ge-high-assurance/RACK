@@ -6,7 +6,7 @@ Both Docker and Podman [allow](https://xebia.com/podman-the-free-container-engin
 
 # Run a RACK Box
 
-You may need to increase the resources given to Docker in order to run a RACK box.  Click the right mouse button on Docker's whale icon in the system tray and select "Settings".  When the Settings window appears, click on Resources and see whether the following resource settings appear.  If you don't see these resource settings, it means you don't need to change anything; Docker will use all of your computer's CPUs and 80% of your computer's RAM if it needs to.
+You may need to increase the resources given to Docker in order to run a RACK box.  Click the right mouse button on Docker's whale icon in the system tray and select "Settings".  When the Settings window appears, click on Resources and see whether the following resource settings appear.  If you don't see these resource settings, it means you don't need to change anything; Docker will use all of your computer's CPUs and 50% - 80% of your computer's RAM if it needs to.
 
 If you do see these resource settings, make the following changes:
 
@@ -23,13 +23,13 @@ Now you are ready to start your RACK box.  If you are running Unix or Mac, you c
 Otherwise, type the following command to run your RACK box on your computer:
 
 ```shell
-docker run --detach -p 3030:3030 -p 8050:8050 -p 8080:80 -p 12050-12091:12050-12091 gehighassurance/rack-box:v11
+docker run --detach -p 3030:3030 -p 8050:8050 -p 8080:80 -p 12050-12091:12050-12091 gehighassurance/rack-box:v12.0
 ```
 
 Type <http://localhost:8080> in your web browser's address bar, hit Enter, and you should see your RACK box's welcome page appear in your browser.  The welcome page will tell you some things you can do with your RACK box.
 
 ---
-Copyright (c) 2021, General Electric Company, Galois, Inc.
+Copyright (c) 2021-2023, General Electric Company, Galois, Inc.
 
 All Rights Reserved
 

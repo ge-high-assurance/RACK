@@ -9,18 +9,12 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
-from ontology_changes import Commit
+from ontology_changes import Commit, FreeformNotes
 
-raise Exception(
-    f"This is a template, implement me and remove this exception!"
-)
-# You can use the following command to see the relevant changes:
-# <COMMAND>
-
-# pylint: disable=unreachable
 commit = Commit(
-    number="<COMMIT_ID>",
+    number="96c4d5d8672bbb8e8b5ff44ea928638092f91b82",
     changes=[
-        # <FILE>.sadl
+        # PROV-S.sadl
+        FreeformNotes("Minor change")
     ],
 )

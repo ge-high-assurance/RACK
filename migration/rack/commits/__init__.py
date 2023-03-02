@@ -15,6 +15,7 @@ from ontology_changes.ontology_change import Commit
 from rack.commits import (
     # <CHANGE_CRAWLER_IMPORTS> DO NOT EDIT OR MOVE THIS LINE
     commit05a03cd687e3bdce425794763e0957d3ccaf8ff0,
+    commit096749fb6a984d801d9ace5ccf5ec269de390a66,
     commit09962dd9ab9d252639d9e4324288fd6b47cbd91f,
     commit09b79d6c0e7f72b533a3ad21e776b200a973698a,
     commit0a89f70ff929380269a79fe2fc82f5dde346ed8c,
@@ -60,7 +61,9 @@ from rack.commits import (
     commit823e9eada16b98c896f9afc30a505683a7500276,
     commit833ef18f5024fee255f77887de2c8e9bc136e56d,
     commit84bad08fee850046ef1b328b2b393322b48d5e09,
+    commit8a01ff1b53e0b4979f0120a362b8fd3776a6586c,
     commit90f2d4f55668786ffa01bba2a646c7468849c97d,
+    commit96c4d5d8672bbb8e8b5ff44ea928638092f91b82,
     commit9af9030fe191d564875c067f6e0319ca6b52b798,
     commita9210534a2ceb9ea5595df9eb5cd02df3abe3cb3,
     commita95a46dec5162e65979d96ba140559dfb3013d23,
@@ -83,8 +86,10 @@ from rack.commits import (
     commite18de6ebaa298881aab7e8e69580905ffb97e0c4,
     commite5e8a35322fab104a42cc0f46d16c27ffc10adbb,
     commite696969a9d85ca8f894eea12305412bdc05521b3,
+    commiteb2f51ed862f33d2a56bbd6d43af27d9524912c9,
     commitee148bca649a1b451085832a7e2a488ce4127de7,
     commitef72564bbc4887c2d6f6654671427ba2780e0f67,
+    commitefb8faf291a895dcce35300ae3341dd4a5c3f0bd,
     commitf801242e4a8a763620571481fd83cc2af5aac2ac,
     commitfa603aad886439eb6a94e44e2c6f4851af16c9a3,
     commitff31a28051a5e348fd2474fce5360195999ddb3a,
@@ -200,7 +205,12 @@ commits_in_chronological_order: List[Commit] = [
     commitb85a66b005f4105ac5195cfd2cefec475f9e1f21.commit, # 2022 Oct 05
     commit16f6fe3e2bb5c8c6fae59b10f400380a76863452.commit, # 2022 Oct 05
 
-    # TODO: v11
+    commitefb8faf291a895dcce35300ae3341dd4a5c3f0bd.commit, # v11
+
+    commiteb2f51ed862f33d2a56bbd6d43af27d9524912c9.commit, # 2022 Nov 07
+    commit096749fb6a984d801d9ace5ccf5ec269de390a66.commit, # 2022 Dec 13
+    commit8a01ff1b53e0b4979f0120a362b8fd3776a6586c.commit, # 2023 Jan 10
+    commit96c4d5d8672bbb8e8b5ff44ea928638092f91b82.commit, # 2023 Feb 21
 
     # most recent (in history)
 ]

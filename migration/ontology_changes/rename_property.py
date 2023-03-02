@@ -91,7 +91,7 @@ class MigrationVisitor(semtk.DefaultSemTKVisitor):
         def on_change() -> None:
             # ConnectBy is sometimes filled, and sometimes not in our
             # nodegroups.  For now, we just follow what it was.
-            if node.ConnectBy is not "" and node.ConnectBy != self.data.to_name:
+            if node.ConnectBy != "" and node.ConnectBy != self.data.to_name:
                 log_additional_change(
                     f"{path}.ConnectBy", node.ConnectBy, self.data.to_name
                 )

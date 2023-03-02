@@ -1,4 +1,4 @@
-# Copyright (c) 2023, Galois, Inc.
+# Copyright (c) 2022, Galois, Inc.
 #
 # All Rights Reserved
 #
@@ -11,16 +11,10 @@
 
 from ontology_changes import Commit
 
-raise Exception(
-    f"This is a template, implement me and remove this exception!"
-)
-# You can use the following command to see the relevant changes:
-# <COMMAND>
-
-# pylint: disable=unreachable
 commit = Commit(
-    number="<COMMIT_ID>",
+    number="efb8faf291a895dcce35300ae3341dd4a5c3f0bd",
+    tag="v11",
     changes=[
-        # <FILE>.sadl
+        # no ontology change, just here for the tag
     ],
 )

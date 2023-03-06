@@ -14,7 +14,7 @@
     {
       "type": "virtualbox-ovf",
 
-      "boot_wait": "30s",
+      "boot_wait": "10s",
       "communicator": "ssh",
       "guest_additions_mode": "disable",
       "headless": "{{user `headless`}}",

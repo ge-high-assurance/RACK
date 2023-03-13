@@ -17,7 +17,6 @@ This simple process can be adapted to import other data into RACK for experiment
 """
 # standard imports
 import argparse
-from contextlib import nullcontext
 import csv
 from enum import Enum, unique
 from io import StringIO

@@ -12,7 +12,7 @@ jobs:
 #  - Lints RACK CLI, RACK Ontology, and shell scripts
 
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Check out RACK source
@@ -21,7 +21,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.8
+        python-version: '3.10'
 
     - name: Cache Python dependencies
       uses: actions/cache@v3
@@ -51,7 +51,7 @@ jobs:
         ./assist/bin/check
 
     - name: Lint shell scripts
-      uses: ludeeus/action-shellcheck@1.1.0
+      uses: ludeeus/action-shellcheck@2.0.0
       env:
         SHELLCHECK_OPTS: -x -P assist/databin -e SC1008
 
@@ -62,11 +62,13 @@ jobs:
     uses: ./.github/workflows/assemble-files.yml
 
 # test job:
+#  - Downloads rack-box files from artifacts
+#  - Installs rack-box on runner
 #  - Runs rack-box tests
 
   test:
     needs: assemble-files
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Check out RACK source
@@ -75,16 +77,16 @@ jobs:
         repository: ge-high-assurance/RACK
         path: RACK
 
-    - name: Ask cache for rack-box files
-      uses: actions/cache@v3
+    - name: Download rack-box files from artifacts
+      uses: actions/download-artifact@v3
       with:
+        name: rack-box-files
         path: RACK/rack-box/files
-        key: files-${{ github.sha }}
 
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.8
+        python-version: '3.10'
 
     - name: Cache Python dependencies
       uses: actions/cache@v3
@@ -97,7 +99,7 @@ jobs:
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
 
-    - name: Install rack-box files on runner
+    - name: Install rack-box on runner
       run: |
         mkdir -p /tmp/files
         for f in RACK/rack-box/files/*; do

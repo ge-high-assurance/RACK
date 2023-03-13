@@ -5,8 +5,10 @@ set -e
 
 rack_dir=$(realpath "$(dirname "$0")"/..)
 
+DOCKER="${DOCKER:-docker}"
+
 rack_image="gehighassurance/rack-box"
-rack_tag="v11"
+rack_tag="v12.0"
 
 sadl_image="sadl/sadl-eclipse"
 sadl_tag="v3.5.0-20211204"
@@ -39,7 +41,7 @@ in
     build)
         echo "[setup-owl] Building OWL files using docker"
 
-        docker run --rm -u 0 -e RUN_AS="$(id -u) $(id -g)" -v "${rack_dir}:/RACK" ${sadl_image}:${sadl_tag} -importAll /RACK -cleanBuild
+        $DOCKER run --rm -u 0 -e RUN_AS="$(id -u) $(id -g)" -v "${rack_dir}:/RACK" ${sadl_image}:${sadl_tag} -importAll /RACK -cleanBuild
         ;;
 
     virtualbox)
@@ -84,7 +86,7 @@ in
     docker)
         echo "[setup-owl] Copying CDR and OWL files from Docker"
 
-        container=$(docker container ls -aqf "ancestor=${rack_image}:${rack_tag}")
+        container=$($DOCKER container ls -aqf "ancestor=${rack_image}:${rack_tag}")
 
         if [ -z "${container}" ]; then
                 echo "Unable to find docker container ${rack_image}:${rack_tag}."
@@ -95,20 +97,20 @@ in
         echo "[setup-owl] Found container ${container}"
 
         echo "[setup-owl] Copying OwlModels"
-        docker cp "${container}:/home/ubuntu/RACK/RACK-Ontology/OwlModels/" "${rack_dir}/RACK-Ontology/"
-        docker cp "${container}:/home/ubuntu/RACK/GE-Ontology/OwlModels/" "${rack_dir}/GE-Ontology/"
-        docker cp "${container}:/home/ubuntu/RACK/GrammaTech-Ontology/OwlModels/" "${rack_dir}/GrammaTech-Ontology/"
-        docker cp "${container}:/home/ubuntu/RACK/STR-Ontology/OwlModels/" "${rack_dir}/STR-Ontology/"
-        docker cp "${container}:/home/ubuntu/RACK/Boeing-Ontology/OwlModels/" "${rack_dir}/Boeing-Ontology/"
-        docker cp "${container}:/home/ubuntu/RACK/LM-Ontology/OwlModels/" "${rack_dir}/LM-Ontology/"
-        docker cp "${container}:/home/ubuntu/RACK/SRI-Ontology/OwlModels/" "${rack_dir}/SRI-Ontology/"
-        docker cp "${container}:/home/ubuntu/RACK/RTX-Ontology/OwlModels/" "${rack_dir}/RTX-Ontology/"
-        docker cp "${container}:/home/ubuntu/RACK/Provenance-Example/OwlModels/" "${rack_dir}/Provenance-Example/"
-        docker cp "${container}:/home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/" "${rack_dir}/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
-        docker cp "${container}:/home/ubuntu/RACK/sadl-examples/OwlModels/" "${rack_dir}/sadl-examples/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/RACK-Ontology/OwlModels/" "${rack_dir}/RACK-Ontology/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/GE-Ontology/OwlModels/" "${rack_dir}/GE-Ontology/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/GrammaTech-Ontology/OwlModels/" "${rack_dir}/GrammaTech-Ontology/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/STR-Ontology/OwlModels/" "${rack_dir}/STR-Ontology/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/Boeing-Ontology/OwlModels/" "${rack_dir}/Boeing-Ontology/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/LM-Ontology/OwlModels/" "${rack_dir}/LM-Ontology/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/SRI-Ontology/OwlModels/" "${rack_dir}/SRI-Ontology/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/RTX-Ontology/OwlModels/" "${rack_dir}/RTX-Ontology/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/Provenance-Example/OwlModels/" "${rack_dir}/Provenance-Example/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/" "${rack_dir}/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/sadl-examples/OwlModels/" "${rack_dir}/sadl-examples/"
 
         echo "[setup-owl] Copying nodegroups"
-        docker cp "${container}:/home/ubuntu/RACK/nodegroups/CDR/" "${rack_dir}/nodegroups/"
-        docker cp "${container}:/home/ubuntu/RACK/nodegroups/ingestion/" "${rack_dir}/nodegroups/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/nodegroups/CDR/" "${rack_dir}/nodegroups/"
+        $DOCKER cp "${container}:/home/ubuntu/RACK/nodegroups/ingestion/" "${rack_dir}/nodegroups/"
         ;;
 esac

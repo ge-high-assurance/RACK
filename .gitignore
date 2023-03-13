@@ -68,3 +68,7 @@ cli/.project
 /Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.o
 rack-ui/cache/
 rack-ui/.project
+EntityResolution/.project
+EntityResolution/Resolutions/Summary.csv
+EntityResolution/cache/
+EntityResolution/Resolutions/*.json

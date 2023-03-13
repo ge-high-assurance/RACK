@@ -26,11 +26,48 @@ button {
 
 /* style for scrolling status area */
 div.scrollarea {
-    margin-top: 100px;
+    margin-top: 50px;
     white-space: pre-wrap;
     border-style: none;
-    height: 500px;
+    height: 400px;
     width: 1200px; overflow-y: auto;
     display: flex;
     flex-direction: column-reverse;
+}
+
+/* put a space between a checkbox and the text next to it */
+input[type=checkbox] {
+  margin-right: 10px;
+}
+
+
+/* dropdown menus */
+.ddm {
+    background-color: powderblue;
+    color: black;
+    border: none;
+    padding: 0px;
+}
+/* avoid color change when hovering */
+.ddm:hover {
+    background-color:powderblue;
+    color: black;
+}
+
+
+/* load options accordion */
+.accordion-button {
+    padding: 0px;
+}
+.accordion-button:not(.collapsed) {
+    background-color: white;
+    color: black;
+    box-shadow: none;
+}
+.accordion-button:is(.collapsed) {
+    box-shadow: none;
+}
+.accordion-body {
+    padding-top: 0px;
+    padding-bottom: 0px;
 }

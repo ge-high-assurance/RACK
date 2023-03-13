@@ -28,7 +28,7 @@ steps:
 
    ```shell
    cd RACK.wiki
-   git commit -a -m "Fix markdownlint warnings and update versions for next release"
+   git commit -a -m "Update versions for next release"
    git push
    cd ../RACK
    git commit -a -m "Update versions for next release"
@@ -44,7 +44,7 @@ steps:
 
    ```shell
    cd RACK.wiki
-   git tag v11
+   git tag v12.0
    git push --tag
    ```
 

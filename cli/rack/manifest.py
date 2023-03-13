@@ -12,6 +12,10 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
     'properties': {
         'name': {'type': 'string'},
         'description': {'type': 'string'},
+
+        'copy-to-graph':                    {'type': 'string'},
+        'perform-entity-resolution':        {'type': 'string'},
+
         'footprint': {
             'type': 'object',
             'additionalProperties': False,
@@ -97,12 +101,22 @@ class Manifest:
         self.datagraphsFootprint: List[Url] = []
         self.nodegroupsFootprint: List[str] = []
         self.steps: List[Tuple[StepType, Any]] = []
+        self.performEntityResolution: Optional[Url] = None
+        self.copyToGraph: Optional[Url] = None
 
     def getName(self) -> str:
         return self.name
 
     def getDescription(self) -> Optional[str]:
         return self.description
+    
+    def getPerformEntityResolution(self) -> Optional[Url]:
+        """Return target graph URL when this manifest prescribes running entity resolution"""
+        return self.performEntityResolution
+    
+    def getCopyToGraph(self) -> Optional[Url]:
+        """Return target graph URL when this manifest prescribes copying the footprint to the default graph"""
+        return self.copyToGraph
 
     def addModelgraphFootprint(self, modelgraph: Url) -> None:
         self.modelgraphsFootprint.append(modelgraph)
@@ -125,7 +139,11 @@ class Manifest:
     def addStep(self, stepType: StepType, stepFile: Any) -> None:
         self.steps.append((stepType, stepFile))
 
-    def getConnection(self, triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:
+    def getConnection(self, model_graphs: List[str], data_graph: str, extra_data_graphs: List[str], triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:
+        """Build a connection string."""
+        return Connection(semtk3.build_connection_str(self.name, triple_store_type, triple_store, model_graphs, data_graph, extra_data_graphs))
+
+    def getFootprintConnection(self, triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:
         """Build a connection string using the graphs defined in the footprint."""
         return Connection(semtk3.build_connection_str(self.name, triple_store_type, triple_store, self.modelgraphsFootprint, self.datagraphsFootprint[0], self.datagraphsFootprint[1:]))
 
@@ -140,6 +158,9 @@ class Manifest:
         validate(obj, MANIFEST_SCHEMA)
 
         manifest = Manifest(obj.get('name'), obj.get('description'))
+
+        manifest.copyToGraph = obj.get('copy-to-graph')
+        manifest.performEntityResolution = obj.get('perform-entity-resolution')
 
         footprint = obj.get('footprint', {})
         for datagraph in footprint.get('data-graphs', []):

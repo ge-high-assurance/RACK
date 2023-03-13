@@ -1,19 +1,19 @@
 ase==3.22.1
-attrs==21.4.0
-certifi==2022.6.15
-chardet==5.0.0
-colorama==0.4.5
-idna==3.3
-importlib-metadata==4.12.0
-jsonschema==3.2.0
-pyrsistent==0.18.1
+attrs==22.2.0
+certifi==2022.12.7
+chardet==5.1.0
+colorama==0.4.6
+idna==3.4
+importlib-metadata==6.0.0
+jsonschema==4.17.3
+pyrsistent==0.19.3
 python-dateutil==2.8.2
-PyYAML==5.4.1
-requests==2.28.1
-Pillow==9.0.1
-plotly==5.9.0
-semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@b07d2219679e46d588884fc0e4427da5a6f28a1e
+PyYAML==6.0
+requests==2.28.2
+Pillow==9.4.0
+plotly==5.13.0
+semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@5b858cdbc0cea6b3b6b3c992a255605246452235
 six==1.16.0
-tabulate==0.8.10
-urllib3==1.26.10
-zipp==3.8.1
+tabulate==0.9.0
+urllib3==1.26.14
+zipp==3.13.0

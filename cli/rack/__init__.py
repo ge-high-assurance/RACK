@@ -521,19 +521,20 @@ def ingest_manifest_driver(
     top_level: bool = True,
     optimization_url: Optional[Url] = None) -> None:
 
-    is_toplevel_archive = top_level and manifest_path.suffix in [suffix for _, suffixes, _ in shutil.get_unpack_formats() for suffix in suffixes]
-    tmp_mngr = TemporaryDirectory if is_toplevel_archive else nullcontext
-
-    with tmp_mngr() as tmp_dir:
-
-        if tmp_dir is not None:
-            @with_status(f'Unpacking archive')
-            def unpack() -> None:
-                shutil.unpack_archive(manifest_path, tmp_dir)
-            unpack()
-
-            manifest_path = Path(tmp_dir) / 'manifest.yaml'
-
+    is_toplevel_archive = top_level and manifest_path.suffix.lower() == ".zip"
+    
+    if is_toplevel_archive:
+        resp = semtk3.load_ingestion_package(
+            triple_store or DEFAULT_TRIPLE_STORE,
+            triple_store_type or DEFAULT_TRIPLE_STORE_TYPE,
+            manifest_path,
+            clear,
+            MODEL_GRAPH,
+            DEFAULT_DATA_GRAPH,
+        )
+        sys.stdout.buffer.writelines(resp)
+    
+    else:
         with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
             manifest = Manifest.fromYAML(manifest_file)
 

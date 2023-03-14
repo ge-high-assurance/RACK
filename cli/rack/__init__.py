@@ -18,6 +18,7 @@ This simple process can be adapted to import other data into RACK for experiment
 # standard imports
 import argparse
 import csv
+from contextlib import nullcontext
 from enum import Enum, unique
 from io import StringIO
 import logging
@@ -522,6 +523,16 @@ def ingest_manifest_driver(
 
     is_toplevel_archive = top_level and manifest_path.suffix.lower() == ".zip"
 
+    # Extract the manifest even if this is a zip file we're sending off to SemTK
+    if is_toplevel_archive:
+        with TemporaryDirectory() as tmpdir:
+            shutil.unpack_archive(manifest_path, tmpdir)
+            with open(Path(tmpdir)/"manifest.yaml", mode='r', encoding='utf-8-sig') as manifest_file:
+                manifest = Manifest.fromYAML(manifest_file)
+    else:
+        with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
+            manifest = Manifest.fromYAML(manifest_file)
+
     if is_toplevel_archive:
         resp = semtk3.load_ingestion_package(
             triple_store or DEFAULT_TRIPLE_STORE,
@@ -542,9 +553,6 @@ def ingest_manifest_driver(
                     sys.stdout.buffer.write(b'\n')
 
     else:
-        with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
-            manifest = Manifest.fromYAML(manifest_file)
-
         base_path = manifest_path.parent
 
         if clear:
@@ -593,9 +601,11 @@ def ingest_manifest_driver(
                     return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [r], r, [], triple_store, triple_store_type))
                 combine()
 
-            defaultGraphUrls = ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]
-            if (triple_store_type or DEFAULT_TRIPLE_STORE_TYPE) == "fuseki" and copyToGraph in defaultGraphUrls:
-                invoke_optimization(optimization_url)
+    # SemTK doesn't support this functionality, so we do it even if we've sent the zip file over
+    if top_level:
+        defaultGraphUrls = ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]
+        if (triple_store_type or DEFAULT_TRIPLE_STORE_TYPE) == "fuseki" and manifest.getCopyToGraph() in defaultGraphUrls:
+            invoke_optimization(optimization_url)
 
 def invoke_optimization(url: Optional[Url]) -> None:
     url = url or DEFAULT_OPTIMIZE_URL

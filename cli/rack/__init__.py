@@ -17,7 +17,6 @@ This simple process can be adapted to import other data into RACK for experiment
 """
 # standard imports
 import argparse
-from contextlib import nullcontext
 import csv
 from enum import Enum, unique
 from io import StringIO
@@ -392,7 +391,7 @@ class IngestionBuilder:
         elif isinstance(c, list):
             self.model_graphs.update(c)
 
-        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
+        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out:
             yaml.safe_dump(obj, out)
 
     def data(
@@ -428,7 +427,7 @@ class IngestionBuilder:
             elif isinstance(c, list):
                 self.model_graphs.update(c)
 
-        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
+        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out:
             yaml.safe_dump(obj, out)
 
     def nodegroups(
@@ -491,8 +490,8 @@ class IngestionBuilder:
                     subdir.mkdir(exist_ok=False)
                     self.nodegroups(base_path.joinpath(path), subdir)
                     step['nodegroups'] = dirname.as_posix()
-        
-        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
+
+        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out:
             yaml.safe_dump(obj, out)
 
 def build_manifest_driver(
@@ -504,7 +503,7 @@ def build_manifest_driver(
         builder = IngestionBuilder()
         builder.manifest(manifest_path, Path(outdir).joinpath(f'manifest.yaml'))
         shutil.make_archive(str(zipfile_path), 'zip', outdir)
-        
+
         for x in builder.model_graphs:
             print(f'Model graph: {x}')
 
@@ -521,19 +520,28 @@ def ingest_manifest_driver(
     top_level: bool = True,
     optimization_url: Optional[Url] = None) -> None:
 
-    is_toplevel_archive = top_level and manifest_path.suffix in [suffix for _, suffixes, _ in shutil.get_unpack_formats() for suffix in suffixes]
-    tmp_mngr = TemporaryDirectory if is_toplevel_archive else nullcontext
+    is_toplevel_archive = top_level and manifest_path.suffix.lower() == ".zip"
 
-    with tmp_mngr() as tmp_dir:
+    if is_toplevel_archive:
+        resp = semtk3.load_ingestion_package(
+            triple_store or DEFAULT_TRIPLE_STORE,
+            triple_store_type or DEFAULT_TRIPLE_STORE_TYPE,
+            manifest_path,
+            clear,
+            MODEL_GRAPH,
+            DEFAULT_DATA_GRAPH,
+        )
 
-        if tmp_dir is not None:
-            @with_status(f'Unpacking archive')
-            def unpack() -> None:
-                shutil.unpack_archive(manifest_path, tmp_dir)
-            unpack()
+        if logger.getEffectiveLevel() <= logging.WARN:
+            sys.stdout.buffer.writelines(resp)
+        else:
+            for line in resp.iter_lines():
+                warningPrefix = "Load CSV warning:".encode()
+                if not line.startswith(warningPrefix):
+                    sys.stdout.buffer.write(line)
+                    sys.stdout.buffer.write(b'\n')
 
-            manifest_path = Path(tmp_dir) / 'manifest.yaml'
-
+    else:
         with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
             manifest = Manifest.fromYAML(manifest_file)
 

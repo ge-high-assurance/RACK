@@ -18,7 +18,6 @@ This simple process can be adapted to import other data into RACK for experiment
 # standard imports
 import argparse
 import csv
-from contextlib import nullcontext
 from enum import Enum, unique
 from io import StringIO
 import logging
@@ -26,7 +25,7 @@ from os import environ
 from pathlib import Path
 import re
 import sys
-from typing import Any, Callable, Dict, List, Optional, Set, TypeVar, cast
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple, TypeVar, cast
 from types import SimpleNamespace
 from tempfile import TemporaryDirectory
 import shutil
@@ -361,6 +360,7 @@ class IngestionBuilder:
         self.model_graphs: Set[str] = set()
         self.data_graphs: Set[str] = set()
         self.manifests: Set[Path] = set()
+        self.steps: List[Any] = []
 
     def next_fresh(self) -> int:
         result = self.fresh
@@ -442,58 +442,62 @@ class IngestionBuilder:
                 json = row['jsonFile']
                 shutil.copyfile(from_path.joinpath(json), to_path.joinpath(json), follow_symlinks=True)
 
+    def new_directory(self, to_path: Path, full_path: Path, depth: int) -> Tuple[Path, Path]:
+        parts = full_path.parts
+        if depth <= len(parts):
+            human_name = full_path.parts[-depth]
+        else:
+            human_name = "step"
+        dirname = Path(f'{self.next_fresh():02}_{human_name}')
+        subdir = to_path.parent.joinpath(dirname)
+        subdir.mkdir(exist_ok=False)
+        return dirname, subdir
+
     def manifest(
         self,
         from_path: Path,
         to_path: Path,
+        is_top_level: bool = False
     ) -> None:
 
         with open(from_path, mode='r', encoding='utf-8-sig') as f:
             obj = yaml.safe_load(f)
 
         # Handle multiple inclusions of the same manifest to simplify
-        full_path = from_path.absolute()
+        full_path = from_path.resolve()
         if full_path in self.manifests:
             print(f'Pruning duplicate manifest {from_path}')
-            del obj['steps']
-        else:
-            self.manifests.add(full_path)
-            base_path = from_path.parent
-            for step in obj.get('steps',[]):
-                if 'manifest' in step:
-                    path = Path(step['manifest'])
-                    dirname = Path(f'{self.next_fresh():02}_manifest')
-                    subdir = to_path.parent.joinpath(dirname)
-                    topath = subdir.joinpath(path.name)
-                    subdir.mkdir(exist_ok=False)
-                    self.manifest(base_path.joinpath(path), topath)
-                    step['manifest'] = dirname.joinpath(path.name).as_posix()
-                elif 'model' in step:
-                    path = Path(step['model'])
-                    dirname = Path(f'{self.next_fresh():02}_model')
-                    subdir = to_path.parent.joinpath(dirname)
-                    topath = subdir.joinpath(path.name)
-                    subdir.mkdir(exist_ok=False)
-                    self.model(base_path.joinpath(path), topath)
-                    step['model'] = dirname.joinpath(path.name).as_posix()
-                elif 'data' in step:
-                    path = Path(step['data'])
-                    dirname = Path(f'{self.next_fresh():02}_data')
-                    subdir = to_path.parent.joinpath(dirname)
-                    topath = subdir.joinpath(path.name)
-                    subdir.mkdir(exist_ok=False)
-                    self.data(base_path.joinpath(path), topath)
-                    step['data'] = dirname.joinpath(path.name).as_posix()
-                elif 'nodegroups' in step:
-                    path = Path(step['nodegroups'])
-                    dirname = Path(f'{self.next_fresh():02}_nodegroups')
-                    subdir = to_path.parent.joinpath(dirname)
-                    subdir.mkdir(exist_ok=False)
-                    self.nodegroups(base_path.joinpath(path), subdir)
-                    step['nodegroups'] = dirname.as_posix()
+            return
+        self.manifests.add(full_path)
 
-        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out:
-            yaml.safe_dump(obj, out)
+        base_path = full_path.parent
+        for step in obj.get('steps',[]):
+            if 'manifest' in step:
+                self.manifest(base_path / step['manifest'], to_path)
+            elif 'model' in step:
+                path = Path(step['model'])
+                dirname, subdir = self.new_directory(to_path, base_path.joinpath(path), 3)
+                topath = subdir.joinpath(path.name)
+                self.model(base_path.joinpath(path), topath)
+                self.steps.append({"model": dirname.joinpath(path.name).as_posix()})
+
+            elif 'data' in step:
+                path = Path(step['data'])
+                dirname, subdir = self.new_directory(to_path, base_path.joinpath(path), 2)
+                topath = subdir.joinpath(path.name)
+                self.data(base_path.joinpath(path), topath)
+                self.steps.append({'data': dirname.joinpath(path.name).as_posix()})
+
+            elif 'nodegroups' in step:
+                path = Path(step['nodegroups'])
+                dirname, subdir = self.new_directory(to_path, base_path.joinpath(path), 1)
+                self.nodegroups(base_path.joinpath(path), subdir)
+                self.steps.append({'nodegroups': dirname.as_posix()})
+        
+        if is_top_level:               
+            obj['steps'] = self.steps
+            with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out:
+                yaml.safe_dump(obj, out)
 
 def build_manifest_driver(
     manifest_path: Path,
@@ -502,7 +506,7 @@ def build_manifest_driver(
 
     with TemporaryDirectory() as outdir:
         builder = IngestionBuilder()
-        builder.manifest(manifest_path, Path(outdir).joinpath(f'manifest.yaml'))
+        builder.manifest(manifest_path, Path(outdir).joinpath(f'manifest.yaml'), True)
         shutil.make_archive(str(zipfile_path), 'zip', outdir)
 
         for x in builder.model_graphs:

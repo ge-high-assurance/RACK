@@ -1,0 +1,6 @@
+[build-system]
+requires = [
+    "plotly",
+    "setuptools",
+    "semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@aab793d70325eff349bfa2012296d164d97afdcd",
+]

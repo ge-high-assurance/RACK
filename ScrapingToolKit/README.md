@@ -1,9 +1,9 @@
 # Overview
-The Scraping Tool Kit (STK) is a series of python packages that provide utilities to make it easier to extract assurance evidence from existing files.  STK is set up to allow an adaptable interface for quickly generating Common Data Representation (CDR) files for ingestion into RACK. The STK allows users to simply "add" evidence as it is found while processing documents, and all the tooling to curate and orgainize the information into CDR files for ingestion into RACK.  
+The Scraping Tool Kit (STK) is a series of python packages that provide utilities to make it easier to extract assurance evidence from existing files.  STK is set up to allow an adaptable interface for quickly generating Common Data Representation (CDR) files for ingestion into RACK. The STK allows users to simply "add" evidence as it is found while processing documents, and all the tooling to curate and orgainize the information into CDR files for ingestion into RACK.
 
 # Installation
 
-STK is installed by downloading the files to your local machine.  This can either be from a git clone of the whole RACK repo, or it can be just the ScrapingToolKit folder. After the repo is downloaded with and with RACK running on you local machine and the desired ontology loaded, execute the script `AutoGeneration/Generate-STK.py`, this will create `Evidence/Add.py`, `Evidence/CONSTANTS.py` and `Evidence/RACK-DATA.xsd`. Once the source files are generated installation is as simple entering `pip install .` from a command window in your `ScrapingToolKit` folder.
+STK is installed by downloading the files to your local machine.  This can either be from a git clone of the whole RACK repo, or it can be just the ScrapingToolKit folder. After the repo is downloaded with and with RACK running on you local machine and the desired ontology loaded, execute the script `AutoGeneration/GenerateSTK.py`, this will create `Evidence/Add.py`, `Evidence/CONSTANTS.py` and `Evidence/RACK-DATA.xsd`. Once the source files are generated installation is as simple entering `pip install .` from a command window in your `ScrapingToolKit` folder.
 dependencies can be installed by `pip install -r requirements.txt` to install all dependencies at once or they can be installed individually.
 
 Dependencies:
@@ -31,11 +31,11 @@ After installing, the STK there are two modules that need to be imported into yo
 ### createEvidenceFile
 `Evidence.createEvidenceFile()` - Initializes a new RACK-DATA.xml for the collecting of data when the `Add` functions are called.
 
-### createCDR  
+### createCDR
 `Evidence.createCDR()` - Curates the data collected in RACK-DATA.xml and generates CDR CSV files as well as the RACK CLI import.yaml for ingesting the data.
 
 ## Evidence.Add Module
-`Evidence.Add` - This module is provides all the `Add` functions for adding data in the RACK-DATA.xml.  For each class from the ontology there is a function that allows you to add an evidence record to the RACK-DATA.xml.  
+`Evidence.Add` - This module is provides all the `Add` functions for adding data in the RACK-DATA.xml.  For each class from the ontology there is a function that allows you to add an evidence record to the RACK-DATA.xml.
 
 ### <CLASS>
   `Evidence.Add.<NAMESPACE_ID>.<CLASS>` - Each function has a series of option arguments that correspond to the properties of the class. Every property is optional and are defaulted to `None`, for example:
@@ -134,7 +134,7 @@ This will result in an ingestion error. `PARENT-1` for the `satisfies_identifier
 
 Ingesting of Text Files is entirely up to the user on how the data is formatted and how they are processing it.  This example is created just to show how the STK can be used, it is e only way. Any processing begins by examining the data to be ingested. For this short tutorial we are going to look at a simple text file "REQs.txt"
 
-Example File REQs.txt: 
+Example File REQs.txt:
 ```
 [REQ1] - System shall do something.
 ParentRequirement:{Parent-1}
@@ -144,7 +144,7 @@ SourceCode:{SourceCodeFile1,SourceCodeFile2}
 ParentRequirement:{Parent-1,Parent-2}
 SourceCode:{SourceCodeFile}
 ```
-First thing to do is to identify how the text can be processed. For a more complex file the use of RegEx might be easier, but for this example each line starts with a token that can be used to identify the data that is in the line. So this can be accomplished by simply reading through the file line by line and processing the data.  The only complication is that a record of the last requirement line identifier needs to be maintained. 
+First thing to do is to identify how the text can be processed. For a more complex file the use of RegEx might be easier, but for this example each line starts with a token that can be used to identify the data that is in the line. So this can be accomplished by simply reading through the file line by line and processing the data.  The only complication is that a record of the last requirement line identifier needs to be maintained.
 
 ```
 import Evidence
@@ -175,7 +175,7 @@ def ingest(filePath):
         end = l.rfind("}")
         sourceIds = l[start+1:end].split(",")
         for sId in sourceIds:
-          Evidence.Add.FILE.FILE(identifier = sId, satisfies_identifier = lastReqId)        
+          Evidence.Add.FILE.FILE(identifier = sId, satisfies_identifier = lastReqId)
 
 if __name__=="__main__":
   Evidence.createEvidenceFile()

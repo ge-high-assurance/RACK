@@ -71,7 +71,7 @@ jobs:
     - name: Download systemctl script
       shell: bash
       run: |
-        curl -LSfs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.4505/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
+        curl -LSfs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.7106/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
 
     - name: Build OWL files using sadl-eclipse
       shell: bash

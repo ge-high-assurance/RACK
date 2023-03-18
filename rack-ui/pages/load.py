@@ -1,5 +1,6 @@
 """ Content for the "load data" page """
 
+import yaml
 import time
 import io
 import base64
@@ -17,6 +18,11 @@ from .helper import *
 
 # name of default manifest file within ingestion package
 MANIFEST_FILE_NAME = "manifest.yaml"
+
+# get text for warning banner
+def get_warning_banner_str() -> str:
+    config_obj = yaml.safe_load(open("config/config.yml"))
+    return config_obj.get('load-warning')
 
 # display strings
 CLEAR_BEFORE_LOADING_STR = "Clear before loading"
@@ -74,6 +80,7 @@ done_dialog = dbc.Modal(
 layout = html.Div([
         html.H2("Load data"),
         dcc.Markdown("_Load data into RACK_"),
+        html.Div(dcc.Markdown(get_warning_banner_str()), className="warningbanner"),
         dbc.Row([
             dbc.Col(html.Button(id="turnstile-button", children="Select Turnstile data"), width="auto"),  # button to load turnstile
             dbc.Col(dcc.Upload(html.Button(id="select-button", children="Select ingestion package"), id='select-button-upload', accept=".zip", multiple=False), width="auto")  # button to show upload dialog to pick ingestion package

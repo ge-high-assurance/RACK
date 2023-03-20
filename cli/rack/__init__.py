@@ -174,6 +174,9 @@ def str_good(s: str) -> str:
 def str_bad(s: str) -> str:
     return Fore.RED + s + Style.RESET_ALL
 
+def str_warn(s: str) -> str:
+    return Fore.YELLOW + s + Style.RESET_ALL
+
 def str_highlight(s: str) -> str:
     return Fore.MAGENTA + s + Style.RESET_ALL
 
@@ -551,15 +554,17 @@ def ingest_manifest_driver(
             DEFAULT_DATA_GRAPH,
         )
 
-        if logger.getEffectiveLevel() <= logging.WARN:
-            sys.stdout.buffer.writelines(resp)
-        else:
-            for line in resp.iter_lines():
-                warningPrefix = "Load CSV warning:".encode()
-                if not line.startswith(warningPrefix):
-                    sys.stdout.buffer.write(line)
-                    sys.stdout.buffer.write(b'\n')
-
+        loglevel = logger.getEffectiveLevel()
+        for line_bytes in resp.iter_lines():
+            level, _, msg = line_bytes.decode().partition(': ')
+            if level == "INFO" and logging.INFO >= loglevel:
+                print(msg)
+            elif level == "DEBUG" and logging.DEBUG >= loglevel:
+                print("Debug: " + str_highlight(msg))
+            elif level == "WARNING" and logging.WARNING >= loglevel:
+                print(str_warn("Warning: " + msg))
+            elif level == "ERROR" and logging.ERROR >= loglevel:
+                print("Error: " + str_bad(msg))
     else:
         base_path = manifest_path.parent
 
@@ -953,7 +958,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument('--base-url', type=str, default=environ.get('BASE_URL') or DEFAULT_BASE_URL, help='Base SemTK instance URL')
     parser.add_argument('--triple-store', type=str, default=environ.get('TRIPLE_STORE'), help='Override Fuseki URL')
     parser.add_argument('--triple-store-type', type=str, default=environ.get('TRIPLE_STORE_TYPE'), help='Override Triplestore Type (default: fuseki)')
-    parser.add_argument('--log-level', type=str, default=environ.get('LOG_LEVEL', 'WARNING'), help='Assign logger severity level')
+    parser.add_argument('--log-level', type=str, default=environ.get('LOG_LEVEL', 'INFO'), help='Assign logger severity level')
 
     subparsers = parser.add_subparsers(dest='command')
 

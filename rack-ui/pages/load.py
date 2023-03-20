@@ -127,12 +127,7 @@ def run_unzip(zip_file_contents, turnstile_clicks):
             zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
             zip_obj = ZipFile(zip_str, 'r')
             zip_obj.extractall(path=tmp_dir)  # unzip the package
-            manifest_paths = glob.glob(f"{tmp_dir}/**/{MANIFEST_FILE_NAME}", recursive=True)
-            if len(manifest_paths) == 0:
-                raise Exception(f"Cannot load ingestion package: does not contain manifest file {MANIFEST_FILE_NAME}")
-            if len(manifest_paths) > 1:
-                raise Exception(f"Cannot load ingestion package: contains multiple default manifest files: {manifests}")
-            manifest_path = manifest_paths[0]
+            manifest_path = tmp_dir + "/" + MANIFEST_FILE_NAME
         else:
             manifest_path = "../Turnstile-Example/Turnstile-IngestionPackage/manifest.yaml"
         manifest = get_manifest(manifest_path)
@@ -274,6 +269,9 @@ def manage_done_dialog(children, n_clicks):
 
 def get_manifest(manifest_filepath) -> Manifest:
     """ Get manifest contents from file """
-    with open(manifest_filepath, mode='r', encoding='utf-8-sig') as manifest_file:
-        manifest = Manifest.fromYAML(manifest_file)
+    try:
+        manifest_file = open(manifest_filepath, mode='r', encoding='utf-8-sig')
+    except Exception as e:
+        raise Exception("Cannot find top-level manifest file " + MANIFEST_FILE_NAME)
+    manifest = Manifest.fromYAML(manifest_file)
     return manifest

@@ -20,6 +20,10 @@ Terminology used throughout this document:
   * Target: the output executable software generated via a Program's efforts that
     will be installed.
 
+  * Thing Tested: each test should be identified with a particular element of the
+    Program (e.g. requirement, software unit, etc.) and there should also be
+    traceability of the test to the particular (sub-)set of code being tested.
+
   * Area of Concern: A program is often comprised of a number of inter-related
     activities (areas of concern), including (but not limited to):
 
@@ -235,7 +239,272 @@ the TESTING.sadl file provides a more complete specification of TESTING elements
 
       * "annotatedResult" property : the TEST_RESULT being annotated
       * "annotation" property : the ENTITY providing the annotation information
-  
+
+# Sample Scenarios
+
+## Scenario 1
+
+The software written during the Program is intended to satisfy a particular
+requirement "Req1" (among others).  The software is built via the documented
+build process and the resulting artifact of the build is an executable,
+identified by Target name and version.  The software must be verified to meet
+Req1, so 5 requirements-based TESTs are developed (the TESTs 'wasGeneratedBy' a
+TEST_DEVELOPMENT), and the 'verifies' target of each is the "Req1" REQUIREMENT.
+
+    REQ1 is a REQUIREMENT has identifier "Req1".
+
+    SOURCE1 is a FILE.
+    MakeFile1 is a FILE.
+    MainDev is a CODE_DEVELOPMENT.
+    MainDev has goal SOURCE1.
+    MainDev has goal MakeFile1.
+
+    Bld1 is a COMPILE.
+    Bld1 has used MakeFile1 has compileInput SOURCE1 has goal TARGET1.
+    TARGET1 is a FILE.
+
+    TDEV1 is a TEST_DEVELOPMENT.
+    TDEV1 has goal TestSource1.
+    TestSource1 is a FILE.
+
+    TestBld1 is a COMPILE.
+    TestBld1 has compileInput TestSource1 has goal TestExe.
+    TestExe is a FILE.
+
+    TEST1 is a TEST has identifier "Test1".
+    TEST2 is a TEST has identifier "Test2".
+    TEST3 is a TEST has identifier "Test3".
+    TEST4 is a TEST has identifier "Test4".
+    TEST5 is a TEST has identifier "Test5".
+
+    TEST1 has wasGeneratedBy TDEV1 has verifies REQ1 has wasDerivedFrom TestSource1.
+    TEST2 has wasGeneratedBy TDEV1 has verifies REQ1 has wasDerivedFrom TestSource1.
+    TEST3 has wasGeneratedBy TDEV1 has verifies REQ1 has wasDerivedFrom TestSource1.
+    TEST4 has wasGeneratedBy TDEV1 has verifies REQ1 has wasDerivedFrom TestSource1.
+    TEST5 has wasGeneratedBy TDEV1 has verifies REQ1 has wasDerivedFrom TestSource1.
+
+Two of the TESTs ("Test1" and "Test2") are independent, and the remaining three
+are independent of the first two but it is known that they must be run in a
+specific order ("Test3" -> "Test4" -> "Test5").  This information is represented
+by a TEST_PROCEDURE "VerifyReq1" with three 'independentTest' links to three
+TEST_STEPs ("Step1", "Step2", "Step3"), where "Step1" 'thisStep' is "Test1",
+"Step2" 'thisStep' is "Test2", and "Step3" 'thisStep' is "Test3".  There are two
+more TEST_STEPs ("Step3b" and "Step3c"), where "Step3" has 'nextStep' to "Step3b"
+(which has 'thisStep' to "Test4"), and "Step3b" has 'nextStep' to "Step3c" (which
+has 'thisStep' to "Test5").
+
+    VR1 is a TEST_PROCEDURE has identifier "VerifyReq1".
+    Tstep1 is a TEST_STEP has identifier "Step1" has thisStep TEST1.
+    Tstep2 is a TEST_STEP has identifier "Step2" has thisStep TEST2.
+    Tstep3 is a TEST_STEP has identifier "Step3" has thisStep TEST3.
+    Tstep4 is a TEST_STEP has identifier "Step3b" has thisStep TEST4.
+    Tstep5 is a TEST_STEP has identifier "Step3c" has thisStep TEST5.
+
+    VR1 has independentTest Tstep1.
+    VR1 has independentTest Tstep2.
+    VR1 has independentTest Tstep3.
+    Tstep3 has nextStep Tstep4.
+    Tstep4 has nextStep Tstep5.
+
+After the Target software and the Tests have been developed, it is time for the
+actual testing to be performed (a TEST_EXECUTION activity).  This TEST_EXECUTION
+identifies the 'testProcedure' of "VerifyReq1" (it may have additional
+'testProcedure' targets if it is running multiple procedures), and it has a
+'testLog' connection to a TEST_LOG to log records of the tests performed and the
+results.  The TEST_LOG will have at least one 'content' connection to a
+TEST_RECORD that is associated with the "VerifyReq1" TEST_PROCEDURE via the
+'testRecordProcedure'.  Note that it is possible that the testing might only run
+a subset of the TEST_PROCEDURE, so the TEST_RECORD has a 'testRecordSteps' to
+each of the independent tests actually run during that TEST_EXECUTION; these
+should be a subset of the 'content' links from the TEST_PROCEDURE to the
+corresponding TEST_STEPs.  The TEST_RECORD also has a 'testRecordScenario' link
+to a TEST_SCENARIO that identifies both the Target software (FILE and string
+version) as well as the Testing software (FILE and string version).  The
+TEST_RECORD may also have 'testConfiguration' links to ENTITYs that further
+describe the configuration (e.g. the hardware elements, the test parameters,
+etc.).
+
+    Trun1 is a TEST_EXECUTION has testProcedure VR1.
+    Tlog1 is a TEST_LOG.
+    Trec1 is a TEST_RECORD.
+    Scenario1 is a TEST_SCENARIO.
+
+    Trun1 has testLog Tlog1.
+    Tlog1 has content Trec1;
+
+    Trec1 has testRecordProcedure VR1.
+    Trec1 has testRecordSteps Tstep1.
+    Trec1 has testRecordSteps Tstep2.
+    Trec1 has testRecordSteps Tstep3.
+    Trec1 has testRecordScenario Scenario1.
+    Trec1 has testConfiguration Processor1.
+
+    Processor1 is a HWCOMPONENT has componentType ComputePlatform.
+
+    Scenario1 has targetPackage TARGET1 has targetVersion "v1".
+    Scenario1 has testPackage TestExe has testVersion "v1".
+
+Each individual TEST that is run during the TEST_EXECUTION should generate a
+TEST_RESULT with a 'result' of TEST_STATUS to indicate if the TEST successfully
+validated the 'verifies' Thing-Tested for the test.  Each TEST_RESULT has a
+'wasGeneratedBy' to the TEST_EXECUTION, and a 'confirms' link to the TEST that it
+is the result of.
+
+    TRES1 is a TEST_RESULT has wasGeneratedBy Trun1 has confirms TEST1.
+    TRES2 is a TEST_RESULT has wasGeneratedBy Trun1 has confirms TEST2.
+    TRES3 is a TEST_RESULT has wasGeneratedBy Trun1 has confirms TEST3.
+    TRES4 is a TEST_RESULT has wasGeneratedBy Trun1 has confirms TEST4.
+    TRES5 is a TEST_RESULT has wasGeneratedBy Trun1 has confirms TEST5.
+
+In our sample scenario, we will suppose that the TEST_STATUS for all of our TESTs
+is 'Passed', with the exception of "Test2", which has a TEST_STATUS 'result' of
+'Failed'.  However, Joe Test (an AGENT) subsequently performs a generic ACTIVITY
+where he evaluates the failure and determines that it is not properly indicative
+of the scenario defined by the "VerifyReq1" requirement (perhaps due to the
+'testConfiguration' information) and therefore he creates a formal "Memo"
+(TEST_ANNOTATION) that 'wasGeneratedBy' his ACTIVITY.  That Memo describes his
+findings and documents his assessment that the 'Failed' TEST_STATUS should be
+ignored.  That "Memo" has an 'annotatedResult' link to the TEST_EXECUTION's
+TEST_RESULT for "Test2".
+
+    TRES1 has result Passed.
+    TRES2 has result Failed.
+    TRES3 has result Passed.
+    TRES4 has result Passed.
+    TRES5 has result Passed.
+
+    JoeTest is a PERSON has title "Joe Test".
+    TestResultAnalysis is an ACTIVITY.
+    TestResultAnalysis has wasAssociatedWith JoeTest has goal Memo.
+
+    Memo is an TEST_ANNOTATION has wasGeneratedBy TestResultAnalysis.
+    Memo has annotatedResult TRES2.
+    IgnoredFailureOOB is a ENTITY has wasGeneratedBy TestResultAnalysis.
+    Memo has testAnnotation IgnoredFailureOOB.
+
+
+## Scenario 2
+
+A software developer (AGENT "Alice") in the Program writes a SWCOMPONENT
+"bitflipper" with a 'componentType' of 'SourceFunction' as part of a
+CODE_DEVELOPMENT activity.  "Alice"'s pair-programmer AGENT "Bob" performs a
+TEST_DEVELOPMENT activity to write 3 Unit TESTs that will directly link with
+"Alice"'s SWCOMPONENT to create a distinct test executable (FILE and Version
+string) FILE with 'filename' "BitFlipperTesting" via a COMPILE activity. The
+COMPILE activity has a 'compileInput' link to the FILE containing the
+"bitflipper" SWCOMPONENT. These three tests ("Flip", "Flop", "Flap") are
+independent and therefore each is the 'thisStep' of "FlipStep", "FlopStep", and
+"FlapStep" TEST_STEP's, respectively, all three of which are 'content' linked to
+by the "FLIPTest" TEST_PROCEDURE.  All three of "Flip", "Flop", and "Flap" TESTs
+have a 'verifies' link to the "bitflipper" SWCOMPONENT.
+
+    ALICE is a PERSON has title "Alice".
+    InitialDev is a CODE_DEVELOPMENT wasAssociatedWith ALICE.
+    InitialDev has goal BitFlipperSource has goal BitFlipper.
+    BitFlipperSource is a FILE.
+    BitFlipper is a SWCOMPONENT has title "bitflipper".
+    BitFlipper has componentType SourceFunction.
+    BitFlipper has partOf BitFlipperSource.
+
+    BOB is a Person has title "Bob".
+    TestDev is a TEST_DEVELOPMENT wasAssociatedWith BOB.
+    Flip is a TEST has wasGeneratedBy TestDev.
+    Flap is a TEST has wasGeneratedBy TestDev.
+    Flop is a TEST has wasGeneratedBy TestDev.
+    TestDev has goal SrcTestFile.
+    SrcTestFile is a FILE.
+
+    TestBld1 is a COMPILE wasAssociatedWith BOB.
+    TestBld1 has compileInput SrcTestFile has compileInput BitFlipperSource.
+    TestBld1 has goal TestExe.
+    TestExe is a FILE has filename "BitFlipperTesting".
+
+    Flip has verifies BitFlipper.
+    Flap has verifies BitFlipper.
+    Flop has verifies BitFlipper.
+
+    FlipStep is a TEST_STEP has thisStep Flip.
+    FlapStep is a TEST_STEP has thisStep Flap.
+    FlopStep is a TEST_STEP has thisStep Flop.
+
+    FLIPTest is a TEST_PROCEDURE.
+    FLIPTest has independentTest FlipStep.
+    FLIPTest has independentTest FlapStep.
+    FLIPTest has independentTest FlopStep.
+
+"Bob" then performs a TEST_EXECUTION activity for the 'testProcedure' "FLIPTest"
+which generates a 'testLog' link to a TEST_LOG with 'content' of a TEST_RECORD.
+The TEST_RECORD has a 'testRecordProcedure' to "FLIPTest", a 'testRecordScenario'
+to a TEST_SCENARIO that has a 'testPackage' of "BitFlipperTesting" and
+'testVersion' of "1.0" but no 'targetPackage' linkage.  At the completion of the
+TEST_EXECUTION, there are three TEST_RESULTs that 'wasGeneratedBy' the
+TEST_EXECUTION, where each confirms "Flip", "Flop" and "Flap" TESTs respectively.
+Unfortunately, "Flip" and "Flap" have a TEST_RESULT 'result' TEST_STATUS of
+'Passed', but "Flop" is 'Failed'.
+
+    Run1 is a TEST_EXECUTION has testProcedure FLIPTest wasAssociatedWith BOB.
+    Log1 is a TEST_LOG.
+    Record1 is a TEST_RECORD.
+    Scenario1 is a TEST_SCENARIO.
+
+    Run1 has testLog Log1.
+    Log1 has content Record1.
+    Record1 has testRecordProcedure FLIPTest.
+    Record1 has testRecordSteps FlipStep.
+    Record1 has testRecordSteps FlapStep.
+    Record1 has testRecordSteps FlopStep.
+    Record1 has testRecordScenario Scenario1.
+
+    Scenario1 has testPackage TestExe has testVersion "1.0".
+
+    Flipped1 is a TEST_RESULT has wasGeneratedBy Run1 has confirms Flip.
+    Flapped1 is a TEST_RESULT has wasGeneratedBy Run1 has confirms Flap.
+    Flopped1 is a TEST_RESULT has wasGeneratedBy Run1 has confirms Flop.
+
+    Flipped1 has result Passed.
+    Flapped1 has result Passed.
+    Flopped1 has result Failed.
+
+
+"Alice" looks at the failed "Flop" test and realizes she needs to make a small
+change to the "bitflipper", which she does as a new CODE_DEVELOPMENT.  "Bob" then
+performs another COMPILE activity to get a new version of "BitFlipperTesting".
+He then performs another TEST_EXECUTION, which has all the aforementioned links,
+except this time he only runs the previously-failed Flop test, which now has a
+new TEST_RESULT with a 'result' TEST_STATUS of 'Passed'.  The TEST_RECORD
+'testRecordScenario' linked TEST_SCENARIO for this second run still has a
+'testPackage' of "BitFlipper" but the 'testVersion' is now "1.1", and the
+corresponding COMPILE activity has a 'compileInput' to the new FILE containing
+"Alice"'s updated "bitflipper" that 'wasGeneratedBy' her second CODE_DEVELOPMENT
+activity.
+
+    FixBitFlipper is a CODE_DEVELOPMENT wasAssociatedWith ALICE.
+    FixBitFlipper has goal BitFlipperSource2 has goal BitFlipper.
+    BitFlipperSource2 is a FILE.
+    BitFlipper has partOf BitFlipperSource2.
+
+    TestBld2 is a COMPILE wasAssociatedWith BOB.
+    TestBld2 has compileInput SrcTestFile has comipleInput BitFlipperSource2.
+    TestBld2 has goal TestExe2.
+    TestExe2 is a FILE has filename "BitFlipperTesting".
+
+    Run2 is a TEST_EXECUTION has testProcedure FLIPTest wasAssociatedWith BOB.
+    Log2 is a TEST_LOG.
+    Record2 is a TEST_RECORD.
+    Scenario2 is a TEST_SCENARIO.
+
+    Run2 has testLog Log2.
+    Log2 has content Record2.
+    Record2 has testRecordProcedure FLIPTest.
+    Record2 has testRecordSteps FlopStep.
+    Record2 has testRecordScenario Scenario2.
+
+    Scenario2 has testPackage TestExe2 has testVersion "1.1".
+
+    Flopped2 is a TEST_RESULT has wasGeneratedBy Run2 has confirms Flop.
+    Flopped2 has result Passed.
+
+
 ---- temporary below --------------------------------------------------
 
 Changes:
@@ -261,19 +530,23 @@ Changes:
    contains?  That might be a duplicate/conflict with
    TEST_RECORD.testRecordProcedure though.
 
-4. Modify TEST_RECORD, which currently parallels TEST_STEP but doesn't add any
-   new information.  The original idea was that the output side paralleled the
-   input side, but it's not clear that the parallel to the TEST_STEP can be
+4. Modify `TEST_RECORD`, which currently parallels `TEST_STEP` but doesn't add
+   any new information.  The original idea was that the output side paralleled
+   the input side, but it's not clear that the parallel to the `TEST_STEP` can be
    extracted reliably from the test output.  There's also a concern about if
-   TEST_RECORD.nextRecord conflicts with TEST_STEP.nextStep what that would mean.
+   `TEST_RECORD.nextRecord` conflicts with `TEST_STEP.nextStep` what that would
+   mean.
+
    Taking a step back from this approach, it seems that ultimately the
-   TEST_RESULTS should match up to the TESTS in 1:1, and if there's too many of
-   either, that is a reasonable indication of a mismatch.  Other than that, there
-   doesn't seem to be any useful information imparted by trying to have the
-   TEST_RECORD as a parallel to TEST_STEP (it doesn't fulfill any of the
-   considerations discussed above).  Instead, TEST_RECORD can be used to track
-   the run of a subset of tests (where the TEST_RECORD corresponds to a .out file
-   captured from a TEST_EXECUTION).
+   `TEST_RESULTS` should match up to the `TESTS` in 1:1 fashion, and if there's
+   too many of either, that is a reasonable indication of a mismatch for TA3
+   analysis.  Other than that, there doesn't seem to be any useful information
+   imparted by trying to have the `TEST_RECORD` as a parallel to `TEST_STEP` (it
+   doesn't fulfill any of the considerations discussed above).
+
+   Instead, *`TEST_RECORD` can be used to track the run of a subset of tests
+   (where the `TEST_RECORD` corresponds to a `.out` file captured from a
+   `TEST_EXECUTION`)*.
 
 5. Add fields to TEST_EXECUTION
 

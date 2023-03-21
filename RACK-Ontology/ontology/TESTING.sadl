@@ -49,7 +49,9 @@ TEST_RESULT
 
 
 TEST_PROCEDURE (note "A TEST_PROCEDURE is the TEST_STEPs that perform TESTs. ") is a type of COLLECTION.
-	content of TEST_PROCEDURE only has values of type TEST_STEP.
+	independentTest describes TEST_PROCEDURE.
+   independentTest is a type of content.
+   independentTest only has values of type TEST_STEP.
 	
 TEST_STEP (note "A TEST_STEP is a collection of TESTs that are performed in a single execution") is a type of ENTITY.
 	thisStep (note "The TEST performed by this TEST_STEP") of TEST_STEP has a single value of type TEST.
@@ -82,6 +84,7 @@ TEST_EXECUTION
 	testProcedure (note "TEST_PROCEDURE that was executed.") describes TEST_EXECUTION with values of type TEST_PROCEDURE.
 	testProcedure is a type of used.
 	testLog (note "TEST_LOG that was generated") describes TEST_EXECUTION with values of type TEST_LOG.
+   testLog is a type of goal.
 
 TEST_ANNOTATION (note "provides additional information about a TEST_RESULT") is a type of ENTITY.
 	annotatedResult (note "identifies the TEST_RESULT being annotated") describes TEST_ANNOTATION with values of type TEST_RESULT.

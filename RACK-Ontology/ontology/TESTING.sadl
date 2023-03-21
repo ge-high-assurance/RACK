@@ -49,9 +49,8 @@ TEST_RESULT
 
 
 TEST_PROCEDURE (note "A TEST_PROCEDURE is the TEST_STEPs that perform TESTs. ") is a type of COLLECTION.
-	independentTest describes TEST_PROCEDURE.
+	independentTest describes TEST_PROCEDURE  only has values of type TEST_STEP.
    independentTest is a type of content.
-   independentTest only has values of type TEST_STEP.
 	
 TEST_STEP (note "A TEST_STEP is a collection of TESTs that are performed in a single execution") is a type of ENTITY.
 	thisStep (note "The TEST performed by this TEST_STEP") of TEST_STEP has a single value of type TEST.

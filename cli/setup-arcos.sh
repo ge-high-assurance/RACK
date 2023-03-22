@@ -4,7 +4,7 @@ set -eu
 
 ./ensure-cli-in-PATH.sh
 
-TMP=$(mktemp -d -t ingestion_package) || exit 1
+TMP=$(mktemp -d -t ingestion_package_XXXXXX) || exit 1
 trap 'rm -rf "$TMP"; trap - EXIT; exit' EXIT INT HUP
 
 rack manifest build ../manifests/arcos.yaml "${TMP}/output"

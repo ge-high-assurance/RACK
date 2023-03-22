@@ -209,9 +209,10 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath, zip_filep
         if semtk3.check_services() is False:
             raise Exception("Cannot reach SemTK Services (wait for startup to complete, or check for failures)")
 
+        # load the ingestion package
         f = open(status_filepath, "a")
         with redirect_stdout(f), redirect_stderr(f):    # send command output to temporary file
-            resp = semtk3.load_ingestion_package(TRIPLE_STORE, TRIPLE_STORE_TYPE, Path(zip_filepath), clear, rack.MODEL_GRAPH, rack.DEFAULT_DATA_GRAPH)
+            resp = semtk3.load_ingestion_package(TRIPLE_STORE, TRIPLE_STORE_TYPE, zip_filepath, clear, rack.MODEL_GRAPH, rack.DEFAULT_DATA_GRAPH)
             for line_bytes in resp.iter_lines():
                 level, _, msg = line_bytes.decode().partition(': ')
                 if level != "WARNING":
@@ -219,8 +220,10 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath, zip_filep
                 if level == "ERROR":
                     raise Exception(msg)
 
-        # store list of loaded graphs
+        # extract the manifest for actions below
         manifest = get_manifest(manifest_filepath)
+
+        # store list of loaded graphs
         last_loaded_graphs = manifest.getModelgraphsFootprint() + manifest.getDatagraphsFootprint()
 
         time.sleep(3)

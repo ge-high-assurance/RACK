@@ -18,7 +18,6 @@ This simple process can be adapted to import other data into RACK for experiment
 # standard imports
 import argparse
 import csv
-from contextlib import nullcontext
 from enum import Enum, unique
 from io import StringIO
 import logging
@@ -40,7 +39,7 @@ import semtk3
 from semtk3.semtktable import SemtkTable
 import yaml
 
-from rack.manifest import Manifest, StepType
+from rack.manifest import Manifest
 from rack.types import Connection, Url
 from rack.defaults import *
 
@@ -518,11 +517,9 @@ def build_manifest_driver(
 
 def ingest_manifest_driver(
     manifest_path: Path,
-    base_url: Url,
     triple_store: Optional[Url],
     triple_store_type: Optional[str],
     clear: bool,
-    top_level: bool = True,
     optimization_url: Optional[Url] = None) -> None:
 
     manifest = Manifest.getToplevelManifest(manifest_path)
@@ -834,7 +831,7 @@ def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, True, args.optimize_url)
+    ingest_manifest_driver(Path(args.config), args.triple_store, args.triple_store_type, args.clear, args.optimize_url)
 
 def dispatch_manifest_build(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""

@@ -17,6 +17,7 @@ SPARQLGRAPH_BASE_URL = "http://localhost:8080"
 TRIPLE_STORE_BASE_URL = "http://localhost:3030"
 TRIPLE_STORE = TRIPLE_STORE_BASE_URL + "/RACK"
 TRIPLE_STORE_TYPE = "fuseki"
+DEFAULT_GRAPH_URLS = ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]
 
 def get_temp_dir() -> str:
     """ Get a temp dir """

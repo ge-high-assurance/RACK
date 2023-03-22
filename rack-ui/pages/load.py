@@ -226,6 +226,10 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath, zip_filep
         # store list of loaded graphs
         last_loaded_graphs = manifest.getModelgraphsFootprint() + manifest.getDatagraphsFootprint()
 
+        # optimize triple store
+        if TRIPLE_STORE_TYPE == "fuseki" and manifest.getCopyToGraph() in DEFAULT_GRAPH_URLS:
+            rack.invoke_optimization(None)
+
         time.sleep(3)
     except Exception as e:
         return get_error_trace(e), []  # show done dialog with error

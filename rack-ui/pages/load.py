@@ -8,7 +8,7 @@ import glob
 from contextlib import redirect_stdout, redirect_stderr
 from urllib.parse import urlparse
 from pathlib import Path
-from zipfile import ZipFile
+from zipfile import *
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 import rack
@@ -93,6 +93,7 @@ layout = html.Div([
         done_dialog,
         dcc.Store("status-filepath"),           # stores the filename of the temp file containing status
         dcc.Store("manifest-filepath"),         # stores the path to the manifest file
+        dcc.Store("zip-filepath"),              # stores the path to the zip file
         dcc.Interval(id='status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
     ])
 
@@ -103,6 +104,7 @@ layout = html.Div([
             Output("load-div-message", "children"),                 # package information to display to the user before confirming load
             Output("view-dropdown", "children"),                    # options to display for the view data dropdown
             Output("manifest-filepath", "data"),
+            Output("zip-filepath", "data"),                         # path to the zip file
             Output("unzip-error-dialog-body", "children"),
             Output("status-filepath", "data"),                      # store a status file path
             Output("select-button-upload", "contents")],            # set to None after extracting, else callback ignores re-uploaded file
@@ -123,13 +125,27 @@ def run_unzip(zip_file_contents, turnstile_clicks):
     """
     try:
         if zip_file_contents is not None:
-            tmp_dir = get_temp_dir_unique("ingest")   # temp directory to store the unzipped package
+            tmp_dir_base = get_temp_dir_unique("ingest")
             zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
+
+            # unzip to disk (need manifest)
+            tmp_dir_for_unzip = tmp_dir_base + "-unzip"   # temp directory to store the unzipped package
             zip_obj = ZipFile(zip_str, 'r')
-            zip_obj.extractall(path=tmp_dir)  # unzip the package
-            manifest_path = tmp_dir + "/" + MANIFEST_FILE_NAME
+            zip_obj.extractall(path=tmp_dir_for_unzip)  # unzip the package
+            manifest_path = tmp_dir_for_unzip + "/" + MANIFEST_FILE_NAME
+
+            # write zip file to disk
+            tmp_dir_for_zip = tmp_dir_base + "-zip"
+            os.mkdir(tmp_dir_for_zip)
+            zip_path = os.path.join(tmp_dir_for_zip, "ingestion-package.zip")
+            with open(zip_path, 'wb') as f:
+                f.write(zip_str.getbuffer())
+
+            zip_str.close()
+
         else:
             manifest_path = "../Turnstile-Example/Turnstile-IngestionPackage/manifest.yaml"
+            zip_path = None # TODO address this
         manifest = get_manifest(manifest_path)
 
         # gather displayable information about the package
@@ -156,8 +172,8 @@ def run_unzip(zip_file_contents, turnstile_clicks):
             view_graph_children.append(dbc.DropdownMenuItem(manifest.getCopyToGraph(), href=sg_link_copyto, target="_blank"))  # option to view copy-to graph
 
     except Exception as e:
-        return "", None, None, get_error_trace(e), None, None
-    return package_info, view_graph_children, manifest_path, None, status_filepath, None
+        return "", None, None, None, get_error_trace(e), None, None
+    return package_info, view_graph_children, manifest_path, zip_path, None, status_filepath, None
 
 
 @dash.callback(
@@ -167,6 +183,7 @@ def run_unzip(zip_file_contents, turnstile_clicks):
     state=[
         State("status-filepath", "data"),
         State("manifest-filepath", "data"),
+        State("zip-filepath", "data"),
         State("load-options-checklist", "value")],                  # user-selected load options from the checklist
     background=True,                                                # background callback
     running=[
@@ -177,7 +194,7 @@ def run_unzip(zip_file_contents, turnstile_clicks):
     ],
     prevent_initial_call=True                                       # NOTE won't work because last-loaded-graphs is in the layout before load-button (see https://dash.plotly.com/advanced-callbacks#prevent-callback-execution-upon-initial-component-render)
 )
-def run_ingest(load_button_clicks, status_filepath, manifest_filepath, load_options):
+def run_ingest(load_button_clicks, status_filepath, manifest_filepath, zip_filepath, load_options):
     """
     Ingest the selected zip file
     """
@@ -194,8 +211,13 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath, load_opti
 
         f = open(status_filepath, "a")
         with redirect_stdout(f), redirect_stderr(f):    # send command output to temporary file
-            rack.logger.setLevel("ERROR")
-            rack.ingest_manifest_driver(Path(manifest_filepath), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, clear, False)  # process the manifest
+            resp = semtk3.load_ingestion_package(TRIPLE_STORE, TRIPLE_STORE_TYPE, Path(zip_filepath), clear, rack.MODEL_GRAPH, rack.DEFAULT_DATA_GRAPH)
+            for line_bytes in resp.iter_lines():
+                level, _, msg = line_bytes.decode().partition(': ')
+                if level != "WARNING":
+                    print(msg, flush=True)
+                if level == "ERROR":
+                    raise Exception(msg)
 
         # store list of loaded graphs
         manifest = get_manifest(manifest_filepath)

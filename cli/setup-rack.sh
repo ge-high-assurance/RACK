@@ -4,4 +4,8 @@ set -eu
 
 ./ensure-cli-in-PATH.sh
 
-rack manifest import --clear ../manifests/rack.yaml
+TMP=$(mktemp -d -t ingestion_package) || exit 1
+trap 'rm -rf "$TMP"; trap - EXIT; exit' EXIT INT HUP
+
+rack manifest build ../manifests/rack.yaml "${TMP}/output"
+rack manifest import --clear "${TMP}/output.zip"

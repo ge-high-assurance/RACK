@@ -101,7 +101,6 @@ layout = html.Div([
     output=[
             Output("load-div-message", "children"),                 # package information to display to the user before confirming load
             Output("view-dropdown", "children"),                    # options to display for the view data dropdown
-            Output("manifest-filepath", "data"),
             Output("zip-filepath", "data"),                         # path to the zip file
             Output("unzip-error-dialog-body", "children"),
             Output("status-filepath", "data"),                      # store a status file path
@@ -120,25 +119,17 @@ def run_unzip(zip_file_contents):
     Extract the selected zip file
     """
     try:
-        tmp_dir_base = get_temp_dir_unique("ingest")
-        zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
-
-        # unzip to disk (need manifest)
-        tmp_dir_for_unzip = tmp_dir_base + "-unzip"   # temp directory to store the unzipped package
-        zip_obj = ZipFile(zip_str, 'r')
-        zip_obj.extractall(path=tmp_dir_for_unzip)  # unzip the package
-        manifest_path = tmp_dir_for_unzip + "/" + MANIFEST_FILE_NAME
-
         # write zip file to disk
-        tmp_dir_for_zip = tmp_dir_base + "-zip"
-        os.mkdir(tmp_dir_for_zip)
-        zip_path = os.path.join(tmp_dir_for_zip, "ingestion-package.zip")
+        tmp_dir = get_temp_dir_unique("ingest")
+        os.mkdir(tmp_dir)
+        zip_path = os.path.join(tmp_dir, "ingestion-package.zip")
+        zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
         with open(zip_path, 'wb') as f:
             f.write(zip_str.getbuffer())
         zip_str.close()
 
         # extract a manifest
-        manifest = get_manifest(manifest_path)
+        manifest = Manifest.getToplevelManifest(zip_path)
 
         # gather displayable information about the package
         package_description = ""
@@ -164,8 +155,8 @@ def run_unzip(zip_file_contents):
             view_graph_children.append(dbc.DropdownMenuItem(manifest.getCopyToGraph(), href=sg_link_copyto, target="_blank"))  # option to view copy-to graph
 
     except Exception as e:
-        return "", None, None, None, get_error_trace(e), None, None
-    return package_info, view_graph_children, manifest_path, zip_path, None, status_filepath, None
+        return "", None, None, get_error_trace(e), None, None
+    return package_info, view_graph_children, zip_path, None, status_filepath, None
 
 
 @dash.callback(
@@ -174,7 +165,6 @@ def run_unzip(zip_file_contents):
     inputs=Input("load-button", "n_clicks"),                        # triggered by user clicking load button
     state=[
         State("status-filepath", "data"),
-        State("manifest-filepath", "data"),
         State("zip-filepath", "data"),
         State("load-options-checklist", "value")],                  # user-selected load options from the checklist
     background=True,                                                # background callback
@@ -185,7 +175,7 @@ def run_unzip(zip_file_contents):
     ],
     prevent_initial_call=True                                       # NOTE won't work because last-loaded-graphs is in the layout before load-button (see https://dash.plotly.com/advanced-callbacks#prevent-callback-execution-upon-initial-component-render)
 )
-def run_ingest(load_button_clicks, status_filepath, manifest_filepath, zip_filepath, load_options):
+def run_ingest(load_button_clicks, status_filepath, zip_filepath, load_options):
     """
     Ingest the selected zip file
     """
@@ -212,13 +202,13 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath, zip_filep
                     raise Exception(msg)
 
         # extract the manifest for actions below
-        manifest = get_manifest(manifest_filepath)
+        manifest = Manifest.getToplevelManifest(zip_filepath)
 
         # store list of loaded graphs
         last_loaded_graphs = manifest.getModelgraphsFootprint() + manifest.getDatagraphsFootprint()
 
         # optimize triple store
-        if rack.DEFAULT_TRIPLE_STORE_TYPE == "fuseki" and manifest.getCopyToGraph() in ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]:
+        if manifest.getNeedsOptimization():
             rack.invoke_optimization(None)
 
         time.sleep(3)
@@ -284,14 +274,3 @@ def manage_done_dialog(children, n_clicks):
     else:
         return True     # child added, show the dialog
 
-
-####### convenience functions #######
-
-def get_manifest(manifest_filepath) -> Manifest:
-    """ Get manifest contents from file """
-    try:
-        manifest_file = open(manifest_filepath, mode='r', encoding='utf-8-sig')
-    except Exception as e:
-        raise Exception("Cannot find top-level manifest file " + MANIFEST_FILE_NAME)
-    manifest = Manifest.fromYAML(manifest_file)
-    return manifest

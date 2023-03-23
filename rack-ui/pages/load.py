@@ -82,10 +82,8 @@ layout = html.Div([
         dcc.Markdown("_Load data into RACK_"),
         html.Div(dcc.Markdown(get_warning_banner_str()), className="warningbanner"),
         dbc.Row([
-            dbc.Col(html.Button(id="turnstile-button", children="Select Turnstile data"), width="auto"),  # button to load turnstile
             dbc.Col(dcc.Upload(html.Button(id="select-button", children="Select ingestion package"), id='select-button-upload', accept=".zip", multiple=False), width="auto")  # button to show upload dialog to pick ingestion package
         ]),
-        dbc.Tooltip("Select the Turnstile sample data provided with RACK", target="turnstile-button"),
         dbc.Tooltip("Select an ingestion package (in .zip format) from your local machine", target="select-button"),
         load_div,
         html.Div(id="status-div", className="scrollarea"),      # displays ingestion status
@@ -109,43 +107,37 @@ layout = html.Div([
             Output("status-filepath", "data"),                      # store a status file path
             Output("select-button-upload", "contents")],            # set to None after extracting, else callback ignores re-uploaded file
     inputs=[
-            Input("select-button-upload", "contents"),              # triggered by user selecting an upload file
-            Input("turnstile-button", "n_clicks")],                 # triggered by turnstile button
+            Input("select-button-upload", "contents")],             # triggered by user selecting an upload file
     background=True,                                                # background callback
     running=[
         (Output("select-button", "disabled"), True, False),         # disable the button while running
-        (Output("turnstile-button", "disabled"), True, False),      # disable the button while running
         (Output("load-button", "disabled"), True, False),           # disable the button while running
     ],
     prevent_initial_call=True
 )
-def run_unzip(zip_file_contents, turnstile_clicks):
+def run_unzip(zip_file_contents):
     """
     Extract the selected zip file
     """
     try:
-        if zip_file_contents is not None:
-            tmp_dir_base = get_temp_dir_unique("ingest")
-            zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
+        tmp_dir_base = get_temp_dir_unique("ingest")
+        zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
 
-            # unzip to disk (need manifest)
-            tmp_dir_for_unzip = tmp_dir_base + "-unzip"   # temp directory to store the unzipped package
-            zip_obj = ZipFile(zip_str, 'r')
-            zip_obj.extractall(path=tmp_dir_for_unzip)  # unzip the package
-            manifest_path = tmp_dir_for_unzip + "/" + MANIFEST_FILE_NAME
+        # unzip to disk (need manifest)
+        tmp_dir_for_unzip = tmp_dir_base + "-unzip"   # temp directory to store the unzipped package
+        zip_obj = ZipFile(zip_str, 'r')
+        zip_obj.extractall(path=tmp_dir_for_unzip)  # unzip the package
+        manifest_path = tmp_dir_for_unzip + "/" + MANIFEST_FILE_NAME
 
-            # write zip file to disk
-            tmp_dir_for_zip = tmp_dir_base + "-zip"
-            os.mkdir(tmp_dir_for_zip)
-            zip_path = os.path.join(tmp_dir_for_zip, "ingestion-package.zip")
-            with open(zip_path, 'wb') as f:
-                f.write(zip_str.getbuffer())
+        # write zip file to disk
+        tmp_dir_for_zip = tmp_dir_base + "-zip"
+        os.mkdir(tmp_dir_for_zip)
+        zip_path = os.path.join(tmp_dir_for_zip, "ingestion-package.zip")
+        with open(zip_path, 'wb') as f:
+            f.write(zip_str.getbuffer())
+        zip_str.close()
 
-            zip_str.close()
-
-        else:
-            manifest_path = "../Turnstile-Example/Turnstile-IngestionPackage/manifest.yaml"
-            zip_path = None # TODO address this
+        # extract a manifest
         manifest = get_manifest(manifest_path)
 
         # gather displayable information about the package
@@ -188,7 +180,6 @@ def run_unzip(zip_file_contents, turnstile_clicks):
     background=True,                                                # background callback
     running=[
         (Output("select-button", "disabled"), True, False),         # disable button while running
-        (Output("turnstile-button", "disabled"), True, False),      # disable button while running
         (Output("load-button", "disabled"), True, False),           # disable button while running
         (Output("status-interval", "disabled"), False, True)        # enable the interval component while running
     ],

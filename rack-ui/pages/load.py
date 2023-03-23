@@ -212,7 +212,7 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath, zip_filep
         # load the ingestion package
         f = open(status_filepath, "a")
         with redirect_stdout(f), redirect_stderr(f):    # send command output to temporary file
-            resp = semtk3.load_ingestion_package(TRIPLE_STORE, TRIPLE_STORE_TYPE, zip_filepath, clear, rack.MODEL_GRAPH, rack.DEFAULT_DATA_GRAPH)
+            resp = semtk3.load_ingestion_package(rack.DEFAULT_TRIPLE_STORE, rack.DEFAULT_TRIPLE_STORE_TYPE, zip_filepath, clear, rack.MODEL_GRAPH, rack.DEFAULT_DATA_GRAPH)
             for line_bytes in resp.iter_lines():
                 level, _, msg = line_bytes.decode().partition(': ')
                 if level != "WARNING":
@@ -227,7 +227,7 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath, zip_filep
         last_loaded_graphs = manifest.getModelgraphsFootprint() + manifest.getDatagraphsFootprint()
 
         # optimize triple store
-        if TRIPLE_STORE_TYPE == "fuseki" and manifest.getCopyToGraph() in DEFAULT_GRAPH_URLS:
+        if rack.DEFAULT_TRIPLE_STORE_TYPE == "fuseki" and manifest.getCopyToGraph() in ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]:
             rack.invoke_optimization(None)
 
         time.sleep(3)

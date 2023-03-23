@@ -42,6 +42,7 @@ import yaml
 
 from rack.manifest import Manifest, StepType
 from rack.types import Connection, Url
+from rack.defaults import *
 
 __author__ = "Eric Mertens"
 __email__ = "emertens@galois.com"
@@ -72,14 +73,6 @@ class ExportFormat(Enum):
     def __str__(self) -> str:
         """For inclusion in --help"""
         return self.value
-
-DEFAULT_BASE_URL: Url = Url("http://localhost")
-DEFAULT_OPTIMIZE_URL: Url = Url("http://localhost:8050/optimize")
-
-MODEL_GRAPH: Url = Url("http://rack001/model")
-DEFAULT_DATA_GRAPH = Url("http://rack001/data")
-DEFAULT_TRIPLE_STORE = Url("http://localhost:3030/RACK")
-DEFAULT_TRIPLE_STORE_TYPE = "fuseki"
 
 INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
     'type': 'object',
@@ -420,7 +413,7 @@ class IngestionBuilder:
                 shutil.copyfile(frombase.joinpath(path), tobase.joinpath(path.name), follow_symlinks=True)
                 step['csv'] = path.name
 
-        self.data_graphs.add(obj['data-graph'])
+        self.data_graphs.add(obj.get('data-graph', DEFAULT_DATA_GRAPH))
 
         c = obj.get('extra-data-graphs')
         if c is not None:

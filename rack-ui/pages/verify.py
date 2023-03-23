@@ -115,7 +115,7 @@ def run_assist(status_filepath):
         if platform.system() == "Windows":
             raise Exception("Not yet supported on Windows.  (PROLOG checking is available through LINUX/Docker.)")
         else:
-            if(rack.DEFAULT_TRIPLE_STORE != "fuseki"):
+            if(rack.DEFAULT_TRIPLE_STORE_TYPE != "fuseki"):
                 raise Exception("RACK UI currently only supports ASSIST tool using Fuseki triplestore")
             TRIPLE_STORE_BASE_URL = rack.DEFAULT_TRIPLE_STORE.rsplit("/", 1)[0] # e.g. get http://localhost:3030
             command = f"../assist/bin/check -v -m {TRIPLE_STORE_BASE_URL}/"     # ASSIST tool.  Runs on all graphs, minus exclusion list of internal SemTK graphs

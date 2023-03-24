@@ -520,6 +520,7 @@ def ingest_manifest_driver(
     triple_store: Optional[Url],
     triple_store_type: Optional[str],
     clear: bool,
+    optimize: bool,
     optimization_url: Optional[Url] = None) -> None:
 
     manifest = Manifest.getToplevelManifest(manifest_path)
@@ -545,7 +546,7 @@ def ingest_manifest_driver(
         elif level == "ERROR" and logging.ERROR >= loglevel:
             print("Error: " + str_bad(msg))
 
-    if manifest.getNeedsOptimization(triple_store_type or DEFAULT_TRIPLE_STORE_TYPE):
+    if optimize and manifest.getNeedsOptimization(triple_store_type or DEFAULT_TRIPLE_STORE_TYPE):
         invoke_optimization(optimization_url)
 
 def invoke_optimization(url: Optional[Url]) -> None:
@@ -831,7 +832,7 @@ def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.config), args.triple_store, args.triple_store_type, args.clear, args.optimize_url)
+    ingest_manifest_driver(Path(args.config), args.triple_store, args.triple_store_type, args.clear, args.optimize, args.optimize_url)
 
 def dispatch_manifest_build(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
@@ -928,6 +929,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     manifest_import_parser.add_argument('config', type=str, help='Manifest YAML file')
     manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
+    manifest_import_parser.add_argument('--optimize', type=bool, help='Enable RACK UI optimization when available')
     manifest_import_parser.add_argument('--optimize-url', type=str, help='RACK UI optimization endpoint (e.g. http://localhost:8050/optimize)')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)
 

@@ -21,6 +21,7 @@ class CustomInstall(install):
     def run(self):
         install.run(self)
         autogen()
+        install.run(self)
 
 
 print(find_packages())

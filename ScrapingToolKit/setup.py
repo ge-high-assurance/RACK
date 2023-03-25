@@ -20,6 +20,7 @@ from AutoGeneration.GenerateSTK import autogen
 class CustomInstall(install):
     def run(self):
         autogen()
+        raise(Exception("Checking that this happens"))
         install.run(self)
 
 

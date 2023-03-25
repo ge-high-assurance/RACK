@@ -19,7 +19,6 @@ from AutoGeneration.GenerateSTK import autogen
 
 class CustomInstall(install):
     def run(self):
-        install.run(self)
         autogen()
         install.run(self)
 

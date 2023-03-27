@@ -11,6 +11,8 @@
 # material are those of the author(s) and do not necessarily reflect the views
 # of the Defense Advanced Research Projects Agency (DARPA).
 
+import os.path
+
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 
@@ -20,7 +22,8 @@ from AutoGeneration.GenerateSTK import autogen
 class CustomInstall(install):
     def run(self):
         autogen()
-        raise(Exception("Checking that this happens"))
+        if not os.path.isfile("Evidence/CONSTANTS.py"):
+            raise(Exception("Evidence/CONSTANTS.py does not exist, investigate!"))
         install.run(self)
 
 

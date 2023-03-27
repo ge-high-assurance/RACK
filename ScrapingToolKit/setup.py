@@ -22,6 +22,7 @@ from AutoGeneration.GenerateSTK import autogen
 class CustomInstall(install):
     def run(self):
         autogen()
+        raise(Exception("Refusing to install"))
         if not os.path.isfile("Evidence/CONSTANTS.py"):
             raise(Exception("Evidence/CONSTANTS.py does not exist, investigate!"))
         install.run(self)

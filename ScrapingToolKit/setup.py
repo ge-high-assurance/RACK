@@ -12,6 +12,7 @@
 # of the Defense Advanced Research Projects Agency (DARPA).
 
 import os.path
+import shutil
 
 from setuptools import setup, find_packages
 from setuptools.command.install import install
@@ -22,6 +23,9 @@ from AutoGeneration.GenerateSTK import autogen
 class CustomInstall(install):
     def run(self):
         autogen()
+        shutil.copy("Evidence/Add.py", "build/lib/Evidence/Add.py")
+        shutil.copy("Evidence/CONSTANTS.py", "build/lib/Evidence/CONSTANTS.py")
+        shutil.copy("Evidence/RACK-DATA.xsd", "build/lib/Evidence/RACK-DATA.xsd")
         if not os.path.isfile("Evidence/Add.py"):
             raise(Exception("Evidence/Add.py does not exist, investigate!"))
         if not os.path.isfile("Evidence/CONSTANTS.py"):

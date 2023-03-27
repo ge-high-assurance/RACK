@@ -1,5 +1,5 @@
 [build-system]
-build-backend = "setuptools.build_meta"
+build-backend = "setuptools.build_meta:__legacy__"
 requires = [
     "packaging", # plotly seems to rely on packaging in CI, this is stupid but...
     "plotly",

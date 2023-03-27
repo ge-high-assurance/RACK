@@ -3,7 +3,9 @@ name: Build ScrapingToolKit wheel
 on:
   push:
     # Temporarily putting my temporary branch for testing
-    branches: [ master, vr/ScrapingToolKit ]
+    branches:
+    - master
+    - 'vr/ScrapingToolKit'
     # Might need more but this is a start
     paths:
     - ontology

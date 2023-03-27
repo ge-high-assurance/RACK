@@ -22,7 +22,8 @@ from AutoGeneration.GenerateSTK import autogen
 class CustomInstall(install):
     def run(self):
         autogen()
-        raise(Exception("Refusing to install"))
+        if not os.path.isfile("Evidence/CONSTANTS.py"):
+            raise(Exception("Evidence/CONSTANTS.py does not exist, investigate!"))
         if not os.path.isfile("Evidence/CONSTANTS.py"):
             raise(Exception("Evidence/CONSTANTS.py does not exist, investigate!"))
         install.run(self)
@@ -34,5 +35,5 @@ setup(
     cmdclass={"install": CustomInstall},
     name="ScrapingToolKit",
     packages=find_packages(),
-    package_data={"Evidence": ["RACK-DATA.xsd"]},
+    package_data={"Evidence": ["Add.py", "CONSTANTS.py", "RACK-DATA.xsd"]},
 )

@@ -1,6 +1,7 @@
 name: Build ScrapingToolKit wheel
 
 on:
+  workflow_call:
   push:
     # Temporarily putting my temporary branch for testing
     branches:

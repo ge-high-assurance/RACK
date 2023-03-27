@@ -1,7 +1,11 @@
 [build-system]
+build-backend = "setuptools.build_meta"
 requires = [
     "packaging", # plotly seems to rely on packaging in CI, this is stupid but...
     "plotly",
     "setuptools",
     "semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@aab793d70325eff349bfa2012296d164d97afdcd",
 ]
+
+[tool.distutils.bdist_wheel]
+universal = true

@@ -127,3 +127,7 @@ jobs:
     with:
       push: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev-test' }}
       version: ${{ (github.ref == 'refs/heads/master' && 'dev') || 'dev-test' }}
+
+  build-scraping-toolkit-wheel:
+    uses: ./.github/workflows/scraping-toolkit-wheel.yml
+    secrets: inherit

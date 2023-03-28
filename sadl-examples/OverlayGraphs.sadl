@@ -2,7 +2,7 @@ uri "http://arcos.rack/OverlayGraphs" alias graph.
 
 // Set SADL "Translate multiple-class domain or range as union" property to be false 
 // for the overlay ontology being graphed.
-import "http://arcos.descert/SRI-SS". // the overlay ontology to check
+import "http://arcos.descert/SRI". // the overlay ontology to check
 
 // Still need to check that we are not missing anything.
 // This does graphing for SRI ontology; to do graphing for other ontologies

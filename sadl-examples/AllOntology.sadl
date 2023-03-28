@@ -13,7 +13,7 @@ import "http://arcos.rack/MODEL".
 import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/REQUIREMENTS".
 import "http://arcos.rack/REVIEW".
-import "http://arcos.rack/SECURITY".
+import "http://arcos.rack/SAFETY-SECURITY".
 import "http://arcos.rack/SOFTWARE".
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/TESTING".
@@ -23,7 +23,6 @@ import "http://arcos.acert/GrammaTech".
 import "http://arcos.certgate/LM".
 import "http://arcos.aace/RTX".
 import "http://arcos.descert/SRI".
-import "http://arcos.descert/SRI-SS".
 import "http://arcos.arbiter/STR".
 
 //import "http://arcos.turnstile/GE".

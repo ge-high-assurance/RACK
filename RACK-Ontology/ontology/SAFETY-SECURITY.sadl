@@ -33,8 +33,8 @@ From: NCSD Glossary. NTSSI 4009 (2000), CNSSI 4009
 
 // We model THREAT only as an ATTACK is an activity on say a fielded system.
 THREAT (note "A threat / vulnerability to be assessed for certification") is a type of ENTITY.
-	Sec:source (note "ENTITY(s) that participate in causing this THREAT") describes THREAT with values of type ENTITY.
-	Sec:source is a type of wasImpactedBy.
+	ss:source (note "ENTITY(s) that participate in causing this THREAT") describes THREAT with values of type ENTITY.
+	ss:source is a type of wasImpactedBy.
 
 	identified (note "how this THREAT was identified") describes THREAT with values of type THREAT_IDENTIFICATION.
 
@@ -51,8 +51,8 @@ THREAT_IDENTIFICATION
 	(note "ACTIVITY that identifies potential sources of THREAT whose risk must be evaluated")
 	is a type of ACTIVITY.
 
-	Sec:author (note "AGENT(s) who work on this ACTIVITY") describes THREAT_IDENTIFICATION with values of type AGENT.
-	Sec:author is a type of wasAssociatedWith.
+	ss:author (note "AGENT(s) who work on this ACTIVITY") describes THREAT_IDENTIFICATION with values of type AGENT.
+	ss:author is a type of wasAssociatedWith.
 
 SECURITY_LABEL (note "A label to help categorize the associated SECURITY concern") is a type of THING.
 
@@ -75,7 +75,7 @@ CONTROLSET (note "A set of CONTROLs that combine to mitigate a THREAT") is a typ
     // A THREAT can be mitigated by a set of CONTROLs etc., mitigation by CONTROL is defined in CONTROL.sadl.
 	// In general, a THREAT T may be mitigated by "(C1 and C2) or (C3 and C4 and C5)" which is represented in a disjunctive normal form,
 	// each CONTROLSET provides the conjunctions and the the disjunction via multiple CONTROLSET.
-	Sec:mitigates (note "ENTITY(s) (e.g. THREAT) that is being mitigated by this CONTROLSET") describes CONTROLSET with values of type THREAT.
+	ss:mitigates (note "ENTITY(s) (e.g. THREAT) that is being mitigated by this CONTROLSET") describes CONTROLSET with values of type THREAT.
 
 	   
 // Originally DesCert Ontology for Safety and Security
@@ -223,7 +223,7 @@ VIRTUAL_CHANNEL is a type of INTERFACE.
   
 DATA_FLOW is a type of ENTITY.
    communicatesOver describes DATA_FLOW with a single value of type VIRTUAL_CHANNEL.
-   ss:source describes DATA_FLOW with a single value of type FUNCTION.
+   ss:source describes DATA_FLOW only has values of type FUNCTION.
    ss:destination describes DATA_FLOW with values of type FUNCTION.
    
 SAFETY_DESIGN_ASSURANCE_LEVEL is a type of THING.
@@ -289,8 +289,8 @@ ARCHITECTURE_TOUCHPOINTS (note "touch points to architectural elements like hard
 // Subclass of CONTROL in core ontology, using title case
 // Control is a type of CONTROL.
    // DB 4/19/22: removed provedBy since a PropertyResult is proved by a Control rather than a Control proved by a PropertyResult
-   mitigatesHazard describes CONTROL with values of type HazardCondition.
-   enhancesHazard describes CONTROL with values of type HazardCondition.
+   mitigatesHazard describes CONTROL with values of type HAZARD_CONDITION.
+   enhancesHazard describes CONTROL with values of type HAZARD_CONDITION.
    location describes CONTROL with values of type ARCHITECTURE_TOUCHPOINTS.
    nist_800_53Reference describes CONTROL with values of type ENTITY. // DB: added a reference that may not always be populated. DB 4/18/22: fixed copy-paste error
    nist_800_53Reference is a type of wasImpactedBy.
@@ -307,22 +307,22 @@ NonRepudiation is a SECURITY_LABEL
    has identifier "NonRepudiation"
    has description "Non-deniability of authenticated information such as digital signature.".
 
-HazardCondition is a type of HAZARD. // replaced Hazard by HazardCondition so as to be like ThreatCondition below. DB Agreed.
-   mitigatesControl describes HazardCondition with values of type CONTROL.
-   enhancesControl describes HazardCondition with values of type CONTROL.
-   lossCategory describes HazardCondition with values of type LOSS_CATEGORY. // a HazardCondition may relate to multiple categories
-   triggers (note "the risk event(s) that can be triggered by this") describes HazardCondition with values of type SafetyAccident.
+HAZARD_CONDITION is a type of HAZARD. // replaced Hazard by HazardCondition so as to be like ThreatCondition below. DB Agreed.
+   mitigatesControl describes HAZARD_CONDITION with values of type CONTROL.
+   enhancesControl describes HAZARD_CONDITION with values of type CONTROL.
+   lossCategory describes HAZARD_CONDITION with values of type LOSS_CATEGORY. // a HazardCondition may relate to multiple categories
+   triggers (note "the risk event(s) that can be triggered by this") describes HAZARD_CONDITION with values of type SAFETY_ACCIDENT.
    
-Exploitation (note "unmitigated vulnerability exploited by an attack access vector") is a type of ENTITY.
-   uses describes Exploitation with values of type ATTACK_ACCESS_VECTORS.
+EXPLOITATION (note "unmitigated vulnerability exploited by an attack access vector") is a type of ENTITY.
+   uses describes EXPLOITATION with values of type ATTACK_ACCESS_VECTORS.
    uses is a type of wasImpactedBy.
-   exploits describes Exploitation with values of type VULNERABILITY.
+   exploits describes EXPLOITATION with values of type VULNERABILITY.
    exploits is a type of wasImpactedBy.
 
-ThreatCondition is a type of THREAT.
-   Sec:source of ThreatCondition only has values of type Exploitation.
-   securityLabel describes ThreatCondition with values of type SECURITY_LABEL.
-   triggers describes ThreatCondition with values of type SecurityViolation.
+THREAT_CONDITION is a type of THREAT.
+   ss:source of THREAT_CONDITION only has values of type EXPLOITATION.
+   securityLabel describes THREAT_CONDITION with values of type SECURITY_LABEL.
+   triggers describes THREAT_CONDITION with values of type SECURITY_VIOLATION.
    
 SAFETY_REQUIREMENT is a type of REQUIREMENT.
   // inherited
@@ -343,14 +343,14 @@ SECURITY_REQUIREMENT_SET is a type of REQUIREMENT_SET.
 // property binding
 // RiskEvent, Safety Violation, Hazard
 
-RiskEvent is a type of ENTITY.
-   SS:severity describes RiskEvent with values of type float.
-   SS:severity describes RiskEvent with at most 1 value.
-   probability describes RiskEvent with values of type float.
-   probability describes RiskEvent with at most 1 value.
+RISK_EVENT is a type of ENTITY.
+   SS:severity describes RISK_EVENT with values of type float.
+   SS:severity describes RISK_EVENT with at most 1 value.
+   probability describes RISK_EVENT with values of type float.
+   probability describes RISK_EVENT with at most 1 value.
    
-SecurityViolation is a type of RiskEvent.
+SECURITY_VIOLATION is a type of RISK_EVENT.
    // future: add more properties
 
-SafetyAccident is a type of RiskEvent.
+SAFETY_ACCIDENT is a type of RISK_EVENT.
    // future: add more properties

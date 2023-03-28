@@ -152,7 +152,7 @@ sed -e 's/"30000"/"300000"/' -i /etc/fuseki/config.ttl
 
 # Create the RACK dataset
 
-curl -Ss -d 'dbName=RACK' -d 'dbType=tdb' 'http://localhost:3030/$/datasets'
+curl -Ss -d 'dbName=RACK' -d 'dbType=tdb2' 'http://localhost:3030/$/datasets'
 
 # Configure the SemTK services and webapps
 

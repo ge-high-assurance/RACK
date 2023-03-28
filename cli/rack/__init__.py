@@ -18,7 +18,6 @@ This simple process can be adapted to import other data into RACK for experiment
 # standard imports
 import argparse
 import csv
-from contextlib import nullcontext
 from enum import Enum, unique
 from io import StringIO
 import logging
@@ -40,7 +39,7 @@ import semtk3
 from semtk3.semtktable import SemtkTable
 import yaml
 
-from rack.manifest import Manifest, StepType
+from rack.manifest import Manifest
 from rack.types import Connection, Url
 from rack.defaults import *
 
@@ -518,100 +517,37 @@ def build_manifest_driver(
 
 def ingest_manifest_driver(
     manifest_path: Path,
-    base_url: Url,
     triple_store: Optional[Url],
     triple_store_type: Optional[str],
     clear: bool,
-    top_level: bool = True,
+    optimize: bool,
     optimization_url: Optional[Url] = None) -> None:
 
-    is_toplevel_archive = top_level and manifest_path.suffix.lower() == ".zip"
+    manifest = Manifest.getToplevelManifest(manifest_path)
 
-    # Extract the manifest even if this is a zip file we're sending off to SemTK
-    if is_toplevel_archive:
-        with TemporaryDirectory() as tmpdir:
-            shutil.unpack_archive(manifest_path, tmpdir)
-            with open(Path(tmpdir)/"manifest.yaml", mode='r', encoding='utf-8-sig') as manifest_file:
-                manifest = Manifest.fromYAML(manifest_file)
-    else:
-        with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
-            manifest = Manifest.fromYAML(manifest_file)
+    resp = semtk3.load_ingestion_package(
+        triple_store or DEFAULT_TRIPLE_STORE,
+        triple_store_type or DEFAULT_TRIPLE_STORE_TYPE,
+        manifest_path,
+        clear,
+        MODEL_GRAPH,
+        DEFAULT_DATA_GRAPH,
+    )
 
-    if is_toplevel_archive:
-        resp = semtk3.load_ingestion_package(
-            triple_store or DEFAULT_TRIPLE_STORE,
-            triple_store_type or DEFAULT_TRIPLE_STORE_TYPE,
-            manifest_path,
-            clear,
-            MODEL_GRAPH,
-            DEFAULT_DATA_GRAPH,
-        )
+    loglevel = logger.getEffectiveLevel()
+    for line_bytes in resp.iter_lines():
+        level, _, msg = line_bytes.decode().partition(': ')
+        if level == "INFO" and logging.INFO >= loglevel:
+            print(msg)
+        elif level == "DEBUG" and logging.DEBUG >= loglevel:
+            print("Debug: " + str_highlight(msg))
+        elif level == "WARNING" and logging.WARNING >= loglevel:
+            print(str_warn("Warning: " + msg))
+        elif level == "ERROR" and logging.ERROR >= loglevel:
+            print("Error: " + str_bad(msg))
 
-        loglevel = logger.getEffectiveLevel()
-        for line_bytes in resp.iter_lines():
-            level, _, msg = line_bytes.decode().partition(': ')
-            if level == "INFO" and logging.INFO >= loglevel:
-                print(msg)
-            elif level == "DEBUG" and logging.DEBUG >= loglevel:
-                print("Debug: " + str_highlight(msg))
-            elif level == "WARNING" and logging.WARNING >= loglevel:
-                print(str_warn("Warning: " + msg))
-            elif level == "ERROR" and logging.ERROR >= loglevel:
-                print("Error: " + str_bad(msg))
-    else:
-        base_path = manifest_path.parent
-
-        if clear:
-            # clear the whole footprint
-            modelgraphs = manifest.getModelgraphsFootprint()
-            datagraphs = manifest.getDatagraphsFootprint()
-            if not modelgraphs == []:
-                clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.MODEL)
-            if not datagraphs == []:
-                clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.DATA)
-
-            if not manifest.getNodegroupsFootprint() == []:
-                delete_nodegroups_driver(manifest.getNodegroupsFootprint(), True, True, True, base_url)
-
-        for (step_type, step_data) in manifest.steps:
-            if StepType.DATA == step_type:
-                stepFile = base_path / step_data
-                ingest_data_driver(stepFile, base_url, None, None, triple_store, triple_store_type, False)
-            elif StepType.MODEL == step_type:
-                stepFile = base_path / step_data
-                ingest_owl_driver(stepFile, base_url, None, triple_store, triple_store_type, False)
-            elif StepType.NODEGROUPS == step_type:
-                stepFile = base_path / step_data
-                store_nodegroups_driver(stepFile, base_url)
-            elif StepType.MANIFEST == step_type:
-                stepFile = base_path / step_data
-                ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, False)
-            elif StepType.COPYGRAPH == step_type:
-                utility_copygraph_driver(base_url, triple_store, triple_store_type, step_data[0], step_data[1])
-
-        if top_level:
-            copyToGraph = manifest.getCopyToGraph()
-            if copyToGraph is not None:
-                if clear:
-                    clear_driver(base_url, [copyToGraph], None, triple_store, triple_store_type, Graph.MODEL)
-                for graph in manifest.getModelgraphsFootprint():
-                    utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, copyToGraph)
-                for graph in manifest.getDatagraphsFootprint():
-                    utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, copyToGraph)
-
-            resolutionGraph = manifest.getPerformEntityResolution()
-            if resolutionGraph is not None:
-                r = resolutionGraph # mypy hack: otherwise type error that in [resolutionGraph], resolution graph is still Optional[Url]
-                @with_status(f'Executing entity resolution')
-                def combine() -> dict:
-                    return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [r], r, [], triple_store, triple_store_type))
-                combine()
-
-    # SemTK doesn't support this functionality, so we do it even if we've sent the zip file over
-    if top_level:
-        defaultGraphUrls = ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]
-        if (triple_store_type or DEFAULT_TRIPLE_STORE_TYPE) == "fuseki" and manifest.getCopyToGraph() in defaultGraphUrls:
-            invoke_optimization(optimization_url)
+    if optimize and manifest.getNeedsOptimization(triple_store_type or DEFAULT_TRIPLE_STORE_TYPE):
+        invoke_optimization(optimization_url)
 
 def invoke_optimization(url: Optional[Url]) -> None:
     url = url or DEFAULT_OPTIMIZE_URL
@@ -896,7 +832,7 @@ def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, True, args.optimize_url)
+    ingest_manifest_driver(Path(args.config), args.triple_store, args.triple_store_type, args.clear, args.optimize, args.optimize_url)
 
 def dispatch_manifest_build(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
@@ -993,6 +929,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     manifest_import_parser.add_argument('config', type=str, help='Manifest YAML file')
     manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
+    manifest_import_parser.add_argument('--optimize', type=bool, help='Enable RACK UI optimization when available')
     manifest_import_parser.add_argument('--optimize-url', type=str, help='RACK UI optimization endpoint (e.g. http://localhost:8050/optimize)')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)
 

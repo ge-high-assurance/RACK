@@ -8,7 +8,7 @@ import glob
 from contextlib import redirect_stdout, redirect_stderr
 from urllib.parse import urlparse
 from pathlib import Path
-from zipfile import ZipFile
+from zipfile import *
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 import rack
@@ -82,10 +82,8 @@ layout = html.Div([
         dcc.Markdown("_Load data into RACK_"),
         html.Div(dcc.Markdown(get_warning_banner_str()), className="warningbanner"),
         dbc.Row([
-            dbc.Col(html.Button(id="turnstile-button", children="Select Turnstile data"), width="auto"),  # button to load turnstile
             dbc.Col(dcc.Upload(html.Button(id="select-button", children="Select ingestion package"), id='select-button-upload', accept=".zip", multiple=False), width="auto")  # button to show upload dialog to pick ingestion package
         ]),
-        dbc.Tooltip("Select the Turnstile sample data provided with RACK", target="turnstile-button"),
         dbc.Tooltip("Select an ingestion package (in .zip format) from your local machine", target="select-button"),
         load_div,
         html.Div(id="status-div", className="scrollarea"),      # displays ingestion status
@@ -93,6 +91,7 @@ layout = html.Div([
         done_dialog,
         dcc.Store("status-filepath"),           # stores the filename of the temp file containing status
         dcc.Store("manifest-filepath"),         # stores the path to the manifest file
+        dcc.Store("zip-filepath"),              # stores the path to the zip file
         dcc.Interval(id='status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
     ])
 
@@ -102,35 +101,35 @@ layout = html.Div([
     output=[
             Output("load-div-message", "children"),                 # package information to display to the user before confirming load
             Output("view-dropdown", "children"),                    # options to display for the view data dropdown
-            Output("manifest-filepath", "data"),
+            Output("zip-filepath", "data"),                         # path to the zip file
             Output("unzip-error-dialog-body", "children"),
             Output("status-filepath", "data"),                      # store a status file path
             Output("select-button-upload", "contents")],            # set to None after extracting, else callback ignores re-uploaded file
     inputs=[
-            Input("select-button-upload", "contents"),              # triggered by user selecting an upload file
-            Input("turnstile-button", "n_clicks")],                 # triggered by turnstile button
+            Input("select-button-upload", "contents")],             # triggered by user selecting an upload file
     background=True,                                                # background callback
     running=[
         (Output("select-button", "disabled"), True, False),         # disable the button while running
-        (Output("turnstile-button", "disabled"), True, False),      # disable the button while running
         (Output("load-button", "disabled"), True, False),           # disable the button while running
     ],
     prevent_initial_call=True
 )
-def run_unzip(zip_file_contents, turnstile_clicks):
+def run_unzip(zip_file_contents):
     """
     Extract the selected zip file
     """
     try:
-        if zip_file_contents is not None:
-            tmp_dir = get_temp_dir_unique("ingest")   # temp directory to store the unzipped package
-            zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
-            zip_obj = ZipFile(zip_str, 'r')
-            zip_obj.extractall(path=tmp_dir)  # unzip the package
-            manifest_path = tmp_dir + "/" + MANIFEST_FILE_NAME
-        else:
-            manifest_path = "../Turnstile-Example/Turnstile-IngestionPackage/manifest.yaml"
-        manifest = get_manifest(manifest_path)
+        # write zip file to disk
+        tmp_dir = get_temp_dir_unique("ingest")
+        os.mkdir(tmp_dir)
+        zip_path = os.path.join(tmp_dir, "ingestion-package.zip")
+        zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
+        with open(zip_path, 'wb') as f:
+            f.write(zip_str.getbuffer())
+        zip_str.close()
+
+        # extract a manifest
+        manifest = Manifest.getToplevelManifest(zip_path)
 
         # gather displayable information about the package
         package_description = ""
@@ -157,7 +156,7 @@ def run_unzip(zip_file_contents, turnstile_clicks):
 
     except Exception as e:
         return "", None, None, get_error_trace(e), None, None
-    return package_info, view_graph_children, manifest_path, None, status_filepath, None
+    return package_info, view_graph_children, zip_path, None, status_filepath, None
 
 
 @dash.callback(
@@ -166,18 +165,17 @@ def run_unzip(zip_file_contents, turnstile_clicks):
     inputs=Input("load-button", "n_clicks"),                        # triggered by user clicking load button
     state=[
         State("status-filepath", "data"),
-        State("manifest-filepath", "data"),
+        State("zip-filepath", "data"),
         State("load-options-checklist", "value")],                  # user-selected load options from the checklist
     background=True,                                                # background callback
     running=[
         (Output("select-button", "disabled"), True, False),         # disable button while running
-        (Output("turnstile-button", "disabled"), True, False),      # disable button while running
         (Output("load-button", "disabled"), True, False),           # disable button while running
         (Output("status-interval", "disabled"), False, True)        # enable the interval component while running
     ],
     prevent_initial_call=True                                       # NOTE won't work because last-loaded-graphs is in the layout before load-button (see https://dash.plotly.com/advanced-callbacks#prevent-callback-execution-upon-initial-component-render)
 )
-def run_ingest(load_button_clicks, status_filepath, manifest_filepath, load_options):
+def run_ingest(load_button_clicks, status_filepath, zip_filepath, load_options):
     """
     Ingest the selected zip file
     """
@@ -192,14 +190,26 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath, load_opti
         if semtk3.check_services() is False:
             raise Exception("Cannot reach SemTK Services (wait for startup to complete, or check for failures)")
 
+        # load the ingestion package
         f = open(status_filepath, "a")
         with redirect_stdout(f), redirect_stderr(f):    # send command output to temporary file
-            rack.logger.setLevel("ERROR")
-            rack.ingest_manifest_driver(Path(manifest_filepath), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, clear, False)  # process the manifest
+            resp = semtk3.load_ingestion_package(rack.DEFAULT_TRIPLE_STORE, rack.DEFAULT_TRIPLE_STORE_TYPE, zip_filepath, clear, rack.MODEL_GRAPH, rack.DEFAULT_DATA_GRAPH)
+            for line_bytes in resp.iter_lines():
+                level, _, msg = line_bytes.decode().partition(': ')
+                if level != "WARNING":
+                    print(msg, flush=True)
+                if level == "ERROR":
+                    raise Exception(msg)
+
+        # extract the manifest for actions below
+        manifest = Manifest.getToplevelManifest(zip_filepath)
 
         # store list of loaded graphs
-        manifest = get_manifest(manifest_filepath)
         last_loaded_graphs = manifest.getModelgraphsFootprint() + manifest.getDatagraphsFootprint()
+
+        # optimize triple store
+        #if manifest.getNeedsOptimization():
+        #    rack.invoke_optimization(None)
 
         time.sleep(3)
     except Exception as e:
@@ -264,14 +274,3 @@ def manage_done_dialog(children, n_clicks):
     else:
         return True     # child added, show the dialog
 
-
-####### convenience functions #######
-
-def get_manifest(manifest_filepath) -> Manifest:
-    """ Get manifest contents from file """
-    try:
-        manifest_file = open(manifest_filepath, mode='r', encoding='utf-8-sig')
-    except Exception as e:
-        raise Exception("Cannot find top-level manifest file " + MANIFEST_FILE_NAME)
-    manifest = Manifest.fromYAML(manifest_file)
-    return manifest

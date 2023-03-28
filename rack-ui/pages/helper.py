@@ -12,11 +12,7 @@ import rack
 import subprocess
 
 # configuration
-BASE_URL = "http://localhost"
 SPARQLGRAPH_BASE_URL = "http://localhost:8080"
-TRIPLE_STORE_BASE_URL = "http://localhost:3030"
-TRIPLE_STORE = TRIPLE_STORE_BASE_URL + "/RACK"
-TRIPLE_STORE_TYPE = "fuseki"
 
 def get_temp_dir() -> str:
     """ Get a temp dir """
@@ -49,7 +45,7 @@ def clean_for_display(s):
 
 def get_graph_info():
     """ Gets list of graphs in the triple store, with their triple counts """
-    conn_str = rack.sparql_connection(BASE_URL, None, None, [], TRIPLE_STORE, TRIPLE_STORE_TYPE)
+    conn_str = rack.sparql_connection(rack.DEFAULT_BASE_URL, None, None, [], rack.DEFAULT_TRIPLE_STORE, rack.DEFAULT_TRIPLE_STORE_TYPE)
     graph_info_table = semtk3.get_graph_info(conn_str, True, False)  # True to exclude internal SemTK graphs, False to get counts too
     return graph_info_table
 

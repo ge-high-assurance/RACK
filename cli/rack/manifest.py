@@ -1,6 +1,11 @@
 from enum import Enum
 from jsonschema import validate
 from rack.types import Connection, Url
+import os
+import os.path
+from pathlib import Path
+import shutil
+from tempfile import TemporaryDirectory
 from typing import Any, Dict, List, Tuple, Optional
 import yaml
 import semtk3
@@ -111,11 +116,11 @@ class Manifest:
 
     def getDescription(self) -> Optional[str]:
         return self.description
-    
+
     def getPerformEntityResolution(self) -> Optional[Url]:
         """Return target graph URL when this manifest prescribes running entity resolution"""
         return self.performEntityResolution
-    
+
     def getCopyToGraph(self) -> Optional[Url]:
         """Return target graph URL when this manifest prescribes copying the footprint to the default graph"""
         return self.copyToGraph
@@ -152,6 +157,28 @@ class Manifest:
     def getDefaultGraphConnection(self, triple_store: str = DEFAULT_TRIPLE_STORE, triple_store_type: str = DEFAULT_TRIPLE_STORE_TYPE) -> Connection:
         """Build a connection string using the triple store's default graph."""
         return semtk3.build_default_connection_str("Default Graph", triple_store_type, triple_store)
+
+    def getNeedsOptimization(self, triple_store_type: str = DEFAULT_TRIPLE_STORE_TYPE) -> bool:
+        defaultGraphUrls = ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]
+        return triple_store_type == "fuseki" and self.getCopyToGraph() in defaultGraphUrls
+
+    @staticmethod
+    def getToplevelManifest(zipfile: Path) -> 'Manifest':
+        with TemporaryDirectory() as tmpdir_str:
+            tmpdir = Path(tmpdir_str)
+
+            shutil.unpack_archive(zipfile, tmpdir)
+
+            top_level_entries = os.listdir(tmpdir)
+            if "manifest.yaml" in top_level_entries:
+                manifest_path = tmpdir / "manifest.yaml"
+            elif len(top_level_entries) == 1 and os.path.isdir(tmpdir / top_level_entries[0]):
+                manifest_path = tmpdir / top_level_entries[0] / "manifest.yaml"
+            else:
+                raise FileNotFoundError("manifest.yaml")
+
+            with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
+                return Manifest.fromYAML(manifest_file)
 
     @staticmethod
     def fromYAML(src: Any) -> 'Manifest':

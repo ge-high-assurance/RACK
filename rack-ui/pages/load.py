@@ -208,8 +208,8 @@ def run_ingest(load_button_clicks, status_filepath, zip_filepath, load_options):
         last_loaded_graphs = manifest.getModelgraphsFootprint() + manifest.getDatagraphsFootprint()
 
         # optimize triple store
-        #if manifest.getNeedsOptimization():
-        #    rack.invoke_optimization(None)
+        if manifest.getNeedsOptimization():
+            rack.invoke_optimization(None)
 
         time.sleep(3)
     except Exception as e:

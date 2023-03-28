@@ -18,8 +18,8 @@ fi
 
 RACK_DB="/etc/fuseki/databases/RACK"
 RACK_FUSEKI_CONFIG="/etc/fuseki/configuration/RACK.ttl"
-# Currently using TDB1, this should become tdb2.tdbstats for TDB2
-TDBSTATS="/opt/jena/bin/tdbstats"
+# Currently using TDB2, revert to tdbstats for TDB1
+TDBSTATS="/opt/jena/bin/tdb2.tdbstats"
 TMP_STATS="/tmp/stats.opt"
 # Usually it goes into a `Data-0001` subdirectory, but it seems that with our
 # RACK.ttl configuration we just don't have the extra directory.

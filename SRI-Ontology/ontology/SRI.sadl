@@ -90,24 +90,17 @@ import "http://arcos.AH-64D/Boeing".
       ///////////////////////////////////////////////////
       // System, Software requirements, design, code   
       
-    // DB 2/27/22: Added new class RequirementSet with common properties for all types of requirement sets
-    RequirementSet (note "a set of requirements that together defines the required behavior of a SYSTEM (or part thereof)")
-      is a type of COLLECTION.
-      content of RequirementSet only has values of type REQUIREMENT.
-      // note: 'speficies' is not a subtype of 'wasImpactedBy, which has the reverse meaning. RequiremenSet occurs before the SYSTEM is constructed.
-      specifies (note "the system or component this RequirementSet governs/specifies") describes RequirementSet with values of type ENTITY.
-
     SystemRequirement is a type of REQUIREMENT.
         wasGeneratedBy of SystemRequirement only has values of type SystemRequirementsDefinition.
     
-    SystemRequirementSet is a type of RequirementSet.
+    SystemRequirementSet is a type of REQUIREMENT_SET.
        content of SystemRequirementSet only has values of type SystemRequirement. 
        wasGeneratedBy of SystemRequirementSet only has values of type SystemRequirementsDefinition.
        
     SoftwareHighLevelRequirement is a type of REQUIREMENT.
       wasGeneratedBy of SoftwareHighLevelRequirement only has values of type SoftwareHighLevelRequirementsDefinition.
 
-    SoftwareHighLevelRequirementSet is a type of RequirementSet.
+    SoftwareHighLevelRequirementSet is a type of REQUIREMENT_SET.
        content of SoftwareHighLevelRequirementSet only has values of type SoftwareHighLevelRequirement.
        wasGeneratedBy of SoftwareHighLevelRequirementSet only has values of type SoftwareHighLevelRequirementsDefinition.
        specifies of SoftwareHighLevelRequirementSet only has values of type SWCOMPONENT.
@@ -115,7 +108,7 @@ import "http://arcos.AH-64D/Boeing".
     SoftwareLowLevelRequirement is a type of REQUIREMENT.
         wasGeneratedBy of SoftwareLowLevelRequirement only has values of type SoftwareDesign.
     
-    SoftwareLowLevelRequirementSet is a type of RequirementSet.
+    SoftwareLowLevelRequirementSet is a type of REQUIREMENT_SET.
        content of SoftwareLowLevelRequirementSet only has values of type SoftwareLowLevelRequirement. // DB 2/1/22: was SubDD_Req
        wasGeneratedBy of SoftwareLowLevelRequirementSet only has values of type SoftwareDesign. 
        specifies of SoftwareLowLevelRequirementSet only has values of type SWCOMPONENT.

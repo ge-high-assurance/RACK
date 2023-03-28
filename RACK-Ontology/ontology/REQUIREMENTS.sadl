@@ -38,6 +38,14 @@ REQUIREMENT
 	
 	wasGeneratedBy of REQUIREMENT only has values of type REQUIREMENT_DEVELOPMENT.
 
+// DB 2/27/22: Added new class RequirementSet with common properties for all types of requirement sets
+REQUIREMENT_SET 
+	(note "a set of requirements that together defines the required behavior of a SYSTEM (or part thereof)")
+	is a type of COLLECTION.
+	content of REQUIREMENT_SET only has values of type REQUIREMENT.
+	// note: 'specifies' is not a subtype of 'wasImpactedBy, which has the reverse meaning. RequirementSet occurs before the SYSTEM is constructed.
+	specifies (note "the system or component this requirement set governs/specifies") describes REQUIREMENT_SET with values of type ENTITY.
+
 DATA_DICTIONARY_TERM
 	(note "Defines some conceptual data that may be collected somewhere and used somewhere else")
 	is a type of ENTITY.

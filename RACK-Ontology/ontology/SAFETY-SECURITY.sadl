@@ -90,38 +90,38 @@ InputPort is a PORT_DIRECTION has identifier "Input".
 OutputPort is a PORT_DIRECTION has identifier "Output".
 BidirectionalPort is a PORT_DIRECTION has identifier "Bidirectional".
 
-GUARENTEE is a type of PROPERTY.
-  guaranteeType describes GUARENTEE with a single value of type GUARENTEE_TYPE.
+GUARANTEE is a type of PROPERTY.
+  guaranteeType describes GUARANTEE with a single value of type GUARANTEE_TYPE.
   
-COMPONENT_GUARENTEE is a type of GUARENTEE.
+COMPONENT_GUARANTEE is a type of GUARANTEE.
   // Future: need to subset guaranteeType 
 
-INTERFACE_GUARENTEE is a type of GUARENTEE.
+INTERFACE_GUARANTEE is a type of GUARANTEE.
   // Future: need to subset guaranteeType
 
 // extensible types of guarantees
-GUARENTEE_TYPE (note "a protocol guarantee on interface or platform gurantee on a HW component") is a type of THING.
-LatencyGuarantee is a GUARENTEE_TYPE
+GUARANTEE_TYPE (note "a protocol guarantee on interface or platform gurantee on a HW component") is a type of THING.
+LatencyGuarantee is a GUARANTEE_TYPE
   has identifier "LatencyGuarantee".
-JitterGuarantee (note "timing guarantees such as jitter") is a GUARENTEE_TYPE
+JitterGuarantee (note "timing guarantees such as jitter") is a GUARANTEE_TYPE
   has identifier "JitterGuarantee".
-BandwidthGuarantee is a GUARENTEE_TYPE
+BandwidthGuarantee is a GUARANTEE_TYPE
   has identifier "BandwidthGuarantee".
-EncryptionGuarantee (note "") is a GUARENTEE_TYPE
+EncryptionGuarantee (note "") is a GUARANTEE_TYPE
   has identifier "EncryptionGuarantee".
-AuthenticationGuarantee (note "") is a GUARENTEE_TYPE
+AuthenticationGuarantee (note "") is a GUARANTEE_TYPE
   has identifier "AuthenticationGuarantee".
-IntegrityGuarantee (note "") is a GUARENTEE_TYPE
+IntegrityGuarantee (note "") is a GUARANTEE_TYPE
   has identifier "IntegrityGuarantee".
-AvailabilityGuarantee (note "") is a GUARENTEE_TYPE
+AvailabilityGuarantee (note "") is a GUARANTEE_TYPE
   has identifier "AvailabilityGuarantee".
-CPUCyclesGuarantee (note "") is a GUARENTEE_TYPE
+CPUCyclesGuarantee (note "") is a GUARANTEE_TYPE
   has identifier "CPUCyclesGuarantee".
-MemoryAvailablilityGuarantee (note "") is a GUARENTEE_TYPE
+MemoryAvailablilityGuarantee (note "") is a GUARANTEE_TYPE
   has identifier "MemoryAvailablilityGuarantee".
-SoftwareMemoryUsageGuarantee (note "") is a GUARENTEE_TYPE
+SoftwareMemoryUsageGuarantee (note "") is a GUARANTEE_TYPE
   has identifier "SoftwareMemoryUsageGuarantee".
-WCETGuarantee (note "worst case execution time of software") is a GUARENTEE_TYPE
+WCETGuarantee (note "worst case execution time of software") is a GUARANTEE_TYPE
   has identifier "WCETGuarantee".
    
 // note: copied from CPS.sadl that is part of RACK's core data model
@@ -154,20 +154,19 @@ BusInterface (note "a bus interface is a connection with multiple communicates d
 EthernetInterface is an INTERFACE_TYPE has identifier "EthernetInterface".
 WirelessInterface is an INTERFACE_TYPE has identifier "WirelessInterface".
 
-// HardwareComponent is a type of HWCOMPONENT.
-// the below extends HARDWARE#HWCOMPONENT
+HWCOMPONENT_SS (note "Extends HWCOMPONENT with properties about safety and security") is a type of HWCOMPONENT.
    // inherited
    //   instantiates values of type ENTITY which we will map to SYSTEM
-   hw:port (note "set of ports of this component") describes HWCOMPONENT with values of type PORT.
+   port (note "set of ports of this component") describes HWCOMPONENT_SS with values of type PORT.
    // DB 4/20/22: use inherited attribute partOf in core ontology to point to container object
-   hw:partOf of HWCOMPONENT only has values of type HWCOMPONENT.
+   ss:partOf of HWCOMPONENT_SS only has values of type HWCOMPONENT_SS.
    //    old: part (note "set of hw components this component contains") describes HardwareComponent with values of type HardwareComponent. 
 //  guarantee describes HardwareComponent with values of type ComponentGuarantee.
-   hw:hosts describes HWCOMPONENT with values of type SWCOMPONENT.
-   hw:pedigree describes HWCOMPONENT with values of type PEDIGREE.
-   hw:pedigree describes HWCOMPONENT with at most 1 value.
-   hw:trustworthiness describes HWCOMPONENT with values of type TRUSTWORTHINESS.
-   hw:trustworthiness describes HWCOMPONENT with at most 1 value.
+   hosts describes HWCOMPONENT_SS with values of type SWCOMPONENT.
+   ss:pedigree describes HWCOMPONENT_SS with values of type PEDIGREE.
+   ss:pedigree describes HWCOMPONENT_SS with at most 1 value.
+   ss:trustworthiness describes HWCOMPONENT_SS with values of type TRUSTWORTHINESS.
+   ss:trustworthiness describes HWCOMPONENT_SS with at most 1 value.
 
 // add more hw component types in addtion to those defined in core
 Switch (note "provides switching capability between point-to-point links")
@@ -180,20 +179,19 @@ Display (note "provides display capability - e.g. a flight display/touchscreen")
     is a HWCOMPONENT_TYPE
     has identifier "Display".
  
-// SoftwareComponent is a type of SWCOMPONENT.
-// the below extends SOFTWARE#SWCOMPONENT
+SWCOMPONENT_SS (note "Extends SWCOMPONENT with properties about safety and security") is a type of SWCOMPONENT.
    // inherited
    //   subcomponentOf 
    //   componentType
-   sw:instantiates of SWCOMPONENT only has values of type FUNCTION.
+   ss:instantiates of SWCOMPONENT_SS only has values of type FUNCTION.
 //   guarantee describes SoftwareComponent with values of type ComponentGuarantee.
    // DB 4/22/22: use inherited attribute partOf in core ontology to point to container object
    //   old: part (note "set of sw components this component contains") describes SoftwareComponent with values of type SoftwareComponent. 
-   sw:partOf of SWCOMPONENT only has values of type SWCOMPONENT.
-   sw:pedigree describes SWCOMPONENT with values of type PEDIGREE.
-   sw:pedigree describes SWCOMPONENT with at most 1 value.
-   sw:trustworthiness describes SWCOMPONENT with values of type TRUSTWORTHINESS.
-   sw:trustworthiness describes SWCOMPONENT with at most 1 value.
+   ss:partOf of SWCOMPONENT_SS only has values of type SWCOMPONENT.
+   ss:pedigree describes SWCOMPONENT_SS with values of type PEDIGREE.
+   ss:pedigree describes SWCOMPONENT_SS with at most 1 value.
+   ss:trustworthiness describes SWCOMPONENT_SS with values of type TRUSTWORTHINESS.
+   ss:trustworthiness describes SWCOMPONENT_SS with at most 1 value.
    
 // the below adds to an enum list in SOFTWARE.sadl
 KernelAPI

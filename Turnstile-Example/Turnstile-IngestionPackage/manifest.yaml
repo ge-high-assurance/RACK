@@ -26,3 +26,4 @@ steps:
   - data: SystemVerificationReport/import.yaml
   - data: Objectives/import.yaml
   - data: TurnstileBaselines/import.yaml
+  - data: BuildProcess/import.yaml

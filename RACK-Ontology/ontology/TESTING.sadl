@@ -83,6 +83,12 @@ TEST_EXECUTION
    testLog is a type of goal.
 
 TEST_ANNOTATION (note "provides additional information about a TEST_RESULT") is a type of ENTITY.
+   annotatedValue describes TEST_ANNOTATION with values of TEST_ANNOTATION_VALUE.
 	annotatedResult (note "identifies the TEST_RESULT being annotated") describes TEST_ANNOTATION with values of type TEST_RESULT.
-	testAnnotation (note "specifies the annotation information to add to the TEST_RESULT") describes TEST_ANNOTATION with values of type ENTITY.
 
+TEST_ANNOTATION_VALUE (note "values for a TEST_ANNOTATION value") is a type of THING
+   must be one of {IgnoredFailureOOB}.
+
+IgnoredFailureOOB is a TEST_ANNOTATION_VALUE.
+   identifier "IgnoredFailure"
+   title "Ignored Failure based on Out-Of-Band information".

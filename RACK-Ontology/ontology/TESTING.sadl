@@ -64,10 +64,10 @@ TEST_RECORD (note "a TEST_RECORD identifies the configuration under which a set 
 	testRecordProcedure (note "the TEST_PROCEDURE for which this TEST_RECORD was created") describes TEST_RECORD with a single value of type TEST_PROCEDURE.
 	testRecordSteps (note "the initial TEST_STEPs performed") describes TEST_RECORD with values of type TEST_STEP.
 	testConfiguration (note "the configuration information for this TEST_EXECUTION") describes TEST_RECORD with values of type ENTITY.
-	targetPackage (note "is the target FILE tested") describes TEST_SCENARIO with values of type FILE.
-	targetVersion (note "is the version of the targetPackage tested") describes TEST_SCENARIO with a single value of type string.
-	testPackage (note "is the test FILE executed") describes TEST_SCENARIO with values of type FILE.
-	testVersion (note "is the version of the testPackage run") describes TEST_SCENARIO with a single value of type string.
+	targetPackage (note "is the target FILE tested") describes TEST_RECORD with values of type FILE.
+	targetVersion (note "is the version of the targetPackage tested") describes TEST_RECORD with a single value of type string.
+	testPackage (note "is the test FILE executed") describes TEST_RECORD with values of type FILE.
+	testVersion (note "is the version of the testPackage run") describes TEST_RECORD with a single value of type string.
 
 TEST_DEVELOPMENT
 	(note "ACTIVITY of creating a TEST to participate in the evaluation of a requirement")
@@ -83,12 +83,12 @@ TEST_EXECUTION
    testLog is a type of goal.
 
 TEST_ANNOTATION (note "provides additional information about a TEST_RESULT") is a type of ENTITY.
-   annotatedValue describes TEST_ANNOTATION with values of TEST_ANNOTATION_VALUE.
+   annotatedValue describes TEST_ANNOTATION with values of type TEST_ANNOTATION_VALUE.
 	annotatedResult (note "identifies the TEST_RESULT being annotated") describes TEST_ANNOTATION with values of type TEST_RESULT.
 
 TEST_ANNOTATION_VALUE (note "values for a TEST_ANNOTATION value") is a type of THING
    must be one of {IgnoredFailureOOB}.
 
-IgnoredFailureOOB is a TEST_ANNOTATION_VALUE.
+IgnoredFailureOOB is a TEST_ANNOTATION_VALUE
    identifier "IgnoredFailure"
    title "Ignored Failure based on Out-Of-Band information".

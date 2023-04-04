@@ -240,6 +240,9 @@ the TESTING.sadl file provides a more complete specification of TESTING elements
       * "annotatedResult" property : the TEST_RESULT being annotated
       * "annotation" property : the ENTITY providing the annotation information
 
+Also see [this graphical representation](/RACK-Ontology/Graphs/TESTING_scoped.svg)
+of these primary TESTING elements and some of their surrounding elements.
+
 # Sample Scenarios
 
 ## Scenario 1

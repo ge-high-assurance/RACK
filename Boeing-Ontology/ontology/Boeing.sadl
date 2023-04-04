@@ -91,6 +91,7 @@ SBVT_Test_Log is a type of TEST_LOG.
     content of SBVT_Test_Log only has values of type SBVT_Test_Record.
 SBVT_Test_Record is a type of TEST_RECORD.
 	testRecordSteps of SBVT_Test_Record only has values of type SBVT_Test_Step.
+    // targetVersion replaces systemUnderTestBuildVersion
 
 IDD_Test is a type of TEST. // note "verifies" corresponds to "observes"
 //    verifies of IDD_Test only has values of type Signal.
@@ -112,9 +113,6 @@ SBVT_Test_Execution is a type of TEST_EXECUTION.
        systemUnderTest describes SBVT_Test_Execution with values of type SYSTEM.
        testStation of SBVT_Test_Execution has a single value of type Test_Station.
        testStation is a type of wasAssociatedWith.
-
-SBVT_Test_Scenario is a type of TEST_SCENARIO.
-    // targetVersion replaces systemUnderTestBuildVersion
 
 BuildVersion is a type of ENTITY.
        system describes BuildVersion with a single value of type SYSTEM.

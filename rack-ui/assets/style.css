@@ -35,6 +35,13 @@ div.scrollarea {
     flex-direction: column-reverse;
 }
 
+/* style for a warning banner */
+div.warningbanner {
+    background-color: red;
+    color: white;
+    padding-left: 10px;
+}
+
 /* put a space between a checkbox and the text next to it */
 input[type=checkbox] {
   margin-right: 10px;

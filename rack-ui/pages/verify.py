@@ -115,6 +115,9 @@ def run_assist(status_filepath):
         if platform.system() == "Windows":
             raise Exception("Not yet supported on Windows.  (PROLOG checking is available through LINUX/Docker.)")
         else:
+            if(rack.DEFAULT_TRIPLE_STORE_TYPE != "fuseki"):
+                raise Exception("RACK UI currently only supports ASSIST tool using Fuseki triplestore")
+            TRIPLE_STORE_BASE_URL = rack.DEFAULT_TRIPLE_STORE.rsplit("/", 1)[0] # e.g. get http://localhost:3030
             command = f"../assist/bin/check -v -m {TRIPLE_STORE_BASE_URL}/"     # ASSIST tool.  Runs on all graphs, minus exclusion list of internal SemTK graphs
             run_subprocess(command, status_filepath)                            # TODO returns error code 1 even though seems successful
         time.sleep(1)
@@ -184,7 +187,7 @@ def show_report_options(button_clicks, last_loaded_graphs):
     graphs_list = [{'label': label, 'value': val} for label, val in zip(graphs_list_labels, graphs_list_values)]
 
     # these are the graphs last loaded - check the checkboxes for these
-    if last_loaded_graphs == None:
+    if last_loaded_graphs is None:
         last_loaded_graphs = []
 
     return graphs_list, last_loaded_graphs
@@ -214,7 +217,7 @@ def generate_report_link(sg_button_clicks, graphs_selected):
     graphs = []
     for graph in graphs_selected:
         graphs.append(graph)
-    conn = semtk3.build_connection_str("Graphs To Verify", TRIPLE_STORE_TYPE, TRIPLE_STORE, graphs, graphs[0], graphs[1:])  # use all graphs for both model and data, to avoid either being empty
+    conn = semtk3.build_connection_str("Graphs To Verify", rack.DEFAULT_TRIPLE_STORE_TYPE, rack.DEFAULT_TRIPLE_STORE, graphs, graphs[0], graphs[1:])  # use all graphs for both model and data, to avoid either being empty
 
     # construct SG report URL
     sparqlgraph_verify_url_str = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=str(conn), report_id="report data verification")
@@ -294,7 +297,7 @@ def manage_verify_report_error_dialog(children, n_clicks):
     if (get_trigger() == "verify-report-error-button.n_clicks"):
         return False        # button pressed, hide the dialog
     else:
-        if children == None:
+        if children is None:
             return False    # child added but it's None, hide the dialog
         else:
             return True     # child added, show it

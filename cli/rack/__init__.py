@@ -25,9 +25,9 @@ from os import environ
 from pathlib import Path
 import re
 import sys
-from typing import Any, Callable, Dict, List, Optional, NewType, Set, TypeVar, cast
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple, TypeVar, cast
 from types import SimpleNamespace
-import tempfile
+from tempfile import TemporaryDirectory
 import shutil
 
 # library imports
@@ -39,8 +39,9 @@ import semtk3
 from semtk3.semtktable import SemtkTable
 import yaml
 
-from rack.manifest import Manifest, StepType
+from rack.manifest import Manifest
 from rack.types import Connection, Url
+from rack.defaults import *
 
 __author__ = "Eric Mertens"
 __email__ = "emertens@galois.com"
@@ -71,14 +72,6 @@ class ExportFormat(Enum):
     def __str__(self) -> str:
         """For inclusion in --help"""
         return self.value
-
-DEFAULT_BASE_URL: Url = Url("http://localhost")
-DEFAULT_OPTIMIZE_URL: Url = Url("http://localhost:8050/optimize")
-
-MODEL_GRAPH: Url = Url("http://rack001/model")
-DEFAULT_DATA_GRAPH = Url("http://rack001/data")
-DEFAULT_TRIPLE_STORE = Url("http://localhost:3030/RACK")
-DEFAULT_TRIPLE_STORE_TYPE = "fuseki"
 
 INGEST_CSV_CONFIG_SCHEMA: Dict[str, Any] = {
     'type': 'object',
@@ -173,6 +166,9 @@ def str_good(s: str) -> str:
 def str_bad(s: str) -> str:
     return Fore.RED + s + Style.RESET_ALL
 
+def str_warn(s: str) -> str:
+    return Fore.YELLOW + s + Style.RESET_ALL
+
 def str_highlight(s: str) -> str:
     return Fore.MAGENTA + s + Style.RESET_ALL
 
@@ -196,8 +192,6 @@ class CustomFormatter(logging.Formatter):
 
 Decoratee = TypeVar('Decoratee', bound=Callable[..., Any])
 
-# Bug https://github.com/PyCQA/pylint/issues/1953
-# pylint: disable=unused-argument
 def with_status(prefix: str, suffix: Callable[[Any], str] = lambda _ : '') -> Callable[[Decoratee], Decoratee]:
     """This decorator writes the prefix, followed by three dots, then runs the
     decorated function.  Upon success, it appends OK, upon failure, it appends
@@ -357,11 +351,13 @@ def utility_copygraph_driver(base_url: Url, triple_store: Optional[Url], triple_
     go()
 
 class IngestionBuilder:
-    def __init__(self) -> None:
+    def __init__(self, base_dir: str) -> None:
         self.fresh: int = 0
         self.model_graphs: Set[str] = set()
         self.data_graphs: Set[str] = set()
         self.manifests: Set[Path] = set()
+        self.steps: List[Any] = []
+        self.base_dir: Path = Path(base_dir)
 
     def next_fresh(self) -> int:
         result = self.fresh
@@ -393,7 +389,7 @@ class IngestionBuilder:
         elif isinstance(c, list):
             self.model_graphs.update(c)
 
-        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
+        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out:
             yaml.safe_dump(obj, out)
 
     def data(
@@ -416,7 +412,7 @@ class IngestionBuilder:
                 shutil.copyfile(frombase.joinpath(path), tobase.joinpath(path.name), follow_symlinks=True)
                 step['csv'] = path.name
 
-        self.data_graphs.add(obj['data-graph'])
+        self.data_graphs.add(obj.get('data-graph', DEFAULT_DATA_GRAPH))
 
         c = obj.get('extra-data-graphs')
         if c is not None:
@@ -429,7 +425,7 @@ class IngestionBuilder:
             elif isinstance(c, list):
                 self.model_graphs.update(c)
 
-        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
+        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out:
             yaml.safe_dump(obj, out)
 
     def nodegroups(
@@ -443,69 +439,75 @@ class IngestionBuilder:
                 json = row['jsonFile']
                 shutil.copyfile(from_path.joinpath(json), to_path.joinpath(json), follow_symlinks=True)
 
+    def new_directory(self, name: str, kind: str) -> Tuple[Path, Path]:
+        dirname = Path(name) / Path(f'{self.next_fresh():02}_{kind}')
+        subdir = self.base_dir / dirname
+        subdir.mkdir(parents=True, exist_ok=False)
+        return dirname, subdir
+
     def manifest(
         self,
         from_path: Path,
-        to_path: Path,
+        is_top_level: bool = False
     ) -> None:
 
         with open(from_path, mode='r', encoding='utf-8-sig') as f:
             obj = yaml.safe_load(f)
 
+        manifest_name = obj['name']
+
         # Handle multiple inclusions of the same manifest to simplify
-        full_path = from_path.absolute()
-        if full_path in self.manifests:
+        if manifest_name in self.manifests:
             print(f'Pruning duplicate manifest {from_path}')
-            del obj['steps']
-        else:
-            self.manifests.add(full_path)
-            base_path = from_path.parent
-            for step in obj.get('steps',[]):
-                if 'manifest' in step:
-                    path = step['manifest']
-                    dirname = Path(f'{self.next_fresh():02}_manifest')
-                    subdir = to_path.parent.joinpath(dirname)
-                    topath = subdir.joinpath(Path(path).name)
-                    subdir.mkdir(exist_ok=False)
-                    self.manifest(base_path.joinpath(path), topath)
-                    step['manifest'] = str(dirname.joinpath(Path(path).name))
-                elif 'model' in step:
-                    path = step['model']
-                    dirname = Path(f'{self.next_fresh():02}_model')
-                    subdir = to_path.parent.joinpath(dirname)
-                    topath = subdir.joinpath(Path(path).name)
-                    subdir.mkdir(exist_ok=False)
-                    self.model(base_path.joinpath(path), topath)
-                    step['model'] = str(dirname.joinpath(Path(path).name))
-                elif 'data' in step:
-                    path = step['data']
-                    dirname = Path(f'{self.next_fresh():02}_data')
-                    subdir = to_path.parent.joinpath(dirname)
-                    topath = subdir.joinpath(Path(path).name)
-                    subdir.mkdir(exist_ok=False)
-                    self.data(base_path.joinpath(path), topath)
-                    step['data'] = str(dirname.joinpath(Path(path).name))
-                elif 'nodegroups' in step:
-                    path = step['nodegroups']
-                    dirname = Path(f'{self.next_fresh():02}_nodegroups')
-                    subdir = to_path.parent.joinpath(dirname)
-                    subdir.mkdir(exist_ok=False)
-                    self.nodegroups(base_path.joinpath(path), subdir)
-                    step['nodegroups'] = str(dirname)
+            return
+        self.manifests.add(manifest_name)
+
+        # base used for resolving relative paths found in manifests
+        from_base = from_path.resolve().parent
         
-        with open(to_path, mode='w', encoding='utf-8-sig', newline='\n') as out: 
-            yaml.safe_dump(obj, out)
+        manifest_dir = None
+
+        for step in obj.get('steps',[]):
+            if 'manifest' in step:
+                self.manifest(from_base / step['manifest'])
+            else:
+                if manifest_dir is None:
+                    manifest_dir = f'{self.next_fresh():02}_{manifest_name}'
+                    self.base_dir.joinpath(manifest_dir).mkdir()
+
+                if 'model' in step:
+                    path = Path(step['model'])
+                    dirname, subdir = self.new_directory(manifest_dir, 'model')
+                    self.model(from_base / path, subdir / path.name)
+                    self.steps.append({"model": dirname.joinpath(path.name).as_posix()})
+
+                elif 'data' in step:
+                    path = Path(step['data'])
+                    dirname, subdir = self.new_directory(manifest_dir, 'data')
+                    self.data(from_base / path, subdir / path.name)
+                    self.steps.append({'data': dirname.joinpath(path.name).as_posix()})
+
+                elif 'nodegroups' in step:
+                    path = Path(step['nodegroups'])
+                    dirname, subdir = self.new_directory(manifest_dir, 'nodegroups')
+                    self.nodegroups(from_base / path, subdir)
+                    self.steps.append({'nodegroups': dirname.as_posix()})
+        
+        if is_top_level:
+            obj['steps'] = self.steps
+            with open(self.base_dir / 'manifest.yaml', mode='w', encoding='utf-8-sig', newline='\n') as out:
+                yaml.safe_dump(obj, out)
 
 def build_manifest_driver(
     manifest_path: Path,
     zipfile_path: Path
 ) -> None:
 
-    with tempfile.TemporaryDirectory() as outdir:
-        builder = IngestionBuilder()
-        builder.manifest(manifest_path, Path(outdir).joinpath(f'manifest.yaml'))
+    with TemporaryDirectory() as outdir:
+        builder = IngestionBuilder(outdir)
+        builder.manifest(manifest_path, True)
         shutil.make_archive(str(zipfile_path), 'zip', outdir)
-        
+
         for x in builder.model_graphs:
             print(f'Model graph: {x}')
 
@@ -515,77 +517,37 @@ def build_manifest_driver(
 
 def ingest_manifest_driver(
     manifest_path: Path,
-    base_url: Url,
     triple_store: Optional[Url],
     triple_store_type: Optional[str],
     clear: bool,
-    default_graph: bool,
-    top_level: bool = True,
+    optimize: bool,
     optimization_url: Optional[Url] = None) -> None:
 
-    with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
-        manifest = Manifest.fromYAML(manifest_file)
+    manifest = Manifest.getToplevelManifest(manifest_path)
 
-    base_path = manifest_path.parent
+    resp = semtk3.load_ingestion_package(
+        triple_store or DEFAULT_TRIPLE_STORE,
+        triple_store_type or DEFAULT_TRIPLE_STORE_TYPE,
+        manifest_path,
+        clear,
+        MODEL_GRAPH,
+        DEFAULT_DATA_GRAPH,
+    )
 
-    if clear:
-        if default_graph:
-            # clear only the default graph first
-            clear_driver(base_url, [Url("uri://DefaultGraph")], [], triple_store, triple_store_type, Graph.MODEL)
-        else:
-            # clear the whole footprint
-            modelgraphs = manifest.getModelgraphsFootprint()
-            datagraphs = manifest.getDatagraphsFootprint()
-            if not modelgraphs == []:
-                clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.MODEL)
-            if not datagraphs == []:
-                clear_driver(base_url, modelgraphs, datagraphs, triple_store, triple_store_type, Graph.DATA)
+    loglevel = logger.getEffectiveLevel()
+    for line_bytes in resp.iter_lines():
+        level, _, msg = line_bytes.decode().partition(': ')
+        if level == "INFO" and logging.INFO >= loglevel:
+            print(msg)
+        elif level == "DEBUG" and logging.DEBUG >= loglevel:
+            print("Debug: " + str_highlight(msg))
+        elif level == "WARNING" and logging.WARNING >= loglevel:
+            print(str_warn("Warning: " + msg))
+        elif level == "ERROR" and logging.ERROR >= loglevel:
+            print("Error: " + str_bad(msg))
 
-        if not manifest.getNodegroupsFootprint() == []:
-            delete_nodegroups_driver(manifest.getNodegroupsFootprint(), True, True, True, base_url)
-
-    # We don't override the model and datagraphs from the ingestion components unless it's for default
-    # the step itself gets to pick the target graphs
-    if default_graph:
-        targetgraph = [Url("uri://DefaultGraph")]
-    else:
-        targetgraph = None
-
-    for (step_type, step_data) in manifest.steps:
-        if StepType.DATA == step_type:
-            stepFile = base_path / step_data
-            ingest_data_driver(stepFile, base_url, targetgraph, targetgraph, triple_store, triple_store_type, False)
-        elif StepType.MODEL == step_type:
-            stepFile = base_path / step_data
-            ingest_owl_driver(stepFile, base_url, targetgraph, triple_store, triple_store_type, False)
-        elif StepType.NODEGROUPS == step_type:
-            stepFile = base_path / step_data
-            store_nodegroups_driver(stepFile, base_url)
-        elif StepType.MANIFEST == step_type:
-            stepFile = base_path / step_data
-            ingest_manifest_driver(stepFile, base_url, triple_store, triple_store_type, False, default_graph, False)
-        elif StepType.COPYGRAPH == step_type:
-            utility_copygraph_driver(base_url, triple_store, triple_store_type, step_data[0], step_data[1])
-
-    if top_level:
-        if manifest.getCopyToDefaultGraph():
-            defaultGraph = Url("uri://DefaultGraph")
-
-            if clear:
-                clear_driver(base_url, [defaultGraph], None, triple_store, triple_store_type, Graph.MODEL)
-            for graph in manifest.getModelgraphsFootprint():
-                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
-            for graph in manifest.getDatagraphsFootprint():
-                utility_copygraph_driver(base_url, triple_store, triple_store_type, graph, defaultGraph)
-
-        if manifest.getPerformEntityResolution():
-            @with_status(f'Executing entity resolution')
-            def go() -> dict:
-                return semtk3.combine_entities_in_conn(conn=sparql_connection(base_url, [defaultGraph], defaultGraph, [], triple_store, triple_store_type))
-            go()
-
-        if manifest.getPerformOptimization():
-            invoke_optimization(optimization_url)
+    if optimize and manifest.getNeedsOptimization(triple_store_type or DEFAULT_TRIPLE_STORE_TYPE):
+        invoke_optimization(optimization_url)
 
 def invoke_optimization(url: Optional[Url]) -> None:
     url = url or DEFAULT_OPTIMIZE_URL
@@ -870,7 +832,7 @@ def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.config), args.base_url, args.triple_store, args.triple_store_type, args.clear, args.default_graph, True, args.optimize_url)
+    ingest_manifest_driver(Path(args.config), args.triple_store, args.triple_store_type, args.clear, args.optimize, args.optimize_url)
 
 def dispatch_manifest_build(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
@@ -925,7 +887,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument('--base-url', type=str, default=environ.get('BASE_URL') or DEFAULT_BASE_URL, help='Base SemTK instance URL')
     parser.add_argument('--triple-store', type=str, default=environ.get('TRIPLE_STORE'), help='Override Fuseki URL')
     parser.add_argument('--triple-store-type', type=str, default=environ.get('TRIPLE_STORE_TYPE'), help='Override Triplestore Type (default: fuseki)')
-    parser.add_argument('--log-level', type=str, default=environ.get('LOG_LEVEL', 'WARNING'), help='Assign logger severity level')
+    parser.add_argument('--log-level', type=str, default=environ.get('LOG_LEVEL', 'INFO'), help='Assign logger severity level')
 
     subparsers = parser.add_subparsers(dest='command')
 
@@ -967,7 +929,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     manifest_import_parser.add_argument('config', type=str, help='Manifest YAML file')
     manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
-    manifest_import_parser.add_argument('--default-graph', action='store_true', help='Load whole manifest into default graph')
+    manifest_import_parser.add_argument('--optimize', type=bool, help='Enable RACK UI optimization when available')
     manifest_import_parser.add_argument('--optimize-url', type=str, help='RACK UI optimization endpoint (e.g. http://localhost:8050/optimize)')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)
 

@@ -1,9 +1,16 @@
 from enum import Enum
 from jsonschema import validate
 from rack.types import Connection, Url
+import os
+import os.path
+from pathlib import Path
+import shutil
+from tempfile import TemporaryDirectory
 from typing import Any, Dict, List, Tuple, Optional
 import yaml
 import semtk3
+
+from rack.defaults import *
 
 MANIFEST_SCHEMA: Dict[str, Any] = {
     'type': 'object',
@@ -13,9 +20,8 @@ MANIFEST_SCHEMA: Dict[str, Any] = {
         'name': {'type': 'string'},
         'description': {'type': 'string'},
 
-        'copy-to-default-graph':            {'type': 'boolean'},
-        'perform-entity-resolution':        {'type': 'boolean'},
-        'perform-triplestore-optimization': {'type': 'boolean'},
+        'copy-to-graph':                    {'type': 'string'},
+        'perform-entity-resolution':        {'type': 'string'},
 
         'footprint': {
             'type': 'object',
@@ -102,9 +108,8 @@ class Manifest:
         self.datagraphsFootprint: List[Url] = []
         self.nodegroupsFootprint: List[str] = []
         self.steps: List[Tuple[StepType, Any]] = []
-        self.performOptimization: bool = False
-        self.performEntityResolution: bool = False
-        self.copyToDefaultGraph: bool = False
+        self.performEntityResolution: Optional[Url] = None
+        self.copyToGraph: Optional[Url] = None
 
     def getName(self) -> str:
         return self.name
@@ -112,17 +117,13 @@ class Manifest:
     def getDescription(self) -> Optional[str]:
         return self.description
 
-    def getPerformOptimization(self) -> bool:
-        """Return True when this manifest file prescribes running the triplestore optimizer"""
-        return self.performOptimization
-    
-    def getPerformEntityResolution(self) -> bool:
-        """Return True when this manifest prescribes running entity resolution"""
+    def getPerformEntityResolution(self) -> Optional[Url]:
+        """Return target graph URL when this manifest prescribes running entity resolution"""
         return self.performEntityResolution
-    
-    def getCopyToDefaultGraph(self) -> bool:
-        """Return True when this manifest prescribes copying the footprint to the default graph"""
-        return self.copyToDefaultGraph
+
+    def getCopyToGraph(self) -> Optional[Url]:
+        """Return target graph URL when this manifest prescribes copying the footprint to the default graph"""
+        return self.copyToGraph
 
     def addModelgraphFootprint(self, modelgraph: Url) -> None:
         self.modelgraphsFootprint.append(modelgraph)
@@ -145,13 +146,39 @@ class Manifest:
     def addStep(self, stepType: StepType, stepFile: Any) -> None:
         self.steps.append((stepType, stepFile))
 
-    def getConnection(self, triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:
+    def getConnection(self, model_graphs: List[str], data_graph: str, extra_data_graphs: List[str], triple_store: str = DEFAULT_TRIPLE_STORE, triple_store_type: str = DEFAULT_TRIPLE_STORE_TYPE) -> Connection:
+        """Build a connection string."""
+        return Connection(semtk3.build_connection_str(self.name, triple_store_type, triple_store, model_graphs, data_graph, extra_data_graphs))
+
+    def getFootprintConnection(self, triple_store: str = DEFAULT_TRIPLE_STORE, triple_store_type: str = DEFAULT_TRIPLE_STORE_TYPE) -> Connection:
         """Build a connection string using the graphs defined in the footprint."""
         return Connection(semtk3.build_connection_str(self.name, triple_store_type, triple_store, self.modelgraphsFootprint, self.datagraphsFootprint[0], self.datagraphsFootprint[1:]))
 
-    def getDefaultGraphConnection(self, triple_store: str = "http://localhost:3030/RACK", triple_store_type: str = "fuseki") -> Connection:
+    def getDefaultGraphConnection(self, triple_store: str = DEFAULT_TRIPLE_STORE, triple_store_type: str = DEFAULT_TRIPLE_STORE_TYPE) -> Connection:
         """Build a connection string using the triple store's default graph."""
         return semtk3.build_default_connection_str("Default Graph", triple_store_type, triple_store)
+
+    def getNeedsOptimization(self, triple_store_type: str = DEFAULT_TRIPLE_STORE_TYPE) -> bool:
+        defaultGraphUrls = ["uri://DefaultGraph", "urn:x-arq:DefaultGraph"]
+        return triple_store_type == "fuseki" and self.getCopyToGraph() in defaultGraphUrls
+
+    @staticmethod
+    def getToplevelManifest(zipfile: Path) -> 'Manifest':
+        with TemporaryDirectory() as tmpdir_str:
+            tmpdir = Path(tmpdir_str)
+
+            shutil.unpack_archive(zipfile, tmpdir)
+
+            top_level_entries = os.listdir(tmpdir)
+            if "manifest.yaml" in top_level_entries:
+                manifest_path = tmpdir / "manifest.yaml"
+            elif len(top_level_entries) == 1 and os.path.isdir(tmpdir / top_level_entries[0]):
+                manifest_path = tmpdir / top_level_entries[0] / "manifest.yaml"
+            else:
+                raise FileNotFoundError("manifest.yaml")
+
+            with open(manifest_path, mode='r', encoding='utf-8-sig') as manifest_file:
+                return Manifest.fromYAML(manifest_file)
 
     @staticmethod
     def fromYAML(src: Any) -> 'Manifest':
@@ -161,9 +188,8 @@ class Manifest:
 
         manifest = Manifest(obj.get('name'), obj.get('description'))
 
-        manifest.copyToDefaultGraph = obj.get('copy-to-default-graph', False)
-        manifest.performEntityResolution = obj.get('perform-entity-resolution', False)
-        manifest.performOptimization = obj.get('perform-triplestore-optimization', False)
+        manifest.copyToGraph = obj.get('copy-to-graph')
+        manifest.performEntityResolution = obj.get('perform-entity-resolution')
 
         footprint = obj.get('footprint', {})
         for datagraph in footprint.get('data-graphs', []):

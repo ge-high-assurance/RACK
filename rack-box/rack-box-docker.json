@@ -16,7 +16,7 @@
         "ENTRYPOINT [ \"/usr/bin/python3\", \"/usr/bin/systemctl\" ]"
       ],
       "commit": true,
-      "image": "ubuntu:20.04",
+      "image": "ubuntu:22.04",
       "pull": false
     }
   ],

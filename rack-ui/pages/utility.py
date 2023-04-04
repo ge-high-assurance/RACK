@@ -49,7 +49,8 @@ def run_restart(n_clicks):
             raise Exception("Triple store restart not supported in this deployment")
 
         # restart fuseki
-        completed_process = run_subprocess("sudo systemctl restart fuseki", get_temp_dir_unique("restart-fuseki"))
+        command = "sudo ../cli/restart-fuseki.sh"
+        completed_process = run_subprocess(command, get_temp_dir_unique("restart-fuseki"))
         if completed_process.returncode == 0:
             return dcc.Markdown("Restarted the triple store.")
         else:

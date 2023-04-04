@@ -1,5 +1,6 @@
 """ Content for the "load data" page """
 
+import yaml
 import time
 import io
 import base64
@@ -7,7 +8,7 @@ import glob
 from contextlib import redirect_stdout, redirect_stderr
 from urllib.parse import urlparse
 from pathlib import Path
-from zipfile import ZipFile
+from zipfile import *
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 import rack
@@ -17,6 +18,11 @@ from .helper import *
 
 # name of default manifest file within ingestion package
 MANIFEST_FILE_NAME = "manifest.yaml"
+
+# get text for warning banner
+def get_warning_banner_str() -> str:
+    config_obj = yaml.safe_load(open("config/config.yml"))
+    return config_obj.get('load-warning')
 
 # display strings
 CLEAR_BEFORE_LOADING_STR = "Clear before loading"
@@ -38,10 +44,7 @@ load_div = dbc.Spinner(html.Div(
         dbc.Row([
             dbc.Col([html.Button("Load data", id="load-button", n_clicks=0)], width="auto"),      # load button
             dbc.Tooltip("Load the above data into RACK", target="load-button"),
-            dbc.Col(dbc.DropdownMenu([
-                dbc.DropdownMenuItem("Target graphs", href="", target="_blank", id="sparqlgraph-button"),
-                dbc.DropdownMenuItem("Optimized graph", href="", target="_blank", id="sparqlgraph-default-button")
-            ], id="view-dropdown", label="View data", toggle_class_name="ddm"), width="auto"),
+            dbc.Col(dbc.DropdownMenu(children=[], id="view-dropdown", label="View data", toggle_class_name="ddm"), width="auto"),
             dbc.Tooltip("After loading, view data in SPARQLgraph", target="view-dropdown")
         ])
 
@@ -77,11 +80,10 @@ done_dialog = dbc.Modal(
 layout = html.Div([
         html.H2("Load data"),
         dcc.Markdown("_Load data into RACK_"),
+        html.Div(dcc.Markdown(get_warning_banner_str()), className="warningbanner"),
         dbc.Row([
-            dbc.Col(html.Button(id="turnstile-button", children="Select Turnstile data"), width="auto"),  # button to load turnstile
             dbc.Col(dcc.Upload(html.Button(id="select-button", children="Select ingestion package"), id='select-button-upload', accept=".zip", multiple=False), width="auto")  # button to show upload dialog to pick ingestion package
         ]),
-        dbc.Tooltip("Select the Turnstile sample data provided with RACK", target="turnstile-button"),
         dbc.Tooltip("Select an ingestion package (in .zip format) from your local machine", target="select-button"),
         load_div,
         html.Div(id="status-div", className="scrollarea"),      # displays ingestion status
@@ -89,6 +91,7 @@ layout = html.Div([
         done_dialog,
         dcc.Store("status-filepath"),           # stores the filename of the temp file containing status
         dcc.Store("manifest-filepath"),         # stores the path to the manifest file
+        dcc.Store("zip-filepath"),              # stores the path to the zip file
         dcc.Interval(id='status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
     ])
 
@@ -97,55 +100,44 @@ layout = html.Div([
 @dash.callback(
     output=[
             Output("load-div-message", "children"),                 # package information to display to the user before confirming load
-            Output("sparqlgraph-button", "href"),                   # set the SG button link
-            Output("sparqlgraph-default-button", "href"),           # set the SG button link (default graph)
-            Output("manifest-filepath", "data"),
+            Output("view-dropdown", "children"),                    # options to display for the view data dropdown
+            Output("zip-filepath", "data"),                         # path to the zip file
             Output("unzip-error-dialog-body", "children"),
             Output("status-filepath", "data"),                      # store a status file path
             Output("select-button-upload", "contents")],            # set to None after extracting, else callback ignores re-uploaded file
     inputs=[
-            Input("select-button-upload", "contents"),              # triggered by user selecting an upload file
-            Input("turnstile-button", "n_clicks")],                 # triggered by turnstile button
+            Input("select-button-upload", "contents")],             # triggered by user selecting an upload file
     background=True,                                                # background callback
     running=[
         (Output("select-button", "disabled"), True, False),         # disable the button while running
-        (Output("turnstile-button", "disabled"), True, False),      # disable the button while running
         (Output("load-button", "disabled"), True, False),           # disable the button while running
     ],
     prevent_initial_call=True
 )
-def run_unzip(zip_file_contents, turnstile_clicks):
+def run_unzip(zip_file_contents):
     """
     Extract the selected zip file
     """
     try:
-        if zip_file_contents != None:
-            tmp_dir = get_temp_dir_unique("ingest")   # temp directory to store the unzipped package
-            zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
-            zip_obj = ZipFile(zip_str, 'r')
-            zip_obj.extractall(path=tmp_dir)  # unzip the package
-            manifest_paths = glob.glob(f"{tmp_dir}/**/{MANIFEST_FILE_NAME}", recursive=True)
-            if len(manifest_paths) == 0:
-                raise Exception(f"Cannot load ingestion package: does not contain manifest file {MANIFEST_FILE_NAME}")
-            if len(manifest_paths) > 1:
-                raise Exception(f"Cannot load ingestion package: contains multiple default manifest files: {manifests}")
-            manifest_path = manifest_paths[0]
-        else:
-            manifest_path = "../Turnstile-Example/Turnstile-IngestionPackage/manifest.yaml"
-        manifest = get_manifest(manifest_path)
+        # write zip file to disk
+        tmp_dir = get_temp_dir_unique("ingest")
+        os.mkdir(tmp_dir)
+        zip_path = os.path.join(tmp_dir, "ingestion-package.zip")
+        zip_str = io.BytesIO(base64.b64decode(zip_file_contents.split(',')[1]))
+        with open(zip_path, 'wb') as f:
+            f.write(zip_str.getbuffer())
+        zip_str.close()
 
-        # generate SPARQLgraph link
-        sg_link = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getConnection())
-        sg_link_default = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getDefaultGraphConnection())
+        # extract a manifest
+        manifest = Manifest.getToplevelManifest(zip_path)
 
         # gather displayable information about the package
         package_description = ""
-        if manifest.getDescription() != None and manifest.getDescription().strip() != '':
+        if manifest.getDescription() is not None and manifest.getDescription().strip() != '':
             package_description = f"({manifest.getDescription()})"
         additional_actions = []
-        if manifest.getCopyToDefaultGraph(): additional_actions.append("copy to optimized graph")
-        if manifest.getPerformEntityResolution(): additional_actions.append("resolve entities")
-        if manifest.getPerformOptimization(): additional_actions.append("optimize triple store")
+        if manifest.getCopyToGraph() is not None: additional_actions.append("copy to " + manifest.getCopyToGraph())
+        if manifest.getPerformEntityResolution() is not None: additional_actions.append("resolve entities in " + manifest.getPerformEntityResolution())
         package_info = f"Data: `{manifest.getName()} {package_description}`  \n" + \
                        f"Target model graphs: `{', '.join(manifest.getModelgraphsFootprint())}`  \n" + \
                        f"Target data graphs: `{', '.join(manifest.getDatagraphsFootprint())}`  \n" + \
@@ -154,9 +146,17 @@ def run_unzip(zip_file_contents, turnstile_clicks):
         # generate a file in which to capture the ingestion status
         status_filepath = get_temp_dir_unique("output")
 
+        # set options for the view data dropdown menu:  1) footprint graphs and sometimes 2) copy-to graph
+        sg_link_footprint = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=manifest.getFootprintConnection())
+        view_graph_children=[dbc.DropdownMenuItem("Target graphs", href=sg_link_footprint, target="_blank")]  # option to view footprint graphs
+        if manifest.getCopyToGraph() is not None:
+            conn_copyto = manifest.getConnection(model_graphs=[manifest.getCopyToGraph()], data_graph=manifest.getCopyToGraph(), extra_data_graphs=[])
+            sg_link_copyto = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=conn_copyto)
+            view_graph_children.append(dbc.DropdownMenuItem(manifest.getCopyToGraph(), href=sg_link_copyto, target="_blank"))  # option to view copy-to graph
+
     except Exception as e:
-        return "", None, None, None, get_error_trace(e), None, None
-    return package_info, sg_link, sg_link_default, manifest_path, None, status_filepath, None
+        return "", None, None, get_error_trace(e), None, None
+    return package_info, view_graph_children, zip_path, None, status_filepath, None
 
 
 @dash.callback(
@@ -165,18 +165,17 @@ def run_unzip(zip_file_contents, turnstile_clicks):
     inputs=Input("load-button", "n_clicks"),                        # triggered by user clicking load button
     state=[
         State("status-filepath", "data"),
-        State("manifest-filepath", "data"),
+        State("zip-filepath", "data"),
         State("load-options-checklist", "value")],                  # user-selected load options from the checklist
     background=True,                                                # background callback
     running=[
         (Output("select-button", "disabled"), True, False),         # disable button while running
-        (Output("turnstile-button", "disabled"), True, False),      # disable button while running
         (Output("load-button", "disabled"), True, False),           # disable button while running
         (Output("status-interval", "disabled"), False, True)        # enable the interval component while running
     ],
     prevent_initial_call=True                                       # NOTE won't work because last-loaded-graphs is in the layout before load-button (see https://dash.plotly.com/advanced-callbacks#prevent-callback-execution-upon-initial-component-render)
 )
-def run_ingest(load_button_clicks, status_filepath, manifest_filepath, load_options):
+def run_ingest(load_button_clicks, status_filepath, zip_filepath, load_options):
     """
     Ingest the selected zip file
     """
@@ -188,19 +187,31 @@ def run_ingest(load_button_clicks, status_filepath, manifest_filepath, load_opti
 
     try:
         # avoid a ConnectionError if SemTK services are not fully up yet
-        if semtk3.check_services() == False:
+        if semtk3.check_services() is False:
             raise Exception("Cannot reach SemTK Services (wait for startup to complete, or check for failures)")
 
+        # load the ingestion package
         f = open(status_filepath, "a")
         with redirect_stdout(f), redirect_stderr(f):    # send command output to temporary file
-            rack.logger.setLevel("ERROR")
-            rack.ingest_manifest_driver(Path(manifest_filepath), BASE_URL, TRIPLE_STORE, TRIPLE_STORE_TYPE, clear, False)  # process the manifest
+            resp = semtk3.load_ingestion_package(rack.DEFAULT_TRIPLE_STORE, rack.DEFAULT_TRIPLE_STORE_TYPE, zip_filepath, clear, rack.MODEL_GRAPH, rack.DEFAULT_DATA_GRAPH)
+            for line_bytes in resp.iter_lines():
+                level, _, msg = line_bytes.decode().partition(': ')
+                if level != "WARNING":
+                    print(msg, flush=True)
+                if level == "ERROR":
+                    raise Exception(msg)
+
+        # extract the manifest for actions below
+        manifest = Manifest.getToplevelManifest(zip_filepath)
 
         # store list of loaded graphs
-        manifest = get_manifest(manifest_filepath)
         last_loaded_graphs = manifest.getModelgraphsFootprint() + manifest.getDatagraphsFootprint()
 
-        time.sleep(1)
+        # optimize triple store
+        if manifest.getNeedsOptimization():
+            rack.invoke_optimization(None)
+
+        time.sleep(3)
     except Exception as e:
         return get_error_trace(e), []  # show done dialog with error
     return [dcc.Markdown("Data was loaded successfully.")], last_loaded_graphs
@@ -246,7 +257,7 @@ def manage_unzip_error_dialog(message, n_clicks):
     """ Show or hide the unzip error  dialog """
     if (get_trigger() == "unzip-error-dialog-button.n_clicks"):
         return False    # button pressed, hide the dialog
-    elif message == None:
+    elif message is None:
         return False    # no message, don't show the dialog
     else:
         return True     # child added, show the dialog
@@ -263,11 +274,3 @@ def manage_done_dialog(children, n_clicks):
     else:
         return True     # child added, show the dialog
 
-
-####### convenience functions #######
-
-def get_manifest(manifest_filepath) -> Manifest:
-    """ Get manifest contents from file """
-    with open(manifest_filepath, mode='r', encoding='utf-8-sig') as manifest_file:
-        manifest = Manifest.fromYAML(manifest_file)
-    return manifest

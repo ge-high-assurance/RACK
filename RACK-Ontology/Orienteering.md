@@ -247,9 +247,8 @@ the TESTING.sadl file provides a more complete specification of TESTING elements
 The software written during the Program is intended to satisfy a particular
 requirement "Req1" (among others).  The software is built via the documented
 build process and the resulting artifact of the build is an executable,
-identified by Target name and version.  The software must be verified to meet
-Req1, so 5 requirements-based TESTs are developed (the TESTs 'wasGeneratedBy' a
-TEST_DEVELOPMENT), and the 'verifies' target of each is the "Req1" REQUIREMENT.
+identified by Target name and version.  This isn't strictly part of the testing
+ontology, this is some information from the software development ontology:
 
     REQ1 is a REQUIREMENT has identifier "Req1".
 
@@ -263,6 +262,12 @@ TEST_DEVELOPMENT), and the 'verifies' target of each is the "Req1" REQUIREMENT.
     Bld1 has used MakeFile1 has compileInput SOURCE1 has goal TARGET1.
     TARGET1 is a FILE.
 
+The software must be verified to meet
+Req1, so 5 requirements-based TESTs are developed (the TESTs 'wasGeneratedBy' a
+TEST_DEVELOPMENT), and the 'verifies' target of each is the "Req1" REQUIREMENT.
+
+The test development could be captured by another software development dataset:
+
     TDEV1 is a TEST_DEVELOPMENT.
     TDEV1 has goal TestSource1.
     TestSource1 is a FILE.
@@ -270,6 +275,10 @@ TEST_DEVELOPMENT), and the 'verifies' target of each is the "Req1" REQUIREMENT.
     TestBld1 is a COMPILE.
     TestBld1 has compileInput TestSource1 has goal TestExe.
     TestExe is a FILE.
+
+Describing the 5 tests within the TESTING ontology portion and--since we
+documented the `TEST_DEVELOPMENT` above--linking them back to their development
+portion (which is not always present):
 
     TEST1 is a TEST has identifier "Test1".
     TEST2 is a TEST has identifier "Test2".
@@ -291,7 +300,9 @@ TEST_STEPs ("Step1", "Step2", "Step3"), where "Step1" 'thisStep' is "Test1",
 "Step2" 'thisStep' is "Test2", and "Step3" 'thisStep' is "Test3".  There are two
 more TEST_STEPs ("Step3b" and "Step3c"), where "Step3" has 'nextStep' to "Step3b"
 (which has 'thisStep' to "Test4"), and "Step3b" has 'nextStep' to "Step3c" (which
-has 'thisStep' to "Test5").
+has 'thisStep' to "Test5").  Note that it is not always apparent which tests are
+dependent on other tests; the default approach is to simply assume all tests are
+independent until otherwise known, as is described in this scenario.
 
     VR1 is a TEST_PROCEDURE has identifier "VerifyReq1".
     Tstep1 is a TEST_STEP has identifier "Step1" has thisStep TEST1.
@@ -377,10 +388,9 @@ TEST_RESULT for "Test2".
     TestResultAnalysis is an ACTIVITY.
     TestResultAnalysis has wasAssociatedWith JoeTest has goal Memo.
 
-    Memo is an TEST_ANNOTATION has wasGeneratedBy TestResultAnalysis.
+    Memo is a TEST_ANNOTATION has wasGeneratedBy TestResultAnalysis.
     Memo has annotatedResult TRES2.
-    IgnoredFailureOOB is a ENTITY has wasGeneratedBy TestResultAnalysis.
-    Memo has testAnnotation IgnoredFailureOOB.
+    Memo has annotatedValue IgnoredFailureOOB.
 
 
 ## Scenario 2
@@ -503,6 +513,13 @@ activity.
 
     Flopped2 is a TEST_RESULT has wasGeneratedBy Run2 has confirms Flop.
     Flopped2 has result Passed.
+
+Another note to make here is that it's not always the case that this type of
+incremental development process is captured in the data provided to RACK.  The
+minimum scenario is that there is a `TEST_RECORD` that fully matches the
+`TEST_SCENARIO` and contains a `TEST_RESULT` that confirms every `TEST`; the
+additional information captured in the above multi-stage scenario is enhanced
+information that is not always available.
 
 
 ---- temporary below --------------------------------------------------

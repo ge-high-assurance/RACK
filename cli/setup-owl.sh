@@ -73,7 +73,6 @@ in
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/LM-Ontology/OwlModels" "${rack_dir}/LM-Ontology/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/SRI-Ontology/OwlModels" "${rack_dir}/SRI-Ontology/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/RTX-Ontology/OwlModels" "${rack_dir}/RTX-Ontology/"
-        scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/Provenance-Example/OwlModels" "${rack_dir}/Provenance-Example/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels" "${rack_dir}/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
         scp -q -i rack_ssh_key -r "ubuntu@${virtualbox_ip}:RACK/sadl-examples/OwlModels" "${rack_dir}/sadl-examples/"
 
@@ -105,7 +104,6 @@ in
         $DOCKER cp "${container}:/home/ubuntu/RACK/LM-Ontology/OwlModels/" "${rack_dir}/LM-Ontology/"
         $DOCKER cp "${container}:/home/ubuntu/RACK/SRI-Ontology/OwlModels/" "${rack_dir}/SRI-Ontology/"
         $DOCKER cp "${container}:/home/ubuntu/RACK/RTX-Ontology/OwlModels/" "${rack_dir}/RTX-Ontology/"
-        $DOCKER cp "${container}:/home/ubuntu/RACK/Provenance-Example/OwlModels/" "${rack_dir}/Provenance-Example/"
         $DOCKER cp "${container}:/home/ubuntu/RACK/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/OwlModels/" "${rack_dir}/Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationUnitTesting/"
         $DOCKER cp "${container}:/home/ubuntu/RACK/sadl-examples/OwlModels/" "${rack_dir}/sadl-examples/"
 

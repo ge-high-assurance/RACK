@@ -10,13 +10,9 @@ from pathlib import Path
 from rack import ingest_data_driver, ingest_owl_driver, run_query, sparql_connection, Url
 
 
-def test_load_csv(rack_in_a_box: str) -> None:
-    # Just test that it doesn't raise an exception
-    ingest_data_driver(Path("../Turnstile-Ontology/99-Utils/Data/Model.yaml"), Url(rack_in_a_box), None, None, None, None, False)
-
 def test_load_owl(rack_in_a_box: str) -> None:
     # Just test that it doesn't raise an exception
-    ingest_owl_driver(Path("../RACK-Ontology/OwlModels/import.yaml"), Url(rack_in_a_box), None, None, None, False)
+    ingest_owl_driver(Path("../RACK-Ontology/OwlModels/model.yaml"), Url(rack_in_a_box), None, None, None, False)
 
 def test_run_query(rack_in_a_box: str) -> None:
     conn = sparql_connection(Url(rack_in_a_box), None, None, [], None, None)

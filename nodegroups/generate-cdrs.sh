@@ -15,7 +15,7 @@ cli/ensure-cli-in-PATH.sh
 # Import ontologies
 
 rack model clear
-rack model import overlays/RACK-Ontology/OwlModels/model.yaml
+rack model import RACK-Ontology/OwlModels/model.yaml
 rack model import overlays/GE-Ontology/OwlModels/model.yaml
 rack model import overlays/Boeing-Ontology/OwlModels/model.yaml
 rack model import overlays/GrammaTech-Ontology/OwlModels/model.yaml

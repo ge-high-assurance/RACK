@@ -13,6 +13,8 @@ import "http://arcos.rack/SOFTWARE".
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/TESTING".
 
+Procurement_Req (note "A Requirement identified in a procurement specification") is a type of REQUIREMENT.
+
 PIDS_Req (note "A Requirement identified in the Prime Item Development Specification") is a type of REQUIREMENT.
 
 CSID_Req (note "A Requirement identified in the Crew Systems Interface Document") is a type of REQUIREMENT.

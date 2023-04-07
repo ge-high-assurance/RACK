@@ -13,10 +13,6 @@ autoinstall:
   storage:
     layout:
       name: direct
-  apt:
-    sources:
-      swi-prolog:
-        source: "ppa:swi-prolog/stable"
   ssh:
     install-server: true
   packages:

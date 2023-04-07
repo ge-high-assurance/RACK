@@ -13,6 +13,15 @@ jobs:
   assemble-files:
     uses: ./.github/workflows/assemble-files.yml
 
+# assemble-turnstile-data job:
+#  - Assembles Turnstile ingestion package
+#  - Uploads ingestion package to release
+
+  assemble-turnstile-data:
+    needs: assemble-files
+    uses: ./.github/workflows/assemble-turnstile-data.yml
+    secrets: inherit
+
 # build-docker-image job:
 #  - Builds rack-box docker image
 #  - Pushes docker image to Docker Hub

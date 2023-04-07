@@ -14,8 +14,6 @@ apt-get update -yqq
 apt-get install -yqq ca-certificates software-properties-common
 cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
 update-ca-certificates
-add-apt-repository -yu ppa:swi-prolog/stable
-apt-get update -yqq
 
 # If you change packages here, change them in rack-box/http/user-data too
 

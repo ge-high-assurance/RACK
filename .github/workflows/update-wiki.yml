@@ -27,7 +27,7 @@ jobs:
       with:
         repository: ge-high-assurance/RACK.wiki
         path: RACK.wiki
-        
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -47,7 +47,7 @@ jobs:
     - name: Install csvtomd
       run: |
         pip3 install csvtomd --user
-      
+
     - name: Update query wiki page
       run: |
         csvtomd RACK/nodegroups/queries/store_data.csv > temp.md

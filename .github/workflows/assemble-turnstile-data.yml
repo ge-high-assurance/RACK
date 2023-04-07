@@ -9,7 +9,7 @@ jobs:
 #  - Downloads rack-box files from artifacts
 #  - Unpacks CLI wheels and OWL/CDR files
 #  - Assembles Turnstile ingestion package
-#  - Uploads ingestion package to artifacts or releases
+#  - Uploads ingestion package to artifacts or release
 
   assemble-turnstile-data:
     runs-on: ubuntu-22.04
@@ -53,7 +53,7 @@ jobs:
     # against it; replace it with "gh release upload" if CI fails
     # run: gh release upload ${{ github.event.release.tag_name }} RACK/Turnstile-Example/turnstile-ingestion-package.zip --clobber
 
-    - name: Upload ingestion package to releases
+    - name: Upload ingestion package to release
       uses: softprops/action-gh-release@v1
       if: github.event_name == 'release'
       with:

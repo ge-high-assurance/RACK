@@ -13,7 +13,7 @@ jobs:
 # build-virtual-machine job:
 #  - Downloads rack-box files from artifacts
 #  - Builds rack-box virtual machine
-#  - Uploads virtual machine to artifacts or releases
+#  - Uploads virtual machine to artifacts or release
 
   build-virtual-machine:
     runs-on: macos-12
@@ -64,7 +64,7 @@ jobs:
     # against it; replace it with "gh release upload" if CI fails
     # run: gh release upload ${{ github.event.release.tag_name }} RACK/rack-box/GitHub-Release-README.md RACK/rack-box/rack-box-${{ inputs.version }}.zip* --clobber
 
-    - name: Upload virtual machine to releases
+    - name: Upload virtual machine to release
       uses: softprops/action-gh-release@v1
       if: github.event_name == 'release'
       with:

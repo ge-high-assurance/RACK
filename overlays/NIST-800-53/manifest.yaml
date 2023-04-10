@@ -1,0 +1,9 @@
+name: 'NIST-800-53 overlay'
+footprint:
+  model-graphs:
+    - http://rack001/model
+  data-graphs:
+    - http://rack001/nist-800-53
+steps:
+  - manifest: ../../RACK-Ontology/manifest.yaml
+  - data: data.yaml

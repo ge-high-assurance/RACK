@@ -8,22 +8,24 @@ footprint:
     - http://rack001/do-178c
 
 steps:
-  - manifest: ../../manifests/turnstile.yaml
-  - data: CounterApplicationUnitTesting/OwlModels/import.yaml
-  - data: TurnstileDevelopmentPlanData/import.yaml
-  - data: PlanningDocuments/import.yaml
-  - data: HazardAssessment/import.yaml
-  - data: TurnstileSystemDesign/import.yaml
-  - data: TurnstileSystemRequirements/import.yaml
-  - data: TurnstileHighLevelRequirements/import.yaml
-  - data: TurnstileLowLevelRequirements/import.yaml
-  - data: TurnstileRequirementModel/import.yaml
-  - data: CounterApplicationReviews/import.yaml
-  - data: CounterApplicationTesting/import.yaml
-  - data: TurnstileSystemSpec/import.yaml
-  - data: CounterApplicationRequirementSpec/import.yaml
-  - data: CounterApplicationSoftwareDes/import.yaml
-  - data: SystemVerificationReport/import.yaml
-  - data: Objectives/import.yaml
-  - data: TurnstileBaselines/import.yaml
-  - data: BuildProcess/import.yaml
+  - manifest: ../../RACK-Ontology/manifest.yaml
+  - manifest: ../../overlays/GE-Ontology/manifest.yaml
+  - manifest: ../../overlays/DO-178C/manifest.yaml
+  - data: CounterApplicationUnitTesting/OwlModels/data.yaml
+  - data: TurnstileDevelopmentPlanData/data.yaml
+  - data: PlanningDocuments/data.yaml
+  - data: HazardAssessment/data.yaml
+  - data: TurnstileSystemDesign/data.yaml
+  - data: TurnstileSystemRequirements/data.yaml
+  - data: TurnstileHighLevelRequirements/data.yaml
+  - data: TurnstileLowLevelRequirements/data.yaml
+  - data: TurnstileRequirementModel/data.yaml
+  - data: CounterApplicationReviews/data.yaml
+  - data: CounterApplicationTesting/data.yaml
+  - data: TurnstileSystemSpec/data.yaml
+  - data: CounterApplicationRequirementSpec/data.yaml
+  - data: CounterApplicationSoftwareDes/data.yaml
+  - data: SystemVerificationReport/data.yaml
+  - data: Objectives/data.yaml
+  - data: TurnstileBaselines/data.yaml
+  - data: BuildProcess/data.yaml

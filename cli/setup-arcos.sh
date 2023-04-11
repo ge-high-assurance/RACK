@@ -7,5 +7,5 @@ set -eu
 TMP=$(mktemp -d -t ingestion_package_XXXXXX) || exit 1
 trap 'rm -rf "$TMP"; trap - EXIT; exit' EXIT INT HUP
 
-rack manifest build ../manifests/arcos.yaml "${TMP}/output"
+rack manifest build ../overlays/arcos/manifest.yaml "${TMP}/output"
 rack manifest import --clear "${TMP}/output.zip"

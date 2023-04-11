@@ -1,0 +1,11 @@
+name: MITRE-CWE
+footprint:
+  model-graphs:
+  - http://rack001/model
+  data-graphs:
+  - http://rack001/mitre-cwe
+steps:
+- manifest: ../../RACK-Ontology/manifest.yaml
+- model: OwlModels/model.yaml
+- data: data.yaml
+- nodegroups: ../../nodegroups/arcos.cwe

@@ -1,9 +1,9 @@
-name: 'CAPEC overlay'
+name: CAPEC
 footprint:
   model-graphs:
-    - http://rack001/model
+  - http://rack001/model
   data-graphs:
-    - http://rack001/capec
+  - http://rack001/capec
 steps:
-  - manifest: ../../RACK-Ontology/manifest.yaml
-  - data: data.yaml
+- manifest: ../../RACK-Ontology/manifest.yaml
+- data: data.yaml

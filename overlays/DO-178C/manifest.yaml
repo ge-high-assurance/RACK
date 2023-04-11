@@ -1,9 +1,9 @@
-name: 'DO-178C overlay'
+name: DO-178C
 footprint:
   model-graphs:
-    - http://rack001/model
+  - http://rack001/model
   data-graphs:
-    - http://rack001/do-178c
+  - http://rack001/do-178c
 steps:
-  - manifest: ../../RACK-Ontology/manifest.yaml
-  - data: data.yaml
+- manifest: ../../RACK-Ontology/manifest.yaml
+- data: data.yaml

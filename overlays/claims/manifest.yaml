@@ -1,7 +1,9 @@
-name: 'claims overlay'
+name: claims
 footprint:
   model-graphs:
-    - http://rack001/model
+  - http://rack001/model
+  data-graphs:
+  - http://rack001/model
 steps:
-  - manifest: ../../RACK-Ontology/manifest.yaml
-  - data: data.yaml
+- manifest: ../../RACK-Ontology/manifest.yaml
+- data: data.yaml

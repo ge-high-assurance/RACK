@@ -79,7 +79,7 @@ done_dialog = dbc.Modal(
 # page elements
 layout = html.Div([
         html.H2("Load data"),
-        dcc.Markdown("_Load data into RACK_"),
+        dcc.Markdown("_Load a data ingestion package ([sample here](https://github.com/ge-high-assurance/RACK/releases/latest/download/turnstile-ingestion-package.zip)) into RACK_"),
         html.Div(dcc.Markdown(get_warning_banner_str()), className="warningbanner"),
         dbc.Row([
             dbc.Col(dcc.Upload(html.Button(id="select-button", children="Select ingestion package"), id='select-button-upload', accept=".zip", multiple=False), width="auto")  # button to show upload dialog to pick ingestion package

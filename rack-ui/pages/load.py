@@ -1,6 +1,5 @@
 """ Content for the "load data" page """
 
-import yaml
 import time
 import io
 import base64
@@ -21,8 +20,7 @@ MANIFEST_FILE_NAME = "manifest.yaml"
 
 # get text for warning banner
 def get_warning_banner_str() -> str:
-    config_obj = yaml.safe_load(open("config/config.yml"))
-    return config_obj.get('load-warning')
+    return get_config('load-warning')
 
 # display strings
 CLEAR_BEFORE_LOADING_STR = "Clear before loading"

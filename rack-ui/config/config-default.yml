@@ -1,0 +1,5 @@
+# RACK UI default configuration
+# config/config-override.yml (if present) will override these values
+
+# text to display as warning banner on load page (if empty string, no banner will appear)
+load-warning: ''

@@ -4,4 +4,4 @@ footprint:
   - http://rack001/model
 steps:
 - model: OwlModels/model.yaml
-- nodegroups: ../nodegroups/queries
+- nodegroups: nodegroups

@@ -7,5 +7,5 @@ footprint:
 steps:
 - manifest: ../../RACK-Ontology/manifest.yaml
 - model: OwlModels/model.yaml
+- nodegroups: nodegroups
 - data: data.yaml
-- nodegroups: ../../nodegroups/arcos.cwe

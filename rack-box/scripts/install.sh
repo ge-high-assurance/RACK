@@ -94,7 +94,6 @@ echo "rackui ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/rackui
 mkdir /etc/rackui
 chown rackui.rackui /etc/rackui
 envsubst < rackui.service > /etc/systemd/system/rackui.service
-cp config/config.sample.yml config/config.yml
 systemctl enable rackui
 
 # Initialize SemTK environment variables

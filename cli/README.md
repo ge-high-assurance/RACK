@@ -342,7 +342,7 @@ The script can automate loading a directory full of nodegroups
 indexed by a `store_data.csv` file.
 
 ```shell
-(venv) $ rack nodegroups import ../nodegroups/ingestion/arcos.rack
+(venv) $ rack nodegroups import ../RACK-Ontology/nodegroups
 Storing nodegroups...                                       OK
 ```
 

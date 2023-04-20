@@ -11,5 +11,4 @@ then
     exit 1
 fi
 
-rack nodegroups export "^ingest" ../../nodegroups/ingestion
-rack nodegroups export "^query " ../../nodegroups/queries
+rack nodegroups export "^query " ../RACK-Ontology/nodegroups

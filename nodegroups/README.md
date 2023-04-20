@@ -7,10 +7,6 @@ and generate INSERT queries.
 
 ## Sub-folders
 
-Each sub-folder has nodegroups for particular purposes or applications.
-
-- **queries** - Sample derived RACK queries
-
 These sub-folders will be in RACK-in-a-Box images but not in the git
 repository because these sub-folders are automatically generated:
 

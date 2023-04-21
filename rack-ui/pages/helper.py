@@ -1,6 +1,7 @@
 
 """ Helper functions """
 
+import yaml
 import tempfile
 import traceback
 import dash
@@ -13,6 +14,21 @@ import subprocess
 
 # configuration
 SPARQLGRAPH_BASE_URL = "http://localhost:8080"
+CONFIG_FILE_DEFAULT = "config/config-default.yml"
+CONFIG_FILE_OVERRIDE = "config/config-override.yml"
+
+def get_config(key) -> str:
+    """ Load default config, override it with custom config if present """
+    # TODO read config once, store for subsequent use
+    with open(CONFIG_FILE_DEFAULT) as f:
+        config_obj = yaml.safe_load(f)
+    try:
+        with open(CONFIG_FILE_OVERRIDE) as f:
+            config_custom = yaml.safe_load(f)
+        config_obj.update(config_custom)  # override
+    except FileNotFoundError:
+        pass
+    return config_obj.get(key)
 
 def get_temp_dir() -> str:
     """ Get a temp dir """

@@ -43,6 +43,7 @@ $ swipl --version
 Prolog can be installed/updated on Debian/Ubuntu via the following steps:
 
 ```
+# You can skip adding ppa repo on Ubuntu 22.04 or later
 $ sudo add-apt-repository ppa:swi-prolog/stable
 $ sudo apt-get update
 $ sude apt-get install swi-prolog

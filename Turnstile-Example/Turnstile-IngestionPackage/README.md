@@ -34,8 +34,9 @@ The script [setup-turnstile.sh](../../cli/setup-turnstile.sh) loads the [GE onto
 ## Ingest the turnstile data into RACK:
 Browse to the dataset location and load the data via the provided shell script.
 ```sh
-(venv) $ cd ${RACK}/Turnstile-Example/Turnstile-IngestionPackage
-(venv) $ ./Load-TurnstileData.sh
+(venv) $ cd ${RACK}/Turnstile-Example
+(venv) $ ./Assemble-TurnstileData.sh # this generates turnstile-ingestion-package.zip
+(venv) $ rack manifest import turnstile-ingestion-package.zip
 ```
 
 ## Export the data from RACK

@@ -1,0 +1,7 @@
+name: RACK-Ontology
+footprint:
+  model-graphs:
+  - http://rack001/model
+steps:
+- model: OwlModels/model.yaml
+- nodegroups: nodegroups

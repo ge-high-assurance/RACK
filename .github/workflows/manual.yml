@@ -2,7 +2,7 @@
 
 name: RACK Build Virtual Machine Workflow
 on:
-  workflow_dispatch:  
+  workflow_dispatch:
     inputs:
       version:
         required: false
@@ -17,9 +17,18 @@ jobs:
   assemble-files:
     uses: ./.github/workflows/assemble-files.yml
 
+# assemble-turnstile-data job:
+#  - Assembles Turnstile ingestion package
+#  - Uploads ingestion package to artifacts
+
+  assemble-turnstile-data:
+    needs: assemble-files
+    uses: ./.github/workflows/assemble-turnstile-data.yml
+    secrets: inherit
+
 # build-virtual-machine job:
 #  - Builds rack-box virtual machine
-#  - Uploads virtual machine to workflow
+#  - Uploads virtual machine to artifacts
 
   build-virtual-machine:
     needs: assemble-files

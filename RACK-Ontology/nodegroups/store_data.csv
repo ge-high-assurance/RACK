@@ -1,0 +1,37 @@
+ID,comments,creator,jsonFile,itemType
+query Files of a Given Format,Find files of specified format,langston,query Files of a Given Format.json,PrefabNodeGroup
+query Requirements without Tests,Find requirements without a verifying test case,200001934,query Requirements without Tests.json,PrefabNodeGroup
+query Testcase without requirement,Find any test case that doesn't verify a requirement,200001934,query Testcase without requirement.json,PrefabNodeGroup
+query Requirements with failed test result,Find requirements with test failures,200001934,query Requirements with failed test result.json,PrefabNodeGroup
+query Requirements decomposition,Recursively show all requirements satisfied by an original,200001934,query Requirements decomposition.json,PrefabNodeGroup
+query Interface structure,Find system source and destination for interface,200001934,query Interface structure.json,PrefabNodeGroup
+query Requirements with Tests,Find requirements verified by testcase,200001934,query Requirements with Tests.json,PrefabNodeGroup
+query Trace Hazards to Tests,Trace hazard down to test case,200001934,query Trace Hazards to Tests.json,PrefabNodeGroup
+query Trace Requirements to Tests,Recursively show all requirements which satisfy and verify a testcase,200001934,query Trace Requirements to Tests.json,PrefabNodeGroup
+query Hazard structure,Find system component associated with the hazards traced to tests,200001934,query Hazard structure.json,PrefabNodeGroup
+query Terms consumedBy Requirement,Find data dictionary terms consumed by requirement(s),200001934,query Terms consumedBy Requirement.json,PrefabNodeGroup
+query Compilation Inputs,Find inputs used in compilation of executables,langston,query Compilation Inputs.json,PrefabNodeGroup
+query System Structure,Extract system subcomponent structure contained under a given top-level anchor system,eric,query System Structure.json,PrefabNodeGroup
+query Requirements without passed test,"No Test, or no test result, or failure",200001934,query Requirements without passed test.json,PrefabNodeGroup
+query Requirements without passed test v2,"No Test, or no test result, or failure: Reworked",200001934,query Requirements without passed test v2.json,PrefabNodeGroup
+query Models for Thing,Query that finds all the models and their types given a target THING identifier,em,query Models for Thing.json,PrefabNodeGroup
+query Get DataInsertedBy From Guid,Query that finds all all dataInsertedBy infromation for a THING selected by guid,dr,GetDataInsertedByFromGuid.json,PrefabNodeGroup
+query dataVer INTERFACE without destination SYSTEM,number of INTERFACE w/o -destination-> SYSTEM should be 0,rack,query dataVer INTERFACE without destination SYSTEM.json,PrefabNodeGroup
+query dataVer INTERFACE without source SYSTEM,number of INTERFACE w/o -source-> SYSTEM should be 0,rack,query dataVer INTERFACE without source SYSTEM.json,PrefabNodeGroup
+query dataVer only REQUIREMENT subclasses,number of REQUIREMENT != {SRS_Req or SubDD or CSID or PIDS} should be 0,rack,query dataVer only REQUIREMENT subclasses.json,PrefabNodeGroup
+query dataVer SBVT_Result without confirms_SBVT_Test,number of SBVT_Result w/o -confirms->SBVT_Test should be 0,rack,query dataVer SBVT_Result without confirms_SBVT_Test.json,PrefabNodeGroup
+query dataVer SBVT_Test without REQUIREMENT,number of SBVT_Test w/o -verifies->REQUIREMENT should be 0,rack,query dataVer SBVT_Test without REQUIREMENT.json,PrefabNodeGroup
+query dataVer SRS_Req dataInsertedBy other than SRS Data Ingestion,number of SRS_Req w/o -dataInsertedBy-> SRS Data Ingestion should be 0,rack,query dataVer SRS_Req dataInsertedBy other than SRS Data Ingestion.json,PrefabNodeGroup
+query dataVer SRS_Req without CSID or PIDS,number of SRS_Req w/o -satisfies-> {CSID or PIDS} should be 0,rack,query dataVer SRS_Req without CSID or PIDS.json,PrefabNodeGroup
+query dataVer SRS_Req without description,number of SRS_Req w/o descriptions should be 0,rack,query dataVer SRS_Req without description.json,PrefabNodeGroup
+query dataVer SRS_Req without verifies SBVT_Test,number of SRS_Req w/o <-verifies- SBVT_Test should be 0,rack,query dataVer SRS_Req without verifies SBVT_Test.json,PrefabNodeGroup
+query dataVer SubDD_Req without satisfies SRS_Req,number of SubDD w/o -satisfies-> SRS_Req should be 0,rack,query dataVer SubDD_Req without satisfies SRS_Req.json,PrefabNodeGroup
+query dataVer SYSTEM without partOf SYSTEM,number of SYSTEM w/o -partOf-> SYSTEM should be 1,rack,query dataVer SYSTEM without partOf SYSTEM.json,PrefabNodeGroup
+query dataVer unlinked SWCOMPONENT,Find SWCOMPONENT w/o -wasImpactedBy-> REQUIREMENT  or  w/o -subcomponentOf -> SWCOMPONENT,rack,query dataVer unlinked SWCOMPONENT.json,PrefabNodeGroup
+report data verification,Run the dataVer nodegroups,rack,report data verification.json,Report
+setup ARCOS Apache Phase 2,doesn't return anything; used to setup the connections with Apache datagraphs,rack,setup-arcos-ApachePhase2.json,PrefabNodeGroup
+query Requirement Review same Agent,Demonstration of a nodegroup that isn't a tree structure,rack,query Requirement Review same Agent.json,PrefabNodeGroup
+query Claim declares Property,Query for Claim that declares a Property demonstrated by a Test Execution,rack,query_Claim_declares_addresses.json,PrefabNodeGroup
+query Claim declares Property with scopeOf Control,Query for Claim that declares a Property with the scopeOf a Control,rack,query_Claim_declares_scopeOf.json,PrefabNodeGroup
+query Claim Property PropertyResult Activity,Query for Claim that declares a Property demonstrated by a Property Result generated by an Activity,rack,query_Claim_Property_PropertyResult_Activity.json,PrefabNodeGroup
+query Claim Property PropertyResult Review,Query for Claim that declares a Property demonstrated by a Property Result generated by a Review w/Results,rack,query_Claim_Property_PropertyResult_Review.json,PrefabNodeGroup

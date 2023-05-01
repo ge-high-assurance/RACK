@@ -1,0 +1,171 @@
+uri "http://arcos.AH-64D/Boeing" alias BoeingModel.
+import "http://arcos.rack/AGENTS".
+import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/CONFIDENCE".
+import "http://arcos.rack/DOCUMENT".
+import "http://arcos.rack/FILE".
+import "http://arcos.rack/HAZARD".
+import "http://arcos.rack/MODEL".
+import "http://arcos.rack/PROCESS".
+import "http://arcos.rack/REQUIREMENTS".
+import "http://arcos.rack/REVIEW".
+import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/TESTING".
+
+Procurement_Req (note "A Requirement identified in a procurement specification") is a type of REQUIREMENT.
+
+PIDS_Req (note "A Requirement identified in the Prime Item Development Specification") is a type of REQUIREMENT.
+
+CSID_Req (note "A Requirement identified in the Crew Systems Interface Document") is a type of REQUIREMENT.
+
+SRS_Req (note "A Requirement identified in the Software Requirements Specification") is a type of REQUIREMENT.
+
+SubDD_Req (note "A Requirement identified in the Subsystem Design Document") is a type of REQUIREMENT. 
+	Rq:satisfies of SubDD_Req only has values of type SRS_Req.
+
+SBVT_Test (note "A test identified in the Software Baseline Verification Tests") is a type of TEST.
+   verifies of SBVT_Test_Procedure only has values of type {SubDD_Req or SRS_Req or CSID_Req}.
+	verifies of SBVT_Test has at least 1 value.
+   // A new property unique to SBVT_Test: stimulates
+   stimulates of SBVT_Test has values of type Signal.  //<--how come "only has values" doesn't work here?
+
+SBVT_Result (note "A result identified for a SBVT_Test (Software Baseline Verification Tests)") is a type of TEST_RESULT.
+	confirms of SBVT_Result only has values of type SBVT_Test.
+
+DevelopSystemConOps is a type of ACTIVITY.
+	wasAssociatedWith of DevelopSystemConOps only has values of type PERSON.
+
+SystemConOps is a type of ENTITY.
+    wasGeneratedBy of SystemConOps only has values of type DevelopSystemConOps.
+    conOpsDocs describes SystemConOps with values of type DOCUMENT.  
+
+DevelopSystemArchitecture is a type of ACTIVITY.  
+	wasInformedBy of DevelopSystemArchitecture only has values of type DevelopSystemConOps.
+    used of DevelopSystemArchitecture only has values of type SystemConOps. 
+
+SystemArchitecture (note "specification of system architecture") is a type of ENTITY. 
+    wasGeneratedBy of SystemArchitecture only has values of type DevelopSystemArchitecture. 
+    isArchitectureOf describes SystemArchitecture with values of type SYSTEM.
+    isArchitectureOf is a type of wasImpactedBy.
+
+SystemRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
+    wasInformedBy of SystemRequirementsDefinition only has values of type DevelopSystemConOps. 
+
+PIDS_Doc is a type of DOCUMENT. 
+    content of PIDS_Doc only has values of type PIDS_Req. 
+        
+SoftwareHighLevelRequirementsDefinition is a type of REQUIREMENT_DEVELOPMENT. 
+	wasInformedBy of SoftwareHighLevelRequirementsDefinition only has values of type {SystemRequirementsDefinition or DevelopSystemArchitecture}.
+
+SRS_Doc is a type of DOCUMENT. 
+    content of SRS_Doc only has values of type SRS_Req.
+
+SubDD_Doc is a type of DOCUMENT. 
+    content of SubDD_Doc only has values of type SubDD_Req. 
+
+SoftwareDesign is a type of REQUIREMENT_DEVELOPMENT.
+	wasInformedBy of SoftwareDesign only has values of type {SoftwareHighLevelRequirementsDefinition or DevelopSystemArchitecture}.
+
+SoftwareCoding is a type of CODE_DEVELOPMENT. 
+    wasInformedBy of SoftwareCoding only has values of type SoftwareDesign.        
+
+// Support for characterizing message types, valid signals, and tests
+// that verify these correspondences
+
+Message is a type of INTERFACE.
+
+Signal is a type of DATA_DICTIONARY_TERM.
+    message describes Signal with a single value of type Message.
+    
+// content of IDD_Doc can be Message and other things
+IDD_Doc is a type of DOCUMENT.
+
+// subclass from core ontology related to SBVT and IDD
+SBVT_Test_Procedure is a type of TEST_PROCEDURE. 
+    content of SBVT_Test only has values of type SBVT_Test_Step.
+
+SBVT_Test_Step is a type of TEST_STEP.
+    nextStep of SBVT_Test_Step only has values of type SBVT_Test_Step.
+
+//SBVT_Test_Step can contain HMI test etc.
+SBVT_Test_Log is a type of TEST_LOG.
+    content of SBVT_Test_Log only has values of type SBVT_Test_Record.
+SBVT_Test_Record is a type of TEST_RECORD.
+	testRecordSteps of SBVT_Test_Record only has values of type SBVT_Test_Step.
+    // targetVersion replaces systemUnderTestBuildVersion
+
+IDD_Test is a type of TEST. // note "verifies" corresponds to "observes"
+//    verifies of IDD_Test only has values of type Signal.
+    // A new property unique to IDD_Test: observes 
+	observes of IDD_Test has values of type Signal.    //<--how come "only has values" doesn't work here?
+
+IDD_Test_Result is a type of TEST_RESULT.
+    confirms of IDD_Test_Result only has values of type IDD_Test.
+
+IDDCoverageAnalysis is a type of ANALYSIS. // move it to "ToolOntology"
+    analysisInput of IDDCoverageAnalysis only has values of type IDD_Test.
+IDDCoverageAnalysisResult is a type of TEST_RESULT.
+    confirms of IDDCoverageAnalysisResult only has values of type IDD_Test.
+
+Test_Station is a type of AGENT.
+
+SBVT_Test_Execution is a type of TEST_EXECUTION.
+       testProcedure of SBVT_Test_Execution only has values of type SBVT_Test_Procedure. 
+       systemUnderTest describes SBVT_Test_Execution with values of type SYSTEM.
+       testStation of SBVT_Test_Execution has a single value of type Test_Station.
+       testStation is a type of wasAssociatedWith.
+
+BuildVersion is a type of ENTITY.
+       system describes BuildVersion with a single value of type SYSTEM.
+       buildVersion describes BuildVersion with a single value of type Executable.
+testExecution of SBVT_Test_Log has a single value of type SBVT_Test_Execution.
+testExecution is a type of wasGeneratedBy.
+
+Database is a type of SWCOMPONENT.
+Executable is a type of SWCOMPONENT.
+
+// COMMON FILE FORMATS
+
+XmlFormat       (note "Extensible Markup Language file format") is a FORMAT identifier "xml".
+SysmlFormat     (note "Systems Modeling Language file format") is a FORMAT identifier "sysml".
+PdfFormat       (note "PDF file format") is a FORMAT identifier "pdf".
+EmlFormat       (note "Email file format") is a FORMAT identifier "eml".
+YamlFormat      (note "Yet Another Markup Language file format") is a FORMAT identifier "yaml".
+JsonFormat      (note "JavaScript Object Notation file format") is a FORMAT identifier "json".
+TomlFormat      (note "Tom's Obvious Minimal Language file format") is a FORMAT identifier "toml".
+IniFormat       (note "Initialization configuration file format") is a FORMAT identifier "ini".
+OutFormat       (note "Text file output, e.g. output of test results") is a FORMAT with identifier "out".
+
+// Image formats
+SvgFormat       (note "Scalable Vector Graphics image file format") is a FORMAT identifier "svg".
+JpegFormat      (note "Joint Photographic Exports Group image file format") is a FORMAT identifier "jpeg".
+GifFormat       (note "Graphics Interchange Format image file format") is a FORMAT identifier "gif".
+PngFormat       (note "Portable Network Graphics image file format") is a FORMAT identifier "png".
+BmpFormat       (note "Bitmap image file format") is a FORMAT identifier "bmp".
+TiffFormat      (note "Tag Image File Format image file format") is a FORMAT identifier "tiff".
+
+// Programming language source files
+AdaFormat       (note "Ada source file format") is a FORMAT identifier "ada".
+CFormat         (note "C source file format") is a FORMAT identifier "c".
+CxxFormat       (note "C++ source file format") is a FORMAT identifier "cpp".
+PythonFormat    (note "Python source file format") is a FORMAT identifier "py".
+ShellFormat     (note "Shell script file format") is a FORMAT identifier "sh".
+
+// Plain text formats
+TextFormat      (note "Plain text file format") is a FORMAT identifier "txt".
+CsvFormat       (note "Comma separated values file format") is a FORMAT identifier "csv".
+TsvFormat       (note "Tab separated values file format") is a FORMAT identifier "tsv".
+
+// Microsoft office
+XlsFormat       (note "Microsoft Excel spreadsheet file format") is a FORMAT identifier "xls".
+DocFormat       (note "Microsoft Word document file format") is a FORMAT identifier "doc".
+PptFormat       (note "Microsoft PowerPoint file format") is a FORMAT identifier "ppt".
+
+// Archives
+ArchiveFormat   (note "File archive file format: e.g. zip, tar, rar") is a FORMAT identifier "archive".
+
+// Various object code types
+ExecutableFormat (note "Executable file format: e.g. exe, com, elf, macho") is a FORMAT identifier "exe".
+LibraryFormat    (note "Library file format: e.g. dylib, lib, a, dll") is a FORMAT identifier "lib".
+ObjectFormat     (note "Intermediate compiler outputs: e.g. o, coff") is a FORMAT identifier "obj".

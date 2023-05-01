@@ -3,8 +3,8 @@
 name: RACK Continuous Integration Workflow
 on:
   push:
-    branches: [ '**' ]
-    tags-ignore: [ '**' ]
+    branches: [ '*' ]
+    tags-ignore: [ '*' ]
 
 jobs:
 
@@ -45,8 +45,6 @@ jobs:
 
     - name: Lint RACK Ontology
       run: |
-        sudo apt-add-repository ppa:swi-prolog/stable
-        sudo apt-get update -qq --yes
         sudo apt-get install -qq --yes swi-prolog
         ./assist/bin/check
 

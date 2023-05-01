@@ -1,0 +1,244 @@
+{
+	"version": 3,
+	"sparqlConn": {
+		"name": "RACK local fuseki Apache Phase 2",
+		"domain": "",
+		"enableOwlImports": false,
+		"model": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/model"
+			}
+		],
+		"data": [
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/data"
+			},
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/mitre-cwe"
+			},
+			{
+				"type": "fuseki",
+				"url": "http://localhost:3030/RACK",
+				"graph": "http://rack001/nist-800-53"
+			}
+		]
+	},
+	"sNodeGroup": {
+		"version": 19,
+		"limit": 0,
+		"offset": 0,
+		"sNodeList": [
+			{
+				"propList": [
+					{
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?declares_identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"fullURIName": "http://arcos.rack/PROCESS#PROPERTY",
+				"SparqlID": "?PROPERTY",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?CLAIM_identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": true,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [
+					{
+						"SnodeSparqlIDs": [
+							"?PROPERTY"
+						],
+						"OptionalMinus": [
+							0
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"range": [
+							"http://arcos.rack/PROCESS#PROPERTY"
+						],
+						"ConnectBy": "declares",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/CLAIM#declares"
+					}
+				],
+				"fullURIName": "http://arcos.rack/CLAIM#CLAIM",
+				"SparqlID": "?CLAIM",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?wasGeneratedBy_identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [],
+				"fullURIName": "http://arcos.rack/PROV-S#ACTIVITY",
+				"SparqlID": "?ACTIVITY",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			},
+			{
+				"propList": [
+					{
+						"valueTypes": [
+							"string"
+						],
+						"rangeURI": "http://www.w3.org/2001/XMLSchema#string",
+						"UriRelationship": "http://arcos.rack/PROV-S#identifier",
+						"Constraints": "",
+						"SparqlID": "?identifier",
+						"isReturned": true,
+						"optMinus": 0,
+						"isRuntimeConstrained": false,
+						"instanceValues": [],
+						"isMarkedForDeletion": false
+					}
+				],
+				"nodeList": [
+					{
+						"SnodeSparqlIDs": [
+							"?PROPERTY"
+						],
+						"OptionalMinus": [
+							0
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"range": [
+							"http://arcos.rack/PROCESS#PROPERTY"
+						],
+						"ConnectBy": "demonstrates",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/CLAIM#demonstrates"
+					},
+					{
+						"SnodeSparqlIDs": [
+							"?ACTIVITY"
+						],
+						"OptionalMinus": [
+							0
+						],
+						"Qualifiers": [
+							""
+						],
+						"DeletionMarkers": [
+							false
+						],
+						"range": [
+							"http://arcos.rack/PROV-S#ACTIVITY"
+						],
+						"ConnectBy": "wasGeneratedBy",
+						"Connected": true,
+						"UriConnectBy": "http://arcos.rack/PROV-S#wasGeneratedBy"
+					}
+				],
+				"fullURIName": "http://arcos.rack/CLAIM#PROPERTY_RESULT",
+				"SparqlID": "?PROPERTY_RESULT",
+				"isReturned": false,
+				"isRuntimeConstrained": false,
+				"valueConstraint": "",
+				"instanceValue": null,
+				"deletionMode": "NO_DELETE"
+			}
+		],
+		"orderBy": [],
+		"groupBy": [],
+		"unionHash": {},
+		"columnOrder": []
+	},
+	"importSpec": {
+		"version": "1",
+		"baseURI": "",
+		"columns": [],
+		"dataValidator": [],
+		"texts": [],
+		"transforms": [],
+		"nodes": [
+			{
+				"sparqlID": "?PROPERTY_RESULT",
+				"type": "http://arcos.rack/CLAIM#PROPERTY_RESULT",
+				"mapping": [],
+				"props": []
+			},
+			{
+				"sparqlID": "?ACTIVITY",
+				"type": "http://arcos.rack/PROV-S#ACTIVITY",
+				"mapping": [],
+				"props": []
+			},
+			{
+				"sparqlID": "?CLAIM",
+				"type": "http://arcos.rack/CLAIM#CLAIM",
+				"mapping": [],
+				"props": []
+			},
+			{
+				"sparqlID": "?PROPERTY",
+				"type": "http://arcos.rack/PROCESS#PROPERTY",
+				"mapping": [],
+				"props": []
+			}
+		]
+	},
+	"plotSpecs": []
+}

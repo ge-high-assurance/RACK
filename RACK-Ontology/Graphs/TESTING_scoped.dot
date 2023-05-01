@@ -1,0 +1,247 @@
+// This is a graphical representation of the core TESTING ontology and some of
+// the surrounding elements that connect to it.
+//
+// Different portions of the RACK_Ontology have different colorizations, and
+// ACTIVITIES have doubled borders.
+//
+// This has every TESTING ontology element, but is a representational subset of
+// the various properties and surrounding elements; a full representation is too
+// verbose to be useful, so the items shown here should be chosen judiciously.
+
+digraph RACK {
+  edge [ decorate=true ];
+  node [ style=filled ];
+
+  subgraph PROV_S {
+    node [ root=true ];
+    THING [ shape=record, label = "{ THING | identifier::string | title::string | description::string }" ];
+    THING -> ACTIVITY [ label = "dataInsertedBy" ];
+    THING -> ENTITY;
+    ENTITY [ shape=record, label = "{ ENTITY | generatedAtTime::dateTime | invalidatedAtTime::dateTime | entityURL::string }" ];
+    ENTITY -> ENTITY [ label = "wasDerivedFrom" ];
+    ENTITY -> ENTITY [ label = "wasRevisionOf" ];
+    ENTITY -> ENTITY [ label = "wasImpactedBy" ];
+    ENTITY -> ACTIVITY [ label = "wasGeneratedBy" ];
+    ENTITY -> AGENT [ label = "wasAttributedTo" ];
+    COLLECTION -> ENTITY [ label = "content" ];
+    ENTITY -> COLLECTION;
+    THING -> AGENT;
+    AGENT -> AGENT [ root=true, label = "actedOnBehalfOf" ];
+    ACTIVITY [ shape=record, label = "{ ACTIVITY | startedAtTime::dateTime | endedAtTime::dateTime }", peripheries=2 ];
+    ACTIVITY -> AGENT [ label = "wasAssociatedWith" ];
+    ACTIVITY -> ACTIVITY [ label = "wasInformedBy" ];
+    ACTIVITY -> ENTITY [ label = "goal" ];
+    ACTIVITY -> ENTITY [ label = "used" ];
+  };
+
+  subgraph cluster_TESTING {
+    node [ color = "red", fillcolor="lightcoral" ];
+    edge [ color = "red" ];
+
+    TEST [ label = "TEST\n:: ENTITY" ];
+    TEST -> ENTITY [ label = "verifies" ];
+    
+    TEST_PROCEDURE [ label = "TEST_PROCEDURE\n:: COLLECTION" ];
+    // TEST_PROCEDURE -> COLLECTION [ color="black", weight=10, style="bold" ];
+    TEST_PROCEDURE -> TEST_STEP [ label = "independentTest" ];
+
+    TEST_STEP [ label = "TEST_STEP\n:: ENTITY" ];
+    // TEST_STEP -> COLLECTION [ color="black", weight=10, style="bold" ];
+    TEST_STEP -> TEST [ label = "thisStep" ];
+    TEST_STEP -> TEST_STEP [ label = "nextStep [*]"; ];
+
+    TEST_STATUS -> tsts;
+    tsts [ shape=record, label = "{ Passed | Failed | Indeterminate }" ];
+
+    TEST_LOG [ label = "TEST_LOG\n:: COLLECTION" ];
+    // TEST_LOG -> COLLECTION [ color="black" ];
+    TEST_LOG -> TEST_RECORD [ label = "content" ];
+
+    TEST_RESULT [ label = "TEST_RESULT\n:: ENTITY" ];
+    // TEST_RESULT -> ENTITY [ color="black" ];
+    TEST_RESULT -> TEST_STATUS [ label = "result" ];
+    TEST_RESULT -> TEST [ label = "confirms" ];
+
+    TEST_RECORD [ label = "TEST_RECORD\n:: ENTITY" ];
+    // TEST_RECORD -> COLLECTION [ color="black" ];
+    TEST_RECORD -> TEST_PROCEDURE [ label = "testRecordProcedure" ];
+    TEST_RECORD -> ENTITY [ label = "testConfiguration" ];
+    TEST_RECORD -> TEST_STEP [ label = "testRecordSteps" ];
+    TEST_RECORD -> FILE [ label = "targetPackage" ];
+    TEST_RECORD -> string [ label = "targetVersion" ];
+    TEST_RECORD -> FILE [ label = "testPackage" ];
+    TEST_RECORD -> string [ label = "testVersion" ];
+
+    TEST_EXECUTION [ peripheries=2 ];
+    TEST_EXECUTION [ label = "TEST_EXECUTION\n:: ACTIVITY" ];
+    // TEST_EXECUTION -> ACTIVITY [ color="black" ];
+    TEST_EXECUTION -> TEST_PROCEDURE [ label = "testProcedure" ];
+    TEST_EXECUTION -> TEST_LOG [ label = "testLog" ];
+    TEST_RESULT -> TEST_EXECUTION [ label = "wasGeneratedBy" ];
+
+    TEST_ANNOTATION [ label = "TEST_ANNOTATION\n:: ENTITY" ];
+    TEST_ANNOTATION -> TEST_RESULT [ label = "annotatedResult" ];
+    // TEST_ANNOTATION -> ACTIVITY [ label = "wasGeneratedBy" ];
+    TEST_ANNOTATION -> TstAnnotations [ label = "annotatedValue" ];
+    TstAnnotations [ shape=record, label = "{ IgnoredFailureOOB }" ];
+
+    TEST_DEVELOPMENT [ peripheries=2 ];
+    TEST -> TEST_DEVELOPMENT [ label = "wasGeneratedBy" ];
+    TEST_DEVELOPMENT [ label = "TEST_DEVELOPMENT\n:: ACTIVITY" ];
+    // TEST_DEVELOPMENT -> ACTIVITY [ color="black" ];
+  };
+
+  subgraph REQUIREMENTS {
+    node [ color = "blue", fillcolor="cyan" ];
+    edge [ color = "blue" ];
+    REQUIREMENT [ label = "REQUIREMENT\n:: ENTITY" ];
+    // REQUIREMENT -> ENTITY [ color="black" ];
+    REQUIREMENT -> ENTITY [ label = "governs" ];
+    REQUIREMENT -> ENTITY [ label = "satisfies" ];
+    REQUIREMENT -> ENTITY [ label = "mitigates" ];
+    REQUIREMENT -> REQUIREMENT_DEVELOPMENT [ decorate=true, label = "wasGeneratedBy" ];
+    DATA_DICTIONARY_TERM [ label = "DATA_DICTIONARY_TERM\n:: ENTITY" ];
+    // DATA_DICTIONARY_TERM -> ENTITY [ color="black" ];
+    DATA_DICTIONARY_TERM -> ENTITY [ label = "providedBy" ];
+    DATA_DICTIONARY_TERM -> ENTITY [ label = "consumedBy" ];
+    REQUIREMENT_DEVELOPMENT [ peripheries=2, label = "REQUIREMENT_DEVELOPMENT\n:: ACTIVITY" ];
+    // REQUIREMENT_DEVELOPMENT -> ACTIVITY [ color="black" ];
+    REQUIREMENT_DEVELOPMENT -> ENTITY [ label = "referenced" ];
+    REQUIREMENT_DEVELOPMENT -> ENTITY [ label = "governedBy" ];
+  };
+
+  subgraph DOC {
+    node [ color="green", fillcolor="lightgreen" ];
+    edge [ color="green" ];
+    DOCUMENT [ label = "DOCUMENT\n:: COLLECTION" ];
+    // DOCUMENT -> COLLECTION [ color="black" ];
+    DOCUMENT -> DOC_STATUS [ label="status" ];
+    DOCUMENT -> AGENT [ label="issuingOrganization" ];
+    DOCUMENT -> AGENT [ label="approvalAuthority" ];
+    DOCUMENT -> ENTITY [ label="references" ];
+    DOC_STATUS -> dsts;
+    dsts [ shape=record, decorate=true, label = "{ In_Development | Released | Withdrawn }" ];
+    DESCRIPTION -> DOCUMENT;
+    PLAN -> DOCUMENT;
+    PROCEDURE -> DOCUMENT;
+    REPORT -> DOCUMENT;
+    REQUEST -> DOCUMENT;
+    SPECIFICATION -> DOCUMENT;
+    SECTION [ label = "SECTION\n:: COLLECTION" ];
+    // SECTION -> COLLECTION [ color="black" ];
+  };
+
+  subgraph SOFTWARE {
+    node [ color="brown", fillcolor="tan" ];
+    edge [ color="brown" ];
+    SWCOMPONENT [ label = "SWCOMPONENT\n:: ENTITY" ];
+    // SWCOMPONENT -> ENTITY [ color="black" ];
+    SWCOMPONENT_TYPE [ label = "SWCOMPONENT_TYPE\n:: THING" ];
+    // SWCOMPONENT_TYPE -> THING [ color="black" ];
+    SWCOMPONENT -> SWCOMPONENT_TYPE [ label="componentType" ];
+  };
+  
+  subgraph SYS {
+    node [ color="purple", fillcolor="lavender" ];
+    edge [ color="purple" ];
+    SYSTEM [ label = "SYSTEM\n:: ENTITY" ];
+    // SYSTEM -> ENTITY [ color="black" ];
+    SYSTEM -> SYSTEM [ label="partOf" ];
+    SYSTEM -> FUNCTION [ label="provides" ];
+    SYSTEM -> FUNCTION [ label="requires" ];
+    SYSTEM -> FUNCTION [ label="function" ];
+    SYSTEM -> SYSTEM_DEVELOPMENT [ label="wasGeneratedBy" ];
+    INTERFACE [ label = "INTERFACE\n:: ENTITY" ];
+    // INTERFACE -> ENTITY [ color="black" ];
+    INTERFACE -> SYSTEM [ label="source" ];
+    INTERFACE -> SYSTEM [ label="destination" ];
+    SYSTEM_DEVELOPMENT [ peripheries=2, label = "SYSTEM_DEVELOPMENT\n:: ACTIVITY" ];
+    FUNCTION [ label = "FUNCTION\n:: ENTITY" ];
+    // FUNCTION -> ENTITY [ color="black" ];
+    FUNCTION -> FUNCTION [ label="parentFunction" ];
+    OP_ENV [ label = "OP_ENV\n:: THING" ];
+    // OP_ENV -> THING;
+    OP_PROCEDURE -> PROCEDURE;
+  };
+
+  subgraph Boeing {
+    node [ fillcolor="yellow" ];
+    SRS_Doc [ color="green" ];
+    PIDS_Doc [ color="green" ];
+    SubDD_Doc [ color="green" ];
+    SRS_Doc [ color="green" ];
+    SRS_Doc -> DOCUMENT [ color="green", weight=10, style="bold" ];
+    SRS_Doc -> SRS_Req [ label="> content" ];
+    PIDS_Doc -> DOCUMENT [ color="green", weight=10, style="bold" ];
+    PIDS_Doc -> PIDS_Req [ label="> content" ];
+    SubDD_Doc -> DOCUMENT [ color="green", weight=10, style="bold" ];
+    SubDD_Doc -> SubDD_Req [ label="> content" ];
+    
+    PIDS_Req [ color="blue" ];
+    CSID_Req [ color="blue" ];
+    SRS_Req [ color="blue" ];
+    SubDD_Req [ color="blue" ];
+    PIDS_Req -> REQUIREMENT [ color="blue", weight=10, style="bold" ];
+    CSID_Req -> REQUIREMENT [ color="blue", weight=10, style="bold" ];
+    SRS_Req -> REQUIREMENT [ color="blue", weight=10, style="bold" ];
+    SubDD_Req -> REQUIREMENT [ color="blue", weight=10, style="bold" ];
+    SubDD_Req -> SRS_Req [ label="> satisfies" ];
+
+    SBVT_Test [ color="red" ];
+    SBVT_Result [ color="red" ];
+    SBVT_Test -> TEST [ color="red", weight=10, style="bold" ];
+    SBVT_Result -> TEST_RESULT [ color="red", weight=10, style="bold" ];
+    SBVT_Result -> SBVT_Test [ label="> confirms" ];
+    SBVT_Test_Procedure [ color="red" ];
+    SBVT_Test_Procedure -> TEST_PROCEDURE [ color="red", weight=10, style="bold" ];
+    SBVT_Test_Procedure -> SBVT_Test_Step
+
+    Message [ color="purple" ];
+    Message -> INTERFACE [ color="purple", weight=10, style="bold" ];
+    Signal [ color="blue" ];
+    Signal -> DATA_DICTIONARY_TERM [ color="blue", weight=10, style="bold" ];
+    Signal -> Message [ label="message" ];
+
+    SBVT_Test_Step [ color="red" ];
+    SBVT_Test_Step -> TEST_STEP [ color="red", weight=10, style="bold" ];
+    SBVT_Test_Step -> Signal [ label="stimulates" ];
+    SBVT_Test_Step -> Signal [ label="observes" ];
+    SBVT_Test_Step -> SBVT_Test_Step [ label="> nextStep" ];
+    SBVT_Test_Log [ color="red" ];
+    SBVT_Test_Log -> TEST_LOG [ color="red", weight=10, style="bold" ];
+    SBVT_Test_Log -> SBVT_Test_Record [ label="> content" ];
+    SBVT_Test_Record [ color="red" ];
+    SBVT_Test_Record -> TEST_RECORD [ color="red", weight=10, style="bold" ];
+    SBVT_Test_Record -> SBVT_Test_Step [ label="> logs" ];
+    IDD_Test_Result [ color="red" ];
+    IDD_Test_Result -> TEST_RESULT [ color="red", weight=10, style="bold" ];
+    IDD_Test_Result -> IDD_Test [ label="> confirms" ];
+
+    IDD [ color="purple" ];
+    IDD -> INTERFACE [ color="purple", weight=10, style="bold" ];
+    IDD_Doc [ color="blue" ];
+    IDD_Doc -> DOCUMENT [ color="blue", weight=10, style="bold" ];
+    IDD_Test [ color="red" ];
+    IDD_Test -> TEST [ color="red" ];
+    IDDCoverageAnalysis -> ANALYSIS [ weight=10, style="bold" ];
+    IDDCoverageAnalysis -> IDD_Test [ label="analysisInput" ];
+    IDDCoverageAnalysisResult [ color="red" ];
+    IDDCoverageAnalysisResult -> TEST_RESULT [ color="red", weight=10, style="bold" ];
+    IDDCoverageAnalysisResult -> IDD_Test [ label="confirms" ];
+
+    Test_Station -> AGENT [ color="black", weight=10, style="bold" ];
+    SBVT_Test_Execution [ color="red", peripheries=2 ];
+    SBVT_Test_Execution -> TEST_EXECUTION [ color="red", weight=10, style="bold" ];
+    SBVT_Test_Execution -> SBVT_Test_Procedure [ label="testProcedure" ];
+    SBVT_Test_Execution -> SYSTEM [ label="systemUnderTest", weight=10, style="bold" ];
+    SBVT_Test_Execution -> BuildVersion [ label="systemUnderTestBuildVersion" ];
+    SBVT_Test_Execution -> Database [ label="databaseVersion" ];
+    SBVT_Test_Execution -> Test_Station [ label="testStation" ];
+    SBVT_Test_Execution -> Executable [ label="buildVersion" ];
+
+    SBVT_Test_Log -> SBVT_Test_Execution [ label="testExecution [1]" ];
+
+    Database -> SWCOMPONENT [ color="brown", weight=10, style="bold" ];
+    Executable -> SWCOMPONENT [ color="brown", weight=10, style="bold" ];
+  }
+}

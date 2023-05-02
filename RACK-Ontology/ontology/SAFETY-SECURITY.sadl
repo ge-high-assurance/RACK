@@ -1,0 +1,354 @@
+/* Copyright (c) 2020-2023, General Electric Company, Galois, Inc., Honeywell International and SRI International
+ *
+ * All Rights Reserved
+ *
+ * This material is based upon work supported by the Defense Advanced Research
+ * Projects Agency (DARPA) under Contract No. FA8750-20-C-0203.
+ *
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the Defense Advanced Research Projects Agency (DARPA).
+ */
+
+uri "http://arcos.rack/SAFETY-SECURITY" alias ss.
+
+import "http://arcos.rack/PROV-S".
+import "http://arcos.rack/PROCESS".
+import "http://arcos.rack/HARDWARE".
+import "http://arcos.rack/SOFTWARE".
+import "http://arcos.rack/SYSTEM".
+import "http://arcos.rack/HAZARD".
+import "http://arcos.rack/REQUIREMENTS".
+
+/* SOURCE: https://niccs.cisa.gov/about-niccs/cybersecurity-glossary
+
+THREAT: A circumstance or event that has or indicates the potential to exploit vulnerabilities and to adversely impact (create adverse consequences for) organizational operations, organizational assets (including information and information systems), individuals, other organizations, or society.
+Extended Definition: Includes an individual or group of individuals, entity such as an organization or a nation), action, or occurrence.
+Adapted from: DHS Risk Lexicon, NIPP, CNSSI 4009, NIST SP 800-53 Rev 4
+ 
+ATTACK: An attempt to gain unauthorized access to system services, resources, or information, or an attempt to compromise system integrity.
+Extended Definition: The intentional act of attempting to bypass one or more security services or controls of an information system.
+From: NCSD Glossary. NTSSI 4009 (2000), CNSSI 4009
+* */
+
+// We model THREAT only as an ATTACK is an activity on say a fielded system.
+THREAT (note "A threat / vulnerability to be assessed for certification") is a type of ENTITY.
+	ss:source (note "ENTITY(s) that participate in causing this THREAT") describes THREAT with values of type ENTITY.
+	ss:source is a type of wasImpactedBy.
+
+	identified (note "how this THREAT was identified") describes THREAT with values of type THREAT_IDENTIFICATION.
+
+	ss:effect (note "consequence(s) of the THREAT") describes THREAT with values of type string.
+   	ss:effect describes THREAT with at most 1 value.
+
+	ss:severity (note "the severity of the THREAT") describes THREAT with values of type float. // [0,1].
+	ss:severity describes THREAT with at most 1 value.
+
+	ss:likelihood (note "probability value between 0 and 1") describes THREAT with values of type float. // [0,1].
+	ss:likelihood describes THREAT with at most 1 value.
+
+THREAT_IDENTIFICATION
+	(note "ACTIVITY that identifies potential sources of THREAT whose risk must be evaluated")
+	is a type of ACTIVITY.
+
+	ss:author (note "AGENT(s) who work on this ACTIVITY") describes THREAT_IDENTIFICATION with values of type AGENT.
+	ss:author is a type of wasAssociatedWith.
+
+SECURITY_LABEL (note "A label to help categorize the associated SECURITY concern") is a type of THING.
+
+// A few common instances: additional ones could be Authorization, Non-repudiation, Privacy, etc.
+Confidentiality is a SECURITY_LABEL 
+	has identifier "Confidentiality"
+	has description "No unauthorized information is disclosed.".
+Integrity is a SECURITY_LABEL 
+	has identifier "Integrity"
+	has description "Maintain data accuracy.".
+Availability is a SECURITY_LABEL
+	has identifier "Availability"
+	has description "Information / functionality is available when needed.". 
+
+CONTROL (note "CONTROLs mitigate THREATs") is a type of ENTITY.
+
+CONTROLSET (note "A set of CONTROLs that combine to mitigate a THREAT") is a type of COLLECTION.
+    content of CONTROLSET only has values of type CONTROL.
+
+    // A THREAT can be mitigated by a set of CONTROLs etc., mitigation by CONTROL is defined in CONTROL.sadl.
+	// In general, a THREAT T may be mitigated by "(C1 and C2) or (C3 and C4 and C5)" which is represented in a disjunctive normal form,
+	// each CONTROLSET provides the conjunctions and the the disjunction via multiple CONTROLSET.
+	ss:mitigates (note "ENTITY(s) (e.g. THREAT) that is being mitigated by this CONTROLSET") describes CONTROLSET with values of type THREAT.
+
+	   
+// Originally DesCert Ontology for Safety and Security
+// core ontology types used:
+//  SYSTEM, HWCOMPONENT, SWCOMPONENT, FUNCTION
+
+PORT is a type of ENTITY.
+   direction describes PORT with a single value of type PORT_DIRECTION.
+   
+PORT_DIRECTION (note "input is Rx, output is Tx") is a type of THING.
+InputPort is a PORT_DIRECTION has identifier "Input".
+OutputPort is a PORT_DIRECTION has identifier "Output".
+BidirectionalPort is a PORT_DIRECTION has identifier "Bidirectional".
+
+GUARANTEE is a type of PROPERTY.
+  guaranteeType describes GUARANTEE with a single value of type GUARANTEE_TYPE.
+  
+COMPONENT_GUARANTEE is a type of GUARANTEE.
+  // Future: need to subset guaranteeType 
+
+INTERFACE_GUARANTEE is a type of GUARANTEE.
+  // Future: need to subset guaranteeType
+
+// extensible types of guarantees
+GUARANTEE_TYPE (note "a protocol guarantee on interface or platform gurantee on a HW component") is a type of THING.
+LatencyGuarantee is a GUARANTEE_TYPE
+  has identifier "LatencyGuarantee".
+JitterGuarantee (note "timing guarantees such as jitter") is a GUARANTEE_TYPE
+  has identifier "JitterGuarantee".
+BandwidthGuarantee is a GUARANTEE_TYPE
+  has identifier "BandwidthGuarantee".
+EncryptionGuarantee (note "") is a GUARANTEE_TYPE
+  has identifier "EncryptionGuarantee".
+AuthenticationGuarantee (note "") is a GUARANTEE_TYPE
+  has identifier "AuthenticationGuarantee".
+IntegrityGuarantee (note "") is a GUARANTEE_TYPE
+  has identifier "IntegrityGuarantee".
+AvailabilityGuarantee (note "") is a GUARANTEE_TYPE
+  has identifier "AvailabilityGuarantee".
+CPUCyclesGuarantee (note "") is a GUARANTEE_TYPE
+  has identifier "CPUCyclesGuarantee".
+MemoryAvailablilityGuarantee (note "") is a GUARANTEE_TYPE
+  has identifier "MemoryAvailablilityGuarantee".
+SoftwareMemoryUsageGuarantee (note "") is a GUARANTEE_TYPE
+  has identifier "SoftwareMemoryUsageGuarantee".
+WCETGuarantee (note "worst case execution time of software") is a GUARANTEE_TYPE
+  has identifier "WCETGuarantee".
+   
+// note: copied from CPS.sadl that is part of RACK's core data model
+PEDIGREE (note "Describes source of a component or interface") is a type of THING.
+
+// A few common instances:
+InternallyDeveloped is a PEDIGREE 
+   has identifier "InternallyDeveloped"
+   has description "Development is done in house.".
+COTS is a PEDIGREE 
+   has identifier "COTS"
+   has description "Commercial Off-The-Shelf products that are bought as is".
+Sourced is a PEDIGREE 
+   has identifier "Sourced"
+   has description "The system is provides by an outside organization.".   
+
+TRUSTWORTHINESS (note "the trust designation of a component or interface - similar to CPS.sadl") is a type of THING.
+
+Trusted is a TRUSTWORTHINESS 
+   has identifier "Trusted"
+   has description "Developed and tested to be secure.". 
+Untrusted is a TRUSTWORTHINESS 
+   has identifier "Untrusted"
+   has description "May be susceptible to security attacks.".
+
+INTERFACE_TYPE (note "An open/extensible set of topologies of physical interfaces") is a type of THING.
+// note: the identifier "Bus" is taken up by core ontology for something else
+BusInterface (note "a bus interface is a connection with multiple communicates data between the components")
+    is an INTERFACE_TYPE has identifier "BusInterface".
+EthernetInterface is an INTERFACE_TYPE has identifier "EthernetInterface".
+WirelessInterface is an INTERFACE_TYPE has identifier "WirelessInterface".
+
+HWCOMPONENT_SS (note "Extends HWCOMPONENT with properties about safety and security") is a type of HWCOMPONENT.
+   // inherited
+   //   instantiates values of type ENTITY which we will map to SYSTEM
+   port (note "set of ports of this component") describes HWCOMPONENT_SS with values of type PORT.
+   // DB 4/20/22: use inherited attribute partOf in core ontology to point to container object
+   ss:partOf of HWCOMPONENT_SS only has values of type HWCOMPONENT_SS.
+   //    old: part (note "set of hw components this component contains") describes HardwareComponent with values of type HardwareComponent. 
+//  guarantee describes HardwareComponent with values of type ComponentGuarantee.
+   hosts describes HWCOMPONENT_SS with values of type SWCOMPONENT.
+   ss:pedigree describes HWCOMPONENT_SS with values of type PEDIGREE.
+   ss:pedigree describes HWCOMPONENT_SS with at most 1 value.
+   ss:trustworthiness describes HWCOMPONENT_SS with values of type TRUSTWORTHINESS.
+   ss:trustworthiness describes HWCOMPONENT_SS with at most 1 value.
+
+// add more hw component types in addtion to those defined in core
+Switch (note "provides switching capability between point-to-point links")
+    is a HWCOMPONENT_TYPE
+    has identifier "Switch".
+Actuator (note "provides actuation capability")
+    is a HWCOMPONENT_TYPE
+    has identifier "Actuator".
+Display (note "provides display capability - e.g. a flight display/touchscreen")
+    is a HWCOMPONENT_TYPE
+    has identifier "Display".
+ 
+SWCOMPONENT_SS (note "Extends SWCOMPONENT with properties about safety and security") is a type of SWCOMPONENT.
+   // inherited
+   //   subcomponentOf 
+   //   componentType
+   ss:instantiates of SWCOMPONENT_SS only has values of type FUNCTION.
+//   guarantee describes SoftwareComponent with values of type ComponentGuarantee.
+   // DB 4/22/22: use inherited attribute partOf in core ontology to point to container object
+   //   old: part (note "set of sw components this component contains") describes SoftwareComponent with values of type SoftwareComponent. 
+   ss:partOf of SWCOMPONENT_SS only has values of type SWCOMPONENT.
+   ss:pedigree describes SWCOMPONENT_SS with values of type PEDIGREE.
+   ss:pedigree describes SWCOMPONENT_SS with at most 1 value.
+   ss:trustworthiness describes SWCOMPONENT_SS with values of type TRUSTWORTHINESS.
+   ss:trustworthiness describes SWCOMPONENT_SS with at most 1 value.
+   
+// the below adds to an enum list in SOFTWARE.sadl
+KernelAPI
+   (note "API call to kernel (RTOS), used by other software components.")
+   is a SWCOMPONENT_TYPE
+   has identifier "KernelAPI".
+DeviceDriver
+   (note "software device driver managed by the kernel (RTOS)")
+   is a SWCOMPONENT_TYPE
+   has identifier "DeviceDriver".
+
+PHYSICAL_INTERFACE is a type of ENTITY.  
+   srcPort (note "the source port of this interface") describes PHYSICAL_INTERFACE with values of type PORT.
+   destPort (note "the destination port of this interface") describes PHYSICAL_INTERFACE with values of type PORT.
+   protocol describes PHYSICAL_INTERFACE with values of type ENTITY.
+   interfaceType describes PHYSICAL_INTERFACE with a single value of type INTERFACE_TYPE.
+   ss:pedigree describes PHYSICAL_INTERFACE with values of type PEDIGREE.
+   ss:pedigree describes PHYSICAL_INTERFACE with at most 1 value.
+   ss:trustworthiness describes PHYSICAL_INTERFACE with values of type TRUSTWORTHINESS.
+   ss:trustworthiness describes PHYSICAL_INTERFACE with at most 1 value.
+  
+VIRTUAL_CHANNEL is a type of INTERFACE.
+   utlilizes describes VIRTUAL_CHANNEL with values of type PHYSICAL_INTERFACE.
+//   sys:source of VIRTUAL_CHANNEL only has values of type SYSTEM. //DB: this may not be needed since range in INTERFACE is SYSTEM
+//   sys:source describes VIRTUAL_CHANNEL with a single value of type SYSTEM.
+//   sys:destination of VIRTUAL_CHANNEL only has values of type SYSTEM. //DB this may not be needed since range in INTERFACE is SYSTEM
+  
+DATA_FLOW is a type of ENTITY.
+   communicatesOver describes DATA_FLOW with a single value of type VIRTUAL_CHANNEL.
+   ss:source describes DATA_FLOW only has values of type FUNCTION.
+   ss:destination describes DATA_FLOW with values of type FUNCTION.
+   
+SAFETY_DESIGN_ASSURANCE_LEVEL is a type of THING.
+DAL_A (note "error in design can result in a catastrophic safety event") 
+   is a SAFETY_DESIGN_ASSURANCE_LEVEL has identifier "DAL_A".
+DAL_B (note "error in design can result in at most a hazardous safety event")
+   is a SAFETY_DESIGN_ASSURANCE_LEVEL has identifier "DAL_B".
+DAL_C (note "error in design can result in at most a major safety event")
+   is a SAFETY_DESIGN_ASSURANCE_LEVEL has identifier "DAL_C".
+DAL_D (note "error in design can result in at most a minor safety event")
+   is a SAFETY_DESIGN_ASSURANCE_LEVEL has identifier "DAL_D".
+DAL_E (note "error in design has no safety impact")
+   is a SAFETY_DESIGN_ASSURANCE_LEVEL has identifier "DAL_E".
+
+SECURITY_ASSURANCE_LEVEL is a type of THING.
+SAL_1 (note "NIST/ISA99 - protection against casual/coincidental violation") 
+	is a SECURITY_ASSURANCE_LEVEL has identifier "SAL_1".
+SAL_2 (note "NIST/ISA99 - protection against intentional violation using simple means") 
+	is a SECURITY_ASSURANCE_LEVEL has identifier "SAL_2".
+SAL_3 (note "NIST/ISA99 - protection against intentional violation using sophisticated means") 
+	is a SECURITY_ASSURANCE_LEVEL has identifier "SAL_3".
+SAL_4 (note "NIST/ISA99 - protection against intentional violation using sophisticated means with extended resources") 
+	is a SECURITY_ASSURANCE_LEVEL has identifier "SAL_4".
+
+SECURITY_ENCLAVE (note "a time, space, network partition; used synonymously here with SecurityEnclave") is a type of COLLECTION.
+   content of SECURITY_ENCLAVE only has values of type {HWCOMPONENT or PHYSICAL_INTERFACE or SWCOMPONENT or PORT}. 
+   dal describes SECURITY_ENCLAVE with values of type SAFETY_DESIGN_ASSURANCE_LEVEL.
+   dal describes SECURITY_ENCLAVE with at most 1 value.
+   sal describes SECURITY_ENCLAVE with values of type SECURITY_ASSURANCE_LEVEL.
+   sal describes SECURITY_ENCLAVE with at most 1 value.
+
+SECURITY_PERIMETER is a type of COLLECTION. 
+  content of SECURITY_PERIMETER only has values of type SECURITY_ENCLAVE.
+   
+VULNERABILITY is a type of ENTITY.
+   mitgatedBy describes VULNERABILITY with values of type {CONTROL or PROPERTY}.
+   mitgatedBy is a type of wasImpactedBy.
+   enhancedBy describes VULNERABILITY with values of type {CONTROL or PROPERTY}.
+   enhancedBy is a type of wasImpactedBy.
+   recoveredBy describes VULNERABILITY with values of type {CONTROL or PROPERTY}.
+   recoveredBy is a type of wasImpactedBy.
+   vulnerabilityTouchPoints describes VULNERABILITY with values of type ARCHITECTURE_TOUCHPOINTS.
+   cweReference describes VULNERABILITY with values of type ENTITY. // DB: added a reference that may not always be populated. DB 4/18/22: fixed copy-paste error
+   cweReference is a type of wasImpactedBy.
+   
+ATTACKER is a type of AGENT.
+
+ATTACK is a type of ACTIVITY.
+  attacker describes ATTACK with values of type ATTACKER.
+  attacker is a type of wasAssociatedWith.
+
+ATTACK_ACCESS_VECTORS is a type of ENTITY.
+  wasGeneratedBy of ATTACK_ACCESS_VECTORS only has values of type ATTACK.
+  attackTouchPoints describes ATTACK_ACCESS_VECTORS with values of type ARCHITECTURE_TOUCHPOINTS.
+  capecReference describes ATTACK_ACCESS_VECTORS with values of type ENTITY. // DB: added a reference that may not always be populated.
+  capecReference is a type of wasImpactedBy.
+  // other attributes: sequencing order of attack, duration of attack
+  
+ARCHITECTURE_TOUCHPOINTS (note "touch points to architectural elements like hardware, component, physical interface, software component, data flows")
+    is a type of COLLECTION.
+   // Future: constrain content, other attributes
+  
+// Subclass of CONTROL in core ontology, using title case
+// Control is a type of CONTROL.
+   // DB 4/19/22: removed provedBy since a PropertyResult is proved by a Control rather than a Control proved by a PropertyResult
+   mitigatesHazard describes CONTROL with values of type HAZARD_CONDITION.
+   enhancesHazard describes CONTROL with values of type HAZARD_CONDITION.
+   location describes CONTROL with values of type ARCHITECTURE_TOUCHPOINTS.
+   nist_800_53Reference describes CONTROL with values of type ENTITY. // DB: added a reference that may not always be populated. DB 4/18/22: fixed copy-paste error
+   nist_800_53Reference is a type of wasImpactedBy.
+
+// DB: Assuming for now that we can use SECURITY_LABEL identifier such as Integrity for a LossCategory,
+//          since LossCategory is a subtype. 
+//          Not sure of the SADL semantics here: can parent type's object identifiers be used for an object of a subtype?
+//    Future: It will be good to define a base type for both LossCategory and SECURITY_LABEL and Then subtype it for these two
+LOSS_CATEGORY (note "category of a safety related loss") is a type of SECURITY_LABEL.
+   // future: constrain values to exclude confidentiality for safety
+
+// DB 4/25/22: add non-repudiation
+NonRepudiation is a SECURITY_LABEL 
+   has identifier "NonRepudiation"
+   has description "Non-deniability of authenticated information such as digital signature.".
+
+HAZARD_CONDITION is a type of HAZARD. // replaced Hazard by HazardCondition so as to be like ThreatCondition below. DB Agreed.
+   mitigatesControl describes HAZARD_CONDITION with values of type CONTROL.
+   enhancesControl describes HAZARD_CONDITION with values of type CONTROL.
+   lossCategory describes HAZARD_CONDITION with values of type LOSS_CATEGORY. // a HazardCondition may relate to multiple categories
+   triggers (note "the risk event(s) that can be triggered by this") describes HAZARD_CONDITION with values of type SAFETY_ACCIDENT.
+   
+EXPLOITATION (note "unmitigated vulnerability exploited by an attack access vector") is a type of ENTITY.
+   uses describes EXPLOITATION with values of type ATTACK_ACCESS_VECTORS.
+   uses is a type of wasImpactedBy.
+   exploits describes EXPLOITATION with values of type VULNERABILITY.
+   exploits is a type of wasImpactedBy.
+
+THREAT_CONDITION is a type of THREAT.
+   ss:source of THREAT_CONDITION only has values of type EXPLOITATION.
+   securityLabel describes THREAT_CONDITION with values of type SECURITY_LABEL.
+   triggers describes THREAT_CONDITION with values of type SECURITY_VIOLATION.
+   
+SAFETY_REQUIREMENT is a type of REQUIREMENT.
+  // inherited
+  //   governs to refer to enclave, hw component, sw component, or interface ...
+
+SECURITY_REQUIREMENT is a type of REQUIREMENT.
+  // inherited
+  //   governs to refer to architecture elements: e.g., enclave, hw component, sw component, or interface ...
+  
+SAFETY_REQUIREMENT_SET is a type of REQUIREMENT_SET.
+   content of SAFETY_REQUIREMENT_SET only has values of type SAFETY_REQUIREMENT.
+   // future: put range constraint on 'specifies property
+
+SECURITY_REQUIREMENT_SET is a type of REQUIREMENT_SET.
+   content of SECURITY_REQUIREMENT_SET only has values of type SECURITY_REQUIREMENT.
+    // future: put range constraint on 'specifies' property
+   
+// property binding
+// RiskEvent, Safety Violation, Hazard
+
+RISK_EVENT is a type of ENTITY.
+   SS:severity describes RISK_EVENT with values of type float.
+   SS:severity describes RISK_EVENT with at most 1 value.
+   probability describes RISK_EVENT with values of type float.
+   probability describes RISK_EVENT with at most 1 value.
+   
+SECURITY_VIOLATION is a type of RISK_EVENT.
+   // future: add more properties
+
+SAFETY_ACCIDENT is a type of RISK_EVENT.
+   // future: add more properties

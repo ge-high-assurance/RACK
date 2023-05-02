@@ -116,7 +116,7 @@ IA-3-1 is a CONTROL
 DeviceAuthentication is a CONTROLSET
 	with content IA-3
 	with content IA-3-1
-	with Sec:mitigates CAPEC-148.
+	with ss:mitigates CAPEC-148.
 
 // Now, if appropriate NIST controls have been implemented then 
 // ARCOS performers will determine that and there will be 
@@ -125,10 +125,10 @@ DeviceAuthentication is a CONTROLSET
 // Here I simply declare them in SADL.
 ic1 is a ImplControl
 	with control IA-3
-	with dal 7.
+	with CPS:dal 7.
 ic2 is a ImplControl
 	with control IA-3-1
-	with dal 6.
+	with CPS:dal 6.
 inflow has implConnControl ic1.
 inflow has implConnControl ic2.
 
@@ -139,12 +139,12 @@ if comp is a Cps
 	and conn is a Connection
 	and conn destination comp
 	and connectionType of conn is Untrusted
-then Sec:source of CAPEC-148 is conn.
+then ss:source of CAPEC-148 is conn.
 
 // Rule for check if threat is mitigated
 Rule Mitigated-CAPEC-148
 if conn is a Connection
-	and Sec:source of CAPEC-148 is conn
+	and ss:source of CAPEC-148 is conn
 	and implControl of conn is ic1
 	and implControl of conn is ic2
 then print("CAPEC-148 (Content Spoofing) is mitigated for connection = ",conn). 

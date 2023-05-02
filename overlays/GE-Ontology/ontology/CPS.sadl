@@ -12,7 +12,7 @@
 
 uri "http://arcos.turnstile/CPS" alias CPS.
 import "http://arcos.rack/SYSTEM".
-import "http://arcos.rack/SECURITY".
+import "http://arcos.rack/SAFETY-SECURITY".
 
 // In https://www.faa.gov/documentLibrary/media/Advisory_Circular/AC%2023.1309-1E.pdf
 // the DALs (Catastrophic, Hazardous, Major,Minor, No Safety Effect) are mapped to
@@ -32,14 +32,14 @@ Cps (note "A cyber physical system") is a type of SYSTEM
 	described by canReceiveConfigUpdate with a single value of type boolean
 	described by hasSensitiveInfo with a single value of type boolean	
 	described by insideTrustedBoundary with a single value of type boolean
-	described by pedigree with a single value of type Pedigree
+	described by CPS:pedigree with a single value of type Pedigree
 
 	// properties that allow for mitigating of threats
 	described by implControl with values of type ImplControl.
 	
 ImplControl (note "CONTROL implemented in a SYSTEM") is a type of THING
 	described by control with a single value of type CONTROL
-	described by dal with a single value of type int.
+	described by CPS:dal with a single value of type int.
 
 CpsType (note "An open/extensible set of CPS types") is a type of THING.
 

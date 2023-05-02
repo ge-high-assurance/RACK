@@ -23,7 +23,7 @@ import "http://arcos.rack/MODEL".
 import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/REQUIREMENTS".
 import "http://arcos.rack/REVIEW".
-import "http://arcos.rack/SECURITY".
+import "http://arcos.rack/SAFETY-SECURITY".
 import "http://arcos.rack/SOFTWARE".
 import "http://arcos.rack/SYSTEM".
 import "http://arcos.rack/TESTING".

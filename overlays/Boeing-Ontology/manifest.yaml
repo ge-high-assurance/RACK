@@ -1,0 +1,7 @@
+name: Boeing-Ontology
+footprint:
+  model-graphs:
+  - http://rack001/model
+steps:
+- manifest: ../../RACK-Ontology/manifest.yaml
+- model: OwlModels/model.yaml

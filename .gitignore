@@ -66,7 +66,9 @@ cli/.project
 /Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.exe
 /Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.gz
 /Turnstile-Example/Turnstile-IngestionPackage/CounterApplicationImplementation/*.o
+/Turnstile-Example/turnstile-ingestion-package.zip
 rack-ui/cache/
+rack-ui/config/config-override.yml
 rack-ui/.project
 EntityResolution/.project
 EntityResolution/Resolutions/Summary.csv

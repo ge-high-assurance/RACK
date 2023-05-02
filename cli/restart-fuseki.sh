@@ -3,14 +3,20 @@
 
 set -e
 
-FUSEKI_PID=$(systemctl show --property MainPID fuseki)
-FUSEKI_PID=${FUSEKI_PID#"MainPID="}
+if systemctl is-active --quiet fuseki; then
 
-if [ -n "${FUSEKI_PID}" ]; then
+    echo "Stopping Fuseki"
+
+    # remember the PID in case stopping fuseki doesn't stop it    
+    FUSEKI_PID=$(systemctl show --property MainPID fuseki)
+    FUSEKI_PID=${FUSEKI_PID#"MainPID="}
+
     systemctl stop fuseki
-    # systemctl doesn't always seem to succeed, so be quite certain
-    # until we figure out why it doesn't always succeed
-    kill -9 "${FUSEKI_PID}" > /dev/null 2>&1
+
+    # systemctl stop doesn't always work, so kill -9 for now to be sure
+    if [ -n "${FUSEKI_PID}" ]; then
+        kill -9 "${FUSEKI_PID}" &> /dev/null || true
+    fi
 fi
 
 systemctl start fuseki

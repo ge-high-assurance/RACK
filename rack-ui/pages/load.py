@@ -1,6 +1,5 @@
 """ Content for the "load data" page """
 
-import yaml
 import time
 import io
 import base64
@@ -21,8 +20,7 @@ MANIFEST_FILE_NAME = "manifest.yaml"
 
 # get text for warning banner
 def get_warning_banner_str() -> str:
-    config_obj = yaml.safe_load(open("config/config.yml"))
-    return config_obj.get('load-warning')
+    return get_config('load-warning')
 
 # display strings
 CLEAR_BEFORE_LOADING_STR = "Clear before loading"
@@ -79,7 +77,7 @@ done_dialog = dbc.Modal(
 # page elements
 layout = html.Div([
         html.H2("Load data"),
-        dcc.Markdown("_Load data into RACK_"),
+        dcc.Markdown("_Load a data ingestion package ([sample here](https://github.com/ge-high-assurance/RACK/releases/latest/download/turnstile-ingestion-package.zip)) into RACK_"),
         html.Div(dcc.Markdown(get_warning_banner_str()), className="warningbanner"),
         dbc.Row([
             dbc.Col(dcc.Upload(html.Button(id="select-button", children="Select ingestion package"), id='select-button-upload', accept=".zip", multiple=False), width="auto")  # button to show upload dialog to pick ingestion package
@@ -208,8 +206,8 @@ def run_ingest(load_button_clicks, status_filepath, zip_filepath, load_options):
         last_loaded_graphs = manifest.getModelgraphsFootprint() + manifest.getDatagraphsFootprint()
 
         # optimize triple store
-        #if manifest.getNeedsOptimization():
-        #    rack.invoke_optimization(None)
+        if manifest.getNeedsOptimization():
+            rack.invoke_optimization(None)
 
         time.sleep(3)
     except Exception as e:

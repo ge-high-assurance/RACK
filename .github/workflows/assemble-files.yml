@@ -51,17 +51,17 @@ jobs:
     - name: Download Fuseki
       shell: bash
       run: |
-        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-4.6.1.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
+        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-4.7.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
 
     - name: Download Apache Jena
       shell: bash
       run: |
-        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-4.6.1.tar.gz -o RACK/rack-box/files/jena.tar.gz
+        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-4.7.0.tar.gz -o RACK/rack-box/files/jena.tar.gz
 
     - name: Download SemTK
       shell: bash
       run: |
-        curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.5.0-20230323/semtk-opensource-v2.5.0-20230323-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+        curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.5.0-20230425/semtk-opensource-v2.5.0-20230425-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
 
     - name: Download CSS stylesheet
       shell: bash

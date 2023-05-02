@@ -1,0 +1,61 @@
+# Assembles Turnstile ingestion package (reusable workflow)
+
+on:
+  workflow_call:
+
+jobs:
+
+# assemble-turnstile-data job:
+#  - Downloads rack-box files from artifacts
+#  - Unpacks CLI wheels and OWL/CDR files
+#  - Assembles Turnstile ingestion package
+#  - Uploads ingestion package to artifacts or release
+
+  assemble-turnstile-data:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Check out RACK source
+      uses: actions/checkout@v3
+      with:
+        repository: ge-high-assurance/RACK
+        path: RACK
+
+    - name: Download rack-box files from artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: rack-box-files
+        path: RACK/rack-box/files
+
+    - name: Unpack CLI wheels and OWL/CDR files
+      run: |
+        tar xfz RACK/rack-box/files/rack-cli.tar.gz
+        tar xfz RACK/rack-box/files/rack.tar.gz
+
+    - name: Install RACK CLI
+      run: |
+        pip3 install RACK/cli/wheels/*.whl
+        sudo apt-get install -qq --yes swi-prolog
+
+    - name: Assemble Turnstile ingestion package
+      run: |
+        RACK/Turnstile-Example/Assemble-TurnstileData.sh
+
+    - name: Upload ingestion package to artifacts
+      uses: actions/upload-artifact@v3
+      if: github.event_name != 'release'
+      with:
+        name: turnstile-ingestion-package.zip
+        path: |
+          RACK/Turnstile-Example/turnstile-ingestion-package.zip
+
+    # softprops/action-gh-release has many issues and PRs filed
+    # against it; replace it with "gh release upload" if CI fails
+    # run: gh release upload ${{ github.event.release.tag_name }} RACK/Turnstile-Example/turnstile-ingestion-package.zip --clobber
+
+    - name: Upload ingestion package to release
+      uses: softprops/action-gh-release@v1
+      if: github.event_name == 'release'
+      with:
+        files: |
+          RACK/Turnstile-Example/turnstile-ingestion-package.zip

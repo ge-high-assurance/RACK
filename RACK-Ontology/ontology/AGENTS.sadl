@@ -29,14 +29,14 @@ ORGANIZATION
 
 PERSON (note "Person agents are people - alias for User")
   is a type of AGENT.
-
   emailAddress (note "Email address of person")
     describes PERSON with values of type string.
-
   employedBy (note "Relates people to the company they were acting on behalf of.")
     describes PERSON with values of type AGENT.
   employedBy describes PERSON with at most 1 value of type AGENT.
   employedBy is a type of actedOnBehalfOf.
+  role (note "The role a person played in the performance of an activity (tester, witness, etc.)") 
+  	describes PERSON with values of type string.
 
 TOOL
   (note "An aid (software, hardware, etc) that automates the performance of an activity.")

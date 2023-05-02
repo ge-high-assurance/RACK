@@ -929,7 +929,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
 
     manifest_import_parser.add_argument('config', type=str, help='Manifest YAML file')
     manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
-    manifest_import_parser.add_argument('--optimize', type=bool, help='Enable RACK UI optimization when available')
+    manifest_import_parser.add_argument('--optimize', default=True, action=argparse.BooleanOptionalAction, help='Enable RACK UI optimization when available')
     manifest_import_parser.add_argument('--optimize-url', type=str, help='RACK UI optimization endpoint (e.g. http://localhost:8050/optimize)')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)
 

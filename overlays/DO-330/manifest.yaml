@@ -1,0 +1,9 @@
+name: DO-330
+footprint:
+  model-graphs:
+  - http://rack001/model
+  data-graphs:
+  - http://rack001/do-330
+steps:
+- manifest: ../../RACK-Ontology/manifest.yaml
+- data: data.yaml

@@ -15,14 +15,14 @@ cli/ensure-cli-in-PATH.sh
 # Import ontologies
 
 rack model clear
-rack model import RACK-Ontology/OwlModels/import.yaml
-rack model import GE-Ontology/OwlModels/import.yaml
-rack model import Boeing-Ontology/OwlModels/import.yaml
-rack model import GrammaTech-Ontology/OwlModels/import.yaml
-rack model import LM-Ontology/OwlModels/import.yaml
-rack model import SRI-Ontology/OwlModels/import.yaml
-rack model import STR-Ontology/OwlModels/import.yaml
-rack model import RTX-Ontology/OwlModels/import.yaml
+rack model import RACK-Ontology/OwlModels/model.yaml
+rack model import overlays/GE-Ontology/OwlModels/model.yaml
+rack model import overlays/Boeing-Ontology/OwlModels/model.yaml
+rack model import overlays/GrammaTech-Ontology/OwlModels/model.yaml
+rack model import overlays/LM-Ontology/OwlModels/model.yaml
+rack model import overlays/SRI-Ontology/OwlModels/model.yaml
+rack model import overlays/STR-Ontology/OwlModels/model.yaml
+rack model import overlays/RTX-Ontology/OwlModels/model.yaml
 
 # Remove old CDR files
 

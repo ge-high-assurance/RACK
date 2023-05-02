@@ -3,20 +3,26 @@
 
 set -eu
 
-echo "Stopping Fuseki"
-FUSEKI_PID=$(systemctl show --property MainPID fuseki)
-FUSEKI_PID=${FUSEKI_PID#"MainPID="}
-if [ -n "${FUSEKI_PID}" ]; then
+if systemctl is-active --quiet fuseki; then
+
+    echo "Stopping Fuseki"
+
+    # remember the PID in case stopping fuseki doesn't stop it    
+    FUSEKI_PID=$(systemctl show --property MainPID fuseki)
+    FUSEKI_PID=${FUSEKI_PID#"MainPID="}
+
     systemctl stop fuseki
-    # systemctl doesn't always seem to succeed, so be quite certain
-    # until we figure out why it doesn't always succeed
-    kill -9 "${FUSEKI_PID}" > /dev/null 2>&1
+
+    # systemctl stop doesn't always work, so kill -9 for now to be sure
+    if [ -n "${FUSEKI_PID}" ]; then
+        kill -9 "${FUSEKI_PID}" &> /dev/null || true
+    fi
 fi
 
 RACK_DB="/etc/fuseki/databases/RACK"
 RACK_FUSEKI_CONFIG="/etc/fuseki/configuration/RACK.ttl"
-# Currently using TDB1, this should become tdb2.tdbstats for TDB2
-TDBSTATS="/opt/jena/bin/tdbstats"
+# Currently using TDB2, revert to tdbstats for TDB1
+TDBSTATS="/opt/jena/bin/tdb2.tdbstats"
 TMP_STATS="/tmp/stats.opt"
 # Usually it goes into a `Data-0001` subdirectory, but it seems that with our
 # RACK.ttl configuration we just don't have the extra directory.

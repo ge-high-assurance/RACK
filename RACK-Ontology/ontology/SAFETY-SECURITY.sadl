@@ -342,8 +342,8 @@ SECURITY_REQUIREMENT_SET is a type of REQUIREMENT_SET.
 // RiskEvent, Safety Violation, Hazard
 
 RISK_EVENT is a type of ENTITY.
-   SS:severity describes RISK_EVENT with values of type float.
-   SS:severity describes RISK_EVENT with at most 1 value.
+   ss:severity describes RISK_EVENT with values of type float.
+   ss:severity describes RISK_EVENT with at most 1 value.
    probability describes RISK_EVENT with values of type float.
    probability describes RISK_EVENT with at most 1 value.
    

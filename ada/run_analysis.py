@@ -45,14 +45,7 @@ parser.add_argument(
     type=str
 )
 
-parser.add_argument("--analyze", help="File to analyze (.ada, .adb, .ads)", type=str, action='append', required=True)
-
-parser.add_argument(
-    "others",
-    help="List of project files (use --project-files if there are many)",
-    type=str,
-    nargs="*"
-)
+parser.add_argument("analyze", help="File to analyze (.ada, .adb, .ads)", nargs='*')
 
 args = parser.parse_args()
 
@@ -74,9 +67,6 @@ class CustomFormatter(logging.Formatter):
         formatter = logging.Formatter(which_format, "%H:%M:%S")
         return formatter.format(record)
 
-# Default provider just looks through files listed as "others"
-provider = lal.UnitProvider.auto(input_files=args.others)
-
 def input_files_from_files_list(files_file: str) -> List[str]:
     """
     Takes as input a path to a file containing a list of filepaths (one per
@@ -97,9 +87,6 @@ provider = (
     if args.gpr
     else
     lal.UnitProvider.auto(input_files=input_files_from_files_list(args.files))
-    if args.files
-    else
-    lal.UnitProvider.auto(input_files=args.others)
 )
 
 context = lal.AnalysisContext(unit_provider=provider)
@@ -225,7 +212,7 @@ def output_using_scrapingtoolkit(
     """Outputs the analysis output using ScrapingToolKit."""
 
     for component_type in analysis_output["component_types"]:
-        Evidence.Add.SOFTWARE.COMPONENT_TYPE(
+        Evidence.Add.SOFTWARE.SWCOMPONENT_TYPE(
             identifier=component_type,
         )
 

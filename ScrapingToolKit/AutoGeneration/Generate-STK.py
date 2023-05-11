@@ -92,6 +92,8 @@ def cleanName(string):
             newString+=c
         else:
             newString+="_"
+    if newString[0].isnumeric():
+        newString ="_"+newString
     return newString
 
 def genDataTypeComment(templateData):

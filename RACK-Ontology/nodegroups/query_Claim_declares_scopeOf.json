@@ -52,7 +52,7 @@
 					}
 				],
 				"nodeList": [],
-				"fullURIName": "http://arcos.rack/SECURITY#CONTROL",
+				"fullURIName": "http://arcos.rack/SAFETY-SECURITY#CONTROL",
 				"SparqlID": "?CONTROL",
 				"isReturned": false,
 				"isRuntimeConstrained": false,
@@ -182,7 +182,7 @@
 			},
 			{
 				"sparqlID": "?CONTROL",
-				"type": "http://arcos.rack/SECURITY#CONTROL",
+				"type": "http://arcos.rack/SAFETY-SECURITY#CONTROL",
 				"mapping": [],
 				"props": []
 			}

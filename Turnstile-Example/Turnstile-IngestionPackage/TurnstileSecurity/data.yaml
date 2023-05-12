@@ -8,9 +8,9 @@ ingestion-steps:
 - {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "GE_HighLevelRequirement1.csv"}
 - {class: "http://arcos.turnstile/GE#LowLevelRequirement", csv: "GE_LowLevelRequirement1.csv"}
 - {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY1.csv"}
-- {class: "http://arcos.rack/SECURITY#CONTROL", csv: "SECURITY_CONTROL1.csv"}
-- {class: "http://arcos.rack/SECURITY#CONTROLSET", csv: "SECURITY_CONTROLSET1.csv"}
-- {class: "http://arcos.rack/SECURITY#THREAT", csv: "SECURITY_THREAT1.csv"}
+- {class: "http://arcos.rack/SAFETY-SECURITY#CONTROL", csv: "SECURITY_CONTROL1.csv"}
+- {class: "http://arcos.rack/SAFETY-SECURITY#CONTROLSET", csv: "SECURITY_CONTROLSET1.csv"}
+- {class: "http://arcos.rack/SAFETY-SECURITY#THREAT", csv: "SECURITY_THREAT1.csv"}
 
 #Phase2: All Evidence
 - {class: "http://arcos.turnstile/CPS#Connection", csv: "CPS_Connection2.csv"}
@@ -20,6 +20,6 @@ ingestion-steps:
 - {class: "http://arcos.turnstile/GE#HighLevelRequirement", csv: "GE_HighLevelRequirement2.csv"}
 - {class: "http://arcos.turnstile/GE#LowLevelRequirement", csv: "GE_LowLevelRequirement2.csv"}
 - {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "PROV_S_ACTIVITY2.csv"}
-- {class: "http://arcos.rack/SECURITY#CONTROL", csv: "SECURITY_CONTROL2.csv"}
-- {class: "http://arcos.rack/SECURITY#CONTROLSET", csv: "SECURITY_CONTROLSET2.csv"}
-- {class: "http://arcos.rack/SECURITY#THREAT", csv: "SECURITY_THREAT2.csv"}
+- {class: "http://arcos.rack/SAFETY-SECURITY#CONTROL", csv: "SECURITY_CONTROL2.csv"}
+- {class: "http://arcos.rack/SAFETY-SECURITY#CONTROLSET", csv: "SECURITY_CONTROLSET2.csv"}
+- {class: "http://arcos.rack/SAFETY-SECURITY#THREAT", csv: "SECURITY_THREAT2.csv"}

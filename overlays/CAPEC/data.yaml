@@ -1,7 +1,7 @@
 data-graph: "http://rack001/capec"
 ingestion-steps:
 #Phase1: Identifiers Only
-- {class: "http://arcos.rack/SECURITY#THREAT", csv: "CAPEC1.csv"}
+- {class: "http://arcos.rack/SAFETY-SECURITY#THREAT", csv: "CAPEC1.csv"}
 
 #Phase2: The rest of the data
-- {class: "http://arcos.rack/SECURITY#THREAT", csv: "CAPEC2.csv"}
+- {class: "http://arcos.rack/SAFETY-SECURITY#THREAT", csv: "CAPEC2.csv"}

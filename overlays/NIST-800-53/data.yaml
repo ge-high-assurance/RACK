@@ -1,7 +1,7 @@
 data-graph: "http://rack001/nist-800-53"
 ingestion-steps:
 #Phase1: Identifiers Only
-- {class: "http://arcos.rack/SECURITY#CONTROL", csv: "NIST-800-53_1.csv"}
+- {class: "http://arcos.rack/SAFETY-SECURITY#CONTROL", csv: "NIST-800-53_1.csv"}
 
 #Phase2: The rest of the data
-- {class: "http://arcos.rack/SECURITY#CONTROL", csv: "NIST-800-53_2.csv"}
+- {class: "http://arcos.rack/SAFETY-SECURITY#CONTROL", csv: "NIST-800-53_2.csv"}

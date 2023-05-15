@@ -50,7 +50,7 @@ addFunctionComment = """    '''
     @staticmethod
 """
 addDataTypeComment = """
-    |    {:40}: {:16} |"""
+    |    {:45}: {:11} |"""
 addFileHeader = """#!/usr/bin/env python3
 #
 # Copyright (c) 2022, General Electric Company, Galois, Inc.
@@ -99,13 +99,13 @@ def cleanName(string):
 def genDataTypeComment(templateData):
     dataTypeComment = ""
     for p in sorted(templateData):
-        dataTypeComment += addDataTypeComment.format(p, templateData[p])
+        dataTypeComment += addDataTypeComment.format(cleanName(p), templateData[p])
     return dataTypeComment
 
 def genFunctionDef(className,templateData):
     functionDef = "    def {}(".format(className)
     for p in sorted(templateData):
-        functionDef += p+"=None, "
+        functionDef += cleanName(p)+"=None, "
     return functionDef.rstrip(", ")+"):\n"
 
 def genFunctionBody(groupName,className,templateData):
@@ -113,7 +113,7 @@ def genFunctionBody(groupName,className,templateData):
     pyAddString += '        log("Adding Evidence:",str_good("'+className+'"))\n'
     pyAddString += '        objStr = "<{}_{}>"\n'.format(groupName,className)
     for p in sorted(templateData):
-        pyAddString += '        objStr += objectDataString("{propName}", {propName})\n'.replace('{propName}',p)
+        pyAddString += '        objStr += objectDataString("{propName}", {argName})\n'.replace('{argName}',cleanName(p)).replace('{propName}',p)
     pyAddString += '        objStr += "</{}_{}>"\n'.format(groupName,className)
     pyAddString += '        addEvidenceObject(etree.fromstring(objStr))\n\n'    
     return pyAddString

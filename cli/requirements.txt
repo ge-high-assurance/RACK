@@ -9,7 +9,7 @@ jsonschema==4.17.3
 pyrsistent==0.19.3
 python-dateutil==2.8.2
 PyYAML==6.0
-requests==2.28.2
+requests==2.31.0
 Pillow==9.4.0
 plotly==5.13.0
 semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@26044518fa796168a76c3a1f3c6448930b8bff01

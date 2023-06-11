@@ -17,6 +17,13 @@ As shown above, RACK takes in evidence in the form of technical documents, test 
 
 If you are citing RACK project, please use the following BibTex entries:
 ```latex
+@inproceedings{moitra2023rack,
+title={RACK: A Semantic Model and Triplestore for Curation of Assurance Case Evidence},
+author={Moitra, Abha and Cuddihy, Paul and Siu, Kit and Archer, David and Mertens, Eric and Russell, Daniel and Quick, Kevin and Robert, Valentin and Meng, Baoluo},
+booktitle={10th International Workshop on Next Generation of System Assurance Approaches for Safety-Critical Systems (SASSUR), Toulouse, France, September, Computer Safety, Reliability, and Security (SAFECOMP), Lecture Notes in Computer Science},
+year={2023}
+}
+
 @inproceedings{moitra2022semantic,
   title={A Semantic Reference Model for Capturing System Development and Evaluation},
   author={Moitra, Abha and Cuddihy, Paul and Siu, Kit and Meng, Baoluo and Interrante, John and Archer, David and Mertens, Eric and Quick, Kevin and Robert, Valentin and Russell, Daniel},

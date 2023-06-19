@@ -374,7 +374,7 @@ Ingest-SoftwareComponentTestResult           Node group to ingest Sof[...]
 
 ## Ingestion Packages (manifest)
 
-The bulk ingestion of multiple models, nodegrounds, and data can be
+The bulk ingestion of multiple models, nodegroups, and data can be
 automated using a manifest file.
 
 ```yaml

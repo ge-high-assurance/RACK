@@ -1,19 +1,19 @@
 ase==3.22.1
-attrs==22.2.0
-certifi==2022.12.7
+attrs==23.1.0
+certifi==2023.5.7
 chardet==5.1.0
 colorama==0.4.6
 idna==3.4
-importlib-metadata==6.0.0
+importlib-metadata==6.7.0
 jsonschema==4.17.3
 pyrsistent==0.19.3
 python-dateutil==2.8.2
 PyYAML==6.0
-requests==2.28.2
+requests==2.31.0
 Pillow==9.4.0
-plotly==5.13.0
+plotly==5.15.0
 semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@26044518fa796168a76c3a1f3c6448930b8bff01
 six==1.16.0
 tabulate==0.9.0
-urllib3==1.26.14
-zipp==3.13.0
+urllib3==2.0.3
+zipp==3.15.0

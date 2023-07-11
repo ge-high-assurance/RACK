@@ -31,7 +31,7 @@ check_SRS_insertion_source(I) :-
     rdf(I, 'http://arcos.rack/PROV-S#dataInsertedBy', A),
     must_have_srs_data_ingestion(T,I,A).
 
-must_have_srs_data_ingestion(T,I,A) :-
+must_have_srs_data_ingestion(_T,_I,A) :-
     rack_instance_ident(A, "SRS Data Ingestion"), !.
 must_be_srs_data_ingestion(T,I,A) :-
     rack_instance_ident(A, AName),

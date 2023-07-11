@@ -43,7 +43,7 @@ check_missing_notes(Class) :-
 check_not_prov_s(Class) :-
     rdf(Class, rdf:type, owl:'Class'),
     has_interesting_prefix(Class),
-    rack_ref('PROV-S#THING', Thing),
+    rack_ref('PROV-S#NODE', Thing),
     \+ rdf_reachable(Class, rdfs:subClassOf, Thing),
     \+ rdf_is_bnode(Class),
     print_message(warning, not_prov_s_thing_class(Class)).
@@ -248,20 +248,12 @@ check_invalid_domain(Property) :-
     check_invalid_domain_class(_SrcClass, Property, _DefinedClass).
 
 check_invalid_domain_class(SrcClass, Property, DefinedClass) :-
-    rdf(SrcClass, _, B),
-    rack_ref(_, SrcClass),
-    rdf_is_bnode(B),
-    rdf(B, rdf:type, owl:'Restriction'),
-    rdf(B, owl:onProperty, Property),
-    rdf(Property, rdfs:domain, DefinedClass),
-    \+ rdf_reachable(SrcClass, rdfs:subClassOf, DefinedClass),
-    print_message(error, invalid_domain(SrcClass, Property, DefinedClass)).
-
-check_invalid_domain_class(SrcClass, Property, DefinedClass) :-
-    property(SrcClass, Property, _Usage),
+    property(SrcClass, Property, Usage),
     rdf_reachable(Property, rdfs:subPropertyOf, ParentProp),
     property(DefinedClass, ParentProp, _ParentUsage),
     \+ rdf_reachable(SrcClass, rdfs:subClassOf, DefinedClass),
+    findall(OtherParent, (property(OtherParent, Property, Usage), OtherParent \= SrcClass), OtherParents),
+    \+ member(DefinedClass, OtherParents),
     ( Property = ParentProp,
       print_message(error, invalid_domain(SrcClass, Property, DefinedClass))
     ; Property \= ParentProp,

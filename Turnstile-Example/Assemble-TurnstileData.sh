@@ -13,7 +13,7 @@ make
 make test
 make dist
 ingest_data -r "${BASEDIR}"/Turnstile-IngestionPackage/turnstile-ingest.rack \
-            -O "${TOPDIR}"/GE-Ontology \
+            -O "${TOPDIR}"/overlays/GE-Ontology \
             -O "${TOPDIR}"/RACK-Ontology \
             -o "${BASEDIR}"/Turnstile-IngestionPackage/BuildProcess/turnstile-build.owl \
             http://rack001/turnstiledata .

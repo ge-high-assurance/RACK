@@ -76,10 +76,9 @@ although we will mention each file here as well:
   --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box
   --exclude=tests --exclude=tools RACK`)
 
-- `jammy64\*`: Unpack the most recent Ubuntu 22.04 vagrant box here
-  (`curl -LOSfs
-  https://app.vagrantup.com/ubuntu/boxes/jammy64/versions/20230302.0.0/providers/virtualbox.box
-  && tar -xf virtualbox.box -C RACK/rack-box/jammy64`)
+- `jammy64\*`: Download latest Ubuntu 22.04 vagrant box from
+  <https://app.vagrantup.com/ubuntu/boxes/jammy64>, unpacking it in a
+  `jammy64` folder (`tar -xf virtualbox.box -C RACK/rack-box/jammy64`)
 
 Once you have put these files into the `files` subdirectory, skip to
 [Build the rack-box images](#Build-the-rack-box-images) for the next
@@ -139,21 +138,19 @@ You will need to install [Packer](https://www.packer.io/) if you don't
 have it.  Packer will read instructions from the rack-box JSON files
 and use files in the `files`, `http`, and `scripts` directories to
 build the rack-box images.  The following Packer commands will build
-Docker, Hyper-V, and VirtualBox rack-box images:
+Docker and VirtualBox rack-box images:
 
     packer build rack-box-docker.json
-    packer build rack-box-hyperv.json
     packer build rack-box-virtualbox.json
 
 When Packer finishes these build commands, it will save the Docker
-rack-box image in your local Docker image cache and save the Hyper-V &
-VirtualBox rack-box images to new subdirectories called
-`output-hyperv-iso` and `output-virtualbox-ovf`.  Your Hyper-V and
-VirtualBox GUI program can import these subdirectories directly into
-newly created virtual machines.
+rack-box image in your local Docker image cache and save the
+VirtualBox rack-box image to a new subdirectory called
+`output-virtualbox-ovf`.  Your VirtualBox application can import the
+image from that subdirectory to create a new virtual machine.
 
 ---
-Copyright (c) 2021, General Electric Company, Galois, Inc.
+Copyright (c) 2021-2023, General Electric Company, Galois, Inc.
 
 All Rights Reserved
 

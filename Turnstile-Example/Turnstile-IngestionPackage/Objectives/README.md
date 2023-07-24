@@ -1,11 +1,26 @@
 # Certification Objectives for Turnstile
-The process we used to generate the certification objectives is slightly different from the other Turnstile instance data.
-- Created nodegroups to relate ACTIVITYs from the GE-Ontology overlay to OBJECTIVEs from the [DO-178C ontology](https://github.com/ge-high-assurance/RACK/blob/TurnstileUpdate/RACK-Ontology/ontology/DO-178C/DO-178C.sadl). 
-	- The purpose of these nodegroups is to create CSV files with instance data for ingestion into RACK. These nodegroups customize the header names so that they are compliant with the ingest_OBJECTIVE CDR. For example, OBJECTIVE identifiers are saved under the header "identifier"; ACTIVITY identifiers are saved under the header "satisfiedBy".
-- Created a shell script (Create-SoftwareObjectives.sh) that loads these nodegroups and runs each nodegroup as a query. Exported the data and saved as CSV formatted files.
-- Loaded the exported data back into RACK via Load-TurnstileData.sh, using the ingest_OBJECTIVE nodegroup. (See import.yaml.)
 
-The following table summarizes the identified OBJECTIVEs `satisfiedBy` the ACTIVITYs. (Note: the listed ACTIVITYs are part of the GE-Ontology overlay.)
+The process we used to generate the certification objectives is
+slightly different from the other Turnstile instance data.
+
+- Created nodegroups to relate ACTIVITYs from the GE-Ontology overlay
+to OBJECTIVEs from the [DO-178C
+ontology](https://github.com/ge-high-assurance/RACK/blob/TurnstileUpdate/RACK-Ontology/ontology/DO-178C/DO-178C.sadl).
+  - The purpose of these nodegroups is to create CSV files with
+    instance data for ingestion into RACK.  These nodegroups customize
+    the header names so that they are compliant with the
+    ingest_OBJECTIVE CDR.  For example, OBJECTIVE identifiers are
+    saved under the header "identifier"; ACTIVITY identifiers are
+    saved under the header "satisfiedBy".
+- Created a shell script (Create-SoftwareObjectives.sh) that loads
+  these nodegroups and runs each nodegroup as a query.  Exported the
+  data and saved as CSV formatted files.
+- Loaded the exported data back into RACK via Load-TurnstileData.sh,
+  using the ingest_OBJECTIVE nodegroup.  (See import.yaml.)
+
+The following table summarizes the identified OBJECTIVEs `satisfiedBy`
+the ACTIVITYs.  (Note: the listed ACTIVITYs are part of the
+GE-Ontology overlay.)
 
 |OBJECTIVE|ACTIVITY|
 |---|---|

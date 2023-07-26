@@ -10,14 +10,26 @@
 
   "builders": [
     {
+      "name": "arch_amd64",
       "type": "docker",
-
       "changes": [
         "ENTRYPOINT [ \"/usr/bin/python3\", \"/usr/bin/systemctl\" ]"
       ],
       "commit": true,
       "image": "ubuntu:22.04",
+      "platform": "linux/amd64",
       "pull": false
+    },
+    {
+      "name": "arch_arm64v8",
+      "type": "docker",
+      "changes": [
+        "ENTRYPOINT [ \"/usr/bin/python3\", \"/usr/bin/systemctl\" ]"
+      ],
+      "commit": true,
+      "image": "ubuntu:22.04",
+      "platform": "linux/arm64/v8",
+      "pull": true
     }
   ],
 

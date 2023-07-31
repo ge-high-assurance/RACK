@@ -424,26 +424,44 @@ YAML file.
 ### CLI support
 
 ```text
-usage: rack manifest import [-h] [--clear] [--default-graph] manifest
+usage: rack manifest build [-h] config zipfile
 
 positional arguments:
-  manifest         Manifest YAML file
+  config      Manifest YAML file
+  zipfile     Ingestion package output file
 
-optional arguments:
-  -h, --help       show this help message and exit
-  --clear          Clear footprint before import
-  --default-graph  Load whole manifest into default graph
+options:
+  -h, --help  show this help message and exit
 ```
 
-Manifests can be loaded using `rack manifest import`.
+Ingestion packages can be created using the CLI by providing a manifest
+file and a target package name.
+
+For example: `rack manifest build manifest.yaml package-v1` will produce
+a package called `package-v1.zip`.
+
+```text
+usage: rack manifest import [-h] [--clear] [--optimize | --no-optimize]
+                            [--optimize-url OPTIMIZE_URL]
+                            config
+
+positional arguments:
+  config                Manifest YAML file
+
+options:
+  -h, --help            show this help message and exit
+  --clear               Clear footprint before import
+  --optimize, --no-optimize
+                        Enable RACK UI optimization when available
+  --optimize-url OPTIMIZE_URL
+                        RACK UI optimization endpoint (e.g.
+                        http://localhost:8050/optimize)
+```
+
+Ingestion packages can be loaded using `rack manifest import`.
 
 To clear all graphs mentioned in the `footprint` use `--clear`. For example:
-`rack manifest import --clear my-manifest.yaml`
-
-Fuseki happens to run faster when data is stored in the *default graph*.
-To load a complete ingestion manifest into the default graph use
-`--default-graph`. For example:
-`rack manifest import --default-graph my-manifest.yaml`
+`rack manifest import --clear package.zip`
 
 ## Hacking
 

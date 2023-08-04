@@ -558,6 +558,32 @@ def invoke_optimization(url: Optional[Url]) -> None:
             raise Exception(response['message'])
     go()
 
+def cardinality_driver(
+        base_url: Url,
+        model_graphs: Optional[List[Url]],
+        data_graphs: Optional[List[Url]],
+        triple_store: Optional[Url],
+        triple_store_type: Optional[str],
+        headers: bool,
+        export_format: ExportFormat
+        ) -> None:
+    """Generate an output table with all cardinality violations in the given datagraphs"""
+
+    if data_graphs is not None:
+        data_graph = data_graphs[0]
+    else:
+        logger.warning("Defaulting data-graph to %s", DEFAULT_DATA_GRAPH)
+        data_graph = DEFAULT_DATA_GRAPH
+
+    if data_graphs is not None:
+        extra_data_graphs = data_graphs[1:]
+    else:
+        extra_data_graphs = []
+
+    conn = sparql_connection(base_url, model_graphs, data_graph, extra_data_graphs, triple_store, triple_store_type)
+    
+    semtk_table = semtk3.get_cardinality_violations(conn)
+    print(format_semtk_table(semtk_table, export_format=export_format, headers=headers))
 
 def ingest_data_driver(config_path: Path, base_url: Url, model_graphs: Optional[List[Url]], data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
@@ -843,6 +869,11 @@ def dispatch_data_import(args: SimpleNamespace) -> None:
     cliMethod = CLIMethod.DATA_IMPORT
     ingest_data_driver(Path(args.config), args.base_url, args.model_graph, args.data_graph, args.triple_store, args.triple_store_type, args.clear)
 
+def dispatch_data_cardinality(args: SimpleNamespace) -> None:
+    """Implementation of the data cardinality subcommand"""
+    cliMethod = CLIMethod.DATA_IMPORT
+    cardinality_driver(args.base_url, args.model_graph, args.data_graph, args.triple_store, args.triple_store_type, export_format=args.format, headers=not args.no_headers)
+
 def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
     cliMethod = CLIMethod.MODEL_IMPORT
@@ -899,6 +930,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_parser = subparsers.add_parser('data', help='Import or export CSV data')
     data_subparsers = data_parser.add_subparsers(dest='command')
     data_import_parser = data_subparsers.add_parser('import', help='Import CSV data')
+    data_cardinality_parser = data_subparsers.add_parser('cardinality', help='Check data cardinality')
     data_export_parser = data_subparsers.add_parser('export', help='Export query results')
     data_count_parser = data_subparsers.add_parser('count', help='Count matched query rows')
     data_clear_parser = data_subparsers.add_parser('clear', help='Clear data graph')
@@ -942,6 +974,12 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_import_parser.add_argument('--data-graph', type=str, action='append', help='Data graph URL')
     data_import_parser.add_argument('--clear', action='store_true', help='Clear data graph before import')
     data_import_parser.set_defaults(func=dispatch_data_import)
+
+    data_cardinality_parser.add_argument('--model-graph', type=str, action='append', help='Model graph URL')
+    data_cardinality_parser.add_argument('--data-graph', type=str, action='append', help='Data graph URL')
+    data_cardinality_parser.add_argument('--format', type=ExportFormat, help='Export format', choices=list(ExportFormat), default=ExportFormat.TEXT)
+    data_cardinality_parser.add_argument('--no-headers', action='store_true', help='Omit header row')
+    data_cardinality_parser.set_defaults(func=dispatch_data_cardinality)
 
     data_export_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
     data_export_parser.add_argument('--model-graph', type=str, action='append', help='Model graph URL')

@@ -565,7 +565,9 @@ def cardinality_driver(
         triple_store: Optional[Url],
         triple_store_type: Optional[str],
         headers: bool,
-        export_format: ExportFormat
+        export_format: ExportFormat,
+        concise: bool,
+        max_rows: int
         ) -> None:
     """Generate an output table with all cardinality violations in the given datagraphs"""
 
@@ -582,7 +584,7 @@ def cardinality_driver(
 
     conn = sparql_connection(base_url, model_graphs, data_graph, extra_data_graphs, triple_store, triple_store_type)
     
-    semtk_table = semtk3.get_cardinality_violations(conn)
+    semtk_table = semtk3.get_cardinality_violations(conn, max_rows=max_rows, concise_format=concise)
     print(format_semtk_table(semtk_table, export_format=export_format, headers=headers))
 
 def ingest_data_driver(config_path: Path, base_url: Url, model_graphs: Optional[List[Url]], data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
@@ -872,7 +874,8 @@ def dispatch_data_import(args: SimpleNamespace) -> None:
 def dispatch_data_cardinality(args: SimpleNamespace) -> None:
     """Implementation of the data cardinality subcommand"""
     cliMethod = CLIMethod.DATA_IMPORT
-    cardinality_driver(args.base_url, args.model_graph, args.data_graph, args.triple_store, args.triple_store_type, export_format=args.format, headers=not args.no_headers)
+    cardinality_driver(args.base_url, args.model_graph, args.data_graph, args.triple_store, args.triple_store_type,
+                       export_format=args.format, headers=not args.no_headers, concise=args.concise, max_rows=args.max_rows)
 
 def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
@@ -979,6 +982,8 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_cardinality_parser.add_argument('--data-graph', type=str, action='append', help='Data graph URL')
     data_cardinality_parser.add_argument('--format', type=ExportFormat, help='Export format', choices=list(ExportFormat), default=ExportFormat.TEXT)
     data_cardinality_parser.add_argument('--no-headers', action='store_true', help='Omit header row')
+    data_cardinality_parser.add_argument('--max-rows', default=-1, type=int, help='Maximum output rows')
+    data_cardinality_parser.add_argument('--concise', default=False, action='store_true', help='Use concise output')
     data_cardinality_parser.set_defaults(func=dispatch_data_cardinality)
 
     data_export_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')

@@ -662,13 +662,23 @@ rack_instance_ident(_, "<no-identifier>").
 
 rack_instance_target(SrcInst, Rel, TgtInst) :-
     rdf(SrcInst, rdf:type, SrcClass),
-    property_extra(SrcClass, Rel, Restriction),
-    instance_target(SrcInst, Rel, Restriction, TgtInst).
+    (property_extra(SrcClass, Rel, Restriction),
+     instance_target_restr(SrcInst, Rel, Restriction, TgtInst)
+    ; rdf(SrcInst, Rel, TgtInst)
+    ).
 
-instance_target(SrcInst, Rel, value_from(TgtClass), TgtInst) :-
+instance_target_restr(SrcInst, Rel, value_from(TgtClass), TgtInst) :-
     rdf(SrcInst, Rel, TgtInst),
     rdf(TgtInst, rdfs:isSubClassOf, TgtClass).
-instance_target(SrcInst, Rel, Restr, TgtInst) :-
+instance_target_restr(SrcInst, Rel, value_from(TgtClass), TgtInst) :-
+    rdf_is_bnode(TgtClass),
+    rdf(TgtClass, owl:unionOf, TgtUnion),
+    rdf_list(TgtUnion),
+    rdf_list(TgtUnion, TgtList),
+    rdf(SrcInst, Rel, TgtInst),
+    rdf(TgtInst, rdf:type, TIClass),
+    member(TIClass, TgtList).
+instance_target_restr(SrcInst, Rel, Restr, TgtInst) :-
     Restr \= value_from(_),
     rdf(SrcInst, Rel, TgtInst).
 

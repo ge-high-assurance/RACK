@@ -43,10 +43,10 @@ check_missing_notes(Class) :-
 check_not_prov_s(Class) :-
     rdf(Class, rdf:type, owl:'Class'),
     has_interesting_prefix(Class),
-    rack_ref('PROV-S#NODE', Thing),
-    \+ rdf_reachable(Class, rdfs:subClassOf, Thing),
+    rack_ref('PROV-S#NODE', NodeBase),
+    \+ rdf_reachable(Class, rdfs:subClassOf, NodeBase),
     \+ rdf_is_bnode(Class),
-    print_message(warning, not_prov_s_thing_class(Class)).
+    print_message(warning, not_prov_s_node_class(Class)).
 
 check_instance_types(I) :-
     % Get an instance
@@ -302,8 +302,8 @@ sum_all_nonzero([(_,N)|CNS], Sum) :-
 
 prolog:message(class_missing_note(Class)) -->
     [ 'CE-100: No Note/Description for class ~w'-[Class] ].
-prolog:message(not_prov_s_thing_class(Class)) -->
-    [ 'CE-101: Not a subclass of PROV-S#THING: ~w'-[Class] ].
+prolog:message(not_prov_s_node_class(Class)) -->
+    [ 'CE-101: Not a subclass of PROV-S#NODE: ~w'-[Class] ].
 prolog:message(num_classes(What, Count)) -->
     [ 'There are ~:d RACK ~w.'-[Count, What] ].
 prolog:message(cardinality_violation(InstType, Instance, InstanceIdent, Property, Specified, Actual)) -->

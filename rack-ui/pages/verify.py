@@ -27,29 +27,29 @@ verify_assist_done_dialog = dbc.Modal(
 )
 
 # div showing graphs list
-verify_report_options_div = dbc.Spinner(html.Div(
+select_graphs_div = dbc.Spinner(html.Div(
     [
-        dcc.Markdown("Select graphs to include in report:"),
+        dcc.Markdown("Select graphs to include:"),
         dcc.Checklist([], [], id="verify-graph-checklist", labelStyle={'display': 'block'}),   # choose which graphs to verify
         dbc.Row([
-            dbc.Col(html.Button("Continue", id="verify-report-continue-button", n_clicks=0), width="auto"),  # button to open SPARQLgraph report
-            dbc.Col(html.Button("Cancel", id="verify-report-cancel-button", n_clicks=0), width="auto")       # button to cancel
+            dbc.Col(html.Button("Continue", id="select-graphs-continue-button", n_clicks=0), width="auto"),  # button to open SPARQLgraph
+            dbc.Col(html.Button("Cancel", id="select-graphs-cancel-button", n_clicks=0), width="auto")       # button to cancel
         ])
     ],
-    id="verify-report-options-div",
+    id="select-graphs-div",
     hidden=True,
     style={"margin-top": "50px"},
 ))
 
-# dialog indicating an error generating the SPARQLgraph report (e.g. no graphs selected)
-verify_report_error_dialog = dbc.Modal(
+# dialog indicating an error generating the SPARQLgraph link (e.g. no graphs selected)
+sg_link_error_dialog = dbc.Modal(
     [
-        dbc.ModalBody("MESSAGE PLACEHOLDER", id="verify-report-error-dialog-body"),     # message
+        dbc.ModalBody("MESSAGE PLACEHOLDER", id="sg-link-error-dialog-body"),     # message
         dbc.ModalFooter([
-            html.Button("Close", id="verify-report-error-button", n_clicks=0)           # close button
+            html.Button("Close", id="sg-link-error-button", n_clicks=0)           # close button
         ]),
     ],
-    id="verify-report-error-dialog",
+    id="sg-link-error-dialog",
     is_open=False,
     backdrop=False,
 )
@@ -60,16 +60,18 @@ layout = html.Div([
     dcc.Markdown("_Run verification routines on the data loaded in RACK_"),
     dbc.Row([
         dbc.Col(html.Button("Verify using ASSIST", id="verify-assist-button", n_clicks=0), width="auto"),  # button to verify using ASSIST
-        dbc.Col(html.Button("Verify using report", id="verify-report-button"), width="auto")               # button to verify using SPARQLgraph report
+        dbc.Col(html.Button("Verify using report", id="verify-report-button"), width="auto"),              # button to verify using SPARQLgraph report
+        dbc.Col(html.Button("Check cardinality", id="check-cardinality-button"), width="auto")             # button to check cardinality via SPARQLgraph
     ]),
     dbc.Tooltip("Run the ASSIST tool and download an error report", target="verify-assist-button"),
     dbc.Tooltip("Open SPARQLgraph and run data verification report on selected graphs", target="verify-report-button"),
-    verify_report_options_div,
+    dbc.Tooltip("Open SPARQLgraph and check cardinality on selected graphs", target="check-cardinality-button"),
+    select_graphs_div,
     html.Div(id="assist-status-div", className="scrollarea"),       # displays status
     verify_assist_done_dialog,
-    verify_report_error_dialog,
+    sg_link_error_dialog,
     dcc.Store("assist-status-filepath"),        # stores the filename of the temp file containing status
-    dcc.Store("sparqlgraph-url"),               # stores the URL of the SPARQLgraph report
+    dcc.Store("sparqlgraph-url"),               # stores the SPARQLgraph URL 
     dcc.Store(id="clientside-dummy-store"),     # dummy store because callback needs an Output
     dcc.Interval(id='assist-status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
 ])
@@ -83,7 +85,8 @@ layout = html.Div([
     background=True,                                                # background callback
     running=[
         (Output("verify-report-button", "disabled"), True, False),  # disable the button while running
-        (Output("verify-assist-button", "disabled"), True, False),  # disable the button while running
+        (Output("verify-assist-button", "disabled"), True, False),      # disable the button while running
+        (Output("check-cardinality-button", "disabled"), True, False),  # disable the button while running
     ],
     prevent_initial_call=True
 )
@@ -103,6 +106,7 @@ def create_assist_status_filepath(n_clicks):
     running=[
         (Output("verify-report-button", "disabled"), True, False),  # disable the button while running
         (Output("verify-assist-button", "disabled"), True, False),  # disable the button while running
+        (Output("check-cardinality-button", "disabled"), True, False),  # disable the button while running
         (Output("assist-status-interval", "disabled"), False, True) # enable the interval component while running
     ],
     prevent_initial_call=True
@@ -172,8 +176,9 @@ def download_assist_results(n_clicks, status_filepath):
     state=State("last-loaded-graphs", "data"),                  # last loaded graphs
     background=True,                                            # background callback
     running=[
-        (Output("verify-report-button", "disabled"), True, False),     # disable the run button while running
+        (Output("verify-report-button", "disabled"), True, False),     # disable the button while running
         (Output("verify-assist-button", "disabled"), True, False),     # disable the button while running
+        (Output("check-cardinality-button", "disabled"), True, False), # disable the button while running
     ],
     prevent_initial_call=True
 )
@@ -195,13 +200,14 @@ def show_report_options(button_clicks, last_loaded_graphs):
 
 @dash.callback(
     output=[Output("sparqlgraph-url", "data"),                      # output SPARQLgraph report URL
-            Output("verify-report-error-dialog-body", "children")], # output error message
-    inputs=Input("verify-report-continue-button", "n_clicks"),      # triggered by clicking continue button
+            Output("sg-link-error-dialog-body", "children")], # output error message
+    inputs=Input("select-graphs-continue-button", "n_clicks"),      # triggered by clicking continue button
     state=State("verify-graph-checklist", "value"),                 # the currently selected graphs
     background=True,                                                # background callback
     running=[
         (Output("verify-report-button", "disabled"), True, False),  # disable the button while running
         (Output("verify-assist-button", "disabled"), True, False),  # disable the button while running
+        (Output("check-cardinality-button", "disabled"), True, False),  # disable the button while running
     ],
     prevent_initial_call=True
 )
@@ -258,15 +264,15 @@ def manage_assist_status_div(assist_clicks, report_clicks):
         return True         # user clicked report, hide the div
 
 
-@callback(Output("verify-report-options-div", "hidden"),
+@callback(Output("select-graphs-div", "hidden"),
               Input("verify-graph-checklist", "options"),
               Input("verify-assist-button", "n_clicks"),
-              Input("verify-report-cancel-button", "n_clicks"),
+              Input("select-graphs-cancel-button", "n_clicks"),
               prevent_initial_call=True
               )
-def manage_verify_report_options_div(checklist_options, continue_clicks, cancel_clicks):
+def manage_select_graphs_div(checklist_options, continue_clicks, cancel_clicks):
     """ Show or hide the graph checklist div """
-    if (get_trigger() in ["verify-assist-button.n_clicks", "verify-report-cancel-button.n_clicks"]):
+    if (get_trigger() in ["verify-assist-button.n_clicks", "select-graphs-cancel-button.n_clicks"]):
         return True         # continue or cancel button pressed, hide div
     elif checklist_options == []:
         return True         # no checklist options provided, don't show div
@@ -287,14 +293,14 @@ def manage_verify_assist_done_dialog(children, n_clicks):
         return True     # child added, show the dialog
 
 
-@callback(Output("verify-report-error-dialog", "is_open"),
-          Input("verify-report-error-dialog-body", "children"),
-          Input("verify-report-error-button", "n_clicks"),
+@callback(Output("sg-link-error-dialog", "is_open"),
+          Input("sg-link-error-dialog-body", "children"),
+          Input("sg-link-error-button", "n_clicks"),
           prevent_initial_call=True
           )
-def manage_verify_report_error_dialog(children, n_clicks):
+def manage_sg_link_error_dialog(children, n_clicks):
     """ Show or hide the SPARQLgraph report error dialog (e.g. if no graphs selected) """
-    if (get_trigger() == "verify-report-error-button.n_clicks"):
+    if (get_trigger() == "sg-link-error-button.n_clicks"):
         return False        # button pressed, hide the dialog
     else:
         if children is None:

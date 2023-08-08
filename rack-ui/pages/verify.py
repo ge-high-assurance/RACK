@@ -71,6 +71,7 @@ layout = html.Div([
     verify_assist_done_dialog,
     sg_link_error_dialog,
     dcc.Store("assist-status-filepath"),        # stores the filename of the temp file containing status
+    dcc.Store("report-vs-cardinality"),         # stores user choice of SPARQLgraph report or cardinality
     dcc.Store("sparqlgraph-url"),               # stores the SPARQLgraph URL 
     dcc.Store(id="clientside-dummy-store"),     # dummy store because callback needs an Output
     dcc.Interval(id='assist-status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
@@ -170,6 +171,7 @@ def download_assist_results(n_clicks, status_filepath):
 
 @dash.callback(
     output=[
+        Output("report-vs-cardinality", "data"),                # remember whether user wanted SPARQLgraph report or cardinality
         Output("verify-graph-checklist", "options"),            # list of graphs populated in the triple store
         Output("verify-graph-checklist", "value")],             # list of graphs to pre-select (graphs recently loaded)
     inputs=[
@@ -186,8 +188,15 @@ def download_assist_results(n_clicks, status_filepath):
 )
 def show_graphs_checklist(report_button_clicks, cardinality_button_clicks, last_loaded_graphs):
     """
-    Show list of graphs for verification report, with the last loaded graphs pre-selected
+    Show list of graphs for generating SPARQLgraph link, with the last loaded graphs pre-selected
     """
+    
+    # remember which button triggered this: report or cardinality
+    if (get_trigger() == "verify-report-button.n_clicks"):
+        report_vs_cardinality = True    # user wants report
+    else:
+        report_vs_cardinality = False   # user wants cardinality
+    
     # get list of graphs populated in the triple store
     graphs_list_values = get_graph_info().get_column(0)    # list of graphs, including uri://DefaultGraph
     graphs_list_labels = list(map(lambda x: x.replace(DEFAULT_GRAPH_NAME, 'Optimized graph'), graphs_list_values.copy()))  # display default graph as "Optimized graph"
@@ -197,14 +206,16 @@ def show_graphs_checklist(report_button_clicks, cardinality_button_clicks, last_
     if last_loaded_graphs is None:
         last_loaded_graphs = []
 
-    return graphs_list, last_loaded_graphs
+    return report_vs_cardinality, graphs_list, last_loaded_graphs
 
 
 @dash.callback(
-    output=[Output("sparqlgraph-url", "data"),                      # output SPARQLgraph report URL
+    output=[Output("sparqlgraph-url", "data"),                      # output SPARQLgraph URL
             Output("sg-link-error-dialog-body", "children")],       # output error message
     inputs=Input("select-graphs-continue-button", "n_clicks"),      # triggered by clicking continue button
-    state=State("verify-graph-checklist", "value"),                 # the currently selected graphs
+    state=[
+        State("report-vs-cardinality", "data"),                     # true for report, false for cardinality
+        State("verify-graph-checklist", "value")],                  # the currently selected graphs
     background=True,                                                # background callback
     running=[
         (Output("verify-report-button", "disabled"), True, False),  # disable the button while running
@@ -213,9 +224,9 @@ def show_graphs_checklist(report_button_clicks, cardinality_button_clicks, last_
     ],
     prevent_initial_call=True
 )
-def generate_report_link(sg_button_clicks, graphs_selected):
+def generate_sg_link(sg_button_clicks, report_vs_cardinality, graphs_selected):
     """
-    Generate the SPARQLgraph report link
+    Generate the SPARQLgraph link
     """
     # error if no graphs were selected
     if len(graphs_selected) == 0:
@@ -227,14 +238,17 @@ def generate_report_link(sg_button_clicks, graphs_selected):
         graphs.append(graph)
     conn = semtk3.build_connection_str("Graphs To Verify", rack.DEFAULT_TRIPLE_STORE_TYPE, rack.DEFAULT_TRIPLE_STORE, graphs, graphs[0], graphs[1:])  # use all graphs for both model and data, to avoid either being empty
 
-    # construct SG report URL
-    sparqlgraph_verify_url_str = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=str(conn), report_id="report data verification")
+    # construct SG URL
+    if(report_vs_cardinality):
+        sparqlgraph_verify_url_str = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=str(conn), report_id="report data verification") # URL to generate report
+    else:
+        sparqlgraph_verify_url_str = semtk3.get_sparqlgraph_url(SPARQLGRAPH_BASE_URL, conn_json_str=str(conn), explore_restrictions=True)  # URL to explore cardinality
 
-    # return SPARQLgraph report URL
+    # return SPARQLgraph URL
     return sparqlgraph_verify_url_str, None
 
 
-# Open a browser tab with SPARQLgraph report  (this is a clientside callback written in JavaScript: https://dash.plotly.com/clientside-callbacks)
+# Open a browser tab with SPARQLgraph link  (this is a clientside callback written in JavaScript: https://dash.plotly.com/clientside-callbacks)
 dash.clientside_callback(
     """
     function(url) {
@@ -256,6 +270,7 @@ dash.clientside_callback(
 @callback(Output("assist-status-div", "hidden"),
               Input("verify-assist-button", "n_clicks"),
               Input("verify-report-button", "n_clicks"),
+              Input("cardinality-button", "n_clicks"),
               prevent_initial_call=True
               )
 def manage_assist_status_div(assist_clicks, report_clicks):
@@ -263,7 +278,7 @@ def manage_assist_status_div(assist_clicks, report_clicks):
     if (get_trigger() in ["verify-assist-button.n_clicks"]):
         return False        # user clicked ASSIST, show the div
     else:
-        return True         # user clicked report, hide the div
+        return True         # user clicked other button, hide the div
 
 
 @callback(Output("select-graphs-div", "hidden"),
@@ -301,7 +316,7 @@ def manage_verify_assist_done_dialog(children, n_clicks):
           prevent_initial_call=True
           )
 def manage_sg_link_error_dialog(children, n_clicks):
-    """ Show or hide the SPARQLgraph report error dialog (e.g. if no graphs selected) """
+    """ Show or hide the SPARQLgraph link error dialog (e.g. if no graphs selected) """
     if (get_trigger() == "sg-link-error-button.n_clicks"):
         return False        # button pressed, hide the dialog
     else:

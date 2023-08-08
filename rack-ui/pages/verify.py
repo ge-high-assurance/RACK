@@ -172,7 +172,9 @@ def download_assist_results(n_clicks, status_filepath):
     output=[
         Output("verify-graph-checklist", "options"),            # list of graphs populated in the triple store
         Output("verify-graph-checklist", "value")],             # list of graphs to pre-select (graphs recently loaded)
-    inputs=Input("verify-report-button", "n_clicks"),           # triggered by user clicking button
+    inputs=[
+        Input("verify-report-button", "n_clicks"),              # triggered by user clicking buttons
+        Input("check-cardinality-button", "n_clicks")],
     state=State("last-loaded-graphs", "data"),                  # last loaded graphs
     background=True,                                            # background callback
     running=[
@@ -182,7 +184,7 @@ def download_assist_results(n_clicks, status_filepath):
     ],
     prevent_initial_call=True
 )
-def show_report_options(button_clicks, last_loaded_graphs):
+def show_graphs_checklist(report_button_clicks, cardinality_button_clicks, last_loaded_graphs):
     """
     Show list of graphs for verification report, with the last loaded graphs pre-selected
     """

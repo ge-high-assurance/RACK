@@ -61,11 +61,11 @@ layout = html.Div([
     dbc.Row([
         dbc.Col(html.Button("Verify using ASSIST", id="verify-assist-button", n_clicks=0), width="auto"),  # button to verify using ASSIST
         dbc.Col(html.Button("Verify using report", id="verify-report-button"), width="auto"),              # button to verify using SPARQLgraph report
-        dbc.Col(html.Button("Check cardinality", id="check-cardinality-button"), width="auto")             # button to check cardinality via SPARQLgraph
+        dbc.Col(html.Button("Check cardinality", id="cardinality-button"), width="auto")                   # button to check cardinality via SPARQLgraph
     ]),
     dbc.Tooltip("Run the ASSIST tool and download an error report", target="verify-assist-button"),
     dbc.Tooltip("Open SPARQLgraph and run data verification report on selected graphs", target="verify-report-button"),
-    dbc.Tooltip("Open SPARQLgraph and check cardinality on selected graphs", target="check-cardinality-button"),
+    dbc.Tooltip("Open SPARQLgraph and check cardinality on selected graphs", target="cardinality-button"),
     select_graphs_div,
     html.Div(id="assist-status-div", className="scrollarea"),       # displays status
     verify_assist_done_dialog,
@@ -85,8 +85,8 @@ layout = html.Div([
     background=True,                                                # background callback
     running=[
         (Output("verify-report-button", "disabled"), True, False),  # disable the button while running
-        (Output("verify-assist-button", "disabled"), True, False),      # disable the button while running
-        (Output("check-cardinality-button", "disabled"), True, False),  # disable the button while running
+        (Output("verify-assist-button", "disabled"), True, False),  # disable the button while running
+        (Output("cardinality-button", "disabled"), True, False),    # disable the button while running
     ],
     prevent_initial_call=True
 )
@@ -106,7 +106,7 @@ def create_assist_status_filepath(n_clicks):
     running=[
         (Output("verify-report-button", "disabled"), True, False),  # disable the button while running
         (Output("verify-assist-button", "disabled"), True, False),  # disable the button while running
-        (Output("check-cardinality-button", "disabled"), True, False),  # disable the button while running
+        (Output("cardinality-button", "disabled"), True, False),    # disable the button while running
         (Output("assist-status-interval", "disabled"), False, True) # enable the interval component while running
     ],
     prevent_initial_call=True
@@ -165,7 +165,7 @@ def download_assist_results(n_clicks, status_filepath):
     return dict(content=file_content, filename="rack_verification_results.txt")
 
 
-####### callbacks for SPARQLgraph report verification ######################################
+####### callbacks for SPARQLgraph report / cardinality ######################################
 
 
 @dash.callback(
@@ -174,13 +174,13 @@ def download_assist_results(n_clicks, status_filepath):
         Output("verify-graph-checklist", "value")],             # list of graphs to pre-select (graphs recently loaded)
     inputs=[
         Input("verify-report-button", "n_clicks"),              # triggered by user clicking buttons
-        Input("check-cardinality-button", "n_clicks")],
+        Input("cardinality-button", "n_clicks")],
     state=State("last-loaded-graphs", "data"),                  # last loaded graphs
     background=True,                                            # background callback
     running=[
         (Output("verify-report-button", "disabled"), True, False),     # disable the button while running
         (Output("verify-assist-button", "disabled"), True, False),     # disable the button while running
-        (Output("check-cardinality-button", "disabled"), True, False), # disable the button while running
+        (Output("cardinality-button", "disabled"), True, False),       # disable the button while running
     ],
     prevent_initial_call=True
 )
@@ -202,14 +202,14 @@ def show_graphs_checklist(report_button_clicks, cardinality_button_clicks, last_
 
 @dash.callback(
     output=[Output("sparqlgraph-url", "data"),                      # output SPARQLgraph report URL
-            Output("sg-link-error-dialog-body", "children")], # output error message
+            Output("sg-link-error-dialog-body", "children")],       # output error message
     inputs=Input("select-graphs-continue-button", "n_clicks"),      # triggered by clicking continue button
     state=State("verify-graph-checklist", "value"),                 # the currently selected graphs
     background=True,                                                # background callback
     running=[
         (Output("verify-report-button", "disabled"), True, False),  # disable the button while running
         (Output("verify-assist-button", "disabled"), True, False),  # disable the button while running
-        (Output("check-cardinality-button", "disabled"), True, False),  # disable the button while running
+        (Output("cardinality-button", "disabled"), True, False),    # disable the button while running
     ],
     prevent_initial_call=True
 )

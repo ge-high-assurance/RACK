@@ -12,7 +12,7 @@ from .helper import *
 DEFAULT_GRAPH_NAME = "uri://DefaultGraph"
 
 # dialog confirming ASSIST verification done
-verify_assist_done_dialog = dbc.Modal(
+verify_assist_done_dialog = dbc.Spinner(dbc.Modal(
     [
         dbc.ModalBody("MESSAGE PLACEHOLDER", id="verify-assist-done-dialog-body"),      # message
         dbc.ModalFooter([
@@ -24,7 +24,7 @@ verify_assist_done_dialog = dbc.Modal(
     id="verify-assist-done-dialog",
     is_open=False,
     backdrop=False,
-)
+))
 
 # div showing graphs list
 select_graphs_div = dbc.Spinner(html.Div(
@@ -59,20 +59,20 @@ layout = html.Div([
     html.H2('Verify Data'),
     dcc.Markdown("_Run verification routines on the data loaded in RACK_"),
     dbc.Row([
-        dbc.Col(html.Button("Verify using ASSIST", id="verify-assist-button", n_clicks=0), width="auto"),  # button to verify using ASSIST
-        dbc.Col(html.Button("Verify using report", id="verify-report-button"), width="auto"),              # button to verify using SPARQLgraph report
-        dbc.Col(html.Button("Check cardinality", id="cardinality-button"), width="auto")                   # button to check cardinality via SPARQLgraph
+        dbc.Col(html.Button("Data verification report", id="verify-report-button"), width="auto"),  # button to verify using SPARQLgraph data verification report
+        dbc.Col(html.Button("Cardinality checker", id="cardinality-button"), width="auto"),         # button to check cardinality via SPARQLgraph
+        dbc.Col(html.Button("ASSIST-DV", id="verify-assist-button", n_clicks=0), width="auto")      # button to verify using ASSIST
     ]),
-    dbc.Tooltip("Run the ASSIST tool and download an error report", target="verify-assist-button"),
-    dbc.Tooltip("Open SPARQLgraph and run data verification report on selected graphs", target="verify-report-button"),
-    dbc.Tooltip("Open SPARQLgraph and check cardinality on selected graphs", target="cardinality-button"),
+    dbc.Tooltip("Run the ASSIST-DV tool and download an error report", target="verify-assist-button"),
+    dbc.Tooltip("Run SPARQLgraph data verification report on selected graphs", target="verify-report-button"),
+    dbc.Tooltip("Run SPARQLgraph cardinality checker on selected graphs", target="cardinality-button"),
     select_graphs_div,
     html.Div(id="assist-status-div", className="scrollarea"),       # displays status
     verify_assist_done_dialog,
     sg_link_error_dialog,
     dcc.Store("assist-status-filepath"),        # stores the filename of the temp file containing status
     dcc.Store("report-vs-cardinality"),         # stores user choice of SPARQLgraph report or cardinality
-    dcc.Store("sparqlgraph-url"),               # stores the SPARQLgraph URL 
+    dbc.Spinner(dcc.Store("sparqlgraph-url")),  # stores the SPARQLgraph URL.  Show spinner while generating it. 
     dcc.Store(id="clientside-dummy-store"),     # dummy store because callback needs an Output
     dcc.Interval(id='assist-status-interval', interval=0.5*1000, n_intervals=0, disabled=True), # triggers updating the status display
 ])
@@ -273,7 +273,7 @@ dash.clientside_callback(
               Input("cardinality-button", "n_clicks"),
               prevent_initial_call=True
               )
-def manage_assist_status_div(assist_clicks, report_clicks):
+def manage_assist_status_div(assist_clicks, report_clicks, cardinality_clicks):
     """ Show or hide the ASSIST status div """
     if (get_trigger() in ["verify-assist-button.n_clicks"]):
         return False        # user clicked ASSIST, show the div

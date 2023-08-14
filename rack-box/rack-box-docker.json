@@ -19,7 +19,7 @@
       "commit": true,
       "image": "ubuntu:22.04",
       "platform": "{{user `arch`}}",
-      "pull": false
+      "pull": true
     }
   ],
 

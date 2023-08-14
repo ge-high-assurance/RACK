@@ -21,6 +21,15 @@ jobs:
 
   build-docker-image:
     runs-on: ubuntu-22.04
+    name: Build on ${{ matrix.distro }} ${{ matrix.arch }}
+
+    strategy:
+      matrix:
+        include:
+          - arch: aarch64
+            distro: ubuntu22.04
+          - arch: armv7
+            distro: ubuntu22.04
 
     steps:
     - name: Check out RACK source
@@ -36,9 +45,13 @@ jobs:
         path: RACK/rack-box/files
 
     - name: Build rack-box docker image
-      run: |
-        cd RACK/rack-box
-        packer build -var version=${{ inputs.version }} rack-box-docker.json
+      uses: uraimo/run-on-arch-action@v2
+      with:
+          arch: ${{ matrix.arch }}
+          distro: ${{ matrix.distro }}
+          run: |
+            cd RACK/rack-box
+            packer build -var version=${{ inputs.version }} rack-box-docker.json
 
     - name: Login to Docker Hub
       if: inputs.push == true

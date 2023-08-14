@@ -29,9 +29,6 @@ jobs:
           - arch: aarch64
             distro: ubuntu22.04
             ubuntu-arch: linux/amd64
-          - arch: armv7
-            distro: ubuntu22.04
-            ubuntu-arch: linux/arm64/v8
 
     steps:
     - name: Check out RACK source

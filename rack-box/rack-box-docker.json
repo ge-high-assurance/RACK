@@ -5,6 +5,7 @@
     "no_proxy": "{{env `no_proxy`}}",
     "repository": "gehighassurance/rack-box",
     "tags": "{{user `version`}}",
+    "arch": "{{user `arch`}}",
     "version": "dev"
   },
 
@@ -17,6 +18,7 @@
       ],
       "commit": true,
       "image": "ubuntu:22.04",
+      "platform": "{{user `arch`}}",
       "pull": false
     }
   ],

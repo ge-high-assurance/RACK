@@ -28,8 +28,10 @@ jobs:
         include:
           - arch: aarch64
             distro: ubuntu22.04
+            ubuntu-arch: linux/amd64
           - arch: armv7
             distro: ubuntu22.04
+            ubuntu-arch: linux/arm64/v8
 
     steps:
     - name: Check out RACK source
@@ -51,7 +53,7 @@ jobs:
           distro: ${{ matrix.distro }}
           run: |
             cd RACK/rack-box
-            packer build -var version=${{ inputs.version }} rack-box-docker.json
+            packer build -var version=${{ inputs.version }} -var arch=${{ matrix.ubuntu-arch }} rack-box-docker.json
 
     - name: Login to Docker Hub
       if: inputs.push == true

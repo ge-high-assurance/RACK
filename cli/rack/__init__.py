@@ -860,7 +860,7 @@ def dispatch_utility_copygraph(args: SimpleNamespace) -> None:
 
 def dispatch_manifest_import(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
-    ingest_manifest_driver(Path(args.config), args.triple_store, args.triple_store_type, args.clear, args.optimize, args.optimize_url)
+    ingest_manifest_driver(Path(args.package), args.triple_store, args.triple_store_type, args.clear, args.optimize, args.optimize_url)
 
 def dispatch_manifest_build(args: SimpleNamespace) -> None:
     """Implementation of manifest import subcommand"""
@@ -962,14 +962,14 @@ def get_argument_parser() -> argparse.ArgumentParser:
     utility_copygraph_parser.add_argument('--to-graph', type=str, required=True, help='merge to this graph')
     utility_copygraph_parser.set_defaults(func=dispatch_utility_copygraph)
 
-    manifest_import_parser.add_argument('config', type=str, help='Manifest YAML file')
+    manifest_import_parser.add_argument('package', type=str, help='Ingestion package')
     manifest_import_parser.add_argument('--clear', action='store_true', help='Clear footprint before import')
     manifest_import_parser.add_argument('--optimize', default=True, action=argparse.BooleanOptionalAction, help='Enable RACK UI optimization when available')
     manifest_import_parser.add_argument('--optimize-url', type=str, help='RACK UI optimization endpoint (e.g. http://localhost:8050/optimize)')
     manifest_import_parser.set_defaults(func=dispatch_manifest_import)
 
     manifest_build_parser.add_argument('config', type=str, help='Manifest YAML file')
-    manifest_build_parser.add_argument('zipfile', type=str, help='Ingestion package output file')
+    manifest_build_parser.add_argument('zipfile', type=str, help='Ingestion package output file name')
     manifest_build_parser.set_defaults(func=dispatch_manifest_build)
 
     data_import_parser.add_argument('config', type=str, help='Configuration YAML file')

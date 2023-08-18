@@ -443,10 +443,10 @@ a package called `package-v1.zip`.
 ```text
 usage: rack manifest import [-h] [--clear] [--optimize | --no-optimize]
                             [--optimize-url OPTIMIZE_URL]
-                            config
+                            package
 
 positional arguments:
-  config                Manifest YAML file
+  package               Ingestion package
 
 options:
   -h, --help            show this help message and exit

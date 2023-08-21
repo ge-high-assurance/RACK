@@ -37,7 +37,7 @@ jobs:
     - name: Install RACK CLI development dependencies
       run: |
         cd cli
-        pip3 install "rack[dev]"
+        pip3 install ".[dev]"
 
     - name: Lint RACK CLI
       run: |

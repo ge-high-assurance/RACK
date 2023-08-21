@@ -336,6 +336,33 @@ default `http://rack001/data`. Multiple data graphs can be specified.
 (venv) $ rack data clear --data-graph http://rack001/ex1 --data-graph http://rack001/ex2
 ```
 
+### Check data cardinality constraints
+
+The RACK CLI can invoke the cardinality report generator. The output behavior is similar
+to a data export. The format and headers are configurable.
+
+```
+usage: rack data cardinality [-h] [--model-graph MODEL_GRAPH] [--data-graph DATA_GRAPH] [--format {text,csv}] [--no-headers]
+                             [--max-rows MAX_ROWS] [--concise]
+
+options:
+  -h, --help            show this help message and exit
+  --model-graph MODEL_GRAPH
+                        Model graph URL
+  --data-graph DATA_GRAPH
+                        Data graph URL
+  --format {text,csv}   Export format
+  --no-headers          Omit header row
+  --max-rows MAX_ROWS   Maximum output rows
+  --concise             Use concise output
+```
+
+With the default arguments, RACK will check the default graph and generate a human-readable table.
+
+```shell
+(venv) $ rack data cardinality
+```
+
 ### Nodegroups
 
 The script can automate loading a directory full of nodegroups

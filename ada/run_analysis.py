@@ -281,10 +281,12 @@ def analyze_structure(unit: lal.AnalysisUnit) -> None:
     analysis_output = visitor.packages
 
     for package, components in analysis_output.items():
+        filename = package.p_relative_name.unit.filename.rsplit('/', 1)[-1]
         Evidence.Add.SOFTWARE.SWCOMPONENT(
             identifier=get_node_identifier(package),
             title=escape(package.doc_name),
             componentType_identifier=ontology.MODULE,
+            definedIn_identifier=filename,
         )
         for component in components:
             Evidence.Add.SOFTWARE.SWCOMPONENT(

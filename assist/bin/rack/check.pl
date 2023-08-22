@@ -72,12 +72,12 @@ check_instance_property_violations(Property) :-
     ; check_cardinality_min(Property, I, T)
     ; check_cardinality_max(Property, I, T)
     ; check_target_type(Property, I, T)
-    ; check_target_type_restrictions(Property, I, T)
     ; check_values_from(Property, I, T)
     ).
 
 check_instance_property_violations(Property) :-
     (check_maybe_prop(Property)
+    ; check_target_type_restrictions(Property)
     ; check_invalid_value(Property)
     ).
 
@@ -142,24 +142,32 @@ check_target_type(Property, I, T) :-
     print_message(informational, trinary_op(check_target_type, Property, I, T)),
     print_message(error, property_value_wrong_type(T, I, IName, Property, ValTy, Val, ModelTy)).
 
-check_target_type_restrictions(Property, I, T) :-
-    rdf(T, rdfs:subClassOf, R),
+check_target_type_restrictions(Property) :-
+    rdf(R, owl:'onProperty', Property),
     rdf_is_bnode(R),
     rdf(R, rdf:type, owl:'Restriction'),
-    rdf(R, owl:'onProperty', Property),
-    has_interesting_prefix(Property),
     rdf(R, owl:'allValuesFrom', RTgtTy),
+    has_interesting_prefix(Property),
+    rdf(TargetClass, rdfs:subClassOf, R),
+    property_extra(TargetClass, Property, value_from(RTgtTy)),
+    rdf(I, rdf:type, TargetClass),
+    rack_data_instance(I),
+    has_interesting_prefix(I),
+    % Get all instances of that TargetClass which have that Property set
     rdf(I, Property, Val),
+    rdf(I, rdf:type, ITy),
+    rdf_reachable(ITy, rdfs:subClassOf, TargetClass),
+    property_extra(TargetClass, Property, value_from(RTgtTy)),
+    % Ensure the TargetClass doesn't have an overriding property (e.g. it is a
+    % subclass and that subclass has its own restriction).
+    property_extra(ITy, Property, value_from(InstTgtTy)),
+    \+ rdf_reachable(RTgtTy, rdfs:subClassOf, InstTgtTy),
+    \+ rack_instance_target(I, Property, Val),
     rack_instance_ident(I, IName),
-    \+ rdf_is_literal(Val),
     rdf(Val, rdf:type, ValTy),
-    ( owl_list(RTgtTy, TyLst),
-      \+ member(ValTy, TyLst),
-      print_message(error, property_value_wrong_type(T, I, IName, Property, ValTy, Val, 'TyLst'))
-    ; \+ owl_list(RTgtTy, _),
-      ValTy \= RTgtTy,
-        print_message(error, property_value_wrong_type(T, I, IName, Property, ValTy, Val, RTgtTy))
-    ).
+    print_message(informational, trinary_op(check_target_type_restrictions, Property, I, TargetClass)),
+    print_message(error, property_value_wrong_type(TargetClass, I, IName, Property, ValTy, Val, RTgtTy)).
+
 
 check_values_from(Property, I, T) :-
     property_extra(T, Property, value_from(Cls)),

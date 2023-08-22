@@ -75,8 +75,10 @@ check_instance_property_violations(Property) :-
     ; check_target_type(Property, I, T)
     ; check_target_type_restrictions(Property, I, T)
     ; check_values_from(Property, I, T)
-    ; check_invalid_value(Property, I, T)
     ).
+
+check_instance_property_violations(Property) :-
+    check_invalid_value(Property).
 
 check_cardinality_exact(Property, I, T) :-
     property_extra(T, Property, cardinality(N)),
@@ -177,28 +179,29 @@ check_values_from(Property, I, T) :-
       print_message(error, property_value_wrong_type(T, I, IName, Property, DefTy, Val, Cls))
     ).
 
-check_invalid_value(Property, I, T) :-
-    property_extra(T, Property, _Restr),
-    rdf(Property, rdfs:range, PTy),
+check_invalid_value(Property) :-
     rdf(PTy, owl:equivalentClass, PTyEquiv),
-    rdf(PTyEquiv, owl:oneOf, Enums),
+    rdf(Property, rdfs:range, PTy),
+    has_interesting_prefix(Property),
     rdf(I, Property, V),
+    rack_data_instance(I),
+    has_interesting_prefix(I),
+    rdf(I, rdf:type, T),
+    property_extra(T, Property, _Restr),
+    check_invalid_value_of(Property, I, PTyEquiv, V, T).
+
+check_invalid_value_of(Property, I, PTyEquiv, V, T) :-
+    rdf(PTyEquiv, owl:oneOf, Enums),
     \+ rdf_is_literal(V),  % literals checked elsewhere
     \+ rdf(V, rdf:type, _),
-    has_interesting_prefix(Property),
     !,
     rdf_list(Enums,L),
     rack_instance_ident(I, IName),
     print_message(informational, trinary_op(check_invalid_value, Property, I, T)),
     print_message(error, invalid_value_in_enum(T, I, IName, Property, V, L)).
 
-check_invalid_value(Property, I, T) :-
-    property_extra(T, Property, _Restr),
-    has_interesting_prefix(Property),
-    rdf(I, Property, V),
+check_invalid_value_of(Property, REquiv, I, V, T) :-
     rdf_is_literal(V),  % non-literals handled elsewhere
-    rdf(Property, rdfs:range, R),
-    rdf(R, owl:equivalentClass, REquiv),
     rdf(REquiv, owl:withRestrictions, RL),
     rdf(REquiv, owl:onDatatype, RT),
     rdf_list(RL, L),

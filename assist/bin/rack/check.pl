@@ -71,14 +71,15 @@ check_instance_property_violations(Property) :-
     ( check_cardinality_exact(Property, I, T)
     ; check_cardinality_min(Property, I, T)
     ; check_cardinality_max(Property, I, T)
-    ; check_maybe_prop(Property, I, T)
     ; check_target_type(Property, I, T)
     ; check_target_type_restrictions(Property, I, T)
     ; check_values_from(Property, I, T)
     ).
 
 check_instance_property_violations(Property) :-
-    check_invalid_value(Property).
+    (check_maybe_prop(Property)
+    ; check_invalid_value(Property)
+    ).
 
 check_cardinality_exact(Property, I, T) :-
     property_extra(T, Property, cardinality(N)),
@@ -113,8 +114,11 @@ check_cardinality_max(Property, I, T) :-
     print_message(informational, trinary_op(check_cardinality_max, Property, I, T)),
     print_message(error, max_cardinality_violation(T, I, IName, Property, N, VSLen)).
 
-check_maybe_prop(Property, I, T) :-
+check_maybe_prop(Property) :-
     property_extra(T, Property, maybe),
+    rdf(I, rdf:type, T),
+    rack_data_instance(I),
+    has_interesting_prefix(I),
     has_interesting_prefix(Property),
     % How many actual values for that property on this instance
     findall(V, rdf(I, Property, V), VS),

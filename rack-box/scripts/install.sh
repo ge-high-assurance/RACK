@@ -183,5 +183,5 @@ done
 # Setup the RACK dataset using the RACK CLI
 
 cd "/home/${USER}/RACK/cli/"
-python3 -m pip install ./wheels/*.whl
+python3 -m pip install --no-dependencies ./wheels/*.whl
 ./setup-rack.sh

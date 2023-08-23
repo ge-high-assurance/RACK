@@ -42,8 +42,8 @@ jobs:
     - name: Lint RACK CLI
       run: |
         cd cli
-        pylint .
-        mypy .
+        pylint rack
+        mypy rack
 
     - name: Lint RACK Ontology
       run: |

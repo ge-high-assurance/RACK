@@ -43,7 +43,7 @@ jobs:
         # This path is specific to Ubuntu
         path: ~/.cache/pip
         # Look to see if there is a cache hit for the corresponding requirements file
-        key: ${{ runner.os }}-pip-${{ hashFiles('RACK/cli/requirements.txt') }}
+        key: ${{ runner.os }}-pip-${{ hashFiles('RACK/cli/pyproject.toml') }}
         restore-keys: |
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
@@ -88,7 +88,6 @@ jobs:
       run: |
         cd RACK/cli
         python3 -m pip install --upgrade pip setuptools wheel
-        pip3 wheel --wheel-dir=wheels -r requirements.txt
         pip3 wheel --wheel-dir=wheels .
         cd ${{ github.workspace }}
         tar cfz RACK/rack-box/files/rack-cli.tar.gz RACK/cli/{*.sh,wheels}

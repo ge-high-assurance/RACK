@@ -793,10 +793,10 @@ def delete_nodegroup(nodegroup: str) -> None:
         semtk3.delete_nodegroup_from_store(nodegroup)
     delete()
 
-def delete_store_item(id: str, item_type: str) -> None:
-    @with_status(f'Deleting {str_highlight(id)}')
+def delete_store_item(ident: str, item_type: str) -> None:
+    @with_status(f'Deleting {str_highlight(ident)}')
     def delete() -> None:
-        semtk3.delete_store_item(id, item_type)
+        semtk3.delete_store_item(ident, item_type)
     delete()
 
 def delete_nodegroups_driver(nodegroups: List[str], ignore_nonexistent: bool, yes: bool, use_regexp: bool, base_url: Url) -> None:
@@ -868,17 +868,20 @@ def dispatch_manifest_build(args: SimpleNamespace) -> None:
 
 def dispatch_data_import(args: SimpleNamespace) -> None:
     """Implementation of the data import subcommand"""
+    global cliMethod
     cliMethod = CLIMethod.DATA_IMPORT
     ingest_data_driver(Path(args.config), args.base_url, args.model_graph, args.data_graph, args.triple_store, args.triple_store_type, args.clear)
 
 def dispatch_data_cardinality(args: SimpleNamespace) -> None:
     """Implementation of the data cardinality subcommand"""
+    global cliMethod
     cliMethod = CLIMethod.DATA_IMPORT
     cardinality_driver(args.base_url, args.model_graph, args.data_graph, args.triple_store, args.triple_store_type,
                        export_format=args.format, headers=not args.no_headers, concise=args.concise, max_rows=args.max_rows)
 
 def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
+    global cliMethod
     cliMethod = CLIMethod.MODEL_IMPORT
     ingest_owl_driver(Path(args.config), args.base_url, args.model_graph, args.triple_store, args.triple_store_type, args.clear)
 

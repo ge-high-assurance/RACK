@@ -31,7 +31,7 @@ __email__ = "emertens@galois.com"
 
 logger = logging.getLogger(__name__)
 
-def main():
+def main() -> None:
     # Sets up colors for Windows users
     colorama.init()
 

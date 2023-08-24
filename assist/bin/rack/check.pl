@@ -38,15 +38,17 @@ check_missing_notes(Class) :-
     has_interesting_prefix(Class),
     \+ rdf(Class, rdfs:comment, _),
     \+ rdf_is_bnode(Class),
+    print_message(informational, unary_op(check_missing_notes, Class)),
     print_message(warning, class_missing_note(Class)).
 
 check_not_prov_s(Class) :-
     rdf(Class, rdf:type, owl:'Class'),
     has_interesting_prefix(Class),
-    rack_ref('PROV-S#NODE', Thing),
-    \+ rdf_reachable(Class, rdfs:subClassOf, Thing),
+    rack_ref('PROV-S#NODE', NodeBase),
+    \+ rdf_reachable(Class, rdfs:subClassOf, NodeBase),
     \+ rdf_is_bnode(Class),
-    print_message(warning, not_prov_s_thing_class(Class)).
+    print_message(informational, unary_op(check_not_prov_s, Class)),
+    print_message(warning, not_prov_s_node_class(Class)).
 
 check_instance_types(I) :-
     % Get an instance
@@ -56,6 +58,7 @@ check_instance_types(I) :-
     findall(IT, rdf(I, rdf:type, IT), ITs),
     length(ITs, N),
     N > 1,
+    print_message(informational, unary_op(check_instance_types, I)),
     print_message(error, multiple_types_for_instance(I, ITs)).
 
 check_instance_property_violations(Property) :-
@@ -68,11 +71,14 @@ check_instance_property_violations(Property) :-
     ( check_cardinality_exact(Property, I, T)
     ; check_cardinality_min(Property, I, T)
     ; check_cardinality_max(Property, I, T)
-    ; check_maybe_prop(Property, I, T)
     ; check_target_type(Property, I, T)
-    ; check_target_type_restrictions(Property, I, T)
     ; check_values_from(Property, I, T)
-    ; check_invalid_value(Property, I, T)
+    ).
+
+check_instance_property_violations(Property) :-
+    (check_maybe_prop(Property)
+    ; check_target_type_restrictions(Property)
+    ; check_invalid_value(Property)
     ).
 
 check_cardinality_exact(Property, I, T) :-
@@ -83,6 +89,7 @@ check_cardinality_exact(Property, I, T) :-
     length(VS, VSLen),
     VSLen \= N,
     rack_instance_ident(I, IName),
+    print_message(informational, trinary_op(check_cardinality_exact, Property, I, T)),
     print_message(error, cardinality_violation(T, I, IName, Property, N, VSLen)).
 
 check_cardinality_min(Property, I, T) :-
@@ -93,6 +100,7 @@ check_cardinality_min(Property, I, T) :-
     length(VS, VSLen),
     VSLen < N,
     rack_instance_ident(I, IName),
+    print_message(informational, trinary_op(check_cardinality_min, Property, I, T)),
     print_message(error, min_cardinality_violation(T, I, IName, Property, N, VSLen)).
 
 check_cardinality_max(Property, I, T) :-
@@ -103,10 +111,14 @@ check_cardinality_max(Property, I, T) :-
     length(VS, VSLen),
     VSLen > N,
     rack_instance_ident(I, IName),
+    print_message(informational, trinary_op(check_cardinality_max, Property, I, T)),
     print_message(error, max_cardinality_violation(T, I, IName, Property, N, VSLen)).
 
-check_maybe_prop(Property, I, T) :-
+check_maybe_prop(Property) :-
     property_extra(T, Property, maybe),
+    rdf(I, rdf:type, T),
+    rack_data_instance(I),
+    has_interesting_prefix(I),
     has_interesting_prefix(Property),
     % How many actual values for that property on this instance
     findall(V, rdf(I, Property, V), VS),
@@ -114,6 +126,7 @@ check_maybe_prop(Property, I, T) :-
      length(VS, 1), !, fail; % fail: do not report during check
      length(VS, VSLen),
      rack_instance_ident(I, IName),
+     print_message(informational, trinary_op(check_maybe_prop, Property, I, T)),
      print_message(error, maybe_restriction(T, I, IName, Property, VSLen))).
 
 check_target_type(Property, I, T) :-
@@ -126,26 +139,35 @@ check_target_type(Property, I, T) :-
     rack_instance_ident(I, IName),
     rdf(Val, rdf:type, ValTy),
     property_range_type(T, Property, ModelTy),
+    print_message(informational, trinary_op(check_target_type, Property, I, T)),
     print_message(error, property_value_wrong_type(T, I, IName, Property, ValTy, Val, ModelTy)).
 
-check_target_type_restrictions(Property, I, T) :-
-    rdf(T, rdfs:subClassOf, R),
+check_target_type_restrictions(Property) :-
+    rdf(R, owl:'onProperty', Property),
     rdf_is_bnode(R),
     rdf(R, rdf:type, owl:'Restriction'),
-    rdf(R, owl:'onProperty', Property),
-    has_interesting_prefix(Property),
     rdf(R, owl:'allValuesFrom', RTgtTy),
+    has_interesting_prefix(Property),
+    rdf(TargetClass, rdfs:subClassOf, R),
+    property_extra(TargetClass, Property, value_from(RTgtTy)),
+    rdf(I, rdf:type, TargetClass),
+    rack_data_instance(I),
+    has_interesting_prefix(I),
+    % Get all instances of that TargetClass which have that Property set
     rdf(I, Property, Val),
+    rdf(I, rdf:type, ITy),
+    rdf_reachable(ITy, rdfs:subClassOf, TargetClass),
+    property_extra(TargetClass, Property, value_from(RTgtTy)),
+    % Ensure the TargetClass doesn't have an overriding property (e.g. it is a
+    % subclass and that subclass has its own restriction).
+    property_extra(ITy, Property, value_from(InstTgtTy)),
+    \+ rdf_reachable(RTgtTy, rdfs:subClassOf, InstTgtTy),
+    \+ rack_instance_target(I, Property, Val),
     rack_instance_ident(I, IName),
-    \+ rdf_is_literal(Val),
     rdf(Val, rdf:type, ValTy),
-    ( owl_list(RTgtTy, TyLst),
-      \+ member(ValTy, TyLst),
-      print_message(error, property_value_wrong_type(T, I, IName, Property, ValTy, Val, 'TyLst'))
-    ; \+ owl_list(RTgtTy, _),
-      ValTy \= RTgtTy,
-        print_message(error, property_value_wrong_type(T, I, IName, Property, ValTy, Val, RTgtTy))
-    ).
+    print_message(informational, trinary_op(check_target_type_restrictions, Property, I, TargetClass)),
+    print_message(error, property_value_wrong_type(TargetClass, I, IName, Property, ValTy, Val, RTgtTy)).
+
 
 check_values_from(Property, I, T) :-
     property_extra(T, Property, value_from(Cls)),
@@ -160,34 +182,47 @@ check_values_from(Property, I, T) :-
       rdf_list(ClsLst, CList),
       ( member(CL, CList),
         rdf_reachable(DefTy, rdfs:subClassOf, CL), !  % matches, stop processing
-      ; print_message(error,
+      ; print_message(informational, trinary_op(check_values_from, Property, I, T)),
+        print_message(error,
                       property_value_wrong_type_in(T, I, IName, Property, DefTy, Val, CList))
       )
+    ; % Cls might be a union of multiple possible classes
+      rdf_is_bnode(Cls), rdf(Cls, owl:unionOf, ClsLst), !,
+      rdf_list(ClsLst, CList),
+      ( member(CL, CList),
+        rdf_reachable(DefTy, rdfs:subClassOf, CL), ! % matches, stop processing
+      ; print_message(informational, trinary_op(check_values_from, Property, I, T)),
+        print_message(error,
+                        property_value_wrong_type_in(T, I, IName, Property, DefTy, Val, CList))
+    )
     ; \+ rdf_reachable(DefTy, rdfs:subClassOf, Cls),
+      print_message(informational, trinary_op(check_values_from, Property, I, T)),
       print_message(error, property_value_wrong_type(T, I, IName, Property, DefTy, Val, Cls))
     ).
 
-check_invalid_value(Property, I, T) :-
-    property_extra(T, Property, _Restr),
-    rdf(Property, rdfs:range, PTy),
+check_invalid_value(Property) :-
     rdf(PTy, owl:equivalentClass, PTyEquiv),
-    rdf(PTyEquiv, owl:oneOf, Enums),
+    rdf(Property, rdfs:range, PTy),
+    has_interesting_prefix(Property),
     rdf(I, Property, V),
+    rack_data_instance(I),
+    has_interesting_prefix(I),
+    rdf(I, rdf:type, T),
+    property_extra(T, Property, _Restr),
+    check_invalid_value_of(Property, I, PTyEquiv, V, T).
+
+check_invalid_value_of(Property, I, PTyEquiv, V, T) :-
+    rdf(PTyEquiv, owl:oneOf, Enums),
     \+ rdf_is_literal(V),  % literals checked elsewhere
     \+ rdf(V, rdf:type, _),
-    has_interesting_prefix(Property),
     !,
     rdf_list(Enums,L),
     rack_instance_ident(I, IName),
+    print_message(informational, trinary_op(check_invalid_value, Property, I, T)),
     print_message(error, invalid_value_in_enum(T, I, IName, Property, V, L)).
 
-check_invalid_value(Property, I, T) :-
-    property_extra(T, Property, _Restr),
-    has_interesting_prefix(Property),
-    rdf(I, Property, V),
+check_invalid_value_of(Property, REquiv, I, V, T) :-
     rdf_is_literal(V),  % non-literals handled elsewhere
-    rdf(Property, rdfs:range, R),
-    rdf(R, owl:equivalentClass, REquiv),
     rdf(REquiv, owl:withRestrictions, RL),
     rdf(REquiv, owl:onDatatype, RT),
     rdf_list(RL, L),
@@ -199,6 +234,7 @@ check_invalid_value(Property, I, T) :-
     actual_val(V, RT, Val),
     (rdf_compare(<,Val,MinVal) ; rdf_compare(>,Val,MaxVal)),
     rack_instance_ident(I, IName),
+    print_message(informational, trinary_op(check_invalid_value, Property, I, T)),
     print_message(error, value_outside_range(T, I, IName, Property, RT, Val, MinVal, MaxVal)).
 
 % True for any SrcClass that has no Prop relationship to any target
@@ -209,6 +245,7 @@ check_has_no_rel(Context, SrcClass, Prop, SrcInst) :-
     rack_data_instance(SrcClass, SrcInst),
     none_of(SrcInst, rack_instance_relationship(SrcClass, Prop)),
     rack_instance_ident(SrcInst, SrcName),
+    print_message(informational, quarnary_op(check_has_no_rel, Context, SrcClass, Prop, SrcInst)),
     print_message(warning, missing_any_tgt(Context, SrcClass, SrcInst, SrcName, Prop)).
 
 % True for any SrcClass that has no Prop relationship to an instance
@@ -219,6 +256,7 @@ check_has_no_rel(Context, SrcClass, Prop, TgtClass, SrcInst) :-
     rack_data_instance(SrcClass, SrcInst),
     none_of(SrcInst, rack_instance_relationship(SrcClass, Prop, TgtClass)),
     rack_instance_ident(SrcInst, SrcName),
+    print_message(informational, quintary_op(check_has_no_rel, Context, SrcClass, Prop, TgtClass, SrcInst)),
     print_message(warning, missing_tgt(Context, SrcClass, SrcInst, SrcName, Prop, TgtClass)),
     % -- if the above fails, it's probably useful to see if there are
     % *any* targets of Src--[Rel]-->
@@ -232,6 +270,7 @@ is_valid_property(_, SrcClass, Property) :-
     rdf(Property, rdfs:domain, PropClass),
     rdf_reachable(SrcClass, rdfs:subClassOf, PropClass), !.
 is_valid_property(Context, SrcClass, Property) :-
+    print_message(informational, trinary_op(is_valid_property, '_', SrcClass, Property)),
     print_message(error, invalid_property_in_check(Context, SrcClass, Property)),
     fail.
 
@@ -255,8 +294,10 @@ check_invalid_domain_class(SrcClass, Property, DefinedClass) :-
     findall(OtherParent, (property(OtherParent, Property, Usage), OtherParent \= SrcClass), OtherParents),
     \+ member(DefinedClass, OtherParents),
     ( Property = ParentProp,
+      print_message(informational, trinary_op(check_invalid_domain_class, SrcClass, Property, DefinedClass)),
       print_message(error, invalid_domain(SrcClass, Property, DefinedClass))
     ; Property \= ParentProp,
+      print_message(informational, trinary_op(check_invalid_domain_class, SrcClass, Property, DefinedClass)),
       print_message(error, invalid_subclass_domain(SrcClass, Property, ParentProp, DefinedClass))
     ).
 
@@ -300,10 +341,18 @@ sum_all_nonzero([(_,N)|CNS], Sum) :-
     Sum is N + SubSum.
 
 
+prolog:message(unary_op(Name, Arg1)) -->
+    [ 'vv ~w(~w)'-[Name, Arg1] ].
+prolog:message(trinary_op(Name, Arg1, Arg2, Arg3)) -->
+    [ 'vv ~w(~w, ~w, ~w)'-[Name, Arg1, Arg2, Arg3] ].
+prolog:message(quarnary_op(Name, Arg1, Arg2, Arg3, Arg4)) -->
+    [ 'vv ~w(~w, ~w, ~w, ~w)'-[Name, Arg1, Arg2, Arg3, Arg4] ].
+prolog:message(quintary_op(Name, Arg1, Arg2, Arg3, Arg4, Arg5)) -->
+    [ 'vv ~w(~w, ~w, ~w, ~w, ~w)'-[Name, Arg1, Arg2, Arg3, Arg4, Arg5] ].
 prolog:message(class_missing_note(Class)) -->
     [ 'CE-100: No Note/Description for class ~w'-[Class] ].
-prolog:message(not_prov_s_thing_class(Class)) -->
-    [ 'CE-101: Not a subclass of PROV-S#THING: ~w'-[Class] ].
+prolog:message(not_prov_s_node_class(Class)) -->
+    [ 'CE-101: Not a subclass of PROV-S#NODE: ~w'-[Class] ].
 prolog:message(num_classes(What, Count)) -->
     [ 'There are ~:d RACK ~w.'-[Count, What] ].
 prolog:message(cardinality_violation(InstType, Instance, InstanceIdent, Property, Specified, Actual)) -->

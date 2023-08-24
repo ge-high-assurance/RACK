@@ -144,6 +144,9 @@ load_data_from_dir(Opts) :-
      load_data(NS, D)
     ).
 
+% Setting the verbose prolog_flag affects print_message: if set to "silent" then
+% "informational" and "banner" messages are suppressed.  Valid values are
+% "normal" and "silent".
 set_verbosity([]).
 set_verbosity([verbose(true)|_]) :- set_prolog_flag(verbose, normal).
 set_verbosity([verbose(false)|_]) :- set_prolog_flag(verbose, silent).

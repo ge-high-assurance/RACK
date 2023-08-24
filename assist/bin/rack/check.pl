@@ -186,6 +186,15 @@ check_values_from(Property, I, T) :-
         print_message(error,
                       property_value_wrong_type_in(T, I, IName, Property, DefTy, Val, CList))
       )
+    ; % Cls might be a union of multiple possible classes
+      rdf_is_bnode(Cls), rdf(Cls, owl:unionOf, ClsLst), !,
+      rdf_list(ClsLst, CList),
+      ( member(CL, CList),
+        rdf_reachable(DefTy, rdfs:subClassOf, CL), ! % matches, stop processing
+      ; print_message(informational, trinary_op(check_values_from, Property, I, T)),
+        print_message(error,
+                        property_value_wrong_type_in(T, I, IName, Property, DefTy, Val, CList))
+    )
     ; \+ rdf_reachable(DefTy, rdfs:subClassOf, Cls),
       print_message(informational, trinary_op(check_values_from, Property, I, T)),
       print_message(error, property_value_wrong_type(T, I, IName, Property, DefTy, Val, Cls))

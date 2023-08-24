@@ -36,8 +36,7 @@ jobs:
 
     - name: Install RACK CLI development dependencies
       run: |
-        cd cli
-        pip3 install ".[dev]"
+        pip3 install "cli/[dev]"
 
     - name: Lint RACK CLI
       run: |
@@ -110,9 +109,8 @@ jobs:
 
     - name: Run rack-box tests
       run: |
-        cd RACK/cli
-        pip3 install .
-        cd ..
+        cd RACK
+        pip3 install cli/
         pip3 install -r tests/requirements.txt
         python3 -m pytest tests
 

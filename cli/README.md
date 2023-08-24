@@ -46,7 +46,7 @@ the RACK-Box README.
 ```shell
 python3 -m venv venv
 source venv/bin/activate
-pip install --force-reinstall .
+pip3 install --force-reinstall .
 ```
 
 If running on Windows, [GitBash](https://gitforwindows.org/) can be used with the following commands.
@@ -54,7 +54,7 @@ If running on Windows, [GitBash](https://gitforwindows.org/) can be used with th
 ```shell
 python -m venv venv
 source venv/Scripts/activate
-pip install --force-reinstall .
+pip3 install --force-reinstall .
 ```
 
 ## Initialize RACK-in-a-Box

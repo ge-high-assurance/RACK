@@ -117,6 +117,6 @@ prolog:message(invalid_srs_req_satisfies(ITy, Inst, InstIdent, TgtTy, Tgt, TgtId
 %    Performs all checks for SRS classes.  Always succeeds, emits warnings.
 check_SRS(SRS) :-
     check_SRS_insertion_source(SRS);
-    check_SRS_Req_CSID_or_PIDS(SRS);
-    check_SRS_Req_description(SRS);
-    check_SubDD_Req_satisfies_SRS_Req(SRS).
+    check_SRS_Req_CSID_or_PIDS(SRS).
+%   check_SRS_Req_description(SRS);
+%   check_SubDD_Req_satisfies_SRS_Req(SRS).

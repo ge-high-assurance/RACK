@@ -15,8 +15,8 @@ are used to statically type-check the code. Usage is simple:
 
 ```shell
 source venv/bin/activate
-pip install -r dev/requirements.txt
-mypy .
+pip install ".[dev]"
+mypy rack
 ```
 
 ## Tests
@@ -25,8 +25,8 @@ You can run the tests with `pytest`:
 
 ```shell
 source venv/bin/activate
-pip install -r dev/requirements.txt
-python3 setup.py install && pytest
+pip install ".[dev]"
+pytest
 ```
 
 Note that you should _always install the code before testing_.

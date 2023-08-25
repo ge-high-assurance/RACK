@@ -48,6 +48,6 @@ check_INTERFACE_no_src_SYSTEM(IFACE) :-
 %! check_INTERFACE is det.
 %
 %    Performs all checks for INTERFACEs.  Always succeeds, emits warnings.
-check_INTERFACE(IFACE).
+check_INTERFACE(IFACE) :- IFACE = 0, fail.
 %    check_INTERFACE_no_dest_SYSTEM(IFACE);
 %    check_INTERFACE_no_src_SYSTEM(IFACE).

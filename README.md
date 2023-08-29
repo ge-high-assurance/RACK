@@ -18,10 +18,17 @@ RACK is a vendor agnostic data curation system. Requirements can be maintained i
 If you are citing RACK project, please use the following BibTex entries:
 ```latex
 @inproceedings{moitra2023rack,
-title={RACK: A Semantic Model and Triplestore for Curation of Assurance Case Evidence},
-author={Moitra, Abha and Cuddihy, Paul and Siu, Kit and Archer, David and Mertens, Eric and Russell, Daniel and Quick, Kevin and Robert, Valentin and Meng, Baoluo},
-booktitle={10th International Workshop on Next Generation of System Assurance Approaches for Safety-Critical Systems (SASSUR), Toulouse, France, September, Computer Safety, Reliability, and Security (SAFECOMP), Lecture Notes in Computer Science},
-year={2023}
+  title={RACK: A Semantic Model and Triplestore for Curation of Assurance Case Evidence},
+  author={Moitra, Abha and Cuddihy, Paul and Siu, Kit and Archer, David and Mertens, Eric and Russell, Daniel and Quick, Kevin and Robert, Valentin and Meng, Baoluo},
+  booktitle={10th International Workshop on Next Generation of System Assurance Approaches for Safety-Critical Systems (SASSUR), Toulouse, France, September, Computer Safety, Reliability, and Security (SAFECOMP), Lecture Notes in Computer Science},
+  year={2023}
+}
+
+@inproceedings{cuddihy2023rack,
+  title={Aviation Certification Powered by the Semantic Web Stack},
+  author={Cuddihy, Paul and Moitra, Abha and Mertens, Eric and Siu, Kit and Archer, David and Williams, Jenny},
+  booktitle={22nd International Semantic Web Conference},
+  year={2023}
 }
 
 @inproceedings{moitra2022semantic,
@@ -36,7 +43,7 @@ year={2023}
 
 ## The RACK Deployment Model
 
-To make RACK easy for all ARCOS performers to use, we deploy RACK as a software appliance that any user can download, install, and run in a local environment. This deployment model, which we call RACK-in-a-Box, makes it easy for both TA1 and TA3 performers to test software against the RACK APIs at will, without worrying about interfering accidentally with other users. In addition, our model allows for users to concurrently collaborate at will across TAs. For example, a TA1 user can send a set of sample data to a TA3 user, so that the TA3 user can ingest that data in a private RACK instance and develop query techniques independently. RACK's deployment approach achieves this flexibility while retaining ease of deployment in a centralized cloud instance, such as we might use during an ARCOS system evaluation experiment.
+To make RACK easy for all ARCOS performers to use, we deploy RACK as a software appliance that any user can download, install, and run in a local environment. This deployment model, which we call RACK-in-a-Box, makes it easy for both data providers and data consumers to test software against the RACK APIs at will, without worrying about interfering accidentally with other users. In addition, our model allows for users to concurrently collaborate at will. For example, a data provider can send a set of sample data to a data consumer to ingest that data in a private RACK instance and develop queries independently. RACK's deployment approach achieves this flexibility while retaining ease of deployment in a centralized cloud instance, such as we might use when applying RACK on a product development workflow.
 
 ## Getting Started with RACK
 

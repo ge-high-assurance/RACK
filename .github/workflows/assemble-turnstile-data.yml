@@ -34,7 +34,7 @@ jobs:
 
     - name: Install RACK CLI
       run: |
-        pip3 install RACK/cli/wheels/*.whl
+        pip3 install --no-dependencies RACK/cli/wheels/*.whl
         sudo apt-get install -qq --yes swi-prolog
 
     - name: Assemble Turnstile ingestion package

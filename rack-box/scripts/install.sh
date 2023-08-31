@@ -10,7 +10,7 @@ cd /tmp/files
 
 export DEBIAN_FRONTEND=noninteractive
 export DEBCONF_NONINTERACTIVE_SEEN=true
-apt-get update -yqq
+apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update -yqq
 apt-get install -yqq ca-certificates software-properties-common
 cp GE_External_Root_CA_2_1.crt /usr/local/share/ca-certificates
 update-ca-certificates

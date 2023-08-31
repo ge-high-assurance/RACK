@@ -33,10 +33,10 @@ jobs:
 
     - name: Download base box for virtual machine
       run: |
-        curl -LOSfs https://app.vagrantup.com/ubuntu/boxes/jammy64/versions/20230720.0.0/providers/virtualbox.box
+        curl -LOSfs https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64-vagrant.box
         mkdir -p RACK/rack-box/jammy64
-        tar -xf virtualbox.box -C RACK/rack-box/jammy64
-        rm -f virtualbox.box
+        tar -xf jammy-server-cloudimg-amd64-vagrant.box -C RACK/rack-box/jammy64
+        rm -f jammy-server-cloudimg-amd64-vagrant.box
 
     - name: Build rack-box virtual machine
       run: |

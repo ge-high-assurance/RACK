@@ -282,6 +282,11 @@ def analyze_structure(unit: lal.AnalysisUnit) -> None:
 
     for package, components in analysis_output.items():
         filename = package.p_relative_name.unit.filename.rsplit('/', 1)[-1]
+        Evidence.Add.FILE.FILE(
+            fileFormat_identifier="Ada",
+            filename=filename,
+            identifier=filename,
+        )
         Evidence.Add.SOFTWARE.SWCOMPONENT(
             identifier=get_node_identifier(package),
             title=escape(package.doc_name),

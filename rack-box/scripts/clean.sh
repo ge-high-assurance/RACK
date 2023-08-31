@@ -26,7 +26,7 @@ fi
 
 # Upgrade all packages
 
-apt-get update -yqq
+apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update -yqq
 apt-get upgrade -yqq
 
 # Clean apt cache and temporary files

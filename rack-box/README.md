@@ -76,9 +76,10 @@ although we will mention each file here as well:
   --exclude=.github --exclude=assist --exclude=cli --exclude=rack-box
   --exclude=tests --exclude=tools RACK`)
 
-- `jammy64\*`: Download latest Ubuntu 22.04 vagrant box from
-  <https://app.vagrantup.com/ubuntu/boxes/jammy64>, unpacking it in a
-  `jammy64` folder (`tar -xf virtualbox.box -C RACK/rack-box/jammy64`)
+- `jammy64\*`: Download current Ubuntu 22.04 vagrant box from
+  <https://cloud-images.ubuntu.com/jammy/current>, unpacking it in a
+  `jammy64` folder (`tar -xf jammy-server-cloudimg-amd64-vagrant.box
+  -C RACK/rack-box/jammy64`)
 
 Once you have put these files into the `files` subdirectory, skip to
 [Build the rack-box images](#Build-the-rack-box-images) for the next

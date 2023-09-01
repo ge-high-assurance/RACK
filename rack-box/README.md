@@ -96,7 +96,6 @@ building the RACK CLI:
 In the cli directory of your checkout of the RACK repository, run
 these commands to build the RACK CLI:
 
-    pip3 wheel --wheel-dir=wheels -r requirements.txt
     pip3 wheel --wheel-dir=wheels .
 
 If you encounter a `Double requirement given` error, make sure to
@@ -128,7 +127,7 @@ these commands, and finally stop the rack-box that was running in the
 background once you're done:
 
     RACK/cli/setup-owl.sh -b
-    pip3 install RACK/cli/wheels/*.whl
+    pip3 install --no-dependencies RACK/cli/wheels/*.whl
     tar xfz RACK/rack-box/files/semtk.tar.gz
     semtk-opensource/standaloneExecutables/target/standaloneExecutables-jar-with-dependencies.jar
     RACK/nodegroups/generate-cdrs.sh semtk-opensource/standaloneExecutables/target/standaloneExecutables-jar-with-dependencies.jar

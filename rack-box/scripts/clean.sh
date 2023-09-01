@@ -49,7 +49,7 @@ if [ "${PACKER_BUILDER_TYPE}" != "docker" ]; then
 
     # Zero out the rest of the free space using dd, then delete the written file
     echo 'CDEBUG: NOT DOCKER'
-    dd if=/dev/zero of=/EMPTY bs=1M || true
+    dd if=/dev/zero of=/EMPTY bs=1M status=progress || true
     echo 'CDEBUG: DD CMD DONE'
     rm -f /EMPTY
 

@@ -41,7 +41,7 @@ jobs:
     - name: Build rack-box virtual machine
       run: |
         cd RACK/rack-box
-        packer build -var headless=true -var version=${{ inputs.version }} rack-box-virtualbox.json
+        packer build -debug -var headless=true -var version=${{ inputs.version }} rack-box-virtualbox.json
 
     - name: Split rack-box virtual machine
       run: |

@@ -21,13 +21,13 @@ jobs:
         docker run --rm --detach -p 3030:3030 -p 12050-12091:12050-12091 gehighassurance/rack-box:dev
 
     - name: Check out RACK source
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: ge-high-assurance/RACK
         path: RACK
 
     - name: Check out RACK wiki
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: ge-high-assurance/RACK.wiki
         path: RACK.wiki

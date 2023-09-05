@@ -151,7 +151,6 @@ commits_to_consider_in_git_log_order = reversed(
     commits_to_consider_in_chronological_order
 )
 
-
 if len(commits_to_consider_in_chronological_order) == 0:
     logger.error("We did not find any commits in the range you specified, aborting.")
     sys.exit(1)

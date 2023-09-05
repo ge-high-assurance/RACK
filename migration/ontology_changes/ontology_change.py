@@ -12,7 +12,7 @@
 from dataclasses import dataclass
 import logging
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import Optional, Sequence
 
 from colorama import Fore, Style
 from semtk import SemTKJSON
@@ -124,6 +124,6 @@ class OntologyChange(ABC):
 
 @dataclass
 class Commit:
-    changes: List[OntologyChange]
+    changes: Sequence[OntologyChange]
     number: str
     tag: Optional[str] = None

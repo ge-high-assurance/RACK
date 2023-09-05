@@ -14,6 +14,7 @@ from typing import List
 from ontology_changes.ontology_change import Commit
 from rack.commits import (
     # <CHANGE_CRAWLER_IMPORTS> DO NOT EDIT OR MOVE THIS LINE
+    commit000edc6e33bc50fc4ee4d3bd01268d297e48dce6,
     commit05a03cd687e3bdce425794763e0957d3ccaf8ff0,
     commit096749fb6a984d801d9ace5ccf5ec269de390a66,
     commit09962dd9ab9d252639d9e4324288fd6b47cbd91f,
@@ -81,9 +82,13 @@ from rack.commits import (
     commitc6692fed3e150e7df53d4a2a8f8c84f760087420,
     commitcafce30763b5332106340cc8cbeb8fdac3b8132d,
     commitd48e208669c589d070c7c5fb7e3129ababbb9193,
+    commitd497287426ac99acffbd51858ebf4722af06dae2,
     commitd8271d216704351cf0007a04abac47f4abc993ad,
+    commitda9c143c53933d7eeb51f19c3ddc4ccf5fda95a8,
     commitdf67562c4e5305fc9082fc369570de0a49089ccf,
     commite18de6ebaa298881aab7e8e69580905ffb97e0c4,
+    commite454889c706f02818f4badc3360a3c068fa014a0,
+    commite485aa4268867521cc8d6f9c3a0f6fd2aef4311b,
     commite5e8a35322fab104a42cc0f46d16c27ffc10adbb,
     commite696969a9d85ca8f894eea12305412bdc05521b3,
     commiteb2f51ed862f33d2a56bbd6d43af27d9524912c9,
@@ -107,7 +112,6 @@ from rack.commits import (
 
 commits_in_chronological_order: List[Commit] = [
     # <CHANGE_CRAWLER_COMMITS> DO NOT EDIT OR MOVE THIS LINE
-
     # oldest (in history)
 
     commita9210534a2ceb9ea5595df9eb5cd02df3abe3cb3.commit, # v4.0
@@ -211,6 +215,15 @@ commits_in_chronological_order: List[Commit] = [
     commit096749fb6a984d801d9ace5ccf5ec269de390a66.commit, # 2022 Dec 13
     commit8a01ff1b53e0b4979f0120a362b8fd3776a6586c.commit, # 2023 Jan 10
     commit96c4d5d8672bbb8e8b5ff44ea928638092f91b82.commit, # 2023 Feb 21
+
+   commite485aa4268867521cc8d6f9c3a0f6fd2aef4311b.commit, # v12.0
+
+    commitd497287426ac99acffbd51858ebf4722af06dae2.commit, # 2023 Apr 11
+    commit000edc6e33bc50fc4ee4d3bd01268d297e48dce6.commit, # 2023 May 01
+    commite454889c706f02818f4badc3360a3c068fa014a0.commit, # 2023 May 02
+    commitda9c143c53933d7eeb51f19c3ddc4ccf5fda95a8.commit, # 2023 May 12
+
+    # commit???.commit, # v13
 
     # most recent (in history)
 ]

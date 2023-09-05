@@ -41,9 +41,9 @@ def delete_property_from_node_list(
             for sparqlID in node.SnodeSparqlIDs:
                 if json.importSpec is None:
                     continue
+                field = stylize_json("sparqlID")
                 for index, importSpecNode in enumerate(json.importSpec.nodes):
                     if importSpecNode.sparqlID == sparqlID:
-                        field = stylize_json("sparqlID")
                         log_additional_deletion(
                             f"importSpec.nodes[{index}]",
                             f"it has {field} = {sparqlID}",

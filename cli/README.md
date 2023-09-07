@@ -24,7 +24,7 @@ wiki pages.
 
 The `rack` program requires the
 [semtk-python3](https://github.com/ge-semtk/semtk-python3) package and
-other requirements listed in `requirements.txt`.
+other requirements listed in `pyproject.toml`.
 
 > **_NOTE_** these programs and dependencies are already installed in
 > the RACK Box container and virtual machine images; no further

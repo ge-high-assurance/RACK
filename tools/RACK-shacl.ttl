@@ -1,0 +1,185 @@
+###
+### SHACL shapes for validating RACK data
+###
+
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix provs: <http://arcos.rack/PROV-S#> .
+@prefix sys: <http://arcos.rack/SYSTEM#> .
+@prefix sw: <http://arcos.rack/SOFTWARE#> .
+@prefix req: <http://arcos.rack/REQUIREMENTS#> .
+@prefix tst: <http://arcos.rack/TESTING#> .
+@prefix boeing: <http://arcos.AH-64D/Boeing#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rackshacl: <http://rackshacl#> .
+
+### Identifiers must be unique (2 subjects cannot have the same identifier)
+rackshacl:IdentifierIsUnique
+	a sh:NodeShape;
+	sh:targetObjectsOf 	provs:identifier;
+	sh:property [									
+		sh:path 		[ sh:inversePath provs:identifier];
+		sh:maxCount 	1;
+	];
+	.
+
+### A System must be governed by at least one subject
+rackshacl:SystemIsGovernedBy
+	a sh:NodeShape;
+	sh:targetClass 		sys:SYSTEM;
+	sh:property [
+		sh:path 		[ sh:inversePath req:governs ];
+		sh:minCount 	1;
+		sh:severity		sh:Warning;
+	];
+	.
+
+### An interface must have at least one source and one destination
+rackshacl:InterfaceHasSourceAndDestination
+	a sh:NodeShape;
+	sh:targetClass 		sys:INTERFACE;
+	sh:property [
+		sh:path 		sys:source;
+		sh:minCount 	1;
+	];
+	sh:property [
+		sh:path 		sys:destination;
+		sh:minCount 	1;
+	];
+	.
+	
+### An SBVT_Result must confirm something
+rackshacl:SBVTResultConfirmsSBVTTest
+	a sh:NodeShape;
+	sh:targetClass 		boeing:SBVT_Result;
+	sh:property [
+		sh:path 		tst:confirms;
+		sh:minCount 	1;
+	];
+	.
+
+### An SBVT_Test must verify something
+rackshacl:SBVTTestVerifies
+	a sh:NodeShape;
+	sh:targetClass 		boeing:SBVT_Test;
+	sh:property [
+		sh:path 		tst:verifies;
+		sh:minCount 	1;
+	];
+	.
+
+### SRS_Req dataInsertedBy (ACTIVITY) must have identifier "SRS Data Ingestion"
+rackshacl:SRSReqDataInsertedBySRSDataIngestion
+	a sh:NodeShape;
+	sh:targetClass 		boeing:SRS_Req;
+	sh:property [									
+		sh:path 		provs:dataInsertedBy;
+		sh:node			rackshacl:IdentifierIsSRSDataIngestionShape;
+		sh:severity		sh:Warning;
+	];
+	.
+rackshacl:IdentifierIsSRSDataIngestionShape
+	a sh:NodeShape;
+	sh:property [
+		sh:path 		provs:identifier;
+		sh:hasValue 	"SRS Data Ingestion";
+	];
+	.
+
+### SRS_Req must satisfy at least 1 CSID_Req or 1 PIDS_Req
+rackshacl:SRSReqSatisfiesCSIDReqOrPIDSReq
+	a sh:NodeShape;
+	sh:targetClass 		boeing:SRS_Req;
+	sh:property [
+		sh:message 		"Must satisfy at least 1 CSID_Req or 1 PIDS_Req";									
+		sh:path 		req:satisfies;
+		sh:qualifiedValueShape [
+			sh:or (
+				[ sh:class boeing:CSID_Req; ]
+				[ sh:class boeing:PIDS_Req; ]
+			)
+		];
+		sh:qualifiedMinCount 1;
+		sh:severity		sh:Warning;
+	];
+	.
+
+### A SRS_Req must have a description
+rackshacl:SRSReqHasDescription
+	a sh:NodeShape;
+	sh:targetClass 		boeing:SRS_Req;
+	sh:property [									
+		sh:path 		provs:description;
+		sh:minCount 	1;
+		sh:severity		sh:Info;
+	];
+	.
+
+### A SRS_Req must have at least one SBVT_Test verifying it
+rackshacl:SRSReqVerifiedBySBVTTest
+	a sh:NodeShape;
+	sh:targetClass 		boeing:SRS_Req;
+	sh:property [
+		sh:message 		"Must be verified by at least 1 SBVTTest";										
+		sh:path 		[ sh:inversePath tst:verifies ];
+		sh:qualifiedValueShape [
+			sh:class boeing:SBVT_Test;
+		];
+		sh:qualifiedMinCount 	1;
+		sh:severity		sh:Warning;
+	];
+	.
+
+### A System must be part another System
+### (expect top-level system to violate this)
+rackshacl:SystemIsPartOf
+	a sh:NodeShape;
+	sh:targetClass 		sys:SYSTEM;
+	sh:property [
+		sh:path 		sys:partOf;
+		sh:minCount 	1;
+		sh:severity		sh:Warning;
+	];
+	.
+
+### A SubDD_Req must satisfy at least one SRS_Req
+rackshacl:SubDDReqSatisfiesSRSReq
+	a sh:NodeShape;
+	sh:targetClass 		boeing:SubDD_Req;
+	sh:property [
+		sh:path 		req:satisfies;
+		sh:minCount 	1;
+	];
+	.
+
+### A Requirement must be an instance of a REQUIREMENT subclass (vs an instance of REQUIREMENT itself)
+rackshacl:RequirementIsSubclass
+	a sh:NodeShape;
+	sh:targetClass 		req:REQUIREMENT;
+	sh:property [
+		sh:message 		"Must be an instance of a (strict) subclass of REQUIREMENT";
+		sh:path 		( rdf:type [ sh:oneOrMorePath rdfs:subClassOf ] );
+		sh:qualifiedValueShape [
+			sh:hasValue req:REQUIREMENT;
+		];
+		sh:qualifiedMinCount 	1;
+	];
+	.
+	
+### A SWCOMPONENT must be part of something or impacted by something
+rackshacl:SwComponentIsLinked
+	a sh:NodeShape;
+	sh:targetClass 		sw:SWCOMPONENT;
+	sh:message 			"Must have a 'partOf' or 'wasImpactedBy' property";	
+	sh:or (
+		[
+			sh:path sw:partOf;
+			sh:minCount 1 ;
+		]
+		[
+			sh:path provs:wasImpactedBy;
+			sh:minCount 1 ;
+		]
+	);
+	.

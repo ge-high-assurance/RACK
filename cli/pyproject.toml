@@ -26,7 +26,7 @@ dependencies = [
     "semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@e9a16cf52ca8838cf989f268e62fb288282bb9e6",
     "six==1.16.0",
     "tabulate==0.9.0",
-    "urllib3==2.0.3",
+    "urllib3==2.0.6",
     "zipp==3.15.0",
 ]
 

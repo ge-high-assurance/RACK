@@ -21,7 +21,7 @@ dependencies = [
     "python-dateutil==2.8.2",
     "PyYAML==6.0",
     "requests==2.31.0",
-    "Pillow==9.4.0",
+    "Pillow==10.0.1",
     "plotly==5.15.0",
     "semtk-python3 @ git+https://github.com/ge-semtk/semtk-python3@e9a16cf52ca8838cf989f268e62fb288282bb9e6",
     "six==1.16.0",

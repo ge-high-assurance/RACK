@@ -6,4 +6,5 @@ footprint:
   - http://rack001/arp-4754a
 steps:
 - manifest: ../../RACK-Ontology/manifest.yaml
+- model: OwlModels/model.yaml
 - data: data.yaml

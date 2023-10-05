@@ -1,0 +1,8 @@
+description,title,identifier,dataInsertedBy,wasAssociatedWith,wasInformedBy,startedAtTime,endedAtTime,goal,governedBy
+"Activity to perform aircraft/system functional hazard assessment",,ARP4754A_FHA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to perform preliminary aircraft safety assessment",,ARP4754A_PASA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to perform preliminary system safety assessment",,ARP4754A_PSSA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to perform common cause assessments",,ARP4754A_COMMON_CAUSE_ASSESSMENT_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to perform aircraft safety assessment",,ARP4754A_ASA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to perform system safety assessment",,ARP4754A_SSA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to capture independence requirements in functions, systems, and items",,ARP4754A_REQUIREMENTS_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN

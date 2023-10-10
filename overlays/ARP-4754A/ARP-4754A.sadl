@@ -3,31 +3,45 @@ uri "http://arcos.arp/ARP-4754A" alias ARP4754A.
 import "http://arcos.rack/DOCUMENT".
 import "http://arcos.rack/TESTING".
 import "http://arcos.rack/PROCESS".
+import "http://arcos.rack/REQUIREMENTS".
 
-ARP4756A_PLAN_DEVELOPMENT
+ARP4754A_PLAN_DEVELOPMENT
 	(note "ACTIVITY that produces PLANs") is a type of ACTIVITY.
 
-ARP4756A_PLAN
+ARP4754A_PLAN
 	(note "Specialization of PLAN for ARP-4754A") is a type of PLAN.
 
 	//wasGeneratedBy of ARP4654A_PLAN only has values of type PLAN_DEVELOPMENT.
 
-ARP4756A_SAFETY_ASSESSMENT
-	(note "The results of a ARP-4756A safety assessment process.") is a type of DOCUMENT.
+//ARP4754A_SAFETY_ASSESSMENT
+// Use general DOCUMENT instead
+//	(note "The results of a ARP-4756A safety assessment process.") is a type of DOCUMENT.
+//	
+//	ARP4754A:confirms (note "Parent test(s) of this assessment result") describes ARP4754A_SAFETY_ASSESSMENT with values of type TEST.
+//	ARP4754A:confirms is a type of wasImpactedBy.
 	
-ARP4756A_SAFETY_ASSESSMENT_PROCESS
-	(note "A safety assessment conducted at a particular stage of the ARP-4756A development process.") is a type of ACTIVITY.
+SAFETY_ASSESSMENT_EXECUTION
+	(note "A safety assessment conducted at a particular stage of the ARP-4756A development process.") is a type of TEST_EXECUTION.
 	
-	governedBy of ARP4756A_SAFETY_ASSESSMENT_PROCESS only has values of type DOCUMENT.
-	governedBy is a type of used.
-	
-ARP4756A_SUMMARY_REPORT
+	ARP4754A:governedBy of SAFETY_ASSESSMENT_EXECUTION only has values of type DOCUMENT.
+	ARP4754A:governedBy is a type of used.
+
+
+//ARP4754A_TEST_DEVELOPMENT
+// Use general TEST_DEVELOP instead
+//	(note "ARP-4754A specific test development.") is a type of TEST_DEVELOPMENT.
+//	
+//	definedBy of ARP4754A_TEST_DEVELOPMENT only has values of type DOCUMENT.
+//	definedBy is a type of used.
+
+
+ARP4754A_SUMMARY_REPORT
 	(note "Summary report specific to ARP-4754A process") is a type of REPORT.
 	
 	//wasGeneratedBy of SUMMARY_REPORT only has values of type SUMMARY_DEVELOPMENT.
 
-	summarizes of ARP4756A_SUMMARY_REPORT only has values of type TEST_RESULT.
+	summarizes of ARP4754A_SUMMARY_REPORT only has values of type TEST_RESULT.
 	summarizes is a type of wasImpactedBy.
 
-ARP4756A_SUMMARY_DEVELOPMENT
+ARP4754A_SUMMARY_DEVELOPMENT
 	(note "Activity to develop the summary report specific to ARP-4754A process") is a type of ACTIVITY.

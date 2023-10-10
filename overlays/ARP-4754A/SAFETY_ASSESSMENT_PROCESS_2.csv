@@ -1,8 +1,10 @@
-description,title,identifier,dataInsertedBy,wasAssociatedWith,wasInformedBy,startedAtTime,endedAtTime,goal,governedBy
-"Activity to perform aircraft/system functional hazard assessment",,ARP4754A_FHA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
-"Activity to perform preliminary aircraft safety assessment",,ARP4754A_PASA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
-"Activity to perform preliminary system safety assessment",,ARP4754A_PSSA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
-"Activity to perform common cause assessments",,ARP4754A_COMMON_CAUSE_ASSESSMENT_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
-"Activity to perform aircraft safety assessment",,ARP4754A_ASA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
-"Activity to perform system safety assessment",,ARP4754A_SSA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
-"Activity to capture independence requirements in functions, systems, and items",,ARP4754A_REQUIREMENTS_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+description,title,identifier,dataInsertedBy,wasAssociatedWith,wasInformedBy,startedAtTime,endedAtTime,goal,used
+"Activity to develop an aircraft functional hazard assessment.",,AIRCRAFT_FHA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to develop a system functional hazard assessment.",,SYSTEM_FHA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to develop a preliminary aircraft safety assessment".,,PASA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to develop a preliminary system safety assessment.",,PSSA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to develop a common cause particular risk assessment.",,CC_PARTICULAR_RISK_ASSESSMENT_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to develop a common cause common mode analysis.",,CC_COMMON_MODE_ASSESSMENT_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to develop a common cause zonal safety analysis.",,CC_ZONAL_SAFETY_ASSESSMENT_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to develop an aircraft safety assessment.",,ASA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN
+"Activity to develop a system safety assessment.",,SSA_PROCESS,,,,,,,SAFETY_PROGRAM_PLAN

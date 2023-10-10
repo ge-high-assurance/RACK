@@ -1,0 +1,11 @@
+description,title,identifier,dataInsertedBy,wasAssociatedWith,wasInformedBy,startedAtTime,endedAtTime,goal,governedBy
+"The aircraft functional hazard assessment is performed.",,AIRCRAFT_FHA_EXECUTION,,,,,,,
+"The system functional hazard assessment is performed.",,SYSTEM_FHA_EXECUTION,,,,,,,
+"The preliminary aircraft safety assessment is performed.",,PASA_EXECUTION,,,,,,,
+"The preliminary system safety assessment is performed.",,PSSA_EXECUTION,,,,,,,
+"The common cause particular risk assessment analysis is performed.",,CC_PARTICULAR_RISK_ASSESSMENT_EXECUTION,,,,,,,
+"The common cause common mode analysis is performed.",,CC_COMMON_MODE_ASSESSMENT_EXECUTION,,,,,,,
+"The common cause zonal safety analysis is performed.",,CC_ZONAL_SAFETY_ASSESSMENT_EXECUTION,,,,,,,
+"The aircraft safety assessment is performed.",,ASA_EXECUTION,,,,,,,
+"The system safety assessment is performed.",,SSA_EXECUTION,,,,,,,
+"Independence requirements in functions, systems and items are captured",,REQUIREMENTS_EXECUTION,,,,,,,

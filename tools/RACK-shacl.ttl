@@ -55,28 +55,37 @@ rackshacl:InterfaceHasSourceAndDestination
 	];
 	.
 
-### A System must be part another System
-### (expect top-level system to violate this)
+### A System must be part of another System - or another System must be part of it
 rackshacl:SystemIsPartOf
 	a sh:NodeShape;
 	sh:targetClass 		sys:SYSTEM;
 	sh:property [
-		sh:path 		sys:partOf;
+		sh:path 		[ sh:alternativePath ( sys:partOf [sh:inversePath sys:partOf]) ];
 		sh:minCount 	1;
 		sh:severity		sh:Warning;
 	];
 	.
 
-### A System must be governed by at least one subject
+### A System (or one of its subsystems) must be governed by at least one subject
 rackshacl:SystemIsGovernedBy
 	a sh:NodeShape;
 	sh:targetClass 		sys:SYSTEM;
 	sh:property [
-		sh:path 		[ sh:inversePath req:governs ];
+		sh:path 		( [ sh:inversePath [sh:zeroOrMorePath sys:partOf] ] [ sh:inversePath req:governs ]);
 		sh:minCount 	1;
 		sh:severity		sh:Warning;
 	];
 	.
+
+### A Requirement must govern something (or satisfy another Requirement that governs something)
+rackshacl:RequirementGoverns
+	a sh:NodeShape;
+	sh:targetClass 		req:REQUIREMENT;
+	sh:property [
+		sh:path 		( [sh:zeroOrMorePath req:satisfies] req:governs );
+		sh:minCount 	1;
+	];
+	.	
 	
 ### A Requirement must be an instance of a REQUIREMENT subclass (vs an instance of REQUIREMENT itself)
 rackshacl:RequirementIsSubclass

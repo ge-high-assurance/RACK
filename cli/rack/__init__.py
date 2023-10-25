@@ -29,6 +29,7 @@ from typing import Any, Callable, Dict, List, Optional, Set, Tuple, TypeVar, cas
 from types import SimpleNamespace
 from tempfile import TemporaryDirectory
 import shutil
+import json
 
 # library imports
 from colorama import Fore, Style
@@ -587,6 +588,59 @@ def cardinality_driver(
     semtk_table = semtk3.get_cardinality_violations(conn, max_rows=max_rows, concise_format=concise)
     print(format_semtk_table(semtk_table, export_format=export_format, headers=headers))
 
+def shacl_results_driver(
+        base_url: Url,
+        model_graphs: Optional[List[Url]],
+        data_graphs: Optional[List[Url]],
+        triple_store: Optional[Url],
+        triple_store_type: Optional[str],
+        headers: bool,
+        export_format: ExportFormat,
+        shacl_ttl_path: str,
+        severity: str
+        ) -> None:
+    """Evaluate SHACL constraints and return results as pretty printed json (format=text) or as an output table (format=csv)"""
+
+    def json_to_semtk_table(json_data: dict) -> SemtkTable:
+        """Converts the 'reportEntries' in the get_shacl_results() JSON data to a SemtkTable."""
+
+        entries = json_data["reportEntries"]
+        
+        # Given that all entries share the same structure, extract column names and types from the first entry.
+        col_names = list(entries[0].keys())
+        col_types = ['string'] * len(col_names)
+        
+        rows = [list(entry.values()) for entry in entries]
+
+        table_dict = SemtkTable.create_table_dict(col_names, col_types, rows)
+        return SemtkTable(table_dict)
+
+    legal_severity_values = {"Info", "Warning", "Violation"}
+    if severity not in legal_severity_values:
+        print(str_bad(f"Error: Invalid severity value '{severity}'. Allowed values are: {', '.join(legal_severity_values)}"))
+        sys.exit(1)
+
+    if data_graphs is not None:
+        data_graph = data_graphs[0]
+    else:
+        logger.warning("Defaulting data-graph to %s", DEFAULT_DATA_GRAPH)
+        data_graph = DEFAULT_DATA_GRAPH
+
+    if data_graphs is not None:
+        extra_data_graphs = data_graphs[1:]
+    else:
+        extra_data_graphs = []
+
+    conn = sparql_connection(base_url, model_graphs, data_graph, extra_data_graphs, triple_store, triple_store_type)
+    
+    json_result = semtk3.get_shacl_results(conn, shacl_ttl_path=shacl_ttl_path, severity=severity)
+
+    if export_format == ExportFormat.TEXT:
+        print(json.dumps(json_result, indent=4))
+    elif export_format == ExportFormat.CSV:
+        semtk_table = json_to_semtk_table(json_result)
+        print(format_semtk_table(semtk_table, export_format=export_format, headers=headers))
+
 def ingest_data_driver(config_path: Path, base_url: Url, model_graphs: Optional[List[Url]], data_graphs: Optional[List[Url]], triple_store: Optional[Url], triple_store_type: Optional[str], clear: bool) -> None:
     """Use an import.yaml file to ingest multiple CSV files into the data graph."""
     with open(config_path, mode='r', encoding='utf-8-sig') as config_file:
@@ -879,6 +933,13 @@ def dispatch_data_cardinality(args: SimpleNamespace) -> None:
     cardinality_driver(args.base_url, args.model_graph, args.data_graph, args.triple_store, args.triple_store_type,
                        export_format=args.format, headers=not args.no_headers, concise=args.concise, max_rows=args.max_rows)
 
+def dispatch_data_shacl_results(args: SimpleNamespace) -> None:
+    """Implementation of the data SHACL results subcommand"""
+    global cliMethod
+    cliMethod = CLIMethod.DATA_IMPORT
+    shacl_results_driver(args.base_url, args.model_graph, args.data_graph, args.triple_store, args.triple_store_type,
+                       export_format=args.format, headers=not args.no_headers, shacl_ttl_path=args.shacl_ttl_path, severity=args.severity)
+
 def dispatch_model_import(args: SimpleNamespace) -> None:
     """Implementation of the plumbing model subcommand"""
     global cliMethod
@@ -937,6 +998,7 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_subparsers = data_parser.add_subparsers(dest='command')
     data_import_parser = data_subparsers.add_parser('import', help='Import CSV data')
     data_cardinality_parser = data_subparsers.add_parser('cardinality', help='Check data cardinality')
+    data_shacl_results_parser = data_subparsers.add_parser('shacl_results', help='Evaluate SHACL constraints and get results')
     data_export_parser = data_subparsers.add_parser('export', help='Export query results')
     data_count_parser = data_subparsers.add_parser('count', help='Count matched query rows')
     data_clear_parser = data_subparsers.add_parser('clear', help='Clear data graph')
@@ -988,6 +1050,14 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_cardinality_parser.add_argument('--max-rows', default=-1, type=int, help='Maximum output rows')
     data_cardinality_parser.add_argument('--concise', default=False, action='store_true', help='Use concise output')
     data_cardinality_parser.set_defaults(func=dispatch_data_cardinality)
+
+    data_shacl_results_parser.add_argument('--model-graph', type=str, action='append', help='Model graph URL')
+    data_shacl_results_parser.add_argument('--data-graph', type=str, action='append', help='Data graph URL')
+    data_shacl_results_parser.add_argument('--format', type=ExportFormat, help='Export format. text is pretty printed json, csv is SemtkTable.', choices=list(ExportFormat), default=ExportFormat.TEXT)
+    data_shacl_results_parser.add_argument('--no-headers', action='store_true', help='Omit header row')
+    data_shacl_results_parser.add_argument('--severity', default='Info', type=str, help='Minimum severity filter: Info, Warning, or Violation')
+    data_shacl_results_parser.add_argument('shacl_ttl_path', type=str, help='Path to a SHACL file in TTL format')
+    data_shacl_results_parser.set_defaults(func=dispatch_data_shacl_results)
 
     data_export_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')
     data_export_parser.add_argument('--model-graph', type=str, action='append', help='Model graph URL')

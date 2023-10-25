@@ -617,8 +617,8 @@ def shacl_results_driver(
 
     legal_severity_values = {"Info", "Warning", "Violation"}
     if severity not in legal_severity_values:
-        print(f"Error: Invalid severity value '{severity}'. Allowed values are: {', '.join(legal_severity_values)}")
-        return
+        print(str_bad(f"Error: Invalid severity value '{severity}'. Allowed values are: {', '.join(legal_severity_values)}"))
+        sys.exit(1)
 
     if data_graphs is not None:
         data_graph = data_graphs[0]
@@ -1055,8 +1055,8 @@ def get_argument_parser() -> argparse.ArgumentParser:
     data_shacl_results_parser.add_argument('--data-graph', type=str, action='append', help='Data graph URL')
     data_shacl_results_parser.add_argument('--format', type=ExportFormat, help='Export format. text is pretty printed json, csv is SemtkTable.', choices=list(ExportFormat), default=ExportFormat.TEXT)
     data_shacl_results_parser.add_argument('--no-headers', action='store_true', help='Omit header row')
-    data_shacl_results_parser.add_argument('--shacl-ttl-path', type=str, help='Path to a SHACL file in TTL format')
     data_shacl_results_parser.add_argument('--severity', default='Info', type=str, help='Minimum severity filter: Info, Warning, or Violation')
+    data_shacl_results_parser.add_argument('shacl_ttl_path', type=str, help='Path to a SHACL file in TTL format')
     data_shacl_results_parser.set_defaults(func=dispatch_data_shacl_results)
 
     data_export_parser.add_argument('nodegroup', type=str, help='ID of nodegroup')

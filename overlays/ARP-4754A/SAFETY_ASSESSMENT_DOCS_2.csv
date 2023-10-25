@@ -1,0 +1,10 @@
+description,entityURL,generatedAtTime,identifier,invalidatedAtTime,title,definedIn_identifier,content_identifier,dataInsertedBy_identifier,wasAttributedTo_identifier,wasDerivedFrom_identifier,wasGeneratedBy_identifier,wasImpactedBy_identifier,wasRevisionOf_identifier
+"Aircraft functional hazard assessment",,,DOCUMENT_AIRCRAFT_FHA,,,,,,,,FHA_PROCESS,,
+"System function hazard assessment",,,DOCUMENT_SYSTEM_FHA,,,,,,,,FHA_PROCESS,,
+"Preliminary aircraft safety assessment",,,DOCUMENT_PASA,,,,,,,,PASA_PROCESS,,
+"Preliminary system safety assessment",,,DOCUMENT_PSSA,,,,,,,,PSSA_PROCESS,,
+"Common Cause particular risk assessment",,,DOCUMENT_PARTICULAR_RISK_ASSESSMENT,,,,,,,,CC_PARTICULAR_RISK_ASSESSMENT_PROCESS,,
+"Common Cause mode analysis",,,DOCUMENT_COMMON_MODE_ANALYSIS,,,,,,,,CC_COMMON_MODE_ASSESSMENT_PROCESS,,
+"Common Cause zonal safety analysis",,,DOCUMENT_ZONAL_SAFETY_ANALYSIS,,,,,,,,CC_ZONAL_SAFETY_ASSESSMENT_PROCESS,,
+"Aircraft safety assessment",,,DOCUMENT_ASA,,,,,,,,ASA_PROCESS,,
+"System safety assessment",,,DOCUMENT_SSA,,,,,,,,SSA_PROCESS,,

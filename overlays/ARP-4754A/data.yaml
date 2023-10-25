@@ -5,19 +5,17 @@ ingestion-steps:
 - {class: "http://arcos.rack/DOCUMENT#SPECIFICATION", csv: "SPECIFICATION_1.csv"}
 - {class: "http://arcos.rack/DOCUMENT#SECTION", csv: "SECTION_1.csv"}
 - {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "OBJECTIVE_1.csv"}
-- {class: "http://arcos.arp/ARP-4754A#ARP4756A_PLAN_DEVELOPMENT", csv: "PLAN_DEVELOPMENT_1.csv"}
-- {class: "http://arcos.arp/ARP-4754A#ARP4756A_PLAN", csv: "PLAN_1.csv"}
-- {class: "http://arcos.arp/ARP-4754A#SAFETY_ASSESSMENT_EXECUTION", csv: "SAFETY_ASSESSMENT_EXECUTION_1.csv"}
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "SAFETY_ASSESSMENT_PROCESS_1.csv"}
-- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "SAFETY_ASSESSMENT_1.csv"}
+- {class: "http://arcos.arp/ARP-4754A#PLAN_DEVELOPMENT", csv: "PLAN_DEVELOPMENT_1.csv"}
+- {class: "http://arcos.arp/ARP-4754A#PROCESS_PLAN", csv: "PLAN_1.csv"}
+- {class: "http://arcos.arp/ARP-4754A#SAFETY_ASSESSMENT", csv: "SAFETY_ASSESSMENT_1.csv"}
+- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "SAFETY_ASSESSMENT_DOCS_1.csv"}
 
 #Phase2: The rest of the data
 - {class: "http://arcos.rack/PROV-S#AGENT", csv: "AGENT_2.csv"}
 - {class: "http://arcos.rack/DOCUMENT#SPECIFICATION", csv: "SPECIFICATION_2.csv"}
 - {class: "http://arcos.rack/DOCUMENT#SECTION", csv: "SECTION_2.csv"}
 - {class: "http://arcos.rack/PROCESS#OBJECTIVE", csv: "OBJECTIVE_2.csv"}
-- {class: "http://arcos.arp/ARP-4754A#ARP4756A_PLAN_DEVELOPMENT", csv: "PLAN_DEVELOPMENT_2.csv"}
-- {class: "http://arcos.arp/ARP-4754A#ARP4756A_PLAN", csv: "PLAN_2.csv"}
-- {class: "http://arcos.arp/ARP-4754A#SAFETY_ASSESSMENT_EXECUTION", csv: "SAFETY_ASSESSMENT_EXECUTION_2.csv"}
-- {class: "http://arcos.rack/PROV-S#ACTIVITY", csv: "SAFETY_ASSESSMENT_PROCESS_2.csv"}
-- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "SAFETY_ASSESSMENT_2.csv"}
+- {class: "http://arcos.arp/ARP-4754A#PLAN_DEVELOPMENT", csv: "PLAN_DEVELOPMENT_2.csv"}
+- {class: "http://arcos.arp/ARP-4754A#PROCESS_PLAN", csv: "PLAN_2.csv"}
+- {class: "http://arcos.arp/ARP-4754A#SAFETY_ASSESSMENT", csv: "SAFETY_ASSESSMENT_2.csv"}
+- {class: "http://arcos.rack/DOCUMENT#DOCUMENT", csv: "SAFETY_ASSESSMENT_DOCS_2.csv"}

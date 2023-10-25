@@ -1,8 +1,8 @@
-description,title,identifier,dataInsertedBy,wasAssociatedWith,wasInformedBy,startedAtTime,endedAtTime,goal,used
-"Activity to develop an ARP-4754A Certification Plan","ARP-4754A Certification Plan Development",GENERATE_CERTIFICATION_PLAN,,,,,,,
-"Activity to develop an ARP-4754A Safety Program Plan","ARP-4754A Safety Program Plan Development",GENERATE_SAFETY_PROGRAM_PLAN,,,,,,,
-"Activity to develop an ARP-4754A System Development Plan","ARP-4754A System Development Plan Development",GENERATE_DEVELOPMENT_PLAN,,,,,,,
-"Activity to develop an ARP-4754A System Validation Plan","ARP-4754A System Validation Plan Development",GENERATE_VALIDATION_PLAN,,,,,,,
-"Activity to develop an ARP-4754A System Verification Plan","ARP-4754A System Verification Plan Development",GENERATE_VERIFICATION_PLAN,,,,,,,
-"Activity to develop an ARP-4754A Configuration Management Plan","ARP-4754A Configuration Management Plan Development",GENERATE_CONFIGURATION_MANAGEMENT_PLAN,,,,,,,
-"Activity to develop an ARP-4754A Process Assurance Plan","ARP-4754A Process Assurance Plan Development",GENERATE_PROCESS_ASSURANCE_PLAN,,,,,,,
+description,title,identifier,dataInsertedBy,wasAssociatedWith,wasInformedBy,startedAtTime,endedAtTime,goal,satisfies
+"Activity to develop an ARP-4754A Certification Plan","ARP-4754A Certification Plan Development",GENERATE_CERTIFICATION_PLAN,,,,,,,ARP-4754-1.1
+"Activity to develop an ARP-4754A Safety Program Plan","ARP-4754A Safety Program Plan Development",GENERATE_SAFETY_PROGRAM_PLAN,,,,,,,ARP-4754-1.1
+"Activity to develop an ARP-4754A System Development Plan","ARP-4754A System Development Plan Development",GENERATE_DEVELOPMENT_PLAN,,,,,,,ARP-4754-1.1
+"Activity to develop an ARP-4754A System Validation Plan","ARP-4754A System Validation Plan Development",GENERATE_VALIDATION_PLAN,,,,,,,ARP-4754-1.1
+"Activity to develop an ARP-4754A System Verification Plan","ARP-4754A System Verification Plan Development",GENERATE_VERIFICATION_PLAN,,,,,,,ARP-4754-1.1
+"Activity to develop an ARP-4754A Configuration Management Plan","ARP-4754A Configuration Management Plan Development",GENERATE_CONFIGURATION_MANAGEMENT_PLAN,,,,,,,ARP-4754-1.1
+"Activity to develop an ARP-4754A Process Assurance Plan","ARP-4754A Process Assurance Plan Development",GENERATE_PROCESS_ASSURANCE_PLAN,,,,,,,ARP-4754-1.1

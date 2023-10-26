@@ -47,7 +47,7 @@ PLAN_DEVELOPMENT
 // A plan specifically for defining the process to follow
 PROCESS_PLAN
 	(note "Describes the process by which a specific stage in the aircraft/system development is performed.") is a type of PLAN.
-	wasGeneratedBy of PROCESS_PLAN only has values of type PLAN_DEVELOPMENT.
+	//wasGeneratedBy of PROCESS_PLAN only has values of type PLAN_DEVELOPMENT.
 	planType describes PROCESS_PLAN with values of type PLAN_TYPE.
 	planType describes PROCESS_PLAN with at most 1 value.
 

@@ -1,9 +1,9 @@
 description,title,identifier,dataInsertedBy_identifier,wasAssociatedWith_identifier,wasInformedBy_identifier,startedAtTime,endedAtTime,goal_identifier,isPreliminary,commonCauseAnalysis_identifier,governedBy_identifier
 "The aircraft functional hazard assessment is performed.",,AIRCRAFT_FHA_DEVELOPMENT,,,,,,,,,ARP4754A_SAFETY_PROGRAM_PLAN
 "The system functional hazard assessment is performed.",,SYSTEM_FHA_DEVELOPMENT,,,,,,,,,ARP4754A_SAFETY_PROGRAM_PLAN
-"The preliminary aircraft safety assessment is performed.",,PASA_DEVELOPMENT,,,,,true,,ARP4754A_SAFETY_PROGRAM_PLAN
-"The preliminary system safety assessment is performed.",,PSSA_DEVELOPMENT,,,,,true,,ARP4754A_SAFETY_PROGRAM_PLAN
-"The common cause particular risk assessment analysis is performed.",,CC_PARTICULAR_RISK_ASSESSMENT_DEVELOPMENT,,,,,,,,PARTICULAR_RISK_ASSESSMENT,SARP4754A_AFETY_PROGRAM_PLAN
+"The preliminary aircraft safety assessment is performed.",,PASA_DEVELOPMENT,,,,,,,true,,ARP4754A_SAFETY_PROGRAM_PLAN
+"The preliminary system safety assessment is performed.",,PSSA_DEVELOPMENT,,,,,,,true,,ARP4754A_SAFETY_PROGRAM_PLAN
+"The common cause particular risk assessment analysis is performed.",,CC_PARTICULAR_RISK_ASSESSMENT_DEVELOPMENT,,,,,,,,PARTICULAR_RISK_ASSESSMENT,ARP4754A_SAFETY_PROGRAM_PLAN
 "The common cause common mode analysis is performed.",,CC_COMMON_MODE_ASSESSMENT_DEVELOPMENT,,,,,,,,COMMON_MODE_ANALYSIS,ARP4754A_SAFETY_PROGRAM_PLAN
 "The common cause zonal safety analysis is performed.",,CC_ZONAL_SAFETY_ASSESSMENT_DEVELOPMENT,,,,,,,,ZONAL_SAFETY_ANALYSIS,ARP4754A_SAFETY_PROGRAM_PLAN
 "The aircraft safety assessment is performed.",,ASA_DEVELOPMENT,,,,,,,,,ARP4754A_SAFETY_PROGRAM_PLAN

@@ -20,8 +20,10 @@ If you are citing RACK project, please use the following BibTex entries:
 @inproceedings{moitra2023rack,
   title={RACK: A Semantic Model and Triplestore for Curation of Assurance Case Evidence},
   author={Moitra, Abha and Cuddihy, Paul and Siu, Kit and Archer, David and Mertens, Eric and Russell, Daniel and Quick, Kevin and Robert, Valentin and Meng, Baoluo},
-  booktitle={10th International Workshop on Next Generation of System Assurance Approaches for Safety-Critical Systems (SASSUR), Toulouse, France, September, Computer Safety, Reliability, and Security (SAFECOMP), Lecture Notes in Computer Science},
-  year={2023}
+  booktitle={International Conference on Computer Safety, Reliability, and Security},
+  pages={149--160},
+  year={2023},
+  organization={Springer}
 }
 
 @inproceedings{cuddihy2023rack,

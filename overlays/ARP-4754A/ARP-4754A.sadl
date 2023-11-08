@@ -5,6 +5,19 @@ import "http://arcos.rack/TESTING".
 import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/REQUIREMENTS".
 import "http://arcos.rack/ANALYSIS".
+import "http://arcos.rack/PROCESS".
+import "http://arcos.rack/SAFETY-SECURITY".
+
+// The REQUIRED_CERTIFICATION entity identifies ARP-4754A objectives that must have associated documents or processes
+// in order to achieve certification at its given DAL level. The enforcement of the certification is captured in 
+// SHACL specifications applied within backend queries.
+REQUIRED_CERTIFICATION 
+	(note "Specifies that a particular ARP-4754A objective must have associated documents or processes to achieve certification.") 
+	is a type of ENTITY.
+	objective describes REQUIRED_CERTIFICATION with values of type OBJECTIVE.
+	objective describes REQUIRED_CERTIFICATION with at most 1 value.
+	ARP4754A:dal describes REQUIRED_CERTIFICATION with values of type SAFETY_DESIGN_ASSURANCE_LEVEL.
+	ARP4754A:dal describes REQUIRED_CERTIFICATION with at most 1 value.
 
 // Types of plans defined by ARP-4754A standard
 PLAN_TYPE is a type of THING.

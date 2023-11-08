@@ -1,0 +1,351 @@
+###
+### SHACL shapes for validating the ARP-4754A overlay in RACK
+###
+
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix provs: <http://arcos.rack/PROV-S#> .
+@prefix req: <http://arcos.rack/REQUIREMENTS#> .
+@prefix tst: <http://arcos.rack/TESTING#> .
+@prefix doc: <http://arcos.rack/DOCUMENT#> .
+@prefix sec: <http://arcos.rack/SAFETY-SECURITY#> .
+@prefix proc: <http://arcos.rack/PROCESS#> .
+@prefix arp4754a: <http://arcos.arp/ARP-4754A#> .
+@prefix sh4754: <http://arp4754ashacl#> .
+
+### An ARP-4754A plan should have its type defined
+sh4754:PlanIs4754A
+	a sh:NodeShape;
+	sh:targetClass	arp4754a:PROCESS_PLAN;
+	sh:property [
+		sh:path		arp4754a:planType;
+		sh:minCount	1;
+	];
+	.
+
+###
+### Queries to find specific types of ARP-4754A plans
+###
+
+sh4754:CertificationPlan
+	a sh:NodeShape;
+	sh:targetClass 	arp4754a:PROCESS_PLAN;
+	sh:property [
+		sh:path		arp4754a:planType;
+		sh:minCount	1;
+		sh:property {
+			sh:path		provs:identifier;
+			sh:hasValue	"CERTIFIACTION_PLAN";
+		];
+	];
+	.
+
+sh4754:SafetyProgramPlan
+	a sh:NodeShape;
+	sh:targetClass 	arp4754a:PROCESS_PLAN;
+	sh:property [
+		sh:path		arp4754a:planType;
+		sh:minCount	1;
+		sh:property {
+			sh:path		provs:identifier;
+			sh:hasValue	"SAFETY_PROGRAM_PLAN";
+		];
+	];
+	.
+
+sh4754:DevelopmentPlan
+	a sh:NodeShape;
+	sh:targetClass 	arp4754a:PROCESS_PLAN;
+	sh:property [
+		sh:path		arp4754a:planType;
+		sh:minCount	1;
+		sh:property {
+			sh:path		provs:identifier;
+			sh:hasValue	"DEVELOPMENT_PLAN";
+		];
+	];
+	.
+
+sh4754:ValidationPlan
+	a sh:NodeShape;
+	sh:targetClass 	arp4754a:PROCESS_PLAN;
+	sh:property [
+		sh:path		arp4754a:planType;
+		sh:minCount	1;
+		sh:property {
+			sh:path		provs:identifier;
+			sh:hasValue	"VALIDATION_PLAN";
+		];
+	];
+	.
+
+sh4754:VerificationPlan
+	a sh:NodeShape;
+	sh:targetClass 	arp4754a:PROCESS_PLAN;
+	sh:property [
+		sh:path		arp4754a:planType;
+		sh:minCount	1;
+		sh:property {
+			sh:path		provs:identifier;
+			sh:hasValue	"VERIFICATION_PLAN";
+		];
+	];
+	.
+
+sh4754:ConfigurationManagementPlan
+	a sh:NodeShape;
+	sh:targetClass 	arp4754a:PROCESS_PLAN;
+	sh:property [
+		sh:path		arp4754a:planType;
+		sh:minCount	1;
+		sh:property {
+			sh:path		provs:identifier;
+			sh:hasValue	"CONFIGURATION_MANAGEMENT_PLAN";
+		];
+	];
+	.
+
+sh4754:ProcessAssurancePlan
+	a sh:NodeShape;
+	sh:targetClass 	arp4754a:PROCESS_PLAN;
+	sh:property [
+		sh:path		arp4754a:planType;
+		sh:minCount	1;
+		sh:property {
+			sh:path		provs:identifier;
+			sh:hasValue	"PROCESS_ASSURANCE_PLAN";
+		];
+	];
+	.
+
+sh4754:ProcessARP4754Plan
+	a sh:NodeShape;
+	sh:targetClass 	arp4754a:PROCESS_PLAN;
+	sh:property [
+		sh:path		arp4754a:planType;
+		sh:minCount	1;
+		sh:property {
+			sh:path	provs:identifier;
+			sh:or (
+				[ sh:hasValue  "CERTIFIACTION_PLAN"; ]
+				[ sh:hasValue  "SAFETY_PROGRAM_PLAN"; ]
+				[ sh:hasValue  "DEVELOPMENT_PLAN"; ]
+				[ sh:hasValue  "VALIDATION_PLAN"; ]
+				[ sh:hasValue  "VERIFICATION_PLAN"; ]
+				[ sh:hasValue  "CONFIGURATION_MANAGEMENT_PLAN"; ]
+				[ sh:hasValue  "PROCESS_ASSURANCE_PLAN"; ]
+			)
+		];
+	];
+	.
+
+### Safety assessment associated with a safety program plan
+sh4754:AssessmentHasSafetypProgramPlan
+	a sh:NodeShape;
+	sh:targetClass arp4754a:SAFETY_ASSESSMENT;
+	sh:property [
+		sh:path		arp4754a:governedBy;
+		sh:node		sh4754:SafetyProgramPlan;
+	];
+	.
+
+
+### Development activity associated with an ARP-4754 plan
+sh4754:DevelopmentUsesARP4754Plan
+	a sh:NodeShape;
+	sh:targetClass provs:ACTIVITY;
+	sh:property [
+		sh:or (
+			[ sh:path	provs:used; ]
+			[ sh:path	arp4754a:governedBy; ]
+		)
+		sh:node	sh4754:ProcessARP4754Plan; ]
+	];
+	.
+
+
+### Query for safety assessments associated properly with and safety program plan
+sh4754:SafetyAssessment
+	a sh:NodeShape;
+	sh:targetClass	arp4754a:SAFETY_ASSESSMENT;
+	sh:node			sh4754:AssessmentHasSafetypProgramPlan
+	.
+
+### Query for preliminary safety assessments associated properly with and safety program plan
+sh4754:PreliminarySafetyAssessment
+	a sh:NodeShape;
+	sh:targetClass	arp4754a:SAFETY_ASSESSMENT 
+	sh:node			sh4754:AssessmentHasSafetypProgramPlan;
+	sh:property [
+		sh:path		arp4754a:isPreliminary;
+		sh:minCount	1;
+		sh:hasValue	true;
+	];
+	.
+
+### Query for final safety assessments associated properly with and safety program plan
+sh4754:FinalSafetyAssessment
+	a sh:NodeShape;
+	sh:targetClass	arp4754a:SAFETY_ASSESSMENT
+	sh:node			sh4754:AssessmentHasSafetypProgramPlan;
+	sh:or (
+		[
+			sh:property [
+				sh:path		arp4754a:isPreliminary;
+				sh:minCount	1;
+				sh:hasValue	false;
+			]
+		]
+		[
+			sh:property [
+				sh:path 	arp4754a:isPreliminary;
+				sh:maxCount	0;
+			]
+		]
+	)
+	.
+
+### Query for preliminary safety assessment documentation
+sh4754a:PreliminarySafetyAssessmentDocument
+	a sh:NodeShape;
+	sh:targetClass doc:DOCUMENT;
+	sh:property [
+		sh:path		provs:wasGeneratedBy;
+		sh:node		sh4754:PreliminarySafetyAssessment;
+	];
+	.
+
+### Query for (any) safety assessment documentation
+sh4754a:SafetyAssessmentDocument
+	a sh:NodeShape;
+	sh:targetClass doc:DOCUMENT;
+	sh:property [
+		sh:path		provs:wasGeneratedBy;
+		sh:node		sh4754:SafetyAssessment;
+	];
+	.
+	
+### Query for any ARP-4754A documentation
+sh4754a:ARP4754Document
+	a sh:NodeShape;
+	sh:targetClass doc:DOCUMENT;
+	sh:property [
+		sh:path		provs:wasGeneratedBy;
+		sh:node		sh4754:DevelopmentUsesARP4754Plan;
+	];
+	.
+
+### Get the requirement development activities that are governed by a safety document
+sh4754a:RequirementDevelopmentSafetyDocuments
+	a sh:NodeShape;
+	sh:targetClass req:REQUIREMENT_DEVELOPMENT;
+	sh:property [
+		sh:path		doc:governedBy;
+		sh:node		sh4754:SafetyAssessmentDocument;
+	];
+	.
+	
+### Get the requirement development activities that are governed by an ARP-4754 document
+sh4754a:RequirementDevelopmentARP4754Documents
+	a sh:NodeShape;
+	sh:targetClass req:REQUIREMENT_DEVELOPMENT;
+	sh:property [
+		sh:path		doc:governedBy;
+		sh:node		sh4754:ARP4754Document;
+	];
+	.
+	
+### Get the requirements that are governed by a safety document
+sh4754a:RequirementDocuments
+	a sh:NodeShape;
+	sh:targetClass req:REQUIREMENT;
+	sh:property [
+		sh:path		doc:wasGeneratedBy;
+		sh:node		sh4754:sh4754a:RequirementDevelopmentDocuments;
+	];
+	.
+	
+### Get the requirements that are governed by an ARP-4754A document
+sh4754a:RequirementARP4754Documents
+	a sh:NodeShape;
+	sh:targetClass req:REQUIREMENT;
+	sh:property [
+		sh:path		doc:wasGeneratedBy;
+		sh:node		sh4754a:RequirementDevelopmentARP4754Documents;
+	];
+	.
+	
+###
+### Validate that all the requirements of an enclave trace back to an ARP-4754A plan and objective
+###
+sh4754a:SecurityEnclaveHasARP4754Requirements
+	a sh:NodeShape;
+	sh:targetClass	sec:SECURITY_ENCLAVE;
+	sh:property [
+		sh:inversePath	req:governs;
+		sh:targetClass	req:REQUIREMENT;
+		sh:xone (
+			[ sh:node	sh4754a:RequirementARP4754Documents; ]
+		)
+	];
+	.
+
+###
+### Get all required certifications with a specific DAL level
+###
+sh4754a:RequiredCertificationDAL_A
+	a sh:NodeShape;
+	sh:targetClass arp4754a:REQUIRED_CERTIFICATION
+	sh:property [
+		sh:path		arp4754a:objective;
+		sh:minCount	1;
+		sh:property [
+			sh:path		provs:identifier;
+			sh:hasValue	"DAL_A";
+		];
+	];
+	.
+
+###
+### Get all security enclaves with a specific DAL level
+###
+sh4754a:SecurityEnclaveDAL_A
+	a sh:NodeShape;
+	sh:targetClass sec:SECURITY_ENCLAVE;
+	sh:property [
+		sh:path		sec:dal
+		sh:maxCount	1;
+		sh:property [
+			sh:path		provs:identifier;
+			sh:hasValue	"DAL_A";
+		];
+	];
+	.
+
+###
+### Operations to enforce ARP-4754A traceability to process planning objective
+###
+sh4754a:EnforceProcessPlanDevelopment
+	a sh:NodeShape;
+	sh:targetClass	arp4754a:PLAN_DEVELOPMENT;
+	sh:property [
+		sh:path		proc:satisfies;
+		sh:class	proc:OBJECTIVE;
+		sh:property [
+			sh:path		provs:identifier
+			sh:hasValue	"ARP-4754-1.1";
+		];
+	];
+	.
+
+sh4754a:EnforceARP4754Plans
+	a sh:NodeShape;
+	sh:targetClass 	arp4754a:PROCESS_PLAN;
+	sh:node			sh4754:ProcessARP4754Plan
+	sh:property [
+		sh:path		arp4754a:wasGeneratedBy;
+		sh:node		sh4754a:EnforceProcessPlanDevelopment;
+	];
+	.

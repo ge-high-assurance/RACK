@@ -8,61 +8,22 @@ import "http://arcos.rack/ANALYSIS".
 import "http://arcos.rack/PROCESS".
 import "http://arcos.rack/SAFETY-SECURITY".
 
-// The REQUIRED_CERTIFICATION entity identifies ARP-4754A objectives that must have associated documents or processes
+// The Required_Certification entity identifies ARP-4754A objectives that must have associated documents or processes
 // in order to achieve certification at its given DAL level. The enforcement of the certification is captured in 
 // SHACL specifications applied within backend queries.
-REQUIRED_CERTIFICATION 
+Required_Certification 
 	(note "Specifies that a particular ARP-4754A objective must have associated documents or processes to achieve certification.") 
 	is a type of ENTITY.
-	objective describes REQUIRED_CERTIFICATION with values of type OBJECTIVE.
-	objective describes REQUIRED_CERTIFICATION with at most 1 value.
-	ARP4754A:dal describes REQUIRED_CERTIFICATION with values of type SAFETY_DESIGN_ASSURANCE_LEVEL.
-	ARP4754A:dal describes REQUIRED_CERTIFICATION with at most 1 value.
-
-// Types of plans defined by ARP-4754A standard
-PLAN_TYPE is a type of THING.
-CERTIFIACTION_PLAN 
-	(note "Describes the means by which the applicant expects to demonstrate certification compliance.") 
-	is a PLAN_TYPE has identifier "CERTIFIACTION_PLAN".
-SAFETY_PROGRAM_PLAN 
-	(note "Defines the scope and the content of the safety activities that are applicable at the aircraft/system level.")
-	is a PLAN_TYPE has identifier "SAFETY_PROGRAM_PLAN".
-DEVELOPMENT_PLAN 
-	(note "Defines the means of producing an aircraft or system which will satisfy the aircraft/system requirements.")
-	is a PLAN_TYPE has identifier "DEVELOPMENT_PLAN".
-VALIDATION_PLAN 
-	(note "Defines the process in which the correctness of Failure Condition classification and stated requirements are reviewed and justified.")
-	is a PLAN_TYPE has identifier "VALIDATION_PLAN".
-VERIFICATION_PLAN 
-	(note "Describes the process that determines if each level of the aircraft or system implementation meets its specified requirements.")
-	is a PLAN_TYPE has identifier "VERIFICATION_PLAN".
-CONFIGURATION_MANAGEMENT_PLAN 
-	(note "Defines the methods to be used to achieve the objectives of the configuration management process throughout the system development life cycle.")
-	is a PLAN_TYPE has identifier "CONFIGURATION_MANAGEMENT_PLAN".
-PROCESS_ASSURANCE_PLAN
-	(note "Describes the means to assure that the practices and procedures to be applied during system development are followed.") 
-	is a PLAN_TYPE has identifier "PROCESS_ASSURANCE_PLAN".
-	
-COMMON_CAUSE_ANALYSIS_TYPE is a type of THING.
-PARTICULAR_RISK_ASSESSMENT
-	is a COMMON_CAUSE_ANALYSIS_TYPE has identifier "PARTICULAR_RISK_ASSESSMENT".
-COMMON_MODE_ANALYSIS
-	is a COMMON_CAUSE_ANALYSIS_TYPE has identifier "COMMON_MODE_ANALYSIS".
-ZONAL_SAFETY_ANALYSIS
-	is a COMMON_CAUSE_ANALYSIS_TYPE has identifier "ZONAL_SAFETY_ANALYSIS".
+	objective describes Required_Certification with values of type OBJECTIVE.
+	objective describes Required_Certification with at most 1 value.
+	ARP4754A:dal describes Required_Certification with values of type SAFETY_DESIGN_ASSURANCE_LEVEL.
+	ARP4754A:dal describes Required_Certification with at most 1 value.
 
 // Refine the specification of plans for identification against ARP-4754A queries
-PLAN_DEVELOPMENT
+Plan_Development
 	(note "ACTIVITY that produces PLANs") is a type of ACTIVITY.
-	ARP4754A:satisfies (note "ENTITY(s) (e.g. OBJECTIVE, any sort of document) used during this ACTIVITY") describes PLAN_DEVELOPMENT with values of type ENTITY.
-	ARP4754A:satisfies is a type of used.
-
-// A plan specifically for defining the process to follow
-PROCESS_PLAN
-	(note "Describes the process by which a specific stage in the aircraft/system development is performed.") is a type of PLAN.
-	//wasGeneratedBy of PROCESS_PLAN only has values of type PLAN_DEVELOPMENT.
-	planType describes PROCESS_PLAN with values of type PLAN_TYPE.
-	planType describes PROCESS_PLAN with at most 1 value.
+//	ARP4754A:satisfies (note "ENTITY(s) (e.g. OBJECTIVE, any sort of document) used during this ACTIVITY") describes Plan_Development with values of type ENTITY.
+//	ARP4754A:satisfies is a type of used.
 
 // Refine the specification of safety assessments (preliminary and final) for identification against ARP-4754A queries
 // Preliminary assessments are examinations of a proposed architecture(s) to determine how failures could cause Failure Conditions.
@@ -70,27 +31,11 @@ PROCESS_PLAN
 //     and to cover all of the specific safety considerations.
 // Common Cause Analysis further identifies individual failure modes or external events that can lead to a 
 //     Catastrophic or Hazardous/Severe-Major Failure Condition.
-SAFETY_ASSESSMENT
+Safety_Assessment
 	(note "Integrates the results of various analyses to verify the safety of the overall aircraft/systems and to cover all of the specific safety considerations.") 
 	is a type of ACTIVITY.
 
-	isPreliminary describes SAFETY_ASSESSMENT with values of type boolean.
-	isPreliminary describes SAFETY_ASSESSMENT  with at most 1 value.
-
-	commonCauseAnalysis describes SAFETY_ASSESSMENT with values of type COMMON_CAUSE_ANALYSIS_TYPE.
-	commonCauseAnalysis describes SAFETY_ASSESSMENT with at most 1 value.
-
-	ARP4754A:governedBy (note "ENTITY(s) (e.g. PLANS or any sort of document) used during this ACTIVITY") describes SAFETY_ASSESSMENT with values of type ENTITY.
-	ARP4754A:governedBy is a type of used.
-	
-
-ARP4754A_SUMMARY_REPORT
-	(note "Summary report specific to ARP-4754A process") is a type of REPORT.
-	
-	//wasGeneratedBy of SUMMARY_REPORT only has values of type SUMMARY_DEVELOPMENT.
-
-	summarizes of ARP4754A_SUMMARY_REPORT only has values of type TEST_RESULT.
-	summarizes is a type of wasImpactedBy.
-
-ARP4754A_SUMMARY_DEVELOPMENT
-	(note "Activity to develop the summary report specific to ARP-4754A process") is a type of ACTIVITY.
+	isPreliminary describes Safety_Assessment with values of type boolean.
+	isPreliminary describes Safety_Assessment  with at most 1 value.
+//	ARP4754A:governedBy (note "ENTITY(s) (e.g. PLANS or any sort of document) used during this ACTIVITY") describes Safety_Assessment with values of type ENTITY.
+//	ARP4754A:governedBy is a type of used.

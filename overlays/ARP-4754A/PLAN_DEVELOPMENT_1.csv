@@ -1,8 +1,8 @@
-description,title,identifier,dataInsertedBy,wasAssociatedWith,wasInformedBy,startedAtTime,endedAtTime,goal,satisfies
-,,GENERATE_CERTIFICATION_PLAN,,,,,,,
-,,GENERATE_SAFETY_PROGRAM_PLAN,,,,,,,
-,,GENERATE_DEVELOPMENT_PLAN,,,,,,,
-,,GENERATE_VALIDATION_PLAN,,,,,,,
-,,GENERATE_VERIFICATION_PLAN,,,,,,,
-,,GENERATE_CONFIGURATION_MANAGEMENT_PLAN,,,,,,,
-,,GENERATE_PROCESS_ASSURANCE_PLAN,,,,,,,
+description,title,identifier,dataInsertedBy_identifier,wasAssociatedWith_identifier,wasInformedBy_identifier,startedAtTime,endedAtTime,goal_identifier,used_identifier
+,,Generate_Certification_Plan,,,,,,,
+,,Generate_Safety_Program_Plan,,,,,,,
+,,Generate_Process_Development_Plan,,,,,,,
+,,Generate_Validation_Plan,,,,,,,
+,,Generate_Verification_Plan,,,,,,,
+,,Generate_Configuration_Management_Plan,,,,,,,
+,,Generate_Process_Assurance_Plan,,,,,,,

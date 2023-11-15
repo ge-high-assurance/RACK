@@ -1,10 +1,10 @@
 description,title,identifier,dataInsertedBy_identifier,wasAssociatedWith_identifier,wasInformedBy_identifier,startedAtTime,endedAtTime,goal_identifier,isPreliminary,used_identifier
-"The aircraft functional hazard assessment is performed.",,Aircraft_FHA_Development,,,,,,,,ARP4754A_SAFETY_PROGRAM_PLAN
-"The system functional hazard assessment is performed.",,System_FHA_Development,,,,,,,,ARP4754A_SAFETY_PROGRAM_PLAN
-"The preliminary aircraft safety assessment is performed.",,PASA_Development,,,,,,,true,ARP4754A_SAFETY_PROGRAM_PLAN
-"The preliminary system safety assessment is performed.",,PSSA_Development,,,,,,,true,ARP4754A_SAFETY_PROGRAM_PLAN
-"The common cause particular risk assessment analysis is performed.",,CC_Particular_Risk_Assessment_Development,,,,,,,,ARP4754A_SAFETY_PROGRAM_PLAN
-"The common cause common mode analysis is performed.",,CC_Common_Mode_Assessment_Development,,,,,,,,ARP4754A_SAFETY_PROGRAM_PLAN
-"The common cause zonal safety analysis is performed.",,CC_Zonal_Safety_Assessment_Development,,,,,,,,ARP4754A_SAFETY_PROGRAM_PLAN
-"The aircraft safety assessment is performed.",,ASA_Development,,,,,,,,ARP4754A_SAFETY_PROGRAM_PLAN
-"The system safety assessment is performed.",,SSA_Development,,,,,,,,ARP4754A_SAFETY_PROGRAM_PLAN
+"The aircraft functional hazard assessment is performed.",,Aircraft_FHA_Development,,,,,,,,ARP4754A_Safety_Program_Plan
+"The system functional hazard assessment is performed.",,System_FHA_Development,,,,,,,,ARP4754A_Safety_Program_Plan
+"The preliminary aircraft safety assessment is performed.",,PASA_Development,,,,,,,true,ARP4754A_Safety_Program_Plan
+"The preliminary system safety assessment is performed.",,PSSA_Development,,,,,,,true,ARP4754A_Safety_Program_Plan
+"The common cause particular risk assessment analysis is performed.",,CC_Particular_Risk_Assessment_Development,,,,,,,,ARP4754A_Safety_Program_Plan
+"The common cause common mode analysis is performed.",,CC_Common_Mode_Assessment_Development,,,,,,,,ARP4754A_Safety_Program_Plan
+"The common cause zonal safety analysis is performed.",,CC_Zonal_Safety_Assessment_Development,,,,,,,,ARP4754A_Safety_Program_Plan
+"The aircraft safety assessment is performed.",,ASA_Development,,,,,,,,ARP4754A_Safety_Program_Plan
+"The system safety assessment is performed.",,SSA_Development,,,,,,,,ARP4754A_Safety_Program_Plan

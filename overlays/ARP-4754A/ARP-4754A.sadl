@@ -1,4 +1,4 @@
-uri "http://arcos.arp/ARP-4754A" alias ARP4754A.
+uri "http://arcos.arp/ARP-4754A" alias ARP4754Av2.
 
 import "http://arcos.rack/DOCUMENT".
 import "http://arcos.rack/TESTING".
@@ -18,12 +18,59 @@ Required_Certification
 	objective describes Required_Certification with at most 1 value.
 	ARP4754A:dal describes Required_Certification with values of type SAFETY_DESIGN_ASSURANCE_LEVEL.
 	ARP4754A:dal describes Required_Certification with at most 1 value.
+	
+// Types of plans defined by ARP-4754A standard.
+CertificationRegulatoryAuthorityCoordPlan
+        (note "Describes the means by which the applicant expects to demonstrate certification compliance.")
+        is a PLAN has identifier "CertificationRegulatoryAuthorityCoordPlan".
+
+SafetyAssessmentPlan
+        (note "Defines the scope and the content of the safety activities that are applicable at the aircraft/system level.")
+        is a PLAN has identifier "SafetyAssessmentPlan".
+
+DAL_AssessmentPlan
+        (note "Defines the means of producing an aircraft or system which will satisfy the aircraft/system requirements at the required assurance level.")
+        is a PLAN has identifier "DAL_AssessmentPlan".
+
+RequirementsCapturePlan (note "Describes requirements and types of requirements which in turn influence various ARP4754A plans.")
+        is a PLAN has identifier "RequirementsCapturePlan".
+
+RequirementsValidationPlan
+        (note "Defines the process in which the correctness of Failure Condition classification and stated requirements are reviewed and justified.")
+        is a PLAN has identifier "RequirementsValidationPlan".
+
+ImplementationVerificationPlan
+        (note "Describes the process that determines if each level of the aircraft or system implementation meets its specified requirements.")
+        is a PLAN has identifier "ImplementationVerificationPlan".
+
+ConfigurationManagementPlan
+        (note "Defines the methods to be used to achieve the objectives of the configuration management process throughout the system development life cycle.")
+        is a PLAN has identifier "ConfigurationManagementPlan".
+
+ProcessAssurancePlan
+        (note "Describes the means to assure that the practices and procedures to be applied during system development are followed.")
+        is a PLAN has identifier "ProcessAssurancePlan".
 
 // Refine the specification of plans for identification against ARP-4754A queries
-Plan_Development
+ARP4754A_Plan_Development
 	(note "ACTIVITY that produces PLANs") is a type of ACTIVITY.
-//	ARP4754A:satisfies (note "ENTITY(s) (e.g. OBJECTIVE, any sort of document) used during this ACTIVITY") describes Plan_Development with values of type ENTITY.
-//	ARP4754A:satisfies is a type of used.
+
+// A plan specifically for defining the process to follow
+ARP4754A_ProcessPlan 
+	(note "Describes the process by which a specific stage in the aircraft/system development is performed.")
+    is a type of PLAN.
+    wasGeneratedBy of ARP4754A_ProcessPlan only has values of type ARP4754A_Plan_Development.
+    planType describes ARP4754A_ProcessPlan with values of type PLAN.
+    planType describes ARP4754A_ProcessPlan with at most 1 value.
+
+// Common Cause variations of a safety analysis.
+CommonCauseAnalysis is a type of ANALYSIS.
+ParticularRiskAssessment
+    is a CommonCauseAnalysis has identifier "ParticularRiskAssessment".
+CommonModeAnalysis
+    is a CommonCauseAnalysis has identifier "CommonModeAnalysis".
+ZonalSafetyAnalysis
+    is a CommonCauseAnalysis has identifier "ZonalSafetyAnalysis".
 
 // Refine the specification of safety assessments (preliminary and final) for identification against ARP-4754A queries
 // Preliminary assessments are examinations of a proposed architecture(s) to determine how failures could cause Failure Conditions.
@@ -31,11 +78,19 @@ Plan_Development
 //     and to cover all of the specific safety considerations.
 // Common Cause Analysis further identifies individual failure modes or external events that can lead to a 
 //     Catastrophic or Hazardous/Severe-Major Failure Condition.
-Safety_Assessment
+SafetyAssessment
 	(note "Integrates the results of various analyses to verify the safety of the overall aircraft/systems and to cover all of the specific safety considerations.") 
 	is a type of ACTIVITY.
 
-	isPreliminary describes Safety_Assessment with values of type boolean.
-	isPreliminary describes Safety_Assessment  with at most 1 value.
-//	ARP4754A:governedBy (note "ENTITY(s) (e.g. PLANS or any sort of document) used during this ACTIVITY") describes Safety_Assessment with values of type ENTITY.
-//	ARP4754A:governedBy is a type of used.
+	isPreliminary describes SafetyAssessment with values of type boolean.
+	isPreliminary describes SafetyAssessment  with at most 1 value.
+    commonCauseAnalysis describes SafetyAssessment with values of type CommonCauseAnalysis.
+    commonCauseAnalysis describes SafetyAssessment with at most 1 value.
+
+// Top-Level Failure Condition Classification is one of Catastrophic, Hazardous/Severe Major, Major, Minor, No Safety Effect
+FDAL_Assignment (note "Function Development Assurance Level is assigned to the top-level function based on its most severe Top-Level Failure Condition Classification.")
+    is a type of ACTIVITY.
+
+IDAL_Assignment (note "Item Development Assurance Level assignment to hardware or software items ad these items come from decomposing the functions.")
+	is a type of ACTIVITY.
+

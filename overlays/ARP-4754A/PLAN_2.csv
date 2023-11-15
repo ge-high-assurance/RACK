@@ -1,8 +1,8 @@
-description,entityURL,generatedAtTime,identifier,invalidatedAtTime,title,definedIn_identifier,content_identifier,dataInsertedBy_identifier,wasAttributedTo_identifier,wasDerivedFrom_identifier,wasGeneratedBy_identifier,wasImpactedBy_identifier,wasRevisionOf_identifier
-,,,ARP4754A_CERTIFICATION_PLAN,,,,,,,,Generate_Certification_Plan,,
-,,,ARP4754A_SAFETY_PROGRAM_PLAN,,,,,,,,Generate_Safety_Program_Plan,,
-,,,ARP4754A_DEVELOPMENT_PLAN,,,,,,,,Generate_Process_Development_Plan,,
-,,,ARP4754A_VALIDATION_PLAN,,,,,,,,Generate_Validation_Plan,,
-,,,ARP4754A_VERIFICATION_PLAN,,,,,,,,Generate_Verification_Plan,,
-,,,ARP4754A_CONFIGURATION_MANAGEMENT_PLAN,,,,,,,,Generate_Configuration_Management_Plan,,
-,,,ARP4754A_PROCESS_ASSURANCE_PLAN,,,,,,,,Generate_Process_Assurance_Plan,,
+description,entityURL,generatedAtTime,identifier,invalidatedAtTime,title,definedIn_identifier,content_identifier,dataInsertedBy_identifier,wasAttributedTo_identifier,wasDerivedFrom_identifier,wasGeneratedBy_identifier,wasImpactedBy_identifier,wasRevisionOf_identifier,planType_identifier
+,,,ARP4754A_Certification_Plan,,,,,,,,Generate_Certification_Plan,,,CertificationRegulatoryAuthorityCoordPlan
+,,,ARP4754A_Safety_Program_Plan,,,,,,,,Generate_Safety_Program_Plan,,,SafetyAssessmentPlan
+,,,ARP4754A_Requirements_Development_Plan,,,,,,,,Generate_Process_Development_Plan,,,RequirementsCapturePlan
+,,,ARP4754A_Validation_Plan,,,,,,,,Generate_Validation_Plan,,,RequirementsValidationPlan
+,,,ARP4754A_Verification_Plan,,,,,,,,Generate_Verification_Plan,,,ImplementationVerificationPlan
+,,,ARP4754A_Configuration_Management_Plan,,,,,,,,Generate_Configuration_Management_Plan,,,ConfigurationManagementPlan
+,,,ARP4754A_Process_Assurance_Plan,,,,,,,,Generate_Process_Assurance_Plan,,,ProcessAssurancePlan

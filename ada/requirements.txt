@@ -1,5 +1,5 @@
 colorama~=0.4.4
 lxml
 rdflib==6.2.0
-rope~=0.18.0
+rope~=1.11.0
 git+https://github.com/ge-high-assurance/RACK.git@vr/ScrapingToolKit#egg=ScrapingToolKit&subdirectory=ScrapingToolKit

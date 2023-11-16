@@ -361,6 +361,35 @@ With the default arguments, RACK will check the default graph and generate a hum
 (venv) $ rack data cardinality
 ```
 
+### Check SHACL constraints
+
+The RACK CLI can invoke the [SHACL](https://www.w3.org/TR/shacl/)
+constraint checker.  A SHACL Turtle file can be supplied which will be
+checked against data selected by the `--data-graph` flag. Results can be
+returned in a pretty-printed JSON text format or as a CSV table.
+
+An example SHACL file can be found in the `tools/` folder of this
+repository.
+
+```
+usage: rack data shacl_results [-h] [--model-graph MODEL_GRAPH] [--data-graph DATA_GRAPH] [--format {text,csv}] [--no-headers]
+                               [--severity SEVERITY]
+                               shacl_ttl_path
+
+positional arguments:
+  shacl_ttl_path        Path to a SHACL file in TTL format
+
+options:
+  -h, --help            show this help message and exit
+  --model-graph MODEL_GRAPH
+                        Model graph URL
+  --data-graph DATA_GRAPH
+                        Data graph URL
+  --format {text,csv}   Export format. text is pretty printed json, csv is SemtkTable.
+  --no-headers          Omit header row
+  --severity SEVERITY   Minimum severity filter: Info, Warning, or Violation
+```
+
 ### Nodegroups
 
 The script can automate loading a directory full of nodegroups

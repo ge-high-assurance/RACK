@@ -22,7 +22,7 @@ jobs:
         path: RACK
 
     - name: Download rack-box files from artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: rack-box-files
         path: RACK/rack-box/files

@@ -42,7 +42,7 @@ jobs:
         RACK/Turnstile-Example/Assemble-TurnstileData.sh
 
     - name: Upload ingestion package to artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: github.event_name != 'release'
       with:
         name: turnstile-ingestion-package.zip

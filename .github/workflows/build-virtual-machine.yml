@@ -52,7 +52,7 @@ jobs:
         rm rack-box-${{ inputs.version }}.zip
 
     - name: Upload virtual machine to artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: github.event_name != 'release'
       with:
         name: rack-box-${{ inputs.version }}

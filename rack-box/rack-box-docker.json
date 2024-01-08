@@ -13,6 +13,7 @@
       "type": "docker",
 
       "changes": [
+        "CMD [ \"-v\" ]",
         "ENTRYPOINT [ \"/usr/bin/python3\", \"/usr/bin/systemctl\" ]"
       ],
       "commit": true,

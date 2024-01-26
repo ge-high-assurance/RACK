@@ -52,7 +52,7 @@ To make RACK easy for all ARCOS performers to use, we deploy RACK as a software 
 RACK is available as both a Linux container and a virtual machine, and is supported on Linux, Windows, and MacOS systems. To learn more and get detailed instructions on how to get started, see our [Installation Instructions](https://github.com/ge-high-assurance/RACK/wiki/Home#installation-instructions).
 
 ---
-Copyright (c) 2021-2022 General Electric Company, Galois, Inc.
+Copyright (c) 2021-2024 General Electric Company, Galois, Inc.
 
 All Rights Reserved
 

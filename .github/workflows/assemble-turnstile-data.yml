@@ -49,13 +49,7 @@ jobs:
         path: |
           RACK/Turnstile-Example/turnstile-ingestion-package.zip
 
-    # softprops/action-gh-release has many issues and PRs filed
-    # against it; replace it with "gh release upload" if CI fails
-    # run: gh release upload ${{ github.event.release.tag_name }} RACK/Turnstile-Example/turnstile-ingestion-package.zip --clobber
-
     - name: Upload ingestion package to release
-      uses: softprops/action-gh-release@v1
       if: github.event_name == 'release'
-      with:
-        files: |
-          RACK/Turnstile-Example/turnstile-ingestion-package.zip
+      run: |
+        gh release upload ${{ github.event.release.tag_name }} RACK/Turnstile-Example/turnstile-ingestion-package.zip --clobber

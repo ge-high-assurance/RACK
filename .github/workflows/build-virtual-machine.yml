@@ -61,14 +61,7 @@ jobs:
           RACK/rack-box/GitHub-Release-README.md
           RACK/rack-box/rack-box-${{ inputs.version }}.zip*
 
-    # softprops/action-gh-release has many issues and PRs filed
-    # against it; replace it with "gh release upload" if CI fails
-    # run: gh release upload ${{ github.event.release.tag_name }} RACK/rack-box/GitHub-Release-README.md RACK/rack-box/rack-box-${{ inputs.version }}.zip* --clobber
-
     - name: Upload virtual machine to release
-      uses: softprops/action-gh-release@v1
       if: github.event_name == 'release'
-      with:
-        files: |
-          RACK/rack-box/GitHub-Release-README.md
-          RACK/rack-box/rack-box-${{ inputs.version }}.zip*
+      run: |
+        gh release upload ${{ github.event.release.tag_name }} RACK/rack-box/GitHub-Release-README.md RACK/rack-box/rack-box-${{ inputs.version }}.zip* --clobber

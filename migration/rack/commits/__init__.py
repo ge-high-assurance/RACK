@@ -92,6 +92,7 @@ from rack.commits import (
     commite5e8a35322fab104a42cc0f46d16c27ffc10adbb,
     commite696969a9d85ca8f894eea12305412bdc05521b3,
     commiteb2f51ed862f33d2a56bbd6d43af27d9524912c9,
+    commiteda11bc3abcd3d3876cfb9d9434541fb6e8fb6d4,
     commitee148bca649a1b451085832a7e2a488ce4127de7,
     commitef72564bbc4887c2d6f6654671427ba2780e0f67,
     commitefb8faf291a895dcce35300ae3341dd4a5c3f0bd,

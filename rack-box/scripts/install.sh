@@ -134,7 +134,7 @@ chown -R "${USER}.${USER}" "${WEBAPPS}"
 # Wait for Fuseki to become ready
 
 echo "Waiting for Fuseki at http://localhost:3030..."
-MAX_SECS=400
+MAX_SECS=800
 while ! curl http://localhost:3030/$/ping &>/dev/null; do
     if [[ $SECONDS -gt $MAX_SECS ]]; then
         echo "Error: Took longer than $MAX_SECS seconds to start Fuseki"
@@ -171,7 +171,7 @@ done
 # Wait for the nodeGroupService to become ready
 
 echo "Waiting for nodeGroupService at http://localhost:12059..."
-MAX_SECS=600
+MAX_SECS=1200
 while ! curl -X POST http://localhost:12059/serviceInfo/ping 2>/dev/null | grep -q yes; do
     if [[ $SECONDS -gt $MAX_SECS ]]; then
         echo "Error: Took longer than $MAX_SECS seconds to start nodeGroupService"

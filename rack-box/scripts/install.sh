@@ -175,6 +175,7 @@ MAX_SECS=600
 while ! curl -X POST http://localhost:12059/serviceInfo/ping 2>/dev/null | grep -q yes; do
     if [[ $SECONDS -gt $MAX_SECS ]]; then
         echo "Error: Took longer than $MAX_SECS seconds to start nodeGroupService"
+        systemctl status nodeGroupService | cat
         exit 1
     fi
     sleep 10

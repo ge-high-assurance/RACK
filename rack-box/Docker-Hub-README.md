@@ -23,7 +23,7 @@ Now you are ready to start your RACK box.  If you are running Unix or Mac, you c
 Otherwise, type the following command to run your RACK box on your computer:
 
 ```shell
-docker run --detach -p 3030:3030 -p 8050:8050 -p 8080:80 -p 12050-12091:12050-12091 gehighassurance/rack-box:v13.0
+docker run --detach -p 3030:3030 -p 8050:8050 -p 8080:80 -p 12050-12091:12050-12091 gehighassurance/rack-box:v14.0
 ```
 
 Type <http://localhost:8080> in your web browser's address bar, hit Enter, and you should see your RACK box's welcome page appear in your browser.  The welcome page will tell you some things you can do with your RACK box.

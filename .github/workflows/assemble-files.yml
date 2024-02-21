@@ -51,12 +51,12 @@ jobs:
     - name: Download Fuseki
       shell: bash
       run: |
-        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-4.9.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
+        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-4.10.0.tar.gz -o RACK/rack-box/files/fuseki.tar.gz
 
     - name: Download Apache Jena
       shell: bash
       run: |
-        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-4.9.0.tar.gz -o RACK/rack-box/files/jena.tar.gz
+        curl -LSfs https://archive.apache.org/dist/jena/binaries/apache-jena-4.10.0.tar.gz -o RACK/rack-box/files/jena.tar.gz
 
     - name: Download SemTK
       shell: bash
@@ -71,7 +71,7 @@ jobs:
     - name: Download systemctl script
       shell: bash
       run: |
-        curl -LSfs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.7106/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
+        curl -LSfs https://github.com/gdraheim/docker-systemctl-replacement/raw/v1.5.8066/files/docker/systemctl3.py -o RACK/rack-box/files/systemctl3.py
 
     - name: Build OWL files using sadl-eclipse
       shell: bash

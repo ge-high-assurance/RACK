@@ -6,8 +6,8 @@
 Here are very brief instructions how to run a RACK box using a Linux container.  You will find more detailed [instructions](https://github.com/ge-high-assurance/RACK/wiki/02-Run-a-RACK-Box-container) in the RACK Wiki.  You will need to give your Docker Hub username to the RACK team so you can be given access to our Docker Hub repository.
 
 1. Open a terminal window where you can run `docker`.
-2. Type `docker pull gehighassurance/rack-box:v13.0`
-3. Type `docker run --detach -p 3030:3030 -p 8050:8050 -p 8080:80 -p 12050-12091:12050-12091 gehighassurance/rack-box:v13.0`
+2. Type `docker pull gehighassurance/rack-box:v14.0`
+3. Type `docker run --detach -p 3030:3030 -p 8050:8050 -p 8080:80 -p 12050-12091:12050-12091 gehighassurance/rack-box:v14.0`
 4. Visit <http://localhost:8080> in your browser to view the RACK box's welcome page.
 
 ## Run a RACK box using a virtual machine

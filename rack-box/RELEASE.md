@@ -6,6 +6,9 @@ steps:
 1. Update version numbers or instructions in the following files
    within the RACK and RACK.wiki repositories:
 
+   RACK/.github/workflows/
+   - [ ] [assemble-files.yml](../.github/workflows/assemble-files.yml)
+
    RACK/rack-box/
 
    - [ ] [Docker-Hub-README.md](Docker-Hub-README.md)
@@ -15,12 +18,16 @@ steps:
    RACK/cli/
    - [ ] [setup-owl.sh](../cli/setup-owl.sh)
 
+   RACK/migration/rack/commits/
+   - [ ] [__init__.py](../migration/rack/commits/__init__.py)
+
    RACK.wiki/
 
    - [ ] [01-Release-Schedule](https://github.com/ge-high-assurance/RACK/wiki/01-Release-Schedule)
    - [ ] [02-Run-a-RACK-Box-container](https://github.com/ge-high-assurance/RACK/wiki/02-Run-a-RACK-Box-container)
    - [ ] [03-Run-a-RACK-Box-VM](https://github.com/ge-high-assurance/RACK/wiki/03-Run-a-RACK-Box-VM)
    - [ ] [Home](https://github.com/ge-high-assurance/RACK/wiki/Home)
+   - [ ] [Ontology Changelog](https://github.com/ge-high-assurance/RACK/wiki/RACK-core-ontology-detailed-changelogs)
    - [ ] [Welcome](https://github.com/ge-high-assurance/RACK/wiki/_Welcome)
 
    After you save these files, commit and push those changes to both
@@ -44,7 +51,7 @@ steps:
 
    ```shell
    cd RACK.wiki
-   git tag v13.0
+   git tag v14.0
    git push --tag
    ```
 

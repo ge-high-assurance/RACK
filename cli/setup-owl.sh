@@ -8,7 +8,7 @@ rack_dir=$(realpath "$(dirname "$0")"/..)
 DOCKER="${DOCKER:-docker}"
 
 rack_image="gehighassurance/rack-box"
-rack_tag="v13.0"
+rack_tag="v14.0"
 
 sadl_image="sadl/sadl-eclipse"
 sadl_tag="v3.5.0-20211204"

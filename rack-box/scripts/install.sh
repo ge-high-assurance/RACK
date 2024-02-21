@@ -134,14 +134,12 @@ chown -R "${USER}.${USER}" "${WEBAPPS}"
 # Wait for Fuseki to become ready
 
 echo "Waiting for Fuseki at http://localhost:3030..."
-MAX_SECS=800
-while ! curl http://localhost:3030/$/ping &>/dev/null; do
-    if [[ $SECONDS -gt $MAX_SECS ]]; then
-        echo "Error: Took longer than $MAX_SECS seconds to start Fuseki"
-        exit 1
-    fi
-    sleep 10
-done
+
+if ! timeout 3m bash -c 'until curl http://localhost:3030/$/ping &>/dev/null; do sleep 10; done'; then
+    echo "Error: Took longer than 3 minutes to start Fuseki"
+    systemctl status fuseki | cat
+    exit 1
+fi
 
 # Configure Fuseki to time out queries after 5 minutes
 
@@ -171,15 +169,12 @@ done
 # Wait for the nodeGroupService to become ready
 
 echo "Waiting for nodeGroupService at http://localhost:12059..."
-MAX_SECS=1200
-while ! curl -X POST http://localhost:12059/serviceInfo/ping 2>/dev/null | grep -q yes; do
-    if [[ $SECONDS -gt $MAX_SECS ]]; then
-        echo "Error: Took longer than $MAX_SECS seconds to start nodeGroupService"
-        systemctl status nodeGroupService | cat
-        exit 1
-    fi
-    sleep 10
-done
+
+if ! timeout 5m bash -c 'until curl -X POST http://localhost:12059/serviceInfo/ping 2>/dev/null | grep -q yes; do sleep 10; done'; then
+    echo "Error: Took longer than 5 minutes to start nodeGroupService"
+    systemctl status nodeGroupService | cat
+    exit 1
+fi
 
 # Setup the RACK dataset using the RACK CLI
 

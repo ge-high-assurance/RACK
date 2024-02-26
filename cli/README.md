@@ -368,7 +368,7 @@ constraint checker.  A SHACL Turtle file can be supplied which will be
 checked against data selected by the `--data-graph` flag. Results can be
 returned in a pretty-printed JSON text format or as a CSV table.
 
-An example SHACL file can be found in the `tools/` folder of this
+An example SHACL file can be found in the `RACK-Ontology/` folder of this
 repository.
 
 ```

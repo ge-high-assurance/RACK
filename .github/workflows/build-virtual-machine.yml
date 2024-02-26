@@ -65,3 +65,5 @@ jobs:
       if: github.event_name == 'release'
       run: |
         gh release upload ${{ github.event.release.tag_name }} RACK/rack-box/GitHub-Release-README.md RACK/rack-box/rack-box-${{ inputs.version }}.zip* --clobber
+      env:
+        GH_TOKEN: ${{ github.token }}

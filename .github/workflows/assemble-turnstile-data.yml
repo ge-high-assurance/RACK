@@ -53,3 +53,5 @@ jobs:
       if: github.event_name == 'release'
       run: |
         gh release upload ${{ github.event.release.tag_name }} RACK/Turnstile-Example/turnstile-ingestion-package.zip --clobber
+      env:
+        GH_TOKEN: ${{ github.token }}

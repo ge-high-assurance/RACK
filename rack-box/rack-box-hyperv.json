@@ -24,8 +24,8 @@
       "disk_size": "{{user `disk_size`}}",
       "headless": "{{user `headless`}}",
       "http_directory": "http",
-      "iso_checksum": "sha256:a4acfda10b18da50e2ec50ccaf860d7f20b389df8765611142305c0e911d16fd",
-      "iso_url": "https://releases.ubuntu.com/22.04/ubuntu-22.04.3-live-server-amd64.iso",
+      "iso_checksum": "file:http://releases.ubuntu.com/22.04/SHA256SUMS"
+      "iso_url": "https://releases.ubuntu.com/22.04/ubuntu-22.04.4-live-server-amd64.iso",
       "memory": "{{user `memory`}}",
       "shutdown_command": "sudo shutdown -P now",
       "ssh_password": "ubuntu",

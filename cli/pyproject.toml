@@ -14,7 +14,7 @@ dependencies = [
     "certifi==2023.7.22",
     "chardet==5.1.0",
     "colorama==0.4.6",
-    "idna==3.4",
+    "idna==3.7",
     "importlib-metadata==6.7.0",
     "jsonschema==4.17.3",
     "pyrsistent==0.19.3",

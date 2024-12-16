@@ -216,7 +216,7 @@ handlers = None
 
 def req(e):
     reqId = e.attrib["id"]
-    Add.REQUIREMENT(identifier=reqId)
+    Add.REQUIREMENTS.REQUIREMENT(identifier=reqId)
     for p in e.iter("ParentReq"):
       parentId = p.attrib["id"]
       Add.REQUIREMENTS.REQUIREMENT(identifier=parentId)

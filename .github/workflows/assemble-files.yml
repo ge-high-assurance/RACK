@@ -61,7 +61,7 @@ jobs:
     - name: Download SemTK
       shell: bash
       run: |
-        curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.5.0-20240215/semtk-opensource-v2.5.0-20240215-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
+        curl -LSfs https://github.com/ge-semtk/semtk/releases/download/v2.5.0-20250313/semtk-opensource-v2.5.0-20250313-dist.tar.gz -o RACK/rack-box/files/semtk.tar.gz
 
     - name: Download CSS stylesheet
       shell: bash
